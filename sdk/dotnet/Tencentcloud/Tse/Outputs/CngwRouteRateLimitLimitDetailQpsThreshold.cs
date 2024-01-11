@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Outputs
     [OutputType]
     public sealed class CngwRouteRateLimitLimitDetailQpsThreshold
     {
+        /// <summary>
+        /// the max threshold.
+        /// </summary>
         public readonly int Max;
+        /// <summary>
+        /// qps threshold unit.Reference value:`second`,`minute`,`hour`,`day`,`month`,`year`.
+        /// </summary>
         public readonly string Unit;
 
         [OutputConstructor]

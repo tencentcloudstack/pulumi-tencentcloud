@@ -35,6 +35,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// }
     /// ```
+    /// ### Using Zip file
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Scf.Function("foo", new Tencentcloud.Scf.FunctionArgs
+    ///         {
+    ///             DnsCache = true,
+    ///             EnablePublicNet = true,
+    ///             Handler = "first.do_it_first",
+    ///             IntranetConfig = new Tencentcloud.Scf.Inputs.FunctionIntranetConfigArgs
+    ///             {
+    ///                 IpFixed = "ENABLE",
+    ///             },
+    ///             Runtime = "Python3.6",
+    ///             SubnetId = "subnet-ljyn7h30",
+    ///             Tags = 
+    ///             {
+    ///                 { "env", "test" },
+    ///             },
+    ///             VpcId = "vpc-391sv4w3",
+    ///             ZipFile = "/scf/first.zip",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
     /// ### Using CFS config
     /// 
     /// ```csharp
@@ -66,6 +98,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// }
     /// ```
+    /// ### Using triggers
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foo = new Tencentcloud.Scf.Function("foo", new Tencentcloud.Scf.FunctionArgs
+    ///         {
+    ///             EnablePublicNet = true,
+    ///             Handler = "first.do_it_first",
+    ///             Runtime = "Python3.6",
+    ///             Triggers = 
+    ///             {
+    ///                 new Tencentcloud.Scf.Inputs.FunctionTriggerArgs
+    ///                 {
+    ///                     Name = "tf-test-fn-trigger",
+    ///                     TriggerDesc = "*/5 * * * * * *",
+    ///                     Type = "timer",
+    ///                 },
+    ///                 new Tencentcloud.Scf.Inputs.FunctionTriggerArgs
+    ///                 {
+    ///                     CosRegion = "ap-guangzhou",
+    ///                     Name = "scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com",
+    ///                     TriggerDesc = "{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}",
+    ///                     Type = "cos",
+    ///                 },
+    ///             },
+    ///             ZipFile = "/scf/first.zip",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
     /// 
     /// ## Import
     /// 
@@ -78,6 +147,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     [TencentcloudResourceType("tencentcloud:Scf/function:Function")]
     public partial class Function : Pulumi.CustomResource
     {
+        /// <summary>
+        /// Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
+        /// </summary>
+        [Output("asyncRunEnable")]
+        public Output<string> AsyncRunEnable { get; private set; } = null!;
+
         /// <summary>
         /// List of CFS configurations.
         /// </summary>
@@ -139,6 +214,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
+        /// Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+        /// </summary>
+        [Output("dnsCache")]
+        public Output<bool?> DnsCache { get; private set; } = null!;
+
+        /// <summary>
         /// Whether EIP is a fixed IP.
         /// </summary>
         [Output("eipFixed")]
@@ -178,13 +259,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
         /// </summary>
         [Output("funcType")]
-        public Output<string> FuncType { get; private set; } = null!;
+        public Output<string?> FuncType { get; private set; } = null!;
 
         /// <summary>
         /// Handler of the SCF function. The format of name is `&lt;filename&gt;.&lt;method_name&gt;`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         /// </summary>
         [Output("handler")]
-        public Output<string> Handler { get; private set; } = null!;
+        public Output<string?> Handler { get; private set; } = null!;
 
         /// <summary>
         /// SCF function domain name.
@@ -193,7 +274,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public Output<string> Host { get; private set; } = null!;
 
         /// <summary>
-        /// Image of the SCF function, conflict with ``.
+        /// Image of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`, `zip_file`.
         /// </summary>
         [Output("imageConfigs")]
         public Output<ImmutableArray<Outputs.FunctionImageConfig>> ImageConfigs { get; private set; } = null!;
@@ -203,6 +284,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// </summary>
         [Output("installDependency")]
         public Output<bool> InstallDependency { get; private set; } = null!;
+
+        /// <summary>
+        /// Intranet access configuration.
+        /// </summary>
+        [Output("intranetConfig")]
+        public Output<Outputs.FunctionIntranetConfig> IntranetConfig { get; private set; } = null!;
 
         /// <summary>
         /// Enable L5 for SCF function, default is `false`.
@@ -247,10 +334,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public Output<string?> Role { get; private set; } = null!;
 
         /// <summary>
-        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
+        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
         /// </summary>
         [Output("runtime")]
-        public Output<string> Runtime { get; private set; } = null!;
+        public Output<string?> Runtime { get; private set; } = null!;
 
         /// <summary>
         /// SCF function status.
@@ -320,7 +407,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Function(string name, FunctionArgs args, CustomResourceOptions? options = null)
+        public Function(string name, FunctionArgs? args = null, CustomResourceOptions? options = null)
             : base("tencentcloud:Scf/function:Function", name, args ?? new FunctionArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -359,6 +446,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
 
     public sealed class FunctionArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
+        /// </summary>
+        [Input("asyncRunEnable")]
+        public Input<string>? AsyncRunEnable { get; set; }
+
         [Input("cfsConfigs")]
         private InputList<Inputs.FunctionCfsConfigArgs>? _cfsConfigs;
 
@@ -408,6 +501,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public Input<string>? Description { get; set; }
 
         /// <summary>
+        /// Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+        /// </summary>
+        [Input("dnsCache")]
+        public Input<bool>? DnsCache { get; set; }
+
+        /// <summary>
         /// Indicates whether EIP config set to `ENABLE` when `enable_public_net` was true. Default `false`.
         /// </summary>
         [Input("enableEipConfig")]
@@ -440,20 +539,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// <summary>
         /// Handler of the SCF function. The format of name is `&lt;filename&gt;.&lt;method_name&gt;`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         /// </summary>
-        [Input("handler", required: true)]
-        public Input<string> Handler { get; set; } = null!;
+        [Input("handler")]
+        public Input<string>? Handler { get; set; }
 
         [Input("imageConfigs")]
         private InputList<Inputs.FunctionImageConfigArgs>? _imageConfigs;
 
         /// <summary>
-        /// Image of the SCF function, conflict with ``.
+        /// Image of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`, `zip_file`.
         /// </summary>
         public InputList<Inputs.FunctionImageConfigArgs> ImageConfigs
         {
             get => _imageConfigs ?? (_imageConfigs = new InputList<Inputs.FunctionImageConfigArgs>());
             set => _imageConfigs = value;
         }
+
+        /// <summary>
+        /// Intranet access configuration.
+        /// </summary>
+        [Input("intranetConfig")]
+        public Input<Inputs.FunctionIntranetConfigArgs>? IntranetConfig { get; set; }
 
         /// <summary>
         /// Enable L5 for SCF function, default is `false`.
@@ -498,10 +603,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public Input<string>? Role { get; set; }
 
         /// <summary>
-        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
+        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
         /// </summary>
-        [Input("runtime", required: true)]
-        public Input<string> Runtime { get; set; } = null!;
+        [Input("runtime")]
+        public Input<string>? Runtime { get; set; }
 
         /// <summary>
         /// Subnet ID of the SCF function.
@@ -558,6 +663,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
 
     public sealed class FunctionState : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
+        /// </summary>
+        [Input("asyncRunEnable")]
+        public Input<string>? AsyncRunEnable { get; set; }
+
         [Input("cfsConfigs")]
         private InputList<Inputs.FunctionCfsConfigGetArgs>? _cfsConfigs;
 
@@ -623,6 +734,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
+
+        /// <summary>
+        /// Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
+        /// </summary>
+        [Input("dnsCache")]
+        public Input<bool>? DnsCache { get; set; }
 
         /// <summary>
         /// Whether EIP is a fixed IP.
@@ -694,7 +811,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         private InputList<Inputs.FunctionImageConfigGetArgs>? _imageConfigs;
 
         /// <summary>
-        /// Image of the SCF function, conflict with ``.
+        /// Image of the SCF function, conflict with `cos_bucket_name`, `cos_object_name`, `cos_bucket_region`, `zip_file`.
         /// </summary>
         public InputList<Inputs.FunctionImageConfigGetArgs> ImageConfigs
         {
@@ -707,6 +824,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// </summary>
         [Input("installDependency")]
         public Input<bool>? InstallDependency { get; set; }
+
+        /// <summary>
+        /// Intranet access configuration.
+        /// </summary>
+        [Input("intranetConfig")]
+        public Input<Inputs.FunctionIntranetConfigGetArgs>? IntranetConfig { get; set; }
 
         /// <summary>
         /// Enable L5 for SCF function, default is `false`.
@@ -757,7 +880,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public Input<string>? Role { get; set; }
 
         /// <summary>
-        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `PHP5`, `PHP7`, `Golang1`, and `Java8`.
+        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
         /// </summary>
         [Input("runtime")]
         public Input<string>? Runtime { get; set; }

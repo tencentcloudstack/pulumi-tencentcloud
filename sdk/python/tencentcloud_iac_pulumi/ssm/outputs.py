@@ -143,29 +143,73 @@ class GetSecretVersionsSecretVersionListResult(dict):
 @pulumi.output_type
 class GetSecretsSecretListResult(dict):
     def __init__(__self__, *,
+                 associated_instance_ids: Sequence[str],
                  create_time: int,
                  create_uin: int,
                  delete_time: int,
                  description: str,
                  kms_key_id: str,
+                 kms_key_type: str,
+                 next_rotation_time: int,
+                 product_name: str,
+                 project_id: int,
+                 resource_id: str,
+                 resource_name: str,
+                 rotation_begin_time: str,
+                 rotation_frequency: int,
+                 rotation_status: int,
                  secret_name: str,
-                 status: str):
+                 secret_type: int,
+                 status: str,
+                 target_uin: int):
         """
+        :param Sequence[str] associated_instance_ids: When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.
         :param int create_time: Create time of secret.
         :param int create_uin: Uin of Creator.
         :param int delete_time: Delete time of CMK.
         :param str description: Description of secret.
         :param str kms_key_id: KMS keyId used to encrypt secret.
+        :param str kms_key_type: KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.
+        :param int next_rotation_time: Next rotation start time, uinx timestamp.
+        :param str product_name: This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.
+        :param int project_id: When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.
+        :param str resource_id: The cloud product instance ID number corresponding to the cloud product credentials.
+        :param str resource_name: When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.
+        :param str rotation_begin_time: The user specified rotation start time.
+        :param int rotation_frequency: The frequency of rotation, in days, takes effect when rotation is on.
+        :param int rotation_status: 1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.
         :param str secret_name: Secret name used to filter result.
+        :param int secret_type: 0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.
         :param str status: Status of secret.
+        :param int target_uin: When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.
         """
+        pulumi.set(__self__, "associated_instance_ids", associated_instance_ids)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "create_uin", create_uin)
         pulumi.set(__self__, "delete_time", delete_time)
         pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "kms_key_id", kms_key_id)
+        pulumi.set(__self__, "kms_key_type", kms_key_type)
+        pulumi.set(__self__, "next_rotation_time", next_rotation_time)
+        pulumi.set(__self__, "product_name", product_name)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "resource_id", resource_id)
+        pulumi.set(__self__, "resource_name", resource_name)
+        pulumi.set(__self__, "rotation_begin_time", rotation_begin_time)
+        pulumi.set(__self__, "rotation_frequency", rotation_frequency)
+        pulumi.set(__self__, "rotation_status", rotation_status)
         pulumi.set(__self__, "secret_name", secret_name)
+        pulumi.set(__self__, "secret_type", secret_type)
         pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "target_uin", target_uin)
+
+    @property
+    @pulumi.getter(name="associatedInstanceIds")
+    def associated_instance_ids(self) -> Sequence[str]:
+        """
+        When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.
+        """
+        return pulumi.get(self, "associated_instance_ids")
 
     @property
     @pulumi.getter(name="createTime")
@@ -208,6 +252,78 @@ class GetSecretsSecretListResult(dict):
         return pulumi.get(self, "kms_key_id")
 
     @property
+    @pulumi.getter(name="kmsKeyType")
+    def kms_key_type(self) -> str:
+        """
+        KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.
+        """
+        return pulumi.get(self, "kms_key_type")
+
+    @property
+    @pulumi.getter(name="nextRotationTime")
+    def next_rotation_time(self) -> int:
+        """
+        Next rotation start time, uinx timestamp.
+        """
+        return pulumi.get(self, "next_rotation_time")
+
+    @property
+    @pulumi.getter(name="productName")
+    def product_name(self) -> str:
+        """
+        This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.
+        """
+        return pulumi.get(self, "product_name")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> int:
+        """
+        When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> str:
+        """
+        The cloud product instance ID number corresponding to the cloud product credentials.
+        """
+        return pulumi.get(self, "resource_id")
+
+    @property
+    @pulumi.getter(name="resourceName")
+    def resource_name(self) -> str:
+        """
+        When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.
+        """
+        return pulumi.get(self, "resource_name")
+
+    @property
+    @pulumi.getter(name="rotationBeginTime")
+    def rotation_begin_time(self) -> str:
+        """
+        The user specified rotation start time.
+        """
+        return pulumi.get(self, "rotation_begin_time")
+
+    @property
+    @pulumi.getter(name="rotationFrequency")
+    def rotation_frequency(self) -> int:
+        """
+        The frequency of rotation, in days, takes effect when rotation is on.
+        """
+        return pulumi.get(self, "rotation_frequency")
+
+    @property
+    @pulumi.getter(name="rotationStatus")
+    def rotation_status(self) -> int:
+        """
+        1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "rotation_status")
+
+    @property
     @pulumi.getter(name="secretName")
     def secret_name(self) -> str:
         """
@@ -216,11 +332,27 @@ class GetSecretsSecretListResult(dict):
         return pulumi.get(self, "secret_name")
 
     @property
+    @pulumi.getter(name="secretType")
+    def secret_type(self) -> int:
+        """
+        0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.
+        """
+        return pulumi.get(self, "secret_type")
+
+    @property
     @pulumi.getter
     def status(self) -> str:
         """
         Status of secret.
         """
         return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="targetUin")
+    def target_uin(self) -> int:
+        """
+        When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.
+        """
+        return pulumi.get(self, "target_uin")
 
 

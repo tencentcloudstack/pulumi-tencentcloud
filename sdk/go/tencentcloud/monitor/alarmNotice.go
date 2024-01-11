@@ -26,13 +26,14 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewAlarmNotice(ctx, "foo", &Monitor.AlarmNoticeArgs{
+// 		_, err := Monitor.NewAlarmNotice(ctx, "example", &Monitor.AlarmNoticeArgs{
 // 			NoticeLanguage: pulumi.String("zh-CN"),
 // 			NoticeType:     pulumi.String("ALL"),
 // 			UrlNotices: monitor.AlarmNoticeUrlNoticeArray{
 // 				&monitor.AlarmNoticeUrlNoticeArgs{
-// 					EndTime:   pulumi.Int(0),
-// 					StartTime: pulumi.Int(1),
+// 					EndTime:   pulumi.Int(86399),
+// 					IsValid:   pulumi.Int(0),
+// 					StartTime: pulumi.Int(0),
 // 					Url:       pulumi.String("https://www.mytest.com/validate"),
 // 					Weekdays: pulumi.IntArray{
 // 						pulumi.Int(1),
@@ -47,24 +48,23 @@ import (
 // 			},
 // 			UserNotices: monitor.AlarmNoticeUserNoticeArray{
 // 				&monitor.AlarmNoticeUserNoticeArgs{
-// 					EndTime:               pulumi.Int(1),
+// 					EndTime:               pulumi.Int(86399),
 // 					GroupIds:              pulumi.IntArray{},
 // 					NeedPhoneArriveNotice: pulumi.Int(1),
 // 					NoticeWays: pulumi.StringArray{
-// 						pulumi.String("SMS"),
 // 						pulumi.String("EMAIL"),
+// 						pulumi.String("SMS"),
 // 					},
 // 					PhoneCallType:       pulumi.String("CIRCLE"),
-// 					PhoneCircleInterval: pulumi.Int(50),
+// 					PhoneCircleInterval: pulumi.Int(180),
 // 					PhoneCircleTimes:    pulumi.Int(2),
-// 					PhoneInnerInterval:  pulumi.Int(60),
-// 					PhoneOrders: pulumi.IntArray{
-// 						pulumi.Int(10001),
-// 					},
-// 					ReceiverType: pulumi.String("USER"),
-// 					StartTime:    pulumi.Int(0),
+// 					PhoneInnerInterval:  pulumi.Int(180),
+// 					PhoneOrders:         pulumi.IntArray{},
+// 					ReceiverType:        pulumi.String("USER"),
+// 					StartTime:           pulumi.Int(0),
 // 					UserIds: pulumi.IntArray{
-// 						pulumi.Int(10001),
+// 						pulumi.Int(11082189),
+// 						pulumi.Int(11082190),
 // 					},
 // 					Weekdays: pulumi.IntArray{
 // 						pulumi.Int(1),

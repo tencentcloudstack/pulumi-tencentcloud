@@ -1990,10 +1990,10 @@ class DatahubTaskSourceResourceClickHouseParamDropClsArgs:
                  drop_cls_topic_id: Optional[pulumi.Input[str]] = None,
                  drop_invalid_message_to_cls: Optional[pulumi.Input[bool]] = None):
         """
-        :param pulumi.Input[str] drop_cls_log_set: cls log set.
-        :param pulumi.Input[str] drop_cls_owneruin: Delivery account of cls.
+        :param pulumi.Input[str] drop_cls_log_set: cls LogSet id.
+        :param pulumi.Input[str] drop_cls_owneruin: account.
         :param pulumi.Input[str] drop_cls_region: The region where the cls is delivered.
-        :param pulumi.Input[str] drop_cls_topic_id: topic of cls.
+        :param pulumi.Input[str] drop_cls_topic_id: cls topic.
         :param pulumi.Input[bool] drop_invalid_message_to_cls: Whether to deliver to cls.
         """
         if drop_cls_log_set is not None:
@@ -2011,7 +2011,7 @@ class DatahubTaskSourceResourceClickHouseParamDropClsArgs:
     @pulumi.getter(name="dropClsLogSet")
     def drop_cls_log_set(self) -> Optional[pulumi.Input[str]]:
         """
-        cls log set.
+        cls LogSet id.
         """
         return pulumi.get(self, "drop_cls_log_set")
 
@@ -2023,7 +2023,7 @@ class DatahubTaskSourceResourceClickHouseParamDropClsArgs:
     @pulumi.getter(name="dropClsOwneruin")
     def drop_cls_owneruin(self) -> Optional[pulumi.Input[str]]:
         """
-        Delivery account of cls.
+        account.
         """
         return pulumi.get(self, "drop_cls_owneruin")
 
@@ -2047,7 +2047,7 @@ class DatahubTaskSourceResourceClickHouseParamDropClsArgs:
     @pulumi.getter(name="dropClsTopicId")
     def drop_cls_topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        topic of cls.
+        cls topic.
         """
         return pulumi.get(self, "drop_cls_topic_id")
 
@@ -2813,10 +2813,10 @@ class DatahubTaskSourceResourceEsParamDropClsArgs:
                  drop_cls_topic_id: Optional[pulumi.Input[str]] = None,
                  drop_invalid_message_to_cls: Optional[pulumi.Input[bool]] = None):
         """
-        :param pulumi.Input[str] drop_cls_log_set: cls log set.
-        :param pulumi.Input[str] drop_cls_owneruin: Delivery account of cls.
+        :param pulumi.Input[str] drop_cls_log_set: cls LogSet id.
+        :param pulumi.Input[str] drop_cls_owneruin: account.
         :param pulumi.Input[str] drop_cls_region: The region where the cls is delivered.
-        :param pulumi.Input[str] drop_cls_topic_id: topic of cls.
+        :param pulumi.Input[str] drop_cls_topic_id: cls topic.
         :param pulumi.Input[bool] drop_invalid_message_to_cls: Whether to deliver to cls.
         """
         if drop_cls_log_set is not None:
@@ -2834,7 +2834,7 @@ class DatahubTaskSourceResourceEsParamDropClsArgs:
     @pulumi.getter(name="dropClsLogSet")
     def drop_cls_log_set(self) -> Optional[pulumi.Input[str]]:
         """
-        cls log set.
+        cls LogSet id.
         """
         return pulumi.get(self, "drop_cls_log_set")
 
@@ -2846,7 +2846,7 @@ class DatahubTaskSourceResourceEsParamDropClsArgs:
     @pulumi.getter(name="dropClsOwneruin")
     def drop_cls_owneruin(self) -> Optional[pulumi.Input[str]]:
         """
-        Delivery account of cls.
+        account.
         """
         return pulumi.get(self, "drop_cls_owneruin")
 
@@ -2870,7 +2870,7 @@ class DatahubTaskSourceResourceEsParamDropClsArgs:
     @pulumi.getter(name="dropClsTopicId")
     def drop_cls_topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        topic of cls.
+        cls topic.
         """
         return pulumi.get(self, "drop_cls_topic_id")
 
@@ -3013,21 +3013,21 @@ class DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs:
                  use_table_mapping: Optional[pulumi.Input[bool]] = None,
                  zone_id: Optional[pulumi.Input[int]] = None):
         """
-        :param pulumi.Input[str] resource: resource id.
-        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] resource: instance resource.
+        :param pulumi.Input[bool] self_built: whether the cluster is built by yourself instead of cloud product.
         :param pulumi.Input[str] compression_type: Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
-        :param pulumi.Input[bool] enable_toleration: Enable the fault-tolerant instance and enable the dead-letter queue.
+        :param pulumi.Input[bool] enable_toleration: enable dead letter queue.
         :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
-        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
-        :param pulumi.Input[int] partition_num: Partition num.
-        :param pulumi.Input[int] qps_limit: Qps limit.
-        :param pulumi.Input[str] resource_name: resource id name.
-        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
-        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs']]] table_mappings: The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
-        :param pulumi.Input[str] topic: Topic name, multiple separated by,.
-        :param pulumi.Input[str] topic_id: Topic Id.
-        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
-        :param pulumi.Input[bool] use_table_mapping: Distribute to multiple topics switch, the default is false.
+        :param pulumi.Input[str] offset_type: Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
+        :param pulumi.Input[int] partition_num: the partition num of the topic.
+        :param pulumi.Input[int] qps_limit: Qps(query per seconds) limit.
+        :param pulumi.Input[str] resource_name: instance name.
+        :param pulumi.Input[int] start_time: when Offset type timestamp is required.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs']]] table_mappings: maps of table to topic, required when multi topic is selected.
+        :param pulumi.Input[str] topic: Topic name, use `,` when more than 1 topic.
+        :param pulumi.Input[str] topic_id: Topic id.
+        :param pulumi.Input[bool] use_auto_create_topic: Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        :param pulumi.Input[bool] use_table_mapping: whether to use multi table.
         :param pulumi.Input[int] zone_id: Zone ID.
         """
         pulumi.set(__self__, "resource", resource)
@@ -3065,7 +3065,7 @@ class DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter
     def resource(self) -> pulumi.Input[str]:
         """
-        resource id.
+        instance resource.
         """
         return pulumi.get(self, "resource")
 
@@ -3077,7 +3077,7 @@ class DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="selfBuilt")
     def self_built(self) -> pulumi.Input[bool]:
         """
-        Whether it is a self-built cluster.
+        whether the cluster is built by yourself instead of cloud product.
         """
         return pulumi.get(self, "self_built")
 
@@ -3101,7 +3101,7 @@ class DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="enableToleration")
     def enable_toleration(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable the fault-tolerant instance and enable the dead-letter queue.
+        enable dead letter queue.
         """
         return pulumi.get(self, "enable_toleration")
 
@@ -3125,7 +3125,7 @@ class DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="offsetType")
     def offset_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
         """
         return pulumi.get(self, "offset_type")
 
@@ -3137,7 +3137,7 @@ class DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="partitionNum")
     def partition_num(self) -> Optional[pulumi.Input[int]]:
         """
-        Partition num.
+        the partition num of the topic.
         """
         return pulumi.get(self, "partition_num")
 
@@ -3149,7 +3149,7 @@ class DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="qpsLimit")
     def qps_limit(self) -> Optional[pulumi.Input[int]]:
         """
-        Qps limit.
+        Qps(query per seconds) limit.
         """
         return pulumi.get(self, "qps_limit")
 
@@ -3161,7 +3161,7 @@ class DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="resourceName")
     def resource_name(self) -> Optional[pulumi.Input[str]]:
         """
-        resource id name.
+        instance name.
         """
         return pulumi.get(self, "resource_name")
 
@@ -3173,7 +3173,7 @@ class DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="startTime")
     def start_time(self) -> Optional[pulumi.Input[int]]:
         """
-        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        when Offset type timestamp is required.
         """
         return pulumi.get(self, "start_time")
 
@@ -3185,7 +3185,7 @@ class DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="tableMappings")
     def table_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs']]]]:
         """
-        The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        maps of table to topic, required when multi topic is selected.
         """
         return pulumi.get(self, "table_mappings")
 
@@ -3197,7 +3197,7 @@ class DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter
     def topic(self) -> Optional[pulumi.Input[str]]:
         """
-        Topic name, multiple separated by,.
+        Topic name, use `,` when more than 1 topic.
         """
         return pulumi.get(self, "topic")
 
@@ -3209,7 +3209,7 @@ class DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="topicId")
     def topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Topic Id.
+        Topic id.
         """
         return pulumi.get(self, "topic_id")
 
@@ -3221,7 +3221,7 @@ class DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="useAutoCreateTopic")
     def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
         """
-        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
         """
         return pulumi.get(self, "use_auto_create_topic")
 
@@ -3233,7 +3233,7 @@ class DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="useTableMapping")
     def use_table_mapping(self) -> Optional[pulumi.Input[bool]]:
         """
-        Distribute to multiple topics switch, the default is false.
+        whether to use multi table.
         """
         return pulumi.get(self, "use_table_mapping")
 
@@ -3337,7 +3337,7 @@ class DatahubTaskSourceResourceEsParamDropDlqTopicParamArgs:
         :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
         :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
         :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
-        :param pulumi.Input[str] topic_id: TopicId.
+        :param pulumi.Input[str] topic_id: Topic TopicId.
         :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
         """
         pulumi.set(__self__, "resource", resource)
@@ -3418,7 +3418,7 @@ class DatahubTaskSourceResourceEsParamDropDlqTopicParamArgs:
     @pulumi.getter(name="topicId")
     def topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        TopicId.
+        Topic TopicId.
         """
         return pulumi.get(self, "topic_id")
 
@@ -3559,21 +3559,21 @@ class DatahubTaskSourceResourceKafkaParamArgs:
                  use_table_mapping: Optional[pulumi.Input[bool]] = None,
                  zone_id: Optional[pulumi.Input[int]] = None):
         """
-        :param pulumi.Input[str] resource: resource id.
-        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] resource: instance resource.
+        :param pulumi.Input[bool] self_built: whether the cluster is built by yourself instead of cloud product.
         :param pulumi.Input[str] compression_type: Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
-        :param pulumi.Input[bool] enable_toleration: Enable the fault-tolerant instance and enable the dead-letter queue.
+        :param pulumi.Input[bool] enable_toleration: enable dead letter queue.
         :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
-        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
-        :param pulumi.Input[int] partition_num: Partition num.
-        :param pulumi.Input[int] qps_limit: Qps limit.
-        :param pulumi.Input[str] resource_name: resource id name.
-        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
-        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceKafkaParamTableMappingArgs']]] table_mappings: The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
-        :param pulumi.Input[str] topic: Topic name, multiple separated by,.
-        :param pulumi.Input[str] topic_id: Topic Id.
-        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
-        :param pulumi.Input[bool] use_table_mapping: Distribute to multiple topics switch, the default is false.
+        :param pulumi.Input[str] offset_type: Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
+        :param pulumi.Input[int] partition_num: the partition num of the topic.
+        :param pulumi.Input[int] qps_limit: Qps(query per seconds) limit.
+        :param pulumi.Input[str] resource_name: instance name.
+        :param pulumi.Input[int] start_time: when Offset type timestamp is required.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceKafkaParamTableMappingArgs']]] table_mappings: maps of table to topic, required when multi topic is selected.
+        :param pulumi.Input[str] topic: Topic name, use `,` when more than 1 topic.
+        :param pulumi.Input[str] topic_id: Topic id.
+        :param pulumi.Input[bool] use_auto_create_topic: Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        :param pulumi.Input[bool] use_table_mapping: whether to use multi table.
         :param pulumi.Input[int] zone_id: Zone ID.
         """
         pulumi.set(__self__, "resource", resource)
@@ -3611,7 +3611,7 @@ class DatahubTaskSourceResourceKafkaParamArgs:
     @pulumi.getter
     def resource(self) -> pulumi.Input[str]:
         """
-        resource id.
+        instance resource.
         """
         return pulumi.get(self, "resource")
 
@@ -3623,7 +3623,7 @@ class DatahubTaskSourceResourceKafkaParamArgs:
     @pulumi.getter(name="selfBuilt")
     def self_built(self) -> pulumi.Input[bool]:
         """
-        Whether it is a self-built cluster.
+        whether the cluster is built by yourself instead of cloud product.
         """
         return pulumi.get(self, "self_built")
 
@@ -3647,7 +3647,7 @@ class DatahubTaskSourceResourceKafkaParamArgs:
     @pulumi.getter(name="enableToleration")
     def enable_toleration(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable the fault-tolerant instance and enable the dead-letter queue.
+        enable dead letter queue.
         """
         return pulumi.get(self, "enable_toleration")
 
@@ -3671,7 +3671,7 @@ class DatahubTaskSourceResourceKafkaParamArgs:
     @pulumi.getter(name="offsetType")
     def offset_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
         """
         return pulumi.get(self, "offset_type")
 
@@ -3683,7 +3683,7 @@ class DatahubTaskSourceResourceKafkaParamArgs:
     @pulumi.getter(name="partitionNum")
     def partition_num(self) -> Optional[pulumi.Input[int]]:
         """
-        Partition num.
+        the partition num of the topic.
         """
         return pulumi.get(self, "partition_num")
 
@@ -3695,7 +3695,7 @@ class DatahubTaskSourceResourceKafkaParamArgs:
     @pulumi.getter(name="qpsLimit")
     def qps_limit(self) -> Optional[pulumi.Input[int]]:
         """
-        Qps limit.
+        Qps(query per seconds) limit.
         """
         return pulumi.get(self, "qps_limit")
 
@@ -3707,7 +3707,7 @@ class DatahubTaskSourceResourceKafkaParamArgs:
     @pulumi.getter(name="resourceName")
     def resource_name(self) -> Optional[pulumi.Input[str]]:
         """
-        resource id name.
+        instance name.
         """
         return pulumi.get(self, "resource_name")
 
@@ -3719,7 +3719,7 @@ class DatahubTaskSourceResourceKafkaParamArgs:
     @pulumi.getter(name="startTime")
     def start_time(self) -> Optional[pulumi.Input[int]]:
         """
-        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        when Offset type timestamp is required.
         """
         return pulumi.get(self, "start_time")
 
@@ -3731,7 +3731,7 @@ class DatahubTaskSourceResourceKafkaParamArgs:
     @pulumi.getter(name="tableMappings")
     def table_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskSourceResourceKafkaParamTableMappingArgs']]]]:
         """
-        The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        maps of table to topic, required when multi topic is selected.
         """
         return pulumi.get(self, "table_mappings")
 
@@ -3743,7 +3743,7 @@ class DatahubTaskSourceResourceKafkaParamArgs:
     @pulumi.getter
     def topic(self) -> Optional[pulumi.Input[str]]:
         """
-        Topic name, multiple separated by,.
+        Topic name, use `,` when more than 1 topic.
         """
         return pulumi.get(self, "topic")
 
@@ -3755,7 +3755,7 @@ class DatahubTaskSourceResourceKafkaParamArgs:
     @pulumi.getter(name="topicId")
     def topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Topic Id.
+        Topic id.
         """
         return pulumi.get(self, "topic_id")
 
@@ -3767,7 +3767,7 @@ class DatahubTaskSourceResourceKafkaParamArgs:
     @pulumi.getter(name="useAutoCreateTopic")
     def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
         """
-        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
         """
         return pulumi.get(self, "use_auto_create_topic")
 
@@ -3779,7 +3779,7 @@ class DatahubTaskSourceResourceKafkaParamArgs:
     @pulumi.getter(name="useTableMapping")
     def use_table_mapping(self) -> Optional[pulumi.Input[bool]]:
         """
-        Distribute to multiple topics switch, the default is false.
+        whether to use multi table.
         """
         return pulumi.get(self, "use_table_mapping")
 
@@ -4645,9 +4645,9 @@ class DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs:
         """
         :param pulumi.Input[bool] allow_null: Whether the message is allowed to be empty.
         :param pulumi.Input[bool] auto_increment: Whether it is an auto-increment column.
-        :param pulumi.Input[str] column_name: Corresponding mapping column name.
-        :param pulumi.Input[str] column_size: current column size.
-        :param pulumi.Input[str] decimal_digits: current column precision.
+        :param pulumi.Input[str] column_name: Column Name.
+        :param pulumi.Input[str] column_size: current ColumnSize.
+        :param pulumi.Input[str] decimal_digits: current Column DecimalDigits.
         :param pulumi.Input[str] default_value: Database table default parameters.
         :param pulumi.Input[str] extra_info: Database table extra fields.
         :param pulumi.Input[str] json_key: The key name of the message.
@@ -4700,7 +4700,7 @@ class DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs:
     @pulumi.getter(name="columnName")
     def column_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Corresponding mapping column name.
+        Column Name.
         """
         return pulumi.get(self, "column_name")
 
@@ -4712,7 +4712,7 @@ class DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs:
     @pulumi.getter(name="columnSize")
     def column_size(self) -> Optional[pulumi.Input[str]]:
         """
-        current column size.
+        current ColumnSize.
         """
         return pulumi.get(self, "column_size")
 
@@ -4724,7 +4724,7 @@ class DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs:
     @pulumi.getter(name="decimalDigits")
     def decimal_digits(self) -> Optional[pulumi.Input[str]]:
         """
-        current column precision.
+        current Column DecimalDigits.
         """
         return pulumi.get(self, "decimal_digits")
 
@@ -4790,10 +4790,10 @@ class DatahubTaskSourceResourceMySqlParamDropClsArgs:
                  drop_cls_topic_id: Optional[pulumi.Input[str]] = None,
                  drop_invalid_message_to_cls: Optional[pulumi.Input[bool]] = None):
         """
-        :param pulumi.Input[str] drop_cls_log_set: cls log set.
-        :param pulumi.Input[str] drop_cls_owneruin: Delivery account of cls.
+        :param pulumi.Input[str] drop_cls_log_set: cls LogSet id.
+        :param pulumi.Input[str] drop_cls_owneruin: account.
         :param pulumi.Input[str] drop_cls_region: The region where the cls is delivered.
-        :param pulumi.Input[str] drop_cls_topic_id: topic of cls.
+        :param pulumi.Input[str] drop_cls_topic_id: cls topic.
         :param pulumi.Input[bool] drop_invalid_message_to_cls: Whether to deliver to cls.
         """
         if drop_cls_log_set is not None:
@@ -4811,7 +4811,7 @@ class DatahubTaskSourceResourceMySqlParamDropClsArgs:
     @pulumi.getter(name="dropClsLogSet")
     def drop_cls_log_set(self) -> Optional[pulumi.Input[str]]:
         """
-        cls log set.
+        cls LogSet id.
         """
         return pulumi.get(self, "drop_cls_log_set")
 
@@ -4823,7 +4823,7 @@ class DatahubTaskSourceResourceMySqlParamDropClsArgs:
     @pulumi.getter(name="dropClsOwneruin")
     def drop_cls_owneruin(self) -> Optional[pulumi.Input[str]]:
         """
-        Delivery account of cls.
+        account.
         """
         return pulumi.get(self, "drop_cls_owneruin")
 
@@ -4847,7 +4847,7 @@ class DatahubTaskSourceResourceMySqlParamDropClsArgs:
     @pulumi.getter(name="dropClsTopicId")
     def drop_cls_topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        topic of cls.
+        cls topic.
         """
         return pulumi.get(self, "drop_cls_topic_id")
 
@@ -5094,9 +5094,9 @@ class DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs:
         """
         :param pulumi.Input[bool] allow_null: Whether the message is allowed to be empty.
         :param pulumi.Input[bool] auto_increment: Whether it is an auto-increment column.
-        :param pulumi.Input[str] column_name: Corresponding mapping column name.
-        :param pulumi.Input[str] column_size: current column size.
-        :param pulumi.Input[str] decimal_digits: current column precision.
+        :param pulumi.Input[str] column_name: Column Name.
+        :param pulumi.Input[str] column_size: current ColumnSize.
+        :param pulumi.Input[str] decimal_digits: current Column DecimalDigits.
         :param pulumi.Input[str] default_value: Database table default parameters.
         :param pulumi.Input[str] extra_info: Database table extra fields.
         :param pulumi.Input[str] json_key: The key name of the message.
@@ -5149,7 +5149,7 @@ class DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs:
     @pulumi.getter(name="columnName")
     def column_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Corresponding mapping column name.
+        Column Name.
         """
         return pulumi.get(self, "column_name")
 
@@ -5161,7 +5161,7 @@ class DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs:
     @pulumi.getter(name="columnSize")
     def column_size(self) -> Optional[pulumi.Input[str]]:
         """
-        current column size.
+        current ColumnSize.
         """
         return pulumi.get(self, "column_size")
 
@@ -5173,7 +5173,7 @@ class DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs:
     @pulumi.getter(name="decimalDigits")
     def decimal_digits(self) -> Optional[pulumi.Input[str]]:
         """
-        current column precision.
+        current Column DecimalDigits.
         """
         return pulumi.get(self, "decimal_digits")
 
@@ -5485,7 +5485,7 @@ class DatahubTaskSourceResourceTopicParamArgs:
         :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
         :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
         :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
-        :param pulumi.Input[str] topic_id: TopicId.
+        :param pulumi.Input[str] topic_id: Topic TopicId.
         :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
         """
         pulumi.set(__self__, "resource", resource)
@@ -5566,7 +5566,7 @@ class DatahubTaskSourceResourceTopicParamArgs:
     @pulumi.getter(name="topicId")
     def topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        TopicId.
+        Topic TopicId.
         """
         return pulumi.get(self, "topic_id")
 
@@ -6116,10 +6116,10 @@ class DatahubTaskTargetResourceClickHouseParamDropClsArgs:
                  drop_cls_topic_id: Optional[pulumi.Input[str]] = None,
                  drop_invalid_message_to_cls: Optional[pulumi.Input[bool]] = None):
         """
-        :param pulumi.Input[str] drop_cls_log_set: cls log set.
-        :param pulumi.Input[str] drop_cls_owneruin: Delivery account of cls.
+        :param pulumi.Input[str] drop_cls_log_set: cls LogSet id.
+        :param pulumi.Input[str] drop_cls_owneruin: account.
         :param pulumi.Input[str] drop_cls_region: The region where the cls is delivered.
-        :param pulumi.Input[str] drop_cls_topic_id: topic of cls.
+        :param pulumi.Input[str] drop_cls_topic_id: cls topic.
         :param pulumi.Input[bool] drop_invalid_message_to_cls: Whether to deliver to cls.
         """
         if drop_cls_log_set is not None:
@@ -6137,7 +6137,7 @@ class DatahubTaskTargetResourceClickHouseParamDropClsArgs:
     @pulumi.getter(name="dropClsLogSet")
     def drop_cls_log_set(self) -> Optional[pulumi.Input[str]]:
         """
-        cls log set.
+        cls LogSet id.
         """
         return pulumi.get(self, "drop_cls_log_set")
 
@@ -6149,7 +6149,7 @@ class DatahubTaskTargetResourceClickHouseParamDropClsArgs:
     @pulumi.getter(name="dropClsOwneruin")
     def drop_cls_owneruin(self) -> Optional[pulumi.Input[str]]:
         """
-        Delivery account of cls.
+        account.
         """
         return pulumi.get(self, "drop_cls_owneruin")
 
@@ -6173,7 +6173,7 @@ class DatahubTaskTargetResourceClickHouseParamDropClsArgs:
     @pulumi.getter(name="dropClsTopicId")
     def drop_cls_topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        topic of cls.
+        cls topic.
         """
         return pulumi.get(self, "drop_cls_topic_id")
 
@@ -6939,10 +6939,10 @@ class DatahubTaskTargetResourceEsParamDropClsArgs:
                  drop_cls_topic_id: Optional[pulumi.Input[str]] = None,
                  drop_invalid_message_to_cls: Optional[pulumi.Input[bool]] = None):
         """
-        :param pulumi.Input[str] drop_cls_log_set: cls log set.
-        :param pulumi.Input[str] drop_cls_owneruin: Delivery account of cls.
+        :param pulumi.Input[str] drop_cls_log_set: cls LogSet id.
+        :param pulumi.Input[str] drop_cls_owneruin: account.
         :param pulumi.Input[str] drop_cls_region: The region where the cls is delivered.
-        :param pulumi.Input[str] drop_cls_topic_id: topic of cls.
+        :param pulumi.Input[str] drop_cls_topic_id: cls topic.
         :param pulumi.Input[bool] drop_invalid_message_to_cls: Whether to deliver to cls.
         """
         if drop_cls_log_set is not None:
@@ -6960,7 +6960,7 @@ class DatahubTaskTargetResourceEsParamDropClsArgs:
     @pulumi.getter(name="dropClsLogSet")
     def drop_cls_log_set(self) -> Optional[pulumi.Input[str]]:
         """
-        cls log set.
+        cls LogSet id.
         """
         return pulumi.get(self, "drop_cls_log_set")
 
@@ -6972,7 +6972,7 @@ class DatahubTaskTargetResourceEsParamDropClsArgs:
     @pulumi.getter(name="dropClsOwneruin")
     def drop_cls_owneruin(self) -> Optional[pulumi.Input[str]]:
         """
-        Delivery account of cls.
+        account.
         """
         return pulumi.get(self, "drop_cls_owneruin")
 
@@ -6996,7 +6996,7 @@ class DatahubTaskTargetResourceEsParamDropClsArgs:
     @pulumi.getter(name="dropClsTopicId")
     def drop_cls_topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        topic of cls.
+        cls topic.
         """
         return pulumi.get(self, "drop_cls_topic_id")
 
@@ -7139,21 +7139,21 @@ class DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs:
                  use_table_mapping: Optional[pulumi.Input[bool]] = None,
                  zone_id: Optional[pulumi.Input[int]] = None):
         """
-        :param pulumi.Input[str] resource: resource id.
-        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] resource: instance resource.
+        :param pulumi.Input[bool] self_built: whether the cluster is built by yourself instead of cloud product.
         :param pulumi.Input[str] compression_type: Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
-        :param pulumi.Input[bool] enable_toleration: Enable the fault-tolerant instance and enable the dead-letter queue.
+        :param pulumi.Input[bool] enable_toleration: enable dead letter queue.
         :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
-        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
-        :param pulumi.Input[int] partition_num: Partition num.
-        :param pulumi.Input[int] qps_limit: Qps limit.
-        :param pulumi.Input[str] resource_name: resource id name.
-        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
-        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArgs']]] table_mappings: The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
-        :param pulumi.Input[str] topic: Topic name, multiple separated by,.
-        :param pulumi.Input[str] topic_id: Topic Id.
-        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
-        :param pulumi.Input[bool] use_table_mapping: Distribute to multiple topics switch, the default is false.
+        :param pulumi.Input[str] offset_type: Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
+        :param pulumi.Input[int] partition_num: the partition num of the topic.
+        :param pulumi.Input[int] qps_limit: Qps(query per seconds) limit.
+        :param pulumi.Input[str] resource_name: instance name.
+        :param pulumi.Input[int] start_time: when Offset type timestamp is required.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArgs']]] table_mappings: maps of table to topic, required when multi topic is selected.
+        :param pulumi.Input[str] topic: Topic name, use `,` when more than 1 topic.
+        :param pulumi.Input[str] topic_id: Topic id.
+        :param pulumi.Input[bool] use_auto_create_topic: Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        :param pulumi.Input[bool] use_table_mapping: whether to use multi table.
         :param pulumi.Input[int] zone_id: Zone ID.
         """
         pulumi.set(__self__, "resource", resource)
@@ -7191,7 +7191,7 @@ class DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter
     def resource(self) -> pulumi.Input[str]:
         """
-        resource id.
+        instance resource.
         """
         return pulumi.get(self, "resource")
 
@@ -7203,7 +7203,7 @@ class DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="selfBuilt")
     def self_built(self) -> pulumi.Input[bool]:
         """
-        Whether it is a self-built cluster.
+        whether the cluster is built by yourself instead of cloud product.
         """
         return pulumi.get(self, "self_built")
 
@@ -7227,7 +7227,7 @@ class DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="enableToleration")
     def enable_toleration(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable the fault-tolerant instance and enable the dead-letter queue.
+        enable dead letter queue.
         """
         return pulumi.get(self, "enable_toleration")
 
@@ -7251,7 +7251,7 @@ class DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="offsetType")
     def offset_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
         """
         return pulumi.get(self, "offset_type")
 
@@ -7263,7 +7263,7 @@ class DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="partitionNum")
     def partition_num(self) -> Optional[pulumi.Input[int]]:
         """
-        Partition num.
+        the partition num of the topic.
         """
         return pulumi.get(self, "partition_num")
 
@@ -7275,7 +7275,7 @@ class DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="qpsLimit")
     def qps_limit(self) -> Optional[pulumi.Input[int]]:
         """
-        Qps limit.
+        Qps(query per seconds) limit.
         """
         return pulumi.get(self, "qps_limit")
 
@@ -7287,7 +7287,7 @@ class DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="resourceName")
     def resource_name(self) -> Optional[pulumi.Input[str]]:
         """
-        resource id name.
+        instance name.
         """
         return pulumi.get(self, "resource_name")
 
@@ -7299,7 +7299,7 @@ class DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="startTime")
     def start_time(self) -> Optional[pulumi.Input[int]]:
         """
-        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        when Offset type timestamp is required.
         """
         return pulumi.get(self, "start_time")
 
@@ -7311,7 +7311,7 @@ class DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="tableMappings")
     def table_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArgs']]]]:
         """
-        The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        maps of table to topic, required when multi topic is selected.
         """
         return pulumi.get(self, "table_mappings")
 
@@ -7323,7 +7323,7 @@ class DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter
     def topic(self) -> Optional[pulumi.Input[str]]:
         """
-        Topic name, multiple separated by,.
+        Topic name, use `,` when more than 1 topic.
         """
         return pulumi.get(self, "topic")
 
@@ -7335,7 +7335,7 @@ class DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="topicId")
     def topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Topic Id.
+        Topic id.
         """
         return pulumi.get(self, "topic_id")
 
@@ -7347,7 +7347,7 @@ class DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="useAutoCreateTopic")
     def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
         """
-        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
         """
         return pulumi.get(self, "use_auto_create_topic")
 
@@ -7359,7 +7359,7 @@ class DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs:
     @pulumi.getter(name="useTableMapping")
     def use_table_mapping(self) -> Optional[pulumi.Input[bool]]:
         """
-        Distribute to multiple topics switch, the default is false.
+        whether to use multi table.
         """
         return pulumi.get(self, "use_table_mapping")
 
@@ -7463,7 +7463,7 @@ class DatahubTaskTargetResourceEsParamDropDlqTopicParamArgs:
         :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
         :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
         :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
-        :param pulumi.Input[str] topic_id: TopicId.
+        :param pulumi.Input[str] topic_id: Topic TopicId.
         :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
         """
         pulumi.set(__self__, "resource", resource)
@@ -7544,7 +7544,7 @@ class DatahubTaskTargetResourceEsParamDropDlqTopicParamArgs:
     @pulumi.getter(name="topicId")
     def topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        TopicId.
+        Topic TopicId.
         """
         return pulumi.get(self, "topic_id")
 
@@ -7685,21 +7685,21 @@ class DatahubTaskTargetResourceKafkaParamArgs:
                  use_table_mapping: Optional[pulumi.Input[bool]] = None,
                  zone_id: Optional[pulumi.Input[int]] = None):
         """
-        :param pulumi.Input[str] resource: resource id.
-        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] resource: instance resource.
+        :param pulumi.Input[bool] self_built: whether the cluster is built by yourself instead of cloud product.
         :param pulumi.Input[str] compression_type: Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
-        :param pulumi.Input[bool] enable_toleration: Enable the fault-tolerant instance and enable the dead-letter queue.
+        :param pulumi.Input[bool] enable_toleration: enable dead letter queue.
         :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
-        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
-        :param pulumi.Input[int] partition_num: Partition num.
-        :param pulumi.Input[int] qps_limit: Qps limit.
-        :param pulumi.Input[str] resource_name: resource id name.
-        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
-        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceKafkaParamTableMappingArgs']]] table_mappings: The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
-        :param pulumi.Input[str] topic: Topic name, multiple separated by,.
-        :param pulumi.Input[str] topic_id: Topic Id.
-        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
-        :param pulumi.Input[bool] use_table_mapping: Distribute to multiple topics switch, the default is false.
+        :param pulumi.Input[str] offset_type: Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
+        :param pulumi.Input[int] partition_num: the partition num of the topic.
+        :param pulumi.Input[int] qps_limit: Qps(query per seconds) limit.
+        :param pulumi.Input[str] resource_name: instance name.
+        :param pulumi.Input[int] start_time: when Offset type timestamp is required.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceKafkaParamTableMappingArgs']]] table_mappings: maps of table to topic, required when multi topic is selected.
+        :param pulumi.Input[str] topic: Topic name, use `,` when more than 1 topic.
+        :param pulumi.Input[str] topic_id: Topic id.
+        :param pulumi.Input[bool] use_auto_create_topic: Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        :param pulumi.Input[bool] use_table_mapping: whether to use multi table.
         :param pulumi.Input[int] zone_id: Zone ID.
         """
         pulumi.set(__self__, "resource", resource)
@@ -7737,7 +7737,7 @@ class DatahubTaskTargetResourceKafkaParamArgs:
     @pulumi.getter
     def resource(self) -> pulumi.Input[str]:
         """
-        resource id.
+        instance resource.
         """
         return pulumi.get(self, "resource")
 
@@ -7749,7 +7749,7 @@ class DatahubTaskTargetResourceKafkaParamArgs:
     @pulumi.getter(name="selfBuilt")
     def self_built(self) -> pulumi.Input[bool]:
         """
-        Whether it is a self-built cluster.
+        whether the cluster is built by yourself instead of cloud product.
         """
         return pulumi.get(self, "self_built")
 
@@ -7773,7 +7773,7 @@ class DatahubTaskTargetResourceKafkaParamArgs:
     @pulumi.getter(name="enableToleration")
     def enable_toleration(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable the fault-tolerant instance and enable the dead-letter queue.
+        enable dead letter queue.
         """
         return pulumi.get(self, "enable_toleration")
 
@@ -7797,7 +7797,7 @@ class DatahubTaskTargetResourceKafkaParamArgs:
     @pulumi.getter(name="offsetType")
     def offset_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
         """
         return pulumi.get(self, "offset_type")
 
@@ -7809,7 +7809,7 @@ class DatahubTaskTargetResourceKafkaParamArgs:
     @pulumi.getter(name="partitionNum")
     def partition_num(self) -> Optional[pulumi.Input[int]]:
         """
-        Partition num.
+        the partition num of the topic.
         """
         return pulumi.get(self, "partition_num")
 
@@ -7821,7 +7821,7 @@ class DatahubTaskTargetResourceKafkaParamArgs:
     @pulumi.getter(name="qpsLimit")
     def qps_limit(self) -> Optional[pulumi.Input[int]]:
         """
-        Qps limit.
+        Qps(query per seconds) limit.
         """
         return pulumi.get(self, "qps_limit")
 
@@ -7833,7 +7833,7 @@ class DatahubTaskTargetResourceKafkaParamArgs:
     @pulumi.getter(name="resourceName")
     def resource_name(self) -> Optional[pulumi.Input[str]]:
         """
-        resource id name.
+        instance name.
         """
         return pulumi.get(self, "resource_name")
 
@@ -7845,7 +7845,7 @@ class DatahubTaskTargetResourceKafkaParamArgs:
     @pulumi.getter(name="startTime")
     def start_time(self) -> Optional[pulumi.Input[int]]:
         """
-        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        when Offset type timestamp is required.
         """
         return pulumi.get(self, "start_time")
 
@@ -7857,7 +7857,7 @@ class DatahubTaskTargetResourceKafkaParamArgs:
     @pulumi.getter(name="tableMappings")
     def table_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTargetResourceKafkaParamTableMappingArgs']]]]:
         """
-        The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        maps of table to topic, required when multi topic is selected.
         """
         return pulumi.get(self, "table_mappings")
 
@@ -7869,7 +7869,7 @@ class DatahubTaskTargetResourceKafkaParamArgs:
     @pulumi.getter
     def topic(self) -> Optional[pulumi.Input[str]]:
         """
-        Topic name, multiple separated by,.
+        Topic name, use `,` when more than 1 topic.
         """
         return pulumi.get(self, "topic")
 
@@ -7881,7 +7881,7 @@ class DatahubTaskTargetResourceKafkaParamArgs:
     @pulumi.getter(name="topicId")
     def topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Topic Id.
+        Topic id.
         """
         return pulumi.get(self, "topic_id")
 
@@ -7893,7 +7893,7 @@ class DatahubTaskTargetResourceKafkaParamArgs:
     @pulumi.getter(name="useAutoCreateTopic")
     def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
         """
-        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
         """
         return pulumi.get(self, "use_auto_create_topic")
 
@@ -7905,7 +7905,7 @@ class DatahubTaskTargetResourceKafkaParamArgs:
     @pulumi.getter(name="useTableMapping")
     def use_table_mapping(self) -> Optional[pulumi.Input[bool]]:
         """
-        Distribute to multiple topics switch, the default is false.
+        whether to use multi table.
         """
         return pulumi.get(self, "use_table_mapping")
 
@@ -8771,9 +8771,9 @@ class DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs:
         """
         :param pulumi.Input[bool] allow_null: Whether the message is allowed to be empty.
         :param pulumi.Input[bool] auto_increment: Whether it is an auto-increment column.
-        :param pulumi.Input[str] column_name: Corresponding mapping column name.
-        :param pulumi.Input[str] column_size: current column size.
-        :param pulumi.Input[str] decimal_digits: current column precision.
+        :param pulumi.Input[str] column_name: Column Name.
+        :param pulumi.Input[str] column_size: current ColumnSize.
+        :param pulumi.Input[str] decimal_digits: current Column DecimalDigits.
         :param pulumi.Input[str] default_value: Database table default parameters.
         :param pulumi.Input[str] extra_info: Database table extra fields.
         :param pulumi.Input[str] json_key: The key name of the message.
@@ -8826,7 +8826,7 @@ class DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs:
     @pulumi.getter(name="columnName")
     def column_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Corresponding mapping column name.
+        Column Name.
         """
         return pulumi.get(self, "column_name")
 
@@ -8838,7 +8838,7 @@ class DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs:
     @pulumi.getter(name="columnSize")
     def column_size(self) -> Optional[pulumi.Input[str]]:
         """
-        current column size.
+        current ColumnSize.
         """
         return pulumi.get(self, "column_size")
 
@@ -8850,7 +8850,7 @@ class DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs:
     @pulumi.getter(name="decimalDigits")
     def decimal_digits(self) -> Optional[pulumi.Input[str]]:
         """
-        current column precision.
+        current Column DecimalDigits.
         """
         return pulumi.get(self, "decimal_digits")
 
@@ -8916,10 +8916,10 @@ class DatahubTaskTargetResourceMySqlParamDropClsArgs:
                  drop_cls_topic_id: Optional[pulumi.Input[str]] = None,
                  drop_invalid_message_to_cls: Optional[pulumi.Input[bool]] = None):
         """
-        :param pulumi.Input[str] drop_cls_log_set: cls log set.
-        :param pulumi.Input[str] drop_cls_owneruin: Delivery account of cls.
+        :param pulumi.Input[str] drop_cls_log_set: cls LogSet id.
+        :param pulumi.Input[str] drop_cls_owneruin: account.
         :param pulumi.Input[str] drop_cls_region: The region where the cls is delivered.
-        :param pulumi.Input[str] drop_cls_topic_id: topic of cls.
+        :param pulumi.Input[str] drop_cls_topic_id: cls topic.
         :param pulumi.Input[bool] drop_invalid_message_to_cls: Whether to deliver to cls.
         """
         if drop_cls_log_set is not None:
@@ -8937,7 +8937,7 @@ class DatahubTaskTargetResourceMySqlParamDropClsArgs:
     @pulumi.getter(name="dropClsLogSet")
     def drop_cls_log_set(self) -> Optional[pulumi.Input[str]]:
         """
-        cls log set.
+        cls LogSet id.
         """
         return pulumi.get(self, "drop_cls_log_set")
 
@@ -8949,7 +8949,7 @@ class DatahubTaskTargetResourceMySqlParamDropClsArgs:
     @pulumi.getter(name="dropClsOwneruin")
     def drop_cls_owneruin(self) -> Optional[pulumi.Input[str]]:
         """
-        Delivery account of cls.
+        account.
         """
         return pulumi.get(self, "drop_cls_owneruin")
 
@@ -8973,7 +8973,7 @@ class DatahubTaskTargetResourceMySqlParamDropClsArgs:
     @pulumi.getter(name="dropClsTopicId")
     def drop_cls_topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        topic of cls.
+        cls topic.
         """
         return pulumi.get(self, "drop_cls_topic_id")
 
@@ -9220,9 +9220,9 @@ class DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs:
         """
         :param pulumi.Input[bool] allow_null: Whether the message is allowed to be empty.
         :param pulumi.Input[bool] auto_increment: Whether it is an auto-increment column.
-        :param pulumi.Input[str] column_name: Corresponding mapping column name.
-        :param pulumi.Input[str] column_size: current column size.
-        :param pulumi.Input[str] decimal_digits: current column precision.
+        :param pulumi.Input[str] column_name: Column Name.
+        :param pulumi.Input[str] column_size: current ColumnSize.
+        :param pulumi.Input[str] decimal_digits: current Column DecimalDigits.
         :param pulumi.Input[str] default_value: Database table default parameters.
         :param pulumi.Input[str] extra_info: Database table extra fields.
         :param pulumi.Input[str] json_key: The key name of the message.
@@ -9275,7 +9275,7 @@ class DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs:
     @pulumi.getter(name="columnName")
     def column_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Corresponding mapping column name.
+        Column Name.
         """
         return pulumi.get(self, "column_name")
 
@@ -9287,7 +9287,7 @@ class DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs:
     @pulumi.getter(name="columnSize")
     def column_size(self) -> Optional[pulumi.Input[str]]:
         """
-        current column size.
+        current ColumnSize.
         """
         return pulumi.get(self, "column_size")
 
@@ -9299,7 +9299,7 @@ class DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs:
     @pulumi.getter(name="decimalDigits")
     def decimal_digits(self) -> Optional[pulumi.Input[str]]:
         """
-        current column precision.
+        current Column DecimalDigits.
         """
         return pulumi.get(self, "decimal_digits")
 
@@ -9611,7 +9611,7 @@ class DatahubTaskTargetResourceTopicParamArgs:
         :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
         :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
         :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
-        :param pulumi.Input[str] topic_id: TopicId.
+        :param pulumi.Input[str] topic_id: Topic TopicId.
         :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
         """
         pulumi.set(__self__, "resource", resource)
@@ -9692,7 +9692,7 @@ class DatahubTaskTargetResourceTopicParamArgs:
     @pulumi.getter(name="topicId")
     def topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        TopicId.
+        Topic TopicId.
         """
         return pulumi.get(self, "topic_id")
 
@@ -10067,21 +10067,21 @@ class DatahubTaskTransformParamFailureParamKafkaParamArgs:
                  use_table_mapping: Optional[pulumi.Input[bool]] = None,
                  zone_id: Optional[pulumi.Input[int]] = None):
         """
-        :param pulumi.Input[str] resource: resource id.
-        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] resource: instance resource.
+        :param pulumi.Input[bool] self_built: whether the cluster is built by yourself instead of cloud product.
         :param pulumi.Input[str] compression_type: Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
-        :param pulumi.Input[bool] enable_toleration: Enable the fault-tolerant instance and enable the dead-letter queue.
+        :param pulumi.Input[bool] enable_toleration: enable dead letter queue.
         :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
-        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
-        :param pulumi.Input[int] partition_num: Partition num.
-        :param pulumi.Input[int] qps_limit: Qps limit.
-        :param pulumi.Input[str] resource_name: resource id name.
-        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
-        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamFailureParamKafkaParamTableMappingArgs']]] table_mappings: The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
-        :param pulumi.Input[str] topic: Topic name, multiple separated by,.
-        :param pulumi.Input[str] topic_id: Topic Id.
-        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
-        :param pulumi.Input[bool] use_table_mapping: Distribute to multiple topics switch, the default is false.
+        :param pulumi.Input[str] offset_type: Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
+        :param pulumi.Input[int] partition_num: the partition num of the topic.
+        :param pulumi.Input[int] qps_limit: Qps(query per seconds) limit.
+        :param pulumi.Input[str] resource_name: instance name.
+        :param pulumi.Input[int] start_time: when Offset type timestamp is required.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamFailureParamKafkaParamTableMappingArgs']]] table_mappings: maps of table to topic, required when multi topic is selected.
+        :param pulumi.Input[str] topic: Topic name, use `,` when more than 1 topic.
+        :param pulumi.Input[str] topic_id: Topic id.
+        :param pulumi.Input[bool] use_auto_create_topic: Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        :param pulumi.Input[bool] use_table_mapping: whether to use multi table.
         :param pulumi.Input[int] zone_id: Zone ID.
         """
         pulumi.set(__self__, "resource", resource)
@@ -10119,7 +10119,7 @@ class DatahubTaskTransformParamFailureParamKafkaParamArgs:
     @pulumi.getter
     def resource(self) -> pulumi.Input[str]:
         """
-        resource id.
+        instance resource.
         """
         return pulumi.get(self, "resource")
 
@@ -10131,7 +10131,7 @@ class DatahubTaskTransformParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="selfBuilt")
     def self_built(self) -> pulumi.Input[bool]:
         """
-        Whether it is a self-built cluster.
+        whether the cluster is built by yourself instead of cloud product.
         """
         return pulumi.get(self, "self_built")
 
@@ -10155,7 +10155,7 @@ class DatahubTaskTransformParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="enableToleration")
     def enable_toleration(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable the fault-tolerant instance and enable the dead-letter queue.
+        enable dead letter queue.
         """
         return pulumi.get(self, "enable_toleration")
 
@@ -10179,7 +10179,7 @@ class DatahubTaskTransformParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="offsetType")
     def offset_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
         """
         return pulumi.get(self, "offset_type")
 
@@ -10191,7 +10191,7 @@ class DatahubTaskTransformParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="partitionNum")
     def partition_num(self) -> Optional[pulumi.Input[int]]:
         """
-        Partition num.
+        the partition num of the topic.
         """
         return pulumi.get(self, "partition_num")
 
@@ -10203,7 +10203,7 @@ class DatahubTaskTransformParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="qpsLimit")
     def qps_limit(self) -> Optional[pulumi.Input[int]]:
         """
-        Qps limit.
+        Qps(query per seconds) limit.
         """
         return pulumi.get(self, "qps_limit")
 
@@ -10215,7 +10215,7 @@ class DatahubTaskTransformParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="resourceName")
     def resource_name(self) -> Optional[pulumi.Input[str]]:
         """
-        resource id name.
+        instance name.
         """
         return pulumi.get(self, "resource_name")
 
@@ -10227,7 +10227,7 @@ class DatahubTaskTransformParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="startTime")
     def start_time(self) -> Optional[pulumi.Input[int]]:
         """
-        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        when Offset type timestamp is required.
         """
         return pulumi.get(self, "start_time")
 
@@ -10239,7 +10239,7 @@ class DatahubTaskTransformParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="tableMappings")
     def table_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformParamFailureParamKafkaParamTableMappingArgs']]]]:
         """
-        The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        maps of table to topic, required when multi topic is selected.
         """
         return pulumi.get(self, "table_mappings")
 
@@ -10251,7 +10251,7 @@ class DatahubTaskTransformParamFailureParamKafkaParamArgs:
     @pulumi.getter
     def topic(self) -> Optional[pulumi.Input[str]]:
         """
-        Topic name, multiple separated by,.
+        Topic name, use `,` when more than 1 topic.
         """
         return pulumi.get(self, "topic")
 
@@ -10263,7 +10263,7 @@ class DatahubTaskTransformParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="topicId")
     def topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Topic Id.
+        Topic id.
         """
         return pulumi.get(self, "topic_id")
 
@@ -10275,7 +10275,7 @@ class DatahubTaskTransformParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="useAutoCreateTopic")
     def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
         """
-        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
         """
         return pulumi.get(self, "use_auto_create_topic")
 
@@ -10287,7 +10287,7 @@ class DatahubTaskTransformParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="useTableMapping")
     def use_table_mapping(self) -> Optional[pulumi.Input[bool]]:
         """
-        Distribute to multiple topics switch, the default is false.
+        whether to use multi table.
         """
         return pulumi.get(self, "use_table_mapping")
 
@@ -10391,7 +10391,7 @@ class DatahubTaskTransformParamFailureParamTopicParamArgs:
         :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
         :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
         :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
-        :param pulumi.Input[str] topic_id: TopicId.
+        :param pulumi.Input[str] topic_id: Topic TopicId.
         :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
         """
         pulumi.set(__self__, "resource", resource)
@@ -10472,7 +10472,7 @@ class DatahubTaskTransformParamFailureParamTopicParamArgs:
     @pulumi.getter(name="topicId")
     def topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        TopicId.
+        Topic TopicId.
         """
         return pulumi.get(self, "topic_id")
 
@@ -10924,21 +10924,21 @@ class DatahubTaskTransformsParamFailureParamKafkaParamArgs:
                  use_table_mapping: Optional[pulumi.Input[bool]] = None,
                  zone_id: Optional[pulumi.Input[int]] = None):
         """
-        :param pulumi.Input[str] resource: resource id.
-        :param pulumi.Input[bool] self_built: Whether it is a self-built cluster.
+        :param pulumi.Input[str] resource: instance resource.
+        :param pulumi.Input[bool] self_built: whether the cluster is built by yourself instead of cloud product.
         :param pulumi.Input[str] compression_type: Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
-        :param pulumi.Input[bool] enable_toleration: Enable the fault-tolerant instance and enable the dead-letter queue.
+        :param pulumi.Input[bool] enable_toleration: enable dead letter queue.
         :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
-        :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
-        :param pulumi.Input[int] partition_num: Partition num.
-        :param pulumi.Input[int] qps_limit: Qps limit.
-        :param pulumi.Input[str] resource_name: resource id name.
-        :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
-        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArgs']]] table_mappings: The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
-        :param pulumi.Input[str] topic: Topic name, multiple separated by,.
-        :param pulumi.Input[str] topic_id: Topic Id.
-        :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
-        :param pulumi.Input[bool] use_table_mapping: Distribute to multiple topics switch, the default is false.
+        :param pulumi.Input[str] offset_type: Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
+        :param pulumi.Input[int] partition_num: the partition num of the topic.
+        :param pulumi.Input[int] qps_limit: Qps(query per seconds) limit.
+        :param pulumi.Input[str] resource_name: instance name.
+        :param pulumi.Input[int] start_time: when Offset type timestamp is required.
+        :param pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArgs']]] table_mappings: maps of table to topic, required when multi topic is selected.
+        :param pulumi.Input[str] topic: Topic name, use `,` when more than 1 topic.
+        :param pulumi.Input[str] topic_id: Topic id.
+        :param pulumi.Input[bool] use_auto_create_topic: Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        :param pulumi.Input[bool] use_table_mapping: whether to use multi table.
         :param pulumi.Input[int] zone_id: Zone ID.
         """
         pulumi.set(__self__, "resource", resource)
@@ -10976,7 +10976,7 @@ class DatahubTaskTransformsParamFailureParamKafkaParamArgs:
     @pulumi.getter
     def resource(self) -> pulumi.Input[str]:
         """
-        resource id.
+        instance resource.
         """
         return pulumi.get(self, "resource")
 
@@ -10988,7 +10988,7 @@ class DatahubTaskTransformsParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="selfBuilt")
     def self_built(self) -> pulumi.Input[bool]:
         """
-        Whether it is a self-built cluster.
+        whether the cluster is built by yourself instead of cloud product.
         """
         return pulumi.get(self, "self_built")
 
@@ -11012,7 +11012,7 @@ class DatahubTaskTransformsParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="enableToleration")
     def enable_toleration(self) -> Optional[pulumi.Input[bool]]:
         """
-        Enable the fault-tolerant instance and enable the dead-letter queue.
+        enable dead letter queue.
         """
         return pulumi.get(self, "enable_toleration")
 
@@ -11036,7 +11036,7 @@ class DatahubTaskTransformsParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="offsetType")
     def offset_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Offset type, initial position earliest, latest position latest, time point position timestamp.
+        Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
         """
         return pulumi.get(self, "offset_type")
 
@@ -11048,7 +11048,7 @@ class DatahubTaskTransformsParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="partitionNum")
     def partition_num(self) -> Optional[pulumi.Input[int]]:
         """
-        Partition num.
+        the partition num of the topic.
         """
         return pulumi.get(self, "partition_num")
 
@@ -11060,7 +11060,7 @@ class DatahubTaskTransformsParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="qpsLimit")
     def qps_limit(self) -> Optional[pulumi.Input[int]]:
         """
-        Qps limit.
+        Qps(query per seconds) limit.
         """
         return pulumi.get(self, "qps_limit")
 
@@ -11072,7 +11072,7 @@ class DatahubTaskTransformsParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="resourceName")
     def resource_name(self) -> Optional[pulumi.Input[str]]:
         """
-        resource id name.
+        instance name.
         """
         return pulumi.get(self, "resource_name")
 
@@ -11084,7 +11084,7 @@ class DatahubTaskTransformsParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="startTime")
     def start_time(self) -> Optional[pulumi.Input[int]]:
         """
-        It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        when Offset type timestamp is required.
         """
         return pulumi.get(self, "start_time")
 
@@ -11096,7 +11096,7 @@ class DatahubTaskTransformsParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="tableMappings")
     def table_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArgs']]]]:
         """
-        The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        maps of table to topic, required when multi topic is selected.
         """
         return pulumi.get(self, "table_mappings")
 
@@ -11108,7 +11108,7 @@ class DatahubTaskTransformsParamFailureParamKafkaParamArgs:
     @pulumi.getter
     def topic(self) -> Optional[pulumi.Input[str]]:
         """
-        Topic name, multiple separated by,.
+        Topic name, use `,` when more than 1 topic.
         """
         return pulumi.get(self, "topic")
 
@@ -11120,7 +11120,7 @@ class DatahubTaskTransformsParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="topicId")
     def topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Topic Id.
+        Topic id.
         """
         return pulumi.get(self, "topic_id")
 
@@ -11132,7 +11132,7 @@ class DatahubTaskTransformsParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="useAutoCreateTopic")
     def use_auto_create_topic(self) -> Optional[pulumi.Input[bool]]:
         """
-        whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
         """
         return pulumi.get(self, "use_auto_create_topic")
 
@@ -11144,7 +11144,7 @@ class DatahubTaskTransformsParamFailureParamKafkaParamArgs:
     @pulumi.getter(name="useTableMapping")
     def use_table_mapping(self) -> Optional[pulumi.Input[bool]]:
         """
-        Distribute to multiple topics switch, the default is false.
+        whether to use multi table.
         """
         return pulumi.get(self, "use_table_mapping")
 
@@ -11248,7 +11248,7 @@ class DatahubTaskTransformsParamFailureParamTopicParamArgs:
         :param pulumi.Input[int] msg_multiple: 1 source topic message is amplified into msg Multiple and written to the target topic (this parameter is currently only applicable to ckafka flowing into ckafka).
         :param pulumi.Input[str] offset_type: Offset type, initial position earliest, latest position latest, time point position timestamp.
         :param pulumi.Input[int] start_time: It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
-        :param pulumi.Input[str] topic_id: TopicId.
+        :param pulumi.Input[str] topic_id: Topic TopicId.
         :param pulumi.Input[bool] use_auto_create_topic: whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks).
         """
         pulumi.set(__self__, "resource", resource)
@@ -11329,7 +11329,7 @@ class DatahubTaskTransformsParamFailureParamTopicParamArgs:
     @pulumi.getter(name="topicId")
     def topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        TopicId.
+        Topic TopicId.
         """
         return pulumi.get(self, "topic_id")
 

@@ -8,13 +8,28 @@ import * as utilities from "../utilities";
  * Use this resource to create API gateway access key.
  *
  * ## Example Usage
+ * ### Automatically generate key for API gateway access key.
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const test = new tencentcloud.ApiGateway.ApiKey("test", {
- *     secretName: "my_api_key",
+ * const exampleAuto = new tencentcloud.ApiGateway.ApiKey("example_auto", {
+ *     secretName: "tf_example_auto",
+ *     status: "on",
+ * });
+ * ```
+ * ### Manually generate a secret key for API gateway access key.
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const exampleManual = new tencentcloud.ApiGateway.ApiKey("example_manual", {
+ *     accessKeyId: "28e287e340507fa147b2c8284dab542f",
+ *     accessKeySecret: "0198a4b8c3105080f4acd9e507599eff",
+ *     accessKeyType: "manual",
+ *     secretName: "tf_example_manual",
  *     status: "on",
  * });
  * ```
@@ -56,9 +71,17 @@ export class ApiKey extends pulumi.CustomResource {
     }
 
     /**
-     * Created API key.
+     * User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
      */
-    public /*out*/ readonly accessKeySecret!: pulumi.Output<string>;
+    public readonly accessKeyId!: pulumi.Output<string>;
+    /**
+     * The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
+     */
+    public readonly accessKeySecret!: pulumi.Output<string>;
+    /**
+     * Key type, supports both auto and manual (custom keys), defaults to auto.
+     */
+    public readonly accessKeyType!: pulumi.Output<string | undefined>;
     /**
      * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
@@ -89,7 +112,9 @@ export class ApiKey extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ApiKeyState | undefined;
+            resourceInputs["accessKeyId"] = state ? state.accessKeyId : undefined;
             resourceInputs["accessKeySecret"] = state ? state.accessKeySecret : undefined;
+            resourceInputs["accessKeyType"] = state ? state.accessKeyType : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["modifyTime"] = state ? state.modifyTime : undefined;
             resourceInputs["secretName"] = state ? state.secretName : undefined;
@@ -99,9 +124,11 @@ export class ApiKey extends pulumi.CustomResource {
             if ((!args || args.secretName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'secretName'");
             }
+            resourceInputs["accessKeyId"] = args ? args.accessKeyId : undefined;
+            resourceInputs["accessKeySecret"] = args ? args.accessKeySecret : undefined;
+            resourceInputs["accessKeyType"] = args ? args.accessKeyType : undefined;
             resourceInputs["secretName"] = args ? args.secretName : undefined;
             resourceInputs["status"] = args ? args.status : undefined;
-            resourceInputs["accessKeySecret"] = undefined /*out*/;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["modifyTime"] = undefined /*out*/;
         }
@@ -115,9 +142,17 @@ export class ApiKey extends pulumi.CustomResource {
  */
 export interface ApiKeyState {
     /**
-     * Created API key.
+     * User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+     */
+    accessKeyId?: pulumi.Input<string>;
+    /**
+     * The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
      */
     accessKeySecret?: pulumi.Input<string>;
+    /**
+     * Key type, supports both auto and manual (custom keys), defaults to auto.
+     */
+    accessKeyType?: pulumi.Input<string>;
     /**
      * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
@@ -140,6 +175,18 @@ export interface ApiKeyState {
  * The set of arguments for constructing a ApiKey resource.
  */
 export interface ApiKeyArgs {
+    /**
+     * User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
+     */
+    accessKeyId?: pulumi.Input<string>;
+    /**
+     * The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
+     */
+    accessKeySecret?: pulumi.Input<string>;
+    /**
+     * Key type, supports both auto and manual (custom keys), defaults to auto.
+     */
+    accessKeyType?: pulumi.Input<string>;
     /**
      * Custom key name.
      */

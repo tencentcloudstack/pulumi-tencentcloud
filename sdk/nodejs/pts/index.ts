@@ -7,18 +7,27 @@ import * as utilities from "../utilities";
 // Export members:
 export * from "./alertChannel";
 export * from "./cronJob";
+export * from "./cronJobAbort";
+export * from "./cronJobRestart";
 export * from "./file";
+export * from "./getScenarioWithJobs";
 export * from "./job";
+export * from "./jobAbort";
 export * from "./project";
 export * from "./scenario";
+export * from "./tmpKeyGenerate";
 
 // Import resources to register:
 import { AlertChannel } from "./alertChannel";
 import { CronJob } from "./cronJob";
+import { CronJobAbort } from "./cronJobAbort";
+import { CronJobRestart } from "./cronJobRestart";
 import { File } from "./file";
 import { Job } from "./job";
+import { JobAbort } from "./jobAbort";
 import { Project } from "./project";
 import { Scenario } from "./scenario";
+import { TmpKeyGenerate } from "./tmpKeyGenerate";
 
 const _module = {
     version: utilities.getVersion(),
@@ -28,14 +37,22 @@ const _module = {
                 return new AlertChannel(name, <any>undefined, { urn })
             case "tencentcloud:Pts/cronJob:CronJob":
                 return new CronJob(name, <any>undefined, { urn })
+            case "tencentcloud:Pts/cronJobAbort:CronJobAbort":
+                return new CronJobAbort(name, <any>undefined, { urn })
+            case "tencentcloud:Pts/cronJobRestart:CronJobRestart":
+                return new CronJobRestart(name, <any>undefined, { urn })
             case "tencentcloud:Pts/file:File":
                 return new File(name, <any>undefined, { urn })
             case "tencentcloud:Pts/job:Job":
                 return new Job(name, <any>undefined, { urn })
+            case "tencentcloud:Pts/jobAbort:JobAbort":
+                return new JobAbort(name, <any>undefined, { urn })
             case "tencentcloud:Pts/project:Project":
                 return new Project(name, <any>undefined, { urn })
             case "tencentcloud:Pts/scenario:Scenario":
                 return new Scenario(name, <any>undefined, { urn })
+            case "tencentcloud:Pts/tmpKeyGenerate:TmpKeyGenerate":
+                return new TmpKeyGenerate(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -43,7 +60,11 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Pts/alertChannel", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Pts/cronJob", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Pts/cronJobAbort", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Pts/cronJobRestart", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Pts/file", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Pts/job", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Pts/jobAbort", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Pts/project", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Pts/scenario", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Pts/tmpKeyGenerate", _module)

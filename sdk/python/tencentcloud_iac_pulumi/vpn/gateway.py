@@ -13,7 +13,6 @@ __all__ = ['GatewayArgs', 'Gateway']
 @pulumi.input_type
 class GatewayArgs:
     def __init__(__self__, *,
-                 zone: pulumi.Input[str],
                  bandwidth: Optional[pulumi.Input[int]] = None,
                  cdc_id: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
@@ -23,10 +22,10 @@ class GatewayArgs:
                  prepaid_renew_flag: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  type: Optional[pulumi.Input[str]] = None,
-                 vpc_id: Optional[pulumi.Input[str]] = None):
+                 vpc_id: Optional[pulumi.Input[str]] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Gateway resource.
-        :param pulumi.Input[str] zone: Zone of the VPN gateway.
         :param pulumi.Input[int] bandwidth: The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
         :param pulumi.Input[str] cdc_id: CDC instance ID.
         :param pulumi.Input[str] charge_type: Charge Type of the VPN gateway. Valid value: `PREPAID`, `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
@@ -37,8 +36,8 @@ class GatewayArgs:
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
         :param pulumi.Input[str] type: Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
         :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
+        :param pulumi.Input[str] zone: Zone of the VPN gateway.
         """
-        pulumi.set(__self__, "zone", zone)
         if bandwidth is not None:
             pulumi.set(__self__, "bandwidth", bandwidth)
         if cdc_id is not None:
@@ -59,18 +58,8 @@ class GatewayArgs:
             pulumi.set(__self__, "type", type)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
-
-    @property
-    @pulumi.getter
-    def zone(self) -> pulumi.Input[str]:
-        """
-        Zone of the VPN gateway.
-        """
-        return pulumi.get(self, "zone")
-
-    @zone.setter
-    def zone(self, value: pulumi.Input[str]):
-        pulumi.set(self, "zone", value)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
 
     @property
     @pulumi.getter
@@ -191,6 +180,18 @@ class GatewayArgs:
     @vpc_id.setter
     def vpc_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "vpc_id", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        Zone of the VPN gateway.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
 
 
 @pulumi.input_type
@@ -523,7 +524,7 @@ class Gateway(pulumi.CustomResource):
             vpc_id="vpc-86v957zb",
             zone="ap-guangzhou-3")
         ```
-        ### CCN IPEC VPN gateway
+        ### CCN IPSEC VPN gateway
 
         ```python
         import pulumi
@@ -534,7 +535,7 @@ class Gateway(pulumi.CustomResource):
             tags={
                 "test": "test",
             },
-            type="CCN",
+            type="IPSEC",
             zone="ap-guangzhou-3")
         ```
         ### CCN SSL VPN gateway
@@ -608,7 +609,7 @@ class Gateway(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: GatewayArgs,
+                 args: Optional[GatewayArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         ## Example Usage
@@ -627,7 +628,7 @@ class Gateway(pulumi.CustomResource):
             vpc_id="vpc-86v957zb",
             zone="ap-guangzhou-3")
         ```
-        ### CCN IPEC VPN gateway
+        ### CCN IPSEC VPN gateway
 
         ```python
         import pulumi
@@ -638,7 +639,7 @@ class Gateway(pulumi.CustomResource):
             tags={
                 "test": "test",
             },
-            type="CCN",
+            type="IPSEC",
             zone="ap-guangzhou-3")
         ```
         ### CCN SSL VPN gateway
@@ -744,8 +745,6 @@ class Gateway(pulumi.CustomResource):
             __props__.__dict__["tags"] = tags
             __props__.__dict__["type"] = type
             __props__.__dict__["vpc_id"] = vpc_id
-            if zone is None and not opts.urn:
-                raise TypeError("Missing required property 'zone'")
             __props__.__dict__["zone"] = zone
             __props__.__dict__["create_time"] = None
             __props__.__dict__["expired_time"] = None

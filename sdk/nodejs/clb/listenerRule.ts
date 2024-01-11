@@ -145,6 +145,10 @@ export class ListenerRule extends pulumi.CustomResource {
      */
     public readonly listenerId!: pulumi.Output<string>;
     /**
+     * Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
+     */
+    public readonly quic!: pulumi.Output<boolean>;
+    /**
      * ID of this CLB listener rule.
      */
     public /*out*/ readonly ruleId!: pulumi.Output<string>;
@@ -196,6 +200,7 @@ export class ListenerRule extends pulumi.CustomResource {
             resourceInputs["healthCheckUnhealthNum"] = state ? state.healthCheckUnhealthNum : undefined;
             resourceInputs["http2Switch"] = state ? state.http2Switch : undefined;
             resourceInputs["listenerId"] = state ? state.listenerId : undefined;
+            resourceInputs["quic"] = state ? state.quic : undefined;
             resourceInputs["ruleId"] = state ? state.ruleId : undefined;
             resourceInputs["scheduler"] = state ? state.scheduler : undefined;
             resourceInputs["sessionExpireTime"] = state ? state.sessionExpireTime : undefined;
@@ -233,6 +238,7 @@ export class ListenerRule extends pulumi.CustomResource {
             resourceInputs["healthCheckUnhealthNum"] = args ? args.healthCheckUnhealthNum : undefined;
             resourceInputs["http2Switch"] = args ? args.http2Switch : undefined;
             resourceInputs["listenerId"] = args ? args.listenerId : undefined;
+            resourceInputs["quic"] = args ? args.quic : undefined;
             resourceInputs["scheduler"] = args ? args.scheduler : undefined;
             resourceInputs["sessionExpireTime"] = args ? args.sessionExpireTime : undefined;
             resourceInputs["targetType"] = args ? args.targetType : undefined;
@@ -320,6 +326,10 @@ export interface ListenerRuleState {
      * ID of CLB listener.
      */
     listenerId?: pulumi.Input<string>;
+    /**
+     * Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
+     */
+    quic?: pulumi.Input<boolean>;
     /**
      * ID of this CLB listener rule.
      */
@@ -418,6 +428,10 @@ export interface ListenerRuleArgs {
      * ID of CLB listener.
      */
     listenerId: pulumi.Input<string>;
+    /**
+     * Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
+     */
+    quic?: pulumi.Input<boolean>;
     /**
      * Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */

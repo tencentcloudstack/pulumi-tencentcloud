@@ -167,13 +167,67 @@ class PluginAttachment(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import json
         import tencentcloud_iac_pulumi as tencentcloud
 
-        plugin_attachment = tencentcloud.api_gateway.PluginAttachment("pluginAttachment",
-            api_id="api-6tfrdysk",
-            environment_name="test",
-            plugin_id="plugin-ny74siyz",
-            service_id="service-n1mgl0sq")
+        example_plugin = tencentcloud.api_gateway.Plugin("examplePlugin",
+            plugin_name="tf-example",
+            plugin_type="IPControl",
+            plugin_data=json.dumps({
+                "type": "white_list",
+                "blocks": "1.1.1.1",
+            }),
+            description="desc.")
+        example_service = tencentcloud.api_gateway.Service("exampleService",
+            service_name="tf_example_service",
+            protocol="http&https",
+            service_desc="your nice service",
+            net_types=[
+                "INNER",
+                "OUTER",
+            ],
+            ip_version="IPv4")
+        example_api = tencentcloud.api_gateway.Api("exampleApi",
+            service_id=example_service.id,
+            api_name="tf_example_api",
+            api_desc="desc.",
+            auth_type="APP",
+            protocol="HTTP",
+            enable_cors=True,
+            request_config_path="/user/info",
+            request_config_method="GET",
+            request_parameters=[tencentcloud.api.gateway.ApiRequestParameterArgs(
+                name="name",
+                position="QUERY",
+                type="string",
+                desc="desc.",
+                default_value="terraform",
+                required=True,
+            )],
+            service_config_type="HTTP",
+            service_config_timeout=15,
+            service_config_url="https://www.qq.com",
+            service_config_path="/user",
+            service_config_method="GET",
+            response_type="HTML",
+            response_success_example="success",
+            response_fail_example="fail",
+            response_error_codes=[tencentcloud.api.gateway.ApiResponseErrorCodeArgs(
+                code=400,
+                msg="system error msg.",
+                desc="system error desc.",
+                converted_code=407,
+                need_convert=True,
+            )])
+        example_service_release = tencentcloud.api_gateway.ServiceRelease("exampleServiceRelease",
+            service_id=example_api.service_id,
+            environment_name="release",
+            release_desc="desc.")
+        example_plugin_attachment = tencentcloud.api_gateway.PluginAttachment("examplePluginAttachment",
+            plugin_id=example_plugin.id,
+            service_id=example_service_release.service_id,
+            api_id=example_api.id,
+            environment_name="release")
         ```
 
         ## Import
@@ -181,7 +235,7 @@ class PluginAttachment(pulumi.CustomResource):
         apiGateway plugin_attachment can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:ApiGateway/pluginAttachment:PluginAttachment plugin_attachment pluginId#serviceId#environmentName#apiId
+         $ pulumi import tencentcloud:ApiGateway/pluginAttachment:PluginAttachment example plugin-hnqntalp#service-q3f533ja#release#api-62ud9woa
         ```
 
         :param str resource_name: The name of the resource.
@@ -204,13 +258,67 @@ class PluginAttachment(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import json
         import tencentcloud_iac_pulumi as tencentcloud
 
-        plugin_attachment = tencentcloud.api_gateway.PluginAttachment("pluginAttachment",
-            api_id="api-6tfrdysk",
-            environment_name="test",
-            plugin_id="plugin-ny74siyz",
-            service_id="service-n1mgl0sq")
+        example_plugin = tencentcloud.api_gateway.Plugin("examplePlugin",
+            plugin_name="tf-example",
+            plugin_type="IPControl",
+            plugin_data=json.dumps({
+                "type": "white_list",
+                "blocks": "1.1.1.1",
+            }),
+            description="desc.")
+        example_service = tencentcloud.api_gateway.Service("exampleService",
+            service_name="tf_example_service",
+            protocol="http&https",
+            service_desc="your nice service",
+            net_types=[
+                "INNER",
+                "OUTER",
+            ],
+            ip_version="IPv4")
+        example_api = tencentcloud.api_gateway.Api("exampleApi",
+            service_id=example_service.id,
+            api_name="tf_example_api",
+            api_desc="desc.",
+            auth_type="APP",
+            protocol="HTTP",
+            enable_cors=True,
+            request_config_path="/user/info",
+            request_config_method="GET",
+            request_parameters=[tencentcloud.api.gateway.ApiRequestParameterArgs(
+                name="name",
+                position="QUERY",
+                type="string",
+                desc="desc.",
+                default_value="terraform",
+                required=True,
+            )],
+            service_config_type="HTTP",
+            service_config_timeout=15,
+            service_config_url="https://www.qq.com",
+            service_config_path="/user",
+            service_config_method="GET",
+            response_type="HTML",
+            response_success_example="success",
+            response_fail_example="fail",
+            response_error_codes=[tencentcloud.api.gateway.ApiResponseErrorCodeArgs(
+                code=400,
+                msg="system error msg.",
+                desc="system error desc.",
+                converted_code=407,
+                need_convert=True,
+            )])
+        example_service_release = tencentcloud.api_gateway.ServiceRelease("exampleServiceRelease",
+            service_id=example_api.service_id,
+            environment_name="release",
+            release_desc="desc.")
+        example_plugin_attachment = tencentcloud.api_gateway.PluginAttachment("examplePluginAttachment",
+            plugin_id=example_plugin.id,
+            service_id=example_service_release.service_id,
+            api_id=example_api.id,
+            environment_name="release")
         ```
 
         ## Import
@@ -218,7 +326,7 @@ class PluginAttachment(pulumi.CustomResource):
         apiGateway plugin_attachment can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:ApiGateway/pluginAttachment:PluginAttachment plugin_attachment pluginId#serviceId#environmentName#apiId
+         $ pulumi import tencentcloud:ApiGateway/pluginAttachment:PluginAttachment example plugin-hnqntalp#service-q3f533ja#release#api-62ud9woa
         ```
 
         :param str resource_name: The name of the resource.

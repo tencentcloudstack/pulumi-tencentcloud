@@ -5,26 +5,49 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./cloudResourceAttachment";
 export * from "./externalKey";
+export * from "./getDescribeKeys";
+export * from "./getGetParametersForImport";
 export * from "./getKeys";
+export * from "./getListAlgorithms";
+export * from "./getListKeys";
+export * from "./getPublicKey";
+export * from "./getWhiteBoxDecryptKey";
+export * from "./getWhiteBoxDeviceFingerprints";
+export * from "./getWhiteBoxKeyDetails";
 export * from "./key";
+export * from "./overwriteWhiteBoxDeviceFingerprints";
+export * from "./whiteBoxKey";
 
 // Import resources to register:
+import { CloudResourceAttachment } from "./cloudResourceAttachment";
 import { ExternalKey } from "./externalKey";
 import { Key } from "./key";
+import { OverwriteWhiteBoxDeviceFingerprints } from "./overwriteWhiteBoxDeviceFingerprints";
+import { WhiteBoxKey } from "./whiteBoxKey";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Kms/cloudResourceAttachment:CloudResourceAttachment":
+                return new CloudResourceAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Kms/externalKey:ExternalKey":
                 return new ExternalKey(name, <any>undefined, { urn })
             case "tencentcloud:Kms/key:Key":
                 return new Key(name, <any>undefined, { urn })
+            case "tencentcloud:Kms/overwriteWhiteBoxDeviceFingerprints:OverwriteWhiteBoxDeviceFingerprints":
+                return new OverwriteWhiteBoxDeviceFingerprints(name, <any>undefined, { urn })
+            case "tencentcloud:Kms/whiteBoxKey:WhiteBoxKey":
+                return new WhiteBoxKey(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Kms/cloudResourceAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kms/externalKey", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kms/key", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kms/overwriteWhiteBoxDeviceFingerprints", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kms/whiteBoxKey", _module)

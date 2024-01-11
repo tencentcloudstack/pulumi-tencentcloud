@@ -42,7 +42,7 @@ class PullStreamTaskArgs:
         :param pulumi.Input[str] app_name: push app name.
         :param pulumi.Input[str] domain_name: push domain name.
         :param pulumi.Input[str] end_time: task end time.
-        :param pulumi.Input[str] source_type: &amp;#39;PullLivePushLive&amp;#39;: SourceUrls live type, &amp;#39;PullVodPushLive&amp;#39;: SourceUrls vod type.
+        :param pulumi.Input[str] source_type: `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] source_urls: Pull Source media, SourceType=PullLivePushLive only 1 value, SourceType=PullLivePushLive can input multi values.
         :param pulumi.Input[str] start_time: task begin time.
         :param pulumi.Input[str] stream_name: push stream name.
@@ -59,7 +59,7 @@ class PullStreamTaskArgs:
         :param pulumi.Input[str] status: task enable or disable.
         :param pulumi.Input[str] to_url: full target push url, DomainName, AppName, StreamName field must be empty.
         :param pulumi.Input[int] vod_loop_times: loop time for vod.
-        :param pulumi.Input[str] vod_refresh_type: vod refresh method. &amp;#39;ImmediateNewSource&amp;#39;: switch to new source at once, &amp;#39;ContinueBreakPoint&amp;#39;: switch to new source while old source finish.
+        :param pulumi.Input[str] vod_refresh_type: vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
         :param pulumi.Input[Sequence[pulumi.Input['PullStreamTaskWatermarkListArgs']]] watermark_lists: watermark list, max 4 setting.
         """
         pulumi.set(__self__, "app_name", app_name)
@@ -140,7 +140,7 @@ class PullStreamTaskArgs:
     @pulumi.getter(name="sourceType")
     def source_type(self) -> pulumi.Input[str]:
         """
-        &amp;#39;PullLivePushLive&amp;#39;: SourceUrls live type, &amp;#39;PullVodPushLive&amp;#39;: SourceUrls vod type.
+        `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
         """
         return pulumi.get(self, "source_type")
 
@@ -344,7 +344,7 @@ class PullStreamTaskArgs:
     @pulumi.getter(name="vodRefreshType")
     def vod_refresh_type(self) -> Optional[pulumi.Input[str]]:
         """
-        vod refresh method. &amp;#39;ImmediateNewSource&amp;#39;: switch to new source at once, &amp;#39;ContinueBreakPoint&amp;#39;: switch to new source while old source finish.
+        vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
         """
         return pulumi.get(self, "vod_refresh_type")
 
@@ -413,7 +413,7 @@ class _PullStreamTaskState:
         :param pulumi.Input[str] operator: desc operator user name.
         :param pulumi.Input[str] push_args: other pushing args.
         :param pulumi.Input[str] region: task run region.
-        :param pulumi.Input[str] source_type: &amp;#39;PullLivePushLive&amp;#39;: SourceUrls live type, &amp;#39;PullVodPushLive&amp;#39;: SourceUrls vod type.
+        :param pulumi.Input[str] source_type: `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] source_urls: Pull Source media, SourceType=PullLivePushLive only 1 value, SourceType=PullLivePushLive can input multi values.
         :param pulumi.Input[str] start_time: task begin time.
         :param pulumi.Input[str] status: task enable or disable.
@@ -422,7 +422,7 @@ class _PullStreamTaskState:
         :param pulumi.Input[str] update_by: desc who update the task.
         :param pulumi.Input[str] update_time: update time.
         :param pulumi.Input[int] vod_loop_times: loop time for vod.
-        :param pulumi.Input[str] vod_refresh_type: vod refresh method. &amp;#39;ImmediateNewSource&amp;#39;: switch to new source at once, &amp;#39;ContinueBreakPoint&amp;#39;: switch to new source while old source finish.
+        :param pulumi.Input[str] vod_refresh_type: vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
         :param pulumi.Input[Sequence[pulumi.Input['PullStreamTaskWatermarkListArgs']]] watermark_lists: watermark list, max 4 setting.
         """
         if app_name is not None:
@@ -676,7 +676,7 @@ class _PullStreamTaskState:
     @pulumi.getter(name="sourceType")
     def source_type(self) -> Optional[pulumi.Input[str]]:
         """
-        &amp;#39;PullLivePushLive&amp;#39;: SourceUrls live type, &amp;#39;PullVodPushLive&amp;#39;: SourceUrls vod type.
+        `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
         """
         return pulumi.get(self, "source_type")
 
@@ -784,7 +784,7 @@ class _PullStreamTaskState:
     @pulumi.getter(name="vodRefreshType")
     def vod_refresh_type(self) -> Optional[pulumi.Input[str]]:
         """
-        vod refresh method. &amp;#39;ImmediateNewSource&amp;#39;: switch to new source at once, &amp;#39;ContinueBreakPoint&amp;#39;: switch to new source while old source finish.
+        vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
         """
         return pulumi.get(self, "vod_refresh_type")
 
@@ -877,14 +877,14 @@ class PullStreamTask(pulumi.CustomResource):
         :param pulumi.Input[int] offset_time: task enable or disable.
         :param pulumi.Input[str] operator: desc operator user name.
         :param pulumi.Input[str] push_args: other pushing args.
-        :param pulumi.Input[str] source_type: &amp;#39;PullLivePushLive&amp;#39;: SourceUrls live type, &amp;#39;PullVodPushLive&amp;#39;: SourceUrls vod type.
+        :param pulumi.Input[str] source_type: `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] source_urls: Pull Source media, SourceType=PullLivePushLive only 1 value, SourceType=PullLivePushLive can input multi values.
         :param pulumi.Input[str] start_time: task begin time.
         :param pulumi.Input[str] status: task enable or disable.
         :param pulumi.Input[str] stream_name: push stream name.
         :param pulumi.Input[str] to_url: full target push url, DomainName, AppName, StreamName field must be empty.
         :param pulumi.Input[int] vod_loop_times: loop time for vod.
-        :param pulumi.Input[str] vod_refresh_type: vod refresh method. &amp;#39;ImmediateNewSource&amp;#39;: switch to new source at once, &amp;#39;ContinueBreakPoint&amp;#39;: switch to new source while old source finish.
+        :param pulumi.Input[str] vod_refresh_type: vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PullStreamTaskWatermarkListArgs']]]] watermark_lists: watermark list, max 4 setting.
         """
         ...
@@ -1074,7 +1074,7 @@ class PullStreamTask(pulumi.CustomResource):
         :param pulumi.Input[str] operator: desc operator user name.
         :param pulumi.Input[str] push_args: other pushing args.
         :param pulumi.Input[str] region: task run region.
-        :param pulumi.Input[str] source_type: &amp;#39;PullLivePushLive&amp;#39;: SourceUrls live type, &amp;#39;PullVodPushLive&amp;#39;: SourceUrls vod type.
+        :param pulumi.Input[str] source_type: `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] source_urls: Pull Source media, SourceType=PullLivePushLive only 1 value, SourceType=PullLivePushLive can input multi values.
         :param pulumi.Input[str] start_time: task begin time.
         :param pulumi.Input[str] status: task enable or disable.
@@ -1083,7 +1083,7 @@ class PullStreamTask(pulumi.CustomResource):
         :param pulumi.Input[str] update_by: desc who update the task.
         :param pulumi.Input[str] update_time: update time.
         :param pulumi.Input[int] vod_loop_times: loop time for vod.
-        :param pulumi.Input[str] vod_refresh_type: vod refresh method. &amp;#39;ImmediateNewSource&amp;#39;: switch to new source at once, &amp;#39;ContinueBreakPoint&amp;#39;: switch to new source while old source finish.
+        :param pulumi.Input[str] vod_refresh_type: vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PullStreamTaskWatermarkListArgs']]]] watermark_lists: watermark list, max 4 setting.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -1251,7 +1251,7 @@ class PullStreamTask(pulumi.CustomResource):
     @pulumi.getter(name="sourceType")
     def source_type(self) -> pulumi.Output[str]:
         """
-        &amp;#39;PullLivePushLive&amp;#39;: SourceUrls live type, &amp;#39;PullVodPushLive&amp;#39;: SourceUrls vod type.
+        `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
         """
         return pulumi.get(self, "source_type")
 
@@ -1323,7 +1323,7 @@ class PullStreamTask(pulumi.CustomResource):
     @pulumi.getter(name="vodRefreshType")
     def vod_refresh_type(self) -> pulumi.Output[str]:
         """
-        vod refresh method. &amp;#39;ImmediateNewSource&amp;#39;: switch to new source at once, &amp;#39;ContinueBreakPoint&amp;#39;: switch to new source while old source finish.
+        vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
         """
         return pulumi.get(self, "vod_refresh_type")
 

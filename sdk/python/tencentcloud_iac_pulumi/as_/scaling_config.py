@@ -23,6 +23,7 @@ class ScalingConfigArgs:
                  disk_type_policy: Optional[pulumi.Input[str]] = None,
                  enhanced_monitor_service: Optional[pulumi.Input[bool]] = None,
                  enhanced_security_service: Optional[pulumi.Input[bool]] = None,
+                 host_name_settings: Optional[pulumi.Input['ScalingConfigHostNameSettingsArgs']] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
                  instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
                  instance_charge_type_prepaid_renew_flag: Optional[pulumi.Input[str]] = None,
@@ -51,12 +52,13 @@ class ScalingConfigArgs:
         :param pulumi.Input[str] disk_type_policy: Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
         :param pulumi.Input[bool] enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is `TRUE`.
         :param pulumi.Input[bool] enhanced_security_service: To specify whether to enable cloud security service. Default is `TRUE`.
+        :param pulumi.Input['ScalingConfigHostNameSettingsArgs'] host_name_settings: Related settings of the cloud server hostname (HostName).
         :param pulumi.Input[str] instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[str] instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         :param pulumi.Input['ScalingConfigInstanceNameSettingsArgs'] instance_name_settings: Settings of CVM instance names.
         :param pulumi.Input[Mapping[str, Any]] instance_tags: A list of tags used to associate different resources.
-        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[int] internet_max_bandwidth_out: Max bandwidth of Internet access in Mbps. Default is `0`.
         :param pulumi.Input[bool] keep_image_login: Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: ID list of keys.
@@ -83,6 +85,8 @@ class ScalingConfigArgs:
             pulumi.set(__self__, "enhanced_monitor_service", enhanced_monitor_service)
         if enhanced_security_service is not None:
             pulumi.set(__self__, "enhanced_security_service", enhanced_security_service)
+        if host_name_settings is not None:
+            pulumi.set(__self__, "host_name_settings", host_name_settings)
         if instance_charge_type is not None:
             pulumi.set(__self__, "instance_charge_type", instance_charge_type)
         if instance_charge_type_prepaid_period is not None:
@@ -217,6 +221,18 @@ class ScalingConfigArgs:
         pulumi.set(self, "enhanced_security_service", value)
 
     @property
+    @pulumi.getter(name="hostNameSettings")
+    def host_name_settings(self) -> Optional[pulumi.Input['ScalingConfigHostNameSettingsArgs']]:
+        """
+        Related settings of the cloud server hostname (HostName).
+        """
+        return pulumi.get(self, "host_name_settings")
+
+    @host_name_settings.setter
+    def host_name_settings(self, value: Optional[pulumi.Input['ScalingConfigHostNameSettingsArgs']]):
+        pulumi.set(self, "host_name_settings", value)
+
+    @property
     @pulumi.getter(name="instanceChargeType")
     def instance_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
@@ -280,7 +296,7 @@ class ScalingConfigArgs:
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -443,6 +459,7 @@ class _ScalingConfigState:
                  disk_type_policy: Optional[pulumi.Input[str]] = None,
                  enhanced_monitor_service: Optional[pulumi.Input[bool]] = None,
                  enhanced_security_service: Optional[pulumi.Input[bool]] = None,
+                 host_name_settings: Optional[pulumi.Input['ScalingConfigHostNameSettingsArgs']] = None,
                  image_id: Optional[pulumi.Input[str]] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
                  instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
@@ -473,6 +490,7 @@ class _ScalingConfigState:
         :param pulumi.Input[str] disk_type_policy: Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
         :param pulumi.Input[bool] enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is `TRUE`.
         :param pulumi.Input[bool] enhanced_security_service: To specify whether to enable cloud security service. Default is `TRUE`.
+        :param pulumi.Input['ScalingConfigHostNameSettingsArgs'] host_name_settings: Related settings of the cloud server hostname (HostName).
         :param pulumi.Input[str] image_id: An available image ID for a cvm instance.
         :param pulumi.Input[str] instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
@@ -480,7 +498,7 @@ class _ScalingConfigState:
         :param pulumi.Input['ScalingConfigInstanceNameSettingsArgs'] instance_name_settings: Settings of CVM instance names.
         :param pulumi.Input[Mapping[str, Any]] instance_tags: A list of tags used to associate different resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_types: Specified types of CVM instances.
-        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[int] internet_max_bandwidth_out: Max bandwidth of Internet access in Mbps. Default is `0`.
         :param pulumi.Input[bool] keep_image_login: Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: ID list of keys.
@@ -509,6 +527,8 @@ class _ScalingConfigState:
             pulumi.set(__self__, "enhanced_monitor_service", enhanced_monitor_service)
         if enhanced_security_service is not None:
             pulumi.set(__self__, "enhanced_security_service", enhanced_security_service)
+        if host_name_settings is not None:
+            pulumi.set(__self__, "host_name_settings", host_name_settings)
         if image_id is not None:
             pulumi.set(__self__, "image_id", image_id)
         if instance_charge_type is not None:
@@ -637,6 +657,18 @@ class _ScalingConfigState:
         pulumi.set(self, "enhanced_security_service", value)
 
     @property
+    @pulumi.getter(name="hostNameSettings")
+    def host_name_settings(self) -> Optional[pulumi.Input['ScalingConfigHostNameSettingsArgs']]:
+        """
+        Related settings of the cloud server hostname (HostName).
+        """
+        return pulumi.get(self, "host_name_settings")
+
+    @host_name_settings.setter
+    def host_name_settings(self, value: Optional[pulumi.Input['ScalingConfigHostNameSettingsArgs']]):
+        pulumi.set(self, "host_name_settings", value)
+
+    @property
     @pulumi.getter(name="imageId")
     def image_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -724,7 +756,7 @@ class _ScalingConfigState:
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         """
         return pulumi.get(self, "internet_charge_type")
 
@@ -900,6 +932,7 @@ class ScalingConfig(pulumi.CustomResource):
                  disk_type_policy: Optional[pulumi.Input[str]] = None,
                  enhanced_monitor_service: Optional[pulumi.Input[bool]] = None,
                  enhanced_security_service: Optional[pulumi.Input[bool]] = None,
+                 host_name_settings: Optional[pulumi.Input[pulumi.InputType['ScalingConfigHostNameSettingsArgs']]] = None,
                  image_id: Optional[pulumi.Input[str]] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
                  instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
@@ -953,6 +986,10 @@ class ScalingConfig(pulumi.CustomResource):
             enhanced_security_service=False,
             enhanced_monitor_service=False,
             user_data="dGVzdA==",
+            host_name_settings=tencentcloud.as..ScalingConfigHostNameSettingsArgs(
+                host_name="host-name-test",
+                host_name_style="UNIQUE",
+            ),
             instance_tags={
                 "tag": "example",
             })
@@ -980,7 +1017,7 @@ class ScalingConfig(pulumi.CustomResource):
         AutoScaling Configuration can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig scaling_config asc-n32ymck2
+         $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig example asc-n32ymck2
         ```
 
         :param str resource_name: The name of the resource.
@@ -991,6 +1028,7 @@ class ScalingConfig(pulumi.CustomResource):
         :param pulumi.Input[str] disk_type_policy: Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
         :param pulumi.Input[bool] enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is `TRUE`.
         :param pulumi.Input[bool] enhanced_security_service: To specify whether to enable cloud security service. Default is `TRUE`.
+        :param pulumi.Input[pulumi.InputType['ScalingConfigHostNameSettingsArgs']] host_name_settings: Related settings of the cloud server hostname (HostName).
         :param pulumi.Input[str] image_id: An available image ID for a cvm instance.
         :param pulumi.Input[str] instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
@@ -998,7 +1036,7 @@ class ScalingConfig(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['ScalingConfigInstanceNameSettingsArgs']] instance_name_settings: Settings of CVM instance names.
         :param pulumi.Input[Mapping[str, Any]] instance_tags: A list of tags used to associate different resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_types: Specified types of CVM instances.
-        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[int] internet_max_bandwidth_out: Max bandwidth of Internet access in Mbps. Default is `0`.
         :param pulumi.Input[bool] keep_image_login: Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: ID list of keys.
@@ -1050,6 +1088,10 @@ class ScalingConfig(pulumi.CustomResource):
             enhanced_security_service=False,
             enhanced_monitor_service=False,
             user_data="dGVzdA==",
+            host_name_settings=tencentcloud.as..ScalingConfigHostNameSettingsArgs(
+                host_name="host-name-test",
+                host_name_style="UNIQUE",
+            ),
             instance_tags={
                 "tag": "example",
             })
@@ -1077,7 +1119,7 @@ class ScalingConfig(pulumi.CustomResource):
         AutoScaling Configuration can be imported using the id, e.g.
 
         ```sh
-         $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig scaling_config asc-n32ymck2
+         $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig example asc-n32ymck2
         ```
 
         :param str resource_name: The name of the resource.
@@ -1101,6 +1143,7 @@ class ScalingConfig(pulumi.CustomResource):
                  disk_type_policy: Optional[pulumi.Input[str]] = None,
                  enhanced_monitor_service: Optional[pulumi.Input[bool]] = None,
                  enhanced_security_service: Optional[pulumi.Input[bool]] = None,
+                 host_name_settings: Optional[pulumi.Input[pulumi.InputType['ScalingConfigHostNameSettingsArgs']]] = None,
                  image_id: Optional[pulumi.Input[str]] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
                  instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
@@ -1143,6 +1186,7 @@ class ScalingConfig(pulumi.CustomResource):
             __props__.__dict__["disk_type_policy"] = disk_type_policy
             __props__.__dict__["enhanced_monitor_service"] = enhanced_monitor_service
             __props__.__dict__["enhanced_security_service"] = enhanced_security_service
+            __props__.__dict__["host_name_settings"] = host_name_settings
             if image_id is None and not opts.urn:
                 raise TypeError("Missing required property 'image_id'")
             __props__.__dict__["image_id"] = image_id
@@ -1186,6 +1230,7 @@ class ScalingConfig(pulumi.CustomResource):
             disk_type_policy: Optional[pulumi.Input[str]] = None,
             enhanced_monitor_service: Optional[pulumi.Input[bool]] = None,
             enhanced_security_service: Optional[pulumi.Input[bool]] = None,
+            host_name_settings: Optional[pulumi.Input[pulumi.InputType['ScalingConfigHostNameSettingsArgs']]] = None,
             image_id: Optional[pulumi.Input[str]] = None,
             instance_charge_type: Optional[pulumi.Input[str]] = None,
             instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
@@ -1221,6 +1266,7 @@ class ScalingConfig(pulumi.CustomResource):
         :param pulumi.Input[str] disk_type_policy: Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
         :param pulumi.Input[bool] enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is `TRUE`.
         :param pulumi.Input[bool] enhanced_security_service: To specify whether to enable cloud security service. Default is `TRUE`.
+        :param pulumi.Input[pulumi.InputType['ScalingConfigHostNameSettingsArgs']] host_name_settings: Related settings of the cloud server hostname (HostName).
         :param pulumi.Input[str] image_id: An available image ID for a cvm instance.
         :param pulumi.Input[str] instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
@@ -1228,7 +1274,7 @@ class ScalingConfig(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['ScalingConfigInstanceNameSettingsArgs']] instance_name_settings: Settings of CVM instance names.
         :param pulumi.Input[Mapping[str, Any]] instance_tags: A list of tags used to associate different resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_types: Specified types of CVM instances.
-        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[int] internet_max_bandwidth_out: Max bandwidth of Internet access in Mbps. Default is `0`.
         :param pulumi.Input[bool] keep_image_login: Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: ID list of keys.
@@ -1254,6 +1300,7 @@ class ScalingConfig(pulumi.CustomResource):
         __props__.__dict__["disk_type_policy"] = disk_type_policy
         __props__.__dict__["enhanced_monitor_service"] = enhanced_monitor_service
         __props__.__dict__["enhanced_security_service"] = enhanced_security_service
+        __props__.__dict__["host_name_settings"] = host_name_settings
         __props__.__dict__["image_id"] = image_id
         __props__.__dict__["instance_charge_type"] = instance_charge_type
         __props__.__dict__["instance_charge_type_prepaid_period"] = instance_charge_type_prepaid_period
@@ -1334,6 +1381,14 @@ class ScalingConfig(pulumi.CustomResource):
         return pulumi.get(self, "enhanced_security_service")
 
     @property
+    @pulumi.getter(name="hostNameSettings")
+    def host_name_settings(self) -> pulumi.Output[Optional['outputs.ScalingConfigHostNameSettings']]:
+        """
+        Related settings of the cloud server hostname (HostName).
+        """
+        return pulumi.get(self, "host_name_settings")
+
+    @property
     @pulumi.getter(name="imageId")
     def image_id(self) -> pulumi.Output[str]:
         """
@@ -1393,7 +1448,7 @@ class ScalingConfig(pulumi.CustomResource):
     @pulumi.getter(name="internetChargeType")
     def internet_charge_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         """
         return pulumi.get(self, "internet_charge_type")
 

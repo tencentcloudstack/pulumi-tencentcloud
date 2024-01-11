@@ -26,8 +26,8 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Cvm.NewRebootInstance(ctx, "rebootInstance", &Cvm.RebootInstanceArgs{
-// 			ForceReboot: pulumi.Bool(false),
-// 			InstanceId:  pulumi.String("ins-xxxxx"),
+// 			InstanceId: pulumi.String("ins-f9jr4bd2"),
+// 			StopType:   pulumi.String("SOFT_FIRST"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -39,7 +39,9 @@ import (
 type RebootInstance struct {
 	pulumi.CustomResourceState
 
-	// This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+	// It has been deprecated from version 1.81.21. Please use `stopType` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+	//
+	// Deprecated: It has been deprecated from version 1.81.21. Please use `stop_type` instead.
 	ForceReboot pulumi.BoolPtrOutput `pulumi:"forceReboot"`
 	// Instance ID.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
@@ -80,7 +82,9 @@ func GetRebootInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering RebootInstance resources.
 type rebootInstanceState struct {
-	// This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+	// It has been deprecated from version 1.81.21. Please use `stopType` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+	//
+	// Deprecated: It has been deprecated from version 1.81.21. Please use `stop_type` instead.
 	ForceReboot *bool `pulumi:"forceReboot"`
 	// Instance ID.
 	InstanceId *string `pulumi:"instanceId"`
@@ -89,7 +93,9 @@ type rebootInstanceState struct {
 }
 
 type RebootInstanceState struct {
-	// This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+	// It has been deprecated from version 1.81.21. Please use `stopType` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+	//
+	// Deprecated: It has been deprecated from version 1.81.21. Please use `stop_type` instead.
 	ForceReboot pulumi.BoolPtrInput
 	// Instance ID.
 	InstanceId pulumi.StringPtrInput
@@ -102,7 +108,9 @@ func (RebootInstanceState) ElementType() reflect.Type {
 }
 
 type rebootInstanceArgs struct {
-	// This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+	// It has been deprecated from version 1.81.21. Please use `stopType` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+	//
+	// Deprecated: It has been deprecated from version 1.81.21. Please use `stop_type` instead.
 	ForceReboot *bool `pulumi:"forceReboot"`
 	// Instance ID.
 	InstanceId string `pulumi:"instanceId"`
@@ -112,7 +120,9 @@ type rebootInstanceArgs struct {
 
 // The set of arguments for constructing a RebootInstance resource.
 type RebootInstanceArgs struct {
-	// This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+	// It has been deprecated from version 1.81.21. Please use `stopType` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+	//
+	// Deprecated: It has been deprecated from version 1.81.21. Please use `stop_type` instead.
 	ForceReboot pulumi.BoolPtrInput
 	// Instance ID.
 	InstanceId pulumi.StringInput
@@ -207,7 +217,9 @@ func (o RebootInstanceOutput) ToRebootInstanceOutputWithContext(ctx context.Cont
 	return o
 }
 
-// This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+// It has been deprecated from version 1.81.21. Please use `stopType` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
+//
+// Deprecated: It has been deprecated from version 1.81.21. Please use `stop_type` instead.
 func (o RebootInstanceOutput) ForceReboot() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *RebootInstance) pulumi.BoolPtrOutput { return v.ForceReboot }).(pulumi.BoolPtrOutput)
 }

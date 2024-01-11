@@ -111,6 +111,20 @@ import (
 // 				},
 // 			},
 // 			ResourceId: pulumi.String("bgpip-000004xf"),
+// 			WaterPrintConfigs: dayu.DdosPolicyV2WaterPrintConfigArray{
+// 				&dayu.DdosPolicyV2WaterPrintConfigArgs{
+// 					Listeners: dayu.DdosPolicyV2WaterPrintConfigListenerArray{
+// 						&dayu.DdosPolicyV2WaterPrintConfigListenerArgs{
+// 							ForwardProtocol: pulumi.String("TCP"),
+// 							FrontendPort:    pulumi.Int(90),
+// 							FrontendPortEnd: pulumi.Int(90),
+// 						},
+// 					},
+// 					Offset:     pulumi.Int(1),
+// 					OpenStatus: pulumi.Int(1),
+// 					Verify:     pulumi.String("checkall"),
+// 				},
+// 			},
 // 		})
 // 		if err != nil {
 // 			return err
@@ -146,6 +160,8 @@ type DdosPolicyV2 struct {
 	ProtocolBlockConfigs DdosPolicyV2ProtocolBlockConfigArrayOutput `pulumi:"protocolBlockConfigs"`
 	// The ID of the resource instance.
 	ResourceId pulumi.StringOutput `pulumi:"resourceId"`
+	// Water print config.
+	WaterPrintConfigs DdosPolicyV2WaterPrintConfigArrayOutput `pulumi:"waterPrintConfigs"`
 }
 
 // NewDdosPolicyV2 registers a new resource with the given unique name, arguments, and options.
@@ -205,6 +221,8 @@ type ddosPolicyV2State struct {
 	ProtocolBlockConfigs []DdosPolicyV2ProtocolBlockConfig `pulumi:"protocolBlockConfigs"`
 	// The ID of the resource instance.
 	ResourceId *string `pulumi:"resourceId"`
+	// Water print config.
+	WaterPrintConfigs []DdosPolicyV2WaterPrintConfig `pulumi:"waterPrintConfigs"`
 }
 
 type DdosPolicyV2State struct {
@@ -232,6 +250,8 @@ type DdosPolicyV2State struct {
 	ProtocolBlockConfigs DdosPolicyV2ProtocolBlockConfigArrayInput
 	// The ID of the resource instance.
 	ResourceId pulumi.StringPtrInput
+	// Water print config.
+	WaterPrintConfigs DdosPolicyV2WaterPrintConfigArrayInput
 }
 
 func (DdosPolicyV2State) ElementType() reflect.Type {
@@ -263,6 +283,8 @@ type ddosPolicyV2Args struct {
 	ProtocolBlockConfigs []DdosPolicyV2ProtocolBlockConfig `pulumi:"protocolBlockConfigs"`
 	// The ID of the resource instance.
 	ResourceId string `pulumi:"resourceId"`
+	// Water print config.
+	WaterPrintConfigs []DdosPolicyV2WaterPrintConfig `pulumi:"waterPrintConfigs"`
 }
 
 // The set of arguments for constructing a DdosPolicyV2 resource.
@@ -291,6 +313,8 @@ type DdosPolicyV2Args struct {
 	ProtocolBlockConfigs DdosPolicyV2ProtocolBlockConfigArrayInput
 	// The ID of the resource instance.
 	ResourceId pulumi.StringInput
+	// Water print config.
+	WaterPrintConfigs DdosPolicyV2WaterPrintConfigArrayInput
 }
 
 func (DdosPolicyV2Args) ElementType() reflect.Type {
@@ -438,6 +462,11 @@ func (o DdosPolicyV2Output) ProtocolBlockConfigs() DdosPolicyV2ProtocolBlockConf
 // The ID of the resource instance.
 func (o DdosPolicyV2Output) ResourceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *DdosPolicyV2) pulumi.StringOutput { return v.ResourceId }).(pulumi.StringOutput)
+}
+
+// Water print config.
+func (o DdosPolicyV2Output) WaterPrintConfigs() DdosPolicyV2WaterPrintConfigArrayOutput {
+	return o.ApplyT(func(v *DdosPolicyV2) DdosPolicyV2WaterPrintConfigArrayOutput { return v.WaterPrintConfigs }).(DdosPolicyV2WaterPrintConfigArrayOutput)
 }
 
 type DdosPolicyV2ArrayOutput struct{ *pulumi.OutputState }

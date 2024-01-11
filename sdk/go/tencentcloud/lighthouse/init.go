@@ -35,6 +35,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &DiskBackup{}
 	case "tencentcloud:Lighthouse/firewallRule:FirewallRule":
 		r = &FirewallRule{}
+	case "tencentcloud:Lighthouse/firewallTemplate:FirewallTemplate":
+		r = &FirewallTemplate{}
 	case "tencentcloud:Lighthouse/instance:Instance":
 		r = &Instance{}
 	case "tencentcloud:Lighthouse/keyPair:KeyPair":
@@ -99,6 +101,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Lighthouse/firewallRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Lighthouse/firewallTemplate",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

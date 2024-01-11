@@ -16,6 +16,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
@@ -23,12 +25,83 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// {
     ///     public MyStack()
     ///     {
-    ///         var pluginAttachment = new Tencentcloud.ApiGateway.PluginAttachment("pluginAttachment", new Tencentcloud.ApiGateway.PluginAttachmentArgs
+    ///         var examplePlugin = new Tencentcloud.ApiGateway.Plugin("examplePlugin", new Tencentcloud.ApiGateway.PluginArgs
     ///         {
-    ///             ApiId = "api-6tfrdysk",
-    ///             EnvironmentName = "test",
-    ///             PluginId = "plugin-ny74siyz",
-    ///             ServiceId = "service-n1mgl0sq",
+    ///             PluginName = "tf-example",
+    ///             PluginType = "IPControl",
+    ///             PluginData = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 { "type", "white_list" },
+    ///                 { "blocks", "1.1.1.1" },
+    ///             }),
+    ///             Description = "desc.",
+    ///         });
+    ///         var exampleService = new Tencentcloud.ApiGateway.Service("exampleService", new Tencentcloud.ApiGateway.ServiceArgs
+    ///         {
+    ///             ServiceName = "tf_example_service",
+    ///             Protocol = "http&amp;https",
+    ///             ServiceDesc = "your nice service",
+    ///             NetTypes = 
+    ///             {
+    ///                 "INNER",
+    ///                 "OUTER",
+    ///             },
+    ///             IpVersion = "IPv4",
+    ///         });
+    ///         var exampleApi = new Tencentcloud.ApiGateway.Api("exampleApi", new Tencentcloud.ApiGateway.ApiArgs
+    ///         {
+    ///             ServiceId = exampleService.Id,
+    ///             ApiName = "tf_example_api",
+    ///             ApiDesc = "desc.",
+    ///             AuthType = "APP",
+    ///             Protocol = "HTTP",
+    ///             EnableCors = true,
+    ///             RequestConfigPath = "/user/info",
+    ///             RequestConfigMethod = "GET",
+    ///             RequestParameters = 
+    ///             {
+    ///                 new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
+    ///                 {
+    ///                     Name = "name",
+    ///                     Position = "QUERY",
+    ///                     Type = "string",
+    ///                     Desc = "desc.",
+    ///                     DefaultValue = "terraform",
+    ///                     Required = true,
+    ///                 },
+    ///             },
+    ///             ServiceConfigType = "HTTP",
+    ///             ServiceConfigTimeout = 15,
+    ///             ServiceConfigUrl = "https://www.qq.com",
+    ///             ServiceConfigPath = "/user",
+    ///             ServiceConfigMethod = "GET",
+    ///             ResponseType = "HTML",
+    ///             ResponseSuccessExample = "success",
+    ///             ResponseFailExample = "fail",
+    ///             ResponseErrorCodes = 
+    ///             {
+    ///                 new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
+    ///                 {
+    ///                     Code = 400,
+    ///                     Msg = "system error msg.",
+    ///                     Desc = "system error desc.",
+    ///                     ConvertedCode = 407,
+    ///                     NeedConvert = true,
+    ///                 },
+    ///             },
+    ///         });
+    ///         var exampleServiceRelease = new Tencentcloud.ApiGateway.ServiceRelease("exampleServiceRelease", new Tencentcloud.ApiGateway.ServiceReleaseArgs
+    ///         {
+    ///             ServiceId = exampleApi.ServiceId,
+    ///             EnvironmentName = "release",
+    ///             ReleaseDesc = "desc.",
+    ///         });
+    ///         var examplePluginAttachment = new Tencentcloud.ApiGateway.PluginAttachment("examplePluginAttachment", new Tencentcloud.ApiGateway.PluginAttachmentArgs
+    ///         {
+    ///             PluginId = examplePlugin.Id,
+    ///             ServiceId = exampleServiceRelease.ServiceId,
+    ///             ApiId = exampleApi.Id,
+    ///             EnvironmentName = "release",
     ///         });
     ///     }
     /// 
@@ -40,7 +113,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// apiGateway plugin_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:ApiGateway/pluginAttachment:PluginAttachment plugin_attachment pluginId#serviceId#environmentName#apiId
+    ///  $ pulumi import tencentcloud:ApiGateway/pluginAttachment:PluginAttachment example plugin-hnqntalp#service-q3f533ja#release#api-62ud9woa
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/pluginAttachment:PluginAttachment")]

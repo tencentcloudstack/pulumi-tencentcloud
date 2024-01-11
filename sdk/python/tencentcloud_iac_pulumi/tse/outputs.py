@@ -13,6 +13,12 @@ __all__ = [
     'CngwCanaryRuleCanaryRule',
     'CngwCanaryRuleCanaryRuleBalancedServiceList',
     'CngwCanaryRuleCanaryRuleConditionList',
+    'CngwGatewayInstancePort',
+    'CngwGatewayInternetConfig',
+    'CngwGatewayNodeConfig',
+    'CngwGatewayVpcConfig',
+    'CngwGroupInternetConfig',
+    'CngwGroupNodeConfig',
     'CngwRouteHeader',
     'CngwRouteRateLimitLimitDetail',
     'CngwRouteRateLimitLimitDetailExternalRedis',
@@ -34,6 +40,9 @@ __all__ = [
     'GetGatewayCanaryRulesResultCanaryRuleListResult',
     'GetGatewayCanaryRulesResultCanaryRuleListBalancedServiceListResult',
     'GetGatewayCanaryRulesResultCanaryRuleListConditionListResult',
+    'GetGatewayCertificatesFilterResult',
+    'GetGatewayCertificatesResultResult',
+    'GetGatewayCertificatesResultCertificatesListResult',
     'GetGatewayNodesNodeListResult',
     'GetGatewayRoutesResultResult',
     'GetGatewayRoutesResultRouteListResult',
@@ -43,6 +52,22 @@ __all__ = [
     'GetGatewayServicesResultServiceListResult',
     'GetGatewayServicesResultServiceListUpstreamInfoResult',
     'GetGatewayServicesResultServiceListUpstreamInfoTargetResult',
+    'GetGatewaysFilterResult',
+    'GetGatewaysResultResult',
+    'GetGatewaysResultGatewayListResult',
+    'GetGatewaysResultGatewayListInstancePortResult',
+    'GetGatewaysResultGatewayListNodeConfigResult',
+    'GetGatewaysResultGatewayListTagResult',
+    'GetGatewaysResultGatewayListVpcConfigResult',
+    'GetGroupsFilterResult',
+    'GetGroupsResultResult',
+    'GetGroupsResultGatewayGroupListResult',
+    'GetGroupsResultGatewayGroupListBindingStrategyResult',
+    'GetGroupsResultGatewayGroupListBindingStrategyConfigResult',
+    'GetGroupsResultGatewayGroupListBindingStrategyConfigMetricResult',
+    'GetGroupsResultGatewayGroupListBindingStrategyCronConfigResult',
+    'GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamResult',
+    'GetGroupsResultGatewayGroupListNodeConfigResult',
     'GetNacosReplicasReplicaResult',
     'GetNacosServerInterfacesContentResult',
     'GetZookeeperReplicasReplicaResult',
@@ -331,10 +356,464 @@ class CngwCanaryRuleCanaryRuleConditionList(dict):
 
 
 @pulumi.output_type
+class CngwGatewayInstancePort(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "httpPort":
+            suggest = "http_port"
+        elif key == "httpsPort":
+            suggest = "https_port"
+        elif key == "tcpPort":
+            suggest = "tcp_port"
+        elif key == "udpPort":
+            suggest = "udp_port"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CngwGatewayInstancePort. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CngwGatewayInstancePort.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CngwGatewayInstancePort.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 http_port: Optional[str] = None,
+                 https_port: Optional[str] = None,
+                 tcp_port: Optional[str] = None,
+                 udp_port: Optional[str] = None):
+        """
+        :param str http_port: Http port range.
+        :param str https_port: Https port range.
+        :param str tcp_port: Tcp port range.
+        :param str udp_port: Udp port range.
+        """
+        if http_port is not None:
+            pulumi.set(__self__, "http_port", http_port)
+        if https_port is not None:
+            pulumi.set(__self__, "https_port", https_port)
+        if tcp_port is not None:
+            pulumi.set(__self__, "tcp_port", tcp_port)
+        if udp_port is not None:
+            pulumi.set(__self__, "udp_port", udp_port)
+
+    @property
+    @pulumi.getter(name="httpPort")
+    def http_port(self) -> Optional[str]:
+        """
+        Http port range.
+        """
+        return pulumi.get(self, "http_port")
+
+    @property
+    @pulumi.getter(name="httpsPort")
+    def https_port(self) -> Optional[str]:
+        """
+        Https port range.
+        """
+        return pulumi.get(self, "https_port")
+
+    @property
+    @pulumi.getter(name="tcpPort")
+    def tcp_port(self) -> Optional[str]:
+        """
+        Tcp port range.
+        """
+        return pulumi.get(self, "tcp_port")
+
+    @property
+    @pulumi.getter(name="udpPort")
+    def udp_port(self) -> Optional[str]:
+        """
+        Udp port range.
+        """
+        return pulumi.get(self, "udp_port")
+
+
+@pulumi.output_type
+class CngwGatewayInternetConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "internetAddressVersion":
+            suggest = "internet_address_version"
+        elif key == "internetMaxBandwidthOut":
+            suggest = "internet_max_bandwidth_out"
+        elif key == "internetPayMode":
+            suggest = "internet_pay_mode"
+        elif key == "masterZoneId":
+            suggest = "master_zone_id"
+        elif key == "multiZoneFlag":
+            suggest = "multi_zone_flag"
+        elif key == "slaType":
+            suggest = "sla_type"
+        elif key == "slaveZoneId":
+            suggest = "slave_zone_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CngwGatewayInternetConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CngwGatewayInternetConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CngwGatewayInternetConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 description: Optional[str] = None,
+                 internet_address_version: Optional[str] = None,
+                 internet_max_bandwidth_out: Optional[int] = None,
+                 internet_pay_mode: Optional[str] = None,
+                 master_zone_id: Optional[str] = None,
+                 multi_zone_flag: Optional[bool] = None,
+                 sla_type: Optional[str] = None,
+                 slave_zone_id: Optional[str] = None):
+        """
+        :param str description: description of clb.
+        :param str internet_address_version: internet type. Reference value: `IPV4`(default value), `IPV6`.
+        :param int internet_max_bandwidth_out: public network bandwidth.
+        :param str internet_pay_mode: trade type of internet. Reference value: `BANDWIDTH`, `TRAFFIC`(default value).
+        :param str master_zone_id: primary availability zone.
+        :param bool multi_zone_flag: Whether load balancing has multiple availability zones.
+        :param str sla_type: specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+        :param str slave_zone_id: alternate availability zone.
+        """
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if internet_address_version is not None:
+            pulumi.set(__self__, "internet_address_version", internet_address_version)
+        if internet_max_bandwidth_out is not None:
+            pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
+        if internet_pay_mode is not None:
+            pulumi.set(__self__, "internet_pay_mode", internet_pay_mode)
+        if master_zone_id is not None:
+            pulumi.set(__self__, "master_zone_id", master_zone_id)
+        if multi_zone_flag is not None:
+            pulumi.set(__self__, "multi_zone_flag", multi_zone_flag)
+        if sla_type is not None:
+            pulumi.set(__self__, "sla_type", sla_type)
+        if slave_zone_id is not None:
+            pulumi.set(__self__, "slave_zone_id", slave_zone_id)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        description of clb.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="internetAddressVersion")
+    def internet_address_version(self) -> Optional[str]:
+        """
+        internet type. Reference value: `IPV4`(default value), `IPV6`.
+        """
+        return pulumi.get(self, "internet_address_version")
+
+    @property
+    @pulumi.getter(name="internetMaxBandwidthOut")
+    def internet_max_bandwidth_out(self) -> Optional[int]:
+        """
+        public network bandwidth.
+        """
+        return pulumi.get(self, "internet_max_bandwidth_out")
+
+    @property
+    @pulumi.getter(name="internetPayMode")
+    def internet_pay_mode(self) -> Optional[str]:
+        """
+        trade type of internet. Reference value: `BANDWIDTH`, `TRAFFIC`(default value).
+        """
+        return pulumi.get(self, "internet_pay_mode")
+
+    @property
+    @pulumi.getter(name="masterZoneId")
+    def master_zone_id(self) -> Optional[str]:
+        """
+        primary availability zone.
+        """
+        return pulumi.get(self, "master_zone_id")
+
+    @property
+    @pulumi.getter(name="multiZoneFlag")
+    def multi_zone_flag(self) -> Optional[bool]:
+        """
+        Whether load balancing has multiple availability zones.
+        """
+        return pulumi.get(self, "multi_zone_flag")
+
+    @property
+    @pulumi.getter(name="slaType")
+    def sla_type(self) -> Optional[str]:
+        """
+        specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+        """
+        return pulumi.get(self, "sla_type")
+
+    @property
+    @pulumi.getter(name="slaveZoneId")
+    def slave_zone_id(self) -> Optional[str]:
+        """
+        alternate availability zone.
+        """
+        return pulumi.get(self, "slave_zone_id")
+
+
+@pulumi.output_type
+class CngwGatewayNodeConfig(dict):
+    def __init__(__self__, *,
+                 number: int,
+                 specification: str):
+        """
+        :param int number: node number, 2-50.
+        :param str specification: specification, 1c2g|2c4g|4c8g|8c16g.
+        """
+        pulumi.set(__self__, "number", number)
+        pulumi.set(__self__, "specification", specification)
+
+    @property
+    @pulumi.getter
+    def number(self) -> int:
+        """
+        node number, 2-50.
+        """
+        return pulumi.get(self, "number")
+
+    @property
+    @pulumi.getter
+    def specification(self) -> str:
+        """
+        specification, 1c2g|2c4g|4c8g|8c16g.
+        """
+        return pulumi.get(self, "specification")
+
+
+@pulumi.output_type
+class CngwGatewayVpcConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "subnetId":
+            suggest = "subnet_id"
+        elif key == "vpcId":
+            suggest = "vpc_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CngwGatewayVpcConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CngwGatewayVpcConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CngwGatewayVpcConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 subnet_id: Optional[str] = None,
+                 vpc_id: Optional[str] = None):
+        """
+        :param str subnet_id: subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.
+        :param str vpc_id: VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.
+        """
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
+        if vpc_id is not None:
+            pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[str]:
+        """
+        subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> Optional[str]:
+        """
+        VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class CngwGroupInternetConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "internetAddressVersion":
+            suggest = "internet_address_version"
+        elif key == "internetMaxBandwidthOut":
+            suggest = "internet_max_bandwidth_out"
+        elif key == "internetPayMode":
+            suggest = "internet_pay_mode"
+        elif key == "masterZoneId":
+            suggest = "master_zone_id"
+        elif key == "multiZoneFlag":
+            suggest = "multi_zone_flag"
+        elif key == "slaType":
+            suggest = "sla_type"
+        elif key == "slaveZoneId":
+            suggest = "slave_zone_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CngwGroupInternetConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CngwGroupInternetConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CngwGroupInternetConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 description: Optional[str] = None,
+                 internet_address_version: Optional[str] = None,
+                 internet_max_bandwidth_out: Optional[int] = None,
+                 internet_pay_mode: Optional[str] = None,
+                 master_zone_id: Optional[str] = None,
+                 multi_zone_flag: Optional[bool] = None,
+                 sla_type: Optional[str] = None,
+                 slave_zone_id: Optional[str] = None):
+        """
+        :param str description: description of clb.
+        :param str internet_address_version: internet type. Reference value:- IPV4 (default value)- IPV6.
+        :param int internet_max_bandwidth_out: public network bandwidth.
+        :param str internet_pay_mode: trade type of internet. Reference value:- BANDWIDTH- TRAFFIC (default value).
+        :param str master_zone_id: primary availability zone.
+        :param bool multi_zone_flag: Whether load balancing has multiple availability zones.
+        :param str sla_type: specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+        :param str slave_zone_id: alternate availability zone.
+        """
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if internet_address_version is not None:
+            pulumi.set(__self__, "internet_address_version", internet_address_version)
+        if internet_max_bandwidth_out is not None:
+            pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
+        if internet_pay_mode is not None:
+            pulumi.set(__self__, "internet_pay_mode", internet_pay_mode)
+        if master_zone_id is not None:
+            pulumi.set(__self__, "master_zone_id", master_zone_id)
+        if multi_zone_flag is not None:
+            pulumi.set(__self__, "multi_zone_flag", multi_zone_flag)
+        if sla_type is not None:
+            pulumi.set(__self__, "sla_type", sla_type)
+        if slave_zone_id is not None:
+            pulumi.set(__self__, "slave_zone_id", slave_zone_id)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        description of clb.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="internetAddressVersion")
+    def internet_address_version(self) -> Optional[str]:
+        """
+        internet type. Reference value:- IPV4 (default value)- IPV6.
+        """
+        return pulumi.get(self, "internet_address_version")
+
+    @property
+    @pulumi.getter(name="internetMaxBandwidthOut")
+    def internet_max_bandwidth_out(self) -> Optional[int]:
+        """
+        public network bandwidth.
+        """
+        return pulumi.get(self, "internet_max_bandwidth_out")
+
+    @property
+    @pulumi.getter(name="internetPayMode")
+    def internet_pay_mode(self) -> Optional[str]:
+        """
+        trade type of internet. Reference value:- BANDWIDTH- TRAFFIC (default value).
+        """
+        return pulumi.get(self, "internet_pay_mode")
+
+    @property
+    @pulumi.getter(name="masterZoneId")
+    def master_zone_id(self) -> Optional[str]:
+        """
+        primary availability zone.
+        """
+        return pulumi.get(self, "master_zone_id")
+
+    @property
+    @pulumi.getter(name="multiZoneFlag")
+    def multi_zone_flag(self) -> Optional[bool]:
+        """
+        Whether load balancing has multiple availability zones.
+        """
+        return pulumi.get(self, "multi_zone_flag")
+
+    @property
+    @pulumi.getter(name="slaType")
+    def sla_type(self) -> Optional[str]:
+        """
+        specification type of clb. Default shared type when this parameter is empty. Reference value:- SLA LCU-supported.
+        """
+        return pulumi.get(self, "sla_type")
+
+    @property
+    @pulumi.getter(name="slaveZoneId")
+    def slave_zone_id(self) -> Optional[str]:
+        """
+        alternate availability zone.
+        """
+        return pulumi.get(self, "slave_zone_id")
+
+
+@pulumi.output_type
+class CngwGroupNodeConfig(dict):
+    def __init__(__self__, *,
+                 number: int,
+                 specification: str):
+        """
+        :param int number: group node number, 2-50.
+        :param str specification: group specification, 1c2g|2c4g|4c8g|8c16g.
+        """
+        pulumi.set(__self__, "number", number)
+        pulumi.set(__self__, "specification", specification)
+
+    @property
+    @pulumi.getter
+    def number(self) -> int:
+        """
+        group node number, 2-50.
+        """
+        return pulumi.get(self, "number")
+
+    @property
+    @pulumi.getter
+    def specification(self) -> str:
+        """
+        group specification, 1c2g|2c4g|4c8g|8c16g.
+        """
+        return pulumi.get(self, "specification")
+
+
+@pulumi.output_type
 class CngwRouteHeader(dict):
     def __init__(__self__, *,
                  key: Optional[str] = None,
                  value: Optional[str] = None):
+        """
+        :param str key: key of header.
+        :param str value: value of header.
+        """
         if key is not None:
             pulumi.set(__self__, "key", key)
         if value is not None:
@@ -343,11 +822,17 @@ class CngwRouteHeader(dict):
     @property
     @pulumi.getter
     def key(self) -> Optional[str]:
+        """
+        key of header.
+        """
         return pulumi.get(self, "key")
 
     @property
     @pulumi.getter
     def value(self) -> Optional[str]:
+        """
+        value of header.
+        """
         return pulumi.get(self, "value")
 
 
@@ -400,6 +885,21 @@ class CngwRouteRateLimitLimitDetail(dict):
                  policy: Optional[str] = None,
                  rate_limit_response: Optional['outputs.CngwRouteRateLimitLimitDetailRateLimitResponse'] = None,
                  rate_limit_response_url: Optional[str] = None):
+        """
+        :param bool enabled: status of service rate limit.
+        :param bool hide_client_headers: whether to hide the headers of client.
+        :param bool is_delay: whether to enable request queuing.
+        :param str limit_by: basis for service rate limit.Reference value:`ip`,`service`,`consumer`,`credential`,`path`,`header`.
+        :param Sequence['CngwRouteRateLimitLimitDetailQpsThresholdArgs'] qps_thresholds: qps threshold.
+        :param str response_type: response strategy.Reference value:`url`: forward request according to url,`text`: response configuration,`default`: return directly.
+        :param 'CngwRouteRateLimitLimitDetailExternalRedisArgs' external_redis: external redis information, maybe null.
+        :param str header: request headers that require rate limit.
+        :param int line_up_time: queue time.
+        :param str path: request paths that require rate limit.
+        :param str policy: counter policy.Reference value:`local`,`redis`,`external_redis`.
+        :param 'CngwRouteRateLimitLimitDetailRateLimitResponseArgs' rate_limit_response: response configuration, the response strategy is text, maybe null.
+        :param str rate_limit_response_url: request forwarding address, maybe null.
+        """
         pulumi.set(__self__, "enabled", enabled)
         pulumi.set(__self__, "hide_client_headers", hide_client_headers)
         pulumi.set(__self__, "is_delay", is_delay)
@@ -424,66 +924,105 @@ class CngwRouteRateLimitLimitDetail(dict):
     @property
     @pulumi.getter
     def enabled(self) -> bool:
+        """
+        status of service rate limit.
+        """
         return pulumi.get(self, "enabled")
 
     @property
     @pulumi.getter(name="hideClientHeaders")
     def hide_client_headers(self) -> bool:
+        """
+        whether to hide the headers of client.
+        """
         return pulumi.get(self, "hide_client_headers")
 
     @property
     @pulumi.getter(name="isDelay")
     def is_delay(self) -> bool:
+        """
+        whether to enable request queuing.
+        """
         return pulumi.get(self, "is_delay")
 
     @property
     @pulumi.getter(name="limitBy")
     def limit_by(self) -> str:
+        """
+        basis for service rate limit.Reference value:`ip`,`service`,`consumer`,`credential`,`path`,`header`.
+        """
         return pulumi.get(self, "limit_by")
 
     @property
     @pulumi.getter(name="qpsThresholds")
     def qps_thresholds(self) -> Sequence['outputs.CngwRouteRateLimitLimitDetailQpsThreshold']:
+        """
+        qps threshold.
+        """
         return pulumi.get(self, "qps_thresholds")
 
     @property
     @pulumi.getter(name="responseType")
     def response_type(self) -> str:
+        """
+        response strategy.Reference value:`url`: forward request according to url,`text`: response configuration,`default`: return directly.
+        """
         return pulumi.get(self, "response_type")
 
     @property
     @pulumi.getter(name="externalRedis")
     def external_redis(self) -> Optional['outputs.CngwRouteRateLimitLimitDetailExternalRedis']:
+        """
+        external redis information, maybe null.
+        """
         return pulumi.get(self, "external_redis")
 
     @property
     @pulumi.getter
     def header(self) -> Optional[str]:
+        """
+        request headers that require rate limit.
+        """
         return pulumi.get(self, "header")
 
     @property
     @pulumi.getter(name="lineUpTime")
     def line_up_time(self) -> Optional[int]:
+        """
+        queue time.
+        """
         return pulumi.get(self, "line_up_time")
 
     @property
     @pulumi.getter
     def path(self) -> Optional[str]:
+        """
+        request paths that require rate limit.
+        """
         return pulumi.get(self, "path")
 
     @property
     @pulumi.getter
     def policy(self) -> Optional[str]:
+        """
+        counter policy.Reference value:`local`,`redis`,`external_redis`.
+        """
         return pulumi.get(self, "policy")
 
     @property
     @pulumi.getter(name="rateLimitResponse")
     def rate_limit_response(self) -> Optional['outputs.CngwRouteRateLimitLimitDetailRateLimitResponse']:
+        """
+        response configuration, the response strategy is text, maybe null.
+        """
         return pulumi.get(self, "rate_limit_response")
 
     @property
     @pulumi.getter(name="rateLimitResponseUrl")
     def rate_limit_response_url(self) -> Optional[str]:
+        """
+        request forwarding address, maybe null.
+        """
         return pulumi.get(self, "rate_limit_response_url")
 
 
@@ -517,6 +1056,12 @@ class CngwRouteRateLimitLimitDetailExternalRedis(dict):
                  redis_password: str,
                  redis_port: int,
                  redis_timeout: int):
+        """
+        :param str redis_host: redis ip, maybe null.
+        :param str redis_password: redis password, maybe null.
+        :param int redis_port: redis port, maybe null.
+        :param int redis_timeout: redis timeout, unit: `ms`, maybe null.
+        """
         pulumi.set(__self__, "redis_host", redis_host)
         pulumi.set(__self__, "redis_password", redis_password)
         pulumi.set(__self__, "redis_port", redis_port)
@@ -525,21 +1070,33 @@ class CngwRouteRateLimitLimitDetailExternalRedis(dict):
     @property
     @pulumi.getter(name="redisHost")
     def redis_host(self) -> str:
+        """
+        redis ip, maybe null.
+        """
         return pulumi.get(self, "redis_host")
 
     @property
     @pulumi.getter(name="redisPassword")
     def redis_password(self) -> str:
+        """
+        redis password, maybe null.
+        """
         return pulumi.get(self, "redis_password")
 
     @property
     @pulumi.getter(name="redisPort")
     def redis_port(self) -> int:
+        """
+        redis port, maybe null.
+        """
         return pulumi.get(self, "redis_port")
 
     @property
     @pulumi.getter(name="redisTimeout")
     def redis_timeout(self) -> int:
+        """
+        redis timeout, unit: `ms`, maybe null.
+        """
         return pulumi.get(self, "redis_timeout")
 
 
@@ -548,17 +1105,27 @@ class CngwRouteRateLimitLimitDetailQpsThreshold(dict):
     def __init__(__self__, *,
                  max: int,
                  unit: str):
+        """
+        :param int max: the max threshold.
+        :param str unit: qps threshold unit.Reference value:`second`,`minute`,`hour`,`day`,`month`,`year`.
+        """
         pulumi.set(__self__, "max", max)
         pulumi.set(__self__, "unit", unit)
 
     @property
     @pulumi.getter
     def max(self) -> int:
+        """
+        the max threshold.
+        """
         return pulumi.get(self, "max")
 
     @property
     @pulumi.getter
     def unit(self) -> str:
+        """
+        qps threshold unit.Reference value:`second`,`minute`,`hour`,`day`,`month`,`year`.
+        """
         return pulumi.get(self, "unit")
 
 
@@ -585,6 +1152,11 @@ class CngwRouteRateLimitLimitDetailRateLimitResponse(dict):
                  body: Optional[str] = None,
                  headers: Optional[Sequence['outputs.CngwRouteRateLimitLimitDetailRateLimitResponseHeader']] = None,
                  http_status: Optional[int] = None):
+        """
+        :param str body: custom response body, maybe bull.
+        :param Sequence['CngwRouteRateLimitLimitDetailRateLimitResponseHeaderArgs'] headers: headrs.
+        :param int http_status: http status code.
+        """
         if body is not None:
             pulumi.set(__self__, "body", body)
         if headers is not None:
@@ -595,16 +1167,25 @@ class CngwRouteRateLimitLimitDetailRateLimitResponse(dict):
     @property
     @pulumi.getter
     def body(self) -> Optional[str]:
+        """
+        custom response body, maybe bull.
+        """
         return pulumi.get(self, "body")
 
     @property
     @pulumi.getter
     def headers(self) -> Optional[Sequence['outputs.CngwRouteRateLimitLimitDetailRateLimitResponseHeader']]:
+        """
+        headrs.
+        """
         return pulumi.get(self, "headers")
 
     @property
     @pulumi.getter(name="httpStatus")
     def http_status(self) -> Optional[int]:
+        """
+        http status code.
+        """
         return pulumi.get(self, "http_status")
 
 
@@ -613,6 +1194,10 @@ class CngwRouteRateLimitLimitDetailRateLimitResponseHeader(dict):
     def __init__(__self__, *,
                  key: Optional[str] = None,
                  value: Optional[str] = None):
+        """
+        :param str key: key of header.
+        :param str value: value of header.
+        """
         if key is not None:
             pulumi.set(__self__, "key", key)
         if value is not None:
@@ -621,11 +1206,17 @@ class CngwRouteRateLimitLimitDetailRateLimitResponseHeader(dict):
     @property
     @pulumi.getter
     def key(self) -> Optional[str]:
+        """
+        key of header.
+        """
         return pulumi.get(self, "key")
 
     @property
     @pulumi.getter
     def value(self) -> Optional[str]:
+        """
+        value of header.
+        """
         return pulumi.get(self, "value")
 
 
@@ -678,6 +1269,21 @@ class CngwServiceRateLimitLimitDetail(dict):
                  policy: Optional[str] = None,
                  rate_limit_response: Optional['outputs.CngwServiceRateLimitLimitDetailRateLimitResponse'] = None,
                  rate_limit_response_url: Optional[str] = None):
+        """
+        :param bool enabled: status of service rate limit.
+        :param bool hide_client_headers: whether to hide the headers of client.
+        :param bool is_delay: whether to enable request queuing.
+        :param str limit_by: basis for service rate limit.Reference value: `ip`, `service`, `consumer`, `credential`, `path`, `header`.
+        :param Sequence['CngwServiceRateLimitLimitDetailQpsThresholdArgs'] qps_thresholds: qps threshold.
+        :param str response_type: response strategy.Reference value: `url`: forward request according to url, `text`: response configuration, `default`: return directly.
+        :param 'CngwServiceRateLimitLimitDetailExternalRedisArgs' external_redis: external redis information, maybe null.
+        :param str header: request headers that require rate limit.
+        :param int line_up_time: queue time.
+        :param str path: request paths that require rate limit.
+        :param str policy: counter policy.Reference value: `local`, `redis`, `external_redis`.
+        :param 'CngwServiceRateLimitLimitDetailRateLimitResponseArgs' rate_limit_response: response configuration, the response strategy is text, maybe null.
+        :param str rate_limit_response_url: request forwarding address, maybe null.
+        """
         pulumi.set(__self__, "enabled", enabled)
         pulumi.set(__self__, "hide_client_headers", hide_client_headers)
         pulumi.set(__self__, "is_delay", is_delay)
@@ -702,66 +1308,105 @@ class CngwServiceRateLimitLimitDetail(dict):
     @property
     @pulumi.getter
     def enabled(self) -> bool:
+        """
+        status of service rate limit.
+        """
         return pulumi.get(self, "enabled")
 
     @property
     @pulumi.getter(name="hideClientHeaders")
     def hide_client_headers(self) -> bool:
+        """
+        whether to hide the headers of client.
+        """
         return pulumi.get(self, "hide_client_headers")
 
     @property
     @pulumi.getter(name="isDelay")
     def is_delay(self) -> bool:
+        """
+        whether to enable request queuing.
+        """
         return pulumi.get(self, "is_delay")
 
     @property
     @pulumi.getter(name="limitBy")
     def limit_by(self) -> str:
+        """
+        basis for service rate limit.Reference value: `ip`, `service`, `consumer`, `credential`, `path`, `header`.
+        """
         return pulumi.get(self, "limit_by")
 
     @property
     @pulumi.getter(name="qpsThresholds")
     def qps_thresholds(self) -> Sequence['outputs.CngwServiceRateLimitLimitDetailQpsThreshold']:
+        """
+        qps threshold.
+        """
         return pulumi.get(self, "qps_thresholds")
 
     @property
     @pulumi.getter(name="responseType")
     def response_type(self) -> str:
+        """
+        response strategy.Reference value: `url`: forward request according to url, `text`: response configuration, `default`: return directly.
+        """
         return pulumi.get(self, "response_type")
 
     @property
     @pulumi.getter(name="externalRedis")
     def external_redis(self) -> Optional['outputs.CngwServiceRateLimitLimitDetailExternalRedis']:
+        """
+        external redis information, maybe null.
+        """
         return pulumi.get(self, "external_redis")
 
     @property
     @pulumi.getter
     def header(self) -> Optional[str]:
+        """
+        request headers that require rate limit.
+        """
         return pulumi.get(self, "header")
 
     @property
     @pulumi.getter(name="lineUpTime")
     def line_up_time(self) -> Optional[int]:
+        """
+        queue time.
+        """
         return pulumi.get(self, "line_up_time")
 
     @property
     @pulumi.getter
     def path(self) -> Optional[str]:
+        """
+        request paths that require rate limit.
+        """
         return pulumi.get(self, "path")
 
     @property
     @pulumi.getter
     def policy(self) -> Optional[str]:
+        """
+        counter policy.Reference value: `local`, `redis`, `external_redis`.
+        """
         return pulumi.get(self, "policy")
 
     @property
     @pulumi.getter(name="rateLimitResponse")
     def rate_limit_response(self) -> Optional['outputs.CngwServiceRateLimitLimitDetailRateLimitResponse']:
+        """
+        response configuration, the response strategy is text, maybe null.
+        """
         return pulumi.get(self, "rate_limit_response")
 
     @property
     @pulumi.getter(name="rateLimitResponseUrl")
     def rate_limit_response_url(self) -> Optional[str]:
+        """
+        request forwarding address, maybe null.
+        """
         return pulumi.get(self, "rate_limit_response_url")
 
 
@@ -795,6 +1440,12 @@ class CngwServiceRateLimitLimitDetailExternalRedis(dict):
                  redis_password: str,
                  redis_port: int,
                  redis_timeout: int):
+        """
+        :param str redis_host: redis ip, maybe null.
+        :param str redis_password: redis password, maybe null.
+        :param int redis_port: redis port, maybe null.
+        :param int redis_timeout: redis timeout, unit: `ms`, maybe null.
+        """
         pulumi.set(__self__, "redis_host", redis_host)
         pulumi.set(__self__, "redis_password", redis_password)
         pulumi.set(__self__, "redis_port", redis_port)
@@ -803,21 +1454,33 @@ class CngwServiceRateLimitLimitDetailExternalRedis(dict):
     @property
     @pulumi.getter(name="redisHost")
     def redis_host(self) -> str:
+        """
+        redis ip, maybe null.
+        """
         return pulumi.get(self, "redis_host")
 
     @property
     @pulumi.getter(name="redisPassword")
     def redis_password(self) -> str:
+        """
+        redis password, maybe null.
+        """
         return pulumi.get(self, "redis_password")
 
     @property
     @pulumi.getter(name="redisPort")
     def redis_port(self) -> int:
+        """
+        redis port, maybe null.
+        """
         return pulumi.get(self, "redis_port")
 
     @property
     @pulumi.getter(name="redisTimeout")
     def redis_timeout(self) -> int:
+        """
+        redis timeout, unit: `ms`, maybe null.
+        """
         return pulumi.get(self, "redis_timeout")
 
 
@@ -826,17 +1489,27 @@ class CngwServiceRateLimitLimitDetailQpsThreshold(dict):
     def __init__(__self__, *,
                  max: int,
                  unit: str):
+        """
+        :param int max: the max threshold.
+        :param str unit: qps threshold unit.Reference value:`second`, `minute`, `hour`, `day`, `month`, `year`.
+        """
         pulumi.set(__self__, "max", max)
         pulumi.set(__self__, "unit", unit)
 
     @property
     @pulumi.getter
     def max(self) -> int:
+        """
+        the max threshold.
+        """
         return pulumi.get(self, "max")
 
     @property
     @pulumi.getter
     def unit(self) -> str:
+        """
+        qps threshold unit.Reference value:`second`, `minute`, `hour`, `day`, `month`, `year`.
+        """
         return pulumi.get(self, "unit")
 
 
@@ -863,6 +1536,11 @@ class CngwServiceRateLimitLimitDetailRateLimitResponse(dict):
                  body: Optional[str] = None,
                  headers: Optional[Sequence['outputs.CngwServiceRateLimitLimitDetailRateLimitResponseHeader']] = None,
                  http_status: Optional[int] = None):
+        """
+        :param str body: custom response body, maybe bull.
+        :param Sequence['CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs'] headers: headrs.
+        :param int http_status: http status code.
+        """
         if body is not None:
             pulumi.set(__self__, "body", body)
         if headers is not None:
@@ -873,16 +1551,25 @@ class CngwServiceRateLimitLimitDetailRateLimitResponse(dict):
     @property
     @pulumi.getter
     def body(self) -> Optional[str]:
+        """
+        custom response body, maybe bull.
+        """
         return pulumi.get(self, "body")
 
     @property
     @pulumi.getter
     def headers(self) -> Optional[Sequence['outputs.CngwServiceRateLimitLimitDetailRateLimitResponseHeader']]:
+        """
+        headrs.
+        """
         return pulumi.get(self, "headers")
 
     @property
     @pulumi.getter(name="httpStatus")
     def http_status(self) -> Optional[int]:
+        """
+        http status code.
+        """
         return pulumi.get(self, "http_status")
 
 
@@ -891,6 +1578,10 @@ class CngwServiceRateLimitLimitDetailRateLimitResponseHeader(dict):
     def __init__(__self__, *,
                  key: Optional[str] = None,
                  value: Optional[str] = None):
+        """
+        :param str key: key of header.
+        :param str value: value of header.
+        """
         if key is not None:
             pulumi.set(__self__, "key", key)
         if value is not None:
@@ -899,11 +1590,17 @@ class CngwServiceRateLimitLimitDetailRateLimitResponseHeader(dict):
     @property
     @pulumi.getter
     def key(self) -> Optional[str]:
+        """
+        key of header.
+        """
         return pulumi.get(self, "key")
 
     @property
     @pulumi.getter
     def value(self) -> Optional[str]:
+        """
+        value of header.
+        """
         return pulumi.get(self, "value")
 
 
@@ -1720,6 +2417,194 @@ class GetGatewayCanaryRulesResultCanaryRuleListConditionListResult(dict):
 
 
 @pulumi.output_type
+class GetGatewayCertificatesFilterResult(dict):
+    def __init__(__self__, *,
+                 key: Optional[str] = None,
+                 value: Optional[str] = None):
+        """
+        :param str key: Filter name.
+        :param str value: Filter value.
+        """
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[str]:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[str]:
+        """
+        Filter value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetGatewayCertificatesResultResult(dict):
+    def __init__(__self__, *,
+                 certificates_lists: Sequence['outputs.GetGatewayCertificatesResultCertificatesListResult'],
+                 total: int):
+        """
+        :param Sequence['GetGatewayCertificatesResultCertificatesListArgs'] certificates_lists: Certificate list of gateway. Note: This field may return null, indicating that a valid value is not available.
+        :param int total: Total count. Note: This field may return null, indicating that a valid value is not available.
+        """
+        pulumi.set(__self__, "certificates_lists", certificates_lists)
+        pulumi.set(__self__, "total", total)
+
+    @property
+    @pulumi.getter(name="certificatesLists")
+    def certificates_lists(self) -> Sequence['outputs.GetGatewayCertificatesResultCertificatesListResult']:
+        """
+        Certificate list of gateway. Note: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "certificates_lists")
+
+    @property
+    @pulumi.getter
+    def total(self) -> int:
+        """
+        Total count. Note: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "total")
+
+
+@pulumi.output_type
+class GetGatewayCertificatesResultCertificatesListResult(dict):
+    def __init__(__self__, *,
+                 bind_domains: Sequence[str],
+                 cert_id: str,
+                 cert_source: str,
+                 create_time: str,
+                 crt: str,
+                 expire_time: str,
+                 id: str,
+                 issue_time: str,
+                 key: str,
+                 name: str,
+                 status: str):
+        """
+        :param Sequence[str] bind_domains: Domains of the binding. Note: This field may return null, indicating that a valid value is not available.
+        :param str cert_id: Certificate ID of ssl platform. Note: This field may return null, indicating that a valid value is not available.
+        :param str cert_source: Source of certificate. Reference value:- native. Source: konga- ssl. Source: ssl platform. Note: This field may return null, indicating that a valid value is not available.
+        :param str create_time: Upload time of certificate. Note: This field may return null, indicating that a valid value is not available.
+        :param str crt: Pem format of certificate. Note: This field may return null, indicating that a valid value is not available.
+        :param str expire_time: Expiration time of certificate. Note: This field may return null, indicating that a valid value is not available.
+        :param str id: Certificate ID. Note: This field may return null, indicating that a valid value is not available.
+        :param str issue_time: Issuance time of certificateNote: This field may return null, indicating that a valid value is not available.
+        :param str key: Filter name.
+        :param str name: Certificate name. Note: This field may return null, indicating that a valid value is not available.
+        :param str status: Status of certificate. Reference value:- expired- active. Note: This field may return null, indicating that a valid value is not available.
+        """
+        pulumi.set(__self__, "bind_domains", bind_domains)
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "cert_source", cert_source)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "crt", crt)
+        pulumi.set(__self__, "expire_time", expire_time)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "issue_time", issue_time)
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="bindDomains")
+    def bind_domains(self) -> Sequence[str]:
+        """
+        Domains of the binding. Note: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "bind_domains")
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        Certificate ID of ssl platform. Note: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter(name="certSource")
+    def cert_source(self) -> str:
+        """
+        Source of certificate. Reference value:- native. Source: konga- ssl. Source: ssl platform. Note: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "cert_source")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Upload time of certificate. Note: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def crt(self) -> str:
+        """
+        Pem format of certificate. Note: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "crt")
+
+    @property
+    @pulumi.getter(name="expireTime")
+    def expire_time(self) -> str:
+        """
+        Expiration time of certificate. Note: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "expire_time")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        Certificate ID. Note: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="issueTime")
+    def issue_time(self) -> str:
+        """
+        Issuance time of certificateNote: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "issue_time")
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Certificate name. Note: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Status of certificate. Reference value:- expired- active. Note: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
 class GetGatewayNodesNodeListResult(dict):
     def __init__(__self__, *,
                  group_id: str,
@@ -1808,17 +2693,27 @@ class GetGatewayRoutesResultResult(dict):
     def __init__(__self__, *,
                  route_lists: Sequence['outputs.GetGatewayRoutesResultRouteListResult'],
                  total_count: int):
+        """
+        :param Sequence['GetGatewayRoutesResultRouteListArgs'] route_lists: route list.
+        :param int total_count: total count.
+        """
         pulumi.set(__self__, "route_lists", route_lists)
         pulumi.set(__self__, "total_count", total_count)
 
     @property
     @pulumi.getter(name="routeLists")
     def route_lists(self) -> Sequence['outputs.GetGatewayRoutesResultRouteListResult']:
+        """
+        route list.
+        """
         return pulumi.get(self, "route_lists")
 
     @property
     @pulumi.getter(name="totalCount")
     def total_count(self) -> int:
+        """
+        total count.
+        """
         return pulumi.get(self, "total_count")
 
 
@@ -1840,6 +2735,23 @@ class GetGatewayRoutesResultRouteListResult(dict):
                  service_id: str,
                  service_name: str,
                  strip_path: bool):
+        """
+        :param str created_time: created time.
+        :param Sequence[int] destination_ports: destination port for Layer 4 matching.
+        :param bool force_https: whether to enable forced HTTPS, no longer use.
+        :param Sequence['GetGatewayRoutesResultRouteListHeaderArgs'] headers: the headers of route.
+        :param Sequence[str] hosts: host list.
+        :param int https_redirect_status_code: https redirection status code.
+        :param str id: service ID.
+        :param Sequence[str] methods: method list.
+        :param str name: service name.
+        :param Sequence[str] paths: path list.
+        :param bool preserve_host: whether to keep the host when forwarding to the backend.
+        :param Sequence[str] protocols: protocol list.
+        :param str service_id: service ID.
+        :param str service_name: service name.
+        :param bool strip_path: whether to strip path when forwarding to the backend.
+        """
         pulumi.set(__self__, "created_time", created_time)
         pulumi.set(__self__, "destination_ports", destination_ports)
         pulumi.set(__self__, "force_https", force_https)
@@ -1859,76 +2771,121 @@ class GetGatewayRoutesResultRouteListResult(dict):
     @property
     @pulumi.getter(name="createdTime")
     def created_time(self) -> str:
+        """
+        created time.
+        """
         return pulumi.get(self, "created_time")
 
     @property
     @pulumi.getter(name="destinationPorts")
     def destination_ports(self) -> Sequence[int]:
+        """
+        destination port for Layer 4 matching.
+        """
         return pulumi.get(self, "destination_ports")
 
     @property
     @pulumi.getter(name="forceHttps")
     def force_https(self) -> bool:
+        """
+        whether to enable forced HTTPS, no longer use.
+        """
         return pulumi.get(self, "force_https")
 
     @property
     @pulumi.getter
     def headers(self) -> Sequence['outputs.GetGatewayRoutesResultRouteListHeaderResult']:
+        """
+        the headers of route.
+        """
         return pulumi.get(self, "headers")
 
     @property
     @pulumi.getter
     def hosts(self) -> Sequence[str]:
+        """
+        host list.
+        """
         return pulumi.get(self, "hosts")
 
     @property
     @pulumi.getter(name="httpsRedirectStatusCode")
     def https_redirect_status_code(self) -> int:
+        """
+        https redirection status code.
+        """
         return pulumi.get(self, "https_redirect_status_code")
 
     @property
     @pulumi.getter
     def id(self) -> str:
+        """
+        service ID.
+        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def methods(self) -> Sequence[str]:
+        """
+        method list.
+        """
         return pulumi.get(self, "methods")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        service name.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def paths(self) -> Sequence[str]:
+        """
+        path list.
+        """
         return pulumi.get(self, "paths")
 
     @property
     @pulumi.getter(name="preserveHost")
     def preserve_host(self) -> bool:
+        """
+        whether to keep the host when forwarding to the backend.
+        """
         return pulumi.get(self, "preserve_host")
 
     @property
     @pulumi.getter
     def protocols(self) -> Sequence[str]:
+        """
+        protocol list.
+        """
         return pulumi.get(self, "protocols")
 
     @property
     @pulumi.getter(name="serviceId")
     def service_id(self) -> str:
+        """
+        service ID.
+        """
         return pulumi.get(self, "service_id")
 
     @property
     @pulumi.getter(name="serviceName")
     def service_name(self) -> str:
+        """
+        service name.
+        """
         return pulumi.get(self, "service_name")
 
     @property
     @pulumi.getter(name="stripPath")
     def strip_path(self) -> bool:
+        """
+        whether to strip path when forwarding to the backend.
+        """
         return pulumi.get(self, "strip_path")
 
 
@@ -1937,17 +2894,27 @@ class GetGatewayRoutesResultRouteListHeaderResult(dict):
     def __init__(__self__, *,
                  key: str,
                  value: str):
+        """
+        :param str key: key of header.
+        :param str value: value of header.
+        """
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "value", value)
 
     @property
     @pulumi.getter
     def key(self) -> str:
+        """
+        key of header.
+        """
         return pulumi.get(self, "key")
 
     @property
     @pulumi.getter
     def value(self) -> str:
+        """
+        value of header.
+        """
         return pulumi.get(self, "value")
 
 
@@ -2382,6 +3349,1042 @@ class GetGatewayServicesResultServiceListUpstreamInfoTargetResult(dict):
         weight.
         """
         return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class GetGatewaysFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: filter name.
+        :param Sequence[str] values: filter value.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        filter value.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetGatewaysResultResult(dict):
+    def __init__(__self__, *,
+                 gateway_lists: Sequence['outputs.GetGatewaysResultGatewayListResult'],
+                 total_count: int):
+        """
+        :param Sequence['GetGatewaysResultGatewayListArgs'] gateway_lists: gateway list.
+        :param int total_count: total count.
+        """
+        pulumi.set(__self__, "gateway_lists", gateway_lists)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter(name="gatewayLists")
+    def gateway_lists(self) -> Sequence['outputs.GetGatewaysResultGatewayListResult']:
+        """
+        gateway list.
+        """
+        return pulumi.get(self, "gateway_lists")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        total count.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetGatewaysResultGatewayListResult(dict):
+    def __init__(__self__, *,
+                 auto_renew_flag: int,
+                 create_time: str,
+                 cur_deadline: str,
+                 description: str,
+                 enable_cls: bool,
+                 enable_internet: bool,
+                 engine_region: str,
+                 feature_version: str,
+                 gateway_id: str,
+                 gateway_minor_version: str,
+                 gateway_version: str,
+                 ingress_class_name: str,
+                 instance_ports: Sequence['outputs.GetGatewaysResultGatewayListInstancePortResult'],
+                 internet_max_bandwidth_out: int,
+                 internet_pay_mode: str,
+                 isolate_time: str,
+                 load_balancer_type: str,
+                 name: str,
+                 node_configs: Sequence['outputs.GetGatewaysResultGatewayListNodeConfigResult'],
+                 public_ip_addresses: Sequence[str],
+                 status: str,
+                 tags: Sequence['outputs.GetGatewaysResultGatewayListTagResult'],
+                 trade_type: int,
+                 type: str,
+                 vpc_configs: Sequence['outputs.GetGatewaysResultGatewayListVpcConfigResult']):
+        """
+        :param int auto_renew_flag: auto renew flag, `0`: default status, `1`: auto renew, `2`: auto not renew.
+        :param str create_time: create time.
+        :param str cur_deadline: expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.
+        :param str description: description of gateway.
+        :param bool enable_cls: whether to enable CLS log.
+        :param bool enable_internet: whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.
+        :param str engine_region: engine region of gateway.
+        :param str feature_version: product version. `TRIAL`, `STANDARD`(default value), `PROFESSIONAL`.
+        :param str gateway_id: gateway ID.
+        :param str gateway_minor_version: minor version of gateway.
+        :param str gateway_version: gateway version. Reference value: `2.4.1`, `2.5.1`.
+        :param str ingress_class_name: ingress class name.
+        :param Sequence['GetGatewaysResultGatewayListInstancePortArgs'] instance_ports: the port information that the instance monitors.
+        :param int internet_max_bandwidth_out: public network outbound traffic bandwidth.
+        :param str internet_pay_mode: trade type of internet. `BANDWIDTH`, `TRAFFIC`.
+        :param str isolate_time: isolation time, used when the gateway is isolated.
+        :param str load_balancer_type: load balance type of public internet.
+        :param str name: filter name.
+        :param Sequence['GetGatewaysResultGatewayListNodeConfigArgs'] node_configs: original node config.
+        :param Sequence[str] public_ip_addresses: addresses of public internet.
+        :param str status: status of gateway. May return values: `Creating`, `CreateFailed`, `Running`, `Modifying`, `UpdatingSpec`, `UpdateFailed`, `Deleting`, `DeleteFailed`, `Isolating`.
+        :param Sequence['GetGatewaysResultGatewayListTagArgs'] tags: tags information of gatewayNote: This field may return null, indicating that a valid value is not available.
+        :param int trade_type: trade type. `0`: postpaid, `1`: Prepaid.
+        :param str type: gateway type.
+        :param Sequence['GetGatewaysResultGatewayListVpcConfigArgs'] vpc_configs: vpc information.
+        """
+        pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "cur_deadline", cur_deadline)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "enable_cls", enable_cls)
+        pulumi.set(__self__, "enable_internet", enable_internet)
+        pulumi.set(__self__, "engine_region", engine_region)
+        pulumi.set(__self__, "feature_version", feature_version)
+        pulumi.set(__self__, "gateway_id", gateway_id)
+        pulumi.set(__self__, "gateway_minor_version", gateway_minor_version)
+        pulumi.set(__self__, "gateway_version", gateway_version)
+        pulumi.set(__self__, "ingress_class_name", ingress_class_name)
+        pulumi.set(__self__, "instance_ports", instance_ports)
+        pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
+        pulumi.set(__self__, "internet_pay_mode", internet_pay_mode)
+        pulumi.set(__self__, "isolate_time", isolate_time)
+        pulumi.set(__self__, "load_balancer_type", load_balancer_type)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "node_configs", node_configs)
+        pulumi.set(__self__, "public_ip_addresses", public_ip_addresses)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "trade_type", trade_type)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "vpc_configs", vpc_configs)
+
+    @property
+    @pulumi.getter(name="autoRenewFlag")
+    def auto_renew_flag(self) -> int:
+        """
+        auto renew flag, `0`: default status, `1`: auto renew, `2`: auto not renew.
+        """
+        return pulumi.get(self, "auto_renew_flag")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="curDeadline")
+    def cur_deadline(self) -> str:
+        """
+        expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "cur_deadline")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        description of gateway.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="enableCls")
+    def enable_cls(self) -> bool:
+        """
+        whether to enable CLS log.
+        """
+        return pulumi.get(self, "enable_cls")
+
+    @property
+    @pulumi.getter(name="enableInternet")
+    def enable_internet(self) -> bool:
+        """
+        whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "enable_internet")
+
+    @property
+    @pulumi.getter(name="engineRegion")
+    def engine_region(self) -> str:
+        """
+        engine region of gateway.
+        """
+        return pulumi.get(self, "engine_region")
+
+    @property
+    @pulumi.getter(name="featureVersion")
+    def feature_version(self) -> str:
+        """
+        product version. `TRIAL`, `STANDARD`(default value), `PROFESSIONAL`.
+        """
+        return pulumi.get(self, "feature_version")
+
+    @property
+    @pulumi.getter(name="gatewayId")
+    def gateway_id(self) -> str:
+        """
+        gateway ID.
+        """
+        return pulumi.get(self, "gateway_id")
+
+    @property
+    @pulumi.getter(name="gatewayMinorVersion")
+    def gateway_minor_version(self) -> str:
+        """
+        minor version of gateway.
+        """
+        return pulumi.get(self, "gateway_minor_version")
+
+    @property
+    @pulumi.getter(name="gatewayVersion")
+    def gateway_version(self) -> str:
+        """
+        gateway version. Reference value: `2.4.1`, `2.5.1`.
+        """
+        return pulumi.get(self, "gateway_version")
+
+    @property
+    @pulumi.getter(name="ingressClassName")
+    def ingress_class_name(self) -> str:
+        """
+        ingress class name.
+        """
+        return pulumi.get(self, "ingress_class_name")
+
+    @property
+    @pulumi.getter(name="instancePorts")
+    def instance_ports(self) -> Sequence['outputs.GetGatewaysResultGatewayListInstancePortResult']:
+        """
+        the port information that the instance monitors.
+        """
+        return pulumi.get(self, "instance_ports")
+
+    @property
+    @pulumi.getter(name="internetMaxBandwidthOut")
+    def internet_max_bandwidth_out(self) -> int:
+        """
+        public network outbound traffic bandwidth.
+        """
+        return pulumi.get(self, "internet_max_bandwidth_out")
+
+    @property
+    @pulumi.getter(name="internetPayMode")
+    def internet_pay_mode(self) -> str:
+        """
+        trade type of internet. `BANDWIDTH`, `TRAFFIC`.
+        """
+        return pulumi.get(self, "internet_pay_mode")
+
+    @property
+    @pulumi.getter(name="isolateTime")
+    def isolate_time(self) -> str:
+        """
+        isolation time, used when the gateway is isolated.
+        """
+        return pulumi.get(self, "isolate_time")
+
+    @property
+    @pulumi.getter(name="loadBalancerType")
+    def load_balancer_type(self) -> str:
+        """
+        load balance type of public internet.
+        """
+        return pulumi.get(self, "load_balancer_type")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="nodeConfigs")
+    def node_configs(self) -> Sequence['outputs.GetGatewaysResultGatewayListNodeConfigResult']:
+        """
+        original node config.
+        """
+        return pulumi.get(self, "node_configs")
+
+    @property
+    @pulumi.getter(name="publicIpAddresses")
+    def public_ip_addresses(self) -> Sequence[str]:
+        """
+        addresses of public internet.
+        """
+        return pulumi.get(self, "public_ip_addresses")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        status of gateway. May return values: `Creating`, `CreateFailed`, `Running`, `Modifying`, `UpdatingSpec`, `UpdateFailed`, `Deleting`, `DeleteFailed`, `Isolating`.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.GetGatewaysResultGatewayListTagResult']:
+        """
+        tags information of gatewayNote: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="tradeType")
+    def trade_type(self) -> int:
+        """
+        trade type. `0`: postpaid, `1`: Prepaid.
+        """
+        return pulumi.get(self, "trade_type")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        gateway type.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="vpcConfigs")
+    def vpc_configs(self) -> Sequence['outputs.GetGatewaysResultGatewayListVpcConfigResult']:
+        """
+        vpc information.
+        """
+        return pulumi.get(self, "vpc_configs")
+
+
+@pulumi.output_type
+class GetGatewaysResultGatewayListInstancePortResult(dict):
+    def __init__(__self__, *,
+                 http_port: str,
+                 https_port: str):
+        """
+        :param str http_port: http port.
+        :param str https_port: https port.
+        """
+        pulumi.set(__self__, "http_port", http_port)
+        pulumi.set(__self__, "https_port", https_port)
+
+    @property
+    @pulumi.getter(name="httpPort")
+    def http_port(self) -> str:
+        """
+        http port.
+        """
+        return pulumi.get(self, "http_port")
+
+    @property
+    @pulumi.getter(name="httpsPort")
+    def https_port(self) -> str:
+        """
+        https port.
+        """
+        return pulumi.get(self, "https_port")
+
+
+@pulumi.output_type
+class GetGatewaysResultGatewayListNodeConfigResult(dict):
+    def __init__(__self__, *,
+                 number: int,
+                 specification: str):
+        """
+        :param int number: node number, 2-50.
+        :param str specification: specification, 1c2g|2c4g|4c8g|8c16g.
+        """
+        pulumi.set(__self__, "number", number)
+        pulumi.set(__self__, "specification", specification)
+
+    @property
+    @pulumi.getter
+    def number(self) -> int:
+        """
+        node number, 2-50.
+        """
+        return pulumi.get(self, "number")
+
+    @property
+    @pulumi.getter
+    def specification(self) -> str:
+        """
+        specification, 1c2g|2c4g|4c8g|8c16g.
+        """
+        return pulumi.get(self, "specification")
+
+
+@pulumi.output_type
+class GetGatewaysResultGatewayListTagResult(dict):
+    def __init__(__self__, *,
+                 tag_key: str,
+                 tag_value: str):
+        """
+        :param str tag_key: tag key.
+        :param str tag_value: tag value.
+        """
+        pulumi.set(__self__, "tag_key", tag_key)
+        pulumi.set(__self__, "tag_value", tag_value)
+
+    @property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> str:
+        """
+        tag key.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> str:
+        """
+        tag value.
+        """
+        return pulumi.get(self, "tag_value")
+
+
+@pulumi.output_type
+class GetGatewaysResultGatewayListVpcConfigResult(dict):
+    def __init__(__self__, *,
+                 subnet_id: str,
+                 vpc_id: str):
+        """
+        :param str subnet_id: subnet ID. Assign an IP address to the engine in the VPC subnet.
+        :param str vpc_id: subnet ID. Assign an IP address to the engine in the VPC subnet.
+        """
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        subnet ID. Assign an IP address to the engine in the VPC subnet.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        subnet ID. Assign an IP address to the engine in the VPC subnet.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetGroupsFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: filter name.
+        :param Sequence[str] values: filter values.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        filter values.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetGroupsResultResult(dict):
+    def __init__(__self__, *,
+                 gateway_group_lists: Sequence['outputs.GetGroupsResultGatewayGroupListResult'],
+                 total_count: int):
+        """
+        :param Sequence['GetGroupsResultGatewayGroupListArgs'] gateway_group_lists: group list of gateway.
+        :param int total_count: total count.
+        """
+        pulumi.set(__self__, "gateway_group_lists", gateway_group_lists)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter(name="gatewayGroupLists")
+    def gateway_group_lists(self) -> Sequence['outputs.GetGroupsResultGatewayGroupListResult']:
+        """
+        group list of gateway.
+        """
+        return pulumi.get(self, "gateway_group_lists")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        total count.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetGroupsResultGatewayGroupListResult(dict):
+    def __init__(__self__, *,
+                 binding_strategies: Sequence['outputs.GetGroupsResultGatewayGroupListBindingStrategyResult'],
+                 create_time: str,
+                 description: str,
+                 gateway_id: str,
+                 group_id: str,
+                 internet_max_bandwidth_out: int,
+                 is_first_group: int,
+                 modify_time: str,
+                 name: str,
+                 node_configs: Sequence['outputs.GetGroupsResultGatewayGroupListNodeConfigResult'],
+                 status: str,
+                 subnet_ids: str):
+        """
+        :param Sequence['GetGroupsResultGatewayGroupListBindingStrategyArgs'] binding_strategies: associated strategy informationNote: This field may return null, indicating that a valid value is not available.
+        :param str create_time: group create time.
+        :param str description: group description.
+        :param str gateway_id: gateway ID.
+        :param str group_id: group Id.
+        :param int internet_max_bandwidth_out: public network outbound traffic bandwidth.
+        :param int is_first_group: whether it is the default group- 0: false.- 1: yes.
+        :param str modify_time: modify time.
+        :param str name: filter name.
+        :param Sequence['GetGroupsResultGatewayGroupListNodeConfigArgs'] node_configs: group node configration.
+        :param str status: group status.
+        :param str subnet_ids: subnet IDs.
+        """
+        pulumi.set(__self__, "binding_strategies", binding_strategies)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "gateway_id", gateway_id)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "internet_max_bandwidth_out", internet_max_bandwidth_out)
+        pulumi.set(__self__, "is_first_group", is_first_group)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "node_configs", node_configs)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "subnet_ids", subnet_ids)
+
+    @property
+    @pulumi.getter(name="bindingStrategies")
+    def binding_strategies(self) -> Sequence['outputs.GetGroupsResultGatewayGroupListBindingStrategyResult']:
+        """
+        associated strategy informationNote: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "binding_strategies")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        group create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        group description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="gatewayId")
+    def gateway_id(self) -> str:
+        """
+        gateway ID.
+        """
+        return pulumi.get(self, "gateway_id")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> str:
+        """
+        group Id.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="internetMaxBandwidthOut")
+    def internet_max_bandwidth_out(self) -> int:
+        """
+        public network outbound traffic bandwidth.
+        """
+        return pulumi.get(self, "internet_max_bandwidth_out")
+
+    @property
+    @pulumi.getter(name="isFirstGroup")
+    def is_first_group(self) -> int:
+        """
+        whether it is the default group- 0: false.- 1: yes.
+        """
+        return pulumi.get(self, "is_first_group")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        modify time.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="nodeConfigs")
+    def node_configs(self) -> Sequence['outputs.GetGroupsResultGatewayGroupListNodeConfigResult']:
+        """
+        group node configration.
+        """
+        return pulumi.get(self, "node_configs")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        group status.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="subnetIds")
+    def subnet_ids(self) -> str:
+        """
+        subnet IDs.
+        """
+        return pulumi.get(self, "subnet_ids")
+
+
+@pulumi.output_type
+class GetGroupsResultGatewayGroupListBindingStrategyResult(dict):
+    def __init__(__self__, *,
+                 configs: Sequence['outputs.GetGroupsResultGatewayGroupListBindingStrategyConfigResult'],
+                 create_time: str,
+                 cron_configs: Sequence['outputs.GetGroupsResultGatewayGroupListBindingStrategyCronConfigResult'],
+                 description: str,
+                 gateway_id: str,
+                 max_replicas: int,
+                 modify_time: str,
+                 strategy_id: str,
+                 strategy_name: str):
+        """
+        :param Sequence['GetGroupsResultGatewayGroupListBindingStrategyConfigArgs'] configs: auto scaling configurationNote: This field may return null, indicating that a valid value is not available.
+        :param str create_time: group create time.
+        :param Sequence['GetGroupsResultGatewayGroupListBindingStrategyCronConfigArgs'] cron_configs: timing scaling configurationNote: This field may return null, indicating that a valid value is not available.
+        :param str description: group description.
+        :param str gateway_id: gateway ID.
+        :param int max_replicas: maximum number of replicas.
+        :param str modify_time: modify time.
+        :param str strategy_id: strategy ID.
+        :param str strategy_name: strategy nameNote: This field may return null, indicating that a valid value is not available.
+        """
+        pulumi.set(__self__, "configs", configs)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "cron_configs", cron_configs)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "gateway_id", gateway_id)
+        pulumi.set(__self__, "max_replicas", max_replicas)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "strategy_id", strategy_id)
+        pulumi.set(__self__, "strategy_name", strategy_name)
+
+    @property
+    @pulumi.getter
+    def configs(self) -> Sequence['outputs.GetGroupsResultGatewayGroupListBindingStrategyConfigResult']:
+        """
+        auto scaling configurationNote: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "configs")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        group create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="cronConfigs")
+    def cron_configs(self) -> Sequence['outputs.GetGroupsResultGatewayGroupListBindingStrategyCronConfigResult']:
+        """
+        timing scaling configurationNote: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "cron_configs")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        group description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="gatewayId")
+    def gateway_id(self) -> str:
+        """
+        gateway ID.
+        """
+        return pulumi.get(self, "gateway_id")
+
+    @property
+    @pulumi.getter(name="maxReplicas")
+    def max_replicas(self) -> int:
+        """
+        maximum number of replicas.
+        """
+        return pulumi.get(self, "max_replicas")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        modify time.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter(name="strategyId")
+    def strategy_id(self) -> str:
+        """
+        strategy ID.
+        """
+        return pulumi.get(self, "strategy_id")
+
+    @property
+    @pulumi.getter(name="strategyName")
+    def strategy_name(self) -> str:
+        """
+        strategy nameNote: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "strategy_name")
+
+
+@pulumi.output_type
+class GetGroupsResultGatewayGroupListBindingStrategyConfigResult(dict):
+    def __init__(__self__, *,
+                 auto_scaler_id: str,
+                 create_time: str,
+                 enabled: bool,
+                 max_replicas: int,
+                 metrics: Sequence['outputs.GetGroupsResultGatewayGroupListBindingStrategyConfigMetricResult'],
+                 modify_time: str,
+                 strategy_id: str):
+        """
+        :param str auto_scaler_id: auto scaler IDNote: This field may return null, indicating that a valid value is not available.
+        :param str create_time: group create time.
+        :param bool enabled: whether to enable timing auto scaling.
+        :param int max_replicas: maximum number of replicas.
+        :param Sequence['GetGroupsResultGatewayGroupListBindingStrategyConfigMetricArgs'] metrics: metric listNote: This field may return null, indicating that a valid value is not available.
+        :param str modify_time: modify time.
+        :param str strategy_id: strategy ID.
+        """
+        pulumi.set(__self__, "auto_scaler_id", auto_scaler_id)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "max_replicas", max_replicas)
+        pulumi.set(__self__, "metrics", metrics)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "strategy_id", strategy_id)
+
+    @property
+    @pulumi.getter(name="autoScalerId")
+    def auto_scaler_id(self) -> str:
+        """
+        auto scaler IDNote: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "auto_scaler_id")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        group create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        whether to enable timing auto scaling.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="maxReplicas")
+    def max_replicas(self) -> int:
+        """
+        maximum number of replicas.
+        """
+        return pulumi.get(self, "max_replicas")
+
+    @property
+    @pulumi.getter
+    def metrics(self) -> Sequence['outputs.GetGroupsResultGatewayGroupListBindingStrategyConfigMetricResult']:
+        """
+        metric listNote: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "metrics")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        modify time.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter(name="strategyId")
+    def strategy_id(self) -> str:
+        """
+        strategy ID.
+        """
+        return pulumi.get(self, "strategy_id")
+
+
+@pulumi.output_type
+class GetGroupsResultGatewayGroupListBindingStrategyConfigMetricResult(dict):
+    def __init__(__self__, *,
+                 resource_name: str,
+                 target_type: str,
+                 target_value: int,
+                 type: str):
+        """
+        :param str resource_name: metric resource nameNote: This field may return null, indicating that a valid value is not available.
+        :param str target_type: metric target typeNote: This field may return null, indicating that a valid value is not available.
+        :param int target_value: metric target valueNote: This field may return null, indicating that a valid value is not available.
+        :param str type: metric typeNote: This field may return null, indicating that a valid value is not available.
+        """
+        pulumi.set(__self__, "resource_name", resource_name)
+        pulumi.set(__self__, "target_type", target_type)
+        pulumi.set(__self__, "target_value", target_value)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="resourceName")
+    def resource_name(self) -> str:
+        """
+        metric resource nameNote: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "resource_name")
+
+    @property
+    @pulumi.getter(name="targetType")
+    def target_type(self) -> str:
+        """
+        metric target typeNote: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "target_type")
+
+    @property
+    @pulumi.getter(name="targetValue")
+    def target_value(self) -> int:
+        """
+        metric target valueNote: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "target_value")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        metric typeNote: This field may return null, indicating that a valid value is not available.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetGroupsResultGatewayGroupListBindingStrategyCronConfigResult(dict):
+    def __init__(__self__, *,
+                 create_time: str,
+                 enabled: bool,
+                 modify_time: str,
+                 params: Sequence['outputs.GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamResult'],
+                 strategy_id: str):
+        """
+        :param str create_time: group create time.
+        :param bool enabled: whether to enable timing auto scaling.
+        :param str modify_time: modify time.
+        :param Sequence['GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamArgs'] params: params of timing auto scaling.
+        :param str strategy_id: strategy ID.
+        """
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "modify_time", modify_time)
+        pulumi.set(__self__, "params", params)
+        pulumi.set(__self__, "strategy_id", strategy_id)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        group create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        whether to enable timing auto scaling.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="modifyTime")
+    def modify_time(self) -> str:
+        """
+        modify time.
+        """
+        return pulumi.get(self, "modify_time")
+
+    @property
+    @pulumi.getter
+    def params(self) -> Sequence['outputs.GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamResult']:
+        """
+        params of timing auto scaling.
+        """
+        return pulumi.get(self, "params")
+
+    @property
+    @pulumi.getter(name="strategyId")
+    def strategy_id(self) -> str:
+        """
+        strategy ID.
+        """
+        return pulumi.get(self, "strategy_id")
+
+
+@pulumi.output_type
+class GetGroupsResultGatewayGroupListBindingStrategyCronConfigParamResult(dict):
+    def __init__(__self__, *,
+                 crontab: str,
+                 period: str,
+                 start_at: str,
+                 target_replicas: int):
+        """
+        :param str crontab: cron expression.
+        :param str period: period of timing auto scaling.
+        :param str start_at: start time.
+        :param int target_replicas: target replicas.
+        """
+        pulumi.set(__self__, "crontab", crontab)
+        pulumi.set(__self__, "period", period)
+        pulumi.set(__self__, "start_at", start_at)
+        pulumi.set(__self__, "target_replicas", target_replicas)
+
+    @property
+    @pulumi.getter
+    def crontab(self) -> str:
+        """
+        cron expression.
+        """
+        return pulumi.get(self, "crontab")
+
+    @property
+    @pulumi.getter
+    def period(self) -> str:
+        """
+        period of timing auto scaling.
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="startAt")
+    def start_at(self) -> str:
+        """
+        start time.
+        """
+        return pulumi.get(self, "start_at")
+
+    @property
+    @pulumi.getter(name="targetReplicas")
+    def target_replicas(self) -> int:
+        """
+        target replicas.
+        """
+        return pulumi.get(self, "target_replicas")
+
+
+@pulumi.output_type
+class GetGroupsResultGatewayGroupListNodeConfigResult(dict):
+    def __init__(__self__, *,
+                 number: int,
+                 specification: str):
+        """
+        :param int number: group node number, 2-50.
+        :param str specification: group specification, 1c2g|2c4g|4c8g|8c16g.
+        """
+        pulumi.set(__self__, "number", number)
+        pulumi.set(__self__, "specification", specification)
+
+    @property
+    @pulumi.getter
+    def number(self) -> int:
+        """
+        group node number, 2-50.
+        """
+        return pulumi.get(self, "number")
+
+    @property
+    @pulumi.getter
+    def specification(self) -> str:
+        """
+        group specification, 1c2g|2c4g|4c8g|8c16g.
+        """
+        return pulumi.get(self, "specification")
 
 
 @pulumi.output_type

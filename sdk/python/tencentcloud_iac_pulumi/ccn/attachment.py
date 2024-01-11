@@ -121,6 +121,7 @@ class _AttachmentState:
                  instance_id: Optional[pulumi.Input[str]] = None,
                  instance_region: Optional[pulumi.Input[str]] = None,
                  instance_type: Optional[pulumi.Input[str]] = None,
+                 route_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  state: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Attachment resources.
@@ -132,6 +133,7 @@ class _AttachmentState:
         :param pulumi.Input[str] instance_id: ID of instance is attached.
         :param pulumi.Input[str] instance_region: The region that the instance locates at.
         :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_ids: Route id list.
         :param pulumi.Input[str] state: States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
         """
         if attached_time is not None:
@@ -150,6 +152,8 @@ class _AttachmentState:
             pulumi.set(__self__, "instance_region", instance_region)
         if instance_type is not None:
             pulumi.set(__self__, "instance_type", instance_type)
+        if route_ids is not None:
+            pulumi.set(__self__, "route_ids", route_ids)
         if state is not None:
             pulumi.set(__self__, "state", state)
 
@@ -248,6 +252,18 @@ class _AttachmentState:
     @instance_type.setter
     def instance_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "instance_type", value)
+
+    @property
+    @pulumi.getter(name="routeIds")
+    def route_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Route id list.
+        """
+        return pulumi.get(self, "route_ids")
+
+    @route_ids.setter
+    def route_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "route_ids", value)
 
     @property
     @pulumi.getter
@@ -424,6 +440,7 @@ class Attachment(pulumi.CustomResource):
             __props__.__dict__["instance_type"] = instance_type
             __props__.__dict__["attached_time"] = None
             __props__.__dict__["cidr_blocks"] = None
+            __props__.__dict__["route_ids"] = None
             __props__.__dict__["state"] = None
         super(Attachment, __self__).__init__(
             'tencentcloud:Ccn/attachment:Attachment',
@@ -443,6 +460,7 @@ class Attachment(pulumi.CustomResource):
             instance_id: Optional[pulumi.Input[str]] = None,
             instance_region: Optional[pulumi.Input[str]] = None,
             instance_type: Optional[pulumi.Input[str]] = None,
+            route_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             state: Optional[pulumi.Input[str]] = None) -> 'Attachment':
         """
         Get an existing Attachment resource's state with the given name, id, and optional extra
@@ -459,6 +477,7 @@ class Attachment(pulumi.CustomResource):
         :param pulumi.Input[str] instance_id: ID of instance is attached.
         :param pulumi.Input[str] instance_region: The region that the instance locates at.
         :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_ids: Route id list.
         :param pulumi.Input[str] state: States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -473,6 +492,7 @@ class Attachment(pulumi.CustomResource):
         __props__.__dict__["instance_id"] = instance_id
         __props__.__dict__["instance_region"] = instance_region
         __props__.__dict__["instance_type"] = instance_type
+        __props__.__dict__["route_ids"] = route_ids
         __props__.__dict__["state"] = state
         return Attachment(resource_name, opts=opts, __props__=__props__)
 
@@ -539,6 +559,14 @@ class Attachment(pulumi.CustomResource):
         Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
         """
         return pulumi.get(self, "instance_type")
+
+    @property
+    @pulumi.getter(name="routeIds")
+    def route_ids(self) -> pulumi.Output[Sequence[str]]:
+        """
+        Route id list.
+        """
+        return pulumi.get(self, "route_ids")
 
     @property
     @pulumi.getter

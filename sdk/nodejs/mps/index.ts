@@ -9,12 +9,33 @@ export * from "./adaptiveDynamicStreamingTemplate";
 export * from "./aiAnalysisTemplate";
 export * from "./aiRecognitionTemplate";
 export * from "./animatedGraphicsTemplate";
+export * from "./contentReviewTemplate";
+export * from "./editMediaOperation";
+export * from "./enableScheduleConfig";
+export * from "./enableWorkflowConfig";
+export * from "./event";
+export * from "./executeFunctionOperation";
+export * from "./flow";
+export * from "./getMediaMetaData";
+export * from "./getParseLiveStreamProcessNotification";
+export * from "./getParseNotification";
+export * from "./getSchedules";
+export * from "./getTasks";
 export * from "./imageSpriteTemplate";
+export * from "./input";
+export * from "./manageTaskOperation";
+export * from "./output";
 export * from "./personSample";
+export * from "./processLiveStreamOperation";
+export * from "./processMediaOperation";
 export * from "./sampleSnapshotTemplate";
+export * from "./schedule";
 export * from "./snapshotByTimeoffsetTemplate";
+export * from "./startFlowOperation";
 export * from "./transcodeTemplate";
 export * from "./watermarkTemplate";
+export * from "./withdrawsWatermarkOperation";
+export * from "./wordSample";
 export * from "./workflow";
 
 // Import resources to register:
@@ -22,12 +43,28 @@ import { AdaptiveDynamicStreamingTemplate } from "./adaptiveDynamicStreamingTemp
 import { AiAnalysisTemplate } from "./aiAnalysisTemplate";
 import { AiRecognitionTemplate } from "./aiRecognitionTemplate";
 import { AnimatedGraphicsTemplate } from "./animatedGraphicsTemplate";
+import { ContentReviewTemplate } from "./contentReviewTemplate";
+import { EditMediaOperation } from "./editMediaOperation";
+import { EnableScheduleConfig } from "./enableScheduleConfig";
+import { EnableWorkflowConfig } from "./enableWorkflowConfig";
+import { Event } from "./event";
+import { ExecuteFunctionOperation } from "./executeFunctionOperation";
+import { Flow } from "./flow";
 import { ImageSpriteTemplate } from "./imageSpriteTemplate";
+import { Input } from "./input";
+import { ManageTaskOperation } from "./manageTaskOperation";
+import { Output } from "./output";
 import { PersonSample } from "./personSample";
+import { ProcessLiveStreamOperation } from "./processLiveStreamOperation";
+import { ProcessMediaOperation } from "./processMediaOperation";
 import { SampleSnapshotTemplate } from "./sampleSnapshotTemplate";
+import { Schedule } from "./schedule";
 import { SnapshotByTimeoffsetTemplate } from "./snapshotByTimeoffsetTemplate";
+import { StartFlowOperation } from "./startFlowOperation";
 import { TranscodeTemplate } from "./transcodeTemplate";
 import { WatermarkTemplate } from "./watermarkTemplate";
+import { WithdrawsWatermarkOperation } from "./withdrawsWatermarkOperation";
+import { WordSample } from "./wordSample";
 import { Workflow } from "./workflow";
 
 const _module = {
@@ -42,18 +79,50 @@ const _module = {
                 return new AiRecognitionTemplate(name, <any>undefined, { urn })
             case "tencentcloud:Mps/animatedGraphicsTemplate:AnimatedGraphicsTemplate":
                 return new AnimatedGraphicsTemplate(name, <any>undefined, { urn })
+            case "tencentcloud:Mps/contentReviewTemplate:ContentReviewTemplate":
+                return new ContentReviewTemplate(name, <any>undefined, { urn })
+            case "tencentcloud:Mps/editMediaOperation:EditMediaOperation":
+                return new EditMediaOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Mps/enableScheduleConfig:EnableScheduleConfig":
+                return new EnableScheduleConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Mps/enableWorkflowConfig:EnableWorkflowConfig":
+                return new EnableWorkflowConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Mps/event:Event":
+                return new Event(name, <any>undefined, { urn })
+            case "tencentcloud:Mps/executeFunctionOperation:ExecuteFunctionOperation":
+                return new ExecuteFunctionOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Mps/flow:Flow":
+                return new Flow(name, <any>undefined, { urn })
             case "tencentcloud:Mps/imageSpriteTemplate:ImageSpriteTemplate":
                 return new ImageSpriteTemplate(name, <any>undefined, { urn })
+            case "tencentcloud:Mps/input:Input":
+                return new Input(name, <any>undefined, { urn })
+            case "tencentcloud:Mps/manageTaskOperation:ManageTaskOperation":
+                return new ManageTaskOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Mps/output:Output":
+                return new Output(name, <any>undefined, { urn })
             case "tencentcloud:Mps/personSample:PersonSample":
                 return new PersonSample(name, <any>undefined, { urn })
+            case "tencentcloud:Mps/processLiveStreamOperation:ProcessLiveStreamOperation":
+                return new ProcessLiveStreamOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Mps/processMediaOperation:ProcessMediaOperation":
+                return new ProcessMediaOperation(name, <any>undefined, { urn })
             case "tencentcloud:Mps/sampleSnapshotTemplate:SampleSnapshotTemplate":
                 return new SampleSnapshotTemplate(name, <any>undefined, { urn })
+            case "tencentcloud:Mps/schedule:Schedule":
+                return new Schedule(name, <any>undefined, { urn })
             case "tencentcloud:Mps/snapshotByTimeoffsetTemplate:SnapshotByTimeoffsetTemplate":
                 return new SnapshotByTimeoffsetTemplate(name, <any>undefined, { urn })
+            case "tencentcloud:Mps/startFlowOperation:StartFlowOperation":
+                return new StartFlowOperation(name, <any>undefined, { urn })
             case "tencentcloud:Mps/transcodeTemplate:TranscodeTemplate":
                 return new TranscodeTemplate(name, <any>undefined, { urn })
             case "tencentcloud:Mps/watermarkTemplate:WatermarkTemplate":
                 return new WatermarkTemplate(name, <any>undefined, { urn })
+            case "tencentcloud:Mps/withdrawsWatermarkOperation:WithdrawsWatermarkOperation":
+                return new WithdrawsWatermarkOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Mps/wordSample:WordSample":
+                return new WordSample(name, <any>undefined, { urn })
             case "tencentcloud:Mps/workflow:Workflow":
                 return new Workflow(name, <any>undefined, { urn })
             default:
@@ -65,10 +134,26 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Mps/adaptiveDynamicStream
 pulumi.runtime.registerResourceModule("tencentcloud", "Mps/aiAnalysisTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mps/aiRecognitionTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mps/animatedGraphicsTemplate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mps/contentReviewTemplate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mps/editMediaOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mps/enableScheduleConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mps/enableWorkflowConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mps/event", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mps/executeFunctionOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mps/flow", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mps/imageSpriteTemplate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mps/input", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mps/manageTaskOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mps/output", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mps/personSample", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mps/processLiveStreamOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mps/processMediaOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mps/sampleSnapshotTemplate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mps/schedule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mps/snapshotByTimeoffsetTemplate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mps/startFlowOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mps/transcodeTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mps/watermarkTemplate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mps/withdrawsWatermarkOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mps/wordSample", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mps/workflow", _module)

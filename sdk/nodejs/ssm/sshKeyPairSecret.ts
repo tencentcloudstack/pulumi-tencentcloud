@@ -7,6 +7,35 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a ssm ssh key pair secret
  *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleKey = new tencentcloud.kms.Key("exampleKey", {
+ *     alias: "tf-example-kms-key",
+ *     description: "example of kms key",
+ *     keyRotationEnabled: false,
+ *     isEnabled: true,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleSshKeyPairSecret = new tencentcloud.ssm.SshKeyPairSecret("exampleSshKeyPairSecret", {
+ *     secretName: "tf-example",
+ *     projectId: 0,
+ *     description: "desc.",
+ *     kmsKeyId: exampleKey.id,
+ *     sshKeyName: "tf_example_ssh",
+ *     status: "Enabled",
+ *     cleanSshKey: true,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * ```
+ *
  * ## Import
  *
  * ssm ssh_key_pair_secret can be imported using the id, e.g.
@@ -58,7 +87,7 @@ export class SshKeyPairSecret extends pulumi.CustomResource {
     /**
      * Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.
      */
-    public readonly kmsKeyId!: pulumi.Output<string | undefined>;
+    public readonly kmsKeyId!: pulumi.Output<string>;
     /**
      * ID of the project to which the created SSH key belongs.
      */
@@ -74,11 +103,15 @@ export class SshKeyPairSecret extends pulumi.CustomResource {
     /**
      * Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
      */
-    public readonly sshKeyName!: pulumi.Output<string | undefined>;
+    public readonly sshKeyName!: pulumi.Output<string>;
     /**
      * Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
      */
     public readonly status!: pulumi.Output<string>;
+    /**
+     * Tags of secret.
+     */
+    public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
 
     /**
      * Create a SshKeyPairSecret resource with the given unique name, arguments, and options.
@@ -102,6 +135,7 @@ export class SshKeyPairSecret extends pulumi.CustomResource {
             resourceInputs["secretType"] = state ? state.secretType : undefined;
             resourceInputs["sshKeyName"] = state ? state.sshKeyName : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as SshKeyPairSecretArgs | undefined;
             if ((!args || args.projectId === undefined) && !opts.urn) {
@@ -117,6 +151,7 @@ export class SshKeyPairSecret extends pulumi.CustomResource {
             resourceInputs["secretName"] = args ? args.secretName : undefined;
             resourceInputs["sshKeyName"] = args ? args.sshKeyName : undefined;
             resourceInputs["status"] = args ? args.status : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["secretType"] = undefined /*out*/;
         }
@@ -165,6 +200,10 @@ export interface SshKeyPairSecretState {
      * Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
      */
     status?: pulumi.Input<string>;
+    /**
+     * Tags of secret.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
 }
 
 /**
@@ -199,4 +238,8 @@ export interface SshKeyPairSecretArgs {
      * Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
      */
     status?: pulumi.Input<string>;
+    /**
+     * Tags of secret.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
 }

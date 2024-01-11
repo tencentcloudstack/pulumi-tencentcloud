@@ -308,6 +308,2342 @@ func (o PullStreamTaskWatermarkListArrayOutput) Index(i pulumi.IntInput) PullStr
 	}).(PullStreamTaskWatermarkListOutput)
 }
 
+type RecordTemplateAacParam struct {
+	ClassId        *int    `pulumi:"classId"`
+	Enable         *int    `pulumi:"enable"`
+	Procedure      *string `pulumi:"procedure"`
+	RecordInterval *int    `pulumi:"recordInterval"`
+	StorageMode    *string `pulumi:"storageMode"`
+	StorageTime    *int    `pulumi:"storageTime"`
+	VodFileName    *string `pulumi:"vodFileName"`
+	VodSubAppId    *int    `pulumi:"vodSubAppId"`
+}
+
+// RecordTemplateAacParamInput is an input type that accepts RecordTemplateAacParamArgs and RecordTemplateAacParamOutput values.
+// You can construct a concrete instance of `RecordTemplateAacParamInput` via:
+//
+//          RecordTemplateAacParamArgs{...}
+type RecordTemplateAacParamInput interface {
+	pulumi.Input
+
+	ToRecordTemplateAacParamOutput() RecordTemplateAacParamOutput
+	ToRecordTemplateAacParamOutputWithContext(context.Context) RecordTemplateAacParamOutput
+}
+
+type RecordTemplateAacParamArgs struct {
+	ClassId        pulumi.IntPtrInput    `pulumi:"classId"`
+	Enable         pulumi.IntPtrInput    `pulumi:"enable"`
+	Procedure      pulumi.StringPtrInput `pulumi:"procedure"`
+	RecordInterval pulumi.IntPtrInput    `pulumi:"recordInterval"`
+	StorageMode    pulumi.StringPtrInput `pulumi:"storageMode"`
+	StorageTime    pulumi.IntPtrInput    `pulumi:"storageTime"`
+	VodFileName    pulumi.StringPtrInput `pulumi:"vodFileName"`
+	VodSubAppId    pulumi.IntPtrInput    `pulumi:"vodSubAppId"`
+}
+
+func (RecordTemplateAacParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RecordTemplateAacParam)(nil)).Elem()
+}
+
+func (i RecordTemplateAacParamArgs) ToRecordTemplateAacParamOutput() RecordTemplateAacParamOutput {
+	return i.ToRecordTemplateAacParamOutputWithContext(context.Background())
+}
+
+func (i RecordTemplateAacParamArgs) ToRecordTemplateAacParamOutputWithContext(ctx context.Context) RecordTemplateAacParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateAacParamOutput)
+}
+
+func (i RecordTemplateAacParamArgs) ToRecordTemplateAacParamPtrOutput() RecordTemplateAacParamPtrOutput {
+	return i.ToRecordTemplateAacParamPtrOutputWithContext(context.Background())
+}
+
+func (i RecordTemplateAacParamArgs) ToRecordTemplateAacParamPtrOutputWithContext(ctx context.Context) RecordTemplateAacParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateAacParamOutput).ToRecordTemplateAacParamPtrOutputWithContext(ctx)
+}
+
+// RecordTemplateAacParamPtrInput is an input type that accepts RecordTemplateAacParamArgs, RecordTemplateAacParamPtr and RecordTemplateAacParamPtrOutput values.
+// You can construct a concrete instance of `RecordTemplateAacParamPtrInput` via:
+//
+//          RecordTemplateAacParamArgs{...}
+//
+//  or:
+//
+//          nil
+type RecordTemplateAacParamPtrInput interface {
+	pulumi.Input
+
+	ToRecordTemplateAacParamPtrOutput() RecordTemplateAacParamPtrOutput
+	ToRecordTemplateAacParamPtrOutputWithContext(context.Context) RecordTemplateAacParamPtrOutput
+}
+
+type recordTemplateAacParamPtrType RecordTemplateAacParamArgs
+
+func RecordTemplateAacParamPtr(v *RecordTemplateAacParamArgs) RecordTemplateAacParamPtrInput {
+	return (*recordTemplateAacParamPtrType)(v)
+}
+
+func (*recordTemplateAacParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RecordTemplateAacParam)(nil)).Elem()
+}
+
+func (i *recordTemplateAacParamPtrType) ToRecordTemplateAacParamPtrOutput() RecordTemplateAacParamPtrOutput {
+	return i.ToRecordTemplateAacParamPtrOutputWithContext(context.Background())
+}
+
+func (i *recordTemplateAacParamPtrType) ToRecordTemplateAacParamPtrOutputWithContext(ctx context.Context) RecordTemplateAacParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateAacParamPtrOutput)
+}
+
+type RecordTemplateAacParamOutput struct{ *pulumi.OutputState }
+
+func (RecordTemplateAacParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RecordTemplateAacParam)(nil)).Elem()
+}
+
+func (o RecordTemplateAacParamOutput) ToRecordTemplateAacParamOutput() RecordTemplateAacParamOutput {
+	return o
+}
+
+func (o RecordTemplateAacParamOutput) ToRecordTemplateAacParamOutputWithContext(ctx context.Context) RecordTemplateAacParamOutput {
+	return o
+}
+
+func (o RecordTemplateAacParamOutput) ToRecordTemplateAacParamPtrOutput() RecordTemplateAacParamPtrOutput {
+	return o.ToRecordTemplateAacParamPtrOutputWithContext(context.Background())
+}
+
+func (o RecordTemplateAacParamOutput) ToRecordTemplateAacParamPtrOutputWithContext(ctx context.Context) RecordTemplateAacParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RecordTemplateAacParam) *RecordTemplateAacParam {
+		return &v
+	}).(RecordTemplateAacParamPtrOutput)
+}
+
+func (o RecordTemplateAacParamOutput) ClassId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateAacParam) *int { return v.ClassId }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateAacParamOutput) Enable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateAacParam) *int { return v.Enable }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateAacParamOutput) Procedure() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RecordTemplateAacParam) *string { return v.Procedure }).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateAacParamOutput) RecordInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateAacParam) *int { return v.RecordInterval }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateAacParamOutput) StorageMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RecordTemplateAacParam) *string { return v.StorageMode }).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateAacParamOutput) StorageTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateAacParam) *int { return v.StorageTime }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateAacParamOutput) VodFileName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RecordTemplateAacParam) *string { return v.VodFileName }).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateAacParamOutput) VodSubAppId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateAacParam) *int { return v.VodSubAppId }).(pulumi.IntPtrOutput)
+}
+
+type RecordTemplateAacParamPtrOutput struct{ *pulumi.OutputState }
+
+func (RecordTemplateAacParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RecordTemplateAacParam)(nil)).Elem()
+}
+
+func (o RecordTemplateAacParamPtrOutput) ToRecordTemplateAacParamPtrOutput() RecordTemplateAacParamPtrOutput {
+	return o
+}
+
+func (o RecordTemplateAacParamPtrOutput) ToRecordTemplateAacParamPtrOutputWithContext(ctx context.Context) RecordTemplateAacParamPtrOutput {
+	return o
+}
+
+func (o RecordTemplateAacParamPtrOutput) Elem() RecordTemplateAacParamOutput {
+	return o.ApplyT(func(v *RecordTemplateAacParam) RecordTemplateAacParam {
+		if v != nil {
+			return *v
+		}
+		var ret RecordTemplateAacParam
+		return ret
+	}).(RecordTemplateAacParamOutput)
+}
+
+func (o RecordTemplateAacParamPtrOutput) ClassId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateAacParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ClassId
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateAacParamPtrOutput) Enable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateAacParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Enable
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateAacParamPtrOutput) Procedure() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateAacParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Procedure
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateAacParamPtrOutput) RecordInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateAacParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.RecordInterval
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateAacParamPtrOutput) StorageMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateAacParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StorageMode
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateAacParamPtrOutput) StorageTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateAacParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.StorageTime
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateAacParamPtrOutput) VodFileName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateAacParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.VodFileName
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateAacParamPtrOutput) VodSubAppId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateAacParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.VodSubAppId
+	}).(pulumi.IntPtrOutput)
+}
+
+type RecordTemplateFlvParam struct {
+	ClassId        *int    `pulumi:"classId"`
+	Enable         *int    `pulumi:"enable"`
+	Procedure      *string `pulumi:"procedure"`
+	RecordInterval *int    `pulumi:"recordInterval"`
+	StorageMode    *string `pulumi:"storageMode"`
+	StorageTime    *int    `pulumi:"storageTime"`
+	VodFileName    *string `pulumi:"vodFileName"`
+	VodSubAppId    *int    `pulumi:"vodSubAppId"`
+}
+
+// RecordTemplateFlvParamInput is an input type that accepts RecordTemplateFlvParamArgs and RecordTemplateFlvParamOutput values.
+// You can construct a concrete instance of `RecordTemplateFlvParamInput` via:
+//
+//          RecordTemplateFlvParamArgs{...}
+type RecordTemplateFlvParamInput interface {
+	pulumi.Input
+
+	ToRecordTemplateFlvParamOutput() RecordTemplateFlvParamOutput
+	ToRecordTemplateFlvParamOutputWithContext(context.Context) RecordTemplateFlvParamOutput
+}
+
+type RecordTemplateFlvParamArgs struct {
+	ClassId        pulumi.IntPtrInput    `pulumi:"classId"`
+	Enable         pulumi.IntPtrInput    `pulumi:"enable"`
+	Procedure      pulumi.StringPtrInput `pulumi:"procedure"`
+	RecordInterval pulumi.IntPtrInput    `pulumi:"recordInterval"`
+	StorageMode    pulumi.StringPtrInput `pulumi:"storageMode"`
+	StorageTime    pulumi.IntPtrInput    `pulumi:"storageTime"`
+	VodFileName    pulumi.StringPtrInput `pulumi:"vodFileName"`
+	VodSubAppId    pulumi.IntPtrInput    `pulumi:"vodSubAppId"`
+}
+
+func (RecordTemplateFlvParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RecordTemplateFlvParam)(nil)).Elem()
+}
+
+func (i RecordTemplateFlvParamArgs) ToRecordTemplateFlvParamOutput() RecordTemplateFlvParamOutput {
+	return i.ToRecordTemplateFlvParamOutputWithContext(context.Background())
+}
+
+func (i RecordTemplateFlvParamArgs) ToRecordTemplateFlvParamOutputWithContext(ctx context.Context) RecordTemplateFlvParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateFlvParamOutput)
+}
+
+func (i RecordTemplateFlvParamArgs) ToRecordTemplateFlvParamPtrOutput() RecordTemplateFlvParamPtrOutput {
+	return i.ToRecordTemplateFlvParamPtrOutputWithContext(context.Background())
+}
+
+func (i RecordTemplateFlvParamArgs) ToRecordTemplateFlvParamPtrOutputWithContext(ctx context.Context) RecordTemplateFlvParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateFlvParamOutput).ToRecordTemplateFlvParamPtrOutputWithContext(ctx)
+}
+
+// RecordTemplateFlvParamPtrInput is an input type that accepts RecordTemplateFlvParamArgs, RecordTemplateFlvParamPtr and RecordTemplateFlvParamPtrOutput values.
+// You can construct a concrete instance of `RecordTemplateFlvParamPtrInput` via:
+//
+//          RecordTemplateFlvParamArgs{...}
+//
+//  or:
+//
+//          nil
+type RecordTemplateFlvParamPtrInput interface {
+	pulumi.Input
+
+	ToRecordTemplateFlvParamPtrOutput() RecordTemplateFlvParamPtrOutput
+	ToRecordTemplateFlvParamPtrOutputWithContext(context.Context) RecordTemplateFlvParamPtrOutput
+}
+
+type recordTemplateFlvParamPtrType RecordTemplateFlvParamArgs
+
+func RecordTemplateFlvParamPtr(v *RecordTemplateFlvParamArgs) RecordTemplateFlvParamPtrInput {
+	return (*recordTemplateFlvParamPtrType)(v)
+}
+
+func (*recordTemplateFlvParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RecordTemplateFlvParam)(nil)).Elem()
+}
+
+func (i *recordTemplateFlvParamPtrType) ToRecordTemplateFlvParamPtrOutput() RecordTemplateFlvParamPtrOutput {
+	return i.ToRecordTemplateFlvParamPtrOutputWithContext(context.Background())
+}
+
+func (i *recordTemplateFlvParamPtrType) ToRecordTemplateFlvParamPtrOutputWithContext(ctx context.Context) RecordTemplateFlvParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateFlvParamPtrOutput)
+}
+
+type RecordTemplateFlvParamOutput struct{ *pulumi.OutputState }
+
+func (RecordTemplateFlvParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RecordTemplateFlvParam)(nil)).Elem()
+}
+
+func (o RecordTemplateFlvParamOutput) ToRecordTemplateFlvParamOutput() RecordTemplateFlvParamOutput {
+	return o
+}
+
+func (o RecordTemplateFlvParamOutput) ToRecordTemplateFlvParamOutputWithContext(ctx context.Context) RecordTemplateFlvParamOutput {
+	return o
+}
+
+func (o RecordTemplateFlvParamOutput) ToRecordTemplateFlvParamPtrOutput() RecordTemplateFlvParamPtrOutput {
+	return o.ToRecordTemplateFlvParamPtrOutputWithContext(context.Background())
+}
+
+func (o RecordTemplateFlvParamOutput) ToRecordTemplateFlvParamPtrOutputWithContext(ctx context.Context) RecordTemplateFlvParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RecordTemplateFlvParam) *RecordTemplateFlvParam {
+		return &v
+	}).(RecordTemplateFlvParamPtrOutput)
+}
+
+func (o RecordTemplateFlvParamOutput) ClassId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateFlvParam) *int { return v.ClassId }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateFlvParamOutput) Enable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateFlvParam) *int { return v.Enable }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateFlvParamOutput) Procedure() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RecordTemplateFlvParam) *string { return v.Procedure }).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateFlvParamOutput) RecordInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateFlvParam) *int { return v.RecordInterval }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateFlvParamOutput) StorageMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RecordTemplateFlvParam) *string { return v.StorageMode }).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateFlvParamOutput) StorageTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateFlvParam) *int { return v.StorageTime }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateFlvParamOutput) VodFileName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RecordTemplateFlvParam) *string { return v.VodFileName }).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateFlvParamOutput) VodSubAppId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateFlvParam) *int { return v.VodSubAppId }).(pulumi.IntPtrOutput)
+}
+
+type RecordTemplateFlvParamPtrOutput struct{ *pulumi.OutputState }
+
+func (RecordTemplateFlvParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RecordTemplateFlvParam)(nil)).Elem()
+}
+
+func (o RecordTemplateFlvParamPtrOutput) ToRecordTemplateFlvParamPtrOutput() RecordTemplateFlvParamPtrOutput {
+	return o
+}
+
+func (o RecordTemplateFlvParamPtrOutput) ToRecordTemplateFlvParamPtrOutputWithContext(ctx context.Context) RecordTemplateFlvParamPtrOutput {
+	return o
+}
+
+func (o RecordTemplateFlvParamPtrOutput) Elem() RecordTemplateFlvParamOutput {
+	return o.ApplyT(func(v *RecordTemplateFlvParam) RecordTemplateFlvParam {
+		if v != nil {
+			return *v
+		}
+		var ret RecordTemplateFlvParam
+		return ret
+	}).(RecordTemplateFlvParamOutput)
+}
+
+func (o RecordTemplateFlvParamPtrOutput) ClassId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateFlvParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ClassId
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateFlvParamPtrOutput) Enable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateFlvParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Enable
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateFlvParamPtrOutput) Procedure() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateFlvParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Procedure
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateFlvParamPtrOutput) RecordInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateFlvParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.RecordInterval
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateFlvParamPtrOutput) StorageMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateFlvParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StorageMode
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateFlvParamPtrOutput) StorageTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateFlvParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.StorageTime
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateFlvParamPtrOutput) VodFileName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateFlvParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.VodFileName
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateFlvParamPtrOutput) VodSubAppId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateFlvParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.VodSubAppId
+	}).(pulumi.IntPtrOutput)
+}
+
+type RecordTemplateFlvSpecialParam struct {
+	UploadInRecording *bool `pulumi:"uploadInRecording"`
+}
+
+// RecordTemplateFlvSpecialParamInput is an input type that accepts RecordTemplateFlvSpecialParamArgs and RecordTemplateFlvSpecialParamOutput values.
+// You can construct a concrete instance of `RecordTemplateFlvSpecialParamInput` via:
+//
+//          RecordTemplateFlvSpecialParamArgs{...}
+type RecordTemplateFlvSpecialParamInput interface {
+	pulumi.Input
+
+	ToRecordTemplateFlvSpecialParamOutput() RecordTemplateFlvSpecialParamOutput
+	ToRecordTemplateFlvSpecialParamOutputWithContext(context.Context) RecordTemplateFlvSpecialParamOutput
+}
+
+type RecordTemplateFlvSpecialParamArgs struct {
+	UploadInRecording pulumi.BoolPtrInput `pulumi:"uploadInRecording"`
+}
+
+func (RecordTemplateFlvSpecialParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RecordTemplateFlvSpecialParam)(nil)).Elem()
+}
+
+func (i RecordTemplateFlvSpecialParamArgs) ToRecordTemplateFlvSpecialParamOutput() RecordTemplateFlvSpecialParamOutput {
+	return i.ToRecordTemplateFlvSpecialParamOutputWithContext(context.Background())
+}
+
+func (i RecordTemplateFlvSpecialParamArgs) ToRecordTemplateFlvSpecialParamOutputWithContext(ctx context.Context) RecordTemplateFlvSpecialParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateFlvSpecialParamOutput)
+}
+
+func (i RecordTemplateFlvSpecialParamArgs) ToRecordTemplateFlvSpecialParamPtrOutput() RecordTemplateFlvSpecialParamPtrOutput {
+	return i.ToRecordTemplateFlvSpecialParamPtrOutputWithContext(context.Background())
+}
+
+func (i RecordTemplateFlvSpecialParamArgs) ToRecordTemplateFlvSpecialParamPtrOutputWithContext(ctx context.Context) RecordTemplateFlvSpecialParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateFlvSpecialParamOutput).ToRecordTemplateFlvSpecialParamPtrOutputWithContext(ctx)
+}
+
+// RecordTemplateFlvSpecialParamPtrInput is an input type that accepts RecordTemplateFlvSpecialParamArgs, RecordTemplateFlvSpecialParamPtr and RecordTemplateFlvSpecialParamPtrOutput values.
+// You can construct a concrete instance of `RecordTemplateFlvSpecialParamPtrInput` via:
+//
+//          RecordTemplateFlvSpecialParamArgs{...}
+//
+//  or:
+//
+//          nil
+type RecordTemplateFlvSpecialParamPtrInput interface {
+	pulumi.Input
+
+	ToRecordTemplateFlvSpecialParamPtrOutput() RecordTemplateFlvSpecialParamPtrOutput
+	ToRecordTemplateFlvSpecialParamPtrOutputWithContext(context.Context) RecordTemplateFlvSpecialParamPtrOutput
+}
+
+type recordTemplateFlvSpecialParamPtrType RecordTemplateFlvSpecialParamArgs
+
+func RecordTemplateFlvSpecialParamPtr(v *RecordTemplateFlvSpecialParamArgs) RecordTemplateFlvSpecialParamPtrInput {
+	return (*recordTemplateFlvSpecialParamPtrType)(v)
+}
+
+func (*recordTemplateFlvSpecialParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RecordTemplateFlvSpecialParam)(nil)).Elem()
+}
+
+func (i *recordTemplateFlvSpecialParamPtrType) ToRecordTemplateFlvSpecialParamPtrOutput() RecordTemplateFlvSpecialParamPtrOutput {
+	return i.ToRecordTemplateFlvSpecialParamPtrOutputWithContext(context.Background())
+}
+
+func (i *recordTemplateFlvSpecialParamPtrType) ToRecordTemplateFlvSpecialParamPtrOutputWithContext(ctx context.Context) RecordTemplateFlvSpecialParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateFlvSpecialParamPtrOutput)
+}
+
+type RecordTemplateFlvSpecialParamOutput struct{ *pulumi.OutputState }
+
+func (RecordTemplateFlvSpecialParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RecordTemplateFlvSpecialParam)(nil)).Elem()
+}
+
+func (o RecordTemplateFlvSpecialParamOutput) ToRecordTemplateFlvSpecialParamOutput() RecordTemplateFlvSpecialParamOutput {
+	return o
+}
+
+func (o RecordTemplateFlvSpecialParamOutput) ToRecordTemplateFlvSpecialParamOutputWithContext(ctx context.Context) RecordTemplateFlvSpecialParamOutput {
+	return o
+}
+
+func (o RecordTemplateFlvSpecialParamOutput) ToRecordTemplateFlvSpecialParamPtrOutput() RecordTemplateFlvSpecialParamPtrOutput {
+	return o.ToRecordTemplateFlvSpecialParamPtrOutputWithContext(context.Background())
+}
+
+func (o RecordTemplateFlvSpecialParamOutput) ToRecordTemplateFlvSpecialParamPtrOutputWithContext(ctx context.Context) RecordTemplateFlvSpecialParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RecordTemplateFlvSpecialParam) *RecordTemplateFlvSpecialParam {
+		return &v
+	}).(RecordTemplateFlvSpecialParamPtrOutput)
+}
+
+func (o RecordTemplateFlvSpecialParamOutput) UploadInRecording() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v RecordTemplateFlvSpecialParam) *bool { return v.UploadInRecording }).(pulumi.BoolPtrOutput)
+}
+
+type RecordTemplateFlvSpecialParamPtrOutput struct{ *pulumi.OutputState }
+
+func (RecordTemplateFlvSpecialParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RecordTemplateFlvSpecialParam)(nil)).Elem()
+}
+
+func (o RecordTemplateFlvSpecialParamPtrOutput) ToRecordTemplateFlvSpecialParamPtrOutput() RecordTemplateFlvSpecialParamPtrOutput {
+	return o
+}
+
+func (o RecordTemplateFlvSpecialParamPtrOutput) ToRecordTemplateFlvSpecialParamPtrOutputWithContext(ctx context.Context) RecordTemplateFlvSpecialParamPtrOutput {
+	return o
+}
+
+func (o RecordTemplateFlvSpecialParamPtrOutput) Elem() RecordTemplateFlvSpecialParamOutput {
+	return o.ApplyT(func(v *RecordTemplateFlvSpecialParam) RecordTemplateFlvSpecialParam {
+		if v != nil {
+			return *v
+		}
+		var ret RecordTemplateFlvSpecialParam
+		return ret
+	}).(RecordTemplateFlvSpecialParamOutput)
+}
+
+func (o RecordTemplateFlvSpecialParamPtrOutput) UploadInRecording() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateFlvSpecialParam) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.UploadInRecording
+	}).(pulumi.BoolPtrOutput)
+}
+
+type RecordTemplateHlsParam struct {
+	ClassId        *int    `pulumi:"classId"`
+	Enable         *int    `pulumi:"enable"`
+	Procedure      *string `pulumi:"procedure"`
+	RecordInterval *int    `pulumi:"recordInterval"`
+	StorageMode    *string `pulumi:"storageMode"`
+	StorageTime    *int    `pulumi:"storageTime"`
+	VodFileName    *string `pulumi:"vodFileName"`
+	VodSubAppId    *int    `pulumi:"vodSubAppId"`
+}
+
+// RecordTemplateHlsParamInput is an input type that accepts RecordTemplateHlsParamArgs and RecordTemplateHlsParamOutput values.
+// You can construct a concrete instance of `RecordTemplateHlsParamInput` via:
+//
+//          RecordTemplateHlsParamArgs{...}
+type RecordTemplateHlsParamInput interface {
+	pulumi.Input
+
+	ToRecordTemplateHlsParamOutput() RecordTemplateHlsParamOutput
+	ToRecordTemplateHlsParamOutputWithContext(context.Context) RecordTemplateHlsParamOutput
+}
+
+type RecordTemplateHlsParamArgs struct {
+	ClassId        pulumi.IntPtrInput    `pulumi:"classId"`
+	Enable         pulumi.IntPtrInput    `pulumi:"enable"`
+	Procedure      pulumi.StringPtrInput `pulumi:"procedure"`
+	RecordInterval pulumi.IntPtrInput    `pulumi:"recordInterval"`
+	StorageMode    pulumi.StringPtrInput `pulumi:"storageMode"`
+	StorageTime    pulumi.IntPtrInput    `pulumi:"storageTime"`
+	VodFileName    pulumi.StringPtrInput `pulumi:"vodFileName"`
+	VodSubAppId    pulumi.IntPtrInput    `pulumi:"vodSubAppId"`
+}
+
+func (RecordTemplateHlsParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RecordTemplateHlsParam)(nil)).Elem()
+}
+
+func (i RecordTemplateHlsParamArgs) ToRecordTemplateHlsParamOutput() RecordTemplateHlsParamOutput {
+	return i.ToRecordTemplateHlsParamOutputWithContext(context.Background())
+}
+
+func (i RecordTemplateHlsParamArgs) ToRecordTemplateHlsParamOutputWithContext(ctx context.Context) RecordTemplateHlsParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateHlsParamOutput)
+}
+
+func (i RecordTemplateHlsParamArgs) ToRecordTemplateHlsParamPtrOutput() RecordTemplateHlsParamPtrOutput {
+	return i.ToRecordTemplateHlsParamPtrOutputWithContext(context.Background())
+}
+
+func (i RecordTemplateHlsParamArgs) ToRecordTemplateHlsParamPtrOutputWithContext(ctx context.Context) RecordTemplateHlsParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateHlsParamOutput).ToRecordTemplateHlsParamPtrOutputWithContext(ctx)
+}
+
+// RecordTemplateHlsParamPtrInput is an input type that accepts RecordTemplateHlsParamArgs, RecordTemplateHlsParamPtr and RecordTemplateHlsParamPtrOutput values.
+// You can construct a concrete instance of `RecordTemplateHlsParamPtrInput` via:
+//
+//          RecordTemplateHlsParamArgs{...}
+//
+//  or:
+//
+//          nil
+type RecordTemplateHlsParamPtrInput interface {
+	pulumi.Input
+
+	ToRecordTemplateHlsParamPtrOutput() RecordTemplateHlsParamPtrOutput
+	ToRecordTemplateHlsParamPtrOutputWithContext(context.Context) RecordTemplateHlsParamPtrOutput
+}
+
+type recordTemplateHlsParamPtrType RecordTemplateHlsParamArgs
+
+func RecordTemplateHlsParamPtr(v *RecordTemplateHlsParamArgs) RecordTemplateHlsParamPtrInput {
+	return (*recordTemplateHlsParamPtrType)(v)
+}
+
+func (*recordTemplateHlsParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RecordTemplateHlsParam)(nil)).Elem()
+}
+
+func (i *recordTemplateHlsParamPtrType) ToRecordTemplateHlsParamPtrOutput() RecordTemplateHlsParamPtrOutput {
+	return i.ToRecordTemplateHlsParamPtrOutputWithContext(context.Background())
+}
+
+func (i *recordTemplateHlsParamPtrType) ToRecordTemplateHlsParamPtrOutputWithContext(ctx context.Context) RecordTemplateHlsParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateHlsParamPtrOutput)
+}
+
+type RecordTemplateHlsParamOutput struct{ *pulumi.OutputState }
+
+func (RecordTemplateHlsParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RecordTemplateHlsParam)(nil)).Elem()
+}
+
+func (o RecordTemplateHlsParamOutput) ToRecordTemplateHlsParamOutput() RecordTemplateHlsParamOutput {
+	return o
+}
+
+func (o RecordTemplateHlsParamOutput) ToRecordTemplateHlsParamOutputWithContext(ctx context.Context) RecordTemplateHlsParamOutput {
+	return o
+}
+
+func (o RecordTemplateHlsParamOutput) ToRecordTemplateHlsParamPtrOutput() RecordTemplateHlsParamPtrOutput {
+	return o.ToRecordTemplateHlsParamPtrOutputWithContext(context.Background())
+}
+
+func (o RecordTemplateHlsParamOutput) ToRecordTemplateHlsParamPtrOutputWithContext(ctx context.Context) RecordTemplateHlsParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RecordTemplateHlsParam) *RecordTemplateHlsParam {
+		return &v
+	}).(RecordTemplateHlsParamPtrOutput)
+}
+
+func (o RecordTemplateHlsParamOutput) ClassId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateHlsParam) *int { return v.ClassId }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateHlsParamOutput) Enable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateHlsParam) *int { return v.Enable }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateHlsParamOutput) Procedure() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RecordTemplateHlsParam) *string { return v.Procedure }).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateHlsParamOutput) RecordInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateHlsParam) *int { return v.RecordInterval }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateHlsParamOutput) StorageMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RecordTemplateHlsParam) *string { return v.StorageMode }).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateHlsParamOutput) StorageTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateHlsParam) *int { return v.StorageTime }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateHlsParamOutput) VodFileName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RecordTemplateHlsParam) *string { return v.VodFileName }).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateHlsParamOutput) VodSubAppId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateHlsParam) *int { return v.VodSubAppId }).(pulumi.IntPtrOutput)
+}
+
+type RecordTemplateHlsParamPtrOutput struct{ *pulumi.OutputState }
+
+func (RecordTemplateHlsParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RecordTemplateHlsParam)(nil)).Elem()
+}
+
+func (o RecordTemplateHlsParamPtrOutput) ToRecordTemplateHlsParamPtrOutput() RecordTemplateHlsParamPtrOutput {
+	return o
+}
+
+func (o RecordTemplateHlsParamPtrOutput) ToRecordTemplateHlsParamPtrOutputWithContext(ctx context.Context) RecordTemplateHlsParamPtrOutput {
+	return o
+}
+
+func (o RecordTemplateHlsParamPtrOutput) Elem() RecordTemplateHlsParamOutput {
+	return o.ApplyT(func(v *RecordTemplateHlsParam) RecordTemplateHlsParam {
+		if v != nil {
+			return *v
+		}
+		var ret RecordTemplateHlsParam
+		return ret
+	}).(RecordTemplateHlsParamOutput)
+}
+
+func (o RecordTemplateHlsParamPtrOutput) ClassId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateHlsParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ClassId
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateHlsParamPtrOutput) Enable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateHlsParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Enable
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateHlsParamPtrOutput) Procedure() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateHlsParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Procedure
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateHlsParamPtrOutput) RecordInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateHlsParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.RecordInterval
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateHlsParamPtrOutput) StorageMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateHlsParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StorageMode
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateHlsParamPtrOutput) StorageTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateHlsParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.StorageTime
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateHlsParamPtrOutput) VodFileName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateHlsParam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.VodFileName
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateHlsParamPtrOutput) VodSubAppId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateHlsParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.VodSubAppId
+	}).(pulumi.IntPtrOutput)
+}
+
+type RecordTemplateHlsSpecialParam struct {
+	FlowContinueDuration *int `pulumi:"flowContinueDuration"`
+}
+
+// RecordTemplateHlsSpecialParamInput is an input type that accepts RecordTemplateHlsSpecialParamArgs and RecordTemplateHlsSpecialParamOutput values.
+// You can construct a concrete instance of `RecordTemplateHlsSpecialParamInput` via:
+//
+//          RecordTemplateHlsSpecialParamArgs{...}
+type RecordTemplateHlsSpecialParamInput interface {
+	pulumi.Input
+
+	ToRecordTemplateHlsSpecialParamOutput() RecordTemplateHlsSpecialParamOutput
+	ToRecordTemplateHlsSpecialParamOutputWithContext(context.Context) RecordTemplateHlsSpecialParamOutput
+}
+
+type RecordTemplateHlsSpecialParamArgs struct {
+	FlowContinueDuration pulumi.IntPtrInput `pulumi:"flowContinueDuration"`
+}
+
+func (RecordTemplateHlsSpecialParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RecordTemplateHlsSpecialParam)(nil)).Elem()
+}
+
+func (i RecordTemplateHlsSpecialParamArgs) ToRecordTemplateHlsSpecialParamOutput() RecordTemplateHlsSpecialParamOutput {
+	return i.ToRecordTemplateHlsSpecialParamOutputWithContext(context.Background())
+}
+
+func (i RecordTemplateHlsSpecialParamArgs) ToRecordTemplateHlsSpecialParamOutputWithContext(ctx context.Context) RecordTemplateHlsSpecialParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateHlsSpecialParamOutput)
+}
+
+func (i RecordTemplateHlsSpecialParamArgs) ToRecordTemplateHlsSpecialParamPtrOutput() RecordTemplateHlsSpecialParamPtrOutput {
+	return i.ToRecordTemplateHlsSpecialParamPtrOutputWithContext(context.Background())
+}
+
+func (i RecordTemplateHlsSpecialParamArgs) ToRecordTemplateHlsSpecialParamPtrOutputWithContext(ctx context.Context) RecordTemplateHlsSpecialParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateHlsSpecialParamOutput).ToRecordTemplateHlsSpecialParamPtrOutputWithContext(ctx)
+}
+
+// RecordTemplateHlsSpecialParamPtrInput is an input type that accepts RecordTemplateHlsSpecialParamArgs, RecordTemplateHlsSpecialParamPtr and RecordTemplateHlsSpecialParamPtrOutput values.
+// You can construct a concrete instance of `RecordTemplateHlsSpecialParamPtrInput` via:
+//
+//          RecordTemplateHlsSpecialParamArgs{...}
+//
+//  or:
+//
+//          nil
+type RecordTemplateHlsSpecialParamPtrInput interface {
+	pulumi.Input
+
+	ToRecordTemplateHlsSpecialParamPtrOutput() RecordTemplateHlsSpecialParamPtrOutput
+	ToRecordTemplateHlsSpecialParamPtrOutputWithContext(context.Context) RecordTemplateHlsSpecialParamPtrOutput
+}
+
+type recordTemplateHlsSpecialParamPtrType RecordTemplateHlsSpecialParamArgs
+
+func RecordTemplateHlsSpecialParamPtr(v *RecordTemplateHlsSpecialParamArgs) RecordTemplateHlsSpecialParamPtrInput {
+	return (*recordTemplateHlsSpecialParamPtrType)(v)
+}
+
+func (*recordTemplateHlsSpecialParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RecordTemplateHlsSpecialParam)(nil)).Elem()
+}
+
+func (i *recordTemplateHlsSpecialParamPtrType) ToRecordTemplateHlsSpecialParamPtrOutput() RecordTemplateHlsSpecialParamPtrOutput {
+	return i.ToRecordTemplateHlsSpecialParamPtrOutputWithContext(context.Background())
+}
+
+func (i *recordTemplateHlsSpecialParamPtrType) ToRecordTemplateHlsSpecialParamPtrOutputWithContext(ctx context.Context) RecordTemplateHlsSpecialParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateHlsSpecialParamPtrOutput)
+}
+
+type RecordTemplateHlsSpecialParamOutput struct{ *pulumi.OutputState }
+
+func (RecordTemplateHlsSpecialParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RecordTemplateHlsSpecialParam)(nil)).Elem()
+}
+
+func (o RecordTemplateHlsSpecialParamOutput) ToRecordTemplateHlsSpecialParamOutput() RecordTemplateHlsSpecialParamOutput {
+	return o
+}
+
+func (o RecordTemplateHlsSpecialParamOutput) ToRecordTemplateHlsSpecialParamOutputWithContext(ctx context.Context) RecordTemplateHlsSpecialParamOutput {
+	return o
+}
+
+func (o RecordTemplateHlsSpecialParamOutput) ToRecordTemplateHlsSpecialParamPtrOutput() RecordTemplateHlsSpecialParamPtrOutput {
+	return o.ToRecordTemplateHlsSpecialParamPtrOutputWithContext(context.Background())
+}
+
+func (o RecordTemplateHlsSpecialParamOutput) ToRecordTemplateHlsSpecialParamPtrOutputWithContext(ctx context.Context) RecordTemplateHlsSpecialParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RecordTemplateHlsSpecialParam) *RecordTemplateHlsSpecialParam {
+		return &v
+	}).(RecordTemplateHlsSpecialParamPtrOutput)
+}
+
+func (o RecordTemplateHlsSpecialParamOutput) FlowContinueDuration() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateHlsSpecialParam) *int { return v.FlowContinueDuration }).(pulumi.IntPtrOutput)
+}
+
+type RecordTemplateHlsSpecialParamPtrOutput struct{ *pulumi.OutputState }
+
+func (RecordTemplateHlsSpecialParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RecordTemplateHlsSpecialParam)(nil)).Elem()
+}
+
+func (o RecordTemplateHlsSpecialParamPtrOutput) ToRecordTemplateHlsSpecialParamPtrOutput() RecordTemplateHlsSpecialParamPtrOutput {
+	return o
+}
+
+func (o RecordTemplateHlsSpecialParamPtrOutput) ToRecordTemplateHlsSpecialParamPtrOutputWithContext(ctx context.Context) RecordTemplateHlsSpecialParamPtrOutput {
+	return o
+}
+
+func (o RecordTemplateHlsSpecialParamPtrOutput) Elem() RecordTemplateHlsSpecialParamOutput {
+	return o.ApplyT(func(v *RecordTemplateHlsSpecialParam) RecordTemplateHlsSpecialParam {
+		if v != nil {
+			return *v
+		}
+		var ret RecordTemplateHlsSpecialParam
+		return ret
+	}).(RecordTemplateHlsSpecialParamOutput)
+}
+
+func (o RecordTemplateHlsSpecialParamPtrOutput) FlowContinueDuration() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateHlsSpecialParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.FlowContinueDuration
+	}).(pulumi.IntPtrOutput)
+}
+
+type RecordTemplateMp3Param struct {
+	ClassId        *int    `pulumi:"classId"`
+	Enable         *int    `pulumi:"enable"`
+	Procedure      *string `pulumi:"procedure"`
+	RecordInterval *int    `pulumi:"recordInterval"`
+	StorageMode    *string `pulumi:"storageMode"`
+	StorageTime    *int    `pulumi:"storageTime"`
+	VodFileName    *string `pulumi:"vodFileName"`
+	VodSubAppId    *int    `pulumi:"vodSubAppId"`
+}
+
+// RecordTemplateMp3ParamInput is an input type that accepts RecordTemplateMp3ParamArgs and RecordTemplateMp3ParamOutput values.
+// You can construct a concrete instance of `RecordTemplateMp3ParamInput` via:
+//
+//          RecordTemplateMp3ParamArgs{...}
+type RecordTemplateMp3ParamInput interface {
+	pulumi.Input
+
+	ToRecordTemplateMp3ParamOutput() RecordTemplateMp3ParamOutput
+	ToRecordTemplateMp3ParamOutputWithContext(context.Context) RecordTemplateMp3ParamOutput
+}
+
+type RecordTemplateMp3ParamArgs struct {
+	ClassId        pulumi.IntPtrInput    `pulumi:"classId"`
+	Enable         pulumi.IntPtrInput    `pulumi:"enable"`
+	Procedure      pulumi.StringPtrInput `pulumi:"procedure"`
+	RecordInterval pulumi.IntPtrInput    `pulumi:"recordInterval"`
+	StorageMode    pulumi.StringPtrInput `pulumi:"storageMode"`
+	StorageTime    pulumi.IntPtrInput    `pulumi:"storageTime"`
+	VodFileName    pulumi.StringPtrInput `pulumi:"vodFileName"`
+	VodSubAppId    pulumi.IntPtrInput    `pulumi:"vodSubAppId"`
+}
+
+func (RecordTemplateMp3ParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RecordTemplateMp3Param)(nil)).Elem()
+}
+
+func (i RecordTemplateMp3ParamArgs) ToRecordTemplateMp3ParamOutput() RecordTemplateMp3ParamOutput {
+	return i.ToRecordTemplateMp3ParamOutputWithContext(context.Background())
+}
+
+func (i RecordTemplateMp3ParamArgs) ToRecordTemplateMp3ParamOutputWithContext(ctx context.Context) RecordTemplateMp3ParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateMp3ParamOutput)
+}
+
+func (i RecordTemplateMp3ParamArgs) ToRecordTemplateMp3ParamPtrOutput() RecordTemplateMp3ParamPtrOutput {
+	return i.ToRecordTemplateMp3ParamPtrOutputWithContext(context.Background())
+}
+
+func (i RecordTemplateMp3ParamArgs) ToRecordTemplateMp3ParamPtrOutputWithContext(ctx context.Context) RecordTemplateMp3ParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateMp3ParamOutput).ToRecordTemplateMp3ParamPtrOutputWithContext(ctx)
+}
+
+// RecordTemplateMp3ParamPtrInput is an input type that accepts RecordTemplateMp3ParamArgs, RecordTemplateMp3ParamPtr and RecordTemplateMp3ParamPtrOutput values.
+// You can construct a concrete instance of `RecordTemplateMp3ParamPtrInput` via:
+//
+//          RecordTemplateMp3ParamArgs{...}
+//
+//  or:
+//
+//          nil
+type RecordTemplateMp3ParamPtrInput interface {
+	pulumi.Input
+
+	ToRecordTemplateMp3ParamPtrOutput() RecordTemplateMp3ParamPtrOutput
+	ToRecordTemplateMp3ParamPtrOutputWithContext(context.Context) RecordTemplateMp3ParamPtrOutput
+}
+
+type recordTemplateMp3ParamPtrType RecordTemplateMp3ParamArgs
+
+func RecordTemplateMp3ParamPtr(v *RecordTemplateMp3ParamArgs) RecordTemplateMp3ParamPtrInput {
+	return (*recordTemplateMp3ParamPtrType)(v)
+}
+
+func (*recordTemplateMp3ParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RecordTemplateMp3Param)(nil)).Elem()
+}
+
+func (i *recordTemplateMp3ParamPtrType) ToRecordTemplateMp3ParamPtrOutput() RecordTemplateMp3ParamPtrOutput {
+	return i.ToRecordTemplateMp3ParamPtrOutputWithContext(context.Background())
+}
+
+func (i *recordTemplateMp3ParamPtrType) ToRecordTemplateMp3ParamPtrOutputWithContext(ctx context.Context) RecordTemplateMp3ParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateMp3ParamPtrOutput)
+}
+
+type RecordTemplateMp3ParamOutput struct{ *pulumi.OutputState }
+
+func (RecordTemplateMp3ParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RecordTemplateMp3Param)(nil)).Elem()
+}
+
+func (o RecordTemplateMp3ParamOutput) ToRecordTemplateMp3ParamOutput() RecordTemplateMp3ParamOutput {
+	return o
+}
+
+func (o RecordTemplateMp3ParamOutput) ToRecordTemplateMp3ParamOutputWithContext(ctx context.Context) RecordTemplateMp3ParamOutput {
+	return o
+}
+
+func (o RecordTemplateMp3ParamOutput) ToRecordTemplateMp3ParamPtrOutput() RecordTemplateMp3ParamPtrOutput {
+	return o.ToRecordTemplateMp3ParamPtrOutputWithContext(context.Background())
+}
+
+func (o RecordTemplateMp3ParamOutput) ToRecordTemplateMp3ParamPtrOutputWithContext(ctx context.Context) RecordTemplateMp3ParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RecordTemplateMp3Param) *RecordTemplateMp3Param {
+		return &v
+	}).(RecordTemplateMp3ParamPtrOutput)
+}
+
+func (o RecordTemplateMp3ParamOutput) ClassId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateMp3Param) *int { return v.ClassId }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateMp3ParamOutput) Enable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateMp3Param) *int { return v.Enable }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateMp3ParamOutput) Procedure() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RecordTemplateMp3Param) *string { return v.Procedure }).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateMp3ParamOutput) RecordInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateMp3Param) *int { return v.RecordInterval }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateMp3ParamOutput) StorageMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RecordTemplateMp3Param) *string { return v.StorageMode }).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateMp3ParamOutput) StorageTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateMp3Param) *int { return v.StorageTime }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateMp3ParamOutput) VodFileName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RecordTemplateMp3Param) *string { return v.VodFileName }).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateMp3ParamOutput) VodSubAppId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateMp3Param) *int { return v.VodSubAppId }).(pulumi.IntPtrOutput)
+}
+
+type RecordTemplateMp3ParamPtrOutput struct{ *pulumi.OutputState }
+
+func (RecordTemplateMp3ParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RecordTemplateMp3Param)(nil)).Elem()
+}
+
+func (o RecordTemplateMp3ParamPtrOutput) ToRecordTemplateMp3ParamPtrOutput() RecordTemplateMp3ParamPtrOutput {
+	return o
+}
+
+func (o RecordTemplateMp3ParamPtrOutput) ToRecordTemplateMp3ParamPtrOutputWithContext(ctx context.Context) RecordTemplateMp3ParamPtrOutput {
+	return o
+}
+
+func (o RecordTemplateMp3ParamPtrOutput) Elem() RecordTemplateMp3ParamOutput {
+	return o.ApplyT(func(v *RecordTemplateMp3Param) RecordTemplateMp3Param {
+		if v != nil {
+			return *v
+		}
+		var ret RecordTemplateMp3Param
+		return ret
+	}).(RecordTemplateMp3ParamOutput)
+}
+
+func (o RecordTemplateMp3ParamPtrOutput) ClassId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateMp3Param) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ClassId
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateMp3ParamPtrOutput) Enable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateMp3Param) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Enable
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateMp3ParamPtrOutput) Procedure() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateMp3Param) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Procedure
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateMp3ParamPtrOutput) RecordInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateMp3Param) *int {
+		if v == nil {
+			return nil
+		}
+		return v.RecordInterval
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateMp3ParamPtrOutput) StorageMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateMp3Param) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StorageMode
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateMp3ParamPtrOutput) StorageTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateMp3Param) *int {
+		if v == nil {
+			return nil
+		}
+		return v.StorageTime
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateMp3ParamPtrOutput) VodFileName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateMp3Param) *string {
+		if v == nil {
+			return nil
+		}
+		return v.VodFileName
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateMp3ParamPtrOutput) VodSubAppId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateMp3Param) *int {
+		if v == nil {
+			return nil
+		}
+		return v.VodSubAppId
+	}).(pulumi.IntPtrOutput)
+}
+
+type RecordTemplateMp4Param struct {
+	ClassId        *int    `pulumi:"classId"`
+	Enable         *int    `pulumi:"enable"`
+	Procedure      *string `pulumi:"procedure"`
+	RecordInterval *int    `pulumi:"recordInterval"`
+	StorageMode    *string `pulumi:"storageMode"`
+	StorageTime    *int    `pulumi:"storageTime"`
+	VodFileName    *string `pulumi:"vodFileName"`
+	VodSubAppId    *int    `pulumi:"vodSubAppId"`
+}
+
+// RecordTemplateMp4ParamInput is an input type that accepts RecordTemplateMp4ParamArgs and RecordTemplateMp4ParamOutput values.
+// You can construct a concrete instance of `RecordTemplateMp4ParamInput` via:
+//
+//          RecordTemplateMp4ParamArgs{...}
+type RecordTemplateMp4ParamInput interface {
+	pulumi.Input
+
+	ToRecordTemplateMp4ParamOutput() RecordTemplateMp4ParamOutput
+	ToRecordTemplateMp4ParamOutputWithContext(context.Context) RecordTemplateMp4ParamOutput
+}
+
+type RecordTemplateMp4ParamArgs struct {
+	ClassId        pulumi.IntPtrInput    `pulumi:"classId"`
+	Enable         pulumi.IntPtrInput    `pulumi:"enable"`
+	Procedure      pulumi.StringPtrInput `pulumi:"procedure"`
+	RecordInterval pulumi.IntPtrInput    `pulumi:"recordInterval"`
+	StorageMode    pulumi.StringPtrInput `pulumi:"storageMode"`
+	StorageTime    pulumi.IntPtrInput    `pulumi:"storageTime"`
+	VodFileName    pulumi.StringPtrInput `pulumi:"vodFileName"`
+	VodSubAppId    pulumi.IntPtrInput    `pulumi:"vodSubAppId"`
+}
+
+func (RecordTemplateMp4ParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RecordTemplateMp4Param)(nil)).Elem()
+}
+
+func (i RecordTemplateMp4ParamArgs) ToRecordTemplateMp4ParamOutput() RecordTemplateMp4ParamOutput {
+	return i.ToRecordTemplateMp4ParamOutputWithContext(context.Background())
+}
+
+func (i RecordTemplateMp4ParamArgs) ToRecordTemplateMp4ParamOutputWithContext(ctx context.Context) RecordTemplateMp4ParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateMp4ParamOutput)
+}
+
+func (i RecordTemplateMp4ParamArgs) ToRecordTemplateMp4ParamPtrOutput() RecordTemplateMp4ParamPtrOutput {
+	return i.ToRecordTemplateMp4ParamPtrOutputWithContext(context.Background())
+}
+
+func (i RecordTemplateMp4ParamArgs) ToRecordTemplateMp4ParamPtrOutputWithContext(ctx context.Context) RecordTemplateMp4ParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateMp4ParamOutput).ToRecordTemplateMp4ParamPtrOutputWithContext(ctx)
+}
+
+// RecordTemplateMp4ParamPtrInput is an input type that accepts RecordTemplateMp4ParamArgs, RecordTemplateMp4ParamPtr and RecordTemplateMp4ParamPtrOutput values.
+// You can construct a concrete instance of `RecordTemplateMp4ParamPtrInput` via:
+//
+//          RecordTemplateMp4ParamArgs{...}
+//
+//  or:
+//
+//          nil
+type RecordTemplateMp4ParamPtrInput interface {
+	pulumi.Input
+
+	ToRecordTemplateMp4ParamPtrOutput() RecordTemplateMp4ParamPtrOutput
+	ToRecordTemplateMp4ParamPtrOutputWithContext(context.Context) RecordTemplateMp4ParamPtrOutput
+}
+
+type recordTemplateMp4ParamPtrType RecordTemplateMp4ParamArgs
+
+func RecordTemplateMp4ParamPtr(v *RecordTemplateMp4ParamArgs) RecordTemplateMp4ParamPtrInput {
+	return (*recordTemplateMp4ParamPtrType)(v)
+}
+
+func (*recordTemplateMp4ParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RecordTemplateMp4Param)(nil)).Elem()
+}
+
+func (i *recordTemplateMp4ParamPtrType) ToRecordTemplateMp4ParamPtrOutput() RecordTemplateMp4ParamPtrOutput {
+	return i.ToRecordTemplateMp4ParamPtrOutputWithContext(context.Background())
+}
+
+func (i *recordTemplateMp4ParamPtrType) ToRecordTemplateMp4ParamPtrOutputWithContext(ctx context.Context) RecordTemplateMp4ParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RecordTemplateMp4ParamPtrOutput)
+}
+
+type RecordTemplateMp4ParamOutput struct{ *pulumi.OutputState }
+
+func (RecordTemplateMp4ParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RecordTemplateMp4Param)(nil)).Elem()
+}
+
+func (o RecordTemplateMp4ParamOutput) ToRecordTemplateMp4ParamOutput() RecordTemplateMp4ParamOutput {
+	return o
+}
+
+func (o RecordTemplateMp4ParamOutput) ToRecordTemplateMp4ParamOutputWithContext(ctx context.Context) RecordTemplateMp4ParamOutput {
+	return o
+}
+
+func (o RecordTemplateMp4ParamOutput) ToRecordTemplateMp4ParamPtrOutput() RecordTemplateMp4ParamPtrOutput {
+	return o.ToRecordTemplateMp4ParamPtrOutputWithContext(context.Background())
+}
+
+func (o RecordTemplateMp4ParamOutput) ToRecordTemplateMp4ParamPtrOutputWithContext(ctx context.Context) RecordTemplateMp4ParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RecordTemplateMp4Param) *RecordTemplateMp4Param {
+		return &v
+	}).(RecordTemplateMp4ParamPtrOutput)
+}
+
+func (o RecordTemplateMp4ParamOutput) ClassId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateMp4Param) *int { return v.ClassId }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateMp4ParamOutput) Enable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateMp4Param) *int { return v.Enable }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateMp4ParamOutput) Procedure() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RecordTemplateMp4Param) *string { return v.Procedure }).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateMp4ParamOutput) RecordInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateMp4Param) *int { return v.RecordInterval }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateMp4ParamOutput) StorageMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RecordTemplateMp4Param) *string { return v.StorageMode }).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateMp4ParamOutput) StorageTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateMp4Param) *int { return v.StorageTime }).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateMp4ParamOutput) VodFileName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RecordTemplateMp4Param) *string { return v.VodFileName }).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateMp4ParamOutput) VodSubAppId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RecordTemplateMp4Param) *int { return v.VodSubAppId }).(pulumi.IntPtrOutput)
+}
+
+type RecordTemplateMp4ParamPtrOutput struct{ *pulumi.OutputState }
+
+func (RecordTemplateMp4ParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RecordTemplateMp4Param)(nil)).Elem()
+}
+
+func (o RecordTemplateMp4ParamPtrOutput) ToRecordTemplateMp4ParamPtrOutput() RecordTemplateMp4ParamPtrOutput {
+	return o
+}
+
+func (o RecordTemplateMp4ParamPtrOutput) ToRecordTemplateMp4ParamPtrOutputWithContext(ctx context.Context) RecordTemplateMp4ParamPtrOutput {
+	return o
+}
+
+func (o RecordTemplateMp4ParamPtrOutput) Elem() RecordTemplateMp4ParamOutput {
+	return o.ApplyT(func(v *RecordTemplateMp4Param) RecordTemplateMp4Param {
+		if v != nil {
+			return *v
+		}
+		var ret RecordTemplateMp4Param
+		return ret
+	}).(RecordTemplateMp4ParamOutput)
+}
+
+func (o RecordTemplateMp4ParamPtrOutput) ClassId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateMp4Param) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ClassId
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateMp4ParamPtrOutput) Enable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateMp4Param) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Enable
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateMp4ParamPtrOutput) Procedure() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateMp4Param) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Procedure
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateMp4ParamPtrOutput) RecordInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateMp4Param) *int {
+		if v == nil {
+			return nil
+		}
+		return v.RecordInterval
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateMp4ParamPtrOutput) StorageMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateMp4Param) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StorageMode
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateMp4ParamPtrOutput) StorageTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateMp4Param) *int {
+		if v == nil {
+			return nil
+		}
+		return v.StorageTime
+	}).(pulumi.IntPtrOutput)
+}
+
+func (o RecordTemplateMp4ParamPtrOutput) VodFileName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateMp4Param) *string {
+		if v == nil {
+			return nil
+		}
+		return v.VodFileName
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o RecordTemplateMp4ParamPtrOutput) VodSubAppId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RecordTemplateMp4Param) *int {
+		if v == nil {
+			return nil
+		}
+		return v.VodSubAppId
+	}).(pulumi.IntPtrOutput)
+}
+
+type StreamMonitorInputList struct {
+	// Description content.limit 256 bytes.
+	Description *string `pulumi:"description"`
+	// Wait monitor input push path.limit 32 bytes.
+	InputApp *string `pulumi:"inputApp"`
+	// Wait monitor input push domain.limit 128 bytes.
+	InputDomain *string `pulumi:"inputDomain"`
+	// Wait monitor input stream name.limit 256 bytes.
+	InputStreamName string `pulumi:"inputStreamName"`
+	// Wait monitor input stream push url.
+	InputUrl *string `pulumi:"inputUrl"`
+}
+
+// StreamMonitorInputListInput is an input type that accepts StreamMonitorInputListArgs and StreamMonitorInputListOutput values.
+// You can construct a concrete instance of `StreamMonitorInputListInput` via:
+//
+//          StreamMonitorInputListArgs{...}
+type StreamMonitorInputListInput interface {
+	pulumi.Input
+
+	ToStreamMonitorInputListOutput() StreamMonitorInputListOutput
+	ToStreamMonitorInputListOutputWithContext(context.Context) StreamMonitorInputListOutput
+}
+
+type StreamMonitorInputListArgs struct {
+	// Description content.limit 256 bytes.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Wait monitor input push path.limit 32 bytes.
+	InputApp pulumi.StringPtrInput `pulumi:"inputApp"`
+	// Wait monitor input push domain.limit 128 bytes.
+	InputDomain pulumi.StringPtrInput `pulumi:"inputDomain"`
+	// Wait monitor input stream name.limit 256 bytes.
+	InputStreamName pulumi.StringInput `pulumi:"inputStreamName"`
+	// Wait monitor input stream push url.
+	InputUrl pulumi.StringPtrInput `pulumi:"inputUrl"`
+}
+
+func (StreamMonitorInputListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*StreamMonitorInputList)(nil)).Elem()
+}
+
+func (i StreamMonitorInputListArgs) ToStreamMonitorInputListOutput() StreamMonitorInputListOutput {
+	return i.ToStreamMonitorInputListOutputWithContext(context.Background())
+}
+
+func (i StreamMonitorInputListArgs) ToStreamMonitorInputListOutputWithContext(ctx context.Context) StreamMonitorInputListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(StreamMonitorInputListOutput)
+}
+
+// StreamMonitorInputListArrayInput is an input type that accepts StreamMonitorInputListArray and StreamMonitorInputListArrayOutput values.
+// You can construct a concrete instance of `StreamMonitorInputListArrayInput` via:
+//
+//          StreamMonitorInputListArray{ StreamMonitorInputListArgs{...} }
+type StreamMonitorInputListArrayInput interface {
+	pulumi.Input
+
+	ToStreamMonitorInputListArrayOutput() StreamMonitorInputListArrayOutput
+	ToStreamMonitorInputListArrayOutputWithContext(context.Context) StreamMonitorInputListArrayOutput
+}
+
+type StreamMonitorInputListArray []StreamMonitorInputListInput
+
+func (StreamMonitorInputListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]StreamMonitorInputList)(nil)).Elem()
+}
+
+func (i StreamMonitorInputListArray) ToStreamMonitorInputListArrayOutput() StreamMonitorInputListArrayOutput {
+	return i.ToStreamMonitorInputListArrayOutputWithContext(context.Background())
+}
+
+func (i StreamMonitorInputListArray) ToStreamMonitorInputListArrayOutputWithContext(ctx context.Context) StreamMonitorInputListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(StreamMonitorInputListArrayOutput)
+}
+
+type StreamMonitorInputListOutput struct{ *pulumi.OutputState }
+
+func (StreamMonitorInputListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*StreamMonitorInputList)(nil)).Elem()
+}
+
+func (o StreamMonitorInputListOutput) ToStreamMonitorInputListOutput() StreamMonitorInputListOutput {
+	return o
+}
+
+func (o StreamMonitorInputListOutput) ToStreamMonitorInputListOutputWithContext(ctx context.Context) StreamMonitorInputListOutput {
+	return o
+}
+
+// Description content.limit 256 bytes.
+func (o StreamMonitorInputListOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v StreamMonitorInputList) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Wait monitor input push path.limit 32 bytes.
+func (o StreamMonitorInputListOutput) InputApp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v StreamMonitorInputList) *string { return v.InputApp }).(pulumi.StringPtrOutput)
+}
+
+// Wait monitor input push domain.limit 128 bytes.
+func (o StreamMonitorInputListOutput) InputDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v StreamMonitorInputList) *string { return v.InputDomain }).(pulumi.StringPtrOutput)
+}
+
+// Wait monitor input stream name.limit 256 bytes.
+func (o StreamMonitorInputListOutput) InputStreamName() pulumi.StringOutput {
+	return o.ApplyT(func(v StreamMonitorInputList) string { return v.InputStreamName }).(pulumi.StringOutput)
+}
+
+// Wait monitor input stream push url.
+func (o StreamMonitorInputListOutput) InputUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v StreamMonitorInputList) *string { return v.InputUrl }).(pulumi.StringPtrOutput)
+}
+
+type StreamMonitorInputListArrayOutput struct{ *pulumi.OutputState }
+
+func (StreamMonitorInputListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]StreamMonitorInputList)(nil)).Elem()
+}
+
+func (o StreamMonitorInputListArrayOutput) ToStreamMonitorInputListArrayOutput() StreamMonitorInputListArrayOutput {
+	return o
+}
+
+func (o StreamMonitorInputListArrayOutput) ToStreamMonitorInputListArrayOutputWithContext(ctx context.Context) StreamMonitorInputListArrayOutput {
+	return o
+}
+
+func (o StreamMonitorInputListArrayOutput) Index(i pulumi.IntInput) StreamMonitorInputListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) StreamMonitorInputList {
+		return vs[0].([]StreamMonitorInputList)[vs[1].(int)]
+	}).(StreamMonitorInputListOutput)
+}
+
+type StreamMonitorNotifyPolicy struct {
+	// Callback url.limit [0,512].only http or https.
+	CallbackUrl *string `pulumi:"callbackUrl"`
+	// Notify policy type.0: not notify.1: use global policy.
+	NotifyPolicyType *int `pulumi:"notifyPolicyType"`
+}
+
+// StreamMonitorNotifyPolicyInput is an input type that accepts StreamMonitorNotifyPolicyArgs and StreamMonitorNotifyPolicyOutput values.
+// You can construct a concrete instance of `StreamMonitorNotifyPolicyInput` via:
+//
+//          StreamMonitorNotifyPolicyArgs{...}
+type StreamMonitorNotifyPolicyInput interface {
+	pulumi.Input
+
+	ToStreamMonitorNotifyPolicyOutput() StreamMonitorNotifyPolicyOutput
+	ToStreamMonitorNotifyPolicyOutputWithContext(context.Context) StreamMonitorNotifyPolicyOutput
+}
+
+type StreamMonitorNotifyPolicyArgs struct {
+	// Callback url.limit [0,512].only http or https.
+	CallbackUrl pulumi.StringPtrInput `pulumi:"callbackUrl"`
+	// Notify policy type.0: not notify.1: use global policy.
+	NotifyPolicyType pulumi.IntPtrInput `pulumi:"notifyPolicyType"`
+}
+
+func (StreamMonitorNotifyPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*StreamMonitorNotifyPolicy)(nil)).Elem()
+}
+
+func (i StreamMonitorNotifyPolicyArgs) ToStreamMonitorNotifyPolicyOutput() StreamMonitorNotifyPolicyOutput {
+	return i.ToStreamMonitorNotifyPolicyOutputWithContext(context.Background())
+}
+
+func (i StreamMonitorNotifyPolicyArgs) ToStreamMonitorNotifyPolicyOutputWithContext(ctx context.Context) StreamMonitorNotifyPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(StreamMonitorNotifyPolicyOutput)
+}
+
+func (i StreamMonitorNotifyPolicyArgs) ToStreamMonitorNotifyPolicyPtrOutput() StreamMonitorNotifyPolicyPtrOutput {
+	return i.ToStreamMonitorNotifyPolicyPtrOutputWithContext(context.Background())
+}
+
+func (i StreamMonitorNotifyPolicyArgs) ToStreamMonitorNotifyPolicyPtrOutputWithContext(ctx context.Context) StreamMonitorNotifyPolicyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(StreamMonitorNotifyPolicyOutput).ToStreamMonitorNotifyPolicyPtrOutputWithContext(ctx)
+}
+
+// StreamMonitorNotifyPolicyPtrInput is an input type that accepts StreamMonitorNotifyPolicyArgs, StreamMonitorNotifyPolicyPtr and StreamMonitorNotifyPolicyPtrOutput values.
+// You can construct a concrete instance of `StreamMonitorNotifyPolicyPtrInput` via:
+//
+//          StreamMonitorNotifyPolicyArgs{...}
+//
+//  or:
+//
+//          nil
+type StreamMonitorNotifyPolicyPtrInput interface {
+	pulumi.Input
+
+	ToStreamMonitorNotifyPolicyPtrOutput() StreamMonitorNotifyPolicyPtrOutput
+	ToStreamMonitorNotifyPolicyPtrOutputWithContext(context.Context) StreamMonitorNotifyPolicyPtrOutput
+}
+
+type streamMonitorNotifyPolicyPtrType StreamMonitorNotifyPolicyArgs
+
+func StreamMonitorNotifyPolicyPtr(v *StreamMonitorNotifyPolicyArgs) StreamMonitorNotifyPolicyPtrInput {
+	return (*streamMonitorNotifyPolicyPtrType)(v)
+}
+
+func (*streamMonitorNotifyPolicyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**StreamMonitorNotifyPolicy)(nil)).Elem()
+}
+
+func (i *streamMonitorNotifyPolicyPtrType) ToStreamMonitorNotifyPolicyPtrOutput() StreamMonitorNotifyPolicyPtrOutput {
+	return i.ToStreamMonitorNotifyPolicyPtrOutputWithContext(context.Background())
+}
+
+func (i *streamMonitorNotifyPolicyPtrType) ToStreamMonitorNotifyPolicyPtrOutputWithContext(ctx context.Context) StreamMonitorNotifyPolicyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(StreamMonitorNotifyPolicyPtrOutput)
+}
+
+type StreamMonitorNotifyPolicyOutput struct{ *pulumi.OutputState }
+
+func (StreamMonitorNotifyPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*StreamMonitorNotifyPolicy)(nil)).Elem()
+}
+
+func (o StreamMonitorNotifyPolicyOutput) ToStreamMonitorNotifyPolicyOutput() StreamMonitorNotifyPolicyOutput {
+	return o
+}
+
+func (o StreamMonitorNotifyPolicyOutput) ToStreamMonitorNotifyPolicyOutputWithContext(ctx context.Context) StreamMonitorNotifyPolicyOutput {
+	return o
+}
+
+func (o StreamMonitorNotifyPolicyOutput) ToStreamMonitorNotifyPolicyPtrOutput() StreamMonitorNotifyPolicyPtrOutput {
+	return o.ToStreamMonitorNotifyPolicyPtrOutputWithContext(context.Background())
+}
+
+func (o StreamMonitorNotifyPolicyOutput) ToStreamMonitorNotifyPolicyPtrOutputWithContext(ctx context.Context) StreamMonitorNotifyPolicyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v StreamMonitorNotifyPolicy) *StreamMonitorNotifyPolicy {
+		return &v
+	}).(StreamMonitorNotifyPolicyPtrOutput)
+}
+
+// Callback url.limit [0,512].only http or https.
+func (o StreamMonitorNotifyPolicyOutput) CallbackUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v StreamMonitorNotifyPolicy) *string { return v.CallbackUrl }).(pulumi.StringPtrOutput)
+}
+
+// Notify policy type.0: not notify.1: use global policy.
+func (o StreamMonitorNotifyPolicyOutput) NotifyPolicyType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v StreamMonitorNotifyPolicy) *int { return v.NotifyPolicyType }).(pulumi.IntPtrOutput)
+}
+
+type StreamMonitorNotifyPolicyPtrOutput struct{ *pulumi.OutputState }
+
+func (StreamMonitorNotifyPolicyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**StreamMonitorNotifyPolicy)(nil)).Elem()
+}
+
+func (o StreamMonitorNotifyPolicyPtrOutput) ToStreamMonitorNotifyPolicyPtrOutput() StreamMonitorNotifyPolicyPtrOutput {
+	return o
+}
+
+func (o StreamMonitorNotifyPolicyPtrOutput) ToStreamMonitorNotifyPolicyPtrOutputWithContext(ctx context.Context) StreamMonitorNotifyPolicyPtrOutput {
+	return o
+}
+
+func (o StreamMonitorNotifyPolicyPtrOutput) Elem() StreamMonitorNotifyPolicyOutput {
+	return o.ApplyT(func(v *StreamMonitorNotifyPolicy) StreamMonitorNotifyPolicy {
+		if v != nil {
+			return *v
+		}
+		var ret StreamMonitorNotifyPolicy
+		return ret
+	}).(StreamMonitorNotifyPolicyOutput)
+}
+
+// Callback url.limit [0,512].only http or https.
+func (o StreamMonitorNotifyPolicyPtrOutput) CallbackUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *StreamMonitorNotifyPolicy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CallbackUrl
+	}).(pulumi.StringPtrOutput)
+}
+
+// Notify policy type.0: not notify.1: use global policy.
+func (o StreamMonitorNotifyPolicyPtrOutput) NotifyPolicyType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *StreamMonitorNotifyPolicy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.NotifyPolicyType
+	}).(pulumi.IntPtrOutput)
+}
+
+type StreamMonitorOutputInfo struct {
+	// Monitor task play path.limit 32 bytes.
+	OutputApp *string `pulumi:"outputApp"`
+	// Monitor task output play domain.limit 128 bytes.
+	OutputDomain *string `pulumi:"outputDomain"`
+	// Monitor task output height, limit[1, 1080].
+	OutputStreamHeight int `pulumi:"outputStreamHeight"`
+	// Monitor task output stream name.limit 256 bytes.
+	OutputStreamName *string `pulumi:"outputStreamName"`
+	// Output stream width, limit[1, 1920].
+	OutputStreamWidth int `pulumi:"outputStreamWidth"`
+}
+
+// StreamMonitorOutputInfoInput is an input type that accepts StreamMonitorOutputInfoArgs and StreamMonitorOutputInfoOutput values.
+// You can construct a concrete instance of `StreamMonitorOutputInfoInput` via:
+//
+//          StreamMonitorOutputInfoArgs{...}
+type StreamMonitorOutputInfoInput interface {
+	pulumi.Input
+
+	ToStreamMonitorOutputInfoOutput() StreamMonitorOutputInfoOutput
+	ToStreamMonitorOutputInfoOutputWithContext(context.Context) StreamMonitorOutputInfoOutput
+}
+
+type StreamMonitorOutputInfoArgs struct {
+	// Monitor task play path.limit 32 bytes.
+	OutputApp pulumi.StringPtrInput `pulumi:"outputApp"`
+	// Monitor task output play domain.limit 128 bytes.
+	OutputDomain pulumi.StringPtrInput `pulumi:"outputDomain"`
+	// Monitor task output height, limit[1, 1080].
+	OutputStreamHeight pulumi.IntInput `pulumi:"outputStreamHeight"`
+	// Monitor task output stream name.limit 256 bytes.
+	OutputStreamName pulumi.StringPtrInput `pulumi:"outputStreamName"`
+	// Output stream width, limit[1, 1920].
+	OutputStreamWidth pulumi.IntInput `pulumi:"outputStreamWidth"`
+}
+
+func (StreamMonitorOutputInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*StreamMonitorOutputInfo)(nil)).Elem()
+}
+
+func (i StreamMonitorOutputInfoArgs) ToStreamMonitorOutputInfoOutput() StreamMonitorOutputInfoOutput {
+	return i.ToStreamMonitorOutputInfoOutputWithContext(context.Background())
+}
+
+func (i StreamMonitorOutputInfoArgs) ToStreamMonitorOutputInfoOutputWithContext(ctx context.Context) StreamMonitorOutputInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(StreamMonitorOutputInfoOutput)
+}
+
+func (i StreamMonitorOutputInfoArgs) ToStreamMonitorOutputInfoPtrOutput() StreamMonitorOutputInfoPtrOutput {
+	return i.ToStreamMonitorOutputInfoPtrOutputWithContext(context.Background())
+}
+
+func (i StreamMonitorOutputInfoArgs) ToStreamMonitorOutputInfoPtrOutputWithContext(ctx context.Context) StreamMonitorOutputInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(StreamMonitorOutputInfoOutput).ToStreamMonitorOutputInfoPtrOutputWithContext(ctx)
+}
+
+// StreamMonitorOutputInfoPtrInput is an input type that accepts StreamMonitorOutputInfoArgs, StreamMonitorOutputInfoPtr and StreamMonitorOutputInfoPtrOutput values.
+// You can construct a concrete instance of `StreamMonitorOutputInfoPtrInput` via:
+//
+//          StreamMonitorOutputInfoArgs{...}
+//
+//  or:
+//
+//          nil
+type StreamMonitorOutputInfoPtrInput interface {
+	pulumi.Input
+
+	ToStreamMonitorOutputInfoPtrOutput() StreamMonitorOutputInfoPtrOutput
+	ToStreamMonitorOutputInfoPtrOutputWithContext(context.Context) StreamMonitorOutputInfoPtrOutput
+}
+
+type streamMonitorOutputInfoPtrType StreamMonitorOutputInfoArgs
+
+func StreamMonitorOutputInfoPtr(v *StreamMonitorOutputInfoArgs) StreamMonitorOutputInfoPtrInput {
+	return (*streamMonitorOutputInfoPtrType)(v)
+}
+
+func (*streamMonitorOutputInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**StreamMonitorOutputInfo)(nil)).Elem()
+}
+
+func (i *streamMonitorOutputInfoPtrType) ToStreamMonitorOutputInfoPtrOutput() StreamMonitorOutputInfoPtrOutput {
+	return i.ToStreamMonitorOutputInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *streamMonitorOutputInfoPtrType) ToStreamMonitorOutputInfoPtrOutputWithContext(ctx context.Context) StreamMonitorOutputInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(StreamMonitorOutputInfoPtrOutput)
+}
+
+type StreamMonitorOutputInfoOutput struct{ *pulumi.OutputState }
+
+func (StreamMonitorOutputInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*StreamMonitorOutputInfo)(nil)).Elem()
+}
+
+func (o StreamMonitorOutputInfoOutput) ToStreamMonitorOutputInfoOutput() StreamMonitorOutputInfoOutput {
+	return o
+}
+
+func (o StreamMonitorOutputInfoOutput) ToStreamMonitorOutputInfoOutputWithContext(ctx context.Context) StreamMonitorOutputInfoOutput {
+	return o
+}
+
+func (o StreamMonitorOutputInfoOutput) ToStreamMonitorOutputInfoPtrOutput() StreamMonitorOutputInfoPtrOutput {
+	return o.ToStreamMonitorOutputInfoPtrOutputWithContext(context.Background())
+}
+
+func (o StreamMonitorOutputInfoOutput) ToStreamMonitorOutputInfoPtrOutputWithContext(ctx context.Context) StreamMonitorOutputInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v StreamMonitorOutputInfo) *StreamMonitorOutputInfo {
+		return &v
+	}).(StreamMonitorOutputInfoPtrOutput)
+}
+
+// Monitor task play path.limit 32 bytes.
+func (o StreamMonitorOutputInfoOutput) OutputApp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v StreamMonitorOutputInfo) *string { return v.OutputApp }).(pulumi.StringPtrOutput)
+}
+
+// Monitor task output play domain.limit 128 bytes.
+func (o StreamMonitorOutputInfoOutput) OutputDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v StreamMonitorOutputInfo) *string { return v.OutputDomain }).(pulumi.StringPtrOutput)
+}
+
+// Monitor task output height, limit[1, 1080].
+func (o StreamMonitorOutputInfoOutput) OutputStreamHeight() pulumi.IntOutput {
+	return o.ApplyT(func(v StreamMonitorOutputInfo) int { return v.OutputStreamHeight }).(pulumi.IntOutput)
+}
+
+// Monitor task output stream name.limit 256 bytes.
+func (o StreamMonitorOutputInfoOutput) OutputStreamName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v StreamMonitorOutputInfo) *string { return v.OutputStreamName }).(pulumi.StringPtrOutput)
+}
+
+// Output stream width, limit[1, 1920].
+func (o StreamMonitorOutputInfoOutput) OutputStreamWidth() pulumi.IntOutput {
+	return o.ApplyT(func(v StreamMonitorOutputInfo) int { return v.OutputStreamWidth }).(pulumi.IntOutput)
+}
+
+type StreamMonitorOutputInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (StreamMonitorOutputInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**StreamMonitorOutputInfo)(nil)).Elem()
+}
+
+func (o StreamMonitorOutputInfoPtrOutput) ToStreamMonitorOutputInfoPtrOutput() StreamMonitorOutputInfoPtrOutput {
+	return o
+}
+
+func (o StreamMonitorOutputInfoPtrOutput) ToStreamMonitorOutputInfoPtrOutputWithContext(ctx context.Context) StreamMonitorOutputInfoPtrOutput {
+	return o
+}
+
+func (o StreamMonitorOutputInfoPtrOutput) Elem() StreamMonitorOutputInfoOutput {
+	return o.ApplyT(func(v *StreamMonitorOutputInfo) StreamMonitorOutputInfo {
+		if v != nil {
+			return *v
+		}
+		var ret StreamMonitorOutputInfo
+		return ret
+	}).(StreamMonitorOutputInfoOutput)
+}
+
+// Monitor task play path.limit 32 bytes.
+func (o StreamMonitorOutputInfoPtrOutput) OutputApp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *StreamMonitorOutputInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.OutputApp
+	}).(pulumi.StringPtrOutput)
+}
+
+// Monitor task output play domain.limit 128 bytes.
+func (o StreamMonitorOutputInfoPtrOutput) OutputDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *StreamMonitorOutputInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.OutputDomain
+	}).(pulumi.StringPtrOutput)
+}
+
+// Monitor task output height, limit[1, 1080].
+func (o StreamMonitorOutputInfoPtrOutput) OutputStreamHeight() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *StreamMonitorOutputInfo) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.OutputStreamHeight
+	}).(pulumi.IntPtrOutput)
+}
+
+// Monitor task output stream name.limit 256 bytes.
+func (o StreamMonitorOutputInfoPtrOutput) OutputStreamName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *StreamMonitorOutputInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.OutputStreamName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Output stream width, limit[1, 1920].
+func (o StreamMonitorOutputInfoPtrOutput) OutputStreamWidth() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *StreamMonitorOutputInfo) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.OutputStreamWidth
+	}).(pulumi.IntPtrOutput)
+}
+
+type GetBackupStreamStreamInfoList struct {
+	// Backup stream info.
+	BackupLists []GetBackupStreamStreamInfoListBackupList `pulumi:"backupLists"`
+	// Group name.
+	HostGroupName string `pulumi:"hostGroupName"`
+	// Optimal switch, 1-enable, 0-disable.
+	OptimalEnable int `pulumi:"optimalEnable"`
+	// Stream id.
+	StreamName string `pulumi:"streamName"`
+}
+
+// GetBackupStreamStreamInfoListInput is an input type that accepts GetBackupStreamStreamInfoListArgs and GetBackupStreamStreamInfoListOutput values.
+// You can construct a concrete instance of `GetBackupStreamStreamInfoListInput` via:
+//
+//          GetBackupStreamStreamInfoListArgs{...}
+type GetBackupStreamStreamInfoListInput interface {
+	pulumi.Input
+
+	ToGetBackupStreamStreamInfoListOutput() GetBackupStreamStreamInfoListOutput
+	ToGetBackupStreamStreamInfoListOutputWithContext(context.Context) GetBackupStreamStreamInfoListOutput
+}
+
+type GetBackupStreamStreamInfoListArgs struct {
+	// Backup stream info.
+	BackupLists GetBackupStreamStreamInfoListBackupListArrayInput `pulumi:"backupLists"`
+	// Group name.
+	HostGroupName pulumi.StringInput `pulumi:"hostGroupName"`
+	// Optimal switch, 1-enable, 0-disable.
+	OptimalEnable pulumi.IntInput `pulumi:"optimalEnable"`
+	// Stream id.
+	StreamName pulumi.StringInput `pulumi:"streamName"`
+}
+
+func (GetBackupStreamStreamInfoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupStreamStreamInfoList)(nil)).Elem()
+}
+
+func (i GetBackupStreamStreamInfoListArgs) ToGetBackupStreamStreamInfoListOutput() GetBackupStreamStreamInfoListOutput {
+	return i.ToGetBackupStreamStreamInfoListOutputWithContext(context.Background())
+}
+
+func (i GetBackupStreamStreamInfoListArgs) ToGetBackupStreamStreamInfoListOutputWithContext(ctx context.Context) GetBackupStreamStreamInfoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupStreamStreamInfoListOutput)
+}
+
+// GetBackupStreamStreamInfoListArrayInput is an input type that accepts GetBackupStreamStreamInfoListArray and GetBackupStreamStreamInfoListArrayOutput values.
+// You can construct a concrete instance of `GetBackupStreamStreamInfoListArrayInput` via:
+//
+//          GetBackupStreamStreamInfoListArray{ GetBackupStreamStreamInfoListArgs{...} }
+type GetBackupStreamStreamInfoListArrayInput interface {
+	pulumi.Input
+
+	ToGetBackupStreamStreamInfoListArrayOutput() GetBackupStreamStreamInfoListArrayOutput
+	ToGetBackupStreamStreamInfoListArrayOutputWithContext(context.Context) GetBackupStreamStreamInfoListArrayOutput
+}
+
+type GetBackupStreamStreamInfoListArray []GetBackupStreamStreamInfoListInput
+
+func (GetBackupStreamStreamInfoListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBackupStreamStreamInfoList)(nil)).Elem()
+}
+
+func (i GetBackupStreamStreamInfoListArray) ToGetBackupStreamStreamInfoListArrayOutput() GetBackupStreamStreamInfoListArrayOutput {
+	return i.ToGetBackupStreamStreamInfoListArrayOutputWithContext(context.Background())
+}
+
+func (i GetBackupStreamStreamInfoListArray) ToGetBackupStreamStreamInfoListArrayOutputWithContext(ctx context.Context) GetBackupStreamStreamInfoListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupStreamStreamInfoListArrayOutput)
+}
+
+type GetBackupStreamStreamInfoListOutput struct{ *pulumi.OutputState }
+
+func (GetBackupStreamStreamInfoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupStreamStreamInfoList)(nil)).Elem()
+}
+
+func (o GetBackupStreamStreamInfoListOutput) ToGetBackupStreamStreamInfoListOutput() GetBackupStreamStreamInfoListOutput {
+	return o
+}
+
+func (o GetBackupStreamStreamInfoListOutput) ToGetBackupStreamStreamInfoListOutputWithContext(ctx context.Context) GetBackupStreamStreamInfoListOutput {
+	return o
+}
+
+// Backup stream info.
+func (o GetBackupStreamStreamInfoListOutput) BackupLists() GetBackupStreamStreamInfoListBackupListArrayOutput {
+	return o.ApplyT(func(v GetBackupStreamStreamInfoList) []GetBackupStreamStreamInfoListBackupList { return v.BackupLists }).(GetBackupStreamStreamInfoListBackupListArrayOutput)
+}
+
+// Group name.
+func (o GetBackupStreamStreamInfoListOutput) HostGroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupStreamStreamInfoList) string { return v.HostGroupName }).(pulumi.StringOutput)
+}
+
+// Optimal switch, 1-enable, 0-disable.
+func (o GetBackupStreamStreamInfoListOutput) OptimalEnable() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupStreamStreamInfoList) int { return v.OptimalEnable }).(pulumi.IntOutput)
+}
+
+// Stream id.
+func (o GetBackupStreamStreamInfoListOutput) StreamName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupStreamStreamInfoList) string { return v.StreamName }).(pulumi.StringOutput)
+}
+
+type GetBackupStreamStreamInfoListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBackupStreamStreamInfoListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBackupStreamStreamInfoList)(nil)).Elem()
+}
+
+func (o GetBackupStreamStreamInfoListArrayOutput) ToGetBackupStreamStreamInfoListArrayOutput() GetBackupStreamStreamInfoListArrayOutput {
+	return o
+}
+
+func (o GetBackupStreamStreamInfoListArrayOutput) ToGetBackupStreamStreamInfoListArrayOutputWithContext(ctx context.Context) GetBackupStreamStreamInfoListArrayOutput {
+	return o
+}
+
+func (o GetBackupStreamStreamInfoListArrayOutput) Index(i pulumi.IntInput) GetBackupStreamStreamInfoListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBackupStreamStreamInfoList {
+		return vs[0].([]GetBackupStreamStreamInfoList)[vs[1].(int)]
+	}).(GetBackupStreamStreamInfoListOutput)
+}
+
+type GetBackupStreamStreamInfoListBackupList struct {
+	// Push path.
+	AppName string `pulumi:"appName"`
+	// Push domain.
+	DomainName string `pulumi:"domainName"`
+	// Master stream flag.
+	MasterFlag int `pulumi:"masterFlag"`
+	// UTC time, eg, 2018-06-29T19:00:00Z.
+	PublishTime string `pulumi:"publishTime"`
+	// Source from.
+	SourceFrom string `pulumi:"sourceFrom"`
+	// Push stream sequence.
+	UpstreamSequence string `pulumi:"upstreamSequence"`
+}
+
+// GetBackupStreamStreamInfoListBackupListInput is an input type that accepts GetBackupStreamStreamInfoListBackupListArgs and GetBackupStreamStreamInfoListBackupListOutput values.
+// You can construct a concrete instance of `GetBackupStreamStreamInfoListBackupListInput` via:
+//
+//          GetBackupStreamStreamInfoListBackupListArgs{...}
+type GetBackupStreamStreamInfoListBackupListInput interface {
+	pulumi.Input
+
+	ToGetBackupStreamStreamInfoListBackupListOutput() GetBackupStreamStreamInfoListBackupListOutput
+	ToGetBackupStreamStreamInfoListBackupListOutputWithContext(context.Context) GetBackupStreamStreamInfoListBackupListOutput
+}
+
+type GetBackupStreamStreamInfoListBackupListArgs struct {
+	// Push path.
+	AppName pulumi.StringInput `pulumi:"appName"`
+	// Push domain.
+	DomainName pulumi.StringInput `pulumi:"domainName"`
+	// Master stream flag.
+	MasterFlag pulumi.IntInput `pulumi:"masterFlag"`
+	// UTC time, eg, 2018-06-29T19:00:00Z.
+	PublishTime pulumi.StringInput `pulumi:"publishTime"`
+	// Source from.
+	SourceFrom pulumi.StringInput `pulumi:"sourceFrom"`
+	// Push stream sequence.
+	UpstreamSequence pulumi.StringInput `pulumi:"upstreamSequence"`
+}
+
+func (GetBackupStreamStreamInfoListBackupListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupStreamStreamInfoListBackupList)(nil)).Elem()
+}
+
+func (i GetBackupStreamStreamInfoListBackupListArgs) ToGetBackupStreamStreamInfoListBackupListOutput() GetBackupStreamStreamInfoListBackupListOutput {
+	return i.ToGetBackupStreamStreamInfoListBackupListOutputWithContext(context.Background())
+}
+
+func (i GetBackupStreamStreamInfoListBackupListArgs) ToGetBackupStreamStreamInfoListBackupListOutputWithContext(ctx context.Context) GetBackupStreamStreamInfoListBackupListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupStreamStreamInfoListBackupListOutput)
+}
+
+// GetBackupStreamStreamInfoListBackupListArrayInput is an input type that accepts GetBackupStreamStreamInfoListBackupListArray and GetBackupStreamStreamInfoListBackupListArrayOutput values.
+// You can construct a concrete instance of `GetBackupStreamStreamInfoListBackupListArrayInput` via:
+//
+//          GetBackupStreamStreamInfoListBackupListArray{ GetBackupStreamStreamInfoListBackupListArgs{...} }
+type GetBackupStreamStreamInfoListBackupListArrayInput interface {
+	pulumi.Input
+
+	ToGetBackupStreamStreamInfoListBackupListArrayOutput() GetBackupStreamStreamInfoListBackupListArrayOutput
+	ToGetBackupStreamStreamInfoListBackupListArrayOutputWithContext(context.Context) GetBackupStreamStreamInfoListBackupListArrayOutput
+}
+
+type GetBackupStreamStreamInfoListBackupListArray []GetBackupStreamStreamInfoListBackupListInput
+
+func (GetBackupStreamStreamInfoListBackupListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBackupStreamStreamInfoListBackupList)(nil)).Elem()
+}
+
+func (i GetBackupStreamStreamInfoListBackupListArray) ToGetBackupStreamStreamInfoListBackupListArrayOutput() GetBackupStreamStreamInfoListBackupListArrayOutput {
+	return i.ToGetBackupStreamStreamInfoListBackupListArrayOutputWithContext(context.Background())
+}
+
+func (i GetBackupStreamStreamInfoListBackupListArray) ToGetBackupStreamStreamInfoListBackupListArrayOutputWithContext(ctx context.Context) GetBackupStreamStreamInfoListBackupListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupStreamStreamInfoListBackupListArrayOutput)
+}
+
+type GetBackupStreamStreamInfoListBackupListOutput struct{ *pulumi.OutputState }
+
+func (GetBackupStreamStreamInfoListBackupListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupStreamStreamInfoListBackupList)(nil)).Elem()
+}
+
+func (o GetBackupStreamStreamInfoListBackupListOutput) ToGetBackupStreamStreamInfoListBackupListOutput() GetBackupStreamStreamInfoListBackupListOutput {
+	return o
+}
+
+func (o GetBackupStreamStreamInfoListBackupListOutput) ToGetBackupStreamStreamInfoListBackupListOutputWithContext(ctx context.Context) GetBackupStreamStreamInfoListBackupListOutput {
+	return o
+}
+
+// Push path.
+func (o GetBackupStreamStreamInfoListBackupListOutput) AppName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupStreamStreamInfoListBackupList) string { return v.AppName }).(pulumi.StringOutput)
+}
+
+// Push domain.
+func (o GetBackupStreamStreamInfoListBackupListOutput) DomainName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupStreamStreamInfoListBackupList) string { return v.DomainName }).(pulumi.StringOutput)
+}
+
+// Master stream flag.
+func (o GetBackupStreamStreamInfoListBackupListOutput) MasterFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupStreamStreamInfoListBackupList) int { return v.MasterFlag }).(pulumi.IntOutput)
+}
+
+// UTC time, eg, 2018-06-29T19:00:00Z.
+func (o GetBackupStreamStreamInfoListBackupListOutput) PublishTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupStreamStreamInfoListBackupList) string { return v.PublishTime }).(pulumi.StringOutput)
+}
+
+// Source from.
+func (o GetBackupStreamStreamInfoListBackupListOutput) SourceFrom() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupStreamStreamInfoListBackupList) string { return v.SourceFrom }).(pulumi.StringOutput)
+}
+
+// Push stream sequence.
+func (o GetBackupStreamStreamInfoListBackupListOutput) UpstreamSequence() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupStreamStreamInfoListBackupList) string { return v.UpstreamSequence }).(pulumi.StringOutput)
+}
+
+type GetBackupStreamStreamInfoListBackupListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBackupStreamStreamInfoListBackupListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBackupStreamStreamInfoListBackupList)(nil)).Elem()
+}
+
+func (o GetBackupStreamStreamInfoListBackupListArrayOutput) ToGetBackupStreamStreamInfoListBackupListArrayOutput() GetBackupStreamStreamInfoListBackupListArrayOutput {
+	return o
+}
+
+func (o GetBackupStreamStreamInfoListBackupListArrayOutput) ToGetBackupStreamStreamInfoListBackupListArrayOutputWithContext(ctx context.Context) GetBackupStreamStreamInfoListBackupListArrayOutput {
+	return o
+}
+
+func (o GetBackupStreamStreamInfoListBackupListArrayOutput) Index(i pulumi.IntInput) GetBackupStreamStreamInfoListBackupListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBackupStreamStreamInfoListBackupList {
+		return vs[0].([]GetBackupStreamStreamInfoListBackupList)[vs[1].(int)]
+	}).(GetBackupStreamStreamInfoListBackupListOutput)
+}
+
+type GetDeliverLogDownListLogInfoList struct {
+	FileSize int    `pulumi:"fileSize"`
+	LogName  string `pulumi:"logName"`
+	LogTime  string `pulumi:"logTime"`
+	LogUrl   string `pulumi:"logUrl"`
+}
+
+// GetDeliverLogDownListLogInfoListInput is an input type that accepts GetDeliverLogDownListLogInfoListArgs and GetDeliverLogDownListLogInfoListOutput values.
+// You can construct a concrete instance of `GetDeliverLogDownListLogInfoListInput` via:
+//
+//          GetDeliverLogDownListLogInfoListArgs{...}
+type GetDeliverLogDownListLogInfoListInput interface {
+	pulumi.Input
+
+	ToGetDeliverLogDownListLogInfoListOutput() GetDeliverLogDownListLogInfoListOutput
+	ToGetDeliverLogDownListLogInfoListOutputWithContext(context.Context) GetDeliverLogDownListLogInfoListOutput
+}
+
+type GetDeliverLogDownListLogInfoListArgs struct {
+	FileSize pulumi.IntInput    `pulumi:"fileSize"`
+	LogName  pulumi.StringInput `pulumi:"logName"`
+	LogTime  pulumi.StringInput `pulumi:"logTime"`
+	LogUrl   pulumi.StringInput `pulumi:"logUrl"`
+}
+
+func (GetDeliverLogDownListLogInfoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDeliverLogDownListLogInfoList)(nil)).Elem()
+}
+
+func (i GetDeliverLogDownListLogInfoListArgs) ToGetDeliverLogDownListLogInfoListOutput() GetDeliverLogDownListLogInfoListOutput {
+	return i.ToGetDeliverLogDownListLogInfoListOutputWithContext(context.Background())
+}
+
+func (i GetDeliverLogDownListLogInfoListArgs) ToGetDeliverLogDownListLogInfoListOutputWithContext(ctx context.Context) GetDeliverLogDownListLogInfoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDeliverLogDownListLogInfoListOutput)
+}
+
+// GetDeliverLogDownListLogInfoListArrayInput is an input type that accepts GetDeliverLogDownListLogInfoListArray and GetDeliverLogDownListLogInfoListArrayOutput values.
+// You can construct a concrete instance of `GetDeliverLogDownListLogInfoListArrayInput` via:
+//
+//          GetDeliverLogDownListLogInfoListArray{ GetDeliverLogDownListLogInfoListArgs{...} }
+type GetDeliverLogDownListLogInfoListArrayInput interface {
+	pulumi.Input
+
+	ToGetDeliverLogDownListLogInfoListArrayOutput() GetDeliverLogDownListLogInfoListArrayOutput
+	ToGetDeliverLogDownListLogInfoListArrayOutputWithContext(context.Context) GetDeliverLogDownListLogInfoListArrayOutput
+}
+
+type GetDeliverLogDownListLogInfoListArray []GetDeliverLogDownListLogInfoListInput
+
+func (GetDeliverLogDownListLogInfoListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDeliverLogDownListLogInfoList)(nil)).Elem()
+}
+
+func (i GetDeliverLogDownListLogInfoListArray) ToGetDeliverLogDownListLogInfoListArrayOutput() GetDeliverLogDownListLogInfoListArrayOutput {
+	return i.ToGetDeliverLogDownListLogInfoListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDeliverLogDownListLogInfoListArray) ToGetDeliverLogDownListLogInfoListArrayOutputWithContext(ctx context.Context) GetDeliverLogDownListLogInfoListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDeliverLogDownListLogInfoListArrayOutput)
+}
+
+type GetDeliverLogDownListLogInfoListOutput struct{ *pulumi.OutputState }
+
+func (GetDeliverLogDownListLogInfoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDeliverLogDownListLogInfoList)(nil)).Elem()
+}
+
+func (o GetDeliverLogDownListLogInfoListOutput) ToGetDeliverLogDownListLogInfoListOutput() GetDeliverLogDownListLogInfoListOutput {
+	return o
+}
+
+func (o GetDeliverLogDownListLogInfoListOutput) ToGetDeliverLogDownListLogInfoListOutputWithContext(ctx context.Context) GetDeliverLogDownListLogInfoListOutput {
+	return o
+}
+
+func (o GetDeliverLogDownListLogInfoListOutput) FileSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDeliverLogDownListLogInfoList) int { return v.FileSize }).(pulumi.IntOutput)
+}
+
+func (o GetDeliverLogDownListLogInfoListOutput) LogName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliverLogDownListLogInfoList) string { return v.LogName }).(pulumi.StringOutput)
+}
+
+func (o GetDeliverLogDownListLogInfoListOutput) LogTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliverLogDownListLogInfoList) string { return v.LogTime }).(pulumi.StringOutput)
+}
+
+func (o GetDeliverLogDownListLogInfoListOutput) LogUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDeliverLogDownListLogInfoList) string { return v.LogUrl }).(pulumi.StringOutput)
+}
+
+type GetDeliverLogDownListLogInfoListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDeliverLogDownListLogInfoListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDeliverLogDownListLogInfoList)(nil)).Elem()
+}
+
+func (o GetDeliverLogDownListLogInfoListArrayOutput) ToGetDeliverLogDownListLogInfoListArrayOutput() GetDeliverLogDownListLogInfoListArrayOutput {
+	return o
+}
+
+func (o GetDeliverLogDownListLogInfoListArrayOutput) ToGetDeliverLogDownListLogInfoListArrayOutputWithContext(ctx context.Context) GetDeliverLogDownListLogInfoListArrayOutput {
+	return o
+}
+
+func (o GetDeliverLogDownListLogInfoListArrayOutput) Index(i pulumi.IntInput) GetDeliverLogDownListLogInfoListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDeliverLogDownListLogInfoList {
+		return vs[0].([]GetDeliverLogDownListLogInfoList)[vs[1].(int)]
+	}).(GetDeliverLogDownListLogInfoListOutput)
+}
+
 type GetDomainsDomainList struct {
 	// Is there a CName to the fixed rule domain name: 0: No. 1: Yes.
 	BCName int `pulumi:"bCName"`
@@ -504,17 +2840,1935 @@ func (o GetDomainsDomainListArrayOutput) Index(i pulumi.IntInput) GetDomainsDoma
 	}).(GetDomainsDomainListOutput)
 }
 
+type GetMonitorReportDiagnoseResult struct {
+	// The information about low frame rate.Note: This field may return null, indicating that no valid value was found.
+	LowFrameRateResults []string `pulumi:"lowFrameRateResults"`
+	// The information about the stream interruption.Note: This field may return null, indicating that no valid value was found.
+	StreamBrokenResults []string `pulumi:"streamBrokenResults"`
+	// The information about the stream format diagnosis.Note: This field may return null, indicating that no valid value was found.
+	StreamFormatResults []string `pulumi:"streamFormatResults"`
+}
+
+// GetMonitorReportDiagnoseResultInput is an input type that accepts GetMonitorReportDiagnoseResultArgs and GetMonitorReportDiagnoseResultOutput values.
+// You can construct a concrete instance of `GetMonitorReportDiagnoseResultInput` via:
+//
+//          GetMonitorReportDiagnoseResultArgs{...}
+type GetMonitorReportDiagnoseResultInput interface {
+	pulumi.Input
+
+	ToGetMonitorReportDiagnoseResultOutput() GetMonitorReportDiagnoseResultOutput
+	ToGetMonitorReportDiagnoseResultOutputWithContext(context.Context) GetMonitorReportDiagnoseResultOutput
+}
+
+type GetMonitorReportDiagnoseResultArgs struct {
+	// The information about low frame rate.Note: This field may return null, indicating that no valid value was found.
+	LowFrameRateResults pulumi.StringArrayInput `pulumi:"lowFrameRateResults"`
+	// The information about the stream interruption.Note: This field may return null, indicating that no valid value was found.
+	StreamBrokenResults pulumi.StringArrayInput `pulumi:"streamBrokenResults"`
+	// The information about the stream format diagnosis.Note: This field may return null, indicating that no valid value was found.
+	StreamFormatResults pulumi.StringArrayInput `pulumi:"streamFormatResults"`
+}
+
+func (GetMonitorReportDiagnoseResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMonitorReportDiagnoseResult)(nil)).Elem()
+}
+
+func (i GetMonitorReportDiagnoseResultArgs) ToGetMonitorReportDiagnoseResultOutput() GetMonitorReportDiagnoseResultOutput {
+	return i.ToGetMonitorReportDiagnoseResultOutputWithContext(context.Background())
+}
+
+func (i GetMonitorReportDiagnoseResultArgs) ToGetMonitorReportDiagnoseResultOutputWithContext(ctx context.Context) GetMonitorReportDiagnoseResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMonitorReportDiagnoseResultOutput)
+}
+
+// GetMonitorReportDiagnoseResultArrayInput is an input type that accepts GetMonitorReportDiagnoseResultArray and GetMonitorReportDiagnoseResultArrayOutput values.
+// You can construct a concrete instance of `GetMonitorReportDiagnoseResultArrayInput` via:
+//
+//          GetMonitorReportDiagnoseResultArray{ GetMonitorReportDiagnoseResultArgs{...} }
+type GetMonitorReportDiagnoseResultArrayInput interface {
+	pulumi.Input
+
+	ToGetMonitorReportDiagnoseResultArrayOutput() GetMonitorReportDiagnoseResultArrayOutput
+	ToGetMonitorReportDiagnoseResultArrayOutputWithContext(context.Context) GetMonitorReportDiagnoseResultArrayOutput
+}
+
+type GetMonitorReportDiagnoseResultArray []GetMonitorReportDiagnoseResultInput
+
+func (GetMonitorReportDiagnoseResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMonitorReportDiagnoseResult)(nil)).Elem()
+}
+
+func (i GetMonitorReportDiagnoseResultArray) ToGetMonitorReportDiagnoseResultArrayOutput() GetMonitorReportDiagnoseResultArrayOutput {
+	return i.ToGetMonitorReportDiagnoseResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetMonitorReportDiagnoseResultArray) ToGetMonitorReportDiagnoseResultArrayOutputWithContext(ctx context.Context) GetMonitorReportDiagnoseResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMonitorReportDiagnoseResultArrayOutput)
+}
+
+type GetMonitorReportDiagnoseResultOutput struct{ *pulumi.OutputState }
+
+func (GetMonitorReportDiagnoseResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMonitorReportDiagnoseResult)(nil)).Elem()
+}
+
+func (o GetMonitorReportDiagnoseResultOutput) ToGetMonitorReportDiagnoseResultOutput() GetMonitorReportDiagnoseResultOutput {
+	return o
+}
+
+func (o GetMonitorReportDiagnoseResultOutput) ToGetMonitorReportDiagnoseResultOutputWithContext(ctx context.Context) GetMonitorReportDiagnoseResultOutput {
+	return o
+}
+
+// The information about low frame rate.Note: This field may return null, indicating that no valid value was found.
+func (o GetMonitorReportDiagnoseResultOutput) LowFrameRateResults() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetMonitorReportDiagnoseResult) []string { return v.LowFrameRateResults }).(pulumi.StringArrayOutput)
+}
+
+// The information about the stream interruption.Note: This field may return null, indicating that no valid value was found.
+func (o GetMonitorReportDiagnoseResultOutput) StreamBrokenResults() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetMonitorReportDiagnoseResult) []string { return v.StreamBrokenResults }).(pulumi.StringArrayOutput)
+}
+
+// The information about the stream format diagnosis.Note: This field may return null, indicating that no valid value was found.
+func (o GetMonitorReportDiagnoseResultOutput) StreamFormatResults() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetMonitorReportDiagnoseResult) []string { return v.StreamFormatResults }).(pulumi.StringArrayOutput)
+}
+
+type GetMonitorReportDiagnoseResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMonitorReportDiagnoseResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMonitorReportDiagnoseResult)(nil)).Elem()
+}
+
+func (o GetMonitorReportDiagnoseResultArrayOutput) ToGetMonitorReportDiagnoseResultArrayOutput() GetMonitorReportDiagnoseResultArrayOutput {
+	return o
+}
+
+func (o GetMonitorReportDiagnoseResultArrayOutput) ToGetMonitorReportDiagnoseResultArrayOutputWithContext(ctx context.Context) GetMonitorReportDiagnoseResultArrayOutput {
+	return o
+}
+
+func (o GetMonitorReportDiagnoseResultArrayOutput) Index(i pulumi.IntInput) GetMonitorReportDiagnoseResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMonitorReportDiagnoseResult {
+		return vs[0].([]GetMonitorReportDiagnoseResult)[vs[1].(int)]
+	}).(GetMonitorReportDiagnoseResultOutput)
+}
+
+type GetMonitorReportMpsResult struct {
+	// The result of intelligent speech recognition.Note: This field may return null, indicating that no valid value was found.
+	AiAsrResults []string `pulumi:"aiAsrResults"`
+	// The result of intelligent text recognition.Note: This field may return null, indicating that no valid value was found.
+	AiOcrResults []string `pulumi:"aiOcrResults"`
+}
+
+// GetMonitorReportMpsResultInput is an input type that accepts GetMonitorReportMpsResultArgs and GetMonitorReportMpsResultOutput values.
+// You can construct a concrete instance of `GetMonitorReportMpsResultInput` via:
+//
+//          GetMonitorReportMpsResultArgs{...}
+type GetMonitorReportMpsResultInput interface {
+	pulumi.Input
+
+	ToGetMonitorReportMpsResultOutput() GetMonitorReportMpsResultOutput
+	ToGetMonitorReportMpsResultOutputWithContext(context.Context) GetMonitorReportMpsResultOutput
+}
+
+type GetMonitorReportMpsResultArgs struct {
+	// The result of intelligent speech recognition.Note: This field may return null, indicating that no valid value was found.
+	AiAsrResults pulumi.StringArrayInput `pulumi:"aiAsrResults"`
+	// The result of intelligent text recognition.Note: This field may return null, indicating that no valid value was found.
+	AiOcrResults pulumi.StringArrayInput `pulumi:"aiOcrResults"`
+}
+
+func (GetMonitorReportMpsResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMonitorReportMpsResult)(nil)).Elem()
+}
+
+func (i GetMonitorReportMpsResultArgs) ToGetMonitorReportMpsResultOutput() GetMonitorReportMpsResultOutput {
+	return i.ToGetMonitorReportMpsResultOutputWithContext(context.Background())
+}
+
+func (i GetMonitorReportMpsResultArgs) ToGetMonitorReportMpsResultOutputWithContext(ctx context.Context) GetMonitorReportMpsResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMonitorReportMpsResultOutput)
+}
+
+// GetMonitorReportMpsResultArrayInput is an input type that accepts GetMonitorReportMpsResultArray and GetMonitorReportMpsResultArrayOutput values.
+// You can construct a concrete instance of `GetMonitorReportMpsResultArrayInput` via:
+//
+//          GetMonitorReportMpsResultArray{ GetMonitorReportMpsResultArgs{...} }
+type GetMonitorReportMpsResultArrayInput interface {
+	pulumi.Input
+
+	ToGetMonitorReportMpsResultArrayOutput() GetMonitorReportMpsResultArrayOutput
+	ToGetMonitorReportMpsResultArrayOutputWithContext(context.Context) GetMonitorReportMpsResultArrayOutput
+}
+
+type GetMonitorReportMpsResultArray []GetMonitorReportMpsResultInput
+
+func (GetMonitorReportMpsResultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMonitorReportMpsResult)(nil)).Elem()
+}
+
+func (i GetMonitorReportMpsResultArray) ToGetMonitorReportMpsResultArrayOutput() GetMonitorReportMpsResultArrayOutput {
+	return i.ToGetMonitorReportMpsResultArrayOutputWithContext(context.Background())
+}
+
+func (i GetMonitorReportMpsResultArray) ToGetMonitorReportMpsResultArrayOutputWithContext(ctx context.Context) GetMonitorReportMpsResultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMonitorReportMpsResultArrayOutput)
+}
+
+type GetMonitorReportMpsResultOutput struct{ *pulumi.OutputState }
+
+func (GetMonitorReportMpsResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMonitorReportMpsResult)(nil)).Elem()
+}
+
+func (o GetMonitorReportMpsResultOutput) ToGetMonitorReportMpsResultOutput() GetMonitorReportMpsResultOutput {
+	return o
+}
+
+func (o GetMonitorReportMpsResultOutput) ToGetMonitorReportMpsResultOutputWithContext(ctx context.Context) GetMonitorReportMpsResultOutput {
+	return o
+}
+
+// The result of intelligent speech recognition.Note: This field may return null, indicating that no valid value was found.
+func (o GetMonitorReportMpsResultOutput) AiAsrResults() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetMonitorReportMpsResult) []string { return v.AiAsrResults }).(pulumi.StringArrayOutput)
+}
+
+// The result of intelligent text recognition.Note: This field may return null, indicating that no valid value was found.
+func (o GetMonitorReportMpsResultOutput) AiOcrResults() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetMonitorReportMpsResult) []string { return v.AiOcrResults }).(pulumi.StringArrayOutput)
+}
+
+type GetMonitorReportMpsResultArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMonitorReportMpsResultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMonitorReportMpsResult)(nil)).Elem()
+}
+
+func (o GetMonitorReportMpsResultArrayOutput) ToGetMonitorReportMpsResultArrayOutput() GetMonitorReportMpsResultArrayOutput {
+	return o
+}
+
+func (o GetMonitorReportMpsResultArrayOutput) ToGetMonitorReportMpsResultArrayOutputWithContext(ctx context.Context) GetMonitorReportMpsResultArrayOutput {
+	return o
+}
+
+func (o GetMonitorReportMpsResultArrayOutput) Index(i pulumi.IntInput) GetMonitorReportMpsResultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMonitorReportMpsResult {
+		return vs[0].([]GetMonitorReportMpsResult)[vs[1].(int)]
+	}).(GetMonitorReportMpsResultOutput)
+}
+
+type GetPadTemplatesTemplate struct {
+	// Template create time.
+	CreateTime string `pulumi:"createTime"`
+	// Description info.
+	Description string `pulumi:"description"`
+	// Maximum pad duration.Value range: 0 - positive infinity.Unit: milliseconds.
+	MaxDuration int `pulumi:"maxDuration"`
+	// Template id.
+	TemplateId int `pulumi:"templateId"`
+	// Template name.
+	TemplateName string `pulumi:"templateName"`
+	// Pad content type: 1: Image, 2: Video. Default value: 1.
+	Type int `pulumi:"type"`
+	// Template modify time.
+	UpdateTime string `pulumi:"updateTime"`
+	// Pad content.
+	Url string `pulumi:"url"`
+	// Stream interruption waiting time.Value range: 0-30000.Unit: milliseconds.
+	WaitDuration int `pulumi:"waitDuration"`
+}
+
+// GetPadTemplatesTemplateInput is an input type that accepts GetPadTemplatesTemplateArgs and GetPadTemplatesTemplateOutput values.
+// You can construct a concrete instance of `GetPadTemplatesTemplateInput` via:
+//
+//          GetPadTemplatesTemplateArgs{...}
+type GetPadTemplatesTemplateInput interface {
+	pulumi.Input
+
+	ToGetPadTemplatesTemplateOutput() GetPadTemplatesTemplateOutput
+	ToGetPadTemplatesTemplateOutputWithContext(context.Context) GetPadTemplatesTemplateOutput
+}
+
+type GetPadTemplatesTemplateArgs struct {
+	// Template create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Description info.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Maximum pad duration.Value range: 0 - positive infinity.Unit: milliseconds.
+	MaxDuration pulumi.IntInput `pulumi:"maxDuration"`
+	// Template id.
+	TemplateId pulumi.IntInput `pulumi:"templateId"`
+	// Template name.
+	TemplateName pulumi.StringInput `pulumi:"templateName"`
+	// Pad content type: 1: Image, 2: Video. Default value: 1.
+	Type pulumi.IntInput `pulumi:"type"`
+	// Template modify time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+	// Pad content.
+	Url pulumi.StringInput `pulumi:"url"`
+	// Stream interruption waiting time.Value range: 0-30000.Unit: milliseconds.
+	WaitDuration pulumi.IntInput `pulumi:"waitDuration"`
+}
+
+func (GetPadTemplatesTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPadTemplatesTemplate)(nil)).Elem()
+}
+
+func (i GetPadTemplatesTemplateArgs) ToGetPadTemplatesTemplateOutput() GetPadTemplatesTemplateOutput {
+	return i.ToGetPadTemplatesTemplateOutputWithContext(context.Background())
+}
+
+func (i GetPadTemplatesTemplateArgs) ToGetPadTemplatesTemplateOutputWithContext(ctx context.Context) GetPadTemplatesTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPadTemplatesTemplateOutput)
+}
+
+// GetPadTemplatesTemplateArrayInput is an input type that accepts GetPadTemplatesTemplateArray and GetPadTemplatesTemplateArrayOutput values.
+// You can construct a concrete instance of `GetPadTemplatesTemplateArrayInput` via:
+//
+//          GetPadTemplatesTemplateArray{ GetPadTemplatesTemplateArgs{...} }
+type GetPadTemplatesTemplateArrayInput interface {
+	pulumi.Input
+
+	ToGetPadTemplatesTemplateArrayOutput() GetPadTemplatesTemplateArrayOutput
+	ToGetPadTemplatesTemplateArrayOutputWithContext(context.Context) GetPadTemplatesTemplateArrayOutput
+}
+
+type GetPadTemplatesTemplateArray []GetPadTemplatesTemplateInput
+
+func (GetPadTemplatesTemplateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPadTemplatesTemplate)(nil)).Elem()
+}
+
+func (i GetPadTemplatesTemplateArray) ToGetPadTemplatesTemplateArrayOutput() GetPadTemplatesTemplateArrayOutput {
+	return i.ToGetPadTemplatesTemplateArrayOutputWithContext(context.Background())
+}
+
+func (i GetPadTemplatesTemplateArray) ToGetPadTemplatesTemplateArrayOutputWithContext(ctx context.Context) GetPadTemplatesTemplateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPadTemplatesTemplateArrayOutput)
+}
+
+type GetPadTemplatesTemplateOutput struct{ *pulumi.OutputState }
+
+func (GetPadTemplatesTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPadTemplatesTemplate)(nil)).Elem()
+}
+
+func (o GetPadTemplatesTemplateOutput) ToGetPadTemplatesTemplateOutput() GetPadTemplatesTemplateOutput {
+	return o
+}
+
+func (o GetPadTemplatesTemplateOutput) ToGetPadTemplatesTemplateOutputWithContext(ctx context.Context) GetPadTemplatesTemplateOutput {
+	return o
+}
+
+// Template create time.
+func (o GetPadTemplatesTemplateOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPadTemplatesTemplate) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Description info.
+func (o GetPadTemplatesTemplateOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPadTemplatesTemplate) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Maximum pad duration.Value range: 0 - positive infinity.Unit: milliseconds.
+func (o GetPadTemplatesTemplateOutput) MaxDuration() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPadTemplatesTemplate) int { return v.MaxDuration }).(pulumi.IntOutput)
+}
+
+// Template id.
+func (o GetPadTemplatesTemplateOutput) TemplateId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPadTemplatesTemplate) int { return v.TemplateId }).(pulumi.IntOutput)
+}
+
+// Template name.
+func (o GetPadTemplatesTemplateOutput) TemplateName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPadTemplatesTemplate) string { return v.TemplateName }).(pulumi.StringOutput)
+}
+
+// Pad content type: 1: Image, 2: Video. Default value: 1.
+func (o GetPadTemplatesTemplateOutput) Type() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPadTemplatesTemplate) int { return v.Type }).(pulumi.IntOutput)
+}
+
+// Template modify time.
+func (o GetPadTemplatesTemplateOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPadTemplatesTemplate) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+// Pad content.
+func (o GetPadTemplatesTemplateOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPadTemplatesTemplate) string { return v.Url }).(pulumi.StringOutput)
+}
+
+// Stream interruption waiting time.Value range: 0-30000.Unit: milliseconds.
+func (o GetPadTemplatesTemplateOutput) WaitDuration() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPadTemplatesTemplate) int { return v.WaitDuration }).(pulumi.IntOutput)
+}
+
+type GetPadTemplatesTemplateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPadTemplatesTemplateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPadTemplatesTemplate)(nil)).Elem()
+}
+
+func (o GetPadTemplatesTemplateArrayOutput) ToGetPadTemplatesTemplateArrayOutput() GetPadTemplatesTemplateArrayOutput {
+	return o
+}
+
+func (o GetPadTemplatesTemplateArrayOutput) ToGetPadTemplatesTemplateArrayOutputWithContext(ctx context.Context) GetPadTemplatesTemplateArrayOutput {
+	return o
+}
+
+func (o GetPadTemplatesTemplateArrayOutput) Index(i pulumi.IntInput) GetPadTemplatesTemplateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPadTemplatesTemplate {
+		return vs[0].([]GetPadTemplatesTemplate)[vs[1].(int)]
+	}).(GetPadTemplatesTemplateOutput)
+}
+
+type GetPullStreamTaskStatusTaskStatusInfo struct {
+	// The duration of the VOD source file, in seconds.
+	FileDuration int `pulumi:"fileDuration"`
+	// Current use source url.
+	FileUrl string `pulumi:"fileUrl"`
+	// The number of times a VOD source task is played in a loop.
+	LoopedTimes int `pulumi:"loopedTimes"`
+	// The URL of the next progress VOD file.
+	NextFileUrl string `pulumi:"nextFileUrl"`
+	// The playback offset of the VOD source, in seconds.
+	OffsetTime int `pulumi:"offsetTime"`
+	// The latest heartbeat reporting time in UTC format, for example: 2022-02-11T10:00:00Z.Note: UTC time is 8 hours ahead of Beijing time.
+	ReportTime string `pulumi:"reportTime"`
+	// Real run status:active,inactive.
+	RunStatus string `pulumi:"runStatus"`
+}
+
+// GetPullStreamTaskStatusTaskStatusInfoInput is an input type that accepts GetPullStreamTaskStatusTaskStatusInfoArgs and GetPullStreamTaskStatusTaskStatusInfoOutput values.
+// You can construct a concrete instance of `GetPullStreamTaskStatusTaskStatusInfoInput` via:
+//
+//          GetPullStreamTaskStatusTaskStatusInfoArgs{...}
+type GetPullStreamTaskStatusTaskStatusInfoInput interface {
+	pulumi.Input
+
+	ToGetPullStreamTaskStatusTaskStatusInfoOutput() GetPullStreamTaskStatusTaskStatusInfoOutput
+	ToGetPullStreamTaskStatusTaskStatusInfoOutputWithContext(context.Context) GetPullStreamTaskStatusTaskStatusInfoOutput
+}
+
+type GetPullStreamTaskStatusTaskStatusInfoArgs struct {
+	// The duration of the VOD source file, in seconds.
+	FileDuration pulumi.IntInput `pulumi:"fileDuration"`
+	// Current use source url.
+	FileUrl pulumi.StringInput `pulumi:"fileUrl"`
+	// The number of times a VOD source task is played in a loop.
+	LoopedTimes pulumi.IntInput `pulumi:"loopedTimes"`
+	// The URL of the next progress VOD file.
+	NextFileUrl pulumi.StringInput `pulumi:"nextFileUrl"`
+	// The playback offset of the VOD source, in seconds.
+	OffsetTime pulumi.IntInput `pulumi:"offsetTime"`
+	// The latest heartbeat reporting time in UTC format, for example: 2022-02-11T10:00:00Z.Note: UTC time is 8 hours ahead of Beijing time.
+	ReportTime pulumi.StringInput `pulumi:"reportTime"`
+	// Real run status:active,inactive.
+	RunStatus pulumi.StringInput `pulumi:"runStatus"`
+}
+
+func (GetPullStreamTaskStatusTaskStatusInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPullStreamTaskStatusTaskStatusInfo)(nil)).Elem()
+}
+
+func (i GetPullStreamTaskStatusTaskStatusInfoArgs) ToGetPullStreamTaskStatusTaskStatusInfoOutput() GetPullStreamTaskStatusTaskStatusInfoOutput {
+	return i.ToGetPullStreamTaskStatusTaskStatusInfoOutputWithContext(context.Background())
+}
+
+func (i GetPullStreamTaskStatusTaskStatusInfoArgs) ToGetPullStreamTaskStatusTaskStatusInfoOutputWithContext(ctx context.Context) GetPullStreamTaskStatusTaskStatusInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPullStreamTaskStatusTaskStatusInfoOutput)
+}
+
+// GetPullStreamTaskStatusTaskStatusInfoArrayInput is an input type that accepts GetPullStreamTaskStatusTaskStatusInfoArray and GetPullStreamTaskStatusTaskStatusInfoArrayOutput values.
+// You can construct a concrete instance of `GetPullStreamTaskStatusTaskStatusInfoArrayInput` via:
+//
+//          GetPullStreamTaskStatusTaskStatusInfoArray{ GetPullStreamTaskStatusTaskStatusInfoArgs{...} }
+type GetPullStreamTaskStatusTaskStatusInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetPullStreamTaskStatusTaskStatusInfoArrayOutput() GetPullStreamTaskStatusTaskStatusInfoArrayOutput
+	ToGetPullStreamTaskStatusTaskStatusInfoArrayOutputWithContext(context.Context) GetPullStreamTaskStatusTaskStatusInfoArrayOutput
+}
+
+type GetPullStreamTaskStatusTaskStatusInfoArray []GetPullStreamTaskStatusTaskStatusInfoInput
+
+func (GetPullStreamTaskStatusTaskStatusInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPullStreamTaskStatusTaskStatusInfo)(nil)).Elem()
+}
+
+func (i GetPullStreamTaskStatusTaskStatusInfoArray) ToGetPullStreamTaskStatusTaskStatusInfoArrayOutput() GetPullStreamTaskStatusTaskStatusInfoArrayOutput {
+	return i.ToGetPullStreamTaskStatusTaskStatusInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetPullStreamTaskStatusTaskStatusInfoArray) ToGetPullStreamTaskStatusTaskStatusInfoArrayOutputWithContext(ctx context.Context) GetPullStreamTaskStatusTaskStatusInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPullStreamTaskStatusTaskStatusInfoArrayOutput)
+}
+
+type GetPullStreamTaskStatusTaskStatusInfoOutput struct{ *pulumi.OutputState }
+
+func (GetPullStreamTaskStatusTaskStatusInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPullStreamTaskStatusTaskStatusInfo)(nil)).Elem()
+}
+
+func (o GetPullStreamTaskStatusTaskStatusInfoOutput) ToGetPullStreamTaskStatusTaskStatusInfoOutput() GetPullStreamTaskStatusTaskStatusInfoOutput {
+	return o
+}
+
+func (o GetPullStreamTaskStatusTaskStatusInfoOutput) ToGetPullStreamTaskStatusTaskStatusInfoOutputWithContext(ctx context.Context) GetPullStreamTaskStatusTaskStatusInfoOutput {
+	return o
+}
+
+// The duration of the VOD source file, in seconds.
+func (o GetPullStreamTaskStatusTaskStatusInfoOutput) FileDuration() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPullStreamTaskStatusTaskStatusInfo) int { return v.FileDuration }).(pulumi.IntOutput)
+}
+
+// Current use source url.
+func (o GetPullStreamTaskStatusTaskStatusInfoOutput) FileUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPullStreamTaskStatusTaskStatusInfo) string { return v.FileUrl }).(pulumi.StringOutput)
+}
+
+// The number of times a VOD source task is played in a loop.
+func (o GetPullStreamTaskStatusTaskStatusInfoOutput) LoopedTimes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPullStreamTaskStatusTaskStatusInfo) int { return v.LoopedTimes }).(pulumi.IntOutput)
+}
+
+// The URL of the next progress VOD file.
+func (o GetPullStreamTaskStatusTaskStatusInfoOutput) NextFileUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPullStreamTaskStatusTaskStatusInfo) string { return v.NextFileUrl }).(pulumi.StringOutput)
+}
+
+// The playback offset of the VOD source, in seconds.
+func (o GetPullStreamTaskStatusTaskStatusInfoOutput) OffsetTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPullStreamTaskStatusTaskStatusInfo) int { return v.OffsetTime }).(pulumi.IntOutput)
+}
+
+// The latest heartbeat reporting time in UTC format, for example: 2022-02-11T10:00:00Z.Note: UTC time is 8 hours ahead of Beijing time.
+func (o GetPullStreamTaskStatusTaskStatusInfoOutput) ReportTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPullStreamTaskStatusTaskStatusInfo) string { return v.ReportTime }).(pulumi.StringOutput)
+}
+
+// Real run status:active,inactive.
+func (o GetPullStreamTaskStatusTaskStatusInfoOutput) RunStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPullStreamTaskStatusTaskStatusInfo) string { return v.RunStatus }).(pulumi.StringOutput)
+}
+
+type GetPullStreamTaskStatusTaskStatusInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPullStreamTaskStatusTaskStatusInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPullStreamTaskStatusTaskStatusInfo)(nil)).Elem()
+}
+
+func (o GetPullStreamTaskStatusTaskStatusInfoArrayOutput) ToGetPullStreamTaskStatusTaskStatusInfoArrayOutput() GetPullStreamTaskStatusTaskStatusInfoArrayOutput {
+	return o
+}
+
+func (o GetPullStreamTaskStatusTaskStatusInfoArrayOutput) ToGetPullStreamTaskStatusTaskStatusInfoArrayOutputWithContext(ctx context.Context) GetPullStreamTaskStatusTaskStatusInfoArrayOutput {
+	return o
+}
+
+func (o GetPullStreamTaskStatusTaskStatusInfoArrayOutput) Index(i pulumi.IntInput) GetPullStreamTaskStatusTaskStatusInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPullStreamTaskStatusTaskStatusInfo {
+		return vs[0].([]GetPullStreamTaskStatusTaskStatusInfo)[vs[1].(int)]
+	}).(GetPullStreamTaskStatusTaskStatusInfoOutput)
+}
+
+type GetStreamMonitorListLiveStreamMonitor struct {
+	// The list of input indices for enabling intelligent speech recognition.Note: This field may return null, indicating that no valid value is available.
+	AiAsrInputIndexLists []int `pulumi:"aiAsrInputIndexLists"`
+	// Whether to enable format diagnosis. Note: This field may return null, indicating that no valid value is available.
+	AiFormatDiagnose int `pulumi:"aiFormatDiagnose"`
+	// The list of input indices for enabling intelligent text recognition.Note: This field may return null, indicating that no valid value is available.
+	AiOcrInputIndexLists []int `pulumi:"aiOcrInputIndexLists"`
+	// Whether to store monitoring events in the monitoring report and allow querying of the monitoring report.Note: This field may return null, indicating that no valid value is available.
+	AllowMonitorReport int `pulumi:"allowMonitorReport"`
+	// The language for intelligent speech recognition:0: Disabled1: Chinese2: English3: Japanese4: KoreanNote: This field may return null, indicating that no valid value is available.
+	AsrLanguage int `pulumi:"asrLanguage"`
+	// The list of input indices for the output audio.Note: This field may return null, indicating that no valid value is available.
+	AudibleInputIndexLists []int `pulumi:"audibleInputIndexLists"`
+	// Whether to enable stream disconnection detection.Note: This field may return null, indicating that no valid value is available.
+	CheckStreamBroken int `pulumi:"checkStreamBroken"`
+	// Whether to enable low frame rate detection.Note: This field may return null, indicating that no valid value is available.
+	CheckStreamLowFrameRate int `pulumi:"checkStreamLowFrameRate"`
+	// The creation time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+	CreateTime int `pulumi:"createTime"`
+	// The input stream information for the monitoring task.Note: This field may return null, indicating that no valid value is available.
+	InputLists []GetStreamMonitorListLiveStreamMonitorInputList `pulumi:"inputLists"`
+	// Monitoring task ID.Note: This field may return null, indicating that no valid value is available.
+	MonitorId string `pulumi:"monitorId"`
+	// Monitoring task name. Up to 128 bytes.Note: This field may return null, indicating that no valid value is available.
+	MonitorName string `pulumi:"monitorName"`
+	// The notification policy for monitoring events.Note: This field may return null, indicating that no valid value is available.
+	NotifyPolicies []GetStreamMonitorListLiveStreamMonitorNotifyPolicy `pulumi:"notifyPolicies"`
+	// The language for intelligent text recognition:0: Disabled1: Chinese and EnglishNote: This field may return null, indicating that no valid value is available.
+	OcrLanguage int `pulumi:"ocrLanguage"`
+	// Monitoring task output information.Note: This field may return null, indicating that no valid value is available.
+	OutputInfos []GetStreamMonitorListLiveStreamMonitorOutputInfo `pulumi:"outputInfos"`
+	// The last start time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+	StartTime int `pulumi:"startTime"`
+	// The status of the monitoring task.  0: Represents idle.  1: Represents monitoring in progress.Note: This field may return null, indicating that no valid value is available.
+	Status int `pulumi:"status"`
+	// The last stop time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+	StopTime int `pulumi:"stopTime"`
+	// The update time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+	UpdateTime int `pulumi:"updateTime"`
+}
+
+// GetStreamMonitorListLiveStreamMonitorInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorArgs and GetStreamMonitorListLiveStreamMonitorOutput values.
+// You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorInput` via:
+//
+//          GetStreamMonitorListLiveStreamMonitorArgs{...}
+type GetStreamMonitorListLiveStreamMonitorInput interface {
+	pulumi.Input
+
+	ToGetStreamMonitorListLiveStreamMonitorOutput() GetStreamMonitorListLiveStreamMonitorOutput
+	ToGetStreamMonitorListLiveStreamMonitorOutputWithContext(context.Context) GetStreamMonitorListLiveStreamMonitorOutput
+}
+
+type GetStreamMonitorListLiveStreamMonitorArgs struct {
+	// The list of input indices for enabling intelligent speech recognition.Note: This field may return null, indicating that no valid value is available.
+	AiAsrInputIndexLists pulumi.IntArrayInput `pulumi:"aiAsrInputIndexLists"`
+	// Whether to enable format diagnosis. Note: This field may return null, indicating that no valid value is available.
+	AiFormatDiagnose pulumi.IntInput `pulumi:"aiFormatDiagnose"`
+	// The list of input indices for enabling intelligent text recognition.Note: This field may return null, indicating that no valid value is available.
+	AiOcrInputIndexLists pulumi.IntArrayInput `pulumi:"aiOcrInputIndexLists"`
+	// Whether to store monitoring events in the monitoring report and allow querying of the monitoring report.Note: This field may return null, indicating that no valid value is available.
+	AllowMonitorReport pulumi.IntInput `pulumi:"allowMonitorReport"`
+	// The language for intelligent speech recognition:0: Disabled1: Chinese2: English3: Japanese4: KoreanNote: This field may return null, indicating that no valid value is available.
+	AsrLanguage pulumi.IntInput `pulumi:"asrLanguage"`
+	// The list of input indices for the output audio.Note: This field may return null, indicating that no valid value is available.
+	AudibleInputIndexLists pulumi.IntArrayInput `pulumi:"audibleInputIndexLists"`
+	// Whether to enable stream disconnection detection.Note: This field may return null, indicating that no valid value is available.
+	CheckStreamBroken pulumi.IntInput `pulumi:"checkStreamBroken"`
+	// Whether to enable low frame rate detection.Note: This field may return null, indicating that no valid value is available.
+	CheckStreamLowFrameRate pulumi.IntInput `pulumi:"checkStreamLowFrameRate"`
+	// The creation time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+	CreateTime pulumi.IntInput `pulumi:"createTime"`
+	// The input stream information for the monitoring task.Note: This field may return null, indicating that no valid value is available.
+	InputLists GetStreamMonitorListLiveStreamMonitorInputListArrayInput `pulumi:"inputLists"`
+	// Monitoring task ID.Note: This field may return null, indicating that no valid value is available.
+	MonitorId pulumi.StringInput `pulumi:"monitorId"`
+	// Monitoring task name. Up to 128 bytes.Note: This field may return null, indicating that no valid value is available.
+	MonitorName pulumi.StringInput `pulumi:"monitorName"`
+	// The notification policy for monitoring events.Note: This field may return null, indicating that no valid value is available.
+	NotifyPolicies GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayInput `pulumi:"notifyPolicies"`
+	// The language for intelligent text recognition:0: Disabled1: Chinese and EnglishNote: This field may return null, indicating that no valid value is available.
+	OcrLanguage pulumi.IntInput `pulumi:"ocrLanguage"`
+	// Monitoring task output information.Note: This field may return null, indicating that no valid value is available.
+	OutputInfos GetStreamMonitorListLiveStreamMonitorOutputInfoArrayInput `pulumi:"outputInfos"`
+	// The last start time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+	StartTime pulumi.IntInput `pulumi:"startTime"`
+	// The status of the monitoring task.  0: Represents idle.  1: Represents monitoring in progress.Note: This field may return null, indicating that no valid value is available.
+	Status pulumi.IntInput `pulumi:"status"`
+	// The last stop time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+	StopTime pulumi.IntInput `pulumi:"stopTime"`
+	// The update time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+	UpdateTime pulumi.IntInput `pulumi:"updateTime"`
+}
+
+func (GetStreamMonitorListLiveStreamMonitorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetStreamMonitorListLiveStreamMonitor)(nil)).Elem()
+}
+
+func (i GetStreamMonitorListLiveStreamMonitorArgs) ToGetStreamMonitorListLiveStreamMonitorOutput() GetStreamMonitorListLiveStreamMonitorOutput {
+	return i.ToGetStreamMonitorListLiveStreamMonitorOutputWithContext(context.Background())
+}
+
+func (i GetStreamMonitorListLiveStreamMonitorArgs) ToGetStreamMonitorListLiveStreamMonitorOutputWithContext(ctx context.Context) GetStreamMonitorListLiveStreamMonitorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetStreamMonitorListLiveStreamMonitorOutput)
+}
+
+// GetStreamMonitorListLiveStreamMonitorArrayInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorArray and GetStreamMonitorListLiveStreamMonitorArrayOutput values.
+// You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorArrayInput` via:
+//
+//          GetStreamMonitorListLiveStreamMonitorArray{ GetStreamMonitorListLiveStreamMonitorArgs{...} }
+type GetStreamMonitorListLiveStreamMonitorArrayInput interface {
+	pulumi.Input
+
+	ToGetStreamMonitorListLiveStreamMonitorArrayOutput() GetStreamMonitorListLiveStreamMonitorArrayOutput
+	ToGetStreamMonitorListLiveStreamMonitorArrayOutputWithContext(context.Context) GetStreamMonitorListLiveStreamMonitorArrayOutput
+}
+
+type GetStreamMonitorListLiveStreamMonitorArray []GetStreamMonitorListLiveStreamMonitorInput
+
+func (GetStreamMonitorListLiveStreamMonitorArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetStreamMonitorListLiveStreamMonitor)(nil)).Elem()
+}
+
+func (i GetStreamMonitorListLiveStreamMonitorArray) ToGetStreamMonitorListLiveStreamMonitorArrayOutput() GetStreamMonitorListLiveStreamMonitorArrayOutput {
+	return i.ToGetStreamMonitorListLiveStreamMonitorArrayOutputWithContext(context.Background())
+}
+
+func (i GetStreamMonitorListLiveStreamMonitorArray) ToGetStreamMonitorListLiveStreamMonitorArrayOutputWithContext(ctx context.Context) GetStreamMonitorListLiveStreamMonitorArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetStreamMonitorListLiveStreamMonitorArrayOutput)
+}
+
+type GetStreamMonitorListLiveStreamMonitorOutput struct{ *pulumi.OutputState }
+
+func (GetStreamMonitorListLiveStreamMonitorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetStreamMonitorListLiveStreamMonitor)(nil)).Elem()
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorOutput) ToGetStreamMonitorListLiveStreamMonitorOutput() GetStreamMonitorListLiveStreamMonitorOutput {
+	return o
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorOutput) ToGetStreamMonitorListLiveStreamMonitorOutputWithContext(ctx context.Context) GetStreamMonitorListLiveStreamMonitorOutput {
+	return o
+}
+
+// The list of input indices for enabling intelligent speech recognition.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) AiAsrInputIndexLists() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) []int { return v.AiAsrInputIndexLists }).(pulumi.IntArrayOutput)
+}
+
+// Whether to enable format diagnosis. Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) AiFormatDiagnose() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) int { return v.AiFormatDiagnose }).(pulumi.IntOutput)
+}
+
+// The list of input indices for enabling intelligent text recognition.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) AiOcrInputIndexLists() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) []int { return v.AiOcrInputIndexLists }).(pulumi.IntArrayOutput)
+}
+
+// Whether to store monitoring events in the monitoring report and allow querying of the monitoring report.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) AllowMonitorReport() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) int { return v.AllowMonitorReport }).(pulumi.IntOutput)
+}
+
+// The language for intelligent speech recognition:0: Disabled1: Chinese2: English3: Japanese4: KoreanNote: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) AsrLanguage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) int { return v.AsrLanguage }).(pulumi.IntOutput)
+}
+
+// The list of input indices for the output audio.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) AudibleInputIndexLists() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) []int { return v.AudibleInputIndexLists }).(pulumi.IntArrayOutput)
+}
+
+// Whether to enable stream disconnection detection.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) CheckStreamBroken() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) int { return v.CheckStreamBroken }).(pulumi.IntOutput)
+}
+
+// Whether to enable low frame rate detection.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) CheckStreamLowFrameRate() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) int { return v.CheckStreamLowFrameRate }).(pulumi.IntOutput)
+}
+
+// The creation time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) CreateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) int { return v.CreateTime }).(pulumi.IntOutput)
+}
+
+// The input stream information for the monitoring task.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) InputLists() GetStreamMonitorListLiveStreamMonitorInputListArrayOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) []GetStreamMonitorListLiveStreamMonitorInputList {
+		return v.InputLists
+	}).(GetStreamMonitorListLiveStreamMonitorInputListArrayOutput)
+}
+
+// Monitoring task ID.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) MonitorId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) string { return v.MonitorId }).(pulumi.StringOutput)
+}
+
+// Monitoring task name. Up to 128 bytes.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) MonitorName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) string { return v.MonitorName }).(pulumi.StringOutput)
+}
+
+// The notification policy for monitoring events.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) NotifyPolicies() GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) []GetStreamMonitorListLiveStreamMonitorNotifyPolicy {
+		return v.NotifyPolicies
+	}).(GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput)
+}
+
+// The language for intelligent text recognition:0: Disabled1: Chinese and EnglishNote: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) OcrLanguage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) int { return v.OcrLanguage }).(pulumi.IntOutput)
+}
+
+// Monitoring task output information.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) OutputInfos() GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) []GetStreamMonitorListLiveStreamMonitorOutputInfo {
+		return v.OutputInfos
+	}).(GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput)
+}
+
+// The last start time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) StartTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) int { return v.StartTime }).(pulumi.IntOutput)
+}
+
+// The status of the monitoring task.  0: Represents idle.  1: Represents monitoring in progress.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// The last stop time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) StopTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) int { return v.StopTime }).(pulumi.IntOutput)
+}
+
+// The update time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutput) UpdateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitor) int { return v.UpdateTime }).(pulumi.IntOutput)
+}
+
+type GetStreamMonitorListLiveStreamMonitorArrayOutput struct{ *pulumi.OutputState }
+
+func (GetStreamMonitorListLiveStreamMonitorArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetStreamMonitorListLiveStreamMonitor)(nil)).Elem()
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorArrayOutput) ToGetStreamMonitorListLiveStreamMonitorArrayOutput() GetStreamMonitorListLiveStreamMonitorArrayOutput {
+	return o
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorArrayOutput) ToGetStreamMonitorListLiveStreamMonitorArrayOutputWithContext(ctx context.Context) GetStreamMonitorListLiveStreamMonitorArrayOutput {
+	return o
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorArrayOutput) Index(i pulumi.IntInput) GetStreamMonitorListLiveStreamMonitorOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetStreamMonitorListLiveStreamMonitor {
+		return vs[0].([]GetStreamMonitorListLiveStreamMonitor)[vs[1].(int)]
+	}).(GetStreamMonitorListLiveStreamMonitorOutput)
+}
+
+type GetStreamMonitorListLiveStreamMonitorInputList struct {
+	// Description of the monitoring task.It should be within 256 bytes.Note: This field may return null, indicating that no valid value is available.
+	Description string `pulumi:"description"`
+	// The push path for the input stream to be monitored.It should be within 32 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+	InputApp string `pulumi:"inputApp"`
+	// The push domain for the input stream to be monitored.It should be within 128 bytes and can only be filled with an enabled push domain.Note: This field may return null, indicating that no valid value is available.
+	InputDomain string `pulumi:"inputDomain"`
+	// The name of the input stream for the monitoring task.It should be within 256 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+	InputStreamName string `pulumi:"inputStreamName"`
+	// The push URL for the input stream to be monitored. In most cases, this parameter is not required.Note: This field may return null, indicating that no valid value is available.
+	InputUrl string `pulumi:"inputUrl"`
+}
+
+// GetStreamMonitorListLiveStreamMonitorInputListInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorInputListArgs and GetStreamMonitorListLiveStreamMonitorInputListOutput values.
+// You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorInputListInput` via:
+//
+//          GetStreamMonitorListLiveStreamMonitorInputListArgs{...}
+type GetStreamMonitorListLiveStreamMonitorInputListInput interface {
+	pulumi.Input
+
+	ToGetStreamMonitorListLiveStreamMonitorInputListOutput() GetStreamMonitorListLiveStreamMonitorInputListOutput
+	ToGetStreamMonitorListLiveStreamMonitorInputListOutputWithContext(context.Context) GetStreamMonitorListLiveStreamMonitorInputListOutput
+}
+
+type GetStreamMonitorListLiveStreamMonitorInputListArgs struct {
+	// Description of the monitoring task.It should be within 256 bytes.Note: This field may return null, indicating that no valid value is available.
+	Description pulumi.StringInput `pulumi:"description"`
+	// The push path for the input stream to be monitored.It should be within 32 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+	InputApp pulumi.StringInput `pulumi:"inputApp"`
+	// The push domain for the input stream to be monitored.It should be within 128 bytes and can only be filled with an enabled push domain.Note: This field may return null, indicating that no valid value is available.
+	InputDomain pulumi.StringInput `pulumi:"inputDomain"`
+	// The name of the input stream for the monitoring task.It should be within 256 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+	InputStreamName pulumi.StringInput `pulumi:"inputStreamName"`
+	// The push URL for the input stream to be monitored. In most cases, this parameter is not required.Note: This field may return null, indicating that no valid value is available.
+	InputUrl pulumi.StringInput `pulumi:"inputUrl"`
+}
+
+func (GetStreamMonitorListLiveStreamMonitorInputListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetStreamMonitorListLiveStreamMonitorInputList)(nil)).Elem()
+}
+
+func (i GetStreamMonitorListLiveStreamMonitorInputListArgs) ToGetStreamMonitorListLiveStreamMonitorInputListOutput() GetStreamMonitorListLiveStreamMonitorInputListOutput {
+	return i.ToGetStreamMonitorListLiveStreamMonitorInputListOutputWithContext(context.Background())
+}
+
+func (i GetStreamMonitorListLiveStreamMonitorInputListArgs) ToGetStreamMonitorListLiveStreamMonitorInputListOutputWithContext(ctx context.Context) GetStreamMonitorListLiveStreamMonitorInputListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetStreamMonitorListLiveStreamMonitorInputListOutput)
+}
+
+// GetStreamMonitorListLiveStreamMonitorInputListArrayInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorInputListArray and GetStreamMonitorListLiveStreamMonitorInputListArrayOutput values.
+// You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorInputListArrayInput` via:
+//
+//          GetStreamMonitorListLiveStreamMonitorInputListArray{ GetStreamMonitorListLiveStreamMonitorInputListArgs{...} }
+type GetStreamMonitorListLiveStreamMonitorInputListArrayInput interface {
+	pulumi.Input
+
+	ToGetStreamMonitorListLiveStreamMonitorInputListArrayOutput() GetStreamMonitorListLiveStreamMonitorInputListArrayOutput
+	ToGetStreamMonitorListLiveStreamMonitorInputListArrayOutputWithContext(context.Context) GetStreamMonitorListLiveStreamMonitorInputListArrayOutput
+}
+
+type GetStreamMonitorListLiveStreamMonitorInputListArray []GetStreamMonitorListLiveStreamMonitorInputListInput
+
+func (GetStreamMonitorListLiveStreamMonitorInputListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetStreamMonitorListLiveStreamMonitorInputList)(nil)).Elem()
+}
+
+func (i GetStreamMonitorListLiveStreamMonitorInputListArray) ToGetStreamMonitorListLiveStreamMonitorInputListArrayOutput() GetStreamMonitorListLiveStreamMonitorInputListArrayOutput {
+	return i.ToGetStreamMonitorListLiveStreamMonitorInputListArrayOutputWithContext(context.Background())
+}
+
+func (i GetStreamMonitorListLiveStreamMonitorInputListArray) ToGetStreamMonitorListLiveStreamMonitorInputListArrayOutputWithContext(ctx context.Context) GetStreamMonitorListLiveStreamMonitorInputListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetStreamMonitorListLiveStreamMonitorInputListArrayOutput)
+}
+
+type GetStreamMonitorListLiveStreamMonitorInputListOutput struct{ *pulumi.OutputState }
+
+func (GetStreamMonitorListLiveStreamMonitorInputListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetStreamMonitorListLiveStreamMonitorInputList)(nil)).Elem()
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorInputListOutput) ToGetStreamMonitorListLiveStreamMonitorInputListOutput() GetStreamMonitorListLiveStreamMonitorInputListOutput {
+	return o
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorInputListOutput) ToGetStreamMonitorListLiveStreamMonitorInputListOutputWithContext(ctx context.Context) GetStreamMonitorListLiveStreamMonitorInputListOutput {
+	return o
+}
+
+// Description of the monitoring task.It should be within 256 bytes.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorInputListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitorInputList) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// The push path for the input stream to be monitored.It should be within 32 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorInputListOutput) InputApp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitorInputList) string { return v.InputApp }).(pulumi.StringOutput)
+}
+
+// The push domain for the input stream to be monitored.It should be within 128 bytes and can only be filled with an enabled push domain.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorInputListOutput) InputDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitorInputList) string { return v.InputDomain }).(pulumi.StringOutput)
+}
+
+// The name of the input stream for the monitoring task.It should be within 256 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorInputListOutput) InputStreamName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitorInputList) string { return v.InputStreamName }).(pulumi.StringOutput)
+}
+
+// The push URL for the input stream to be monitored. In most cases, this parameter is not required.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorInputListOutput) InputUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitorInputList) string { return v.InputUrl }).(pulumi.StringOutput)
+}
+
+type GetStreamMonitorListLiveStreamMonitorInputListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetStreamMonitorListLiveStreamMonitorInputListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetStreamMonitorListLiveStreamMonitorInputList)(nil)).Elem()
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorInputListArrayOutput) ToGetStreamMonitorListLiveStreamMonitorInputListArrayOutput() GetStreamMonitorListLiveStreamMonitorInputListArrayOutput {
+	return o
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorInputListArrayOutput) ToGetStreamMonitorListLiveStreamMonitorInputListArrayOutputWithContext(ctx context.Context) GetStreamMonitorListLiveStreamMonitorInputListArrayOutput {
+	return o
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorInputListArrayOutput) Index(i pulumi.IntInput) GetStreamMonitorListLiveStreamMonitorInputListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetStreamMonitorListLiveStreamMonitorInputList {
+		return vs[0].([]GetStreamMonitorListLiveStreamMonitorInputList)[vs[1].(int)]
+	}).(GetStreamMonitorListLiveStreamMonitorInputListOutput)
+}
+
+type GetStreamMonitorListLiveStreamMonitorNotifyPolicy struct {
+	// The callback URL for notifications. It should be of length [0,512] and only support URLs with the http and https types.Note: This field may return null, indicating that no valid value is available.
+	CallbackUrl string `pulumi:"callbackUrl"`
+	// The type of notification policy: Range [0,1]  0: Represents no notification policy is used.  1: Represents the use of a global callback policy, where all events are notified to the CallbackUrl.Note: This field may return null, indicating that no valid value is available.
+	NotifyPolicyType int `pulumi:"notifyPolicyType"`
+}
+
+// GetStreamMonitorListLiveStreamMonitorNotifyPolicyInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs and GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput values.
+// You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorNotifyPolicyInput` via:
+//
+//          GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs{...}
+type GetStreamMonitorListLiveStreamMonitorNotifyPolicyInput interface {
+	pulumi.Input
+
+	ToGetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput() GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput
+	ToGetStreamMonitorListLiveStreamMonitorNotifyPolicyOutputWithContext(context.Context) GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput
+}
+
+type GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs struct {
+	// The callback URL for notifications. It should be of length [0,512] and only support URLs with the http and https types.Note: This field may return null, indicating that no valid value is available.
+	CallbackUrl pulumi.StringInput `pulumi:"callbackUrl"`
+	// The type of notification policy: Range [0,1]  0: Represents no notification policy is used.  1: Represents the use of a global callback policy, where all events are notified to the CallbackUrl.Note: This field may return null, indicating that no valid value is available.
+	NotifyPolicyType pulumi.IntInput `pulumi:"notifyPolicyType"`
+}
+
+func (GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetStreamMonitorListLiveStreamMonitorNotifyPolicy)(nil)).Elem()
+}
+
+func (i GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs) ToGetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput() GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput {
+	return i.ToGetStreamMonitorListLiveStreamMonitorNotifyPolicyOutputWithContext(context.Background())
+}
+
+func (i GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs) ToGetStreamMonitorListLiveStreamMonitorNotifyPolicyOutputWithContext(ctx context.Context) GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput)
+}
+
+// GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorNotifyPolicyArray and GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput values.
+// You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayInput` via:
+//
+//          GetStreamMonitorListLiveStreamMonitorNotifyPolicyArray{ GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs{...} }
+type GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayInput interface {
+	pulumi.Input
+
+	ToGetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput() GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput
+	ToGetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutputWithContext(context.Context) GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput
+}
+
+type GetStreamMonitorListLiveStreamMonitorNotifyPolicyArray []GetStreamMonitorListLiveStreamMonitorNotifyPolicyInput
+
+func (GetStreamMonitorListLiveStreamMonitorNotifyPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetStreamMonitorListLiveStreamMonitorNotifyPolicy)(nil)).Elem()
+}
+
+func (i GetStreamMonitorListLiveStreamMonitorNotifyPolicyArray) ToGetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput() GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput {
+	return i.ToGetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutputWithContext(context.Background())
+}
+
+func (i GetStreamMonitorListLiveStreamMonitorNotifyPolicyArray) ToGetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutputWithContext(ctx context.Context) GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput)
+}
+
+type GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput struct{ *pulumi.OutputState }
+
+func (GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetStreamMonitorListLiveStreamMonitorNotifyPolicy)(nil)).Elem()
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput) ToGetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput() GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput {
+	return o
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput) ToGetStreamMonitorListLiveStreamMonitorNotifyPolicyOutputWithContext(ctx context.Context) GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput {
+	return o
+}
+
+// The callback URL for notifications. It should be of length [0,512] and only support URLs with the http and https types.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput) CallbackUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitorNotifyPolicy) string { return v.CallbackUrl }).(pulumi.StringOutput)
+}
+
+// The type of notification policy: Range [0,1]  0: Represents no notification policy is used.  1: Represents the use of a global callback policy, where all events are notified to the CallbackUrl.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput) NotifyPolicyType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitorNotifyPolicy) int { return v.NotifyPolicyType }).(pulumi.IntOutput)
+}
+
+type GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetStreamMonitorListLiveStreamMonitorNotifyPolicy)(nil)).Elem()
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput) ToGetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput() GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput {
+	return o
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput) ToGetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutputWithContext(ctx context.Context) GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput {
+	return o
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput) Index(i pulumi.IntInput) GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetStreamMonitorListLiveStreamMonitorNotifyPolicy {
+		return vs[0].([]GetStreamMonitorListLiveStreamMonitorNotifyPolicy)[vs[1].(int)]
+	}).(GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput)
+}
+
+type GetStreamMonitorListLiveStreamMonitorOutputInfo struct {
+	// The playback path for the monitoring task.It should be within 32 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+	OutputApp string `pulumi:"outputApp"`
+	// The playback domain for the monitoring task.It should be within 128 bytes and can only be filled with an enabled playback domain.Note: This field may return null, indicating that no valid value is available.
+	OutputDomain string `pulumi:"outputDomain"`
+	// The height of the output stream in pixels for the monitoring task. The range is [1, 1080]. It is recommended to be at least 100 pixels.Note: This field may return null, indicating that no valid value is available.
+	OutputStreamHeight int `pulumi:"outputStreamHeight"`
+	// The name of the output stream for the monitoring task.If not specified, the system will generate a name automatically.The name should be within 256 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+	OutputStreamName string `pulumi:"outputStreamName"`
+	// The width of the output stream in pixels for the monitoring task. The range is [1, 1920]. It is recommended to be at least 100 pixels.Note: This field may return null, indicating that no valid value is available.
+	OutputStreamWidth int `pulumi:"outputStreamWidth"`
+}
+
+// GetStreamMonitorListLiveStreamMonitorOutputInfoInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorOutputInfoArgs and GetStreamMonitorListLiveStreamMonitorOutputInfoOutput values.
+// You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorOutputInfoInput` via:
+//
+//          GetStreamMonitorListLiveStreamMonitorOutputInfoArgs{...}
+type GetStreamMonitorListLiveStreamMonitorOutputInfoInput interface {
+	pulumi.Input
+
+	ToGetStreamMonitorListLiveStreamMonitorOutputInfoOutput() GetStreamMonitorListLiveStreamMonitorOutputInfoOutput
+	ToGetStreamMonitorListLiveStreamMonitorOutputInfoOutputWithContext(context.Context) GetStreamMonitorListLiveStreamMonitorOutputInfoOutput
+}
+
+type GetStreamMonitorListLiveStreamMonitorOutputInfoArgs struct {
+	// The playback path for the monitoring task.It should be within 32 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+	OutputApp pulumi.StringInput `pulumi:"outputApp"`
+	// The playback domain for the monitoring task.It should be within 128 bytes and can only be filled with an enabled playback domain.Note: This field may return null, indicating that no valid value is available.
+	OutputDomain pulumi.StringInput `pulumi:"outputDomain"`
+	// The height of the output stream in pixels for the monitoring task. The range is [1, 1080]. It is recommended to be at least 100 pixels.Note: This field may return null, indicating that no valid value is available.
+	OutputStreamHeight pulumi.IntInput `pulumi:"outputStreamHeight"`
+	// The name of the output stream for the monitoring task.If not specified, the system will generate a name automatically.The name should be within 256 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+	OutputStreamName pulumi.StringInput `pulumi:"outputStreamName"`
+	// The width of the output stream in pixels for the monitoring task. The range is [1, 1920]. It is recommended to be at least 100 pixels.Note: This field may return null, indicating that no valid value is available.
+	OutputStreamWidth pulumi.IntInput `pulumi:"outputStreamWidth"`
+}
+
+func (GetStreamMonitorListLiveStreamMonitorOutputInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetStreamMonitorListLiveStreamMonitorOutputInfo)(nil)).Elem()
+}
+
+func (i GetStreamMonitorListLiveStreamMonitorOutputInfoArgs) ToGetStreamMonitorListLiveStreamMonitorOutputInfoOutput() GetStreamMonitorListLiveStreamMonitorOutputInfoOutput {
+	return i.ToGetStreamMonitorListLiveStreamMonitorOutputInfoOutputWithContext(context.Background())
+}
+
+func (i GetStreamMonitorListLiveStreamMonitorOutputInfoArgs) ToGetStreamMonitorListLiveStreamMonitorOutputInfoOutputWithContext(ctx context.Context) GetStreamMonitorListLiveStreamMonitorOutputInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetStreamMonitorListLiveStreamMonitorOutputInfoOutput)
+}
+
+// GetStreamMonitorListLiveStreamMonitorOutputInfoArrayInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorOutputInfoArray and GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput values.
+// You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorOutputInfoArrayInput` via:
+//
+//          GetStreamMonitorListLiveStreamMonitorOutputInfoArray{ GetStreamMonitorListLiveStreamMonitorOutputInfoArgs{...} }
+type GetStreamMonitorListLiveStreamMonitorOutputInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput() GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput
+	ToGetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutputWithContext(context.Context) GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput
+}
+
+type GetStreamMonitorListLiveStreamMonitorOutputInfoArray []GetStreamMonitorListLiveStreamMonitorOutputInfoInput
+
+func (GetStreamMonitorListLiveStreamMonitorOutputInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetStreamMonitorListLiveStreamMonitorOutputInfo)(nil)).Elem()
+}
+
+func (i GetStreamMonitorListLiveStreamMonitorOutputInfoArray) ToGetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput() GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput {
+	return i.ToGetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetStreamMonitorListLiveStreamMonitorOutputInfoArray) ToGetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutputWithContext(ctx context.Context) GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput)
+}
+
+type GetStreamMonitorListLiveStreamMonitorOutputInfoOutput struct{ *pulumi.OutputState }
+
+func (GetStreamMonitorListLiveStreamMonitorOutputInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetStreamMonitorListLiveStreamMonitorOutputInfo)(nil)).Elem()
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorOutputInfoOutput) ToGetStreamMonitorListLiveStreamMonitorOutputInfoOutput() GetStreamMonitorListLiveStreamMonitorOutputInfoOutput {
+	return o
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorOutputInfoOutput) ToGetStreamMonitorListLiveStreamMonitorOutputInfoOutputWithContext(ctx context.Context) GetStreamMonitorListLiveStreamMonitorOutputInfoOutput {
+	return o
+}
+
+// The playback path for the monitoring task.It should be within 32 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutputInfoOutput) OutputApp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitorOutputInfo) string { return v.OutputApp }).(pulumi.StringOutput)
+}
+
+// The playback domain for the monitoring task.It should be within 128 bytes and can only be filled with an enabled playback domain.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutputInfoOutput) OutputDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitorOutputInfo) string { return v.OutputDomain }).(pulumi.StringOutput)
+}
+
+// The height of the output stream in pixels for the monitoring task. The range is [1, 1080]. It is recommended to be at least 100 pixels.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutputInfoOutput) OutputStreamHeight() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitorOutputInfo) int { return v.OutputStreamHeight }).(pulumi.IntOutput)
+}
+
+// The name of the output stream for the monitoring task.If not specified, the system will generate a name automatically.The name should be within 256 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutputInfoOutput) OutputStreamName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitorOutputInfo) string { return v.OutputStreamName }).(pulumi.StringOutput)
+}
+
+// The width of the output stream in pixels for the monitoring task. The range is [1, 1920]. It is recommended to be at least 100 pixels.Note: This field may return null, indicating that no valid value is available.
+func (o GetStreamMonitorListLiveStreamMonitorOutputInfoOutput) OutputStreamWidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStreamMonitorListLiveStreamMonitorOutputInfo) int { return v.OutputStreamWidth }).(pulumi.IntOutput)
+}
+
+type GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetStreamMonitorListLiveStreamMonitorOutputInfo)(nil)).Elem()
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput) ToGetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput() GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput {
+	return o
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput) ToGetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutputWithContext(ctx context.Context) GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput {
+	return o
+}
+
+func (o GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput) Index(i pulumi.IntInput) GetStreamMonitorListLiveStreamMonitorOutputInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetStreamMonitorListLiveStreamMonitorOutputInfo {
+		return vs[0].([]GetStreamMonitorListLiveStreamMonitorOutputInfo)[vs[1].(int)]
+	}).(GetStreamMonitorListLiveStreamMonitorOutputInfoOutput)
+}
+
+type GetTimeShiftRecordDetailRecordList struct {
+	// The ending time of the query range is specified in Unix timestamp.
+	EndTime int `pulumi:"endTime"`
+	// The identifier for the time-shift recording session.
+	Sid string `pulumi:"sid"`
+	// The starting time of the query range is specified in Unix timestamp.
+	StartTime int `pulumi:"startTime"`
+}
+
+// GetTimeShiftRecordDetailRecordListInput is an input type that accepts GetTimeShiftRecordDetailRecordListArgs and GetTimeShiftRecordDetailRecordListOutput values.
+// You can construct a concrete instance of `GetTimeShiftRecordDetailRecordListInput` via:
+//
+//          GetTimeShiftRecordDetailRecordListArgs{...}
+type GetTimeShiftRecordDetailRecordListInput interface {
+	pulumi.Input
+
+	ToGetTimeShiftRecordDetailRecordListOutput() GetTimeShiftRecordDetailRecordListOutput
+	ToGetTimeShiftRecordDetailRecordListOutputWithContext(context.Context) GetTimeShiftRecordDetailRecordListOutput
+}
+
+type GetTimeShiftRecordDetailRecordListArgs struct {
+	// The ending time of the query range is specified in Unix timestamp.
+	EndTime pulumi.IntInput `pulumi:"endTime"`
+	// The identifier for the time-shift recording session.
+	Sid pulumi.StringInput `pulumi:"sid"`
+	// The starting time of the query range is specified in Unix timestamp.
+	StartTime pulumi.IntInput `pulumi:"startTime"`
+}
+
+func (GetTimeShiftRecordDetailRecordListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTimeShiftRecordDetailRecordList)(nil)).Elem()
+}
+
+func (i GetTimeShiftRecordDetailRecordListArgs) ToGetTimeShiftRecordDetailRecordListOutput() GetTimeShiftRecordDetailRecordListOutput {
+	return i.ToGetTimeShiftRecordDetailRecordListOutputWithContext(context.Background())
+}
+
+func (i GetTimeShiftRecordDetailRecordListArgs) ToGetTimeShiftRecordDetailRecordListOutputWithContext(ctx context.Context) GetTimeShiftRecordDetailRecordListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTimeShiftRecordDetailRecordListOutput)
+}
+
+// GetTimeShiftRecordDetailRecordListArrayInput is an input type that accepts GetTimeShiftRecordDetailRecordListArray and GetTimeShiftRecordDetailRecordListArrayOutput values.
+// You can construct a concrete instance of `GetTimeShiftRecordDetailRecordListArrayInput` via:
+//
+//          GetTimeShiftRecordDetailRecordListArray{ GetTimeShiftRecordDetailRecordListArgs{...} }
+type GetTimeShiftRecordDetailRecordListArrayInput interface {
+	pulumi.Input
+
+	ToGetTimeShiftRecordDetailRecordListArrayOutput() GetTimeShiftRecordDetailRecordListArrayOutput
+	ToGetTimeShiftRecordDetailRecordListArrayOutputWithContext(context.Context) GetTimeShiftRecordDetailRecordListArrayOutput
+}
+
+type GetTimeShiftRecordDetailRecordListArray []GetTimeShiftRecordDetailRecordListInput
+
+func (GetTimeShiftRecordDetailRecordListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTimeShiftRecordDetailRecordList)(nil)).Elem()
+}
+
+func (i GetTimeShiftRecordDetailRecordListArray) ToGetTimeShiftRecordDetailRecordListArrayOutput() GetTimeShiftRecordDetailRecordListArrayOutput {
+	return i.ToGetTimeShiftRecordDetailRecordListArrayOutputWithContext(context.Background())
+}
+
+func (i GetTimeShiftRecordDetailRecordListArray) ToGetTimeShiftRecordDetailRecordListArrayOutputWithContext(ctx context.Context) GetTimeShiftRecordDetailRecordListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTimeShiftRecordDetailRecordListArrayOutput)
+}
+
+type GetTimeShiftRecordDetailRecordListOutput struct{ *pulumi.OutputState }
+
+func (GetTimeShiftRecordDetailRecordListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTimeShiftRecordDetailRecordList)(nil)).Elem()
+}
+
+func (o GetTimeShiftRecordDetailRecordListOutput) ToGetTimeShiftRecordDetailRecordListOutput() GetTimeShiftRecordDetailRecordListOutput {
+	return o
+}
+
+func (o GetTimeShiftRecordDetailRecordListOutput) ToGetTimeShiftRecordDetailRecordListOutputWithContext(ctx context.Context) GetTimeShiftRecordDetailRecordListOutput {
+	return o
+}
+
+// The ending time of the query range is specified in Unix timestamp.
+func (o GetTimeShiftRecordDetailRecordListOutput) EndTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTimeShiftRecordDetailRecordList) int { return v.EndTime }).(pulumi.IntOutput)
+}
+
+// The identifier for the time-shift recording session.
+func (o GetTimeShiftRecordDetailRecordListOutput) Sid() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTimeShiftRecordDetailRecordList) string { return v.Sid }).(pulumi.StringOutput)
+}
+
+// The starting time of the query range is specified in Unix timestamp.
+func (o GetTimeShiftRecordDetailRecordListOutput) StartTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTimeShiftRecordDetailRecordList) int { return v.StartTime }).(pulumi.IntOutput)
+}
+
+type GetTimeShiftRecordDetailRecordListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTimeShiftRecordDetailRecordListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTimeShiftRecordDetailRecordList)(nil)).Elem()
+}
+
+func (o GetTimeShiftRecordDetailRecordListArrayOutput) ToGetTimeShiftRecordDetailRecordListArrayOutput() GetTimeShiftRecordDetailRecordListArrayOutput {
+	return o
+}
+
+func (o GetTimeShiftRecordDetailRecordListArrayOutput) ToGetTimeShiftRecordDetailRecordListArrayOutputWithContext(ctx context.Context) GetTimeShiftRecordDetailRecordListArrayOutput {
+	return o
+}
+
+func (o GetTimeShiftRecordDetailRecordListArrayOutput) Index(i pulumi.IntInput) GetTimeShiftRecordDetailRecordListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTimeShiftRecordDetailRecordList {
+		return vs[0].([]GetTimeShiftRecordDetailRecordList)[vs[1].(int)]
+	}).(GetTimeShiftRecordDetailRecordListOutput)
+}
+
+type GetTimeShiftStreamListStreamList struct {
+	// The push path.
+	AppName string `pulumi:"appName"`
+	// The push domain.
+	Domain string `pulumi:"domain"`
+	// The group the push domain belongs to.
+	DomainGroup string `pulumi:"domainGroup"`
+	// The storage duration (seconds) of the recording.Note: This field may return null, indicating that no valid values can be obtained.
+	Duration int `pulumi:"duration"`
+	// The end time, which must be a Unix timestamp.
+	EndTime int `pulumi:"endTime"`
+	// The start time, which must be a Unix timestamp.
+	StartTime int `pulumi:"startTime"`
+	// The stream name.
+	StreamName string `pulumi:"streamName"`
+	// The stream type. `0`: The original stream; `1`: The watermarked stream; `2`: The transcoded stream.
+	StreamType int `pulumi:"streamType"`
+	// The transcoding template ID.Note: This field may return null, indicating that no valid values can be obtained.
+	TransCodeId int `pulumi:"transCodeId"`
+}
+
+// GetTimeShiftStreamListStreamListInput is an input type that accepts GetTimeShiftStreamListStreamListArgs and GetTimeShiftStreamListStreamListOutput values.
+// You can construct a concrete instance of `GetTimeShiftStreamListStreamListInput` via:
+//
+//          GetTimeShiftStreamListStreamListArgs{...}
+type GetTimeShiftStreamListStreamListInput interface {
+	pulumi.Input
+
+	ToGetTimeShiftStreamListStreamListOutput() GetTimeShiftStreamListStreamListOutput
+	ToGetTimeShiftStreamListStreamListOutputWithContext(context.Context) GetTimeShiftStreamListStreamListOutput
+}
+
+type GetTimeShiftStreamListStreamListArgs struct {
+	// The push path.
+	AppName pulumi.StringInput `pulumi:"appName"`
+	// The push domain.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// The group the push domain belongs to.
+	DomainGroup pulumi.StringInput `pulumi:"domainGroup"`
+	// The storage duration (seconds) of the recording.Note: This field may return null, indicating that no valid values can be obtained.
+	Duration pulumi.IntInput `pulumi:"duration"`
+	// The end time, which must be a Unix timestamp.
+	EndTime pulumi.IntInput `pulumi:"endTime"`
+	// The start time, which must be a Unix timestamp.
+	StartTime pulumi.IntInput `pulumi:"startTime"`
+	// The stream name.
+	StreamName pulumi.StringInput `pulumi:"streamName"`
+	// The stream type. `0`: The original stream; `1`: The watermarked stream; `2`: The transcoded stream.
+	StreamType pulumi.IntInput `pulumi:"streamType"`
+	// The transcoding template ID.Note: This field may return null, indicating that no valid values can be obtained.
+	TransCodeId pulumi.IntInput `pulumi:"transCodeId"`
+}
+
+func (GetTimeShiftStreamListStreamListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTimeShiftStreamListStreamList)(nil)).Elem()
+}
+
+func (i GetTimeShiftStreamListStreamListArgs) ToGetTimeShiftStreamListStreamListOutput() GetTimeShiftStreamListStreamListOutput {
+	return i.ToGetTimeShiftStreamListStreamListOutputWithContext(context.Background())
+}
+
+func (i GetTimeShiftStreamListStreamListArgs) ToGetTimeShiftStreamListStreamListOutputWithContext(ctx context.Context) GetTimeShiftStreamListStreamListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTimeShiftStreamListStreamListOutput)
+}
+
+// GetTimeShiftStreamListStreamListArrayInput is an input type that accepts GetTimeShiftStreamListStreamListArray and GetTimeShiftStreamListStreamListArrayOutput values.
+// You can construct a concrete instance of `GetTimeShiftStreamListStreamListArrayInput` via:
+//
+//          GetTimeShiftStreamListStreamListArray{ GetTimeShiftStreamListStreamListArgs{...} }
+type GetTimeShiftStreamListStreamListArrayInput interface {
+	pulumi.Input
+
+	ToGetTimeShiftStreamListStreamListArrayOutput() GetTimeShiftStreamListStreamListArrayOutput
+	ToGetTimeShiftStreamListStreamListArrayOutputWithContext(context.Context) GetTimeShiftStreamListStreamListArrayOutput
+}
+
+type GetTimeShiftStreamListStreamListArray []GetTimeShiftStreamListStreamListInput
+
+func (GetTimeShiftStreamListStreamListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTimeShiftStreamListStreamList)(nil)).Elem()
+}
+
+func (i GetTimeShiftStreamListStreamListArray) ToGetTimeShiftStreamListStreamListArrayOutput() GetTimeShiftStreamListStreamListArrayOutput {
+	return i.ToGetTimeShiftStreamListStreamListArrayOutputWithContext(context.Background())
+}
+
+func (i GetTimeShiftStreamListStreamListArray) ToGetTimeShiftStreamListStreamListArrayOutputWithContext(ctx context.Context) GetTimeShiftStreamListStreamListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTimeShiftStreamListStreamListArrayOutput)
+}
+
+type GetTimeShiftStreamListStreamListOutput struct{ *pulumi.OutputState }
+
+func (GetTimeShiftStreamListStreamListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTimeShiftStreamListStreamList)(nil)).Elem()
+}
+
+func (o GetTimeShiftStreamListStreamListOutput) ToGetTimeShiftStreamListStreamListOutput() GetTimeShiftStreamListStreamListOutput {
+	return o
+}
+
+func (o GetTimeShiftStreamListStreamListOutput) ToGetTimeShiftStreamListStreamListOutputWithContext(ctx context.Context) GetTimeShiftStreamListStreamListOutput {
+	return o
+}
+
+// The push path.
+func (o GetTimeShiftStreamListStreamListOutput) AppName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTimeShiftStreamListStreamList) string { return v.AppName }).(pulumi.StringOutput)
+}
+
+// The push domain.
+func (o GetTimeShiftStreamListStreamListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTimeShiftStreamListStreamList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// The group the push domain belongs to.
+func (o GetTimeShiftStreamListStreamListOutput) DomainGroup() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTimeShiftStreamListStreamList) string { return v.DomainGroup }).(pulumi.StringOutput)
+}
+
+// The storage duration (seconds) of the recording.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetTimeShiftStreamListStreamListOutput) Duration() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTimeShiftStreamListStreamList) int { return v.Duration }).(pulumi.IntOutput)
+}
+
+// The end time, which must be a Unix timestamp.
+func (o GetTimeShiftStreamListStreamListOutput) EndTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTimeShiftStreamListStreamList) int { return v.EndTime }).(pulumi.IntOutput)
+}
+
+// The start time, which must be a Unix timestamp.
+func (o GetTimeShiftStreamListStreamListOutput) StartTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTimeShiftStreamListStreamList) int { return v.StartTime }).(pulumi.IntOutput)
+}
+
+// The stream name.
+func (o GetTimeShiftStreamListStreamListOutput) StreamName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTimeShiftStreamListStreamList) string { return v.StreamName }).(pulumi.StringOutput)
+}
+
+// The stream type. `0`: The original stream; `1`: The watermarked stream; `2`: The transcoded stream.
+func (o GetTimeShiftStreamListStreamListOutput) StreamType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTimeShiftStreamListStreamList) int { return v.StreamType }).(pulumi.IntOutput)
+}
+
+// The transcoding template ID.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetTimeShiftStreamListStreamListOutput) TransCodeId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTimeShiftStreamListStreamList) int { return v.TransCodeId }).(pulumi.IntOutput)
+}
+
+type GetTimeShiftStreamListStreamListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTimeShiftStreamListStreamListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTimeShiftStreamListStreamList)(nil)).Elem()
+}
+
+func (o GetTimeShiftStreamListStreamListArrayOutput) ToGetTimeShiftStreamListStreamListArrayOutput() GetTimeShiftStreamListStreamListArrayOutput {
+	return o
+}
+
+func (o GetTimeShiftStreamListStreamListArrayOutput) ToGetTimeShiftStreamListStreamListArrayOutputWithContext(ctx context.Context) GetTimeShiftStreamListStreamListArrayOutput {
+	return o
+}
+
+func (o GetTimeShiftStreamListStreamListArrayOutput) Index(i pulumi.IntInput) GetTimeShiftStreamListStreamListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTimeShiftStreamListStreamList {
+		return vs[0].([]GetTimeShiftStreamListStreamList)[vs[1].(int)]
+	}).(GetTimeShiftStreamListStreamListOutput)
+}
+
+type GetWatermarksWatermarkList struct {
+	// The time when the watermark was added.Note: Beijing time (UTC+8) is used.
+	CreateTime string `pulumi:"createTime"`
+	// Watermark height.
+	Height int `pulumi:"height"`
+	// Watermark image URL.
+	PictureUrl string `pulumi:"pictureUrl"`
+	// Current status. 0: not used. 1: in use.
+	Status int `pulumi:"status"`
+	// Watermark ID.
+	WatermarkId int `pulumi:"watermarkId"`
+	// Watermark name.
+	WatermarkName string `pulumi:"watermarkName"`
+	// Watermark width.
+	Width int `pulumi:"width"`
+	// Display position: X-axis offset.
+	XPosition int `pulumi:"xPosition"`
+	// Display position: Y-axis offset.
+	YPosition int `pulumi:"yPosition"`
+}
+
+// GetWatermarksWatermarkListInput is an input type that accepts GetWatermarksWatermarkListArgs and GetWatermarksWatermarkListOutput values.
+// You can construct a concrete instance of `GetWatermarksWatermarkListInput` via:
+//
+//          GetWatermarksWatermarkListArgs{...}
+type GetWatermarksWatermarkListInput interface {
+	pulumi.Input
+
+	ToGetWatermarksWatermarkListOutput() GetWatermarksWatermarkListOutput
+	ToGetWatermarksWatermarkListOutputWithContext(context.Context) GetWatermarksWatermarkListOutput
+}
+
+type GetWatermarksWatermarkListArgs struct {
+	// The time when the watermark was added.Note: Beijing time (UTC+8) is used.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Watermark height.
+	Height pulumi.IntInput `pulumi:"height"`
+	// Watermark image URL.
+	PictureUrl pulumi.StringInput `pulumi:"pictureUrl"`
+	// Current status. 0: not used. 1: in use.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Watermark ID.
+	WatermarkId pulumi.IntInput `pulumi:"watermarkId"`
+	// Watermark name.
+	WatermarkName pulumi.StringInput `pulumi:"watermarkName"`
+	// Watermark width.
+	Width pulumi.IntInput `pulumi:"width"`
+	// Display position: X-axis offset.
+	XPosition pulumi.IntInput `pulumi:"xPosition"`
+	// Display position: Y-axis offset.
+	YPosition pulumi.IntInput `pulumi:"yPosition"`
+}
+
+func (GetWatermarksWatermarkListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetWatermarksWatermarkList)(nil)).Elem()
+}
+
+func (i GetWatermarksWatermarkListArgs) ToGetWatermarksWatermarkListOutput() GetWatermarksWatermarkListOutput {
+	return i.ToGetWatermarksWatermarkListOutputWithContext(context.Background())
+}
+
+func (i GetWatermarksWatermarkListArgs) ToGetWatermarksWatermarkListOutputWithContext(ctx context.Context) GetWatermarksWatermarkListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetWatermarksWatermarkListOutput)
+}
+
+// GetWatermarksWatermarkListArrayInput is an input type that accepts GetWatermarksWatermarkListArray and GetWatermarksWatermarkListArrayOutput values.
+// You can construct a concrete instance of `GetWatermarksWatermarkListArrayInput` via:
+//
+//          GetWatermarksWatermarkListArray{ GetWatermarksWatermarkListArgs{...} }
+type GetWatermarksWatermarkListArrayInput interface {
+	pulumi.Input
+
+	ToGetWatermarksWatermarkListArrayOutput() GetWatermarksWatermarkListArrayOutput
+	ToGetWatermarksWatermarkListArrayOutputWithContext(context.Context) GetWatermarksWatermarkListArrayOutput
+}
+
+type GetWatermarksWatermarkListArray []GetWatermarksWatermarkListInput
+
+func (GetWatermarksWatermarkListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetWatermarksWatermarkList)(nil)).Elem()
+}
+
+func (i GetWatermarksWatermarkListArray) ToGetWatermarksWatermarkListArrayOutput() GetWatermarksWatermarkListArrayOutput {
+	return i.ToGetWatermarksWatermarkListArrayOutputWithContext(context.Background())
+}
+
+func (i GetWatermarksWatermarkListArray) ToGetWatermarksWatermarkListArrayOutputWithContext(ctx context.Context) GetWatermarksWatermarkListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetWatermarksWatermarkListArrayOutput)
+}
+
+type GetWatermarksWatermarkListOutput struct{ *pulumi.OutputState }
+
+func (GetWatermarksWatermarkListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetWatermarksWatermarkList)(nil)).Elem()
+}
+
+func (o GetWatermarksWatermarkListOutput) ToGetWatermarksWatermarkListOutput() GetWatermarksWatermarkListOutput {
+	return o
+}
+
+func (o GetWatermarksWatermarkListOutput) ToGetWatermarksWatermarkListOutputWithContext(ctx context.Context) GetWatermarksWatermarkListOutput {
+	return o
+}
+
+// The time when the watermark was added.Note: Beijing time (UTC+8) is used.
+func (o GetWatermarksWatermarkListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWatermarksWatermarkList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Watermark height.
+func (o GetWatermarksWatermarkListOutput) Height() pulumi.IntOutput {
+	return o.ApplyT(func(v GetWatermarksWatermarkList) int { return v.Height }).(pulumi.IntOutput)
+}
+
+// Watermark image URL.
+func (o GetWatermarksWatermarkListOutput) PictureUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWatermarksWatermarkList) string { return v.PictureUrl }).(pulumi.StringOutput)
+}
+
+// Current status. 0: not used. 1: in use.
+func (o GetWatermarksWatermarkListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetWatermarksWatermarkList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Watermark ID.
+func (o GetWatermarksWatermarkListOutput) WatermarkId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetWatermarksWatermarkList) int { return v.WatermarkId }).(pulumi.IntOutput)
+}
+
+// Watermark name.
+func (o GetWatermarksWatermarkListOutput) WatermarkName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWatermarksWatermarkList) string { return v.WatermarkName }).(pulumi.StringOutput)
+}
+
+// Watermark width.
+func (o GetWatermarksWatermarkListOutput) Width() pulumi.IntOutput {
+	return o.ApplyT(func(v GetWatermarksWatermarkList) int { return v.Width }).(pulumi.IntOutput)
+}
+
+// Display position: X-axis offset.
+func (o GetWatermarksWatermarkListOutput) XPosition() pulumi.IntOutput {
+	return o.ApplyT(func(v GetWatermarksWatermarkList) int { return v.XPosition }).(pulumi.IntOutput)
+}
+
+// Display position: Y-axis offset.
+func (o GetWatermarksWatermarkListOutput) YPosition() pulumi.IntOutput {
+	return o.ApplyT(func(v GetWatermarksWatermarkList) int { return v.YPosition }).(pulumi.IntOutput)
+}
+
+type GetWatermarksWatermarkListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetWatermarksWatermarkListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetWatermarksWatermarkList)(nil)).Elem()
+}
+
+func (o GetWatermarksWatermarkListArrayOutput) ToGetWatermarksWatermarkListArrayOutput() GetWatermarksWatermarkListArrayOutput {
+	return o
+}
+
+func (o GetWatermarksWatermarkListArrayOutput) ToGetWatermarksWatermarkListArrayOutputWithContext(ctx context.Context) GetWatermarksWatermarkListArrayOutput {
+	return o
+}
+
+func (o GetWatermarksWatermarkListArrayOutput) Index(i pulumi.IntInput) GetWatermarksWatermarkListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetWatermarksWatermarkList {
+		return vs[0].([]GetWatermarksWatermarkList)[vs[1].(int)]
+	}).(GetWatermarksWatermarkListOutput)
+}
+
+type GetXp2pDetailInfoListDataInfoList struct {
+	// AppId. Note: This field may return null, indicating that no valid value is available.
+	AppId string `pulumi:"appId"`
+	// CDN traffic.
+	CdnBytes int `pulumi:"cdnBytes"`
+	// Online numbers.
+	OnlinePeople int `pulumi:"onlinePeople"`
+	// P2P traffic.
+	P2pBytes int `pulumi:"p2pBytes"`
+	// Request numbers.
+	Request int `pulumi:"request"`
+	// Success numbers.
+	RequestSuccess int `pulumi:"requestSuccess"`
+	// Stream ID.Note: This field may return null, indicating that no valid value is available.
+	StreamName string `pulumi:"streamName"`
+	// People count.
+	StuckPeople int `pulumi:"stuckPeople"`
+	// Count.
+	StuckTimes int `pulumi:"stuckTimes"`
+	// The requested format for time in UTC with one-minute granularity is yyyy-mm-ddTHH:MM:SSZ. This format follows the ISO 8601 standard and is commonly used for representing timestamps in UTC. For more information and examples, you can refer to the link provided: https://cloud.tencent.com/document/product/266/11732#I.
+	Time string `pulumi:"time"`
+	// The type array can be used to specify the type of media content to be queried. The two available options are live for live streaming and vod for video on demand. If no type is specified, the query will include both live and VOD content by default.
+	Type string `pulumi:"type"`
+}
+
+// GetXp2pDetailInfoListDataInfoListInput is an input type that accepts GetXp2pDetailInfoListDataInfoListArgs and GetXp2pDetailInfoListDataInfoListOutput values.
+// You can construct a concrete instance of `GetXp2pDetailInfoListDataInfoListInput` via:
+//
+//          GetXp2pDetailInfoListDataInfoListArgs{...}
+type GetXp2pDetailInfoListDataInfoListInput interface {
+	pulumi.Input
+
+	ToGetXp2pDetailInfoListDataInfoListOutput() GetXp2pDetailInfoListDataInfoListOutput
+	ToGetXp2pDetailInfoListDataInfoListOutputWithContext(context.Context) GetXp2pDetailInfoListDataInfoListOutput
+}
+
+type GetXp2pDetailInfoListDataInfoListArgs struct {
+	// AppId. Note: This field may return null, indicating that no valid value is available.
+	AppId pulumi.StringInput `pulumi:"appId"`
+	// CDN traffic.
+	CdnBytes pulumi.IntInput `pulumi:"cdnBytes"`
+	// Online numbers.
+	OnlinePeople pulumi.IntInput `pulumi:"onlinePeople"`
+	// P2P traffic.
+	P2pBytes pulumi.IntInput `pulumi:"p2pBytes"`
+	// Request numbers.
+	Request pulumi.IntInput `pulumi:"request"`
+	// Success numbers.
+	RequestSuccess pulumi.IntInput `pulumi:"requestSuccess"`
+	// Stream ID.Note: This field may return null, indicating that no valid value is available.
+	StreamName pulumi.StringInput `pulumi:"streamName"`
+	// People count.
+	StuckPeople pulumi.IntInput `pulumi:"stuckPeople"`
+	// Count.
+	StuckTimes pulumi.IntInput `pulumi:"stuckTimes"`
+	// The requested format for time in UTC with one-minute granularity is yyyy-mm-ddTHH:MM:SSZ. This format follows the ISO 8601 standard and is commonly used for representing timestamps in UTC. For more information and examples, you can refer to the link provided: https://cloud.tencent.com/document/product/266/11732#I.
+	Time pulumi.StringInput `pulumi:"time"`
+	// The type array can be used to specify the type of media content to be queried. The two available options are live for live streaming and vod for video on demand. If no type is specified, the query will include both live and VOD content by default.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetXp2pDetailInfoListDataInfoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetXp2pDetailInfoListDataInfoList)(nil)).Elem()
+}
+
+func (i GetXp2pDetailInfoListDataInfoListArgs) ToGetXp2pDetailInfoListDataInfoListOutput() GetXp2pDetailInfoListDataInfoListOutput {
+	return i.ToGetXp2pDetailInfoListDataInfoListOutputWithContext(context.Background())
+}
+
+func (i GetXp2pDetailInfoListDataInfoListArgs) ToGetXp2pDetailInfoListDataInfoListOutputWithContext(ctx context.Context) GetXp2pDetailInfoListDataInfoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetXp2pDetailInfoListDataInfoListOutput)
+}
+
+// GetXp2pDetailInfoListDataInfoListArrayInput is an input type that accepts GetXp2pDetailInfoListDataInfoListArray and GetXp2pDetailInfoListDataInfoListArrayOutput values.
+// You can construct a concrete instance of `GetXp2pDetailInfoListDataInfoListArrayInput` via:
+//
+//          GetXp2pDetailInfoListDataInfoListArray{ GetXp2pDetailInfoListDataInfoListArgs{...} }
+type GetXp2pDetailInfoListDataInfoListArrayInput interface {
+	pulumi.Input
+
+	ToGetXp2pDetailInfoListDataInfoListArrayOutput() GetXp2pDetailInfoListDataInfoListArrayOutput
+	ToGetXp2pDetailInfoListDataInfoListArrayOutputWithContext(context.Context) GetXp2pDetailInfoListDataInfoListArrayOutput
+}
+
+type GetXp2pDetailInfoListDataInfoListArray []GetXp2pDetailInfoListDataInfoListInput
+
+func (GetXp2pDetailInfoListDataInfoListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetXp2pDetailInfoListDataInfoList)(nil)).Elem()
+}
+
+func (i GetXp2pDetailInfoListDataInfoListArray) ToGetXp2pDetailInfoListDataInfoListArrayOutput() GetXp2pDetailInfoListDataInfoListArrayOutput {
+	return i.ToGetXp2pDetailInfoListDataInfoListArrayOutputWithContext(context.Background())
+}
+
+func (i GetXp2pDetailInfoListDataInfoListArray) ToGetXp2pDetailInfoListDataInfoListArrayOutputWithContext(ctx context.Context) GetXp2pDetailInfoListDataInfoListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetXp2pDetailInfoListDataInfoListArrayOutput)
+}
+
+type GetXp2pDetailInfoListDataInfoListOutput struct{ *pulumi.OutputState }
+
+func (GetXp2pDetailInfoListDataInfoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetXp2pDetailInfoListDataInfoList)(nil)).Elem()
+}
+
+func (o GetXp2pDetailInfoListDataInfoListOutput) ToGetXp2pDetailInfoListDataInfoListOutput() GetXp2pDetailInfoListDataInfoListOutput {
+	return o
+}
+
+func (o GetXp2pDetailInfoListDataInfoListOutput) ToGetXp2pDetailInfoListDataInfoListOutputWithContext(ctx context.Context) GetXp2pDetailInfoListDataInfoListOutput {
+	return o
+}
+
+// AppId. Note: This field may return null, indicating that no valid value is available.
+func (o GetXp2pDetailInfoListDataInfoListOutput) AppId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetXp2pDetailInfoListDataInfoList) string { return v.AppId }).(pulumi.StringOutput)
+}
+
+// CDN traffic.
+func (o GetXp2pDetailInfoListDataInfoListOutput) CdnBytes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetXp2pDetailInfoListDataInfoList) int { return v.CdnBytes }).(pulumi.IntOutput)
+}
+
+// Online numbers.
+func (o GetXp2pDetailInfoListDataInfoListOutput) OnlinePeople() pulumi.IntOutput {
+	return o.ApplyT(func(v GetXp2pDetailInfoListDataInfoList) int { return v.OnlinePeople }).(pulumi.IntOutput)
+}
+
+// P2P traffic.
+func (o GetXp2pDetailInfoListDataInfoListOutput) P2pBytes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetXp2pDetailInfoListDataInfoList) int { return v.P2pBytes }).(pulumi.IntOutput)
+}
+
+// Request numbers.
+func (o GetXp2pDetailInfoListDataInfoListOutput) Request() pulumi.IntOutput {
+	return o.ApplyT(func(v GetXp2pDetailInfoListDataInfoList) int { return v.Request }).(pulumi.IntOutput)
+}
+
+// Success numbers.
+func (o GetXp2pDetailInfoListDataInfoListOutput) RequestSuccess() pulumi.IntOutput {
+	return o.ApplyT(func(v GetXp2pDetailInfoListDataInfoList) int { return v.RequestSuccess }).(pulumi.IntOutput)
+}
+
+// Stream ID.Note: This field may return null, indicating that no valid value is available.
+func (o GetXp2pDetailInfoListDataInfoListOutput) StreamName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetXp2pDetailInfoListDataInfoList) string { return v.StreamName }).(pulumi.StringOutput)
+}
+
+// People count.
+func (o GetXp2pDetailInfoListDataInfoListOutput) StuckPeople() pulumi.IntOutput {
+	return o.ApplyT(func(v GetXp2pDetailInfoListDataInfoList) int { return v.StuckPeople }).(pulumi.IntOutput)
+}
+
+// Count.
+func (o GetXp2pDetailInfoListDataInfoListOutput) StuckTimes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetXp2pDetailInfoListDataInfoList) int { return v.StuckTimes }).(pulumi.IntOutput)
+}
+
+// The requested format for time in UTC with one-minute granularity is yyyy-mm-ddTHH:MM:SSZ. This format follows the ISO 8601 standard and is commonly used for representing timestamps in UTC. For more information and examples, you can refer to the link provided: https://cloud.tencent.com/document/product/266/11732#I.
+func (o GetXp2pDetailInfoListDataInfoListOutput) Time() pulumi.StringOutput {
+	return o.ApplyT(func(v GetXp2pDetailInfoListDataInfoList) string { return v.Time }).(pulumi.StringOutput)
+}
+
+// The type array can be used to specify the type of media content to be queried. The two available options are live for live streaming and vod for video on demand. If no type is specified, the query will include both live and VOD content by default.
+func (o GetXp2pDetailInfoListDataInfoListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetXp2pDetailInfoListDataInfoList) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetXp2pDetailInfoListDataInfoListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetXp2pDetailInfoListDataInfoListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetXp2pDetailInfoListDataInfoList)(nil)).Elem()
+}
+
+func (o GetXp2pDetailInfoListDataInfoListArrayOutput) ToGetXp2pDetailInfoListDataInfoListArrayOutput() GetXp2pDetailInfoListDataInfoListArrayOutput {
+	return o
+}
+
+func (o GetXp2pDetailInfoListDataInfoListArrayOutput) ToGetXp2pDetailInfoListDataInfoListArrayOutputWithContext(ctx context.Context) GetXp2pDetailInfoListDataInfoListArrayOutput {
+	return o
+}
+
+func (o GetXp2pDetailInfoListDataInfoListArrayOutput) Index(i pulumi.IntInput) GetXp2pDetailInfoListDataInfoListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetXp2pDetailInfoListDataInfoList {
+		return vs[0].([]GetXp2pDetailInfoListDataInfoList)[vs[1].(int)]
+	}).(GetXp2pDetailInfoListDataInfoListOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*PlayDomainCertAttachmentDomainInfoInput)(nil)).Elem(), PlayDomainCertAttachmentDomainInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PlayDomainCertAttachmentDomainInfoPtrInput)(nil)).Elem(), PlayDomainCertAttachmentDomainInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PullStreamTaskWatermarkListInput)(nil)).Elem(), PullStreamTaskWatermarkListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PullStreamTaskWatermarkListArrayInput)(nil)).Elem(), PullStreamTaskWatermarkListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RecordTemplateAacParamInput)(nil)).Elem(), RecordTemplateAacParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RecordTemplateAacParamPtrInput)(nil)).Elem(), RecordTemplateAacParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RecordTemplateFlvParamInput)(nil)).Elem(), RecordTemplateFlvParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RecordTemplateFlvParamPtrInput)(nil)).Elem(), RecordTemplateFlvParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RecordTemplateFlvSpecialParamInput)(nil)).Elem(), RecordTemplateFlvSpecialParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RecordTemplateFlvSpecialParamPtrInput)(nil)).Elem(), RecordTemplateFlvSpecialParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RecordTemplateHlsParamInput)(nil)).Elem(), RecordTemplateHlsParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RecordTemplateHlsParamPtrInput)(nil)).Elem(), RecordTemplateHlsParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RecordTemplateHlsSpecialParamInput)(nil)).Elem(), RecordTemplateHlsSpecialParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RecordTemplateHlsSpecialParamPtrInput)(nil)).Elem(), RecordTemplateHlsSpecialParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RecordTemplateMp3ParamInput)(nil)).Elem(), RecordTemplateMp3ParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RecordTemplateMp3ParamPtrInput)(nil)).Elem(), RecordTemplateMp3ParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RecordTemplateMp4ParamInput)(nil)).Elem(), RecordTemplateMp4ParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RecordTemplateMp4ParamPtrInput)(nil)).Elem(), RecordTemplateMp4ParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*StreamMonitorInputListInput)(nil)).Elem(), StreamMonitorInputListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*StreamMonitorInputListArrayInput)(nil)).Elem(), StreamMonitorInputListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*StreamMonitorNotifyPolicyInput)(nil)).Elem(), StreamMonitorNotifyPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*StreamMonitorNotifyPolicyPtrInput)(nil)).Elem(), StreamMonitorNotifyPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*StreamMonitorOutputInfoInput)(nil)).Elem(), StreamMonitorOutputInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*StreamMonitorOutputInfoPtrInput)(nil)).Elem(), StreamMonitorOutputInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupStreamStreamInfoListInput)(nil)).Elem(), GetBackupStreamStreamInfoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupStreamStreamInfoListArrayInput)(nil)).Elem(), GetBackupStreamStreamInfoListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupStreamStreamInfoListBackupListInput)(nil)).Elem(), GetBackupStreamStreamInfoListBackupListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupStreamStreamInfoListBackupListArrayInput)(nil)).Elem(), GetBackupStreamStreamInfoListBackupListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDeliverLogDownListLogInfoListInput)(nil)).Elem(), GetDeliverLogDownListLogInfoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDeliverLogDownListLogInfoListArrayInput)(nil)).Elem(), GetDeliverLogDownListLogInfoListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainsDomainListInput)(nil)).Elem(), GetDomainsDomainListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainsDomainListArrayInput)(nil)).Elem(), GetDomainsDomainListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMonitorReportDiagnoseResultInput)(nil)).Elem(), GetMonitorReportDiagnoseResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMonitorReportDiagnoseResultArrayInput)(nil)).Elem(), GetMonitorReportDiagnoseResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMonitorReportMpsResultInput)(nil)).Elem(), GetMonitorReportMpsResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMonitorReportMpsResultArrayInput)(nil)).Elem(), GetMonitorReportMpsResultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPadTemplatesTemplateInput)(nil)).Elem(), GetPadTemplatesTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPadTemplatesTemplateArrayInput)(nil)).Elem(), GetPadTemplatesTemplateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPullStreamTaskStatusTaskStatusInfoInput)(nil)).Elem(), GetPullStreamTaskStatusTaskStatusInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPullStreamTaskStatusTaskStatusInfoArrayInput)(nil)).Elem(), GetPullStreamTaskStatusTaskStatusInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetStreamMonitorListLiveStreamMonitorInput)(nil)).Elem(), GetStreamMonitorListLiveStreamMonitorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetStreamMonitorListLiveStreamMonitorArrayInput)(nil)).Elem(), GetStreamMonitorListLiveStreamMonitorArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetStreamMonitorListLiveStreamMonitorInputListInput)(nil)).Elem(), GetStreamMonitorListLiveStreamMonitorInputListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetStreamMonitorListLiveStreamMonitorInputListArrayInput)(nil)).Elem(), GetStreamMonitorListLiveStreamMonitorInputListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetStreamMonitorListLiveStreamMonitorNotifyPolicyInput)(nil)).Elem(), GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayInput)(nil)).Elem(), GetStreamMonitorListLiveStreamMonitorNotifyPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetStreamMonitorListLiveStreamMonitorOutputInfoInput)(nil)).Elem(), GetStreamMonitorListLiveStreamMonitorOutputInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetStreamMonitorListLiveStreamMonitorOutputInfoArrayInput)(nil)).Elem(), GetStreamMonitorListLiveStreamMonitorOutputInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTimeShiftRecordDetailRecordListInput)(nil)).Elem(), GetTimeShiftRecordDetailRecordListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTimeShiftRecordDetailRecordListArrayInput)(nil)).Elem(), GetTimeShiftRecordDetailRecordListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTimeShiftStreamListStreamListInput)(nil)).Elem(), GetTimeShiftStreamListStreamListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTimeShiftStreamListStreamListArrayInput)(nil)).Elem(), GetTimeShiftStreamListStreamListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetWatermarksWatermarkListInput)(nil)).Elem(), GetWatermarksWatermarkListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetWatermarksWatermarkListArrayInput)(nil)).Elem(), GetWatermarksWatermarkListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetXp2pDetailInfoListDataInfoListInput)(nil)).Elem(), GetXp2pDetailInfoListDataInfoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetXp2pDetailInfoListDataInfoListArrayInput)(nil)).Elem(), GetXp2pDetailInfoListDataInfoListArray{})
 	pulumi.RegisterOutputType(PlayDomainCertAttachmentDomainInfoOutput{})
 	pulumi.RegisterOutputType(PlayDomainCertAttachmentDomainInfoPtrOutput{})
 	pulumi.RegisterOutputType(PullStreamTaskWatermarkListOutput{})
 	pulumi.RegisterOutputType(PullStreamTaskWatermarkListArrayOutput{})
+	pulumi.RegisterOutputType(RecordTemplateAacParamOutput{})
+	pulumi.RegisterOutputType(RecordTemplateAacParamPtrOutput{})
+	pulumi.RegisterOutputType(RecordTemplateFlvParamOutput{})
+	pulumi.RegisterOutputType(RecordTemplateFlvParamPtrOutput{})
+	pulumi.RegisterOutputType(RecordTemplateFlvSpecialParamOutput{})
+	pulumi.RegisterOutputType(RecordTemplateFlvSpecialParamPtrOutput{})
+	pulumi.RegisterOutputType(RecordTemplateHlsParamOutput{})
+	pulumi.RegisterOutputType(RecordTemplateHlsParamPtrOutput{})
+	pulumi.RegisterOutputType(RecordTemplateHlsSpecialParamOutput{})
+	pulumi.RegisterOutputType(RecordTemplateHlsSpecialParamPtrOutput{})
+	pulumi.RegisterOutputType(RecordTemplateMp3ParamOutput{})
+	pulumi.RegisterOutputType(RecordTemplateMp3ParamPtrOutput{})
+	pulumi.RegisterOutputType(RecordTemplateMp4ParamOutput{})
+	pulumi.RegisterOutputType(RecordTemplateMp4ParamPtrOutput{})
+	pulumi.RegisterOutputType(StreamMonitorInputListOutput{})
+	pulumi.RegisterOutputType(StreamMonitorInputListArrayOutput{})
+	pulumi.RegisterOutputType(StreamMonitorNotifyPolicyOutput{})
+	pulumi.RegisterOutputType(StreamMonitorNotifyPolicyPtrOutput{})
+	pulumi.RegisterOutputType(StreamMonitorOutputInfoOutput{})
+	pulumi.RegisterOutputType(StreamMonitorOutputInfoPtrOutput{})
+	pulumi.RegisterOutputType(GetBackupStreamStreamInfoListOutput{})
+	pulumi.RegisterOutputType(GetBackupStreamStreamInfoListArrayOutput{})
+	pulumi.RegisterOutputType(GetBackupStreamStreamInfoListBackupListOutput{})
+	pulumi.RegisterOutputType(GetBackupStreamStreamInfoListBackupListArrayOutput{})
+	pulumi.RegisterOutputType(GetDeliverLogDownListLogInfoListOutput{})
+	pulumi.RegisterOutputType(GetDeliverLogDownListLogInfoListArrayOutput{})
 	pulumi.RegisterOutputType(GetDomainsDomainListOutput{})
 	pulumi.RegisterOutputType(GetDomainsDomainListArrayOutput{})
+	pulumi.RegisterOutputType(GetMonitorReportDiagnoseResultOutput{})
+	pulumi.RegisterOutputType(GetMonitorReportDiagnoseResultArrayOutput{})
+	pulumi.RegisterOutputType(GetMonitorReportMpsResultOutput{})
+	pulumi.RegisterOutputType(GetMonitorReportMpsResultArrayOutput{})
+	pulumi.RegisterOutputType(GetPadTemplatesTemplateOutput{})
+	pulumi.RegisterOutputType(GetPadTemplatesTemplateArrayOutput{})
+	pulumi.RegisterOutputType(GetPullStreamTaskStatusTaskStatusInfoOutput{})
+	pulumi.RegisterOutputType(GetPullStreamTaskStatusTaskStatusInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetStreamMonitorListLiveStreamMonitorOutput{})
+	pulumi.RegisterOutputType(GetStreamMonitorListLiveStreamMonitorArrayOutput{})
+	pulumi.RegisterOutputType(GetStreamMonitorListLiveStreamMonitorInputListOutput{})
+	pulumi.RegisterOutputType(GetStreamMonitorListLiveStreamMonitorInputListArrayOutput{})
+	pulumi.RegisterOutputType(GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput{})
+	pulumi.RegisterOutputType(GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput{})
+	pulumi.RegisterOutputType(GetStreamMonitorListLiveStreamMonitorOutputInfoOutput{})
+	pulumi.RegisterOutputType(GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetTimeShiftRecordDetailRecordListOutput{})
+	pulumi.RegisterOutputType(GetTimeShiftRecordDetailRecordListArrayOutput{})
+	pulumi.RegisterOutputType(GetTimeShiftStreamListStreamListOutput{})
+	pulumi.RegisterOutputType(GetTimeShiftStreamListStreamListArrayOutput{})
+	pulumi.RegisterOutputType(GetWatermarksWatermarkListOutput{})
+	pulumi.RegisterOutputType(GetWatermarksWatermarkListArrayOutput{})
+	pulumi.RegisterOutputType(GetXp2pDetailInfoListDataInfoListOutput{})
+	pulumi.RegisterOutputType(GetXp2pDetailInfoListDataInfoListArrayOutput{})
 }

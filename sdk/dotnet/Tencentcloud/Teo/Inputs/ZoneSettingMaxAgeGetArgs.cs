@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class ZoneSettingMaxAgeGetArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If it&amp;#39;s on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If is on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         [Input("followOrigin")]
         public Input<string>? FollowOrigin { get; set; }

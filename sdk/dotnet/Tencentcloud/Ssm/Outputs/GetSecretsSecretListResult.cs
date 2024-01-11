@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm.Outputs
     public sealed class GetSecretsSecretListResult
     {
         /// <summary>
+        /// When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.
+        /// </summary>
+        public readonly ImmutableArray<string> AssociatedInstanceIds;
+        /// <summary>
         /// Create time of secret.
         /// </summary>
         public readonly int CreateTime;
@@ -35,16 +39,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm.Outputs
         /// </summary>
         public readonly string KmsKeyId;
         /// <summary>
+        /// KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.
+        /// </summary>
+        public readonly string KmsKeyType;
+        /// <summary>
+        /// Next rotation start time, uinx timestamp.
+        /// </summary>
+        public readonly int NextRotationTime;
+        /// <summary>
+        /// This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.
+        /// </summary>
+        public readonly string ProductName;
+        /// <summary>
+        /// When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.
+        /// </summary>
+        public readonly int ProjectId;
+        /// <summary>
+        /// The cloud product instance ID number corresponding to the cloud product credentials.
+        /// </summary>
+        public readonly string ResourceId;
+        /// <summary>
+        /// When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.
+        /// </summary>
+        public readonly string ResourceName;
+        /// <summary>
+        /// The user specified rotation start time.
+        /// </summary>
+        public readonly string RotationBeginTime;
+        /// <summary>
+        /// The frequency of rotation, in days, takes effect when rotation is on.
+        /// </summary>
+        public readonly int RotationFrequency;
+        /// <summary>
+        /// 1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.
+        /// </summary>
+        public readonly int RotationStatus;
+        /// <summary>
         /// Secret name used to filter result.
         /// </summary>
         public readonly string SecretName;
         /// <summary>
+        /// 0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.
+        /// </summary>
+        public readonly int SecretType;
+        /// <summary>
         /// Status of secret.
         /// </summary>
         public readonly string Status;
+        /// <summary>
+        /// When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.
+        /// </summary>
+        public readonly int TargetUin;
 
         [OutputConstructor]
         private GetSecretsSecretListResult(
+            ImmutableArray<string> associatedInstanceIds,
+
             int createTime,
 
             int createUin,
@@ -55,17 +105,51 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm.Outputs
 
             string kmsKeyId,
 
+            string kmsKeyType,
+
+            int nextRotationTime,
+
+            string productName,
+
+            int projectId,
+
+            string resourceId,
+
+            string resourceName,
+
+            string rotationBeginTime,
+
+            int rotationFrequency,
+
+            int rotationStatus,
+
             string secretName,
 
-            string status)
+            int secretType,
+
+            string status,
+
+            int targetUin)
         {
+            AssociatedInstanceIds = associatedInstanceIds;
             CreateTime = createTime;
             CreateUin = createUin;
             DeleteTime = deleteTime;
             Description = description;
             KmsKeyId = kmsKeyId;
+            KmsKeyType = kmsKeyType;
+            NextRotationTime = nextRotationTime;
+            ProductName = productName;
+            ProjectId = projectId;
+            ResourceId = resourceId;
+            ResourceName = resourceName;
+            RotationBeginTime = rotationBeginTime;
+            RotationFrequency = rotationFrequency;
+            RotationStatus = rotationStatus;
             SecretName = secretName;
+            SecretType = secretType;
             Status = status;
+            TargetUin = targetUin;
         }
     }
 }

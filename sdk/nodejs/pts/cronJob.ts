@@ -79,6 +79,10 @@ export class CronJob extends pulumi.CustomResource {
      */
     public readonly cronExpression!: pulumi.Output<string>;
     /**
+     * Cron job ID.
+     */
+    public /*out*/ readonly cronJobId!: pulumi.Output<string>;
+    /**
      * End Time; type: Timestamp ISO8601.
      */
     public readonly endTime!: pulumi.Output<string | undefined>;
@@ -148,6 +152,7 @@ export class CronJob extends pulumi.CustomResource {
             resourceInputs["appId"] = state ? state.appId : undefined;
             resourceInputs["createdAt"] = state ? state.createdAt : undefined;
             resourceInputs["cronExpression"] = state ? state.cronExpression : undefined;
+            resourceInputs["cronJobId"] = state ? state.cronJobId : undefined;
             resourceInputs["endTime"] = state ? state.endTime : undefined;
             resourceInputs["frequencyType"] = state ? state.frequencyType : undefined;
             resourceInputs["jobOwner"] = state ? state.jobOwner : undefined;
@@ -194,6 +199,7 @@ export class CronJob extends pulumi.CustomResource {
             resourceInputs["abortReason"] = undefined /*out*/;
             resourceInputs["appId"] = undefined /*out*/;
             resourceInputs["createdAt"] = undefined /*out*/;
+            resourceInputs["cronJobId"] = undefined /*out*/;
             resourceInputs["status"] = undefined /*out*/;
             resourceInputs["subAccountUin"] = undefined /*out*/;
             resourceInputs["uin"] = undefined /*out*/;
@@ -224,6 +230,10 @@ export interface CronJobState {
      * Cron expression, When setting cronExpression at that time, frequencyType must be greater than 1.
      */
     cronExpression?: pulumi.Input<string>;
+    /**
+     * Cron job ID.
+     */
+    cronJobId?: pulumi.Input<string>;
     /**
      * End Time; type: Timestamp ISO8601.
      */

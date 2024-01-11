@@ -69,6 +69,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &IncreBackupMigration{}
 	case "tencentcloud:Sqlserver/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Sqlserver/instanceSsl:InstanceSsl":
+		r = &InstanceSsl{}
 	case "tencentcloud:Sqlserver/instanceTde:InstanceTde":
 		r = &InstanceTde{}
 	case "tencentcloud:Sqlserver/migration:Migration":
@@ -224,6 +226,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Sqlserver/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/instanceSsl",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

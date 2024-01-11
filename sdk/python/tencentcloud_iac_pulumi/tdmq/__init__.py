@@ -22,6 +22,7 @@ from .get_vip_instance import *
 from .instance import *
 from .namespace import *
 from .namespace_role_attachment import *
+from .professional_cluster import *
 from .rabbitmq_user import *
 from .rabbitmq_vip_instance import *
 from .rabbitmq_virtual_host import *
@@ -34,7 +35,7 @@ from .rocketmq_topic import *
 from .rocketmq_vip_instance import *
 from .role import *
 from .send_rocketmq_message import *
-from .subscription_attachment import *
+from .subscription import *
 from .topic import *
 from ._inputs import *
 from . import outputs

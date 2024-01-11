@@ -10,6 +10,621 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type AccountPermissionDatabasePrivilegeList struct {
+	// Database name.
+	DatabaseName string `pulumi:"databaseName"`
+	// Database privileges. Valid valuse: SELECT, INSERT_ALL, ALTER, TRUNCATE, DROP_TABLE, CREATE_TABLE, DROP_DATABASE.
+	DatabasePrivileges []string `pulumi:"databasePrivileges"`
+	// Table privilege list.
+	TablePrivilegeLists []AccountPermissionDatabasePrivilegeListTablePrivilegeList `pulumi:"tablePrivilegeLists"`
+}
+
+// AccountPermissionDatabasePrivilegeListInput is an input type that accepts AccountPermissionDatabasePrivilegeListArgs and AccountPermissionDatabasePrivilegeListOutput values.
+// You can construct a concrete instance of `AccountPermissionDatabasePrivilegeListInput` via:
+//
+//          AccountPermissionDatabasePrivilegeListArgs{...}
+type AccountPermissionDatabasePrivilegeListInput interface {
+	pulumi.Input
+
+	ToAccountPermissionDatabasePrivilegeListOutput() AccountPermissionDatabasePrivilegeListOutput
+	ToAccountPermissionDatabasePrivilegeListOutputWithContext(context.Context) AccountPermissionDatabasePrivilegeListOutput
+}
+
+type AccountPermissionDatabasePrivilegeListArgs struct {
+	// Database name.
+	DatabaseName pulumi.StringInput `pulumi:"databaseName"`
+	// Database privileges. Valid valuse: SELECT, INSERT_ALL, ALTER, TRUNCATE, DROP_TABLE, CREATE_TABLE, DROP_DATABASE.
+	DatabasePrivileges pulumi.StringArrayInput `pulumi:"databasePrivileges"`
+	// Table privilege list.
+	TablePrivilegeLists AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayInput `pulumi:"tablePrivilegeLists"`
+}
+
+func (AccountPermissionDatabasePrivilegeListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPermissionDatabasePrivilegeList)(nil)).Elem()
+}
+
+func (i AccountPermissionDatabasePrivilegeListArgs) ToAccountPermissionDatabasePrivilegeListOutput() AccountPermissionDatabasePrivilegeListOutput {
+	return i.ToAccountPermissionDatabasePrivilegeListOutputWithContext(context.Background())
+}
+
+func (i AccountPermissionDatabasePrivilegeListArgs) ToAccountPermissionDatabasePrivilegeListOutputWithContext(ctx context.Context) AccountPermissionDatabasePrivilegeListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPermissionDatabasePrivilegeListOutput)
+}
+
+// AccountPermissionDatabasePrivilegeListArrayInput is an input type that accepts AccountPermissionDatabasePrivilegeListArray and AccountPermissionDatabasePrivilegeListArrayOutput values.
+// You can construct a concrete instance of `AccountPermissionDatabasePrivilegeListArrayInput` via:
+//
+//          AccountPermissionDatabasePrivilegeListArray{ AccountPermissionDatabasePrivilegeListArgs{...} }
+type AccountPermissionDatabasePrivilegeListArrayInput interface {
+	pulumi.Input
+
+	ToAccountPermissionDatabasePrivilegeListArrayOutput() AccountPermissionDatabasePrivilegeListArrayOutput
+	ToAccountPermissionDatabasePrivilegeListArrayOutputWithContext(context.Context) AccountPermissionDatabasePrivilegeListArrayOutput
+}
+
+type AccountPermissionDatabasePrivilegeListArray []AccountPermissionDatabasePrivilegeListInput
+
+func (AccountPermissionDatabasePrivilegeListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPermissionDatabasePrivilegeList)(nil)).Elem()
+}
+
+func (i AccountPermissionDatabasePrivilegeListArray) ToAccountPermissionDatabasePrivilegeListArrayOutput() AccountPermissionDatabasePrivilegeListArrayOutput {
+	return i.ToAccountPermissionDatabasePrivilegeListArrayOutputWithContext(context.Background())
+}
+
+func (i AccountPermissionDatabasePrivilegeListArray) ToAccountPermissionDatabasePrivilegeListArrayOutputWithContext(ctx context.Context) AccountPermissionDatabasePrivilegeListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPermissionDatabasePrivilegeListArrayOutput)
+}
+
+type AccountPermissionDatabasePrivilegeListOutput struct{ *pulumi.OutputState }
+
+func (AccountPermissionDatabasePrivilegeListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPermissionDatabasePrivilegeList)(nil)).Elem()
+}
+
+func (o AccountPermissionDatabasePrivilegeListOutput) ToAccountPermissionDatabasePrivilegeListOutput() AccountPermissionDatabasePrivilegeListOutput {
+	return o
+}
+
+func (o AccountPermissionDatabasePrivilegeListOutput) ToAccountPermissionDatabasePrivilegeListOutputWithContext(ctx context.Context) AccountPermissionDatabasePrivilegeListOutput {
+	return o
+}
+
+// Database name.
+func (o AccountPermissionDatabasePrivilegeListOutput) DatabaseName() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPermissionDatabasePrivilegeList) string { return v.DatabaseName }).(pulumi.StringOutput)
+}
+
+// Database privileges. Valid valuse: SELECT, INSERT_ALL, ALTER, TRUNCATE, DROP_TABLE, CREATE_TABLE, DROP_DATABASE.
+func (o AccountPermissionDatabasePrivilegeListOutput) DatabasePrivileges() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AccountPermissionDatabasePrivilegeList) []string { return v.DatabasePrivileges }).(pulumi.StringArrayOutput)
+}
+
+// Table privilege list.
+func (o AccountPermissionDatabasePrivilegeListOutput) TablePrivilegeLists() AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput {
+	return o.ApplyT(func(v AccountPermissionDatabasePrivilegeList) []AccountPermissionDatabasePrivilegeListTablePrivilegeList {
+		return v.TablePrivilegeLists
+	}).(AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput)
+}
+
+type AccountPermissionDatabasePrivilegeListArrayOutput struct{ *pulumi.OutputState }
+
+func (AccountPermissionDatabasePrivilegeListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPermissionDatabasePrivilegeList)(nil)).Elem()
+}
+
+func (o AccountPermissionDatabasePrivilegeListArrayOutput) ToAccountPermissionDatabasePrivilegeListArrayOutput() AccountPermissionDatabasePrivilegeListArrayOutput {
+	return o
+}
+
+func (o AccountPermissionDatabasePrivilegeListArrayOutput) ToAccountPermissionDatabasePrivilegeListArrayOutputWithContext(ctx context.Context) AccountPermissionDatabasePrivilegeListArrayOutput {
+	return o
+}
+
+func (o AccountPermissionDatabasePrivilegeListArrayOutput) Index(i pulumi.IntInput) AccountPermissionDatabasePrivilegeListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AccountPermissionDatabasePrivilegeList {
+		return vs[0].([]AccountPermissionDatabasePrivilegeList)[vs[1].(int)]
+	}).(AccountPermissionDatabasePrivilegeListOutput)
+}
+
+type AccountPermissionDatabasePrivilegeListTablePrivilegeList struct {
+	// Table name.
+	TableName string `pulumi:"tableName"`
+	// Table privileges. Valid values: SELECT, INSERT_ALL, ALTER, TRUNCATE, DROP_TABLE.
+	TablePrivileges []string `pulumi:"tablePrivileges"`
+}
+
+// AccountPermissionDatabasePrivilegeListTablePrivilegeListInput is an input type that accepts AccountPermissionDatabasePrivilegeListTablePrivilegeListArgs and AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput values.
+// You can construct a concrete instance of `AccountPermissionDatabasePrivilegeListTablePrivilegeListInput` via:
+//
+//          AccountPermissionDatabasePrivilegeListTablePrivilegeListArgs{...}
+type AccountPermissionDatabasePrivilegeListTablePrivilegeListInput interface {
+	pulumi.Input
+
+	ToAccountPermissionDatabasePrivilegeListTablePrivilegeListOutput() AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput
+	ToAccountPermissionDatabasePrivilegeListTablePrivilegeListOutputWithContext(context.Context) AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput
+}
+
+type AccountPermissionDatabasePrivilegeListTablePrivilegeListArgs struct {
+	// Table name.
+	TableName pulumi.StringInput `pulumi:"tableName"`
+	// Table privileges. Valid values: SELECT, INSERT_ALL, ALTER, TRUNCATE, DROP_TABLE.
+	TablePrivileges pulumi.StringArrayInput `pulumi:"tablePrivileges"`
+}
+
+func (AccountPermissionDatabasePrivilegeListTablePrivilegeListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPermissionDatabasePrivilegeListTablePrivilegeList)(nil)).Elem()
+}
+
+func (i AccountPermissionDatabasePrivilegeListTablePrivilegeListArgs) ToAccountPermissionDatabasePrivilegeListTablePrivilegeListOutput() AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput {
+	return i.ToAccountPermissionDatabasePrivilegeListTablePrivilegeListOutputWithContext(context.Background())
+}
+
+func (i AccountPermissionDatabasePrivilegeListTablePrivilegeListArgs) ToAccountPermissionDatabasePrivilegeListTablePrivilegeListOutputWithContext(ctx context.Context) AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput)
+}
+
+// AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayInput is an input type that accepts AccountPermissionDatabasePrivilegeListTablePrivilegeListArray and AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput values.
+// You can construct a concrete instance of `AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayInput` via:
+//
+//          AccountPermissionDatabasePrivilegeListTablePrivilegeListArray{ AccountPermissionDatabasePrivilegeListTablePrivilegeListArgs{...} }
+type AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayInput interface {
+	pulumi.Input
+
+	ToAccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput() AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput
+	ToAccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutputWithContext(context.Context) AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput
+}
+
+type AccountPermissionDatabasePrivilegeListTablePrivilegeListArray []AccountPermissionDatabasePrivilegeListTablePrivilegeListInput
+
+func (AccountPermissionDatabasePrivilegeListTablePrivilegeListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPermissionDatabasePrivilegeListTablePrivilegeList)(nil)).Elem()
+}
+
+func (i AccountPermissionDatabasePrivilegeListTablePrivilegeListArray) ToAccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput() AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput {
+	return i.ToAccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutputWithContext(context.Background())
+}
+
+func (i AccountPermissionDatabasePrivilegeListTablePrivilegeListArray) ToAccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutputWithContext(ctx context.Context) AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput)
+}
+
+type AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput struct{ *pulumi.OutputState }
+
+func (AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPermissionDatabasePrivilegeListTablePrivilegeList)(nil)).Elem()
+}
+
+func (o AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput) ToAccountPermissionDatabasePrivilegeListTablePrivilegeListOutput() AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput {
+	return o
+}
+
+func (o AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput) ToAccountPermissionDatabasePrivilegeListTablePrivilegeListOutputWithContext(ctx context.Context) AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput {
+	return o
+}
+
+// Table name.
+func (o AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput) TableName() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPermissionDatabasePrivilegeListTablePrivilegeList) string { return v.TableName }).(pulumi.StringOutput)
+}
+
+// Table privileges. Valid values: SELECT, INSERT_ALL, ALTER, TRUNCATE, DROP_TABLE.
+func (o AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput) TablePrivileges() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AccountPermissionDatabasePrivilegeListTablePrivilegeList) []string { return v.TablePrivileges }).(pulumi.StringArrayOutput)
+}
+
+type AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput struct{ *pulumi.OutputState }
+
+func (AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPermissionDatabasePrivilegeListTablePrivilegeList)(nil)).Elem()
+}
+
+func (o AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput) ToAccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput() AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput {
+	return o
+}
+
+func (o AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput) ToAccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutputWithContext(ctx context.Context) AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput {
+	return o
+}
+
+func (o AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput) Index(i pulumi.IntInput) AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AccountPermissionDatabasePrivilegeListTablePrivilegeList {
+		return vs[0].([]AccountPermissionDatabasePrivilegeListTablePrivilegeList)[vs[1].(int)]
+	}).(AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput)
+}
+
+type BackupStrategyDataBackupStrategy struct {
+	// Back up the list of tables.
+	BackUpTables []BackupStrategyDataBackupStrategyBackUpTable `pulumi:"backUpTables"`
+	// Execution hour.
+	ExecuteHour int `pulumi:"executeHour"`
+	// Retention days.
+	RetainDays int `pulumi:"retainDays"`
+	// The day of the week is separated by commas. For example: 2 represents Tuesday.
+	WeekDays string `pulumi:"weekDays"`
+}
+
+// BackupStrategyDataBackupStrategyInput is an input type that accepts BackupStrategyDataBackupStrategyArgs and BackupStrategyDataBackupStrategyOutput values.
+// You can construct a concrete instance of `BackupStrategyDataBackupStrategyInput` via:
+//
+//          BackupStrategyDataBackupStrategyArgs{...}
+type BackupStrategyDataBackupStrategyInput interface {
+	pulumi.Input
+
+	ToBackupStrategyDataBackupStrategyOutput() BackupStrategyDataBackupStrategyOutput
+	ToBackupStrategyDataBackupStrategyOutputWithContext(context.Context) BackupStrategyDataBackupStrategyOutput
+}
+
+type BackupStrategyDataBackupStrategyArgs struct {
+	// Back up the list of tables.
+	BackUpTables BackupStrategyDataBackupStrategyBackUpTableArrayInput `pulumi:"backUpTables"`
+	// Execution hour.
+	ExecuteHour pulumi.IntInput `pulumi:"executeHour"`
+	// Retention days.
+	RetainDays pulumi.IntInput `pulumi:"retainDays"`
+	// The day of the week is separated by commas. For example: 2 represents Tuesday.
+	WeekDays pulumi.StringInput `pulumi:"weekDays"`
+}
+
+func (BackupStrategyDataBackupStrategyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BackupStrategyDataBackupStrategy)(nil)).Elem()
+}
+
+func (i BackupStrategyDataBackupStrategyArgs) ToBackupStrategyDataBackupStrategyOutput() BackupStrategyDataBackupStrategyOutput {
+	return i.ToBackupStrategyDataBackupStrategyOutputWithContext(context.Background())
+}
+
+func (i BackupStrategyDataBackupStrategyArgs) ToBackupStrategyDataBackupStrategyOutputWithContext(ctx context.Context) BackupStrategyDataBackupStrategyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BackupStrategyDataBackupStrategyOutput)
+}
+
+// BackupStrategyDataBackupStrategyArrayInput is an input type that accepts BackupStrategyDataBackupStrategyArray and BackupStrategyDataBackupStrategyArrayOutput values.
+// You can construct a concrete instance of `BackupStrategyDataBackupStrategyArrayInput` via:
+//
+//          BackupStrategyDataBackupStrategyArray{ BackupStrategyDataBackupStrategyArgs{...} }
+type BackupStrategyDataBackupStrategyArrayInput interface {
+	pulumi.Input
+
+	ToBackupStrategyDataBackupStrategyArrayOutput() BackupStrategyDataBackupStrategyArrayOutput
+	ToBackupStrategyDataBackupStrategyArrayOutputWithContext(context.Context) BackupStrategyDataBackupStrategyArrayOutput
+}
+
+type BackupStrategyDataBackupStrategyArray []BackupStrategyDataBackupStrategyInput
+
+func (BackupStrategyDataBackupStrategyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BackupStrategyDataBackupStrategy)(nil)).Elem()
+}
+
+func (i BackupStrategyDataBackupStrategyArray) ToBackupStrategyDataBackupStrategyArrayOutput() BackupStrategyDataBackupStrategyArrayOutput {
+	return i.ToBackupStrategyDataBackupStrategyArrayOutputWithContext(context.Background())
+}
+
+func (i BackupStrategyDataBackupStrategyArray) ToBackupStrategyDataBackupStrategyArrayOutputWithContext(ctx context.Context) BackupStrategyDataBackupStrategyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BackupStrategyDataBackupStrategyArrayOutput)
+}
+
+type BackupStrategyDataBackupStrategyOutput struct{ *pulumi.OutputState }
+
+func (BackupStrategyDataBackupStrategyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BackupStrategyDataBackupStrategy)(nil)).Elem()
+}
+
+func (o BackupStrategyDataBackupStrategyOutput) ToBackupStrategyDataBackupStrategyOutput() BackupStrategyDataBackupStrategyOutput {
+	return o
+}
+
+func (o BackupStrategyDataBackupStrategyOutput) ToBackupStrategyDataBackupStrategyOutputWithContext(ctx context.Context) BackupStrategyDataBackupStrategyOutput {
+	return o
+}
+
+// Back up the list of tables.
+func (o BackupStrategyDataBackupStrategyOutput) BackUpTables() BackupStrategyDataBackupStrategyBackUpTableArrayOutput {
+	return o.ApplyT(func(v BackupStrategyDataBackupStrategy) []BackupStrategyDataBackupStrategyBackUpTable {
+		return v.BackUpTables
+	}).(BackupStrategyDataBackupStrategyBackUpTableArrayOutput)
+}
+
+// Execution hour.
+func (o BackupStrategyDataBackupStrategyOutput) ExecuteHour() pulumi.IntOutput {
+	return o.ApplyT(func(v BackupStrategyDataBackupStrategy) int { return v.ExecuteHour }).(pulumi.IntOutput)
+}
+
+// Retention days.
+func (o BackupStrategyDataBackupStrategyOutput) RetainDays() pulumi.IntOutput {
+	return o.ApplyT(func(v BackupStrategyDataBackupStrategy) int { return v.RetainDays }).(pulumi.IntOutput)
+}
+
+// The day of the week is separated by commas. For example: 2 represents Tuesday.
+func (o BackupStrategyDataBackupStrategyOutput) WeekDays() pulumi.StringOutput {
+	return o.ApplyT(func(v BackupStrategyDataBackupStrategy) string { return v.WeekDays }).(pulumi.StringOutput)
+}
+
+type BackupStrategyDataBackupStrategyArrayOutput struct{ *pulumi.OutputState }
+
+func (BackupStrategyDataBackupStrategyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BackupStrategyDataBackupStrategy)(nil)).Elem()
+}
+
+func (o BackupStrategyDataBackupStrategyArrayOutput) ToBackupStrategyDataBackupStrategyArrayOutput() BackupStrategyDataBackupStrategyArrayOutput {
+	return o
+}
+
+func (o BackupStrategyDataBackupStrategyArrayOutput) ToBackupStrategyDataBackupStrategyArrayOutputWithContext(ctx context.Context) BackupStrategyDataBackupStrategyArrayOutput {
+	return o
+}
+
+func (o BackupStrategyDataBackupStrategyArrayOutput) Index(i pulumi.IntInput) BackupStrategyDataBackupStrategyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BackupStrategyDataBackupStrategy {
+		return vs[0].([]BackupStrategyDataBackupStrategy)[vs[1].(int)]
+	}).(BackupStrategyDataBackupStrategyOutput)
+}
+
+type BackupStrategyDataBackupStrategyBackUpTable struct {
+	// Database.
+	Database string `pulumi:"database"`
+	// Table ip.
+	Ips *string `pulumi:"ips"`
+	// Ip address of cvm.
+	Rip *string `pulumi:"rip"`
+	// Table.
+	Table string `pulumi:"table"`
+	// Back up the list of tables.
+	TotalBytes int `pulumi:"totalBytes"`
+	// Virtual clusters.
+	VCluster *string `pulumi:"vCluster"`
+	// ZK path.
+	ZooPath *string `pulumi:"zooPath"`
+}
+
+// BackupStrategyDataBackupStrategyBackUpTableInput is an input type that accepts BackupStrategyDataBackupStrategyBackUpTableArgs and BackupStrategyDataBackupStrategyBackUpTableOutput values.
+// You can construct a concrete instance of `BackupStrategyDataBackupStrategyBackUpTableInput` via:
+//
+//          BackupStrategyDataBackupStrategyBackUpTableArgs{...}
+type BackupStrategyDataBackupStrategyBackUpTableInput interface {
+	pulumi.Input
+
+	ToBackupStrategyDataBackupStrategyBackUpTableOutput() BackupStrategyDataBackupStrategyBackUpTableOutput
+	ToBackupStrategyDataBackupStrategyBackUpTableOutputWithContext(context.Context) BackupStrategyDataBackupStrategyBackUpTableOutput
+}
+
+type BackupStrategyDataBackupStrategyBackUpTableArgs struct {
+	// Database.
+	Database pulumi.StringInput `pulumi:"database"`
+	// Table ip.
+	Ips pulumi.StringPtrInput `pulumi:"ips"`
+	// Ip address of cvm.
+	Rip pulumi.StringPtrInput `pulumi:"rip"`
+	// Table.
+	Table pulumi.StringInput `pulumi:"table"`
+	// Back up the list of tables.
+	TotalBytes pulumi.IntInput `pulumi:"totalBytes"`
+	// Virtual clusters.
+	VCluster pulumi.StringPtrInput `pulumi:"vCluster"`
+	// ZK path.
+	ZooPath pulumi.StringPtrInput `pulumi:"zooPath"`
+}
+
+func (BackupStrategyDataBackupStrategyBackUpTableArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BackupStrategyDataBackupStrategyBackUpTable)(nil)).Elem()
+}
+
+func (i BackupStrategyDataBackupStrategyBackUpTableArgs) ToBackupStrategyDataBackupStrategyBackUpTableOutput() BackupStrategyDataBackupStrategyBackUpTableOutput {
+	return i.ToBackupStrategyDataBackupStrategyBackUpTableOutputWithContext(context.Background())
+}
+
+func (i BackupStrategyDataBackupStrategyBackUpTableArgs) ToBackupStrategyDataBackupStrategyBackUpTableOutputWithContext(ctx context.Context) BackupStrategyDataBackupStrategyBackUpTableOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BackupStrategyDataBackupStrategyBackUpTableOutput)
+}
+
+// BackupStrategyDataBackupStrategyBackUpTableArrayInput is an input type that accepts BackupStrategyDataBackupStrategyBackUpTableArray and BackupStrategyDataBackupStrategyBackUpTableArrayOutput values.
+// You can construct a concrete instance of `BackupStrategyDataBackupStrategyBackUpTableArrayInput` via:
+//
+//          BackupStrategyDataBackupStrategyBackUpTableArray{ BackupStrategyDataBackupStrategyBackUpTableArgs{...} }
+type BackupStrategyDataBackupStrategyBackUpTableArrayInput interface {
+	pulumi.Input
+
+	ToBackupStrategyDataBackupStrategyBackUpTableArrayOutput() BackupStrategyDataBackupStrategyBackUpTableArrayOutput
+	ToBackupStrategyDataBackupStrategyBackUpTableArrayOutputWithContext(context.Context) BackupStrategyDataBackupStrategyBackUpTableArrayOutput
+}
+
+type BackupStrategyDataBackupStrategyBackUpTableArray []BackupStrategyDataBackupStrategyBackUpTableInput
+
+func (BackupStrategyDataBackupStrategyBackUpTableArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BackupStrategyDataBackupStrategyBackUpTable)(nil)).Elem()
+}
+
+func (i BackupStrategyDataBackupStrategyBackUpTableArray) ToBackupStrategyDataBackupStrategyBackUpTableArrayOutput() BackupStrategyDataBackupStrategyBackUpTableArrayOutput {
+	return i.ToBackupStrategyDataBackupStrategyBackUpTableArrayOutputWithContext(context.Background())
+}
+
+func (i BackupStrategyDataBackupStrategyBackUpTableArray) ToBackupStrategyDataBackupStrategyBackUpTableArrayOutputWithContext(ctx context.Context) BackupStrategyDataBackupStrategyBackUpTableArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BackupStrategyDataBackupStrategyBackUpTableArrayOutput)
+}
+
+type BackupStrategyDataBackupStrategyBackUpTableOutput struct{ *pulumi.OutputState }
+
+func (BackupStrategyDataBackupStrategyBackUpTableOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BackupStrategyDataBackupStrategyBackUpTable)(nil)).Elem()
+}
+
+func (o BackupStrategyDataBackupStrategyBackUpTableOutput) ToBackupStrategyDataBackupStrategyBackUpTableOutput() BackupStrategyDataBackupStrategyBackUpTableOutput {
+	return o
+}
+
+func (o BackupStrategyDataBackupStrategyBackUpTableOutput) ToBackupStrategyDataBackupStrategyBackUpTableOutputWithContext(ctx context.Context) BackupStrategyDataBackupStrategyBackUpTableOutput {
+	return o
+}
+
+// Database.
+func (o BackupStrategyDataBackupStrategyBackUpTableOutput) Database() pulumi.StringOutput {
+	return o.ApplyT(func(v BackupStrategyDataBackupStrategyBackUpTable) string { return v.Database }).(pulumi.StringOutput)
+}
+
+// Table ip.
+func (o BackupStrategyDataBackupStrategyBackUpTableOutput) Ips() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BackupStrategyDataBackupStrategyBackUpTable) *string { return v.Ips }).(pulumi.StringPtrOutput)
+}
+
+// Ip address of cvm.
+func (o BackupStrategyDataBackupStrategyBackUpTableOutput) Rip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BackupStrategyDataBackupStrategyBackUpTable) *string { return v.Rip }).(pulumi.StringPtrOutput)
+}
+
+// Table.
+func (o BackupStrategyDataBackupStrategyBackUpTableOutput) Table() pulumi.StringOutput {
+	return o.ApplyT(func(v BackupStrategyDataBackupStrategyBackUpTable) string { return v.Table }).(pulumi.StringOutput)
+}
+
+// Back up the list of tables.
+func (o BackupStrategyDataBackupStrategyBackUpTableOutput) TotalBytes() pulumi.IntOutput {
+	return o.ApplyT(func(v BackupStrategyDataBackupStrategyBackUpTable) int { return v.TotalBytes }).(pulumi.IntOutput)
+}
+
+// Virtual clusters.
+func (o BackupStrategyDataBackupStrategyBackUpTableOutput) VCluster() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BackupStrategyDataBackupStrategyBackUpTable) *string { return v.VCluster }).(pulumi.StringPtrOutput)
+}
+
+// ZK path.
+func (o BackupStrategyDataBackupStrategyBackUpTableOutput) ZooPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BackupStrategyDataBackupStrategyBackUpTable) *string { return v.ZooPath }).(pulumi.StringPtrOutput)
+}
+
+type BackupStrategyDataBackupStrategyBackUpTableArrayOutput struct{ *pulumi.OutputState }
+
+func (BackupStrategyDataBackupStrategyBackUpTableArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BackupStrategyDataBackupStrategyBackUpTable)(nil)).Elem()
+}
+
+func (o BackupStrategyDataBackupStrategyBackUpTableArrayOutput) ToBackupStrategyDataBackupStrategyBackUpTableArrayOutput() BackupStrategyDataBackupStrategyBackUpTableArrayOutput {
+	return o
+}
+
+func (o BackupStrategyDataBackupStrategyBackUpTableArrayOutput) ToBackupStrategyDataBackupStrategyBackUpTableArrayOutputWithContext(ctx context.Context) BackupStrategyDataBackupStrategyBackUpTableArrayOutput {
+	return o
+}
+
+func (o BackupStrategyDataBackupStrategyBackUpTableArrayOutput) Index(i pulumi.IntInput) BackupStrategyDataBackupStrategyBackUpTableOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BackupStrategyDataBackupStrategyBackUpTable {
+		return vs[0].([]BackupStrategyDataBackupStrategyBackUpTable)[vs[1].(int)]
+	}).(BackupStrategyDataBackupStrategyBackUpTableOutput)
+}
+
+type BackupStrategyMetaBackupStrategy struct {
+	// Execution hour.
+	ExecuteHour *int `pulumi:"executeHour"`
+	// Retention days.
+	RetainDays *int `pulumi:"retainDays"`
+	// The day of the week is separated by commas. For example: 2 represents Tuesday.
+	WeekDays *string `pulumi:"weekDays"`
+}
+
+// BackupStrategyMetaBackupStrategyInput is an input type that accepts BackupStrategyMetaBackupStrategyArgs and BackupStrategyMetaBackupStrategyOutput values.
+// You can construct a concrete instance of `BackupStrategyMetaBackupStrategyInput` via:
+//
+//          BackupStrategyMetaBackupStrategyArgs{...}
+type BackupStrategyMetaBackupStrategyInput interface {
+	pulumi.Input
+
+	ToBackupStrategyMetaBackupStrategyOutput() BackupStrategyMetaBackupStrategyOutput
+	ToBackupStrategyMetaBackupStrategyOutputWithContext(context.Context) BackupStrategyMetaBackupStrategyOutput
+}
+
+type BackupStrategyMetaBackupStrategyArgs struct {
+	// Execution hour.
+	ExecuteHour pulumi.IntPtrInput `pulumi:"executeHour"`
+	// Retention days.
+	RetainDays pulumi.IntPtrInput `pulumi:"retainDays"`
+	// The day of the week is separated by commas. For example: 2 represents Tuesday.
+	WeekDays pulumi.StringPtrInput `pulumi:"weekDays"`
+}
+
+func (BackupStrategyMetaBackupStrategyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BackupStrategyMetaBackupStrategy)(nil)).Elem()
+}
+
+func (i BackupStrategyMetaBackupStrategyArgs) ToBackupStrategyMetaBackupStrategyOutput() BackupStrategyMetaBackupStrategyOutput {
+	return i.ToBackupStrategyMetaBackupStrategyOutputWithContext(context.Background())
+}
+
+func (i BackupStrategyMetaBackupStrategyArgs) ToBackupStrategyMetaBackupStrategyOutputWithContext(ctx context.Context) BackupStrategyMetaBackupStrategyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BackupStrategyMetaBackupStrategyOutput)
+}
+
+// BackupStrategyMetaBackupStrategyArrayInput is an input type that accepts BackupStrategyMetaBackupStrategyArray and BackupStrategyMetaBackupStrategyArrayOutput values.
+// You can construct a concrete instance of `BackupStrategyMetaBackupStrategyArrayInput` via:
+//
+//          BackupStrategyMetaBackupStrategyArray{ BackupStrategyMetaBackupStrategyArgs{...} }
+type BackupStrategyMetaBackupStrategyArrayInput interface {
+	pulumi.Input
+
+	ToBackupStrategyMetaBackupStrategyArrayOutput() BackupStrategyMetaBackupStrategyArrayOutput
+	ToBackupStrategyMetaBackupStrategyArrayOutputWithContext(context.Context) BackupStrategyMetaBackupStrategyArrayOutput
+}
+
+type BackupStrategyMetaBackupStrategyArray []BackupStrategyMetaBackupStrategyInput
+
+func (BackupStrategyMetaBackupStrategyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BackupStrategyMetaBackupStrategy)(nil)).Elem()
+}
+
+func (i BackupStrategyMetaBackupStrategyArray) ToBackupStrategyMetaBackupStrategyArrayOutput() BackupStrategyMetaBackupStrategyArrayOutput {
+	return i.ToBackupStrategyMetaBackupStrategyArrayOutputWithContext(context.Background())
+}
+
+func (i BackupStrategyMetaBackupStrategyArray) ToBackupStrategyMetaBackupStrategyArrayOutputWithContext(ctx context.Context) BackupStrategyMetaBackupStrategyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BackupStrategyMetaBackupStrategyArrayOutput)
+}
+
+type BackupStrategyMetaBackupStrategyOutput struct{ *pulumi.OutputState }
+
+func (BackupStrategyMetaBackupStrategyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BackupStrategyMetaBackupStrategy)(nil)).Elem()
+}
+
+func (o BackupStrategyMetaBackupStrategyOutput) ToBackupStrategyMetaBackupStrategyOutput() BackupStrategyMetaBackupStrategyOutput {
+	return o
+}
+
+func (o BackupStrategyMetaBackupStrategyOutput) ToBackupStrategyMetaBackupStrategyOutputWithContext(ctx context.Context) BackupStrategyMetaBackupStrategyOutput {
+	return o
+}
+
+// Execution hour.
+func (o BackupStrategyMetaBackupStrategyOutput) ExecuteHour() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BackupStrategyMetaBackupStrategy) *int { return v.ExecuteHour }).(pulumi.IntPtrOutput)
+}
+
+// Retention days.
+func (o BackupStrategyMetaBackupStrategyOutput) RetainDays() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BackupStrategyMetaBackupStrategy) *int { return v.RetainDays }).(pulumi.IntPtrOutput)
+}
+
+// The day of the week is separated by commas. For example: 2 represents Tuesday.
+func (o BackupStrategyMetaBackupStrategyOutput) WeekDays() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BackupStrategyMetaBackupStrategy) *string { return v.WeekDays }).(pulumi.StringPtrOutput)
+}
+
+type BackupStrategyMetaBackupStrategyArrayOutput struct{ *pulumi.OutputState }
+
+func (BackupStrategyMetaBackupStrategyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BackupStrategyMetaBackupStrategy)(nil)).Elem()
+}
+
+func (o BackupStrategyMetaBackupStrategyArrayOutput) ToBackupStrategyMetaBackupStrategyArrayOutput() BackupStrategyMetaBackupStrategyArrayOutput {
+	return o
+}
+
+func (o BackupStrategyMetaBackupStrategyArrayOutput) ToBackupStrategyMetaBackupStrategyArrayOutputWithContext(ctx context.Context) BackupStrategyMetaBackupStrategyArrayOutput {
+	return o
+}
+
+func (o BackupStrategyMetaBackupStrategyArrayOutput) Index(i pulumi.IntInput) BackupStrategyMetaBackupStrategyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BackupStrategyMetaBackupStrategy {
+		return vs[0].([]BackupStrategyMetaBackupStrategy)[vs[1].(int)]
+	}).(BackupStrategyMetaBackupStrategyOutput)
+}
+
 type InstanceCommonSpec struct {
 	// Node count. NOTE: Only support value 3.
 	Count int `pulumi:"count"`
@@ -360,13 +975,1904 @@ func (o InstanceDataSpecPtrOutput) SpecName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type KeyvalConfigItems struct {
+	// Instance config key.
+	ConfKey string `pulumi:"confKey"`
+	// Instance config value.
+	ConfValue string `pulumi:"confValue"`
+}
+
+// KeyvalConfigItemsInput is an input type that accepts KeyvalConfigItemsArgs and KeyvalConfigItemsOutput values.
+// You can construct a concrete instance of `KeyvalConfigItemsInput` via:
+//
+//          KeyvalConfigItemsArgs{...}
+type KeyvalConfigItemsInput interface {
+	pulumi.Input
+
+	ToKeyvalConfigItemsOutput() KeyvalConfigItemsOutput
+	ToKeyvalConfigItemsOutputWithContext(context.Context) KeyvalConfigItemsOutput
+}
+
+type KeyvalConfigItemsArgs struct {
+	// Instance config key.
+	ConfKey pulumi.StringInput `pulumi:"confKey"`
+	// Instance config value.
+	ConfValue pulumi.StringInput `pulumi:"confValue"`
+}
+
+func (KeyvalConfigItemsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*KeyvalConfigItems)(nil)).Elem()
+}
+
+func (i KeyvalConfigItemsArgs) ToKeyvalConfigItemsOutput() KeyvalConfigItemsOutput {
+	return i.ToKeyvalConfigItemsOutputWithContext(context.Background())
+}
+
+func (i KeyvalConfigItemsArgs) ToKeyvalConfigItemsOutputWithContext(ctx context.Context) KeyvalConfigItemsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KeyvalConfigItemsOutput)
+}
+
+func (i KeyvalConfigItemsArgs) ToKeyvalConfigItemsPtrOutput() KeyvalConfigItemsPtrOutput {
+	return i.ToKeyvalConfigItemsPtrOutputWithContext(context.Background())
+}
+
+func (i KeyvalConfigItemsArgs) ToKeyvalConfigItemsPtrOutputWithContext(ctx context.Context) KeyvalConfigItemsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KeyvalConfigItemsOutput).ToKeyvalConfigItemsPtrOutputWithContext(ctx)
+}
+
+// KeyvalConfigItemsPtrInput is an input type that accepts KeyvalConfigItemsArgs, KeyvalConfigItemsPtr and KeyvalConfigItemsPtrOutput values.
+// You can construct a concrete instance of `KeyvalConfigItemsPtrInput` via:
+//
+//          KeyvalConfigItemsArgs{...}
+//
+//  or:
+//
+//          nil
+type KeyvalConfigItemsPtrInput interface {
+	pulumi.Input
+
+	ToKeyvalConfigItemsPtrOutput() KeyvalConfigItemsPtrOutput
+	ToKeyvalConfigItemsPtrOutputWithContext(context.Context) KeyvalConfigItemsPtrOutput
+}
+
+type keyvalConfigItemsPtrType KeyvalConfigItemsArgs
+
+func KeyvalConfigItemsPtr(v *KeyvalConfigItemsArgs) KeyvalConfigItemsPtrInput {
+	return (*keyvalConfigItemsPtrType)(v)
+}
+
+func (*keyvalConfigItemsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**KeyvalConfigItems)(nil)).Elem()
+}
+
+func (i *keyvalConfigItemsPtrType) ToKeyvalConfigItemsPtrOutput() KeyvalConfigItemsPtrOutput {
+	return i.ToKeyvalConfigItemsPtrOutputWithContext(context.Background())
+}
+
+func (i *keyvalConfigItemsPtrType) ToKeyvalConfigItemsPtrOutputWithContext(ctx context.Context) KeyvalConfigItemsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KeyvalConfigItemsPtrOutput)
+}
+
+type KeyvalConfigItemsOutput struct{ *pulumi.OutputState }
+
+func (KeyvalConfigItemsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*KeyvalConfigItems)(nil)).Elem()
+}
+
+func (o KeyvalConfigItemsOutput) ToKeyvalConfigItemsOutput() KeyvalConfigItemsOutput {
+	return o
+}
+
+func (o KeyvalConfigItemsOutput) ToKeyvalConfigItemsOutputWithContext(ctx context.Context) KeyvalConfigItemsOutput {
+	return o
+}
+
+func (o KeyvalConfigItemsOutput) ToKeyvalConfigItemsPtrOutput() KeyvalConfigItemsPtrOutput {
+	return o.ToKeyvalConfigItemsPtrOutputWithContext(context.Background())
+}
+
+func (o KeyvalConfigItemsOutput) ToKeyvalConfigItemsPtrOutputWithContext(ctx context.Context) KeyvalConfigItemsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v KeyvalConfigItems) *KeyvalConfigItems {
+		return &v
+	}).(KeyvalConfigItemsPtrOutput)
+}
+
+// Instance config key.
+func (o KeyvalConfigItemsOutput) ConfKey() pulumi.StringOutput {
+	return o.ApplyT(func(v KeyvalConfigItems) string { return v.ConfKey }).(pulumi.StringOutput)
+}
+
+// Instance config value.
+func (o KeyvalConfigItemsOutput) ConfValue() pulumi.StringOutput {
+	return o.ApplyT(func(v KeyvalConfigItems) string { return v.ConfValue }).(pulumi.StringOutput)
+}
+
+type KeyvalConfigItemsPtrOutput struct{ *pulumi.OutputState }
+
+func (KeyvalConfigItemsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**KeyvalConfigItems)(nil)).Elem()
+}
+
+func (o KeyvalConfigItemsPtrOutput) ToKeyvalConfigItemsPtrOutput() KeyvalConfigItemsPtrOutput {
+	return o
+}
+
+func (o KeyvalConfigItemsPtrOutput) ToKeyvalConfigItemsPtrOutputWithContext(ctx context.Context) KeyvalConfigItemsPtrOutput {
+	return o
+}
+
+func (o KeyvalConfigItemsPtrOutput) Elem() KeyvalConfigItemsOutput {
+	return o.ApplyT(func(v *KeyvalConfigItems) KeyvalConfigItems {
+		if v != nil {
+			return *v
+		}
+		var ret KeyvalConfigItems
+		return ret
+	}).(KeyvalConfigItemsOutput)
+}
+
+// Instance config key.
+func (o KeyvalConfigItemsPtrOutput) ConfKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KeyvalConfigItems) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ConfKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Instance config value.
+func (o KeyvalConfigItemsPtrOutput) ConfValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *KeyvalConfigItems) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ConfValue
+	}).(pulumi.StringPtrOutput)
+}
+
+type XmlConfigModifyConfContext struct {
+	// Configuration file name.
+	FileName string `pulumi:"fileName"`
+	// Path to save configuration file.
+	FilePath *string `pulumi:"filePath"`
+	// New content of configuration file, base64 encoded.
+	NewConfValue string `pulumi:"newConfValue"`
+}
+
+// XmlConfigModifyConfContextInput is an input type that accepts XmlConfigModifyConfContextArgs and XmlConfigModifyConfContextOutput values.
+// You can construct a concrete instance of `XmlConfigModifyConfContextInput` via:
+//
+//          XmlConfigModifyConfContextArgs{...}
+type XmlConfigModifyConfContextInput interface {
+	pulumi.Input
+
+	ToXmlConfigModifyConfContextOutput() XmlConfigModifyConfContextOutput
+	ToXmlConfigModifyConfContextOutputWithContext(context.Context) XmlConfigModifyConfContextOutput
+}
+
+type XmlConfigModifyConfContextArgs struct {
+	// Configuration file name.
+	FileName pulumi.StringInput `pulumi:"fileName"`
+	// Path to save configuration file.
+	FilePath pulumi.StringPtrInput `pulumi:"filePath"`
+	// New content of configuration file, base64 encoded.
+	NewConfValue pulumi.StringInput `pulumi:"newConfValue"`
+}
+
+func (XmlConfigModifyConfContextArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*XmlConfigModifyConfContext)(nil)).Elem()
+}
+
+func (i XmlConfigModifyConfContextArgs) ToXmlConfigModifyConfContextOutput() XmlConfigModifyConfContextOutput {
+	return i.ToXmlConfigModifyConfContextOutputWithContext(context.Background())
+}
+
+func (i XmlConfigModifyConfContextArgs) ToXmlConfigModifyConfContextOutputWithContext(ctx context.Context) XmlConfigModifyConfContextOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(XmlConfigModifyConfContextOutput)
+}
+
+func (i XmlConfigModifyConfContextArgs) ToXmlConfigModifyConfContextPtrOutput() XmlConfigModifyConfContextPtrOutput {
+	return i.ToXmlConfigModifyConfContextPtrOutputWithContext(context.Background())
+}
+
+func (i XmlConfigModifyConfContextArgs) ToXmlConfigModifyConfContextPtrOutputWithContext(ctx context.Context) XmlConfigModifyConfContextPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(XmlConfigModifyConfContextOutput).ToXmlConfigModifyConfContextPtrOutputWithContext(ctx)
+}
+
+// XmlConfigModifyConfContextPtrInput is an input type that accepts XmlConfigModifyConfContextArgs, XmlConfigModifyConfContextPtr and XmlConfigModifyConfContextPtrOutput values.
+// You can construct a concrete instance of `XmlConfigModifyConfContextPtrInput` via:
+//
+//          XmlConfigModifyConfContextArgs{...}
+//
+//  or:
+//
+//          nil
+type XmlConfigModifyConfContextPtrInput interface {
+	pulumi.Input
+
+	ToXmlConfigModifyConfContextPtrOutput() XmlConfigModifyConfContextPtrOutput
+	ToXmlConfigModifyConfContextPtrOutputWithContext(context.Context) XmlConfigModifyConfContextPtrOutput
+}
+
+type xmlConfigModifyConfContextPtrType XmlConfigModifyConfContextArgs
+
+func XmlConfigModifyConfContextPtr(v *XmlConfigModifyConfContextArgs) XmlConfigModifyConfContextPtrInput {
+	return (*xmlConfigModifyConfContextPtrType)(v)
+}
+
+func (*xmlConfigModifyConfContextPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**XmlConfigModifyConfContext)(nil)).Elem()
+}
+
+func (i *xmlConfigModifyConfContextPtrType) ToXmlConfigModifyConfContextPtrOutput() XmlConfigModifyConfContextPtrOutput {
+	return i.ToXmlConfigModifyConfContextPtrOutputWithContext(context.Background())
+}
+
+func (i *xmlConfigModifyConfContextPtrType) ToXmlConfigModifyConfContextPtrOutputWithContext(ctx context.Context) XmlConfigModifyConfContextPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(XmlConfigModifyConfContextPtrOutput)
+}
+
+type XmlConfigModifyConfContextOutput struct{ *pulumi.OutputState }
+
+func (XmlConfigModifyConfContextOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*XmlConfigModifyConfContext)(nil)).Elem()
+}
+
+func (o XmlConfigModifyConfContextOutput) ToXmlConfigModifyConfContextOutput() XmlConfigModifyConfContextOutput {
+	return o
+}
+
+func (o XmlConfigModifyConfContextOutput) ToXmlConfigModifyConfContextOutputWithContext(ctx context.Context) XmlConfigModifyConfContextOutput {
+	return o
+}
+
+func (o XmlConfigModifyConfContextOutput) ToXmlConfigModifyConfContextPtrOutput() XmlConfigModifyConfContextPtrOutput {
+	return o.ToXmlConfigModifyConfContextPtrOutputWithContext(context.Background())
+}
+
+func (o XmlConfigModifyConfContextOutput) ToXmlConfigModifyConfContextPtrOutputWithContext(ctx context.Context) XmlConfigModifyConfContextPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v XmlConfigModifyConfContext) *XmlConfigModifyConfContext {
+		return &v
+	}).(XmlConfigModifyConfContextPtrOutput)
+}
+
+// Configuration file name.
+func (o XmlConfigModifyConfContextOutput) FileName() pulumi.StringOutput {
+	return o.ApplyT(func(v XmlConfigModifyConfContext) string { return v.FileName }).(pulumi.StringOutput)
+}
+
+// Path to save configuration file.
+func (o XmlConfigModifyConfContextOutput) FilePath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v XmlConfigModifyConfContext) *string { return v.FilePath }).(pulumi.StringPtrOutput)
+}
+
+// New content of configuration file, base64 encoded.
+func (o XmlConfigModifyConfContextOutput) NewConfValue() pulumi.StringOutput {
+	return o.ApplyT(func(v XmlConfigModifyConfContext) string { return v.NewConfValue }).(pulumi.StringOutput)
+}
+
+type XmlConfigModifyConfContextPtrOutput struct{ *pulumi.OutputState }
+
+func (XmlConfigModifyConfContextPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**XmlConfigModifyConfContext)(nil)).Elem()
+}
+
+func (o XmlConfigModifyConfContextPtrOutput) ToXmlConfigModifyConfContextPtrOutput() XmlConfigModifyConfContextPtrOutput {
+	return o
+}
+
+func (o XmlConfigModifyConfContextPtrOutput) ToXmlConfigModifyConfContextPtrOutputWithContext(ctx context.Context) XmlConfigModifyConfContextPtrOutput {
+	return o
+}
+
+func (o XmlConfigModifyConfContextPtrOutput) Elem() XmlConfigModifyConfContextOutput {
+	return o.ApplyT(func(v *XmlConfigModifyConfContext) XmlConfigModifyConfContext {
+		if v != nil {
+			return *v
+		}
+		var ret XmlConfigModifyConfContext
+		return ret
+	}).(XmlConfigModifyConfContextOutput)
+}
+
+// Configuration file name.
+func (o XmlConfigModifyConfContextPtrOutput) FileName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *XmlConfigModifyConfContext) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.FileName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Path to save configuration file.
+func (o XmlConfigModifyConfContextPtrOutput) FilePath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *XmlConfigModifyConfContext) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FilePath
+	}).(pulumi.StringPtrOutput)
+}
+
+// New content of configuration file, base64 encoded.
+func (o XmlConfigModifyConfContextPtrOutput) NewConfValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *XmlConfigModifyConfContext) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.NewConfValue
+	}).(pulumi.StringPtrOutput)
+}
+
+type GetBackupJobDetailTableContent struct {
+	// Database.
+	Database string `pulumi:"database"`
+	// Ips.
+	Ips string `pulumi:"ips"`
+	// Ip address of cvm.
+	Rip string `pulumi:"rip"`
+	// Table.
+	Table string `pulumi:"table"`
+	// Total bytes.
+	TotalBytes int `pulumi:"totalBytes"`
+	// Virtual cluster.
+	VCluster string `pulumi:"vCluster"`
+	// ZK path.
+	ZooPath string `pulumi:"zooPath"`
+}
+
+// GetBackupJobDetailTableContentInput is an input type that accepts GetBackupJobDetailTableContentArgs and GetBackupJobDetailTableContentOutput values.
+// You can construct a concrete instance of `GetBackupJobDetailTableContentInput` via:
+//
+//          GetBackupJobDetailTableContentArgs{...}
+type GetBackupJobDetailTableContentInput interface {
+	pulumi.Input
+
+	ToGetBackupJobDetailTableContentOutput() GetBackupJobDetailTableContentOutput
+	ToGetBackupJobDetailTableContentOutputWithContext(context.Context) GetBackupJobDetailTableContentOutput
+}
+
+type GetBackupJobDetailTableContentArgs struct {
+	// Database.
+	Database pulumi.StringInput `pulumi:"database"`
+	// Ips.
+	Ips pulumi.StringInput `pulumi:"ips"`
+	// Ip address of cvm.
+	Rip pulumi.StringInput `pulumi:"rip"`
+	// Table.
+	Table pulumi.StringInput `pulumi:"table"`
+	// Total bytes.
+	TotalBytes pulumi.IntInput `pulumi:"totalBytes"`
+	// Virtual cluster.
+	VCluster pulumi.StringInput `pulumi:"vCluster"`
+	// ZK path.
+	ZooPath pulumi.StringInput `pulumi:"zooPath"`
+}
+
+func (GetBackupJobDetailTableContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupJobDetailTableContent)(nil)).Elem()
+}
+
+func (i GetBackupJobDetailTableContentArgs) ToGetBackupJobDetailTableContentOutput() GetBackupJobDetailTableContentOutput {
+	return i.ToGetBackupJobDetailTableContentOutputWithContext(context.Background())
+}
+
+func (i GetBackupJobDetailTableContentArgs) ToGetBackupJobDetailTableContentOutputWithContext(ctx context.Context) GetBackupJobDetailTableContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupJobDetailTableContentOutput)
+}
+
+// GetBackupJobDetailTableContentArrayInput is an input type that accepts GetBackupJobDetailTableContentArray and GetBackupJobDetailTableContentArrayOutput values.
+// You can construct a concrete instance of `GetBackupJobDetailTableContentArrayInput` via:
+//
+//          GetBackupJobDetailTableContentArray{ GetBackupJobDetailTableContentArgs{...} }
+type GetBackupJobDetailTableContentArrayInput interface {
+	pulumi.Input
+
+	ToGetBackupJobDetailTableContentArrayOutput() GetBackupJobDetailTableContentArrayOutput
+	ToGetBackupJobDetailTableContentArrayOutputWithContext(context.Context) GetBackupJobDetailTableContentArrayOutput
+}
+
+type GetBackupJobDetailTableContentArray []GetBackupJobDetailTableContentInput
+
+func (GetBackupJobDetailTableContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBackupJobDetailTableContent)(nil)).Elem()
+}
+
+func (i GetBackupJobDetailTableContentArray) ToGetBackupJobDetailTableContentArrayOutput() GetBackupJobDetailTableContentArrayOutput {
+	return i.ToGetBackupJobDetailTableContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetBackupJobDetailTableContentArray) ToGetBackupJobDetailTableContentArrayOutputWithContext(ctx context.Context) GetBackupJobDetailTableContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupJobDetailTableContentArrayOutput)
+}
+
+type GetBackupJobDetailTableContentOutput struct{ *pulumi.OutputState }
+
+func (GetBackupJobDetailTableContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupJobDetailTableContent)(nil)).Elem()
+}
+
+func (o GetBackupJobDetailTableContentOutput) ToGetBackupJobDetailTableContentOutput() GetBackupJobDetailTableContentOutput {
+	return o
+}
+
+func (o GetBackupJobDetailTableContentOutput) ToGetBackupJobDetailTableContentOutputWithContext(ctx context.Context) GetBackupJobDetailTableContentOutput {
+	return o
+}
+
+// Database.
+func (o GetBackupJobDetailTableContentOutput) Database() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupJobDetailTableContent) string { return v.Database }).(pulumi.StringOutput)
+}
+
+// Ips.
+func (o GetBackupJobDetailTableContentOutput) Ips() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupJobDetailTableContent) string { return v.Ips }).(pulumi.StringOutput)
+}
+
+// Ip address of cvm.
+func (o GetBackupJobDetailTableContentOutput) Rip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupJobDetailTableContent) string { return v.Rip }).(pulumi.StringOutput)
+}
+
+// Table.
+func (o GetBackupJobDetailTableContentOutput) Table() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupJobDetailTableContent) string { return v.Table }).(pulumi.StringOutput)
+}
+
+// Total bytes.
+func (o GetBackupJobDetailTableContentOutput) TotalBytes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupJobDetailTableContent) int { return v.TotalBytes }).(pulumi.IntOutput)
+}
+
+// Virtual cluster.
+func (o GetBackupJobDetailTableContentOutput) VCluster() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupJobDetailTableContent) string { return v.VCluster }).(pulumi.StringOutput)
+}
+
+// ZK path.
+func (o GetBackupJobDetailTableContentOutput) ZooPath() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupJobDetailTableContent) string { return v.ZooPath }).(pulumi.StringOutput)
+}
+
+type GetBackupJobDetailTableContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBackupJobDetailTableContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBackupJobDetailTableContent)(nil)).Elem()
+}
+
+func (o GetBackupJobDetailTableContentArrayOutput) ToGetBackupJobDetailTableContentArrayOutput() GetBackupJobDetailTableContentArrayOutput {
+	return o
+}
+
+func (o GetBackupJobDetailTableContentArrayOutput) ToGetBackupJobDetailTableContentArrayOutputWithContext(ctx context.Context) GetBackupJobDetailTableContentArrayOutput {
+	return o
+}
+
+func (o GetBackupJobDetailTableContentArrayOutput) Index(i pulumi.IntInput) GetBackupJobDetailTableContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBackupJobDetailTableContent {
+		return vs[0].([]GetBackupJobDetailTableContent)[vs[1].(int)]
+	}).(GetBackupJobDetailTableContentOutput)
+}
+
+type GetBackupJobsBackUpJob struct {
+	// Back up size.
+	BackUpSize int `pulumi:"backUpSize"`
+	// Back up create time.
+	BackUpTime string `pulumi:"backUpTime"`
+	// Back up type.
+	BackUpType string `pulumi:"backUpType"`
+	// Back up expire time.
+	ExpireTime string `pulumi:"expireTime"`
+	// Back up job id.
+	JobId int `pulumi:"jobId"`
+	// Job status.
+	JobStatus string `pulumi:"jobStatus"`
+	// Back up job name.
+	Snapshot string `pulumi:"snapshot"`
+}
+
+// GetBackupJobsBackUpJobInput is an input type that accepts GetBackupJobsBackUpJobArgs and GetBackupJobsBackUpJobOutput values.
+// You can construct a concrete instance of `GetBackupJobsBackUpJobInput` via:
+//
+//          GetBackupJobsBackUpJobArgs{...}
+type GetBackupJobsBackUpJobInput interface {
+	pulumi.Input
+
+	ToGetBackupJobsBackUpJobOutput() GetBackupJobsBackUpJobOutput
+	ToGetBackupJobsBackUpJobOutputWithContext(context.Context) GetBackupJobsBackUpJobOutput
+}
+
+type GetBackupJobsBackUpJobArgs struct {
+	// Back up size.
+	BackUpSize pulumi.IntInput `pulumi:"backUpSize"`
+	// Back up create time.
+	BackUpTime pulumi.StringInput `pulumi:"backUpTime"`
+	// Back up type.
+	BackUpType pulumi.StringInput `pulumi:"backUpType"`
+	// Back up expire time.
+	ExpireTime pulumi.StringInput `pulumi:"expireTime"`
+	// Back up job id.
+	JobId pulumi.IntInput `pulumi:"jobId"`
+	// Job status.
+	JobStatus pulumi.StringInput `pulumi:"jobStatus"`
+	// Back up job name.
+	Snapshot pulumi.StringInput `pulumi:"snapshot"`
+}
+
+func (GetBackupJobsBackUpJobArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupJobsBackUpJob)(nil)).Elem()
+}
+
+func (i GetBackupJobsBackUpJobArgs) ToGetBackupJobsBackUpJobOutput() GetBackupJobsBackUpJobOutput {
+	return i.ToGetBackupJobsBackUpJobOutputWithContext(context.Background())
+}
+
+func (i GetBackupJobsBackUpJobArgs) ToGetBackupJobsBackUpJobOutputWithContext(ctx context.Context) GetBackupJobsBackUpJobOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupJobsBackUpJobOutput)
+}
+
+// GetBackupJobsBackUpJobArrayInput is an input type that accepts GetBackupJobsBackUpJobArray and GetBackupJobsBackUpJobArrayOutput values.
+// You can construct a concrete instance of `GetBackupJobsBackUpJobArrayInput` via:
+//
+//          GetBackupJobsBackUpJobArray{ GetBackupJobsBackUpJobArgs{...} }
+type GetBackupJobsBackUpJobArrayInput interface {
+	pulumi.Input
+
+	ToGetBackupJobsBackUpJobArrayOutput() GetBackupJobsBackUpJobArrayOutput
+	ToGetBackupJobsBackUpJobArrayOutputWithContext(context.Context) GetBackupJobsBackUpJobArrayOutput
+}
+
+type GetBackupJobsBackUpJobArray []GetBackupJobsBackUpJobInput
+
+func (GetBackupJobsBackUpJobArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBackupJobsBackUpJob)(nil)).Elem()
+}
+
+func (i GetBackupJobsBackUpJobArray) ToGetBackupJobsBackUpJobArrayOutput() GetBackupJobsBackUpJobArrayOutput {
+	return i.ToGetBackupJobsBackUpJobArrayOutputWithContext(context.Background())
+}
+
+func (i GetBackupJobsBackUpJobArray) ToGetBackupJobsBackUpJobArrayOutputWithContext(ctx context.Context) GetBackupJobsBackUpJobArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupJobsBackUpJobArrayOutput)
+}
+
+type GetBackupJobsBackUpJobOutput struct{ *pulumi.OutputState }
+
+func (GetBackupJobsBackUpJobOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupJobsBackUpJob)(nil)).Elem()
+}
+
+func (o GetBackupJobsBackUpJobOutput) ToGetBackupJobsBackUpJobOutput() GetBackupJobsBackUpJobOutput {
+	return o
+}
+
+func (o GetBackupJobsBackUpJobOutput) ToGetBackupJobsBackUpJobOutputWithContext(ctx context.Context) GetBackupJobsBackUpJobOutput {
+	return o
+}
+
+// Back up size.
+func (o GetBackupJobsBackUpJobOutput) BackUpSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupJobsBackUpJob) int { return v.BackUpSize }).(pulumi.IntOutput)
+}
+
+// Back up create time.
+func (o GetBackupJobsBackUpJobOutput) BackUpTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupJobsBackUpJob) string { return v.BackUpTime }).(pulumi.StringOutput)
+}
+
+// Back up type.
+func (o GetBackupJobsBackUpJobOutput) BackUpType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupJobsBackUpJob) string { return v.BackUpType }).(pulumi.StringOutput)
+}
+
+// Back up expire time.
+func (o GetBackupJobsBackUpJobOutput) ExpireTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupJobsBackUpJob) string { return v.ExpireTime }).(pulumi.StringOutput)
+}
+
+// Back up job id.
+func (o GetBackupJobsBackUpJobOutput) JobId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupJobsBackUpJob) int { return v.JobId }).(pulumi.IntOutput)
+}
+
+// Job status.
+func (o GetBackupJobsBackUpJobOutput) JobStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupJobsBackUpJob) string { return v.JobStatus }).(pulumi.StringOutput)
+}
+
+// Back up job name.
+func (o GetBackupJobsBackUpJobOutput) Snapshot() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupJobsBackUpJob) string { return v.Snapshot }).(pulumi.StringOutput)
+}
+
+type GetBackupJobsBackUpJobArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBackupJobsBackUpJobArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBackupJobsBackUpJob)(nil)).Elem()
+}
+
+func (o GetBackupJobsBackUpJobArrayOutput) ToGetBackupJobsBackUpJobArrayOutput() GetBackupJobsBackUpJobArrayOutput {
+	return o
+}
+
+func (o GetBackupJobsBackUpJobArrayOutput) ToGetBackupJobsBackUpJobArrayOutputWithContext(ctx context.Context) GetBackupJobsBackUpJobArrayOutput {
+	return o
+}
+
+func (o GetBackupJobsBackUpJobArrayOutput) Index(i pulumi.IntInput) GetBackupJobsBackUpJobOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBackupJobsBackUpJob {
+		return vs[0].([]GetBackupJobsBackUpJob)[vs[1].(int)]
+	}).(GetBackupJobsBackUpJobOutput)
+}
+
+type GetBackupTablesAvailableTable struct {
+	// Database.
+	Database string `pulumi:"database"`
+	// Table ips.
+	Ips string `pulumi:"ips"`
+	// Ip address of cvm.
+	Rip string `pulumi:"rip"`
+	// Table.
+	Table string `pulumi:"table"`
+	// Table total bytes.
+	TotalBytes int `pulumi:"totalBytes"`
+	// Virtual cluster.
+	VCluster string `pulumi:"vCluster"`
+	// Zk path.
+	ZooPath string `pulumi:"zooPath"`
+}
+
+// GetBackupTablesAvailableTableInput is an input type that accepts GetBackupTablesAvailableTableArgs and GetBackupTablesAvailableTableOutput values.
+// You can construct a concrete instance of `GetBackupTablesAvailableTableInput` via:
+//
+//          GetBackupTablesAvailableTableArgs{...}
+type GetBackupTablesAvailableTableInput interface {
+	pulumi.Input
+
+	ToGetBackupTablesAvailableTableOutput() GetBackupTablesAvailableTableOutput
+	ToGetBackupTablesAvailableTableOutputWithContext(context.Context) GetBackupTablesAvailableTableOutput
+}
+
+type GetBackupTablesAvailableTableArgs struct {
+	// Database.
+	Database pulumi.StringInput `pulumi:"database"`
+	// Table ips.
+	Ips pulumi.StringInput `pulumi:"ips"`
+	// Ip address of cvm.
+	Rip pulumi.StringInput `pulumi:"rip"`
+	// Table.
+	Table pulumi.StringInput `pulumi:"table"`
+	// Table total bytes.
+	TotalBytes pulumi.IntInput `pulumi:"totalBytes"`
+	// Virtual cluster.
+	VCluster pulumi.StringInput `pulumi:"vCluster"`
+	// Zk path.
+	ZooPath pulumi.StringInput `pulumi:"zooPath"`
+}
+
+func (GetBackupTablesAvailableTableArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupTablesAvailableTable)(nil)).Elem()
+}
+
+func (i GetBackupTablesAvailableTableArgs) ToGetBackupTablesAvailableTableOutput() GetBackupTablesAvailableTableOutput {
+	return i.ToGetBackupTablesAvailableTableOutputWithContext(context.Background())
+}
+
+func (i GetBackupTablesAvailableTableArgs) ToGetBackupTablesAvailableTableOutputWithContext(ctx context.Context) GetBackupTablesAvailableTableOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupTablesAvailableTableOutput)
+}
+
+// GetBackupTablesAvailableTableArrayInput is an input type that accepts GetBackupTablesAvailableTableArray and GetBackupTablesAvailableTableArrayOutput values.
+// You can construct a concrete instance of `GetBackupTablesAvailableTableArrayInput` via:
+//
+//          GetBackupTablesAvailableTableArray{ GetBackupTablesAvailableTableArgs{...} }
+type GetBackupTablesAvailableTableArrayInput interface {
+	pulumi.Input
+
+	ToGetBackupTablesAvailableTableArrayOutput() GetBackupTablesAvailableTableArrayOutput
+	ToGetBackupTablesAvailableTableArrayOutputWithContext(context.Context) GetBackupTablesAvailableTableArrayOutput
+}
+
+type GetBackupTablesAvailableTableArray []GetBackupTablesAvailableTableInput
+
+func (GetBackupTablesAvailableTableArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBackupTablesAvailableTable)(nil)).Elem()
+}
+
+func (i GetBackupTablesAvailableTableArray) ToGetBackupTablesAvailableTableArrayOutput() GetBackupTablesAvailableTableArrayOutput {
+	return i.ToGetBackupTablesAvailableTableArrayOutputWithContext(context.Background())
+}
+
+func (i GetBackupTablesAvailableTableArray) ToGetBackupTablesAvailableTableArrayOutputWithContext(ctx context.Context) GetBackupTablesAvailableTableArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBackupTablesAvailableTableArrayOutput)
+}
+
+type GetBackupTablesAvailableTableOutput struct{ *pulumi.OutputState }
+
+func (GetBackupTablesAvailableTableOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBackupTablesAvailableTable)(nil)).Elem()
+}
+
+func (o GetBackupTablesAvailableTableOutput) ToGetBackupTablesAvailableTableOutput() GetBackupTablesAvailableTableOutput {
+	return o
+}
+
+func (o GetBackupTablesAvailableTableOutput) ToGetBackupTablesAvailableTableOutputWithContext(ctx context.Context) GetBackupTablesAvailableTableOutput {
+	return o
+}
+
+// Database.
+func (o GetBackupTablesAvailableTableOutput) Database() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupTablesAvailableTable) string { return v.Database }).(pulumi.StringOutput)
+}
+
+// Table ips.
+func (o GetBackupTablesAvailableTableOutput) Ips() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupTablesAvailableTable) string { return v.Ips }).(pulumi.StringOutput)
+}
+
+// Ip address of cvm.
+func (o GetBackupTablesAvailableTableOutput) Rip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupTablesAvailableTable) string { return v.Rip }).(pulumi.StringOutput)
+}
+
+// Table.
+func (o GetBackupTablesAvailableTableOutput) Table() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupTablesAvailableTable) string { return v.Table }).(pulumi.StringOutput)
+}
+
+// Table total bytes.
+func (o GetBackupTablesAvailableTableOutput) TotalBytes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBackupTablesAvailableTable) int { return v.TotalBytes }).(pulumi.IntOutput)
+}
+
+// Virtual cluster.
+func (o GetBackupTablesAvailableTableOutput) VCluster() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupTablesAvailableTable) string { return v.VCluster }).(pulumi.StringOutput)
+}
+
+// Zk path.
+func (o GetBackupTablesAvailableTableOutput) ZooPath() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBackupTablesAvailableTable) string { return v.ZooPath }).(pulumi.StringOutput)
+}
+
+type GetBackupTablesAvailableTableArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBackupTablesAvailableTableArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBackupTablesAvailableTable)(nil)).Elem()
+}
+
+func (o GetBackupTablesAvailableTableArrayOutput) ToGetBackupTablesAvailableTableArrayOutput() GetBackupTablesAvailableTableArrayOutput {
+	return o
+}
+
+func (o GetBackupTablesAvailableTableArrayOutput) ToGetBackupTablesAvailableTableArrayOutputWithContext(ctx context.Context) GetBackupTablesAvailableTableArrayOutput {
+	return o
+}
+
+func (o GetBackupTablesAvailableTableArrayOutput) Index(i pulumi.IntInput) GetBackupTablesAvailableTableOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBackupTablesAvailableTable {
+		return vs[0].([]GetBackupTablesAvailableTable)[vs[1].(int)]
+	}).(GetBackupTablesAvailableTableOutput)
+}
+
+type GetSpecAttachCbsSpec struct {
+	// Number of disks.
+	DiskCount int `pulumi:"diskCount"`
+	// Disk type description.
+	DiskDesc string `pulumi:"diskDesc"`
+	// Disk type.
+	DiskType string `pulumi:"diskType"`
+	// Maximum disk size, unit G.
+	MaxDiskSize int `pulumi:"maxDiskSize"`
+	// Minimum disk size, unit G.
+	MinDiskSize int `pulumi:"minDiskSize"`
+}
+
+// GetSpecAttachCbsSpecInput is an input type that accepts GetSpecAttachCbsSpecArgs and GetSpecAttachCbsSpecOutput values.
+// You can construct a concrete instance of `GetSpecAttachCbsSpecInput` via:
+//
+//          GetSpecAttachCbsSpecArgs{...}
+type GetSpecAttachCbsSpecInput interface {
+	pulumi.Input
+
+	ToGetSpecAttachCbsSpecOutput() GetSpecAttachCbsSpecOutput
+	ToGetSpecAttachCbsSpecOutputWithContext(context.Context) GetSpecAttachCbsSpecOutput
+}
+
+type GetSpecAttachCbsSpecArgs struct {
+	// Number of disks.
+	DiskCount pulumi.IntInput `pulumi:"diskCount"`
+	// Disk type description.
+	DiskDesc pulumi.StringInput `pulumi:"diskDesc"`
+	// Disk type.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// Maximum disk size, unit G.
+	MaxDiskSize pulumi.IntInput `pulumi:"maxDiskSize"`
+	// Minimum disk size, unit G.
+	MinDiskSize pulumi.IntInput `pulumi:"minDiskSize"`
+}
+
+func (GetSpecAttachCbsSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSpecAttachCbsSpec)(nil)).Elem()
+}
+
+func (i GetSpecAttachCbsSpecArgs) ToGetSpecAttachCbsSpecOutput() GetSpecAttachCbsSpecOutput {
+	return i.ToGetSpecAttachCbsSpecOutputWithContext(context.Background())
+}
+
+func (i GetSpecAttachCbsSpecArgs) ToGetSpecAttachCbsSpecOutputWithContext(ctx context.Context) GetSpecAttachCbsSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSpecAttachCbsSpecOutput)
+}
+
+// GetSpecAttachCbsSpecArrayInput is an input type that accepts GetSpecAttachCbsSpecArray and GetSpecAttachCbsSpecArrayOutput values.
+// You can construct a concrete instance of `GetSpecAttachCbsSpecArrayInput` via:
+//
+//          GetSpecAttachCbsSpecArray{ GetSpecAttachCbsSpecArgs{...} }
+type GetSpecAttachCbsSpecArrayInput interface {
+	pulumi.Input
+
+	ToGetSpecAttachCbsSpecArrayOutput() GetSpecAttachCbsSpecArrayOutput
+	ToGetSpecAttachCbsSpecArrayOutputWithContext(context.Context) GetSpecAttachCbsSpecArrayOutput
+}
+
+type GetSpecAttachCbsSpecArray []GetSpecAttachCbsSpecInput
+
+func (GetSpecAttachCbsSpecArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSpecAttachCbsSpec)(nil)).Elem()
+}
+
+func (i GetSpecAttachCbsSpecArray) ToGetSpecAttachCbsSpecArrayOutput() GetSpecAttachCbsSpecArrayOutput {
+	return i.ToGetSpecAttachCbsSpecArrayOutputWithContext(context.Background())
+}
+
+func (i GetSpecAttachCbsSpecArray) ToGetSpecAttachCbsSpecArrayOutputWithContext(ctx context.Context) GetSpecAttachCbsSpecArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSpecAttachCbsSpecArrayOutput)
+}
+
+type GetSpecAttachCbsSpecOutput struct{ *pulumi.OutputState }
+
+func (GetSpecAttachCbsSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSpecAttachCbsSpec)(nil)).Elem()
+}
+
+func (o GetSpecAttachCbsSpecOutput) ToGetSpecAttachCbsSpecOutput() GetSpecAttachCbsSpecOutput {
+	return o
+}
+
+func (o GetSpecAttachCbsSpecOutput) ToGetSpecAttachCbsSpecOutputWithContext(ctx context.Context) GetSpecAttachCbsSpecOutput {
+	return o
+}
+
+// Number of disks.
+func (o GetSpecAttachCbsSpecOutput) DiskCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecAttachCbsSpec) int { return v.DiskCount }).(pulumi.IntOutput)
+}
+
+// Disk type description.
+func (o GetSpecAttachCbsSpecOutput) DiskDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecAttachCbsSpec) string { return v.DiskDesc }).(pulumi.StringOutput)
+}
+
+// Disk type.
+func (o GetSpecAttachCbsSpecOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecAttachCbsSpec) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+// Maximum disk size, unit G.
+func (o GetSpecAttachCbsSpecOutput) MaxDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecAttachCbsSpec) int { return v.MaxDiskSize }).(pulumi.IntOutput)
+}
+
+// Minimum disk size, unit G.
+func (o GetSpecAttachCbsSpecOutput) MinDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecAttachCbsSpec) int { return v.MinDiskSize }).(pulumi.IntOutput)
+}
+
+type GetSpecAttachCbsSpecArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSpecAttachCbsSpecArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSpecAttachCbsSpec)(nil)).Elem()
+}
+
+func (o GetSpecAttachCbsSpecArrayOutput) ToGetSpecAttachCbsSpecArrayOutput() GetSpecAttachCbsSpecArrayOutput {
+	return o
+}
+
+func (o GetSpecAttachCbsSpecArrayOutput) ToGetSpecAttachCbsSpecArrayOutputWithContext(ctx context.Context) GetSpecAttachCbsSpecArrayOutput {
+	return o
+}
+
+func (o GetSpecAttachCbsSpecArrayOutput) Index(i pulumi.IntInput) GetSpecAttachCbsSpecOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSpecAttachCbsSpec {
+		return vs[0].([]GetSpecAttachCbsSpec)[vs[1].(int)]
+	}).(GetSpecAttachCbsSpecOutput)
+}
+
+type GetSpecCommonSpec struct {
+	// Whether it is available, false means sold out.
+	Available bool `pulumi:"available"`
+	// Specification description information.
+	ComputeSpecDesc string `pulumi:"computeSpecDesc"`
+	// Number of cpu cores.
+	Cpu int `pulumi:"cpu"`
+	// Data disk description information.
+	DataDisks []GetSpecCommonSpecDataDisk `pulumi:"dataDisks"`
+	// Specification name.
+	DisplayName string `pulumi:"displayName"`
+	// Inventory.
+	InstanceQuota int `pulumi:"instanceQuota"`
+	// Maximum number of nodes limit.
+	MaxNodeSize int `pulumi:"maxNodeSize"`
+	// Memory size, unit G.
+	Mem int `pulumi:"mem"`
+	// Specification name.
+	Name string `pulumi:"name"`
+	// System disk description information.
+	SystemDisks []GetSpecCommonSpecSystemDisk `pulumi:"systemDisks"`
+	// Classification tags, STANDARD/BIGDATA/HIGHIO respectively represent standard/big data/high IO.
+	Type string `pulumi:"type"`
+}
+
+// GetSpecCommonSpecInput is an input type that accepts GetSpecCommonSpecArgs and GetSpecCommonSpecOutput values.
+// You can construct a concrete instance of `GetSpecCommonSpecInput` via:
+//
+//          GetSpecCommonSpecArgs{...}
+type GetSpecCommonSpecInput interface {
+	pulumi.Input
+
+	ToGetSpecCommonSpecOutput() GetSpecCommonSpecOutput
+	ToGetSpecCommonSpecOutputWithContext(context.Context) GetSpecCommonSpecOutput
+}
+
+type GetSpecCommonSpecArgs struct {
+	// Whether it is available, false means sold out.
+	Available pulumi.BoolInput `pulumi:"available"`
+	// Specification description information.
+	ComputeSpecDesc pulumi.StringInput `pulumi:"computeSpecDesc"`
+	// Number of cpu cores.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// Data disk description information.
+	DataDisks GetSpecCommonSpecDataDiskArrayInput `pulumi:"dataDisks"`
+	// Specification name.
+	DisplayName pulumi.StringInput `pulumi:"displayName"`
+	// Inventory.
+	InstanceQuota pulumi.IntInput `pulumi:"instanceQuota"`
+	// Maximum number of nodes limit.
+	MaxNodeSize pulumi.IntInput `pulumi:"maxNodeSize"`
+	// Memory size, unit G.
+	Mem pulumi.IntInput `pulumi:"mem"`
+	// Specification name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// System disk description information.
+	SystemDisks GetSpecCommonSpecSystemDiskArrayInput `pulumi:"systemDisks"`
+	// Classification tags, STANDARD/BIGDATA/HIGHIO respectively represent standard/big data/high IO.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetSpecCommonSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSpecCommonSpec)(nil)).Elem()
+}
+
+func (i GetSpecCommonSpecArgs) ToGetSpecCommonSpecOutput() GetSpecCommonSpecOutput {
+	return i.ToGetSpecCommonSpecOutputWithContext(context.Background())
+}
+
+func (i GetSpecCommonSpecArgs) ToGetSpecCommonSpecOutputWithContext(ctx context.Context) GetSpecCommonSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSpecCommonSpecOutput)
+}
+
+// GetSpecCommonSpecArrayInput is an input type that accepts GetSpecCommonSpecArray and GetSpecCommonSpecArrayOutput values.
+// You can construct a concrete instance of `GetSpecCommonSpecArrayInput` via:
+//
+//          GetSpecCommonSpecArray{ GetSpecCommonSpecArgs{...} }
+type GetSpecCommonSpecArrayInput interface {
+	pulumi.Input
+
+	ToGetSpecCommonSpecArrayOutput() GetSpecCommonSpecArrayOutput
+	ToGetSpecCommonSpecArrayOutputWithContext(context.Context) GetSpecCommonSpecArrayOutput
+}
+
+type GetSpecCommonSpecArray []GetSpecCommonSpecInput
+
+func (GetSpecCommonSpecArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSpecCommonSpec)(nil)).Elem()
+}
+
+func (i GetSpecCommonSpecArray) ToGetSpecCommonSpecArrayOutput() GetSpecCommonSpecArrayOutput {
+	return i.ToGetSpecCommonSpecArrayOutputWithContext(context.Background())
+}
+
+func (i GetSpecCommonSpecArray) ToGetSpecCommonSpecArrayOutputWithContext(ctx context.Context) GetSpecCommonSpecArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSpecCommonSpecArrayOutput)
+}
+
+type GetSpecCommonSpecOutput struct{ *pulumi.OutputState }
+
+func (GetSpecCommonSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSpecCommonSpec)(nil)).Elem()
+}
+
+func (o GetSpecCommonSpecOutput) ToGetSpecCommonSpecOutput() GetSpecCommonSpecOutput {
+	return o
+}
+
+func (o GetSpecCommonSpecOutput) ToGetSpecCommonSpecOutputWithContext(ctx context.Context) GetSpecCommonSpecOutput {
+	return o
+}
+
+// Whether it is available, false means sold out.
+func (o GetSpecCommonSpecOutput) Available() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSpecCommonSpec) bool { return v.Available }).(pulumi.BoolOutput)
+}
+
+// Specification description information.
+func (o GetSpecCommonSpecOutput) ComputeSpecDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecCommonSpec) string { return v.ComputeSpecDesc }).(pulumi.StringOutput)
+}
+
+// Number of cpu cores.
+func (o GetSpecCommonSpecOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecCommonSpec) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// Data disk description information.
+func (o GetSpecCommonSpecOutput) DataDisks() GetSpecCommonSpecDataDiskArrayOutput {
+	return o.ApplyT(func(v GetSpecCommonSpec) []GetSpecCommonSpecDataDisk { return v.DataDisks }).(GetSpecCommonSpecDataDiskArrayOutput)
+}
+
+// Specification name.
+func (o GetSpecCommonSpecOutput) DisplayName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecCommonSpec) string { return v.DisplayName }).(pulumi.StringOutput)
+}
+
+// Inventory.
+func (o GetSpecCommonSpecOutput) InstanceQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecCommonSpec) int { return v.InstanceQuota }).(pulumi.IntOutput)
+}
+
+// Maximum number of nodes limit.
+func (o GetSpecCommonSpecOutput) MaxNodeSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecCommonSpec) int { return v.MaxNodeSize }).(pulumi.IntOutput)
+}
+
+// Memory size, unit G.
+func (o GetSpecCommonSpecOutput) Mem() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecCommonSpec) int { return v.Mem }).(pulumi.IntOutput)
+}
+
+// Specification name.
+func (o GetSpecCommonSpecOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecCommonSpec) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// System disk description information.
+func (o GetSpecCommonSpecOutput) SystemDisks() GetSpecCommonSpecSystemDiskArrayOutput {
+	return o.ApplyT(func(v GetSpecCommonSpec) []GetSpecCommonSpecSystemDisk { return v.SystemDisks }).(GetSpecCommonSpecSystemDiskArrayOutput)
+}
+
+// Classification tags, STANDARD/BIGDATA/HIGHIO respectively represent standard/big data/high IO.
+func (o GetSpecCommonSpecOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecCommonSpec) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetSpecCommonSpecArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSpecCommonSpecArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSpecCommonSpec)(nil)).Elem()
+}
+
+func (o GetSpecCommonSpecArrayOutput) ToGetSpecCommonSpecArrayOutput() GetSpecCommonSpecArrayOutput {
+	return o
+}
+
+func (o GetSpecCommonSpecArrayOutput) ToGetSpecCommonSpecArrayOutputWithContext(ctx context.Context) GetSpecCommonSpecArrayOutput {
+	return o
+}
+
+func (o GetSpecCommonSpecArrayOutput) Index(i pulumi.IntInput) GetSpecCommonSpecOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSpecCommonSpec {
+		return vs[0].([]GetSpecCommonSpec)[vs[1].(int)]
+	}).(GetSpecCommonSpecOutput)
+}
+
+type GetSpecCommonSpecDataDisk struct {
+	// Number of disks.
+	DiskCount int `pulumi:"diskCount"`
+	// Disk type description.
+	DiskDesc string `pulumi:"diskDesc"`
+	// Disk type.
+	DiskType string `pulumi:"diskType"`
+	// Maximum disk size, unit G.
+	MaxDiskSize int `pulumi:"maxDiskSize"`
+	// Minimum disk size, unit G.
+	MinDiskSize int `pulumi:"minDiskSize"`
+}
+
+// GetSpecCommonSpecDataDiskInput is an input type that accepts GetSpecCommonSpecDataDiskArgs and GetSpecCommonSpecDataDiskOutput values.
+// You can construct a concrete instance of `GetSpecCommonSpecDataDiskInput` via:
+//
+//          GetSpecCommonSpecDataDiskArgs{...}
+type GetSpecCommonSpecDataDiskInput interface {
+	pulumi.Input
+
+	ToGetSpecCommonSpecDataDiskOutput() GetSpecCommonSpecDataDiskOutput
+	ToGetSpecCommonSpecDataDiskOutputWithContext(context.Context) GetSpecCommonSpecDataDiskOutput
+}
+
+type GetSpecCommonSpecDataDiskArgs struct {
+	// Number of disks.
+	DiskCount pulumi.IntInput `pulumi:"diskCount"`
+	// Disk type description.
+	DiskDesc pulumi.StringInput `pulumi:"diskDesc"`
+	// Disk type.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// Maximum disk size, unit G.
+	MaxDiskSize pulumi.IntInput `pulumi:"maxDiskSize"`
+	// Minimum disk size, unit G.
+	MinDiskSize pulumi.IntInput `pulumi:"minDiskSize"`
+}
+
+func (GetSpecCommonSpecDataDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSpecCommonSpecDataDisk)(nil)).Elem()
+}
+
+func (i GetSpecCommonSpecDataDiskArgs) ToGetSpecCommonSpecDataDiskOutput() GetSpecCommonSpecDataDiskOutput {
+	return i.ToGetSpecCommonSpecDataDiskOutputWithContext(context.Background())
+}
+
+func (i GetSpecCommonSpecDataDiskArgs) ToGetSpecCommonSpecDataDiskOutputWithContext(ctx context.Context) GetSpecCommonSpecDataDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSpecCommonSpecDataDiskOutput)
+}
+
+// GetSpecCommonSpecDataDiskArrayInput is an input type that accepts GetSpecCommonSpecDataDiskArray and GetSpecCommonSpecDataDiskArrayOutput values.
+// You can construct a concrete instance of `GetSpecCommonSpecDataDiskArrayInput` via:
+//
+//          GetSpecCommonSpecDataDiskArray{ GetSpecCommonSpecDataDiskArgs{...} }
+type GetSpecCommonSpecDataDiskArrayInput interface {
+	pulumi.Input
+
+	ToGetSpecCommonSpecDataDiskArrayOutput() GetSpecCommonSpecDataDiskArrayOutput
+	ToGetSpecCommonSpecDataDiskArrayOutputWithContext(context.Context) GetSpecCommonSpecDataDiskArrayOutput
+}
+
+type GetSpecCommonSpecDataDiskArray []GetSpecCommonSpecDataDiskInput
+
+func (GetSpecCommonSpecDataDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSpecCommonSpecDataDisk)(nil)).Elem()
+}
+
+func (i GetSpecCommonSpecDataDiskArray) ToGetSpecCommonSpecDataDiskArrayOutput() GetSpecCommonSpecDataDiskArrayOutput {
+	return i.ToGetSpecCommonSpecDataDiskArrayOutputWithContext(context.Background())
+}
+
+func (i GetSpecCommonSpecDataDiskArray) ToGetSpecCommonSpecDataDiskArrayOutputWithContext(ctx context.Context) GetSpecCommonSpecDataDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSpecCommonSpecDataDiskArrayOutput)
+}
+
+type GetSpecCommonSpecDataDiskOutput struct{ *pulumi.OutputState }
+
+func (GetSpecCommonSpecDataDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSpecCommonSpecDataDisk)(nil)).Elem()
+}
+
+func (o GetSpecCommonSpecDataDiskOutput) ToGetSpecCommonSpecDataDiskOutput() GetSpecCommonSpecDataDiskOutput {
+	return o
+}
+
+func (o GetSpecCommonSpecDataDiskOutput) ToGetSpecCommonSpecDataDiskOutputWithContext(ctx context.Context) GetSpecCommonSpecDataDiskOutput {
+	return o
+}
+
+// Number of disks.
+func (o GetSpecCommonSpecDataDiskOutput) DiskCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecCommonSpecDataDisk) int { return v.DiskCount }).(pulumi.IntOutput)
+}
+
+// Disk type description.
+func (o GetSpecCommonSpecDataDiskOutput) DiskDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecCommonSpecDataDisk) string { return v.DiskDesc }).(pulumi.StringOutput)
+}
+
+// Disk type.
+func (o GetSpecCommonSpecDataDiskOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecCommonSpecDataDisk) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+// Maximum disk size, unit G.
+func (o GetSpecCommonSpecDataDiskOutput) MaxDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecCommonSpecDataDisk) int { return v.MaxDiskSize }).(pulumi.IntOutput)
+}
+
+// Minimum disk size, unit G.
+func (o GetSpecCommonSpecDataDiskOutput) MinDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecCommonSpecDataDisk) int { return v.MinDiskSize }).(pulumi.IntOutput)
+}
+
+type GetSpecCommonSpecDataDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSpecCommonSpecDataDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSpecCommonSpecDataDisk)(nil)).Elem()
+}
+
+func (o GetSpecCommonSpecDataDiskArrayOutput) ToGetSpecCommonSpecDataDiskArrayOutput() GetSpecCommonSpecDataDiskArrayOutput {
+	return o
+}
+
+func (o GetSpecCommonSpecDataDiskArrayOutput) ToGetSpecCommonSpecDataDiskArrayOutputWithContext(ctx context.Context) GetSpecCommonSpecDataDiskArrayOutput {
+	return o
+}
+
+func (o GetSpecCommonSpecDataDiskArrayOutput) Index(i pulumi.IntInput) GetSpecCommonSpecDataDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSpecCommonSpecDataDisk {
+		return vs[0].([]GetSpecCommonSpecDataDisk)[vs[1].(int)]
+	}).(GetSpecCommonSpecDataDiskOutput)
+}
+
+type GetSpecCommonSpecSystemDisk struct {
+	// Number of disks.
+	DiskCount int `pulumi:"diskCount"`
+	// Disk type description.
+	DiskDesc string `pulumi:"diskDesc"`
+	// Disk type.
+	DiskType string `pulumi:"diskType"`
+	// Maximum disk size, unit G.
+	MaxDiskSize int `pulumi:"maxDiskSize"`
+	// Minimum disk size, unit G.
+	MinDiskSize int `pulumi:"minDiskSize"`
+}
+
+// GetSpecCommonSpecSystemDiskInput is an input type that accepts GetSpecCommonSpecSystemDiskArgs and GetSpecCommonSpecSystemDiskOutput values.
+// You can construct a concrete instance of `GetSpecCommonSpecSystemDiskInput` via:
+//
+//          GetSpecCommonSpecSystemDiskArgs{...}
+type GetSpecCommonSpecSystemDiskInput interface {
+	pulumi.Input
+
+	ToGetSpecCommonSpecSystemDiskOutput() GetSpecCommonSpecSystemDiskOutput
+	ToGetSpecCommonSpecSystemDiskOutputWithContext(context.Context) GetSpecCommonSpecSystemDiskOutput
+}
+
+type GetSpecCommonSpecSystemDiskArgs struct {
+	// Number of disks.
+	DiskCount pulumi.IntInput `pulumi:"diskCount"`
+	// Disk type description.
+	DiskDesc pulumi.StringInput `pulumi:"diskDesc"`
+	// Disk type.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// Maximum disk size, unit G.
+	MaxDiskSize pulumi.IntInput `pulumi:"maxDiskSize"`
+	// Minimum disk size, unit G.
+	MinDiskSize pulumi.IntInput `pulumi:"minDiskSize"`
+}
+
+func (GetSpecCommonSpecSystemDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSpecCommonSpecSystemDisk)(nil)).Elem()
+}
+
+func (i GetSpecCommonSpecSystemDiskArgs) ToGetSpecCommonSpecSystemDiskOutput() GetSpecCommonSpecSystemDiskOutput {
+	return i.ToGetSpecCommonSpecSystemDiskOutputWithContext(context.Background())
+}
+
+func (i GetSpecCommonSpecSystemDiskArgs) ToGetSpecCommonSpecSystemDiskOutputWithContext(ctx context.Context) GetSpecCommonSpecSystemDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSpecCommonSpecSystemDiskOutput)
+}
+
+// GetSpecCommonSpecSystemDiskArrayInput is an input type that accepts GetSpecCommonSpecSystemDiskArray and GetSpecCommonSpecSystemDiskArrayOutput values.
+// You can construct a concrete instance of `GetSpecCommonSpecSystemDiskArrayInput` via:
+//
+//          GetSpecCommonSpecSystemDiskArray{ GetSpecCommonSpecSystemDiskArgs{...} }
+type GetSpecCommonSpecSystemDiskArrayInput interface {
+	pulumi.Input
+
+	ToGetSpecCommonSpecSystemDiskArrayOutput() GetSpecCommonSpecSystemDiskArrayOutput
+	ToGetSpecCommonSpecSystemDiskArrayOutputWithContext(context.Context) GetSpecCommonSpecSystemDiskArrayOutput
+}
+
+type GetSpecCommonSpecSystemDiskArray []GetSpecCommonSpecSystemDiskInput
+
+func (GetSpecCommonSpecSystemDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSpecCommonSpecSystemDisk)(nil)).Elem()
+}
+
+func (i GetSpecCommonSpecSystemDiskArray) ToGetSpecCommonSpecSystemDiskArrayOutput() GetSpecCommonSpecSystemDiskArrayOutput {
+	return i.ToGetSpecCommonSpecSystemDiskArrayOutputWithContext(context.Background())
+}
+
+func (i GetSpecCommonSpecSystemDiskArray) ToGetSpecCommonSpecSystemDiskArrayOutputWithContext(ctx context.Context) GetSpecCommonSpecSystemDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSpecCommonSpecSystemDiskArrayOutput)
+}
+
+type GetSpecCommonSpecSystemDiskOutput struct{ *pulumi.OutputState }
+
+func (GetSpecCommonSpecSystemDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSpecCommonSpecSystemDisk)(nil)).Elem()
+}
+
+func (o GetSpecCommonSpecSystemDiskOutput) ToGetSpecCommonSpecSystemDiskOutput() GetSpecCommonSpecSystemDiskOutput {
+	return o
+}
+
+func (o GetSpecCommonSpecSystemDiskOutput) ToGetSpecCommonSpecSystemDiskOutputWithContext(ctx context.Context) GetSpecCommonSpecSystemDiskOutput {
+	return o
+}
+
+// Number of disks.
+func (o GetSpecCommonSpecSystemDiskOutput) DiskCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecCommonSpecSystemDisk) int { return v.DiskCount }).(pulumi.IntOutput)
+}
+
+// Disk type description.
+func (o GetSpecCommonSpecSystemDiskOutput) DiskDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecCommonSpecSystemDisk) string { return v.DiskDesc }).(pulumi.StringOutput)
+}
+
+// Disk type.
+func (o GetSpecCommonSpecSystemDiskOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecCommonSpecSystemDisk) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+// Maximum disk size, unit G.
+func (o GetSpecCommonSpecSystemDiskOutput) MaxDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecCommonSpecSystemDisk) int { return v.MaxDiskSize }).(pulumi.IntOutput)
+}
+
+// Minimum disk size, unit G.
+func (o GetSpecCommonSpecSystemDiskOutput) MinDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecCommonSpecSystemDisk) int { return v.MinDiskSize }).(pulumi.IntOutput)
+}
+
+type GetSpecCommonSpecSystemDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSpecCommonSpecSystemDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSpecCommonSpecSystemDisk)(nil)).Elem()
+}
+
+func (o GetSpecCommonSpecSystemDiskArrayOutput) ToGetSpecCommonSpecSystemDiskArrayOutput() GetSpecCommonSpecSystemDiskArrayOutput {
+	return o
+}
+
+func (o GetSpecCommonSpecSystemDiskArrayOutput) ToGetSpecCommonSpecSystemDiskArrayOutputWithContext(ctx context.Context) GetSpecCommonSpecSystemDiskArrayOutput {
+	return o
+}
+
+func (o GetSpecCommonSpecSystemDiskArrayOutput) Index(i pulumi.IntInput) GetSpecCommonSpecSystemDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSpecCommonSpecSystemDisk {
+		return vs[0].([]GetSpecCommonSpecSystemDisk)[vs[1].(int)]
+	}).(GetSpecCommonSpecSystemDiskOutput)
+}
+
+type GetSpecDataSpec struct {
+	// Whether it is available, false means sold out.
+	Available bool `pulumi:"available"`
+	// Specification description information.
+	ComputeSpecDesc string `pulumi:"computeSpecDesc"`
+	// Number of cpu cores.
+	Cpu int `pulumi:"cpu"`
+	// Data disk description information.
+	DataDisks []GetSpecDataSpecDataDisk `pulumi:"dataDisks"`
+	// Specification name.
+	DisplayName string `pulumi:"displayName"`
+	// Inventory.
+	InstanceQuota int `pulumi:"instanceQuota"`
+	// Maximum number of nodes limit.
+	MaxNodeSize int `pulumi:"maxNodeSize"`
+	// Memory size, unit G.
+	Mem int `pulumi:"mem"`
+	// Specification name.
+	Name string `pulumi:"name"`
+	// System disk description information.
+	SystemDisks []GetSpecDataSpecSystemDisk `pulumi:"systemDisks"`
+	// Classification tags, STANDARD/BIGDATA/HIGHIO respectively represent standard/big data/high IO.
+	Type string `pulumi:"type"`
+}
+
+// GetSpecDataSpecInput is an input type that accepts GetSpecDataSpecArgs and GetSpecDataSpecOutput values.
+// You can construct a concrete instance of `GetSpecDataSpecInput` via:
+//
+//          GetSpecDataSpecArgs{...}
+type GetSpecDataSpecInput interface {
+	pulumi.Input
+
+	ToGetSpecDataSpecOutput() GetSpecDataSpecOutput
+	ToGetSpecDataSpecOutputWithContext(context.Context) GetSpecDataSpecOutput
+}
+
+type GetSpecDataSpecArgs struct {
+	// Whether it is available, false means sold out.
+	Available pulumi.BoolInput `pulumi:"available"`
+	// Specification description information.
+	ComputeSpecDesc pulumi.StringInput `pulumi:"computeSpecDesc"`
+	// Number of cpu cores.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// Data disk description information.
+	DataDisks GetSpecDataSpecDataDiskArrayInput `pulumi:"dataDisks"`
+	// Specification name.
+	DisplayName pulumi.StringInput `pulumi:"displayName"`
+	// Inventory.
+	InstanceQuota pulumi.IntInput `pulumi:"instanceQuota"`
+	// Maximum number of nodes limit.
+	MaxNodeSize pulumi.IntInput `pulumi:"maxNodeSize"`
+	// Memory size, unit G.
+	Mem pulumi.IntInput `pulumi:"mem"`
+	// Specification name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// System disk description information.
+	SystemDisks GetSpecDataSpecSystemDiskArrayInput `pulumi:"systemDisks"`
+	// Classification tags, STANDARD/BIGDATA/HIGHIO respectively represent standard/big data/high IO.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetSpecDataSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSpecDataSpec)(nil)).Elem()
+}
+
+func (i GetSpecDataSpecArgs) ToGetSpecDataSpecOutput() GetSpecDataSpecOutput {
+	return i.ToGetSpecDataSpecOutputWithContext(context.Background())
+}
+
+func (i GetSpecDataSpecArgs) ToGetSpecDataSpecOutputWithContext(ctx context.Context) GetSpecDataSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSpecDataSpecOutput)
+}
+
+// GetSpecDataSpecArrayInput is an input type that accepts GetSpecDataSpecArray and GetSpecDataSpecArrayOutput values.
+// You can construct a concrete instance of `GetSpecDataSpecArrayInput` via:
+//
+//          GetSpecDataSpecArray{ GetSpecDataSpecArgs{...} }
+type GetSpecDataSpecArrayInput interface {
+	pulumi.Input
+
+	ToGetSpecDataSpecArrayOutput() GetSpecDataSpecArrayOutput
+	ToGetSpecDataSpecArrayOutputWithContext(context.Context) GetSpecDataSpecArrayOutput
+}
+
+type GetSpecDataSpecArray []GetSpecDataSpecInput
+
+func (GetSpecDataSpecArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSpecDataSpec)(nil)).Elem()
+}
+
+func (i GetSpecDataSpecArray) ToGetSpecDataSpecArrayOutput() GetSpecDataSpecArrayOutput {
+	return i.ToGetSpecDataSpecArrayOutputWithContext(context.Background())
+}
+
+func (i GetSpecDataSpecArray) ToGetSpecDataSpecArrayOutputWithContext(ctx context.Context) GetSpecDataSpecArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSpecDataSpecArrayOutput)
+}
+
+type GetSpecDataSpecOutput struct{ *pulumi.OutputState }
+
+func (GetSpecDataSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSpecDataSpec)(nil)).Elem()
+}
+
+func (o GetSpecDataSpecOutput) ToGetSpecDataSpecOutput() GetSpecDataSpecOutput {
+	return o
+}
+
+func (o GetSpecDataSpecOutput) ToGetSpecDataSpecOutputWithContext(ctx context.Context) GetSpecDataSpecOutput {
+	return o
+}
+
+// Whether it is available, false means sold out.
+func (o GetSpecDataSpecOutput) Available() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSpecDataSpec) bool { return v.Available }).(pulumi.BoolOutput)
+}
+
+// Specification description information.
+func (o GetSpecDataSpecOutput) ComputeSpecDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecDataSpec) string { return v.ComputeSpecDesc }).(pulumi.StringOutput)
+}
+
+// Number of cpu cores.
+func (o GetSpecDataSpecOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecDataSpec) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// Data disk description information.
+func (o GetSpecDataSpecOutput) DataDisks() GetSpecDataSpecDataDiskArrayOutput {
+	return o.ApplyT(func(v GetSpecDataSpec) []GetSpecDataSpecDataDisk { return v.DataDisks }).(GetSpecDataSpecDataDiskArrayOutput)
+}
+
+// Specification name.
+func (o GetSpecDataSpecOutput) DisplayName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecDataSpec) string { return v.DisplayName }).(pulumi.StringOutput)
+}
+
+// Inventory.
+func (o GetSpecDataSpecOutput) InstanceQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecDataSpec) int { return v.InstanceQuota }).(pulumi.IntOutput)
+}
+
+// Maximum number of nodes limit.
+func (o GetSpecDataSpecOutput) MaxNodeSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecDataSpec) int { return v.MaxNodeSize }).(pulumi.IntOutput)
+}
+
+// Memory size, unit G.
+func (o GetSpecDataSpecOutput) Mem() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecDataSpec) int { return v.Mem }).(pulumi.IntOutput)
+}
+
+// Specification name.
+func (o GetSpecDataSpecOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecDataSpec) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// System disk description information.
+func (o GetSpecDataSpecOutput) SystemDisks() GetSpecDataSpecSystemDiskArrayOutput {
+	return o.ApplyT(func(v GetSpecDataSpec) []GetSpecDataSpecSystemDisk { return v.SystemDisks }).(GetSpecDataSpecSystemDiskArrayOutput)
+}
+
+// Classification tags, STANDARD/BIGDATA/HIGHIO respectively represent standard/big data/high IO.
+func (o GetSpecDataSpecOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecDataSpec) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetSpecDataSpecArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSpecDataSpecArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSpecDataSpec)(nil)).Elem()
+}
+
+func (o GetSpecDataSpecArrayOutput) ToGetSpecDataSpecArrayOutput() GetSpecDataSpecArrayOutput {
+	return o
+}
+
+func (o GetSpecDataSpecArrayOutput) ToGetSpecDataSpecArrayOutputWithContext(ctx context.Context) GetSpecDataSpecArrayOutput {
+	return o
+}
+
+func (o GetSpecDataSpecArrayOutput) Index(i pulumi.IntInput) GetSpecDataSpecOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSpecDataSpec {
+		return vs[0].([]GetSpecDataSpec)[vs[1].(int)]
+	}).(GetSpecDataSpecOutput)
+}
+
+type GetSpecDataSpecDataDisk struct {
+	// Number of disks.
+	DiskCount int `pulumi:"diskCount"`
+	// Disk type description.
+	DiskDesc string `pulumi:"diskDesc"`
+	// Disk type.
+	DiskType string `pulumi:"diskType"`
+	// Maximum disk size, unit G.
+	MaxDiskSize int `pulumi:"maxDiskSize"`
+	// Minimum disk size, unit G.
+	MinDiskSize int `pulumi:"minDiskSize"`
+}
+
+// GetSpecDataSpecDataDiskInput is an input type that accepts GetSpecDataSpecDataDiskArgs and GetSpecDataSpecDataDiskOutput values.
+// You can construct a concrete instance of `GetSpecDataSpecDataDiskInput` via:
+//
+//          GetSpecDataSpecDataDiskArgs{...}
+type GetSpecDataSpecDataDiskInput interface {
+	pulumi.Input
+
+	ToGetSpecDataSpecDataDiskOutput() GetSpecDataSpecDataDiskOutput
+	ToGetSpecDataSpecDataDiskOutputWithContext(context.Context) GetSpecDataSpecDataDiskOutput
+}
+
+type GetSpecDataSpecDataDiskArgs struct {
+	// Number of disks.
+	DiskCount pulumi.IntInput `pulumi:"diskCount"`
+	// Disk type description.
+	DiskDesc pulumi.StringInput `pulumi:"diskDesc"`
+	// Disk type.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// Maximum disk size, unit G.
+	MaxDiskSize pulumi.IntInput `pulumi:"maxDiskSize"`
+	// Minimum disk size, unit G.
+	MinDiskSize pulumi.IntInput `pulumi:"minDiskSize"`
+}
+
+func (GetSpecDataSpecDataDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSpecDataSpecDataDisk)(nil)).Elem()
+}
+
+func (i GetSpecDataSpecDataDiskArgs) ToGetSpecDataSpecDataDiskOutput() GetSpecDataSpecDataDiskOutput {
+	return i.ToGetSpecDataSpecDataDiskOutputWithContext(context.Background())
+}
+
+func (i GetSpecDataSpecDataDiskArgs) ToGetSpecDataSpecDataDiskOutputWithContext(ctx context.Context) GetSpecDataSpecDataDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSpecDataSpecDataDiskOutput)
+}
+
+// GetSpecDataSpecDataDiskArrayInput is an input type that accepts GetSpecDataSpecDataDiskArray and GetSpecDataSpecDataDiskArrayOutput values.
+// You can construct a concrete instance of `GetSpecDataSpecDataDiskArrayInput` via:
+//
+//          GetSpecDataSpecDataDiskArray{ GetSpecDataSpecDataDiskArgs{...} }
+type GetSpecDataSpecDataDiskArrayInput interface {
+	pulumi.Input
+
+	ToGetSpecDataSpecDataDiskArrayOutput() GetSpecDataSpecDataDiskArrayOutput
+	ToGetSpecDataSpecDataDiskArrayOutputWithContext(context.Context) GetSpecDataSpecDataDiskArrayOutput
+}
+
+type GetSpecDataSpecDataDiskArray []GetSpecDataSpecDataDiskInput
+
+func (GetSpecDataSpecDataDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSpecDataSpecDataDisk)(nil)).Elem()
+}
+
+func (i GetSpecDataSpecDataDiskArray) ToGetSpecDataSpecDataDiskArrayOutput() GetSpecDataSpecDataDiskArrayOutput {
+	return i.ToGetSpecDataSpecDataDiskArrayOutputWithContext(context.Background())
+}
+
+func (i GetSpecDataSpecDataDiskArray) ToGetSpecDataSpecDataDiskArrayOutputWithContext(ctx context.Context) GetSpecDataSpecDataDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSpecDataSpecDataDiskArrayOutput)
+}
+
+type GetSpecDataSpecDataDiskOutput struct{ *pulumi.OutputState }
+
+func (GetSpecDataSpecDataDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSpecDataSpecDataDisk)(nil)).Elem()
+}
+
+func (o GetSpecDataSpecDataDiskOutput) ToGetSpecDataSpecDataDiskOutput() GetSpecDataSpecDataDiskOutput {
+	return o
+}
+
+func (o GetSpecDataSpecDataDiskOutput) ToGetSpecDataSpecDataDiskOutputWithContext(ctx context.Context) GetSpecDataSpecDataDiskOutput {
+	return o
+}
+
+// Number of disks.
+func (o GetSpecDataSpecDataDiskOutput) DiskCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecDataSpecDataDisk) int { return v.DiskCount }).(pulumi.IntOutput)
+}
+
+// Disk type description.
+func (o GetSpecDataSpecDataDiskOutput) DiskDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecDataSpecDataDisk) string { return v.DiskDesc }).(pulumi.StringOutput)
+}
+
+// Disk type.
+func (o GetSpecDataSpecDataDiskOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecDataSpecDataDisk) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+// Maximum disk size, unit G.
+func (o GetSpecDataSpecDataDiskOutput) MaxDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecDataSpecDataDisk) int { return v.MaxDiskSize }).(pulumi.IntOutput)
+}
+
+// Minimum disk size, unit G.
+func (o GetSpecDataSpecDataDiskOutput) MinDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecDataSpecDataDisk) int { return v.MinDiskSize }).(pulumi.IntOutput)
+}
+
+type GetSpecDataSpecDataDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSpecDataSpecDataDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSpecDataSpecDataDisk)(nil)).Elem()
+}
+
+func (o GetSpecDataSpecDataDiskArrayOutput) ToGetSpecDataSpecDataDiskArrayOutput() GetSpecDataSpecDataDiskArrayOutput {
+	return o
+}
+
+func (o GetSpecDataSpecDataDiskArrayOutput) ToGetSpecDataSpecDataDiskArrayOutputWithContext(ctx context.Context) GetSpecDataSpecDataDiskArrayOutput {
+	return o
+}
+
+func (o GetSpecDataSpecDataDiskArrayOutput) Index(i pulumi.IntInput) GetSpecDataSpecDataDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSpecDataSpecDataDisk {
+		return vs[0].([]GetSpecDataSpecDataDisk)[vs[1].(int)]
+	}).(GetSpecDataSpecDataDiskOutput)
+}
+
+type GetSpecDataSpecSystemDisk struct {
+	// Number of disks.
+	DiskCount int `pulumi:"diskCount"`
+	// Disk type description.
+	DiskDesc string `pulumi:"diskDesc"`
+	// Disk type.
+	DiskType string `pulumi:"diskType"`
+	// Maximum disk size, unit G.
+	MaxDiskSize int `pulumi:"maxDiskSize"`
+	// Minimum disk size, unit G.
+	MinDiskSize int `pulumi:"minDiskSize"`
+}
+
+// GetSpecDataSpecSystemDiskInput is an input type that accepts GetSpecDataSpecSystemDiskArgs and GetSpecDataSpecSystemDiskOutput values.
+// You can construct a concrete instance of `GetSpecDataSpecSystemDiskInput` via:
+//
+//          GetSpecDataSpecSystemDiskArgs{...}
+type GetSpecDataSpecSystemDiskInput interface {
+	pulumi.Input
+
+	ToGetSpecDataSpecSystemDiskOutput() GetSpecDataSpecSystemDiskOutput
+	ToGetSpecDataSpecSystemDiskOutputWithContext(context.Context) GetSpecDataSpecSystemDiskOutput
+}
+
+type GetSpecDataSpecSystemDiskArgs struct {
+	// Number of disks.
+	DiskCount pulumi.IntInput `pulumi:"diskCount"`
+	// Disk type description.
+	DiskDesc pulumi.StringInput `pulumi:"diskDesc"`
+	// Disk type.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// Maximum disk size, unit G.
+	MaxDiskSize pulumi.IntInput `pulumi:"maxDiskSize"`
+	// Minimum disk size, unit G.
+	MinDiskSize pulumi.IntInput `pulumi:"minDiskSize"`
+}
+
+func (GetSpecDataSpecSystemDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSpecDataSpecSystemDisk)(nil)).Elem()
+}
+
+func (i GetSpecDataSpecSystemDiskArgs) ToGetSpecDataSpecSystemDiskOutput() GetSpecDataSpecSystemDiskOutput {
+	return i.ToGetSpecDataSpecSystemDiskOutputWithContext(context.Background())
+}
+
+func (i GetSpecDataSpecSystemDiskArgs) ToGetSpecDataSpecSystemDiskOutputWithContext(ctx context.Context) GetSpecDataSpecSystemDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSpecDataSpecSystemDiskOutput)
+}
+
+// GetSpecDataSpecSystemDiskArrayInput is an input type that accepts GetSpecDataSpecSystemDiskArray and GetSpecDataSpecSystemDiskArrayOutput values.
+// You can construct a concrete instance of `GetSpecDataSpecSystemDiskArrayInput` via:
+//
+//          GetSpecDataSpecSystemDiskArray{ GetSpecDataSpecSystemDiskArgs{...} }
+type GetSpecDataSpecSystemDiskArrayInput interface {
+	pulumi.Input
+
+	ToGetSpecDataSpecSystemDiskArrayOutput() GetSpecDataSpecSystemDiskArrayOutput
+	ToGetSpecDataSpecSystemDiskArrayOutputWithContext(context.Context) GetSpecDataSpecSystemDiskArrayOutput
+}
+
+type GetSpecDataSpecSystemDiskArray []GetSpecDataSpecSystemDiskInput
+
+func (GetSpecDataSpecSystemDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSpecDataSpecSystemDisk)(nil)).Elem()
+}
+
+func (i GetSpecDataSpecSystemDiskArray) ToGetSpecDataSpecSystemDiskArrayOutput() GetSpecDataSpecSystemDiskArrayOutput {
+	return i.ToGetSpecDataSpecSystemDiskArrayOutputWithContext(context.Background())
+}
+
+func (i GetSpecDataSpecSystemDiskArray) ToGetSpecDataSpecSystemDiskArrayOutputWithContext(ctx context.Context) GetSpecDataSpecSystemDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSpecDataSpecSystemDiskArrayOutput)
+}
+
+type GetSpecDataSpecSystemDiskOutput struct{ *pulumi.OutputState }
+
+func (GetSpecDataSpecSystemDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSpecDataSpecSystemDisk)(nil)).Elem()
+}
+
+func (o GetSpecDataSpecSystemDiskOutput) ToGetSpecDataSpecSystemDiskOutput() GetSpecDataSpecSystemDiskOutput {
+	return o
+}
+
+func (o GetSpecDataSpecSystemDiskOutput) ToGetSpecDataSpecSystemDiskOutputWithContext(ctx context.Context) GetSpecDataSpecSystemDiskOutput {
+	return o
+}
+
+// Number of disks.
+func (o GetSpecDataSpecSystemDiskOutput) DiskCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecDataSpecSystemDisk) int { return v.DiskCount }).(pulumi.IntOutput)
+}
+
+// Disk type description.
+func (o GetSpecDataSpecSystemDiskOutput) DiskDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecDataSpecSystemDisk) string { return v.DiskDesc }).(pulumi.StringOutput)
+}
+
+// Disk type.
+func (o GetSpecDataSpecSystemDiskOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSpecDataSpecSystemDisk) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+// Maximum disk size, unit G.
+func (o GetSpecDataSpecSystemDiskOutput) MaxDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecDataSpecSystemDisk) int { return v.MaxDiskSize }).(pulumi.IntOutput)
+}
+
+// Minimum disk size, unit G.
+func (o GetSpecDataSpecSystemDiskOutput) MinDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSpecDataSpecSystemDisk) int { return v.MinDiskSize }).(pulumi.IntOutput)
+}
+
+type GetSpecDataSpecSystemDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSpecDataSpecSystemDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSpecDataSpecSystemDisk)(nil)).Elem()
+}
+
+func (o GetSpecDataSpecSystemDiskArrayOutput) ToGetSpecDataSpecSystemDiskArrayOutput() GetSpecDataSpecSystemDiskArrayOutput {
+	return o
+}
+
+func (o GetSpecDataSpecSystemDiskArrayOutput) ToGetSpecDataSpecSystemDiskArrayOutputWithContext(ctx context.Context) GetSpecDataSpecSystemDiskArrayOutput {
+	return o
+}
+
+func (o GetSpecDataSpecSystemDiskArrayOutput) Index(i pulumi.IntInput) GetSpecDataSpecSystemDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSpecDataSpecSystemDisk {
+		return vs[0].([]GetSpecDataSpecSystemDisk)[vs[1].(int)]
+	}).(GetSpecDataSpecSystemDiskOutput)
+}
+
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPermissionDatabasePrivilegeListInput)(nil)).Elem(), AccountPermissionDatabasePrivilegeListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPermissionDatabasePrivilegeListArrayInput)(nil)).Elem(), AccountPermissionDatabasePrivilegeListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPermissionDatabasePrivilegeListTablePrivilegeListInput)(nil)).Elem(), AccountPermissionDatabasePrivilegeListTablePrivilegeListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayInput)(nil)).Elem(), AccountPermissionDatabasePrivilegeListTablePrivilegeListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BackupStrategyDataBackupStrategyInput)(nil)).Elem(), BackupStrategyDataBackupStrategyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BackupStrategyDataBackupStrategyArrayInput)(nil)).Elem(), BackupStrategyDataBackupStrategyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BackupStrategyDataBackupStrategyBackUpTableInput)(nil)).Elem(), BackupStrategyDataBackupStrategyBackUpTableArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BackupStrategyDataBackupStrategyBackUpTableArrayInput)(nil)).Elem(), BackupStrategyDataBackupStrategyBackUpTableArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BackupStrategyMetaBackupStrategyInput)(nil)).Elem(), BackupStrategyMetaBackupStrategyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BackupStrategyMetaBackupStrategyArrayInput)(nil)).Elem(), BackupStrategyMetaBackupStrategyArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceCommonSpecInput)(nil)).Elem(), InstanceCommonSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceCommonSpecPtrInput)(nil)).Elem(), InstanceCommonSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceDataSpecInput)(nil)).Elem(), InstanceDataSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceDataSpecPtrInput)(nil)).Elem(), InstanceDataSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KeyvalConfigItemsInput)(nil)).Elem(), KeyvalConfigItemsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KeyvalConfigItemsPtrInput)(nil)).Elem(), KeyvalConfigItemsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*XmlConfigModifyConfContextInput)(nil)).Elem(), XmlConfigModifyConfContextArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*XmlConfigModifyConfContextPtrInput)(nil)).Elem(), XmlConfigModifyConfContextArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupJobDetailTableContentInput)(nil)).Elem(), GetBackupJobDetailTableContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupJobDetailTableContentArrayInput)(nil)).Elem(), GetBackupJobDetailTableContentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupJobsBackUpJobInput)(nil)).Elem(), GetBackupJobsBackUpJobArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupJobsBackUpJobArrayInput)(nil)).Elem(), GetBackupJobsBackUpJobArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupTablesAvailableTableInput)(nil)).Elem(), GetBackupTablesAvailableTableArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupTablesAvailableTableArrayInput)(nil)).Elem(), GetBackupTablesAvailableTableArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecAttachCbsSpecInput)(nil)).Elem(), GetSpecAttachCbsSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecAttachCbsSpecArrayInput)(nil)).Elem(), GetSpecAttachCbsSpecArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecCommonSpecInput)(nil)).Elem(), GetSpecCommonSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecCommonSpecArrayInput)(nil)).Elem(), GetSpecCommonSpecArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecCommonSpecDataDiskInput)(nil)).Elem(), GetSpecCommonSpecDataDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecCommonSpecDataDiskArrayInput)(nil)).Elem(), GetSpecCommonSpecDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecCommonSpecSystemDiskInput)(nil)).Elem(), GetSpecCommonSpecSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecCommonSpecSystemDiskArrayInput)(nil)).Elem(), GetSpecCommonSpecSystemDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecDataSpecInput)(nil)).Elem(), GetSpecDataSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecDataSpecArrayInput)(nil)).Elem(), GetSpecDataSpecArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecDataSpecDataDiskInput)(nil)).Elem(), GetSpecDataSpecDataDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecDataSpecDataDiskArrayInput)(nil)).Elem(), GetSpecDataSpecDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecDataSpecSystemDiskInput)(nil)).Elem(), GetSpecDataSpecSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecDataSpecSystemDiskArrayInput)(nil)).Elem(), GetSpecDataSpecSystemDiskArray{})
+	pulumi.RegisterOutputType(AccountPermissionDatabasePrivilegeListOutput{})
+	pulumi.RegisterOutputType(AccountPermissionDatabasePrivilegeListArrayOutput{})
+	pulumi.RegisterOutputType(AccountPermissionDatabasePrivilegeListTablePrivilegeListOutput{})
+	pulumi.RegisterOutputType(AccountPermissionDatabasePrivilegeListTablePrivilegeListArrayOutput{})
+	pulumi.RegisterOutputType(BackupStrategyDataBackupStrategyOutput{})
+	pulumi.RegisterOutputType(BackupStrategyDataBackupStrategyArrayOutput{})
+	pulumi.RegisterOutputType(BackupStrategyDataBackupStrategyBackUpTableOutput{})
+	pulumi.RegisterOutputType(BackupStrategyDataBackupStrategyBackUpTableArrayOutput{})
+	pulumi.RegisterOutputType(BackupStrategyMetaBackupStrategyOutput{})
+	pulumi.RegisterOutputType(BackupStrategyMetaBackupStrategyArrayOutput{})
 	pulumi.RegisterOutputType(InstanceCommonSpecOutput{})
 	pulumi.RegisterOutputType(InstanceCommonSpecPtrOutput{})
 	pulumi.RegisterOutputType(InstanceDataSpecOutput{})
 	pulumi.RegisterOutputType(InstanceDataSpecPtrOutput{})
+	pulumi.RegisterOutputType(KeyvalConfigItemsOutput{})
+	pulumi.RegisterOutputType(KeyvalConfigItemsPtrOutput{})
+	pulumi.RegisterOutputType(XmlConfigModifyConfContextOutput{})
+	pulumi.RegisterOutputType(XmlConfigModifyConfContextPtrOutput{})
+	pulumi.RegisterOutputType(GetBackupJobDetailTableContentOutput{})
+	pulumi.RegisterOutputType(GetBackupJobDetailTableContentArrayOutput{})
+	pulumi.RegisterOutputType(GetBackupJobsBackUpJobOutput{})
+	pulumi.RegisterOutputType(GetBackupJobsBackUpJobArrayOutput{})
+	pulumi.RegisterOutputType(GetBackupTablesAvailableTableOutput{})
+	pulumi.RegisterOutputType(GetBackupTablesAvailableTableArrayOutput{})
+	pulumi.RegisterOutputType(GetSpecAttachCbsSpecOutput{})
+	pulumi.RegisterOutputType(GetSpecAttachCbsSpecArrayOutput{})
+	pulumi.RegisterOutputType(GetSpecCommonSpecOutput{})
+	pulumi.RegisterOutputType(GetSpecCommonSpecArrayOutput{})
+	pulumi.RegisterOutputType(GetSpecCommonSpecDataDiskOutput{})
+	pulumi.RegisterOutputType(GetSpecCommonSpecDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(GetSpecCommonSpecSystemDiskOutput{})
+	pulumi.RegisterOutputType(GetSpecCommonSpecSystemDiskArrayOutput{})
+	pulumi.RegisterOutputType(GetSpecDataSpecOutput{})
+	pulumi.RegisterOutputType(GetSpecDataSpecArrayOutput{})
+	pulumi.RegisterOutputType(GetSpecDataSpecDataDiskOutput{})
+	pulumi.RegisterOutputType(GetSpecDataSpecDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(GetSpecDataSpecSystemDiskOutput{})
+	pulumi.RegisterOutputType(GetSpecDataSpecSystemDiskArrayOutput{})
 }

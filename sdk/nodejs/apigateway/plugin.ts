@@ -13,15 +13,14 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const plugin = new tencentcloud.apigateway.Plugin("plugin", {
- *     pluginName: "terraform-plugin-test",
+ * const example = new tencentcloud.apigateway.Plugin("example", {
+ *     pluginName: "tf-example",
  *     pluginType: "IPControl",
  *     pluginData: JSON.stringify({
  *         type: "white_list",
- *         blocks: `1.1.1.1
- * 2.2.2.2`,
+ *         blocks: "1.1.1.1",
  *     }),
- *     description: "terraform test",
+ *     description: "desc.",
  * });
  * ```
  *

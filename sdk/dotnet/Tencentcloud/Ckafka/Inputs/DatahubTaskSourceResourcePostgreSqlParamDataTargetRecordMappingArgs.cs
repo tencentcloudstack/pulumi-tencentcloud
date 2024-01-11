@@ -26,19 +26,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public Input<bool>? AutoIncrement { get; set; }
 
         /// <summary>
-        /// Corresponding mapping column name.
+        /// Column Name.
         /// </summary>
         [Input("columnName")]
         public Input<string>? ColumnName { get; set; }
 
         /// <summary>
-        /// current column size.
+        /// current ColumnSize.
         /// </summary>
         [Input("columnSize")]
         public Input<string>? ColumnSize { get; set; }
 
         /// <summary>
-        /// current column precision.
+        /// current Column DecimalDigits.
         /// </summary>
         [Input("decimalDigits")]
         public Input<string>? DecimalDigits { get; set; }

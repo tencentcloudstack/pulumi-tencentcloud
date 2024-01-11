@@ -113,6 +113,206 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * ### Create an empty cluster with a node pool
+ *
+ * The cluster does not have any nodes, nodes will be added through node pool.
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const config = new pulumi.Config();
+ * const defaultInstanceType = config.get("defaultInstanceType") || "SA2.2XLARGE16";
+ * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
+ * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
+ * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
+ * const vpcOne = tencentcloud.Vpc.getSubnets({
+ *     isDefault: true,
+ *     availabilityZone: availabilityZoneFirst,
+ * });
+ * const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.vpcId);
+ * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.subnetId);
+ * const sg = new tencentcloud.security.Group("sg", {});
+ * const sgId = sg.id;
+ * const vpcTwo = tencentcloud.Vpc.getSubnets({
+ *     isDefault: true,
+ *     availabilityZone: availabilityZoneSecond,
+ * });
+ * const sgRule = new tencentcloud.security.GroupLiteRule("sgRule", {
+ *     securityGroupId: sg.id,
+ *     ingresses: [
+ *         "ACCEPT#10.0.0.0/16#ALL#ALL",
+ *         "ACCEPT#172.16.0.0/22#ALL#ALL",
+ *         "DROP#0.0.0.0/0#ALL#ALL",
+ *     ],
+ *     egresses: ["ACCEPT#172.16.0.0/22#ALL#ALL"],
+ * });
+ * const exampleCluster = new tencentcloud.kubernetes.Cluster("exampleCluster", {
+ *     vpcId: firstVpcId,
+ *     clusterCidr: exampleClusterCidr,
+ *     clusterMaxPodNum: 32,
+ *     clusterName: "tf_example_cluster_np",
+ *     clusterDesc: "example for tke cluster",
+ *     clusterMaxServiceNum: 32,
+ *     clusterVersion: "1.22.5",
+ *     clusterDeployType: "MANAGED_CLUSTER",
+ * });
+ * // without any worker config
+ * const exampleNodePool = new tencentcloud.kubernetes.NodePool("exampleNodePool", {
+ *     clusterId: exampleCluster.id,
+ *     maxSize: 6,
+ *     minSize: 1,
+ *     vpcId: firstVpcId,
+ *     subnetIds: [firstSubnetId],
+ *     retryPolicy: "INCREMENTAL_INTERVALS",
+ *     desiredCapacity: 4,
+ *     enableAutoScale: true,
+ *     multiZoneSubnetPolicy: "EQUALITY",
+ *     autoScalingConfig: {
+ *         instanceType: defaultInstanceType,
+ *         systemDiskType: "CLOUD_PREMIUM",
+ *         systemDiskSize: 50,
+ *         orderlySecurityGroupIds: [sgId],
+ *         dataDisks: [{
+ *             diskType: "CLOUD_PREMIUM",
+ *             diskSize: 50,
+ *         }],
+ *         internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+ *         internetMaxBandwidthOut: 10,
+ *         publicIpAssigned: true,
+ *         password: "test123#",
+ *         enhancedSecurityService: false,
+ *         enhancedMonitorService: false,
+ *         hostName: "12.123.0.0",
+ *         hostNameStyle: "ORIGINAL",
+ *     },
+ *     labels: {
+ *         test1: "test1",
+ *         test2: "test2",
+ *     },
+ *     taints: [
+ *         {
+ *             key: "test_taint",
+ *             value: "taint_value",
+ *             effect: "PreferNoSchedule",
+ *         },
+ *         {
+ *             key: "test_taint2",
+ *             value: "taint_value2",
+ *             effect: "PreferNoSchedule",
+ *         },
+ *     ],
+ *     nodeConfig: {
+ *         extraArgs: ["root-dir=/var/lib/kubelet"],
+ *     },
+ * });
+ * ```
+ * ### Create a cluster with a node pool and open the network access with cluster endpoint
+ *
+ * The cluster's internet and intranet access will be opened after nodes are added through node pool.
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const config = new pulumi.Config();
+ * const defaultInstanceType = config.get("defaultInstanceType") || "SA2.2XLARGE16";
+ * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
+ * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
+ * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
+ * const vpcOne = tencentcloud.Vpc.getSubnets({
+ *     isDefault: true,
+ *     availabilityZone: availabilityZoneFirst,
+ * });
+ * const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.vpcId);
+ * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.subnetId);
+ * const sg = new tencentcloud.security.Group("sg", {});
+ * const sgId = sg.id;
+ * const vpcTwo = tencentcloud.Vpc.getSubnets({
+ *     isDefault: true,
+ *     availabilityZone: availabilityZoneSecond,
+ * });
+ * const sgRule = new tencentcloud.security.GroupLiteRule("sgRule", {
+ *     securityGroupId: sg.id,
+ *     ingresses: [
+ *         "ACCEPT#10.0.0.0/16#ALL#ALL",
+ *         "ACCEPT#172.16.0.0/22#ALL#ALL",
+ *         "DROP#0.0.0.0/0#ALL#ALL",
+ *     ],
+ *     egresses: ["ACCEPT#172.16.0.0/22#ALL#ALL"],
+ * });
+ * const exampleCluster = new tencentcloud.kubernetes.Cluster("exampleCluster", {
+ *     vpcId: firstVpcId,
+ *     clusterCidr: exampleClusterCidr,
+ *     clusterMaxPodNum: 32,
+ *     clusterName: "tf_example_cluster",
+ *     clusterDesc: "example for tke cluster",
+ *     clusterMaxServiceNum: 32,
+ *     clusterInternet: false,
+ *     clusterVersion: "1.22.5",
+ *     clusterDeployType: "MANAGED_CLUSTER",
+ * });
+ * // without any worker config
+ * const exampleNodePool = new tencentcloud.kubernetes.NodePool("exampleNodePool", {
+ *     clusterId: exampleCluster.id,
+ *     maxSize: 6,
+ *     minSize: 1,
+ *     vpcId: firstVpcId,
+ *     subnetIds: [firstSubnetId],
+ *     retryPolicy: "INCREMENTAL_INTERVALS",
+ *     desiredCapacity: 4,
+ *     enableAutoScale: true,
+ *     multiZoneSubnetPolicy: "EQUALITY",
+ *     autoScalingConfig: {
+ *         instanceType: defaultInstanceType,
+ *         systemDiskType: "CLOUD_PREMIUM",
+ *         systemDiskSize: 50,
+ *         orderlySecurityGroupIds: [sgId],
+ *         dataDisks: [{
+ *             diskType: "CLOUD_PREMIUM",
+ *             diskSize: 50,
+ *         }],
+ *         internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+ *         internetMaxBandwidthOut: 10,
+ *         publicIpAssigned: true,
+ *         password: "test123#",
+ *         enhancedSecurityService: false,
+ *         enhancedMonitorService: false,
+ *         hostName: "12.123.0.0",
+ *         hostNameStyle: "ORIGINAL",
+ *     },
+ *     labels: {
+ *         test1: "test1",
+ *         test2: "test2",
+ *     },
+ *     taints: [
+ *         {
+ *             key: "test_taint",
+ *             value: "taint_value",
+ *             effect: "PreferNoSchedule",
+ *         },
+ *         {
+ *             key: "test_taint2",
+ *             value: "taint_value2",
+ *             effect: "PreferNoSchedule",
+ *         },
+ *     ],
+ *     nodeConfig: {
+ *         extraArgs: ["root-dir=/var/lib/kubelet"],
+ *     },
+ * });
+ * const exampleClusterEndpoint = new tencentcloud.kubernetes.ClusterEndpoint("exampleClusterEndpoint", {
+ *     clusterId: exampleCluster.id,
+ *     clusterInternet: true,
+ *     clusterIntranet: true,
+ *     clusterInternetSecurityGroup: sgId,
+ *     clusterIntranetSubnetId: firstSubnetId,
+ * }, {
+ *     dependsOn: [exampleNodePool],
+ * });
+ * ```
  * ### Use Kubelet
  *
  * ```typescript
@@ -397,13 +597,13 @@ export class Cluster extends pulumi.CustomResource {
     /**
      * Claim expired seconds to recycle ENI. This field can only set when field `networkType` is 'VPC-CNI'. `claimExpiredSeconds` must greater or equal than 300 and less than 15768000.
      */
-    public readonly claimExpiredSeconds!: pulumi.Output<number | undefined>;
+    public readonly claimExpiredSeconds!: pulumi.Output<number>;
     /**
-     * This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
+     * (**Deprecated**) This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
      *
      * @deprecated This argument is deprecated because the TKE auto-scaling group was no longer available.
      */
-    public readonly clusterAsEnabled!: pulumi.Output<boolean | undefined>;
+    public /*out*/ readonly clusterAsEnabled!: pulumi.Output<boolean>;
     /**
      * Specify Cluster Audit config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
      */
@@ -429,7 +629,7 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly clusterExtraArgs!: pulumi.Output<outputs.Kubernetes.ClusterClusterExtraArgs | undefined>;
     /**
-     * Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint.
+     * Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
     public readonly clusterInternet!: pulumi.Output<boolean | undefined>;
     /**
@@ -441,7 +641,7 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly clusterInternetSecurityGroup!: pulumi.Output<string | undefined>;
     /**
-     * Open intranet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint.
+     * Open intranet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
     public readonly clusterIntranet!: pulumi.Output<boolean | undefined>;
     /**
@@ -484,6 +684,10 @@ export class Cluster extends pulumi.CustomResource {
      * Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
      */
     public readonly clusterOsType!: pulumi.Output<string | undefined>;
+    /**
+     * Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+     */
+    public readonly clusterSubnetId!: pulumi.Output<string | undefined>;
     /**
      * Version of the cluster. Use `tencentcloud.Kubernetes.getAvailableClusterVersions` to get the upgradable cluster version.
      */
@@ -575,7 +779,7 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly mountTarget!: pulumi.Output<string | undefined>;
     /**
-     * Cluster network type, GR or VPC-CNI. Default is GR.
+     * Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
      */
     public readonly networkType!: pulumi.Output<string | undefined>;
     /**
@@ -626,6 +830,10 @@ export class Cluster extends pulumi.CustomResource {
      * User name of account.
      */
     public /*out*/ readonly userName!: pulumi.Output<string>;
+    /**
+     * Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eniSubnetIds` and `vpcCniType` must be set to empty.
+     */
+    public readonly vpcCniType!: pulumi.Output<string>;
     /**
      * Vpc Id of the cluster.
      */
@@ -679,6 +887,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["clusterNodeNum"] = state ? state.clusterNodeNum : undefined;
             resourceInputs["clusterOs"] = state ? state.clusterOs : undefined;
             resourceInputs["clusterOsType"] = state ? state.clusterOsType : undefined;
+            resourceInputs["clusterSubnetId"] = state ? state.clusterSubnetId : undefined;
             resourceInputs["clusterVersion"] = state ? state.clusterVersion : undefined;
             resourceInputs["containerRuntime"] = state ? state.containerRuntime : undefined;
             resourceInputs["deletionProtection"] = state ? state.deletionProtection : undefined;
@@ -714,6 +923,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["unschedulable"] = state ? state.unschedulable : undefined;
             resourceInputs["upgradeInstancesFollowCluster"] = state ? state.upgradeInstancesFollowCluster : undefined;
             resourceInputs["userName"] = state ? state.userName : undefined;
+            resourceInputs["vpcCniType"] = state ? state.vpcCniType : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
             resourceInputs["workerConfigs"] = state ? state.workerConfigs : undefined;
             resourceInputs["workerInstancesLists"] = state ? state.workerInstancesLists : undefined;
@@ -727,7 +937,6 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["autoUpgradeClusterLevel"] = args ? args.autoUpgradeClusterLevel : undefined;
             resourceInputs["basePodNum"] = args ? args.basePodNum : undefined;
             resourceInputs["claimExpiredSeconds"] = args ? args.claimExpiredSeconds : undefined;
-            resourceInputs["clusterAsEnabled"] = args ? args.clusterAsEnabled : undefined;
             resourceInputs["clusterAudit"] = args ? args.clusterAudit : undefined;
             resourceInputs["clusterCidr"] = args ? args.clusterCidr : undefined;
             resourceInputs["clusterDeployType"] = args ? args.clusterDeployType : undefined;
@@ -746,6 +955,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["clusterName"] = args ? args.clusterName : undefined;
             resourceInputs["clusterOs"] = args ? args.clusterOs : undefined;
             resourceInputs["clusterOsType"] = args ? args.clusterOsType : undefined;
+            resourceInputs["clusterSubnetId"] = args ? args.clusterSubnetId : undefined;
             resourceInputs["clusterVersion"] = args ? args.clusterVersion : undefined;
             resourceInputs["containerRuntime"] = args ? args.containerRuntime : undefined;
             resourceInputs["deletionProtection"] = args ? args.deletionProtection : undefined;
@@ -774,9 +984,11 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["unschedulable"] = args ? args.unschedulable : undefined;
             resourceInputs["upgradeInstancesFollowCluster"] = args ? args.upgradeInstancesFollowCluster : undefined;
+            resourceInputs["vpcCniType"] = args ? args.vpcCniType : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["workerConfigs"] = args ? args.workerConfigs : undefined;
             resourceInputs["certificationAuthority"] = undefined /*out*/;
+            resourceInputs["clusterAsEnabled"] = undefined /*out*/;
             resourceInputs["clusterExternalEndpoint"] = undefined /*out*/;
             resourceInputs["clusterNodeNum"] = undefined /*out*/;
             resourceInputs["domain"] = undefined /*out*/;
@@ -822,7 +1034,7 @@ export interface ClusterState {
      */
     claimExpiredSeconds?: pulumi.Input<number>;
     /**
-     * This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
+     * (**Deprecated**) This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
      *
      * @deprecated This argument is deprecated because the TKE auto-scaling group was no longer available.
      */
@@ -852,7 +1064,7 @@ export interface ClusterState {
      */
     clusterExtraArgs?: pulumi.Input<inputs.Kubernetes.ClusterClusterExtraArgs>;
     /**
-     * Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint.
+     * Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
     clusterInternet?: pulumi.Input<boolean>;
     /**
@@ -864,7 +1076,7 @@ export interface ClusterState {
      */
     clusterInternetSecurityGroup?: pulumi.Input<string>;
     /**
-     * Open intranet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint.
+     * Open intranet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
     clusterIntranet?: pulumi.Input<boolean>;
     /**
@@ -907,6 +1119,10 @@ export interface ClusterState {
      * Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
      */
     clusterOsType?: pulumi.Input<string>;
+    /**
+     * Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+     */
+    clusterSubnetId?: pulumi.Input<string>;
     /**
      * Version of the cluster. Use `tencentcloud.Kubernetes.getAvailableClusterVersions` to get the upgradable cluster version.
      */
@@ -998,7 +1214,7 @@ export interface ClusterState {
      */
     mountTarget?: pulumi.Input<string>;
     /**
-     * Cluster network type, GR or VPC-CNI. Default is GR.
+     * Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
      */
     networkType?: pulumi.Input<string>;
     /**
@@ -1050,6 +1266,10 @@ export interface ClusterState {
      */
     userName?: pulumi.Input<string>;
     /**
+     * Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eniSubnetIds` and `vpcCniType` must be set to empty.
+     */
+    vpcCniType?: pulumi.Input<string>;
+    /**
      * Vpc Id of the cluster.
      */
     vpcId?: pulumi.Input<string>;
@@ -1088,12 +1308,6 @@ export interface ClusterArgs {
      */
     claimExpiredSeconds?: pulumi.Input<number>;
     /**
-     * This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
-     *
-     * @deprecated This argument is deprecated because the TKE auto-scaling group was no longer available.
-     */
-    clusterAsEnabled?: pulumi.Input<boolean>;
-    /**
      * Specify Cluster Audit config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
      */
     clusterAudit?: pulumi.Input<inputs.Kubernetes.ClusterClusterAudit>;
@@ -1114,7 +1328,7 @@ export interface ClusterArgs {
      */
     clusterExtraArgs?: pulumi.Input<inputs.Kubernetes.ClusterClusterExtraArgs>;
     /**
-     * Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint.
+     * Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
     clusterInternet?: pulumi.Input<boolean>;
     /**
@@ -1126,7 +1340,7 @@ export interface ClusterArgs {
      */
     clusterInternetSecurityGroup?: pulumi.Input<string>;
     /**
-     * Open intranet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint.
+     * Open intranet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
     clusterIntranet?: pulumi.Input<boolean>;
     /**
@@ -1165,6 +1379,10 @@ export interface ClusterArgs {
      * Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
      */
     clusterOsType?: pulumi.Input<string>;
+    /**
+     * Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+     */
+    clusterSubnetId?: pulumi.Input<string>;
     /**
      * Version of the cluster. Use `tencentcloud.Kubernetes.getAvailableClusterVersions` to get the upgradable cluster version.
      */
@@ -1244,7 +1462,7 @@ export interface ClusterArgs {
      */
     mountTarget?: pulumi.Input<string>;
     /**
-     * Cluster network type, GR or VPC-CNI. Default is GR.
+     * Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
      */
     networkType?: pulumi.Input<string>;
     /**
@@ -1279,6 +1497,10 @@ export interface ClusterArgs {
      * Indicates whether upgrade all instances when clusterVersion change. Default is false.
      */
     upgradeInstancesFollowCluster?: pulumi.Input<boolean>;
+    /**
+     * Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eniSubnetIds` and `vpcCniType` must be set to empty.
+     */
+    vpcCniType?: pulumi.Input<string>;
     /**
      * Vpc Id of the cluster.
      */

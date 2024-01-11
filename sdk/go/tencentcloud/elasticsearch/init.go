@@ -21,10 +21,34 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Elasticsearch/diagnose:Diagnose":
+		r = &Diagnose{}
+	case "tencentcloud:Elasticsearch/diagnoseInstance:DiagnoseInstance":
+		r = &DiagnoseInstance{}
+	case "tencentcloud:Elasticsearch/index:Index":
+		r = &Index{}
 	case "tencentcloud:Elasticsearch/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Elasticsearch/logstash:Logstash":
+		r = &Logstash{}
+	case "tencentcloud:Elasticsearch/logstashPipeline:LogstashPipeline":
+		r = &LogstashPipeline{}
+	case "tencentcloud:Elasticsearch/restartInstanceOperation:RestartInstanceOperation":
+		r = &RestartInstanceOperation{}
+	case "tencentcloud:Elasticsearch/restartKibanaOperation:RestartKibanaOperation":
+		r = &RestartKibanaOperation{}
+	case "tencentcloud:Elasticsearch/restartLogstashInstanceOperation:RestartLogstashInstanceOperation":
+		r = &RestartLogstashInstanceOperation{}
+	case "tencentcloud:Elasticsearch/restartNodesOperation:RestartNodesOperation":
+		r = &RestartNodesOperation{}
 	case "tencentcloud:Elasticsearch/securityGroup:SecurityGroup":
 		r = &SecurityGroup{}
+	case "tencentcloud:Elasticsearch/startLogstashPipelineOperation:StartLogstashPipelineOperation":
+		r = &StartLogstashPipelineOperation{}
+	case "tencentcloud:Elasticsearch/stopLogstashPipelineOperation:StopLogstashPipelineOperation":
+		r = &StopLogstashPipelineOperation{}
+	case "tencentcloud:Elasticsearch/updatePluginsOperation:UpdatePluginsOperation":
+		r = &UpdatePluginsOperation{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -40,12 +64,72 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Elasticsearch/diagnose",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Elasticsearch/diagnoseInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Elasticsearch/index",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Elasticsearch/instance",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Elasticsearch/logstash",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Elasticsearch/logstashPipeline",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Elasticsearch/restartInstanceOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Elasticsearch/restartKibanaOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Elasticsearch/restartLogstashInstanceOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Elasticsearch/restartNodesOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Elasticsearch/securityGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Elasticsearch/startLogstashPipelineOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Elasticsearch/stopLogstashPipelineOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Elasticsearch/updatePluginsOperation",
 		&module{version},
 	)
 }

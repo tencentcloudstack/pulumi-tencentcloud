@@ -1405,7 +1405,7 @@ class Bucket(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="aclBody")
-    def acl_body(self) -> pulumi.Output[Optional[str]]:
+    def acl_body(self) -> pulumi.Output[str]:
         """
         ACL XML body for multiple grant info. NOTE: this argument will overwrite `acl`. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.
         """

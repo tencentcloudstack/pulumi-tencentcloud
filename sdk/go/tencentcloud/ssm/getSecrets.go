@@ -25,10 +25,39 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		exampleSecret, err := Ssm.NewSecret(ctx, "exampleSecret", &Ssm.SecretArgs{
+// 			SecretName:  pulumi.String("tf_example"),
+// 			Description: pulumi.String("desc."),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### OR you can filter by tags
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := Ssm.GetSecrets(ctx, &ssm.GetSecretsArgs{
-// 			OrderType:  pulumi.IntRef(1),
-// 			SecretName: pulumi.StringRef("test"),
+// 			SecretName: pulumi.StringRef(tencentcloud_ssm_secret.Example.Secret_name),
 // 			State:      pulumi.IntRef(1),
+// 			Tags: map[string]interface{}{
+// 				"createdBy": "terraform",
+// 			},
 // 		}, nil)
 // 		if err != nil {
 // 			return err
@@ -51,10 +80,14 @@ func GetSecrets(ctx *pulumi.Context, args *GetSecretsArgs, opts ...pulumi.Invoke
 type GetSecretsArgs struct {
 	// The order to sort the create time of secret. `0` - desc, `1` - asc. Default value is `0`.
 	OrderType *int `pulumi:"orderType"`
+	// This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.
+	ProductName *string `pulumi:"productName"`
 	// Used to save results.
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
 	// Secret name used to filter result.
 	SecretName *string `pulumi:"secretName"`
+	// 0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.
+	SecretType *int `pulumi:"secretType"`
 	// Filter by state of secret. `0` - all secrets are queried, `1` - only Enabled secrets are queried, `2` - only Disabled secrets are queried, `3` - only PendingDelete secrets are queried.
 	State *int `pulumi:"state"`
 	// Tags to filter secret.
@@ -64,13 +97,17 @@ type GetSecretsArgs struct {
 // A collection of values returned by getSecrets.
 type GetSecretsResult struct {
 	// The provider-assigned unique ID for this managed resource.
-	Id               string  `pulumi:"id"`
-	OrderType        *int    `pulumi:"orderType"`
+	Id        string `pulumi:"id"`
+	OrderType *int   `pulumi:"orderType"`
+	// Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.
+	ProductName      *string `pulumi:"productName"`
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
 	// A list of SSM secrets.
 	SecretLists []GetSecretsSecretList `pulumi:"secretLists"`
 	// Name of secret.
-	SecretName *string                `pulumi:"secretName"`
+	SecretName *string `pulumi:"secretName"`
+	// 0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.
+	SecretType *int                   `pulumi:"secretType"`
 	State      *int                   `pulumi:"state"`
 	Tags       map[string]interface{} `pulumi:"tags"`
 }
@@ -92,10 +129,14 @@ func GetSecretsOutput(ctx *pulumi.Context, args GetSecretsOutputArgs, opts ...pu
 type GetSecretsOutputArgs struct {
 	// The order to sort the create time of secret. `0` - desc, `1` - asc. Default value is `0`.
 	OrderType pulumi.IntPtrInput `pulumi:"orderType"`
+	// This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.
+	ProductName pulumi.StringPtrInput `pulumi:"productName"`
 	// Used to save results.
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
 	// Secret name used to filter result.
 	SecretName pulumi.StringPtrInput `pulumi:"secretName"`
+	// 0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.
+	SecretType pulumi.IntPtrInput `pulumi:"secretType"`
 	// Filter by state of secret. `0` - all secrets are queried, `1` - only Enabled secrets are queried, `2` - only Disabled secrets are queried, `3` - only PendingDelete secrets are queried.
 	State pulumi.IntPtrInput `pulumi:"state"`
 	// Tags to filter secret.
@@ -130,6 +171,11 @@ func (o GetSecretsResultOutput) OrderType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v GetSecretsResult) *int { return v.OrderType }).(pulumi.IntPtrOutput)
 }
 
+// Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.
+func (o GetSecretsResultOutput) ProductName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetSecretsResult) *string { return v.ProductName }).(pulumi.StringPtrOutput)
+}
+
 func (o GetSecretsResultOutput) ResultOutputFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetSecretsResult) *string { return v.ResultOutputFile }).(pulumi.StringPtrOutput)
 }
@@ -142,6 +188,11 @@ func (o GetSecretsResultOutput) SecretLists() GetSecretsSecretListArrayOutput {
 // Name of secret.
 func (o GetSecretsResultOutput) SecretName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetSecretsResult) *string { return v.SecretName }).(pulumi.StringPtrOutput)
+}
+
+// 0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.
+func (o GetSecretsResultOutput) SecretType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetSecretsResult) *int { return v.SecretType }).(pulumi.IntPtrOutput)
 }
 
 func (o GetSecretsResultOutput) State() pulumi.IntPtrOutput {

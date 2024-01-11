@@ -17,21 +17,17 @@ class CngwServiceRateLimitArgs:
     def __init__(__self__, *,
                  gateway_id: pulumi.Input[str],
                  limit_detail: pulumi.Input['CngwServiceRateLimitLimitDetailArgs'],
-                 name: Optional[pulumi.Input[str]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
+                 name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a CngwServiceRateLimit resource.
         :param pulumi.Input[str] gateway_id: gateway ID.
         :param pulumi.Input['CngwServiceRateLimitLimitDetailArgs'] limit_detail: rate limit configuration.
         :param pulumi.Input[str] name: service name or service ID.
-        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         pulumi.set(__self__, "gateway_id", gateway_id)
         pulumi.set(__self__, "limit_detail", limit_detail)
         if name is not None:
             pulumi.set(__self__, "name", name)
-        if tags is not None:
-            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="gatewayId")
@@ -69,32 +65,18 @@ class CngwServiceRateLimitArgs:
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
 
-    @property
-    @pulumi.getter
-    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
-        """
-        Tag description list.
-        """
-        return pulumi.get(self, "tags")
-
-    @tags.setter
-    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
-        pulumi.set(self, "tags", value)
-
 
 @pulumi.input_type
 class _CngwServiceRateLimitState:
     def __init__(__self__, *,
                  gateway_id: Optional[pulumi.Input[str]] = None,
                  limit_detail: Optional[pulumi.Input['CngwServiceRateLimitLimitDetailArgs']] = None,
-                 name: Optional[pulumi.Input[str]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
+                 name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering CngwServiceRateLimit resources.
         :param pulumi.Input[str] gateway_id: gateway ID.
         :param pulumi.Input['CngwServiceRateLimitLimitDetailArgs'] limit_detail: rate limit configuration.
         :param pulumi.Input[str] name: service name or service ID.
-        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         if gateway_id is not None:
             pulumi.set(__self__, "gateway_id", gateway_id)
@@ -102,8 +84,6 @@ class _CngwServiceRateLimitState:
             pulumi.set(__self__, "limit_detail", limit_detail)
         if name is not None:
             pulumi.set(__self__, "name", name)
-        if tags is not None:
-            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="gatewayId")
@@ -141,18 +121,6 @@ class _CngwServiceRateLimitState:
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
 
-    @property
-    @pulumi.getter
-    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
-        """
-        Tag description list.
-        """
-        return pulumi.get(self, "tags")
-
-    @tags.setter
-    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
-        pulumi.set(self, "tags", value)
-
 
 class CngwServiceRateLimit(pulumi.CustomResource):
     @overload
@@ -162,16 +130,91 @@ class CngwServiceRateLimit(pulumi.CustomResource):
                  gateway_id: Optional[pulumi.Input[str]] = None,
                  limit_detail: Optional[pulumi.Input[pulumi.InputType['CngwServiceRateLimitLimitDetailArgs']]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
-        Create a CngwServiceRateLimit resource with the given unique name, props, and options.
+        Provides a resource to create a tse cngw_service_rate_limit
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        cngw_gateway = tencentcloud.tse.CngwGateway("cngwGateway",
+            description="terraform test1",
+            enable_cls=True,
+            engine_region="ap-guangzhou",
+            feature_version="STANDARD",
+            gateway_version="2.5.1",
+            ingress_class_name="tse-nginx-ingress",
+            internet_max_bandwidth_out=0,
+            trade_type=0,
+            type="kong",
+            node_config=tencentcloud.tse.CngwGatewayNodeConfigArgs(
+                number=2,
+                specification="1c2g",
+            ),
+            vpc_config=tencentcloud.tse.CngwGatewayVpcConfigArgs(
+                subnet_id=subnet.id,
+                vpc_id=vpc.id,
+            ),
+            tags={
+                "createdBy": "terraform",
+            })
+        cngw_service = tencentcloud.tse.CngwService("cngwService",
+            gateway_id=cngw_gateway.id,
+            path="/test",
+            protocol="http",
+            retries=5,
+            timeout=60000,
+            upstream_type="HostIP",
+            upstream_info=tencentcloud.tse.CngwServiceUpstreamInfoArgs(
+                algorithm="round-robin",
+                auto_scaling_cvm_port=0,
+                host="arunma.cn",
+                port=8012,
+                slow_start=0,
+            ))
+        cngw_service_rate_limit = tencentcloud.tse.CngwServiceRateLimit("cngwServiceRateLimit",
+            gateway_id=cngw_gateway.id,
+            limit_detail=tencentcloud.tse.CngwServiceRateLimitLimitDetailArgs(
+                enabled=True,
+                header="req",
+                hide_client_headers=True,
+                is_delay=True,
+                limit_by="header",
+                line_up_time=15,
+                policy="redis",
+                response_type="default",
+                qps_thresholds=[tencentcloud.tse.CngwServiceRateLimitLimitDetailQpsThresholdArgs(
+                    max=100,
+                    unit="hour",
+                )],
+            ))
+        ```
+
+        ## Import
+
+        tse cngw_service_rate_limit can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tse/cngwServiceRateLimit:CngwServiceRateLimit cngw_service_rate_limit gatewayId#name
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] gateway_id: gateway ID.
         :param pulumi.Input[pulumi.InputType['CngwServiceRateLimitLimitDetailArgs']] limit_detail: rate limit configuration.
         :param pulumi.Input[str] name: service name or service ID.
-        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         ...
     @overload
@@ -180,7 +223,84 @@ class CngwServiceRateLimit(pulumi.CustomResource):
                  args: CngwServiceRateLimitArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a CngwServiceRateLimit resource with the given unique name, props, and options.
+        Provides a resource to create a tse cngw_service_rate_limit
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        cngw_gateway = tencentcloud.tse.CngwGateway("cngwGateway",
+            description="terraform test1",
+            enable_cls=True,
+            engine_region="ap-guangzhou",
+            feature_version="STANDARD",
+            gateway_version="2.5.1",
+            ingress_class_name="tse-nginx-ingress",
+            internet_max_bandwidth_out=0,
+            trade_type=0,
+            type="kong",
+            node_config=tencentcloud.tse.CngwGatewayNodeConfigArgs(
+                number=2,
+                specification="1c2g",
+            ),
+            vpc_config=tencentcloud.tse.CngwGatewayVpcConfigArgs(
+                subnet_id=subnet.id,
+                vpc_id=vpc.id,
+            ),
+            tags={
+                "createdBy": "terraform",
+            })
+        cngw_service = tencentcloud.tse.CngwService("cngwService",
+            gateway_id=cngw_gateway.id,
+            path="/test",
+            protocol="http",
+            retries=5,
+            timeout=60000,
+            upstream_type="HostIP",
+            upstream_info=tencentcloud.tse.CngwServiceUpstreamInfoArgs(
+                algorithm="round-robin",
+                auto_scaling_cvm_port=0,
+                host="arunma.cn",
+                port=8012,
+                slow_start=0,
+            ))
+        cngw_service_rate_limit = tencentcloud.tse.CngwServiceRateLimit("cngwServiceRateLimit",
+            gateway_id=cngw_gateway.id,
+            limit_detail=tencentcloud.tse.CngwServiceRateLimitLimitDetailArgs(
+                enabled=True,
+                header="req",
+                hide_client_headers=True,
+                is_delay=True,
+                limit_by="header",
+                line_up_time=15,
+                policy="redis",
+                response_type="default",
+                qps_thresholds=[tencentcloud.tse.CngwServiceRateLimitLimitDetailQpsThresholdArgs(
+                    max=100,
+                    unit="hour",
+                )],
+            ))
+        ```
+
+        ## Import
+
+        tse cngw_service_rate_limit can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tse/cngwServiceRateLimit:CngwServiceRateLimit cngw_service_rate_limit gatewayId#name
+        ```
+
         :param str resource_name: The name of the resource.
         :param CngwServiceRateLimitArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -199,7 +319,6 @@ class CngwServiceRateLimit(pulumi.CustomResource):
                  gateway_id: Optional[pulumi.Input[str]] = None,
                  limit_detail: Optional[pulumi.Input[pulumi.InputType['CngwServiceRateLimitLimitDetailArgs']]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -221,7 +340,6 @@ class CngwServiceRateLimit(pulumi.CustomResource):
                 raise TypeError("Missing required property 'limit_detail'")
             __props__.__dict__["limit_detail"] = limit_detail
             __props__.__dict__["name"] = name
-            __props__.__dict__["tags"] = tags
         super(CngwServiceRateLimit, __self__).__init__(
             'tencentcloud:Tse/cngwServiceRateLimit:CngwServiceRateLimit',
             resource_name,
@@ -234,8 +352,7 @@ class CngwServiceRateLimit(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             gateway_id: Optional[pulumi.Input[str]] = None,
             limit_detail: Optional[pulumi.Input[pulumi.InputType['CngwServiceRateLimitLimitDetailArgs']]] = None,
-            name: Optional[pulumi.Input[str]] = None,
-            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None) -> 'CngwServiceRateLimit':
+            name: Optional[pulumi.Input[str]] = None) -> 'CngwServiceRateLimit':
         """
         Get an existing CngwServiceRateLimit resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -246,7 +363,6 @@ class CngwServiceRateLimit(pulumi.CustomResource):
         :param pulumi.Input[str] gateway_id: gateway ID.
         :param pulumi.Input[pulumi.InputType['CngwServiceRateLimitLimitDetailArgs']] limit_detail: rate limit configuration.
         :param pulumi.Input[str] name: service name or service ID.
-        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -255,7 +371,6 @@ class CngwServiceRateLimit(pulumi.CustomResource):
         __props__.__dict__["gateway_id"] = gateway_id
         __props__.__dict__["limit_detail"] = limit_detail
         __props__.__dict__["name"] = name
-        __props__.__dict__["tags"] = tags
         return CngwServiceRateLimit(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -281,12 +396,4 @@ class CngwServiceRateLimit(pulumi.CustomResource):
         service name or service ID.
         """
         return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter
-    def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
-        """
-        Tag description list.
-        """
-        return pulumi.get(self, "tags")
 

@@ -10,6 +10,1063 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type BatchSendEmailAttachment struct {
+	// Base64-encoded attachment content. You can send attachments of up to 4 MB in the total size.Note: The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachmentcontent will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of allattachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
+	Content string `pulumi:"content"`
+	// Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types.](https://www.tencentcloud.com/document/product/1084/42373?has_map=1).
+	FileName string `pulumi:"fileName"`
+}
+
+// BatchSendEmailAttachmentInput is an input type that accepts BatchSendEmailAttachmentArgs and BatchSendEmailAttachmentOutput values.
+// You can construct a concrete instance of `BatchSendEmailAttachmentInput` via:
+//
+//          BatchSendEmailAttachmentArgs{...}
+type BatchSendEmailAttachmentInput interface {
+	pulumi.Input
+
+	ToBatchSendEmailAttachmentOutput() BatchSendEmailAttachmentOutput
+	ToBatchSendEmailAttachmentOutputWithContext(context.Context) BatchSendEmailAttachmentOutput
+}
+
+type BatchSendEmailAttachmentArgs struct {
+	// Base64-encoded attachment content. You can send attachments of up to 4 MB in the total size.Note: The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachmentcontent will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of allattachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
+	Content pulumi.StringInput `pulumi:"content"`
+	// Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types.](https://www.tencentcloud.com/document/product/1084/42373?has_map=1).
+	FileName pulumi.StringInput `pulumi:"fileName"`
+}
+
+func (BatchSendEmailAttachmentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchSendEmailAttachment)(nil)).Elem()
+}
+
+func (i BatchSendEmailAttachmentArgs) ToBatchSendEmailAttachmentOutput() BatchSendEmailAttachmentOutput {
+	return i.ToBatchSendEmailAttachmentOutputWithContext(context.Background())
+}
+
+func (i BatchSendEmailAttachmentArgs) ToBatchSendEmailAttachmentOutputWithContext(ctx context.Context) BatchSendEmailAttachmentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchSendEmailAttachmentOutput)
+}
+
+// BatchSendEmailAttachmentArrayInput is an input type that accepts BatchSendEmailAttachmentArray and BatchSendEmailAttachmentArrayOutput values.
+// You can construct a concrete instance of `BatchSendEmailAttachmentArrayInput` via:
+//
+//          BatchSendEmailAttachmentArray{ BatchSendEmailAttachmentArgs{...} }
+type BatchSendEmailAttachmentArrayInput interface {
+	pulumi.Input
+
+	ToBatchSendEmailAttachmentArrayOutput() BatchSendEmailAttachmentArrayOutput
+	ToBatchSendEmailAttachmentArrayOutputWithContext(context.Context) BatchSendEmailAttachmentArrayOutput
+}
+
+type BatchSendEmailAttachmentArray []BatchSendEmailAttachmentInput
+
+func (BatchSendEmailAttachmentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BatchSendEmailAttachment)(nil)).Elem()
+}
+
+func (i BatchSendEmailAttachmentArray) ToBatchSendEmailAttachmentArrayOutput() BatchSendEmailAttachmentArrayOutput {
+	return i.ToBatchSendEmailAttachmentArrayOutputWithContext(context.Background())
+}
+
+func (i BatchSendEmailAttachmentArray) ToBatchSendEmailAttachmentArrayOutputWithContext(ctx context.Context) BatchSendEmailAttachmentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchSendEmailAttachmentArrayOutput)
+}
+
+type BatchSendEmailAttachmentOutput struct{ *pulumi.OutputState }
+
+func (BatchSendEmailAttachmentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchSendEmailAttachment)(nil)).Elem()
+}
+
+func (o BatchSendEmailAttachmentOutput) ToBatchSendEmailAttachmentOutput() BatchSendEmailAttachmentOutput {
+	return o
+}
+
+func (o BatchSendEmailAttachmentOutput) ToBatchSendEmailAttachmentOutputWithContext(ctx context.Context) BatchSendEmailAttachmentOutput {
+	return o
+}
+
+// Base64-encoded attachment content. You can send attachments of up to 4 MB in the total size.Note: The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachmentcontent will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of allattachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
+func (o BatchSendEmailAttachmentOutput) Content() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchSendEmailAttachment) string { return v.Content }).(pulumi.StringOutput)
+}
+
+// Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types.](https://www.tencentcloud.com/document/product/1084/42373?has_map=1).
+func (o BatchSendEmailAttachmentOutput) FileName() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchSendEmailAttachment) string { return v.FileName }).(pulumi.StringOutput)
+}
+
+type BatchSendEmailAttachmentArrayOutput struct{ *pulumi.OutputState }
+
+func (BatchSendEmailAttachmentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BatchSendEmailAttachment)(nil)).Elem()
+}
+
+func (o BatchSendEmailAttachmentArrayOutput) ToBatchSendEmailAttachmentArrayOutput() BatchSendEmailAttachmentArrayOutput {
+	return o
+}
+
+func (o BatchSendEmailAttachmentArrayOutput) ToBatchSendEmailAttachmentArrayOutputWithContext(ctx context.Context) BatchSendEmailAttachmentArrayOutput {
+	return o
+}
+
+func (o BatchSendEmailAttachmentArrayOutput) Index(i pulumi.IntInput) BatchSendEmailAttachmentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BatchSendEmailAttachment {
+		return vs[0].([]BatchSendEmailAttachment)[vs[1].(int)]
+	}).(BatchSendEmailAttachmentOutput)
+}
+
+type BatchSendEmailCycleParam struct {
+	// Start time of the task.
+	BeginTime string `pulumi:"beginTime"`
+	// Task recurrence in hours.
+	IntervalTime int `pulumi:"intervalTime"`
+	// Specifies whether to end the cycle. This parameter is used to update the task. Valid values: 0: No; 1: Yes.
+	TermCycle *int `pulumi:"termCycle"`
+}
+
+// BatchSendEmailCycleParamInput is an input type that accepts BatchSendEmailCycleParamArgs and BatchSendEmailCycleParamOutput values.
+// You can construct a concrete instance of `BatchSendEmailCycleParamInput` via:
+//
+//          BatchSendEmailCycleParamArgs{...}
+type BatchSendEmailCycleParamInput interface {
+	pulumi.Input
+
+	ToBatchSendEmailCycleParamOutput() BatchSendEmailCycleParamOutput
+	ToBatchSendEmailCycleParamOutputWithContext(context.Context) BatchSendEmailCycleParamOutput
+}
+
+type BatchSendEmailCycleParamArgs struct {
+	// Start time of the task.
+	BeginTime pulumi.StringInput `pulumi:"beginTime"`
+	// Task recurrence in hours.
+	IntervalTime pulumi.IntInput `pulumi:"intervalTime"`
+	// Specifies whether to end the cycle. This parameter is used to update the task. Valid values: 0: No; 1: Yes.
+	TermCycle pulumi.IntPtrInput `pulumi:"termCycle"`
+}
+
+func (BatchSendEmailCycleParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchSendEmailCycleParam)(nil)).Elem()
+}
+
+func (i BatchSendEmailCycleParamArgs) ToBatchSendEmailCycleParamOutput() BatchSendEmailCycleParamOutput {
+	return i.ToBatchSendEmailCycleParamOutputWithContext(context.Background())
+}
+
+func (i BatchSendEmailCycleParamArgs) ToBatchSendEmailCycleParamOutputWithContext(ctx context.Context) BatchSendEmailCycleParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchSendEmailCycleParamOutput)
+}
+
+func (i BatchSendEmailCycleParamArgs) ToBatchSendEmailCycleParamPtrOutput() BatchSendEmailCycleParamPtrOutput {
+	return i.ToBatchSendEmailCycleParamPtrOutputWithContext(context.Background())
+}
+
+func (i BatchSendEmailCycleParamArgs) ToBatchSendEmailCycleParamPtrOutputWithContext(ctx context.Context) BatchSendEmailCycleParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchSendEmailCycleParamOutput).ToBatchSendEmailCycleParamPtrOutputWithContext(ctx)
+}
+
+// BatchSendEmailCycleParamPtrInput is an input type that accepts BatchSendEmailCycleParamArgs, BatchSendEmailCycleParamPtr and BatchSendEmailCycleParamPtrOutput values.
+// You can construct a concrete instance of `BatchSendEmailCycleParamPtrInput` via:
+//
+//          BatchSendEmailCycleParamArgs{...}
+//
+//  or:
+//
+//          nil
+type BatchSendEmailCycleParamPtrInput interface {
+	pulumi.Input
+
+	ToBatchSendEmailCycleParamPtrOutput() BatchSendEmailCycleParamPtrOutput
+	ToBatchSendEmailCycleParamPtrOutputWithContext(context.Context) BatchSendEmailCycleParamPtrOutput
+}
+
+type batchSendEmailCycleParamPtrType BatchSendEmailCycleParamArgs
+
+func BatchSendEmailCycleParamPtr(v *BatchSendEmailCycleParamArgs) BatchSendEmailCycleParamPtrInput {
+	return (*batchSendEmailCycleParamPtrType)(v)
+}
+
+func (*batchSendEmailCycleParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchSendEmailCycleParam)(nil)).Elem()
+}
+
+func (i *batchSendEmailCycleParamPtrType) ToBatchSendEmailCycleParamPtrOutput() BatchSendEmailCycleParamPtrOutput {
+	return i.ToBatchSendEmailCycleParamPtrOutputWithContext(context.Background())
+}
+
+func (i *batchSendEmailCycleParamPtrType) ToBatchSendEmailCycleParamPtrOutputWithContext(ctx context.Context) BatchSendEmailCycleParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchSendEmailCycleParamPtrOutput)
+}
+
+type BatchSendEmailCycleParamOutput struct{ *pulumi.OutputState }
+
+func (BatchSendEmailCycleParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchSendEmailCycleParam)(nil)).Elem()
+}
+
+func (o BatchSendEmailCycleParamOutput) ToBatchSendEmailCycleParamOutput() BatchSendEmailCycleParamOutput {
+	return o
+}
+
+func (o BatchSendEmailCycleParamOutput) ToBatchSendEmailCycleParamOutputWithContext(ctx context.Context) BatchSendEmailCycleParamOutput {
+	return o
+}
+
+func (o BatchSendEmailCycleParamOutput) ToBatchSendEmailCycleParamPtrOutput() BatchSendEmailCycleParamPtrOutput {
+	return o.ToBatchSendEmailCycleParamPtrOutputWithContext(context.Background())
+}
+
+func (o BatchSendEmailCycleParamOutput) ToBatchSendEmailCycleParamPtrOutputWithContext(ctx context.Context) BatchSendEmailCycleParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchSendEmailCycleParam) *BatchSendEmailCycleParam {
+		return &v
+	}).(BatchSendEmailCycleParamPtrOutput)
+}
+
+// Start time of the task.
+func (o BatchSendEmailCycleParamOutput) BeginTime() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchSendEmailCycleParam) string { return v.BeginTime }).(pulumi.StringOutput)
+}
+
+// Task recurrence in hours.
+func (o BatchSendEmailCycleParamOutput) IntervalTime() pulumi.IntOutput {
+	return o.ApplyT(func(v BatchSendEmailCycleParam) int { return v.IntervalTime }).(pulumi.IntOutput)
+}
+
+// Specifies whether to end the cycle. This parameter is used to update the task. Valid values: 0: No; 1: Yes.
+func (o BatchSendEmailCycleParamOutput) TermCycle() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BatchSendEmailCycleParam) *int { return v.TermCycle }).(pulumi.IntPtrOutput)
+}
+
+type BatchSendEmailCycleParamPtrOutput struct{ *pulumi.OutputState }
+
+func (BatchSendEmailCycleParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchSendEmailCycleParam)(nil)).Elem()
+}
+
+func (o BatchSendEmailCycleParamPtrOutput) ToBatchSendEmailCycleParamPtrOutput() BatchSendEmailCycleParamPtrOutput {
+	return o
+}
+
+func (o BatchSendEmailCycleParamPtrOutput) ToBatchSendEmailCycleParamPtrOutputWithContext(ctx context.Context) BatchSendEmailCycleParamPtrOutput {
+	return o
+}
+
+func (o BatchSendEmailCycleParamPtrOutput) Elem() BatchSendEmailCycleParamOutput {
+	return o.ApplyT(func(v *BatchSendEmailCycleParam) BatchSendEmailCycleParam {
+		if v != nil {
+			return *v
+		}
+		var ret BatchSendEmailCycleParam
+		return ret
+	}).(BatchSendEmailCycleParamOutput)
+}
+
+// Start time of the task.
+func (o BatchSendEmailCycleParamPtrOutput) BeginTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchSendEmailCycleParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.BeginTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Task recurrence in hours.
+func (o BatchSendEmailCycleParamPtrOutput) IntervalTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BatchSendEmailCycleParam) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.IntervalTime
+	}).(pulumi.IntPtrOutput)
+}
+
+// Specifies whether to end the cycle. This parameter is used to update the task. Valid values: 0: No; 1: Yes.
+func (o BatchSendEmailCycleParamPtrOutput) TermCycle() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BatchSendEmailCycleParam) *int {
+		if v == nil {
+			return nil
+		}
+		return v.TermCycle
+	}).(pulumi.IntPtrOutput)
+}
+
+type BatchSendEmailTemplate struct {
+	// Variable parameters in the template. Please use json.dump to format the JSON object into a string type.The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the correspondingvalue (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+	TemplateData string `pulumi:"templateData"`
+	// Template ID. If you do not have any template, please create one.
+	TemplateId int `pulumi:"templateId"`
+}
+
+// BatchSendEmailTemplateInput is an input type that accepts BatchSendEmailTemplateArgs and BatchSendEmailTemplateOutput values.
+// You can construct a concrete instance of `BatchSendEmailTemplateInput` via:
+//
+//          BatchSendEmailTemplateArgs{...}
+type BatchSendEmailTemplateInput interface {
+	pulumi.Input
+
+	ToBatchSendEmailTemplateOutput() BatchSendEmailTemplateOutput
+	ToBatchSendEmailTemplateOutputWithContext(context.Context) BatchSendEmailTemplateOutput
+}
+
+type BatchSendEmailTemplateArgs struct {
+	// Variable parameters in the template. Please use json.dump to format the JSON object into a string type.The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the correspondingvalue (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+	TemplateData pulumi.StringInput `pulumi:"templateData"`
+	// Template ID. If you do not have any template, please create one.
+	TemplateId pulumi.IntInput `pulumi:"templateId"`
+}
+
+func (BatchSendEmailTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchSendEmailTemplate)(nil)).Elem()
+}
+
+func (i BatchSendEmailTemplateArgs) ToBatchSendEmailTemplateOutput() BatchSendEmailTemplateOutput {
+	return i.ToBatchSendEmailTemplateOutputWithContext(context.Background())
+}
+
+func (i BatchSendEmailTemplateArgs) ToBatchSendEmailTemplateOutputWithContext(ctx context.Context) BatchSendEmailTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchSendEmailTemplateOutput)
+}
+
+func (i BatchSendEmailTemplateArgs) ToBatchSendEmailTemplatePtrOutput() BatchSendEmailTemplatePtrOutput {
+	return i.ToBatchSendEmailTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i BatchSendEmailTemplateArgs) ToBatchSendEmailTemplatePtrOutputWithContext(ctx context.Context) BatchSendEmailTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchSendEmailTemplateOutput).ToBatchSendEmailTemplatePtrOutputWithContext(ctx)
+}
+
+// BatchSendEmailTemplatePtrInput is an input type that accepts BatchSendEmailTemplateArgs, BatchSendEmailTemplatePtr and BatchSendEmailTemplatePtrOutput values.
+// You can construct a concrete instance of `BatchSendEmailTemplatePtrInput` via:
+//
+//          BatchSendEmailTemplateArgs{...}
+//
+//  or:
+//
+//          nil
+type BatchSendEmailTemplatePtrInput interface {
+	pulumi.Input
+
+	ToBatchSendEmailTemplatePtrOutput() BatchSendEmailTemplatePtrOutput
+	ToBatchSendEmailTemplatePtrOutputWithContext(context.Context) BatchSendEmailTemplatePtrOutput
+}
+
+type batchSendEmailTemplatePtrType BatchSendEmailTemplateArgs
+
+func BatchSendEmailTemplatePtr(v *BatchSendEmailTemplateArgs) BatchSendEmailTemplatePtrInput {
+	return (*batchSendEmailTemplatePtrType)(v)
+}
+
+func (*batchSendEmailTemplatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchSendEmailTemplate)(nil)).Elem()
+}
+
+func (i *batchSendEmailTemplatePtrType) ToBatchSendEmailTemplatePtrOutput() BatchSendEmailTemplatePtrOutput {
+	return i.ToBatchSendEmailTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i *batchSendEmailTemplatePtrType) ToBatchSendEmailTemplatePtrOutputWithContext(ctx context.Context) BatchSendEmailTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchSendEmailTemplatePtrOutput)
+}
+
+type BatchSendEmailTemplateOutput struct{ *pulumi.OutputState }
+
+func (BatchSendEmailTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchSendEmailTemplate)(nil)).Elem()
+}
+
+func (o BatchSendEmailTemplateOutput) ToBatchSendEmailTemplateOutput() BatchSendEmailTemplateOutput {
+	return o
+}
+
+func (o BatchSendEmailTemplateOutput) ToBatchSendEmailTemplateOutputWithContext(ctx context.Context) BatchSendEmailTemplateOutput {
+	return o
+}
+
+func (o BatchSendEmailTemplateOutput) ToBatchSendEmailTemplatePtrOutput() BatchSendEmailTemplatePtrOutput {
+	return o.ToBatchSendEmailTemplatePtrOutputWithContext(context.Background())
+}
+
+func (o BatchSendEmailTemplateOutput) ToBatchSendEmailTemplatePtrOutputWithContext(ctx context.Context) BatchSendEmailTemplatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchSendEmailTemplate) *BatchSendEmailTemplate {
+		return &v
+	}).(BatchSendEmailTemplatePtrOutput)
+}
+
+// Variable parameters in the template. Please use json.dump to format the JSON object into a string type.The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the correspondingvalue (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+func (o BatchSendEmailTemplateOutput) TemplateData() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchSendEmailTemplate) string { return v.TemplateData }).(pulumi.StringOutput)
+}
+
+// Template ID. If you do not have any template, please create one.
+func (o BatchSendEmailTemplateOutput) TemplateId() pulumi.IntOutput {
+	return o.ApplyT(func(v BatchSendEmailTemplate) int { return v.TemplateId }).(pulumi.IntOutput)
+}
+
+type BatchSendEmailTemplatePtrOutput struct{ *pulumi.OutputState }
+
+func (BatchSendEmailTemplatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchSendEmailTemplate)(nil)).Elem()
+}
+
+func (o BatchSendEmailTemplatePtrOutput) ToBatchSendEmailTemplatePtrOutput() BatchSendEmailTemplatePtrOutput {
+	return o
+}
+
+func (o BatchSendEmailTemplatePtrOutput) ToBatchSendEmailTemplatePtrOutputWithContext(ctx context.Context) BatchSendEmailTemplatePtrOutput {
+	return o
+}
+
+func (o BatchSendEmailTemplatePtrOutput) Elem() BatchSendEmailTemplateOutput {
+	return o.ApplyT(func(v *BatchSendEmailTemplate) BatchSendEmailTemplate {
+		if v != nil {
+			return *v
+		}
+		var ret BatchSendEmailTemplate
+		return ret
+	}).(BatchSendEmailTemplateOutput)
+}
+
+// Variable parameters in the template. Please use json.dump to format the JSON object into a string type.The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the correspondingvalue (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+func (o BatchSendEmailTemplatePtrOutput) TemplateData() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchSendEmailTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TemplateData
+	}).(pulumi.StringPtrOutput)
+}
+
+// Template ID. If you do not have any template, please create one.
+func (o BatchSendEmailTemplatePtrOutput) TemplateId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BatchSendEmailTemplate) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.TemplateId
+	}).(pulumi.IntPtrOutput)
+}
+
+type BatchSendEmailTimedParam struct {
+	// Start time of a scheduled sending task.
+	BeginTime string `pulumi:"beginTime"`
+}
+
+// BatchSendEmailTimedParamInput is an input type that accepts BatchSendEmailTimedParamArgs and BatchSendEmailTimedParamOutput values.
+// You can construct a concrete instance of `BatchSendEmailTimedParamInput` via:
+//
+//          BatchSendEmailTimedParamArgs{...}
+type BatchSendEmailTimedParamInput interface {
+	pulumi.Input
+
+	ToBatchSendEmailTimedParamOutput() BatchSendEmailTimedParamOutput
+	ToBatchSendEmailTimedParamOutputWithContext(context.Context) BatchSendEmailTimedParamOutput
+}
+
+type BatchSendEmailTimedParamArgs struct {
+	// Start time of a scheduled sending task.
+	BeginTime pulumi.StringInput `pulumi:"beginTime"`
+}
+
+func (BatchSendEmailTimedParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchSendEmailTimedParam)(nil)).Elem()
+}
+
+func (i BatchSendEmailTimedParamArgs) ToBatchSendEmailTimedParamOutput() BatchSendEmailTimedParamOutput {
+	return i.ToBatchSendEmailTimedParamOutputWithContext(context.Background())
+}
+
+func (i BatchSendEmailTimedParamArgs) ToBatchSendEmailTimedParamOutputWithContext(ctx context.Context) BatchSendEmailTimedParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchSendEmailTimedParamOutput)
+}
+
+func (i BatchSendEmailTimedParamArgs) ToBatchSendEmailTimedParamPtrOutput() BatchSendEmailTimedParamPtrOutput {
+	return i.ToBatchSendEmailTimedParamPtrOutputWithContext(context.Background())
+}
+
+func (i BatchSendEmailTimedParamArgs) ToBatchSendEmailTimedParamPtrOutputWithContext(ctx context.Context) BatchSendEmailTimedParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchSendEmailTimedParamOutput).ToBatchSendEmailTimedParamPtrOutputWithContext(ctx)
+}
+
+// BatchSendEmailTimedParamPtrInput is an input type that accepts BatchSendEmailTimedParamArgs, BatchSendEmailTimedParamPtr and BatchSendEmailTimedParamPtrOutput values.
+// You can construct a concrete instance of `BatchSendEmailTimedParamPtrInput` via:
+//
+//          BatchSendEmailTimedParamArgs{...}
+//
+//  or:
+//
+//          nil
+type BatchSendEmailTimedParamPtrInput interface {
+	pulumi.Input
+
+	ToBatchSendEmailTimedParamPtrOutput() BatchSendEmailTimedParamPtrOutput
+	ToBatchSendEmailTimedParamPtrOutputWithContext(context.Context) BatchSendEmailTimedParamPtrOutput
+}
+
+type batchSendEmailTimedParamPtrType BatchSendEmailTimedParamArgs
+
+func BatchSendEmailTimedParamPtr(v *BatchSendEmailTimedParamArgs) BatchSendEmailTimedParamPtrInput {
+	return (*batchSendEmailTimedParamPtrType)(v)
+}
+
+func (*batchSendEmailTimedParamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchSendEmailTimedParam)(nil)).Elem()
+}
+
+func (i *batchSendEmailTimedParamPtrType) ToBatchSendEmailTimedParamPtrOutput() BatchSendEmailTimedParamPtrOutput {
+	return i.ToBatchSendEmailTimedParamPtrOutputWithContext(context.Background())
+}
+
+func (i *batchSendEmailTimedParamPtrType) ToBatchSendEmailTimedParamPtrOutputWithContext(ctx context.Context) BatchSendEmailTimedParamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchSendEmailTimedParamPtrOutput)
+}
+
+type BatchSendEmailTimedParamOutput struct{ *pulumi.OutputState }
+
+func (BatchSendEmailTimedParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchSendEmailTimedParam)(nil)).Elem()
+}
+
+func (o BatchSendEmailTimedParamOutput) ToBatchSendEmailTimedParamOutput() BatchSendEmailTimedParamOutput {
+	return o
+}
+
+func (o BatchSendEmailTimedParamOutput) ToBatchSendEmailTimedParamOutputWithContext(ctx context.Context) BatchSendEmailTimedParamOutput {
+	return o
+}
+
+func (o BatchSendEmailTimedParamOutput) ToBatchSendEmailTimedParamPtrOutput() BatchSendEmailTimedParamPtrOutput {
+	return o.ToBatchSendEmailTimedParamPtrOutputWithContext(context.Background())
+}
+
+func (o BatchSendEmailTimedParamOutput) ToBatchSendEmailTimedParamPtrOutputWithContext(ctx context.Context) BatchSendEmailTimedParamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchSendEmailTimedParam) *BatchSendEmailTimedParam {
+		return &v
+	}).(BatchSendEmailTimedParamPtrOutput)
+}
+
+// Start time of a scheduled sending task.
+func (o BatchSendEmailTimedParamOutput) BeginTime() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchSendEmailTimedParam) string { return v.BeginTime }).(pulumi.StringOutput)
+}
+
+type BatchSendEmailTimedParamPtrOutput struct{ *pulumi.OutputState }
+
+func (BatchSendEmailTimedParamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchSendEmailTimedParam)(nil)).Elem()
+}
+
+func (o BatchSendEmailTimedParamPtrOutput) ToBatchSendEmailTimedParamPtrOutput() BatchSendEmailTimedParamPtrOutput {
+	return o
+}
+
+func (o BatchSendEmailTimedParamPtrOutput) ToBatchSendEmailTimedParamPtrOutputWithContext(ctx context.Context) BatchSendEmailTimedParamPtrOutput {
+	return o
+}
+
+func (o BatchSendEmailTimedParamPtrOutput) Elem() BatchSendEmailTimedParamOutput {
+	return o.ApplyT(func(v *BatchSendEmailTimedParam) BatchSendEmailTimedParam {
+		if v != nil {
+			return *v
+		}
+		var ret BatchSendEmailTimedParam
+		return ret
+	}).(BatchSendEmailTimedParamOutput)
+}
+
+// Start time of a scheduled sending task.
+func (o BatchSendEmailTimedParamPtrOutput) BeginTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchSendEmailTimedParam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.BeginTime
+	}).(pulumi.StringPtrOutput)
+}
+
+type DomainAttribute struct {
+	// Values that need to be configured.
+	ExpectedValue *string `pulumi:"expectedValue"`
+	// Domain name.
+	SendDomain *string `pulumi:"sendDomain"`
+	// Record Type CNAME | A | TXT | MX.
+	Type *string `pulumi:"type"`
+}
+
+// DomainAttributeInput is an input type that accepts DomainAttributeArgs and DomainAttributeOutput values.
+// You can construct a concrete instance of `DomainAttributeInput` via:
+//
+//          DomainAttributeArgs{...}
+type DomainAttributeInput interface {
+	pulumi.Input
+
+	ToDomainAttributeOutput() DomainAttributeOutput
+	ToDomainAttributeOutputWithContext(context.Context) DomainAttributeOutput
+}
+
+type DomainAttributeArgs struct {
+	// Values that need to be configured.
+	ExpectedValue pulumi.StringPtrInput `pulumi:"expectedValue"`
+	// Domain name.
+	SendDomain pulumi.StringPtrInput `pulumi:"sendDomain"`
+	// Record Type CNAME | A | TXT | MX.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+}
+
+func (DomainAttributeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAttribute)(nil)).Elem()
+}
+
+func (i DomainAttributeArgs) ToDomainAttributeOutput() DomainAttributeOutput {
+	return i.ToDomainAttributeOutputWithContext(context.Background())
+}
+
+func (i DomainAttributeArgs) ToDomainAttributeOutputWithContext(ctx context.Context) DomainAttributeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAttributeOutput)
+}
+
+// DomainAttributeArrayInput is an input type that accepts DomainAttributeArray and DomainAttributeArrayOutput values.
+// You can construct a concrete instance of `DomainAttributeArrayInput` via:
+//
+//          DomainAttributeArray{ DomainAttributeArgs{...} }
+type DomainAttributeArrayInput interface {
+	pulumi.Input
+
+	ToDomainAttributeArrayOutput() DomainAttributeArrayOutput
+	ToDomainAttributeArrayOutputWithContext(context.Context) DomainAttributeArrayOutput
+}
+
+type DomainAttributeArray []DomainAttributeInput
+
+func (DomainAttributeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainAttribute)(nil)).Elem()
+}
+
+func (i DomainAttributeArray) ToDomainAttributeArrayOutput() DomainAttributeArrayOutput {
+	return i.ToDomainAttributeArrayOutputWithContext(context.Background())
+}
+
+func (i DomainAttributeArray) ToDomainAttributeArrayOutputWithContext(ctx context.Context) DomainAttributeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAttributeArrayOutput)
+}
+
+type DomainAttributeOutput struct{ *pulumi.OutputState }
+
+func (DomainAttributeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAttribute)(nil)).Elem()
+}
+
+func (o DomainAttributeOutput) ToDomainAttributeOutput() DomainAttributeOutput {
+	return o
+}
+
+func (o DomainAttributeOutput) ToDomainAttributeOutputWithContext(ctx context.Context) DomainAttributeOutput {
+	return o
+}
+
+// Values that need to be configured.
+func (o DomainAttributeOutput) ExpectedValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAttribute) *string { return v.ExpectedValue }).(pulumi.StringPtrOutput)
+}
+
+// Domain name.
+func (o DomainAttributeOutput) SendDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAttribute) *string { return v.SendDomain }).(pulumi.StringPtrOutput)
+}
+
+// Record Type CNAME | A | TXT | MX.
+func (o DomainAttributeOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAttribute) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+type DomainAttributeArrayOutput struct{ *pulumi.OutputState }
+
+func (DomainAttributeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainAttribute)(nil)).Elem()
+}
+
+func (o DomainAttributeArrayOutput) ToDomainAttributeArrayOutput() DomainAttributeArrayOutput {
+	return o
+}
+
+func (o DomainAttributeArrayOutput) ToDomainAttributeArrayOutputWithContext(ctx context.Context) DomainAttributeArrayOutput {
+	return o
+}
+
+func (o DomainAttributeArrayOutput) Index(i pulumi.IntInput) DomainAttributeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainAttribute {
+		return vs[0].([]DomainAttribute)[vs[1].(int)]
+	}).(DomainAttributeOutput)
+}
+
+type ReceiverData struct {
+	// Recipient email addresses.
+	Email string `pulumi:"email"`
+	// Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.
+	TemplateData *string `pulumi:"templateData"`
+}
+
+// ReceiverDataInput is an input type that accepts ReceiverDataArgs and ReceiverDataOutput values.
+// You can construct a concrete instance of `ReceiverDataInput` via:
+//
+//          ReceiverDataArgs{...}
+type ReceiverDataInput interface {
+	pulumi.Input
+
+	ToReceiverDataOutput() ReceiverDataOutput
+	ToReceiverDataOutputWithContext(context.Context) ReceiverDataOutput
+}
+
+type ReceiverDataArgs struct {
+	// Recipient email addresses.
+	Email pulumi.StringInput `pulumi:"email"`
+	// Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.
+	TemplateData pulumi.StringPtrInput `pulumi:"templateData"`
+}
+
+func (ReceiverDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ReceiverData)(nil)).Elem()
+}
+
+func (i ReceiverDataArgs) ToReceiverDataOutput() ReceiverDataOutput {
+	return i.ToReceiverDataOutputWithContext(context.Background())
+}
+
+func (i ReceiverDataArgs) ToReceiverDataOutputWithContext(ctx context.Context) ReceiverDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReceiverDataOutput)
+}
+
+// ReceiverDataArrayInput is an input type that accepts ReceiverDataArray and ReceiverDataArrayOutput values.
+// You can construct a concrete instance of `ReceiverDataArrayInput` via:
+//
+//          ReceiverDataArray{ ReceiverDataArgs{...} }
+type ReceiverDataArrayInput interface {
+	pulumi.Input
+
+	ToReceiverDataArrayOutput() ReceiverDataArrayOutput
+	ToReceiverDataArrayOutputWithContext(context.Context) ReceiverDataArrayOutput
+}
+
+type ReceiverDataArray []ReceiverDataInput
+
+func (ReceiverDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ReceiverData)(nil)).Elem()
+}
+
+func (i ReceiverDataArray) ToReceiverDataArrayOutput() ReceiverDataArrayOutput {
+	return i.ToReceiverDataArrayOutputWithContext(context.Background())
+}
+
+func (i ReceiverDataArray) ToReceiverDataArrayOutputWithContext(ctx context.Context) ReceiverDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReceiverDataArrayOutput)
+}
+
+type ReceiverDataOutput struct{ *pulumi.OutputState }
+
+func (ReceiverDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ReceiverData)(nil)).Elem()
+}
+
+func (o ReceiverDataOutput) ToReceiverDataOutput() ReceiverDataOutput {
+	return o
+}
+
+func (o ReceiverDataOutput) ToReceiverDataOutputWithContext(ctx context.Context) ReceiverDataOutput {
+	return o
+}
+
+// Recipient email addresses.
+func (o ReceiverDataOutput) Email() pulumi.StringOutput {
+	return o.ApplyT(func(v ReceiverData) string { return v.Email }).(pulumi.StringOutput)
+}
+
+// Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.
+func (o ReceiverDataOutput) TemplateData() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ReceiverData) *string { return v.TemplateData }).(pulumi.StringPtrOutput)
+}
+
+type ReceiverDataArrayOutput struct{ *pulumi.OutputState }
+
+func (ReceiverDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ReceiverData)(nil)).Elem()
+}
+
+func (o ReceiverDataArrayOutput) ToReceiverDataArrayOutput() ReceiverDataArrayOutput {
+	return o
+}
+
+func (o ReceiverDataArrayOutput) ToReceiverDataArrayOutputWithContext(ctx context.Context) ReceiverDataArrayOutput {
+	return o
+}
+
+func (o ReceiverDataArrayOutput) Index(i pulumi.IntInput) ReceiverDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ReceiverData {
+		return vs[0].([]ReceiverData)[vs[1].(int)]
+	}).(ReceiverDataOutput)
+}
+
+type SendEmailAttachment struct {
+	// Base64-encoded attachment content. You can send attachments of up to 4 MB in the total size.Note: The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachmentcontent will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of allattachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
+	Content string `pulumi:"content"`
+	// Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types.](https://www.tencentcloud.com/document/product/1084/42373?has_map=1).
+	FileName string `pulumi:"fileName"`
+}
+
+// SendEmailAttachmentInput is an input type that accepts SendEmailAttachmentArgs and SendEmailAttachmentOutput values.
+// You can construct a concrete instance of `SendEmailAttachmentInput` via:
+//
+//          SendEmailAttachmentArgs{...}
+type SendEmailAttachmentInput interface {
+	pulumi.Input
+
+	ToSendEmailAttachmentOutput() SendEmailAttachmentOutput
+	ToSendEmailAttachmentOutputWithContext(context.Context) SendEmailAttachmentOutput
+}
+
+type SendEmailAttachmentArgs struct {
+	// Base64-encoded attachment content. You can send attachments of up to 4 MB in the total size.Note: The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachmentcontent will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of allattachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
+	Content pulumi.StringInput `pulumi:"content"`
+	// Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types.](https://www.tencentcloud.com/document/product/1084/42373?has_map=1).
+	FileName pulumi.StringInput `pulumi:"fileName"`
+}
+
+func (SendEmailAttachmentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SendEmailAttachment)(nil)).Elem()
+}
+
+func (i SendEmailAttachmentArgs) ToSendEmailAttachmentOutput() SendEmailAttachmentOutput {
+	return i.ToSendEmailAttachmentOutputWithContext(context.Background())
+}
+
+func (i SendEmailAttachmentArgs) ToSendEmailAttachmentOutputWithContext(ctx context.Context) SendEmailAttachmentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SendEmailAttachmentOutput)
+}
+
+// SendEmailAttachmentArrayInput is an input type that accepts SendEmailAttachmentArray and SendEmailAttachmentArrayOutput values.
+// You can construct a concrete instance of `SendEmailAttachmentArrayInput` via:
+//
+//          SendEmailAttachmentArray{ SendEmailAttachmentArgs{...} }
+type SendEmailAttachmentArrayInput interface {
+	pulumi.Input
+
+	ToSendEmailAttachmentArrayOutput() SendEmailAttachmentArrayOutput
+	ToSendEmailAttachmentArrayOutputWithContext(context.Context) SendEmailAttachmentArrayOutput
+}
+
+type SendEmailAttachmentArray []SendEmailAttachmentInput
+
+func (SendEmailAttachmentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SendEmailAttachment)(nil)).Elem()
+}
+
+func (i SendEmailAttachmentArray) ToSendEmailAttachmentArrayOutput() SendEmailAttachmentArrayOutput {
+	return i.ToSendEmailAttachmentArrayOutputWithContext(context.Background())
+}
+
+func (i SendEmailAttachmentArray) ToSendEmailAttachmentArrayOutputWithContext(ctx context.Context) SendEmailAttachmentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SendEmailAttachmentArrayOutput)
+}
+
+type SendEmailAttachmentOutput struct{ *pulumi.OutputState }
+
+func (SendEmailAttachmentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SendEmailAttachment)(nil)).Elem()
+}
+
+func (o SendEmailAttachmentOutput) ToSendEmailAttachmentOutput() SendEmailAttachmentOutput {
+	return o
+}
+
+func (o SendEmailAttachmentOutput) ToSendEmailAttachmentOutputWithContext(ctx context.Context) SendEmailAttachmentOutput {
+	return o
+}
+
+// Base64-encoded attachment content. You can send attachments of up to 4 MB in the total size.Note: The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachmentcontent will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of allattachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
+func (o SendEmailAttachmentOutput) Content() pulumi.StringOutput {
+	return o.ApplyT(func(v SendEmailAttachment) string { return v.Content }).(pulumi.StringOutput)
+}
+
+// Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types.](https://www.tencentcloud.com/document/product/1084/42373?has_map=1).
+func (o SendEmailAttachmentOutput) FileName() pulumi.StringOutput {
+	return o.ApplyT(func(v SendEmailAttachment) string { return v.FileName }).(pulumi.StringOutput)
+}
+
+type SendEmailAttachmentArrayOutput struct{ *pulumi.OutputState }
+
+func (SendEmailAttachmentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SendEmailAttachment)(nil)).Elem()
+}
+
+func (o SendEmailAttachmentArrayOutput) ToSendEmailAttachmentArrayOutput() SendEmailAttachmentArrayOutput {
+	return o
+}
+
+func (o SendEmailAttachmentArrayOutput) ToSendEmailAttachmentArrayOutputWithContext(ctx context.Context) SendEmailAttachmentArrayOutput {
+	return o
+}
+
+func (o SendEmailAttachmentArrayOutput) Index(i pulumi.IntInput) SendEmailAttachmentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SendEmailAttachment {
+		return vs[0].([]SendEmailAttachment)[vs[1].(int)]
+	}).(SendEmailAttachmentOutput)
+}
+
+type SendEmailTemplate struct {
+	// Variable parameters in the template. Please use json.dump to format the JSON object into a string type.The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the correspondingvalue (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+	TemplateData string `pulumi:"templateData"`
+	// Template ID. If you do not have any template, please create one.
+	TemplateId int `pulumi:"templateId"`
+}
+
+// SendEmailTemplateInput is an input type that accepts SendEmailTemplateArgs and SendEmailTemplateOutput values.
+// You can construct a concrete instance of `SendEmailTemplateInput` via:
+//
+//          SendEmailTemplateArgs{...}
+type SendEmailTemplateInput interface {
+	pulumi.Input
+
+	ToSendEmailTemplateOutput() SendEmailTemplateOutput
+	ToSendEmailTemplateOutputWithContext(context.Context) SendEmailTemplateOutput
+}
+
+type SendEmailTemplateArgs struct {
+	// Variable parameters in the template. Please use json.dump to format the JSON object into a string type.The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the correspondingvalue (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+	TemplateData pulumi.StringInput `pulumi:"templateData"`
+	// Template ID. If you do not have any template, please create one.
+	TemplateId pulumi.IntInput `pulumi:"templateId"`
+}
+
+func (SendEmailTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SendEmailTemplate)(nil)).Elem()
+}
+
+func (i SendEmailTemplateArgs) ToSendEmailTemplateOutput() SendEmailTemplateOutput {
+	return i.ToSendEmailTemplateOutputWithContext(context.Background())
+}
+
+func (i SendEmailTemplateArgs) ToSendEmailTemplateOutputWithContext(ctx context.Context) SendEmailTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SendEmailTemplateOutput)
+}
+
+func (i SendEmailTemplateArgs) ToSendEmailTemplatePtrOutput() SendEmailTemplatePtrOutput {
+	return i.ToSendEmailTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i SendEmailTemplateArgs) ToSendEmailTemplatePtrOutputWithContext(ctx context.Context) SendEmailTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SendEmailTemplateOutput).ToSendEmailTemplatePtrOutputWithContext(ctx)
+}
+
+// SendEmailTemplatePtrInput is an input type that accepts SendEmailTemplateArgs, SendEmailTemplatePtr and SendEmailTemplatePtrOutput values.
+// You can construct a concrete instance of `SendEmailTemplatePtrInput` via:
+//
+//          SendEmailTemplateArgs{...}
+//
+//  or:
+//
+//          nil
+type SendEmailTemplatePtrInput interface {
+	pulumi.Input
+
+	ToSendEmailTemplatePtrOutput() SendEmailTemplatePtrOutput
+	ToSendEmailTemplatePtrOutputWithContext(context.Context) SendEmailTemplatePtrOutput
+}
+
+type sendEmailTemplatePtrType SendEmailTemplateArgs
+
+func SendEmailTemplatePtr(v *SendEmailTemplateArgs) SendEmailTemplatePtrInput {
+	return (*sendEmailTemplatePtrType)(v)
+}
+
+func (*sendEmailTemplatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SendEmailTemplate)(nil)).Elem()
+}
+
+func (i *sendEmailTemplatePtrType) ToSendEmailTemplatePtrOutput() SendEmailTemplatePtrOutput {
+	return i.ToSendEmailTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i *sendEmailTemplatePtrType) ToSendEmailTemplatePtrOutputWithContext(ctx context.Context) SendEmailTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SendEmailTemplatePtrOutput)
+}
+
+type SendEmailTemplateOutput struct{ *pulumi.OutputState }
+
+func (SendEmailTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SendEmailTemplate)(nil)).Elem()
+}
+
+func (o SendEmailTemplateOutput) ToSendEmailTemplateOutput() SendEmailTemplateOutput {
+	return o
+}
+
+func (o SendEmailTemplateOutput) ToSendEmailTemplateOutputWithContext(ctx context.Context) SendEmailTemplateOutput {
+	return o
+}
+
+func (o SendEmailTemplateOutput) ToSendEmailTemplatePtrOutput() SendEmailTemplatePtrOutput {
+	return o.ToSendEmailTemplatePtrOutputWithContext(context.Background())
+}
+
+func (o SendEmailTemplateOutput) ToSendEmailTemplatePtrOutputWithContext(ctx context.Context) SendEmailTemplatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SendEmailTemplate) *SendEmailTemplate {
+		return &v
+	}).(SendEmailTemplatePtrOutput)
+}
+
+// Variable parameters in the template. Please use json.dump to format the JSON object into a string type.The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the correspondingvalue (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+func (o SendEmailTemplateOutput) TemplateData() pulumi.StringOutput {
+	return o.ApplyT(func(v SendEmailTemplate) string { return v.TemplateData }).(pulumi.StringOutput)
+}
+
+// Template ID. If you do not have any template, please create one.
+func (o SendEmailTemplateOutput) TemplateId() pulumi.IntOutput {
+	return o.ApplyT(func(v SendEmailTemplate) int { return v.TemplateId }).(pulumi.IntOutput)
+}
+
+type SendEmailTemplatePtrOutput struct{ *pulumi.OutputState }
+
+func (SendEmailTemplatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SendEmailTemplate)(nil)).Elem()
+}
+
+func (o SendEmailTemplatePtrOutput) ToSendEmailTemplatePtrOutput() SendEmailTemplatePtrOutput {
+	return o
+}
+
+func (o SendEmailTemplatePtrOutput) ToSendEmailTemplatePtrOutputWithContext(ctx context.Context) SendEmailTemplatePtrOutput {
+	return o
+}
+
+func (o SendEmailTemplatePtrOutput) Elem() SendEmailTemplateOutput {
+	return o.ApplyT(func(v *SendEmailTemplate) SendEmailTemplate {
+		if v != nil {
+			return *v
+		}
+		var ret SendEmailTemplate
+		return ret
+	}).(SendEmailTemplateOutput)
+}
+
+// Variable parameters in the template. Please use json.dump to format the JSON object into a string type.The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the correspondingvalue (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+func (o SendEmailTemplatePtrOutput) TemplateData() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SendEmailTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TemplateData
+	}).(pulumi.StringPtrOutput)
+}
+
+// Template ID. If you do not have any template, please create one.
+func (o SendEmailTemplatePtrOutput) TemplateId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SendEmailTemplate) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.TemplateId
+	}).(pulumi.IntPtrOutput)
+}
+
 type TemplateTemplateContent struct {
 	// Html code after base64.
 	Html *string `pulumi:"html"`
@@ -166,9 +1223,1528 @@ func (o TemplateTemplateContentPtrOutput) Text() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type GetBlackEmailAddressBlackList struct {
+	// Time when the email address is blocklisted.
+	BounceTime string `pulumi:"bounceTime"`
+	// You can specify an email address to query.
+	EmailAddress string `pulumi:"emailAddress"`
+}
+
+// GetBlackEmailAddressBlackListInput is an input type that accepts GetBlackEmailAddressBlackListArgs and GetBlackEmailAddressBlackListOutput values.
+// You can construct a concrete instance of `GetBlackEmailAddressBlackListInput` via:
+//
+//          GetBlackEmailAddressBlackListArgs{...}
+type GetBlackEmailAddressBlackListInput interface {
+	pulumi.Input
+
+	ToGetBlackEmailAddressBlackListOutput() GetBlackEmailAddressBlackListOutput
+	ToGetBlackEmailAddressBlackListOutputWithContext(context.Context) GetBlackEmailAddressBlackListOutput
+}
+
+type GetBlackEmailAddressBlackListArgs struct {
+	// Time when the email address is blocklisted.
+	BounceTime pulumi.StringInput `pulumi:"bounceTime"`
+	// You can specify an email address to query.
+	EmailAddress pulumi.StringInput `pulumi:"emailAddress"`
+}
+
+func (GetBlackEmailAddressBlackListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBlackEmailAddressBlackList)(nil)).Elem()
+}
+
+func (i GetBlackEmailAddressBlackListArgs) ToGetBlackEmailAddressBlackListOutput() GetBlackEmailAddressBlackListOutput {
+	return i.ToGetBlackEmailAddressBlackListOutputWithContext(context.Background())
+}
+
+func (i GetBlackEmailAddressBlackListArgs) ToGetBlackEmailAddressBlackListOutputWithContext(ctx context.Context) GetBlackEmailAddressBlackListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBlackEmailAddressBlackListOutput)
+}
+
+// GetBlackEmailAddressBlackListArrayInput is an input type that accepts GetBlackEmailAddressBlackListArray and GetBlackEmailAddressBlackListArrayOutput values.
+// You can construct a concrete instance of `GetBlackEmailAddressBlackListArrayInput` via:
+//
+//          GetBlackEmailAddressBlackListArray{ GetBlackEmailAddressBlackListArgs{...} }
+type GetBlackEmailAddressBlackListArrayInput interface {
+	pulumi.Input
+
+	ToGetBlackEmailAddressBlackListArrayOutput() GetBlackEmailAddressBlackListArrayOutput
+	ToGetBlackEmailAddressBlackListArrayOutputWithContext(context.Context) GetBlackEmailAddressBlackListArrayOutput
+}
+
+type GetBlackEmailAddressBlackListArray []GetBlackEmailAddressBlackListInput
+
+func (GetBlackEmailAddressBlackListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBlackEmailAddressBlackList)(nil)).Elem()
+}
+
+func (i GetBlackEmailAddressBlackListArray) ToGetBlackEmailAddressBlackListArrayOutput() GetBlackEmailAddressBlackListArrayOutput {
+	return i.ToGetBlackEmailAddressBlackListArrayOutputWithContext(context.Background())
+}
+
+func (i GetBlackEmailAddressBlackListArray) ToGetBlackEmailAddressBlackListArrayOutputWithContext(ctx context.Context) GetBlackEmailAddressBlackListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBlackEmailAddressBlackListArrayOutput)
+}
+
+type GetBlackEmailAddressBlackListOutput struct{ *pulumi.OutputState }
+
+func (GetBlackEmailAddressBlackListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBlackEmailAddressBlackList)(nil)).Elem()
+}
+
+func (o GetBlackEmailAddressBlackListOutput) ToGetBlackEmailAddressBlackListOutput() GetBlackEmailAddressBlackListOutput {
+	return o
+}
+
+func (o GetBlackEmailAddressBlackListOutput) ToGetBlackEmailAddressBlackListOutputWithContext(ctx context.Context) GetBlackEmailAddressBlackListOutput {
+	return o
+}
+
+// Time when the email address is blocklisted.
+func (o GetBlackEmailAddressBlackListOutput) BounceTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlackEmailAddressBlackList) string { return v.BounceTime }).(pulumi.StringOutput)
+}
+
+// You can specify an email address to query.
+func (o GetBlackEmailAddressBlackListOutput) EmailAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlackEmailAddressBlackList) string { return v.EmailAddress }).(pulumi.StringOutput)
+}
+
+type GetBlackEmailAddressBlackListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBlackEmailAddressBlackListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBlackEmailAddressBlackList)(nil)).Elem()
+}
+
+func (o GetBlackEmailAddressBlackListArrayOutput) ToGetBlackEmailAddressBlackListArrayOutput() GetBlackEmailAddressBlackListArrayOutput {
+	return o
+}
+
+func (o GetBlackEmailAddressBlackListArrayOutput) ToGetBlackEmailAddressBlackListArrayOutputWithContext(ctx context.Context) GetBlackEmailAddressBlackListArrayOutput {
+	return o
+}
+
+func (o GetBlackEmailAddressBlackListArrayOutput) Index(i pulumi.IntInput) GetBlackEmailAddressBlackListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBlackEmailAddressBlackList {
+		return vs[0].([]GetBlackEmailAddressBlackList)[vs[1].(int)]
+	}).(GetBlackEmailAddressBlackListOutput)
+}
+
+type GetEmailIdentitiesEmailIdentity struct {
+	// Current credit rating.
+	CurrentReputationLevel int `pulumi:"currentReputationLevel"`
+	// Highest number of letters of the day.
+	DailyQuota int `pulumi:"dailyQuota"`
+	// Sending domain name.
+	IdentityName string `pulumi:"identityName"`
+	// Authentication type, fixed as DOMAIN.
+	IdentityType string `pulumi:"identityType"`
+	// Is it verified.
+	SendingEnabled bool `pulumi:"sendingEnabled"`
+}
+
+// GetEmailIdentitiesEmailIdentityInput is an input type that accepts GetEmailIdentitiesEmailIdentityArgs and GetEmailIdentitiesEmailIdentityOutput values.
+// You can construct a concrete instance of `GetEmailIdentitiesEmailIdentityInput` via:
+//
+//          GetEmailIdentitiesEmailIdentityArgs{...}
+type GetEmailIdentitiesEmailIdentityInput interface {
+	pulumi.Input
+
+	ToGetEmailIdentitiesEmailIdentityOutput() GetEmailIdentitiesEmailIdentityOutput
+	ToGetEmailIdentitiesEmailIdentityOutputWithContext(context.Context) GetEmailIdentitiesEmailIdentityOutput
+}
+
+type GetEmailIdentitiesEmailIdentityArgs struct {
+	// Current credit rating.
+	CurrentReputationLevel pulumi.IntInput `pulumi:"currentReputationLevel"`
+	// Highest number of letters of the day.
+	DailyQuota pulumi.IntInput `pulumi:"dailyQuota"`
+	// Sending domain name.
+	IdentityName pulumi.StringInput `pulumi:"identityName"`
+	// Authentication type, fixed as DOMAIN.
+	IdentityType pulumi.StringInput `pulumi:"identityType"`
+	// Is it verified.
+	SendingEnabled pulumi.BoolInput `pulumi:"sendingEnabled"`
+}
+
+func (GetEmailIdentitiesEmailIdentityArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEmailIdentitiesEmailIdentity)(nil)).Elem()
+}
+
+func (i GetEmailIdentitiesEmailIdentityArgs) ToGetEmailIdentitiesEmailIdentityOutput() GetEmailIdentitiesEmailIdentityOutput {
+	return i.ToGetEmailIdentitiesEmailIdentityOutputWithContext(context.Background())
+}
+
+func (i GetEmailIdentitiesEmailIdentityArgs) ToGetEmailIdentitiesEmailIdentityOutputWithContext(ctx context.Context) GetEmailIdentitiesEmailIdentityOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEmailIdentitiesEmailIdentityOutput)
+}
+
+// GetEmailIdentitiesEmailIdentityArrayInput is an input type that accepts GetEmailIdentitiesEmailIdentityArray and GetEmailIdentitiesEmailIdentityArrayOutput values.
+// You can construct a concrete instance of `GetEmailIdentitiesEmailIdentityArrayInput` via:
+//
+//          GetEmailIdentitiesEmailIdentityArray{ GetEmailIdentitiesEmailIdentityArgs{...} }
+type GetEmailIdentitiesEmailIdentityArrayInput interface {
+	pulumi.Input
+
+	ToGetEmailIdentitiesEmailIdentityArrayOutput() GetEmailIdentitiesEmailIdentityArrayOutput
+	ToGetEmailIdentitiesEmailIdentityArrayOutputWithContext(context.Context) GetEmailIdentitiesEmailIdentityArrayOutput
+}
+
+type GetEmailIdentitiesEmailIdentityArray []GetEmailIdentitiesEmailIdentityInput
+
+func (GetEmailIdentitiesEmailIdentityArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEmailIdentitiesEmailIdentity)(nil)).Elem()
+}
+
+func (i GetEmailIdentitiesEmailIdentityArray) ToGetEmailIdentitiesEmailIdentityArrayOutput() GetEmailIdentitiesEmailIdentityArrayOutput {
+	return i.ToGetEmailIdentitiesEmailIdentityArrayOutputWithContext(context.Background())
+}
+
+func (i GetEmailIdentitiesEmailIdentityArray) ToGetEmailIdentitiesEmailIdentityArrayOutputWithContext(ctx context.Context) GetEmailIdentitiesEmailIdentityArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEmailIdentitiesEmailIdentityArrayOutput)
+}
+
+type GetEmailIdentitiesEmailIdentityOutput struct{ *pulumi.OutputState }
+
+func (GetEmailIdentitiesEmailIdentityOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEmailIdentitiesEmailIdentity)(nil)).Elem()
+}
+
+func (o GetEmailIdentitiesEmailIdentityOutput) ToGetEmailIdentitiesEmailIdentityOutput() GetEmailIdentitiesEmailIdentityOutput {
+	return o
+}
+
+func (o GetEmailIdentitiesEmailIdentityOutput) ToGetEmailIdentitiesEmailIdentityOutputWithContext(ctx context.Context) GetEmailIdentitiesEmailIdentityOutput {
+	return o
+}
+
+// Current credit rating.
+func (o GetEmailIdentitiesEmailIdentityOutput) CurrentReputationLevel() pulumi.IntOutput {
+	return o.ApplyT(func(v GetEmailIdentitiesEmailIdentity) int { return v.CurrentReputationLevel }).(pulumi.IntOutput)
+}
+
+// Highest number of letters of the day.
+func (o GetEmailIdentitiesEmailIdentityOutput) DailyQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetEmailIdentitiesEmailIdentity) int { return v.DailyQuota }).(pulumi.IntOutput)
+}
+
+// Sending domain name.
+func (o GetEmailIdentitiesEmailIdentityOutput) IdentityName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEmailIdentitiesEmailIdentity) string { return v.IdentityName }).(pulumi.StringOutput)
+}
+
+// Authentication type, fixed as DOMAIN.
+func (o GetEmailIdentitiesEmailIdentityOutput) IdentityType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEmailIdentitiesEmailIdentity) string { return v.IdentityType }).(pulumi.StringOutput)
+}
+
+// Is it verified.
+func (o GetEmailIdentitiesEmailIdentityOutput) SendingEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetEmailIdentitiesEmailIdentity) bool { return v.SendingEnabled }).(pulumi.BoolOutput)
+}
+
+type GetEmailIdentitiesEmailIdentityArrayOutput struct{ *pulumi.OutputState }
+
+func (GetEmailIdentitiesEmailIdentityArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEmailIdentitiesEmailIdentity)(nil)).Elem()
+}
+
+func (o GetEmailIdentitiesEmailIdentityArrayOutput) ToGetEmailIdentitiesEmailIdentityArrayOutput() GetEmailIdentitiesEmailIdentityArrayOutput {
+	return o
+}
+
+func (o GetEmailIdentitiesEmailIdentityArrayOutput) ToGetEmailIdentitiesEmailIdentityArrayOutputWithContext(ctx context.Context) GetEmailIdentitiesEmailIdentityArrayOutput {
+	return o
+}
+
+func (o GetEmailIdentitiesEmailIdentityArrayOutput) Index(i pulumi.IntInput) GetEmailIdentitiesEmailIdentityOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetEmailIdentitiesEmailIdentity {
+		return vs[0].([]GetEmailIdentitiesEmailIdentity)[vs[1].(int)]
+	}).(GetEmailIdentitiesEmailIdentityOutput)
+}
+
+type GetReceiversData struct {
+	// Total number of recipient email addresses.
+	Count int `pulumi:"count"`
+	// Creation time, such as 2021-09-28 16:40:35.
+	CreateTime string `pulumi:"createTime"`
+	// Recipient group descriptionNote: This field may return `null`, indicating that no valid value can be found.
+	Desc string `pulumi:"desc"`
+	// Recipient group ID.
+	ReceiverId int `pulumi:"receiverId"`
+	// Recipient group name.
+	ReceiversName string `pulumi:"receiversName"`
+	// Group status (`1`: to be uploaded; `2` uploading; `3` uploaded)Note: This field may return `null`, indicating that no valid value can be found.
+	ReceiversStatus int `pulumi:"receiversStatus"`
+}
+
+// GetReceiversDataInput is an input type that accepts GetReceiversDataArgs and GetReceiversDataOutput values.
+// You can construct a concrete instance of `GetReceiversDataInput` via:
+//
+//          GetReceiversDataArgs{...}
+type GetReceiversDataInput interface {
+	pulumi.Input
+
+	ToGetReceiversDataOutput() GetReceiversDataOutput
+	ToGetReceiversDataOutputWithContext(context.Context) GetReceiversDataOutput
+}
+
+type GetReceiversDataArgs struct {
+	// Total number of recipient email addresses.
+	Count pulumi.IntInput `pulumi:"count"`
+	// Creation time, such as 2021-09-28 16:40:35.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Recipient group descriptionNote: This field may return `null`, indicating that no valid value can be found.
+	Desc pulumi.StringInput `pulumi:"desc"`
+	// Recipient group ID.
+	ReceiverId pulumi.IntInput `pulumi:"receiverId"`
+	// Recipient group name.
+	ReceiversName pulumi.StringInput `pulumi:"receiversName"`
+	// Group status (`1`: to be uploaded; `2` uploading; `3` uploaded)Note: This field may return `null`, indicating that no valid value can be found.
+	ReceiversStatus pulumi.IntInput `pulumi:"receiversStatus"`
+}
+
+func (GetReceiversDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReceiversData)(nil)).Elem()
+}
+
+func (i GetReceiversDataArgs) ToGetReceiversDataOutput() GetReceiversDataOutput {
+	return i.ToGetReceiversDataOutputWithContext(context.Background())
+}
+
+func (i GetReceiversDataArgs) ToGetReceiversDataOutputWithContext(ctx context.Context) GetReceiversDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReceiversDataOutput)
+}
+
+// GetReceiversDataArrayInput is an input type that accepts GetReceiversDataArray and GetReceiversDataArrayOutput values.
+// You can construct a concrete instance of `GetReceiversDataArrayInput` via:
+//
+//          GetReceiversDataArray{ GetReceiversDataArgs{...} }
+type GetReceiversDataArrayInput interface {
+	pulumi.Input
+
+	ToGetReceiversDataArrayOutput() GetReceiversDataArrayOutput
+	ToGetReceiversDataArrayOutputWithContext(context.Context) GetReceiversDataArrayOutput
+}
+
+type GetReceiversDataArray []GetReceiversDataInput
+
+func (GetReceiversDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReceiversData)(nil)).Elem()
+}
+
+func (i GetReceiversDataArray) ToGetReceiversDataArrayOutput() GetReceiversDataArrayOutput {
+	return i.ToGetReceiversDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetReceiversDataArray) ToGetReceiversDataArrayOutputWithContext(ctx context.Context) GetReceiversDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetReceiversDataArrayOutput)
+}
+
+type GetReceiversDataOutput struct{ *pulumi.OutputState }
+
+func (GetReceiversDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetReceiversData)(nil)).Elem()
+}
+
+func (o GetReceiversDataOutput) ToGetReceiversDataOutput() GetReceiversDataOutput {
+	return o
+}
+
+func (o GetReceiversDataOutput) ToGetReceiversDataOutputWithContext(ctx context.Context) GetReceiversDataOutput {
+	return o
+}
+
+// Total number of recipient email addresses.
+func (o GetReceiversDataOutput) Count() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReceiversData) int { return v.Count }).(pulumi.IntOutput)
+}
+
+// Creation time, such as 2021-09-28 16:40:35.
+func (o GetReceiversDataOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReceiversData) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Recipient group descriptionNote: This field may return `null`, indicating that no valid value can be found.
+func (o GetReceiversDataOutput) Desc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReceiversData) string { return v.Desc }).(pulumi.StringOutput)
+}
+
+// Recipient group ID.
+func (o GetReceiversDataOutput) ReceiverId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReceiversData) int { return v.ReceiverId }).(pulumi.IntOutput)
+}
+
+// Recipient group name.
+func (o GetReceiversDataOutput) ReceiversName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetReceiversData) string { return v.ReceiversName }).(pulumi.StringOutput)
+}
+
+// Group status (`1`: to be uploaded; `2` uploading; `3` uploaded)Note: This field may return `null`, indicating that no valid value can be found.
+func (o GetReceiversDataOutput) ReceiversStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetReceiversData) int { return v.ReceiversStatus }).(pulumi.IntOutput)
+}
+
+type GetReceiversDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetReceiversDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetReceiversData)(nil)).Elem()
+}
+
+func (o GetReceiversDataArrayOutput) ToGetReceiversDataArrayOutput() GetReceiversDataArrayOutput {
+	return o
+}
+
+func (o GetReceiversDataArrayOutput) ToGetReceiversDataArrayOutputWithContext(ctx context.Context) GetReceiversDataArrayOutput {
+	return o
+}
+
+func (o GetReceiversDataArrayOutput) Index(i pulumi.IntInput) GetReceiversDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetReceiversData {
+		return vs[0].([]GetReceiversData)[vs[1].(int)]
+	}).(GetReceiversDataOutput)
+}
+
+type GetSendEmailStatusEmailStatusList struct {
+	// Description of the recipient processing status.
+	DeliverMessage string `pulumi:"deliverMessage"`
+	// Recipient processing status0: Tencent Cloud has accepted the request and added it to the send queue.1: The email is delivered successfully. DeliverTime indicates the time when the email is delivered successfully.2: The email is discarded. DeliverMessage indicates the reason for discarding.3: The recipient&amp;#39;s ESP rejects the email, probably because the email address does not exist or due to other reasons.8: The email is delayed by the ESP. DeliverMessage indicates the reason for delay.
+	DeliverStatus int `pulumi:"deliverStatus"`
+	// Timestamp when Tencent Cloud delivers the email.
+	DeliverTime int `pulumi:"deliverTime"`
+	// Sender email address.
+	FromEmailAddress string `pulumi:"fromEmailAddress"`
+	// The MessageId field returned by the SendMail API.
+	MessageId string `pulumi:"messageId"`
+	// Timestamp when the request arrives at Tencent Cloud.
+	RequestTime int `pulumi:"requestTime"`
+	// Tencent Cloud processing status: `0`: Successful. `1001`: Internal system exception. `1002`: Internal system exception. `1003`: Internal system exception. `1003`: Internal system exception. `1004`: Email sending timed out. `1005`: Internal system exception. `1006`: You have sent too many emails to the same address in a short period. `1007`: The email address is in the blocklist. `1008`: The sender domain is rejected by the recipient. `1009`: Internal system exception. `1010`: The daily email sending limit is exceeded. `1011`: You have no permission to send custom content. Use a template. `1013`: The sender domain is unsubscribed from by the recipient. `2001`: No results were found. `3007`: The template ID is invalid or the template is unavailable. `3008`: The sender domain is temporarily blocked by the recipient domain. `3009`: You have no permission to use this template. `3010`: The format of the TemplateData field is incorrect. `3014`: The email cannot be sent because the sender domain is not verified. `3020`: The recipient email address is in the blocklist. `3024`: Failed to precheck the email address format. `3030`: Email sending is restricted temporarily due to a high bounce rate. `3033`: The account has insufficient balance or overdue payment.
+	SendStatus int `pulumi:"sendStatus"`
+	// Recipient email address.
+	ToEmailAddress string `pulumi:"toEmailAddress"`
+	// Whether the recipient has clicked the links in the email.
+	UserClicked bool `pulumi:"userClicked"`
+	// Whether the recipient has reported the sender.
+	UserComplainted bool `pulumi:"userComplainted"`
+	// Whether the recipient has opened the email.
+	UserOpened bool `pulumi:"userOpened"`
+	// Whether the recipient has unsubscribed from the email sent by the sender.
+	UserUnsubscribed bool `pulumi:"userUnsubscribed"`
+}
+
+// GetSendEmailStatusEmailStatusListInput is an input type that accepts GetSendEmailStatusEmailStatusListArgs and GetSendEmailStatusEmailStatusListOutput values.
+// You can construct a concrete instance of `GetSendEmailStatusEmailStatusListInput` via:
+//
+//          GetSendEmailStatusEmailStatusListArgs{...}
+type GetSendEmailStatusEmailStatusListInput interface {
+	pulumi.Input
+
+	ToGetSendEmailStatusEmailStatusListOutput() GetSendEmailStatusEmailStatusListOutput
+	ToGetSendEmailStatusEmailStatusListOutputWithContext(context.Context) GetSendEmailStatusEmailStatusListOutput
+}
+
+type GetSendEmailStatusEmailStatusListArgs struct {
+	// Description of the recipient processing status.
+	DeliverMessage pulumi.StringInput `pulumi:"deliverMessage"`
+	// Recipient processing status0: Tencent Cloud has accepted the request and added it to the send queue.1: The email is delivered successfully. DeliverTime indicates the time when the email is delivered successfully.2: The email is discarded. DeliverMessage indicates the reason for discarding.3: The recipient&amp;#39;s ESP rejects the email, probably because the email address does not exist or due to other reasons.8: The email is delayed by the ESP. DeliverMessage indicates the reason for delay.
+	DeliverStatus pulumi.IntInput `pulumi:"deliverStatus"`
+	// Timestamp when Tencent Cloud delivers the email.
+	DeliverTime pulumi.IntInput `pulumi:"deliverTime"`
+	// Sender email address.
+	FromEmailAddress pulumi.StringInput `pulumi:"fromEmailAddress"`
+	// The MessageId field returned by the SendMail API.
+	MessageId pulumi.StringInput `pulumi:"messageId"`
+	// Timestamp when the request arrives at Tencent Cloud.
+	RequestTime pulumi.IntInput `pulumi:"requestTime"`
+	// Tencent Cloud processing status: `0`: Successful. `1001`: Internal system exception. `1002`: Internal system exception. `1003`: Internal system exception. `1003`: Internal system exception. `1004`: Email sending timed out. `1005`: Internal system exception. `1006`: You have sent too many emails to the same address in a short period. `1007`: The email address is in the blocklist. `1008`: The sender domain is rejected by the recipient. `1009`: Internal system exception. `1010`: The daily email sending limit is exceeded. `1011`: You have no permission to send custom content. Use a template. `1013`: The sender domain is unsubscribed from by the recipient. `2001`: No results were found. `3007`: The template ID is invalid or the template is unavailable. `3008`: The sender domain is temporarily blocked by the recipient domain. `3009`: You have no permission to use this template. `3010`: The format of the TemplateData field is incorrect. `3014`: The email cannot be sent because the sender domain is not verified. `3020`: The recipient email address is in the blocklist. `3024`: Failed to precheck the email address format. `3030`: Email sending is restricted temporarily due to a high bounce rate. `3033`: The account has insufficient balance or overdue payment.
+	SendStatus pulumi.IntInput `pulumi:"sendStatus"`
+	// Recipient email address.
+	ToEmailAddress pulumi.StringInput `pulumi:"toEmailAddress"`
+	// Whether the recipient has clicked the links in the email.
+	UserClicked pulumi.BoolInput `pulumi:"userClicked"`
+	// Whether the recipient has reported the sender.
+	UserComplainted pulumi.BoolInput `pulumi:"userComplainted"`
+	// Whether the recipient has opened the email.
+	UserOpened pulumi.BoolInput `pulumi:"userOpened"`
+	// Whether the recipient has unsubscribed from the email sent by the sender.
+	UserUnsubscribed pulumi.BoolInput `pulumi:"userUnsubscribed"`
+}
+
+func (GetSendEmailStatusEmailStatusListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSendEmailStatusEmailStatusList)(nil)).Elem()
+}
+
+func (i GetSendEmailStatusEmailStatusListArgs) ToGetSendEmailStatusEmailStatusListOutput() GetSendEmailStatusEmailStatusListOutput {
+	return i.ToGetSendEmailStatusEmailStatusListOutputWithContext(context.Background())
+}
+
+func (i GetSendEmailStatusEmailStatusListArgs) ToGetSendEmailStatusEmailStatusListOutputWithContext(ctx context.Context) GetSendEmailStatusEmailStatusListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSendEmailStatusEmailStatusListOutput)
+}
+
+// GetSendEmailStatusEmailStatusListArrayInput is an input type that accepts GetSendEmailStatusEmailStatusListArray and GetSendEmailStatusEmailStatusListArrayOutput values.
+// You can construct a concrete instance of `GetSendEmailStatusEmailStatusListArrayInput` via:
+//
+//          GetSendEmailStatusEmailStatusListArray{ GetSendEmailStatusEmailStatusListArgs{...} }
+type GetSendEmailStatusEmailStatusListArrayInput interface {
+	pulumi.Input
+
+	ToGetSendEmailStatusEmailStatusListArrayOutput() GetSendEmailStatusEmailStatusListArrayOutput
+	ToGetSendEmailStatusEmailStatusListArrayOutputWithContext(context.Context) GetSendEmailStatusEmailStatusListArrayOutput
+}
+
+type GetSendEmailStatusEmailStatusListArray []GetSendEmailStatusEmailStatusListInput
+
+func (GetSendEmailStatusEmailStatusListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSendEmailStatusEmailStatusList)(nil)).Elem()
+}
+
+func (i GetSendEmailStatusEmailStatusListArray) ToGetSendEmailStatusEmailStatusListArrayOutput() GetSendEmailStatusEmailStatusListArrayOutput {
+	return i.ToGetSendEmailStatusEmailStatusListArrayOutputWithContext(context.Background())
+}
+
+func (i GetSendEmailStatusEmailStatusListArray) ToGetSendEmailStatusEmailStatusListArrayOutputWithContext(ctx context.Context) GetSendEmailStatusEmailStatusListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSendEmailStatusEmailStatusListArrayOutput)
+}
+
+type GetSendEmailStatusEmailStatusListOutput struct{ *pulumi.OutputState }
+
+func (GetSendEmailStatusEmailStatusListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSendEmailStatusEmailStatusList)(nil)).Elem()
+}
+
+func (o GetSendEmailStatusEmailStatusListOutput) ToGetSendEmailStatusEmailStatusListOutput() GetSendEmailStatusEmailStatusListOutput {
+	return o
+}
+
+func (o GetSendEmailStatusEmailStatusListOutput) ToGetSendEmailStatusEmailStatusListOutputWithContext(ctx context.Context) GetSendEmailStatusEmailStatusListOutput {
+	return o
+}
+
+// Description of the recipient processing status.
+func (o GetSendEmailStatusEmailStatusListOutput) DeliverMessage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSendEmailStatusEmailStatusList) string { return v.DeliverMessage }).(pulumi.StringOutput)
+}
+
+// Recipient processing status0: Tencent Cloud has accepted the request and added it to the send queue.1: The email is delivered successfully. DeliverTime indicates the time when the email is delivered successfully.2: The email is discarded. DeliverMessage indicates the reason for discarding.3: The recipient&amp;#39;s ESP rejects the email, probably because the email address does not exist or due to other reasons.8: The email is delayed by the ESP. DeliverMessage indicates the reason for delay.
+func (o GetSendEmailStatusEmailStatusListOutput) DeliverStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSendEmailStatusEmailStatusList) int { return v.DeliverStatus }).(pulumi.IntOutput)
+}
+
+// Timestamp when Tencent Cloud delivers the email.
+func (o GetSendEmailStatusEmailStatusListOutput) DeliverTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSendEmailStatusEmailStatusList) int { return v.DeliverTime }).(pulumi.IntOutput)
+}
+
+// Sender email address.
+func (o GetSendEmailStatusEmailStatusListOutput) FromEmailAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSendEmailStatusEmailStatusList) string { return v.FromEmailAddress }).(pulumi.StringOutput)
+}
+
+// The MessageId field returned by the SendMail API.
+func (o GetSendEmailStatusEmailStatusListOutput) MessageId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSendEmailStatusEmailStatusList) string { return v.MessageId }).(pulumi.StringOutput)
+}
+
+// Timestamp when the request arrives at Tencent Cloud.
+func (o GetSendEmailStatusEmailStatusListOutput) RequestTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSendEmailStatusEmailStatusList) int { return v.RequestTime }).(pulumi.IntOutput)
+}
+
+// Tencent Cloud processing status: `0`: Successful. `1001`: Internal system exception. `1002`: Internal system exception. `1003`: Internal system exception. `1003`: Internal system exception. `1004`: Email sending timed out. `1005`: Internal system exception. `1006`: You have sent too many emails to the same address in a short period. `1007`: The email address is in the blocklist. `1008`: The sender domain is rejected by the recipient. `1009`: Internal system exception. `1010`: The daily email sending limit is exceeded. `1011`: You have no permission to send custom content. Use a template. `1013`: The sender domain is unsubscribed from by the recipient. `2001`: No results were found. `3007`: The template ID is invalid or the template is unavailable. `3008`: The sender domain is temporarily blocked by the recipient domain. `3009`: You have no permission to use this template. `3010`: The format of the TemplateData field is incorrect. `3014`: The email cannot be sent because the sender domain is not verified. `3020`: The recipient email address is in the blocklist. `3024`: Failed to precheck the email address format. `3030`: Email sending is restricted temporarily due to a high bounce rate. `3033`: The account has insufficient balance or overdue payment.
+func (o GetSendEmailStatusEmailStatusListOutput) SendStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSendEmailStatusEmailStatusList) int { return v.SendStatus }).(pulumi.IntOutput)
+}
+
+// Recipient email address.
+func (o GetSendEmailStatusEmailStatusListOutput) ToEmailAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSendEmailStatusEmailStatusList) string { return v.ToEmailAddress }).(pulumi.StringOutput)
+}
+
+// Whether the recipient has clicked the links in the email.
+func (o GetSendEmailStatusEmailStatusListOutput) UserClicked() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSendEmailStatusEmailStatusList) bool { return v.UserClicked }).(pulumi.BoolOutput)
+}
+
+// Whether the recipient has reported the sender.
+func (o GetSendEmailStatusEmailStatusListOutput) UserComplainted() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSendEmailStatusEmailStatusList) bool { return v.UserComplainted }).(pulumi.BoolOutput)
+}
+
+// Whether the recipient has opened the email.
+func (o GetSendEmailStatusEmailStatusListOutput) UserOpened() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSendEmailStatusEmailStatusList) bool { return v.UserOpened }).(pulumi.BoolOutput)
+}
+
+// Whether the recipient has unsubscribed from the email sent by the sender.
+func (o GetSendEmailStatusEmailStatusListOutput) UserUnsubscribed() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSendEmailStatusEmailStatusList) bool { return v.UserUnsubscribed }).(pulumi.BoolOutput)
+}
+
+type GetSendEmailStatusEmailStatusListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSendEmailStatusEmailStatusListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSendEmailStatusEmailStatusList)(nil)).Elem()
+}
+
+func (o GetSendEmailStatusEmailStatusListArrayOutput) ToGetSendEmailStatusEmailStatusListArrayOutput() GetSendEmailStatusEmailStatusListArrayOutput {
+	return o
+}
+
+func (o GetSendEmailStatusEmailStatusListArrayOutput) ToGetSendEmailStatusEmailStatusListArrayOutputWithContext(ctx context.Context) GetSendEmailStatusEmailStatusListArrayOutput {
+	return o
+}
+
+func (o GetSendEmailStatusEmailStatusListArrayOutput) Index(i pulumi.IntInput) GetSendEmailStatusEmailStatusListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSendEmailStatusEmailStatusList {
+		return vs[0].([]GetSendEmailStatusEmailStatusList)[vs[1].(int)]
+	}).(GetSendEmailStatusEmailStatusListOutput)
+}
+
+type GetSendTasksData struct {
+	// Number of emails cached.
+	CacheCount int `pulumi:"cacheCount"`
+	// Task creation time.
+	CreateTime string `pulumi:"createTime"`
+	// Parameters of a recurring taskNote: This field may return `null`, indicating that no valid value can be found.
+	CycleParams []GetSendTasksDataCycleParam `pulumi:"cycleParams"`
+	// Task exception informationNote: This field may return `null`, indicating that no valid value can be found.
+	ErrMsg string `pulumi:"errMsg"`
+	// Sender address.
+	FromEmailAddress string `pulumi:"fromEmailAddress"`
+	// Recipient group ID.
+	ReceiverId int `pulumi:"receiverId"`
+	// Recipient group name.
+	ReceiversName string `pulumi:"receiversName"`
+	// Number of emails requested to be sent.
+	RequestCount int `pulumi:"requestCount"`
+	// Number of emails sent.
+	SendCount int `pulumi:"sendCount"`
+	// Email subject.
+	Subject string `pulumi:"subject"`
+	// Task ID.
+	TaskId int `pulumi:"taskId"`
+	// Task status. `1`: to start; `5`: sending; `6`: sending suspended today; `7`: sending error; `10`: sent.
+	TaskStatus int `pulumi:"taskStatus"`
+	// Task type. `1`: immediate; `2`: scheduled; `3`: recurring. To query tasks of all types, do not pass in this parameter.
+	TaskType int `pulumi:"taskType"`
+	// Template and template dataNote: This field may return `null`, indicating that no valid value can be found.
+	Templates []GetSendTasksDataTemplate `pulumi:"templates"`
+	// Parameters of a scheduled taskNote: This field may return `null`, indicating that no valid value can be found.
+	TimedParams []GetSendTasksDataTimedParam `pulumi:"timedParams"`
+	// Task update time.
+	UpdateTime string `pulumi:"updateTime"`
+}
+
+// GetSendTasksDataInput is an input type that accepts GetSendTasksDataArgs and GetSendTasksDataOutput values.
+// You can construct a concrete instance of `GetSendTasksDataInput` via:
+//
+//          GetSendTasksDataArgs{...}
+type GetSendTasksDataInput interface {
+	pulumi.Input
+
+	ToGetSendTasksDataOutput() GetSendTasksDataOutput
+	ToGetSendTasksDataOutputWithContext(context.Context) GetSendTasksDataOutput
+}
+
+type GetSendTasksDataArgs struct {
+	// Number of emails cached.
+	CacheCount pulumi.IntInput `pulumi:"cacheCount"`
+	// Task creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Parameters of a recurring taskNote: This field may return `null`, indicating that no valid value can be found.
+	CycleParams GetSendTasksDataCycleParamArrayInput `pulumi:"cycleParams"`
+	// Task exception informationNote: This field may return `null`, indicating that no valid value can be found.
+	ErrMsg pulumi.StringInput `pulumi:"errMsg"`
+	// Sender address.
+	FromEmailAddress pulumi.StringInput `pulumi:"fromEmailAddress"`
+	// Recipient group ID.
+	ReceiverId pulumi.IntInput `pulumi:"receiverId"`
+	// Recipient group name.
+	ReceiversName pulumi.StringInput `pulumi:"receiversName"`
+	// Number of emails requested to be sent.
+	RequestCount pulumi.IntInput `pulumi:"requestCount"`
+	// Number of emails sent.
+	SendCount pulumi.IntInput `pulumi:"sendCount"`
+	// Email subject.
+	Subject pulumi.StringInput `pulumi:"subject"`
+	// Task ID.
+	TaskId pulumi.IntInput `pulumi:"taskId"`
+	// Task status. `1`: to start; `5`: sending; `6`: sending suspended today; `7`: sending error; `10`: sent.
+	TaskStatus pulumi.IntInput `pulumi:"taskStatus"`
+	// Task type. `1`: immediate; `2`: scheduled; `3`: recurring. To query tasks of all types, do not pass in this parameter.
+	TaskType pulumi.IntInput `pulumi:"taskType"`
+	// Template and template dataNote: This field may return `null`, indicating that no valid value can be found.
+	Templates GetSendTasksDataTemplateArrayInput `pulumi:"templates"`
+	// Parameters of a scheduled taskNote: This field may return `null`, indicating that no valid value can be found.
+	TimedParams GetSendTasksDataTimedParamArrayInput `pulumi:"timedParams"`
+	// Task update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+}
+
+func (GetSendTasksDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSendTasksData)(nil)).Elem()
+}
+
+func (i GetSendTasksDataArgs) ToGetSendTasksDataOutput() GetSendTasksDataOutput {
+	return i.ToGetSendTasksDataOutputWithContext(context.Background())
+}
+
+func (i GetSendTasksDataArgs) ToGetSendTasksDataOutputWithContext(ctx context.Context) GetSendTasksDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSendTasksDataOutput)
+}
+
+// GetSendTasksDataArrayInput is an input type that accepts GetSendTasksDataArray and GetSendTasksDataArrayOutput values.
+// You can construct a concrete instance of `GetSendTasksDataArrayInput` via:
+//
+//          GetSendTasksDataArray{ GetSendTasksDataArgs{...} }
+type GetSendTasksDataArrayInput interface {
+	pulumi.Input
+
+	ToGetSendTasksDataArrayOutput() GetSendTasksDataArrayOutput
+	ToGetSendTasksDataArrayOutputWithContext(context.Context) GetSendTasksDataArrayOutput
+}
+
+type GetSendTasksDataArray []GetSendTasksDataInput
+
+func (GetSendTasksDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSendTasksData)(nil)).Elem()
+}
+
+func (i GetSendTasksDataArray) ToGetSendTasksDataArrayOutput() GetSendTasksDataArrayOutput {
+	return i.ToGetSendTasksDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetSendTasksDataArray) ToGetSendTasksDataArrayOutputWithContext(ctx context.Context) GetSendTasksDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSendTasksDataArrayOutput)
+}
+
+type GetSendTasksDataOutput struct{ *pulumi.OutputState }
+
+func (GetSendTasksDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSendTasksData)(nil)).Elem()
+}
+
+func (o GetSendTasksDataOutput) ToGetSendTasksDataOutput() GetSendTasksDataOutput {
+	return o
+}
+
+func (o GetSendTasksDataOutput) ToGetSendTasksDataOutputWithContext(ctx context.Context) GetSendTasksDataOutput {
+	return o
+}
+
+// Number of emails cached.
+func (o GetSendTasksDataOutput) CacheCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSendTasksData) int { return v.CacheCount }).(pulumi.IntOutput)
+}
+
+// Task creation time.
+func (o GetSendTasksDataOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSendTasksData) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Parameters of a recurring taskNote: This field may return `null`, indicating that no valid value can be found.
+func (o GetSendTasksDataOutput) CycleParams() GetSendTasksDataCycleParamArrayOutput {
+	return o.ApplyT(func(v GetSendTasksData) []GetSendTasksDataCycleParam { return v.CycleParams }).(GetSendTasksDataCycleParamArrayOutput)
+}
+
+// Task exception informationNote: This field may return `null`, indicating that no valid value can be found.
+func (o GetSendTasksDataOutput) ErrMsg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSendTasksData) string { return v.ErrMsg }).(pulumi.StringOutput)
+}
+
+// Sender address.
+func (o GetSendTasksDataOutput) FromEmailAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSendTasksData) string { return v.FromEmailAddress }).(pulumi.StringOutput)
+}
+
+// Recipient group ID.
+func (o GetSendTasksDataOutput) ReceiverId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSendTasksData) int { return v.ReceiverId }).(pulumi.IntOutput)
+}
+
+// Recipient group name.
+func (o GetSendTasksDataOutput) ReceiversName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSendTasksData) string { return v.ReceiversName }).(pulumi.StringOutput)
+}
+
+// Number of emails requested to be sent.
+func (o GetSendTasksDataOutput) RequestCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSendTasksData) int { return v.RequestCount }).(pulumi.IntOutput)
+}
+
+// Number of emails sent.
+func (o GetSendTasksDataOutput) SendCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSendTasksData) int { return v.SendCount }).(pulumi.IntOutput)
+}
+
+// Email subject.
+func (o GetSendTasksDataOutput) Subject() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSendTasksData) string { return v.Subject }).(pulumi.StringOutput)
+}
+
+// Task ID.
+func (o GetSendTasksDataOutput) TaskId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSendTasksData) int { return v.TaskId }).(pulumi.IntOutput)
+}
+
+// Task status. `1`: to start; `5`: sending; `6`: sending suspended today; `7`: sending error; `10`: sent.
+func (o GetSendTasksDataOutput) TaskStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSendTasksData) int { return v.TaskStatus }).(pulumi.IntOutput)
+}
+
+// Task type. `1`: immediate; `2`: scheduled; `3`: recurring. To query tasks of all types, do not pass in this parameter.
+func (o GetSendTasksDataOutput) TaskType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSendTasksData) int { return v.TaskType }).(pulumi.IntOutput)
+}
+
+// Template and template dataNote: This field may return `null`, indicating that no valid value can be found.
+func (o GetSendTasksDataOutput) Templates() GetSendTasksDataTemplateArrayOutput {
+	return o.ApplyT(func(v GetSendTasksData) []GetSendTasksDataTemplate { return v.Templates }).(GetSendTasksDataTemplateArrayOutput)
+}
+
+// Parameters of a scheduled taskNote: This field may return `null`, indicating that no valid value can be found.
+func (o GetSendTasksDataOutput) TimedParams() GetSendTasksDataTimedParamArrayOutput {
+	return o.ApplyT(func(v GetSendTasksData) []GetSendTasksDataTimedParam { return v.TimedParams }).(GetSendTasksDataTimedParamArrayOutput)
+}
+
+// Task update time.
+func (o GetSendTasksDataOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSendTasksData) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+type GetSendTasksDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSendTasksDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSendTasksData)(nil)).Elem()
+}
+
+func (o GetSendTasksDataArrayOutput) ToGetSendTasksDataArrayOutput() GetSendTasksDataArrayOutput {
+	return o
+}
+
+func (o GetSendTasksDataArrayOutput) ToGetSendTasksDataArrayOutputWithContext(ctx context.Context) GetSendTasksDataArrayOutput {
+	return o
+}
+
+func (o GetSendTasksDataArrayOutput) Index(i pulumi.IntInput) GetSendTasksDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSendTasksData {
+		return vs[0].([]GetSendTasksData)[vs[1].(int)]
+	}).(GetSendTasksDataOutput)
+}
+
+type GetSendTasksDataCycleParam struct {
+	// Start time of a scheduled sending task.
+	BeginTime string `pulumi:"beginTime"`
+	// Task recurrence in hours.
+	IntervalTime int `pulumi:"intervalTime"`
+	// Specifies whether to end the cycle. This parameter is used to update the task. Valid values: 0: No; 1: Yes.
+	TermCycle int `pulumi:"termCycle"`
+}
+
+// GetSendTasksDataCycleParamInput is an input type that accepts GetSendTasksDataCycleParamArgs and GetSendTasksDataCycleParamOutput values.
+// You can construct a concrete instance of `GetSendTasksDataCycleParamInput` via:
+//
+//          GetSendTasksDataCycleParamArgs{...}
+type GetSendTasksDataCycleParamInput interface {
+	pulumi.Input
+
+	ToGetSendTasksDataCycleParamOutput() GetSendTasksDataCycleParamOutput
+	ToGetSendTasksDataCycleParamOutputWithContext(context.Context) GetSendTasksDataCycleParamOutput
+}
+
+type GetSendTasksDataCycleParamArgs struct {
+	// Start time of a scheduled sending task.
+	BeginTime pulumi.StringInput `pulumi:"beginTime"`
+	// Task recurrence in hours.
+	IntervalTime pulumi.IntInput `pulumi:"intervalTime"`
+	// Specifies whether to end the cycle. This parameter is used to update the task. Valid values: 0: No; 1: Yes.
+	TermCycle pulumi.IntInput `pulumi:"termCycle"`
+}
+
+func (GetSendTasksDataCycleParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSendTasksDataCycleParam)(nil)).Elem()
+}
+
+func (i GetSendTasksDataCycleParamArgs) ToGetSendTasksDataCycleParamOutput() GetSendTasksDataCycleParamOutput {
+	return i.ToGetSendTasksDataCycleParamOutputWithContext(context.Background())
+}
+
+func (i GetSendTasksDataCycleParamArgs) ToGetSendTasksDataCycleParamOutputWithContext(ctx context.Context) GetSendTasksDataCycleParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSendTasksDataCycleParamOutput)
+}
+
+// GetSendTasksDataCycleParamArrayInput is an input type that accepts GetSendTasksDataCycleParamArray and GetSendTasksDataCycleParamArrayOutput values.
+// You can construct a concrete instance of `GetSendTasksDataCycleParamArrayInput` via:
+//
+//          GetSendTasksDataCycleParamArray{ GetSendTasksDataCycleParamArgs{...} }
+type GetSendTasksDataCycleParamArrayInput interface {
+	pulumi.Input
+
+	ToGetSendTasksDataCycleParamArrayOutput() GetSendTasksDataCycleParamArrayOutput
+	ToGetSendTasksDataCycleParamArrayOutputWithContext(context.Context) GetSendTasksDataCycleParamArrayOutput
+}
+
+type GetSendTasksDataCycleParamArray []GetSendTasksDataCycleParamInput
+
+func (GetSendTasksDataCycleParamArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSendTasksDataCycleParam)(nil)).Elem()
+}
+
+func (i GetSendTasksDataCycleParamArray) ToGetSendTasksDataCycleParamArrayOutput() GetSendTasksDataCycleParamArrayOutput {
+	return i.ToGetSendTasksDataCycleParamArrayOutputWithContext(context.Background())
+}
+
+func (i GetSendTasksDataCycleParamArray) ToGetSendTasksDataCycleParamArrayOutputWithContext(ctx context.Context) GetSendTasksDataCycleParamArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSendTasksDataCycleParamArrayOutput)
+}
+
+type GetSendTasksDataCycleParamOutput struct{ *pulumi.OutputState }
+
+func (GetSendTasksDataCycleParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSendTasksDataCycleParam)(nil)).Elem()
+}
+
+func (o GetSendTasksDataCycleParamOutput) ToGetSendTasksDataCycleParamOutput() GetSendTasksDataCycleParamOutput {
+	return o
+}
+
+func (o GetSendTasksDataCycleParamOutput) ToGetSendTasksDataCycleParamOutputWithContext(ctx context.Context) GetSendTasksDataCycleParamOutput {
+	return o
+}
+
+// Start time of a scheduled sending task.
+func (o GetSendTasksDataCycleParamOutput) BeginTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSendTasksDataCycleParam) string { return v.BeginTime }).(pulumi.StringOutput)
+}
+
+// Task recurrence in hours.
+func (o GetSendTasksDataCycleParamOutput) IntervalTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSendTasksDataCycleParam) int { return v.IntervalTime }).(pulumi.IntOutput)
+}
+
+// Specifies whether to end the cycle. This parameter is used to update the task. Valid values: 0: No; 1: Yes.
+func (o GetSendTasksDataCycleParamOutput) TermCycle() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSendTasksDataCycleParam) int { return v.TermCycle }).(pulumi.IntOutput)
+}
+
+type GetSendTasksDataCycleParamArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSendTasksDataCycleParamArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSendTasksDataCycleParam)(nil)).Elem()
+}
+
+func (o GetSendTasksDataCycleParamArrayOutput) ToGetSendTasksDataCycleParamArrayOutput() GetSendTasksDataCycleParamArrayOutput {
+	return o
+}
+
+func (o GetSendTasksDataCycleParamArrayOutput) ToGetSendTasksDataCycleParamArrayOutputWithContext(ctx context.Context) GetSendTasksDataCycleParamArrayOutput {
+	return o
+}
+
+func (o GetSendTasksDataCycleParamArrayOutput) Index(i pulumi.IntInput) GetSendTasksDataCycleParamOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSendTasksDataCycleParam {
+		return vs[0].([]GetSendTasksDataCycleParam)[vs[1].(int)]
+	}).(GetSendTasksDataCycleParamOutput)
+}
+
+type GetSendTasksDataTemplate struct {
+	// Variable parameters in the template. Please use `json.dump` to format the JSON object into a string type. The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the corresponding value (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+	TemplateData string `pulumi:"templateData"`
+	// Template ID. If you do not have any template, please create one.
+	TemplateId int `pulumi:"templateId"`
+}
+
+// GetSendTasksDataTemplateInput is an input type that accepts GetSendTasksDataTemplateArgs and GetSendTasksDataTemplateOutput values.
+// You can construct a concrete instance of `GetSendTasksDataTemplateInput` via:
+//
+//          GetSendTasksDataTemplateArgs{...}
+type GetSendTasksDataTemplateInput interface {
+	pulumi.Input
+
+	ToGetSendTasksDataTemplateOutput() GetSendTasksDataTemplateOutput
+	ToGetSendTasksDataTemplateOutputWithContext(context.Context) GetSendTasksDataTemplateOutput
+}
+
+type GetSendTasksDataTemplateArgs struct {
+	// Variable parameters in the template. Please use `json.dump` to format the JSON object into a string type. The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the corresponding value (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+	TemplateData pulumi.StringInput `pulumi:"templateData"`
+	// Template ID. If you do not have any template, please create one.
+	TemplateId pulumi.IntInput `pulumi:"templateId"`
+}
+
+func (GetSendTasksDataTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSendTasksDataTemplate)(nil)).Elem()
+}
+
+func (i GetSendTasksDataTemplateArgs) ToGetSendTasksDataTemplateOutput() GetSendTasksDataTemplateOutput {
+	return i.ToGetSendTasksDataTemplateOutputWithContext(context.Background())
+}
+
+func (i GetSendTasksDataTemplateArgs) ToGetSendTasksDataTemplateOutputWithContext(ctx context.Context) GetSendTasksDataTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSendTasksDataTemplateOutput)
+}
+
+// GetSendTasksDataTemplateArrayInput is an input type that accepts GetSendTasksDataTemplateArray and GetSendTasksDataTemplateArrayOutput values.
+// You can construct a concrete instance of `GetSendTasksDataTemplateArrayInput` via:
+//
+//          GetSendTasksDataTemplateArray{ GetSendTasksDataTemplateArgs{...} }
+type GetSendTasksDataTemplateArrayInput interface {
+	pulumi.Input
+
+	ToGetSendTasksDataTemplateArrayOutput() GetSendTasksDataTemplateArrayOutput
+	ToGetSendTasksDataTemplateArrayOutputWithContext(context.Context) GetSendTasksDataTemplateArrayOutput
+}
+
+type GetSendTasksDataTemplateArray []GetSendTasksDataTemplateInput
+
+func (GetSendTasksDataTemplateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSendTasksDataTemplate)(nil)).Elem()
+}
+
+func (i GetSendTasksDataTemplateArray) ToGetSendTasksDataTemplateArrayOutput() GetSendTasksDataTemplateArrayOutput {
+	return i.ToGetSendTasksDataTemplateArrayOutputWithContext(context.Background())
+}
+
+func (i GetSendTasksDataTemplateArray) ToGetSendTasksDataTemplateArrayOutputWithContext(ctx context.Context) GetSendTasksDataTemplateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSendTasksDataTemplateArrayOutput)
+}
+
+type GetSendTasksDataTemplateOutput struct{ *pulumi.OutputState }
+
+func (GetSendTasksDataTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSendTasksDataTemplate)(nil)).Elem()
+}
+
+func (o GetSendTasksDataTemplateOutput) ToGetSendTasksDataTemplateOutput() GetSendTasksDataTemplateOutput {
+	return o
+}
+
+func (o GetSendTasksDataTemplateOutput) ToGetSendTasksDataTemplateOutputWithContext(ctx context.Context) GetSendTasksDataTemplateOutput {
+	return o
+}
+
+// Variable parameters in the template. Please use `json.dump` to format the JSON object into a string type. The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the corresponding value (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+func (o GetSendTasksDataTemplateOutput) TemplateData() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSendTasksDataTemplate) string { return v.TemplateData }).(pulumi.StringOutput)
+}
+
+// Template ID. If you do not have any template, please create one.
+func (o GetSendTasksDataTemplateOutput) TemplateId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSendTasksDataTemplate) int { return v.TemplateId }).(pulumi.IntOutput)
+}
+
+type GetSendTasksDataTemplateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSendTasksDataTemplateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSendTasksDataTemplate)(nil)).Elem()
+}
+
+func (o GetSendTasksDataTemplateArrayOutput) ToGetSendTasksDataTemplateArrayOutput() GetSendTasksDataTemplateArrayOutput {
+	return o
+}
+
+func (o GetSendTasksDataTemplateArrayOutput) ToGetSendTasksDataTemplateArrayOutputWithContext(ctx context.Context) GetSendTasksDataTemplateArrayOutput {
+	return o
+}
+
+func (o GetSendTasksDataTemplateArrayOutput) Index(i pulumi.IntInput) GetSendTasksDataTemplateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSendTasksDataTemplate {
+		return vs[0].([]GetSendTasksDataTemplate)[vs[1].(int)]
+	}).(GetSendTasksDataTemplateOutput)
+}
+
+type GetSendTasksDataTimedParam struct {
+	// Start time of a scheduled sending task.
+	BeginTime string `pulumi:"beginTime"`
+}
+
+// GetSendTasksDataTimedParamInput is an input type that accepts GetSendTasksDataTimedParamArgs and GetSendTasksDataTimedParamOutput values.
+// You can construct a concrete instance of `GetSendTasksDataTimedParamInput` via:
+//
+//          GetSendTasksDataTimedParamArgs{...}
+type GetSendTasksDataTimedParamInput interface {
+	pulumi.Input
+
+	ToGetSendTasksDataTimedParamOutput() GetSendTasksDataTimedParamOutput
+	ToGetSendTasksDataTimedParamOutputWithContext(context.Context) GetSendTasksDataTimedParamOutput
+}
+
+type GetSendTasksDataTimedParamArgs struct {
+	// Start time of a scheduled sending task.
+	BeginTime pulumi.StringInput `pulumi:"beginTime"`
+}
+
+func (GetSendTasksDataTimedParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSendTasksDataTimedParam)(nil)).Elem()
+}
+
+func (i GetSendTasksDataTimedParamArgs) ToGetSendTasksDataTimedParamOutput() GetSendTasksDataTimedParamOutput {
+	return i.ToGetSendTasksDataTimedParamOutputWithContext(context.Background())
+}
+
+func (i GetSendTasksDataTimedParamArgs) ToGetSendTasksDataTimedParamOutputWithContext(ctx context.Context) GetSendTasksDataTimedParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSendTasksDataTimedParamOutput)
+}
+
+// GetSendTasksDataTimedParamArrayInput is an input type that accepts GetSendTasksDataTimedParamArray and GetSendTasksDataTimedParamArrayOutput values.
+// You can construct a concrete instance of `GetSendTasksDataTimedParamArrayInput` via:
+//
+//          GetSendTasksDataTimedParamArray{ GetSendTasksDataTimedParamArgs{...} }
+type GetSendTasksDataTimedParamArrayInput interface {
+	pulumi.Input
+
+	ToGetSendTasksDataTimedParamArrayOutput() GetSendTasksDataTimedParamArrayOutput
+	ToGetSendTasksDataTimedParamArrayOutputWithContext(context.Context) GetSendTasksDataTimedParamArrayOutput
+}
+
+type GetSendTasksDataTimedParamArray []GetSendTasksDataTimedParamInput
+
+func (GetSendTasksDataTimedParamArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSendTasksDataTimedParam)(nil)).Elem()
+}
+
+func (i GetSendTasksDataTimedParamArray) ToGetSendTasksDataTimedParamArrayOutput() GetSendTasksDataTimedParamArrayOutput {
+	return i.ToGetSendTasksDataTimedParamArrayOutputWithContext(context.Background())
+}
+
+func (i GetSendTasksDataTimedParamArray) ToGetSendTasksDataTimedParamArrayOutputWithContext(ctx context.Context) GetSendTasksDataTimedParamArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSendTasksDataTimedParamArrayOutput)
+}
+
+type GetSendTasksDataTimedParamOutput struct{ *pulumi.OutputState }
+
+func (GetSendTasksDataTimedParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSendTasksDataTimedParam)(nil)).Elem()
+}
+
+func (o GetSendTasksDataTimedParamOutput) ToGetSendTasksDataTimedParamOutput() GetSendTasksDataTimedParamOutput {
+	return o
+}
+
+func (o GetSendTasksDataTimedParamOutput) ToGetSendTasksDataTimedParamOutputWithContext(ctx context.Context) GetSendTasksDataTimedParamOutput {
+	return o
+}
+
+// Start time of a scheduled sending task.
+func (o GetSendTasksDataTimedParamOutput) BeginTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSendTasksDataTimedParam) string { return v.BeginTime }).(pulumi.StringOutput)
+}
+
+type GetSendTasksDataTimedParamArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSendTasksDataTimedParamArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSendTasksDataTimedParam)(nil)).Elem()
+}
+
+func (o GetSendTasksDataTimedParamArrayOutput) ToGetSendTasksDataTimedParamArrayOutput() GetSendTasksDataTimedParamArrayOutput {
+	return o
+}
+
+func (o GetSendTasksDataTimedParamArrayOutput) ToGetSendTasksDataTimedParamArrayOutputWithContext(ctx context.Context) GetSendTasksDataTimedParamArrayOutput {
+	return o
+}
+
+func (o GetSendTasksDataTimedParamArrayOutput) Index(i pulumi.IntInput) GetSendTasksDataTimedParamOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSendTasksDataTimedParam {
+		return vs[0].([]GetSendTasksDataTimedParam)[vs[1].(int)]
+	}).(GetSendTasksDataTimedParamOutput)
+}
+
+type GetStatisticsReportDailyVolume struct {
+	// Number of email requests accepted by Tencent Cloud.
+	AcceptedCount int `pulumi:"acceptedCount"`
+	// Number of bounced emails.
+	BounceCount int `pulumi:"bounceCount"`
+	// Number of recipients who clicked on links in emails.
+	ClickedCount int `pulumi:"clickedCount"`
+	// Number of delivered emails.
+	DeliveredCount int `pulumi:"deliveredCount"`
+	// Number of users (deduplicated) who opened emails.
+	OpenedCount int `pulumi:"openedCount"`
+	// Number of email requests.
+	RequestCount int `pulumi:"requestCount"`
+	// Date Note: this field may return null, indicating that no valid values can be obtained.
+	SendDate string `pulumi:"sendDate"`
+	// Number of users who canceled subscriptions. Note: this field may return null, indicating that no valid values can be obtained.
+	UnsubscribeCount int `pulumi:"unsubscribeCount"`
+}
+
+// GetStatisticsReportDailyVolumeInput is an input type that accepts GetStatisticsReportDailyVolumeArgs and GetStatisticsReportDailyVolumeOutput values.
+// You can construct a concrete instance of `GetStatisticsReportDailyVolumeInput` via:
+//
+//          GetStatisticsReportDailyVolumeArgs{...}
+type GetStatisticsReportDailyVolumeInput interface {
+	pulumi.Input
+
+	ToGetStatisticsReportDailyVolumeOutput() GetStatisticsReportDailyVolumeOutput
+	ToGetStatisticsReportDailyVolumeOutputWithContext(context.Context) GetStatisticsReportDailyVolumeOutput
+}
+
+type GetStatisticsReportDailyVolumeArgs struct {
+	// Number of email requests accepted by Tencent Cloud.
+	AcceptedCount pulumi.IntInput `pulumi:"acceptedCount"`
+	// Number of bounced emails.
+	BounceCount pulumi.IntInput `pulumi:"bounceCount"`
+	// Number of recipients who clicked on links in emails.
+	ClickedCount pulumi.IntInput `pulumi:"clickedCount"`
+	// Number of delivered emails.
+	DeliveredCount pulumi.IntInput `pulumi:"deliveredCount"`
+	// Number of users (deduplicated) who opened emails.
+	OpenedCount pulumi.IntInput `pulumi:"openedCount"`
+	// Number of email requests.
+	RequestCount pulumi.IntInput `pulumi:"requestCount"`
+	// Date Note: this field may return null, indicating that no valid values can be obtained.
+	SendDate pulumi.StringInput `pulumi:"sendDate"`
+	// Number of users who canceled subscriptions. Note: this field may return null, indicating that no valid values can be obtained.
+	UnsubscribeCount pulumi.IntInput `pulumi:"unsubscribeCount"`
+}
+
+func (GetStatisticsReportDailyVolumeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetStatisticsReportDailyVolume)(nil)).Elem()
+}
+
+func (i GetStatisticsReportDailyVolumeArgs) ToGetStatisticsReportDailyVolumeOutput() GetStatisticsReportDailyVolumeOutput {
+	return i.ToGetStatisticsReportDailyVolumeOutputWithContext(context.Background())
+}
+
+func (i GetStatisticsReportDailyVolumeArgs) ToGetStatisticsReportDailyVolumeOutputWithContext(ctx context.Context) GetStatisticsReportDailyVolumeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetStatisticsReportDailyVolumeOutput)
+}
+
+// GetStatisticsReportDailyVolumeArrayInput is an input type that accepts GetStatisticsReportDailyVolumeArray and GetStatisticsReportDailyVolumeArrayOutput values.
+// You can construct a concrete instance of `GetStatisticsReportDailyVolumeArrayInput` via:
+//
+//          GetStatisticsReportDailyVolumeArray{ GetStatisticsReportDailyVolumeArgs{...} }
+type GetStatisticsReportDailyVolumeArrayInput interface {
+	pulumi.Input
+
+	ToGetStatisticsReportDailyVolumeArrayOutput() GetStatisticsReportDailyVolumeArrayOutput
+	ToGetStatisticsReportDailyVolumeArrayOutputWithContext(context.Context) GetStatisticsReportDailyVolumeArrayOutput
+}
+
+type GetStatisticsReportDailyVolumeArray []GetStatisticsReportDailyVolumeInput
+
+func (GetStatisticsReportDailyVolumeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetStatisticsReportDailyVolume)(nil)).Elem()
+}
+
+func (i GetStatisticsReportDailyVolumeArray) ToGetStatisticsReportDailyVolumeArrayOutput() GetStatisticsReportDailyVolumeArrayOutput {
+	return i.ToGetStatisticsReportDailyVolumeArrayOutputWithContext(context.Background())
+}
+
+func (i GetStatisticsReportDailyVolumeArray) ToGetStatisticsReportDailyVolumeArrayOutputWithContext(ctx context.Context) GetStatisticsReportDailyVolumeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetStatisticsReportDailyVolumeArrayOutput)
+}
+
+type GetStatisticsReportDailyVolumeOutput struct{ *pulumi.OutputState }
+
+func (GetStatisticsReportDailyVolumeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetStatisticsReportDailyVolume)(nil)).Elem()
+}
+
+func (o GetStatisticsReportDailyVolumeOutput) ToGetStatisticsReportDailyVolumeOutput() GetStatisticsReportDailyVolumeOutput {
+	return o
+}
+
+func (o GetStatisticsReportDailyVolumeOutput) ToGetStatisticsReportDailyVolumeOutputWithContext(ctx context.Context) GetStatisticsReportDailyVolumeOutput {
+	return o
+}
+
+// Number of email requests accepted by Tencent Cloud.
+func (o GetStatisticsReportDailyVolumeOutput) AcceptedCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStatisticsReportDailyVolume) int { return v.AcceptedCount }).(pulumi.IntOutput)
+}
+
+// Number of bounced emails.
+func (o GetStatisticsReportDailyVolumeOutput) BounceCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStatisticsReportDailyVolume) int { return v.BounceCount }).(pulumi.IntOutput)
+}
+
+// Number of recipients who clicked on links in emails.
+func (o GetStatisticsReportDailyVolumeOutput) ClickedCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStatisticsReportDailyVolume) int { return v.ClickedCount }).(pulumi.IntOutput)
+}
+
+// Number of delivered emails.
+func (o GetStatisticsReportDailyVolumeOutput) DeliveredCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStatisticsReportDailyVolume) int { return v.DeliveredCount }).(pulumi.IntOutput)
+}
+
+// Number of users (deduplicated) who opened emails.
+func (o GetStatisticsReportDailyVolumeOutput) OpenedCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStatisticsReportDailyVolume) int { return v.OpenedCount }).(pulumi.IntOutput)
+}
+
+// Number of email requests.
+func (o GetStatisticsReportDailyVolumeOutput) RequestCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStatisticsReportDailyVolume) int { return v.RequestCount }).(pulumi.IntOutput)
+}
+
+// Date Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetStatisticsReportDailyVolumeOutput) SendDate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetStatisticsReportDailyVolume) string { return v.SendDate }).(pulumi.StringOutput)
+}
+
+// Number of users who canceled subscriptions. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetStatisticsReportDailyVolumeOutput) UnsubscribeCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStatisticsReportDailyVolume) int { return v.UnsubscribeCount }).(pulumi.IntOutput)
+}
+
+type GetStatisticsReportDailyVolumeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetStatisticsReportDailyVolumeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetStatisticsReportDailyVolume)(nil)).Elem()
+}
+
+func (o GetStatisticsReportDailyVolumeArrayOutput) ToGetStatisticsReportDailyVolumeArrayOutput() GetStatisticsReportDailyVolumeArrayOutput {
+	return o
+}
+
+func (o GetStatisticsReportDailyVolumeArrayOutput) ToGetStatisticsReportDailyVolumeArrayOutputWithContext(ctx context.Context) GetStatisticsReportDailyVolumeArrayOutput {
+	return o
+}
+
+func (o GetStatisticsReportDailyVolumeArrayOutput) Index(i pulumi.IntInput) GetStatisticsReportDailyVolumeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetStatisticsReportDailyVolume {
+		return vs[0].([]GetStatisticsReportDailyVolume)[vs[1].(int)]
+	}).(GetStatisticsReportDailyVolumeOutput)
+}
+
+type GetStatisticsReportOverallVolume struct {
+	// Number of email requests accepted by Tencent Cloud.
+	AcceptedCount int `pulumi:"acceptedCount"`
+	// Number of bounced emails.
+	BounceCount int `pulumi:"bounceCount"`
+	// Number of recipients who clicked on links in emails.
+	ClickedCount int `pulumi:"clickedCount"`
+	// Number of delivered emails.
+	DeliveredCount int `pulumi:"deliveredCount"`
+	// Number of users (deduplicated) who opened emails.
+	OpenedCount int `pulumi:"openedCount"`
+	// Number of email requests.
+	RequestCount int `pulumi:"requestCount"`
+	// Date Note: this field may return null, indicating that no valid values can be obtained.
+	SendDate string `pulumi:"sendDate"`
+	// Number of users who canceled subscriptions. Note: this field may return null, indicating that no valid values can be obtained.
+	UnsubscribeCount int `pulumi:"unsubscribeCount"`
+}
+
+// GetStatisticsReportOverallVolumeInput is an input type that accepts GetStatisticsReportOverallVolumeArgs and GetStatisticsReportOverallVolumeOutput values.
+// You can construct a concrete instance of `GetStatisticsReportOverallVolumeInput` via:
+//
+//          GetStatisticsReportOverallVolumeArgs{...}
+type GetStatisticsReportOverallVolumeInput interface {
+	pulumi.Input
+
+	ToGetStatisticsReportOverallVolumeOutput() GetStatisticsReportOverallVolumeOutput
+	ToGetStatisticsReportOverallVolumeOutputWithContext(context.Context) GetStatisticsReportOverallVolumeOutput
+}
+
+type GetStatisticsReportOverallVolumeArgs struct {
+	// Number of email requests accepted by Tencent Cloud.
+	AcceptedCount pulumi.IntInput `pulumi:"acceptedCount"`
+	// Number of bounced emails.
+	BounceCount pulumi.IntInput `pulumi:"bounceCount"`
+	// Number of recipients who clicked on links in emails.
+	ClickedCount pulumi.IntInput `pulumi:"clickedCount"`
+	// Number of delivered emails.
+	DeliveredCount pulumi.IntInput `pulumi:"deliveredCount"`
+	// Number of users (deduplicated) who opened emails.
+	OpenedCount pulumi.IntInput `pulumi:"openedCount"`
+	// Number of email requests.
+	RequestCount pulumi.IntInput `pulumi:"requestCount"`
+	// Date Note: this field may return null, indicating that no valid values can be obtained.
+	SendDate pulumi.StringInput `pulumi:"sendDate"`
+	// Number of users who canceled subscriptions. Note: this field may return null, indicating that no valid values can be obtained.
+	UnsubscribeCount pulumi.IntInput `pulumi:"unsubscribeCount"`
+}
+
+func (GetStatisticsReportOverallVolumeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetStatisticsReportOverallVolume)(nil)).Elem()
+}
+
+func (i GetStatisticsReportOverallVolumeArgs) ToGetStatisticsReportOverallVolumeOutput() GetStatisticsReportOverallVolumeOutput {
+	return i.ToGetStatisticsReportOverallVolumeOutputWithContext(context.Background())
+}
+
+func (i GetStatisticsReportOverallVolumeArgs) ToGetStatisticsReportOverallVolumeOutputWithContext(ctx context.Context) GetStatisticsReportOverallVolumeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetStatisticsReportOverallVolumeOutput)
+}
+
+// GetStatisticsReportOverallVolumeArrayInput is an input type that accepts GetStatisticsReportOverallVolumeArray and GetStatisticsReportOverallVolumeArrayOutput values.
+// You can construct a concrete instance of `GetStatisticsReportOverallVolumeArrayInput` via:
+//
+//          GetStatisticsReportOverallVolumeArray{ GetStatisticsReportOverallVolumeArgs{...} }
+type GetStatisticsReportOverallVolumeArrayInput interface {
+	pulumi.Input
+
+	ToGetStatisticsReportOverallVolumeArrayOutput() GetStatisticsReportOverallVolumeArrayOutput
+	ToGetStatisticsReportOverallVolumeArrayOutputWithContext(context.Context) GetStatisticsReportOverallVolumeArrayOutput
+}
+
+type GetStatisticsReportOverallVolumeArray []GetStatisticsReportOverallVolumeInput
+
+func (GetStatisticsReportOverallVolumeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetStatisticsReportOverallVolume)(nil)).Elem()
+}
+
+func (i GetStatisticsReportOverallVolumeArray) ToGetStatisticsReportOverallVolumeArrayOutput() GetStatisticsReportOverallVolumeArrayOutput {
+	return i.ToGetStatisticsReportOverallVolumeArrayOutputWithContext(context.Background())
+}
+
+func (i GetStatisticsReportOverallVolumeArray) ToGetStatisticsReportOverallVolumeArrayOutputWithContext(ctx context.Context) GetStatisticsReportOverallVolumeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetStatisticsReportOverallVolumeArrayOutput)
+}
+
+type GetStatisticsReportOverallVolumeOutput struct{ *pulumi.OutputState }
+
+func (GetStatisticsReportOverallVolumeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetStatisticsReportOverallVolume)(nil)).Elem()
+}
+
+func (o GetStatisticsReportOverallVolumeOutput) ToGetStatisticsReportOverallVolumeOutput() GetStatisticsReportOverallVolumeOutput {
+	return o
+}
+
+func (o GetStatisticsReportOverallVolumeOutput) ToGetStatisticsReportOverallVolumeOutputWithContext(ctx context.Context) GetStatisticsReportOverallVolumeOutput {
+	return o
+}
+
+// Number of email requests accepted by Tencent Cloud.
+func (o GetStatisticsReportOverallVolumeOutput) AcceptedCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStatisticsReportOverallVolume) int { return v.AcceptedCount }).(pulumi.IntOutput)
+}
+
+// Number of bounced emails.
+func (o GetStatisticsReportOverallVolumeOutput) BounceCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStatisticsReportOverallVolume) int { return v.BounceCount }).(pulumi.IntOutput)
+}
+
+// Number of recipients who clicked on links in emails.
+func (o GetStatisticsReportOverallVolumeOutput) ClickedCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStatisticsReportOverallVolume) int { return v.ClickedCount }).(pulumi.IntOutput)
+}
+
+// Number of delivered emails.
+func (o GetStatisticsReportOverallVolumeOutput) DeliveredCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStatisticsReportOverallVolume) int { return v.DeliveredCount }).(pulumi.IntOutput)
+}
+
+// Number of users (deduplicated) who opened emails.
+func (o GetStatisticsReportOverallVolumeOutput) OpenedCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStatisticsReportOverallVolume) int { return v.OpenedCount }).(pulumi.IntOutput)
+}
+
+// Number of email requests.
+func (o GetStatisticsReportOverallVolumeOutput) RequestCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStatisticsReportOverallVolume) int { return v.RequestCount }).(pulumi.IntOutput)
+}
+
+// Date Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetStatisticsReportOverallVolumeOutput) SendDate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetStatisticsReportOverallVolume) string { return v.SendDate }).(pulumi.StringOutput)
+}
+
+// Number of users who canceled subscriptions. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetStatisticsReportOverallVolumeOutput) UnsubscribeCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetStatisticsReportOverallVolume) int { return v.UnsubscribeCount }).(pulumi.IntOutput)
+}
+
+type GetStatisticsReportOverallVolumeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetStatisticsReportOverallVolumeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetStatisticsReportOverallVolume)(nil)).Elem()
+}
+
+func (o GetStatisticsReportOverallVolumeArrayOutput) ToGetStatisticsReportOverallVolumeArrayOutput() GetStatisticsReportOverallVolumeArrayOutput {
+	return o
+}
+
+func (o GetStatisticsReportOverallVolumeArrayOutput) ToGetStatisticsReportOverallVolumeArrayOutputWithContext(ctx context.Context) GetStatisticsReportOverallVolumeArrayOutput {
+	return o
+}
+
+func (o GetStatisticsReportOverallVolumeArrayOutput) Index(i pulumi.IntInput) GetStatisticsReportOverallVolumeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetStatisticsReportOverallVolume {
+		return vs[0].([]GetStatisticsReportOverallVolume)[vs[1].(int)]
+	}).(GetStatisticsReportOverallVolumeOutput)
+}
+
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchSendEmailAttachmentInput)(nil)).Elem(), BatchSendEmailAttachmentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchSendEmailAttachmentArrayInput)(nil)).Elem(), BatchSendEmailAttachmentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchSendEmailCycleParamInput)(nil)).Elem(), BatchSendEmailCycleParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchSendEmailCycleParamPtrInput)(nil)).Elem(), BatchSendEmailCycleParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchSendEmailTemplateInput)(nil)).Elem(), BatchSendEmailTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchSendEmailTemplatePtrInput)(nil)).Elem(), BatchSendEmailTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchSendEmailTimedParamInput)(nil)).Elem(), BatchSendEmailTimedParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchSendEmailTimedParamPtrInput)(nil)).Elem(), BatchSendEmailTimedParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAttributeInput)(nil)).Elem(), DomainAttributeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAttributeArrayInput)(nil)).Elem(), DomainAttributeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ReceiverDataInput)(nil)).Elem(), ReceiverDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ReceiverDataArrayInput)(nil)).Elem(), ReceiverDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SendEmailAttachmentInput)(nil)).Elem(), SendEmailAttachmentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SendEmailAttachmentArrayInput)(nil)).Elem(), SendEmailAttachmentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SendEmailTemplateInput)(nil)).Elem(), SendEmailTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SendEmailTemplatePtrInput)(nil)).Elem(), SendEmailTemplateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TemplateTemplateContentInput)(nil)).Elem(), TemplateTemplateContentArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TemplateTemplateContentPtrInput)(nil)).Elem(), TemplateTemplateContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBlackEmailAddressBlackListInput)(nil)).Elem(), GetBlackEmailAddressBlackListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBlackEmailAddressBlackListArrayInput)(nil)).Elem(), GetBlackEmailAddressBlackListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEmailIdentitiesEmailIdentityInput)(nil)).Elem(), GetEmailIdentitiesEmailIdentityArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEmailIdentitiesEmailIdentityArrayInput)(nil)).Elem(), GetEmailIdentitiesEmailIdentityArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReceiversDataInput)(nil)).Elem(), GetReceiversDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetReceiversDataArrayInput)(nil)).Elem(), GetReceiversDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSendEmailStatusEmailStatusListInput)(nil)).Elem(), GetSendEmailStatusEmailStatusListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSendEmailStatusEmailStatusListArrayInput)(nil)).Elem(), GetSendEmailStatusEmailStatusListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSendTasksDataInput)(nil)).Elem(), GetSendTasksDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSendTasksDataArrayInput)(nil)).Elem(), GetSendTasksDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSendTasksDataCycleParamInput)(nil)).Elem(), GetSendTasksDataCycleParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSendTasksDataCycleParamArrayInput)(nil)).Elem(), GetSendTasksDataCycleParamArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSendTasksDataTemplateInput)(nil)).Elem(), GetSendTasksDataTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSendTasksDataTemplateArrayInput)(nil)).Elem(), GetSendTasksDataTemplateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSendTasksDataTimedParamInput)(nil)).Elem(), GetSendTasksDataTimedParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSendTasksDataTimedParamArrayInput)(nil)).Elem(), GetSendTasksDataTimedParamArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetStatisticsReportDailyVolumeInput)(nil)).Elem(), GetStatisticsReportDailyVolumeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetStatisticsReportDailyVolumeArrayInput)(nil)).Elem(), GetStatisticsReportDailyVolumeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetStatisticsReportOverallVolumeInput)(nil)).Elem(), GetStatisticsReportOverallVolumeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetStatisticsReportOverallVolumeArrayInput)(nil)).Elem(), GetStatisticsReportOverallVolumeArray{})
+	pulumi.RegisterOutputType(BatchSendEmailAttachmentOutput{})
+	pulumi.RegisterOutputType(BatchSendEmailAttachmentArrayOutput{})
+	pulumi.RegisterOutputType(BatchSendEmailCycleParamOutput{})
+	pulumi.RegisterOutputType(BatchSendEmailCycleParamPtrOutput{})
+	pulumi.RegisterOutputType(BatchSendEmailTemplateOutput{})
+	pulumi.RegisterOutputType(BatchSendEmailTemplatePtrOutput{})
+	pulumi.RegisterOutputType(BatchSendEmailTimedParamOutput{})
+	pulumi.RegisterOutputType(BatchSendEmailTimedParamPtrOutput{})
+	pulumi.RegisterOutputType(DomainAttributeOutput{})
+	pulumi.RegisterOutputType(DomainAttributeArrayOutput{})
+	pulumi.RegisterOutputType(ReceiverDataOutput{})
+	pulumi.RegisterOutputType(ReceiverDataArrayOutput{})
+	pulumi.RegisterOutputType(SendEmailAttachmentOutput{})
+	pulumi.RegisterOutputType(SendEmailAttachmentArrayOutput{})
+	pulumi.RegisterOutputType(SendEmailTemplateOutput{})
+	pulumi.RegisterOutputType(SendEmailTemplatePtrOutput{})
 	pulumi.RegisterOutputType(TemplateTemplateContentOutput{})
 	pulumi.RegisterOutputType(TemplateTemplateContentPtrOutput{})
+	pulumi.RegisterOutputType(GetBlackEmailAddressBlackListOutput{})
+	pulumi.RegisterOutputType(GetBlackEmailAddressBlackListArrayOutput{})
+	pulumi.RegisterOutputType(GetEmailIdentitiesEmailIdentityOutput{})
+	pulumi.RegisterOutputType(GetEmailIdentitiesEmailIdentityArrayOutput{})
+	pulumi.RegisterOutputType(GetReceiversDataOutput{})
+	pulumi.RegisterOutputType(GetReceiversDataArrayOutput{})
+	pulumi.RegisterOutputType(GetSendEmailStatusEmailStatusListOutput{})
+	pulumi.RegisterOutputType(GetSendEmailStatusEmailStatusListArrayOutput{})
+	pulumi.RegisterOutputType(GetSendTasksDataOutput{})
+	pulumi.RegisterOutputType(GetSendTasksDataArrayOutput{})
+	pulumi.RegisterOutputType(GetSendTasksDataCycleParamOutput{})
+	pulumi.RegisterOutputType(GetSendTasksDataCycleParamArrayOutput{})
+	pulumi.RegisterOutputType(GetSendTasksDataTemplateOutput{})
+	pulumi.RegisterOutputType(GetSendTasksDataTemplateArrayOutput{})
+	pulumi.RegisterOutputType(GetSendTasksDataTimedParamOutput{})
+	pulumi.RegisterOutputType(GetSendTasksDataTimedParamArrayOutput{})
+	pulumi.RegisterOutputType(GetStatisticsReportDailyVolumeOutput{})
+	pulumi.RegisterOutputType(GetStatisticsReportDailyVolumeArrayOutput{})
+	pulumi.RegisterOutputType(GetStatisticsReportOverallVolumeOutput{})
+	pulumi.RegisterOutputType(GetStatisticsReportOverallVolumeArrayOutput{})
 }

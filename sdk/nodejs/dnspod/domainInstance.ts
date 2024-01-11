@@ -76,6 +76,10 @@ export class DomainInstance extends pulumi.CustomResource {
      */
     public readonly remark!: pulumi.Output<string | undefined>;
     /**
+     * Is secondary DNS enabled.
+     */
+    public /*out*/ readonly slaveDns!: pulumi.Output<string>;
+    /**
      * The status of Domain.
      */
     public readonly status!: pulumi.Output<string | undefined>;
@@ -98,6 +102,7 @@ export class DomainInstance extends pulumi.CustomResource {
             resourceInputs["groupId"] = state ? state.groupId : undefined;
             resourceInputs["isMark"] = state ? state.isMark : undefined;
             resourceInputs["remark"] = state ? state.remark : undefined;
+            resourceInputs["slaveDns"] = state ? state.slaveDns : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
         } else {
             const args = argsOrState as DomainInstanceArgs | undefined;
@@ -110,6 +115,7 @@ export class DomainInstance extends pulumi.CustomResource {
             resourceInputs["remark"] = args ? args.remark : undefined;
             resourceInputs["status"] = args ? args.status : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
+            resourceInputs["slaveDns"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(DomainInstance.__pulumiType, name, resourceInputs, opts);
@@ -140,6 +146,10 @@ export interface DomainInstanceState {
      * The remark of Domain.
      */
     remark?: pulumi.Input<string>;
+    /**
+     * Is secondary DNS enabled.
+     */
+    slaveDns?: pulumi.Input<string>;
     /**
      * The status of Domain.
      */

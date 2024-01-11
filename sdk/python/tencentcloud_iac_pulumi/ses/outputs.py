@@ -7,10 +7,423 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
 
 __all__ = [
+    'BatchSendEmailAttachment',
+    'BatchSendEmailCycleParam',
+    'BatchSendEmailTemplate',
+    'BatchSendEmailTimedParam',
+    'DomainAttribute',
+    'ReceiverData',
+    'SendEmailAttachment',
+    'SendEmailTemplate',
     'TemplateTemplateContent',
+    'GetBlackEmailAddressBlackListResult',
+    'GetEmailIdentitiesEmailIdentityResult',
+    'GetReceiversDataResult',
+    'GetSendEmailStatusEmailStatusListResult',
+    'GetSendTasksDataResult',
+    'GetSendTasksDataCycleParamResult',
+    'GetSendTasksDataTemplateResult',
+    'GetSendTasksDataTimedParamResult',
+    'GetStatisticsReportDailyVolumeResult',
+    'GetStatisticsReportOverallVolumeResult',
 ]
+
+@pulumi.output_type
+class BatchSendEmailAttachment(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "fileName":
+            suggest = "file_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BatchSendEmailAttachment. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BatchSendEmailAttachment.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BatchSendEmailAttachment.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 content: str,
+                 file_name: str):
+        """
+        :param str content: Base64-encoded attachment content. You can send attachments of up to 4 MB in the total size.Note: The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachmentcontent will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of allattachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
+        :param str file_name: Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types.](https://www.tencentcloud.com/document/product/1084/42373?has_map=1).
+        """
+        pulumi.set(__self__, "content", content)
+        pulumi.set(__self__, "file_name", file_name)
+
+    @property
+    @pulumi.getter
+    def content(self) -> str:
+        """
+        Base64-encoded attachment content. You can send attachments of up to 4 MB in the total size.Note: The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachmentcontent will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of allattachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
+        """
+        return pulumi.get(self, "content")
+
+    @property
+    @pulumi.getter(name="fileName")
+    def file_name(self) -> str:
+        """
+        Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types.](https://www.tencentcloud.com/document/product/1084/42373?has_map=1).
+        """
+        return pulumi.get(self, "file_name")
+
+
+@pulumi.output_type
+class BatchSendEmailCycleParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "beginTime":
+            suggest = "begin_time"
+        elif key == "intervalTime":
+            suggest = "interval_time"
+        elif key == "termCycle":
+            suggest = "term_cycle"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BatchSendEmailCycleParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BatchSendEmailCycleParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BatchSendEmailCycleParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 begin_time: str,
+                 interval_time: int,
+                 term_cycle: Optional[int] = None):
+        """
+        :param str begin_time: Start time of the task.
+        :param int interval_time: Task recurrence in hours.
+        :param int term_cycle: Specifies whether to end the cycle. This parameter is used to update the task. Valid values: 0: No; 1: Yes.
+        """
+        pulumi.set(__self__, "begin_time", begin_time)
+        pulumi.set(__self__, "interval_time", interval_time)
+        if term_cycle is not None:
+            pulumi.set(__self__, "term_cycle", term_cycle)
+
+    @property
+    @pulumi.getter(name="beginTime")
+    def begin_time(self) -> str:
+        """
+        Start time of the task.
+        """
+        return pulumi.get(self, "begin_time")
+
+    @property
+    @pulumi.getter(name="intervalTime")
+    def interval_time(self) -> int:
+        """
+        Task recurrence in hours.
+        """
+        return pulumi.get(self, "interval_time")
+
+    @property
+    @pulumi.getter(name="termCycle")
+    def term_cycle(self) -> Optional[int]:
+        """
+        Specifies whether to end the cycle. This parameter is used to update the task. Valid values: 0: No; 1: Yes.
+        """
+        return pulumi.get(self, "term_cycle")
+
+
+@pulumi.output_type
+class BatchSendEmailTemplate(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "templateData":
+            suggest = "template_data"
+        elif key == "templateId":
+            suggest = "template_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BatchSendEmailTemplate. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BatchSendEmailTemplate.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BatchSendEmailTemplate.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 template_data: str,
+                 template_id: int):
+        """
+        :param str template_data: Variable parameters in the template. Please use json.dump to format the JSON object into a string type.The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the correspondingvalue (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+        :param int template_id: Template ID. If you do not have any template, please create one.
+        """
+        pulumi.set(__self__, "template_data", template_data)
+        pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter(name="templateData")
+    def template_data(self) -> str:
+        """
+        Variable parameters in the template. Please use json.dump to format the JSON object into a string type.The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the correspondingvalue (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+        """
+        return pulumi.get(self, "template_data")
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> int:
+        """
+        Template ID. If you do not have any template, please create one.
+        """
+        return pulumi.get(self, "template_id")
+
+
+@pulumi.output_type
+class BatchSendEmailTimedParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "beginTime":
+            suggest = "begin_time"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in BatchSendEmailTimedParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        BatchSendEmailTimedParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        BatchSendEmailTimedParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 begin_time: str):
+        """
+        :param str begin_time: Start time of a scheduled sending task.
+        """
+        pulumi.set(__self__, "begin_time", begin_time)
+
+    @property
+    @pulumi.getter(name="beginTime")
+    def begin_time(self) -> str:
+        """
+        Start time of a scheduled sending task.
+        """
+        return pulumi.get(self, "begin_time")
+
+
+@pulumi.output_type
+class DomainAttribute(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "expectedValue":
+            suggest = "expected_value"
+        elif key == "sendDomain":
+            suggest = "send_domain"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DomainAttribute. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DomainAttribute.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DomainAttribute.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 expected_value: Optional[str] = None,
+                 send_domain: Optional[str] = None,
+                 type: Optional[str] = None):
+        """
+        :param str expected_value: Values that need to be configured.
+        :param str send_domain: Domain name.
+        :param str type: Record Type CNAME | A | TXT | MX.
+        """
+        if expected_value is not None:
+            pulumi.set(__self__, "expected_value", expected_value)
+        if send_domain is not None:
+            pulumi.set(__self__, "send_domain", send_domain)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="expectedValue")
+    def expected_value(self) -> Optional[str]:
+        """
+        Values that need to be configured.
+        """
+        return pulumi.get(self, "expected_value")
+
+    @property
+    @pulumi.getter(name="sendDomain")
+    def send_domain(self) -> Optional[str]:
+        """
+        Domain name.
+        """
+        return pulumi.get(self, "send_domain")
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[str]:
+        """
+        Record Type CNAME | A | TXT | MX.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class ReceiverData(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "templateData":
+            suggest = "template_data"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ReceiverData. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ReceiverData.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ReceiverData.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 email: str,
+                 template_data: Optional[str] = None):
+        """
+        :param str email: Recipient email addresses.
+        :param str template_data: Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.
+        """
+        pulumi.set(__self__, "email", email)
+        if template_data is not None:
+            pulumi.set(__self__, "template_data", template_data)
+
+    @property
+    @pulumi.getter
+    def email(self) -> str:
+        """
+        Recipient email addresses.
+        """
+        return pulumi.get(self, "email")
+
+    @property
+    @pulumi.getter(name="templateData")
+    def template_data(self) -> Optional[str]:
+        """
+        Variable parameters in the template, please use json.dump to format the JSON object as a string type. The object is a set of key-value pairs, where each key represents a variable in the template, and the variables in the template are represented by {{key}}, and the corresponding values will be replaced with {{value}} when sent.Note: Parameter values cannot be complex data such as HTML. The total length of TemplateData (the entire JSON structure) should be less than 800 bytes.
+        """
+        return pulumi.get(self, "template_data")
+
+
+@pulumi.output_type
+class SendEmailAttachment(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "fileName":
+            suggest = "file_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SendEmailAttachment. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SendEmailAttachment.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SendEmailAttachment.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 content: str,
+                 file_name: str):
+        """
+        :param str content: Base64-encoded attachment content. You can send attachments of up to 4 MB in the total size.Note: The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachmentcontent will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of allattachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
+        :param str file_name: Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types.](https://www.tencentcloud.com/document/product/1084/42373?has_map=1).
+        """
+        pulumi.set(__self__, "content", content)
+        pulumi.set(__self__, "file_name", file_name)
+
+    @property
+    @pulumi.getter
+    def content(self) -> str:
+        """
+        Base64-encoded attachment content. You can send attachments of up to 4 MB in the total size.Note: The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachmentcontent will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of allattachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
+        """
+        return pulumi.get(self, "content")
+
+    @property
+    @pulumi.getter(name="fileName")
+    def file_name(self) -> str:
+        """
+        Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types.](https://www.tencentcloud.com/document/product/1084/42373?has_map=1).
+        """
+        return pulumi.get(self, "file_name")
+
+
+@pulumi.output_type
+class SendEmailTemplate(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "templateData":
+            suggest = "template_data"
+        elif key == "templateId":
+            suggest = "template_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SendEmailTemplate. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SendEmailTemplate.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SendEmailTemplate.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 template_data: str,
+                 template_id: int):
+        """
+        :param str template_data: Variable parameters in the template. Please use json.dump to format the JSON object into a string type.The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the correspondingvalue (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+        :param int template_id: Template ID. If you do not have any template, please create one.
+        """
+        pulumi.set(__self__, "template_data", template_data)
+        pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter(name="templateData")
+    def template_data(self) -> str:
+        """
+        Variable parameters in the template. Please use json.dump to format the JSON object into a string type.The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the correspondingvalue (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+        """
+        return pulumi.get(self, "template_data")
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> int:
+        """
+        Template ID. If you do not have any template, please create one.
+        """
+        return pulumi.get(self, "template_id")
+
 
 @pulumi.output_type
 class TemplateTemplateContent(dict):
@@ -41,5 +454,768 @@ class TemplateTemplateContent(dict):
         Text content after base64.
         """
         return pulumi.get(self, "text")
+
+
+@pulumi.output_type
+class GetBlackEmailAddressBlackListResult(dict):
+    def __init__(__self__, *,
+                 bounce_time: str,
+                 email_address: str):
+        """
+        :param str bounce_time: Time when the email address is blocklisted.
+        :param str email_address: You can specify an email address to query.
+        """
+        pulumi.set(__self__, "bounce_time", bounce_time)
+        pulumi.set(__self__, "email_address", email_address)
+
+    @property
+    @pulumi.getter(name="bounceTime")
+    def bounce_time(self) -> str:
+        """
+        Time when the email address is blocklisted.
+        """
+        return pulumi.get(self, "bounce_time")
+
+    @property
+    @pulumi.getter(name="emailAddress")
+    def email_address(self) -> str:
+        """
+        You can specify an email address to query.
+        """
+        return pulumi.get(self, "email_address")
+
+
+@pulumi.output_type
+class GetEmailIdentitiesEmailIdentityResult(dict):
+    def __init__(__self__, *,
+                 current_reputation_level: int,
+                 daily_quota: int,
+                 identity_name: str,
+                 identity_type: str,
+                 sending_enabled: bool):
+        """
+        :param int current_reputation_level: Current credit rating.
+        :param int daily_quota: Highest number of letters of the day.
+        :param str identity_name: Sending domain name.
+        :param str identity_type: Authentication type, fixed as DOMAIN.
+        :param bool sending_enabled: Is it verified.
+        """
+        pulumi.set(__self__, "current_reputation_level", current_reputation_level)
+        pulumi.set(__self__, "daily_quota", daily_quota)
+        pulumi.set(__self__, "identity_name", identity_name)
+        pulumi.set(__self__, "identity_type", identity_type)
+        pulumi.set(__self__, "sending_enabled", sending_enabled)
+
+    @property
+    @pulumi.getter(name="currentReputationLevel")
+    def current_reputation_level(self) -> int:
+        """
+        Current credit rating.
+        """
+        return pulumi.get(self, "current_reputation_level")
+
+    @property
+    @pulumi.getter(name="dailyQuota")
+    def daily_quota(self) -> int:
+        """
+        Highest number of letters of the day.
+        """
+        return pulumi.get(self, "daily_quota")
+
+    @property
+    @pulumi.getter(name="identityName")
+    def identity_name(self) -> str:
+        """
+        Sending domain name.
+        """
+        return pulumi.get(self, "identity_name")
+
+    @property
+    @pulumi.getter(name="identityType")
+    def identity_type(self) -> str:
+        """
+        Authentication type, fixed as DOMAIN.
+        """
+        return pulumi.get(self, "identity_type")
+
+    @property
+    @pulumi.getter(name="sendingEnabled")
+    def sending_enabled(self) -> bool:
+        """
+        Is it verified.
+        """
+        return pulumi.get(self, "sending_enabled")
+
+
+@pulumi.output_type
+class GetReceiversDataResult(dict):
+    def __init__(__self__, *,
+                 count: int,
+                 create_time: str,
+                 desc: str,
+                 receiver_id: int,
+                 receivers_name: str,
+                 receivers_status: int):
+        """
+        :param int count: Total number of recipient email addresses.
+        :param str create_time: Creation time, such as 2021-09-28 16:40:35.
+        :param str desc: Recipient group descriptionNote: This field may return `null`, indicating that no valid value can be found.
+        :param int receiver_id: Recipient group ID.
+        :param str receivers_name: Recipient group name.
+        :param int receivers_status: Group status (`1`: to be uploaded; `2` uploading; `3` uploaded)Note: This field may return `null`, indicating that no valid value can be found.
+        """
+        pulumi.set(__self__, "count", count)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "desc", desc)
+        pulumi.set(__self__, "receiver_id", receiver_id)
+        pulumi.set(__self__, "receivers_name", receivers_name)
+        pulumi.set(__self__, "receivers_status", receivers_status)
+
+    @property
+    @pulumi.getter
+    def count(self) -> int:
+        """
+        Total number of recipient email addresses.
+        """
+        return pulumi.get(self, "count")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time, such as 2021-09-28 16:40:35.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def desc(self) -> str:
+        """
+        Recipient group descriptionNote: This field may return `null`, indicating that no valid value can be found.
+        """
+        return pulumi.get(self, "desc")
+
+    @property
+    @pulumi.getter(name="receiverId")
+    def receiver_id(self) -> int:
+        """
+        Recipient group ID.
+        """
+        return pulumi.get(self, "receiver_id")
+
+    @property
+    @pulumi.getter(name="receiversName")
+    def receivers_name(self) -> str:
+        """
+        Recipient group name.
+        """
+        return pulumi.get(self, "receivers_name")
+
+    @property
+    @pulumi.getter(name="receiversStatus")
+    def receivers_status(self) -> int:
+        """
+        Group status (`1`: to be uploaded; `2` uploading; `3` uploaded)Note: This field may return `null`, indicating that no valid value can be found.
+        """
+        return pulumi.get(self, "receivers_status")
+
+
+@pulumi.output_type
+class GetSendEmailStatusEmailStatusListResult(dict):
+    def __init__(__self__, *,
+                 deliver_message: str,
+                 deliver_status: int,
+                 deliver_time: int,
+                 from_email_address: str,
+                 message_id: str,
+                 request_time: int,
+                 send_status: int,
+                 to_email_address: str,
+                 user_clicked: bool,
+                 user_complainted: bool,
+                 user_opened: bool,
+                 user_unsubscribed: bool):
+        """
+        :param str deliver_message: Description of the recipient processing status.
+        :param int deliver_status: Recipient processing status0: Tencent Cloud has accepted the request and added it to the send queue.1: The email is delivered successfully. DeliverTime indicates the time when the email is delivered successfully.2: The email is discarded. DeliverMessage indicates the reason for discarding.3: The recipient&amp;#39;s ESP rejects the email, probably because the email address does not exist or due to other reasons.8: The email is delayed by the ESP. DeliverMessage indicates the reason for delay.
+        :param int deliver_time: Timestamp when Tencent Cloud delivers the email.
+        :param str from_email_address: Sender email address.
+        :param str message_id: The MessageId field returned by the SendMail API.
+        :param int request_time: Timestamp when the request arrives at Tencent Cloud.
+        :param int send_status: Tencent Cloud processing status: `0`: Successful. `1001`: Internal system exception. `1002`: Internal system exception. `1003`: Internal system exception. `1003`: Internal system exception. `1004`: Email sending timed out. `1005`: Internal system exception. `1006`: You have sent too many emails to the same address in a short period. `1007`: The email address is in the blocklist. `1008`: The sender domain is rejected by the recipient. `1009`: Internal system exception. `1010`: The daily email sending limit is exceeded. `1011`: You have no permission to send custom content. Use a template. `1013`: The sender domain is unsubscribed from by the recipient. `2001`: No results were found. `3007`: The template ID is invalid or the template is unavailable. `3008`: The sender domain is temporarily blocked by the recipient domain. `3009`: You have no permission to use this template. `3010`: The format of the TemplateData field is incorrect. `3014`: The email cannot be sent because the sender domain is not verified. `3020`: The recipient email address is in the blocklist. `3024`: Failed to precheck the email address format. `3030`: Email sending is restricted temporarily due to a high bounce rate. `3033`: The account has insufficient balance or overdue payment.
+        :param str to_email_address: Recipient email address.
+        :param bool user_clicked: Whether the recipient has clicked the links in the email.
+        :param bool user_complainted: Whether the recipient has reported the sender.
+        :param bool user_opened: Whether the recipient has opened the email.
+        :param bool user_unsubscribed: Whether the recipient has unsubscribed from the email sent by the sender.
+        """
+        pulumi.set(__self__, "deliver_message", deliver_message)
+        pulumi.set(__self__, "deliver_status", deliver_status)
+        pulumi.set(__self__, "deliver_time", deliver_time)
+        pulumi.set(__self__, "from_email_address", from_email_address)
+        pulumi.set(__self__, "message_id", message_id)
+        pulumi.set(__self__, "request_time", request_time)
+        pulumi.set(__self__, "send_status", send_status)
+        pulumi.set(__self__, "to_email_address", to_email_address)
+        pulumi.set(__self__, "user_clicked", user_clicked)
+        pulumi.set(__self__, "user_complainted", user_complainted)
+        pulumi.set(__self__, "user_opened", user_opened)
+        pulumi.set(__self__, "user_unsubscribed", user_unsubscribed)
+
+    @property
+    @pulumi.getter(name="deliverMessage")
+    def deliver_message(self) -> str:
+        """
+        Description of the recipient processing status.
+        """
+        return pulumi.get(self, "deliver_message")
+
+    @property
+    @pulumi.getter(name="deliverStatus")
+    def deliver_status(self) -> int:
+        """
+        Recipient processing status0: Tencent Cloud has accepted the request and added it to the send queue.1: The email is delivered successfully. DeliverTime indicates the time when the email is delivered successfully.2: The email is discarded. DeliverMessage indicates the reason for discarding.3: The recipient&amp;#39;s ESP rejects the email, probably because the email address does not exist or due to other reasons.8: The email is delayed by the ESP. DeliverMessage indicates the reason for delay.
+        """
+        return pulumi.get(self, "deliver_status")
+
+    @property
+    @pulumi.getter(name="deliverTime")
+    def deliver_time(self) -> int:
+        """
+        Timestamp when Tencent Cloud delivers the email.
+        """
+        return pulumi.get(self, "deliver_time")
+
+    @property
+    @pulumi.getter(name="fromEmailAddress")
+    def from_email_address(self) -> str:
+        """
+        Sender email address.
+        """
+        return pulumi.get(self, "from_email_address")
+
+    @property
+    @pulumi.getter(name="messageId")
+    def message_id(self) -> str:
+        """
+        The MessageId field returned by the SendMail API.
+        """
+        return pulumi.get(self, "message_id")
+
+    @property
+    @pulumi.getter(name="requestTime")
+    def request_time(self) -> int:
+        """
+        Timestamp when the request arrives at Tencent Cloud.
+        """
+        return pulumi.get(self, "request_time")
+
+    @property
+    @pulumi.getter(name="sendStatus")
+    def send_status(self) -> int:
+        """
+        Tencent Cloud processing status: `0`: Successful. `1001`: Internal system exception. `1002`: Internal system exception. `1003`: Internal system exception. `1003`: Internal system exception. `1004`: Email sending timed out. `1005`: Internal system exception. `1006`: You have sent too many emails to the same address in a short period. `1007`: The email address is in the blocklist. `1008`: The sender domain is rejected by the recipient. `1009`: Internal system exception. `1010`: The daily email sending limit is exceeded. `1011`: You have no permission to send custom content. Use a template. `1013`: The sender domain is unsubscribed from by the recipient. `2001`: No results were found. `3007`: The template ID is invalid or the template is unavailable. `3008`: The sender domain is temporarily blocked by the recipient domain. `3009`: You have no permission to use this template. `3010`: The format of the TemplateData field is incorrect. `3014`: The email cannot be sent because the sender domain is not verified. `3020`: The recipient email address is in the blocklist. `3024`: Failed to precheck the email address format. `3030`: Email sending is restricted temporarily due to a high bounce rate. `3033`: The account has insufficient balance or overdue payment.
+        """
+        return pulumi.get(self, "send_status")
+
+    @property
+    @pulumi.getter(name="toEmailAddress")
+    def to_email_address(self) -> str:
+        """
+        Recipient email address.
+        """
+        return pulumi.get(self, "to_email_address")
+
+    @property
+    @pulumi.getter(name="userClicked")
+    def user_clicked(self) -> bool:
+        """
+        Whether the recipient has clicked the links in the email.
+        """
+        return pulumi.get(self, "user_clicked")
+
+    @property
+    @pulumi.getter(name="userComplainted")
+    def user_complainted(self) -> bool:
+        """
+        Whether the recipient has reported the sender.
+        """
+        return pulumi.get(self, "user_complainted")
+
+    @property
+    @pulumi.getter(name="userOpened")
+    def user_opened(self) -> bool:
+        """
+        Whether the recipient has opened the email.
+        """
+        return pulumi.get(self, "user_opened")
+
+    @property
+    @pulumi.getter(name="userUnsubscribed")
+    def user_unsubscribed(self) -> bool:
+        """
+        Whether the recipient has unsubscribed from the email sent by the sender.
+        """
+        return pulumi.get(self, "user_unsubscribed")
+
+
+@pulumi.output_type
+class GetSendTasksDataResult(dict):
+    def __init__(__self__, *,
+                 cache_count: int,
+                 create_time: str,
+                 cycle_params: Sequence['outputs.GetSendTasksDataCycleParamResult'],
+                 err_msg: str,
+                 from_email_address: str,
+                 receiver_id: int,
+                 receivers_name: str,
+                 request_count: int,
+                 send_count: int,
+                 subject: str,
+                 task_id: int,
+                 task_status: int,
+                 task_type: int,
+                 templates: Sequence['outputs.GetSendTasksDataTemplateResult'],
+                 timed_params: Sequence['outputs.GetSendTasksDataTimedParamResult'],
+                 update_time: str):
+        """
+        :param int cache_count: Number of emails cached.
+        :param str create_time: Task creation time.
+        :param Sequence['GetSendTasksDataCycleParamArgs'] cycle_params: Parameters of a recurring taskNote: This field may return `null`, indicating that no valid value can be found.
+        :param str err_msg: Task exception informationNote: This field may return `null`, indicating that no valid value can be found.
+        :param str from_email_address: Sender address.
+        :param int receiver_id: Recipient group ID.
+        :param str receivers_name: Recipient group name.
+        :param int request_count: Number of emails requested to be sent.
+        :param int send_count: Number of emails sent.
+        :param str subject: Email subject.
+        :param int task_id: Task ID.
+        :param int task_status: Task status. `1`: to start; `5`: sending; `6`: sending suspended today; `7`: sending error; `10`: sent.
+        :param int task_type: Task type. `1`: immediate; `2`: scheduled; `3`: recurring. To query tasks of all types, do not pass in this parameter.
+        :param Sequence['GetSendTasksDataTemplateArgs'] templates: Template and template dataNote: This field may return `null`, indicating that no valid value can be found.
+        :param Sequence['GetSendTasksDataTimedParamArgs'] timed_params: Parameters of a scheduled taskNote: This field may return `null`, indicating that no valid value can be found.
+        :param str update_time: Task update time.
+        """
+        pulumi.set(__self__, "cache_count", cache_count)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "cycle_params", cycle_params)
+        pulumi.set(__self__, "err_msg", err_msg)
+        pulumi.set(__self__, "from_email_address", from_email_address)
+        pulumi.set(__self__, "receiver_id", receiver_id)
+        pulumi.set(__self__, "receivers_name", receivers_name)
+        pulumi.set(__self__, "request_count", request_count)
+        pulumi.set(__self__, "send_count", send_count)
+        pulumi.set(__self__, "subject", subject)
+        pulumi.set(__self__, "task_id", task_id)
+        pulumi.set(__self__, "task_status", task_status)
+        pulumi.set(__self__, "task_type", task_type)
+        pulumi.set(__self__, "templates", templates)
+        pulumi.set(__self__, "timed_params", timed_params)
+        pulumi.set(__self__, "update_time", update_time)
+
+    @property
+    @pulumi.getter(name="cacheCount")
+    def cache_count(self) -> int:
+        """
+        Number of emails cached.
+        """
+        return pulumi.get(self, "cache_count")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Task creation time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="cycleParams")
+    def cycle_params(self) -> Sequence['outputs.GetSendTasksDataCycleParamResult']:
+        """
+        Parameters of a recurring taskNote: This field may return `null`, indicating that no valid value can be found.
+        """
+        return pulumi.get(self, "cycle_params")
+
+    @property
+    @pulumi.getter(name="errMsg")
+    def err_msg(self) -> str:
+        """
+        Task exception informationNote: This field may return `null`, indicating that no valid value can be found.
+        """
+        return pulumi.get(self, "err_msg")
+
+    @property
+    @pulumi.getter(name="fromEmailAddress")
+    def from_email_address(self) -> str:
+        """
+        Sender address.
+        """
+        return pulumi.get(self, "from_email_address")
+
+    @property
+    @pulumi.getter(name="receiverId")
+    def receiver_id(self) -> int:
+        """
+        Recipient group ID.
+        """
+        return pulumi.get(self, "receiver_id")
+
+    @property
+    @pulumi.getter(name="receiversName")
+    def receivers_name(self) -> str:
+        """
+        Recipient group name.
+        """
+        return pulumi.get(self, "receivers_name")
+
+    @property
+    @pulumi.getter(name="requestCount")
+    def request_count(self) -> int:
+        """
+        Number of emails requested to be sent.
+        """
+        return pulumi.get(self, "request_count")
+
+    @property
+    @pulumi.getter(name="sendCount")
+    def send_count(self) -> int:
+        """
+        Number of emails sent.
+        """
+        return pulumi.get(self, "send_count")
+
+    @property
+    @pulumi.getter
+    def subject(self) -> str:
+        """
+        Email subject.
+        """
+        return pulumi.get(self, "subject")
+
+    @property
+    @pulumi.getter(name="taskId")
+    def task_id(self) -> int:
+        """
+        Task ID.
+        """
+        return pulumi.get(self, "task_id")
+
+    @property
+    @pulumi.getter(name="taskStatus")
+    def task_status(self) -> int:
+        """
+        Task status. `1`: to start; `5`: sending; `6`: sending suspended today; `7`: sending error; `10`: sent.
+        """
+        return pulumi.get(self, "task_status")
+
+    @property
+    @pulumi.getter(name="taskType")
+    def task_type(self) -> int:
+        """
+        Task type. `1`: immediate; `2`: scheduled; `3`: recurring. To query tasks of all types, do not pass in this parameter.
+        """
+        return pulumi.get(self, "task_type")
+
+    @property
+    @pulumi.getter
+    def templates(self) -> Sequence['outputs.GetSendTasksDataTemplateResult']:
+        """
+        Template and template dataNote: This field may return `null`, indicating that no valid value can be found.
+        """
+        return pulumi.get(self, "templates")
+
+    @property
+    @pulumi.getter(name="timedParams")
+    def timed_params(self) -> Sequence['outputs.GetSendTasksDataTimedParamResult']:
+        """
+        Parameters of a scheduled taskNote: This field may return `null`, indicating that no valid value can be found.
+        """
+        return pulumi.get(self, "timed_params")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        Task update time.
+        """
+        return pulumi.get(self, "update_time")
+
+
+@pulumi.output_type
+class GetSendTasksDataCycleParamResult(dict):
+    def __init__(__self__, *,
+                 begin_time: str,
+                 interval_time: int,
+                 term_cycle: int):
+        """
+        :param str begin_time: Start time of a scheduled sending task.
+        :param int interval_time: Task recurrence in hours.
+        :param int term_cycle: Specifies whether to end the cycle. This parameter is used to update the task. Valid values: 0: No; 1: Yes.
+        """
+        pulumi.set(__self__, "begin_time", begin_time)
+        pulumi.set(__self__, "interval_time", interval_time)
+        pulumi.set(__self__, "term_cycle", term_cycle)
+
+    @property
+    @pulumi.getter(name="beginTime")
+    def begin_time(self) -> str:
+        """
+        Start time of a scheduled sending task.
+        """
+        return pulumi.get(self, "begin_time")
+
+    @property
+    @pulumi.getter(name="intervalTime")
+    def interval_time(self) -> int:
+        """
+        Task recurrence in hours.
+        """
+        return pulumi.get(self, "interval_time")
+
+    @property
+    @pulumi.getter(name="termCycle")
+    def term_cycle(self) -> int:
+        """
+        Specifies whether to end the cycle. This parameter is used to update the task. Valid values: 0: No; 1: Yes.
+        """
+        return pulumi.get(self, "term_cycle")
+
+
+@pulumi.output_type
+class GetSendTasksDataTemplateResult(dict):
+    def __init__(__self__, *,
+                 template_data: str,
+                 template_id: int):
+        """
+        :param str template_data: Variable parameters in the template. Please use `json.dump` to format the JSON object into a string type. The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the corresponding value (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+        :param int template_id: Template ID. If you do not have any template, please create one.
+        """
+        pulumi.set(__self__, "template_data", template_data)
+        pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter(name="templateData")
+    def template_data(self) -> str:
+        """
+        Variable parameters in the template. Please use `json.dump` to format the JSON object into a string type. The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the corresponding value (represented by {{value}}) when sending the email.Note: The parameter value cannot be data of a complex type such as HTML.Example: {name:xxx,age:xx}.
+        """
+        return pulumi.get(self, "template_data")
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> int:
+        """
+        Template ID. If you do not have any template, please create one.
+        """
+        return pulumi.get(self, "template_id")
+
+
+@pulumi.output_type
+class GetSendTasksDataTimedParamResult(dict):
+    def __init__(__self__, *,
+                 begin_time: str):
+        """
+        :param str begin_time: Start time of a scheduled sending task.
+        """
+        pulumi.set(__self__, "begin_time", begin_time)
+
+    @property
+    @pulumi.getter(name="beginTime")
+    def begin_time(self) -> str:
+        """
+        Start time of a scheduled sending task.
+        """
+        return pulumi.get(self, "begin_time")
+
+
+@pulumi.output_type
+class GetStatisticsReportDailyVolumeResult(dict):
+    def __init__(__self__, *,
+                 accepted_count: int,
+                 bounce_count: int,
+                 clicked_count: int,
+                 delivered_count: int,
+                 opened_count: int,
+                 request_count: int,
+                 send_date: str,
+                 unsubscribe_count: int):
+        """
+        :param int accepted_count: Number of email requests accepted by Tencent Cloud.
+        :param int bounce_count: Number of bounced emails.
+        :param int clicked_count: Number of recipients who clicked on links in emails.
+        :param int delivered_count: Number of delivered emails.
+        :param int opened_count: Number of users (deduplicated) who opened emails.
+        :param int request_count: Number of email requests.
+        :param str send_date: Date Note: this field may return null, indicating that no valid values can be obtained.
+        :param int unsubscribe_count: Number of users who canceled subscriptions. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "accepted_count", accepted_count)
+        pulumi.set(__self__, "bounce_count", bounce_count)
+        pulumi.set(__self__, "clicked_count", clicked_count)
+        pulumi.set(__self__, "delivered_count", delivered_count)
+        pulumi.set(__self__, "opened_count", opened_count)
+        pulumi.set(__self__, "request_count", request_count)
+        pulumi.set(__self__, "send_date", send_date)
+        pulumi.set(__self__, "unsubscribe_count", unsubscribe_count)
+
+    @property
+    @pulumi.getter(name="acceptedCount")
+    def accepted_count(self) -> int:
+        """
+        Number of email requests accepted by Tencent Cloud.
+        """
+        return pulumi.get(self, "accepted_count")
+
+    @property
+    @pulumi.getter(name="bounceCount")
+    def bounce_count(self) -> int:
+        """
+        Number of bounced emails.
+        """
+        return pulumi.get(self, "bounce_count")
+
+    @property
+    @pulumi.getter(name="clickedCount")
+    def clicked_count(self) -> int:
+        """
+        Number of recipients who clicked on links in emails.
+        """
+        return pulumi.get(self, "clicked_count")
+
+    @property
+    @pulumi.getter(name="deliveredCount")
+    def delivered_count(self) -> int:
+        """
+        Number of delivered emails.
+        """
+        return pulumi.get(self, "delivered_count")
+
+    @property
+    @pulumi.getter(name="openedCount")
+    def opened_count(self) -> int:
+        """
+        Number of users (deduplicated) who opened emails.
+        """
+        return pulumi.get(self, "opened_count")
+
+    @property
+    @pulumi.getter(name="requestCount")
+    def request_count(self) -> int:
+        """
+        Number of email requests.
+        """
+        return pulumi.get(self, "request_count")
+
+    @property
+    @pulumi.getter(name="sendDate")
+    def send_date(self) -> str:
+        """
+        Date Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "send_date")
+
+    @property
+    @pulumi.getter(name="unsubscribeCount")
+    def unsubscribe_count(self) -> int:
+        """
+        Number of users who canceled subscriptions. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "unsubscribe_count")
+
+
+@pulumi.output_type
+class GetStatisticsReportOverallVolumeResult(dict):
+    def __init__(__self__, *,
+                 accepted_count: int,
+                 bounce_count: int,
+                 clicked_count: int,
+                 delivered_count: int,
+                 opened_count: int,
+                 request_count: int,
+                 send_date: str,
+                 unsubscribe_count: int):
+        """
+        :param int accepted_count: Number of email requests accepted by Tencent Cloud.
+        :param int bounce_count: Number of bounced emails.
+        :param int clicked_count: Number of recipients who clicked on links in emails.
+        :param int delivered_count: Number of delivered emails.
+        :param int opened_count: Number of users (deduplicated) who opened emails.
+        :param int request_count: Number of email requests.
+        :param str send_date: Date Note: this field may return null, indicating that no valid values can be obtained.
+        :param int unsubscribe_count: Number of users who canceled subscriptions. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "accepted_count", accepted_count)
+        pulumi.set(__self__, "bounce_count", bounce_count)
+        pulumi.set(__self__, "clicked_count", clicked_count)
+        pulumi.set(__self__, "delivered_count", delivered_count)
+        pulumi.set(__self__, "opened_count", opened_count)
+        pulumi.set(__self__, "request_count", request_count)
+        pulumi.set(__self__, "send_date", send_date)
+        pulumi.set(__self__, "unsubscribe_count", unsubscribe_count)
+
+    @property
+    @pulumi.getter(name="acceptedCount")
+    def accepted_count(self) -> int:
+        """
+        Number of email requests accepted by Tencent Cloud.
+        """
+        return pulumi.get(self, "accepted_count")
+
+    @property
+    @pulumi.getter(name="bounceCount")
+    def bounce_count(self) -> int:
+        """
+        Number of bounced emails.
+        """
+        return pulumi.get(self, "bounce_count")
+
+    @property
+    @pulumi.getter(name="clickedCount")
+    def clicked_count(self) -> int:
+        """
+        Number of recipients who clicked on links in emails.
+        """
+        return pulumi.get(self, "clicked_count")
+
+    @property
+    @pulumi.getter(name="deliveredCount")
+    def delivered_count(self) -> int:
+        """
+        Number of delivered emails.
+        """
+        return pulumi.get(self, "delivered_count")
+
+    @property
+    @pulumi.getter(name="openedCount")
+    def opened_count(self) -> int:
+        """
+        Number of users (deduplicated) who opened emails.
+        """
+        return pulumi.get(self, "opened_count")
+
+    @property
+    @pulumi.getter(name="requestCount")
+    def request_count(self) -> int:
+        """
+        Number of email requests.
+        """
+        return pulumi.get(self, "request_count")
+
+    @property
+    @pulumi.getter(name="sendDate")
+    def send_date(self) -> str:
+        """
+        Date Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "send_date")
+
+    @property
+    @pulumi.getter(name="unsubscribeCount")
+    def unsubscribe_count(self) -> int:
+        """
+        Number of users who canceled subscriptions. Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "unsubscribe_count")
 
 

@@ -13,6 +13,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// <summary>
     /// Provides a resource to create a ssm ssh key pair secret
     /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var exampleKey = new Tencentcloud.Kms.Key("exampleKey", new Tencentcloud.Kms.KeyArgs
+    ///         {
+    ///             Alias = "tf-example-kms-key",
+    ///             Description = "example of kms key",
+    ///             KeyRotationEnabled = false,
+    ///             IsEnabled = true,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///         var exampleSshKeyPairSecret = new Tencentcloud.Ssm.SshKeyPairSecret("exampleSshKeyPairSecret", new Tencentcloud.Ssm.SshKeyPairSecretArgs
+    ///         {
+    ///             SecretName = "tf-example",
+    ///             ProjectId = 0,
+    ///             Description = "desc.",
+    ///             KmsKeyId = exampleKey.Id,
+    ///             SshKeyName = "tf_example_ssh",
+    ///             Status = "Enabled",
+    ///             CleanSshKey = true,
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// ssm ssh_key_pair_secret can be imported using the id, e.g.
@@ -46,7 +86,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.
         /// </summary>
         [Output("kmsKeyId")]
-        public Output<string?> KmsKeyId { get; private set; } = null!;
+        public Output<string> KmsKeyId { get; private set; } = null!;
 
         /// <summary>
         /// ID of the project to which the created SSH key belongs.
@@ -70,13 +110,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
         /// </summary>
         [Output("sshKeyName")]
-        public Output<string?> SshKeyName { get; private set; } = null!;
+        public Output<string> SshKeyName { get; private set; } = null!;
 
         /// <summary>
         /// Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
+
+        /// <summary>
+        /// Tags of secret.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
 
 
         /// <summary>
@@ -167,6 +213,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         [Input("status")]
         public Input<string>? Status { get; set; }
 
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tags of secret.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
+
         public SshKeyPairSecretArgs()
         {
         }
@@ -227,6 +285,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
+
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tags of secret.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
 
         public SshKeyPairSecretState()
         {

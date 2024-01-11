@@ -14,10 +14,9 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const service = new tencentcloud.apigateway.Service("service", {
- *     serviceName: "ck",
+ * const example = new tencentcloud.apigateway.Service("example", {
+ *     serviceName: "tf-example",
  *     protocol: "http&https",
- *     serviceDesc: "your nice service",
  *     netTypes: [
  *         "INNER",
  *         "OUTER",
@@ -25,9 +24,9 @@ import * as utilities from "../utilities";
  *     ipVersion: "IPv4",
  * });
  * const api = new tencentcloud.apigateway.Api("api", {
- *     serviceId: service.id,
- *     apiName: "hello",
- *     apiDesc: "my hello api",
+ *     serviceId: example.id,
+ *     apiName: "tf-example",
+ *     apiDesc: "desc.",
  *     authType: "NONE",
  *     protocol: "HTTP",
  *     enableCors: true,
@@ -50,12 +49,15 @@ import * as utilities from "../utilities";
  *     responseSuccessExample: "success",
  *     responseFailExample: "fail",
  *     responseErrorCodes: [{
- *         code: 100,
+ *         code: 500,
  *         msg: "system error",
  *         desc: "system error code",
- *         convertedCode: -100,
+ *         convertedCode: 5000,
  *         needConvert: true,
  *     }],
+ *     releaseLimit: 500,
+ *     preLimit: 500,
+ *     testLimit: 500,
  * });
  * ```
  */
@@ -88,6 +90,10 @@ export class Api extends pulumi.CustomResource {
     }
 
     /**
+     * When `authType` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
+     */
+    public readonly apiBusinessType!: pulumi.Output<string>;
+    /**
      * Custom API description.
      */
     public readonly apiDesc!: pulumi.Output<string | undefined>;
@@ -96,17 +102,69 @@ export class Api extends pulumi.CustomResource {
      */
     public readonly apiName!: pulumi.Output<string>;
     /**
-     * API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
+     * API type, supports NORMAL (regular API) and TSF (microservice API), defaults to NORMAL.
+     */
+    public readonly apiType!: pulumi.Output<string | undefined>;
+    /**
+     * The unique ID of the associated authorization API takes effect when AuthType is OAUTH and ApiBusinessType is NORMAL. The unique ID of the oauth2.0 authorized API that identifies the business API binding.
+     */
+    public readonly authRelationApiId!: pulumi.Output<string>;
+    /**
+     * API authentication type. Support SECRET (Key Pair Authentication), NONE (Authentication Exemption), OAUTH, APP (Application Authentication). The default is NONE.
      */
     public readonly authType!: pulumi.Output<string | undefined>;
+    /**
+     * Constant parameter.
+     */
+    public readonly constantParameters!: pulumi.Output<outputs.ApiGateway.ApiConstantParameter[] | undefined>;
     /**
      * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
     /**
+     * EIAM application ID.
+     */
+    public readonly eiamAppId!: pulumi.Output<string | undefined>;
+    /**
+     * EIAM application type.
+     */
+    public readonly eiamAppType!: pulumi.Output<string | undefined>;
+    /**
+     * The EIAM application authentication type supports AuthenticationOnly, Authentication, and Authorization.
+     */
+    public readonly eiamAuthType!: pulumi.Output<string | undefined>;
+    /**
      * Whether to enable CORS. Default value: `true`.
      */
     public readonly enableCors!: pulumi.Output<boolean | undefined>;
+    /**
+     * Event bus ID.
+     */
+    public readonly eventBusId!: pulumi.Output<string | undefined>;
+    /**
+     * Whether to enable Base64 encoding will only take effect when the backend is scf.
+     */
+    public readonly isBase64Encoded!: pulumi.Output<boolean>;
+    /**
+     * Charge after starting debugging. (Cloud Market Reserved Fields).
+     */
+    public readonly isDebugAfterCharge!: pulumi.Output<boolean>;
+    /**
+     * Do you want to delete the custom response configuration error code? If it is not passed or False is passed, it will not be deleted. If True is passed, all custom response configuration error codes for this API will be deleted.
+     */
+    public readonly isDeleteResponseErrorCodes!: pulumi.Output<boolean>;
+    /**
+     * API bound microservice list.
+     */
+    public readonly microServices!: pulumi.Output<outputs.ApiGateway.ApiMicroService[] | undefined>;
+    /**
+     * OAuth configuration. Effective when AuthType is OAUTH.
+     */
+    public readonly oauthConfig!: pulumi.Output<outputs.ApiGateway.ApiOauthConfig | undefined>;
+    /**
+     * Owner of resources.
+     */
+    public readonly owner!: pulumi.Output<string | undefined>;
     /**
      * API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
      */
@@ -138,15 +196,19 @@ export class Api extends pulumi.CustomResource {
     /**
      * Response failure sample of custom response configuration.
      */
-    public readonly responseFailExample!: pulumi.Output<string | undefined>;
+    public readonly responseFailExample!: pulumi.Output<string>;
     /**
      * Successful response sample of custom response configuration.
      */
-    public readonly responseSuccessExample!: pulumi.Output<string | undefined>;
+    public readonly responseSuccessExample!: pulumi.Output<string>;
     /**
      * Return type. Valid values: `HTML`, `JSON`, `TEXT`, `BINARY`, `XML`. Default value: `HTML`.
      */
     public readonly responseType!: pulumi.Output<string>;
+    /**
+     * API backend COS configuration. If ServiceType is COS, then this parameter must be passed.Note: This field may return null, indicating that a valid value cannot be obtained.
+     */
+    public readonly serviceConfigCosConfig!: pulumi.Output<outputs.ApiGateway.ApiServiceConfigCosConfig | undefined>;
     /**
      * API backend service request method, such as `GET`. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigMethod` and backend method `serviceConfigMethod` can be different.
      */
@@ -160,7 +222,7 @@ export class Api extends pulumi.CustomResource {
      */
     public readonly serviceConfigPath!: pulumi.Output<string | undefined>;
     /**
-     * Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+     * Backend type. Effective when enabling vpc, currently supported types are clb, cvm, and upstream.
      */
     public readonly serviceConfigProduct!: pulumi.Output<string | undefined>;
     /**
@@ -176,15 +238,27 @@ export class Api extends pulumi.CustomResource {
      */
     public readonly serviceConfigScfFunctionQualifier!: pulumi.Output<string | undefined>;
     /**
+     * Scf function type. Effective when the backend type is SCF. Support Event Triggering (EVENT) and HTTP Direct Cloud Function (HTTP).
+     */
+    public readonly serviceConfigScfFunctionType!: pulumi.Output<string | undefined>;
+    /**
+     * Whether to enable response integration. Effective when the backend type is SCF.
+     */
+    public readonly serviceConfigScfIsIntegratedResponse!: pulumi.Output<boolean | undefined>;
+    /**
      * API backend service timeout period in seconds. Default value: `5`.
      */
     public readonly serviceConfigTimeout!: pulumi.Output<number | undefined>;
     /**
-     * API backend service type. Valid values: `WEBSOCKET`, `HTTP`, `SCF`, `MOCK`. Default value: `HTTP`.
+     * The backend service type of the API. Supports HTTP, MOCK, TSF, SCF, WEBSOCKET, COS, TARGET (internal testing).
      */
     public readonly serviceConfigType!: pulumi.Output<string | undefined>;
     /**
-     * API backend service url. This parameter is required when `serviceConfigType` is `HTTP`.
+     * Only required when binding to VPC channelsNote: This field may return null, indicating that a valid value cannot be obtained.
+     */
+    public readonly serviceConfigUpstreamId!: pulumi.Output<string | undefined>;
+    /**
+     * The backend service URL of the API. If the ServiceType is HTTP, this parameter must be passed.
      */
     public readonly serviceConfigUrl!: pulumi.Output<string | undefined>;
     /**
@@ -192,17 +266,89 @@ export class Api extends pulumi.CustomResource {
      */
     public readonly serviceConfigVpcId!: pulumi.Output<string | undefined>;
     /**
-     * Which service this API belongs. Refer to resource `tencentcloud.ApiGateway.Service`.
+     * Scf websocket cleaning function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    public readonly serviceConfigWebsocketCleanupFunctionName!: pulumi.Output<string | undefined>;
+    /**
+     * Scf websocket cleans up the function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    public readonly serviceConfigWebsocketCleanupFunctionNamespace!: pulumi.Output<string | undefined>;
+    /**
+     * Scf websocket cleaning function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    public readonly serviceConfigWebsocketCleanupFunctionQualifier!: pulumi.Output<string | undefined>;
+    /**
+     * Scf websocket registration function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    public readonly serviceConfigWebsocketRegisterFunctionName!: pulumi.Output<string | undefined>;
+    /**
+     * Scf websocket registers function namespaces. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    public readonly serviceConfigWebsocketRegisterFunctionNamespace!: pulumi.Output<string | undefined>;
+    /**
+     * Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    public readonly serviceConfigWebsocketRegisterFunctionQualifier!: pulumi.Output<string | undefined>;
+    /**
+     * Scf websocket transfer function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    public readonly serviceConfigWebsocketTransportFunctionName!: pulumi.Output<string | undefined>;
+    /**
+     * Scf websocket transfer function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    public readonly serviceConfigWebsocketTransportFunctionNamespace!: pulumi.Output<string | undefined>;
+    /**
+     * Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    public readonly serviceConfigWebsocketTransportFunctionQualifier!: pulumi.Output<string | undefined>;
+    /**
+     * The unique ID of the service where the API is located. Refer to resource `tencentcloud.ApiGateway.Service`.
      */
     public readonly serviceId!: pulumi.Output<string>;
+    /**
+     * The backend service parameters of the API.
+     */
+    public readonly serviceParameters!: pulumi.Output<outputs.ApiGateway.ApiServiceParameter[] | undefined>;
+    /**
+     * Health check configuration for microservices.
+     */
+    public readonly serviceTsfHealthCheckConf!: pulumi.Output<outputs.ApiGateway.ApiServiceTsfHealthCheckConf | undefined>;
+    /**
+     * Load balancing configuration for microservices.
+     */
+    public readonly serviceTsfLoadBalanceConf!: pulumi.Output<outputs.ApiGateway.ApiServiceTsfLoadBalanceConf | undefined>;
+    /**
+     * Tsf serverless namespace ID. (In internal testing).
+     */
+    public readonly targetNamespaceId!: pulumi.Output<string | undefined>;
+    /**
+     * Target type backend resource information. (Internal testing stage).
+     */
+    public readonly targetServices!: pulumi.Output<outputs.ApiGateway.ApiTargetService[] | undefined>;
+    /**
+     * Target health check configuration. (Internal testing stage).
+     */
+    public readonly targetServicesHealthCheckConf!: pulumi.Output<outputs.ApiGateway.ApiTargetServicesHealthCheckConf | undefined>;
+    /**
+     * Target type load balancing configuration. (Internal testing stage).
+     */
+    public readonly targetServicesLoadBalanceConf!: pulumi.Output<number | undefined>;
     /**
      * API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
      */
     public readonly testLimit!: pulumi.Output<number>;
     /**
+     * The effective time of the EIAM application token, measured in seconds, defaults to 7200 seconds.
+     */
+    public readonly tokenTimeout!: pulumi.Output<number | undefined>;
+    /**
      * Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
     public /*out*/ readonly updateTime!: pulumi.Output<string>;
+    /**
+     * User type.
+     */
+    public readonly userType!: pulumi.Output<string | undefined>;
 
     /**
      * Create a Api resource with the given unique name, arguments, and options.
@@ -217,11 +363,25 @@ export class Api extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ApiState | undefined;
+            resourceInputs["apiBusinessType"] = state ? state.apiBusinessType : undefined;
             resourceInputs["apiDesc"] = state ? state.apiDesc : undefined;
             resourceInputs["apiName"] = state ? state.apiName : undefined;
+            resourceInputs["apiType"] = state ? state.apiType : undefined;
+            resourceInputs["authRelationApiId"] = state ? state.authRelationApiId : undefined;
             resourceInputs["authType"] = state ? state.authType : undefined;
+            resourceInputs["constantParameters"] = state ? state.constantParameters : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
+            resourceInputs["eiamAppId"] = state ? state.eiamAppId : undefined;
+            resourceInputs["eiamAppType"] = state ? state.eiamAppType : undefined;
+            resourceInputs["eiamAuthType"] = state ? state.eiamAuthType : undefined;
             resourceInputs["enableCors"] = state ? state.enableCors : undefined;
+            resourceInputs["eventBusId"] = state ? state.eventBusId : undefined;
+            resourceInputs["isBase64Encoded"] = state ? state.isBase64Encoded : undefined;
+            resourceInputs["isDebugAfterCharge"] = state ? state.isDebugAfterCharge : undefined;
+            resourceInputs["isDeleteResponseErrorCodes"] = state ? state.isDeleteResponseErrorCodes : undefined;
+            resourceInputs["microServices"] = state ? state.microServices : undefined;
+            resourceInputs["oauthConfig"] = state ? state.oauthConfig : undefined;
+            resourceInputs["owner"] = state ? state.owner : undefined;
             resourceInputs["preLimit"] = state ? state.preLimit : undefined;
             resourceInputs["protocol"] = state ? state.protocol : undefined;
             resourceInputs["releaseLimit"] = state ? state.releaseLimit : undefined;
@@ -232,6 +392,7 @@ export class Api extends pulumi.CustomResource {
             resourceInputs["responseFailExample"] = state ? state.responseFailExample : undefined;
             resourceInputs["responseSuccessExample"] = state ? state.responseSuccessExample : undefined;
             resourceInputs["responseType"] = state ? state.responseType : undefined;
+            resourceInputs["serviceConfigCosConfig"] = state ? state.serviceConfigCosConfig : undefined;
             resourceInputs["serviceConfigMethod"] = state ? state.serviceConfigMethod : undefined;
             resourceInputs["serviceConfigMockReturnMessage"] = state ? state.serviceConfigMockReturnMessage : undefined;
             resourceInputs["serviceConfigPath"] = state ? state.serviceConfigPath : undefined;
@@ -239,13 +400,34 @@ export class Api extends pulumi.CustomResource {
             resourceInputs["serviceConfigScfFunctionName"] = state ? state.serviceConfigScfFunctionName : undefined;
             resourceInputs["serviceConfigScfFunctionNamespace"] = state ? state.serviceConfigScfFunctionNamespace : undefined;
             resourceInputs["serviceConfigScfFunctionQualifier"] = state ? state.serviceConfigScfFunctionQualifier : undefined;
+            resourceInputs["serviceConfigScfFunctionType"] = state ? state.serviceConfigScfFunctionType : undefined;
+            resourceInputs["serviceConfigScfIsIntegratedResponse"] = state ? state.serviceConfigScfIsIntegratedResponse : undefined;
             resourceInputs["serviceConfigTimeout"] = state ? state.serviceConfigTimeout : undefined;
             resourceInputs["serviceConfigType"] = state ? state.serviceConfigType : undefined;
+            resourceInputs["serviceConfigUpstreamId"] = state ? state.serviceConfigUpstreamId : undefined;
             resourceInputs["serviceConfigUrl"] = state ? state.serviceConfigUrl : undefined;
             resourceInputs["serviceConfigVpcId"] = state ? state.serviceConfigVpcId : undefined;
+            resourceInputs["serviceConfigWebsocketCleanupFunctionName"] = state ? state.serviceConfigWebsocketCleanupFunctionName : undefined;
+            resourceInputs["serviceConfigWebsocketCleanupFunctionNamespace"] = state ? state.serviceConfigWebsocketCleanupFunctionNamespace : undefined;
+            resourceInputs["serviceConfigWebsocketCleanupFunctionQualifier"] = state ? state.serviceConfigWebsocketCleanupFunctionQualifier : undefined;
+            resourceInputs["serviceConfigWebsocketRegisterFunctionName"] = state ? state.serviceConfigWebsocketRegisterFunctionName : undefined;
+            resourceInputs["serviceConfigWebsocketRegisterFunctionNamespace"] = state ? state.serviceConfigWebsocketRegisterFunctionNamespace : undefined;
+            resourceInputs["serviceConfigWebsocketRegisterFunctionQualifier"] = state ? state.serviceConfigWebsocketRegisterFunctionQualifier : undefined;
+            resourceInputs["serviceConfigWebsocketTransportFunctionName"] = state ? state.serviceConfigWebsocketTransportFunctionName : undefined;
+            resourceInputs["serviceConfigWebsocketTransportFunctionNamespace"] = state ? state.serviceConfigWebsocketTransportFunctionNamespace : undefined;
+            resourceInputs["serviceConfigWebsocketTransportFunctionQualifier"] = state ? state.serviceConfigWebsocketTransportFunctionQualifier : undefined;
             resourceInputs["serviceId"] = state ? state.serviceId : undefined;
+            resourceInputs["serviceParameters"] = state ? state.serviceParameters : undefined;
+            resourceInputs["serviceTsfHealthCheckConf"] = state ? state.serviceTsfHealthCheckConf : undefined;
+            resourceInputs["serviceTsfLoadBalanceConf"] = state ? state.serviceTsfLoadBalanceConf : undefined;
+            resourceInputs["targetNamespaceId"] = state ? state.targetNamespaceId : undefined;
+            resourceInputs["targetServices"] = state ? state.targetServices : undefined;
+            resourceInputs["targetServicesHealthCheckConf"] = state ? state.targetServicesHealthCheckConf : undefined;
+            resourceInputs["targetServicesLoadBalanceConf"] = state ? state.targetServicesLoadBalanceConf : undefined;
             resourceInputs["testLimit"] = state ? state.testLimit : undefined;
+            resourceInputs["tokenTimeout"] = state ? state.tokenTimeout : undefined;
             resourceInputs["updateTime"] = state ? state.updateTime : undefined;
+            resourceInputs["userType"] = state ? state.userType : undefined;
         } else {
             const args = argsOrState as ApiArgs | undefined;
             if ((!args || args.apiName === undefined) && !opts.urn) {
@@ -257,10 +439,24 @@ export class Api extends pulumi.CustomResource {
             if ((!args || args.serviceId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'serviceId'");
             }
+            resourceInputs["apiBusinessType"] = args ? args.apiBusinessType : undefined;
             resourceInputs["apiDesc"] = args ? args.apiDesc : undefined;
             resourceInputs["apiName"] = args ? args.apiName : undefined;
+            resourceInputs["apiType"] = args ? args.apiType : undefined;
+            resourceInputs["authRelationApiId"] = args ? args.authRelationApiId : undefined;
             resourceInputs["authType"] = args ? args.authType : undefined;
+            resourceInputs["constantParameters"] = args ? args.constantParameters : undefined;
+            resourceInputs["eiamAppId"] = args ? args.eiamAppId : undefined;
+            resourceInputs["eiamAppType"] = args ? args.eiamAppType : undefined;
+            resourceInputs["eiamAuthType"] = args ? args.eiamAuthType : undefined;
             resourceInputs["enableCors"] = args ? args.enableCors : undefined;
+            resourceInputs["eventBusId"] = args ? args.eventBusId : undefined;
+            resourceInputs["isBase64Encoded"] = args ? args.isBase64Encoded : undefined;
+            resourceInputs["isDebugAfterCharge"] = args ? args.isDebugAfterCharge : undefined;
+            resourceInputs["isDeleteResponseErrorCodes"] = args ? args.isDeleteResponseErrorCodes : undefined;
+            resourceInputs["microServices"] = args ? args.microServices : undefined;
+            resourceInputs["oauthConfig"] = args ? args.oauthConfig : undefined;
+            resourceInputs["owner"] = args ? args.owner : undefined;
             resourceInputs["preLimit"] = args ? args.preLimit : undefined;
             resourceInputs["protocol"] = args ? args.protocol : undefined;
             resourceInputs["releaseLimit"] = args ? args.releaseLimit : undefined;
@@ -271,6 +467,7 @@ export class Api extends pulumi.CustomResource {
             resourceInputs["responseFailExample"] = args ? args.responseFailExample : undefined;
             resourceInputs["responseSuccessExample"] = args ? args.responseSuccessExample : undefined;
             resourceInputs["responseType"] = args ? args.responseType : undefined;
+            resourceInputs["serviceConfigCosConfig"] = args ? args.serviceConfigCosConfig : undefined;
             resourceInputs["serviceConfigMethod"] = args ? args.serviceConfigMethod : undefined;
             resourceInputs["serviceConfigMockReturnMessage"] = args ? args.serviceConfigMockReturnMessage : undefined;
             resourceInputs["serviceConfigPath"] = args ? args.serviceConfigPath : undefined;
@@ -278,12 +475,33 @@ export class Api extends pulumi.CustomResource {
             resourceInputs["serviceConfigScfFunctionName"] = args ? args.serviceConfigScfFunctionName : undefined;
             resourceInputs["serviceConfigScfFunctionNamespace"] = args ? args.serviceConfigScfFunctionNamespace : undefined;
             resourceInputs["serviceConfigScfFunctionQualifier"] = args ? args.serviceConfigScfFunctionQualifier : undefined;
+            resourceInputs["serviceConfigScfFunctionType"] = args ? args.serviceConfigScfFunctionType : undefined;
+            resourceInputs["serviceConfigScfIsIntegratedResponse"] = args ? args.serviceConfigScfIsIntegratedResponse : undefined;
             resourceInputs["serviceConfigTimeout"] = args ? args.serviceConfigTimeout : undefined;
             resourceInputs["serviceConfigType"] = args ? args.serviceConfigType : undefined;
+            resourceInputs["serviceConfigUpstreamId"] = args ? args.serviceConfigUpstreamId : undefined;
             resourceInputs["serviceConfigUrl"] = args ? args.serviceConfigUrl : undefined;
             resourceInputs["serviceConfigVpcId"] = args ? args.serviceConfigVpcId : undefined;
+            resourceInputs["serviceConfigWebsocketCleanupFunctionName"] = args ? args.serviceConfigWebsocketCleanupFunctionName : undefined;
+            resourceInputs["serviceConfigWebsocketCleanupFunctionNamespace"] = args ? args.serviceConfigWebsocketCleanupFunctionNamespace : undefined;
+            resourceInputs["serviceConfigWebsocketCleanupFunctionQualifier"] = args ? args.serviceConfigWebsocketCleanupFunctionQualifier : undefined;
+            resourceInputs["serviceConfigWebsocketRegisterFunctionName"] = args ? args.serviceConfigWebsocketRegisterFunctionName : undefined;
+            resourceInputs["serviceConfigWebsocketRegisterFunctionNamespace"] = args ? args.serviceConfigWebsocketRegisterFunctionNamespace : undefined;
+            resourceInputs["serviceConfigWebsocketRegisterFunctionQualifier"] = args ? args.serviceConfigWebsocketRegisterFunctionQualifier : undefined;
+            resourceInputs["serviceConfigWebsocketTransportFunctionName"] = args ? args.serviceConfigWebsocketTransportFunctionName : undefined;
+            resourceInputs["serviceConfigWebsocketTransportFunctionNamespace"] = args ? args.serviceConfigWebsocketTransportFunctionNamespace : undefined;
+            resourceInputs["serviceConfigWebsocketTransportFunctionQualifier"] = args ? args.serviceConfigWebsocketTransportFunctionQualifier : undefined;
             resourceInputs["serviceId"] = args ? args.serviceId : undefined;
+            resourceInputs["serviceParameters"] = args ? args.serviceParameters : undefined;
+            resourceInputs["serviceTsfHealthCheckConf"] = args ? args.serviceTsfHealthCheckConf : undefined;
+            resourceInputs["serviceTsfLoadBalanceConf"] = args ? args.serviceTsfLoadBalanceConf : undefined;
+            resourceInputs["targetNamespaceId"] = args ? args.targetNamespaceId : undefined;
+            resourceInputs["targetServices"] = args ? args.targetServices : undefined;
+            resourceInputs["targetServicesHealthCheckConf"] = args ? args.targetServicesHealthCheckConf : undefined;
+            resourceInputs["targetServicesLoadBalanceConf"] = args ? args.targetServicesLoadBalanceConf : undefined;
             resourceInputs["testLimit"] = args ? args.testLimit : undefined;
+            resourceInputs["tokenTimeout"] = args ? args.tokenTimeout : undefined;
+            resourceInputs["userType"] = args ? args.userType : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["updateTime"] = undefined /*out*/;
         }
@@ -297,6 +515,10 @@ export class Api extends pulumi.CustomResource {
  */
 export interface ApiState {
     /**
+     * When `authType` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
+     */
+    apiBusinessType?: pulumi.Input<string>;
+    /**
      * Custom API description.
      */
     apiDesc?: pulumi.Input<string>;
@@ -305,17 +527,69 @@ export interface ApiState {
      */
     apiName?: pulumi.Input<string>;
     /**
-     * API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
+     * API type, supports NORMAL (regular API) and TSF (microservice API), defaults to NORMAL.
+     */
+    apiType?: pulumi.Input<string>;
+    /**
+     * The unique ID of the associated authorization API takes effect when AuthType is OAUTH and ApiBusinessType is NORMAL. The unique ID of the oauth2.0 authorized API that identifies the business API binding.
+     */
+    authRelationApiId?: pulumi.Input<string>;
+    /**
+     * API authentication type. Support SECRET (Key Pair Authentication), NONE (Authentication Exemption), OAUTH, APP (Application Authentication). The default is NONE.
      */
     authType?: pulumi.Input<string>;
+    /**
+     * Constant parameter.
+     */
+    constantParameters?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ApiConstantParameter>[]>;
     /**
      * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
     createTime?: pulumi.Input<string>;
     /**
+     * EIAM application ID.
+     */
+    eiamAppId?: pulumi.Input<string>;
+    /**
+     * EIAM application type.
+     */
+    eiamAppType?: pulumi.Input<string>;
+    /**
+     * The EIAM application authentication type supports AuthenticationOnly, Authentication, and Authorization.
+     */
+    eiamAuthType?: pulumi.Input<string>;
+    /**
      * Whether to enable CORS. Default value: `true`.
      */
     enableCors?: pulumi.Input<boolean>;
+    /**
+     * Event bus ID.
+     */
+    eventBusId?: pulumi.Input<string>;
+    /**
+     * Whether to enable Base64 encoding will only take effect when the backend is scf.
+     */
+    isBase64Encoded?: pulumi.Input<boolean>;
+    /**
+     * Charge after starting debugging. (Cloud Market Reserved Fields).
+     */
+    isDebugAfterCharge?: pulumi.Input<boolean>;
+    /**
+     * Do you want to delete the custom response configuration error code? If it is not passed or False is passed, it will not be deleted. If True is passed, all custom response configuration error codes for this API will be deleted.
+     */
+    isDeleteResponseErrorCodes?: pulumi.Input<boolean>;
+    /**
+     * API bound microservice list.
+     */
+    microServices?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ApiMicroService>[]>;
+    /**
+     * OAuth configuration. Effective when AuthType is OAUTH.
+     */
+    oauthConfig?: pulumi.Input<inputs.ApiGateway.ApiOauthConfig>;
+    /**
+     * Owner of resources.
+     */
+    owner?: pulumi.Input<string>;
     /**
      * API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
      */
@@ -357,6 +631,10 @@ export interface ApiState {
      */
     responseType?: pulumi.Input<string>;
     /**
+     * API backend COS configuration. If ServiceType is COS, then this parameter must be passed.Note: This field may return null, indicating that a valid value cannot be obtained.
+     */
+    serviceConfigCosConfig?: pulumi.Input<inputs.ApiGateway.ApiServiceConfigCosConfig>;
+    /**
      * API backend service request method, such as `GET`. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigMethod` and backend method `serviceConfigMethod` can be different.
      */
     serviceConfigMethod?: pulumi.Input<string>;
@@ -369,7 +647,7 @@ export interface ApiState {
      */
     serviceConfigPath?: pulumi.Input<string>;
     /**
-     * Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+     * Backend type. Effective when enabling vpc, currently supported types are clb, cvm, and upstream.
      */
     serviceConfigProduct?: pulumi.Input<string>;
     /**
@@ -385,15 +663,27 @@ export interface ApiState {
      */
     serviceConfigScfFunctionQualifier?: pulumi.Input<string>;
     /**
+     * Scf function type. Effective when the backend type is SCF. Support Event Triggering (EVENT) and HTTP Direct Cloud Function (HTTP).
+     */
+    serviceConfigScfFunctionType?: pulumi.Input<string>;
+    /**
+     * Whether to enable response integration. Effective when the backend type is SCF.
+     */
+    serviceConfigScfIsIntegratedResponse?: pulumi.Input<boolean>;
+    /**
      * API backend service timeout period in seconds. Default value: `5`.
      */
     serviceConfigTimeout?: pulumi.Input<number>;
     /**
-     * API backend service type. Valid values: `WEBSOCKET`, `HTTP`, `SCF`, `MOCK`. Default value: `HTTP`.
+     * The backend service type of the API. Supports HTTP, MOCK, TSF, SCF, WEBSOCKET, COS, TARGET (internal testing).
      */
     serviceConfigType?: pulumi.Input<string>;
     /**
-     * API backend service url. This parameter is required when `serviceConfigType` is `HTTP`.
+     * Only required when binding to VPC channelsNote: This field may return null, indicating that a valid value cannot be obtained.
+     */
+    serviceConfigUpstreamId?: pulumi.Input<string>;
+    /**
+     * The backend service URL of the API. If the ServiceType is HTTP, this parameter must be passed.
      */
     serviceConfigUrl?: pulumi.Input<string>;
     /**
@@ -401,23 +691,99 @@ export interface ApiState {
      */
     serviceConfigVpcId?: pulumi.Input<string>;
     /**
-     * Which service this API belongs. Refer to resource `tencentcloud.ApiGateway.Service`.
+     * Scf websocket cleaning function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketCleanupFunctionName?: pulumi.Input<string>;
+    /**
+     * Scf websocket cleans up the function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketCleanupFunctionNamespace?: pulumi.Input<string>;
+    /**
+     * Scf websocket cleaning function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketCleanupFunctionQualifier?: pulumi.Input<string>;
+    /**
+     * Scf websocket registration function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketRegisterFunctionName?: pulumi.Input<string>;
+    /**
+     * Scf websocket registers function namespaces. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketRegisterFunctionNamespace?: pulumi.Input<string>;
+    /**
+     * Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketRegisterFunctionQualifier?: pulumi.Input<string>;
+    /**
+     * Scf websocket transfer function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketTransportFunctionName?: pulumi.Input<string>;
+    /**
+     * Scf websocket transfer function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketTransportFunctionNamespace?: pulumi.Input<string>;
+    /**
+     * Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketTransportFunctionQualifier?: pulumi.Input<string>;
+    /**
+     * The unique ID of the service where the API is located. Refer to resource `tencentcloud.ApiGateway.Service`.
      */
     serviceId?: pulumi.Input<string>;
+    /**
+     * The backend service parameters of the API.
+     */
+    serviceParameters?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ApiServiceParameter>[]>;
+    /**
+     * Health check configuration for microservices.
+     */
+    serviceTsfHealthCheckConf?: pulumi.Input<inputs.ApiGateway.ApiServiceTsfHealthCheckConf>;
+    /**
+     * Load balancing configuration for microservices.
+     */
+    serviceTsfLoadBalanceConf?: pulumi.Input<inputs.ApiGateway.ApiServiceTsfLoadBalanceConf>;
+    /**
+     * Tsf serverless namespace ID. (In internal testing).
+     */
+    targetNamespaceId?: pulumi.Input<string>;
+    /**
+     * Target type backend resource information. (Internal testing stage).
+     */
+    targetServices?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ApiTargetService>[]>;
+    /**
+     * Target health check configuration. (Internal testing stage).
+     */
+    targetServicesHealthCheckConf?: pulumi.Input<inputs.ApiGateway.ApiTargetServicesHealthCheckConf>;
+    /**
+     * Target type load balancing configuration. (Internal testing stage).
+     */
+    targetServicesLoadBalanceConf?: pulumi.Input<number>;
     /**
      * API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
      */
     testLimit?: pulumi.Input<number>;
     /**
+     * The effective time of the EIAM application token, measured in seconds, defaults to 7200 seconds.
+     */
+    tokenTimeout?: pulumi.Input<number>;
+    /**
      * Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
     updateTime?: pulumi.Input<string>;
+    /**
+     * User type.
+     */
+    userType?: pulumi.Input<string>;
 }
 
 /**
  * The set of arguments for constructing a Api resource.
  */
 export interface ApiArgs {
+    /**
+     * When `authType` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
+     */
+    apiBusinessType?: pulumi.Input<string>;
     /**
      * Custom API description.
      */
@@ -427,13 +793,65 @@ export interface ApiArgs {
      */
     apiName: pulumi.Input<string>;
     /**
-     * API authentication type. Valid values: `SECRET` (key pair authentication),`NONE` (no authentication). Default value: `NONE`.
+     * API type, supports NORMAL (regular API) and TSF (microservice API), defaults to NORMAL.
+     */
+    apiType?: pulumi.Input<string>;
+    /**
+     * The unique ID of the associated authorization API takes effect when AuthType is OAUTH and ApiBusinessType is NORMAL. The unique ID of the oauth2.0 authorized API that identifies the business API binding.
+     */
+    authRelationApiId?: pulumi.Input<string>;
+    /**
+     * API authentication type. Support SECRET (Key Pair Authentication), NONE (Authentication Exemption), OAUTH, APP (Application Authentication). The default is NONE.
      */
     authType?: pulumi.Input<string>;
+    /**
+     * Constant parameter.
+     */
+    constantParameters?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ApiConstantParameter>[]>;
+    /**
+     * EIAM application ID.
+     */
+    eiamAppId?: pulumi.Input<string>;
+    /**
+     * EIAM application type.
+     */
+    eiamAppType?: pulumi.Input<string>;
+    /**
+     * The EIAM application authentication type supports AuthenticationOnly, Authentication, and Authorization.
+     */
+    eiamAuthType?: pulumi.Input<string>;
     /**
      * Whether to enable CORS. Default value: `true`.
      */
     enableCors?: pulumi.Input<boolean>;
+    /**
+     * Event bus ID.
+     */
+    eventBusId?: pulumi.Input<string>;
+    /**
+     * Whether to enable Base64 encoding will only take effect when the backend is scf.
+     */
+    isBase64Encoded?: pulumi.Input<boolean>;
+    /**
+     * Charge after starting debugging. (Cloud Market Reserved Fields).
+     */
+    isDebugAfterCharge?: pulumi.Input<boolean>;
+    /**
+     * Do you want to delete the custom response configuration error code? If it is not passed or False is passed, it will not be deleted. If True is passed, all custom response configuration error codes for this API will be deleted.
+     */
+    isDeleteResponseErrorCodes?: pulumi.Input<boolean>;
+    /**
+     * API bound microservice list.
+     */
+    microServices?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ApiMicroService>[]>;
+    /**
+     * OAuth configuration. Effective when AuthType is OAUTH.
+     */
+    oauthConfig?: pulumi.Input<inputs.ApiGateway.ApiOauthConfig>;
+    /**
+     * Owner of resources.
+     */
+    owner?: pulumi.Input<string>;
     /**
      * API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
      */
@@ -475,6 +893,10 @@ export interface ApiArgs {
      */
     responseType?: pulumi.Input<string>;
     /**
+     * API backend COS configuration. If ServiceType is COS, then this parameter must be passed.Note: This field may return null, indicating that a valid value cannot be obtained.
+     */
+    serviceConfigCosConfig?: pulumi.Input<inputs.ApiGateway.ApiServiceConfigCosConfig>;
+    /**
      * API backend service request method, such as `GET`. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigMethod` and backend method `serviceConfigMethod` can be different.
      */
     serviceConfigMethod?: pulumi.Input<string>;
@@ -487,7 +909,7 @@ export interface ApiArgs {
      */
     serviceConfigPath?: pulumi.Input<string>;
     /**
-     * Backend type. This parameter takes effect when VPC is enabled. Currently, only `clb` is supported.
+     * Backend type. Effective when enabling vpc, currently supported types are clb, cvm, and upstream.
      */
     serviceConfigProduct?: pulumi.Input<string>;
     /**
@@ -503,15 +925,27 @@ export interface ApiArgs {
      */
     serviceConfigScfFunctionQualifier?: pulumi.Input<string>;
     /**
+     * Scf function type. Effective when the backend type is SCF. Support Event Triggering (EVENT) and HTTP Direct Cloud Function (HTTP).
+     */
+    serviceConfigScfFunctionType?: pulumi.Input<string>;
+    /**
+     * Whether to enable response integration. Effective when the backend type is SCF.
+     */
+    serviceConfigScfIsIntegratedResponse?: pulumi.Input<boolean>;
+    /**
      * API backend service timeout period in seconds. Default value: `5`.
      */
     serviceConfigTimeout?: pulumi.Input<number>;
     /**
-     * API backend service type. Valid values: `WEBSOCKET`, `HTTP`, `SCF`, `MOCK`. Default value: `HTTP`.
+     * The backend service type of the API. Supports HTTP, MOCK, TSF, SCF, WEBSOCKET, COS, TARGET (internal testing).
      */
     serviceConfigType?: pulumi.Input<string>;
     /**
-     * API backend service url. This parameter is required when `serviceConfigType` is `HTTP`.
+     * Only required when binding to VPC channelsNote: This field may return null, indicating that a valid value cannot be obtained.
+     */
+    serviceConfigUpstreamId?: pulumi.Input<string>;
+    /**
+     * The backend service URL of the API. If the ServiceType is HTTP, this parameter must be passed.
      */
     serviceConfigUrl?: pulumi.Input<string>;
     /**
@@ -519,11 +953,83 @@ export interface ApiArgs {
      */
     serviceConfigVpcId?: pulumi.Input<string>;
     /**
-     * Which service this API belongs. Refer to resource `tencentcloud.ApiGateway.Service`.
+     * Scf websocket cleaning function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketCleanupFunctionName?: pulumi.Input<string>;
+    /**
+     * Scf websocket cleans up the function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketCleanupFunctionNamespace?: pulumi.Input<string>;
+    /**
+     * Scf websocket cleaning function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketCleanupFunctionQualifier?: pulumi.Input<string>;
+    /**
+     * Scf websocket registration function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketRegisterFunctionName?: pulumi.Input<string>;
+    /**
+     * Scf websocket registers function namespaces. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketRegisterFunctionNamespace?: pulumi.Input<string>;
+    /**
+     * Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketRegisterFunctionQualifier?: pulumi.Input<string>;
+    /**
+     * Scf websocket transfer function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketTransportFunctionName?: pulumi.Input<string>;
+    /**
+     * Scf websocket transfer function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketTransportFunctionNamespace?: pulumi.Input<string>;
+    /**
+     * Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
+     */
+    serviceConfigWebsocketTransportFunctionQualifier?: pulumi.Input<string>;
+    /**
+     * The unique ID of the service where the API is located. Refer to resource `tencentcloud.ApiGateway.Service`.
      */
     serviceId: pulumi.Input<string>;
+    /**
+     * The backend service parameters of the API.
+     */
+    serviceParameters?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ApiServiceParameter>[]>;
+    /**
+     * Health check configuration for microservices.
+     */
+    serviceTsfHealthCheckConf?: pulumi.Input<inputs.ApiGateway.ApiServiceTsfHealthCheckConf>;
+    /**
+     * Load balancing configuration for microservices.
+     */
+    serviceTsfLoadBalanceConf?: pulumi.Input<inputs.ApiGateway.ApiServiceTsfLoadBalanceConf>;
+    /**
+     * Tsf serverless namespace ID. (In internal testing).
+     */
+    targetNamespaceId?: pulumi.Input<string>;
+    /**
+     * Target type backend resource information. (Internal testing stage).
+     */
+    targetServices?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ApiTargetService>[]>;
+    /**
+     * Target health check configuration. (Internal testing stage).
+     */
+    targetServicesHealthCheckConf?: pulumi.Input<inputs.ApiGateway.ApiTargetServicesHealthCheckConf>;
+    /**
+     * Target type load balancing configuration. (Internal testing stage).
+     */
+    targetServicesLoadBalanceConf?: pulumi.Input<number>;
     /**
      * API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
      */
     testLimit?: pulumi.Input<number>;
+    /**
+     * The effective time of the EIAM application token, measured in seconds, defaults to 7200 seconds.
+     */
+    tokenTimeout?: pulumi.Input<number>;
+    /**
+     * User type.
+     */
+    userType?: pulumi.Input<string>;
 }

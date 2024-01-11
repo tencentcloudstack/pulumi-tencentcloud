@@ -5,6 +5,7 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .get_metric_data import *
 from .get_node import *
 from .get_probe_data import *
 from .task_set import *

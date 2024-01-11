@@ -12,13 +12,34 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = pulumi.output(tencentcloud.Ssm.getSecrets({
- *     orderType: 1,
- *     secretName: "test",
+ * const exampleSecret = new tencentcloud.ssm.Secret("exampleSecret", {
+ *     secretName: "tf_example",
+ *     description: "desc.",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleSecrets = exampleSecret.secretName.apply(secretName => tencentcloud.Ssm.getSecretsOutput({
+ *     secretName: secretName,
  *     state: 1,
  * }));
+ * ```
+ * ### OR you can filter by tags
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Ssm.getSecrets({
+ *     secretName: tencentcloud_ssm_secret.example.secret_name,
+ *     state: 1,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
  * ```
  */
 export function getSecrets(args?: GetSecretsArgs, opts?: pulumi.InvokeOptions): Promise<GetSecretsResult> {
@@ -30,8 +51,10 @@ export function getSecrets(args?: GetSecretsArgs, opts?: pulumi.InvokeOptions): 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
     return pulumi.runtime.invoke("tencentcloud:Ssm/getSecrets:getSecrets", {
         "orderType": args.orderType,
+        "productName": args.productName,
         "resultOutputFile": args.resultOutputFile,
         "secretName": args.secretName,
+        "secretType": args.secretType,
         "state": args.state,
         "tags": args.tags,
     }, opts);
@@ -46,6 +69,10 @@ export interface GetSecretsArgs {
      */
     orderType?: number;
     /**
+     * This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.
+     */
+    productName?: string;
+    /**
      * Used to save results.
      */
     resultOutputFile?: string;
@@ -53,6 +80,10 @@ export interface GetSecretsArgs {
      * Secret name used to filter result.
      */
     secretName?: string;
+    /**
+     * 0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.
+     */
+    secretType?: number;
     /**
      * Filter by state of secret. `0` - all secrets are queried, `1` - only Enabled secrets are queried, `2` - only Disabled secrets are queried, `3` - only PendingDelete secrets are queried.
      */
@@ -72,6 +103,10 @@ export interface GetSecretsResult {
      */
     readonly id: string;
     readonly orderType?: number;
+    /**
+     * Cloud product name, only effective when SecretType is 1, which means the credential type is cloud product credential.
+     */
+    readonly productName?: string;
     readonly resultOutputFile?: string;
     /**
      * A list of SSM secrets.
@@ -81,6 +116,10 @@ export interface GetSecretsResult {
      * Name of secret.
      */
     readonly secretName?: string;
+    /**
+     * 0- User defined credentials; 1- Cloud product credentials; 2- SSH key pair credentials; 3- Cloud API key pair credentials.
+     */
+    readonly secretType?: number;
     readonly state?: number;
     readonly tags?: {[key: string]: any};
 }
@@ -98,6 +137,10 @@ export interface GetSecretsOutputArgs {
      */
     orderType?: pulumi.Input<number>;
     /**
+     * This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.
+     */
+    productName?: pulumi.Input<string>;
+    /**
      * Used to save results.
      */
     resultOutputFile?: pulumi.Input<string>;
@@ -105,6 +148,10 @@ export interface GetSecretsOutputArgs {
      * Secret name used to filter result.
      */
     secretName?: pulumi.Input<string>;
+    /**
+     * 0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.
+     */
+    secretType?: pulumi.Input<number>;
     /**
      * Filter by state of secret. `0` - all secrets are queried, `1` - only Enabled secrets are queried, `2` - only Disabled secrets are queried, `3` - only PendingDelete secrets are queried.
      */

@@ -3159,6 +3159,8 @@ type SyncConfigDstInfo struct {
 	CcnId *string `pulumi:"ccnId"`
 	// CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
 	CvmInstanceId *string `pulumi:"cvmInstanceId"`
+	// The network environment to which the database belongs. It is required when AccessType is Cloud Network (CCN). `UserIDC` represents the user IDC. `TencentVPC` represents Tencent Cloud VPC. Note: This field may return null, indicating that no valid value can be obtained.
+	DatabaseNetEnv *string `pulumi:"databaseNetEnv"`
 	// Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
 	DbKernel *string `pulumi:"dbKernel"`
 	// Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
@@ -3223,6 +3225,8 @@ type SyncConfigDstInfoArgs struct {
 	CcnId pulumi.StringPtrInput `pulumi:"ccnId"`
 	// CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
 	CvmInstanceId pulumi.StringPtrInput `pulumi:"cvmInstanceId"`
+	// The network environment to which the database belongs. It is required when AccessType is Cloud Network (CCN). `UserIDC` represents the user IDC. `TencentVPC` represents Tencent Cloud VPC. Note: This field may return null, indicating that no valid value can be obtained.
+	DatabaseNetEnv pulumi.StringPtrInput `pulumi:"databaseNetEnv"`
 	// Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
 	DbKernel pulumi.StringPtrInput `pulumi:"dbKernel"`
 	// Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
@@ -3365,6 +3369,11 @@ func (o SyncConfigDstInfoOutput) CcnId() pulumi.StringPtrOutput {
 // CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
 func (o SyncConfigDstInfoOutput) CvmInstanceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.CvmInstanceId }).(pulumi.StringPtrOutput)
+}
+
+// The network environment to which the database belongs. It is required when AccessType is Cloud Network (CCN). `UserIDC` represents the user IDC. `TencentVPC` represents Tencent Cloud VPC. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoOutput) DatabaseNetEnv() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigDstInfo) *string { return v.DatabaseNetEnv }).(pulumi.StringPtrOutput)
 }
 
 // Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
@@ -3538,6 +3547,16 @@ func (o SyncConfigDstInfoPtrOutput) CvmInstanceId() pulumi.StringPtrOutput {
 			return nil
 		}
 		return v.CvmInstanceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The network environment to which the database belongs. It is required when AccessType is Cloud Network (CCN). `UserIDC` represents the user IDC. `TencentVPC` represents Tencent Cloud VPC. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigDstInfoPtrOutput) DatabaseNetEnv() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigDstInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DatabaseNetEnv
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -5077,6 +5096,8 @@ type SyncConfigSrcInfo struct {
 	CcnId *string `pulumi:"ccnId"`
 	// CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
 	CvmInstanceId *string `pulumi:"cvmInstanceId"`
+	// The network environment to which the database belongs. It is required when AccessType is Cloud Network (CCN). `UserIDC` represents the user IDC. `TencentVPC` represents Tencent Cloud VPC. Note: This field may return null, indicating that no valid value can be obtained.
+	DatabaseNetEnv *string `pulumi:"databaseNetEnv"`
 	// Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
 	DbKernel *string `pulumi:"dbKernel"`
 	// Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
@@ -5141,6 +5162,8 @@ type SyncConfigSrcInfoArgs struct {
 	CcnId pulumi.StringPtrInput `pulumi:"ccnId"`
 	// CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
 	CvmInstanceId pulumi.StringPtrInput `pulumi:"cvmInstanceId"`
+	// The network environment to which the database belongs. It is required when AccessType is Cloud Network (CCN). `UserIDC` represents the user IDC. `TencentVPC` represents Tencent Cloud VPC. Note: This field may return null, indicating that no valid value can be obtained.
+	DatabaseNetEnv pulumi.StringPtrInput `pulumi:"databaseNetEnv"`
 	// Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
 	DbKernel pulumi.StringPtrInput `pulumi:"dbKernel"`
 	// Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
@@ -5283,6 +5306,11 @@ func (o SyncConfigSrcInfoOutput) CcnId() pulumi.StringPtrOutput {
 // CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
 func (o SyncConfigSrcInfoOutput) CvmInstanceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.CvmInstanceId }).(pulumi.StringPtrOutput)
+}
+
+// The network environment to which the database belongs. It is required when AccessType is Cloud Network (CCN). `UserIDC` represents the user IDC. `TencentVPC` represents Tencent Cloud VPC. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoOutput) DatabaseNetEnv() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigSrcInfo) *string { return v.DatabaseNetEnv }).(pulumi.StringPtrOutput)
 }
 
 // Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
@@ -5456,6 +5484,16 @@ func (o SyncConfigSrcInfoPtrOutput) CvmInstanceId() pulumi.StringPtrOutput {
 			return nil
 		}
 		return v.CvmInstanceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The network environment to which the database belongs. It is required when AccessType is Cloud Network (CCN). `UserIDC` represents the user IDC. `TencentVPC` represents Tencent Cloud VPC. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigSrcInfoPtrOutput) DatabaseNetEnv() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncConfigSrcInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DatabaseNetEnv
 	}).(pulumi.StringPtrOutput)
 }
 

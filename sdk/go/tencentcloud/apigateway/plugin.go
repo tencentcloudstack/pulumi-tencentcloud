@@ -29,17 +29,17 @@ import (
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		tmpJSON0, err := json.Marshal(map[string]interface{}{
 // 			"type":   "white_list",
-// 			"blocks": "1.1.1.1\n2.2.2.2",
+// 			"blocks": "1.1.1.1",
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
 // 		json0 := string(tmpJSON0)
-// 		_, err := ApiGateway.NewPlugin(ctx, "plugin", &ApiGateway.PluginArgs{
-// 			PluginName:  pulumi.String("terraform-plugin-test"),
+// 		_, err := ApiGateway.NewPlugin(ctx, "example", &ApiGateway.PluginArgs{
+// 			PluginName:  pulumi.String("tf-example"),
 // 			PluginType:  pulumi.String("IPControl"),
 // 			PluginData:  pulumi.String(json0),
-// 			Description: pulumi.String("terraform test"),
+// 			Description: pulumi.String("desc."),
 // 		})
 // 		if err != nil {
 // 			return err

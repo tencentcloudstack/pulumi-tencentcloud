@@ -493,6 +493,139 @@ func (o FirewallRuleFirewallRuleArrayOutput) Index(i pulumi.IntInput) FirewallRu
 	}).(FirewallRuleFirewallRuleOutput)
 }
 
+type FirewallTemplateTemplateRule struct {
+	// Action. Values: ACCEPT, DROP. The default is `ACCEPT`.
+	Action *string `pulumi:"action"`
+	// Network segment or IP (mutually exclusive). The default is `0.0.0.0`, indicating all sources.
+	CidrBlock *string `pulumi:"cidrBlock"`
+	// Firewall rule description.
+	FirewallRuleDescription *string `pulumi:"firewallRuleDescription"`
+	// Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.
+	Port *string `pulumi:"port"`
+	// Protocol. Values: TCP, UDP, ICMP, ALL.
+	Protocol string `pulumi:"protocol"`
+}
+
+// FirewallTemplateTemplateRuleInput is an input type that accepts FirewallTemplateTemplateRuleArgs and FirewallTemplateTemplateRuleOutput values.
+// You can construct a concrete instance of `FirewallTemplateTemplateRuleInput` via:
+//
+//          FirewallTemplateTemplateRuleArgs{...}
+type FirewallTemplateTemplateRuleInput interface {
+	pulumi.Input
+
+	ToFirewallTemplateTemplateRuleOutput() FirewallTemplateTemplateRuleOutput
+	ToFirewallTemplateTemplateRuleOutputWithContext(context.Context) FirewallTemplateTemplateRuleOutput
+}
+
+type FirewallTemplateTemplateRuleArgs struct {
+	// Action. Values: ACCEPT, DROP. The default is `ACCEPT`.
+	Action pulumi.StringPtrInput `pulumi:"action"`
+	// Network segment or IP (mutually exclusive). The default is `0.0.0.0`, indicating all sources.
+	CidrBlock pulumi.StringPtrInput `pulumi:"cidrBlock"`
+	// Firewall rule description.
+	FirewallRuleDescription pulumi.StringPtrInput `pulumi:"firewallRuleDescription"`
+	// Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.
+	Port pulumi.StringPtrInput `pulumi:"port"`
+	// Protocol. Values: TCP, UDP, ICMP, ALL.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+}
+
+func (FirewallTemplateTemplateRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FirewallTemplateTemplateRule)(nil)).Elem()
+}
+
+func (i FirewallTemplateTemplateRuleArgs) ToFirewallTemplateTemplateRuleOutput() FirewallTemplateTemplateRuleOutput {
+	return i.ToFirewallTemplateTemplateRuleOutputWithContext(context.Background())
+}
+
+func (i FirewallTemplateTemplateRuleArgs) ToFirewallTemplateTemplateRuleOutputWithContext(ctx context.Context) FirewallTemplateTemplateRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FirewallTemplateTemplateRuleOutput)
+}
+
+// FirewallTemplateTemplateRuleArrayInput is an input type that accepts FirewallTemplateTemplateRuleArray and FirewallTemplateTemplateRuleArrayOutput values.
+// You can construct a concrete instance of `FirewallTemplateTemplateRuleArrayInput` via:
+//
+//          FirewallTemplateTemplateRuleArray{ FirewallTemplateTemplateRuleArgs{...} }
+type FirewallTemplateTemplateRuleArrayInput interface {
+	pulumi.Input
+
+	ToFirewallTemplateTemplateRuleArrayOutput() FirewallTemplateTemplateRuleArrayOutput
+	ToFirewallTemplateTemplateRuleArrayOutputWithContext(context.Context) FirewallTemplateTemplateRuleArrayOutput
+}
+
+type FirewallTemplateTemplateRuleArray []FirewallTemplateTemplateRuleInput
+
+func (FirewallTemplateTemplateRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FirewallTemplateTemplateRule)(nil)).Elem()
+}
+
+func (i FirewallTemplateTemplateRuleArray) ToFirewallTemplateTemplateRuleArrayOutput() FirewallTemplateTemplateRuleArrayOutput {
+	return i.ToFirewallTemplateTemplateRuleArrayOutputWithContext(context.Background())
+}
+
+func (i FirewallTemplateTemplateRuleArray) ToFirewallTemplateTemplateRuleArrayOutputWithContext(ctx context.Context) FirewallTemplateTemplateRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FirewallTemplateTemplateRuleArrayOutput)
+}
+
+type FirewallTemplateTemplateRuleOutput struct{ *pulumi.OutputState }
+
+func (FirewallTemplateTemplateRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FirewallTemplateTemplateRule)(nil)).Elem()
+}
+
+func (o FirewallTemplateTemplateRuleOutput) ToFirewallTemplateTemplateRuleOutput() FirewallTemplateTemplateRuleOutput {
+	return o
+}
+
+func (o FirewallTemplateTemplateRuleOutput) ToFirewallTemplateTemplateRuleOutputWithContext(ctx context.Context) FirewallTemplateTemplateRuleOutput {
+	return o
+}
+
+// Action. Values: ACCEPT, DROP. The default is `ACCEPT`.
+func (o FirewallTemplateTemplateRuleOutput) Action() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FirewallTemplateTemplateRule) *string { return v.Action }).(pulumi.StringPtrOutput)
+}
+
+// Network segment or IP (mutually exclusive). The default is `0.0.0.0`, indicating all sources.
+func (o FirewallTemplateTemplateRuleOutput) CidrBlock() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FirewallTemplateTemplateRule) *string { return v.CidrBlock }).(pulumi.StringPtrOutput)
+}
+
+// Firewall rule description.
+func (o FirewallTemplateTemplateRuleOutput) FirewallRuleDescription() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FirewallTemplateTemplateRule) *string { return v.FirewallRuleDescription }).(pulumi.StringPtrOutput)
+}
+
+// Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.
+func (o FirewallTemplateTemplateRuleOutput) Port() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FirewallTemplateTemplateRule) *string { return v.Port }).(pulumi.StringPtrOutput)
+}
+
+// Protocol. Values: TCP, UDP, ICMP, ALL.
+func (o FirewallTemplateTemplateRuleOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v FirewallTemplateTemplateRule) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+type FirewallTemplateTemplateRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (FirewallTemplateTemplateRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FirewallTemplateTemplateRule)(nil)).Elem()
+}
+
+func (o FirewallTemplateTemplateRuleArrayOutput) ToFirewallTemplateTemplateRuleArrayOutput() FirewallTemplateTemplateRuleArrayOutput {
+	return o
+}
+
+func (o FirewallTemplateTemplateRuleArrayOutput) ToFirewallTemplateTemplateRuleArrayOutputWithContext(ctx context.Context) FirewallTemplateTemplateRuleArrayOutput {
+	return o
+}
+
+func (o FirewallTemplateTemplateRuleArrayOutput) Index(i pulumi.IntInput) FirewallTemplateTemplateRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FirewallTemplateTemplateRule {
+		return vs[0].([]FirewallTemplateTemplateRule)[vs[1].(int)]
+	}).(FirewallTemplateTemplateRuleOutput)
+}
+
 type InstanceContainer struct {
 	// The command to run.
 	Command *string `pulumi:"command"`
@@ -5757,6 +5890,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DiskDiskChargePrepaidPtrInput)(nil)).Elem(), DiskDiskChargePrepaidArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FirewallRuleFirewallRuleInput)(nil)).Elem(), FirewallRuleFirewallRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FirewallRuleFirewallRuleArrayInput)(nil)).Elem(), FirewallRuleFirewallRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FirewallTemplateTemplateRuleInput)(nil)).Elem(), FirewallTemplateTemplateRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FirewallTemplateTemplateRuleArrayInput)(nil)).Elem(), FirewallTemplateTemplateRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceContainerInput)(nil)).Elem(), InstanceContainerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceContainerArrayInput)(nil)).Elem(), InstanceContainerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceContainerEnvInput)(nil)).Elem(), InstanceContainerEnvArgs{})
@@ -5837,6 +5972,8 @@ func init() {
 	pulumi.RegisterOutputType(DiskDiskChargePrepaidPtrOutput{})
 	pulumi.RegisterOutputType(FirewallRuleFirewallRuleOutput{})
 	pulumi.RegisterOutputType(FirewallRuleFirewallRuleArrayOutput{})
+	pulumi.RegisterOutputType(FirewallTemplateTemplateRuleOutput{})
+	pulumi.RegisterOutputType(FirewallTemplateTemplateRuleArrayOutput{})
 	pulumi.RegisterOutputType(InstanceContainerOutput{})
 	pulumi.RegisterOutputType(InstanceContainerArrayOutput{})
 	pulumi.RegisterOutputType(InstanceContainerEnvOutput{})

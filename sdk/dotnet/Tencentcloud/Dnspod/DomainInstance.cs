@@ -75,6 +75,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public Output<string?> Remark { get; private set; } = null!;
 
         /// <summary>
+        /// Is secondary DNS enabled.
+        /// </summary>
+        [Output("slaveDns")]
+        public Output<string> SlaveDns { get; private set; } = null!;
+
+        /// <summary>
         /// The status of Domain.
         /// </summary>
         [Output("status")]
@@ -193,6 +199,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// </summary>
         [Input("remark")]
         public Input<string>? Remark { get; set; }
+
+        /// <summary>
+        /// Is secondary DNS enabled.
+        /// </summary>
+        [Input("slaveDns")]
+        public Input<string>? SlaveDns { get; set; }
 
         /// <summary>
         /// The status of Domain.

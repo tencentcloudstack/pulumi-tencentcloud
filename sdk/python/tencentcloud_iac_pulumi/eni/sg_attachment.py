@@ -99,6 +99,8 @@ class SgAttachment(pulumi.CustomResource):
         """
         Provides a resource to create a eni_sg_attachment
 
+        > **Note:** If this resource is used to bind security groups to eni, it cannot be linked to `tentcloud_eni` binding security group for simultaneous use.
+
         ## Example Usage
 
         ```python
@@ -159,6 +161,8 @@ class SgAttachment(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a eni_sg_attachment
+
+        > **Note:** If this resource is used to bind security groups to eni, it cannot be linked to `tentcloud_eni` binding security group for simultaneous use.
 
         ## Example Usage
 

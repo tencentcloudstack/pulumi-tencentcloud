@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Route/table:Table":
 		r = &Table{}
+	case "tencentcloud:Route/tableAssociation:TableAssociation":
+		r = &TableAssociation{}
 	case "tencentcloud:Route/tableEntry:TableEntry":
 		r = &TableEntry{}
 	default:
@@ -41,6 +43,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Route/table",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Route/tableAssociation",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

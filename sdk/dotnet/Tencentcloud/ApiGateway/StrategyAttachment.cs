@@ -45,7 +45,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     ///         var api = new Tencentcloud.ApiGateway.Api("api", new Tencentcloud.ApiGateway.ApiArgs
     ///         {
     ///             ServiceId = serviceService.Id,
-    ///             ApiName = "hello_update",
+    ///             ApiName = "tf_example",
     ///             ApiDesc = "my hello api update",
     ///             AuthType = "SECRET",
     ///             Protocol = "HTTP",

@@ -26,10 +26,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public Input<string>? Command { get; set; }
 
         /// <summary>
+        /// Image accelerate switch.
+        /// </summary>
+        [Input("containerImageAccelerate")]
+        public Input<bool>? ContainerImageAccelerate { get; set; }
+
+        /// <summary>
         /// The entrypoint of app.
         /// </summary>
         [Input("entryPoint")]
         public Input<string>? EntryPoint { get; set; }
+
+        /// <summary>
+        /// Image function port setting. Default is `9000`, -1 indicates no port mirroring function. Other value ranges 0 ~ 65535.
+        /// </summary>
+        [Input("imagePort")]
+        public Input<int>? ImagePort { get; set; }
 
         /// <summary>
         /// The image type. personal or enterprise.

@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// <summary>
     /// Use this resource to create API gateway service.
     /// 
+    /// &gt; **NOTE:** After setting `uniq_vpc_id`, it cannot be modified.
+    /// 
     /// ## Example Usage
     /// ### Shared Service
     /// 
@@ -24,24 +26,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// {
     ///     public MyStack()
     ///     {
-    ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
     ///         {
-    ///             IpVersion = "IPv4",
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var example = new Tencentcloud.ApiGateway.Service("example", new Tencentcloud.ApiGateway.ServiceArgs
+    ///         {
+    ///             ServiceName = "tf-example",
+    ///             Protocol = "http&amp;https",
+    ///             ServiceDesc = "desc.",
     ///             NetTypes = 
     ///             {
     ///                 "INNER",
     ///                 "OUTER",
     ///             },
-    ///             PreLimit = 500,
-    ///             Protocol = "http&amp;https",
-    ///             ReleaseLimit = 500,
-    ///             ServiceDesc = "your nice service",
-    ///             ServiceName = "niceservice",
+    ///             IpVersion = "IPv4",
+    ///             UniqVpcId = vpc.Id,
     ///             Tags = 
     ///             {
-    ///                 { "test-key1", "test-value1" },
-    ///                 { "test-key2", "test-value2" },
+    ///                 { "createdBy", "terraform" },
     ///             },
+    ///             ReleaseLimit = 500,
+    ///             PreLimit = 500,
     ///             TestLimit = 500,
     ///         });
     ///     }
@@ -58,24 +64,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// {
     ///     public MyStack()
     ///     {
-    ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+    ///         var example = new Tencentcloud.ApiGateway.Service("example", new Tencentcloud.ApiGateway.ServiceArgs
     ///         {
-    ///             InstanceId = "instance-rc6fcv4e",
-    ///             IpVersion = "IPv4",
+    ///             ServiceName = "tf-example",
+    ///             Protocol = "http&amp;https",
+    ///             ServiceDesc = "desc.",
     ///             NetTypes = 
     ///             {
     ///                 "INNER",
     ///                 "OUTER",
     ///             },
-    ///             PreLimit = 500,
-    ///             Protocol = "http&amp;https",
-    ///             ReleaseLimit = 500,
-    ///             ServiceDesc = "your nice service",
-    ///             ServiceName = "service",
+    ///             IpVersion = "IPv4",
+    ///             UniqVpcId = tencentcloud_vpc.Vpc.Id,
+    ///             InstanceId = "instance-rc6fcv4e",
     ///             Tags = 
     ///             {
-    ///                 { "test-key1", "test-value1" },
+    ///                 { "createdBy", "terraform" },
     ///             },
+    ///             ReleaseLimit = 500,
+    ///             PreLimit = 500,
     ///             TestLimit = 500,
     ///         });
     ///     }
@@ -201,6 +208,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// </summary>
         [Output("testLimit")]
         public Output<int> TestLimit { get; private set; } = null!;
+
+        /// <summary>
+        /// VPC ID.
+        /// </summary>
+        [Output("uniqVpcId")]
+        public Output<string?> UniqVpcId { get; private set; } = null!;
 
         /// <summary>
         /// A list of attach usage plans.
@@ -332,6 +345,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// </summary>
         [Input("testLimit")]
         public Input<int>? TestLimit { get; set; }
+
+        /// <summary>
+        /// VPC ID.
+        /// </summary>
+        [Input("uniqVpcId")]
+        public Input<string>? UniqVpcId { get; set; }
 
         public ServiceArgs()
         {
@@ -465,6 +484,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// </summary>
         [Input("testLimit")]
         public Input<int>? TestLimit { get; set; }
+
+        /// <summary>
+        /// VPC ID.
+        /// </summary>
+        [Input("uniqVpcId")]
+        public Input<string>? UniqVpcId { get; set; }
 
         [Input("usagePlanLists")]
         private InputList<Inputs.ServiceUsagePlanListGetArgs>? _usagePlanLists;

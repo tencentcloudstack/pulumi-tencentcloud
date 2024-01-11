@@ -240,6 +240,337 @@ func (o ZoneTagSetArrayOutput) Index(i pulumi.IntInput) ZoneTagSetOutput {
 	}).(ZoneTagSetOutput)
 }
 
+type ZoneVpcAttachmentAccountVpcSet struct {
+	// Vpc region.
+	Region string `pulumi:"region"`
+	// Vpc owner uin. To grant role authorization to this account.
+	Uin string `pulumi:"uin"`
+	// Uniq Vpc Id.
+	UniqVpcId string `pulumi:"uniqVpcId"`
+}
+
+// ZoneVpcAttachmentAccountVpcSetInput is an input type that accepts ZoneVpcAttachmentAccountVpcSetArgs and ZoneVpcAttachmentAccountVpcSetOutput values.
+// You can construct a concrete instance of `ZoneVpcAttachmentAccountVpcSetInput` via:
+//
+//          ZoneVpcAttachmentAccountVpcSetArgs{...}
+type ZoneVpcAttachmentAccountVpcSetInput interface {
+	pulumi.Input
+
+	ToZoneVpcAttachmentAccountVpcSetOutput() ZoneVpcAttachmentAccountVpcSetOutput
+	ToZoneVpcAttachmentAccountVpcSetOutputWithContext(context.Context) ZoneVpcAttachmentAccountVpcSetOutput
+}
+
+type ZoneVpcAttachmentAccountVpcSetArgs struct {
+	// Vpc region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Vpc owner uin. To grant role authorization to this account.
+	Uin pulumi.StringInput `pulumi:"uin"`
+	// Uniq Vpc Id.
+	UniqVpcId pulumi.StringInput `pulumi:"uniqVpcId"`
+}
+
+func (ZoneVpcAttachmentAccountVpcSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ZoneVpcAttachmentAccountVpcSet)(nil)).Elem()
+}
+
+func (i ZoneVpcAttachmentAccountVpcSetArgs) ToZoneVpcAttachmentAccountVpcSetOutput() ZoneVpcAttachmentAccountVpcSetOutput {
+	return i.ToZoneVpcAttachmentAccountVpcSetOutputWithContext(context.Background())
+}
+
+func (i ZoneVpcAttachmentAccountVpcSetArgs) ToZoneVpcAttachmentAccountVpcSetOutputWithContext(ctx context.Context) ZoneVpcAttachmentAccountVpcSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ZoneVpcAttachmentAccountVpcSetOutput)
+}
+
+func (i ZoneVpcAttachmentAccountVpcSetArgs) ToZoneVpcAttachmentAccountVpcSetPtrOutput() ZoneVpcAttachmentAccountVpcSetPtrOutput {
+	return i.ToZoneVpcAttachmentAccountVpcSetPtrOutputWithContext(context.Background())
+}
+
+func (i ZoneVpcAttachmentAccountVpcSetArgs) ToZoneVpcAttachmentAccountVpcSetPtrOutputWithContext(ctx context.Context) ZoneVpcAttachmentAccountVpcSetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ZoneVpcAttachmentAccountVpcSetOutput).ToZoneVpcAttachmentAccountVpcSetPtrOutputWithContext(ctx)
+}
+
+// ZoneVpcAttachmentAccountVpcSetPtrInput is an input type that accepts ZoneVpcAttachmentAccountVpcSetArgs, ZoneVpcAttachmentAccountVpcSetPtr and ZoneVpcAttachmentAccountVpcSetPtrOutput values.
+// You can construct a concrete instance of `ZoneVpcAttachmentAccountVpcSetPtrInput` via:
+//
+//          ZoneVpcAttachmentAccountVpcSetArgs{...}
+//
+//  or:
+//
+//          nil
+type ZoneVpcAttachmentAccountVpcSetPtrInput interface {
+	pulumi.Input
+
+	ToZoneVpcAttachmentAccountVpcSetPtrOutput() ZoneVpcAttachmentAccountVpcSetPtrOutput
+	ToZoneVpcAttachmentAccountVpcSetPtrOutputWithContext(context.Context) ZoneVpcAttachmentAccountVpcSetPtrOutput
+}
+
+type zoneVpcAttachmentAccountVpcSetPtrType ZoneVpcAttachmentAccountVpcSetArgs
+
+func ZoneVpcAttachmentAccountVpcSetPtr(v *ZoneVpcAttachmentAccountVpcSetArgs) ZoneVpcAttachmentAccountVpcSetPtrInput {
+	return (*zoneVpcAttachmentAccountVpcSetPtrType)(v)
+}
+
+func (*zoneVpcAttachmentAccountVpcSetPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ZoneVpcAttachmentAccountVpcSet)(nil)).Elem()
+}
+
+func (i *zoneVpcAttachmentAccountVpcSetPtrType) ToZoneVpcAttachmentAccountVpcSetPtrOutput() ZoneVpcAttachmentAccountVpcSetPtrOutput {
+	return i.ToZoneVpcAttachmentAccountVpcSetPtrOutputWithContext(context.Background())
+}
+
+func (i *zoneVpcAttachmentAccountVpcSetPtrType) ToZoneVpcAttachmentAccountVpcSetPtrOutputWithContext(ctx context.Context) ZoneVpcAttachmentAccountVpcSetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ZoneVpcAttachmentAccountVpcSetPtrOutput)
+}
+
+type ZoneVpcAttachmentAccountVpcSetOutput struct{ *pulumi.OutputState }
+
+func (ZoneVpcAttachmentAccountVpcSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ZoneVpcAttachmentAccountVpcSet)(nil)).Elem()
+}
+
+func (o ZoneVpcAttachmentAccountVpcSetOutput) ToZoneVpcAttachmentAccountVpcSetOutput() ZoneVpcAttachmentAccountVpcSetOutput {
+	return o
+}
+
+func (o ZoneVpcAttachmentAccountVpcSetOutput) ToZoneVpcAttachmentAccountVpcSetOutputWithContext(ctx context.Context) ZoneVpcAttachmentAccountVpcSetOutput {
+	return o
+}
+
+func (o ZoneVpcAttachmentAccountVpcSetOutput) ToZoneVpcAttachmentAccountVpcSetPtrOutput() ZoneVpcAttachmentAccountVpcSetPtrOutput {
+	return o.ToZoneVpcAttachmentAccountVpcSetPtrOutputWithContext(context.Background())
+}
+
+func (o ZoneVpcAttachmentAccountVpcSetOutput) ToZoneVpcAttachmentAccountVpcSetPtrOutputWithContext(ctx context.Context) ZoneVpcAttachmentAccountVpcSetPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ZoneVpcAttachmentAccountVpcSet) *ZoneVpcAttachmentAccountVpcSet {
+		return &v
+	}).(ZoneVpcAttachmentAccountVpcSetPtrOutput)
+}
+
+// Vpc region.
+func (o ZoneVpcAttachmentAccountVpcSetOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v ZoneVpcAttachmentAccountVpcSet) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Vpc owner uin. To grant role authorization to this account.
+func (o ZoneVpcAttachmentAccountVpcSetOutput) Uin() pulumi.StringOutput {
+	return o.ApplyT(func(v ZoneVpcAttachmentAccountVpcSet) string { return v.Uin }).(pulumi.StringOutput)
+}
+
+// Uniq Vpc Id.
+func (o ZoneVpcAttachmentAccountVpcSetOutput) UniqVpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v ZoneVpcAttachmentAccountVpcSet) string { return v.UniqVpcId }).(pulumi.StringOutput)
+}
+
+type ZoneVpcAttachmentAccountVpcSetPtrOutput struct{ *pulumi.OutputState }
+
+func (ZoneVpcAttachmentAccountVpcSetPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ZoneVpcAttachmentAccountVpcSet)(nil)).Elem()
+}
+
+func (o ZoneVpcAttachmentAccountVpcSetPtrOutput) ToZoneVpcAttachmentAccountVpcSetPtrOutput() ZoneVpcAttachmentAccountVpcSetPtrOutput {
+	return o
+}
+
+func (o ZoneVpcAttachmentAccountVpcSetPtrOutput) ToZoneVpcAttachmentAccountVpcSetPtrOutputWithContext(ctx context.Context) ZoneVpcAttachmentAccountVpcSetPtrOutput {
+	return o
+}
+
+func (o ZoneVpcAttachmentAccountVpcSetPtrOutput) Elem() ZoneVpcAttachmentAccountVpcSetOutput {
+	return o.ApplyT(func(v *ZoneVpcAttachmentAccountVpcSet) ZoneVpcAttachmentAccountVpcSet {
+		if v != nil {
+			return *v
+		}
+		var ret ZoneVpcAttachmentAccountVpcSet
+		return ret
+	}).(ZoneVpcAttachmentAccountVpcSetOutput)
+}
+
+// Vpc region.
+func (o ZoneVpcAttachmentAccountVpcSetPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ZoneVpcAttachmentAccountVpcSet) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+// Vpc owner uin. To grant role authorization to this account.
+func (o ZoneVpcAttachmentAccountVpcSetPtrOutput) Uin() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ZoneVpcAttachmentAccountVpcSet) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Uin
+	}).(pulumi.StringPtrOutput)
+}
+
+// Uniq Vpc Id.
+func (o ZoneVpcAttachmentAccountVpcSetPtrOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ZoneVpcAttachmentAccountVpcSet) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.UniqVpcId
+	}).(pulumi.StringPtrOutput)
+}
+
+type ZoneVpcAttachmentVpcSet struct {
+	// Vpc region.
+	Region string `pulumi:"region"`
+	// Uniq Vpc Id.
+	UniqVpcId string `pulumi:"uniqVpcId"`
+}
+
+// ZoneVpcAttachmentVpcSetInput is an input type that accepts ZoneVpcAttachmentVpcSetArgs and ZoneVpcAttachmentVpcSetOutput values.
+// You can construct a concrete instance of `ZoneVpcAttachmentVpcSetInput` via:
+//
+//          ZoneVpcAttachmentVpcSetArgs{...}
+type ZoneVpcAttachmentVpcSetInput interface {
+	pulumi.Input
+
+	ToZoneVpcAttachmentVpcSetOutput() ZoneVpcAttachmentVpcSetOutput
+	ToZoneVpcAttachmentVpcSetOutputWithContext(context.Context) ZoneVpcAttachmentVpcSetOutput
+}
+
+type ZoneVpcAttachmentVpcSetArgs struct {
+	// Vpc region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Uniq Vpc Id.
+	UniqVpcId pulumi.StringInput `pulumi:"uniqVpcId"`
+}
+
+func (ZoneVpcAttachmentVpcSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ZoneVpcAttachmentVpcSet)(nil)).Elem()
+}
+
+func (i ZoneVpcAttachmentVpcSetArgs) ToZoneVpcAttachmentVpcSetOutput() ZoneVpcAttachmentVpcSetOutput {
+	return i.ToZoneVpcAttachmentVpcSetOutputWithContext(context.Background())
+}
+
+func (i ZoneVpcAttachmentVpcSetArgs) ToZoneVpcAttachmentVpcSetOutputWithContext(ctx context.Context) ZoneVpcAttachmentVpcSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ZoneVpcAttachmentVpcSetOutput)
+}
+
+func (i ZoneVpcAttachmentVpcSetArgs) ToZoneVpcAttachmentVpcSetPtrOutput() ZoneVpcAttachmentVpcSetPtrOutput {
+	return i.ToZoneVpcAttachmentVpcSetPtrOutputWithContext(context.Background())
+}
+
+func (i ZoneVpcAttachmentVpcSetArgs) ToZoneVpcAttachmentVpcSetPtrOutputWithContext(ctx context.Context) ZoneVpcAttachmentVpcSetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ZoneVpcAttachmentVpcSetOutput).ToZoneVpcAttachmentVpcSetPtrOutputWithContext(ctx)
+}
+
+// ZoneVpcAttachmentVpcSetPtrInput is an input type that accepts ZoneVpcAttachmentVpcSetArgs, ZoneVpcAttachmentVpcSetPtr and ZoneVpcAttachmentVpcSetPtrOutput values.
+// You can construct a concrete instance of `ZoneVpcAttachmentVpcSetPtrInput` via:
+//
+//          ZoneVpcAttachmentVpcSetArgs{...}
+//
+//  or:
+//
+//          nil
+type ZoneVpcAttachmentVpcSetPtrInput interface {
+	pulumi.Input
+
+	ToZoneVpcAttachmentVpcSetPtrOutput() ZoneVpcAttachmentVpcSetPtrOutput
+	ToZoneVpcAttachmentVpcSetPtrOutputWithContext(context.Context) ZoneVpcAttachmentVpcSetPtrOutput
+}
+
+type zoneVpcAttachmentVpcSetPtrType ZoneVpcAttachmentVpcSetArgs
+
+func ZoneVpcAttachmentVpcSetPtr(v *ZoneVpcAttachmentVpcSetArgs) ZoneVpcAttachmentVpcSetPtrInput {
+	return (*zoneVpcAttachmentVpcSetPtrType)(v)
+}
+
+func (*zoneVpcAttachmentVpcSetPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ZoneVpcAttachmentVpcSet)(nil)).Elem()
+}
+
+func (i *zoneVpcAttachmentVpcSetPtrType) ToZoneVpcAttachmentVpcSetPtrOutput() ZoneVpcAttachmentVpcSetPtrOutput {
+	return i.ToZoneVpcAttachmentVpcSetPtrOutputWithContext(context.Background())
+}
+
+func (i *zoneVpcAttachmentVpcSetPtrType) ToZoneVpcAttachmentVpcSetPtrOutputWithContext(ctx context.Context) ZoneVpcAttachmentVpcSetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ZoneVpcAttachmentVpcSetPtrOutput)
+}
+
+type ZoneVpcAttachmentVpcSetOutput struct{ *pulumi.OutputState }
+
+func (ZoneVpcAttachmentVpcSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ZoneVpcAttachmentVpcSet)(nil)).Elem()
+}
+
+func (o ZoneVpcAttachmentVpcSetOutput) ToZoneVpcAttachmentVpcSetOutput() ZoneVpcAttachmentVpcSetOutput {
+	return o
+}
+
+func (o ZoneVpcAttachmentVpcSetOutput) ToZoneVpcAttachmentVpcSetOutputWithContext(ctx context.Context) ZoneVpcAttachmentVpcSetOutput {
+	return o
+}
+
+func (o ZoneVpcAttachmentVpcSetOutput) ToZoneVpcAttachmentVpcSetPtrOutput() ZoneVpcAttachmentVpcSetPtrOutput {
+	return o.ToZoneVpcAttachmentVpcSetPtrOutputWithContext(context.Background())
+}
+
+func (o ZoneVpcAttachmentVpcSetOutput) ToZoneVpcAttachmentVpcSetPtrOutputWithContext(ctx context.Context) ZoneVpcAttachmentVpcSetPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ZoneVpcAttachmentVpcSet) *ZoneVpcAttachmentVpcSet {
+		return &v
+	}).(ZoneVpcAttachmentVpcSetPtrOutput)
+}
+
+// Vpc region.
+func (o ZoneVpcAttachmentVpcSetOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v ZoneVpcAttachmentVpcSet) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Uniq Vpc Id.
+func (o ZoneVpcAttachmentVpcSetOutput) UniqVpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v ZoneVpcAttachmentVpcSet) string { return v.UniqVpcId }).(pulumi.StringOutput)
+}
+
+type ZoneVpcAttachmentVpcSetPtrOutput struct{ *pulumi.OutputState }
+
+func (ZoneVpcAttachmentVpcSetPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ZoneVpcAttachmentVpcSet)(nil)).Elem()
+}
+
+func (o ZoneVpcAttachmentVpcSetPtrOutput) ToZoneVpcAttachmentVpcSetPtrOutput() ZoneVpcAttachmentVpcSetPtrOutput {
+	return o
+}
+
+func (o ZoneVpcAttachmentVpcSetPtrOutput) ToZoneVpcAttachmentVpcSetPtrOutputWithContext(ctx context.Context) ZoneVpcAttachmentVpcSetPtrOutput {
+	return o
+}
+
+func (o ZoneVpcAttachmentVpcSetPtrOutput) Elem() ZoneVpcAttachmentVpcSetOutput {
+	return o.ApplyT(func(v *ZoneVpcAttachmentVpcSet) ZoneVpcAttachmentVpcSet {
+		if v != nil {
+			return *v
+		}
+		var ret ZoneVpcAttachmentVpcSet
+		return ret
+	}).(ZoneVpcAttachmentVpcSetOutput)
+}
+
+// Vpc region.
+func (o ZoneVpcAttachmentVpcSetPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ZoneVpcAttachmentVpcSet) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+// Uniq Vpc Id.
+func (o ZoneVpcAttachmentVpcSetPtrOutput) UniqVpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ZoneVpcAttachmentVpcSet) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.UniqVpcId
+	}).(pulumi.StringPtrOutput)
+}
+
 type ZoneVpcSet struct {
 	// VPC REGION.
 	Region string `pulumi:"region"`
@@ -346,17 +677,344 @@ func (o ZoneVpcSetArrayOutput) Index(i pulumi.IntInput) ZoneVpcSetOutput {
 	}).(ZoneVpcSetOutput)
 }
 
+type GetRecordsFilter struct {
+	// Parameter name.
+	Name string `pulumi:"name"`
+	// Parameter values.
+	Values []string `pulumi:"values"`
+}
+
+// GetRecordsFilterInput is an input type that accepts GetRecordsFilterArgs and GetRecordsFilterOutput values.
+// You can construct a concrete instance of `GetRecordsFilterInput` via:
+//
+//          GetRecordsFilterArgs{...}
+type GetRecordsFilterInput interface {
+	pulumi.Input
+
+	ToGetRecordsFilterOutput() GetRecordsFilterOutput
+	ToGetRecordsFilterOutputWithContext(context.Context) GetRecordsFilterOutput
+}
+
+type GetRecordsFilterArgs struct {
+	// Parameter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Parameter values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetRecordsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordsFilter)(nil)).Elem()
+}
+
+func (i GetRecordsFilterArgs) ToGetRecordsFilterOutput() GetRecordsFilterOutput {
+	return i.ToGetRecordsFilterOutputWithContext(context.Background())
+}
+
+func (i GetRecordsFilterArgs) ToGetRecordsFilterOutputWithContext(ctx context.Context) GetRecordsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordsFilterOutput)
+}
+
+// GetRecordsFilterArrayInput is an input type that accepts GetRecordsFilterArray and GetRecordsFilterArrayOutput values.
+// You can construct a concrete instance of `GetRecordsFilterArrayInput` via:
+//
+//          GetRecordsFilterArray{ GetRecordsFilterArgs{...} }
+type GetRecordsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetRecordsFilterArrayOutput() GetRecordsFilterArrayOutput
+	ToGetRecordsFilterArrayOutputWithContext(context.Context) GetRecordsFilterArrayOutput
+}
+
+type GetRecordsFilterArray []GetRecordsFilterInput
+
+func (GetRecordsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordsFilter)(nil)).Elem()
+}
+
+func (i GetRecordsFilterArray) ToGetRecordsFilterArrayOutput() GetRecordsFilterArrayOutput {
+	return i.ToGetRecordsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetRecordsFilterArray) ToGetRecordsFilterArrayOutputWithContext(ctx context.Context) GetRecordsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordsFilterArrayOutput)
+}
+
+type GetRecordsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetRecordsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordsFilter)(nil)).Elem()
+}
+
+func (o GetRecordsFilterOutput) ToGetRecordsFilterOutput() GetRecordsFilterOutput {
+	return o
+}
+
+func (o GetRecordsFilterOutput) ToGetRecordsFilterOutputWithContext(ctx context.Context) GetRecordsFilterOutput {
+	return o
+}
+
+// Parameter name.
+func (o GetRecordsFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordsFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Parameter values.
+func (o GetRecordsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetRecordsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetRecordsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRecordsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordsFilter)(nil)).Elem()
+}
+
+func (o GetRecordsFilterArrayOutput) ToGetRecordsFilterArrayOutput() GetRecordsFilterArrayOutput {
+	return o
+}
+
+func (o GetRecordsFilterArrayOutput) ToGetRecordsFilterArrayOutputWithContext(ctx context.Context) GetRecordsFilterArrayOutput {
+	return o
+}
+
+func (o GetRecordsFilterArrayOutput) Index(i pulumi.IntInput) GetRecordsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRecordsFilter {
+		return vs[0].([]GetRecordsFilter)[vs[1].(int)]
+	}).(GetRecordsFilterOutput)
+}
+
+type GetRecordsRecordSet struct {
+	// Record creation time.
+	CreatedOn string `pulumi:"createdOn"`
+	// Enabled. 0 meaning paused, 1 meaning senabled.
+	Enabled int `pulumi:"enabled"`
+	// Additional information.
+	Extra string `pulumi:"extra"`
+	// MX priority: required if the record type is MX. Value range: 5,10,15,20,30,40,50.
+	Mx int `pulumi:"mx"`
+	// Record sid.
+	RecordId string `pulumi:"recordId"`
+	// Record type, optional record type are: A, AAAA, CNAME, MX, TXT, PTR.
+	RecordType string `pulumi:"recordType"`
+	// Record value.
+	RecordValue string `pulumi:"recordValue"`
+	// Record status.
+	Status string `pulumi:"status"`
+	// Subdomain name.
+	SubDomain string `pulumi:"subDomain"`
+	// Record cache time, the smaller the value, the faster it takes effect. The value is 1-86400s. The default is 600.
+	Ttl int `pulumi:"ttl"`
+	// Record update time.
+	UpdatedOn string `pulumi:"updatedOn"`
+	// Record weight, value is 1-100.
+	Weight int `pulumi:"weight"`
+	// Private zone id: zone-xxxxxx.
+	ZoneId string `pulumi:"zoneId"`
+}
+
+// GetRecordsRecordSetInput is an input type that accepts GetRecordsRecordSetArgs and GetRecordsRecordSetOutput values.
+// You can construct a concrete instance of `GetRecordsRecordSetInput` via:
+//
+//          GetRecordsRecordSetArgs{...}
+type GetRecordsRecordSetInput interface {
+	pulumi.Input
+
+	ToGetRecordsRecordSetOutput() GetRecordsRecordSetOutput
+	ToGetRecordsRecordSetOutputWithContext(context.Context) GetRecordsRecordSetOutput
+}
+
+type GetRecordsRecordSetArgs struct {
+	// Record creation time.
+	CreatedOn pulumi.StringInput `pulumi:"createdOn"`
+	// Enabled. 0 meaning paused, 1 meaning senabled.
+	Enabled pulumi.IntInput `pulumi:"enabled"`
+	// Additional information.
+	Extra pulumi.StringInput `pulumi:"extra"`
+	// MX priority: required if the record type is MX. Value range: 5,10,15,20,30,40,50.
+	Mx pulumi.IntInput `pulumi:"mx"`
+	// Record sid.
+	RecordId pulumi.StringInput `pulumi:"recordId"`
+	// Record type, optional record type are: A, AAAA, CNAME, MX, TXT, PTR.
+	RecordType pulumi.StringInput `pulumi:"recordType"`
+	// Record value.
+	RecordValue pulumi.StringInput `pulumi:"recordValue"`
+	// Record status.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Subdomain name.
+	SubDomain pulumi.StringInput `pulumi:"subDomain"`
+	// Record cache time, the smaller the value, the faster it takes effect. The value is 1-86400s. The default is 600.
+	Ttl pulumi.IntInput `pulumi:"ttl"`
+	// Record update time.
+	UpdatedOn pulumi.StringInput `pulumi:"updatedOn"`
+	// Record weight, value is 1-100.
+	Weight pulumi.IntInput `pulumi:"weight"`
+	// Private zone id: zone-xxxxxx.
+	ZoneId pulumi.StringInput `pulumi:"zoneId"`
+}
+
+func (GetRecordsRecordSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordsRecordSet)(nil)).Elem()
+}
+
+func (i GetRecordsRecordSetArgs) ToGetRecordsRecordSetOutput() GetRecordsRecordSetOutput {
+	return i.ToGetRecordsRecordSetOutputWithContext(context.Background())
+}
+
+func (i GetRecordsRecordSetArgs) ToGetRecordsRecordSetOutputWithContext(ctx context.Context) GetRecordsRecordSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordsRecordSetOutput)
+}
+
+// GetRecordsRecordSetArrayInput is an input type that accepts GetRecordsRecordSetArray and GetRecordsRecordSetArrayOutput values.
+// You can construct a concrete instance of `GetRecordsRecordSetArrayInput` via:
+//
+//          GetRecordsRecordSetArray{ GetRecordsRecordSetArgs{...} }
+type GetRecordsRecordSetArrayInput interface {
+	pulumi.Input
+
+	ToGetRecordsRecordSetArrayOutput() GetRecordsRecordSetArrayOutput
+	ToGetRecordsRecordSetArrayOutputWithContext(context.Context) GetRecordsRecordSetArrayOutput
+}
+
+type GetRecordsRecordSetArray []GetRecordsRecordSetInput
+
+func (GetRecordsRecordSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordsRecordSet)(nil)).Elem()
+}
+
+func (i GetRecordsRecordSetArray) ToGetRecordsRecordSetArrayOutput() GetRecordsRecordSetArrayOutput {
+	return i.ToGetRecordsRecordSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetRecordsRecordSetArray) ToGetRecordsRecordSetArrayOutputWithContext(ctx context.Context) GetRecordsRecordSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRecordsRecordSetArrayOutput)
+}
+
+type GetRecordsRecordSetOutput struct{ *pulumi.OutputState }
+
+func (GetRecordsRecordSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRecordsRecordSet)(nil)).Elem()
+}
+
+func (o GetRecordsRecordSetOutput) ToGetRecordsRecordSetOutput() GetRecordsRecordSetOutput {
+	return o
+}
+
+func (o GetRecordsRecordSetOutput) ToGetRecordsRecordSetOutputWithContext(ctx context.Context) GetRecordsRecordSetOutput {
+	return o
+}
+
+// Record creation time.
+func (o GetRecordsRecordSetOutput) CreatedOn() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordsRecordSet) string { return v.CreatedOn }).(pulumi.StringOutput)
+}
+
+// Enabled. 0 meaning paused, 1 meaning senabled.
+func (o GetRecordsRecordSetOutput) Enabled() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordsRecordSet) int { return v.Enabled }).(pulumi.IntOutput)
+}
+
+// Additional information.
+func (o GetRecordsRecordSetOutput) Extra() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordsRecordSet) string { return v.Extra }).(pulumi.StringOutput)
+}
+
+// MX priority: required if the record type is MX. Value range: 5,10,15,20,30,40,50.
+func (o GetRecordsRecordSetOutput) Mx() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordsRecordSet) int { return v.Mx }).(pulumi.IntOutput)
+}
+
+// Record sid.
+func (o GetRecordsRecordSetOutput) RecordId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordsRecordSet) string { return v.RecordId }).(pulumi.StringOutput)
+}
+
+// Record type, optional record type are: A, AAAA, CNAME, MX, TXT, PTR.
+func (o GetRecordsRecordSetOutput) RecordType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordsRecordSet) string { return v.RecordType }).(pulumi.StringOutput)
+}
+
+// Record value.
+func (o GetRecordsRecordSetOutput) RecordValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordsRecordSet) string { return v.RecordValue }).(pulumi.StringOutput)
+}
+
+// Record status.
+func (o GetRecordsRecordSetOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordsRecordSet) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Subdomain name.
+func (o GetRecordsRecordSetOutput) SubDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordsRecordSet) string { return v.SubDomain }).(pulumi.StringOutput)
+}
+
+// Record cache time, the smaller the value, the faster it takes effect. The value is 1-86400s. The default is 600.
+func (o GetRecordsRecordSetOutput) Ttl() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordsRecordSet) int { return v.Ttl }).(pulumi.IntOutput)
+}
+
+// Record update time.
+func (o GetRecordsRecordSetOutput) UpdatedOn() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordsRecordSet) string { return v.UpdatedOn }).(pulumi.StringOutput)
+}
+
+// Record weight, value is 1-100.
+func (o GetRecordsRecordSetOutput) Weight() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRecordsRecordSet) int { return v.Weight }).(pulumi.IntOutput)
+}
+
+// Private zone id: zone-xxxxxx.
+func (o GetRecordsRecordSetOutput) ZoneId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRecordsRecordSet) string { return v.ZoneId }).(pulumi.StringOutput)
+}
+
+type GetRecordsRecordSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRecordsRecordSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRecordsRecordSet)(nil)).Elem()
+}
+
+func (o GetRecordsRecordSetArrayOutput) ToGetRecordsRecordSetArrayOutput() GetRecordsRecordSetArrayOutput {
+	return o
+}
+
+func (o GetRecordsRecordSetArrayOutput) ToGetRecordsRecordSetArrayOutputWithContext(ctx context.Context) GetRecordsRecordSetArrayOutput {
+	return o
+}
+
+func (o GetRecordsRecordSetArrayOutput) Index(i pulumi.IntInput) GetRecordsRecordSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRecordsRecordSet {
+		return vs[0].([]GetRecordsRecordSet)[vs[1].(int)]
+	}).(GetRecordsRecordSetOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneAccountVpcSetInput)(nil)).Elem(), ZoneAccountVpcSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneAccountVpcSetArrayInput)(nil)).Elem(), ZoneAccountVpcSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneTagSetInput)(nil)).Elem(), ZoneTagSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneTagSetArrayInput)(nil)).Elem(), ZoneTagSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ZoneVpcAttachmentAccountVpcSetInput)(nil)).Elem(), ZoneVpcAttachmentAccountVpcSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ZoneVpcAttachmentAccountVpcSetPtrInput)(nil)).Elem(), ZoneVpcAttachmentAccountVpcSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ZoneVpcAttachmentVpcSetInput)(nil)).Elem(), ZoneVpcAttachmentVpcSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ZoneVpcAttachmentVpcSetPtrInput)(nil)).Elem(), ZoneVpcAttachmentVpcSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneVpcSetInput)(nil)).Elem(), ZoneVpcSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneVpcSetArrayInput)(nil)).Elem(), ZoneVpcSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordsFilterInput)(nil)).Elem(), GetRecordsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordsFilterArrayInput)(nil)).Elem(), GetRecordsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordsRecordSetInput)(nil)).Elem(), GetRecordsRecordSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRecordsRecordSetArrayInput)(nil)).Elem(), GetRecordsRecordSetArray{})
 	pulumi.RegisterOutputType(ZoneAccountVpcSetOutput{})
 	pulumi.RegisterOutputType(ZoneAccountVpcSetArrayOutput{})
 	pulumi.RegisterOutputType(ZoneTagSetOutput{})
 	pulumi.RegisterOutputType(ZoneTagSetArrayOutput{})
+	pulumi.RegisterOutputType(ZoneVpcAttachmentAccountVpcSetOutput{})
+	pulumi.RegisterOutputType(ZoneVpcAttachmentAccountVpcSetPtrOutput{})
+	pulumi.RegisterOutputType(ZoneVpcAttachmentVpcSetOutput{})
+	pulumi.RegisterOutputType(ZoneVpcAttachmentVpcSetPtrOutput{})
 	pulumi.RegisterOutputType(ZoneVpcSetOutput{})
 	pulumi.RegisterOutputType(ZoneVpcSetArrayOutput{})
+	pulumi.RegisterOutputType(GetRecordsFilterOutput{})
+	pulumi.RegisterOutputType(GetRecordsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetRecordsRecordSetOutput{})
+	pulumi.RegisterOutputType(GetRecordsRecordSetArrayOutput{})
 }

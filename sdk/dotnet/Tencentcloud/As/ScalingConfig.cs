@@ -60,6 +60,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     ///             EnhancedSecurityService = false,
     ///             EnhancedMonitorService = false,
     ///             UserData = "dGVzdA==",
+    ///             HostNameSettings = new Tencentcloud.As.Inputs.ScalingConfigHostNameSettingsArgs
+    ///             {
+    ///                 HostName = "host-name-test",
+    ///                 HostNameStyle = "UNIQUE",
+    ///             },
     ///             InstanceTags = 
     ///             {
     ///                 { "tag", "example" },
@@ -110,7 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// AutoScaling Configuration can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig scaling_config asc-n32ymck2
+    ///  $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig example asc-n32ymck2
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:As/scalingConfig:ScalingConfig")]
@@ -159,6 +164,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Output<bool?> EnhancedSecurityService { get; private set; } = null!;
 
         /// <summary>
+        /// Related settings of the cloud server hostname (HostName).
+        /// </summary>
+        [Output("hostNameSettings")]
+        public Output<Outputs.ScalingConfigHostNameSettings?> HostNameSettings { get; private set; } = null!;
+
+        /// <summary>
         /// An available image ID for a cvm instance.
         /// </summary>
         [Output("imageId")]
@@ -201,7 +212,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Output<ImmutableArray<string>> InstanceTypes { get; private set; } = null!;
 
         /// <summary>
-        /// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        /// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         /// </summary>
         [Output("internetChargeType")]
         public Output<string?> InternetChargeType { get; private set; } = null!;
@@ -374,6 +385,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Input<bool>? EnhancedSecurityService { get; set; }
 
         /// <summary>
+        /// Related settings of the cloud server hostname (HostName).
+        /// </summary>
+        [Input("hostNameSettings")]
+        public Input<Inputs.ScalingConfigHostNameSettingsArgs>? HostNameSettings { get; set; }
+
+        /// <summary>
         /// An available image ID for a cvm instance.
         /// </summary>
         [Input("imageId", required: true)]
@@ -428,7 +445,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         }
 
         /// <summary>
-        /// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        /// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         /// </summary>
         [Input("internetChargeType")]
         public Input<string>? InternetChargeType { get; set; }
@@ -573,6 +590,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Input<bool>? EnhancedSecurityService { get; set; }
 
         /// <summary>
+        /// Related settings of the cloud server hostname (HostName).
+        /// </summary>
+        [Input("hostNameSettings")]
+        public Input<Inputs.ScalingConfigHostNameSettingsGetArgs>? HostNameSettings { get; set; }
+
+        /// <summary>
         /// An available image ID for a cvm instance.
         /// </summary>
         [Input("imageId")]
@@ -627,7 +650,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         }
 
         /// <summary>
-        /// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        /// Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         /// </summary>
         [Input("internetChargeType")]
         public Input<string>? InternetChargeType { get; set; }

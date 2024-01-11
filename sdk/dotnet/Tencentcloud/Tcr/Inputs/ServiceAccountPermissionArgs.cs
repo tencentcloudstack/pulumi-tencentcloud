@@ -17,7 +17,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
         private InputList<string>? _actions;
 
         /// <summary>
-        /// Actions, currently only support: tcr:PushRepository, tcr:PullRepository. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Actions, currently support: `tcr:PushRepository`, `tcr:PullRepository`, `tcr:CreateRepository`, `tcr:CreateHelmChart`, `tcr:DescribeHelmCharts`. Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         public InputList<string> Actions
         {

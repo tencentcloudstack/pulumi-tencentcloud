@@ -14,17 +14,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Outputs
     [OutputType]
     public sealed class PayCertificateDvAuth
     {
-        /// <summary>
-        /// DV authentication key.
-        /// </summary>
         public readonly string? DvAuthKey;
-        /// <summary>
-        /// DV authentication value.
-        /// </summary>
         public readonly string? DvAuthValue;
-        /// <summary>
-        /// DV authentication type.
-        /// </summary>
         public readonly string? DvAuthVerifyType;
 
         [OutputConstructor]

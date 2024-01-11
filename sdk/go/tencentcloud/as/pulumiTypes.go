@@ -354,6 +354,162 @@ func (o ScalingConfigDataDiskArrayOutput) Index(i pulumi.IntInput) ScalingConfig
 	}).(ScalingConfigDataDiskOutput)
 }
 
+type ScalingConfigHostNameSettings struct {
+	// The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.
+	HostName string `pulumi:"hostName"`
+	// The style of the host name of the cloud server, the value range includes `ORIGINAL` and `UNIQUE`, the default is `ORIGINAL`; `ORIGINAL`, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; `UNIQUE`, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.
+	HostNameStyle *string `pulumi:"hostNameStyle"`
+}
+
+// ScalingConfigHostNameSettingsInput is an input type that accepts ScalingConfigHostNameSettingsArgs and ScalingConfigHostNameSettingsOutput values.
+// You can construct a concrete instance of `ScalingConfigHostNameSettingsInput` via:
+//
+//          ScalingConfigHostNameSettingsArgs{...}
+type ScalingConfigHostNameSettingsInput interface {
+	pulumi.Input
+
+	ToScalingConfigHostNameSettingsOutput() ScalingConfigHostNameSettingsOutput
+	ToScalingConfigHostNameSettingsOutputWithContext(context.Context) ScalingConfigHostNameSettingsOutput
+}
+
+type ScalingConfigHostNameSettingsArgs struct {
+	// The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.
+	HostName pulumi.StringInput `pulumi:"hostName"`
+	// The style of the host name of the cloud server, the value range includes `ORIGINAL` and `UNIQUE`, the default is `ORIGINAL`; `ORIGINAL`, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; `UNIQUE`, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.
+	HostNameStyle pulumi.StringPtrInput `pulumi:"hostNameStyle"`
+}
+
+func (ScalingConfigHostNameSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ScalingConfigHostNameSettings)(nil)).Elem()
+}
+
+func (i ScalingConfigHostNameSettingsArgs) ToScalingConfigHostNameSettingsOutput() ScalingConfigHostNameSettingsOutput {
+	return i.ToScalingConfigHostNameSettingsOutputWithContext(context.Background())
+}
+
+func (i ScalingConfigHostNameSettingsArgs) ToScalingConfigHostNameSettingsOutputWithContext(ctx context.Context) ScalingConfigHostNameSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ScalingConfigHostNameSettingsOutput)
+}
+
+func (i ScalingConfigHostNameSettingsArgs) ToScalingConfigHostNameSettingsPtrOutput() ScalingConfigHostNameSettingsPtrOutput {
+	return i.ToScalingConfigHostNameSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i ScalingConfigHostNameSettingsArgs) ToScalingConfigHostNameSettingsPtrOutputWithContext(ctx context.Context) ScalingConfigHostNameSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ScalingConfigHostNameSettingsOutput).ToScalingConfigHostNameSettingsPtrOutputWithContext(ctx)
+}
+
+// ScalingConfigHostNameSettingsPtrInput is an input type that accepts ScalingConfigHostNameSettingsArgs, ScalingConfigHostNameSettingsPtr and ScalingConfigHostNameSettingsPtrOutput values.
+// You can construct a concrete instance of `ScalingConfigHostNameSettingsPtrInput` via:
+//
+//          ScalingConfigHostNameSettingsArgs{...}
+//
+//  or:
+//
+//          nil
+type ScalingConfigHostNameSettingsPtrInput interface {
+	pulumi.Input
+
+	ToScalingConfigHostNameSettingsPtrOutput() ScalingConfigHostNameSettingsPtrOutput
+	ToScalingConfigHostNameSettingsPtrOutputWithContext(context.Context) ScalingConfigHostNameSettingsPtrOutput
+}
+
+type scalingConfigHostNameSettingsPtrType ScalingConfigHostNameSettingsArgs
+
+func ScalingConfigHostNameSettingsPtr(v *ScalingConfigHostNameSettingsArgs) ScalingConfigHostNameSettingsPtrInput {
+	return (*scalingConfigHostNameSettingsPtrType)(v)
+}
+
+func (*scalingConfigHostNameSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ScalingConfigHostNameSettings)(nil)).Elem()
+}
+
+func (i *scalingConfigHostNameSettingsPtrType) ToScalingConfigHostNameSettingsPtrOutput() ScalingConfigHostNameSettingsPtrOutput {
+	return i.ToScalingConfigHostNameSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *scalingConfigHostNameSettingsPtrType) ToScalingConfigHostNameSettingsPtrOutputWithContext(ctx context.Context) ScalingConfigHostNameSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ScalingConfigHostNameSettingsPtrOutput)
+}
+
+type ScalingConfigHostNameSettingsOutput struct{ *pulumi.OutputState }
+
+func (ScalingConfigHostNameSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ScalingConfigHostNameSettings)(nil)).Elem()
+}
+
+func (o ScalingConfigHostNameSettingsOutput) ToScalingConfigHostNameSettingsOutput() ScalingConfigHostNameSettingsOutput {
+	return o
+}
+
+func (o ScalingConfigHostNameSettingsOutput) ToScalingConfigHostNameSettingsOutputWithContext(ctx context.Context) ScalingConfigHostNameSettingsOutput {
+	return o
+}
+
+func (o ScalingConfigHostNameSettingsOutput) ToScalingConfigHostNameSettingsPtrOutput() ScalingConfigHostNameSettingsPtrOutput {
+	return o.ToScalingConfigHostNameSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o ScalingConfigHostNameSettingsOutput) ToScalingConfigHostNameSettingsPtrOutputWithContext(ctx context.Context) ScalingConfigHostNameSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ScalingConfigHostNameSettings) *ScalingConfigHostNameSettings {
+		return &v
+	}).(ScalingConfigHostNameSettingsPtrOutput)
+}
+
+// The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.
+func (o ScalingConfigHostNameSettingsOutput) HostName() pulumi.StringOutput {
+	return o.ApplyT(func(v ScalingConfigHostNameSettings) string { return v.HostName }).(pulumi.StringOutput)
+}
+
+// The style of the host name of the cloud server, the value range includes `ORIGINAL` and `UNIQUE`, the default is `ORIGINAL`; `ORIGINAL`, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; `UNIQUE`, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.
+func (o ScalingConfigHostNameSettingsOutput) HostNameStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ScalingConfigHostNameSettings) *string { return v.HostNameStyle }).(pulumi.StringPtrOutput)
+}
+
+type ScalingConfigHostNameSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (ScalingConfigHostNameSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ScalingConfigHostNameSettings)(nil)).Elem()
+}
+
+func (o ScalingConfigHostNameSettingsPtrOutput) ToScalingConfigHostNameSettingsPtrOutput() ScalingConfigHostNameSettingsPtrOutput {
+	return o
+}
+
+func (o ScalingConfigHostNameSettingsPtrOutput) ToScalingConfigHostNameSettingsPtrOutputWithContext(ctx context.Context) ScalingConfigHostNameSettingsPtrOutput {
+	return o
+}
+
+func (o ScalingConfigHostNameSettingsPtrOutput) Elem() ScalingConfigHostNameSettingsOutput {
+	return o.ApplyT(func(v *ScalingConfigHostNameSettings) ScalingConfigHostNameSettings {
+		if v != nil {
+			return *v
+		}
+		var ret ScalingConfigHostNameSettings
+		return ret
+	}).(ScalingConfigHostNameSettingsOutput)
+}
+
+// The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.
+func (o ScalingConfigHostNameSettingsPtrOutput) HostName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ScalingConfigHostNameSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.HostName
+	}).(pulumi.StringPtrOutput)
+}
+
+// The style of the host name of the cloud server, the value range includes `ORIGINAL` and `UNIQUE`, the default is `ORIGINAL`; `ORIGINAL`, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; `UNIQUE`, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.
+func (o ScalingConfigHostNameSettingsPtrOutput) HostNameStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ScalingConfigHostNameSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HostNameStyle
+	}).(pulumi.StringPtrOutput)
+}
+
 type ScalingConfigInstanceNameSettings struct {
 	// CVM instance name.
 	InstanceName string `pulumi:"instanceName"`
@@ -3163,6 +3319,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*LoadBalancerForwardLoadBalancerTargetAttributeArrayInput)(nil)).Elem(), LoadBalancerForwardLoadBalancerTargetAttributeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScalingConfigDataDiskInput)(nil)).Elem(), ScalingConfigDataDiskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScalingConfigDataDiskArrayInput)(nil)).Elem(), ScalingConfigDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ScalingConfigHostNameSettingsInput)(nil)).Elem(), ScalingConfigHostNameSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ScalingConfigHostNameSettingsPtrInput)(nil)).Elem(), ScalingConfigHostNameSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScalingConfigInstanceNameSettingsInput)(nil)).Elem(), ScalingConfigInstanceNameSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScalingConfigInstanceNameSettingsPtrInput)(nil)).Elem(), ScalingConfigInstanceNameSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScalingGroupForwardBalancerIdInput)(nil)).Elem(), ScalingGroupForwardBalancerIdArgs{})
@@ -3205,6 +3363,8 @@ func init() {
 	pulumi.RegisterOutputType(LoadBalancerForwardLoadBalancerTargetAttributeArrayOutput{})
 	pulumi.RegisterOutputType(ScalingConfigDataDiskOutput{})
 	pulumi.RegisterOutputType(ScalingConfigDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(ScalingConfigHostNameSettingsOutput{})
+	pulumi.RegisterOutputType(ScalingConfigHostNameSettingsPtrOutput{})
 	pulumi.RegisterOutputType(ScalingConfigInstanceNameSettingsOutput{})
 	pulumi.RegisterOutputType(ScalingConfigInstanceNameSettingsPtrOutput{})
 	pulumi.RegisterOutputType(ScalingGroupForwardBalancerIdOutput{})

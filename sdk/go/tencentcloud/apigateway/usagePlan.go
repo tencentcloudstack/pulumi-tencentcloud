@@ -25,11 +25,11 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewUsagePlan(ctx, "plan", &ApiGateway.UsagePlanArgs{
+// 		_, err := ApiGateway.NewUsagePlan(ctx, "example", &ApiGateway.UsagePlanArgs{
 // 			MaxRequestNum:       pulumi.Int(100),
 // 			MaxRequestNumPreSec: pulumi.Int(10),
-// 			UsagePlanDesc:       pulumi.String("nice plan"),
-// 			UsagePlanName:       pulumi.String("my_plan"),
+// 			UsagePlanDesc:       pulumi.String("desc."),
+// 			UsagePlanName:       pulumi.String("tf_example"),
 // 		})
 // 		if err != nil {
 // 			return err

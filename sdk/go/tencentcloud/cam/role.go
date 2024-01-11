@@ -20,6 +20,7 @@ import (
 // package main
 //
 // import (
+// 	"encoding/json"
 // 	"fmt"
 //
 // 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
@@ -34,11 +35,31 @@ import (
 // 		if err != nil {
 // 			return err
 // 		}
-// 		uin := info.Uin
+// 		myUin := info.OwnerUin
+// 		ctx.Export("uin", myUin)
+// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
+// 			"statement": []map[string]interface{}{
+// 				map[string]interface{}{
+// 					"action": "name/sts:AssumeRole",
+// 					"effect": "allow",
+// 					"principal": map[string]interface{}{
+// 						"qcs": []string{
+// 							fmt.Sprintf("%v%v%v", "qcs::cam::uin/", myUin, ":root"),
+// 						},
+// 					},
+// 				},
+// 			},
+// 			"version": "2.0",
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		json0 := string(tmpJSON0)
 // 		_, err = Cam.NewRole(ctx, "foo", &Cam.RoleArgs{
-// 			Document:     pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\n", "        \"name/sts:AssumeRole\"\n", "      ],\n", "      \"effect\": \"allow\",\n", "      \"principal\": {\n", "        \"qcs\": [\n", "          \"qcs::cam::uin/", uin, ":uin/", uin, "\"\n", "        ]\n", "      }\n", "    }\n", "  ]\n", "}\n")),
-// 			Description:  pulumi.String("test"),
-// 			ConsoleLogin: pulumi.Bool(true),
+// 			Document:        pulumi.String(json0),
+// 			ConsoleLogin:    pulumi.Bool(true),
+// 			Description:     pulumi.String("test"),
+// 			SessionDuration: pulumi.Int(7200),
 // 			Tags: pulumi.AnyMap{
 // 				"test": pulumi.Any("tf-cam-role"),
 // 			},
@@ -74,6 +95,8 @@ type Role struct {
 	Document pulumi.StringOutput `pulumi:"document"`
 	// Name of CAM role.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The maximum validity period of the temporary key for creating a role.
+	SessionDuration pulumi.IntPtrOutput `pulumi:"sessionDuration"`
 	// A list of tags used to associate different resources.
 	Tags pulumi.MapOutput `pulumi:"tags"`
 	// The last update time of the CAM role.
@@ -126,6 +149,8 @@ type roleState struct {
 	Document *string `pulumi:"document"`
 	// Name of CAM role.
 	Name *string `pulumi:"name"`
+	// The maximum validity period of the temporary key for creating a role.
+	SessionDuration *int `pulumi:"sessionDuration"`
 	// A list of tags used to associate different resources.
 	Tags map[string]interface{} `pulumi:"tags"`
 	// The last update time of the CAM role.
@@ -146,6 +171,8 @@ type RoleState struct {
 	Document pulumi.StringPtrInput
 	// Name of CAM role.
 	Name pulumi.StringPtrInput
+	// The maximum validity period of the temporary key for creating a role.
+	SessionDuration pulumi.IntPtrInput
 	// A list of tags used to associate different resources.
 	Tags pulumi.MapInput
 	// The last update time of the CAM role.
@@ -168,6 +195,8 @@ type roleArgs struct {
 	Document string `pulumi:"document"`
 	// Name of CAM role.
 	Name *string `pulumi:"name"`
+	// The maximum validity period of the temporary key for creating a role.
+	SessionDuration *int `pulumi:"sessionDuration"`
 	// A list of tags used to associate different resources.
 	Tags map[string]interface{} `pulumi:"tags"`
 }
@@ -185,6 +214,8 @@ type RoleArgs struct {
 	Document pulumi.StringInput
 	// Name of CAM role.
 	Name pulumi.StringPtrInput
+	// The maximum validity period of the temporary key for creating a role.
+	SessionDuration pulumi.IntPtrInput
 	// A list of tags used to associate different resources.
 	Tags pulumi.MapInput
 }
@@ -302,6 +333,11 @@ func (o RoleOutput) Document() pulumi.StringOutput {
 // Name of CAM role.
 func (o RoleOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Role) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The maximum validity period of the temporary key for creating a role.
+func (o RoleOutput) SessionDuration() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Role) pulumi.IntPtrOutput { return v.SessionDuration }).(pulumi.IntPtrOutput)
 }
 
 // A list of tags used to associate different resources.

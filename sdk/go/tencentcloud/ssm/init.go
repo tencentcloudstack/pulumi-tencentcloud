@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Ssm/productSecret:ProductSecret":
 		r = &ProductSecret{}
+	case "tencentcloud:Ssm/rotateProductSecret:RotateProductSecret":
+		r = &RotateProductSecret{}
 	case "tencentcloud:Ssm/secret:Secret":
 		r = &Secret{}
 	case "tencentcloud:Ssm/secretVersion:SecretVersion":
@@ -45,6 +47,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Ssm/productSecret",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ssm/rotateProductSecret",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

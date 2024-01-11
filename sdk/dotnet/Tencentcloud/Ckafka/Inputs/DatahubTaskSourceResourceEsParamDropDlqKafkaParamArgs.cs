@@ -20,7 +20,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public Input<string>? CompressionType { get; set; }
 
         /// <summary>
-        /// Enable the fault-tolerant instance and enable the dead-letter queue.
+        /// enable dead letter queue.
         /// </summary>
         [Input("enableToleration")]
         public Input<bool>? EnableToleration { get; set; }
@@ -32,43 +32,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public Input<int>? MsgMultiple { get; set; }
 
         /// <summary>
-        /// Offset type, initial position earliest, latest position latest, time point position timestamp.
+        /// Offset type, from beginning:earliest, from latest:latest, from specific time:timestamp.
         /// </summary>
         [Input("offsetType")]
         public Input<string>? OffsetType { get; set; }
 
         /// <summary>
-        /// Partition num.
+        /// the partition num of the topic.
         /// </summary>
         [Input("partitionNum")]
         public Input<int>? PartitionNum { get; set; }
 
         /// <summary>
-        /// Qps limit.
+        /// Qps(query per seconds) limit.
         /// </summary>
         [Input("qpsLimit")]
         public Input<int>? QpsLimit { get; set; }
 
         /// <summary>
-        /// resource id.
+        /// instance resource.
         /// </summary>
         [Input("resource", required: true)]
         public Input<string> Resource { get; set; } = null!;
 
         /// <summary>
-        /// resource id name.
+        /// instance name.
         /// </summary>
         [Input("resourceName")]
         public Input<string>? ResourceName { get; set; }
 
         /// <summary>
-        /// Whether it is a self-built cluster.
+        /// whether the cluster is built by yourself instead of cloud product.
         /// </summary>
         [Input("selfBuilt", required: true)]
         public Input<bool> SelfBuilt { get; set; } = null!;
 
         /// <summary>
-        /// It must be passed when the Offset type is timestamp, and the time stamp is passed, accurate to the second.
+        /// when Offset type timestamp is required.
         /// </summary>
         [Input("startTime")]
         public Input<int>? StartTime { get; set; }
@@ -77,7 +77,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         private InputList<Inputs.DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs>? _tableMappings;
 
         /// <summary>
-        /// The route from Table to Topic must be passed when the Distribute to multiple topics switch is turned on.
+        /// maps of table to topic, required when multi topic is selected.
         /// </summary>
         public InputList<Inputs.DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs> TableMappings
         {
@@ -86,25 +86,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         }
 
         /// <summary>
-        /// Topic name, multiple separated by,.
+        /// Topic name, use `,` when more than 1 topic.
         /// </summary>
         [Input("topic")]
         public Input<string>? Topic { get; set; }
 
         /// <summary>
-        /// Topic Id.
+        /// Topic id.
         /// </summary>
         [Input("topicId")]
         public Input<string>? TopicId { get; set; }
 
         /// <summary>
-        /// whether the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
+        /// Does the used topic need to be automatically created (currently only supports SOURCE inflow tasks, if you do not use to distribute to multiple topics, you need to fill in the topic name that needs to be automatically created in the Topic field).
         /// </summary>
         [Input("useAutoCreateTopic")]
         public Input<bool>? UseAutoCreateTopic { get; set; }
 
         /// <summary>
-        /// Distribute to multiple topics switch, the default is false.
+        /// whether to use multi table.
         /// </summary>
         [Input("useTableMapping")]
         public Input<bool>? UseTableMapping { get; set; }

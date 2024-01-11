@@ -39,6 +39,10 @@ import * as utilities from "../utilities";
  *     enhancedSecurityService: false,
  *     enhancedMonitorService: false,
  *     userData: "dGVzdA==",
+ *     hostNameSettings: {
+ *         hostName: "host-name-test",
+ *         hostNameStyle: "UNIQUE",
+ *     },
  *     instanceTags: {
  *         tag: "example",
  *     },
@@ -70,7 +74,7 @@ import * as utilities from "../utilities";
  * AutoScaling Configuration can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig scaling_config asc-n32ymck2
+ *  $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig example asc-n32ymck2
  * ```
  */
 export class ScalingConfig extends pulumi.CustomResource {
@@ -130,6 +134,10 @@ export class ScalingConfig extends pulumi.CustomResource {
      */
     public readonly enhancedSecurityService!: pulumi.Output<boolean | undefined>;
     /**
+     * Related settings of the cloud server hostname (HostName).
+     */
+    public readonly hostNameSettings!: pulumi.Output<outputs.As.ScalingConfigHostNameSettings | undefined>;
+    /**
      * An available image ID for a cvm instance.
      */
     public readonly imageId!: pulumi.Output<string>;
@@ -158,7 +166,7 @@ export class ScalingConfig extends pulumi.CustomResource {
      */
     public readonly instanceTypes!: pulumi.Output<string[]>;
     /**
-     * Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+     * Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
      */
     public readonly internetChargeType!: pulumi.Output<string | undefined>;
     /**
@@ -234,6 +242,7 @@ export class ScalingConfig extends pulumi.CustomResource {
             resourceInputs["diskTypePolicy"] = state ? state.diskTypePolicy : undefined;
             resourceInputs["enhancedMonitorService"] = state ? state.enhancedMonitorService : undefined;
             resourceInputs["enhancedSecurityService"] = state ? state.enhancedSecurityService : undefined;
+            resourceInputs["hostNameSettings"] = state ? state.hostNameSettings : undefined;
             resourceInputs["imageId"] = state ? state.imageId : undefined;
             resourceInputs["instanceChargeType"] = state ? state.instanceChargeType : undefined;
             resourceInputs["instanceChargeTypePrepaidPeriod"] = state ? state.instanceChargeTypePrepaidPeriod : undefined;
@@ -272,6 +281,7 @@ export class ScalingConfig extends pulumi.CustomResource {
             resourceInputs["diskTypePolicy"] = args ? args.diskTypePolicy : undefined;
             resourceInputs["enhancedMonitorService"] = args ? args.enhancedMonitorService : undefined;
             resourceInputs["enhancedSecurityService"] = args ? args.enhancedSecurityService : undefined;
+            resourceInputs["hostNameSettings"] = args ? args.hostNameSettings : undefined;
             resourceInputs["imageId"] = args ? args.imageId : undefined;
             resourceInputs["instanceChargeType"] = args ? args.instanceChargeType : undefined;
             resourceInputs["instanceChargeTypePrepaidPeriod"] = args ? args.instanceChargeTypePrepaidPeriod : undefined;
@@ -333,6 +343,10 @@ export interface ScalingConfigState {
      */
     enhancedSecurityService?: pulumi.Input<boolean>;
     /**
+     * Related settings of the cloud server hostname (HostName).
+     */
+    hostNameSettings?: pulumi.Input<inputs.As.ScalingConfigHostNameSettings>;
+    /**
      * An available image ID for a cvm instance.
      */
     imageId?: pulumi.Input<string>;
@@ -361,7 +375,7 @@ export interface ScalingConfigState {
      */
     instanceTypes?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+     * Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
      */
     internetChargeType?: pulumi.Input<string>;
     /**
@@ -447,6 +461,10 @@ export interface ScalingConfigArgs {
      */
     enhancedSecurityService?: pulumi.Input<boolean>;
     /**
+     * Related settings of the cloud server hostname (HostName).
+     */
+    hostNameSettings?: pulumi.Input<inputs.As.ScalingConfigHostNameSettings>;
+    /**
      * An available image ID for a cvm instance.
      */
     imageId: pulumi.Input<string>;
@@ -475,7 +493,7 @@ export interface ScalingConfigArgs {
      */
     instanceTypes: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+     * Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
      */
     internetChargeType?: pulumi.Input<string>;
     /**

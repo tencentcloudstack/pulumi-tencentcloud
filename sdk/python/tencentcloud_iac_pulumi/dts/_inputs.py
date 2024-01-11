@@ -1963,6 +1963,7 @@ class SyncConfigDstInfoArgs:
                  account_role: Optional[pulumi.Input[str]] = None,
                  ccn_id: Optional[pulumi.Input[str]] = None,
                  cvm_instance_id: Optional[pulumi.Input[str]] = None,
+                 database_net_env: Optional[pulumi.Input[str]] = None,
                  db_kernel: Optional[pulumi.Input[str]] = None,
                  db_name: Optional[pulumi.Input[str]] = None,
                  encrypt_conn: Optional[pulumi.Input[str]] = None,
@@ -1989,6 +1990,7 @@ class SyncConfigDstInfoArgs:
         :param pulumi.Input[str] account_role: The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[str] ccn_id: Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[str] cvm_instance_id: CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[str] database_net_env: The network environment to which the database belongs. It is required when AccessType is Cloud Network (CCN). `UserIDC` represents the user IDC. `TencentVPC` represents Tencent Cloud VPC. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[str] db_kernel: Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[str] db_name: Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[str] encrypt_conn: Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
@@ -2020,6 +2022,8 @@ class SyncConfigDstInfoArgs:
             pulumi.set(__self__, "ccn_id", ccn_id)
         if cvm_instance_id is not None:
             pulumi.set(__self__, "cvm_instance_id", cvm_instance_id)
+        if database_net_env is not None:
+            pulumi.set(__self__, "database_net_env", database_net_env)
         if db_kernel is not None:
             pulumi.set(__self__, "db_kernel", db_kernel)
         if db_name is not None:
@@ -2120,6 +2124,18 @@ class SyncConfigDstInfoArgs:
     @cvm_instance_id.setter
     def cvm_instance_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "cvm_instance_id", value)
+
+    @property
+    @pulumi.getter(name="databaseNetEnv")
+    def database_net_env(self) -> Optional[pulumi.Input[str]]:
+        """
+        The network environment to which the database belongs. It is required when AccessType is Cloud Network (CCN). `UserIDC` represents the user IDC. `TencentVPC` represents Tencent Cloud VPC. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "database_net_env")
+
+    @database_net_env.setter
+    def database_net_env(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "database_net_env", value)
 
     @property
     @pulumi.getter(name="dbKernel")
@@ -3050,6 +3066,7 @@ class SyncConfigSrcInfoArgs:
                  account_role: Optional[pulumi.Input[str]] = None,
                  ccn_id: Optional[pulumi.Input[str]] = None,
                  cvm_instance_id: Optional[pulumi.Input[str]] = None,
+                 database_net_env: Optional[pulumi.Input[str]] = None,
                  db_kernel: Optional[pulumi.Input[str]] = None,
                  db_name: Optional[pulumi.Input[str]] = None,
                  encrypt_conn: Optional[pulumi.Input[str]] = None,
@@ -3076,6 +3093,7 @@ class SyncConfigSrcInfoArgs:
         :param pulumi.Input[str] account_role: The role during cross-account synchronization, only [a-zA-Z0-9-_]+ is allowed, if it is a cross-account instance, this field is required. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[str] ccn_id: Cloud networking ID, which is required for the cloud networking access type. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[str] cvm_instance_id: CVM instance short ID, which is the same as the instance ID displayed on the cloud server console page. If it is a self-built instance of CVM, this field needs to be passed. Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[str] database_net_env: The network environment to which the database belongs. It is required when AccessType is Cloud Network (CCN). `UserIDC` represents the user IDC. `TencentVPC` represents Tencent Cloud VPC. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[str] db_kernel: Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[str] db_name: Database name, when the database is cdwpg, it needs to be provided. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[str] encrypt_conn: Whether to use encrypted transmission, UnEncrypted means not to use encrypted transmission, Encrypted means to use encrypted transmission, the default is UnEncrypted. Note: This field may return null, indicating that no valid value can be obtained.
@@ -3107,6 +3125,8 @@ class SyncConfigSrcInfoArgs:
             pulumi.set(__self__, "ccn_id", ccn_id)
         if cvm_instance_id is not None:
             pulumi.set(__self__, "cvm_instance_id", cvm_instance_id)
+        if database_net_env is not None:
+            pulumi.set(__self__, "database_net_env", database_net_env)
         if db_kernel is not None:
             pulumi.set(__self__, "db_kernel", db_kernel)
         if db_name is not None:
@@ -3207,6 +3227,18 @@ class SyncConfigSrcInfoArgs:
     @cvm_instance_id.setter
     def cvm_instance_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "cvm_instance_id", value)
+
+    @property
+    @pulumi.getter(name="databaseNetEnv")
+    def database_net_env(self) -> Optional[pulumi.Input[str]]:
+        """
+        The network environment to which the database belongs. It is required when AccessType is Cloud Network (CCN). `UserIDC` represents the user IDC. `TencentVPC` represents Tencent Cloud VPC. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "database_net_env")
+
+    @database_net_env.setter
+    def database_net_env(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "database_net_env", value)
 
     @property
     @pulumi.getter(name="dbKernel")

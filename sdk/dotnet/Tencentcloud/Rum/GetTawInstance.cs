@@ -14,12 +14,96 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     {
         /// <summary>
         /// Use this data source to query detailed information of rum tawInstance
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var tawInstance = Output.Create(Tencentcloud.Rum.GetTawInstance.InvokeAsync(new Tencentcloud.Rum.GetTawInstanceArgs
+        ///         {
+        ///             AreaIds = 
+        ///             {
+        ///                 1,
+        ///             },
+        ///             ChargeStatuses = 
+        ///             {
+        ///                 1,
+        ///             },
+        ///             ChargeTypes = 
+        ///             {
+        ///                 1,
+        ///             },
+        ///             InstanceIds = 
+        ///             {
+        ///                 "rum-pasZKEI3RLgakj",
+        ///             },
+        ///             InstanceStatuses = 
+        ///             {
+        ///                 2,
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
         /// </summary>
         public static Task<GetTawInstanceResult> InvokeAsync(GetTawInstanceArgs? args = null, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetTawInstanceResult>("tencentcloud:Rum/getTawInstance:getTawInstance", args ?? new GetTawInstanceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum tawInstance
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var tawInstance = Output.Create(Tencentcloud.Rum.GetTawInstance.InvokeAsync(new Tencentcloud.Rum.GetTawInstanceArgs
+        ///         {
+        ///             AreaIds = 
+        ///             {
+        ///                 1,
+        ///             },
+        ///             ChargeStatuses = 
+        ///             {
+        ///                 1,
+        ///             },
+        ///             ChargeTypes = 
+        ///             {
+        ///                 1,
+        ///             },
+        ///             InstanceIds = 
+        ///             {
+        ///                 "rum-pasZKEI3RLgakj",
+        ///             },
+        ///             InstanceStatuses = 
+        ///             {
+        ///                 2,
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
         /// </summary>
         public static Output<GetTawInstanceResult> Invoke(GetTawInstanceInvokeArgs? args = null, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.Invoke<GetTawInstanceResult>("tencentcloud:Rum/getTawInstance:getTawInstance", args ?? new GetTawInstanceInvokeArgs(), options.WithDefaults());

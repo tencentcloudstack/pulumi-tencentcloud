@@ -53,7 +53,7 @@ class InstanceArgs:
         :param pulumi.Input[str] password: Password of this Mongodb account.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project which the instance belongs.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC. The value is required if `vpc_id` is set.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the Mongodb. Key name `project` is system reserved and can't be used.
         :param pulumi.Input[str] vpc_id: ID of the VPC.
@@ -265,7 +265,7 @@ class InstanceArgs:
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
+        ID of the security group.
         """
         return pulumi.get(self, "security_groups")
 
@@ -356,7 +356,7 @@ class _InstanceState:
         :param pulumi.Input[str] password: Password of this Mongodb account.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project which the instance belongs.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceStandbyInstanceListArgs']]] standby_instance_lists: List of standby instances' info.
         :param pulumi.Input[int] status: Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC. The value is required if `vpc_id` is set.
@@ -589,7 +589,7 @@ class _InstanceState:
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
+        ID of the security group.
         """
         return pulumi.get(self, "security_groups")
 
@@ -767,7 +767,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] password: Password of this Mongodb account.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project which the instance belongs.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC. The value is required if `vpc_id` is set.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the Mongodb. Key name `project` is system reserved and can't be used.
         :param pulumi.Input[int] volume: Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
@@ -949,7 +949,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] password: Password of this Mongodb account.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project which the instance belongs.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: ID of the security group.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceStandbyInstanceListArgs']]]] standby_instance_lists: List of standby instances' info.
         :param pulumi.Input[int] status: Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC. The value is required if `vpc_id` is set.
@@ -1108,7 +1108,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        ID of the security group. NOTE: for instance which `engine_version` is `MONGO_40_WT`, `security_groups` is not supported.
+        ID of the security group.
         """
         return pulumi.get(self, "security_groups")
 

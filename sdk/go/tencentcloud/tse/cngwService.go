@@ -21,37 +21,72 @@ import (
 // import (
 // 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.NewCngwService(ctx, "cngwService", &Tse.CngwServiceArgs{
-// 			GatewayId: pulumi.String("gateway-ddbb709b"),
-// 			Path:      pulumi.String("/test"),
-// 			Protocol:  pulumi.String("http"),
-// 			Retries:   pulumi.Int(5),
+// 		cfg := config.New(ctx, "")
+// 		availabilityZone := "ap-guangzhou-4"
+// 		if param := cfg.Get("availabilityZone"); param != "" {
+// 			availabilityZone = param
+// 		}
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			VpcId:            vpc.ID(),
+// 			AvailabilityZone: pulumi.String(availabilityZone),
+// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		cngwGateway, err := Tse.NewCngwGateway(ctx, "cngwGateway", &Tse.CngwGatewayArgs{
+// 			Description:             pulumi.String("terraform test1"),
+// 			EnableCls:               pulumi.Bool(true),
+// 			EngineRegion:            pulumi.String("ap-guangzhou"),
+// 			FeatureVersion:          pulumi.String("STANDARD"),
+// 			GatewayVersion:          pulumi.String("2.5.1"),
+// 			IngressClassName:        pulumi.String("tse-nginx-ingress"),
+// 			InternetMaxBandwidthOut: pulumi.Int(0),
+// 			TradeType:               pulumi.Int(0),
+// 			Type:                    pulumi.String("kong"),
+// 			NodeConfig: &tse.CngwGatewayNodeConfigArgs{
+// 				Number:        pulumi.Int(2),
+// 				Specification: pulumi.String("1c2g"),
+// 			},
+// 			VpcConfig: &tse.CngwGatewayVpcConfigArgs{
+// 				SubnetId: subnet.ID(),
+// 				VpcId:    vpc.ID(),
+// 			},
 // 			Tags: pulumi.AnyMap{
-// 				"created": pulumi.Any("terraform"),
+// 				"createdBy": pulumi.Any("terraform"),
 // 			},
-// 			Timeout: pulumi.Int(6000),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Tse.NewCngwService(ctx, "cngwService", &Tse.CngwServiceArgs{
+// 			GatewayId:    cngwGateway.ID(),
+// 			Path:         pulumi.String("/test"),
+// 			Protocol:     pulumi.String("http"),
+// 			Retries:      pulumi.Int(5),
+// 			Timeout:      pulumi.Int(60000),
+// 			UpstreamType: pulumi.String("HostIP"),
 // 			UpstreamInfo: &tse.CngwServiceUpstreamInfoArgs{
-// 				Algorithm:               pulumi.String("round-robin"),
-// 				AutoScalingCvmPort:      pulumi.Int(80),
-// 				AutoScalingGroupId:      pulumi.String("asg-519acdug"),
-// 				AutoScalingHookStatus:   pulumi.String("Normal"),
-// 				AutoScalingTatCmdStatus: pulumi.String("Normal"),
-// 				Port:                    pulumi.Int(0),
-// 				SlowStart:               pulumi.Int(20),
-// 				Targets: tse.CngwServiceUpstreamInfoTargetArray{
-// 					&tse.CngwServiceUpstreamInfoTargetArgs{
-// 						Host:   pulumi.String("192.168.0.1"),
-// 						Port:   pulumi.Int(80),
-// 						Weight: pulumi.Int(100),
-// 					},
-// 				},
+// 				Algorithm:          pulumi.String("round-robin"),
+// 				AutoScalingCvmPort: pulumi.Int(0),
+// 				Host:               pulumi.String("arunma.cn"),
+// 				Port:               pulumi.Int(8012),
+// 				SlowStart:          pulumi.Int(0),
 // 			},
-// 			UpstreamType: pulumi.String("IPList"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -66,7 +101,7 @@ import (
 // tse cngw_service can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tse/cngwService:CngwService cngw_service cngw_service_id
+//  $ pulumi import tencentcloud:Tse/cngwService:CngwService cngw_service gatewayId#name
 // ```
 type CngwService struct {
 	pulumi.CustomResourceState
@@ -83,7 +118,9 @@ type CngwService struct {
 	Retries pulumi.IntOutput `pulumi:"retries"`
 	// service id.
 	ServiceId pulumi.StringOutput `pulumi:"serviceId"`
-	// Tag description list.
+	// Deprecate ineffective tags Tag description list.
+	//
+	// Deprecated: Deprecate ineffective tags
 	Tags pulumi.MapOutput `pulumi:"tags"`
 	// time out, unit:ms.
 	Timeout pulumi.IntOutput `pulumi:"timeout"`
@@ -156,7 +193,9 @@ type cngwServiceState struct {
 	Retries *int `pulumi:"retries"`
 	// service id.
 	ServiceId *string `pulumi:"serviceId"`
-	// Tag description list.
+	// Deprecate ineffective tags Tag description list.
+	//
+	// Deprecated: Deprecate ineffective tags
 	Tags map[string]interface{} `pulumi:"tags"`
 	// time out, unit:ms.
 	Timeout *int `pulumi:"timeout"`
@@ -179,7 +218,9 @@ type CngwServiceState struct {
 	Retries pulumi.IntPtrInput
 	// service id.
 	ServiceId pulumi.StringPtrInput
-	// Tag description list.
+	// Deprecate ineffective tags Tag description list.
+	//
+	// Deprecated: Deprecate ineffective tags
 	Tags pulumi.MapInput
 	// time out, unit:ms.
 	Timeout pulumi.IntPtrInput
@@ -204,7 +245,9 @@ type cngwServiceArgs struct {
 	Protocol string `pulumi:"protocol"`
 	// retry times.
 	Retries int `pulumi:"retries"`
-	// Tag description list.
+	// Deprecate ineffective tags Tag description list.
+	//
+	// Deprecated: Deprecate ineffective tags
 	Tags map[string]interface{} `pulumi:"tags"`
 	// time out, unit:ms.
 	Timeout int `pulumi:"timeout"`
@@ -226,7 +269,9 @@ type CngwServiceArgs struct {
 	Protocol pulumi.StringInput
 	// retry times.
 	Retries pulumi.IntInput
-	// Tag description list.
+	// Deprecate ineffective tags Tag description list.
+	//
+	// Deprecated: Deprecate ineffective tags
 	Tags pulumi.MapInput
 	// time out, unit:ms.
 	Timeout pulumi.IntInput
@@ -353,7 +398,9 @@ func (o CngwServiceOutput) ServiceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CngwService) pulumi.StringOutput { return v.ServiceId }).(pulumi.StringOutput)
 }
 
-// Tag description list.
+// Deprecate ineffective tags Tag description list.
+//
+// Deprecated: Deprecate ineffective tags
 func (o CngwServiceOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v *CngwService) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }

@@ -109,9 +109,17 @@ export class TaskSet extends pulumi.CustomResource {
      */
     public readonly interval!: pulumi.Output<number>;
     /**
+     * `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+     */
+    public readonly nodeIpType!: pulumi.Output<number>;
+    /**
      * Task Nodes.
      */
     public readonly nodes!: pulumi.Output<string[]>;
+    /**
+     * The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+     */
+    public readonly operate!: pulumi.Output<string | undefined>;
     /**
      * tasks parameters.
      */
@@ -153,7 +161,9 @@ export class TaskSet extends pulumi.CustomResource {
             resourceInputs["batchTasks"] = state ? state.batchTasks : undefined;
             resourceInputs["cron"] = state ? state.cron : undefined;
             resourceInputs["interval"] = state ? state.interval : undefined;
+            resourceInputs["nodeIpType"] = state ? state.nodeIpType : undefined;
             resourceInputs["nodes"] = state ? state.nodes : undefined;
+            resourceInputs["operate"] = state ? state.operate : undefined;
             resourceInputs["parameters"] = state ? state.parameters : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
@@ -183,7 +193,9 @@ export class TaskSet extends pulumi.CustomResource {
             resourceInputs["batchTasks"] = args ? args.batchTasks : undefined;
             resourceInputs["cron"] = args ? args.cron : undefined;
             resourceInputs["interval"] = args ? args.interval : undefined;
+            resourceInputs["nodeIpType"] = args ? args.nodeIpType : undefined;
             resourceInputs["nodes"] = args ? args.nodes : undefined;
+            resourceInputs["operate"] = args ? args.operate : undefined;
             resourceInputs["parameters"] = args ? args.parameters : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["taskCategory"] = args ? args.taskCategory : undefined;
@@ -213,9 +225,17 @@ export interface TaskSetState {
      */
     interval?: pulumi.Input<number>;
     /**
+     * `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+     */
+    nodeIpType?: pulumi.Input<number>;
+    /**
      * Task Nodes.
      */
     nodes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+     */
+    operate?: pulumi.Input<string>;
     /**
      * tasks parameters.
      */
@@ -259,9 +279,17 @@ export interface TaskSetArgs {
      */
     interval: pulumi.Input<number>;
     /**
+     * `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+     */
+    nodeIpType?: pulumi.Input<number>;
+    /**
      * Task Nodes.
      */
     nodes: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+     */
+    operate?: pulumi.Input<string>;
     /**
      * tasks parameters.
      */

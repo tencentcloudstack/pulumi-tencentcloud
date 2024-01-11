@@ -38,6 +38,7 @@ from .security_group_attachment import *
 from .snat_ip import *
 from .target_group import *
 from .target_group_attachment import *
+from .target_group_attachments import *
 from .target_group_instance_attachment import *
 from ._inputs import *
 from . import outputs

@@ -104,7 +104,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<string> InstanceType { get; set; } = null!;
 
         /// <summary>
-        /// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        /// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         /// </summary>
         [Input("internetChargeType")]
         public Input<string>? InternetChargeType { get; set; }
@@ -127,6 +127,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
             set => _keyIds = value;
         }
 
+        [Input("orderlySecurityGroupIds")]
+        private InputList<string>? _orderlySecurityGroupIds;
+
+        /// <summary>
+        /// Ordered security groups to which a CVM instance belongs.
+        /// </summary>
+        public InputList<string> OrderlySecurityGroupIds
+        {
+            get => _orderlySecurityGroupIds ?? (_orderlySecurityGroupIds = new InputList<string>());
+            set => _orderlySecurityGroupIds = value;
+        }
+
         /// <summary>
         /// Password to access.
         /// </summary>
@@ -143,8 +155,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         private InputList<string>? _securityGroupIds;
 
         /// <summary>
-        /// Security groups to which a CVM instance belongs.
+        /// The order of elements in this field cannot be guaranteed. Use `orderly_security_group_ids` instead. Security groups to which a CVM instance belongs.
         /// </summary>
+        [Obsolete(@"The order of elements in this field cannot be guaranteed. Use `orderly_security_group_ids` instead.")]
         public InputList<string> SecurityGroupIds
         {
             get => _securityGroupIds ?? (_securityGroupIds = new InputList<string>());

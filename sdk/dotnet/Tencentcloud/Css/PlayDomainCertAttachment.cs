@@ -11,8 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
 {
     /// <summary>
-    /// Provides a resource to create a css play_domain_cert_attachment.
-    /// This resource is used for binding the play domain and specified certification together.
+    /// Provides a resource to create a css play_domain_cert_attachment. This resource is used for binding the play domain and specified certification together.
     /// 
     /// ## Example Usage
     /// 

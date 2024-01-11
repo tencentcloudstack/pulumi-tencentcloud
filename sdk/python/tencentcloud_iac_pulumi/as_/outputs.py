@@ -13,6 +13,7 @@ __all__ = [
     'LoadBalancerForwardLoadBalancer',
     'LoadBalancerForwardLoadBalancerTargetAttribute',
     'ScalingConfigDataDisk',
+    'ScalingConfigHostNameSettings',
     'ScalingConfigInstanceNameSettings',
     'ScalingGroupForwardBalancerId',
     'ScalingGroupForwardBalancerIdTargetAttribute',
@@ -193,6 +194,55 @@ class ScalingConfigDataDisk(dict):
         Data disk snapshot ID.
         """
         return pulumi.get(self, "snapshot_id")
+
+
+@pulumi.output_type
+class ScalingConfigHostNameSettings(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "hostName":
+            suggest = "host_name"
+        elif key == "hostNameStyle":
+            suggest = "host_name_style"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ScalingConfigHostNameSettings. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ScalingConfigHostNameSettings.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ScalingConfigHostNameSettings.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 host_name: str,
+                 host_name_style: Optional[str] = None):
+        """
+        :param str host_name: The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.
+        :param str host_name_style: The style of the host name of the cloud server, the value range includes `ORIGINAL` and `UNIQUE`, the default is `ORIGINAL`; `ORIGINAL`, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; `UNIQUE`, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.
+        """
+        pulumi.set(__self__, "host_name", host_name)
+        if host_name_style is not None:
+            pulumi.set(__self__, "host_name_style", host_name_style)
+
+    @property
+    @pulumi.getter(name="hostName")
+    def host_name(self) -> str:
+        """
+        The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.
+        """
+        return pulumi.get(self, "host_name")
+
+    @property
+    @pulumi.getter(name="hostNameStyle")
+    def host_name_style(self) -> Optional[str]:
+        """
+        The style of the host name of the cloud server, the value range includes `ORIGINAL` and `UNIQUE`, the default is `ORIGINAL`; `ORIGINAL`, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; `UNIQUE`, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.
+        """
+        return pulumi.get(self, "host_name_style")
 
 
 @pulumi.output_type

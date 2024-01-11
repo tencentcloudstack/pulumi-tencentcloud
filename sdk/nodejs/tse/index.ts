@@ -6,28 +6,41 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./cngwCanaryRule";
+export * from "./cngwCertificate";
+export * from "./cngwGateway";
+export * from "./cngwGroup";
 export * from "./cngwRoute";
 export * from "./cngwRouteRateLimit";
 export * from "./cngwService";
 export * from "./cngwServiceRateLimit";
 export * from "./getAccessAddress";
 export * from "./getGatewayCanaryRules";
+export * from "./getGatewayCertificates";
 export * from "./getGatewayNodes";
 export * from "./getGatewayRoutes";
 export * from "./getGatewayServices";
+export * from "./getGateways";
+export * from "./getGroups";
 export * from "./getNacosReplicas";
 export * from "./getNacosServerInterfaces";
 export * from "./getZookeeperReplicas";
 export * from "./getZookeeperServerInterfaces";
 export * from "./instance";
+export * from "./wafDomains";
+export * from "./wafProtection";
 
 // Import resources to register:
 import { CngwCanaryRule } from "./cngwCanaryRule";
+import { CngwCertificate } from "./cngwCertificate";
+import { CngwGateway } from "./cngwGateway";
+import { CngwGroup } from "./cngwGroup";
 import { CngwRoute } from "./cngwRoute";
 import { CngwRouteRateLimit } from "./cngwRouteRateLimit";
 import { CngwService } from "./cngwService";
 import { CngwServiceRateLimit } from "./cngwServiceRateLimit";
 import { Instance } from "./instance";
+import { WafDomains } from "./wafDomains";
+import { WafProtection } from "./wafProtection";
 
 const _module = {
     version: utilities.getVersion(),
@@ -35,6 +48,12 @@ const _module = {
         switch (type) {
             case "tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule":
                 return new CngwCanaryRule(name, <any>undefined, { urn })
+            case "tencentcloud:Tse/cngwCertificate:CngwCertificate":
+                return new CngwCertificate(name, <any>undefined, { urn })
+            case "tencentcloud:Tse/cngwGateway:CngwGateway":
+                return new CngwGateway(name, <any>undefined, { urn })
+            case "tencentcloud:Tse/cngwGroup:CngwGroup":
+                return new CngwGroup(name, <any>undefined, { urn })
             case "tencentcloud:Tse/cngwRoute:CngwRoute":
                 return new CngwRoute(name, <any>undefined, { urn })
             case "tencentcloud:Tse/cngwRouteRateLimit:CngwRouteRateLimit":
@@ -45,14 +64,23 @@ const _module = {
                 return new CngwServiceRateLimit(name, <any>undefined, { urn })
             case "tencentcloud:Tse/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Tse/wafDomains:WafDomains":
+                return new WafDomains(name, <any>undefined, { urn })
+            case "tencentcloud:Tse/wafProtection:WafProtection":
+                return new WafProtection(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Tse/cngwCanaryRule", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tse/cngwCertificate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tse/cngwGateway", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tse/cngwGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tse/cngwRoute", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tse/cngwRouteRateLimit", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tse/cngwService", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tse/cngwServiceRateLimit", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tse/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tse/wafDomains", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tse/wafProtection", _module)

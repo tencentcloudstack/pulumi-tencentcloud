@@ -109,6 +109,14 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      * Storage size of the instance, unit in GB.
      */
     public /*out*/ readonly instanceStorageSize!: pulumi.Output<number>;
+    /**
+     * ID of the subnet within this VPC.
+     */
+    public readonly subnetId!: pulumi.Output<string>;
+    /**
+     * ID of the VPC.
+     */
+    public readonly vpcId!: pulumi.Output<string>;
 
     /**
      * Create a ReadonlyInstance resource with the given unique name, arguments, and options.
@@ -133,6 +141,8 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["instanceName"] = state ? state.instanceName : undefined;
             resourceInputs["instanceStatus"] = state ? state.instanceStatus : undefined;
             resourceInputs["instanceStorageSize"] = state ? state.instanceStorageSize : undefined;
+            resourceInputs["subnetId"] = state ? state.subnetId : undefined;
+            resourceInputs["vpcId"] = state ? state.vpcId : undefined;
         } else {
             const args = argsOrState as ReadonlyInstanceArgs | undefined;
             if ((!args || args.clusterId === undefined) && !opts.urn) {
@@ -149,6 +159,8 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["instanceMaintainWeekdays"] = args ? args.instanceMaintainWeekdays : undefined;
             resourceInputs["instanceMemorySize"] = args ? args.instanceMemorySize : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
+            resourceInputs["subnetId"] = args ? args.subnetId : undefined;
+            resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["instanceStatus"] = undefined /*out*/;
             resourceInputs["instanceStorageSize"] = undefined /*out*/;
         }
@@ -201,6 +213,14 @@ export interface ReadonlyInstanceState {
      * Storage size of the instance, unit in GB.
      */
     instanceStorageSize?: pulumi.Input<number>;
+    /**
+     * ID of the subnet within this VPC.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * ID of the VPC.
+     */
+    vpcId?: pulumi.Input<string>;
 }
 
 /**
@@ -239,4 +259,12 @@ export interface ReadonlyInstanceArgs {
      * Name of instance.
      */
     instanceName: pulumi.Input<string>;
+    /**
+     * ID of the subnet within this VPC.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * ID of the VPC.
+     */
+    vpcId?: pulumi.Input<string>;
 }

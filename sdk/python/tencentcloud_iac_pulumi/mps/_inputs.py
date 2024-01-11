@@ -21,6 +21,278 @@ __all__ = [
     'AiRecognitionTemplateFaceConfigureArgs',
     'AiRecognitionTemplateOcrFullTextConfigureArgs',
     'AiRecognitionTemplateOcrWordsConfigureArgs',
+    'ContentReviewTemplatePoliticalConfigureArgs',
+    'ContentReviewTemplatePoliticalConfigureAsrReviewInfoArgs',
+    'ContentReviewTemplatePoliticalConfigureImgReviewInfoArgs',
+    'ContentReviewTemplatePoliticalConfigureOcrReviewInfoArgs',
+    'ContentReviewTemplatePornConfigureArgs',
+    'ContentReviewTemplatePornConfigureAsrReviewInfoArgs',
+    'ContentReviewTemplatePornConfigureImgReviewInfoArgs',
+    'ContentReviewTemplatePornConfigureOcrReviewInfoArgs',
+    'ContentReviewTemplateProhibitedConfigureArgs',
+    'ContentReviewTemplateProhibitedConfigureAsrReviewInfoArgs',
+    'ContentReviewTemplateProhibitedConfigureOcrReviewInfoArgs',
+    'ContentReviewTemplateTerrorismConfigureArgs',
+    'ContentReviewTemplateTerrorismConfigureImgReviewInfoArgs',
+    'ContentReviewTemplateTerrorismConfigureOcrReviewInfoArgs',
+    'ContentReviewTemplateUserDefineConfigureArgs',
+    'ContentReviewTemplateUserDefineConfigureAsrReviewInfoArgs',
+    'ContentReviewTemplateUserDefineConfigureFaceReviewInfoArgs',
+    'ContentReviewTemplateUserDefineConfigureOcrReviewInfoArgs',
+    'EditMediaOperationFileInfoArgs',
+    'EditMediaOperationFileInfoInputInfoArgs',
+    'EditMediaOperationFileInfoInputInfoCosInputInfoArgs',
+    'EditMediaOperationFileInfoInputInfoS3InputInfoArgs',
+    'EditMediaOperationFileInfoInputInfoUrlInputInfoArgs',
+    'EditMediaOperationOutputConfigArgs',
+    'EditMediaOperationOutputStorageArgs',
+    'EditMediaOperationOutputStorageCosOutputStorageArgs',
+    'EditMediaOperationOutputStorageS3OutputStorageArgs',
+    'EditMediaOperationTaskNotifyConfigArgs',
+    'EditMediaOperationTaskNotifyConfigAwsSqsArgs',
+    'FlowInputGroupArgs',
+    'FlowInputGroupHlsPullSettingsArgs',
+    'FlowInputGroupHlsPullSettingsSourceAddressArgs',
+    'FlowInputGroupResilientStreamArgs',
+    'FlowInputGroupRtmpPullSettingsArgs',
+    'FlowInputGroupRtmpPullSettingsSourceAddressArgs',
+    'FlowInputGroupRtpSettingsArgs',
+    'FlowInputGroupRtspPullSettingsArgs',
+    'FlowInputGroupRtspPullSettingsSourceAddressArgs',
+    'FlowInputGroupSrtSettingsArgs',
+    'FlowInputGroupSrtSettingsSourceAddressArgs',
+    'InputInputGroupArgs',
+    'InputInputGroupHlsPullSettingsArgs',
+    'InputInputGroupHlsPullSettingsSourceAddressArgs',
+    'InputInputGroupResilientStreamArgs',
+    'InputInputGroupRtmpPullSettingsArgs',
+    'InputInputGroupRtmpPullSettingsSourceAddressArgs',
+    'InputInputGroupRtpSettingsArgs',
+    'InputInputGroupRtspPullSettingsArgs',
+    'InputInputGroupRtspPullSettingsSourceAddressArgs',
+    'InputInputGroupSrtSettingsArgs',
+    'InputInputGroupSrtSettingsSourceAddressArgs',
+    'OutputOutputArgs',
+    'OutputOutputRtmpSettingsArgs',
+    'OutputOutputRtmpSettingsDestinationArgs',
+    'OutputOutputRtpSettingsArgs',
+    'OutputOutputRtpSettingsDestinationArgs',
+    'OutputOutputSrtSettingsArgs',
+    'OutputOutputSrtSettingsDestinationArgs',
+    'ProcessLiveStreamOperationAiAnalysisTaskArgs',
+    'ProcessLiveStreamOperationAiContentReviewTaskArgs',
+    'ProcessLiveStreamOperationAiQualityControlTaskArgs',
+    'ProcessLiveStreamOperationAiRecognitionTaskArgs',
+    'ProcessLiveStreamOperationOutputStorageArgs',
+    'ProcessLiveStreamOperationOutputStorageCosOutputStorageArgs',
+    'ProcessLiveStreamOperationOutputStorageS3OutputStorageArgs',
+    'ProcessLiveStreamOperationTaskNotifyConfigArgs',
+    'ProcessMediaOperationAiAnalysisTaskArgs',
+    'ProcessMediaOperationAiContentReviewTaskArgs',
+    'ProcessMediaOperationAiQualityControlTaskArgs',
+    'ProcessMediaOperationAiRecognitionTaskArgs',
+    'ProcessMediaOperationInputInfoArgs',
+    'ProcessMediaOperationInputInfoCosInputInfoArgs',
+    'ProcessMediaOperationInputInfoS3InputInfoArgs',
+    'ProcessMediaOperationInputInfoUrlInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskArgs',
+    'ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetArgs',
+    'ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleArgs',
+    'ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleArgs',
+    'ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleCosInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleS3InputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleUrlInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageCosOutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageS3OutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetArgs',
+    'ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterArgs',
+    'ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateArgs',
+    'ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs',
+    'ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetArgs',
+    'ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageCosOutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageS3OutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetArgs',
+    'ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetObjectNumberFormatArgs',
+    'ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageCosOutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageS3OutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetArgs',
+    'ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetObjectNumberFormatArgs',
+    'ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageCosOutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageS3OutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetArgs',
+    'ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterArgs',
+    'ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateArgs',
+    'ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs',
+    'ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetArgs',
+    'ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetObjectNumberFormatArgs',
+    'ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageCosOutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageS3OutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetArgs',
+    'ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterArgs',
+    'ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateArgs',
+    'ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs',
+    'ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetCosInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetS3InputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetUrlInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetCosInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetS3InputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetUrlInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetMosaicSetArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetObjectNumberFormatArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageCosOutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageS3OutputStorageArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleCosInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleS3InputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamCosInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamS3InputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamUrlInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAudioTemplateArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterSubtitleTemplateArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterTehdConfigArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplateArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterAudioTemplateArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterTehdConfigArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplateArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs',
+    'ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs',
+    'ProcessMediaOperationOutputStorageArgs',
+    'ProcessMediaOperationOutputStorageCosOutputStorageArgs',
+    'ProcessMediaOperationOutputStorageS3OutputStorageArgs',
+    'ProcessMediaOperationTaskNotifyConfigArgs',
+    'ProcessMediaOperationTaskNotifyConfigAwsSqaArgs',
+    'ScheduleActivityArgs',
+    'ScheduleActivityActivityParaArgs',
+    'ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskArgs',
+    'ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleArgs',
+    'ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleArgs',
+    'ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleCosInputInfoArgs',
+    'ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleS3InputInfoArgs',
+    'ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleUrlInputInfoArgs',
+    'ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageArgs',
+    'ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageCosOutputStorageArgs',
+    'ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageS3OutputStorageArgs',
+    'ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetArgs',
+    'ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterArgs',
+    'ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateArgs',
+    'ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentArgs',
+    'ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs',
+    'ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs',
+    'ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs',
+    'ScheduleActivityActivityParaAiAnalysisTaskArgs',
+    'ScheduleActivityActivityParaAiContentReviewTaskArgs',
+    'ScheduleActivityActivityParaAiRecognitionTaskArgs',
+    'ScheduleActivityActivityParaAnimatedGraphicTaskArgs',
+    'ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageArgs',
+    'ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageCosOutputStorageArgs',
+    'ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageS3OutputStorageArgs',
+    'ScheduleActivityActivityParaImageSpriteTaskArgs',
+    'ScheduleActivityActivityParaImageSpriteTaskObjectNumberFormatArgs',
+    'ScheduleActivityActivityParaImageSpriteTaskOutputStorageArgs',
+    'ScheduleActivityActivityParaImageSpriteTaskOutputStorageCosOutputStorageArgs',
+    'ScheduleActivityActivityParaImageSpriteTaskOutputStorageS3OutputStorageArgs',
+    'ScheduleActivityActivityParaSampleSnapshotTaskArgs',
+    'ScheduleActivityActivityParaSampleSnapshotTaskObjectNumberFormatArgs',
+    'ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageArgs',
+    'ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageCosOutputStorageArgs',
+    'ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageS3OutputStorageArgs',
+    'ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetArgs',
+    'ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterArgs',
+    'ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateArgs',
+    'ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentArgs',
+    'ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs',
+    'ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs',
+    'ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs',
+    'ScheduleActivityActivityParaSnapshotByTimeOffsetTaskArgs',
+    'ScheduleActivityActivityParaSnapshotByTimeOffsetTaskObjectNumberFormatArgs',
+    'ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageArgs',
+    'ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageCosOutputStorageArgs',
+    'ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageS3OutputStorageArgs',
+    'ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetArgs',
+    'ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterArgs',
+    'ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateArgs',
+    'ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentArgs',
+    'ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs',
+    'ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs',
+    'ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs',
+    'ScheduleActivityActivityParaTranscodeTaskArgs',
+    'ScheduleActivityActivityParaTranscodeTaskHeadTailParameterArgs',
+    'ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetArgs',
+    'ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetCosInputInfoArgs',
+    'ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetS3InputInfoArgs',
+    'ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetUrlInputInfoArgs',
+    'ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetArgs',
+    'ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetCosInputInfoArgs',
+    'ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetS3InputInfoArgs',
+    'ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetUrlInputInfoArgs',
+    'ScheduleActivityActivityParaTranscodeTaskMosaicSetArgs',
+    'ScheduleActivityActivityParaTranscodeTaskObjectNumberFormatArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOutputStorageArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOutputStorageCosOutputStorageArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOutputStorageS3OutputStorageArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOverrideParameterArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleCosInputInfoArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleS3InputInfoArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamCosInputInfoArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamS3InputInfoArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamUrlInputInfoArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOverrideParameterAudioTemplateArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOverrideParameterSubtitleTemplateArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOverrideParameterTehdConfigArgs',
+    'ScheduleActivityActivityParaTranscodeTaskOverrideParameterVideoTemplateArgs',
+    'ScheduleActivityActivityParaTranscodeTaskRawParameterArgs',
+    'ScheduleActivityActivityParaTranscodeTaskRawParameterAudioTemplateArgs',
+    'ScheduleActivityActivityParaTranscodeTaskRawParameterTehdConfigArgs',
+    'ScheduleActivityActivityParaTranscodeTaskRawParameterVideoTemplateArgs',
+    'ScheduleActivityActivityParaTranscodeTaskWatermarkSetArgs',
+    'ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterArgs',
+    'ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateArgs',
+    'ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentArgs',
+    'ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs',
+    'ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs',
+    'ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs',
+    'ScheduleOutputStorageArgs',
+    'ScheduleOutputStorageCosOutputStorageArgs',
+    'ScheduleOutputStorageS3OutputStorageArgs',
+    'ScheduleTaskNotifyConfigArgs',
+    'ScheduleTaskNotifyConfigAwsSqsArgs',
+    'ScheduleTriggerArgs',
+    'ScheduleTriggerAwsS3FileUploadTriggerArgs',
+    'ScheduleTriggerAwsS3FileUploadTriggerAwsSqsArgs',
+    'ScheduleTriggerCosFileUploadTriggerArgs',
     'TranscodeTemplateAudioTemplateArgs',
     'TranscodeTemplateEnhanceConfigArgs',
     'TranscodeTemplateEnhanceConfigVideoEnhanceArgs',
@@ -40,6 +312,12 @@ __all__ = [
     'WatermarkTemplateImageTemplateArgs',
     'WatermarkTemplateSvgTemplateArgs',
     'WatermarkTemplateTextTemplateArgs',
+    'WithdrawsWatermarkOperationInputInfoArgs',
+    'WithdrawsWatermarkOperationInputInfoCosInputInfoArgs',
+    'WithdrawsWatermarkOperationInputInfoS3InputInfoArgs',
+    'WithdrawsWatermarkOperationInputInfoUrlInputInfoArgs',
+    'WithdrawsWatermarkOperationTaskNotifyConfigArgs',
+    'WithdrawsWatermarkOperationTaskNotifyConfigAwsSqsArgs',
     'WorkflowAiAnalysisTaskArgs',
     'WorkflowAiContentReviewTaskArgs',
     'WorkflowAiRecognitionTaskArgs',
@@ -112,6 +390,10 @@ __all__ = [
     'WorkflowTaskNotifyConfigArgs',
     'WorkflowTriggerArgs',
     'WorkflowTriggerCosFileUploadTriggerArgs',
+    'GetMediaMetaDataInputInfoArgs',
+    'GetMediaMetaDataInputInfoCosInputInfoArgs',
+    'GetMediaMetaDataInputInfoS3InputInfoArgs',
+    'GetMediaMetaDataInputInfoUrlInputInfoArgs',
 ]
 
 @pulumi.input_type
@@ -707,6 +989,17939 @@ class AiRecognitionTemplateOcrWordsConfigureArgs:
     @label_sets.setter
     def label_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "label_sets", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplatePoliticalConfigureArgs:
+    def __init__(__self__, *,
+                 asr_review_info: Optional[pulumi.Input['ContentReviewTemplatePoliticalConfigureAsrReviewInfoArgs']] = None,
+                 img_review_info: Optional[pulumi.Input['ContentReviewTemplatePoliticalConfigureImgReviewInfoArgs']] = None,
+                 ocr_review_info: Optional[pulumi.Input['ContentReviewTemplatePoliticalConfigureOcrReviewInfoArgs']] = None):
+        """
+        :param pulumi.Input['ContentReviewTemplatePoliticalConfigureAsrReviewInfoArgs'] asr_review_info: Political asr control parameters.
+        :param pulumi.Input['ContentReviewTemplatePoliticalConfigureImgReviewInfoArgs'] img_review_info: Political image control parameters.
+        :param pulumi.Input['ContentReviewTemplatePoliticalConfigureOcrReviewInfoArgs'] ocr_review_info: Political ocr control parameters.
+        """
+        if asr_review_info is not None:
+            pulumi.set(__self__, "asr_review_info", asr_review_info)
+        if img_review_info is not None:
+            pulumi.set(__self__, "img_review_info", img_review_info)
+        if ocr_review_info is not None:
+            pulumi.set(__self__, "ocr_review_info", ocr_review_info)
+
+    @property
+    @pulumi.getter(name="asrReviewInfo")
+    def asr_review_info(self) -> Optional[pulumi.Input['ContentReviewTemplatePoliticalConfigureAsrReviewInfoArgs']]:
+        """
+        Political asr control parameters.
+        """
+        return pulumi.get(self, "asr_review_info")
+
+    @asr_review_info.setter
+    def asr_review_info(self, value: Optional[pulumi.Input['ContentReviewTemplatePoliticalConfigureAsrReviewInfoArgs']]):
+        pulumi.set(self, "asr_review_info", value)
+
+    @property
+    @pulumi.getter(name="imgReviewInfo")
+    def img_review_info(self) -> Optional[pulumi.Input['ContentReviewTemplatePoliticalConfigureImgReviewInfoArgs']]:
+        """
+        Political image control parameters.
+        """
+        return pulumi.get(self, "img_review_info")
+
+    @img_review_info.setter
+    def img_review_info(self, value: Optional[pulumi.Input['ContentReviewTemplatePoliticalConfigureImgReviewInfoArgs']]):
+        pulumi.set(self, "img_review_info", value)
+
+    @property
+    @pulumi.getter(name="ocrReviewInfo")
+    def ocr_review_info(self) -> Optional[pulumi.Input['ContentReviewTemplatePoliticalConfigureOcrReviewInfoArgs']]:
+        """
+        Political ocr control parameters.
+        """
+        return pulumi.get(self, "ocr_review_info")
+
+    @ocr_review_info.setter
+    def ocr_review_info(self, value: Optional[pulumi.Input['ContentReviewTemplatePoliticalConfigureOcrReviewInfoArgs']]):
+        pulumi.set(self, "ocr_review_info", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplatePoliticalConfigureAsrReviewInfoArgs:
+    def __init__(__self__, *,
+                 switch: pulumi.Input[str],
+                 block_confidence: Optional[pulumi.Input[int]] = None,
+                 review_confidence: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: User-defined asr review task switch, optional value:ON/OFF.
+        :param pulumi.Input[int] block_confidence: The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        :param pulumi.Input[int] review_confidence: The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        pulumi.set(__self__, "switch", switch)
+        if block_confidence is not None:
+            pulumi.set(__self__, "block_confidence", block_confidence)
+        if review_confidence is not None:
+            pulumi.set(__self__, "review_confidence", review_confidence)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> pulumi.Input[str]:
+        """
+        User-defined asr review task switch, optional value:ON/OFF.
+        """
+        return pulumi.get(self, "switch")
+
+    @switch.setter
+    def switch(self, value: pulumi.Input[str]):
+        pulumi.set(self, "switch", value)
+
+    @property
+    @pulumi.getter(name="blockConfidence")
+    def block_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "block_confidence")
+
+    @block_confidence.setter
+    def block_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "block_confidence", value)
+
+    @property
+    @pulumi.getter(name="reviewConfidence")
+    def review_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "review_confidence")
+
+    @review_confidence.setter
+    def review_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "review_confidence", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplatePoliticalConfigureImgReviewInfoArgs:
+    def __init__(__self__, *,
+                 switch: pulumi.Input[str],
+                 block_confidence: Optional[pulumi.Input[int]] = None,
+                 label_sets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 review_confidence: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: Terrorism image task switch, optional value:ON/OFF.
+        :param pulumi.Input[int] block_confidence: The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 90 points. Value range: 0~100.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] label_sets: Terrorism image filter tag, if the review result contains the selected tag, the result will be returned, if the filter tag is empty, all the review results will be returned, the optional value is:guns, crowd, bloody, police, banners, militant, explosion, terrorists, scenario.
+        :param pulumi.Input[int] review_confidence: The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 80 points. Value range: 0~100.
+        """
+        pulumi.set(__self__, "switch", switch)
+        if block_confidence is not None:
+            pulumi.set(__self__, "block_confidence", block_confidence)
+        if label_sets is not None:
+            pulumi.set(__self__, "label_sets", label_sets)
+        if review_confidence is not None:
+            pulumi.set(__self__, "review_confidence", review_confidence)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> pulumi.Input[str]:
+        """
+        Terrorism image task switch, optional value:ON/OFF.
+        """
+        return pulumi.get(self, "switch")
+
+    @switch.setter
+    def switch(self, value: pulumi.Input[str]):
+        pulumi.set(self, "switch", value)
+
+    @property
+    @pulumi.getter(name="blockConfidence")
+    def block_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 90 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "block_confidence")
+
+    @block_confidence.setter
+    def block_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "block_confidence", value)
+
+    @property
+    @pulumi.getter(name="labelSets")
+    def label_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Terrorism image filter tag, if the review result contains the selected tag, the result will be returned, if the filter tag is empty, all the review results will be returned, the optional value is:guns, crowd, bloody, police, banners, militant, explosion, terrorists, scenario.
+        """
+        return pulumi.get(self, "label_sets")
+
+    @label_sets.setter
+    def label_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "label_sets", value)
+
+    @property
+    @pulumi.getter(name="reviewConfidence")
+    def review_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 80 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "review_confidence")
+
+    @review_confidence.setter
+    def review_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "review_confidence", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplatePoliticalConfigureOcrReviewInfoArgs:
+    def __init__(__self__, *,
+                 switch: pulumi.Input[str],
+                 block_confidence: Optional[pulumi.Input[int]] = None,
+                 review_confidence: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: User-defined ocr text review task switch, optional value:ON/OFF.
+        :param pulumi.Input[int] block_confidence: The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        :param pulumi.Input[int] review_confidence: The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        pulumi.set(__self__, "switch", switch)
+        if block_confidence is not None:
+            pulumi.set(__self__, "block_confidence", block_confidence)
+        if review_confidence is not None:
+            pulumi.set(__self__, "review_confidence", review_confidence)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> pulumi.Input[str]:
+        """
+        User-defined ocr text review task switch, optional value:ON/OFF.
+        """
+        return pulumi.get(self, "switch")
+
+    @switch.setter
+    def switch(self, value: pulumi.Input[str]):
+        pulumi.set(self, "switch", value)
+
+    @property
+    @pulumi.getter(name="blockConfidence")
+    def block_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "block_confidence")
+
+    @block_confidence.setter
+    def block_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "block_confidence", value)
+
+    @property
+    @pulumi.getter(name="reviewConfidence")
+    def review_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "review_confidence")
+
+    @review_confidence.setter
+    def review_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "review_confidence", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplatePornConfigureArgs:
+    def __init__(__self__, *,
+                 asr_review_info: Optional[pulumi.Input['ContentReviewTemplatePornConfigureAsrReviewInfoArgs']] = None,
+                 img_review_info: Optional[pulumi.Input['ContentReviewTemplatePornConfigureImgReviewInfoArgs']] = None,
+                 ocr_review_info: Optional[pulumi.Input['ContentReviewTemplatePornConfigureOcrReviewInfoArgs']] = None):
+        """
+        :param pulumi.Input['ContentReviewTemplatePornConfigureAsrReviewInfoArgs'] asr_review_info: Voice pornography control parameters.
+        :param pulumi.Input['ContentReviewTemplatePornConfigureImgReviewInfoArgs'] img_review_info: Porn image Identification Control Parameters.
+        :param pulumi.Input['ContentReviewTemplatePornConfigureOcrReviewInfoArgs'] ocr_review_info: Ocr pornography control parameters.
+        """
+        if asr_review_info is not None:
+            pulumi.set(__self__, "asr_review_info", asr_review_info)
+        if img_review_info is not None:
+            pulumi.set(__self__, "img_review_info", img_review_info)
+        if ocr_review_info is not None:
+            pulumi.set(__self__, "ocr_review_info", ocr_review_info)
+
+    @property
+    @pulumi.getter(name="asrReviewInfo")
+    def asr_review_info(self) -> Optional[pulumi.Input['ContentReviewTemplatePornConfigureAsrReviewInfoArgs']]:
+        """
+        Voice pornography control parameters.
+        """
+        return pulumi.get(self, "asr_review_info")
+
+    @asr_review_info.setter
+    def asr_review_info(self, value: Optional[pulumi.Input['ContentReviewTemplatePornConfigureAsrReviewInfoArgs']]):
+        pulumi.set(self, "asr_review_info", value)
+
+    @property
+    @pulumi.getter(name="imgReviewInfo")
+    def img_review_info(self) -> Optional[pulumi.Input['ContentReviewTemplatePornConfigureImgReviewInfoArgs']]:
+        """
+        Porn image Identification Control Parameters.
+        """
+        return pulumi.get(self, "img_review_info")
+
+    @img_review_info.setter
+    def img_review_info(self, value: Optional[pulumi.Input['ContentReviewTemplatePornConfigureImgReviewInfoArgs']]):
+        pulumi.set(self, "img_review_info", value)
+
+    @property
+    @pulumi.getter(name="ocrReviewInfo")
+    def ocr_review_info(self) -> Optional[pulumi.Input['ContentReviewTemplatePornConfigureOcrReviewInfoArgs']]:
+        """
+        Ocr pornography control parameters.
+        """
+        return pulumi.get(self, "ocr_review_info")
+
+    @ocr_review_info.setter
+    def ocr_review_info(self, value: Optional[pulumi.Input['ContentReviewTemplatePornConfigureOcrReviewInfoArgs']]):
+        pulumi.set(self, "ocr_review_info", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplatePornConfigureAsrReviewInfoArgs:
+    def __init__(__self__, *,
+                 switch: pulumi.Input[str],
+                 block_confidence: Optional[pulumi.Input[int]] = None,
+                 review_confidence: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: User-defined asr review task switch, optional value:ON/OFF.
+        :param pulumi.Input[int] block_confidence: The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        :param pulumi.Input[int] review_confidence: The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        pulumi.set(__self__, "switch", switch)
+        if block_confidence is not None:
+            pulumi.set(__self__, "block_confidence", block_confidence)
+        if review_confidence is not None:
+            pulumi.set(__self__, "review_confidence", review_confidence)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> pulumi.Input[str]:
+        """
+        User-defined asr review task switch, optional value:ON/OFF.
+        """
+        return pulumi.get(self, "switch")
+
+    @switch.setter
+    def switch(self, value: pulumi.Input[str]):
+        pulumi.set(self, "switch", value)
+
+    @property
+    @pulumi.getter(name="blockConfidence")
+    def block_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "block_confidence")
+
+    @block_confidence.setter
+    def block_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "block_confidence", value)
+
+    @property
+    @pulumi.getter(name="reviewConfidence")
+    def review_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "review_confidence")
+
+    @review_confidence.setter
+    def review_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "review_confidence", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplatePornConfigureImgReviewInfoArgs:
+    def __init__(__self__, *,
+                 switch: pulumi.Input[str],
+                 block_confidence: Optional[pulumi.Input[int]] = None,
+                 label_sets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 review_confidence: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: Terrorism image task switch, optional value:ON/OFF.
+        :param pulumi.Input[int] block_confidence: The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 90 points. Value range: 0~100.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] label_sets: Terrorism image filter tag, if the review result contains the selected tag, the result will be returned, if the filter tag is empty, all the review results will be returned, the optional value is:guns, crowd, bloody, police, banners, militant, explosion, terrorists, scenario.
+        :param pulumi.Input[int] review_confidence: The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 80 points. Value range: 0~100.
+        """
+        pulumi.set(__self__, "switch", switch)
+        if block_confidence is not None:
+            pulumi.set(__self__, "block_confidence", block_confidence)
+        if label_sets is not None:
+            pulumi.set(__self__, "label_sets", label_sets)
+        if review_confidence is not None:
+            pulumi.set(__self__, "review_confidence", review_confidence)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> pulumi.Input[str]:
+        """
+        Terrorism image task switch, optional value:ON/OFF.
+        """
+        return pulumi.get(self, "switch")
+
+    @switch.setter
+    def switch(self, value: pulumi.Input[str]):
+        pulumi.set(self, "switch", value)
+
+    @property
+    @pulumi.getter(name="blockConfidence")
+    def block_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 90 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "block_confidence")
+
+    @block_confidence.setter
+    def block_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "block_confidence", value)
+
+    @property
+    @pulumi.getter(name="labelSets")
+    def label_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Terrorism image filter tag, if the review result contains the selected tag, the result will be returned, if the filter tag is empty, all the review results will be returned, the optional value is:guns, crowd, bloody, police, banners, militant, explosion, terrorists, scenario.
+        """
+        return pulumi.get(self, "label_sets")
+
+    @label_sets.setter
+    def label_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "label_sets", value)
+
+    @property
+    @pulumi.getter(name="reviewConfidence")
+    def review_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 80 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "review_confidence")
+
+    @review_confidence.setter
+    def review_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "review_confidence", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplatePornConfigureOcrReviewInfoArgs:
+    def __init__(__self__, *,
+                 switch: pulumi.Input[str],
+                 block_confidence: Optional[pulumi.Input[int]] = None,
+                 review_confidence: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: User-defined ocr text review task switch, optional value:ON/OFF.
+        :param pulumi.Input[int] block_confidence: The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        :param pulumi.Input[int] review_confidence: The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        pulumi.set(__self__, "switch", switch)
+        if block_confidence is not None:
+            pulumi.set(__self__, "block_confidence", block_confidence)
+        if review_confidence is not None:
+            pulumi.set(__self__, "review_confidence", review_confidence)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> pulumi.Input[str]:
+        """
+        User-defined ocr text review task switch, optional value:ON/OFF.
+        """
+        return pulumi.get(self, "switch")
+
+    @switch.setter
+    def switch(self, value: pulumi.Input[str]):
+        pulumi.set(self, "switch", value)
+
+    @property
+    @pulumi.getter(name="blockConfidence")
+    def block_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "block_confidence")
+
+    @block_confidence.setter
+    def block_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "block_confidence", value)
+
+    @property
+    @pulumi.getter(name="reviewConfidence")
+    def review_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "review_confidence")
+
+    @review_confidence.setter
+    def review_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "review_confidence", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplateProhibitedConfigureArgs:
+    def __init__(__self__, *,
+                 asr_review_info: Optional[pulumi.Input['ContentReviewTemplateProhibitedConfigureAsrReviewInfoArgs']] = None,
+                 ocr_review_info: Optional[pulumi.Input['ContentReviewTemplateProhibitedConfigureOcrReviewInfoArgs']] = None):
+        """
+        :param pulumi.Input['ContentReviewTemplateProhibitedConfigureAsrReviewInfoArgs'] asr_review_info: Voice Prohibition Control Parameters.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ContentReviewTemplateProhibitedConfigureOcrReviewInfoArgs'] ocr_review_info: Ocr Prohibition Control Parameters.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if asr_review_info is not None:
+            pulumi.set(__self__, "asr_review_info", asr_review_info)
+        if ocr_review_info is not None:
+            pulumi.set(__self__, "ocr_review_info", ocr_review_info)
+
+    @property
+    @pulumi.getter(name="asrReviewInfo")
+    def asr_review_info(self) -> Optional[pulumi.Input['ContentReviewTemplateProhibitedConfigureAsrReviewInfoArgs']]:
+        """
+        Voice Prohibition Control Parameters.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "asr_review_info")
+
+    @asr_review_info.setter
+    def asr_review_info(self, value: Optional[pulumi.Input['ContentReviewTemplateProhibitedConfigureAsrReviewInfoArgs']]):
+        pulumi.set(self, "asr_review_info", value)
+
+    @property
+    @pulumi.getter(name="ocrReviewInfo")
+    def ocr_review_info(self) -> Optional[pulumi.Input['ContentReviewTemplateProhibitedConfigureOcrReviewInfoArgs']]:
+        """
+        Ocr Prohibition Control Parameters.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ocr_review_info")
+
+    @ocr_review_info.setter
+    def ocr_review_info(self, value: Optional[pulumi.Input['ContentReviewTemplateProhibitedConfigureOcrReviewInfoArgs']]):
+        pulumi.set(self, "ocr_review_info", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplateProhibitedConfigureAsrReviewInfoArgs:
+    def __init__(__self__, *,
+                 switch: pulumi.Input[str],
+                 block_confidence: Optional[pulumi.Input[int]] = None,
+                 review_confidence: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: User-defined asr review task switch, optional value:ON/OFF.
+        :param pulumi.Input[int] block_confidence: The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        :param pulumi.Input[int] review_confidence: The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        pulumi.set(__self__, "switch", switch)
+        if block_confidence is not None:
+            pulumi.set(__self__, "block_confidence", block_confidence)
+        if review_confidence is not None:
+            pulumi.set(__self__, "review_confidence", review_confidence)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> pulumi.Input[str]:
+        """
+        User-defined asr review task switch, optional value:ON/OFF.
+        """
+        return pulumi.get(self, "switch")
+
+    @switch.setter
+    def switch(self, value: pulumi.Input[str]):
+        pulumi.set(self, "switch", value)
+
+    @property
+    @pulumi.getter(name="blockConfidence")
+    def block_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "block_confidence")
+
+    @block_confidence.setter
+    def block_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "block_confidence", value)
+
+    @property
+    @pulumi.getter(name="reviewConfidence")
+    def review_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "review_confidence")
+
+    @review_confidence.setter
+    def review_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "review_confidence", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplateProhibitedConfigureOcrReviewInfoArgs:
+    def __init__(__self__, *,
+                 switch: pulumi.Input[str],
+                 block_confidence: Optional[pulumi.Input[int]] = None,
+                 review_confidence: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: User-defined ocr text review task switch, optional value:ON/OFF.
+        :param pulumi.Input[int] block_confidence: The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        :param pulumi.Input[int] review_confidence: The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        pulumi.set(__self__, "switch", switch)
+        if block_confidence is not None:
+            pulumi.set(__self__, "block_confidence", block_confidence)
+        if review_confidence is not None:
+            pulumi.set(__self__, "review_confidence", review_confidence)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> pulumi.Input[str]:
+        """
+        User-defined ocr text review task switch, optional value:ON/OFF.
+        """
+        return pulumi.get(self, "switch")
+
+    @switch.setter
+    def switch(self, value: pulumi.Input[str]):
+        pulumi.set(self, "switch", value)
+
+    @property
+    @pulumi.getter(name="blockConfidence")
+    def block_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "block_confidence")
+
+    @block_confidence.setter
+    def block_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "block_confidence", value)
+
+    @property
+    @pulumi.getter(name="reviewConfidence")
+    def review_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "review_confidence")
+
+    @review_confidence.setter
+    def review_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "review_confidence", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplateTerrorismConfigureArgs:
+    def __init__(__self__, *,
+                 ocr_review_info: pulumi.Input['ContentReviewTemplateTerrorismConfigureOcrReviewInfoArgs'],
+                 img_review_info: Optional[pulumi.Input['ContentReviewTemplateTerrorismConfigureImgReviewInfoArgs']] = None):
+        """
+        :param pulumi.Input['ContentReviewTemplateTerrorismConfigureOcrReviewInfoArgs'] ocr_review_info: Ocr terrorism task Control Parameters.
+        :param pulumi.Input['ContentReviewTemplateTerrorismConfigureImgReviewInfoArgs'] img_review_info: Terrorism image task control parameters.
+        """
+        pulumi.set(__self__, "ocr_review_info", ocr_review_info)
+        if img_review_info is not None:
+            pulumi.set(__self__, "img_review_info", img_review_info)
+
+    @property
+    @pulumi.getter(name="ocrReviewInfo")
+    def ocr_review_info(self) -> pulumi.Input['ContentReviewTemplateTerrorismConfigureOcrReviewInfoArgs']:
+        """
+        Ocr terrorism task Control Parameters.
+        """
+        return pulumi.get(self, "ocr_review_info")
+
+    @ocr_review_info.setter
+    def ocr_review_info(self, value: pulumi.Input['ContentReviewTemplateTerrorismConfigureOcrReviewInfoArgs']):
+        pulumi.set(self, "ocr_review_info", value)
+
+    @property
+    @pulumi.getter(name="imgReviewInfo")
+    def img_review_info(self) -> Optional[pulumi.Input['ContentReviewTemplateTerrorismConfigureImgReviewInfoArgs']]:
+        """
+        Terrorism image task control parameters.
+        """
+        return pulumi.get(self, "img_review_info")
+
+    @img_review_info.setter
+    def img_review_info(self, value: Optional[pulumi.Input['ContentReviewTemplateTerrorismConfigureImgReviewInfoArgs']]):
+        pulumi.set(self, "img_review_info", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplateTerrorismConfigureImgReviewInfoArgs:
+    def __init__(__self__, *,
+                 switch: pulumi.Input[str],
+                 block_confidence: Optional[pulumi.Input[int]] = None,
+                 label_sets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 review_confidence: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: Terrorism image task switch, optional value:ON/OFF.
+        :param pulumi.Input[int] block_confidence: The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 90 points. Value range: 0~100.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] label_sets: Terrorism image filter tag, if the review result contains the selected tag, the result will be returned, if the filter tag is empty, all the review results will be returned, the optional value is:guns, crowd, bloody, police, banners, militant, explosion, terrorists, scenario.
+        :param pulumi.Input[int] review_confidence: The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 80 points. Value range: 0~100.
+        """
+        pulumi.set(__self__, "switch", switch)
+        if block_confidence is not None:
+            pulumi.set(__self__, "block_confidence", block_confidence)
+        if label_sets is not None:
+            pulumi.set(__self__, "label_sets", label_sets)
+        if review_confidence is not None:
+            pulumi.set(__self__, "review_confidence", review_confidence)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> pulumi.Input[str]:
+        """
+        Terrorism image task switch, optional value:ON/OFF.
+        """
+        return pulumi.get(self, "switch")
+
+    @switch.setter
+    def switch(self, value: pulumi.Input[str]):
+        pulumi.set(self, "switch", value)
+
+    @property
+    @pulumi.getter(name="blockConfidence")
+    def block_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 90 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "block_confidence")
+
+    @block_confidence.setter
+    def block_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "block_confidence", value)
+
+    @property
+    @pulumi.getter(name="labelSets")
+    def label_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Terrorism image filter tag, if the review result contains the selected tag, the result will be returned, if the filter tag is empty, all the review results will be returned, the optional value is:guns, crowd, bloody, police, banners, militant, explosion, terrorists, scenario.
+        """
+        return pulumi.get(self, "label_sets")
+
+    @label_sets.setter
+    def label_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "label_sets", value)
+
+    @property
+    @pulumi.getter(name="reviewConfidence")
+    def review_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 80 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "review_confidence")
+
+    @review_confidence.setter
+    def review_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "review_confidence", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplateTerrorismConfigureOcrReviewInfoArgs:
+    def __init__(__self__, *,
+                 switch: pulumi.Input[str],
+                 block_confidence: Optional[pulumi.Input[int]] = None,
+                 review_confidence: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: User-defined ocr text review task switch, optional value:ON/OFF.
+        :param pulumi.Input[int] block_confidence: The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        :param pulumi.Input[int] review_confidence: The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        pulumi.set(__self__, "switch", switch)
+        if block_confidence is not None:
+            pulumi.set(__self__, "block_confidence", block_confidence)
+        if review_confidence is not None:
+            pulumi.set(__self__, "review_confidence", review_confidence)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> pulumi.Input[str]:
+        """
+        User-defined ocr text review task switch, optional value:ON/OFF.
+        """
+        return pulumi.get(self, "switch")
+
+    @switch.setter
+    def switch(self, value: pulumi.Input[str]):
+        pulumi.set(self, "switch", value)
+
+    @property
+    @pulumi.getter(name="blockConfidence")
+    def block_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "block_confidence")
+
+    @block_confidence.setter
+    def block_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "block_confidence", value)
+
+    @property
+    @pulumi.getter(name="reviewConfidence")
+    def review_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "review_confidence")
+
+    @review_confidence.setter
+    def review_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "review_confidence", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplateUserDefineConfigureArgs:
+    def __init__(__self__, *,
+                 asr_review_info: Optional[pulumi.Input['ContentReviewTemplateUserDefineConfigureAsrReviewInfoArgs']] = None,
+                 face_review_info: Optional[pulumi.Input['ContentReviewTemplateUserDefineConfigureFaceReviewInfoArgs']] = None,
+                 ocr_review_info: Optional[pulumi.Input['ContentReviewTemplateUserDefineConfigureOcrReviewInfoArgs']] = None):
+        """
+        :param pulumi.Input['ContentReviewTemplateUserDefineConfigureAsrReviewInfoArgs'] asr_review_info: User-defined asr text review control parameters.
+        :param pulumi.Input['ContentReviewTemplateUserDefineConfigureFaceReviewInfoArgs'] face_review_info: User-defined face review control parameters.
+        :param pulumi.Input['ContentReviewTemplateUserDefineConfigureOcrReviewInfoArgs'] ocr_review_info: User-defined ocr text review control parameters.
+        """
+        if asr_review_info is not None:
+            pulumi.set(__self__, "asr_review_info", asr_review_info)
+        if face_review_info is not None:
+            pulumi.set(__self__, "face_review_info", face_review_info)
+        if ocr_review_info is not None:
+            pulumi.set(__self__, "ocr_review_info", ocr_review_info)
+
+    @property
+    @pulumi.getter(name="asrReviewInfo")
+    def asr_review_info(self) -> Optional[pulumi.Input['ContentReviewTemplateUserDefineConfigureAsrReviewInfoArgs']]:
+        """
+        User-defined asr text review control parameters.
+        """
+        return pulumi.get(self, "asr_review_info")
+
+    @asr_review_info.setter
+    def asr_review_info(self, value: Optional[pulumi.Input['ContentReviewTemplateUserDefineConfigureAsrReviewInfoArgs']]):
+        pulumi.set(self, "asr_review_info", value)
+
+    @property
+    @pulumi.getter(name="faceReviewInfo")
+    def face_review_info(self) -> Optional[pulumi.Input['ContentReviewTemplateUserDefineConfigureFaceReviewInfoArgs']]:
+        """
+        User-defined face review control parameters.
+        """
+        return pulumi.get(self, "face_review_info")
+
+    @face_review_info.setter
+    def face_review_info(self, value: Optional[pulumi.Input['ContentReviewTemplateUserDefineConfigureFaceReviewInfoArgs']]):
+        pulumi.set(self, "face_review_info", value)
+
+    @property
+    @pulumi.getter(name="ocrReviewInfo")
+    def ocr_review_info(self) -> Optional[pulumi.Input['ContentReviewTemplateUserDefineConfigureOcrReviewInfoArgs']]:
+        """
+        User-defined ocr text review control parameters.
+        """
+        return pulumi.get(self, "ocr_review_info")
+
+    @ocr_review_info.setter
+    def ocr_review_info(self, value: Optional[pulumi.Input['ContentReviewTemplateUserDefineConfigureOcrReviewInfoArgs']]):
+        pulumi.set(self, "ocr_review_info", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplateUserDefineConfigureAsrReviewInfoArgs:
+    def __init__(__self__, *,
+                 switch: pulumi.Input[str],
+                 block_confidence: Optional[pulumi.Input[int]] = None,
+                 label_sets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 review_confidence: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: User-defined asr review task switch, optional value:ON/OFF.
+        :param pulumi.Input[int] block_confidence: The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] label_sets: User-defined asr tags, the review result contains the selected tag and returns the result, if the filter tag is empty, all review results are returned. If you want to use the tag filtering function, when adding a asr library, you need to add the corresponding character tag.The maximum number of tags is 10, and the length of each tag is up to 16 characters.
+        :param pulumi.Input[int] review_confidence: The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        pulumi.set(__self__, "switch", switch)
+        if block_confidence is not None:
+            pulumi.set(__self__, "block_confidence", block_confidence)
+        if label_sets is not None:
+            pulumi.set(__self__, "label_sets", label_sets)
+        if review_confidence is not None:
+            pulumi.set(__self__, "review_confidence", review_confidence)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> pulumi.Input[str]:
+        """
+        User-defined asr review task switch, optional value:ON/OFF.
+        """
+        return pulumi.get(self, "switch")
+
+    @switch.setter
+    def switch(self, value: pulumi.Input[str]):
+        pulumi.set(self, "switch", value)
+
+    @property
+    @pulumi.getter(name="blockConfidence")
+    def block_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "block_confidence")
+
+    @block_confidence.setter
+    def block_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "block_confidence", value)
+
+    @property
+    @pulumi.getter(name="labelSets")
+    def label_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        User-defined asr tags, the review result contains the selected tag and returns the result, if the filter tag is empty, all review results are returned. If you want to use the tag filtering function, when adding a asr library, you need to add the corresponding character tag.The maximum number of tags is 10, and the length of each tag is up to 16 characters.
+        """
+        return pulumi.get(self, "label_sets")
+
+    @label_sets.setter
+    def label_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "label_sets", value)
+
+    @property
+    @pulumi.getter(name="reviewConfidence")
+    def review_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "review_confidence")
+
+    @review_confidence.setter
+    def review_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "review_confidence", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplateUserDefineConfigureFaceReviewInfoArgs:
+    def __init__(__self__, *,
+                 switch: pulumi.Input[str],
+                 block_confidence: Optional[pulumi.Input[int]] = None,
+                 label_sets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 review_confidence: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: User-defined face review task switch, optional value:ON/OFF.
+        :param pulumi.Input[int] block_confidence: The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] label_sets: User-defined face review tags, the review result contains the selected tag and returns the result, if the filter tag is empty, all review results are returned. If you want to use the tag filtering function, when adding a face library, you need to add the corresponding character tag.The maximum number of tags is 10, and the length of each tag is up to 16 characters.
+        :param pulumi.Input[int] review_confidence: The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        pulumi.set(__self__, "switch", switch)
+        if block_confidence is not None:
+            pulumi.set(__self__, "block_confidence", block_confidence)
+        if label_sets is not None:
+            pulumi.set(__self__, "label_sets", label_sets)
+        if review_confidence is not None:
+            pulumi.set(__self__, "review_confidence", review_confidence)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> pulumi.Input[str]:
+        """
+        User-defined face review task switch, optional value:ON/OFF.
+        """
+        return pulumi.get(self, "switch")
+
+    @switch.setter
+    def switch(self, value: pulumi.Input[str]):
+        pulumi.set(self, "switch", value)
+
+    @property
+    @pulumi.getter(name="blockConfidence")
+    def block_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "block_confidence")
+
+    @block_confidence.setter
+    def block_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "block_confidence", value)
+
+    @property
+    @pulumi.getter(name="labelSets")
+    def label_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        User-defined face review tags, the review result contains the selected tag and returns the result, if the filter tag is empty, all review results are returned. If you want to use the tag filtering function, when adding a face library, you need to add the corresponding character tag.The maximum number of tags is 10, and the length of each tag is up to 16 characters.
+        """
+        return pulumi.get(self, "label_sets")
+
+    @label_sets.setter
+    def label_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "label_sets", value)
+
+    @property
+    @pulumi.getter(name="reviewConfidence")
+    def review_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "review_confidence")
+
+    @review_confidence.setter
+    def review_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "review_confidence", value)
+
+
+@pulumi.input_type
+class ContentReviewTemplateUserDefineConfigureOcrReviewInfoArgs:
+    def __init__(__self__, *,
+                 switch: pulumi.Input[str],
+                 block_confidence: Optional[pulumi.Input[int]] = None,
+                 label_sets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 review_confidence: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] switch: User-defined ocr text review task switch, optional value:ON/OFF.
+        :param pulumi.Input[int] block_confidence: The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] label_sets: User-defined ocr tags, the review result contains the selected tag and returns the result, if the filter tag is empty, all review results are returned. If you want to use the tag filtering function, when adding a ocr library, you need to add the corresponding character tag.The maximum number of tags is 10, and the length of each tag is up to 16 characters.
+        :param pulumi.Input[int] review_confidence: The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        pulumi.set(__self__, "switch", switch)
+        if block_confidence is not None:
+            pulumi.set(__self__, "block_confidence", block_confidence)
+        if label_sets is not None:
+            pulumi.set(__self__, "label_sets", label_sets)
+        if review_confidence is not None:
+            pulumi.set(__self__, "review_confidence", review_confidence)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> pulumi.Input[str]:
+        """
+        User-defined ocr text review task switch, optional value:ON/OFF.
+        """
+        return pulumi.get(self, "switch")
+
+    @switch.setter
+    def switch(self, value: pulumi.Input[str]):
+        pulumi.set(self, "switch", value)
+
+    @property
+    @pulumi.getter(name="blockConfidence")
+    def block_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "block_confidence")
+
+    @block_confidence.setter
+    def block_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "block_confidence", value)
+
+    @property
+    @pulumi.getter(name="labelSets")
+    def label_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        User-defined ocr tags, the review result contains the selected tag and returns the result, if the filter tag is empty, all review results are returned. If you want to use the tag filtering function, when adding a ocr library, you need to add the corresponding character tag.The maximum number of tags is 10, and the length of each tag is up to 16 characters.
+        """
+        return pulumi.get(self, "label_sets")
+
+    @label_sets.setter
+    def label_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "label_sets", value)
+
+    @property
+    @pulumi.getter(name="reviewConfidence")
+    def review_confidence(self) -> Optional[pulumi.Input[int]]:
+        """
+        The score threshold for judging whether manual review is required for violations. When the intelligent review reaches the score above, it is considered that manual review is required. If it is not filled, the default is 75 points. Value range: 0~100.
+        """
+        return pulumi.get(self, "review_confidence")
+
+    @review_confidence.setter
+    def review_confidence(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "review_confidence", value)
+
+
+@pulumi.input_type
+class EditMediaOperationFileInfoArgs:
+    def __init__(__self__, *,
+                 input_info: pulumi.Input['EditMediaOperationFileInfoInputInfoArgs'],
+                 end_time_offset: Optional[pulumi.Input[float]] = None,
+                 start_time_offset: Optional[pulumi.Input[float]] = None):
+        """
+        :param pulumi.Input['EditMediaOperationFileInfoInputInfoArgs'] input_info: Video input information.
+        :param pulumi.Input[float] end_time_offset: End time offset of video clipping in seconds.
+        :param pulumi.Input[float] start_time_offset: Start time offset of video clipping in seconds.
+        """
+        pulumi.set(__self__, "input_info", input_info)
+        if end_time_offset is not None:
+            pulumi.set(__self__, "end_time_offset", end_time_offset)
+        if start_time_offset is not None:
+            pulumi.set(__self__, "start_time_offset", start_time_offset)
+
+    @property
+    @pulumi.getter(name="inputInfo")
+    def input_info(self) -> pulumi.Input['EditMediaOperationFileInfoInputInfoArgs']:
+        """
+        Video input information.
+        """
+        return pulumi.get(self, "input_info")
+
+    @input_info.setter
+    def input_info(self, value: pulumi.Input['EditMediaOperationFileInfoInputInfoArgs']):
+        pulumi.set(self, "input_info", value)
+
+    @property
+    @pulumi.getter(name="endTimeOffset")
+    def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of video clipping in seconds.
+        """
+        return pulumi.get(self, "end_time_offset")
+
+    @end_time_offset.setter
+    def end_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "end_time_offset", value)
+
+    @property
+    @pulumi.getter(name="startTimeOffset")
+    def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of video clipping in seconds.
+        """
+        return pulumi.get(self, "start_time_offset")
+
+    @start_time_offset.setter
+    def start_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "start_time_offset", value)
+
+
+@pulumi.input_type
+class EditMediaOperationFileInfoInputInfoArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['EditMediaOperationFileInfoInputInfoCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['EditMediaOperationFileInfoInputInfoS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['EditMediaOperationFileInfoInputInfoUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['EditMediaOperationFileInfoInputInfoCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['EditMediaOperationFileInfoInputInfoS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['EditMediaOperationFileInfoInputInfoUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['EditMediaOperationFileInfoInputInfoCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['EditMediaOperationFileInfoInputInfoCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['EditMediaOperationFileInfoInputInfoS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['EditMediaOperationFileInfoInputInfoS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['EditMediaOperationFileInfoInputInfoUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['EditMediaOperationFileInfoInputInfoUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class EditMediaOperationFileInfoInputInfoCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class EditMediaOperationFileInfoInputInfoS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class EditMediaOperationFileInfoInputInfoUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class EditMediaOperationOutputConfigArgs:
+    def __init__(__self__, *,
+                 container: Optional[pulumi.Input[str]] = None,
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] container: Format. Valid values: `mp4` (default), `hls`, `mov`, `flv`, `avi`.
+        :param pulumi.Input[str] type: The editing mode. Valid values are `normal` and `fast`. The default is `normal`, which indicates precise editing.
+        """
+        if container is not None:
+            pulumi.set(__self__, "container", container)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def container(self) -> Optional[pulumi.Input[str]]:
+        """
+        Format. Valid values: `mp4` (default), `hls`, `mov`, `flv`, `avi`.
+        """
+        return pulumi.get(self, "container")
+
+    @container.setter
+    def container(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "container", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The editing mode. Valid values are `normal` and `fast`. The default is `normal`, which indicates precise editing.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class EditMediaOperationOutputStorageArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_output_storage: Optional[pulumi.Input['EditMediaOperationOutputStorageCosOutputStorageArgs']] = None,
+                 s3_output_storage: Optional[pulumi.Input['EditMediaOperationOutputStorageS3OutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS. `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        :param pulumi.Input['EditMediaOperationOutputStorageCosOutputStorageArgs'] cos_output_storage: The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['EditMediaOperationOutputStorageS3OutputStorageArgs'] s3_output_storage: The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_output_storage is not None:
+            pulumi.set(__self__, "cos_output_storage", cos_output_storage)
+        if s3_output_storage is not None:
+            pulumi.set(__self__, "s3_output_storage", s3_output_storage)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS. `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosOutputStorage")
+    def cos_output_storage(self) -> Optional[pulumi.Input['EditMediaOperationOutputStorageCosOutputStorageArgs']]:
+        """
+        The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cos_output_storage")
+
+    @cos_output_storage.setter
+    def cos_output_storage(self, value: Optional[pulumi.Input['EditMediaOperationOutputStorageCosOutputStorageArgs']]):
+        pulumi.set(self, "cos_output_storage", value)
+
+    @property
+    @pulumi.getter(name="s3OutputStorage")
+    def s3_output_storage(self) -> Optional[pulumi.Input['EditMediaOperationOutputStorageS3OutputStorageArgs']]:
+        """
+        The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_output_storage")
+
+    @s3_output_storage.setter
+    def s3_output_storage(self, value: Optional[pulumi.Input['EditMediaOperationOutputStorageS3OutputStorageArgs']]):
+        pulumi.set(self, "s3_output_storage", value)
+
+
+@pulumi.input_type
+class EditMediaOperationOutputStorageCosOutputStorageArgs:
+    def __init__(__self__, *,
+                 bucket: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        :param pulumi.Input[str] region: The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class EditMediaOperationOutputStorageS3OutputStorageArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class EditMediaOperationTaskNotifyConfigArgs:
+    def __init__(__self__, *,
+                 aws_sqs: Optional[pulumi.Input['EditMediaOperationTaskNotifyConfigAwsSqsArgs']] = None,
+                 cmq_model: Optional[pulumi.Input[str]] = None,
+                 cmq_region: Optional[pulumi.Input[str]] = None,
+                 notify_mode: Optional[pulumi.Input[str]] = None,
+                 notify_type: Optional[pulumi.Input[str]] = None,
+                 notify_url: Optional[pulumi.Input[str]] = None,
+                 queue_name: Optional[pulumi.Input[str]] = None,
+                 topic_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['EditMediaOperationTaskNotifyConfigAwsSqsArgs'] aws_sqs: The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] cmq_model: The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
+        :param pulumi.Input[str] cmq_region: The CMQ or TDMQ-CMQ region, such as `sh` (Shanghai) or `bj` (Beijing).
+        :param pulumi.Input[str] notify_mode: Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
+        :param pulumi.Input[str] notify_type: The notification type. Valid values: `CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead. `TDMQ-CMQ`: Message queue. `URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API. `SCF`: This notification type is not recommended. You need to configure it in the SCF console. `AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket. If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.
+        :param pulumi.Input[str] notify_url: HTTP callback URL, required if `NotifyType` is set to `URL`.
+        :param pulumi.Input[str] queue_name: The CMQ or TDMQ-CMQ queue to receive notifications. This parameter is valid when `CmqModel` is `Queue`.
+        :param pulumi.Input[str] topic_name: The CMQ or TDMQ-CMQ topic to receive notifications. This parameter is valid when `CmqModel` is `Topic`.
+        """
+        if aws_sqs is not None:
+            pulumi.set(__self__, "aws_sqs", aws_sqs)
+        if cmq_model is not None:
+            pulumi.set(__self__, "cmq_model", cmq_model)
+        if cmq_region is not None:
+            pulumi.set(__self__, "cmq_region", cmq_region)
+        if notify_mode is not None:
+            pulumi.set(__self__, "notify_mode", notify_mode)
+        if notify_type is not None:
+            pulumi.set(__self__, "notify_type", notify_type)
+        if notify_url is not None:
+            pulumi.set(__self__, "notify_url", notify_url)
+        if queue_name is not None:
+            pulumi.set(__self__, "queue_name", queue_name)
+        if topic_name is not None:
+            pulumi.set(__self__, "topic_name", topic_name)
+
+    @property
+    @pulumi.getter(name="awsSqs")
+    def aws_sqs(self) -> Optional[pulumi.Input['EditMediaOperationTaskNotifyConfigAwsSqsArgs']]:
+        """
+        The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "aws_sqs")
+
+    @aws_sqs.setter
+    def aws_sqs(self, value: Optional[pulumi.Input['EditMediaOperationTaskNotifyConfigAwsSqsArgs']]):
+        pulumi.set(self, "aws_sqs", value)
+
+    @property
+    @pulumi.getter(name="cmqModel")
+    def cmq_model(self) -> Optional[pulumi.Input[str]]:
+        """
+        The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
+        """
+        return pulumi.get(self, "cmq_model")
+
+    @cmq_model.setter
+    def cmq_model(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cmq_model", value)
+
+    @property
+    @pulumi.getter(name="cmqRegion")
+    def cmq_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The CMQ or TDMQ-CMQ region, such as `sh` (Shanghai) or `bj` (Beijing).
+        """
+        return pulumi.get(self, "cmq_region")
+
+    @cmq_region.setter
+    def cmq_region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cmq_region", value)
+
+    @property
+    @pulumi.getter(name="notifyMode")
+    def notify_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
+        """
+        return pulumi.get(self, "notify_mode")
+
+    @notify_mode.setter
+    def notify_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notify_mode", value)
+
+    @property
+    @pulumi.getter(name="notifyType")
+    def notify_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The notification type. Valid values: `CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead. `TDMQ-CMQ`: Message queue. `URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API. `SCF`: This notification type is not recommended. You need to configure it in the SCF console. `AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket. If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.
+        """
+        return pulumi.get(self, "notify_type")
+
+    @notify_type.setter
+    def notify_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notify_type", value)
+
+    @property
+    @pulumi.getter(name="notifyUrl")
+    def notify_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        HTTP callback URL, required if `NotifyType` is set to `URL`.
+        """
+        return pulumi.get(self, "notify_url")
+
+    @notify_url.setter
+    def notify_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notify_url", value)
+
+    @property
+    @pulumi.getter(name="queueName")
+    def queue_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The CMQ or TDMQ-CMQ queue to receive notifications. This parameter is valid when `CmqModel` is `Queue`.
+        """
+        return pulumi.get(self, "queue_name")
+
+    @queue_name.setter
+    def queue_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "queue_name", value)
+
+    @property
+    @pulumi.getter(name="topicName")
+    def topic_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The CMQ or TDMQ-CMQ topic to receive notifications. This parameter is valid when `CmqModel` is `Topic`.
+        """
+        return pulumi.get(self, "topic_name")
+
+    @topic_name.setter
+    def topic_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_name", value)
+
+
+@pulumi.input_type
+class EditMediaOperationTaskNotifyConfigAwsSqsArgs:
+    def __init__(__self__, *,
+                 sqs_queue_name: pulumi.Input[str],
+                 sqs_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] sqs_queue_name: The name of the SQS queue.
+        :param pulumi.Input[str] sqs_region: The region of the SQS queue.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "sqs_queue_name", sqs_queue_name)
+        pulumi.set(__self__, "sqs_region", sqs_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="sqsQueueName")
+    def sqs_queue_name(self) -> pulumi.Input[str]:
+        """
+        The name of the SQS queue.
+        """
+        return pulumi.get(self, "sqs_queue_name")
+
+    @sqs_queue_name.setter
+    def sqs_queue_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "sqs_queue_name", value)
+
+    @property
+    @pulumi.getter(name="sqsRegion")
+    def sqs_region(self) -> pulumi.Input[str]:
+        """
+        The region of the SQS queue.
+        """
+        return pulumi.get(self, "sqs_region")
+
+    @sqs_region.setter
+    def sqs_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "sqs_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class FlowInputGroupArgs:
+    def __init__(__self__, *,
+                 input_name: pulumi.Input[str],
+                 protocol: pulumi.Input[str],
+                 allow_ip_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 fail_over: Optional[pulumi.Input[str]] = None,
+                 hls_pull_settings: Optional[pulumi.Input['FlowInputGroupHlsPullSettingsArgs']] = None,
+                 resilient_stream: Optional[pulumi.Input['FlowInputGroupResilientStreamArgs']] = None,
+                 rtmp_pull_settings: Optional[pulumi.Input['FlowInputGroupRtmpPullSettingsArgs']] = None,
+                 rtp_settings: Optional[pulumi.Input['FlowInputGroupRtpSettingsArgs']] = None,
+                 rtsp_pull_settings: Optional[pulumi.Input['FlowInputGroupRtspPullSettingsArgs']] = None,
+                 srt_settings: Optional[pulumi.Input['FlowInputGroupSrtSettingsArgs']] = None):
+        """
+        :param pulumi.Input[str] input_name: Input name, you can fill in uppercase and lowercase letters, numbers and underscores, and the length is [1, 32].
+        :param pulumi.Input[str] protocol: Input protocol, optional [SRT|RTP|RTMP|RTMP_PULL].
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] allow_ip_lists: The input IP whitelist, the format is CIDR.
+        :param pulumi.Input[str] description: Input description with a length of [0, 255].
+        :param pulumi.Input[str] fail_over: The active/standby switch of the input, [OPEN|CLOSE] is optional, and the default is CLOSE.
+        :param pulumi.Input['FlowInputGroupHlsPullSettingsArgs'] hls_pull_settings: Input HLS_PULL configuration information.
+        :param pulumi.Input['FlowInputGroupResilientStreamArgs'] resilient_stream: Delay broadcast smooth streaming configuration information.
+        :param pulumi.Input['FlowInputGroupRtmpPullSettingsArgs'] rtmp_pull_settings: Input RTMP_PULL configuration information.
+        :param pulumi.Input['FlowInputGroupRtpSettingsArgs'] rtp_settings: RTP configuration information.
+        :param pulumi.Input['FlowInputGroupRtspPullSettingsArgs'] rtsp_pull_settings: Input RTSP_PULL configuration information.
+        :param pulumi.Input['FlowInputGroupSrtSettingsArgs'] srt_settings: The input SRT configuration information.
+        """
+        pulumi.set(__self__, "input_name", input_name)
+        pulumi.set(__self__, "protocol", protocol)
+        if allow_ip_lists is not None:
+            pulumi.set(__self__, "allow_ip_lists", allow_ip_lists)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if fail_over is not None:
+            pulumi.set(__self__, "fail_over", fail_over)
+        if hls_pull_settings is not None:
+            pulumi.set(__self__, "hls_pull_settings", hls_pull_settings)
+        if resilient_stream is not None:
+            pulumi.set(__self__, "resilient_stream", resilient_stream)
+        if rtmp_pull_settings is not None:
+            pulumi.set(__self__, "rtmp_pull_settings", rtmp_pull_settings)
+        if rtp_settings is not None:
+            pulumi.set(__self__, "rtp_settings", rtp_settings)
+        if rtsp_pull_settings is not None:
+            pulumi.set(__self__, "rtsp_pull_settings", rtsp_pull_settings)
+        if srt_settings is not None:
+            pulumi.set(__self__, "srt_settings", srt_settings)
+
+    @property
+    @pulumi.getter(name="inputName")
+    def input_name(self) -> pulumi.Input[str]:
+        """
+        Input name, you can fill in uppercase and lowercase letters, numbers and underscores, and the length is [1, 32].
+        """
+        return pulumi.get(self, "input_name")
+
+    @input_name.setter
+    def input_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "input_name", value)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> pulumi.Input[str]:
+        """
+        Input protocol, optional [SRT|RTP|RTMP|RTMP_PULL].
+        """
+        return pulumi.get(self, "protocol")
+
+    @protocol.setter
+    def protocol(self, value: pulumi.Input[str]):
+        pulumi.set(self, "protocol", value)
+
+    @property
+    @pulumi.getter(name="allowIpLists")
+    def allow_ip_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The input IP whitelist, the format is CIDR.
+        """
+        return pulumi.get(self, "allow_ip_lists")
+
+    @allow_ip_lists.setter
+    def allow_ip_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "allow_ip_lists", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        Input description with a length of [0, 255].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="failOver")
+    def fail_over(self) -> Optional[pulumi.Input[str]]:
+        """
+        The active/standby switch of the input, [OPEN|CLOSE] is optional, and the default is CLOSE.
+        """
+        return pulumi.get(self, "fail_over")
+
+    @fail_over.setter
+    def fail_over(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fail_over", value)
+
+    @property
+    @pulumi.getter(name="hlsPullSettings")
+    def hls_pull_settings(self) -> Optional[pulumi.Input['FlowInputGroupHlsPullSettingsArgs']]:
+        """
+        Input HLS_PULL configuration information.
+        """
+        return pulumi.get(self, "hls_pull_settings")
+
+    @hls_pull_settings.setter
+    def hls_pull_settings(self, value: Optional[pulumi.Input['FlowInputGroupHlsPullSettingsArgs']]):
+        pulumi.set(self, "hls_pull_settings", value)
+
+    @property
+    @pulumi.getter(name="resilientStream")
+    def resilient_stream(self) -> Optional[pulumi.Input['FlowInputGroupResilientStreamArgs']]:
+        """
+        Delay broadcast smooth streaming configuration information.
+        """
+        return pulumi.get(self, "resilient_stream")
+
+    @resilient_stream.setter
+    def resilient_stream(self, value: Optional[pulumi.Input['FlowInputGroupResilientStreamArgs']]):
+        pulumi.set(self, "resilient_stream", value)
+
+    @property
+    @pulumi.getter(name="rtmpPullSettings")
+    def rtmp_pull_settings(self) -> Optional[pulumi.Input['FlowInputGroupRtmpPullSettingsArgs']]:
+        """
+        Input RTMP_PULL configuration information.
+        """
+        return pulumi.get(self, "rtmp_pull_settings")
+
+    @rtmp_pull_settings.setter
+    def rtmp_pull_settings(self, value: Optional[pulumi.Input['FlowInputGroupRtmpPullSettingsArgs']]):
+        pulumi.set(self, "rtmp_pull_settings", value)
+
+    @property
+    @pulumi.getter(name="rtpSettings")
+    def rtp_settings(self) -> Optional[pulumi.Input['FlowInputGroupRtpSettingsArgs']]:
+        """
+        RTP configuration information.
+        """
+        return pulumi.get(self, "rtp_settings")
+
+    @rtp_settings.setter
+    def rtp_settings(self, value: Optional[pulumi.Input['FlowInputGroupRtpSettingsArgs']]):
+        pulumi.set(self, "rtp_settings", value)
+
+    @property
+    @pulumi.getter(name="rtspPullSettings")
+    def rtsp_pull_settings(self) -> Optional[pulumi.Input['FlowInputGroupRtspPullSettingsArgs']]:
+        """
+        Input RTSP_PULL configuration information.
+        """
+        return pulumi.get(self, "rtsp_pull_settings")
+
+    @rtsp_pull_settings.setter
+    def rtsp_pull_settings(self, value: Optional[pulumi.Input['FlowInputGroupRtspPullSettingsArgs']]):
+        pulumi.set(self, "rtsp_pull_settings", value)
+
+    @property
+    @pulumi.getter(name="srtSettings")
+    def srt_settings(self) -> Optional[pulumi.Input['FlowInputGroupSrtSettingsArgs']]:
+        """
+        The input SRT configuration information.
+        """
+        return pulumi.get(self, "srt_settings")
+
+    @srt_settings.setter
+    def srt_settings(self, value: Optional[pulumi.Input['FlowInputGroupSrtSettingsArgs']]):
+        pulumi.set(self, "srt_settings", value)
+
+
+@pulumi.input_type
+class FlowInputGroupHlsPullSettingsArgs:
+    def __init__(__self__, *,
+                 source_addresses: pulumi.Input[Sequence[pulumi.Input['FlowInputGroupHlsPullSettingsSourceAddressArgs']]]):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['FlowInputGroupHlsPullSettingsSourceAddressArgs']]] source_addresses: There is only one origin address of the HLS origin station.
+        """
+        pulumi.set(__self__, "source_addresses", source_addresses)
+
+    @property
+    @pulumi.getter(name="sourceAddresses")
+    def source_addresses(self) -> pulumi.Input[Sequence[pulumi.Input['FlowInputGroupHlsPullSettingsSourceAddressArgs']]]:
+        """
+        There is only one origin address of the HLS origin station.
+        """
+        return pulumi.get(self, "source_addresses")
+
+    @source_addresses.setter
+    def source_addresses(self, value: pulumi.Input[Sequence[pulumi.Input['FlowInputGroupHlsPullSettingsSourceAddressArgs']]]):
+        pulumi.set(self, "source_addresses", value)
+
+
+@pulumi.input_type
+class FlowInputGroupHlsPullSettingsSourceAddressArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: The URL address of the RTSP source site.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        The URL address of the RTSP source site.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class FlowInputGroupResilientStreamArgs:
+    def __init__(__self__, *,
+                 buffer_time: Optional[pulumi.Input[int]] = None,
+                 enable: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[int] buffer_time: Delay time, in seconds, currently supports a range of 10 to 300 seconds. Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[bool] enable: Whether to enable the delayed broadcast smooth spit stream, true is enabled, false is not enabled, and the default is not enabled. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if buffer_time is not None:
+            pulumi.set(__self__, "buffer_time", buffer_time)
+        if enable is not None:
+            pulumi.set(__self__, "enable", enable)
+
+    @property
+    @pulumi.getter(name="bufferTime")
+    def buffer_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        Delay time, in seconds, currently supports a range of 10 to 300 seconds. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "buffer_time")
+
+    @buffer_time.setter
+    def buffer_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "buffer_time", value)
+
+    @property
+    @pulumi.getter
+    def enable(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable the delayed broadcast smooth spit stream, true is enabled, false is not enabled, and the default is not enabled. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "enable")
+
+    @enable.setter
+    def enable(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enable", value)
+
+
+@pulumi.input_type
+class FlowInputGroupRtmpPullSettingsArgs:
+    def __init__(__self__, *,
+                 source_addresses: pulumi.Input[Sequence[pulumi.Input['FlowInputGroupRtmpPullSettingsSourceAddressArgs']]]):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['FlowInputGroupRtmpPullSettingsSourceAddressArgs']]] source_addresses: The source site address of the RTMP source site, there can only be one.
+        """
+        pulumi.set(__self__, "source_addresses", source_addresses)
+
+    @property
+    @pulumi.getter(name="sourceAddresses")
+    def source_addresses(self) -> pulumi.Input[Sequence[pulumi.Input['FlowInputGroupRtmpPullSettingsSourceAddressArgs']]]:
+        """
+        The source site address of the RTMP source site, there can only be one.
+        """
+        return pulumi.get(self, "source_addresses")
+
+    @source_addresses.setter
+    def source_addresses(self, value: pulumi.Input[Sequence[pulumi.Input['FlowInputGroupRtmpPullSettingsSourceAddressArgs']]]):
+        pulumi.set(self, "source_addresses", value)
+
+
+@pulumi.input_type
+class FlowInputGroupRtmpPullSettingsSourceAddressArgs:
+    def __init__(__self__, *,
+                 stream_key: pulumi.Input[str],
+                 tc_url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] stream_key: StreamKey information of the RTMP source site.
+        :param pulumi.Input[str] tc_url: TcUrl address of the RTMP source server.
+        """
+        pulumi.set(__self__, "stream_key", stream_key)
+        pulumi.set(__self__, "tc_url", tc_url)
+
+    @property
+    @pulumi.getter(name="streamKey")
+    def stream_key(self) -> pulumi.Input[str]:
+        """
+        StreamKey information of the RTMP source site.
+        """
+        return pulumi.get(self, "stream_key")
+
+    @stream_key.setter
+    def stream_key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "stream_key", value)
+
+    @property
+    @pulumi.getter(name="tcUrl")
+    def tc_url(self) -> pulumi.Input[str]:
+        """
+        TcUrl address of the RTMP source server.
+        """
+        return pulumi.get(self, "tc_url")
+
+    @tc_url.setter
+    def tc_url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "tc_url", value)
+
+
+@pulumi.input_type
+class FlowInputGroupRtpSettingsArgs:
+    def __init__(__self__, *,
+                 fec: Optional[pulumi.Input[str]] = None,
+                 idle_timeout: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] fec: Defaults to none, optional values[none].
+        :param pulumi.Input[int] idle_timeout: Idle timeout, the default is 5000, the unit is ms, and the range is [1000, 10000].
+        """
+        if fec is not None:
+            pulumi.set(__self__, "fec", fec)
+        if idle_timeout is not None:
+            pulumi.set(__self__, "idle_timeout", idle_timeout)
+
+    @property
+    @pulumi.getter
+    def fec(self) -> Optional[pulumi.Input[str]]:
+        """
+        Defaults to none, optional values[none].
+        """
+        return pulumi.get(self, "fec")
+
+    @fec.setter
+    def fec(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fec", value)
+
+    @property
+    @pulumi.getter(name="idleTimeout")
+    def idle_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        Idle timeout, the default is 5000, the unit is ms, and the range is [1000, 10000].
+        """
+        return pulumi.get(self, "idle_timeout")
+
+    @idle_timeout.setter
+    def idle_timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "idle_timeout", value)
+
+
+@pulumi.input_type
+class FlowInputGroupRtspPullSettingsArgs:
+    def __init__(__self__, *,
+                 source_addresses: pulumi.Input[Sequence[pulumi.Input['FlowInputGroupRtspPullSettingsSourceAddressArgs']]]):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['FlowInputGroupRtspPullSettingsSourceAddressArgs']]] source_addresses: The source site address of the RTSP source site, there can only be one.
+        """
+        pulumi.set(__self__, "source_addresses", source_addresses)
+
+    @property
+    @pulumi.getter(name="sourceAddresses")
+    def source_addresses(self) -> pulumi.Input[Sequence[pulumi.Input['FlowInputGroupRtspPullSettingsSourceAddressArgs']]]:
+        """
+        The source site address of the RTSP source site, there can only be one.
+        """
+        return pulumi.get(self, "source_addresses")
+
+    @source_addresses.setter
+    def source_addresses(self, value: pulumi.Input[Sequence[pulumi.Input['FlowInputGroupRtspPullSettingsSourceAddressArgs']]]):
+        pulumi.set(self, "source_addresses", value)
+
+
+@pulumi.input_type
+class FlowInputGroupRtspPullSettingsSourceAddressArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: The URL address of the RTSP source site.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        The URL address of the RTSP source site.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class FlowInputGroupSrtSettingsArgs:
+    def __init__(__self__, *,
+                 latency: Optional[pulumi.Input[int]] = None,
+                 mode: Optional[pulumi.Input[str]] = None,
+                 passphrase: Optional[pulumi.Input[str]] = None,
+                 pb_key_len: Optional[pulumi.Input[int]] = None,
+                 peer_idle_timeout: Optional[pulumi.Input[int]] = None,
+                 peer_latency: Optional[pulumi.Input[int]] = None,
+                 recv_latency: Optional[pulumi.Input[int]] = None,
+                 source_addresses: Optional[pulumi.Input[Sequence[pulumi.Input['FlowInputGroupSrtSettingsSourceAddressArgs']]]] = None,
+                 stream_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] latency: Delay, default 0, unit ms, range [0, 3000].
+        :param pulumi.Input[str] mode: SRT mode, optional [LISTENER|CALLER], default is LISTENER.
+        :param pulumi.Input[str] passphrase: The decryption key, which is empty by default, means no encryption. Only ascii code values can be filled in, and the length is [10, 79].
+        :param pulumi.Input[int] pb_key_len: Key length, default is 0, optional [0|16|24|32].
+        :param pulumi.Input[int] peer_idle_timeout: Peer timeout, default is 5000, unit ms, range is [1000, 10000].
+        :param pulumi.Input[int] peer_latency: Peer delay, the default is 0, the unit is ms, and the range is [0, 3000].
+        :param pulumi.Input[int] recv_latency: Receiving delay, default is 120, unit ms, range is [0, 3000].
+        :param pulumi.Input[Sequence[pulumi.Input['FlowInputGroupSrtSettingsSourceAddressArgs']]] source_addresses: SRT peer address, required when Mode is CALLER, and only 1 set can be filled in.
+        :param pulumi.Input[str] stream_id: Stream ID, optional uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-), length 0~512. For specific format, please refer to:https://github.com/Haivision/srt/blob/master/docs/features/access-control.md#standard-keys.
+        """
+        if latency is not None:
+            pulumi.set(__self__, "latency", latency)
+        if mode is not None:
+            pulumi.set(__self__, "mode", mode)
+        if passphrase is not None:
+            pulumi.set(__self__, "passphrase", passphrase)
+        if pb_key_len is not None:
+            pulumi.set(__self__, "pb_key_len", pb_key_len)
+        if peer_idle_timeout is not None:
+            pulumi.set(__self__, "peer_idle_timeout", peer_idle_timeout)
+        if peer_latency is not None:
+            pulumi.set(__self__, "peer_latency", peer_latency)
+        if recv_latency is not None:
+            pulumi.set(__self__, "recv_latency", recv_latency)
+        if source_addresses is not None:
+            pulumi.set(__self__, "source_addresses", source_addresses)
+        if stream_id is not None:
+            pulumi.set(__self__, "stream_id", stream_id)
+
+    @property
+    @pulumi.getter
+    def latency(self) -> Optional[pulumi.Input[int]]:
+        """
+        Delay, default 0, unit ms, range [0, 3000].
+        """
+        return pulumi.get(self, "latency")
+
+    @latency.setter
+    def latency(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "latency", value)
+
+    @property
+    @pulumi.getter
+    def mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        SRT mode, optional [LISTENER|CALLER], default is LISTENER.
+        """
+        return pulumi.get(self, "mode")
+
+    @mode.setter
+    def mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mode", value)
+
+    @property
+    @pulumi.getter
+    def passphrase(self) -> Optional[pulumi.Input[str]]:
+        """
+        The decryption key, which is empty by default, means no encryption. Only ascii code values can be filled in, and the length is [10, 79].
+        """
+        return pulumi.get(self, "passphrase")
+
+    @passphrase.setter
+    def passphrase(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "passphrase", value)
+
+    @property
+    @pulumi.getter(name="pbKeyLen")
+    def pb_key_len(self) -> Optional[pulumi.Input[int]]:
+        """
+        Key length, default is 0, optional [0|16|24|32].
+        """
+        return pulumi.get(self, "pb_key_len")
+
+    @pb_key_len.setter
+    def pb_key_len(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "pb_key_len", value)
+
+    @property
+    @pulumi.getter(name="peerIdleTimeout")
+    def peer_idle_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        Peer timeout, default is 5000, unit ms, range is [1000, 10000].
+        """
+        return pulumi.get(self, "peer_idle_timeout")
+
+    @peer_idle_timeout.setter
+    def peer_idle_timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "peer_idle_timeout", value)
+
+    @property
+    @pulumi.getter(name="peerLatency")
+    def peer_latency(self) -> Optional[pulumi.Input[int]]:
+        """
+        Peer delay, the default is 0, the unit is ms, and the range is [0, 3000].
+        """
+        return pulumi.get(self, "peer_latency")
+
+    @peer_latency.setter
+    def peer_latency(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "peer_latency", value)
+
+    @property
+    @pulumi.getter(name="recvLatency")
+    def recv_latency(self) -> Optional[pulumi.Input[int]]:
+        """
+        Receiving delay, default is 120, unit ms, range is [0, 3000].
+        """
+        return pulumi.get(self, "recv_latency")
+
+    @recv_latency.setter
+    def recv_latency(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "recv_latency", value)
+
+    @property
+    @pulumi.getter(name="sourceAddresses")
+    def source_addresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['FlowInputGroupSrtSettingsSourceAddressArgs']]]]:
+        """
+        SRT peer address, required when Mode is CALLER, and only 1 set can be filled in.
+        """
+        return pulumi.get(self, "source_addresses")
+
+    @source_addresses.setter
+    def source_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['FlowInputGroupSrtSettingsSourceAddressArgs']]]]):
+        pulumi.set(self, "source_addresses", value)
+
+    @property
+    @pulumi.getter(name="streamId")
+    def stream_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Stream ID, optional uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-), length 0~512. For specific format, please refer to:https://github.com/Haivision/srt/blob/master/docs/features/access-control.md#standard-keys.
+        """
+        return pulumi.get(self, "stream_id")
+
+    @stream_id.setter
+    def stream_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "stream_id", value)
+
+
+@pulumi.input_type
+class FlowInputGroupSrtSettingsSourceAddressArgs:
+    def __init__(__self__, *,
+                 ip: pulumi.Input[str],
+                 port: pulumi.Input[int]):
+        """
+        :param pulumi.Input[str] ip: Peer IP.
+        :param pulumi.Input[int] port: Peer port.
+        """
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "port", port)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> pulumi.Input[str]:
+        """
+        Peer IP.
+        """
+        return pulumi.get(self, "ip")
+
+    @ip.setter
+    def ip(self, value: pulumi.Input[str]):
+        pulumi.set(self, "ip", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> pulumi.Input[int]:
+        """
+        Peer port.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: pulumi.Input[int]):
+        pulumi.set(self, "port", value)
+
+
+@pulumi.input_type
+class InputInputGroupArgs:
+    def __init__(__self__, *,
+                 input_name: pulumi.Input[str],
+                 protocol: pulumi.Input[str],
+                 allow_ip_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 fail_over: Optional[pulumi.Input[str]] = None,
+                 hls_pull_settings: Optional[pulumi.Input['InputInputGroupHlsPullSettingsArgs']] = None,
+                 resilient_stream: Optional[pulumi.Input['InputInputGroupResilientStreamArgs']] = None,
+                 rtmp_pull_settings: Optional[pulumi.Input['InputInputGroupRtmpPullSettingsArgs']] = None,
+                 rtp_settings: Optional[pulumi.Input['InputInputGroupRtpSettingsArgs']] = None,
+                 rtsp_pull_settings: Optional[pulumi.Input['InputInputGroupRtspPullSettingsArgs']] = None,
+                 srt_settings: Optional[pulumi.Input['InputInputGroupSrtSettingsArgs']] = None):
+        """
+        :param pulumi.Input[str] input_name: The input name, you can fill in uppercase and lowercase letters, numbers and underscores, and the length is [1, 32].
+        :param pulumi.Input[str] protocol: Input protocol, optional [SRT|RTP|RTMP|RTMP_PULL].
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] allow_ip_lists: The input IP whitelist, the format is CIDR.
+        :param pulumi.Input[str] description: The input description with a length of [0, 255].
+        :param pulumi.Input[str] fail_over: The active/standby switch of the input, [OPEN|CLOSE] is optional, and the default is CLOSE.
+        :param pulumi.Input['InputInputGroupHlsPullSettingsArgs'] hls_pull_settings: Input HLS_PULL configuration information.
+        :param pulumi.Input['InputInputGroupResilientStreamArgs'] resilient_stream: Delay broadcast smooth streaming configuration information.
+        :param pulumi.Input['InputInputGroupRtmpPullSettingsArgs'] rtmp_pull_settings: Input RTMP_PULL configuration information.
+        :param pulumi.Input['InputInputGroupRtpSettingsArgs'] rtp_settings: Input RTP configuration information.
+        :param pulumi.Input['InputInputGroupRtspPullSettingsArgs'] rtsp_pull_settings: Input RTSP_PULL configuration information.
+        :param pulumi.Input['InputInputGroupSrtSettingsArgs'] srt_settings: The input SRT configuration information.
+        """
+        pulumi.set(__self__, "input_name", input_name)
+        pulumi.set(__self__, "protocol", protocol)
+        if allow_ip_lists is not None:
+            pulumi.set(__self__, "allow_ip_lists", allow_ip_lists)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if fail_over is not None:
+            pulumi.set(__self__, "fail_over", fail_over)
+        if hls_pull_settings is not None:
+            pulumi.set(__self__, "hls_pull_settings", hls_pull_settings)
+        if resilient_stream is not None:
+            pulumi.set(__self__, "resilient_stream", resilient_stream)
+        if rtmp_pull_settings is not None:
+            pulumi.set(__self__, "rtmp_pull_settings", rtmp_pull_settings)
+        if rtp_settings is not None:
+            pulumi.set(__self__, "rtp_settings", rtp_settings)
+        if rtsp_pull_settings is not None:
+            pulumi.set(__self__, "rtsp_pull_settings", rtsp_pull_settings)
+        if srt_settings is not None:
+            pulumi.set(__self__, "srt_settings", srt_settings)
+
+    @property
+    @pulumi.getter(name="inputName")
+    def input_name(self) -> pulumi.Input[str]:
+        """
+        The input name, you can fill in uppercase and lowercase letters, numbers and underscores, and the length is [1, 32].
+        """
+        return pulumi.get(self, "input_name")
+
+    @input_name.setter
+    def input_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "input_name", value)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> pulumi.Input[str]:
+        """
+        Input protocol, optional [SRT|RTP|RTMP|RTMP_PULL].
+        """
+        return pulumi.get(self, "protocol")
+
+    @protocol.setter
+    def protocol(self, value: pulumi.Input[str]):
+        pulumi.set(self, "protocol", value)
+
+    @property
+    @pulumi.getter(name="allowIpLists")
+    def allow_ip_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The input IP whitelist, the format is CIDR.
+        """
+        return pulumi.get(self, "allow_ip_lists")
+
+    @allow_ip_lists.setter
+    def allow_ip_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "allow_ip_lists", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The input description with a length of [0, 255].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="failOver")
+    def fail_over(self) -> Optional[pulumi.Input[str]]:
+        """
+        The active/standby switch of the input, [OPEN|CLOSE] is optional, and the default is CLOSE.
+        """
+        return pulumi.get(self, "fail_over")
+
+    @fail_over.setter
+    def fail_over(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fail_over", value)
+
+    @property
+    @pulumi.getter(name="hlsPullSettings")
+    def hls_pull_settings(self) -> Optional[pulumi.Input['InputInputGroupHlsPullSettingsArgs']]:
+        """
+        Input HLS_PULL configuration information.
+        """
+        return pulumi.get(self, "hls_pull_settings")
+
+    @hls_pull_settings.setter
+    def hls_pull_settings(self, value: Optional[pulumi.Input['InputInputGroupHlsPullSettingsArgs']]):
+        pulumi.set(self, "hls_pull_settings", value)
+
+    @property
+    @pulumi.getter(name="resilientStream")
+    def resilient_stream(self) -> Optional[pulumi.Input['InputInputGroupResilientStreamArgs']]:
+        """
+        Delay broadcast smooth streaming configuration information.
+        """
+        return pulumi.get(self, "resilient_stream")
+
+    @resilient_stream.setter
+    def resilient_stream(self, value: Optional[pulumi.Input['InputInputGroupResilientStreamArgs']]):
+        pulumi.set(self, "resilient_stream", value)
+
+    @property
+    @pulumi.getter(name="rtmpPullSettings")
+    def rtmp_pull_settings(self) -> Optional[pulumi.Input['InputInputGroupRtmpPullSettingsArgs']]:
+        """
+        Input RTMP_PULL configuration information.
+        """
+        return pulumi.get(self, "rtmp_pull_settings")
+
+    @rtmp_pull_settings.setter
+    def rtmp_pull_settings(self, value: Optional[pulumi.Input['InputInputGroupRtmpPullSettingsArgs']]):
+        pulumi.set(self, "rtmp_pull_settings", value)
+
+    @property
+    @pulumi.getter(name="rtpSettings")
+    def rtp_settings(self) -> Optional[pulumi.Input['InputInputGroupRtpSettingsArgs']]:
+        """
+        Input RTP configuration information.
+        """
+        return pulumi.get(self, "rtp_settings")
+
+    @rtp_settings.setter
+    def rtp_settings(self, value: Optional[pulumi.Input['InputInputGroupRtpSettingsArgs']]):
+        pulumi.set(self, "rtp_settings", value)
+
+    @property
+    @pulumi.getter(name="rtspPullSettings")
+    def rtsp_pull_settings(self) -> Optional[pulumi.Input['InputInputGroupRtspPullSettingsArgs']]:
+        """
+        Input RTSP_PULL configuration information.
+        """
+        return pulumi.get(self, "rtsp_pull_settings")
+
+    @rtsp_pull_settings.setter
+    def rtsp_pull_settings(self, value: Optional[pulumi.Input['InputInputGroupRtspPullSettingsArgs']]):
+        pulumi.set(self, "rtsp_pull_settings", value)
+
+    @property
+    @pulumi.getter(name="srtSettings")
+    def srt_settings(self) -> Optional[pulumi.Input['InputInputGroupSrtSettingsArgs']]:
+        """
+        The input SRT configuration information.
+        """
+        return pulumi.get(self, "srt_settings")
+
+    @srt_settings.setter
+    def srt_settings(self, value: Optional[pulumi.Input['InputInputGroupSrtSettingsArgs']]):
+        pulumi.set(self, "srt_settings", value)
+
+
+@pulumi.input_type
+class InputInputGroupHlsPullSettingsArgs:
+    def __init__(__self__, *,
+                 source_addresses: pulumi.Input[Sequence[pulumi.Input['InputInputGroupHlsPullSettingsSourceAddressArgs']]]):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['InputInputGroupHlsPullSettingsSourceAddressArgs']]] source_addresses: There is only one origin address of the HLS origin station.
+        """
+        pulumi.set(__self__, "source_addresses", source_addresses)
+
+    @property
+    @pulumi.getter(name="sourceAddresses")
+    def source_addresses(self) -> pulumi.Input[Sequence[pulumi.Input['InputInputGroupHlsPullSettingsSourceAddressArgs']]]:
+        """
+        There is only one origin address of the HLS origin station.
+        """
+        return pulumi.get(self, "source_addresses")
+
+    @source_addresses.setter
+    def source_addresses(self, value: pulumi.Input[Sequence[pulumi.Input['InputInputGroupHlsPullSettingsSourceAddressArgs']]]):
+        pulumi.set(self, "source_addresses", value)
+
+
+@pulumi.input_type
+class InputInputGroupHlsPullSettingsSourceAddressArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: The URL address of the RTSP source site.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        The URL address of the RTSP source site.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class InputInputGroupResilientStreamArgs:
+    def __init__(__self__, *,
+                 buffer_time: Optional[pulumi.Input[int]] = None,
+                 enable: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[int] buffer_time: Delay time, in seconds, currently supports a range of 10 to 300 seconds. Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[bool] enable: Whether to enable the delayed broadcast smooth spit stream, true is enabled, false is not enabled, and the default is not enabled. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if buffer_time is not None:
+            pulumi.set(__self__, "buffer_time", buffer_time)
+        if enable is not None:
+            pulumi.set(__self__, "enable", enable)
+
+    @property
+    @pulumi.getter(name="bufferTime")
+    def buffer_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        Delay time, in seconds, currently supports a range of 10 to 300 seconds. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "buffer_time")
+
+    @buffer_time.setter
+    def buffer_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "buffer_time", value)
+
+    @property
+    @pulumi.getter
+    def enable(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable the delayed broadcast smooth spit stream, true is enabled, false is not enabled, and the default is not enabled. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "enable")
+
+    @enable.setter
+    def enable(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enable", value)
+
+
+@pulumi.input_type
+class InputInputGroupRtmpPullSettingsArgs:
+    def __init__(__self__, *,
+                 source_addresses: pulumi.Input[Sequence[pulumi.Input['InputInputGroupRtmpPullSettingsSourceAddressArgs']]]):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['InputInputGroupRtmpPullSettingsSourceAddressArgs']]] source_addresses: The source site address of the RTMP source site, there can only be one.
+        """
+        pulumi.set(__self__, "source_addresses", source_addresses)
+
+    @property
+    @pulumi.getter(name="sourceAddresses")
+    def source_addresses(self) -> pulumi.Input[Sequence[pulumi.Input['InputInputGroupRtmpPullSettingsSourceAddressArgs']]]:
+        """
+        The source site address of the RTMP source site, there can only be one.
+        """
+        return pulumi.get(self, "source_addresses")
+
+    @source_addresses.setter
+    def source_addresses(self, value: pulumi.Input[Sequence[pulumi.Input['InputInputGroupRtmpPullSettingsSourceAddressArgs']]]):
+        pulumi.set(self, "source_addresses", value)
+
+
+@pulumi.input_type
+class InputInputGroupRtmpPullSettingsSourceAddressArgs:
+    def __init__(__self__, *,
+                 stream_key: pulumi.Input[str],
+                 tc_url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] stream_key: StreamKey information of the RTMP source site.
+        :param pulumi.Input[str] tc_url: TcUrl address of the RTMP source server.
+        """
+        pulumi.set(__self__, "stream_key", stream_key)
+        pulumi.set(__self__, "tc_url", tc_url)
+
+    @property
+    @pulumi.getter(name="streamKey")
+    def stream_key(self) -> pulumi.Input[str]:
+        """
+        StreamKey information of the RTMP source site.
+        """
+        return pulumi.get(self, "stream_key")
+
+    @stream_key.setter
+    def stream_key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "stream_key", value)
+
+    @property
+    @pulumi.getter(name="tcUrl")
+    def tc_url(self) -> pulumi.Input[str]:
+        """
+        TcUrl address of the RTMP source server.
+        """
+        return pulumi.get(self, "tc_url")
+
+    @tc_url.setter
+    def tc_url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "tc_url", value)
+
+
+@pulumi.input_type
+class InputInputGroupRtpSettingsArgs:
+    def __init__(__self__, *,
+                 fec: Optional[pulumi.Input[str]] = None,
+                 idle_timeout: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] fec: Defaults to &#39;none&#39;, optional values[&#39;none&#39;].
+        :param pulumi.Input[int] idle_timeout: Idle timeout, the default is 5000, the unit is ms, and the range is [1000, 10000].
+        """
+        if fec is not None:
+            pulumi.set(__self__, "fec", fec)
+        if idle_timeout is not None:
+            pulumi.set(__self__, "idle_timeout", idle_timeout)
+
+    @property
+    @pulumi.getter
+    def fec(self) -> Optional[pulumi.Input[str]]:
+        """
+        Defaults to &#39;none&#39;, optional values[&#39;none&#39;].
+        """
+        return pulumi.get(self, "fec")
+
+    @fec.setter
+    def fec(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fec", value)
+
+    @property
+    @pulumi.getter(name="idleTimeout")
+    def idle_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        Idle timeout, the default is 5000, the unit is ms, and the range is [1000, 10000].
+        """
+        return pulumi.get(self, "idle_timeout")
+
+    @idle_timeout.setter
+    def idle_timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "idle_timeout", value)
+
+
+@pulumi.input_type
+class InputInputGroupRtspPullSettingsArgs:
+    def __init__(__self__, *,
+                 source_addresses: pulumi.Input[Sequence[pulumi.Input['InputInputGroupRtspPullSettingsSourceAddressArgs']]]):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['InputInputGroupRtspPullSettingsSourceAddressArgs']]] source_addresses: The source site address of the RTSP source site, there can only be one.
+        """
+        pulumi.set(__self__, "source_addresses", source_addresses)
+
+    @property
+    @pulumi.getter(name="sourceAddresses")
+    def source_addresses(self) -> pulumi.Input[Sequence[pulumi.Input['InputInputGroupRtspPullSettingsSourceAddressArgs']]]:
+        """
+        The source site address of the RTSP source site, there can only be one.
+        """
+        return pulumi.get(self, "source_addresses")
+
+    @source_addresses.setter
+    def source_addresses(self, value: pulumi.Input[Sequence[pulumi.Input['InputInputGroupRtspPullSettingsSourceAddressArgs']]]):
+        pulumi.set(self, "source_addresses", value)
+
+
+@pulumi.input_type
+class InputInputGroupRtspPullSettingsSourceAddressArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: The URL address of the RTSP source site.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        The URL address of the RTSP source site.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class InputInputGroupSrtSettingsArgs:
+    def __init__(__self__, *,
+                 latency: Optional[pulumi.Input[int]] = None,
+                 mode: Optional[pulumi.Input[str]] = None,
+                 passphrase: Optional[pulumi.Input[str]] = None,
+                 pb_key_len: Optional[pulumi.Input[int]] = None,
+                 peer_idle_timeout: Optional[pulumi.Input[int]] = None,
+                 peer_latency: Optional[pulumi.Input[int]] = None,
+                 recv_latency: Optional[pulumi.Input[int]] = None,
+                 source_addresses: Optional[pulumi.Input[Sequence[pulumi.Input['InputInputGroupSrtSettingsSourceAddressArgs']]]] = None,
+                 stream_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] latency: Delay, default 0, unit ms, range [0, 3000].
+        :param pulumi.Input[str] mode: SRT mode, optional [LISTENER|CALLER], default is LISTENER.
+        :param pulumi.Input[str] passphrase: The decryption key, which is empty by default, means no encryption. Only ascii code values can be filled in, and the length is [10, 79].
+        :param pulumi.Input[int] pb_key_len: Key length, default is 0, optional [0|16|24|32].
+        :param pulumi.Input[int] peer_idle_timeout: Peer timeout, default is 5000, unit ms, range is [1000, 10000].
+        :param pulumi.Input[int] peer_latency: Peer delay, the default is 0, the unit is ms, and the range is [0, 3000].
+        :param pulumi.Input[int] recv_latency: Receiving delay, default is 120, unit ms, range is [0, 3000].
+        :param pulumi.Input[Sequence[pulumi.Input['InputInputGroupSrtSettingsSourceAddressArgs']]] source_addresses: SRT peer address, required when Mode is CALLER, and only 1 set can be filled in.
+        :param pulumi.Input[str] stream_id: Stream ID, optional uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-), length 0~512. Specific format can refer to:https://github.com/Haivision/srt/blob/master/docs/features/access-control.md#standard-keys.
+        """
+        if latency is not None:
+            pulumi.set(__self__, "latency", latency)
+        if mode is not None:
+            pulumi.set(__self__, "mode", mode)
+        if passphrase is not None:
+            pulumi.set(__self__, "passphrase", passphrase)
+        if pb_key_len is not None:
+            pulumi.set(__self__, "pb_key_len", pb_key_len)
+        if peer_idle_timeout is not None:
+            pulumi.set(__self__, "peer_idle_timeout", peer_idle_timeout)
+        if peer_latency is not None:
+            pulumi.set(__self__, "peer_latency", peer_latency)
+        if recv_latency is not None:
+            pulumi.set(__self__, "recv_latency", recv_latency)
+        if source_addresses is not None:
+            pulumi.set(__self__, "source_addresses", source_addresses)
+        if stream_id is not None:
+            pulumi.set(__self__, "stream_id", stream_id)
+
+    @property
+    @pulumi.getter
+    def latency(self) -> Optional[pulumi.Input[int]]:
+        """
+        Delay, default 0, unit ms, range [0, 3000].
+        """
+        return pulumi.get(self, "latency")
+
+    @latency.setter
+    def latency(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "latency", value)
+
+    @property
+    @pulumi.getter
+    def mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        SRT mode, optional [LISTENER|CALLER], default is LISTENER.
+        """
+        return pulumi.get(self, "mode")
+
+    @mode.setter
+    def mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mode", value)
+
+    @property
+    @pulumi.getter
+    def passphrase(self) -> Optional[pulumi.Input[str]]:
+        """
+        The decryption key, which is empty by default, means no encryption. Only ascii code values can be filled in, and the length is [10, 79].
+        """
+        return pulumi.get(self, "passphrase")
+
+    @passphrase.setter
+    def passphrase(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "passphrase", value)
+
+    @property
+    @pulumi.getter(name="pbKeyLen")
+    def pb_key_len(self) -> Optional[pulumi.Input[int]]:
+        """
+        Key length, default is 0, optional [0|16|24|32].
+        """
+        return pulumi.get(self, "pb_key_len")
+
+    @pb_key_len.setter
+    def pb_key_len(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "pb_key_len", value)
+
+    @property
+    @pulumi.getter(name="peerIdleTimeout")
+    def peer_idle_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        Peer timeout, default is 5000, unit ms, range is [1000, 10000].
+        """
+        return pulumi.get(self, "peer_idle_timeout")
+
+    @peer_idle_timeout.setter
+    def peer_idle_timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "peer_idle_timeout", value)
+
+    @property
+    @pulumi.getter(name="peerLatency")
+    def peer_latency(self) -> Optional[pulumi.Input[int]]:
+        """
+        Peer delay, the default is 0, the unit is ms, and the range is [0, 3000].
+        """
+        return pulumi.get(self, "peer_latency")
+
+    @peer_latency.setter
+    def peer_latency(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "peer_latency", value)
+
+    @property
+    @pulumi.getter(name="recvLatency")
+    def recv_latency(self) -> Optional[pulumi.Input[int]]:
+        """
+        Receiving delay, default is 120, unit ms, range is [0, 3000].
+        """
+        return pulumi.get(self, "recv_latency")
+
+    @recv_latency.setter
+    def recv_latency(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "recv_latency", value)
+
+    @property
+    @pulumi.getter(name="sourceAddresses")
+    def source_addresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['InputInputGroupSrtSettingsSourceAddressArgs']]]]:
+        """
+        SRT peer address, required when Mode is CALLER, and only 1 set can be filled in.
+        """
+        return pulumi.get(self, "source_addresses")
+
+    @source_addresses.setter
+    def source_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['InputInputGroupSrtSettingsSourceAddressArgs']]]]):
+        pulumi.set(self, "source_addresses", value)
+
+    @property
+    @pulumi.getter(name="streamId")
+    def stream_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Stream ID, optional uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-), length 0~512. Specific format can refer to:https://github.com/Haivision/srt/blob/master/docs/features/access-control.md#standard-keys.
+        """
+        return pulumi.get(self, "stream_id")
+
+    @stream_id.setter
+    def stream_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "stream_id", value)
+
+
+@pulumi.input_type
+class InputInputGroupSrtSettingsSourceAddressArgs:
+    def __init__(__self__, *,
+                 ip: pulumi.Input[str],
+                 port: pulumi.Input[int]):
+        """
+        :param pulumi.Input[str] ip: Peer IP.
+        :param pulumi.Input[int] port: Peer port.
+        """
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "port", port)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> pulumi.Input[str]:
+        """
+        Peer IP.
+        """
+        return pulumi.get(self, "ip")
+
+    @ip.setter
+    def ip(self, value: pulumi.Input[str]):
+        pulumi.set(self, "ip", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> pulumi.Input[int]:
+        """
+        Peer port.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: pulumi.Input[int]):
+        pulumi.set(self, "port", value)
+
+
+@pulumi.input_type
+class OutputOutputArgs:
+    def __init__(__self__, *,
+                 description: pulumi.Input[str],
+                 output_name: pulumi.Input[str],
+                 output_region: pulumi.Input[str],
+                 protocol: pulumi.Input[str],
+                 allow_ip_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 max_concurrent: Optional[pulumi.Input[int]] = None,
+                 rtmp_settings: Optional[pulumi.Input['OutputOutputRtmpSettingsArgs']] = None,
+                 rtp_settings: Optional[pulumi.Input['OutputOutputRtpSettingsArgs']] = None,
+                 srt_settings: Optional[pulumi.Input['OutputOutputSrtSettingsArgs']] = None):
+        """
+        :param pulumi.Input[str] description: Output description.
+        :param pulumi.Input[str] output_name: The name of the output.
+        :param pulumi.Input[str] output_region: Output region.
+        :param pulumi.Input[str] protocol: Output protocol, optional [SRT|RTP|RTMP|RTMP_PULL].
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] allow_ip_lists: IP whitelist list, the format is CIDR, such as 0.0.0.0/0. When the Protocol is RTMP_PULL, it is valid, and if it is empty, it means that the client IP is not limited.
+        :param pulumi.Input[int] max_concurrent: The maximum number of concurrent pull streams, the maximum is 4, and the default is 4. Only SRT or RTMP_PULL can set this parameter.
+        :param pulumi.Input['OutputOutputRtmpSettingsArgs'] rtmp_settings: Output RTMP configuration.
+        :param pulumi.Input['OutputOutputRtpSettingsArgs'] rtp_settings: Output RTP configuration.
+        :param pulumi.Input['OutputOutputSrtSettingsArgs'] srt_settings: configuration of the output SRT.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "output_name", output_name)
+        pulumi.set(__self__, "output_region", output_region)
+        pulumi.set(__self__, "protocol", protocol)
+        if allow_ip_lists is not None:
+            pulumi.set(__self__, "allow_ip_lists", allow_ip_lists)
+        if max_concurrent is not None:
+            pulumi.set(__self__, "max_concurrent", max_concurrent)
+        if rtmp_settings is not None:
+            pulumi.set(__self__, "rtmp_settings", rtmp_settings)
+        if rtp_settings is not None:
+            pulumi.set(__self__, "rtp_settings", rtp_settings)
+        if srt_settings is not None:
+            pulumi.set(__self__, "srt_settings", srt_settings)
+
+    @property
+    @pulumi.getter
+    def description(self) -> pulumi.Input[str]:
+        """
+        Output description.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: pulumi.Input[str]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="outputName")
+    def output_name(self) -> pulumi.Input[str]:
+        """
+        The name of the output.
+        """
+        return pulumi.get(self, "output_name")
+
+    @output_name.setter
+    def output_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "output_name", value)
+
+    @property
+    @pulumi.getter(name="outputRegion")
+    def output_region(self) -> pulumi.Input[str]:
+        """
+        Output region.
+        """
+        return pulumi.get(self, "output_region")
+
+    @output_region.setter
+    def output_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "output_region", value)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> pulumi.Input[str]:
+        """
+        Output protocol, optional [SRT|RTP|RTMP|RTMP_PULL].
+        """
+        return pulumi.get(self, "protocol")
+
+    @protocol.setter
+    def protocol(self, value: pulumi.Input[str]):
+        pulumi.set(self, "protocol", value)
+
+    @property
+    @pulumi.getter(name="allowIpLists")
+    def allow_ip_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        IP whitelist list, the format is CIDR, such as 0.0.0.0/0. When the Protocol is RTMP_PULL, it is valid, and if it is empty, it means that the client IP is not limited.
+        """
+        return pulumi.get(self, "allow_ip_lists")
+
+    @allow_ip_lists.setter
+    def allow_ip_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "allow_ip_lists", value)
+
+    @property
+    @pulumi.getter(name="maxConcurrent")
+    def max_concurrent(self) -> Optional[pulumi.Input[int]]:
+        """
+        The maximum number of concurrent pull streams, the maximum is 4, and the default is 4. Only SRT or RTMP_PULL can set this parameter.
+        """
+        return pulumi.get(self, "max_concurrent")
+
+    @max_concurrent.setter
+    def max_concurrent(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_concurrent", value)
+
+    @property
+    @pulumi.getter(name="rtmpSettings")
+    def rtmp_settings(self) -> Optional[pulumi.Input['OutputOutputRtmpSettingsArgs']]:
+        """
+        Output RTMP configuration.
+        """
+        return pulumi.get(self, "rtmp_settings")
+
+    @rtmp_settings.setter
+    def rtmp_settings(self, value: Optional[pulumi.Input['OutputOutputRtmpSettingsArgs']]):
+        pulumi.set(self, "rtmp_settings", value)
+
+    @property
+    @pulumi.getter(name="rtpSettings")
+    def rtp_settings(self) -> Optional[pulumi.Input['OutputOutputRtpSettingsArgs']]:
+        """
+        Output RTP configuration.
+        """
+        return pulumi.get(self, "rtp_settings")
+
+    @rtp_settings.setter
+    def rtp_settings(self, value: Optional[pulumi.Input['OutputOutputRtpSettingsArgs']]):
+        pulumi.set(self, "rtp_settings", value)
+
+    @property
+    @pulumi.getter(name="srtSettings")
+    def srt_settings(self) -> Optional[pulumi.Input['OutputOutputSrtSettingsArgs']]:
+        """
+        configuration of the output SRT.
+        """
+        return pulumi.get(self, "srt_settings")
+
+    @srt_settings.setter
+    def srt_settings(self, value: Optional[pulumi.Input['OutputOutputSrtSettingsArgs']]):
+        pulumi.set(self, "srt_settings", value)
+
+
+@pulumi.input_type
+class OutputOutputRtmpSettingsArgs:
+    def __init__(__self__, *,
+                 destinations: pulumi.Input[Sequence[pulumi.Input['OutputOutputRtmpSettingsDestinationArgs']]],
+                 chunk_size: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['OutputOutputRtmpSettingsDestinationArgs']]] destinations: The target address of the relay can be filled in 1~2.
+        :param pulumi.Input[int] chunk_size: RTMP Chunk size, range is [4096, 40960].
+        """
+        pulumi.set(__self__, "destinations", destinations)
+        if chunk_size is not None:
+            pulumi.set(__self__, "chunk_size", chunk_size)
+
+    @property
+    @pulumi.getter
+    def destinations(self) -> pulumi.Input[Sequence[pulumi.Input['OutputOutputRtmpSettingsDestinationArgs']]]:
+        """
+        The target address of the relay can be filled in 1~2.
+        """
+        return pulumi.get(self, "destinations")
+
+    @destinations.setter
+    def destinations(self, value: pulumi.Input[Sequence[pulumi.Input['OutputOutputRtmpSettingsDestinationArgs']]]):
+        pulumi.set(self, "destinations", value)
+
+    @property
+    @pulumi.getter(name="chunkSize")
+    def chunk_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        RTMP Chunk size, range is [4096, 40960].
+        """
+        return pulumi.get(self, "chunk_size")
+
+    @chunk_size.setter
+    def chunk_size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "chunk_size", value)
+
+
+@pulumi.input_type
+class OutputOutputRtmpSettingsDestinationArgs:
+    def __init__(__self__, *,
+                 stream_key: pulumi.Input[str],
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] stream_key: relayed StreamKey, in the format: stream?key=value.
+        :param pulumi.Input[str] url: relayed URL, the format is: rtmp://domain/live.
+        """
+        pulumi.set(__self__, "stream_key", stream_key)
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter(name="streamKey")
+    def stream_key(self) -> pulumi.Input[str]:
+        """
+        relayed StreamKey, in the format: stream?key=value.
+        """
+        return pulumi.get(self, "stream_key")
+
+    @stream_key.setter
+    def stream_key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "stream_key", value)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        relayed URL, the format is: rtmp://domain/live.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class OutputOutputRtpSettingsArgs:
+    def __init__(__self__, *,
+                 destinations: pulumi.Input[Sequence[pulumi.Input['OutputOutputRtpSettingsDestinationArgs']]],
+                 fec: pulumi.Input[str],
+                 idle_timeout: pulumi.Input[int]):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['OutputOutputRtpSettingsDestinationArgs']]] destinations: The target address of the relay can be filled in 1~2.
+        :param pulumi.Input[str] fec: You can only fill in none.
+        :param pulumi.Input[int] idle_timeout: Idle timeout, unit ms.
+        """
+        pulumi.set(__self__, "destinations", destinations)
+        pulumi.set(__self__, "fec", fec)
+        pulumi.set(__self__, "idle_timeout", idle_timeout)
+
+    @property
+    @pulumi.getter
+    def destinations(self) -> pulumi.Input[Sequence[pulumi.Input['OutputOutputRtpSettingsDestinationArgs']]]:
+        """
+        The target address of the relay can be filled in 1~2.
+        """
+        return pulumi.get(self, "destinations")
+
+    @destinations.setter
+    def destinations(self, value: pulumi.Input[Sequence[pulumi.Input['OutputOutputRtpSettingsDestinationArgs']]]):
+        pulumi.set(self, "destinations", value)
+
+    @property
+    @pulumi.getter
+    def fec(self) -> pulumi.Input[str]:
+        """
+        You can only fill in none.
+        """
+        return pulumi.get(self, "fec")
+
+    @fec.setter
+    def fec(self, value: pulumi.Input[str]):
+        pulumi.set(self, "fec", value)
+
+    @property
+    @pulumi.getter(name="idleTimeout")
+    def idle_timeout(self) -> pulumi.Input[int]:
+        """
+        Idle timeout, unit ms.
+        """
+        return pulumi.get(self, "idle_timeout")
+
+    @idle_timeout.setter
+    def idle_timeout(self, value: pulumi.Input[int]):
+        pulumi.set(self, "idle_timeout", value)
+
+
+@pulumi.input_type
+class OutputOutputRtpSettingsDestinationArgs:
+    def __init__(__self__, *,
+                 ip: pulumi.Input[str],
+                 port: pulumi.Input[int]):
+        """
+        :param pulumi.Input[str] ip: Output IP.
+        :param pulumi.Input[int] port: output port.
+        """
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "port", port)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> pulumi.Input[str]:
+        """
+        Output IP.
+        """
+        return pulumi.get(self, "ip")
+
+    @ip.setter
+    def ip(self, value: pulumi.Input[str]):
+        pulumi.set(self, "ip", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> pulumi.Input[int]:
+        """
+        output port.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: pulumi.Input[int]):
+        pulumi.set(self, "port", value)
+
+
+@pulumi.input_type
+class OutputOutputSrtSettingsArgs:
+    def __init__(__self__, *,
+                 destinations: pulumi.Input[Sequence[pulumi.Input['OutputOutputSrtSettingsDestinationArgs']]],
+                 latency: Optional[pulumi.Input[int]] = None,
+                 mode: Optional[pulumi.Input[str]] = None,
+                 passphrase: Optional[pulumi.Input[str]] = None,
+                 pb_key_len: Optional[pulumi.Input[int]] = None,
+                 peer_idle_timeout: Optional[pulumi.Input[int]] = None,
+                 peer_latency: Optional[pulumi.Input[int]] = None,
+                 recv_latency: Optional[pulumi.Input[int]] = None,
+                 stream_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['OutputOutputSrtSettingsDestinationArgs']]] destinations: The target address of the relay is required when Mode is CALLER, and only one group can be filled in.
+        :param pulumi.Input[int] latency: The total delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].
+        :param pulumi.Input[str] mode: SRT mode, optional [LISTENER|CALLER], default is CALLER.
+        :param pulumi.Input[str] passphrase: The encryption key for relaying SRT, which is empty by default, indicating no encryption. Only ascii code values can be filled in, and the length is [10, 79].
+        :param pulumi.Input[int] pb_key_len: The key length of relay SRT, the default is 0, optional [0|16|24|32].
+        :param pulumi.Input[int] peer_idle_timeout: The peer idle timeout for relaying SRT, the default is 5000, the unit is ms, and the range is [1000, 10000].
+        :param pulumi.Input[int] peer_latency: The peer delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].
+        :param pulumi.Input[int] recv_latency: The reception delay of relay SRT, the default is 120, the unit is ms, the range is [0, 3000].
+        :param pulumi.Input[str] stream_id: relay the stream ID of SRT. You can choose uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-). The length is 0~512.
+        """
+        pulumi.set(__self__, "destinations", destinations)
+        if latency is not None:
+            pulumi.set(__self__, "latency", latency)
+        if mode is not None:
+            pulumi.set(__self__, "mode", mode)
+        if passphrase is not None:
+            pulumi.set(__self__, "passphrase", passphrase)
+        if pb_key_len is not None:
+            pulumi.set(__self__, "pb_key_len", pb_key_len)
+        if peer_idle_timeout is not None:
+            pulumi.set(__self__, "peer_idle_timeout", peer_idle_timeout)
+        if peer_latency is not None:
+            pulumi.set(__self__, "peer_latency", peer_latency)
+        if recv_latency is not None:
+            pulumi.set(__self__, "recv_latency", recv_latency)
+        if stream_id is not None:
+            pulumi.set(__self__, "stream_id", stream_id)
+
+    @property
+    @pulumi.getter
+    def destinations(self) -> pulumi.Input[Sequence[pulumi.Input['OutputOutputSrtSettingsDestinationArgs']]]:
+        """
+        The target address of the relay is required when Mode is CALLER, and only one group can be filled in.
+        """
+        return pulumi.get(self, "destinations")
+
+    @destinations.setter
+    def destinations(self, value: pulumi.Input[Sequence[pulumi.Input['OutputOutputSrtSettingsDestinationArgs']]]):
+        pulumi.set(self, "destinations", value)
+
+    @property
+    @pulumi.getter
+    def latency(self) -> Optional[pulumi.Input[int]]:
+        """
+        The total delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].
+        """
+        return pulumi.get(self, "latency")
+
+    @latency.setter
+    def latency(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "latency", value)
+
+    @property
+    @pulumi.getter
+    def mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        SRT mode, optional [LISTENER|CALLER], default is CALLER.
+        """
+        return pulumi.get(self, "mode")
+
+    @mode.setter
+    def mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mode", value)
+
+    @property
+    @pulumi.getter
+    def passphrase(self) -> Optional[pulumi.Input[str]]:
+        """
+        The encryption key for relaying SRT, which is empty by default, indicating no encryption. Only ascii code values can be filled in, and the length is [10, 79].
+        """
+        return pulumi.get(self, "passphrase")
+
+    @passphrase.setter
+    def passphrase(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "passphrase", value)
+
+    @property
+    @pulumi.getter(name="pbKeyLen")
+    def pb_key_len(self) -> Optional[pulumi.Input[int]]:
+        """
+        The key length of relay SRT, the default is 0, optional [0|16|24|32].
+        """
+        return pulumi.get(self, "pb_key_len")
+
+    @pb_key_len.setter
+    def pb_key_len(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "pb_key_len", value)
+
+    @property
+    @pulumi.getter(name="peerIdleTimeout")
+    def peer_idle_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        The peer idle timeout for relaying SRT, the default is 5000, the unit is ms, and the range is [1000, 10000].
+        """
+        return pulumi.get(self, "peer_idle_timeout")
+
+    @peer_idle_timeout.setter
+    def peer_idle_timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "peer_idle_timeout", value)
+
+    @property
+    @pulumi.getter(name="peerLatency")
+    def peer_latency(self) -> Optional[pulumi.Input[int]]:
+        """
+        The peer delay of relaying SRT, the default is 0, the unit is ms, and the range is [0, 3000].
+        """
+        return pulumi.get(self, "peer_latency")
+
+    @peer_latency.setter
+    def peer_latency(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "peer_latency", value)
+
+    @property
+    @pulumi.getter(name="recvLatency")
+    def recv_latency(self) -> Optional[pulumi.Input[int]]:
+        """
+        The reception delay of relay SRT, the default is 120, the unit is ms, the range is [0, 3000].
+        """
+        return pulumi.get(self, "recv_latency")
+
+    @recv_latency.setter
+    def recv_latency(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "recv_latency", value)
+
+    @property
+    @pulumi.getter(name="streamId")
+    def stream_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        relay the stream ID of SRT. You can choose uppercase and lowercase letters, numbers and special characters (.#!:&amp;,=_-). The length is 0~512.
+        """
+        return pulumi.get(self, "stream_id")
+
+    @stream_id.setter
+    def stream_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "stream_id", value)
+
+
+@pulumi.input_type
+class OutputOutputSrtSettingsDestinationArgs:
+    def __init__(__self__, *,
+                 ip: pulumi.Input[str],
+                 port: pulumi.Input[int]):
+        """
+        :param pulumi.Input[str] ip: Output IP.
+        :param pulumi.Input[int] port: output port.
+        """
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "port", port)
+
+    @property
+    @pulumi.getter
+    def ip(self) -> pulumi.Input[str]:
+        """
+        Output IP.
+        """
+        return pulumi.get(self, "ip")
+
+    @ip.setter
+    def ip(self, value: pulumi.Input[str]):
+        pulumi.set(self, "ip", value)
+
+    @property
+    @pulumi.getter
+    def port(self) -> pulumi.Input[int]:
+        """
+        output port.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: pulumi.Input[int]):
+        pulumi.set(self, "port", value)
+
+
+@pulumi.input_type
+class ProcessLiveStreamOperationAiAnalysisTaskArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 extended_parameter: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] definition: Video content analysis template ID.
+        :param pulumi.Input[str] extended_parameter: An extended parameter, whose value is a stringfied JSON.Note: This parameter is for customers with special requirements. It needs to be customized offline.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if extended_parameter is not None:
+            pulumi.set(__self__, "extended_parameter", extended_parameter)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        Video content analysis template ID.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="extendedParameter")
+    def extended_parameter(self) -> Optional[pulumi.Input[str]]:
+        """
+        An extended parameter, whose value is a stringfied JSON.Note: This parameter is for customers with special requirements. It needs to be customized offline.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "extended_parameter")
+
+    @extended_parameter.setter
+    def extended_parameter(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "extended_parameter", value)
+
+
+@pulumi.input_type
+class ProcessLiveStreamOperationAiContentReviewTaskArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] definition: Video content audit template ID.
+        """
+        pulumi.set(__self__, "definition", definition)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        Video content audit template ID.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+
+@pulumi.input_type
+class ProcessLiveStreamOperationAiQualityControlTaskArgs:
+    def __init__(__self__, *,
+                 channel_ext_para: Optional[pulumi.Input[str]] = None,
+                 definition: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] channel_ext_para: The channel extension parameter, which is a serialized JSON string.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] definition: The ID of the quality control template.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        if channel_ext_para is not None:
+            pulumi.set(__self__, "channel_ext_para", channel_ext_para)
+        if definition is not None:
+            pulumi.set(__self__, "definition", definition)
+
+    @property
+    @pulumi.getter(name="channelExtPara")
+    def channel_ext_para(self) -> Optional[pulumi.Input[str]]:
+        """
+        The channel extension parameter, which is a serialized JSON string.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "channel_ext_para")
+
+    @channel_ext_para.setter
+    def channel_ext_para(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "channel_ext_para", value)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> Optional[pulumi.Input[int]]:
+        """
+        The ID of the quality control template.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "definition", value)
+
+
+@pulumi.input_type
+class ProcessLiveStreamOperationAiRecognitionTaskArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] definition: Intelligent video recognition template ID.
+        """
+        pulumi.set(__self__, "definition", definition)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        Intelligent video recognition template ID.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+
+@pulumi.input_type
+class ProcessLiveStreamOperationOutputStorageArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_output_storage: Optional[pulumi.Input['ProcessLiveStreamOperationOutputStorageCosOutputStorageArgs']] = None,
+                 s3_output_storage: Optional[pulumi.Input['ProcessLiveStreamOperationOutputStorageS3OutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS.`AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        :param pulumi.Input['ProcessLiveStreamOperationOutputStorageCosOutputStorageArgs'] cos_output_storage: The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessLiveStreamOperationOutputStorageS3OutputStorageArgs'] s3_output_storage: The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_output_storage is not None:
+            pulumi.set(__self__, "cos_output_storage", cos_output_storage)
+        if s3_output_storage is not None:
+            pulumi.set(__self__, "s3_output_storage", s3_output_storage)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS.`AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosOutputStorage")
+    def cos_output_storage(self) -> Optional[pulumi.Input['ProcessLiveStreamOperationOutputStorageCosOutputStorageArgs']]:
+        """
+        The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cos_output_storage")
+
+    @cos_output_storage.setter
+    def cos_output_storage(self, value: Optional[pulumi.Input['ProcessLiveStreamOperationOutputStorageCosOutputStorageArgs']]):
+        pulumi.set(self, "cos_output_storage", value)
+
+    @property
+    @pulumi.getter(name="s3OutputStorage")
+    def s3_output_storage(self) -> Optional[pulumi.Input['ProcessLiveStreamOperationOutputStorageS3OutputStorageArgs']]:
+        """
+        The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_output_storage")
+
+    @s3_output_storage.setter
+    def s3_output_storage(self, value: Optional[pulumi.Input['ProcessLiveStreamOperationOutputStorageS3OutputStorageArgs']]):
+        pulumi.set(self, "s3_output_storage", value)
+
+
+@pulumi.input_type
+class ProcessLiveStreamOperationOutputStorageCosOutputStorageArgs:
+    def __init__(__self__, *,
+                 bucket: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        :param pulumi.Input[str] region: The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessLiveStreamOperationOutputStorageS3OutputStorageArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to upload files to the AWS S3 object.
+        :param pulumi.Input[str] s3_secret_key: The key required to upload files to the AWS S3 object.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to upload files to the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to upload files to the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessLiveStreamOperationTaskNotifyConfigArgs:
+    def __init__(__self__, *,
+                 cmq_model: Optional[pulumi.Input[str]] = None,
+                 cmq_region: Optional[pulumi.Input[str]] = None,
+                 notify_type: Optional[pulumi.Input[str]] = None,
+                 notify_url: Optional[pulumi.Input[str]] = None,
+                 queue_name: Optional[pulumi.Input[str]] = None,
+                 topic_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cmq_model: CMQ model. There are two types: `Queue` and `Topic`. Currently, only `Queue` is supported.
+        :param pulumi.Input[str] cmq_region: CMQ region, such as `sh` and `bj`.
+        :param pulumi.Input[str] notify_type: The notification type, `CMQ` by default. If this parameter is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`.Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.
+        :param pulumi.Input[str] notify_url: HTTP callback URL, required if `NotifyType` is set to `URL`.
+        :param pulumi.Input[str] queue_name: This parameter is valid when the model is `Queue`, indicating the name of the CMQ queue for receiving event notifications.
+        :param pulumi.Input[str] topic_name: This parameter is valid when the model is `Topic`, indicating the name of the CMQ topic for receiving event notifications.
+        """
+        if cmq_model is not None:
+            pulumi.set(__self__, "cmq_model", cmq_model)
+        if cmq_region is not None:
+            pulumi.set(__self__, "cmq_region", cmq_region)
+        if notify_type is not None:
+            pulumi.set(__self__, "notify_type", notify_type)
+        if notify_url is not None:
+            pulumi.set(__self__, "notify_url", notify_url)
+        if queue_name is not None:
+            pulumi.set(__self__, "queue_name", queue_name)
+        if topic_name is not None:
+            pulumi.set(__self__, "topic_name", topic_name)
+
+    @property
+    @pulumi.getter(name="cmqModel")
+    def cmq_model(self) -> Optional[pulumi.Input[str]]:
+        """
+        CMQ model. There are two types: `Queue` and `Topic`. Currently, only `Queue` is supported.
+        """
+        return pulumi.get(self, "cmq_model")
+
+    @cmq_model.setter
+    def cmq_model(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cmq_model", value)
+
+    @property
+    @pulumi.getter(name="cmqRegion")
+    def cmq_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        CMQ region, such as `sh` and `bj`.
+        """
+        return pulumi.get(self, "cmq_region")
+
+    @cmq_region.setter
+    def cmq_region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cmq_region", value)
+
+    @property
+    @pulumi.getter(name="notifyType")
+    def notify_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The notification type, `CMQ` by default. If this parameter is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`.Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.
+        """
+        return pulumi.get(self, "notify_type")
+
+    @notify_type.setter
+    def notify_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notify_type", value)
+
+    @property
+    @pulumi.getter(name="notifyUrl")
+    def notify_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        HTTP callback URL, required if `NotifyType` is set to `URL`.
+        """
+        return pulumi.get(self, "notify_url")
+
+    @notify_url.setter
+    def notify_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notify_url", value)
+
+    @property
+    @pulumi.getter(name="queueName")
+    def queue_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        This parameter is valid when the model is `Queue`, indicating the name of the CMQ queue for receiving event notifications.
+        """
+        return pulumi.get(self, "queue_name")
+
+    @queue_name.setter
+    def queue_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "queue_name", value)
+
+    @property
+    @pulumi.getter(name="topicName")
+    def topic_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        This parameter is valid when the model is `Topic`, indicating the name of the CMQ topic for receiving event notifications.
+        """
+        return pulumi.get(self, "topic_name")
+
+    @topic_name.setter
+    def topic_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_name", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationAiAnalysisTaskArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 extended_parameter: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] definition: Video content analysis template ID.
+        :param pulumi.Input[str] extended_parameter: An extended parameter, whose value is a stringfied JSON.Note: This parameter is for customers with special requirements. It needs to be customized offline.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if extended_parameter is not None:
+            pulumi.set(__self__, "extended_parameter", extended_parameter)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        Video content analysis template ID.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="extendedParameter")
+    def extended_parameter(self) -> Optional[pulumi.Input[str]]:
+        """
+        An extended parameter, whose value is a stringfied JSON.Note: This parameter is for customers with special requirements. It needs to be customized offline.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "extended_parameter")
+
+    @extended_parameter.setter
+    def extended_parameter(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "extended_parameter", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationAiContentReviewTaskArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] definition: Video content audit template ID.
+        """
+        pulumi.set(__self__, "definition", definition)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        Video content audit template ID.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationAiQualityControlTaskArgs:
+    def __init__(__self__, *,
+                 channel_ext_para: Optional[pulumi.Input[str]] = None,
+                 definition: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] channel_ext_para: The channel extension parameter, which is a serialized JSON string.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] definition: The ID of the quality control template.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        if channel_ext_para is not None:
+            pulumi.set(__self__, "channel_ext_para", channel_ext_para)
+        if definition is not None:
+            pulumi.set(__self__, "definition", definition)
+
+    @property
+    @pulumi.getter(name="channelExtPara")
+    def channel_ext_para(self) -> Optional[pulumi.Input[str]]:
+        """
+        The channel extension parameter, which is a serialized JSON string.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "channel_ext_para")
+
+    @channel_ext_para.setter
+    def channel_ext_para(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "channel_ext_para", value)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> Optional[pulumi.Input[int]]:
+        """
+        The ID of the quality control template.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "definition", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationAiRecognitionTaskArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] definition: Intelligent video recognition template ID.
+        """
+        pulumi.set(__self__, "definition", definition)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        Intelligent video recognition template ID.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationInputInfoArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ProcessMediaOperationInputInfoCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ProcessMediaOperationInputInfoS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ProcessMediaOperationInputInfoUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ProcessMediaOperationInputInfoCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ProcessMediaOperationInputInfoS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationInputInfoUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationInputInfoCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationInputInfoCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationInputInfoS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationInputInfoS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationInputInfoUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationInputInfoUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationInputInfoCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationInputInfoS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationInputInfoUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskArgs:
+    def __init__(__self__, *,
+                 adaptive_dynamic_streaming_task_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetArgs']]]] = None,
+                 animated_graphic_task_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetArgs']]]] = None,
+                 image_sprite_task_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetArgs']]]] = None,
+                 sample_snapshot_task_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetArgs']]]] = None,
+                 snapshot_by_time_offset_task_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetArgs']]]] = None,
+                 transcode_task_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetArgs']]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetArgs']]] adaptive_dynamic_streaming_task_sets: List of adaptive bitrate streaming tasks.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetArgs']]] animated_graphic_task_sets: List of animated image generating tasks.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetArgs']]] image_sprite_task_sets: List of image sprite generating tasks.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetArgs']]] sample_snapshot_task_sets: List of sampled screencapturing tasks.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetArgs']]] snapshot_by_time_offset_task_sets: List of time point screencapturing tasks.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetArgs']]] transcode_task_sets: List of transcoding tasks.
+        """
+        if adaptive_dynamic_streaming_task_sets is not None:
+            pulumi.set(__self__, "adaptive_dynamic_streaming_task_sets", adaptive_dynamic_streaming_task_sets)
+        if animated_graphic_task_sets is not None:
+            pulumi.set(__self__, "animated_graphic_task_sets", animated_graphic_task_sets)
+        if image_sprite_task_sets is not None:
+            pulumi.set(__self__, "image_sprite_task_sets", image_sprite_task_sets)
+        if sample_snapshot_task_sets is not None:
+            pulumi.set(__self__, "sample_snapshot_task_sets", sample_snapshot_task_sets)
+        if snapshot_by_time_offset_task_sets is not None:
+            pulumi.set(__self__, "snapshot_by_time_offset_task_sets", snapshot_by_time_offset_task_sets)
+        if transcode_task_sets is not None:
+            pulumi.set(__self__, "transcode_task_sets", transcode_task_sets)
+
+    @property
+    @pulumi.getter(name="adaptiveDynamicStreamingTaskSets")
+    def adaptive_dynamic_streaming_task_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetArgs']]]]:
+        """
+        List of adaptive bitrate streaming tasks.
+        """
+        return pulumi.get(self, "adaptive_dynamic_streaming_task_sets")
+
+    @adaptive_dynamic_streaming_task_sets.setter
+    def adaptive_dynamic_streaming_task_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetArgs']]]]):
+        pulumi.set(self, "adaptive_dynamic_streaming_task_sets", value)
+
+    @property
+    @pulumi.getter(name="animatedGraphicTaskSets")
+    def animated_graphic_task_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetArgs']]]]:
+        """
+        List of animated image generating tasks.
+        """
+        return pulumi.get(self, "animated_graphic_task_sets")
+
+    @animated_graphic_task_sets.setter
+    def animated_graphic_task_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetArgs']]]]):
+        pulumi.set(self, "animated_graphic_task_sets", value)
+
+    @property
+    @pulumi.getter(name="imageSpriteTaskSets")
+    def image_sprite_task_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetArgs']]]]:
+        """
+        List of image sprite generating tasks.
+        """
+        return pulumi.get(self, "image_sprite_task_sets")
+
+    @image_sprite_task_sets.setter
+    def image_sprite_task_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetArgs']]]]):
+        pulumi.set(self, "image_sprite_task_sets", value)
+
+    @property
+    @pulumi.getter(name="sampleSnapshotTaskSets")
+    def sample_snapshot_task_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetArgs']]]]:
+        """
+        List of sampled screencapturing tasks.
+        """
+        return pulumi.get(self, "sample_snapshot_task_sets")
+
+    @sample_snapshot_task_sets.setter
+    def sample_snapshot_task_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetArgs']]]]):
+        pulumi.set(self, "sample_snapshot_task_sets", value)
+
+    @property
+    @pulumi.getter(name="snapshotByTimeOffsetTaskSets")
+    def snapshot_by_time_offset_task_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetArgs']]]]:
+        """
+        List of time point screencapturing tasks.
+        """
+        return pulumi.get(self, "snapshot_by_time_offset_task_sets")
+
+    @snapshot_by_time_offset_task_sets.setter
+    def snapshot_by_time_offset_task_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetArgs']]]]):
+        pulumi.set(self, "snapshot_by_time_offset_task_sets", value)
+
+    @property
+    @pulumi.getter(name="transcodeTaskSets")
+    def transcode_task_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetArgs']]]]:
+        """
+        List of transcoding tasks.
+        """
+        return pulumi.get(self, "transcode_task_sets")
+
+    @transcode_task_sets.setter
+    def transcode_task_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetArgs']]]]):
+        pulumi.set(self, "transcode_task_sets", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 add_on_subtitles: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleArgs']]]] = None,
+                 output_object_path: Optional[pulumi.Input[str]] = None,
+                 output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageArgs']] = None,
+                 segment_object_name: Optional[pulumi.Input[str]] = None,
+                 sub_stream_object_name: Optional[pulumi.Input[str]] = None,
+                 watermark_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetArgs']]]] = None):
+        """
+        :param pulumi.Input[int] definition: Adaptive bitrate streaming template ID.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleArgs']]] add_on_subtitles: The subtitle file to add.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] output_object_path: The relative or absolute output path of the manifest file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}.{format}`.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageArgs'] output_storage: Target bucket of an output file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] segment_object_name: The relative output path of the segment file after being transcoded to adaptive bitrate streaming (in HLS format only). If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
+        :param pulumi.Input[str] sub_stream_object_name: The relative output path of the substream file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}`.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetArgs']]] watermark_sets: List of up to 10 image or text watermarks.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if add_on_subtitles is not None:
+            pulumi.set(__self__, "add_on_subtitles", add_on_subtitles)
+        if output_object_path is not None:
+            pulumi.set(__self__, "output_object_path", output_object_path)
+        if output_storage is not None:
+            pulumi.set(__self__, "output_storage", output_storage)
+        if segment_object_name is not None:
+            pulumi.set(__self__, "segment_object_name", segment_object_name)
+        if sub_stream_object_name is not None:
+            pulumi.set(__self__, "sub_stream_object_name", sub_stream_object_name)
+        if watermark_sets is not None:
+            pulumi.set(__self__, "watermark_sets", watermark_sets)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        Adaptive bitrate streaming template ID.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="addOnSubtitles")
+    def add_on_subtitles(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleArgs']]]]:
+        """
+        The subtitle file to add.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "add_on_subtitles")
+
+    @add_on_subtitles.setter
+    def add_on_subtitles(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleArgs']]]]):
+        pulumi.set(self, "add_on_subtitles", value)
+
+    @property
+    @pulumi.getter(name="outputObjectPath")
+    def output_object_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        The relative or absolute output path of the manifest file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}.{format}`.
+        """
+        return pulumi.get(self, "output_object_path")
+
+    @output_object_path.setter
+    def output_object_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_object_path", value)
+
+    @property
+    @pulumi.getter(name="outputStorage")
+    def output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageArgs']]:
+        """
+        Target bucket of an output file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "output_storage")
+
+    @output_storage.setter
+    def output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageArgs']]):
+        pulumi.set(self, "output_storage", value)
+
+    @property
+    @pulumi.getter(name="segmentObjectName")
+    def segment_object_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The relative output path of the segment file after being transcoded to adaptive bitrate streaming (in HLS format only). If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
+        """
+        return pulumi.get(self, "segment_object_name")
+
+    @segment_object_name.setter
+    def segment_object_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "segment_object_name", value)
+
+    @property
+    @pulumi.getter(name="subStreamObjectName")
+    def sub_stream_object_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The relative output path of the substream file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}`.
+        """
+        return pulumi.get(self, "sub_stream_object_name")
+
+    @sub_stream_object_name.setter
+    def sub_stream_object_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "sub_stream_object_name", value)
+
+    @property
+    @pulumi.getter(name="watermarkSets")
+    def watermark_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetArgs']]]]:
+        """
+        List of up to 10 image or text watermarks.
+        """
+        return pulumi.get(self, "watermark_sets")
+
+    @watermark_sets.setter
+    def watermark_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetArgs']]]]):
+        pulumi.set(self, "watermark_sets", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleArgs:
+    def __init__(__self__, *,
+                 subtitle: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleArgs']] = None,
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleArgs'] subtitle: The subtitle file.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] type: The mode. Valid values:`subtitle-stream`: Add a subtitle track.`close-caption-708`: Embed CEA-708 subtitles in SEI frames.`close-caption-608`: Embed CEA-608 subtitles in SEI frames.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        if subtitle is not None:
+            pulumi.set(__self__, "subtitle", subtitle)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def subtitle(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleArgs']]:
+        """
+        The subtitle file.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "subtitle")
+
+    @subtitle.setter
+    def subtitle(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleArgs']]):
+        pulumi.set(self, "subtitle", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The mode. Valid values:`subtitle-stream`: Add a subtitle track.`close-caption-708`: Embed CEA-708 subtitles in SEI frames.`close-caption-608`: Embed CEA-608 subtitles in SEI frames.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetAddOnSubtitleSubtitleUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageCosOutputStorageArgs']] = None,
+                 s3_output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageS3OutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageCosOutputStorageArgs'] cos_output_storage: The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageS3OutputStorageArgs'] s3_output_storage: The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_output_storage is not None:
+            pulumi.set(__self__, "cos_output_storage", cos_output_storage)
+        if s3_output_storage is not None:
+            pulumi.set(__self__, "s3_output_storage", s3_output_storage)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosOutputStorage")
+    def cos_output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageCosOutputStorageArgs']]:
+        """
+        The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cos_output_storage")
+
+    @cos_output_storage.setter
+    def cos_output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageCosOutputStorageArgs']]):
+        pulumi.set(self, "cos_output_storage", value)
+
+    @property
+    @pulumi.getter(name="s3OutputStorage")
+    def s3_output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageS3OutputStorageArgs']]:
+        """
+        The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_output_storage")
+
+    @s3_output_storage.setter
+    def s3_output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageS3OutputStorageArgs']]):
+        pulumi.set(self, "s3_output_storage", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageCosOutputStorageArgs:
+    def __init__(__self__, *,
+                 bucket: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        :param pulumi.Input[str] region: The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageS3OutputStorageArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 end_time_offset: Optional[pulumi.Input[float]] = None,
+                 raw_parameter: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterArgs']] = None,
+                 start_time_offset: Optional[pulumi.Input[float]] = None,
+                 svg_content: Optional[pulumi.Input[str]] = None,
+                 text_content: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] definition: ID of a watermarking template.
+        :param pulumi.Input[float] end_time_offset: End time offset of a watermark in seconds.If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame;If this value is greater than 0 (e.g., n), the watermark will exist till second n;If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterArgs'] raw_parameter: Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+        :param pulumi.Input[float] start_time_offset: Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame.If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame;If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame;If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+        :param pulumi.Input[str] svg_content: SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+        :param pulumi.Input[str] text_content: Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if end_time_offset is not None:
+            pulumi.set(__self__, "end_time_offset", end_time_offset)
+        if raw_parameter is not None:
+            pulumi.set(__self__, "raw_parameter", raw_parameter)
+        if start_time_offset is not None:
+            pulumi.set(__self__, "start_time_offset", start_time_offset)
+        if svg_content is not None:
+            pulumi.set(__self__, "svg_content", svg_content)
+        if text_content is not None:
+            pulumi.set(__self__, "text_content", text_content)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        ID of a watermarking template.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="endTimeOffset")
+    def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of a watermark in seconds.If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame;If this value is greater than 0 (e.g., n), the watermark will exist till second n;If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+        """
+        return pulumi.get(self, "end_time_offset")
+
+    @end_time_offset.setter
+    def end_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "end_time_offset", value)
+
+    @property
+    @pulumi.getter(name="rawParameter")
+    def raw_parameter(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterArgs']]:
+        """
+        Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+        """
+        return pulumi.get(self, "raw_parameter")
+
+    @raw_parameter.setter
+    def raw_parameter(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterArgs']]):
+        pulumi.set(self, "raw_parameter", value)
+
+    @property
+    @pulumi.getter(name="startTimeOffset")
+    def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame.If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame;If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame;If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+        """
+        return pulumi.get(self, "start_time_offset")
+
+    @start_time_offset.setter
+    def start_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "start_time_offset", value)
+
+    @property
+    @pulumi.getter(name="svgContent")
+    def svg_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+        """
+        return pulumi.get(self, "svg_content")
+
+    @svg_content.setter
+    def svg_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "svg_content", value)
+
+    @property
+    @pulumi.getter(name="textContent")
+    def text_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+        """
+        return pulumi.get(self, "text_content")
+
+    @text_content.setter
+    def text_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "text_content", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 coordinate_origin: Optional[pulumi.Input[str]] = None,
+                 image_template: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateArgs']] = None,
+                 x_pos: Optional[pulumi.Input[str]] = None,
+                 y_pos: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] type: Watermark type. Valid values:image: image watermark.
+        :param pulumi.Input[str] coordinate_origin: Origin position, which currently can only be:TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateArgs'] image_template: Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+        :param pulumi.Input[str] x_pos: The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        :param pulumi.Input[str] y_pos: The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        pulumi.set(__self__, "type", type)
+        if coordinate_origin is not None:
+            pulumi.set(__self__, "coordinate_origin", coordinate_origin)
+        if image_template is not None:
+            pulumi.set(__self__, "image_template", image_template)
+        if x_pos is not None:
+            pulumi.set(__self__, "x_pos", x_pos)
+        if y_pos is not None:
+            pulumi.set(__self__, "y_pos", y_pos)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Watermark type. Valid values:image: image watermark.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="coordinateOrigin")
+    def coordinate_origin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Origin position, which currently can only be:TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+        """
+        return pulumi.get(self, "coordinate_origin")
+
+    @coordinate_origin.setter
+    def coordinate_origin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "coordinate_origin", value)
+
+    @property
+    @pulumi.getter(name="imageTemplate")
+    def image_template(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateArgs']]:
+        """
+        Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+        """
+        return pulumi.get(self, "image_template")
+
+    @image_template.setter
+    def image_template(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateArgs']]):
+        pulumi.set(self, "image_template", value)
+
+    @property
+    @pulumi.getter(name="xPos")
+    def x_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "x_pos")
+
+    @x_pos.setter
+    def x_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "x_pos", value)
+
+    @property
+    @pulumi.getter(name="yPos")
+    def y_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "y_pos")
+
+    @y_pos.setter
+    def y_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "y_pos", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateArgs:
+    def __init__(__self__, *,
+                 image_content: pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs'],
+                 height: Optional[pulumi.Input[str]] = None,
+                 repeat_type: Optional[pulumi.Input[str]] = None,
+                 width: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs'] image_content: Input content of watermark image. JPEG and PNG images are supported.
+        :param pulumi.Input[str] height: Watermark height. % and px formats are supported:If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+        :param pulumi.Input[str] repeat_type: Repeat type of an animated watermark. Valid values:`once`: no longer appears after watermark playback ends.`repeat_last_frame`: stays on the last frame after watermark playback ends.`repeat` (default): repeats the playback until the video ends.
+        :param pulumi.Input[str] width: Watermark width. % and px formats are supported:If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        pulumi.set(__self__, "image_content", image_content)
+        if height is not None:
+            pulumi.set(__self__, "height", height)
+        if repeat_type is not None:
+            pulumi.set(__self__, "repeat_type", repeat_type)
+        if width is not None:
+            pulumi.set(__self__, "width", width)
+
+    @property
+    @pulumi.getter(name="imageContent")
+    def image_content(self) -> pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs']:
+        """
+        Input content of watermark image. JPEG and PNG images are supported.
+        """
+        return pulumi.get(self, "image_content")
+
+    @image_content.setter
+    def image_content(self, value: pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs']):
+        pulumi.set(self, "image_content", value)
+
+    @property
+    @pulumi.getter
+    def height(self) -> Optional[pulumi.Input[str]]:
+        """
+        Watermark height. % and px formats are supported:If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+        """
+        return pulumi.get(self, "height")
+
+    @height.setter
+    def height(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "height", value)
+
+    @property
+    @pulumi.getter(name="repeatType")
+    def repeat_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Repeat type of an animated watermark. Valid values:`once`: no longer appears after watermark playback ends.`repeat_last_frame`: stays on the last frame after watermark playback ends.`repeat` (default): repeats the playback until the video ends.
+        """
+        return pulumi.get(self, "repeat_type")
+
+    @repeat_type.setter
+    def repeat_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "repeat_type", value)
+
+    @property
+    @pulumi.getter
+    def width(self) -> Optional[pulumi.Input[str]]:
+        """
+        Watermark width. % and px formats are supported:If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        return pulumi.get(self, "width")
+
+    @width.setter
+    def width(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "width", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAdaptiveDynamicStreamingTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 end_time_offset: pulumi.Input[float],
+                 start_time_offset: pulumi.Input[float],
+                 output_object_path: Optional[pulumi.Input[str]] = None,
+                 output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[int] definition: Animated image generating template ID.
+        :param pulumi.Input[float] end_time_offset: End time of an animated image in a video in seconds.
+        :param pulumi.Input[float] start_time_offset: Start time of an animated image in a video in seconds.
+        :param pulumi.Input[str] output_object_path: Output path to a generated animated image file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_animatedGraphic_{definition}.{format}`.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageArgs'] output_storage: Target bucket of a generated animated image file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "definition", definition)
+        pulumi.set(__self__, "end_time_offset", end_time_offset)
+        pulumi.set(__self__, "start_time_offset", start_time_offset)
+        if output_object_path is not None:
+            pulumi.set(__self__, "output_object_path", output_object_path)
+        if output_storage is not None:
+            pulumi.set(__self__, "output_storage", output_storage)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        Animated image generating template ID.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="endTimeOffset")
+    def end_time_offset(self) -> pulumi.Input[float]:
+        """
+        End time of an animated image in a video in seconds.
+        """
+        return pulumi.get(self, "end_time_offset")
+
+    @end_time_offset.setter
+    def end_time_offset(self, value: pulumi.Input[float]):
+        pulumi.set(self, "end_time_offset", value)
+
+    @property
+    @pulumi.getter(name="startTimeOffset")
+    def start_time_offset(self) -> pulumi.Input[float]:
+        """
+        Start time of an animated image in a video in seconds.
+        """
+        return pulumi.get(self, "start_time_offset")
+
+    @start_time_offset.setter
+    def start_time_offset(self, value: pulumi.Input[float]):
+        pulumi.set(self, "start_time_offset", value)
+
+    @property
+    @pulumi.getter(name="outputObjectPath")
+    def output_object_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Output path to a generated animated image file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_animatedGraphic_{definition}.{format}`.
+        """
+        return pulumi.get(self, "output_object_path")
+
+    @output_object_path.setter
+    def output_object_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_object_path", value)
+
+    @property
+    @pulumi.getter(name="outputStorage")
+    def output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageArgs']]:
+        """
+        Target bucket of a generated animated image file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "output_storage")
+
+    @output_storage.setter
+    def output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageArgs']]):
+        pulumi.set(self, "output_storage", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageCosOutputStorageArgs']] = None,
+                 s3_output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageS3OutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageCosOutputStorageArgs'] cos_output_storage: The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageS3OutputStorageArgs'] s3_output_storage: The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_output_storage is not None:
+            pulumi.set(__self__, "cos_output_storage", cos_output_storage)
+        if s3_output_storage is not None:
+            pulumi.set(__self__, "s3_output_storage", s3_output_storage)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosOutputStorage")
+    def cos_output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageCosOutputStorageArgs']]:
+        """
+        The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cos_output_storage")
+
+    @cos_output_storage.setter
+    def cos_output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageCosOutputStorageArgs']]):
+        pulumi.set(self, "cos_output_storage", value)
+
+    @property
+    @pulumi.getter(name="s3OutputStorage")
+    def s3_output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageS3OutputStorageArgs']]:
+        """
+        The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_output_storage")
+
+    @s3_output_storage.setter
+    def s3_output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageS3OutputStorageArgs']]):
+        pulumi.set(self, "s3_output_storage", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageCosOutputStorageArgs:
+    def __init__(__self__, *,
+                 bucket: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        :param pulumi.Input[str] region: The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskAnimatedGraphicTaskSetOutputStorageS3OutputStorageArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 object_number_format: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetObjectNumberFormatArgs']] = None,
+                 output_object_path: Optional[pulumi.Input[str]] = None,
+                 output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageArgs']] = None,
+                 web_vtt_object_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] definition: ID of an image sprite generating template.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetObjectNumberFormatArgs'] object_number_format: Rule of the `{number}` variable in the image sprite output path.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] output_object_path: Output path to a generated image sprite file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_imageSprite_{definition}_{number}.{format}`.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageArgs'] output_storage: Target bucket of a generated image sprite. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] web_vtt_object_name: Output path to the WebVTT file after an image sprite is generated, which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_imageSprite_{definition}.{format}`.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if object_number_format is not None:
+            pulumi.set(__self__, "object_number_format", object_number_format)
+        if output_object_path is not None:
+            pulumi.set(__self__, "output_object_path", output_object_path)
+        if output_storage is not None:
+            pulumi.set(__self__, "output_storage", output_storage)
+        if web_vtt_object_name is not None:
+            pulumi.set(__self__, "web_vtt_object_name", web_vtt_object_name)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        ID of an image sprite generating template.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="objectNumberFormat")
+    def object_number_format(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetObjectNumberFormatArgs']]:
+        """
+        Rule of the `{number}` variable in the image sprite output path.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "object_number_format")
+
+    @object_number_format.setter
+    def object_number_format(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetObjectNumberFormatArgs']]):
+        pulumi.set(self, "object_number_format", value)
+
+    @property
+    @pulumi.getter(name="outputObjectPath")
+    def output_object_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Output path to a generated image sprite file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_imageSprite_{definition}_{number}.{format}`.
+        """
+        return pulumi.get(self, "output_object_path")
+
+    @output_object_path.setter
+    def output_object_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_object_path", value)
+
+    @property
+    @pulumi.getter(name="outputStorage")
+    def output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageArgs']]:
+        """
+        Target bucket of a generated image sprite. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "output_storage")
+
+    @output_storage.setter
+    def output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageArgs']]):
+        pulumi.set(self, "output_storage", value)
+
+    @property
+    @pulumi.getter(name="webVttObjectName")
+    def web_vtt_object_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Output path to the WebVTT file after an image sprite is generated, which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_imageSprite_{definition}.{format}`.
+        """
+        return pulumi.get(self, "web_vtt_object_name")
+
+    @web_vtt_object_name.setter
+    def web_vtt_object_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "web_vtt_object_name", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetObjectNumberFormatArgs:
+    def __init__(__self__, *,
+                 increment: Optional[pulumi.Input[int]] = None,
+                 initial_value: Optional[pulumi.Input[int]] = None,
+                 min_length: Optional[pulumi.Input[int]] = None,
+                 place_holder: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] increment: Increment of the `{number}` variable. Default value: 1.
+        :param pulumi.Input[int] initial_value: Start value of the `{number}` variable. Default value: 0.
+        :param pulumi.Input[int] min_length: Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+        :param pulumi.Input[str] place_holder: Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+        """
+        if increment is not None:
+            pulumi.set(__self__, "increment", increment)
+        if initial_value is not None:
+            pulumi.set(__self__, "initial_value", initial_value)
+        if min_length is not None:
+            pulumi.set(__self__, "min_length", min_length)
+        if place_holder is not None:
+            pulumi.set(__self__, "place_holder", place_holder)
+
+    @property
+    @pulumi.getter
+    def increment(self) -> Optional[pulumi.Input[int]]:
+        """
+        Increment of the `{number}` variable. Default value: 1.
+        """
+        return pulumi.get(self, "increment")
+
+    @increment.setter
+    def increment(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "increment", value)
+
+    @property
+    @pulumi.getter(name="initialValue")
+    def initial_value(self) -> Optional[pulumi.Input[int]]:
+        """
+        Start value of the `{number}` variable. Default value: 0.
+        """
+        return pulumi.get(self, "initial_value")
+
+    @initial_value.setter
+    def initial_value(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "initial_value", value)
+
+    @property
+    @pulumi.getter(name="minLength")
+    def min_length(self) -> Optional[pulumi.Input[int]]:
+        """
+        Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+        """
+        return pulumi.get(self, "min_length")
+
+    @min_length.setter
+    def min_length(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "min_length", value)
+
+    @property
+    @pulumi.getter(name="placeHolder")
+    def place_holder(self) -> Optional[pulumi.Input[str]]:
+        """
+        Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+        """
+        return pulumi.get(self, "place_holder")
+
+    @place_holder.setter
+    def place_holder(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "place_holder", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageCosOutputStorageArgs']] = None,
+                 s3_output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageS3OutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageCosOutputStorageArgs'] cos_output_storage: The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageS3OutputStorageArgs'] s3_output_storage: The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_output_storage is not None:
+            pulumi.set(__self__, "cos_output_storage", cos_output_storage)
+        if s3_output_storage is not None:
+            pulumi.set(__self__, "s3_output_storage", s3_output_storage)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosOutputStorage")
+    def cos_output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageCosOutputStorageArgs']]:
+        """
+        The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cos_output_storage")
+
+    @cos_output_storage.setter
+    def cos_output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageCosOutputStorageArgs']]):
+        pulumi.set(self, "cos_output_storage", value)
+
+    @property
+    @pulumi.getter(name="s3OutputStorage")
+    def s3_output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageS3OutputStorageArgs']]:
+        """
+        The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_output_storage")
+
+    @s3_output_storage.setter
+    def s3_output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageS3OutputStorageArgs']]):
+        pulumi.set(self, "s3_output_storage", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageCosOutputStorageArgs:
+    def __init__(__self__, *,
+                 bucket: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        :param pulumi.Input[str] region: The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetOutputStorageS3OutputStorageArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 object_number_format: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetObjectNumberFormatArgs']] = None,
+                 output_object_path: Optional[pulumi.Input[str]] = None,
+                 output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageArgs']] = None,
+                 watermark_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetArgs']]]] = None):
+        """
+        :param pulumi.Input[int] definition: Sampled screencapturing template ID.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetObjectNumberFormatArgs'] object_number_format: Rule of the `{number}` variable in the sampled screenshot output path.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] output_object_path: Output path to a generated sampled screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_sampleSnapshot_{definition}_{number}.{format}`.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageArgs'] output_storage: Target bucket of a sampled screenshot. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetArgs']]] watermark_sets: List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if object_number_format is not None:
+            pulumi.set(__self__, "object_number_format", object_number_format)
+        if output_object_path is not None:
+            pulumi.set(__self__, "output_object_path", output_object_path)
+        if output_storage is not None:
+            pulumi.set(__self__, "output_storage", output_storage)
+        if watermark_sets is not None:
+            pulumi.set(__self__, "watermark_sets", watermark_sets)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        Sampled screencapturing template ID.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="objectNumberFormat")
+    def object_number_format(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetObjectNumberFormatArgs']]:
+        """
+        Rule of the `{number}` variable in the sampled screenshot output path.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "object_number_format")
+
+    @object_number_format.setter
+    def object_number_format(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetObjectNumberFormatArgs']]):
+        pulumi.set(self, "object_number_format", value)
+
+    @property
+    @pulumi.getter(name="outputObjectPath")
+    def output_object_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Output path to a generated sampled screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_sampleSnapshot_{definition}_{number}.{format}`.
+        """
+        return pulumi.get(self, "output_object_path")
+
+    @output_object_path.setter
+    def output_object_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_object_path", value)
+
+    @property
+    @pulumi.getter(name="outputStorage")
+    def output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageArgs']]:
+        """
+        Target bucket of a sampled screenshot. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "output_storage")
+
+    @output_storage.setter
+    def output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageArgs']]):
+        pulumi.set(self, "output_storage", value)
+
+    @property
+    @pulumi.getter(name="watermarkSets")
+    def watermark_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetArgs']]]]:
+        """
+        List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "watermark_sets")
+
+    @watermark_sets.setter
+    def watermark_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetArgs']]]]):
+        pulumi.set(self, "watermark_sets", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetObjectNumberFormatArgs:
+    def __init__(__self__, *,
+                 increment: Optional[pulumi.Input[int]] = None,
+                 initial_value: Optional[pulumi.Input[int]] = None,
+                 min_length: Optional[pulumi.Input[int]] = None,
+                 place_holder: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] increment: Increment of the `{number}` variable. Default value: 1.
+        :param pulumi.Input[int] initial_value: Start value of the `{number}` variable. Default value: 0.
+        :param pulumi.Input[int] min_length: Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+        :param pulumi.Input[str] place_holder: Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+        """
+        if increment is not None:
+            pulumi.set(__self__, "increment", increment)
+        if initial_value is not None:
+            pulumi.set(__self__, "initial_value", initial_value)
+        if min_length is not None:
+            pulumi.set(__self__, "min_length", min_length)
+        if place_holder is not None:
+            pulumi.set(__self__, "place_holder", place_holder)
+
+    @property
+    @pulumi.getter
+    def increment(self) -> Optional[pulumi.Input[int]]:
+        """
+        Increment of the `{number}` variable. Default value: 1.
+        """
+        return pulumi.get(self, "increment")
+
+    @increment.setter
+    def increment(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "increment", value)
+
+    @property
+    @pulumi.getter(name="initialValue")
+    def initial_value(self) -> Optional[pulumi.Input[int]]:
+        """
+        Start value of the `{number}` variable. Default value: 0.
+        """
+        return pulumi.get(self, "initial_value")
+
+    @initial_value.setter
+    def initial_value(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "initial_value", value)
+
+    @property
+    @pulumi.getter(name="minLength")
+    def min_length(self) -> Optional[pulumi.Input[int]]:
+        """
+        Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+        """
+        return pulumi.get(self, "min_length")
+
+    @min_length.setter
+    def min_length(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "min_length", value)
+
+    @property
+    @pulumi.getter(name="placeHolder")
+    def place_holder(self) -> Optional[pulumi.Input[str]]:
+        """
+        Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+        """
+        return pulumi.get(self, "place_holder")
+
+    @place_holder.setter
+    def place_holder(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "place_holder", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageCosOutputStorageArgs']] = None,
+                 s3_output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageS3OutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageCosOutputStorageArgs'] cos_output_storage: The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageS3OutputStorageArgs'] s3_output_storage: The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_output_storage is not None:
+            pulumi.set(__self__, "cos_output_storage", cos_output_storage)
+        if s3_output_storage is not None:
+            pulumi.set(__self__, "s3_output_storage", s3_output_storage)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosOutputStorage")
+    def cos_output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageCosOutputStorageArgs']]:
+        """
+        The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cos_output_storage")
+
+    @cos_output_storage.setter
+    def cos_output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageCosOutputStorageArgs']]):
+        pulumi.set(self, "cos_output_storage", value)
+
+    @property
+    @pulumi.getter(name="s3OutputStorage")
+    def s3_output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageS3OutputStorageArgs']]:
+        """
+        The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_output_storage")
+
+    @s3_output_storage.setter
+    def s3_output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageS3OutputStorageArgs']]):
+        pulumi.set(self, "s3_output_storage", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageCosOutputStorageArgs:
+    def __init__(__self__, *,
+                 bucket: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        :param pulumi.Input[str] region: The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetOutputStorageS3OutputStorageArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 end_time_offset: Optional[pulumi.Input[float]] = None,
+                 raw_parameter: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterArgs']] = None,
+                 start_time_offset: Optional[pulumi.Input[float]] = None,
+                 svg_content: Optional[pulumi.Input[str]] = None,
+                 text_content: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] definition: ID of a watermarking template.
+        :param pulumi.Input[float] end_time_offset: End time offset of a watermark in seconds.If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame;If this value is greater than 0 (e.g., n), the watermark will exist till second n;If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterArgs'] raw_parameter: Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+        :param pulumi.Input[float] start_time_offset: Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame.If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame;If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame;If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+        :param pulumi.Input[str] svg_content: SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+        :param pulumi.Input[str] text_content: Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if end_time_offset is not None:
+            pulumi.set(__self__, "end_time_offset", end_time_offset)
+        if raw_parameter is not None:
+            pulumi.set(__self__, "raw_parameter", raw_parameter)
+        if start_time_offset is not None:
+            pulumi.set(__self__, "start_time_offset", start_time_offset)
+        if svg_content is not None:
+            pulumi.set(__self__, "svg_content", svg_content)
+        if text_content is not None:
+            pulumi.set(__self__, "text_content", text_content)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        ID of a watermarking template.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="endTimeOffset")
+    def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of a watermark in seconds.If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame;If this value is greater than 0 (e.g., n), the watermark will exist till second n;If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+        """
+        return pulumi.get(self, "end_time_offset")
+
+    @end_time_offset.setter
+    def end_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "end_time_offset", value)
+
+    @property
+    @pulumi.getter(name="rawParameter")
+    def raw_parameter(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterArgs']]:
+        """
+        Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+        """
+        return pulumi.get(self, "raw_parameter")
+
+    @raw_parameter.setter
+    def raw_parameter(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterArgs']]):
+        pulumi.set(self, "raw_parameter", value)
+
+    @property
+    @pulumi.getter(name="startTimeOffset")
+    def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame.If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame;If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame;If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+        """
+        return pulumi.get(self, "start_time_offset")
+
+    @start_time_offset.setter
+    def start_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "start_time_offset", value)
+
+    @property
+    @pulumi.getter(name="svgContent")
+    def svg_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+        """
+        return pulumi.get(self, "svg_content")
+
+    @svg_content.setter
+    def svg_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "svg_content", value)
+
+    @property
+    @pulumi.getter(name="textContent")
+    def text_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+        """
+        return pulumi.get(self, "text_content")
+
+    @text_content.setter
+    def text_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "text_content", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 coordinate_origin: Optional[pulumi.Input[str]] = None,
+                 image_template: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateArgs']] = None,
+                 x_pos: Optional[pulumi.Input[str]] = None,
+                 y_pos: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] type: Watermark type. Valid values:image: image watermark.
+        :param pulumi.Input[str] coordinate_origin: Origin position, which currently can only be:TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateArgs'] image_template: Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+        :param pulumi.Input[str] x_pos: The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        :param pulumi.Input[str] y_pos: The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        pulumi.set(__self__, "type", type)
+        if coordinate_origin is not None:
+            pulumi.set(__self__, "coordinate_origin", coordinate_origin)
+        if image_template is not None:
+            pulumi.set(__self__, "image_template", image_template)
+        if x_pos is not None:
+            pulumi.set(__self__, "x_pos", x_pos)
+        if y_pos is not None:
+            pulumi.set(__self__, "y_pos", y_pos)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Watermark type. Valid values:image: image watermark.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="coordinateOrigin")
+    def coordinate_origin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Origin position, which currently can only be:TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+        """
+        return pulumi.get(self, "coordinate_origin")
+
+    @coordinate_origin.setter
+    def coordinate_origin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "coordinate_origin", value)
+
+    @property
+    @pulumi.getter(name="imageTemplate")
+    def image_template(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateArgs']]:
+        """
+        Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+        """
+        return pulumi.get(self, "image_template")
+
+    @image_template.setter
+    def image_template(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateArgs']]):
+        pulumi.set(self, "image_template", value)
+
+    @property
+    @pulumi.getter(name="xPos")
+    def x_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "x_pos")
+
+    @x_pos.setter
+    def x_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "x_pos", value)
+
+    @property
+    @pulumi.getter(name="yPos")
+    def y_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "y_pos")
+
+    @y_pos.setter
+    def y_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "y_pos", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateArgs:
+    def __init__(__self__, *,
+                 image_content: pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs'],
+                 height: Optional[pulumi.Input[str]] = None,
+                 repeat_type: Optional[pulumi.Input[str]] = None,
+                 width: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs'] image_content: Input content of watermark image. JPEG and PNG images are supported.
+        :param pulumi.Input[str] height: Watermark height. % and px formats are supported:If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+        :param pulumi.Input[str] repeat_type: Repeat type of an animated watermark. Valid values:`once`: no longer appears after watermark playback ends.`repeat_last_frame`: stays on the last frame after watermark playback ends.`repeat` (default): repeats the playback until the video ends.
+        :param pulumi.Input[str] width: Watermark width. % and px formats are supported:If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        pulumi.set(__self__, "image_content", image_content)
+        if height is not None:
+            pulumi.set(__self__, "height", height)
+        if repeat_type is not None:
+            pulumi.set(__self__, "repeat_type", repeat_type)
+        if width is not None:
+            pulumi.set(__self__, "width", width)
+
+    @property
+    @pulumi.getter(name="imageContent")
+    def image_content(self) -> pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs']:
+        """
+        Input content of watermark image. JPEG and PNG images are supported.
+        """
+        return pulumi.get(self, "image_content")
+
+    @image_content.setter
+    def image_content(self, value: pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs']):
+        pulumi.set(self, "image_content", value)
+
+    @property
+    @pulumi.getter
+    def height(self) -> Optional[pulumi.Input[str]]:
+        """
+        Watermark height. % and px formats are supported:If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+        """
+        return pulumi.get(self, "height")
+
+    @height.setter
+    def height(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "height", value)
+
+    @property
+    @pulumi.getter(name="repeatType")
+    def repeat_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Repeat type of an animated watermark. Valid values:`once`: no longer appears after watermark playback ends.`repeat_last_frame`: stays on the last frame after watermark playback ends.`repeat` (default): repeats the playback until the video ends.
+        """
+        return pulumi.get(self, "repeat_type")
+
+    @repeat_type.setter
+    def repeat_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "repeat_type", value)
+
+    @property
+    @pulumi.getter
+    def width(self) -> Optional[pulumi.Input[str]]:
+        """
+        Watermark width. % and px formats are supported:If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        return pulumi.get(self, "width")
+
+    @width.setter
+    def width(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "width", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSampleSnapshotTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 ext_time_offset_sets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 object_number_format: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetObjectNumberFormatArgs']] = None,
+                 output_object_path: Optional[pulumi.Input[str]] = None,
+                 output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageArgs']] = None,
+                 time_offset_sets: Optional[pulumi.Input[Sequence[pulumi.Input[float]]]] = None,
+                 watermark_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetArgs']]]] = None):
+        """
+        :param pulumi.Input[int] definition: ID of a time point screencapturing template.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ext_time_offset_sets: List of screenshot time points in the format of `s` or `%`:If the string ends in `s`, it means that the time point is in seconds; for example, `3.5s` means that the time point is the 3.5th second;If the string ends in `%`, it means that the time point is the specified percentage of the video duration; for example, `10%` means that the time point is 10% of the video duration.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetObjectNumberFormatArgs'] object_number_format: Rule of the `{number}` variable in the time point screenshot output path.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] output_object_path: Output path to a generated time point screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}`.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageArgs'] output_storage: Target bucket of a generated time point screenshot file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input[float]]] time_offset_sets: List of time points of screenshots in &lt;font color=red&gt;seconds&lt;/font&gt;.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetArgs']]] watermark_sets: List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if ext_time_offset_sets is not None:
+            pulumi.set(__self__, "ext_time_offset_sets", ext_time_offset_sets)
+        if object_number_format is not None:
+            pulumi.set(__self__, "object_number_format", object_number_format)
+        if output_object_path is not None:
+            pulumi.set(__self__, "output_object_path", output_object_path)
+        if output_storage is not None:
+            pulumi.set(__self__, "output_storage", output_storage)
+        if time_offset_sets is not None:
+            pulumi.set(__self__, "time_offset_sets", time_offset_sets)
+        if watermark_sets is not None:
+            pulumi.set(__self__, "watermark_sets", watermark_sets)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        ID of a time point screencapturing template.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="extTimeOffsetSets")
+    def ext_time_offset_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of screenshot time points in the format of `s` or `%`:If the string ends in `s`, it means that the time point is in seconds; for example, `3.5s` means that the time point is the 3.5th second;If the string ends in `%`, it means that the time point is the specified percentage of the video duration; for example, `10%` means that the time point is 10% of the video duration.
+        """
+        return pulumi.get(self, "ext_time_offset_sets")
+
+    @ext_time_offset_sets.setter
+    def ext_time_offset_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "ext_time_offset_sets", value)
+
+    @property
+    @pulumi.getter(name="objectNumberFormat")
+    def object_number_format(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetObjectNumberFormatArgs']]:
+        """
+        Rule of the `{number}` variable in the time point screenshot output path.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "object_number_format")
+
+    @object_number_format.setter
+    def object_number_format(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetObjectNumberFormatArgs']]):
+        pulumi.set(self, "object_number_format", value)
+
+    @property
+    @pulumi.getter(name="outputObjectPath")
+    def output_object_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Output path to a generated time point screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}`.
+        """
+        return pulumi.get(self, "output_object_path")
+
+    @output_object_path.setter
+    def output_object_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_object_path", value)
+
+    @property
+    @pulumi.getter(name="outputStorage")
+    def output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageArgs']]:
+        """
+        Target bucket of a generated time point screenshot file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "output_storage")
+
+    @output_storage.setter
+    def output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageArgs']]):
+        pulumi.set(self, "output_storage", value)
+
+    @property
+    @pulumi.getter(name="timeOffsetSets")
+    def time_offset_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[float]]]]:
+        """
+        List of time points of screenshots in &lt;font color=red&gt;seconds&lt;/font&gt;.
+        """
+        return pulumi.get(self, "time_offset_sets")
+
+    @time_offset_sets.setter
+    def time_offset_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[float]]]]):
+        pulumi.set(self, "time_offset_sets", value)
+
+    @property
+    @pulumi.getter(name="watermarkSets")
+    def watermark_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetArgs']]]]:
+        """
+        List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "watermark_sets")
+
+    @watermark_sets.setter
+    def watermark_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetArgs']]]]):
+        pulumi.set(self, "watermark_sets", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetObjectNumberFormatArgs:
+    def __init__(__self__, *,
+                 increment: Optional[pulumi.Input[int]] = None,
+                 initial_value: Optional[pulumi.Input[int]] = None,
+                 min_length: Optional[pulumi.Input[int]] = None,
+                 place_holder: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] increment: Increment of the `{number}` variable. Default value: 1.
+        :param pulumi.Input[int] initial_value: Start value of the `{number}` variable. Default value: 0.
+        :param pulumi.Input[int] min_length: Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+        :param pulumi.Input[str] place_holder: Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+        """
+        if increment is not None:
+            pulumi.set(__self__, "increment", increment)
+        if initial_value is not None:
+            pulumi.set(__self__, "initial_value", initial_value)
+        if min_length is not None:
+            pulumi.set(__self__, "min_length", min_length)
+        if place_holder is not None:
+            pulumi.set(__self__, "place_holder", place_holder)
+
+    @property
+    @pulumi.getter
+    def increment(self) -> Optional[pulumi.Input[int]]:
+        """
+        Increment of the `{number}` variable. Default value: 1.
+        """
+        return pulumi.get(self, "increment")
+
+    @increment.setter
+    def increment(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "increment", value)
+
+    @property
+    @pulumi.getter(name="initialValue")
+    def initial_value(self) -> Optional[pulumi.Input[int]]:
+        """
+        Start value of the `{number}` variable. Default value: 0.
+        """
+        return pulumi.get(self, "initial_value")
+
+    @initial_value.setter
+    def initial_value(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "initial_value", value)
+
+    @property
+    @pulumi.getter(name="minLength")
+    def min_length(self) -> Optional[pulumi.Input[int]]:
+        """
+        Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+        """
+        return pulumi.get(self, "min_length")
+
+    @min_length.setter
+    def min_length(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "min_length", value)
+
+    @property
+    @pulumi.getter(name="placeHolder")
+    def place_holder(self) -> Optional[pulumi.Input[str]]:
+        """
+        Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+        """
+        return pulumi.get(self, "place_holder")
+
+    @place_holder.setter
+    def place_holder(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "place_holder", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageCosOutputStorageArgs']] = None,
+                 s3_output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageS3OutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageCosOutputStorageArgs'] cos_output_storage: The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageS3OutputStorageArgs'] s3_output_storage: The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_output_storage is not None:
+            pulumi.set(__self__, "cos_output_storage", cos_output_storage)
+        if s3_output_storage is not None:
+            pulumi.set(__self__, "s3_output_storage", s3_output_storage)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosOutputStorage")
+    def cos_output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageCosOutputStorageArgs']]:
+        """
+        The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cos_output_storage")
+
+    @cos_output_storage.setter
+    def cos_output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageCosOutputStorageArgs']]):
+        pulumi.set(self, "cos_output_storage", value)
+
+    @property
+    @pulumi.getter(name="s3OutputStorage")
+    def s3_output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageS3OutputStorageArgs']]:
+        """
+        The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_output_storage")
+
+    @s3_output_storage.setter
+    def s3_output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageS3OutputStorageArgs']]):
+        pulumi.set(self, "s3_output_storage", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageCosOutputStorageArgs:
+    def __init__(__self__, *,
+                 bucket: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        :param pulumi.Input[str] region: The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageS3OutputStorageArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 end_time_offset: Optional[pulumi.Input[float]] = None,
+                 raw_parameter: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterArgs']] = None,
+                 start_time_offset: Optional[pulumi.Input[float]] = None,
+                 svg_content: Optional[pulumi.Input[str]] = None,
+                 text_content: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] definition: ID of a watermarking template.
+        :param pulumi.Input[float] end_time_offset: End time offset of a watermark in seconds.If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame;If this value is greater than 0 (e.g., n), the watermark will exist till second n;If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterArgs'] raw_parameter: Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+        :param pulumi.Input[float] start_time_offset: Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame.If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame;If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame;If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+        :param pulumi.Input[str] svg_content: SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+        :param pulumi.Input[str] text_content: Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if end_time_offset is not None:
+            pulumi.set(__self__, "end_time_offset", end_time_offset)
+        if raw_parameter is not None:
+            pulumi.set(__self__, "raw_parameter", raw_parameter)
+        if start_time_offset is not None:
+            pulumi.set(__self__, "start_time_offset", start_time_offset)
+        if svg_content is not None:
+            pulumi.set(__self__, "svg_content", svg_content)
+        if text_content is not None:
+            pulumi.set(__self__, "text_content", text_content)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        ID of a watermarking template.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="endTimeOffset")
+    def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of a watermark in seconds.If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame;If this value is greater than 0 (e.g., n), the watermark will exist till second n;If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+        """
+        return pulumi.get(self, "end_time_offset")
+
+    @end_time_offset.setter
+    def end_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "end_time_offset", value)
+
+    @property
+    @pulumi.getter(name="rawParameter")
+    def raw_parameter(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterArgs']]:
+        """
+        Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+        """
+        return pulumi.get(self, "raw_parameter")
+
+    @raw_parameter.setter
+    def raw_parameter(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterArgs']]):
+        pulumi.set(self, "raw_parameter", value)
+
+    @property
+    @pulumi.getter(name="startTimeOffset")
+    def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame.If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame;If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame;If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+        """
+        return pulumi.get(self, "start_time_offset")
+
+    @start_time_offset.setter
+    def start_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "start_time_offset", value)
+
+    @property
+    @pulumi.getter(name="svgContent")
+    def svg_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+        """
+        return pulumi.get(self, "svg_content")
+
+    @svg_content.setter
+    def svg_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "svg_content", value)
+
+    @property
+    @pulumi.getter(name="textContent")
+    def text_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+        """
+        return pulumi.get(self, "text_content")
+
+    @text_content.setter
+    def text_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "text_content", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 coordinate_origin: Optional[pulumi.Input[str]] = None,
+                 image_template: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateArgs']] = None,
+                 x_pos: Optional[pulumi.Input[str]] = None,
+                 y_pos: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] type: Watermark type. Valid values:image: image watermark.
+        :param pulumi.Input[str] coordinate_origin: Origin position, which currently can only be:TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateArgs'] image_template: Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+        :param pulumi.Input[str] x_pos: The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        :param pulumi.Input[str] y_pos: The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        pulumi.set(__self__, "type", type)
+        if coordinate_origin is not None:
+            pulumi.set(__self__, "coordinate_origin", coordinate_origin)
+        if image_template is not None:
+            pulumi.set(__self__, "image_template", image_template)
+        if x_pos is not None:
+            pulumi.set(__self__, "x_pos", x_pos)
+        if y_pos is not None:
+            pulumi.set(__self__, "y_pos", y_pos)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Watermark type. Valid values:image: image watermark.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="coordinateOrigin")
+    def coordinate_origin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Origin position, which currently can only be:TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+        """
+        return pulumi.get(self, "coordinate_origin")
+
+    @coordinate_origin.setter
+    def coordinate_origin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "coordinate_origin", value)
+
+    @property
+    @pulumi.getter(name="imageTemplate")
+    def image_template(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateArgs']]:
+        """
+        Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+        """
+        return pulumi.get(self, "image_template")
+
+    @image_template.setter
+    def image_template(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateArgs']]):
+        pulumi.set(self, "image_template", value)
+
+    @property
+    @pulumi.getter(name="xPos")
+    def x_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "x_pos")
+
+    @x_pos.setter
+    def x_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "x_pos", value)
+
+    @property
+    @pulumi.getter(name="yPos")
+    def y_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "y_pos")
+
+    @y_pos.setter
+    def y_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "y_pos", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateArgs:
+    def __init__(__self__, *,
+                 image_content: pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs'],
+                 height: Optional[pulumi.Input[str]] = None,
+                 repeat_type: Optional[pulumi.Input[str]] = None,
+                 width: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs'] image_content: Input content of watermark image. JPEG and PNG images are supported.
+        :param pulumi.Input[str] height: Watermark height. % and px formats are supported:If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+        :param pulumi.Input[str] repeat_type: Repeat type of an animated watermark. Valid values:`once`: no longer appears after watermark playback ends.`repeat_last_frame`: stays on the last frame after watermark playback ends.`repeat` (default): repeats the playback until the video ends.
+        :param pulumi.Input[str] width: Watermark width. % and px formats are supported:If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        pulumi.set(__self__, "image_content", image_content)
+        if height is not None:
+            pulumi.set(__self__, "height", height)
+        if repeat_type is not None:
+            pulumi.set(__self__, "repeat_type", repeat_type)
+        if width is not None:
+            pulumi.set(__self__, "width", width)
+
+    @property
+    @pulumi.getter(name="imageContent")
+    def image_content(self) -> pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs']:
+        """
+        Input content of watermark image. JPEG and PNG images are supported.
+        """
+        return pulumi.get(self, "image_content")
+
+    @image_content.setter
+    def image_content(self, value: pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs']):
+        pulumi.set(self, "image_content", value)
+
+    @property
+    @pulumi.getter
+    def height(self) -> Optional[pulumi.Input[str]]:
+        """
+        Watermark height. % and px formats are supported:If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+        """
+        return pulumi.get(self, "height")
+
+    @height.setter
+    def height(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "height", value)
+
+    @property
+    @pulumi.getter(name="repeatType")
+    def repeat_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Repeat type of an animated watermark. Valid values:`once`: no longer appears after watermark playback ends.`repeat_last_frame`: stays on the last frame after watermark playback ends.`repeat` (default): repeats the playback until the video ends.
+        """
+        return pulumi.get(self, "repeat_type")
+
+    @repeat_type.setter
+    def repeat_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "repeat_type", value)
+
+    @property
+    @pulumi.getter
+    def width(self) -> Optional[pulumi.Input[str]]:
+        """
+        Watermark width. % and px formats are supported:If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        return pulumi.get(self, "width")
+
+    @width.setter
+    def width(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "width", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskSnapshotByTimeOffsetTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 end_time_offset: Optional[pulumi.Input[float]] = None,
+                 head_tail_parameter: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterArgs']] = None,
+                 mosaic_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetMosaicSetArgs']]]] = None,
+                 object_number_format: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetObjectNumberFormatArgs']] = None,
+                 output_object_path: Optional[pulumi.Input[str]] = None,
+                 output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageArgs']] = None,
+                 override_parameter: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterArgs']] = None,
+                 raw_parameter: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterArgs']] = None,
+                 segment_object_name: Optional[pulumi.Input[str]] = None,
+                 start_time_offset: Optional[pulumi.Input[float]] = None,
+                 watermark_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetArgs']]]] = None):
+        """
+        :param pulumi.Input[int] definition: ID of a video transcoding template.
+        :param pulumi.Input[float] end_time_offset: End time offset of a transcoded video, in seconds.If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video.If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video.If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterArgs'] head_tail_parameter: Opening and closing credits parametersNote: this field may return `null`, indicating that no valid value was found.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetMosaicSetArgs']]] mosaic_sets: List of blurs. Up to 10 ones can be supported.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetObjectNumberFormatArgs'] object_number_format: Rule of the `{number}` variable in the output path after transcoding.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] output_object_path: Path to a primary output file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}.{format}`.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageArgs'] output_storage: Target bucket of an output file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterArgs'] override_parameter: Video transcoding custom parameter, which is valid when `Definition` is not 0.When any parameters in this structure are entered, they will be used to override corresponding parameters in templates.This parameter is used in highly customized scenarios. We recommend you only use `Definition` to specify the transcoding parameter.Note: this field may return `null`, indicating that no valid value was found.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterArgs'] raw_parameter: Custom video transcoding parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the transcoding parameter preferably.
+        :param pulumi.Input[str] segment_object_name: Path to an output file part (the path to ts during transcoding to HLS), which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}_{number}.{format}`.
+        :param pulumi.Input[float] start_time_offset: Start time offset of a transcoded video, in seconds.If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video.If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetArgs']]] watermark_sets: List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if end_time_offset is not None:
+            pulumi.set(__self__, "end_time_offset", end_time_offset)
+        if head_tail_parameter is not None:
+            pulumi.set(__self__, "head_tail_parameter", head_tail_parameter)
+        if mosaic_sets is not None:
+            pulumi.set(__self__, "mosaic_sets", mosaic_sets)
+        if object_number_format is not None:
+            pulumi.set(__self__, "object_number_format", object_number_format)
+        if output_object_path is not None:
+            pulumi.set(__self__, "output_object_path", output_object_path)
+        if output_storage is not None:
+            pulumi.set(__self__, "output_storage", output_storage)
+        if override_parameter is not None:
+            pulumi.set(__self__, "override_parameter", override_parameter)
+        if raw_parameter is not None:
+            pulumi.set(__self__, "raw_parameter", raw_parameter)
+        if segment_object_name is not None:
+            pulumi.set(__self__, "segment_object_name", segment_object_name)
+        if start_time_offset is not None:
+            pulumi.set(__self__, "start_time_offset", start_time_offset)
+        if watermark_sets is not None:
+            pulumi.set(__self__, "watermark_sets", watermark_sets)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        ID of a video transcoding template.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="endTimeOffset")
+    def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of a transcoded video, in seconds.If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video.If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video.If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.
+        """
+        return pulumi.get(self, "end_time_offset")
+
+    @end_time_offset.setter
+    def end_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "end_time_offset", value)
+
+    @property
+    @pulumi.getter(name="headTailParameter")
+    def head_tail_parameter(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterArgs']]:
+        """
+        Opening and closing credits parametersNote: this field may return `null`, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "head_tail_parameter")
+
+    @head_tail_parameter.setter
+    def head_tail_parameter(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterArgs']]):
+        pulumi.set(self, "head_tail_parameter", value)
+
+    @property
+    @pulumi.getter(name="mosaicSets")
+    def mosaic_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetMosaicSetArgs']]]]:
+        """
+        List of blurs. Up to 10 ones can be supported.
+        """
+        return pulumi.get(self, "mosaic_sets")
+
+    @mosaic_sets.setter
+    def mosaic_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetMosaicSetArgs']]]]):
+        pulumi.set(self, "mosaic_sets", value)
+
+    @property
+    @pulumi.getter(name="objectNumberFormat")
+    def object_number_format(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetObjectNumberFormatArgs']]:
+        """
+        Rule of the `{number}` variable in the output path after transcoding.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "object_number_format")
+
+    @object_number_format.setter
+    def object_number_format(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetObjectNumberFormatArgs']]):
+        pulumi.set(self, "object_number_format", value)
+
+    @property
+    @pulumi.getter(name="outputObjectPath")
+    def output_object_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Path to a primary output file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}.{format}`.
+        """
+        return pulumi.get(self, "output_object_path")
+
+    @output_object_path.setter
+    def output_object_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_object_path", value)
+
+    @property
+    @pulumi.getter(name="outputStorage")
+    def output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageArgs']]:
+        """
+        Target bucket of an output file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "output_storage")
+
+    @output_storage.setter
+    def output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageArgs']]):
+        pulumi.set(self, "output_storage", value)
+
+    @property
+    @pulumi.getter(name="overrideParameter")
+    def override_parameter(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterArgs']]:
+        """
+        Video transcoding custom parameter, which is valid when `Definition` is not 0.When any parameters in this structure are entered, they will be used to override corresponding parameters in templates.This parameter is used in highly customized scenarios. We recommend you only use `Definition` to specify the transcoding parameter.Note: this field may return `null`, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "override_parameter")
+
+    @override_parameter.setter
+    def override_parameter(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterArgs']]):
+        pulumi.set(self, "override_parameter", value)
+
+    @property
+    @pulumi.getter(name="rawParameter")
+    def raw_parameter(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterArgs']]:
+        """
+        Custom video transcoding parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the transcoding parameter preferably.
+        """
+        return pulumi.get(self, "raw_parameter")
+
+    @raw_parameter.setter
+    def raw_parameter(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterArgs']]):
+        pulumi.set(self, "raw_parameter", value)
+
+    @property
+    @pulumi.getter(name="segmentObjectName")
+    def segment_object_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Path to an output file part (the path to ts during transcoding to HLS), which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}_{number}.{format}`.
+        """
+        return pulumi.get(self, "segment_object_name")
+
+    @segment_object_name.setter
+    def segment_object_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "segment_object_name", value)
+
+    @property
+    @pulumi.getter(name="startTimeOffset")
+    def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of a transcoded video, in seconds.If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video.If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.
+        """
+        return pulumi.get(self, "start_time_offset")
+
+    @start_time_offset.setter
+    def start_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "start_time_offset", value)
+
+    @property
+    @pulumi.getter(name="watermarkSets")
+    def watermark_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetArgs']]]]:
+        """
+        List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "watermark_sets")
+
+    @watermark_sets.setter
+    def watermark_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetArgs']]]]):
+        pulumi.set(self, "watermark_sets", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterArgs:
+    def __init__(__self__, *,
+                 head_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetArgs']]]] = None,
+                 tail_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetArgs']]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetArgs']]] head_sets: Opening credits list.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetArgs']]] tail_sets: Closing credits list.
+        """
+        if head_sets is not None:
+            pulumi.set(__self__, "head_sets", head_sets)
+        if tail_sets is not None:
+            pulumi.set(__self__, "tail_sets", tail_sets)
+
+    @property
+    @pulumi.getter(name="headSets")
+    def head_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetArgs']]]]:
+        """
+        Opening credits list.
+        """
+        return pulumi.get(self, "head_sets")
+
+    @head_sets.setter
+    def head_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetArgs']]]]):
+        pulumi.set(self, "head_sets", value)
+
+    @property
+    @pulumi.getter(name="tailSets")
+    def tail_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetArgs']]]]:
+        """
+        Closing credits list.
+        """
+        return pulumi.get(self, "tail_sets")
+
+    @tail_sets.setter
+    def tail_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetArgs']]]]):
+        pulumi.set(self, "tail_sets", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterHeadSetUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetHeadTailParameterTailSetUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetMosaicSetArgs:
+    def __init__(__self__, *,
+                 coordinate_origin: Optional[pulumi.Input[str]] = None,
+                 end_time_offset: Optional[pulumi.Input[float]] = None,
+                 height: Optional[pulumi.Input[str]] = None,
+                 start_time_offset: Optional[pulumi.Input[float]] = None,
+                 width: Optional[pulumi.Input[str]] = None,
+                 x_pos: Optional[pulumi.Input[str]] = None,
+                 y_pos: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] coordinate_origin: Origin position, which currently can only be:TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text.Default value: TopLeft.
+        :param pulumi.Input[float] end_time_offset: End time offset of blur in seconds.If this parameter is left empty or 0 is entered, the blur will exist till the last video frame;If this value is greater than 0 (e.g., n), the blur will exist till second n;If this value is smaller than 0 (e.g., -n), the blur will exist till second n before the last video frame.
+        :param pulumi.Input[str] height: Blur height. % and px formats are supported:If the string ends in %, the `Height` of the blur will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;If the string ends in px, the `Height` of the blur will be in px; for example, `100px` means that `Height` is 100 px.Default value: 10%.
+        :param pulumi.Input[float] start_time_offset: Start time offset of blur in seconds. If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame.If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame;If this value is greater than 0 (e.g., n), the blur will appear at second n after the first video frame;If this value is smaller than 0 (e.g., -n), the blur will appear at second n before the last video frame.
+        :param pulumi.Input[str] width: Blur width. % and px formats are supported:If the string ends in %, the `Width` of the blur will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;If the string ends in px, the `Width` of the blur will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        :param pulumi.Input[str] x_pos: The horizontal position of the origin of the blur relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `XPos` of the blur will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;If the string ends in px, the `XPos` of the blur will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        :param pulumi.Input[str] y_pos: Vertical position of the origin of blur relative to the origin of coordinates of video. % and px formats are supported:If the string ends in %, the `YPos` of the blur will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;If the string ends in px, the `YPos` of the blur will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        if coordinate_origin is not None:
+            pulumi.set(__self__, "coordinate_origin", coordinate_origin)
+        if end_time_offset is not None:
+            pulumi.set(__self__, "end_time_offset", end_time_offset)
+        if height is not None:
+            pulumi.set(__self__, "height", height)
+        if start_time_offset is not None:
+            pulumi.set(__self__, "start_time_offset", start_time_offset)
+        if width is not None:
+            pulumi.set(__self__, "width", width)
+        if x_pos is not None:
+            pulumi.set(__self__, "x_pos", x_pos)
+        if y_pos is not None:
+            pulumi.set(__self__, "y_pos", y_pos)
+
+    @property
+    @pulumi.getter(name="coordinateOrigin")
+    def coordinate_origin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Origin position, which currently can only be:TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text.Default value: TopLeft.
+        """
+        return pulumi.get(self, "coordinate_origin")
+
+    @coordinate_origin.setter
+    def coordinate_origin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "coordinate_origin", value)
+
+    @property
+    @pulumi.getter(name="endTimeOffset")
+    def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of blur in seconds.If this parameter is left empty or 0 is entered, the blur will exist till the last video frame;If this value is greater than 0 (e.g., n), the blur will exist till second n;If this value is smaller than 0 (e.g., -n), the blur will exist till second n before the last video frame.
+        """
+        return pulumi.get(self, "end_time_offset")
+
+    @end_time_offset.setter
+    def end_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "end_time_offset", value)
+
+    @property
+    @pulumi.getter
+    def height(self) -> Optional[pulumi.Input[str]]:
+        """
+        Blur height. % and px formats are supported:If the string ends in %, the `Height` of the blur will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;If the string ends in px, the `Height` of the blur will be in px; for example, `100px` means that `Height` is 100 px.Default value: 10%.
+        """
+        return pulumi.get(self, "height")
+
+    @height.setter
+    def height(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "height", value)
+
+    @property
+    @pulumi.getter(name="startTimeOffset")
+    def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of blur in seconds. If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame.If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame;If this value is greater than 0 (e.g., n), the blur will appear at second n after the first video frame;If this value is smaller than 0 (e.g., -n), the blur will appear at second n before the last video frame.
+        """
+        return pulumi.get(self, "start_time_offset")
+
+    @start_time_offset.setter
+    def start_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "start_time_offset", value)
+
+    @property
+    @pulumi.getter
+    def width(self) -> Optional[pulumi.Input[str]]:
+        """
+        Blur width. % and px formats are supported:If the string ends in %, the `Width` of the blur will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;If the string ends in px, the `Width` of the blur will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        return pulumi.get(self, "width")
+
+    @width.setter
+    def width(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "width", value)
+
+    @property
+    @pulumi.getter(name="xPos")
+    def x_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The horizontal position of the origin of the blur relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `XPos` of the blur will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;If the string ends in px, the `XPos` of the blur will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "x_pos")
+
+    @x_pos.setter
+    def x_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "x_pos", value)
+
+    @property
+    @pulumi.getter(name="yPos")
+    def y_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        Vertical position of the origin of blur relative to the origin of coordinates of video. % and px formats are supported:If the string ends in %, the `YPos` of the blur will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;If the string ends in px, the `YPos` of the blur will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "y_pos")
+
+    @y_pos.setter
+    def y_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "y_pos", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetObjectNumberFormatArgs:
+    def __init__(__self__, *,
+                 increment: Optional[pulumi.Input[int]] = None,
+                 initial_value: Optional[pulumi.Input[int]] = None,
+                 min_length: Optional[pulumi.Input[int]] = None,
+                 place_holder: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] increment: Increment of the `{number}` variable. Default value: 1.
+        :param pulumi.Input[int] initial_value: Start value of the `{number}` variable. Default value: 0.
+        :param pulumi.Input[int] min_length: Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+        :param pulumi.Input[str] place_holder: Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+        """
+        if increment is not None:
+            pulumi.set(__self__, "increment", increment)
+        if initial_value is not None:
+            pulumi.set(__self__, "initial_value", initial_value)
+        if min_length is not None:
+            pulumi.set(__self__, "min_length", min_length)
+        if place_holder is not None:
+            pulumi.set(__self__, "place_holder", place_holder)
+
+    @property
+    @pulumi.getter
+    def increment(self) -> Optional[pulumi.Input[int]]:
+        """
+        Increment of the `{number}` variable. Default value: 1.
+        """
+        return pulumi.get(self, "increment")
+
+    @increment.setter
+    def increment(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "increment", value)
+
+    @property
+    @pulumi.getter(name="initialValue")
+    def initial_value(self) -> Optional[pulumi.Input[int]]:
+        """
+        Start value of the `{number}` variable. Default value: 0.
+        """
+        return pulumi.get(self, "initial_value")
+
+    @initial_value.setter
+    def initial_value(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "initial_value", value)
+
+    @property
+    @pulumi.getter(name="minLength")
+    def min_length(self) -> Optional[pulumi.Input[int]]:
+        """
+        Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+        """
+        return pulumi.get(self, "min_length")
+
+    @min_length.setter
+    def min_length(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "min_length", value)
+
+    @property
+    @pulumi.getter(name="placeHolder")
+    def place_holder(self) -> Optional[pulumi.Input[str]]:
+        """
+        Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+        """
+        return pulumi.get(self, "place_holder")
+
+    @place_holder.setter
+    def place_holder(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "place_holder", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageCosOutputStorageArgs']] = None,
+                 s3_output_storage: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageS3OutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageCosOutputStorageArgs'] cos_output_storage: The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageS3OutputStorageArgs'] s3_output_storage: The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_output_storage is not None:
+            pulumi.set(__self__, "cos_output_storage", cos_output_storage)
+        if s3_output_storage is not None:
+            pulumi.set(__self__, "s3_output_storage", s3_output_storage)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosOutputStorage")
+    def cos_output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageCosOutputStorageArgs']]:
+        """
+        The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cos_output_storage")
+
+    @cos_output_storage.setter
+    def cos_output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageCosOutputStorageArgs']]):
+        pulumi.set(self, "cos_output_storage", value)
+
+    @property
+    @pulumi.getter(name="s3OutputStorage")
+    def s3_output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageS3OutputStorageArgs']]:
+        """
+        The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_output_storage")
+
+    @s3_output_storage.setter
+    def s3_output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageS3OutputStorageArgs']]):
+        pulumi.set(self, "s3_output_storage", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageCosOutputStorageArgs:
+    def __init__(__self__, *,
+                 bucket: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        :param pulumi.Input[str] region: The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOutputStorageS3OutputStorageArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterArgs:
+    def __init__(__self__, *,
+                 add_on_subtitles: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleArgs']]]] = None,
+                 addon_audio_streams: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamArgs']]]] = None,
+                 audio_template: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAudioTemplateArgs']] = None,
+                 container: Optional[pulumi.Input[str]] = None,
+                 remove_audio: Optional[pulumi.Input[int]] = None,
+                 remove_video: Optional[pulumi.Input[int]] = None,
+                 std_ext_info: Optional[pulumi.Input[str]] = None,
+                 subtitle_template: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterSubtitleTemplateArgs']] = None,
+                 tehd_config: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterTehdConfigArgs']] = None,
+                 video_template: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplateArgs']] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleArgs']]] add_on_subtitles: The subtitle file to add.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamArgs']]] addon_audio_streams: The information of the external audio track to add.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAudioTemplateArgs'] audio_template: Audio stream configuration parameter.
+        :param pulumi.Input[str] container: Container format. Valid values: mp4, flv, hls, mp3, flac, ogg, and m4a; mp3, flac, ogg, and m4a are formats of audio files.
+        :param pulumi.Input[int] remove_audio: Whether to remove audio data. Valid values:0: retain1: remove.
+        :param pulumi.Input[int] remove_video: Whether to remove video data. Valid values:0: retain1: remove.
+        :param pulumi.Input[str] std_ext_info: An extended field for transcoding.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterSubtitleTemplateArgs'] subtitle_template: The subtitle settings.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterTehdConfigArgs'] tehd_config: The TSC transcoding parameters.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplateArgs'] video_template: Video stream configuration parameter.
+        """
+        if add_on_subtitles is not None:
+            pulumi.set(__self__, "add_on_subtitles", add_on_subtitles)
+        if addon_audio_streams is not None:
+            pulumi.set(__self__, "addon_audio_streams", addon_audio_streams)
+        if audio_template is not None:
+            pulumi.set(__self__, "audio_template", audio_template)
+        if container is not None:
+            pulumi.set(__self__, "container", container)
+        if remove_audio is not None:
+            pulumi.set(__self__, "remove_audio", remove_audio)
+        if remove_video is not None:
+            pulumi.set(__self__, "remove_video", remove_video)
+        if std_ext_info is not None:
+            pulumi.set(__self__, "std_ext_info", std_ext_info)
+        if subtitle_template is not None:
+            pulumi.set(__self__, "subtitle_template", subtitle_template)
+        if tehd_config is not None:
+            pulumi.set(__self__, "tehd_config", tehd_config)
+        if video_template is not None:
+            pulumi.set(__self__, "video_template", video_template)
+
+    @property
+    @pulumi.getter(name="addOnSubtitles")
+    def add_on_subtitles(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleArgs']]]]:
+        """
+        The subtitle file to add.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "add_on_subtitles")
+
+    @add_on_subtitles.setter
+    def add_on_subtitles(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleArgs']]]]):
+        pulumi.set(self, "add_on_subtitles", value)
+
+    @property
+    @pulumi.getter(name="addonAudioStreams")
+    def addon_audio_streams(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamArgs']]]]:
+        """
+        The information of the external audio track to add.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "addon_audio_streams")
+
+    @addon_audio_streams.setter
+    def addon_audio_streams(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamArgs']]]]):
+        pulumi.set(self, "addon_audio_streams", value)
+
+    @property
+    @pulumi.getter(name="audioTemplate")
+    def audio_template(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAudioTemplateArgs']]:
+        """
+        Audio stream configuration parameter.
+        """
+        return pulumi.get(self, "audio_template")
+
+    @audio_template.setter
+    def audio_template(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAudioTemplateArgs']]):
+        pulumi.set(self, "audio_template", value)
+
+    @property
+    @pulumi.getter
+    def container(self) -> Optional[pulumi.Input[str]]:
+        """
+        Container format. Valid values: mp4, flv, hls, mp3, flac, ogg, and m4a; mp3, flac, ogg, and m4a are formats of audio files.
+        """
+        return pulumi.get(self, "container")
+
+    @container.setter
+    def container(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "container", value)
+
+    @property
+    @pulumi.getter(name="removeAudio")
+    def remove_audio(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to remove audio data. Valid values:0: retain1: remove.
+        """
+        return pulumi.get(self, "remove_audio")
+
+    @remove_audio.setter
+    def remove_audio(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "remove_audio", value)
+
+    @property
+    @pulumi.getter(name="removeVideo")
+    def remove_video(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to remove video data. Valid values:0: retain1: remove.
+        """
+        return pulumi.get(self, "remove_video")
+
+    @remove_video.setter
+    def remove_video(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "remove_video", value)
+
+    @property
+    @pulumi.getter(name="stdExtInfo")
+    def std_ext_info(self) -> Optional[pulumi.Input[str]]:
+        """
+        An extended field for transcoding.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "std_ext_info")
+
+    @std_ext_info.setter
+    def std_ext_info(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "std_ext_info", value)
+
+    @property
+    @pulumi.getter(name="subtitleTemplate")
+    def subtitle_template(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterSubtitleTemplateArgs']]:
+        """
+        The subtitle settings.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "subtitle_template")
+
+    @subtitle_template.setter
+    def subtitle_template(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterSubtitleTemplateArgs']]):
+        pulumi.set(self, "subtitle_template", value)
+
+    @property
+    @pulumi.getter(name="tehdConfig")
+    def tehd_config(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterTehdConfigArgs']]:
+        """
+        The TSC transcoding parameters.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "tehd_config")
+
+    @tehd_config.setter
+    def tehd_config(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterTehdConfigArgs']]):
+        pulumi.set(self, "tehd_config", value)
+
+    @property
+    @pulumi.getter(name="videoTemplate")
+    def video_template(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplateArgs']]:
+        """
+        Video stream configuration parameter.
+        """
+        return pulumi.get(self, "video_template")
+
+    @video_template.setter
+    def video_template(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplateArgs']]):
+        pulumi.set(self, "video_template", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleArgs:
+    def __init__(__self__, *,
+                 subtitle: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleArgs']] = None,
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleArgs'] subtitle: The subtitle file.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] type: The mode. Valid values:`subtitle-stream`: Add a subtitle track.`close-caption-708`: Embed CEA-708 subtitles in SEI frames.`close-caption-608`: Embed CEA-608 subtitles in SEI frames.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        if subtitle is not None:
+            pulumi.set(__self__, "subtitle", subtitle)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def subtitle(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleArgs']]:
+        """
+        The subtitle file.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "subtitle")
+
+    @subtitle.setter
+    def subtitle(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleArgs']]):
+        pulumi.set(self, "subtitle", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The mode. Valid values:`subtitle-stream`: Add a subtitle track.`close-caption-708`: Embed CEA-708 subtitles in SEI frames.`close-caption-608`: Embed CEA-608 subtitles in SEI frames.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAddonAudioStreamUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterAudioTemplateArgs:
+    def __init__(__self__, *,
+                 audio_channel: Optional[pulumi.Input[int]] = None,
+                 bitrate: Optional[pulumi.Input[int]] = None,
+                 codec: Optional[pulumi.Input[str]] = None,
+                 sample_rate: Optional[pulumi.Input[int]] = None,
+                 stream_selects: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None):
+        """
+        :param pulumi.Input[int] audio_channel: Audio channel system. Valid values:1: Mono2: Dual6: StereoWhen the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound channel cannot be set to stereo.Default value: 2.
+        :param pulumi.Input[int] bitrate: Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+        :param pulumi.Input[str] codec: Audio stream codec.When the outer `Container` parameter is `mp3`, the valid value is:libmp3lame.When the outer `Container` parameter is `ogg` or `flac`, the valid value is:flac.When the outer `Container` parameter is `m4a`, the valid values include:libfdk_aac;libmp3lame;ac3.When the outer `Container` parameter is `mp4` or `flv`, the valid values include:libfdk_aac: more suitable for mp4;libmp3lame: more suitable for flv.When the outer `Container` parameter is `hls`, the valid values include:libfdk_aac;libmp3lame.
+        :param pulumi.Input[int] sample_rate: Audio stream sample rate. Valid values:32,00044,10048,000In Hz.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] stream_selects: The audio tracks to retain. All audio tracks are retained by default.
+        """
+        if audio_channel is not None:
+            pulumi.set(__self__, "audio_channel", audio_channel)
+        if bitrate is not None:
+            pulumi.set(__self__, "bitrate", bitrate)
+        if codec is not None:
+            pulumi.set(__self__, "codec", codec)
+        if sample_rate is not None:
+            pulumi.set(__self__, "sample_rate", sample_rate)
+        if stream_selects is not None:
+            pulumi.set(__self__, "stream_selects", stream_selects)
+
+    @property
+    @pulumi.getter(name="audioChannel")
+    def audio_channel(self) -> Optional[pulumi.Input[int]]:
+        """
+        Audio channel system. Valid values:1: Mono2: Dual6: StereoWhen the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound channel cannot be set to stereo.Default value: 2.
+        """
+        return pulumi.get(self, "audio_channel")
+
+    @audio_channel.setter
+    def audio_channel(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "audio_channel", value)
+
+    @property
+    @pulumi.getter
+    def bitrate(self) -> Optional[pulumi.Input[int]]:
+        """
+        Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+        """
+        return pulumi.get(self, "bitrate")
+
+    @bitrate.setter
+    def bitrate(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "bitrate", value)
+
+    @property
+    @pulumi.getter
+    def codec(self) -> Optional[pulumi.Input[str]]:
+        """
+        Audio stream codec.When the outer `Container` parameter is `mp3`, the valid value is:libmp3lame.When the outer `Container` parameter is `ogg` or `flac`, the valid value is:flac.When the outer `Container` parameter is `m4a`, the valid values include:libfdk_aac;libmp3lame;ac3.When the outer `Container` parameter is `mp4` or `flv`, the valid values include:libfdk_aac: more suitable for mp4;libmp3lame: more suitable for flv.When the outer `Container` parameter is `hls`, the valid values include:libfdk_aac;libmp3lame.
+        """
+        return pulumi.get(self, "codec")
+
+    @codec.setter
+    def codec(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "codec", value)
+
+    @property
+    @pulumi.getter(name="sampleRate")
+    def sample_rate(self) -> Optional[pulumi.Input[int]]:
+        """
+        Audio stream sample rate. Valid values:32,00044,10048,000In Hz.
+        """
+        return pulumi.get(self, "sample_rate")
+
+    @sample_rate.setter
+    def sample_rate(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "sample_rate", value)
+
+    @property
+    @pulumi.getter(name="streamSelects")
+    def stream_selects(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        The audio tracks to retain. All audio tracks are retained by default.
+        """
+        return pulumi.get(self, "stream_selects")
+
+    @stream_selects.setter
+    def stream_selects(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]):
+        pulumi.set(self, "stream_selects", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterSubtitleTemplateArgs:
+    def __init__(__self__, *,
+                 font_alpha: Optional[pulumi.Input[float]] = None,
+                 font_color: Optional[pulumi.Input[str]] = None,
+                 font_size: Optional[pulumi.Input[str]] = None,
+                 font_type: Optional[pulumi.Input[str]] = None,
+                 path: Optional[pulumi.Input[str]] = None,
+                 stream_index: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[float] font_alpha: The text transparency. Value range: 0-1.`0`: Fully transparent.`1`: Fully opaque.Default value: 1.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] font_color: The font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] font_size: The font size (pixels). If this is not specified, the font size in the subtitle file will be used.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] font_type: The font. Valid values:`hei.ttf`: Heiti.`song.ttf`: Songti.`simkai.ttf`: Kaiti.`arial.ttf`: Arial.The default is `hei.ttf`.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] path: The URL of the subtitles to add to the video.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] stream_index: The subtitle track to add to the video. If both `Path` and `StreamIndex` are specified, `Path` will be used. You need to specify at least one of the two parameters.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        if font_alpha is not None:
+            pulumi.set(__self__, "font_alpha", font_alpha)
+        if font_color is not None:
+            pulumi.set(__self__, "font_color", font_color)
+        if font_size is not None:
+            pulumi.set(__self__, "font_size", font_size)
+        if font_type is not None:
+            pulumi.set(__self__, "font_type", font_type)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+        if stream_index is not None:
+            pulumi.set(__self__, "stream_index", stream_index)
+
+    @property
+    @pulumi.getter(name="fontAlpha")
+    def font_alpha(self) -> Optional[pulumi.Input[float]]:
+        """
+        The text transparency. Value range: 0-1.`0`: Fully transparent.`1`: Fully opaque.Default value: 1.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "font_alpha")
+
+    @font_alpha.setter
+    def font_alpha(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "font_alpha", value)
+
+    @property
+    @pulumi.getter(name="fontColor")
+    def font_color(self) -> Optional[pulumi.Input[str]]:
+        """
+        The font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "font_color")
+
+    @font_color.setter
+    def font_color(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "font_color", value)
+
+    @property
+    @pulumi.getter(name="fontSize")
+    def font_size(self) -> Optional[pulumi.Input[str]]:
+        """
+        The font size (pixels). If this is not specified, the font size in the subtitle file will be used.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "font_size")
+
+    @font_size.setter
+    def font_size(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "font_size", value)
+
+    @property
+    @pulumi.getter(name="fontType")
+    def font_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The font. Valid values:`hei.ttf`: Heiti.`song.ttf`: Songti.`simkai.ttf`: Kaiti.`arial.ttf`: Arial.The default is `hei.ttf`.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "font_type")
+
+    @font_type.setter
+    def font_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "font_type", value)
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the subtitles to add to the video.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "path")
+
+    @path.setter
+    def path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "path", value)
+
+    @property
+    @pulumi.getter(name="streamIndex")
+    def stream_index(self) -> Optional[pulumi.Input[int]]:
+        """
+        The subtitle track to add to the video. If both `Path` and `StreamIndex` are specified, `Path` will be used. You need to specify at least one of the two parameters.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "stream_index")
+
+    @stream_index.setter
+    def stream_index(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "stream_index", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterTehdConfigArgs:
+    def __init__(__self__, *,
+                 max_video_bitrate: Optional[pulumi.Input[int]] = None,
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] max_video_bitrate: Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left empty or 0 is entered, there will be no upper limit for bitrate.
+        :param pulumi.Input[str] type: TESHD type. Valid values:TEHD-100: TESHD-100.If this parameter is left empty, TESHD will not be enabled.
+        """
+        if max_video_bitrate is not None:
+            pulumi.set(__self__, "max_video_bitrate", max_video_bitrate)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="maxVideoBitrate")
+    def max_video_bitrate(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left empty or 0 is entered, there will be no upper limit for bitrate.
+        """
+        return pulumi.get(self, "max_video_bitrate")
+
+    @max_video_bitrate.setter
+    def max_video_bitrate(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_video_bitrate", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        TESHD type. Valid values:TEHD-100: TESHD-100.If this parameter is left empty, TESHD will not be enabled.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetOverrideParameterVideoTemplateArgs:
+    def __init__(__self__, *,
+                 bitrate: Optional[pulumi.Input[int]] = None,
+                 codec: Optional[pulumi.Input[str]] = None,
+                 content_adapt_stream: Optional[pulumi.Input[int]] = None,
+                 fill_type: Optional[pulumi.Input[str]] = None,
+                 fps: Optional[pulumi.Input[int]] = None,
+                 gop: Optional[pulumi.Input[int]] = None,
+                 height: Optional[pulumi.Input[int]] = None,
+                 resolution_adaptive: Optional[pulumi.Input[str]] = None,
+                 vcrf: Optional[pulumi.Input[int]] = None,
+                 width: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] bitrate: The video bitrate (Kbps). Value range: 0 and [128, 35000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+        :param pulumi.Input[str] codec: The video codec. Valid values:`libx264`: H.264`libx265`: H.265`av1`: AOMedia Video 1Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.Note: You can only use the AOMedia Video 1 codec for MP4 files.
+        :param pulumi.Input[int] content_adapt_stream: Whether to enable adaptive encoding. Valid values:0: Disable1: EnableDefault value: 0. If this parameter is set to `1`, multiple streams with different resolutions and bitrates will be generated automatically. The highest resolution, bitrate, and quality of the streams are determined by the values of `width` and `height`, `Bitrate`, and `Vcrf` in `VideoTemplate` respectively. If these parameters are not set in `VideoTemplate`, the highest resolution generated will be the same as that of the source video, and the highest video quality will be close to VMAF 95. To use this parameter or learn about the billing details of adaptive encoding, please contact your sales rep.
+        :param pulumi.Input[str] fill_type: The fill mode, which indicates how a video is resized when the video's original aspect ratio is different from the target aspect ratio. Valid values:stretch: Stretch the image frame by frame to fill the entire screen. The video image may become squashed or stretched after transcoding.black: Keep the image&#39;s original aspect ratio and fill the blank space with black bars.white: Keep the image's original aspect ratio and fill the blank space with white bars.gauss: Keep the image's original aspect ratio and apply Gaussian blur to the blank space.Default value: black.Note: Only `stretch` and `black` are supported for adaptive bitrate streaming.
+        :param pulumi.Input[int] fps: The video frame rate (Hz). Value range: [0, 100].If the value is 0, the frame rate will be the same as that of the source video.Note: For adaptive bitrate streaming, the value range of this parameter is [0, 60].
+        :param pulumi.Input[int] gop: Frame interval between I keyframes. Value range: 0 and [1,100000].If this parameter is 0 or left empty, the system will automatically set the GOP length.
+        :param pulumi.Input[int] height: Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+        :param pulumi.Input[str] resolution_adaptive: Resolution adaption. Valid values:open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side.close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.Default value: open.Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
+        :param pulumi.Input[int] vcrf: The control factor of video constant bitrate. Value range: [1, 51]If this parameter is specified, CRF (a bitrate control method) will be used for transcoding. (Video bitrate will no longer take effect.)It is not recommended to specify this parameter if there are no special requirements.
+        :param pulumi.Input[int] width: Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+        """
+        if bitrate is not None:
+            pulumi.set(__self__, "bitrate", bitrate)
+        if codec is not None:
+            pulumi.set(__self__, "codec", codec)
+        if content_adapt_stream is not None:
+            pulumi.set(__self__, "content_adapt_stream", content_adapt_stream)
+        if fill_type is not None:
+            pulumi.set(__self__, "fill_type", fill_type)
+        if fps is not None:
+            pulumi.set(__self__, "fps", fps)
+        if gop is not None:
+            pulumi.set(__self__, "gop", gop)
+        if height is not None:
+            pulumi.set(__self__, "height", height)
+        if resolution_adaptive is not None:
+            pulumi.set(__self__, "resolution_adaptive", resolution_adaptive)
+        if vcrf is not None:
+            pulumi.set(__self__, "vcrf", vcrf)
+        if width is not None:
+            pulumi.set(__self__, "width", width)
+
+    @property
+    @pulumi.getter
+    def bitrate(self) -> Optional[pulumi.Input[int]]:
+        """
+        The video bitrate (Kbps). Value range: 0 and [128, 35000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+        """
+        return pulumi.get(self, "bitrate")
+
+    @bitrate.setter
+    def bitrate(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "bitrate", value)
+
+    @property
+    @pulumi.getter
+    def codec(self) -> Optional[pulumi.Input[str]]:
+        """
+        The video codec. Valid values:`libx264`: H.264`libx265`: H.265`av1`: AOMedia Video 1Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.Note: You can only use the AOMedia Video 1 codec for MP4 files.
+        """
+        return pulumi.get(self, "codec")
+
+    @codec.setter
+    def codec(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "codec", value)
+
+    @property
+    @pulumi.getter(name="contentAdaptStream")
+    def content_adapt_stream(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to enable adaptive encoding. Valid values:0: Disable1: EnableDefault value: 0. If this parameter is set to `1`, multiple streams with different resolutions and bitrates will be generated automatically. The highest resolution, bitrate, and quality of the streams are determined by the values of `width` and `height`, `Bitrate`, and `Vcrf` in `VideoTemplate` respectively. If these parameters are not set in `VideoTemplate`, the highest resolution generated will be the same as that of the source video, and the highest video quality will be close to VMAF 95. To use this parameter or learn about the billing details of adaptive encoding, please contact your sales rep.
+        """
+        return pulumi.get(self, "content_adapt_stream")
+
+    @content_adapt_stream.setter
+    def content_adapt_stream(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "content_adapt_stream", value)
+
+    @property
+    @pulumi.getter(name="fillType")
+    def fill_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The fill mode, which indicates how a video is resized when the video's original aspect ratio is different from the target aspect ratio. Valid values:stretch: Stretch the image frame by frame to fill the entire screen. The video image may become squashed or stretched after transcoding.black: Keep the image&#39;s original aspect ratio and fill the blank space with black bars.white: Keep the image's original aspect ratio and fill the blank space with white bars.gauss: Keep the image's original aspect ratio and apply Gaussian blur to the blank space.Default value: black.Note: Only `stretch` and `black` are supported for adaptive bitrate streaming.
+        """
+        return pulumi.get(self, "fill_type")
+
+    @fill_type.setter
+    def fill_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fill_type", value)
+
+    @property
+    @pulumi.getter
+    def fps(self) -> Optional[pulumi.Input[int]]:
+        """
+        The video frame rate (Hz). Value range: [0, 100].If the value is 0, the frame rate will be the same as that of the source video.Note: For adaptive bitrate streaming, the value range of this parameter is [0, 60].
+        """
+        return pulumi.get(self, "fps")
+
+    @fps.setter
+    def fps(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "fps", value)
+
+    @property
+    @pulumi.getter
+    def gop(self) -> Optional[pulumi.Input[int]]:
+        """
+        Frame interval between I keyframes. Value range: 0 and [1,100000].If this parameter is 0 or left empty, the system will automatically set the GOP length.
+        """
+        return pulumi.get(self, "gop")
+
+    @gop.setter
+    def gop(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "gop", value)
+
+    @property
+    @pulumi.getter
+    def height(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+        """
+        return pulumi.get(self, "height")
+
+    @height.setter
+    def height(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "height", value)
+
+    @property
+    @pulumi.getter(name="resolutionAdaptive")
+    def resolution_adaptive(self) -> Optional[pulumi.Input[str]]:
+        """
+        Resolution adaption. Valid values:open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side.close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.Default value: open.Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
+        """
+        return pulumi.get(self, "resolution_adaptive")
+
+    @resolution_adaptive.setter
+    def resolution_adaptive(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resolution_adaptive", value)
+
+    @property
+    @pulumi.getter
+    def vcrf(self) -> Optional[pulumi.Input[int]]:
+        """
+        The control factor of video constant bitrate. Value range: [1, 51]If this parameter is specified, CRF (a bitrate control method) will be used for transcoding. (Video bitrate will no longer take effect.)It is not recommended to specify this parameter if there are no special requirements.
+        """
+        return pulumi.get(self, "vcrf")
+
+    @vcrf.setter
+    def vcrf(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "vcrf", value)
+
+    @property
+    @pulumi.getter
+    def width(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+        """
+        return pulumi.get(self, "width")
+
+    @width.setter
+    def width(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "width", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterArgs:
+    def __init__(__self__, *,
+                 container: pulumi.Input[str],
+                 audio_template: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterAudioTemplateArgs']] = None,
+                 remove_audio: Optional[pulumi.Input[int]] = None,
+                 remove_video: Optional[pulumi.Input[int]] = None,
+                 tehd_config: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterTehdConfigArgs']] = None,
+                 video_template: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplateArgs']] = None):
+        """
+        :param pulumi.Input[str] container: Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterAudioTemplateArgs'] audio_template: Audio stream configuration parameter. This field is required when `RemoveAudio` is 0.
+        :param pulumi.Input[int] remove_audio: Whether to remove audio data. Valid values:0: retain;1: remove.Default value: 0.
+        :param pulumi.Input[int] remove_video: Whether to remove video data. Valid values:0: retain;1: remove.Default value: 0.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterTehdConfigArgs'] tehd_config: TESHD transcoding parameter.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplateArgs'] video_template: Video stream configuration parameter. This field is required when `RemoveVideo` is 0.
+        """
+        pulumi.set(__self__, "container", container)
+        if audio_template is not None:
+            pulumi.set(__self__, "audio_template", audio_template)
+        if remove_audio is not None:
+            pulumi.set(__self__, "remove_audio", remove_audio)
+        if remove_video is not None:
+            pulumi.set(__self__, "remove_video", remove_video)
+        if tehd_config is not None:
+            pulumi.set(__self__, "tehd_config", tehd_config)
+        if video_template is not None:
+            pulumi.set(__self__, "video_template", video_template)
+
+    @property
+    @pulumi.getter
+    def container(self) -> pulumi.Input[str]:
+        """
+        Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
+        """
+        return pulumi.get(self, "container")
+
+    @container.setter
+    def container(self, value: pulumi.Input[str]):
+        pulumi.set(self, "container", value)
+
+    @property
+    @pulumi.getter(name="audioTemplate")
+    def audio_template(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterAudioTemplateArgs']]:
+        """
+        Audio stream configuration parameter. This field is required when `RemoveAudio` is 0.
+        """
+        return pulumi.get(self, "audio_template")
+
+    @audio_template.setter
+    def audio_template(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterAudioTemplateArgs']]):
+        pulumi.set(self, "audio_template", value)
+
+    @property
+    @pulumi.getter(name="removeAudio")
+    def remove_audio(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to remove audio data. Valid values:0: retain;1: remove.Default value: 0.
+        """
+        return pulumi.get(self, "remove_audio")
+
+    @remove_audio.setter
+    def remove_audio(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "remove_audio", value)
+
+    @property
+    @pulumi.getter(name="removeVideo")
+    def remove_video(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to remove video data. Valid values:0: retain;1: remove.Default value: 0.
+        """
+        return pulumi.get(self, "remove_video")
+
+    @remove_video.setter
+    def remove_video(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "remove_video", value)
+
+    @property
+    @pulumi.getter(name="tehdConfig")
+    def tehd_config(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterTehdConfigArgs']]:
+        """
+        TESHD transcoding parameter.
+        """
+        return pulumi.get(self, "tehd_config")
+
+    @tehd_config.setter
+    def tehd_config(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterTehdConfigArgs']]):
+        pulumi.set(self, "tehd_config", value)
+
+    @property
+    @pulumi.getter(name="videoTemplate")
+    def video_template(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplateArgs']]:
+        """
+        Video stream configuration parameter. This field is required when `RemoveVideo` is 0.
+        """
+        return pulumi.get(self, "video_template")
+
+    @video_template.setter
+    def video_template(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplateArgs']]):
+        pulumi.set(self, "video_template", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterAudioTemplateArgs:
+    def __init__(__self__, *,
+                 bitrate: pulumi.Input[int],
+                 codec: pulumi.Input[str],
+                 sample_rate: pulumi.Input[int],
+                 audio_channel: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] bitrate: Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+        :param pulumi.Input[str] codec: Audio stream codec.When the outer `Container` parameter is `mp3`, the valid value is:libmp3lame.When the outer `Container` parameter is `ogg` or `flac`, the valid value is:flac.When the outer `Container` parameter is `m4a`, the valid values include:libfdk_aac;libmp3lame;ac3.When the outer `Container` parameter is `mp4` or `flv`, the valid values include:libfdk_aac: more suitable for mp4;libmp3lame: more suitable for flv.When the outer `Container` parameter is `hls`, the valid values include:libfdk_aac;libmp3lame.
+        :param pulumi.Input[int] sample_rate: Audio stream sample rate. Valid values:32,00044,10048,000In Hz.
+        :param pulumi.Input[int] audio_channel: Audio channel system. Valid values:1: Mono2: Dual6: StereoWhen the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound channel cannot be set to stereo.Default value: 2.
+        """
+        pulumi.set(__self__, "bitrate", bitrate)
+        pulumi.set(__self__, "codec", codec)
+        pulumi.set(__self__, "sample_rate", sample_rate)
+        if audio_channel is not None:
+            pulumi.set(__self__, "audio_channel", audio_channel)
+
+    @property
+    @pulumi.getter
+    def bitrate(self) -> pulumi.Input[int]:
+        """
+        Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+        """
+        return pulumi.get(self, "bitrate")
+
+    @bitrate.setter
+    def bitrate(self, value: pulumi.Input[int]):
+        pulumi.set(self, "bitrate", value)
+
+    @property
+    @pulumi.getter
+    def codec(self) -> pulumi.Input[str]:
+        """
+        Audio stream codec.When the outer `Container` parameter is `mp3`, the valid value is:libmp3lame.When the outer `Container` parameter is `ogg` or `flac`, the valid value is:flac.When the outer `Container` parameter is `m4a`, the valid values include:libfdk_aac;libmp3lame;ac3.When the outer `Container` parameter is `mp4` or `flv`, the valid values include:libfdk_aac: more suitable for mp4;libmp3lame: more suitable for flv.When the outer `Container` parameter is `hls`, the valid values include:libfdk_aac;libmp3lame.
+        """
+        return pulumi.get(self, "codec")
+
+    @codec.setter
+    def codec(self, value: pulumi.Input[str]):
+        pulumi.set(self, "codec", value)
+
+    @property
+    @pulumi.getter(name="sampleRate")
+    def sample_rate(self) -> pulumi.Input[int]:
+        """
+        Audio stream sample rate. Valid values:32,00044,10048,000In Hz.
+        """
+        return pulumi.get(self, "sample_rate")
+
+    @sample_rate.setter
+    def sample_rate(self, value: pulumi.Input[int]):
+        pulumi.set(self, "sample_rate", value)
+
+    @property
+    @pulumi.getter(name="audioChannel")
+    def audio_channel(self) -> Optional[pulumi.Input[int]]:
+        """
+        Audio channel system. Valid values:1: Mono2: Dual6: StereoWhen the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound channel cannot be set to stereo.Default value: 2.
+        """
+        return pulumi.get(self, "audio_channel")
+
+    @audio_channel.setter
+    def audio_channel(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "audio_channel", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterTehdConfigArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 max_video_bitrate: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] type: TESHD type. Valid values:TEHD-100: TESHD-100.If this parameter is left empty, TESHD will not be enabled.
+        :param pulumi.Input[int] max_video_bitrate: Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left empty or 0 is entered, there will be no upper limit for bitrate.
+        """
+        pulumi.set(__self__, "type", type)
+        if max_video_bitrate is not None:
+            pulumi.set(__self__, "max_video_bitrate", max_video_bitrate)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        TESHD type. Valid values:TEHD-100: TESHD-100.If this parameter is left empty, TESHD will not be enabled.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="maxVideoBitrate")
+    def max_video_bitrate(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left empty or 0 is entered, there will be no upper limit for bitrate.
+        """
+        return pulumi.get(self, "max_video_bitrate")
+
+    @max_video_bitrate.setter
+    def max_video_bitrate(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_video_bitrate", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterVideoTemplateArgs:
+    def __init__(__self__, *,
+                 bitrate: pulumi.Input[int],
+                 codec: pulumi.Input[str],
+                 fps: pulumi.Input[int],
+                 fill_type: Optional[pulumi.Input[str]] = None,
+                 gop: Optional[pulumi.Input[int]] = None,
+                 height: Optional[pulumi.Input[int]] = None,
+                 resolution_adaptive: Optional[pulumi.Input[str]] = None,
+                 vcrf: Optional[pulumi.Input[int]] = None,
+                 width: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] bitrate: The video bitrate (Kbps). Value range: 0 and [128, 35000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+        :param pulumi.Input[str] codec: The video codec. Valid values:`libx264`: H.264`libx265`: H.265`av1`: AOMedia Video 1Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.Note: You can only use the AOMedia Video 1 codec for MP4 files.
+        :param pulumi.Input[int] fps: The video frame rate (Hz). Value range: [0, 100].If the value is 0, the frame rate will be the same as that of the source video.Note: For adaptive bitrate streaming, the value range of this parameter is [0, 60].
+        :param pulumi.Input[str] fill_type: The fill mode, which indicates how a video is resized when the video's original aspect ratio is different from the target aspect ratio. Valid values:stretch: Stretch the image frame by frame to fill the entire screen. The video image may become squashed or stretched after transcoding.black: Keep the image&#39;s original aspect ratio and fill the blank space with black bars.white: Keep the image's original aspect ratio and fill the blank space with white bars.gauss: Keep the image's original aspect ratio and apply Gaussian blur to the blank space.Default value: black.Note: Only `stretch` and `black` are supported for adaptive bitrate streaming.
+        :param pulumi.Input[int] gop: Frame interval between I keyframes. Value range: 0 and [1,100000].If this parameter is 0 or left empty, the system will automatically set the GOP length.
+        :param pulumi.Input[int] height: Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+        :param pulumi.Input[str] resolution_adaptive: Resolution adaption. Valid values:open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side.close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.Default value: open.Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
+        :param pulumi.Input[int] vcrf: The control factor of video constant bitrate. Value range: [1, 51]If this parameter is specified, CRF (a bitrate control method) will be used for transcoding. (Video bitrate will no longer take effect.)It is not recommended to specify this parameter if there are no special requirements.
+        :param pulumi.Input[int] width: Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+        """
+        pulumi.set(__self__, "bitrate", bitrate)
+        pulumi.set(__self__, "codec", codec)
+        pulumi.set(__self__, "fps", fps)
+        if fill_type is not None:
+            pulumi.set(__self__, "fill_type", fill_type)
+        if gop is not None:
+            pulumi.set(__self__, "gop", gop)
+        if height is not None:
+            pulumi.set(__self__, "height", height)
+        if resolution_adaptive is not None:
+            pulumi.set(__self__, "resolution_adaptive", resolution_adaptive)
+        if vcrf is not None:
+            pulumi.set(__self__, "vcrf", vcrf)
+        if width is not None:
+            pulumi.set(__self__, "width", width)
+
+    @property
+    @pulumi.getter
+    def bitrate(self) -> pulumi.Input[int]:
+        """
+        The video bitrate (Kbps). Value range: 0 and [128, 35000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+        """
+        return pulumi.get(self, "bitrate")
+
+    @bitrate.setter
+    def bitrate(self, value: pulumi.Input[int]):
+        pulumi.set(self, "bitrate", value)
+
+    @property
+    @pulumi.getter
+    def codec(self) -> pulumi.Input[str]:
+        """
+        The video codec. Valid values:`libx264`: H.264`libx265`: H.265`av1`: AOMedia Video 1Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.Note: You can only use the AOMedia Video 1 codec for MP4 files.
+        """
+        return pulumi.get(self, "codec")
+
+    @codec.setter
+    def codec(self, value: pulumi.Input[str]):
+        pulumi.set(self, "codec", value)
+
+    @property
+    @pulumi.getter
+    def fps(self) -> pulumi.Input[int]:
+        """
+        The video frame rate (Hz). Value range: [0, 100].If the value is 0, the frame rate will be the same as that of the source video.Note: For adaptive bitrate streaming, the value range of this parameter is [0, 60].
+        """
+        return pulumi.get(self, "fps")
+
+    @fps.setter
+    def fps(self, value: pulumi.Input[int]):
+        pulumi.set(self, "fps", value)
+
+    @property
+    @pulumi.getter(name="fillType")
+    def fill_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The fill mode, which indicates how a video is resized when the video's original aspect ratio is different from the target aspect ratio. Valid values:stretch: Stretch the image frame by frame to fill the entire screen. The video image may become squashed or stretched after transcoding.black: Keep the image&#39;s original aspect ratio and fill the blank space with black bars.white: Keep the image's original aspect ratio and fill the blank space with white bars.gauss: Keep the image's original aspect ratio and apply Gaussian blur to the blank space.Default value: black.Note: Only `stretch` and `black` are supported for adaptive bitrate streaming.
+        """
+        return pulumi.get(self, "fill_type")
+
+    @fill_type.setter
+    def fill_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fill_type", value)
+
+    @property
+    @pulumi.getter
+    def gop(self) -> Optional[pulumi.Input[int]]:
+        """
+        Frame interval between I keyframes. Value range: 0 and [1,100000].If this parameter is 0 or left empty, the system will automatically set the GOP length.
+        """
+        return pulumi.get(self, "gop")
+
+    @gop.setter
+    def gop(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "gop", value)
+
+    @property
+    @pulumi.getter
+    def height(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+        """
+        return pulumi.get(self, "height")
+
+    @height.setter
+    def height(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "height", value)
+
+    @property
+    @pulumi.getter(name="resolutionAdaptive")
+    def resolution_adaptive(self) -> Optional[pulumi.Input[str]]:
+        """
+        Resolution adaption. Valid values:open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side.close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.Default value: open.Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
+        """
+        return pulumi.get(self, "resolution_adaptive")
+
+    @resolution_adaptive.setter
+    def resolution_adaptive(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resolution_adaptive", value)
+
+    @property
+    @pulumi.getter
+    def vcrf(self) -> Optional[pulumi.Input[int]]:
+        """
+        The control factor of video constant bitrate. Value range: [1, 51]If this parameter is specified, CRF (a bitrate control method) will be used for transcoding. (Video bitrate will no longer take effect.)It is not recommended to specify this parameter if there are no special requirements.
+        """
+        return pulumi.get(self, "vcrf")
+
+    @vcrf.setter
+    def vcrf(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "vcrf", value)
+
+    @property
+    @pulumi.getter
+    def width(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+        """
+        return pulumi.get(self, "width")
+
+    @width.setter
+    def width(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "width", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 end_time_offset: Optional[pulumi.Input[float]] = None,
+                 raw_parameter: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterArgs']] = None,
+                 start_time_offset: Optional[pulumi.Input[float]] = None,
+                 svg_content: Optional[pulumi.Input[str]] = None,
+                 text_content: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] definition: ID of a watermarking template.
+        :param pulumi.Input[float] end_time_offset: End time offset of a watermark in seconds.If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame;If this value is greater than 0 (e.g., n), the watermark will exist till second n;If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterArgs'] raw_parameter: Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+        :param pulumi.Input[float] start_time_offset: Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame.If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame;If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame;If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+        :param pulumi.Input[str] svg_content: SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+        :param pulumi.Input[str] text_content: Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if end_time_offset is not None:
+            pulumi.set(__self__, "end_time_offset", end_time_offset)
+        if raw_parameter is not None:
+            pulumi.set(__self__, "raw_parameter", raw_parameter)
+        if start_time_offset is not None:
+            pulumi.set(__self__, "start_time_offset", start_time_offset)
+        if svg_content is not None:
+            pulumi.set(__self__, "svg_content", svg_content)
+        if text_content is not None:
+            pulumi.set(__self__, "text_content", text_content)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        ID of a watermarking template.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="endTimeOffset")
+    def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of a watermark in seconds.If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame;If this value is greater than 0 (e.g., n), the watermark will exist till second n;If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+        """
+        return pulumi.get(self, "end_time_offset")
+
+    @end_time_offset.setter
+    def end_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "end_time_offset", value)
+
+    @property
+    @pulumi.getter(name="rawParameter")
+    def raw_parameter(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterArgs']]:
+        """
+        Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+        """
+        return pulumi.get(self, "raw_parameter")
+
+    @raw_parameter.setter
+    def raw_parameter(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterArgs']]):
+        pulumi.set(self, "raw_parameter", value)
+
+    @property
+    @pulumi.getter(name="startTimeOffset")
+    def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame.If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame;If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame;If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+        """
+        return pulumi.get(self, "start_time_offset")
+
+    @start_time_offset.setter
+    def start_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "start_time_offset", value)
+
+    @property
+    @pulumi.getter(name="svgContent")
+    def svg_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+        """
+        return pulumi.get(self, "svg_content")
+
+    @svg_content.setter
+    def svg_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "svg_content", value)
+
+    @property
+    @pulumi.getter(name="textContent")
+    def text_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+        """
+        return pulumi.get(self, "text_content")
+
+    @text_content.setter
+    def text_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "text_content", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 coordinate_origin: Optional[pulumi.Input[str]] = None,
+                 image_template: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateArgs']] = None,
+                 x_pos: Optional[pulumi.Input[str]] = None,
+                 y_pos: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] type: Watermark type. Valid values:image: image watermark.
+        :param pulumi.Input[str] coordinate_origin: Origin position, which currently can only be:TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateArgs'] image_template: Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+        :param pulumi.Input[str] x_pos: The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        :param pulumi.Input[str] y_pos: The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        pulumi.set(__self__, "type", type)
+        if coordinate_origin is not None:
+            pulumi.set(__self__, "coordinate_origin", coordinate_origin)
+        if image_template is not None:
+            pulumi.set(__self__, "image_template", image_template)
+        if x_pos is not None:
+            pulumi.set(__self__, "x_pos", x_pos)
+        if y_pos is not None:
+            pulumi.set(__self__, "y_pos", y_pos)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Watermark type. Valid values:image: image watermark.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="coordinateOrigin")
+    def coordinate_origin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Origin position, which currently can only be:TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+        """
+        return pulumi.get(self, "coordinate_origin")
+
+    @coordinate_origin.setter
+    def coordinate_origin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "coordinate_origin", value)
+
+    @property
+    @pulumi.getter(name="imageTemplate")
+    def image_template(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateArgs']]:
+        """
+        Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+        """
+        return pulumi.get(self, "image_template")
+
+    @image_template.setter
+    def image_template(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateArgs']]):
+        pulumi.set(self, "image_template", value)
+
+    @property
+    @pulumi.getter(name="xPos")
+    def x_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "x_pos")
+
+    @x_pos.setter
+    def x_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "x_pos", value)
+
+    @property
+    @pulumi.getter(name="yPos")
+    def y_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "y_pos")
+
+    @y_pos.setter
+    def y_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "y_pos", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateArgs:
+    def __init__(__self__, *,
+                 image_content: pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs'],
+                 height: Optional[pulumi.Input[str]] = None,
+                 repeat_type: Optional[pulumi.Input[str]] = None,
+                 width: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs'] image_content: Input content of watermark image. JPEG and PNG images are supported.
+        :param pulumi.Input[str] height: Watermark height. % and px formats are supported:If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+        :param pulumi.Input[str] repeat_type: Repeat type of an animated watermark. Valid values:`once`: no longer appears after watermark playback ends.`repeat_last_frame`: stays on the last frame after watermark playback ends.`repeat` (default): repeats the playback until the video ends.
+        :param pulumi.Input[str] width: Watermark width. % and px formats are supported:If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        pulumi.set(__self__, "image_content", image_content)
+        if height is not None:
+            pulumi.set(__self__, "height", height)
+        if repeat_type is not None:
+            pulumi.set(__self__, "repeat_type", repeat_type)
+        if width is not None:
+            pulumi.set(__self__, "width", width)
+
+    @property
+    @pulumi.getter(name="imageContent")
+    def image_content(self) -> pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs']:
+        """
+        Input content of watermark image. JPEG and PNG images are supported.
+        """
+        return pulumi.get(self, "image_content")
+
+    @image_content.setter
+    def image_content(self, value: pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs']):
+        pulumi.set(self, "image_content", value)
+
+    @property
+    @pulumi.getter
+    def height(self) -> Optional[pulumi.Input[str]]:
+        """
+        Watermark height. % and px formats are supported:If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+        """
+        return pulumi.get(self, "height")
+
+    @height.setter
+    def height(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "height", value)
+
+    @property
+    @pulumi.getter(name="repeatType")
+    def repeat_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Repeat type of an animated watermark. Valid values:`once`: no longer appears after watermark playback ends.`repeat_last_frame`: stays on the last frame after watermark playback ends.`repeat` (default): repeats the playback until the video ends.
+        """
+        return pulumi.get(self, "repeat_type")
+
+    @repeat_type.setter
+    def repeat_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "repeat_type", value)
+
+    @property
+    @pulumi.getter
+    def width(self) -> Optional[pulumi.Input[str]]:
+        """
+        Watermark width. % and px formats are supported:If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width;If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        return pulumi.get(self, "width")
+
+    @width.setter
+    def width(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "width", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values:`COS`: A COS bucket address. `URL`: A URL. `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationOutputStorageArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_output_storage: Optional[pulumi.Input['ProcessMediaOperationOutputStorageCosOutputStorageArgs']] = None,
+                 s3_output_storage: Optional[pulumi.Input['ProcessMediaOperationOutputStorageS3OutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        :param pulumi.Input['ProcessMediaOperationOutputStorageCosOutputStorageArgs'] cos_output_storage: The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ProcessMediaOperationOutputStorageS3OutputStorageArgs'] s3_output_storage: The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_output_storage is not None:
+            pulumi.set(__self__, "cos_output_storage", cos_output_storage)
+        if s3_output_storage is not None:
+            pulumi.set(__self__, "s3_output_storage", s3_output_storage)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The storage type for a media processing output file. Valid values:`COS`: Tencent Cloud COS`&gt;AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosOutputStorage")
+    def cos_output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationOutputStorageCosOutputStorageArgs']]:
+        """
+        The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cos_output_storage")
+
+    @cos_output_storage.setter
+    def cos_output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationOutputStorageCosOutputStorageArgs']]):
+        pulumi.set(self, "cos_output_storage", value)
+
+    @property
+    @pulumi.getter(name="s3OutputStorage")
+    def s3_output_storage(self) -> Optional[pulumi.Input['ProcessMediaOperationOutputStorageS3OutputStorageArgs']]:
+        """
+        The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_output_storage")
+
+    @s3_output_storage.setter
+    def s3_output_storage(self, value: Optional[pulumi.Input['ProcessMediaOperationOutputStorageS3OutputStorageArgs']]):
+        pulumi.set(self, "s3_output_storage", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationOutputStorageCosOutputStorageArgs:
+    def __init__(__self__, *,
+                 bucket: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        :param pulumi.Input[str] region: The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationOutputStorageS3OutputStorageArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationTaskNotifyConfigArgs:
+    def __init__(__self__, *,
+                 aws_sqa: Optional[pulumi.Input['ProcessMediaOperationTaskNotifyConfigAwsSqaArgs']] = None,
+                 cmq_model: Optional[pulumi.Input[str]] = None,
+                 cmq_region: Optional[pulumi.Input[str]] = None,
+                 notify_mode: Optional[pulumi.Input[str]] = None,
+                 notify_type: Optional[pulumi.Input[str]] = None,
+                 notify_url: Optional[pulumi.Input[str]] = None,
+                 queue_name: Optional[pulumi.Input[str]] = None,
+                 topic_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ProcessMediaOperationTaskNotifyConfigAwsSqaArgs'] aws_sqa: The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] cmq_model: The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
+        :param pulumi.Input[str] cmq_region: The CMQ or TDMQ-CMQ region, such as `sh` (Shanghai) or `bj` (Beijing).
+        :param pulumi.Input[str] notify_mode: Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
+        :param pulumi.Input[str] notify_type: The notification type. Valid values:`CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead.`TDMQ-CMQ`: Message queue`URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.`SCF`: This notification type is not recommended. You need to configure it in the SCF console.`AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket.&lt;font color=red&gt;Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.&lt;/font&gt;.
+        :param pulumi.Input[str] notify_url: HTTP callback URL, required if `NotifyType` is set to `URL`.
+        :param pulumi.Input[str] queue_name: The CMQ or TDMQ-CMQ queue to receive notifications. This parameter is valid when `CmqModel` is `Queue`.
+        :param pulumi.Input[str] topic_name: The CMQ or TDMQ-CMQ topic to receive notifications. This parameter is valid when `CmqModel` is `Topic`.
+        """
+        if aws_sqa is not None:
+            pulumi.set(__self__, "aws_sqa", aws_sqa)
+        if cmq_model is not None:
+            pulumi.set(__self__, "cmq_model", cmq_model)
+        if cmq_region is not None:
+            pulumi.set(__self__, "cmq_region", cmq_region)
+        if notify_mode is not None:
+            pulumi.set(__self__, "notify_mode", notify_mode)
+        if notify_type is not None:
+            pulumi.set(__self__, "notify_type", notify_type)
+        if notify_url is not None:
+            pulumi.set(__self__, "notify_url", notify_url)
+        if queue_name is not None:
+            pulumi.set(__self__, "queue_name", queue_name)
+        if topic_name is not None:
+            pulumi.set(__self__, "topic_name", topic_name)
+
+    @property
+    @pulumi.getter(name="awsSqa")
+    def aws_sqa(self) -> Optional[pulumi.Input['ProcessMediaOperationTaskNotifyConfigAwsSqaArgs']]:
+        """
+        The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "aws_sqa")
+
+    @aws_sqa.setter
+    def aws_sqa(self, value: Optional[pulumi.Input['ProcessMediaOperationTaskNotifyConfigAwsSqaArgs']]):
+        pulumi.set(self, "aws_sqa", value)
+
+    @property
+    @pulumi.getter(name="cmqModel")
+    def cmq_model(self) -> Optional[pulumi.Input[str]]:
+        """
+        The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
+        """
+        return pulumi.get(self, "cmq_model")
+
+    @cmq_model.setter
+    def cmq_model(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cmq_model", value)
+
+    @property
+    @pulumi.getter(name="cmqRegion")
+    def cmq_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The CMQ or TDMQ-CMQ region, such as `sh` (Shanghai) or `bj` (Beijing).
+        """
+        return pulumi.get(self, "cmq_region")
+
+    @cmq_region.setter
+    def cmq_region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cmq_region", value)
+
+    @property
+    @pulumi.getter(name="notifyMode")
+    def notify_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
+        """
+        return pulumi.get(self, "notify_mode")
+
+    @notify_mode.setter
+    def notify_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notify_mode", value)
+
+    @property
+    @pulumi.getter(name="notifyType")
+    def notify_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The notification type. Valid values:`CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead.`TDMQ-CMQ`: Message queue`URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.`SCF`: This notification type is not recommended. You need to configure it in the SCF console.`AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket.&lt;font color=red&gt;Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.&lt;/font&gt;.
+        """
+        return pulumi.get(self, "notify_type")
+
+    @notify_type.setter
+    def notify_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notify_type", value)
+
+    @property
+    @pulumi.getter(name="notifyUrl")
+    def notify_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        HTTP callback URL, required if `NotifyType` is set to `URL`.
+        """
+        return pulumi.get(self, "notify_url")
+
+    @notify_url.setter
+    def notify_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notify_url", value)
+
+    @property
+    @pulumi.getter(name="queueName")
+    def queue_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The CMQ or TDMQ-CMQ queue to receive notifications. This parameter is valid when `CmqModel` is `Queue`.
+        """
+        return pulumi.get(self, "queue_name")
+
+    @queue_name.setter
+    def queue_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "queue_name", value)
+
+    @property
+    @pulumi.getter(name="topicName")
+    def topic_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The CMQ or TDMQ-CMQ topic to receive notifications. This parameter is valid when `CmqModel` is `Topic`.
+        """
+        return pulumi.get(self, "topic_name")
+
+    @topic_name.setter
+    def topic_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_name", value)
+
+
+@pulumi.input_type
+class ProcessMediaOperationTaskNotifyConfigAwsSqaArgs:
+    def __init__(__self__, *,
+                 sqa_queue_name: pulumi.Input[str],
+                 sqa_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] sqa_queue_name: The name of the SQS queue.
+        :param pulumi.Input[str] sqa_region: The region of the SQS queue.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "sqa_queue_name", sqa_queue_name)
+        pulumi.set(__self__, "sqa_region", sqa_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="sqaQueueName")
+    def sqa_queue_name(self) -> pulumi.Input[str]:
+        """
+        The name of the SQS queue.
+        """
+        return pulumi.get(self, "sqa_queue_name")
+
+    @sqa_queue_name.setter
+    def sqa_queue_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "sqa_queue_name", value)
+
+    @property
+    @pulumi.getter(name="sqaRegion")
+    def sqa_region(self) -> pulumi.Input[str]:
+        """
+        The region of the SQS queue.
+        """
+        return pulumi.get(self, "sqa_region")
+
+    @sqa_region.setter
+    def sqa_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "sqa_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleActivityArgs:
+    def __init__(__self__, *,
+                 activity_type: pulumi.Input[str],
+                 activity_para: Optional[pulumi.Input['ScheduleActivityActivityParaArgs']] = None,
+                 reardrive_indices: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None):
+        """
+        :param pulumi.Input[str] activity_type: The subtask type. `input`: The start. `output`: The end. `action-trans`: Transcoding. `action-samplesnapshot`: Sampled screencapturing. `action-AIAnalysis`: Content analysis. `action-AIRecognition`: Content recognition. `action-aiReview`: Content moderation. `action-animated-graphics`: Animated screenshot generation. `action-image-sprite`: Image sprite generation. `action-snapshotByTimeOffset`: Time point screencapturing. `action-adaptive-substream`: Adaptive bitrate streaming.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaArgs'] activity_para: The parameters of a subtask.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] reardrive_indices: The indexes of the subsequent actions. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "activity_type", activity_type)
+        if activity_para is not None:
+            pulumi.set(__self__, "activity_para", activity_para)
+        if reardrive_indices is not None:
+            pulumi.set(__self__, "reardrive_indices", reardrive_indices)
+
+    @property
+    @pulumi.getter(name="activityType")
+    def activity_type(self) -> pulumi.Input[str]:
+        """
+        The subtask type. `input`: The start. `output`: The end. `action-trans`: Transcoding. `action-samplesnapshot`: Sampled screencapturing. `action-AIAnalysis`: Content analysis. `action-AIRecognition`: Content recognition. `action-aiReview`: Content moderation. `action-animated-graphics`: Animated screenshot generation. `action-image-sprite`: Image sprite generation. `action-snapshotByTimeOffset`: Time point screencapturing. `action-adaptive-substream`: Adaptive bitrate streaming.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "activity_type")
+
+    @activity_type.setter
+    def activity_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "activity_type", value)
+
+    @property
+    @pulumi.getter(name="activityPara")
+    def activity_para(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaArgs']]:
+        """
+        The parameters of a subtask.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "activity_para")
+
+    @activity_para.setter
+    def activity_para(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaArgs']]):
+        pulumi.set(self, "activity_para", value)
+
+    @property
+    @pulumi.getter(name="reardriveIndices")
+    def reardrive_indices(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        The indexes of the subsequent actions. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "reardrive_indices")
+
+    @reardrive_indices.setter
+    def reardrive_indices(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]):
+        pulumi.set(self, "reardrive_indices", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaArgs:
+    def __init__(__self__, *,
+                 adaptive_dynamic_streaming_task: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskArgs']] = None,
+                 ai_analysis_task: Optional[pulumi.Input['ScheduleActivityActivityParaAiAnalysisTaskArgs']] = None,
+                 ai_content_review_task: Optional[pulumi.Input['ScheduleActivityActivityParaAiContentReviewTaskArgs']] = None,
+                 ai_recognition_task: Optional[pulumi.Input['ScheduleActivityActivityParaAiRecognitionTaskArgs']] = None,
+                 animated_graphic_task: Optional[pulumi.Input['ScheduleActivityActivityParaAnimatedGraphicTaskArgs']] = None,
+                 image_sprite_task: Optional[pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskArgs']] = None,
+                 sample_snapshot_task: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskArgs']] = None,
+                 snapshot_by_time_offset_task: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskArgs']] = None,
+                 transcode_task: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskArgs']] = None):
+        """
+        :param pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskArgs'] adaptive_dynamic_streaming_task: An adaptive bitrate streaming task.
+        :param pulumi.Input['ScheduleActivityActivityParaAiAnalysisTaskArgs'] ai_analysis_task: A content analysis task.
+        :param pulumi.Input['ScheduleActivityActivityParaAiContentReviewTaskArgs'] ai_content_review_task: A content moderation task.
+        :param pulumi.Input['ScheduleActivityActivityParaAiRecognitionTaskArgs'] ai_recognition_task: A content recognition task.
+        :param pulumi.Input['ScheduleActivityActivityParaAnimatedGraphicTaskArgs'] animated_graphic_task: An animated screenshot generation task.
+        :param pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskArgs'] image_sprite_task: An image sprite generation task.
+        :param pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskArgs'] sample_snapshot_task: A sampled screencapturing task.
+        :param pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskArgs'] snapshot_by_time_offset_task: A time point screencapturing task.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskArgs'] transcode_task: A transcoding task.
+        """
+        if adaptive_dynamic_streaming_task is not None:
+            pulumi.set(__self__, "adaptive_dynamic_streaming_task", adaptive_dynamic_streaming_task)
+        if ai_analysis_task is not None:
+            pulumi.set(__self__, "ai_analysis_task", ai_analysis_task)
+        if ai_content_review_task is not None:
+            pulumi.set(__self__, "ai_content_review_task", ai_content_review_task)
+        if ai_recognition_task is not None:
+            pulumi.set(__self__, "ai_recognition_task", ai_recognition_task)
+        if animated_graphic_task is not None:
+            pulumi.set(__self__, "animated_graphic_task", animated_graphic_task)
+        if image_sprite_task is not None:
+            pulumi.set(__self__, "image_sprite_task", image_sprite_task)
+        if sample_snapshot_task is not None:
+            pulumi.set(__self__, "sample_snapshot_task", sample_snapshot_task)
+        if snapshot_by_time_offset_task is not None:
+            pulumi.set(__self__, "snapshot_by_time_offset_task", snapshot_by_time_offset_task)
+        if transcode_task is not None:
+            pulumi.set(__self__, "transcode_task", transcode_task)
+
+    @property
+    @pulumi.getter(name="adaptiveDynamicStreamingTask")
+    def adaptive_dynamic_streaming_task(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskArgs']]:
+        """
+        An adaptive bitrate streaming task.
+        """
+        return pulumi.get(self, "adaptive_dynamic_streaming_task")
+
+    @adaptive_dynamic_streaming_task.setter
+    def adaptive_dynamic_streaming_task(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskArgs']]):
+        pulumi.set(self, "adaptive_dynamic_streaming_task", value)
+
+    @property
+    @pulumi.getter(name="aiAnalysisTask")
+    def ai_analysis_task(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAiAnalysisTaskArgs']]:
+        """
+        A content analysis task.
+        """
+        return pulumi.get(self, "ai_analysis_task")
+
+    @ai_analysis_task.setter
+    def ai_analysis_task(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAiAnalysisTaskArgs']]):
+        pulumi.set(self, "ai_analysis_task", value)
+
+    @property
+    @pulumi.getter(name="aiContentReviewTask")
+    def ai_content_review_task(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAiContentReviewTaskArgs']]:
+        """
+        A content moderation task.
+        """
+        return pulumi.get(self, "ai_content_review_task")
+
+    @ai_content_review_task.setter
+    def ai_content_review_task(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAiContentReviewTaskArgs']]):
+        pulumi.set(self, "ai_content_review_task", value)
+
+    @property
+    @pulumi.getter(name="aiRecognitionTask")
+    def ai_recognition_task(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAiRecognitionTaskArgs']]:
+        """
+        A content recognition task.
+        """
+        return pulumi.get(self, "ai_recognition_task")
+
+    @ai_recognition_task.setter
+    def ai_recognition_task(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAiRecognitionTaskArgs']]):
+        pulumi.set(self, "ai_recognition_task", value)
+
+    @property
+    @pulumi.getter(name="animatedGraphicTask")
+    def animated_graphic_task(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAnimatedGraphicTaskArgs']]:
+        """
+        An animated screenshot generation task.
+        """
+        return pulumi.get(self, "animated_graphic_task")
+
+    @animated_graphic_task.setter
+    def animated_graphic_task(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAnimatedGraphicTaskArgs']]):
+        pulumi.set(self, "animated_graphic_task", value)
+
+    @property
+    @pulumi.getter(name="imageSpriteTask")
+    def image_sprite_task(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskArgs']]:
+        """
+        An image sprite generation task.
+        """
+        return pulumi.get(self, "image_sprite_task")
+
+    @image_sprite_task.setter
+    def image_sprite_task(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskArgs']]):
+        pulumi.set(self, "image_sprite_task", value)
+
+    @property
+    @pulumi.getter(name="sampleSnapshotTask")
+    def sample_snapshot_task(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskArgs']]:
+        """
+        A sampled screencapturing task.
+        """
+        return pulumi.get(self, "sample_snapshot_task")
+
+    @sample_snapshot_task.setter
+    def sample_snapshot_task(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskArgs']]):
+        pulumi.set(self, "sample_snapshot_task", value)
+
+    @property
+    @pulumi.getter(name="snapshotByTimeOffsetTask")
+    def snapshot_by_time_offset_task(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskArgs']]:
+        """
+        A time point screencapturing task.
+        """
+        return pulumi.get(self, "snapshot_by_time_offset_task")
+
+    @snapshot_by_time_offset_task.setter
+    def snapshot_by_time_offset_task(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskArgs']]):
+        pulumi.set(self, "snapshot_by_time_offset_task", value)
+
+    @property
+    @pulumi.getter(name="transcodeTask")
+    def transcode_task(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskArgs']]:
+        """
+        A transcoding task.
+        """
+        return pulumi.get(self, "transcode_task")
+
+    @transcode_task.setter
+    def transcode_task(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskArgs']]):
+        pulumi.set(self, "transcode_task", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 add_on_subtitles: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleArgs']]]] = None,
+                 output_object_path: Optional[pulumi.Input[str]] = None,
+                 output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageArgs']] = None,
+                 segment_object_name: Optional[pulumi.Input[str]] = None,
+                 sub_stream_object_name: Optional[pulumi.Input[str]] = None,
+                 watermark_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetArgs']]]] = None):
+        """
+        :param pulumi.Input[int] definition: Adaptive bitrate streaming template ID.
+        :param pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleArgs']]] add_on_subtitles: Subtitle files to insert.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[str] output_object_path: The relative or absolute output path of the manifest file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}.{format}`.
+        :param pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageArgs'] output_storage: Target bucket of an output file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: this field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] segment_object_name: The relative output path of the segment file after being transcoded to adaptive bitrate streaming (in HLS format only). If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
+        :param pulumi.Input[str] sub_stream_object_name: The relative output path of the substream file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}`.
+        :param pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetArgs']]] watermark_sets: List of up to 10 image or text watermarks.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if add_on_subtitles is not None:
+            pulumi.set(__self__, "add_on_subtitles", add_on_subtitles)
+        if output_object_path is not None:
+            pulumi.set(__self__, "output_object_path", output_object_path)
+        if output_storage is not None:
+            pulumi.set(__self__, "output_storage", output_storage)
+        if segment_object_name is not None:
+            pulumi.set(__self__, "segment_object_name", segment_object_name)
+        if sub_stream_object_name is not None:
+            pulumi.set(__self__, "sub_stream_object_name", sub_stream_object_name)
+        if watermark_sets is not None:
+            pulumi.set(__self__, "watermark_sets", watermark_sets)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        Adaptive bitrate streaming template ID.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="addOnSubtitles")
+    def add_on_subtitles(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleArgs']]]]:
+        """
+        Subtitle files to insert.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "add_on_subtitles")
+
+    @add_on_subtitles.setter
+    def add_on_subtitles(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleArgs']]]]):
+        pulumi.set(self, "add_on_subtitles", value)
+
+    @property
+    @pulumi.getter(name="outputObjectPath")
+    def output_object_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        The relative or absolute output path of the manifest file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}.{format}`.
+        """
+        return pulumi.get(self, "output_object_path")
+
+    @output_object_path.setter
+    def output_object_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_object_path", value)
+
+    @property
+    @pulumi.getter(name="outputStorage")
+    def output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageArgs']]:
+        """
+        Target bucket of an output file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "output_storage")
+
+    @output_storage.setter
+    def output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageArgs']]):
+        pulumi.set(self, "output_storage", value)
+
+    @property
+    @pulumi.getter(name="segmentObjectName")
+    def segment_object_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The relative output path of the segment file after being transcoded to adaptive bitrate streaming (in HLS format only). If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
+        """
+        return pulumi.get(self, "segment_object_name")
+
+    @segment_object_name.setter
+    def segment_object_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "segment_object_name", value)
+
+    @property
+    @pulumi.getter(name="subStreamObjectName")
+    def sub_stream_object_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The relative output path of the substream file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}`.
+        """
+        return pulumi.get(self, "sub_stream_object_name")
+
+    @sub_stream_object_name.setter
+    def sub_stream_object_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "sub_stream_object_name", value)
+
+    @property
+    @pulumi.getter(name="watermarkSets")
+    def watermark_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetArgs']]]]:
+        """
+        List of up to 10 image or text watermarks.
+        """
+        return pulumi.get(self, "watermark_sets")
+
+    @watermark_sets.setter
+    def watermark_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetArgs']]]]):
+        pulumi.set(self, "watermark_sets", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleArgs:
+    def __init__(__self__, *,
+                 subtitle: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleArgs']] = None,
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleArgs'] subtitle: Subtitle file.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[str] type: The inserting type. Valid values: `subtitle-stream`:Insert title track. `close-caption-708`:CEA-708 subtitle encode to SEI frame. `close-caption-608`:CEA-608 subtitle encode to SEI frame. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if subtitle is not None:
+            pulumi.set(__self__, "subtitle", subtitle)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def subtitle(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleArgs']]:
+        """
+        Subtitle file.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "subtitle")
+
+    @subtitle.setter
+    def subtitle(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleArgs']]):
+        pulumi.set(self, "subtitle", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The inserting type. Valid values: `subtitle-stream`:Insert title track. `close-caption-708`:CEA-708 subtitle encode to SEI frame. `close-caption-608`:CEA-608 subtitle encode to SEI frame. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values:  `COS`:A COS bucket address. `URL`:A URL. `AWS-S3`:An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when Type is COS.
+        :param pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if Type is AWS-S3.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when Type is URL.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values:  `COS`:A COS bucket address. `URL`:A URL. `AWS-S3`:An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when Type is COS.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if Type is AWS-S3.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when Type is URL.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageCosOutputStorageArgs']] = None,
+                 s3_output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageS3OutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        :param pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageCosOutputStorageArgs'] cos_output_storage: The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageS3OutputStorageArgs'] s3_output_storage: The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_output_storage is not None:
+            pulumi.set(__self__, "cos_output_storage", cos_output_storage)
+        if s3_output_storage is not None:
+            pulumi.set(__self__, "s3_output_storage", s3_output_storage)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosOutputStorage")
+    def cos_output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageCosOutputStorageArgs']]:
+        """
+        The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cos_output_storage")
+
+    @cos_output_storage.setter
+    def cos_output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageCosOutputStorageArgs']]):
+        pulumi.set(self, "cos_output_storage", value)
+
+    @property
+    @pulumi.getter(name="s3OutputStorage")
+    def s3_output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageS3OutputStorageArgs']]:
+        """
+        The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_output_storage")
+
+    @s3_output_storage.setter
+    def s3_output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageS3OutputStorageArgs']]):
+        pulumi.set(self, "s3_output_storage", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageCosOutputStorageArgs:
+    def __init__(__self__, *,
+                 bucket: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        :param pulumi.Input[str] region: The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageS3OutputStorageArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 end_time_offset: Optional[pulumi.Input[float]] = None,
+                 raw_parameter: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterArgs']] = None,
+                 start_time_offset: Optional[pulumi.Input[float]] = None,
+                 svg_content: Optional[pulumi.Input[str]] = None,
+                 text_content: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] definition: ID of a watermarking template.
+        :param pulumi.Input[float] end_time_offset: End time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame; If this value is greater than 0 (e.g., n), the watermark will exist till second n; If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+        :param pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterArgs'] raw_parameter: Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+        :param pulumi.Input[float] start_time_offset: Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame; If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+        :param pulumi.Input[str] svg_content: SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+        :param pulumi.Input[str] text_content: Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if end_time_offset is not None:
+            pulumi.set(__self__, "end_time_offset", end_time_offset)
+        if raw_parameter is not None:
+            pulumi.set(__self__, "raw_parameter", raw_parameter)
+        if start_time_offset is not None:
+            pulumi.set(__self__, "start_time_offset", start_time_offset)
+        if svg_content is not None:
+            pulumi.set(__self__, "svg_content", svg_content)
+        if text_content is not None:
+            pulumi.set(__self__, "text_content", text_content)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        ID of a watermarking template.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="endTimeOffset")
+    def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame; If this value is greater than 0 (e.g., n), the watermark will exist till second n; If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+        """
+        return pulumi.get(self, "end_time_offset")
+
+    @end_time_offset.setter
+    def end_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "end_time_offset", value)
+
+    @property
+    @pulumi.getter(name="rawParameter")
+    def raw_parameter(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterArgs']]:
+        """
+        Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+        """
+        return pulumi.get(self, "raw_parameter")
+
+    @raw_parameter.setter
+    def raw_parameter(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterArgs']]):
+        pulumi.set(self, "raw_parameter", value)
+
+    @property
+    @pulumi.getter(name="startTimeOffset")
+    def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame; If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+        """
+        return pulumi.get(self, "start_time_offset")
+
+    @start_time_offset.setter
+    def start_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "start_time_offset", value)
+
+    @property
+    @pulumi.getter(name="svgContent")
+    def svg_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+        """
+        return pulumi.get(self, "svg_content")
+
+    @svg_content.setter
+    def svg_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "svg_content", value)
+
+    @property
+    @pulumi.getter(name="textContent")
+    def text_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+        """
+        return pulumi.get(self, "text_content")
+
+    @text_content.setter
+    def text_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "text_content", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 coordinate_origin: Optional[pulumi.Input[str]] = None,
+                 image_template: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateArgs']] = None,
+                 x_pos: Optional[pulumi.Input[str]] = None,
+                 y_pos: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] type: Watermark type. Valid values: image: image watermark.
+        :param pulumi.Input[str] coordinate_origin: Origin position, which currently can only be: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+        :param pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateArgs'] image_template: Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+        :param pulumi.Input[str] x_pos: The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        :param pulumi.Input[str] y_pos: The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        pulumi.set(__self__, "type", type)
+        if coordinate_origin is not None:
+            pulumi.set(__self__, "coordinate_origin", coordinate_origin)
+        if image_template is not None:
+            pulumi.set(__self__, "image_template", image_template)
+        if x_pos is not None:
+            pulumi.set(__self__, "x_pos", x_pos)
+        if y_pos is not None:
+            pulumi.set(__self__, "y_pos", y_pos)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Watermark type. Valid values: image: image watermark.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="coordinateOrigin")
+    def coordinate_origin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Origin position, which currently can only be: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+        """
+        return pulumi.get(self, "coordinate_origin")
+
+    @coordinate_origin.setter
+    def coordinate_origin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "coordinate_origin", value)
+
+    @property
+    @pulumi.getter(name="imageTemplate")
+    def image_template(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateArgs']]:
+        """
+        Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+        """
+        return pulumi.get(self, "image_template")
+
+    @image_template.setter
+    def image_template(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateArgs']]):
+        pulumi.set(self, "image_template", value)
+
+    @property
+    @pulumi.getter(name="xPos")
+    def x_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "x_pos")
+
+    @x_pos.setter
+    def x_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "x_pos", value)
+
+    @property
+    @pulumi.getter(name="yPos")
+    def y_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "y_pos")
+
+    @y_pos.setter
+    def y_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "y_pos", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateArgs:
+    def __init__(__self__, *,
+                 image_content: pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentArgs'],
+                 height: Optional[pulumi.Input[str]] = None,
+                 repeat_type: Optional[pulumi.Input[str]] = None,
+                 width: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentArgs'] image_content: Input content of watermark image. JPEG and PNG images are supported.
+        :param pulumi.Input[str] height: Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height; If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+        :param pulumi.Input[str] repeat_type: Repeat type of an animated watermark. Valid values: `once`: no longer appears after watermark playback ends. `repeat_last_frame`: stays on the last frame after watermark playback ends. `repeat` (default): repeats the playback until the video ends.
+        :param pulumi.Input[str] width: Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width; If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        pulumi.set(__self__, "image_content", image_content)
+        if height is not None:
+            pulumi.set(__self__, "height", height)
+        if repeat_type is not None:
+            pulumi.set(__self__, "repeat_type", repeat_type)
+        if width is not None:
+            pulumi.set(__self__, "width", width)
+
+    @property
+    @pulumi.getter(name="imageContent")
+    def image_content(self) -> pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentArgs']:
+        """
+        Input content of watermark image. JPEG and PNG images are supported.
+        """
+        return pulumi.get(self, "image_content")
+
+    @image_content.setter
+    def image_content(self, value: pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentArgs']):
+        pulumi.set(self, "image_content", value)
+
+    @property
+    @pulumi.getter
+    def height(self) -> Optional[pulumi.Input[str]]:
+        """
+        Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height; If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+        """
+        return pulumi.get(self, "height")
+
+    @height.setter
+    def height(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "height", value)
+
+    @property
+    @pulumi.getter(name="repeatType")
+    def repeat_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Repeat type of an animated watermark. Valid values: `once`: no longer appears after watermark playback ends. `repeat_last_frame`: stays on the last frame after watermark playback ends. `repeat` (default): repeats the playback until the video ends.
+        """
+        return pulumi.get(self, "repeat_type")
+
+    @repeat_type.setter
+    def repeat_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "repeat_type", value)
+
+    @property
+    @pulumi.getter
+    def width(self) -> Optional[pulumi.Input[str]]:
+        """
+        Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width; If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        return pulumi.get(self, "width")
+
+    @width.setter
+    def width(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "width", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAiAnalysisTaskArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 extended_parameter: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] definition: Video content analysis template ID.
+        :param pulumi.Input[str] extended_parameter: An extended parameter, whose value is a stringfied JSON.Note: This parameter is for customers with special requirements. It needs to be customized offline.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if extended_parameter is not None:
+            pulumi.set(__self__, "extended_parameter", extended_parameter)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        Video content analysis template ID.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="extendedParameter")
+    def extended_parameter(self) -> Optional[pulumi.Input[str]]:
+        """
+        An extended parameter, whose value is a stringfied JSON.Note: This parameter is for customers with special requirements. It needs to be customized offline.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "extended_parameter")
+
+    @extended_parameter.setter
+    def extended_parameter(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "extended_parameter", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAiContentReviewTaskArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] definition: Video content audit template ID.
+        """
+        pulumi.set(__self__, "definition", definition)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        Video content audit template ID.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAiRecognitionTaskArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] definition: Intelligent video recognition template ID.
+        """
+        pulumi.set(__self__, "definition", definition)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        Intelligent video recognition template ID.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAnimatedGraphicTaskArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 end_time_offset: pulumi.Input[float],
+                 start_time_offset: pulumi.Input[float],
+                 output_object_path: Optional[pulumi.Input[str]] = None,
+                 output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[int] definition: Animated image generating template ID.
+        :param pulumi.Input[float] end_time_offset: End time of an animated image in a video in seconds.
+        :param pulumi.Input[float] start_time_offset: Start time of an animated image in a video in seconds.
+        :param pulumi.Input[str] output_object_path: Output path to a generated animated image file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_animatedGraphic_{definition}.{format}`.
+        :param pulumi.Input['ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageArgs'] output_storage: Target bucket of a generated animated image file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "definition", definition)
+        pulumi.set(__self__, "end_time_offset", end_time_offset)
+        pulumi.set(__self__, "start_time_offset", start_time_offset)
+        if output_object_path is not None:
+            pulumi.set(__self__, "output_object_path", output_object_path)
+        if output_storage is not None:
+            pulumi.set(__self__, "output_storage", output_storage)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        Animated image generating template ID.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="endTimeOffset")
+    def end_time_offset(self) -> pulumi.Input[float]:
+        """
+        End time of an animated image in a video in seconds.
+        """
+        return pulumi.get(self, "end_time_offset")
+
+    @end_time_offset.setter
+    def end_time_offset(self, value: pulumi.Input[float]):
+        pulumi.set(self, "end_time_offset", value)
+
+    @property
+    @pulumi.getter(name="startTimeOffset")
+    def start_time_offset(self) -> pulumi.Input[float]:
+        """
+        Start time of an animated image in a video in seconds.
+        """
+        return pulumi.get(self, "start_time_offset")
+
+    @start_time_offset.setter
+    def start_time_offset(self, value: pulumi.Input[float]):
+        pulumi.set(self, "start_time_offset", value)
+
+    @property
+    @pulumi.getter(name="outputObjectPath")
+    def output_object_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Output path to a generated animated image file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_animatedGraphic_{definition}.{format}`.
+        """
+        return pulumi.get(self, "output_object_path")
+
+    @output_object_path.setter
+    def output_object_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_object_path", value)
+
+    @property
+    @pulumi.getter(name="outputStorage")
+    def output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageArgs']]:
+        """
+        Target bucket of a generated animated image file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "output_storage")
+
+    @output_storage.setter
+    def output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageArgs']]):
+        pulumi.set(self, "output_storage", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageCosOutputStorageArgs']] = None,
+                 s3_output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageS3OutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        :param pulumi.Input['ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageCosOutputStorageArgs'] cos_output_storage: The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageS3OutputStorageArgs'] s3_output_storage: The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_output_storage is not None:
+            pulumi.set(__self__, "cos_output_storage", cos_output_storage)
+        if s3_output_storage is not None:
+            pulumi.set(__self__, "s3_output_storage", s3_output_storage)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosOutputStorage")
+    def cos_output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageCosOutputStorageArgs']]:
+        """
+        The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cos_output_storage")
+
+    @cos_output_storage.setter
+    def cos_output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageCosOutputStorageArgs']]):
+        pulumi.set(self, "cos_output_storage", value)
+
+    @property
+    @pulumi.getter(name="s3OutputStorage")
+    def s3_output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageS3OutputStorageArgs']]:
+        """
+        The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_output_storage")
+
+    @s3_output_storage.setter
+    def s3_output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageS3OutputStorageArgs']]):
+        pulumi.set(self, "s3_output_storage", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageCosOutputStorageArgs:
+    def __init__(__self__, *,
+                 bucket: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        :param pulumi.Input[str] region: The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageS3OutputStorageArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaImageSpriteTaskArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 object_number_format: Optional[pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskObjectNumberFormatArgs']] = None,
+                 output_object_path: Optional[pulumi.Input[str]] = None,
+                 output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskOutputStorageArgs']] = None,
+                 web_vtt_object_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] definition: ID of an image sprite generating template.
+        :param pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskObjectNumberFormatArgs'] object_number_format: Rule of the `{number}` variable in the image sprite output path.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] output_object_path: Output path to a generated image sprite file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_imageSprite_{definition}_{number}.{format}`.
+        :param pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskOutputStorageArgs'] output_storage: Target bucket of a generated image sprite. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] web_vtt_object_name: Output path to the WebVTT file after an image sprite is generated, which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_imageSprite_{definition}.{format}`.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if object_number_format is not None:
+            pulumi.set(__self__, "object_number_format", object_number_format)
+        if output_object_path is not None:
+            pulumi.set(__self__, "output_object_path", output_object_path)
+        if output_storage is not None:
+            pulumi.set(__self__, "output_storage", output_storage)
+        if web_vtt_object_name is not None:
+            pulumi.set(__self__, "web_vtt_object_name", web_vtt_object_name)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        ID of an image sprite generating template.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="objectNumberFormat")
+    def object_number_format(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskObjectNumberFormatArgs']]:
+        """
+        Rule of the `{number}` variable in the image sprite output path.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "object_number_format")
+
+    @object_number_format.setter
+    def object_number_format(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskObjectNumberFormatArgs']]):
+        pulumi.set(self, "object_number_format", value)
+
+    @property
+    @pulumi.getter(name="outputObjectPath")
+    def output_object_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Output path to a generated image sprite file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_imageSprite_{definition}_{number}.{format}`.
+        """
+        return pulumi.get(self, "output_object_path")
+
+    @output_object_path.setter
+    def output_object_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_object_path", value)
+
+    @property
+    @pulumi.getter(name="outputStorage")
+    def output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskOutputStorageArgs']]:
+        """
+        Target bucket of a generated image sprite. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "output_storage")
+
+    @output_storage.setter
+    def output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskOutputStorageArgs']]):
+        pulumi.set(self, "output_storage", value)
+
+    @property
+    @pulumi.getter(name="webVttObjectName")
+    def web_vtt_object_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Output path to the WebVTT file after an image sprite is generated, which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_imageSprite_{definition}.{format}`.
+        """
+        return pulumi.get(self, "web_vtt_object_name")
+
+    @web_vtt_object_name.setter
+    def web_vtt_object_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "web_vtt_object_name", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaImageSpriteTaskObjectNumberFormatArgs:
+    def __init__(__self__, *,
+                 increment: Optional[pulumi.Input[int]] = None,
+                 initial_value: Optional[pulumi.Input[int]] = None,
+                 min_length: Optional[pulumi.Input[int]] = None,
+                 place_holder: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] increment: Increment of the `{number}` variable. Default value: 1.
+        :param pulumi.Input[int] initial_value: Start value of the `{number}` variable. Default value: 0.
+        :param pulumi.Input[int] min_length: Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+        :param pulumi.Input[str] place_holder: Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+        """
+        if increment is not None:
+            pulumi.set(__self__, "increment", increment)
+        if initial_value is not None:
+            pulumi.set(__self__, "initial_value", initial_value)
+        if min_length is not None:
+            pulumi.set(__self__, "min_length", min_length)
+        if place_holder is not None:
+            pulumi.set(__self__, "place_holder", place_holder)
+
+    @property
+    @pulumi.getter
+    def increment(self) -> Optional[pulumi.Input[int]]:
+        """
+        Increment of the `{number}` variable. Default value: 1.
+        """
+        return pulumi.get(self, "increment")
+
+    @increment.setter
+    def increment(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "increment", value)
+
+    @property
+    @pulumi.getter(name="initialValue")
+    def initial_value(self) -> Optional[pulumi.Input[int]]:
+        """
+        Start value of the `{number}` variable. Default value: 0.
+        """
+        return pulumi.get(self, "initial_value")
+
+    @initial_value.setter
+    def initial_value(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "initial_value", value)
+
+    @property
+    @pulumi.getter(name="minLength")
+    def min_length(self) -> Optional[pulumi.Input[int]]:
+        """
+        Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+        """
+        return pulumi.get(self, "min_length")
+
+    @min_length.setter
+    def min_length(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "min_length", value)
+
+    @property
+    @pulumi.getter(name="placeHolder")
+    def place_holder(self) -> Optional[pulumi.Input[str]]:
+        """
+        Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+        """
+        return pulumi.get(self, "place_holder")
+
+    @place_holder.setter
+    def place_holder(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "place_holder", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaImageSpriteTaskOutputStorageArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskOutputStorageCosOutputStorageArgs']] = None,
+                 s3_output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskOutputStorageS3OutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        :param pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskOutputStorageCosOutputStorageArgs'] cos_output_storage: The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskOutputStorageS3OutputStorageArgs'] s3_output_storage: The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_output_storage is not None:
+            pulumi.set(__self__, "cos_output_storage", cos_output_storage)
+        if s3_output_storage is not None:
+            pulumi.set(__self__, "s3_output_storage", s3_output_storage)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosOutputStorage")
+    def cos_output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskOutputStorageCosOutputStorageArgs']]:
+        """
+        The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cos_output_storage")
+
+    @cos_output_storage.setter
+    def cos_output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskOutputStorageCosOutputStorageArgs']]):
+        pulumi.set(self, "cos_output_storage", value)
+
+    @property
+    @pulumi.getter(name="s3OutputStorage")
+    def s3_output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskOutputStorageS3OutputStorageArgs']]:
+        """
+        The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_output_storage")
+
+    @s3_output_storage.setter
+    def s3_output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaImageSpriteTaskOutputStorageS3OutputStorageArgs']]):
+        pulumi.set(self, "s3_output_storage", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaImageSpriteTaskOutputStorageCosOutputStorageArgs:
+    def __init__(__self__, *,
+                 bucket: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        :param pulumi.Input[str] region: The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaImageSpriteTaskOutputStorageS3OutputStorageArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSampleSnapshotTaskArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 object_number_format: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskObjectNumberFormatArgs']] = None,
+                 output_object_path: Optional[pulumi.Input[str]] = None,
+                 output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageArgs']] = None,
+                 watermark_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetArgs']]]] = None):
+        """
+        :param pulumi.Input[int] definition: Sampled screencapturing template ID.
+        :param pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskObjectNumberFormatArgs'] object_number_format: Rule of the `{number}` variable in the sampled screenshot output path.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] output_object_path: Output path to a generated sampled screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_sampleSnapshot_{definition}_{number}.{format}`.
+        :param pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageArgs'] output_storage: Target bucket of a sampled screenshot. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetArgs']]] watermark_sets: List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if object_number_format is not None:
+            pulumi.set(__self__, "object_number_format", object_number_format)
+        if output_object_path is not None:
+            pulumi.set(__self__, "output_object_path", output_object_path)
+        if output_storage is not None:
+            pulumi.set(__self__, "output_storage", output_storage)
+        if watermark_sets is not None:
+            pulumi.set(__self__, "watermark_sets", watermark_sets)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        Sampled screencapturing template ID.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="objectNumberFormat")
+    def object_number_format(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskObjectNumberFormatArgs']]:
+        """
+        Rule of the `{number}` variable in the sampled screenshot output path.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "object_number_format")
+
+    @object_number_format.setter
+    def object_number_format(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskObjectNumberFormatArgs']]):
+        pulumi.set(self, "object_number_format", value)
+
+    @property
+    @pulumi.getter(name="outputObjectPath")
+    def output_object_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Output path to a generated sampled screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_sampleSnapshot_{definition}_{number}.{format}`.
+        """
+        return pulumi.get(self, "output_object_path")
+
+    @output_object_path.setter
+    def output_object_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_object_path", value)
+
+    @property
+    @pulumi.getter(name="outputStorage")
+    def output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageArgs']]:
+        """
+        Target bucket of a sampled screenshot. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "output_storage")
+
+    @output_storage.setter
+    def output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageArgs']]):
+        pulumi.set(self, "output_storage", value)
+
+    @property
+    @pulumi.getter(name="watermarkSets")
+    def watermark_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetArgs']]]]:
+        """
+        List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "watermark_sets")
+
+    @watermark_sets.setter
+    def watermark_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetArgs']]]]):
+        pulumi.set(self, "watermark_sets", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSampleSnapshotTaskObjectNumberFormatArgs:
+    def __init__(__self__, *,
+                 increment: Optional[pulumi.Input[int]] = None,
+                 initial_value: Optional[pulumi.Input[int]] = None,
+                 min_length: Optional[pulumi.Input[int]] = None,
+                 place_holder: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] increment: Increment of the `{number}` variable. Default value: 1.
+        :param pulumi.Input[int] initial_value: Start value of the `{number}` variable. Default value: 0.
+        :param pulumi.Input[int] min_length: Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+        :param pulumi.Input[str] place_holder: Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+        """
+        if increment is not None:
+            pulumi.set(__self__, "increment", increment)
+        if initial_value is not None:
+            pulumi.set(__self__, "initial_value", initial_value)
+        if min_length is not None:
+            pulumi.set(__self__, "min_length", min_length)
+        if place_holder is not None:
+            pulumi.set(__self__, "place_holder", place_holder)
+
+    @property
+    @pulumi.getter
+    def increment(self) -> Optional[pulumi.Input[int]]:
+        """
+        Increment of the `{number}` variable. Default value: 1.
+        """
+        return pulumi.get(self, "increment")
+
+    @increment.setter
+    def increment(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "increment", value)
+
+    @property
+    @pulumi.getter(name="initialValue")
+    def initial_value(self) -> Optional[pulumi.Input[int]]:
+        """
+        Start value of the `{number}` variable. Default value: 0.
+        """
+        return pulumi.get(self, "initial_value")
+
+    @initial_value.setter
+    def initial_value(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "initial_value", value)
+
+    @property
+    @pulumi.getter(name="minLength")
+    def min_length(self) -> Optional[pulumi.Input[int]]:
+        """
+        Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+        """
+        return pulumi.get(self, "min_length")
+
+    @min_length.setter
+    def min_length(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "min_length", value)
+
+    @property
+    @pulumi.getter(name="placeHolder")
+    def place_holder(self) -> Optional[pulumi.Input[str]]:
+        """
+        Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+        """
+        return pulumi.get(self, "place_holder")
+
+    @place_holder.setter
+    def place_holder(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "place_holder", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageCosOutputStorageArgs']] = None,
+                 s3_output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageS3OutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        :param pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageCosOutputStorageArgs'] cos_output_storage: The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageS3OutputStorageArgs'] s3_output_storage: The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_output_storage is not None:
+            pulumi.set(__self__, "cos_output_storage", cos_output_storage)
+        if s3_output_storage is not None:
+            pulumi.set(__self__, "s3_output_storage", s3_output_storage)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosOutputStorage")
+    def cos_output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageCosOutputStorageArgs']]:
+        """
+        The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cos_output_storage")
+
+    @cos_output_storage.setter
+    def cos_output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageCosOutputStorageArgs']]):
+        pulumi.set(self, "cos_output_storage", value)
+
+    @property
+    @pulumi.getter(name="s3OutputStorage")
+    def s3_output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageS3OutputStorageArgs']]:
+        """
+        The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_output_storage")
+
+    @s3_output_storage.setter
+    def s3_output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageS3OutputStorageArgs']]):
+        pulumi.set(self, "s3_output_storage", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageCosOutputStorageArgs:
+    def __init__(__self__, *,
+                 bucket: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        :param pulumi.Input[str] region: The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageS3OutputStorageArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 end_time_offset: Optional[pulumi.Input[float]] = None,
+                 raw_parameter: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterArgs']] = None,
+                 start_time_offset: Optional[pulumi.Input[float]] = None,
+                 svg_content: Optional[pulumi.Input[str]] = None,
+                 text_content: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] definition: ID of a watermarking template.
+        :param pulumi.Input[float] end_time_offset: End time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame; If this value is greater than 0 (e.g., n), the watermark will exist till second n; If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+        :param pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterArgs'] raw_parameter: Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+        :param pulumi.Input[float] start_time_offset: Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame; If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+        :param pulumi.Input[str] svg_content: SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+        :param pulumi.Input[str] text_content: Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if end_time_offset is not None:
+            pulumi.set(__self__, "end_time_offset", end_time_offset)
+        if raw_parameter is not None:
+            pulumi.set(__self__, "raw_parameter", raw_parameter)
+        if start_time_offset is not None:
+            pulumi.set(__self__, "start_time_offset", start_time_offset)
+        if svg_content is not None:
+            pulumi.set(__self__, "svg_content", svg_content)
+        if text_content is not None:
+            pulumi.set(__self__, "text_content", text_content)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        ID of a watermarking template.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="endTimeOffset")
+    def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame; If this value is greater than 0 (e.g., n), the watermark will exist till second n; If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+        """
+        return pulumi.get(self, "end_time_offset")
+
+    @end_time_offset.setter
+    def end_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "end_time_offset", value)
+
+    @property
+    @pulumi.getter(name="rawParameter")
+    def raw_parameter(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterArgs']]:
+        """
+        Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+        """
+        return pulumi.get(self, "raw_parameter")
+
+    @raw_parameter.setter
+    def raw_parameter(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterArgs']]):
+        pulumi.set(self, "raw_parameter", value)
+
+    @property
+    @pulumi.getter(name="startTimeOffset")
+    def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame; If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+        """
+        return pulumi.get(self, "start_time_offset")
+
+    @start_time_offset.setter
+    def start_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "start_time_offset", value)
+
+    @property
+    @pulumi.getter(name="svgContent")
+    def svg_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+        """
+        return pulumi.get(self, "svg_content")
+
+    @svg_content.setter
+    def svg_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "svg_content", value)
+
+    @property
+    @pulumi.getter(name="textContent")
+    def text_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+        """
+        return pulumi.get(self, "text_content")
+
+    @text_content.setter
+    def text_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "text_content", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 coordinate_origin: Optional[pulumi.Input[str]] = None,
+                 image_template: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateArgs']] = None,
+                 x_pos: Optional[pulumi.Input[str]] = None,
+                 y_pos: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] type: Watermark type. Valid values: image: image watermark.
+        :param pulumi.Input[str] coordinate_origin: Origin position, which currently can only be: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+        :param pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateArgs'] image_template: Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+        :param pulumi.Input[str] x_pos: The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        :param pulumi.Input[str] y_pos: The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        pulumi.set(__self__, "type", type)
+        if coordinate_origin is not None:
+            pulumi.set(__self__, "coordinate_origin", coordinate_origin)
+        if image_template is not None:
+            pulumi.set(__self__, "image_template", image_template)
+        if x_pos is not None:
+            pulumi.set(__self__, "x_pos", x_pos)
+        if y_pos is not None:
+            pulumi.set(__self__, "y_pos", y_pos)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Watermark type. Valid values: image: image watermark.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="coordinateOrigin")
+    def coordinate_origin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Origin position, which currently can only be: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+        """
+        return pulumi.get(self, "coordinate_origin")
+
+    @coordinate_origin.setter
+    def coordinate_origin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "coordinate_origin", value)
+
+    @property
+    @pulumi.getter(name="imageTemplate")
+    def image_template(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateArgs']]:
+        """
+        Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+        """
+        return pulumi.get(self, "image_template")
+
+    @image_template.setter
+    def image_template(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateArgs']]):
+        pulumi.set(self, "image_template", value)
+
+    @property
+    @pulumi.getter(name="xPos")
+    def x_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "x_pos")
+
+    @x_pos.setter
+    def x_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "x_pos", value)
+
+    @property
+    @pulumi.getter(name="yPos")
+    def y_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "y_pos")
+
+    @y_pos.setter
+    def y_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "y_pos", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateArgs:
+    def __init__(__self__, *,
+                 image_content: pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentArgs'],
+                 height: Optional[pulumi.Input[str]] = None,
+                 repeat_type: Optional[pulumi.Input[str]] = None,
+                 width: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentArgs'] image_content: Input content of watermark image. JPEG and PNG images are supported.
+        :param pulumi.Input[str] height: Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height; If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+        :param pulumi.Input[str] repeat_type: Repeat type of an animated watermark. Valid values: `once`: no longer appears after watermark playback ends. `repeat_last_frame`: stays on the last frame after watermark playback ends. `repeat` (default): repeats the playback until the video ends.
+        :param pulumi.Input[str] width: Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width; If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        pulumi.set(__self__, "image_content", image_content)
+        if height is not None:
+            pulumi.set(__self__, "height", height)
+        if repeat_type is not None:
+            pulumi.set(__self__, "repeat_type", repeat_type)
+        if width is not None:
+            pulumi.set(__self__, "width", width)
+
+    @property
+    @pulumi.getter(name="imageContent")
+    def image_content(self) -> pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentArgs']:
+        """
+        Input content of watermark image. JPEG and PNG images are supported.
+        """
+        return pulumi.get(self, "image_content")
+
+    @image_content.setter
+    def image_content(self, value: pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentArgs']):
+        pulumi.set(self, "image_content", value)
+
+    @property
+    @pulumi.getter
+    def height(self) -> Optional[pulumi.Input[str]]:
+        """
+        Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height; If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+        """
+        return pulumi.get(self, "height")
+
+    @height.setter
+    def height(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "height", value)
+
+    @property
+    @pulumi.getter(name="repeatType")
+    def repeat_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Repeat type of an animated watermark. Valid values: `once`: no longer appears after watermark playback ends. `repeat_last_frame`: stays on the last frame after watermark playback ends. `repeat` (default): repeats the playback until the video ends.
+        """
+        return pulumi.get(self, "repeat_type")
+
+    @repeat_type.setter
+    def repeat_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "repeat_type", value)
+
+    @property
+    @pulumi.getter
+    def width(self) -> Optional[pulumi.Input[str]]:
+        """
+        Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width; If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        return pulumi.get(self, "width")
+
+    @width.setter
+    def width(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "width", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSnapshotByTimeOffsetTaskArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 ext_time_offset_sets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 object_number_format: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskObjectNumberFormatArgs']] = None,
+                 output_object_path: Optional[pulumi.Input[str]] = None,
+                 output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageArgs']] = None,
+                 watermark_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetArgs']]]] = None):
+        """
+        :param pulumi.Input[int] definition: ID of a time point screencapturing template.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ext_time_offset_sets: List of screenshot time points in the format of `s` or `%`: If the string ends in `s`, it means that the time point is in seconds; for example, `3.5s` means that the time point is the 3.5th second; If the string ends in `%`, it means that the time point is the specified percentage of the video duration; for example, `10%` means that the time point is 10% of the video duration.
+        :param pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskObjectNumberFormatArgs'] object_number_format: Rule of the `{number}` variable in the time point screenshot output path.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] output_object_path: Output path to a generated time point screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}`.
+        :param pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageArgs'] output_storage: Target bucket of a generated time point screenshot file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetArgs']]] watermark_sets: List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if ext_time_offset_sets is not None:
+            pulumi.set(__self__, "ext_time_offset_sets", ext_time_offset_sets)
+        if object_number_format is not None:
+            pulumi.set(__self__, "object_number_format", object_number_format)
+        if output_object_path is not None:
+            pulumi.set(__self__, "output_object_path", output_object_path)
+        if output_storage is not None:
+            pulumi.set(__self__, "output_storage", output_storage)
+        if watermark_sets is not None:
+            pulumi.set(__self__, "watermark_sets", watermark_sets)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        ID of a time point screencapturing template.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="extTimeOffsetSets")
+    def ext_time_offset_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of screenshot time points in the format of `s` or `%`: If the string ends in `s`, it means that the time point is in seconds; for example, `3.5s` means that the time point is the 3.5th second; If the string ends in `%`, it means that the time point is the specified percentage of the video duration; for example, `10%` means that the time point is 10% of the video duration.
+        """
+        return pulumi.get(self, "ext_time_offset_sets")
+
+    @ext_time_offset_sets.setter
+    def ext_time_offset_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "ext_time_offset_sets", value)
+
+    @property
+    @pulumi.getter(name="objectNumberFormat")
+    def object_number_format(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskObjectNumberFormatArgs']]:
+        """
+        Rule of the `{number}` variable in the time point screenshot output path.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "object_number_format")
+
+    @object_number_format.setter
+    def object_number_format(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskObjectNumberFormatArgs']]):
+        pulumi.set(self, "object_number_format", value)
+
+    @property
+    @pulumi.getter(name="outputObjectPath")
+    def output_object_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Output path to a generated time point screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}`.
+        """
+        return pulumi.get(self, "output_object_path")
+
+    @output_object_path.setter
+    def output_object_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_object_path", value)
+
+    @property
+    @pulumi.getter(name="outputStorage")
+    def output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageArgs']]:
+        """
+        Target bucket of a generated time point screenshot file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "output_storage")
+
+    @output_storage.setter
+    def output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageArgs']]):
+        pulumi.set(self, "output_storage", value)
+
+    @property
+    @pulumi.getter(name="watermarkSets")
+    def watermark_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetArgs']]]]:
+        """
+        List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "watermark_sets")
+
+    @watermark_sets.setter
+    def watermark_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetArgs']]]]):
+        pulumi.set(self, "watermark_sets", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSnapshotByTimeOffsetTaskObjectNumberFormatArgs:
+    def __init__(__self__, *,
+                 increment: Optional[pulumi.Input[int]] = None,
+                 initial_value: Optional[pulumi.Input[int]] = None,
+                 min_length: Optional[pulumi.Input[int]] = None,
+                 place_holder: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] increment: Increment of the `{number}` variable. Default value: 1.
+        :param pulumi.Input[int] initial_value: Start value of the `{number}` variable. Default value: 0.
+        :param pulumi.Input[int] min_length: Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+        :param pulumi.Input[str] place_holder: Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+        """
+        if increment is not None:
+            pulumi.set(__self__, "increment", increment)
+        if initial_value is not None:
+            pulumi.set(__self__, "initial_value", initial_value)
+        if min_length is not None:
+            pulumi.set(__self__, "min_length", min_length)
+        if place_holder is not None:
+            pulumi.set(__self__, "place_holder", place_holder)
+
+    @property
+    @pulumi.getter
+    def increment(self) -> Optional[pulumi.Input[int]]:
+        """
+        Increment of the `{number}` variable. Default value: 1.
+        """
+        return pulumi.get(self, "increment")
+
+    @increment.setter
+    def increment(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "increment", value)
+
+    @property
+    @pulumi.getter(name="initialValue")
+    def initial_value(self) -> Optional[pulumi.Input[int]]:
+        """
+        Start value of the `{number}` variable. Default value: 0.
+        """
+        return pulumi.get(self, "initial_value")
+
+    @initial_value.setter
+    def initial_value(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "initial_value", value)
+
+    @property
+    @pulumi.getter(name="minLength")
+    def min_length(self) -> Optional[pulumi.Input[int]]:
+        """
+        Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+        """
+        return pulumi.get(self, "min_length")
+
+    @min_length.setter
+    def min_length(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "min_length", value)
+
+    @property
+    @pulumi.getter(name="placeHolder")
+    def place_holder(self) -> Optional[pulumi.Input[str]]:
+        """
+        Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+        """
+        return pulumi.get(self, "place_holder")
+
+    @place_holder.setter
+    def place_holder(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "place_holder", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageCosOutputStorageArgs']] = None,
+                 s3_output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageS3OutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        :param pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageCosOutputStorageArgs'] cos_output_storage: The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageS3OutputStorageArgs'] s3_output_storage: The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_output_storage is not None:
+            pulumi.set(__self__, "cos_output_storage", cos_output_storage)
+        if s3_output_storage is not None:
+            pulumi.set(__self__, "s3_output_storage", s3_output_storage)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosOutputStorage")
+    def cos_output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageCosOutputStorageArgs']]:
+        """
+        The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cos_output_storage")
+
+    @cos_output_storage.setter
+    def cos_output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageCosOutputStorageArgs']]):
+        pulumi.set(self, "cos_output_storage", value)
+
+    @property
+    @pulumi.getter(name="s3OutputStorage")
+    def s3_output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageS3OutputStorageArgs']]:
+        """
+        The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_output_storage")
+
+    @s3_output_storage.setter
+    def s3_output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageS3OutputStorageArgs']]):
+        pulumi.set(self, "s3_output_storage", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageCosOutputStorageArgs:
+    def __init__(__self__, *,
+                 bucket: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        :param pulumi.Input[str] region: The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageS3OutputStorageArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 end_time_offset: Optional[pulumi.Input[float]] = None,
+                 raw_parameter: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterArgs']] = None,
+                 start_time_offset: Optional[pulumi.Input[float]] = None,
+                 svg_content: Optional[pulumi.Input[str]] = None,
+                 text_content: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] definition: ID of a watermarking template.
+        :param pulumi.Input[float] end_time_offset: End time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame; If this value is greater than 0 (e.g., n), the watermark will exist till second n; If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+        :param pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterArgs'] raw_parameter: Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+        :param pulumi.Input[float] start_time_offset: Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame; If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+        :param pulumi.Input[str] svg_content: SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+        :param pulumi.Input[str] text_content: Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if end_time_offset is not None:
+            pulumi.set(__self__, "end_time_offset", end_time_offset)
+        if raw_parameter is not None:
+            pulumi.set(__self__, "raw_parameter", raw_parameter)
+        if start_time_offset is not None:
+            pulumi.set(__self__, "start_time_offset", start_time_offset)
+        if svg_content is not None:
+            pulumi.set(__self__, "svg_content", svg_content)
+        if text_content is not None:
+            pulumi.set(__self__, "text_content", text_content)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        ID of a watermarking template.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="endTimeOffset")
+    def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame; If this value is greater than 0 (e.g., n), the watermark will exist till second n; If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+        """
+        return pulumi.get(self, "end_time_offset")
+
+    @end_time_offset.setter
+    def end_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "end_time_offset", value)
+
+    @property
+    @pulumi.getter(name="rawParameter")
+    def raw_parameter(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterArgs']]:
+        """
+        Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+        """
+        return pulumi.get(self, "raw_parameter")
+
+    @raw_parameter.setter
+    def raw_parameter(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterArgs']]):
+        pulumi.set(self, "raw_parameter", value)
+
+    @property
+    @pulumi.getter(name="startTimeOffset")
+    def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame; If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+        """
+        return pulumi.get(self, "start_time_offset")
+
+    @start_time_offset.setter
+    def start_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "start_time_offset", value)
+
+    @property
+    @pulumi.getter(name="svgContent")
+    def svg_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+        """
+        return pulumi.get(self, "svg_content")
+
+    @svg_content.setter
+    def svg_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "svg_content", value)
+
+    @property
+    @pulumi.getter(name="textContent")
+    def text_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+        """
+        return pulumi.get(self, "text_content")
+
+    @text_content.setter
+    def text_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "text_content", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 coordinate_origin: Optional[pulumi.Input[str]] = None,
+                 image_template: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateArgs']] = None,
+                 x_pos: Optional[pulumi.Input[str]] = None,
+                 y_pos: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] type: Watermark type. Valid values: image: image watermark.
+        :param pulumi.Input[str] coordinate_origin: Origin position, which currently can only be: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+        :param pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateArgs'] image_template: Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+        :param pulumi.Input[str] x_pos: The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        :param pulumi.Input[str] y_pos: The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        pulumi.set(__self__, "type", type)
+        if coordinate_origin is not None:
+            pulumi.set(__self__, "coordinate_origin", coordinate_origin)
+        if image_template is not None:
+            pulumi.set(__self__, "image_template", image_template)
+        if x_pos is not None:
+            pulumi.set(__self__, "x_pos", x_pos)
+        if y_pos is not None:
+            pulumi.set(__self__, "y_pos", y_pos)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Watermark type. Valid values: image: image watermark.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="coordinateOrigin")
+    def coordinate_origin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Origin position, which currently can only be: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+        """
+        return pulumi.get(self, "coordinate_origin")
+
+    @coordinate_origin.setter
+    def coordinate_origin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "coordinate_origin", value)
+
+    @property
+    @pulumi.getter(name="imageTemplate")
+    def image_template(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateArgs']]:
+        """
+        Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+        """
+        return pulumi.get(self, "image_template")
+
+    @image_template.setter
+    def image_template(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateArgs']]):
+        pulumi.set(self, "image_template", value)
+
+    @property
+    @pulumi.getter(name="xPos")
+    def x_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "x_pos")
+
+    @x_pos.setter
+    def x_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "x_pos", value)
+
+    @property
+    @pulumi.getter(name="yPos")
+    def y_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "y_pos")
+
+    @y_pos.setter
+    def y_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "y_pos", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateArgs:
+    def __init__(__self__, *,
+                 image_content: pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentArgs'],
+                 height: Optional[pulumi.Input[str]] = None,
+                 repeat_type: Optional[pulumi.Input[str]] = None,
+                 width: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentArgs'] image_content: Input content of watermark image. JPEG and PNG images are supported.
+        :param pulumi.Input[str] height: Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height; If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+        :param pulumi.Input[str] repeat_type: Repeat type of an animated watermark. Valid values: `once`: no longer appears after watermark playback ends. `repeat_last_frame`: stays on the last frame after watermark playback ends. `repeat` (default): repeats the playback until the video ends.
+        :param pulumi.Input[str] width: Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width; If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        pulumi.set(__self__, "image_content", image_content)
+        if height is not None:
+            pulumi.set(__self__, "height", height)
+        if repeat_type is not None:
+            pulumi.set(__self__, "repeat_type", repeat_type)
+        if width is not None:
+            pulumi.set(__self__, "width", width)
+
+    @property
+    @pulumi.getter(name="imageContent")
+    def image_content(self) -> pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentArgs']:
+        """
+        Input content of watermark image. JPEG and PNG images are supported.
+        """
+        return pulumi.get(self, "image_content")
+
+    @image_content.setter
+    def image_content(self, value: pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentArgs']):
+        pulumi.set(self, "image_content", value)
+
+    @property
+    @pulumi.getter
+    def height(self) -> Optional[pulumi.Input[str]]:
+        """
+        Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height; If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+        """
+        return pulumi.get(self, "height")
+
+    @height.setter
+    def height(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "height", value)
+
+    @property
+    @pulumi.getter(name="repeatType")
+    def repeat_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Repeat type of an animated watermark. Valid values: `once`: no longer appears after watermark playback ends. `repeat_last_frame`: stays on the last frame after watermark playback ends. `repeat` (default): repeats the playback until the video ends.
+        """
+        return pulumi.get(self, "repeat_type")
+
+    @repeat_type.setter
+    def repeat_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "repeat_type", value)
+
+    @property
+    @pulumi.getter
+    def width(self) -> Optional[pulumi.Input[str]]:
+        """
+        Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width; If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        return pulumi.get(self, "width")
+
+    @width.setter
+    def width(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "width", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 end_time_offset: Optional[pulumi.Input[float]] = None,
+                 head_tail_parameter: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterArgs']] = None,
+                 mosaic_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskMosaicSetArgs']]]] = None,
+                 object_number_format: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskObjectNumberFormatArgs']] = None,
+                 output_object_path: Optional[pulumi.Input[str]] = None,
+                 output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOutputStorageArgs']] = None,
+                 override_parameter: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterArgs']] = None,
+                 raw_parameter: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskRawParameterArgs']] = None,
+                 segment_object_name: Optional[pulumi.Input[str]] = None,
+                 start_time_offset: Optional[pulumi.Input[float]] = None,
+                 watermark_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetArgs']]]] = None):
+        """
+        :param pulumi.Input[int] definition: ID of a video transcoding template.
+        :param pulumi.Input[float] end_time_offset: End time offset of a transcoded video, in seconds. If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video. If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video. If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterArgs'] head_tail_parameter: Opening and closing credits parametersNote: this field may return `null`, indicating that no valid value was found.
+        :param pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskMosaicSetArgs']]] mosaic_sets: List of blurs. Up to 10 ones can be supported.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskObjectNumberFormatArgs'] object_number_format: Rule of the `{number}` variable in the output path after transcoding.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] output_object_path: Path to a primary output file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}.{format}`.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOutputStorageArgs'] output_storage: Target bucket of an output file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterArgs'] override_parameter: Video transcoding custom parameter, which is valid when `Definition` is not 0.When any parameters in this structure are entered, they will be used to override corresponding parameters in templates.This parameter is used in highly customized scenarios. We recommend you only use `Definition` to specify the transcoding parameter.Note: this field may return `null`, indicating that no valid value was found.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskRawParameterArgs'] raw_parameter: Custom video transcoding parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the transcoding parameter preferably.
+        :param pulumi.Input[str] segment_object_name: Path to an output file part (the path to ts during transcoding to HLS), which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}_{number}.{format}`.
+        :param pulumi.Input[float] start_time_offset: Start time offset of a transcoded video, in seconds. If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video. If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video. If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.
+        :param pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetArgs']]] watermark_sets: List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if end_time_offset is not None:
+            pulumi.set(__self__, "end_time_offset", end_time_offset)
+        if head_tail_parameter is not None:
+            pulumi.set(__self__, "head_tail_parameter", head_tail_parameter)
+        if mosaic_sets is not None:
+            pulumi.set(__self__, "mosaic_sets", mosaic_sets)
+        if object_number_format is not None:
+            pulumi.set(__self__, "object_number_format", object_number_format)
+        if output_object_path is not None:
+            pulumi.set(__self__, "output_object_path", output_object_path)
+        if output_storage is not None:
+            pulumi.set(__self__, "output_storage", output_storage)
+        if override_parameter is not None:
+            pulumi.set(__self__, "override_parameter", override_parameter)
+        if raw_parameter is not None:
+            pulumi.set(__self__, "raw_parameter", raw_parameter)
+        if segment_object_name is not None:
+            pulumi.set(__self__, "segment_object_name", segment_object_name)
+        if start_time_offset is not None:
+            pulumi.set(__self__, "start_time_offset", start_time_offset)
+        if watermark_sets is not None:
+            pulumi.set(__self__, "watermark_sets", watermark_sets)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        ID of a video transcoding template.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="endTimeOffset")
+    def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of a transcoded video, in seconds. If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video. If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video. If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.
+        """
+        return pulumi.get(self, "end_time_offset")
+
+    @end_time_offset.setter
+    def end_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "end_time_offset", value)
+
+    @property
+    @pulumi.getter(name="headTailParameter")
+    def head_tail_parameter(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterArgs']]:
+        """
+        Opening and closing credits parametersNote: this field may return `null`, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "head_tail_parameter")
+
+    @head_tail_parameter.setter
+    def head_tail_parameter(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterArgs']]):
+        pulumi.set(self, "head_tail_parameter", value)
+
+    @property
+    @pulumi.getter(name="mosaicSets")
+    def mosaic_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskMosaicSetArgs']]]]:
+        """
+        List of blurs. Up to 10 ones can be supported.
+        """
+        return pulumi.get(self, "mosaic_sets")
+
+    @mosaic_sets.setter
+    def mosaic_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskMosaicSetArgs']]]]):
+        pulumi.set(self, "mosaic_sets", value)
+
+    @property
+    @pulumi.getter(name="objectNumberFormat")
+    def object_number_format(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskObjectNumberFormatArgs']]:
+        """
+        Rule of the `{number}` variable in the output path after transcoding.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "object_number_format")
+
+    @object_number_format.setter
+    def object_number_format(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskObjectNumberFormatArgs']]):
+        pulumi.set(self, "object_number_format", value)
+
+    @property
+    @pulumi.getter(name="outputObjectPath")
+    def output_object_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Path to a primary output file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}.{format}`.
+        """
+        return pulumi.get(self, "output_object_path")
+
+    @output_object_path.setter
+    def output_object_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "output_object_path", value)
+
+    @property
+    @pulumi.getter(name="outputStorage")
+    def output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOutputStorageArgs']]:
+        """
+        Target bucket of an output file. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "output_storage")
+
+    @output_storage.setter
+    def output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOutputStorageArgs']]):
+        pulumi.set(self, "output_storage", value)
+
+    @property
+    @pulumi.getter(name="overrideParameter")
+    def override_parameter(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterArgs']]:
+        """
+        Video transcoding custom parameter, which is valid when `Definition` is not 0.When any parameters in this structure are entered, they will be used to override corresponding parameters in templates.This parameter is used in highly customized scenarios. We recommend you only use `Definition` to specify the transcoding parameter.Note: this field may return `null`, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "override_parameter")
+
+    @override_parameter.setter
+    def override_parameter(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterArgs']]):
+        pulumi.set(self, "override_parameter", value)
+
+    @property
+    @pulumi.getter(name="rawParameter")
+    def raw_parameter(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskRawParameterArgs']]:
+        """
+        Custom video transcoding parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the transcoding parameter preferably.
+        """
+        return pulumi.get(self, "raw_parameter")
+
+    @raw_parameter.setter
+    def raw_parameter(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskRawParameterArgs']]):
+        pulumi.set(self, "raw_parameter", value)
+
+    @property
+    @pulumi.getter(name="segmentObjectName")
+    def segment_object_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Path to an output file part (the path to ts during transcoding to HLS), which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}_{number}.{format}`.
+        """
+        return pulumi.get(self, "segment_object_name")
+
+    @segment_object_name.setter
+    def segment_object_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "segment_object_name", value)
+
+    @property
+    @pulumi.getter(name="startTimeOffset")
+    def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of a transcoded video, in seconds. If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video. If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video. If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.
+        """
+        return pulumi.get(self, "start_time_offset")
+
+    @start_time_offset.setter
+    def start_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "start_time_offset", value)
+
+    @property
+    @pulumi.getter(name="watermarkSets")
+    def watermark_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetArgs']]]]:
+        """
+        List of up to 10 image or text watermarks.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "watermark_sets")
+
+    @watermark_sets.setter
+    def watermark_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetArgs']]]]):
+        pulumi.set(self, "watermark_sets", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskHeadTailParameterArgs:
+    def __init__(__self__, *,
+                 head_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetArgs']]]] = None,
+                 tail_sets: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetArgs']]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetArgs']]] head_sets: Opening credits list.
+        :param pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetArgs']]] tail_sets: Closing credits list.
+        """
+        if head_sets is not None:
+            pulumi.set(__self__, "head_sets", head_sets)
+        if tail_sets is not None:
+            pulumi.set(__self__, "tail_sets", tail_sets)
+
+    @property
+    @pulumi.getter(name="headSets")
+    def head_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetArgs']]]]:
+        """
+        Opening credits list.
+        """
+        return pulumi.get(self, "head_sets")
+
+    @head_sets.setter
+    def head_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetArgs']]]]):
+        pulumi.set(self, "head_sets", value)
+
+    @property
+    @pulumi.getter(name="tailSets")
+    def tail_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetArgs']]]]:
+        """
+        Closing credits list.
+        """
+        return pulumi.get(self, "tail_sets")
+
+    @tail_sets.setter
+    def tail_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetArgs']]]]):
+        pulumi.set(self, "tail_sets", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskMosaicSetArgs:
+    def __init__(__self__, *,
+                 coordinate_origin: Optional[pulumi.Input[str]] = None,
+                 end_time_offset: Optional[pulumi.Input[float]] = None,
+                 height: Optional[pulumi.Input[str]] = None,
+                 start_time_offset: Optional[pulumi.Input[float]] = None,
+                 width: Optional[pulumi.Input[str]] = None,
+                 x_pos: Optional[pulumi.Input[str]] = None,
+                 y_pos: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] coordinate_origin: Origin position, which currently can only be: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text.Default value: TopLeft.
+        :param pulumi.Input[float] end_time_offset: End time offset of blur in seconds. If this parameter is left empty or 0 is entered, the blur will exist till the last video frame; If this value is greater than 0 (e.g., n), the blur will exist till second n; If this value is smaller than 0 (e.g., -n), the blur will exist till second n before the last video frame.
+        :param pulumi.Input[str] height: Blur height. % and px formats are supported: If the string ends in %, the `Height` of the blur will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height; If the string ends in px, the `Height` of the blur will be in px; for example, `100px` means that `Height` is 100 px.Default value: 10%.
+        :param pulumi.Input[float] start_time_offset: Start time offset of blur in seconds. If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame. If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame; If this value is greater than 0 (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than 0 (e.g., -n), the blur will appear at second n before the last video frame.
+        :param pulumi.Input[str] width: Blur width. % and px formats are supported: If the string ends in %, the `Width` of the blur will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width; If the string ends in px, the `Width` of the blur will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        :param pulumi.Input[str] x_pos: The horizontal position of the origin of the blur relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the blur will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the blur will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        :param pulumi.Input[str] y_pos: Vertical position of the origin of blur relative to the origin of coordinates of video. % and px formats are supported: If the string ends in %, the `YPos` of the blur will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the blur will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        if coordinate_origin is not None:
+            pulumi.set(__self__, "coordinate_origin", coordinate_origin)
+        if end_time_offset is not None:
+            pulumi.set(__self__, "end_time_offset", end_time_offset)
+        if height is not None:
+            pulumi.set(__self__, "height", height)
+        if start_time_offset is not None:
+            pulumi.set(__self__, "start_time_offset", start_time_offset)
+        if width is not None:
+            pulumi.set(__self__, "width", width)
+        if x_pos is not None:
+            pulumi.set(__self__, "x_pos", x_pos)
+        if y_pos is not None:
+            pulumi.set(__self__, "y_pos", y_pos)
+
+    @property
+    @pulumi.getter(name="coordinateOrigin")
+    def coordinate_origin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Origin position, which currently can only be: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text.Default value: TopLeft.
+        """
+        return pulumi.get(self, "coordinate_origin")
+
+    @coordinate_origin.setter
+    def coordinate_origin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "coordinate_origin", value)
+
+    @property
+    @pulumi.getter(name="endTimeOffset")
+    def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of blur in seconds. If this parameter is left empty or 0 is entered, the blur will exist till the last video frame; If this value is greater than 0 (e.g., n), the blur will exist till second n; If this value is smaller than 0 (e.g., -n), the blur will exist till second n before the last video frame.
+        """
+        return pulumi.get(self, "end_time_offset")
+
+    @end_time_offset.setter
+    def end_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "end_time_offset", value)
+
+    @property
+    @pulumi.getter
+    def height(self) -> Optional[pulumi.Input[str]]:
+        """
+        Blur height. % and px formats are supported: If the string ends in %, the `Height` of the blur will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height; If the string ends in px, the `Height` of the blur will be in px; for example, `100px` means that `Height` is 100 px.Default value: 10%.
+        """
+        return pulumi.get(self, "height")
+
+    @height.setter
+    def height(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "height", value)
+
+    @property
+    @pulumi.getter(name="startTimeOffset")
+    def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of blur in seconds. If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame. If this parameter is left empty or 0 is entered, the blur will appear upon the first video frame; If this value is greater than 0 (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than 0 (e.g., -n), the blur will appear at second n before the last video frame.
+        """
+        return pulumi.get(self, "start_time_offset")
+
+    @start_time_offset.setter
+    def start_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "start_time_offset", value)
+
+    @property
+    @pulumi.getter
+    def width(self) -> Optional[pulumi.Input[str]]:
+        """
+        Blur width. % and px formats are supported: If the string ends in %, the `Width` of the blur will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width; If the string ends in px, the `Width` of the blur will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        return pulumi.get(self, "width")
+
+    @width.setter
+    def width(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "width", value)
+
+    @property
+    @pulumi.getter(name="xPos")
+    def x_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The horizontal position of the origin of the blur relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the blur will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the blur will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "x_pos")
+
+    @x_pos.setter
+    def x_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "x_pos", value)
+
+    @property
+    @pulumi.getter(name="yPos")
+    def y_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        Vertical position of the origin of blur relative to the origin of coordinates of video. % and px formats are supported: If the string ends in %, the `YPos` of the blur will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the blur will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "y_pos")
+
+    @y_pos.setter
+    def y_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "y_pos", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskObjectNumberFormatArgs:
+    def __init__(__self__, *,
+                 increment: Optional[pulumi.Input[int]] = None,
+                 initial_value: Optional[pulumi.Input[int]] = None,
+                 min_length: Optional[pulumi.Input[int]] = None,
+                 place_holder: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] increment: Increment of the `{number}` variable. Default value: 1.
+        :param pulumi.Input[int] initial_value: Start value of the `{number}` variable. Default value: 0.
+        :param pulumi.Input[int] min_length: Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+        :param pulumi.Input[str] place_holder: Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+        """
+        if increment is not None:
+            pulumi.set(__self__, "increment", increment)
+        if initial_value is not None:
+            pulumi.set(__self__, "initial_value", initial_value)
+        if min_length is not None:
+            pulumi.set(__self__, "min_length", min_length)
+        if place_holder is not None:
+            pulumi.set(__self__, "place_holder", place_holder)
+
+    @property
+    @pulumi.getter
+    def increment(self) -> Optional[pulumi.Input[int]]:
+        """
+        Increment of the `{number}` variable. Default value: 1.
+        """
+        return pulumi.get(self, "increment")
+
+    @increment.setter
+    def increment(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "increment", value)
+
+    @property
+    @pulumi.getter(name="initialValue")
+    def initial_value(self) -> Optional[pulumi.Input[int]]:
+        """
+        Start value of the `{number}` variable. Default value: 0.
+        """
+        return pulumi.get(self, "initial_value")
+
+    @initial_value.setter
+    def initial_value(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "initial_value", value)
+
+    @property
+    @pulumi.getter(name="minLength")
+    def min_length(self) -> Optional[pulumi.Input[int]]:
+        """
+        Minimum length of the `{number}` variable. A placeholder will be used if the variable length is below the minimum requirement. Default value: 1.
+        """
+        return pulumi.get(self, "min_length")
+
+    @min_length.setter
+    def min_length(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "min_length", value)
+
+    @property
+    @pulumi.getter(name="placeHolder")
+    def place_holder(self) -> Optional[pulumi.Input[str]]:
+        """
+        Placeholder used when the `{number}` variable length is below the minimum requirement. Default value: 0.
+        """
+        return pulumi.get(self, "place_holder")
+
+    @place_holder.setter
+    def place_holder(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "place_holder", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOutputStorageArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOutputStorageCosOutputStorageArgs']] = None,
+                 s3_output_storage: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOutputStorageS3OutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOutputStorageCosOutputStorageArgs'] cos_output_storage: The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOutputStorageS3OutputStorageArgs'] s3_output_storage: The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_output_storage is not None:
+            pulumi.set(__self__, "cos_output_storage", cos_output_storage)
+        if s3_output_storage is not None:
+            pulumi.set(__self__, "s3_output_storage", s3_output_storage)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosOutputStorage")
+    def cos_output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOutputStorageCosOutputStorageArgs']]:
+        """
+        The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cos_output_storage")
+
+    @cos_output_storage.setter
+    def cos_output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOutputStorageCosOutputStorageArgs']]):
+        pulumi.set(self, "cos_output_storage", value)
+
+    @property
+    @pulumi.getter(name="s3OutputStorage")
+    def s3_output_storage(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOutputStorageS3OutputStorageArgs']]:
+        """
+        The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_output_storage")
+
+    @s3_output_storage.setter
+    def s3_output_storage(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOutputStorageS3OutputStorageArgs']]):
+        pulumi.set(self, "s3_output_storage", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOutputStorageCosOutputStorageArgs:
+    def __init__(__self__, *,
+                 bucket: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        :param pulumi.Input[str] region: The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOutputStorageS3OutputStorageArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOverrideParameterArgs:
+    def __init__(__self__, *,
+                 add_on_subtitles: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleArgs']]]] = None,
+                 addon_audio_streams: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamArgs']]]] = None,
+                 audio_template: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAudioTemplateArgs']] = None,
+                 container: Optional[pulumi.Input[str]] = None,
+                 remove_audio: Optional[pulumi.Input[int]] = None,
+                 remove_video: Optional[pulumi.Input[int]] = None,
+                 std_ext_info: Optional[pulumi.Input[str]] = None,
+                 subtitle_template: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterSubtitleTemplateArgs']] = None,
+                 tehd_config: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterTehdConfigArgs']] = None,
+                 video_template: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterVideoTemplateArgs']] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleArgs']]] add_on_subtitles: Subtitle files to insert.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamArgs']]] addon_audio_streams: The information of the external audio track to add.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAudioTemplateArgs'] audio_template: Audio stream configuration parameter.
+        :param pulumi.Input[str] container: Container format. Valid values: mp4, flv, hls, mp3, flac, ogg, and m4a; mp3, flac, ogg, and m4a are formats of audio files.
+        :param pulumi.Input[int] remove_audio: Whether to remove audio data. Valid values: 0: retain 1: remove.
+        :param pulumi.Input[int] remove_video: Whether to remove video data. Valid values: 0: retain 1: remove.
+        :param pulumi.Input[str] std_ext_info: Transcoding extension field.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterSubtitleTemplateArgs'] subtitle_template: The subtitle settings.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterTehdConfigArgs'] tehd_config: TESHD transcoding parameter.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterVideoTemplateArgs'] video_template: Video stream configuration parameter.
+        """
+        if add_on_subtitles is not None:
+            pulumi.set(__self__, "add_on_subtitles", add_on_subtitles)
+        if addon_audio_streams is not None:
+            pulumi.set(__self__, "addon_audio_streams", addon_audio_streams)
+        if audio_template is not None:
+            pulumi.set(__self__, "audio_template", audio_template)
+        if container is not None:
+            pulumi.set(__self__, "container", container)
+        if remove_audio is not None:
+            pulumi.set(__self__, "remove_audio", remove_audio)
+        if remove_video is not None:
+            pulumi.set(__self__, "remove_video", remove_video)
+        if std_ext_info is not None:
+            pulumi.set(__self__, "std_ext_info", std_ext_info)
+        if subtitle_template is not None:
+            pulumi.set(__self__, "subtitle_template", subtitle_template)
+        if tehd_config is not None:
+            pulumi.set(__self__, "tehd_config", tehd_config)
+        if video_template is not None:
+            pulumi.set(__self__, "video_template", video_template)
+
+    @property
+    @pulumi.getter(name="addOnSubtitles")
+    def add_on_subtitles(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleArgs']]]]:
+        """
+        Subtitle files to insert.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "add_on_subtitles")
+
+    @add_on_subtitles.setter
+    def add_on_subtitles(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleArgs']]]]):
+        pulumi.set(self, "add_on_subtitles", value)
+
+    @property
+    @pulumi.getter(name="addonAudioStreams")
+    def addon_audio_streams(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamArgs']]]]:
+        """
+        The information of the external audio track to add.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "addon_audio_streams")
+
+    @addon_audio_streams.setter
+    def addon_audio_streams(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamArgs']]]]):
+        pulumi.set(self, "addon_audio_streams", value)
+
+    @property
+    @pulumi.getter(name="audioTemplate")
+    def audio_template(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAudioTemplateArgs']]:
+        """
+        Audio stream configuration parameter.
+        """
+        return pulumi.get(self, "audio_template")
+
+    @audio_template.setter
+    def audio_template(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAudioTemplateArgs']]):
+        pulumi.set(self, "audio_template", value)
+
+    @property
+    @pulumi.getter
+    def container(self) -> Optional[pulumi.Input[str]]:
+        """
+        Container format. Valid values: mp4, flv, hls, mp3, flac, ogg, and m4a; mp3, flac, ogg, and m4a are formats of audio files.
+        """
+        return pulumi.get(self, "container")
+
+    @container.setter
+    def container(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "container", value)
+
+    @property
+    @pulumi.getter(name="removeAudio")
+    def remove_audio(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to remove audio data. Valid values: 0: retain 1: remove.
+        """
+        return pulumi.get(self, "remove_audio")
+
+    @remove_audio.setter
+    def remove_audio(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "remove_audio", value)
+
+    @property
+    @pulumi.getter(name="removeVideo")
+    def remove_video(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to remove video data. Valid values: 0: retain 1: remove.
+        """
+        return pulumi.get(self, "remove_video")
+
+    @remove_video.setter
+    def remove_video(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "remove_video", value)
+
+    @property
+    @pulumi.getter(name="stdExtInfo")
+    def std_ext_info(self) -> Optional[pulumi.Input[str]]:
+        """
+        Transcoding extension field.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "std_ext_info")
+
+    @std_ext_info.setter
+    def std_ext_info(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "std_ext_info", value)
+
+    @property
+    @pulumi.getter(name="subtitleTemplate")
+    def subtitle_template(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterSubtitleTemplateArgs']]:
+        """
+        The subtitle settings.
+        """
+        return pulumi.get(self, "subtitle_template")
+
+    @subtitle_template.setter
+    def subtitle_template(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterSubtitleTemplateArgs']]):
+        pulumi.set(self, "subtitle_template", value)
+
+    @property
+    @pulumi.getter(name="tehdConfig")
+    def tehd_config(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterTehdConfigArgs']]:
+        """
+        TESHD transcoding parameter.
+        """
+        return pulumi.get(self, "tehd_config")
+
+    @tehd_config.setter
+    def tehd_config(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterTehdConfigArgs']]):
+        pulumi.set(self, "tehd_config", value)
+
+    @property
+    @pulumi.getter(name="videoTemplate")
+    def video_template(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterVideoTemplateArgs']]:
+        """
+        Video stream configuration parameter.
+        """
+        return pulumi.get(self, "video_template")
+
+    @video_template.setter
+    def video_template(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterVideoTemplateArgs']]):
+        pulumi.set(self, "video_template", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleArgs:
+    def __init__(__self__, *,
+                 subtitle: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleArgs']] = None,
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleArgs'] subtitle: Subtitle file.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[str] type: The inserting type. Valid values: `subtitle-stream`:Insert title track. `close-caption-708`:CEA-708 subtitle encode to SEI frame. `close-caption-608`:CEA-608 subtitle encode to SEI frame. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if subtitle is not None:
+            pulumi.set(__self__, "subtitle", subtitle)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def subtitle(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleArgs']]:
+        """
+        Subtitle file.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "subtitle")
+
+    @subtitle.setter
+    def subtitle(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleArgs']]):
+        pulumi.set(self, "subtitle", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The inserting type. Valid values: `subtitle-stream`:Insert title track. `close-caption-708`:CEA-708 subtitle encode to SEI frame. `close-caption-608`:CEA-608 subtitle encode to SEI frame. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values:  `COS`:A COS bucket address. `URL`:A URL. `AWS-S3`:An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when Type is COS.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if Type is AWS-S3.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when Type is URL.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values:  `COS`:A COS bucket address. `URL`:A URL. `AWS-S3`:An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when Type is COS.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if Type is AWS-S3.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when Type is URL.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOverrideParameterAudioTemplateArgs:
+    def __init__(__self__, *,
+                 audio_channel: Optional[pulumi.Input[int]] = None,
+                 bitrate: Optional[pulumi.Input[int]] = None,
+                 codec: Optional[pulumi.Input[str]] = None,
+                 sample_rate: Optional[pulumi.Input[int]] = None,
+                 stream_selects: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None):
+        """
+        :param pulumi.Input[int] audio_channel: Audio channel system. Valid values: 1: Mono 2: Dual 6: StereoWhen the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound channel cannot be set to stereo.Default value: 2.
+        :param pulumi.Input[int] bitrate: Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+        :param pulumi.Input[str] codec: Audio stream codec.When the outer `Container` parameter is `mp3`, the valid value is: libmp3lame.When the outer `Container` parameter is `ogg` or `flac`, the valid value is: flac.When the outer `Container` parameter is `m4a`, the valid values include: libfdk_aac; libmp3lame; ac3.When the outer `Container` parameter is `mp4` or `flv`, the valid values include: libfdk_aac: more suitable for mp4; libmp3lame: more suitable for flv.When the outer `Container` parameter is `hls`, the valid values include: libfdk_aac; libmp3lame.
+        :param pulumi.Input[int] sample_rate: Audio stream sample rate. Valid values: 32,000 44,100 48,000In Hz.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] stream_selects: The audio tracks to retain. All audio tracks are retained by default.
+        """
+        if audio_channel is not None:
+            pulumi.set(__self__, "audio_channel", audio_channel)
+        if bitrate is not None:
+            pulumi.set(__self__, "bitrate", bitrate)
+        if codec is not None:
+            pulumi.set(__self__, "codec", codec)
+        if sample_rate is not None:
+            pulumi.set(__self__, "sample_rate", sample_rate)
+        if stream_selects is not None:
+            pulumi.set(__self__, "stream_selects", stream_selects)
+
+    @property
+    @pulumi.getter(name="audioChannel")
+    def audio_channel(self) -> Optional[pulumi.Input[int]]:
+        """
+        Audio channel system. Valid values: 1: Mono 2: Dual 6: StereoWhen the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound channel cannot be set to stereo.Default value: 2.
+        """
+        return pulumi.get(self, "audio_channel")
+
+    @audio_channel.setter
+    def audio_channel(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "audio_channel", value)
+
+    @property
+    @pulumi.getter
+    def bitrate(self) -> Optional[pulumi.Input[int]]:
+        """
+        Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+        """
+        return pulumi.get(self, "bitrate")
+
+    @bitrate.setter
+    def bitrate(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "bitrate", value)
+
+    @property
+    @pulumi.getter
+    def codec(self) -> Optional[pulumi.Input[str]]:
+        """
+        Audio stream codec.When the outer `Container` parameter is `mp3`, the valid value is: libmp3lame.When the outer `Container` parameter is `ogg` or `flac`, the valid value is: flac.When the outer `Container` parameter is `m4a`, the valid values include: libfdk_aac; libmp3lame; ac3.When the outer `Container` parameter is `mp4` or `flv`, the valid values include: libfdk_aac: more suitable for mp4; libmp3lame: more suitable for flv.When the outer `Container` parameter is `hls`, the valid values include: libfdk_aac; libmp3lame.
+        """
+        return pulumi.get(self, "codec")
+
+    @codec.setter
+    def codec(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "codec", value)
+
+    @property
+    @pulumi.getter(name="sampleRate")
+    def sample_rate(self) -> Optional[pulumi.Input[int]]:
+        """
+        Audio stream sample rate. Valid values: 32,000 44,100 48,000In Hz.
+        """
+        return pulumi.get(self, "sample_rate")
+
+    @sample_rate.setter
+    def sample_rate(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "sample_rate", value)
+
+    @property
+    @pulumi.getter(name="streamSelects")
+    def stream_selects(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        The audio tracks to retain. All audio tracks are retained by default.
+        """
+        return pulumi.get(self, "stream_selects")
+
+    @stream_selects.setter
+    def stream_selects(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]):
+        pulumi.set(self, "stream_selects", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOverrideParameterSubtitleTemplateArgs:
+    def __init__(__self__, *,
+                 font_alpha: Optional[pulumi.Input[float]] = None,
+                 font_color: Optional[pulumi.Input[str]] = None,
+                 font_size: Optional[pulumi.Input[str]] = None,
+                 font_type: Optional[pulumi.Input[str]] = None,
+                 path: Optional[pulumi.Input[str]] = None,
+                 stream_index: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[float] font_alpha: The text transparency. Value range: 0-1. 0: Completely transparent 1: Completely opaqueDefault value: 1.
+        :param pulumi.Input[str] font_color: The font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
+        :param pulumi.Input[str] font_size: The font size (pixels). If this is not specified, the font size in the subtitle file will be used.
+        :param pulumi.Input[str] font_type: The font type. Valid values: `hei.ttf` `song.ttf` `simkai.ttf` `arial.ttf` (for English only). The default is `hei.ttf`.
+        :param pulumi.Input[str] path: The URL of the subtitles to add to the video.
+        :param pulumi.Input[int] stream_index: The subtitle track to add to the video. If both `Path` and `StreamIndex` are specified, `Path` will be used. You need to specify at least one of the two parameters.
+        """
+        if font_alpha is not None:
+            pulumi.set(__self__, "font_alpha", font_alpha)
+        if font_color is not None:
+            pulumi.set(__self__, "font_color", font_color)
+        if font_size is not None:
+            pulumi.set(__self__, "font_size", font_size)
+        if font_type is not None:
+            pulumi.set(__self__, "font_type", font_type)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+        if stream_index is not None:
+            pulumi.set(__self__, "stream_index", stream_index)
+
+    @property
+    @pulumi.getter(name="fontAlpha")
+    def font_alpha(self) -> Optional[pulumi.Input[float]]:
+        """
+        The text transparency. Value range: 0-1. 0: Completely transparent 1: Completely opaqueDefault value: 1.
+        """
+        return pulumi.get(self, "font_alpha")
+
+    @font_alpha.setter
+    def font_alpha(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "font_alpha", value)
+
+    @property
+    @pulumi.getter(name="fontColor")
+    def font_color(self) -> Optional[pulumi.Input[str]]:
+        """
+        The font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
+        """
+        return pulumi.get(self, "font_color")
+
+    @font_color.setter
+    def font_color(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "font_color", value)
+
+    @property
+    @pulumi.getter(name="fontSize")
+    def font_size(self) -> Optional[pulumi.Input[str]]:
+        """
+        The font size (pixels). If this is not specified, the font size in the subtitle file will be used.
+        """
+        return pulumi.get(self, "font_size")
+
+    @font_size.setter
+    def font_size(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "font_size", value)
+
+    @property
+    @pulumi.getter(name="fontType")
+    def font_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The font type. Valid values: `hei.ttf` `song.ttf` `simkai.ttf` `arial.ttf` (for English only). The default is `hei.ttf`.
+        """
+        return pulumi.get(self, "font_type")
+
+    @font_type.setter
+    def font_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "font_type", value)
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the subtitles to add to the video.
+        """
+        return pulumi.get(self, "path")
+
+    @path.setter
+    def path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "path", value)
+
+    @property
+    @pulumi.getter(name="streamIndex")
+    def stream_index(self) -> Optional[pulumi.Input[int]]:
+        """
+        The subtitle track to add to the video. If both `Path` and `StreamIndex` are specified, `Path` will be used. You need to specify at least one of the two parameters.
+        """
+        return pulumi.get(self, "stream_index")
+
+    @stream_index.setter
+    def stream_index(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "stream_index", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOverrideParameterTehdConfigArgs:
+    def __init__(__self__, *,
+                 max_video_bitrate: Optional[pulumi.Input[int]] = None,
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] max_video_bitrate: Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left empty or 0 is entered, there will be no upper limit for bitrate.
+        :param pulumi.Input[str] type: TESHD type. Valid values: TEHD-100: TESHD-100.If this parameter is left empty, TESHD will not be enabled.
+        """
+        if max_video_bitrate is not None:
+            pulumi.set(__self__, "max_video_bitrate", max_video_bitrate)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="maxVideoBitrate")
+    def max_video_bitrate(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left empty or 0 is entered, there will be no upper limit for bitrate.
+        """
+        return pulumi.get(self, "max_video_bitrate")
+
+    @max_video_bitrate.setter
+    def max_video_bitrate(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_video_bitrate", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        TESHD type. Valid values: TEHD-100: TESHD-100.If this parameter is left empty, TESHD will not be enabled.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskOverrideParameterVideoTemplateArgs:
+    def __init__(__self__, *,
+                 bitrate: Optional[pulumi.Input[int]] = None,
+                 codec: Optional[pulumi.Input[str]] = None,
+                 content_adapt_stream: Optional[pulumi.Input[int]] = None,
+                 fill_type: Optional[pulumi.Input[str]] = None,
+                 fps: Optional[pulumi.Input[int]] = None,
+                 gop: Optional[pulumi.Input[int]] = None,
+                 height: Optional[pulumi.Input[int]] = None,
+                 resolution_adaptive: Optional[pulumi.Input[str]] = None,
+                 vcrf: Optional[pulumi.Input[int]] = None,
+                 width: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] bitrate: The video bitrate (Kbps). Value range: 0 and [128, 35000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+        :param pulumi.Input[str] codec: The video codec. Valid values: `libx264`: H.264 `libx265`: H.265 `av1`: AOMedia Video 1Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.Note: You can only use the AOMedia Video 1 codec for MP4 files.
+        :param pulumi.Input[int] content_adapt_stream: Whether to enable adaptive encoding. Valid values: 0: Disable 1: EnableDefault value: 0. If this parameter is set to `1`, multiple streams with different resolutions and bitrates will be generated automatically. The highest resolution, bitrate, and quality of the streams are determined by the values of `width` and `height`, `Bitrate`, and `Vcrf` in `VideoTemplate` respectively. If these parameters are not set in `VideoTemplate`, the highest resolution generated will be the same as that of the source video, and the highest video quality will be close to VMAF 95. To use this parameter or learn about the billing details of adaptive encoding, please contact your sales rep.
+        :param pulumi.Input[str] fill_type: The fill mode, which indicates how a video is resized when the video's original aspect ratio is different from the target aspect ratio. Valid values: stretch: Stretch the image frame by frame to fill the entire screen. The video image may become squashed or stretched after transcoding. black: Keep the image&#39;s original aspect ratio and fill the blank space with black bars. white: Keep the image's original aspect ratio and fill the blank space with white bars. gauss: Keep the image's original aspect ratio and apply Gaussian blur to the blank space.Default value: black.Note: Only `stretch` and `black` are supported for adaptive bitrate streaming.
+        :param pulumi.Input[int] fps: The video frame rate (Hz). Value range: [0, 100].If the value is 0, the frame rate will be the same as that of the source video.Note: For adaptive bitrate streaming, the value range of this parameter is [0, 60].
+        :param pulumi.Input[int] gop: Frame interval between I keyframes. Value range: 0 and [1,100000].If this parameter is 0 or left empty, the system will automatically set the GOP length.
+        :param pulumi.Input[int] height: Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096]. If both `Width` and `Height` are 0, the resolution will be the same as that of the source video; If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled; If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled; If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+        :param pulumi.Input[str] resolution_adaptive: Resolution adaption. Valid values: open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side. close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.Default value: open.Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
+        :param pulumi.Input[int] vcrf: The control factor of video constant bitrate. Value range: [1, 51]If this parameter is specified, CRF (a bitrate control method) will be used for transcoding. (Video bitrate will no longer take effect.)It is not recommended to specify this parameter if there are no special requirements.
+        :param pulumi.Input[int] width: Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096]. If both `Width` and `Height` are 0, the resolution will be the same as that of the source video; If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled; If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled; If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+        """
+        if bitrate is not None:
+            pulumi.set(__self__, "bitrate", bitrate)
+        if codec is not None:
+            pulumi.set(__self__, "codec", codec)
+        if content_adapt_stream is not None:
+            pulumi.set(__self__, "content_adapt_stream", content_adapt_stream)
+        if fill_type is not None:
+            pulumi.set(__self__, "fill_type", fill_type)
+        if fps is not None:
+            pulumi.set(__self__, "fps", fps)
+        if gop is not None:
+            pulumi.set(__self__, "gop", gop)
+        if height is not None:
+            pulumi.set(__self__, "height", height)
+        if resolution_adaptive is not None:
+            pulumi.set(__self__, "resolution_adaptive", resolution_adaptive)
+        if vcrf is not None:
+            pulumi.set(__self__, "vcrf", vcrf)
+        if width is not None:
+            pulumi.set(__self__, "width", width)
+
+    @property
+    @pulumi.getter
+    def bitrate(self) -> Optional[pulumi.Input[int]]:
+        """
+        The video bitrate (Kbps). Value range: 0 and [128, 35000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+        """
+        return pulumi.get(self, "bitrate")
+
+    @bitrate.setter
+    def bitrate(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "bitrate", value)
+
+    @property
+    @pulumi.getter
+    def codec(self) -> Optional[pulumi.Input[str]]:
+        """
+        The video codec. Valid values: `libx264`: H.264 `libx265`: H.265 `av1`: AOMedia Video 1Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.Note: You can only use the AOMedia Video 1 codec for MP4 files.
+        """
+        return pulumi.get(self, "codec")
+
+    @codec.setter
+    def codec(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "codec", value)
+
+    @property
+    @pulumi.getter(name="contentAdaptStream")
+    def content_adapt_stream(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to enable adaptive encoding. Valid values: 0: Disable 1: EnableDefault value: 0. If this parameter is set to `1`, multiple streams with different resolutions and bitrates will be generated automatically. The highest resolution, bitrate, and quality of the streams are determined by the values of `width` and `height`, `Bitrate`, and `Vcrf` in `VideoTemplate` respectively. If these parameters are not set in `VideoTemplate`, the highest resolution generated will be the same as that of the source video, and the highest video quality will be close to VMAF 95. To use this parameter or learn about the billing details of adaptive encoding, please contact your sales rep.
+        """
+        return pulumi.get(self, "content_adapt_stream")
+
+    @content_adapt_stream.setter
+    def content_adapt_stream(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "content_adapt_stream", value)
+
+    @property
+    @pulumi.getter(name="fillType")
+    def fill_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The fill mode, which indicates how a video is resized when the video's original aspect ratio is different from the target aspect ratio. Valid values: stretch: Stretch the image frame by frame to fill the entire screen. The video image may become squashed or stretched after transcoding. black: Keep the image&#39;s original aspect ratio and fill the blank space with black bars. white: Keep the image's original aspect ratio and fill the blank space with white bars. gauss: Keep the image's original aspect ratio and apply Gaussian blur to the blank space.Default value: black.Note: Only `stretch` and `black` are supported for adaptive bitrate streaming.
+        """
+        return pulumi.get(self, "fill_type")
+
+    @fill_type.setter
+    def fill_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fill_type", value)
+
+    @property
+    @pulumi.getter
+    def fps(self) -> Optional[pulumi.Input[int]]:
+        """
+        The video frame rate (Hz). Value range: [0, 100].If the value is 0, the frame rate will be the same as that of the source video.Note: For adaptive bitrate streaming, the value range of this parameter is [0, 60].
+        """
+        return pulumi.get(self, "fps")
+
+    @fps.setter
+    def fps(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "fps", value)
+
+    @property
+    @pulumi.getter
+    def gop(self) -> Optional[pulumi.Input[int]]:
+        """
+        Frame interval between I keyframes. Value range: 0 and [1,100000].If this parameter is 0 or left empty, the system will automatically set the GOP length.
+        """
+        return pulumi.get(self, "gop")
+
+    @gop.setter
+    def gop(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "gop", value)
+
+    @property
+    @pulumi.getter
+    def height(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096]. If both `Width` and `Height` are 0, the resolution will be the same as that of the source video; If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled; If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled; If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+        """
+        return pulumi.get(self, "height")
+
+    @height.setter
+    def height(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "height", value)
+
+    @property
+    @pulumi.getter(name="resolutionAdaptive")
+    def resolution_adaptive(self) -> Optional[pulumi.Input[str]]:
+        """
+        Resolution adaption. Valid values: open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side. close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.Default value: open.Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
+        """
+        return pulumi.get(self, "resolution_adaptive")
+
+    @resolution_adaptive.setter
+    def resolution_adaptive(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resolution_adaptive", value)
+
+    @property
+    @pulumi.getter
+    def vcrf(self) -> Optional[pulumi.Input[int]]:
+        """
+        The control factor of video constant bitrate. Value range: [1, 51]If this parameter is specified, CRF (a bitrate control method) will be used for transcoding. (Video bitrate will no longer take effect.)It is not recommended to specify this parameter if there are no special requirements.
+        """
+        return pulumi.get(self, "vcrf")
+
+    @vcrf.setter
+    def vcrf(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "vcrf", value)
+
+    @property
+    @pulumi.getter
+    def width(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096]. If both `Width` and `Height` are 0, the resolution will be the same as that of the source video; If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled; If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled; If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+        """
+        return pulumi.get(self, "width")
+
+    @width.setter
+    def width(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "width", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskRawParameterArgs:
+    def __init__(__self__, *,
+                 container: pulumi.Input[str],
+                 audio_template: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskRawParameterAudioTemplateArgs']] = None,
+                 remove_audio: Optional[pulumi.Input[int]] = None,
+                 remove_video: Optional[pulumi.Input[int]] = None,
+                 tehd_config: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskRawParameterTehdConfigArgs']] = None,
+                 video_template: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskRawParameterVideoTemplateArgs']] = None):
+        """
+        :param pulumi.Input[str] container: Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskRawParameterAudioTemplateArgs'] audio_template: Audio stream configuration parameter. This field is required when `RemoveAudio` is 0.
+        :param pulumi.Input[int] remove_audio: Whether to remove audio data. Valid values: 0: retain; 1: remove.Default value: 0.
+        :param pulumi.Input[int] remove_video: Whether to remove video data. Valid values: 0: retain; 1: remove.Default value: 0.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskRawParameterTehdConfigArgs'] tehd_config: TESHD transcoding parameter.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskRawParameterVideoTemplateArgs'] video_template: Video stream configuration parameter. This field is required when `RemoveVideo` is 0.
+        """
+        pulumi.set(__self__, "container", container)
+        if audio_template is not None:
+            pulumi.set(__self__, "audio_template", audio_template)
+        if remove_audio is not None:
+            pulumi.set(__self__, "remove_audio", remove_audio)
+        if remove_video is not None:
+            pulumi.set(__self__, "remove_video", remove_video)
+        if tehd_config is not None:
+            pulumi.set(__self__, "tehd_config", tehd_config)
+        if video_template is not None:
+            pulumi.set(__self__, "video_template", video_template)
+
+    @property
+    @pulumi.getter
+    def container(self) -> pulumi.Input[str]:
+        """
+        Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
+        """
+        return pulumi.get(self, "container")
+
+    @container.setter
+    def container(self, value: pulumi.Input[str]):
+        pulumi.set(self, "container", value)
+
+    @property
+    @pulumi.getter(name="audioTemplate")
+    def audio_template(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskRawParameterAudioTemplateArgs']]:
+        """
+        Audio stream configuration parameter. This field is required when `RemoveAudio` is 0.
+        """
+        return pulumi.get(self, "audio_template")
+
+    @audio_template.setter
+    def audio_template(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskRawParameterAudioTemplateArgs']]):
+        pulumi.set(self, "audio_template", value)
+
+    @property
+    @pulumi.getter(name="removeAudio")
+    def remove_audio(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to remove audio data. Valid values: 0: retain; 1: remove.Default value: 0.
+        """
+        return pulumi.get(self, "remove_audio")
+
+    @remove_audio.setter
+    def remove_audio(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "remove_audio", value)
+
+    @property
+    @pulumi.getter(name="removeVideo")
+    def remove_video(self) -> Optional[pulumi.Input[int]]:
+        """
+        Whether to remove video data. Valid values: 0: retain; 1: remove.Default value: 0.
+        """
+        return pulumi.get(self, "remove_video")
+
+    @remove_video.setter
+    def remove_video(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "remove_video", value)
+
+    @property
+    @pulumi.getter(name="tehdConfig")
+    def tehd_config(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskRawParameterTehdConfigArgs']]:
+        """
+        TESHD transcoding parameter.
+        """
+        return pulumi.get(self, "tehd_config")
+
+    @tehd_config.setter
+    def tehd_config(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskRawParameterTehdConfigArgs']]):
+        pulumi.set(self, "tehd_config", value)
+
+    @property
+    @pulumi.getter(name="videoTemplate")
+    def video_template(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskRawParameterVideoTemplateArgs']]:
+        """
+        Video stream configuration parameter. This field is required when `RemoveVideo` is 0.
+        """
+        return pulumi.get(self, "video_template")
+
+    @video_template.setter
+    def video_template(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskRawParameterVideoTemplateArgs']]):
+        pulumi.set(self, "video_template", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskRawParameterAudioTemplateArgs:
+    def __init__(__self__, *,
+                 bitrate: pulumi.Input[int],
+                 codec: pulumi.Input[str],
+                 sample_rate: pulumi.Input[int],
+                 audio_channel: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] bitrate: Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+        :param pulumi.Input[str] codec: Audio stream codec.When the outer `Container` parameter is `mp3`, the valid value is: libmp3lame.When the outer `Container` parameter is `ogg` or `flac`, the valid value is: flac.When the outer `Container` parameter is `m4a`, the valid values include: libfdk_aac; libmp3lame; ac3.When the outer `Container` parameter is `mp4` or `flv`, the valid values include: libfdk_aac: more suitable for mp4; libmp3lame: more suitable for flv.When the outer `Container` parameter is `hls`, the valid values include: libfdk_aac; libmp3lame.
+        :param pulumi.Input[int] sample_rate: Audio stream sample rate. Valid values: 32,000 44,100 48,000In Hz.
+        :param pulumi.Input[int] audio_channel: Audio channel system. Valid values: 1: Mono 2: Dual 6: StereoWhen the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound channel cannot be set to stereo.Default value: 2.
+        """
+        pulumi.set(__self__, "bitrate", bitrate)
+        pulumi.set(__self__, "codec", codec)
+        pulumi.set(__self__, "sample_rate", sample_rate)
+        if audio_channel is not None:
+            pulumi.set(__self__, "audio_channel", audio_channel)
+
+    @property
+    @pulumi.getter
+    def bitrate(self) -> pulumi.Input[int]:
+        """
+        Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+        """
+        return pulumi.get(self, "bitrate")
+
+    @bitrate.setter
+    def bitrate(self, value: pulumi.Input[int]):
+        pulumi.set(self, "bitrate", value)
+
+    @property
+    @pulumi.getter
+    def codec(self) -> pulumi.Input[str]:
+        """
+        Audio stream codec.When the outer `Container` parameter is `mp3`, the valid value is: libmp3lame.When the outer `Container` parameter is `ogg` or `flac`, the valid value is: flac.When the outer `Container` parameter is `m4a`, the valid values include: libfdk_aac; libmp3lame; ac3.When the outer `Container` parameter is `mp4` or `flv`, the valid values include: libfdk_aac: more suitable for mp4; libmp3lame: more suitable for flv.When the outer `Container` parameter is `hls`, the valid values include: libfdk_aac; libmp3lame.
+        """
+        return pulumi.get(self, "codec")
+
+    @codec.setter
+    def codec(self, value: pulumi.Input[str]):
+        pulumi.set(self, "codec", value)
+
+    @property
+    @pulumi.getter(name="sampleRate")
+    def sample_rate(self) -> pulumi.Input[int]:
+        """
+        Audio stream sample rate. Valid values: 32,000 44,100 48,000In Hz.
+        """
+        return pulumi.get(self, "sample_rate")
+
+    @sample_rate.setter
+    def sample_rate(self, value: pulumi.Input[int]):
+        pulumi.set(self, "sample_rate", value)
+
+    @property
+    @pulumi.getter(name="audioChannel")
+    def audio_channel(self) -> Optional[pulumi.Input[int]]:
+        """
+        Audio channel system. Valid values: 1: Mono 2: Dual 6: StereoWhen the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound channel cannot be set to stereo.Default value: 2.
+        """
+        return pulumi.get(self, "audio_channel")
+
+    @audio_channel.setter
+    def audio_channel(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "audio_channel", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskRawParameterTehdConfigArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 max_video_bitrate: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] type: TESHD type. Valid values: TEHD-100: TESHD-100.If this parameter is left empty, TESHD will not be enabled.
+        :param pulumi.Input[int] max_video_bitrate: Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left empty or 0 is entered, there will be no upper limit for bitrate.
+        """
+        pulumi.set(__self__, "type", type)
+        if max_video_bitrate is not None:
+            pulumi.set(__self__, "max_video_bitrate", max_video_bitrate)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        TESHD type. Valid values: TEHD-100: TESHD-100.If this parameter is left empty, TESHD will not be enabled.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="maxVideoBitrate")
+    def max_video_bitrate(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left empty or 0 is entered, there will be no upper limit for bitrate.
+        """
+        return pulumi.get(self, "max_video_bitrate")
+
+    @max_video_bitrate.setter
+    def max_video_bitrate(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_video_bitrate", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskRawParameterVideoTemplateArgs:
+    def __init__(__self__, *,
+                 bitrate: pulumi.Input[int],
+                 codec: pulumi.Input[str],
+                 fps: pulumi.Input[int],
+                 fill_type: Optional[pulumi.Input[str]] = None,
+                 gop: Optional[pulumi.Input[int]] = None,
+                 height: Optional[pulumi.Input[int]] = None,
+                 resolution_adaptive: Optional[pulumi.Input[str]] = None,
+                 vcrf: Optional[pulumi.Input[int]] = None,
+                 width: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] bitrate: The video bitrate (Kbps). Value range: 0 and [128, 35000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+        :param pulumi.Input[str] codec: The video codec. Valid values: `libx264`: H.264 `libx265`: H.265 `av1`: AOMedia Video 1Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.Note: You can only use the AOMedia Video 1 codec for MP4 files.
+        :param pulumi.Input[int] fps: The video frame rate (Hz). Value range: [0, 100].If the value is 0, the frame rate will be the same as that of the source video.Note: For adaptive bitrate streaming, the value range of this parameter is [0, 60].
+        :param pulumi.Input[str] fill_type: The fill mode, which indicates how a video is resized when the video's original aspect ratio is different from the target aspect ratio. Valid values: stretch: Stretch the image frame by frame to fill the entire screen. The video image may become squashed or stretched after transcoding. black: Keep the image&#39;s original aspect ratio and fill the blank space with black bars. white: Keep the image's original aspect ratio and fill the blank space with white bars. gauss: Keep the image's original aspect ratio and apply Gaussian blur to the blank space.Default value: black.Note: Only `stretch` and `black` are supported for adaptive bitrate streaming.
+        :param pulumi.Input[int] gop: Frame interval between I keyframes. Value range: 0 and [1,100000].If this parameter is 0 or left empty, the system will automatically set the GOP length.
+        :param pulumi.Input[int] height: Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096]. If both `Width` and `Height` are 0, the resolution will be the same as that of the source video; If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled; If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled; If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+        :param pulumi.Input[str] resolution_adaptive: Resolution adaption. Valid values: open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side. close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.Default value: open.Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
+        :param pulumi.Input[int] vcrf: The control factor of video constant bitrate. Value range: [1, 51]If this parameter is specified, CRF (a bitrate control method) will be used for transcoding. (Video bitrate will no longer take effect.)It is not recommended to specify this parameter if there are no special requirements.
+        :param pulumi.Input[int] width: Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096]. If both `Width` and `Height` are 0, the resolution will be the same as that of the source video; If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled; If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled; If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+        """
+        pulumi.set(__self__, "bitrate", bitrate)
+        pulumi.set(__self__, "codec", codec)
+        pulumi.set(__self__, "fps", fps)
+        if fill_type is not None:
+            pulumi.set(__self__, "fill_type", fill_type)
+        if gop is not None:
+            pulumi.set(__self__, "gop", gop)
+        if height is not None:
+            pulumi.set(__self__, "height", height)
+        if resolution_adaptive is not None:
+            pulumi.set(__self__, "resolution_adaptive", resolution_adaptive)
+        if vcrf is not None:
+            pulumi.set(__self__, "vcrf", vcrf)
+        if width is not None:
+            pulumi.set(__self__, "width", width)
+
+    @property
+    @pulumi.getter
+    def bitrate(self) -> pulumi.Input[int]:
+        """
+        The video bitrate (Kbps). Value range: 0 and [128, 35000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+        """
+        return pulumi.get(self, "bitrate")
+
+    @bitrate.setter
+    def bitrate(self, value: pulumi.Input[int]):
+        pulumi.set(self, "bitrate", value)
+
+    @property
+    @pulumi.getter
+    def codec(self) -> pulumi.Input[str]:
+        """
+        The video codec. Valid values: `libx264`: H.264 `libx265`: H.265 `av1`: AOMedia Video 1Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.Note: You can only use the AOMedia Video 1 codec for MP4 files.
+        """
+        return pulumi.get(self, "codec")
+
+    @codec.setter
+    def codec(self, value: pulumi.Input[str]):
+        pulumi.set(self, "codec", value)
+
+    @property
+    @pulumi.getter
+    def fps(self) -> pulumi.Input[int]:
+        """
+        The video frame rate (Hz). Value range: [0, 100].If the value is 0, the frame rate will be the same as that of the source video.Note: For adaptive bitrate streaming, the value range of this parameter is [0, 60].
+        """
+        return pulumi.get(self, "fps")
+
+    @fps.setter
+    def fps(self, value: pulumi.Input[int]):
+        pulumi.set(self, "fps", value)
+
+    @property
+    @pulumi.getter(name="fillType")
+    def fill_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The fill mode, which indicates how a video is resized when the video's original aspect ratio is different from the target aspect ratio. Valid values: stretch: Stretch the image frame by frame to fill the entire screen. The video image may become squashed or stretched after transcoding. black: Keep the image&#39;s original aspect ratio and fill the blank space with black bars. white: Keep the image's original aspect ratio and fill the blank space with white bars. gauss: Keep the image's original aspect ratio and apply Gaussian blur to the blank space.Default value: black.Note: Only `stretch` and `black` are supported for adaptive bitrate streaming.
+        """
+        return pulumi.get(self, "fill_type")
+
+    @fill_type.setter
+    def fill_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fill_type", value)
+
+    @property
+    @pulumi.getter
+    def gop(self) -> Optional[pulumi.Input[int]]:
+        """
+        Frame interval between I keyframes. Value range: 0 and [1,100000].If this parameter is 0 or left empty, the system will automatically set the GOP length.
+        """
+        return pulumi.get(self, "gop")
+
+    @gop.setter
+    def gop(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "gop", value)
+
+    @property
+    @pulumi.getter
+    def height(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096]. If both `Width` and `Height` are 0, the resolution will be the same as that of the source video; If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled; If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled; If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+        """
+        return pulumi.get(self, "height")
+
+    @height.setter
+    def height(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "height", value)
+
+    @property
+    @pulumi.getter(name="resolutionAdaptive")
+    def resolution_adaptive(self) -> Optional[pulumi.Input[str]]:
+        """
+        Resolution adaption. Valid values: open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side. close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.Default value: open.Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
+        """
+        return pulumi.get(self, "resolution_adaptive")
+
+    @resolution_adaptive.setter
+    def resolution_adaptive(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resolution_adaptive", value)
+
+    @property
+    @pulumi.getter
+    def vcrf(self) -> Optional[pulumi.Input[int]]:
+        """
+        The control factor of video constant bitrate. Value range: [1, 51]If this parameter is specified, CRF (a bitrate control method) will be used for transcoding. (Video bitrate will no longer take effect.)It is not recommended to specify this parameter if there are no special requirements.
+        """
+        return pulumi.get(self, "vcrf")
+
+    @vcrf.setter
+    def vcrf(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "vcrf", value)
+
+    @property
+    @pulumi.getter
+    def width(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096]. If both `Width` and `Height` are 0, the resolution will be the same as that of the source video; If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled; If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled; If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
+        """
+        return pulumi.get(self, "width")
+
+    @width.setter
+    def width(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "width", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskWatermarkSetArgs:
+    def __init__(__self__, *,
+                 definition: pulumi.Input[int],
+                 end_time_offset: Optional[pulumi.Input[float]] = None,
+                 raw_parameter: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterArgs']] = None,
+                 start_time_offset: Optional[pulumi.Input[float]] = None,
+                 svg_content: Optional[pulumi.Input[str]] = None,
+                 text_content: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] definition: ID of a watermarking template.
+        :param pulumi.Input[float] end_time_offset: End time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame; If this value is greater than 0 (e.g., n), the watermark will exist till second n; If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterArgs'] raw_parameter: Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+        :param pulumi.Input[float] start_time_offset: Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame; If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+        :param pulumi.Input[str] svg_content: SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+        :param pulumi.Input[str] text_content: Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+        """
+        pulumi.set(__self__, "definition", definition)
+        if end_time_offset is not None:
+            pulumi.set(__self__, "end_time_offset", end_time_offset)
+        if raw_parameter is not None:
+            pulumi.set(__self__, "raw_parameter", raw_parameter)
+        if start_time_offset is not None:
+            pulumi.set(__self__, "start_time_offset", start_time_offset)
+        if svg_content is not None:
+            pulumi.set(__self__, "svg_content", svg_content)
+        if text_content is not None:
+            pulumi.set(__self__, "text_content", text_content)
+
+    @property
+    @pulumi.getter
+    def definition(self) -> pulumi.Input[int]:
+        """
+        ID of a watermarking template.
+        """
+        return pulumi.get(self, "definition")
+
+    @definition.setter
+    def definition(self, value: pulumi.Input[int]):
+        pulumi.set(self, "definition", value)
+
+    @property
+    @pulumi.getter(name="endTimeOffset")
+    def end_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        End time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame; If this value is greater than 0 (e.g., n), the watermark will exist till second n; If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.
+        """
+        return pulumi.get(self, "end_time_offset")
+
+    @end_time_offset.setter
+    def end_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "end_time_offset", value)
+
+    @property
+    @pulumi.getter(name="rawParameter")
+    def raw_parameter(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterArgs']]:
+        """
+        Custom watermark parameter, which is valid if `Definition` is 0.This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the watermark parameter preferably.Custom watermark parameter is not available for screenshot.
+        """
+        return pulumi.get(self, "raw_parameter")
+
+    @raw_parameter.setter
+    def raw_parameter(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterArgs']]):
+        pulumi.set(self, "raw_parameter", value)
+
+    @property
+    @pulumi.getter(name="startTimeOffset")
+    def start_time_offset(self) -> Optional[pulumi.Input[float]]:
+        """
+        Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame; If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.
+        """
+        return pulumi.get(self, "start_time_offset")
+
+    @start_time_offset.setter
+    def start_time_offset(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "start_time_offset", value)
+
+    @property
+    @pulumi.getter(name="svgContent")
+    def svg_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        SVG content of up to 2,000,000 characters. This field is required only when the watermark type is `SVG`.SVG watermark is not available for screenshot.
+        """
+        return pulumi.get(self, "svg_content")
+
+    @svg_content.setter
+    def svg_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "svg_content", value)
+
+    @property
+    @pulumi.getter(name="textContent")
+    def text_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        Text content of up to 100 characters. This field is required only when the watermark type is text.Text watermark is not available for screenshot.
+        """
+        return pulumi.get(self, "text_content")
+
+    @text_content.setter
+    def text_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "text_content", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 coordinate_origin: Optional[pulumi.Input[str]] = None,
+                 image_template: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateArgs']] = None,
+                 x_pos: Optional[pulumi.Input[str]] = None,
+                 y_pos: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] type: Watermark type. Valid values: image: image watermark.
+        :param pulumi.Input[str] coordinate_origin: Origin position, which currently can only be: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateArgs'] image_template: Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+        :param pulumi.Input[str] x_pos: The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        :param pulumi.Input[str] y_pos: The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        pulumi.set(__self__, "type", type)
+        if coordinate_origin is not None:
+            pulumi.set(__self__, "coordinate_origin", coordinate_origin)
+        if image_template is not None:
+            pulumi.set(__self__, "image_template", image_template)
+        if x_pos is not None:
+            pulumi.set(__self__, "x_pos", x_pos)
+        if y_pos is not None:
+            pulumi.set(__self__, "y_pos", y_pos)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Watermark type. Valid values: image: image watermark.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="coordinateOrigin")
+    def coordinate_origin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Origin position, which currently can only be: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.Default value: TopLeft.
+        """
+        return pulumi.get(self, "coordinate_origin")
+
+    @coordinate_origin.setter
+    def coordinate_origin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "coordinate_origin", value)
+
+    @property
+    @pulumi.getter(name="imageTemplate")
+    def image_template(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateArgs']]:
+        """
+        Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
+        """
+        return pulumi.get(self, "image_template")
+
+    @image_template.setter
+    def image_template(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateArgs']]):
+        pulumi.set(self, "image_template", value)
+
+    @property
+    @pulumi.getter(name="xPos")
+    def x_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "x_pos")
+
+    @x_pos.setter
+    def x_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "x_pos", value)
+
+    @property
+    @pulumi.getter(name="yPos")
+    def y_pos(self) -> Optional[pulumi.Input[str]]:
+        """
+        The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
+        """
+        return pulumi.get(self, "y_pos")
+
+    @y_pos.setter
+    def y_pos(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "y_pos", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateArgs:
+    def __init__(__self__, *,
+                 image_content: pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentArgs'],
+                 height: Optional[pulumi.Input[str]] = None,
+                 repeat_type: Optional[pulumi.Input[str]] = None,
+                 width: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentArgs'] image_content: Input content of watermark image. JPEG and PNG images are supported.
+        :param pulumi.Input[str] height: Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height; If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+        :param pulumi.Input[str] repeat_type: Repeat type of an animated watermark. Valid values: `once`: no longer appears after watermark playback ends. `repeat_last_frame`: stays on the last frame after watermark playback ends. `repeat` (default): repeats the playback until the video ends.
+        :param pulumi.Input[str] width: Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width; If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        pulumi.set(__self__, "image_content", image_content)
+        if height is not None:
+            pulumi.set(__self__, "height", height)
+        if repeat_type is not None:
+            pulumi.set(__self__, "repeat_type", repeat_type)
+        if width is not None:
+            pulumi.set(__self__, "width", width)
+
+    @property
+    @pulumi.getter(name="imageContent")
+    def image_content(self) -> pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentArgs']:
+        """
+        Input content of watermark image. JPEG and PNG images are supported.
+        """
+        return pulumi.get(self, "image_content")
+
+    @image_content.setter
+    def image_content(self, value: pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentArgs']):
+        pulumi.set(self, "image_content", value)
+
+    @property
+    @pulumi.getter
+    def height(self) -> Optional[pulumi.Input[str]]:
+        """
+        Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height; If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px.Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+        """
+        return pulumi.get(self, "height")
+
+    @height.setter
+    def height(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "height", value)
+
+    @property
+    @pulumi.getter(name="repeatType")
+    def repeat_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Repeat type of an animated watermark. Valid values: `once`: no longer appears after watermark playback ends. `repeat_last_frame`: stays on the last frame after watermark playback ends. `repeat` (default): repeats the playback until the video ends.
+        """
+        return pulumi.get(self, "repeat_type")
+
+    @repeat_type.setter
+    def repeat_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "repeat_type", value)
+
+    @property
+    @pulumi.getter
+    def width(self) -> Optional[pulumi.Input[str]]:
+        """
+        Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width; for example, `10%` means that `Width` is 10% of the video width; If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px.Default value: 10%.
+        """
+        return pulumi.get(self, "width")
+
+    @width.setter
+    def width(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "width", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class ScheduleOutputStorageArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_output_storage: Optional[pulumi.Input['ScheduleOutputStorageCosOutputStorageArgs']] = None,
+                 s3_output_storage: Optional[pulumi.Input['ScheduleOutputStorageS3OutputStorageArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        :param pulumi.Input['ScheduleOutputStorageCosOutputStorageArgs'] cos_output_storage: The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['ScheduleOutputStorageS3OutputStorageArgs'] s3_output_storage: The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_output_storage is not None:
+            pulumi.set(__self__, "cos_output_storage", cos_output_storage)
+        if s3_output_storage is not None:
+            pulumi.set(__self__, "s3_output_storage", s3_output_storage)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The storage type for a media processing output file. Valid values: `COS`: Tencent Cloud COS `AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosOutputStorage")
+    def cos_output_storage(self) -> Optional[pulumi.Input['ScheduleOutputStorageCosOutputStorageArgs']]:
+        """
+        The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "cos_output_storage")
+
+    @cos_output_storage.setter
+    def cos_output_storage(self, value: Optional[pulumi.Input['ScheduleOutputStorageCosOutputStorageArgs']]):
+        pulumi.set(self, "cos_output_storage", value)
+
+    @property
+    @pulumi.getter(name="s3OutputStorage")
+    def s3_output_storage(self) -> Optional[pulumi.Input['ScheduleOutputStorageS3OutputStorageArgs']]:
+        """
+        The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_output_storage")
+
+    @s3_output_storage.setter
+    def s3_output_storage(self, value: Optional[pulumi.Input['ScheduleOutputStorageS3OutputStorageArgs']]):
+        pulumi.set(self, "s3_output_storage", value)
+
+
+@pulumi.input_type
+class ScheduleOutputStorageCosOutputStorageArgs:
+    def __init__(__self__, *,
+                 bucket: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] bucket: The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        :param pulumi.Input[str] region: The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class ScheduleOutputStorageS3OutputStorageArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleTaskNotifyConfigArgs:
+    def __init__(__self__, *,
+                 aws_sqs: Optional[pulumi.Input['ScheduleTaskNotifyConfigAwsSqsArgs']] = None,
+                 cmq_model: Optional[pulumi.Input[str]] = None,
+                 cmq_region: Optional[pulumi.Input[str]] = None,
+                 notify_mode: Optional[pulumi.Input[str]] = None,
+                 notify_type: Optional[pulumi.Input[str]] = None,
+                 notify_url: Optional[pulumi.Input[str]] = None,
+                 queue_name: Optional[pulumi.Input[str]] = None,
+                 topic_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ScheduleTaskNotifyConfigAwsSqsArgs'] aws_sqs: The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] cmq_model: The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
+        :param pulumi.Input[str] cmq_region: The CMQ or TDMQ-CMQ region, such as `sh` (Shanghai) or `bj` (Beijing).
+        :param pulumi.Input[str] notify_mode: Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
+        :param pulumi.Input[str] notify_type: The notification type. Valid values: `CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead. `TDMQ-CMQ`: Message queue `URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API. `SCF`: This notification type is not recommended. You need to configure it in the SCF console. `AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket.Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.
+        :param pulumi.Input[str] notify_url: HTTP callback URL, required if `NotifyType` is set to `URL`.
+        :param pulumi.Input[str] queue_name: The CMQ or TDMQ-CMQ queue to receive notifications. This parameter is valid when `CmqModel` is `Queue`.
+        :param pulumi.Input[str] topic_name: The CMQ or TDMQ-CMQ topic to receive notifications. This parameter is valid when `CmqModel` is `Topic`.
+        """
+        if aws_sqs is not None:
+            pulumi.set(__self__, "aws_sqs", aws_sqs)
+        if cmq_model is not None:
+            pulumi.set(__self__, "cmq_model", cmq_model)
+        if cmq_region is not None:
+            pulumi.set(__self__, "cmq_region", cmq_region)
+        if notify_mode is not None:
+            pulumi.set(__self__, "notify_mode", notify_mode)
+        if notify_type is not None:
+            pulumi.set(__self__, "notify_type", notify_type)
+        if notify_url is not None:
+            pulumi.set(__self__, "notify_url", notify_url)
+        if queue_name is not None:
+            pulumi.set(__self__, "queue_name", queue_name)
+        if topic_name is not None:
+            pulumi.set(__self__, "topic_name", topic_name)
+
+    @property
+    @pulumi.getter(name="awsSqs")
+    def aws_sqs(self) -> Optional[pulumi.Input['ScheduleTaskNotifyConfigAwsSqsArgs']]:
+        """
+        The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "aws_sqs")
+
+    @aws_sqs.setter
+    def aws_sqs(self, value: Optional[pulumi.Input['ScheduleTaskNotifyConfigAwsSqsArgs']]):
+        pulumi.set(self, "aws_sqs", value)
+
+    @property
+    @pulumi.getter(name="cmqModel")
+    def cmq_model(self) -> Optional[pulumi.Input[str]]:
+        """
+        The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
+        """
+        return pulumi.get(self, "cmq_model")
+
+    @cmq_model.setter
+    def cmq_model(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cmq_model", value)
+
+    @property
+    @pulumi.getter(name="cmqRegion")
+    def cmq_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The CMQ or TDMQ-CMQ region, such as `sh` (Shanghai) or `bj` (Beijing).
+        """
+        return pulumi.get(self, "cmq_region")
+
+    @cmq_region.setter
+    def cmq_region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cmq_region", value)
+
+    @property
+    @pulumi.getter(name="notifyMode")
+    def notify_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
+        """
+        return pulumi.get(self, "notify_mode")
+
+    @notify_mode.setter
+    def notify_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notify_mode", value)
+
+    @property
+    @pulumi.getter(name="notifyType")
+    def notify_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The notification type. Valid values: `CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead. `TDMQ-CMQ`: Message queue `URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API. `SCF`: This notification type is not recommended. You need to configure it in the SCF console. `AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket.Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.
+        """
+        return pulumi.get(self, "notify_type")
+
+    @notify_type.setter
+    def notify_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notify_type", value)
+
+    @property
+    @pulumi.getter(name="notifyUrl")
+    def notify_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        HTTP callback URL, required if `NotifyType` is set to `URL`.
+        """
+        return pulumi.get(self, "notify_url")
+
+    @notify_url.setter
+    def notify_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notify_url", value)
+
+    @property
+    @pulumi.getter(name="queueName")
+    def queue_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The CMQ or TDMQ-CMQ queue to receive notifications. This parameter is valid when `CmqModel` is `Queue`.
+        """
+        return pulumi.get(self, "queue_name")
+
+    @queue_name.setter
+    def queue_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "queue_name", value)
+
+    @property
+    @pulumi.getter(name="topicName")
+    def topic_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The CMQ or TDMQ-CMQ topic to receive notifications. This parameter is valid when `CmqModel` is `Topic`.
+        """
+        return pulumi.get(self, "topic_name")
+
+    @topic_name.setter
+    def topic_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_name", value)
+
+
+@pulumi.input_type
+class ScheduleTaskNotifyConfigAwsSqsArgs:
+    def __init__(__self__, *,
+                 sqs_queue_name: pulumi.Input[str],
+                 sqs_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] sqs_queue_name: The name of the SQS queue.
+        :param pulumi.Input[str] sqs_region: The region of the SQS queue.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "sqs_queue_name", sqs_queue_name)
+        pulumi.set(__self__, "sqs_region", sqs_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="sqsQueueName")
+    def sqs_queue_name(self) -> pulumi.Input[str]:
+        """
+        The name of the SQS queue.
+        """
+        return pulumi.get(self, "sqs_queue_name")
+
+    @sqs_queue_name.setter
+    def sqs_queue_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "sqs_queue_name", value)
+
+    @property
+    @pulumi.getter(name="sqsRegion")
+    def sqs_region(self) -> pulumi.Input[str]:
+        """
+        The region of the SQS queue.
+        """
+        return pulumi.get(self, "sqs_region")
+
+    @sqs_region.setter
+    def sqs_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "sqs_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleTriggerArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 aws_s3_file_upload_trigger: Optional[pulumi.Input['ScheduleTriggerAwsS3FileUploadTriggerArgs']] = None,
+                 cos_file_upload_trigger: Optional[pulumi.Input['ScheduleTriggerCosFileUploadTriggerArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The trigger type. Valid values: `CosFileUpload`: Tencent Cloud COS trigger. `AwsS3FileUpload`: AWS S3 trigger. Currently, this type is only supported for transcoding tasks and schemes (not supported for workflows).
+        :param pulumi.Input['ScheduleTriggerAwsS3FileUploadTriggerArgs'] aws_s3_file_upload_trigger: The AWS S3 trigger. This parameter is valid and required if `Type` is `AwsS3FileUpload`.Note: Currently, the key for the AWS S3 bucket, the trigger SQS queue, and the callback SQS queue must be the same.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input['ScheduleTriggerCosFileUploadTriggerArgs'] cos_file_upload_trigger: This parameter is required and valid when `Type` is `CosFileUpload`, indicating the COS trigger rule.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if aws_s3_file_upload_trigger is not None:
+            pulumi.set(__self__, "aws_s3_file_upload_trigger", aws_s3_file_upload_trigger)
+        if cos_file_upload_trigger is not None:
+            pulumi.set(__self__, "cos_file_upload_trigger", cos_file_upload_trigger)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The trigger type. Valid values: `CosFileUpload`: Tencent Cloud COS trigger. `AwsS3FileUpload`: AWS S3 trigger. Currently, this type is only supported for transcoding tasks and schemes (not supported for workflows).
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="awsS3FileUploadTrigger")
+    def aws_s3_file_upload_trigger(self) -> Optional[pulumi.Input['ScheduleTriggerAwsS3FileUploadTriggerArgs']]:
+        """
+        The AWS S3 trigger. This parameter is valid and required if `Type` is `AwsS3FileUpload`.Note: Currently, the key for the AWS S3 bucket, the trigger SQS queue, and the callback SQS queue must be the same.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "aws_s3_file_upload_trigger")
+
+    @aws_s3_file_upload_trigger.setter
+    def aws_s3_file_upload_trigger(self, value: Optional[pulumi.Input['ScheduleTriggerAwsS3FileUploadTriggerArgs']]):
+        pulumi.set(self, "aws_s3_file_upload_trigger", value)
+
+    @property
+    @pulumi.getter(name="cosFileUploadTrigger")
+    def cos_file_upload_trigger(self) -> Optional[pulumi.Input['ScheduleTriggerCosFileUploadTriggerArgs']]:
+        """
+        This parameter is required and valid when `Type` is `CosFileUpload`, indicating the COS trigger rule.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "cos_file_upload_trigger")
+
+    @cos_file_upload_trigger.setter
+    def cos_file_upload_trigger(self, value: Optional[pulumi.Input['ScheduleTriggerCosFileUploadTriggerArgs']]):
+        pulumi.set(self, "cos_file_upload_trigger", value)
+
+
+@pulumi.input_type
+class ScheduleTriggerAwsS3FileUploadTriggerArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 aws_sqs: Optional[pulumi.Input['ScheduleTriggerAwsS3FileUploadTriggerAwsSqsArgs']] = None,
+                 dir: Optional[pulumi.Input[str]] = None,
+                 formats: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket bound to the scheme.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input['ScheduleTriggerAwsS3FileUploadTriggerAwsSqsArgs'] aws_sqs: The SQS queue of the AWS S3 bucket.Note: The queue must be in the same region as the bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] dir: The bucket directory bound. It must be an absolute path that starts and ends with `/`, such as `/movie/201907/`. If you do not specify this, the root directory will be bound.	.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] formats: The file formats that will trigger the scheme, such as [mp4, flv, mov]. If you do not specify this, the upload of files in any format will trigger the scheme.	.
+        :param pulumi.Input[str] s3_secret_id: The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] s3_secret_key: The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if aws_sqs is not None:
+            pulumi.set(__self__, "aws_sqs", aws_sqs)
+        if dir is not None:
+            pulumi.set(__self__, "dir", dir)
+        if formats is not None:
+            pulumi.set(__self__, "formats", formats)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket bound to the scheme.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="awsSqs")
+    def aws_sqs(self) -> Optional[pulumi.Input['ScheduleTriggerAwsS3FileUploadTriggerAwsSqsArgs']]:
+        """
+        The SQS queue of the AWS S3 bucket.Note: The queue must be in the same region as the bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "aws_sqs")
+
+    @aws_sqs.setter
+    def aws_sqs(self, value: Optional[pulumi.Input['ScheduleTriggerAwsS3FileUploadTriggerAwsSqsArgs']]):
+        pulumi.set(self, "aws_sqs", value)
+
+    @property
+    @pulumi.getter
+    def dir(self) -> Optional[pulumi.Input[str]]:
+        """
+        The bucket directory bound. It must be an absolute path that starts and ends with `/`, such as `/movie/201907/`. If you do not specify this, the root directory will be bound.	.
+        """
+        return pulumi.get(self, "dir")
+
+    @dir.setter
+    def dir(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dir", value)
+
+    @property
+    @pulumi.getter
+    def formats(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The file formats that will trigger the scheme, such as [mp4, flv, mov]. If you do not specify this, the upload of files in any format will trigger the scheme.	.
+        """
+        return pulumi.get(self, "formats")
+
+    @formats.setter
+    def formats(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "formats", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleTriggerAwsS3FileUploadTriggerAwsSqsArgs:
+    def __init__(__self__, *,
+                 sqs_queue_name: pulumi.Input[str],
+                 sqs_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] sqs_queue_name: The name of the SQS queue.
+        :param pulumi.Input[str] sqs_region: The region of the SQS queue.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "sqs_queue_name", sqs_queue_name)
+        pulumi.set(__self__, "sqs_region", sqs_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="sqsQueueName")
+    def sqs_queue_name(self) -> pulumi.Input[str]:
+        """
+        The name of the SQS queue.
+        """
+        return pulumi.get(self, "sqs_queue_name")
+
+    @sqs_queue_name.setter
+    def sqs_queue_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "sqs_queue_name", value)
+
+    @property
+    @pulumi.getter(name="sqsRegion")
+    def sqs_region(self) -> pulumi.Input[str]:
+        """
+        The region of the SQS queue.
+        """
+        return pulumi.get(self, "sqs_region")
+
+    @sqs_region.setter
+    def sqs_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "sqs_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class ScheduleTriggerCosFileUploadTriggerArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 region: pulumi.Input[str],
+                 dir: Optional[pulumi.Input[str]] = None,
+                 formats: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[str] bucket: Name of the COS bucket bound to a workflow, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] region: Region of the COS bucket bound to a workflow, such as `ap-chongiqng`.
+        :param pulumi.Input[str] dir: Input path directory bound to a workflow, such as `/movie/201907/`. If this parameter is left empty, the `/` root directory will be used.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] formats: Format list of files that can trigger a workflow, such as [mp4, flv, mov]. If this parameter is left empty, files in all formats can trigger the workflow.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "region", region)
+        if dir is not None:
+            pulumi.set(__self__, "dir", dir)
+        if formats is not None:
+            pulumi.set(__self__, "formats", formats)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        Name of the COS bucket bound to a workflow, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        Region of the COS bucket bound to a workflow, such as `ap-chongiqng`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+    @property
+    @pulumi.getter
+    def dir(self) -> Optional[pulumi.Input[str]]:
+        """
+        Input path directory bound to a workflow, such as `/movie/201907/`. If this parameter is left empty, the `/` root directory will be used.
+        """
+        return pulumi.get(self, "dir")
+
+    @dir.setter
+    def dir(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dir", value)
+
+    @property
+    @pulumi.getter
+    def formats(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Format list of files that can trigger a workflow, such as [mp4, flv, mov]. If this parameter is left empty, files in all formats can trigger the workflow.
+        """
+        return pulumi.get(self, "formats")
+
+    @formats.setter
+    def formats(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "formats", value)
 
 
 @pulumi.input_type
@@ -1788,6 +20003,438 @@ class WatermarkTemplateTextTemplateArgs:
     @font_type.setter
     def font_type(self, value: pulumi.Input[str]):
         pulumi.set(self, "font_type", value)
+
+
+@pulumi.input_type
+class WithdrawsWatermarkOperationInputInfoArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 cos_input_info: Optional[pulumi.Input['WithdrawsWatermarkOperationInputInfoCosInputInfoArgs']] = None,
+                 s3_input_info: Optional[pulumi.Input['WithdrawsWatermarkOperationInputInfoS3InputInfoArgs']] = None,
+                 url_input_info: Optional[pulumi.Input['WithdrawsWatermarkOperationInputInfoUrlInputInfoArgs']] = None):
+        """
+        :param pulumi.Input[str] type: The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks..
+        :param pulumi.Input['WithdrawsWatermarkOperationInputInfoCosInputInfoArgs'] cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param pulumi.Input['WithdrawsWatermarkOperationInputInfoS3InputInfoArgs'] s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input['WithdrawsWatermarkOperationInputInfoUrlInputInfoArgs'] url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The input type. Valid values: `COS`: A COS bucket address.  `URL`: A URL.  `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks..
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional[pulumi.Input['WithdrawsWatermarkOperationInputInfoCosInputInfoArgs']]:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional[pulumi.Input['WithdrawsWatermarkOperationInputInfoCosInputInfoArgs']]):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional[pulumi.Input['WithdrawsWatermarkOperationInputInfoS3InputInfoArgs']]:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional[pulumi.Input['WithdrawsWatermarkOperationInputInfoS3InputInfoArgs']]):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional[pulumi.Input['WithdrawsWatermarkOperationInputInfoUrlInputInfoArgs']]:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional[pulumi.Input['WithdrawsWatermarkOperationInputInfoUrlInputInfoArgs']]):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class WithdrawsWatermarkOperationInputInfoCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: pulumi.Input[str],
+                 object: pulumi.Input[str],
+                 region: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param pulumi.Input[str] object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param pulumi.Input[str] region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> pulumi.Input[str]:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class WithdrawsWatermarkOperationInputInfoS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: pulumi.Input[str],
+                 s3_object: pulumi.Input[str],
+                 s3_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] s3_bucket: The AWS S3 bucket.
+        :param pulumi.Input[str] s3_object: The path of the AWS S3 object.
+        :param pulumi.Input[str] s3_region: The region of the AWS S3 bucket.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> pulumi.Input[str]:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> pulumi.Input[str]:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> pulumi.Input[str]:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class WithdrawsWatermarkOperationInputInfoUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[str]:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class WithdrawsWatermarkOperationTaskNotifyConfigArgs:
+    def __init__(__self__, *,
+                 aws_sqs: Optional[pulumi.Input['WithdrawsWatermarkOperationTaskNotifyConfigAwsSqsArgs']] = None,
+                 cmq_model: Optional[pulumi.Input[str]] = None,
+                 cmq_region: Optional[pulumi.Input[str]] = None,
+                 notify_mode: Optional[pulumi.Input[str]] = None,
+                 notify_type: Optional[pulumi.Input[str]] = None,
+                 notify_url: Optional[pulumi.Input[str]] = None,
+                 queue_name: Optional[pulumi.Input[str]] = None,
+                 topic_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['WithdrawsWatermarkOperationTaskNotifyConfigAwsSqsArgs'] aws_sqs: The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] cmq_model: The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
+        :param pulumi.Input[str] cmq_region: The CMQ or TDMQ-CMQ region, such as `sh` (Shanghai) or `bj` (Beijing).
+        :param pulumi.Input[str] notify_mode: Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
+        :param pulumi.Input[str] notify_type: The notification type. Valid values:  `CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead.  `TDMQ-CMQ`: Message queue  `URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.  `SCF`: This notification type is not recommended. You need to configure it in the SCF console.  `AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket. Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.
+        :param pulumi.Input[str] notify_url: HTTP callback URL, required if `NotifyType` is set to `URL`.
+        :param pulumi.Input[str] queue_name: The CMQ or TDMQ-CMQ queue to receive notifications. This parameter is valid when `CmqModel` is `Queue`.
+        :param pulumi.Input[str] topic_name: The CMQ or TDMQ-CMQ topic to receive notifications. This parameter is valid when `CmqModel` is `Topic`.
+        """
+        if aws_sqs is not None:
+            pulumi.set(__self__, "aws_sqs", aws_sqs)
+        if cmq_model is not None:
+            pulumi.set(__self__, "cmq_model", cmq_model)
+        if cmq_region is not None:
+            pulumi.set(__self__, "cmq_region", cmq_region)
+        if notify_mode is not None:
+            pulumi.set(__self__, "notify_mode", notify_mode)
+        if notify_type is not None:
+            pulumi.set(__self__, "notify_type", notify_type)
+        if notify_url is not None:
+            pulumi.set(__self__, "notify_url", notify_url)
+        if queue_name is not None:
+            pulumi.set(__self__, "queue_name", queue_name)
+        if topic_name is not None:
+            pulumi.set(__self__, "topic_name", topic_name)
+
+    @property
+    @pulumi.getter(name="awsSqs")
+    def aws_sqs(self) -> Optional[pulumi.Input['WithdrawsWatermarkOperationTaskNotifyConfigAwsSqsArgs']]:
+        """
+        The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "aws_sqs")
+
+    @aws_sqs.setter
+    def aws_sqs(self, value: Optional[pulumi.Input['WithdrawsWatermarkOperationTaskNotifyConfigAwsSqsArgs']]):
+        pulumi.set(self, "aws_sqs", value)
+
+    @property
+    @pulumi.getter(name="cmqModel")
+    def cmq_model(self) -> Optional[pulumi.Input[str]]:
+        """
+        The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
+        """
+        return pulumi.get(self, "cmq_model")
+
+    @cmq_model.setter
+    def cmq_model(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cmq_model", value)
+
+    @property
+    @pulumi.getter(name="cmqRegion")
+    def cmq_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The CMQ or TDMQ-CMQ region, such as `sh` (Shanghai) or `bj` (Beijing).
+        """
+        return pulumi.get(self, "cmq_region")
+
+    @cmq_region.setter
+    def cmq_region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cmq_region", value)
+
+    @property
+    @pulumi.getter(name="notifyMode")
+    def notify_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
+        """
+        return pulumi.get(self, "notify_mode")
+
+    @notify_mode.setter
+    def notify_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notify_mode", value)
+
+    @property
+    @pulumi.getter(name="notifyType")
+    def notify_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The notification type. Valid values:  `CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead.  `TDMQ-CMQ`: Message queue  `URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.  `SCF`: This notification type is not recommended. You need to configure it in the SCF console.  `AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket. Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.
+        """
+        return pulumi.get(self, "notify_type")
+
+    @notify_type.setter
+    def notify_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notify_type", value)
+
+    @property
+    @pulumi.getter(name="notifyUrl")
+    def notify_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        HTTP callback URL, required if `NotifyType` is set to `URL`.
+        """
+        return pulumi.get(self, "notify_url")
+
+    @notify_url.setter
+    def notify_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notify_url", value)
+
+    @property
+    @pulumi.getter(name="queueName")
+    def queue_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The CMQ or TDMQ-CMQ queue to receive notifications. This parameter is valid when `CmqModel` is `Queue`.
+        """
+        return pulumi.get(self, "queue_name")
+
+    @queue_name.setter
+    def queue_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "queue_name", value)
+
+    @property
+    @pulumi.getter(name="topicName")
+    def topic_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The CMQ or TDMQ-CMQ topic to receive notifications. This parameter is valid when `CmqModel` is `Topic`.
+        """
+        return pulumi.get(self, "topic_name")
+
+    @topic_name.setter
+    def topic_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "topic_name", value)
+
+
+@pulumi.input_type
+class WithdrawsWatermarkOperationTaskNotifyConfigAwsSqsArgs:
+    def __init__(__self__, *,
+                 sqs_queue_name: pulumi.Input[str],
+                 sqs_region: pulumi.Input[str],
+                 s3_secret_id: Optional[pulumi.Input[str]] = None,
+                 s3_secret_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] sqs_queue_name: The name of the SQS queue.
+        :param pulumi.Input[str] sqs_region: The region of the SQS queue.
+        :param pulumi.Input[str] s3_secret_id: The key ID required to read from/write to the SQS queue.
+        :param pulumi.Input[str] s3_secret_key: The key required to read from/write to the SQS queue.
+        """
+        pulumi.set(__self__, "sqs_queue_name", sqs_queue_name)
+        pulumi.set(__self__, "sqs_region", sqs_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="sqsQueueName")
+    def sqs_queue_name(self) -> pulumi.Input[str]:
+        """
+        The name of the SQS queue.
+        """
+        return pulumi.get(self, "sqs_queue_name")
+
+    @sqs_queue_name.setter
+    def sqs_queue_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "sqs_queue_name", value)
+
+    @property
+    @pulumi.getter(name="sqsRegion")
+    def sqs_region(self) -> pulumi.Input[str]:
+        """
+        The region of the SQS queue.
+        """
+        return pulumi.get(self, "sqs_region")
+
+    @sqs_region.setter
+    def sqs_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "sqs_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key ID required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key required to read from/write to the SQS queue.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "s3_secret_key", value)
 
 
 @pulumi.input_type
@@ -6525,5 +25172,233 @@ class WorkflowTriggerCosFileUploadTriggerArgs:
     @formats.setter
     def formats(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "formats", value)
+
+
+@pulumi.input_type
+class GetMediaMetaDataInputInfoArgs:
+    def __init__(__self__, *,
+                 type: str,
+                 cos_input_info: Optional['GetMediaMetaDataInputInfoCosInputInfoArgs'] = None,
+                 s3_input_info: Optional['GetMediaMetaDataInputInfoS3InputInfoArgs'] = None,
+                 url_input_info: Optional['GetMediaMetaDataInputInfoUrlInputInfoArgs'] = None):
+        """
+        :param str type: The input type. Valid values:`COS`: A COS bucket address.`URL`: A URL.`AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        :param 'GetMediaMetaDataInputInfoCosInputInfoArgs' cos_input_info: The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        :param 'GetMediaMetaDataInputInfoS3InputInfoArgs' s3_input_info: The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        :param 'GetMediaMetaDataInputInfoUrlInputInfoArgs' url_input_info: The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "type", type)
+        if cos_input_info is not None:
+            pulumi.set(__self__, "cos_input_info", cos_input_info)
+        if s3_input_info is not None:
+            pulumi.set(__self__, "s3_input_info", s3_input_info)
+        if url_input_info is not None:
+            pulumi.set(__self__, "url_input_info", url_input_info)
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        The input type. Valid values:`COS`: A COS bucket address.`URL`: A URL.`AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: str):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="cosInputInfo")
+    def cos_input_info(self) -> Optional['GetMediaMetaDataInputInfoCosInputInfoArgs']:
+        """
+        The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
+        """
+        return pulumi.get(self, "cos_input_info")
+
+    @cos_input_info.setter
+    def cos_input_info(self, value: Optional['GetMediaMetaDataInputInfoCosInputInfoArgs']):
+        pulumi.set(self, "cos_input_info", value)
+
+    @property
+    @pulumi.getter(name="s3InputInfo")
+    def s3_input_info(self) -> Optional['GetMediaMetaDataInputInfoS3InputInfoArgs']:
+        """
+        The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "s3_input_info")
+
+    @s3_input_info.setter
+    def s3_input_info(self, value: Optional['GetMediaMetaDataInputInfoS3InputInfoArgs']):
+        pulumi.set(self, "s3_input_info", value)
+
+    @property
+    @pulumi.getter(name="urlInputInfo")
+    def url_input_info(self) -> Optional['GetMediaMetaDataInputInfoUrlInputInfoArgs']:
+        """
+        The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "url_input_info")
+
+    @url_input_info.setter
+    def url_input_info(self, value: Optional['GetMediaMetaDataInputInfoUrlInputInfoArgs']):
+        pulumi.set(self, "url_input_info", value)
+
+
+@pulumi.input_type
+class GetMediaMetaDataInputInfoCosInputInfoArgs:
+    def __init__(__self__, *,
+                 bucket: str,
+                 object: str,
+                 region: str):
+        """
+        :param str bucket: The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        :param str object: The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        :param str region: The region of the COS bucket, such as `ap-chongqing`.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "object", object)
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> str:
+        """
+        The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: str):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def object(self) -> str:
+        """
+        The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: str):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        The region of the COS bucket, such as `ap-chongqing`.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: str):
+        pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class GetMediaMetaDataInputInfoS3InputInfoArgs:
+    def __init__(__self__, *,
+                 s3_bucket: str,
+                 s3_object: str,
+                 s3_region: str,
+                 s3_secret_id: Optional[str] = None,
+                 s3_secret_key: Optional[str] = None):
+        """
+        :param str s3_bucket: The AWS S3 bucket.
+        :param str s3_object: The path of the AWS S3 object.
+        :param str s3_region: The region of the AWS S3 bucket.
+        :param str s3_secret_id: The key ID required to access the AWS S3 object.
+        :param str s3_secret_key: The key required to access the AWS S3 object.
+        """
+        pulumi.set(__self__, "s3_bucket", s3_bucket)
+        pulumi.set(__self__, "s3_object", s3_object)
+        pulumi.set(__self__, "s3_region", s3_region)
+        if s3_secret_id is not None:
+            pulumi.set(__self__, "s3_secret_id", s3_secret_id)
+        if s3_secret_key is not None:
+            pulumi.set(__self__, "s3_secret_key", s3_secret_key)
+
+    @property
+    @pulumi.getter(name="s3Bucket")
+    def s3_bucket(self) -> str:
+        """
+        The AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_bucket")
+
+    @s3_bucket.setter
+    def s3_bucket(self, value: str):
+        pulumi.set(self, "s3_bucket", value)
+
+    @property
+    @pulumi.getter(name="s3Object")
+    def s3_object(self) -> str:
+        """
+        The path of the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_object")
+
+    @s3_object.setter
+    def s3_object(self, value: str):
+        pulumi.set(self, "s3_object", value)
+
+    @property
+    @pulumi.getter(name="s3Region")
+    def s3_region(self) -> str:
+        """
+        The region of the AWS S3 bucket.
+        """
+        return pulumi.get(self, "s3_region")
+
+    @s3_region.setter
+    def s3_region(self, value: str):
+        pulumi.set(self, "s3_region", value)
+
+    @property
+    @pulumi.getter(name="s3SecretId")
+    def s3_secret_id(self) -> Optional[str]:
+        """
+        The key ID required to access the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_secret_id")
+
+    @s3_secret_id.setter
+    def s3_secret_id(self, value: Optional[str]):
+        pulumi.set(self, "s3_secret_id", value)
+
+    @property
+    @pulumi.getter(name="s3SecretKey")
+    def s3_secret_key(self) -> Optional[str]:
+        """
+        The key required to access the AWS S3 object.
+        """
+        return pulumi.get(self, "s3_secret_key")
+
+    @s3_secret_key.setter
+    def s3_secret_key(self, value: Optional[str]):
+        pulumi.set(self, "s3_secret_key", value)
+
+
+@pulumi.input_type
+class GetMediaMetaDataInputInfoUrlInputInfoArgs:
+    def __init__(__self__, *,
+                 url: str):
+        """
+        :param str url: URL of a video.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def url(self) -> str:
+        """
+        URL of a video.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: str):
+        pulumi.set(self, "url", value)
 
 

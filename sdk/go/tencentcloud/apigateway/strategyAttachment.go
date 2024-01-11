@@ -50,7 +50,7 @@ import (
 // 		}
 // 		api, err := ApiGateway.NewApi(ctx, "api", &ApiGateway.ApiArgs{
 // 			ServiceId:           serviceService.ID(),
-// 			ApiName:             pulumi.String("hello_update"),
+// 			ApiName:             pulumi.String("tf_example"),
 // 			ApiDesc:             pulumi.String("my hello api update"),
 // 			AuthType:            pulumi.String("SECRET"),
 // 			Protocol:            pulumi.String("HTTP"),

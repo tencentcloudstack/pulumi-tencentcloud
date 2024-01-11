@@ -179,6 +179,10 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      */
     public readonly securityGroups!: pulumi.Output<string[] | undefined>;
     /**
+     * Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
+     */
+    public readonly slaveDeployMode!: pulumi.Output<number | undefined>;
+    /**
      * Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
      */
     public /*out*/ readonly status!: pulumi.Output<number>;
@@ -202,6 +206,10 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      * ID of VPC, which can be modified once every 24 hours and can't be removed.
      */
     public readonly vpcId!: pulumi.Output<string>;
+    /**
+     * Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+     */
+    public readonly waitSwitch!: pulumi.Output<number | undefined>;
     /**
      * Zone information, this parameter defaults to, the system automatically selects an Availability Zone.
      */
@@ -238,12 +246,14 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["period"] = state ? state.period : undefined;
             resourceInputs["prepaidPeriod"] = state ? state.prepaidPeriod : undefined;
             resourceInputs["securityGroups"] = state ? state.securityGroups : undefined;
+            resourceInputs["slaveDeployMode"] = state ? state.slaveDeployMode : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["taskStatus"] = state ? state.taskStatus : undefined;
             resourceInputs["volumeSize"] = state ? state.volumeSize : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
+            resourceInputs["waitSwitch"] = state ? state.waitSwitch : undefined;
             resourceInputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as ReadonlyInstanceArgs | undefined;
@@ -275,10 +285,12 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["period"] = args ? args.period : undefined;
             resourceInputs["prepaidPeriod"] = args ? args.prepaidPeriod : undefined;
             resourceInputs["securityGroups"] = args ? args.securityGroups : undefined;
+            resourceInputs["slaveDeployMode"] = args ? args.slaveDeployMode : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["volumeSize"] = args ? args.volumeSize : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
+            resourceInputs["waitSwitch"] = args ? args.waitSwitch : undefined;
             resourceInputs["zone"] = args ? args.zone : undefined;
             resourceInputs["intranetIp"] = undefined /*out*/;
             resourceInputs["locked"] = undefined /*out*/;
@@ -371,6 +383,10 @@ export interface ReadonlyInstanceState {
      */
     securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
     /**
+     * Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
+     */
+    slaveDeployMode?: pulumi.Input<number>;
+    /**
      * Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
      */
     status?: pulumi.Input<number>;
@@ -394,6 +410,10 @@ export interface ReadonlyInstanceState {
      * ID of VPC, which can be modified once every 24 hours and can't be removed.
      */
     vpcId?: pulumi.Input<string>;
+    /**
+     * Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+     */
+    waitSwitch?: pulumi.Input<number>;
     /**
      * Zone information, this parameter defaults to, the system automatically selects an Availability Zone.
      */
@@ -473,6 +493,10 @@ export interface ReadonlyInstanceArgs {
      */
     securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
     /**
+     * Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
+     */
+    slaveDeployMode?: pulumi.Input<number>;
+    /**
      * Private network ID. If `vpcId` is set, this value is required.
      */
     subnetId?: pulumi.Input<string>;
@@ -488,6 +512,10 @@ export interface ReadonlyInstanceArgs {
      * ID of VPC, which can be modified once every 24 hours and can't be removed.
      */
     vpcId?: pulumi.Input<string>;
+    /**
+     * Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+     */
+    waitSwitch?: pulumi.Input<number>;
     /**
      * Zone information, this parameter defaults to, the system automatically selects an Availability Zone.
      */

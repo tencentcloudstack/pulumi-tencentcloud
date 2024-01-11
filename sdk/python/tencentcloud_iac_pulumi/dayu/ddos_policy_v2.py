@@ -26,7 +26,8 @@ class DdosPolicyV2Args:
                  ddos_speed_limit_configs: Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2DdosSpeedLimitConfigArgs']]]] = None,
                  ddos_threshold: Optional[pulumi.Input[int]] = None,
                  packet_filters: Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2PacketFilterArgs']]]] = None,
-                 protocol_block_configs: Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2ProtocolBlockConfigArgs']]]] = None):
+                 protocol_block_configs: Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2ProtocolBlockConfigArgs']]]] = None,
+                 water_print_configs: Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2WaterPrintConfigArgs']]]] = None):
         """
         The set of arguments for constructing a DdosPolicyV2 resource.
         :param pulumi.Input[str] resource_id: The ID of the resource instance.
@@ -41,6 +42,7 @@ class DdosPolicyV2Args:
         :param pulumi.Input[int] ddos_threshold: DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2PacketFilterArgs']]] packet_filters: Feature filtering rules for DDoS protection.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2ProtocolBlockConfigArgs']]] protocol_block_configs: Protocol block configuration for DDoS protection.
+        :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2WaterPrintConfigArgs']]] water_print_configs: Water print config.
         """
         pulumi.set(__self__, "resource_id", resource_id)
         if acls is not None:
@@ -65,6 +67,8 @@ class DdosPolicyV2Args:
             pulumi.set(__self__, "packet_filters", packet_filters)
         if protocol_block_configs is not None:
             pulumi.set(__self__, "protocol_block_configs", protocol_block_configs)
+        if water_print_configs is not None:
+            pulumi.set(__self__, "water_print_configs", water_print_configs)
 
     @property
     @pulumi.getter(name="resourceId")
@@ -210,6 +214,18 @@ class DdosPolicyV2Args:
     def protocol_block_configs(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2ProtocolBlockConfigArgs']]]]):
         pulumi.set(self, "protocol_block_configs", value)
 
+    @property
+    @pulumi.getter(name="waterPrintConfigs")
+    def water_print_configs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2WaterPrintConfigArgs']]]]:
+        """
+        Water print config.
+        """
+        return pulumi.get(self, "water_print_configs")
+
+    @water_print_configs.setter
+    def water_print_configs(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2WaterPrintConfigArgs']]]]):
+        pulumi.set(self, "water_print_configs", value)
+
 
 @pulumi.input_type
 class _DdosPolicyV2State:
@@ -225,7 +241,8 @@ class _DdosPolicyV2State:
                  ddos_threshold: Optional[pulumi.Input[int]] = None,
                  packet_filters: Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2PacketFilterArgs']]]] = None,
                  protocol_block_configs: Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2ProtocolBlockConfigArgs']]]] = None,
-                 resource_id: Optional[pulumi.Input[str]] = None):
+                 resource_id: Optional[pulumi.Input[str]] = None,
+                 water_print_configs: Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2WaterPrintConfigArgs']]]] = None):
         """
         Input properties used for looking up and filtering DdosPolicyV2 resources.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2AclArgs']]] acls: Port ACL policy for DDoS protection.
@@ -240,6 +257,7 @@ class _DdosPolicyV2State:
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2PacketFilterArgs']]] packet_filters: Feature filtering rules for DDoS protection.
         :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2ProtocolBlockConfigArgs']]] protocol_block_configs: Protocol block configuration for DDoS protection.
         :param pulumi.Input[str] resource_id: The ID of the resource instance.
+        :param pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2WaterPrintConfigArgs']]] water_print_configs: Water print config.
         """
         if acls is not None:
             pulumi.set(__self__, "acls", acls)
@@ -265,6 +283,8 @@ class _DdosPolicyV2State:
             pulumi.set(__self__, "protocol_block_configs", protocol_block_configs)
         if resource_id is not None:
             pulumi.set(__self__, "resource_id", resource_id)
+        if water_print_configs is not None:
+            pulumi.set(__self__, "water_print_configs", water_print_configs)
 
     @property
     @pulumi.getter
@@ -410,6 +430,18 @@ class _DdosPolicyV2State:
     def resource_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "resource_id", value)
 
+    @property
+    @pulumi.getter(name="waterPrintConfigs")
+    def water_print_configs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2WaterPrintConfigArgs']]]]:
+        """
+        Water print config.
+        """
+        return pulumi.get(self, "water_print_configs")
+
+    @water_print_configs.setter
+    def water_print_configs(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DdosPolicyV2WaterPrintConfigArgs']]]]):
+        pulumi.set(self, "water_print_configs", value)
+
 
 class DdosPolicyV2(pulumi.CustomResource):
     @overload
@@ -428,6 +460,7 @@ class DdosPolicyV2(pulumi.CustomResource):
                  packet_filters: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2PacketFilterArgs']]]]] = None,
                  protocol_block_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2ProtocolBlockConfigArgs']]]]] = None,
                  resource_id: Optional[pulumi.Input[str]] = None,
+                 water_print_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2WaterPrintConfigArgs']]]]] = None,
                  __props__=None):
         """
         Use this resource to create dayu DDoS policy v2
@@ -508,7 +541,17 @@ class DdosPolicyV2(pulumi.CustomResource):
                 drop_tcp=0,
                 drop_udp=0,
             )],
-            resource_id="bgpip-000004xf")
+            resource_id="bgpip-000004xf",
+            water_print_configs=[tencentcloud.dayu.DdosPolicyV2WaterPrintConfigArgs(
+                listeners=[tencentcloud.dayu.DdosPolicyV2WaterPrintConfigListenerArgs(
+                    forward_protocol="TCP",
+                    frontend_port=90,
+                    frontend_port_end=90,
+                )],
+                offset=1,
+                open_status=1,
+                verify="checkall",
+            )])
         ```
 
         :param str resource_name: The name of the resource.
@@ -525,6 +568,7 @@ class DdosPolicyV2(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2PacketFilterArgs']]]] packet_filters: Feature filtering rules for DDoS protection.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2ProtocolBlockConfigArgs']]]] protocol_block_configs: Protocol block configuration for DDoS protection.
         :param pulumi.Input[str] resource_id: The ID of the resource instance.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2WaterPrintConfigArgs']]]] water_print_configs: Water print config.
         """
         ...
     @overload
@@ -611,7 +655,17 @@ class DdosPolicyV2(pulumi.CustomResource):
                 drop_tcp=0,
                 drop_udp=0,
             )],
-            resource_id="bgpip-000004xf")
+            resource_id="bgpip-000004xf",
+            water_print_configs=[tencentcloud.dayu.DdosPolicyV2WaterPrintConfigArgs(
+                listeners=[tencentcloud.dayu.DdosPolicyV2WaterPrintConfigListenerArgs(
+                    forward_protocol="TCP",
+                    frontend_port=90,
+                    frontend_port_end=90,
+                )],
+                offset=1,
+                open_status=1,
+                verify="checkall",
+            )])
         ```
 
         :param str resource_name: The name of the resource.
@@ -641,6 +695,7 @@ class DdosPolicyV2(pulumi.CustomResource):
                  packet_filters: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2PacketFilterArgs']]]]] = None,
                  protocol_block_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2ProtocolBlockConfigArgs']]]]] = None,
                  resource_id: Optional[pulumi.Input[str]] = None,
+                 water_print_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2WaterPrintConfigArgs']]]]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -669,6 +724,7 @@ class DdosPolicyV2(pulumi.CustomResource):
             if resource_id is None and not opts.urn:
                 raise TypeError("Missing required property 'resource_id'")
             __props__.__dict__["resource_id"] = resource_id
+            __props__.__dict__["water_print_configs"] = water_print_configs
         super(DdosPolicyV2, __self__).__init__(
             'tencentcloud:Dayu/ddosPolicyV2:DdosPolicyV2',
             resource_name,
@@ -690,7 +746,8 @@ class DdosPolicyV2(pulumi.CustomResource):
             ddos_threshold: Optional[pulumi.Input[int]] = None,
             packet_filters: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2PacketFilterArgs']]]]] = None,
             protocol_block_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2ProtocolBlockConfigArgs']]]]] = None,
-            resource_id: Optional[pulumi.Input[str]] = None) -> 'DdosPolicyV2':
+            resource_id: Optional[pulumi.Input[str]] = None,
+            water_print_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2WaterPrintConfigArgs']]]]] = None) -> 'DdosPolicyV2':
         """
         Get an existing DdosPolicyV2 resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -710,6 +767,7 @@ class DdosPolicyV2(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2PacketFilterArgs']]]] packet_filters: Feature filtering rules for DDoS protection.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2ProtocolBlockConfigArgs']]]] protocol_block_configs: Protocol block configuration for DDoS protection.
         :param pulumi.Input[str] resource_id: The ID of the resource instance.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DdosPolicyV2WaterPrintConfigArgs']]]] water_print_configs: Water print config.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -727,6 +785,7 @@ class DdosPolicyV2(pulumi.CustomResource):
         __props__.__dict__["packet_filters"] = packet_filters
         __props__.__dict__["protocol_block_configs"] = protocol_block_configs
         __props__.__dict__["resource_id"] = resource_id
+        __props__.__dict__["water_print_configs"] = water_print_configs
         return DdosPolicyV2(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -824,4 +883,12 @@ class DdosPolicyV2(pulumi.CustomResource):
         The ID of the resource instance.
         """
         return pulumi.get(self, "resource_id")
+
+    @property
+    @pulumi.getter(name="waterPrintConfigs")
+    def water_print_configs(self) -> pulumi.Output[Optional[Sequence['outputs.DdosPolicyV2WaterPrintConfig']]]:
+        """
+        Water print config.
+        """
+        return pulumi.get(self, "water_print_configs")
 

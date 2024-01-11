@@ -13,6 +13,78 @@ import (
 
 // Provides a resource to create a teo originGroup
 //
+// ## Example Usage
+// ### Self origin group
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Teo.NewOriginGroup(ctx, "originGroup", &Teo.OriginGroupArgs{
+// 			ConfigurationType: pulumi.String("weight"),
+// 			OriginGroupName:   pulumi.String("test-group"),
+// 			OriginRecords: teo.OriginGroupOriginRecordArray{
+// 				&teo.OriginGroupOriginRecordArgs{
+// 					Areas:   pulumi.StringArray{},
+// 					Port:    pulumi.Int(8080),
+// 					Private: pulumi.Bool(false),
+// 					Record:  pulumi.String("150.109.8.1"),
+// 					Weight:  pulumi.Int(100),
+// 				},
+// 			},
+// 			OriginType: pulumi.String("self"),
+// 			ZoneId:     pulumi.String("zone-297z8rf93cfw"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Cos origin group
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Teo.NewOriginGroup(ctx, "originGroup", &Teo.OriginGroupArgs{
+// 			ConfigurationType: pulumi.String("weight"),
+// 			OriginGroupName:   pulumi.String("test"),
+// 			OriginRecords: teo.OriginGroupOriginRecordArray{
+// 				&teo.OriginGroupOriginRecordArgs{
+// 					Areas:   pulumi.StringArray{},
+// 					Port:    pulumi.Int(0),
+// 					Private: pulumi.Bool(true),
+// 					Record:  pulumi.String("test-ruichaolin-1310708577.cos.ap-nanjing.myqcloud.com"),
+// 					Weight:  pulumi.Int(100),
+// 				},
+// 			},
+// 			OriginType: pulumi.String("cos"),
+// 			ZoneId:     pulumi.String("zone-2o3h21ed8bpu"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
 // ## Import
 //
 // teo origin_group can be imported using the zone_id#originGroup_id, e.g. `
@@ -25,7 +97,7 @@ import (
 type OriginGroup struct {
 	pulumi.CustomResourceState
 
-	// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+	// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
 	ConfigurationType pulumi.StringOutput `pulumi:"configurationType"`
 	// OriginGroup ID.
 	OriginGroupId pulumi.StringOutput `pulumi:"originGroupId"`
@@ -33,7 +105,7 @@ type OriginGroup struct {
 	OriginGroupName pulumi.StringOutput `pulumi:"originGroupName"`
 	// Origin site records.
 	OriginRecords OriginGroupOriginRecordArrayOutput `pulumi:"originRecords"`
-	// Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `thirdParty`: third party cos.
+	// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
 	OriginType pulumi.StringOutput `pulumi:"originType"`
 	// Last modification date.
 	UpdateTime pulumi.StringOutput `pulumi:"updateTime"`
@@ -86,7 +158,7 @@ func GetOriginGroup(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering OriginGroup resources.
 type originGroupState struct {
-	// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+	// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
 	ConfigurationType *string `pulumi:"configurationType"`
 	// OriginGroup ID.
 	OriginGroupId *string `pulumi:"originGroupId"`
@@ -94,7 +166,7 @@ type originGroupState struct {
 	OriginGroupName *string `pulumi:"originGroupName"`
 	// Origin site records.
 	OriginRecords []OriginGroupOriginRecord `pulumi:"originRecords"`
-	// Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `thirdParty`: third party cos.
+	// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
 	OriginType *string `pulumi:"originType"`
 	// Last modification date.
 	UpdateTime *string `pulumi:"updateTime"`
@@ -103,7 +175,7 @@ type originGroupState struct {
 }
 
 type OriginGroupState struct {
-	// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+	// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
 	ConfigurationType pulumi.StringPtrInput
 	// OriginGroup ID.
 	OriginGroupId pulumi.StringPtrInput
@@ -111,7 +183,7 @@ type OriginGroupState struct {
 	OriginGroupName pulumi.StringPtrInput
 	// Origin site records.
 	OriginRecords OriginGroupOriginRecordArrayInput
-	// Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `thirdParty`: third party cos.
+	// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
 	OriginType pulumi.StringPtrInput
 	// Last modification date.
 	UpdateTime pulumi.StringPtrInput
@@ -124,13 +196,13 @@ func (OriginGroupState) ElementType() reflect.Type {
 }
 
 type originGroupArgs struct {
-	// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+	// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
 	ConfigurationType string `pulumi:"configurationType"`
 	// OriginGroup Name.
 	OriginGroupName string `pulumi:"originGroupName"`
 	// Origin site records.
 	OriginRecords []OriginGroupOriginRecord `pulumi:"originRecords"`
-	// Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `thirdParty`: third party cos.
+	// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
 	OriginType string `pulumi:"originType"`
 	// Site ID.
 	ZoneId string `pulumi:"zoneId"`
@@ -138,13 +210,13 @@ type originGroupArgs struct {
 
 // The set of arguments for constructing a OriginGroup resource.
 type OriginGroupArgs struct {
-	// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+	// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
 	ConfigurationType pulumi.StringInput
 	// OriginGroup Name.
 	OriginGroupName pulumi.StringInput
 	// Origin site records.
 	OriginRecords OriginGroupOriginRecordArrayInput
-	// Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `thirdParty`: third party cos.
+	// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
 	OriginType pulumi.StringInput
 	// Site ID.
 	ZoneId pulumi.StringInput
@@ -237,7 +309,7 @@ func (o OriginGroupOutput) ToOriginGroupOutputWithContext(ctx context.Context) O
 	return o
 }
 
-// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
 func (o OriginGroupOutput) ConfigurationType() pulumi.StringOutput {
 	return o.ApplyT(func(v *OriginGroup) pulumi.StringOutput { return v.ConfigurationType }).(pulumi.StringOutput)
 }
@@ -257,7 +329,7 @@ func (o OriginGroupOutput) OriginRecords() OriginGroupOriginRecordArrayOutput {
 	return o.ApplyT(func(v *OriginGroup) OriginGroupOriginRecordArrayOutput { return v.OriginRecords }).(OriginGroupOriginRecordArrayOutput)
 }
 
-// Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `thirdParty`: third party cos.
+// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
 func (o OriginGroupOutput) OriginType() pulumi.StringOutput {
 	return o.ApplyT(func(v *OriginGroup) pulumi.StringOutput { return v.OriginType }).(pulumi.StringOutput)
 }

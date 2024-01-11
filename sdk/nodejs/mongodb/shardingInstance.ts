@@ -141,7 +141,7 @@ export class ShardingInstance extends pulumi.CustomResource {
      */
     public readonly projectId!: pulumi.Output<number | undefined>;
     /**
-     * ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+     * ID of the security group.
      */
     public readonly securityGroups!: pulumi.Output<string[] | undefined>;
     /**
@@ -351,7 +351,7 @@ export interface ShardingInstanceState {
      */
     projectId?: pulumi.Input<number>;
     /**
-     * ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+     * ID of the security group.
      */
     securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -461,7 +461,7 @@ export interface ShardingInstanceArgs {
      */
     projectId?: pulumi.Input<number>;
     /**
-     * ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+     * ID of the security group.
      */
     securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
     /**

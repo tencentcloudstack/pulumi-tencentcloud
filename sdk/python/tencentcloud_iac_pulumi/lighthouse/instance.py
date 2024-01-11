@@ -23,6 +23,7 @@ class InstanceArgs:
                  client_token: Optional[pulumi.Input[str]] = None,
                  containers: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceContainerArgs']]]] = None,
                  dry_run: Optional[pulumi.Input[bool]] = None,
+                 firewall_template_id: Optional[pulumi.Input[str]] = None,
                  is_update_bundle_id_auto_voucher: Optional[pulumi.Input[bool]] = None,
                  isolate_data_disk: Optional[pulumi.Input[bool]] = None,
                  login_configuration: Optional[pulumi.Input['InstanceLoginConfigurationArgs']] = None,
@@ -38,6 +39,7 @@ class InstanceArgs:
         :param pulumi.Input[str] client_token: A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceContainerArgs']]] containers: Configuration of the containers to create.
         :param pulumi.Input[bool] dry_run: Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.
+        :param pulumi.Input[str] firewall_template_id: Firewall template ID. If this parameter is not specified, the default firewall policy is used.
         :param pulumi.Input[bool] is_update_bundle_id_auto_voucher: Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
         :param pulumi.Input[bool] isolate_data_disk: Whether to return the mounted data disk. `true`: returns both the instance and the mounted data disk; `false`: returns the instance and no longer returns its mounted data disk. Default: `true`.
         :param pulumi.Input['InstanceLoginConfigurationArgs'] login_configuration: Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.
@@ -55,6 +57,8 @@ class InstanceArgs:
             pulumi.set(__self__, "containers", containers)
         if dry_run is not None:
             pulumi.set(__self__, "dry_run", dry_run)
+        if firewall_template_id is not None:
+            pulumi.set(__self__, "firewall_template_id", firewall_template_id)
         if is_update_bundle_id_auto_voucher is not None:
             pulumi.set(__self__, "is_update_bundle_id_auto_voucher", is_update_bundle_id_auto_voucher)
         if isolate_data_disk is not None:
@@ -166,6 +170,18 @@ class InstanceArgs:
         pulumi.set(self, "dry_run", value)
 
     @property
+    @pulumi.getter(name="firewallTemplateId")
+    def firewall_template_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Firewall template ID. If this parameter is not specified, the default firewall policy is used.
+        """
+        return pulumi.get(self, "firewall_template_id")
+
+    @firewall_template_id.setter
+    def firewall_template_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "firewall_template_id", value)
+
+    @property
     @pulumi.getter(name="isUpdateBundleIdAutoVoucher")
     def is_update_bundle_id_auto_voucher(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -234,6 +250,7 @@ class _InstanceState:
                  client_token: Optional[pulumi.Input[str]] = None,
                  containers: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceContainerArgs']]]] = None,
                  dry_run: Optional[pulumi.Input[bool]] = None,
+                 firewall_template_id: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  is_update_bundle_id_auto_voucher: Optional[pulumi.Input[bool]] = None,
                  isolate_data_disk: Optional[pulumi.Input[bool]] = None,
@@ -249,6 +266,7 @@ class _InstanceState:
         :param pulumi.Input[str] client_token: A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceContainerArgs']]] containers: Configuration of the containers to create.
         :param pulumi.Input[bool] dry_run: Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.
+        :param pulumi.Input[str] firewall_template_id: Firewall template ID. If this parameter is not specified, the default firewall policy is used.
         :param pulumi.Input[str] instance_name: The display name of the Lighthouse instance.
         :param pulumi.Input[bool] is_update_bundle_id_auto_voucher: Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
         :param pulumi.Input[bool] isolate_data_disk: Whether to return the mounted data disk. `true`: returns both the instance and the mounted data disk; `false`: returns the instance and no longer returns its mounted data disk. Default: `true`.
@@ -268,6 +286,8 @@ class _InstanceState:
             pulumi.set(__self__, "containers", containers)
         if dry_run is not None:
             pulumi.set(__self__, "dry_run", dry_run)
+        if firewall_template_id is not None:
+            pulumi.set(__self__, "firewall_template_id", firewall_template_id)
         if instance_name is not None:
             pulumi.set(__self__, "instance_name", instance_name)
         if is_update_bundle_id_auto_voucher is not None:
@@ -347,6 +367,18 @@ class _InstanceState:
     @dry_run.setter
     def dry_run(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "dry_run", value)
+
+    @property
+    @pulumi.getter(name="firewallTemplateId")
+    def firewall_template_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Firewall template ID. If this parameter is not specified, the default firewall policy is used.
+        """
+        return pulumi.get(self, "firewall_template_id")
+
+    @firewall_template_id.setter
+    def firewall_template_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "firewall_template_id", value)
 
     @property
     @pulumi.getter(name="instanceName")
@@ -455,6 +487,7 @@ class Instance(pulumi.CustomResource):
                  client_token: Optional[pulumi.Input[str]] = None,
                  containers: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceContainerArgs']]]]] = None,
                  dry_run: Optional[pulumi.Input[bool]] = None,
+                 firewall_template_id: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  is_update_bundle_id_auto_voucher: Optional[pulumi.Input[bool]] = None,
                  isolate_data_disk: Optional[pulumi.Input[bool]] = None,
@@ -473,12 +506,16 @@ class Instance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        firewall_template = tencentcloud.lighthouse.FirewallTemplate("firewallTemplate", template_name="empty-template")
         lighthouse = tencentcloud.lighthouse.Instance("lighthouse",
-            blueprint_id="lhbp-f1lkcd41",
             bundle_id="bundle2022_gen_01",
+            blueprint_id="lhbp-f1lkcd41",
+            period=1,
+            renew_flag="NOTIFY_AND_AUTO_RENEW",
+            instance_name="hello world",
+            zone="ap-guangzhou-3",
             containers=[
                 tencentcloud.lighthouse.InstanceContainerArgs(
-                    command="ls -l",
                     container_image="ccr.ccs.tencentyun.com/qcloud/nginx",
                     container_name="nginx",
                     envs=[
@@ -493,14 +530,14 @@ class Instance(pulumi.CustomResource):
                     ],
                     publish_ports=[
                         tencentcloud.lighthouse.InstanceContainerPublishPortArgs(
-                            container_port=80,
                             host_port=80,
+                            container_port=80,
                             ip="127.0.0.1",
                             protocol="tcp",
                         ),
                         tencentcloud.lighthouse.InstanceContainerPublishPortArgs(
-                            container_port=36000,
                             host_port=36000,
+                            container_port=36000,
                             ip="127.0.0.1",
                             protocol="tcp",
                         ),
@@ -515,9 +552,9 @@ class Instance(pulumi.CustomResource):
                             host_path="/tmp",
                         ),
                     ],
+                    command="ls -l",
                 ),
                 tencentcloud.lighthouse.InstanceContainerArgs(
-                    command="echo \"hello\"",
                     container_image="ccr.ccs.tencentyun.com/qcloud/resty",
                     container_name="resty",
                     envs=[tencentcloud.lighthouse.InstanceContainerEnvArgs(
@@ -525,8 +562,8 @@ class Instance(pulumi.CustomResource):
                         value="value2",
                     )],
                     publish_ports=[tencentcloud.lighthouse.InstanceContainerPublishPortArgs(
-                        container_port=80,
                         host_port=80,
+                        container_port=80,
                         ip="127.0.0.1",
                         protocol="udp",
                     )],
@@ -534,12 +571,18 @@ class Instance(pulumi.CustomResource):
                         container_path="/var",
                         host_path="/tmp",
                     )],
+                    command="echo \"hello\"",
                 ),
             ],
-            instance_name="hello world",
-            period=1,
-            renew_flag="NOTIFY_AND_AUTO_RENEW",
-            zone="ap-guangzhou-3")
+            firewall_template_id=firewall_template.id)
+        ```
+
+        ## Import
+
+        lighthouse instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Lighthouse/instance:Instance lighthouse lhins-xxxxxx
         ```
 
         :param str resource_name: The name of the resource.
@@ -549,6 +592,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] client_token: A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceContainerArgs']]]] containers: Configuration of the containers to create.
         :param pulumi.Input[bool] dry_run: Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.
+        :param pulumi.Input[str] firewall_template_id: Firewall template ID. If this parameter is not specified, the default firewall policy is used.
         :param pulumi.Input[str] instance_name: The display name of the Lighthouse instance.
         :param pulumi.Input[bool] is_update_bundle_id_auto_voucher: Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
         :param pulumi.Input[bool] isolate_data_disk: Whether to return the mounted data disk. `true`: returns both the instance and the mounted data disk; `false`: returns the instance and no longer returns its mounted data disk. Default: `true`.
@@ -573,12 +617,16 @@ class Instance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        firewall_template = tencentcloud.lighthouse.FirewallTemplate("firewallTemplate", template_name="empty-template")
         lighthouse = tencentcloud.lighthouse.Instance("lighthouse",
-            blueprint_id="lhbp-f1lkcd41",
             bundle_id="bundle2022_gen_01",
+            blueprint_id="lhbp-f1lkcd41",
+            period=1,
+            renew_flag="NOTIFY_AND_AUTO_RENEW",
+            instance_name="hello world",
+            zone="ap-guangzhou-3",
             containers=[
                 tencentcloud.lighthouse.InstanceContainerArgs(
-                    command="ls -l",
                     container_image="ccr.ccs.tencentyun.com/qcloud/nginx",
                     container_name="nginx",
                     envs=[
@@ -593,14 +641,14 @@ class Instance(pulumi.CustomResource):
                     ],
                     publish_ports=[
                         tencentcloud.lighthouse.InstanceContainerPublishPortArgs(
-                            container_port=80,
                             host_port=80,
+                            container_port=80,
                             ip="127.0.0.1",
                             protocol="tcp",
                         ),
                         tencentcloud.lighthouse.InstanceContainerPublishPortArgs(
-                            container_port=36000,
                             host_port=36000,
+                            container_port=36000,
                             ip="127.0.0.1",
                             protocol="tcp",
                         ),
@@ -615,9 +663,9 @@ class Instance(pulumi.CustomResource):
                             host_path="/tmp",
                         ),
                     ],
+                    command="ls -l",
                 ),
                 tencentcloud.lighthouse.InstanceContainerArgs(
-                    command="echo \"hello\"",
                     container_image="ccr.ccs.tencentyun.com/qcloud/resty",
                     container_name="resty",
                     envs=[tencentcloud.lighthouse.InstanceContainerEnvArgs(
@@ -625,8 +673,8 @@ class Instance(pulumi.CustomResource):
                         value="value2",
                     )],
                     publish_ports=[tencentcloud.lighthouse.InstanceContainerPublishPortArgs(
-                        container_port=80,
                         host_port=80,
+                        container_port=80,
                         ip="127.0.0.1",
                         protocol="udp",
                     )],
@@ -634,12 +682,18 @@ class Instance(pulumi.CustomResource):
                         container_path="/var",
                         host_path="/tmp",
                     )],
+                    command="echo \"hello\"",
                 ),
             ],
-            instance_name="hello world",
-            period=1,
-            renew_flag="NOTIFY_AND_AUTO_RENEW",
-            zone="ap-guangzhou-3")
+            firewall_template_id=firewall_template.id)
+        ```
+
+        ## Import
+
+        lighthouse instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Lighthouse/instance:Instance lighthouse lhins-xxxxxx
         ```
 
         :param str resource_name: The name of the resource.
@@ -662,6 +716,7 @@ class Instance(pulumi.CustomResource):
                  client_token: Optional[pulumi.Input[str]] = None,
                  containers: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceContainerArgs']]]]] = None,
                  dry_run: Optional[pulumi.Input[bool]] = None,
+                 firewall_template_id: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  is_update_bundle_id_auto_voucher: Optional[pulumi.Input[bool]] = None,
                  isolate_data_disk: Optional[pulumi.Input[bool]] = None,
@@ -693,6 +748,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["client_token"] = client_token
             __props__.__dict__["containers"] = containers
             __props__.__dict__["dry_run"] = dry_run
+            __props__.__dict__["firewall_template_id"] = firewall_template_id
             if instance_name is None and not opts.urn:
                 raise TypeError("Missing required property 'instance_name'")
             __props__.__dict__["instance_name"] = instance_name
@@ -725,6 +781,7 @@ class Instance(pulumi.CustomResource):
             client_token: Optional[pulumi.Input[str]] = None,
             containers: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceContainerArgs']]]]] = None,
             dry_run: Optional[pulumi.Input[bool]] = None,
+            firewall_template_id: Optional[pulumi.Input[str]] = None,
             instance_name: Optional[pulumi.Input[str]] = None,
             is_update_bundle_id_auto_voucher: Optional[pulumi.Input[bool]] = None,
             isolate_data_disk: Optional[pulumi.Input[bool]] = None,
@@ -745,6 +802,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] client_token: A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceContainerArgs']]]] containers: Configuration of the containers to create.
         :param pulumi.Input[bool] dry_run: Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.
+        :param pulumi.Input[str] firewall_template_id: Firewall template ID. If this parameter is not specified, the default firewall policy is used.
         :param pulumi.Input[str] instance_name: The display name of the Lighthouse instance.
         :param pulumi.Input[bool] is_update_bundle_id_auto_voucher: Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
         :param pulumi.Input[bool] isolate_data_disk: Whether to return the mounted data disk. `true`: returns both the instance and the mounted data disk; `false`: returns the instance and no longer returns its mounted data disk. Default: `true`.
@@ -763,6 +821,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["client_token"] = client_token
         __props__.__dict__["containers"] = containers
         __props__.__dict__["dry_run"] = dry_run
+        __props__.__dict__["firewall_template_id"] = firewall_template_id
         __props__.__dict__["instance_name"] = instance_name
         __props__.__dict__["is_update_bundle_id_auto_voucher"] = is_update_bundle_id_auto_voucher
         __props__.__dict__["isolate_data_disk"] = isolate_data_disk
@@ -812,6 +871,14 @@ class Instance(pulumi.CustomResource):
         Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.
         """
         return pulumi.get(self, "dry_run")
+
+    @property
+    @pulumi.getter(name="firewallTemplateId")
+    def firewall_template_id(self) -> pulumi.Output[str]:
+        """
+        Firewall template ID. If this parameter is not specified, the default firewall policy is used.
+        """
+        return pulumi.get(self, "firewall_template_id")
 
     @property
     @pulumi.getter(name="instanceName")

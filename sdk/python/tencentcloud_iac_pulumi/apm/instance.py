@@ -15,6 +15,7 @@ class InstanceArgs:
     def __init__(__self__, *,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 pay_mode: Optional[pulumi.Input[int]] = None,
                  span_daily_counters: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  trace_duration: Optional[pulumi.Input[int]] = None):
@@ -22,6 +23,7 @@ class InstanceArgs:
         The set of arguments for constructing a Instance resource.
         :param pulumi.Input[str] description: Description Of Instance.
         :param pulumi.Input[str] name: Name Of Instance.
+        :param pulumi.Input[int] pay_mode: Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
         :param pulumi.Input[int] span_daily_counters: Quota Of Instance Reporting.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] trace_duration: Duration Of Trace Data.
@@ -30,6 +32,8 @@ class InstanceArgs:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if pay_mode is not None:
+            pulumi.set(__self__, "pay_mode", pay_mode)
         if span_daily_counters is not None:
             pulumi.set(__self__, "span_daily_counters", span_daily_counters)
         if tags is not None:
@@ -60,6 +64,18 @@ class InstanceArgs:
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="payMode")
+    def pay_mode(self) -> Optional[pulumi.Input[int]]:
+        """
+        Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+        """
+        return pulumi.get(self, "pay_mode")
+
+    @pay_mode.setter
+    def pay_mode(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "pay_mode", value)
 
     @property
     @pulumi.getter(name="spanDailyCounters")
@@ -103,6 +119,7 @@ class _InstanceState:
     def __init__(__self__, *,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 pay_mode: Optional[pulumi.Input[int]] = None,
                  span_daily_counters: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  trace_duration: Optional[pulumi.Input[int]] = None):
@@ -110,6 +127,7 @@ class _InstanceState:
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[str] description: Description Of Instance.
         :param pulumi.Input[str] name: Name Of Instance.
+        :param pulumi.Input[int] pay_mode: Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
         :param pulumi.Input[int] span_daily_counters: Quota Of Instance Reporting.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] trace_duration: Duration Of Trace Data.
@@ -118,6 +136,8 @@ class _InstanceState:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if pay_mode is not None:
+            pulumi.set(__self__, "pay_mode", pay_mode)
         if span_daily_counters is not None:
             pulumi.set(__self__, "span_daily_counters", span_daily_counters)
         if tags is not None:
@@ -148,6 +168,18 @@ class _InstanceState:
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="payMode")
+    def pay_mode(self) -> Optional[pulumi.Input[int]]:
+        """
+        Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+        """
+        return pulumi.get(self, "pay_mode")
+
+    @pay_mode.setter
+    def pay_mode(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "pay_mode", value)
 
     @property
     @pulumi.getter(name="spanDailyCounters")
@@ -193,12 +225,15 @@ class Instance(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 pay_mode: Optional[pulumi.Input[int]] = None,
                  span_daily_counters: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  trace_duration: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
         Provides a resource to create a apm instance
+
+        > **NOTE:** To use the field `pay_mode`, you need to contact official customer service to join the whitelist.
 
         ## Example Usage
 
@@ -227,6 +262,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: Description Of Instance.
         :param pulumi.Input[str] name: Name Of Instance.
+        :param pulumi.Input[int] pay_mode: Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
         :param pulumi.Input[int] span_daily_counters: Quota Of Instance Reporting.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] trace_duration: Duration Of Trace Data.
@@ -239,6 +275,8 @@ class Instance(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a apm instance
+
+        > **NOTE:** To use the field `pay_mode`, you need to contact official customer service to join the whitelist.
 
         ## Example Usage
 
@@ -280,6 +318,7 @@ class Instance(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 pay_mode: Optional[pulumi.Input[int]] = None,
                  span_daily_counters: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  trace_duration: Optional[pulumi.Input[int]] = None,
@@ -299,6 +338,7 @@ class Instance(pulumi.CustomResource):
 
             __props__.__dict__["description"] = description
             __props__.__dict__["name"] = name
+            __props__.__dict__["pay_mode"] = pay_mode
             __props__.__dict__["span_daily_counters"] = span_daily_counters
             __props__.__dict__["tags"] = tags
             __props__.__dict__["trace_duration"] = trace_duration
@@ -314,6 +354,7 @@ class Instance(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             description: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
+            pay_mode: Optional[pulumi.Input[int]] = None,
             span_daily_counters: Optional[pulumi.Input[int]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             trace_duration: Optional[pulumi.Input[int]] = None) -> 'Instance':
@@ -326,6 +367,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: Description Of Instance.
         :param pulumi.Input[str] name: Name Of Instance.
+        :param pulumi.Input[int] pay_mode: Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
         :param pulumi.Input[int] span_daily_counters: Quota Of Instance Reporting.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] trace_duration: Duration Of Trace Data.
@@ -336,6 +378,7 @@ class Instance(pulumi.CustomResource):
 
         __props__.__dict__["description"] = description
         __props__.__dict__["name"] = name
+        __props__.__dict__["pay_mode"] = pay_mode
         __props__.__dict__["span_daily_counters"] = span_daily_counters
         __props__.__dict__["tags"] = tags
         __props__.__dict__["trace_duration"] = trace_duration
@@ -356,6 +399,14 @@ class Instance(pulumi.CustomResource):
         Name Of Instance.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="payMode")
+    def pay_mode(self) -> pulumi.Output[Optional[int]]:
+        """
+        Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+        """
+        return pulumi.get(self, "pay_mode")
 
     @property
     @pulumi.getter(name="spanDailyCounters")

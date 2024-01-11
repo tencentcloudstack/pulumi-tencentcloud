@@ -29,7 +29,7 @@ class SecretArgs:
         :param pulumi.Input[bool] is_enabled: Specify whether to enable secret. Default value is `true`.
         :param pulumi.Input[str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         :param pulumi.Input[int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
-        :param pulumi.Input[int] secret_type: Type of secret. `0`: user-defined secret. `4`: redis secret.
+        :param pulumi.Input[int] secret_type: Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
         pulumi.set(__self__, "secret_name", secret_name)
@@ -124,7 +124,7 @@ class SecretArgs:
     @pulumi.getter(name="secretType")
     def secret_type(self) -> Optional[pulumi.Input[int]]:
         """
-        Type of secret. `0`: user-defined secret. `4`: redis secret.
+        Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
         """
         return pulumi.get(self, "secret_type")
 
@@ -165,7 +165,7 @@ class _SecretState:
         :param pulumi.Input[str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         :param pulumi.Input[int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
         :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
-        :param pulumi.Input[int] secret_type: Type of secret. `0`: user-defined secret. `4`: redis secret.
+        :param pulumi.Input[int] secret_type: Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
         :param pulumi.Input[str] status: Status of secret.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
@@ -264,7 +264,7 @@ class _SecretState:
     @pulumi.getter(name="secretType")
     def secret_type(self) -> Optional[pulumi.Input[int]]:
         """
-        Type of secret. `0`: user-defined secret. `4`: redis secret.
+        Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
         """
         return pulumi.get(self, "secret_type")
 
@@ -321,13 +321,13 @@ class Secret(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.ssm.Secret("foo",
-            description="user defined secret",
+        example = tencentcloud.ssm.Secret("example",
+            description="desc.",
             is_enabled=True,
             recovery_window_in_days=0,
-            secret_name="test",
+            secret_name="tf-example",
             tags={
-                "test-tag": "test",
+                "createBy": "terraform",
             })
         ```
         ### Create redis secret
@@ -338,21 +338,36 @@ class Secret(pulumi.CustomResource):
         import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        instance = tencentcloud.Redis.get_instances(zone="ap-guangzhou-6")
-        secret = tencentcloud.ssm.Secret("secret",
-            secret_name="for-redis-test",
-            description="redis secret",
-            is_enabled=False,
+        zone = tencentcloud.Redis.get_zone_config(type_id=8)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[3].zone,
+            cidr_block="10.0.0.0/16")
+        example_instance = tencentcloud.redis.Instance("exampleInstance",
+            availability_zone=zone.lists[3].zone,
+            type_id=zone.lists[3].type_id,
+            password="Qwer@234",
+            mem_size=zone.lists[3].mem_sizes[0],
+            redis_shard_num=zone.lists[3].redis_shard_nums[0],
+            redis_replicas_num=zone.lists[3].redis_replicas_nums[0],
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id)
+        example_secret = tencentcloud.ssm.Secret("exampleSecret",
+            secret_name="tf-example",
+            description="redis desc.",
+            is_enabled=True,
             secret_type=4,
-            additional_config=json.dumps({
+            additional_config=example_instance.id.apply(lambda id: json.dumps({
                 "Region": "ap-guangzhou",
                 "Privilege": "r",
-                "InstanceId": instance.instance_lists[0].redis_id,
+                "InstanceId": id,
                 "ReadonlyPolicy": ["master"],
                 "Remark": "for tf test",
-            }),
+            })),
             tags={
-                "test-tag": "test",
+                "createdBy": "terraform",
             },
             recovery_window_in_days=0)
         ```
@@ -373,7 +388,7 @@ class Secret(pulumi.CustomResource):
         :param pulumi.Input[str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         :param pulumi.Input[int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
         :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
-        :param pulumi.Input[int] secret_type: Type of secret. `0`: user-defined secret. `4`: redis secret.
+        :param pulumi.Input[int] secret_type: Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
         ...
@@ -392,13 +407,13 @@ class Secret(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.ssm.Secret("foo",
-            description="user defined secret",
+        example = tencentcloud.ssm.Secret("example",
+            description="desc.",
             is_enabled=True,
             recovery_window_in_days=0,
-            secret_name="test",
+            secret_name="tf-example",
             tags={
-                "test-tag": "test",
+                "createBy": "terraform",
             })
         ```
         ### Create redis secret
@@ -409,21 +424,36 @@ class Secret(pulumi.CustomResource):
         import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        instance = tencentcloud.Redis.get_instances(zone="ap-guangzhou-6")
-        secret = tencentcloud.ssm.Secret("secret",
-            secret_name="for-redis-test",
-            description="redis secret",
-            is_enabled=False,
+        zone = tencentcloud.Redis.get_zone_config(type_id=8)
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=zone.lists[3].zone,
+            cidr_block="10.0.0.0/16")
+        example_instance = tencentcloud.redis.Instance("exampleInstance",
+            availability_zone=zone.lists[3].zone,
+            type_id=zone.lists[3].type_id,
+            password="Qwer@234",
+            mem_size=zone.lists[3].mem_sizes[0],
+            redis_shard_num=zone.lists[3].redis_shard_nums[0],
+            redis_replicas_num=zone.lists[3].redis_replicas_nums[0],
+            port=6379,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id)
+        example_secret = tencentcloud.ssm.Secret("exampleSecret",
+            secret_name="tf-example",
+            description="redis desc.",
+            is_enabled=True,
             secret_type=4,
-            additional_config=json.dumps({
+            additional_config=example_instance.id.apply(lambda id: json.dumps({
                 "Region": "ap-guangzhou",
                 "Privilege": "r",
-                "InstanceId": instance.instance_lists[0].redis_id,
+                "InstanceId": id,
                 "ReadonlyPolicy": ["master"],
                 "Remark": "for tf test",
-            }),
+            })),
             tags={
-                "test-tag": "test",
+                "createdBy": "terraform",
             },
             recovery_window_in_days=0)
         ```
@@ -516,7 +546,7 @@ class Secret(pulumi.CustomResource):
         :param pulumi.Input[str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         :param pulumi.Input[int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
         :param pulumi.Input[str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
-        :param pulumi.Input[int] secret_type: Type of secret. `0`: user-defined secret. `4`: redis secret.
+        :param pulumi.Input[int] secret_type: Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
         :param pulumi.Input[str] status: Status of secret.
         :param pulumi.Input[Mapping[str, Any]] tags: Tags of secret.
         """
@@ -587,7 +617,7 @@ class Secret(pulumi.CustomResource):
     @pulumi.getter(name="secretType")
     def secret_type(self) -> pulumi.Output[int]:
         """
-        Type of secret. `0`: user-defined secret. `4`: redis secret.
+        Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
         """
         return pulumi.get(self, "secret_type")
 

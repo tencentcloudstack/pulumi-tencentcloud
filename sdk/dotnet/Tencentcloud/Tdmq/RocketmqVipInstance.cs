@@ -31,7 +31,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Output<int> NodeCount { get; private set; } = null!;
 
         /// <summary>
-        /// Instance specification:Basic type, rocket-vip-basic-1Standard type, rocket-vip-basic-2Advanced Type I, rocket-vip-basic-3Advanced Type II, rocket-vip-basic-4.
+        /// Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
         /// </summary>
         [Output("spec")]
         public Output<string> Spec { get; private set; } = null!;
@@ -120,7 +120,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Input<int> NodeCount { get; set; } = null!;
 
         /// <summary>
-        /// Instance specification:Basic type, rocket-vip-basic-1Standard type, rocket-vip-basic-2Advanced Type I, rocket-vip-basic-3Advanced Type II, rocket-vip-basic-4.
+        /// Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
         /// </summary>
         [Input("spec", required: true)]
         public Input<string> Spec { get; set; } = null!;
@@ -175,7 +175,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Input<int>? NodeCount { get; set; }
 
         /// <summary>
-        /// Instance specification:Basic type, rocket-vip-basic-1Standard type, rocket-vip-basic-2Advanced Type I, rocket-vip-basic-3Advanced Type II, rocket-vip-basic-4.
+        /// Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
         /// </summary>
         [Input("spec")]
         public Input<string>? Spec { get; set; }

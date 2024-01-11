@@ -87,7 +87,7 @@ type Instance struct {
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
 	// List of standby instances' info.
 	StandbyInstanceLists InstanceStandbyInstanceListArrayOutput `pulumi:"standbyInstanceLists"`
@@ -187,7 +187,7 @@ type instanceState struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId *int `pulumi:"projectId"`
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// List of standby instances' info.
 	StandbyInstanceLists []InstanceStandbyInstanceList `pulumi:"standbyInstanceLists"`
@@ -240,7 +240,7 @@ type InstanceState struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrInput
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups pulumi.StringArrayInput
 	// List of standby instances' info.
 	StandbyInstanceLists InstanceStandbyInstanceListArrayInput
@@ -295,7 +295,7 @@ type instanceArgs struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId *int `pulumi:"projectId"`
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// ID of the subnet within this VPC. The value is required if `vpcId` is set.
 	SubnetId *string `pulumi:"subnetId"`
@@ -339,7 +339,7 @@ type InstanceArgs struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrInput
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups pulumi.StringArrayInput
 	// ID of the subnet within this VPC. The value is required if `vpcId` is set.
 	SubnetId pulumi.StringPtrInput
@@ -512,7 +512,7 @@ func (o InstanceOutput) ProjectId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
 }
 
-// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+// ID of the security group.
 func (o InstanceOutput) SecurityGroups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.SecurityGroups }).(pulumi.StringArrayOutput)
 }

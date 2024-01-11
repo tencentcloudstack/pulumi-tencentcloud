@@ -10,17 +10,70 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'ClusterPlacementInfo',
     'ClusterResourceSpec',
     'ClusterResourceSpecCommonResourceSpec',
     'ClusterResourceSpecCoreResourceSpec',
     'ClusterResourceSpecMasterResourceSpec',
     'ClusterResourceSpecTaskResourceSpec',
+    'GetAutoScaleRecordsFilterResult',
+    'GetAutoScaleRecordsRecordListResult',
+    'GetCvmQuotaEksQuotaSetResult',
+    'GetCvmQuotaPostPaidQuotaSetResult',
+    'GetCvmQuotaSpotPaidQuotaSetResult',
     'GetInstanceClusterResult',
     'GetNodesNodeResult',
     'GetNodesNodeCdbNodeInfoResult',
     'GetNodesNodeMcMultiDiskResult',
     'GetNodesNodeTagResult',
 ]
+
+@pulumi.output_type
+class ClusterPlacementInfo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "projectId":
+            suggest = "project_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ClusterPlacementInfo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ClusterPlacementInfo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ClusterPlacementInfo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 zone: str,
+                 project_id: Optional[int] = None):
+        """
+        :param str zone: Zone.
+        :param int project_id: Project id.
+        """
+        pulumi.set(__self__, "zone", zone)
+        if project_id is not None:
+            pulumi.set(__self__, "project_id", project_id)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Zone.
+        """
+        return pulumi.get(self, "zone")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> Optional[int]:
+        """
+        Project id.
+        """
+        return pulumi.get(self, "project_id")
+
 
 @pulumi.output_type
 class ClusterResourceSpec(dict):
@@ -482,6 +535,316 @@ class ClusterResourceSpecTaskResourceSpec(dict):
     @pulumi.getter(name="storageType")
     def storage_type(self) -> Optional[int]:
         return pulumi.get(self, "storage_type")
+
+
+@pulumi.output_type
+class GetAutoScaleRecordsFilterResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: Key. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str value: Value. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetAutoScaleRecordsRecordListResult(dict):
+    def __init__(__self__, *,
+                 action_status: str,
+                 action_time: str,
+                 compensate_count: int,
+                 compensate_flag: int,
+                 end_time: str,
+                 expect_scale_num: int,
+                 scale_action: str,
+                 scale_info: str,
+                 spec_info: str,
+                 strategy_name: str,
+                 strategy_type: int):
+        """
+        :param str action_status: `SUCCESS`, `FAILED`, `PART_SUCCESS`, `IN_PROCESS`.
+        :param str action_time: Process Trigger Time.
+        :param int compensate_count: Compensation Times Note: This field may return null, indicating that no valid value can be obtained.
+        :param int compensate_flag: Compensation and expansion, 0 represents no start, 1 represents start. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str end_time: Process End Time.
+        :param int expect_scale_num: Effective only when ScaleAction is SCALE_OUT.
+        :param str scale_action: `SCALE_OUT` and `SCALE_IN` respectively represent expanding and shrinking capacity.
+        :param str scale_info: Scalability-related Description.
+        :param str spec_info: Specification information used when expanding capacity.
+        :param str strategy_name: Rule name of expanding and shrinking capacity.
+        :param int strategy_type: Strategy Type, 1 for Load scaling, 2 for Time scaling.
+        """
+        pulumi.set(__self__, "action_status", action_status)
+        pulumi.set(__self__, "action_time", action_time)
+        pulumi.set(__self__, "compensate_count", compensate_count)
+        pulumi.set(__self__, "compensate_flag", compensate_flag)
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "expect_scale_num", expect_scale_num)
+        pulumi.set(__self__, "scale_action", scale_action)
+        pulumi.set(__self__, "scale_info", scale_info)
+        pulumi.set(__self__, "spec_info", spec_info)
+        pulumi.set(__self__, "strategy_name", strategy_name)
+        pulumi.set(__self__, "strategy_type", strategy_type)
+
+    @property
+    @pulumi.getter(name="actionStatus")
+    def action_status(self) -> str:
+        """
+        `SUCCESS`, `FAILED`, `PART_SUCCESS`, `IN_PROCESS`.
+        """
+        return pulumi.get(self, "action_status")
+
+    @property
+    @pulumi.getter(name="actionTime")
+    def action_time(self) -> str:
+        """
+        Process Trigger Time.
+        """
+        return pulumi.get(self, "action_time")
+
+    @property
+    @pulumi.getter(name="compensateCount")
+    def compensate_count(self) -> int:
+        """
+        Compensation Times Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "compensate_count")
+
+    @property
+    @pulumi.getter(name="compensateFlag")
+    def compensate_flag(self) -> int:
+        """
+        Compensation and expansion, 0 represents no start, 1 represents start. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "compensate_flag")
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        """
+        Process End Time.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="expectScaleNum")
+    def expect_scale_num(self) -> int:
+        """
+        Effective only when ScaleAction is SCALE_OUT.
+        """
+        return pulumi.get(self, "expect_scale_num")
+
+    @property
+    @pulumi.getter(name="scaleAction")
+    def scale_action(self) -> str:
+        """
+        `SCALE_OUT` and `SCALE_IN` respectively represent expanding and shrinking capacity.
+        """
+        return pulumi.get(self, "scale_action")
+
+    @property
+    @pulumi.getter(name="scaleInfo")
+    def scale_info(self) -> str:
+        """
+        Scalability-related Description.
+        """
+        return pulumi.get(self, "scale_info")
+
+    @property
+    @pulumi.getter(name="specInfo")
+    def spec_info(self) -> str:
+        """
+        Specification information used when expanding capacity.
+        """
+        return pulumi.get(self, "spec_info")
+
+    @property
+    @pulumi.getter(name="strategyName")
+    def strategy_name(self) -> str:
+        """
+        Rule name of expanding and shrinking capacity.
+        """
+        return pulumi.get(self, "strategy_name")
+
+    @property
+    @pulumi.getter(name="strategyType")
+    def strategy_type(self) -> int:
+        """
+        Strategy Type, 1 for Load scaling, 2 for Time scaling.
+        """
+        return pulumi.get(self, "strategy_type")
+
+
+@pulumi.output_type
+class GetCvmQuotaEksQuotaSetResult(dict):
+    def __init__(__self__, *,
+                 cpu: int,
+                 memory: int,
+                 node_type: str,
+                 number: int):
+        """
+        :param int cpu: Cpu cores.
+        :param int memory: Memory quantity (unit: GB).
+        :param str node_type: The specifications of the marketable resource are as follows: `TASK`, `CORE`, `MASTER`, `ROUTER`.
+        :param int number: Specifies the maximum number of resources that can be applied for.
+        """
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "memory", memory)
+        pulumi.set(__self__, "node_type", node_type)
+        pulumi.set(__self__, "number", number)
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> int:
+        """
+        Cpu cores.
+        """
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> int:
+        """
+        Memory quantity (unit: GB).
+        """
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter(name="nodeType")
+    def node_type(self) -> str:
+        """
+        The specifications of the marketable resource are as follows: `TASK`, `CORE`, `MASTER`, `ROUTER`.
+        """
+        return pulumi.get(self, "node_type")
+
+    @property
+    @pulumi.getter
+    def number(self) -> int:
+        """
+        Specifies the maximum number of resources that can be applied for.
+        """
+        return pulumi.get(self, "number")
+
+
+@pulumi.output_type
+class GetCvmQuotaPostPaidQuotaSetResult(dict):
+    def __init__(__self__, *,
+                 remaining_quota: int,
+                 total_quota: int,
+                 used_quota: int,
+                 zone: str):
+        """
+        :param int remaining_quota: Residual quota Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param int total_quota: Total quota Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param int used_quota: Used quota Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str zone: Available area Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "remaining_quota", remaining_quota)
+        pulumi.set(__self__, "total_quota", total_quota)
+        pulumi.set(__self__, "used_quota", used_quota)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="remainingQuota")
+    def remaining_quota(self) -> int:
+        """
+        Residual quota Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "remaining_quota")
+
+    @property
+    @pulumi.getter(name="totalQuota")
+    def total_quota(self) -> int:
+        """
+        Total quota Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "total_quota")
+
+    @property
+    @pulumi.getter(name="usedQuota")
+    def used_quota(self) -> int:
+        """
+        Used quota Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "used_quota")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Available area Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetCvmQuotaSpotPaidQuotaSetResult(dict):
+    def __init__(__self__, *,
+                 remaining_quota: int,
+                 total_quota: int,
+                 used_quota: int,
+                 zone: str):
+        """
+        :param int remaining_quota: Residual quota Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param int total_quota: Total quota Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param int used_quota: Used quota Note: This field may return null, indicating that a valid value cannot be obtained.
+        :param str zone: Available area Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "remaining_quota", remaining_quota)
+        pulumi.set(__self__, "total_quota", total_quota)
+        pulumi.set(__self__, "used_quota", used_quota)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="remainingQuota")
+    def remaining_quota(self) -> int:
+        """
+        Residual quota Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "remaining_quota")
+
+    @property
+    @pulumi.getter(name="totalQuota")
+    def total_quota(self) -> int:
+        """
+        Total quota Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "total_quota")
+
+    @property
+    @pulumi.getter(name="usedQuota")
+    def used_quota(self) -> int:
+        """
+        Used quota Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "used_quota")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Available area Note: This field may return null, indicating that a valid value cannot be obtained.
+        """
+        return pulumi.get(self, "zone")
 
 
 @pulumi.output_type

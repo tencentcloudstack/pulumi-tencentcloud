@@ -15,11 +15,11 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const tawInstance = pulumi.output(tencentcloud.Rum.getTawInstance({
- *     areaIds: 0,
- *     chargeStatuses: 0,
- *     chargeTypes: 0,
- *     instanceIds: "",
- *     instanceStatuses: 0,
+ *     areaIds: [1],
+ *     chargeStatuses: [1],
+ *     chargeTypes: [1],
+ *     instanceIds: ["rum-pasZKEI3RLgakj"],
+ *     instanceStatuses: [2],
  * }));
  * ```
  */

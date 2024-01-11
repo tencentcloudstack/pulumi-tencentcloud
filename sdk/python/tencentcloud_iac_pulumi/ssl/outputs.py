@@ -13,8 +13,52 @@ __all__ = [
     'FreeCertificateDvAuth',
     'PayCertificateDvAuth',
     'PayCertificateInformation',
+    'UpdateCertificateInstanceOperationResourceTypesRegion',
     'GetCertificatesCertificateResult',
     'GetCertificatesCertificateDvAuthResult',
+    'GetDescribeCertificateResultResult',
+    'GetDescribeCertificateResultCertificateExtraResult',
+    'GetDescribeCertificateResultDvAuthDetailResult',
+    'GetDescribeCertificateResultDvAuthDetailDvAuthResult',
+    'GetDescribeCertificateResultDvRevokeAuthDetailResult',
+    'GetDescribeCertificateResultSubmittedDataResult',
+    'GetDescribeCompaniesCompanyResult',
+    'GetDescribeHostApiGatewayInstanceListFilterResult',
+    'GetDescribeHostApiGatewayInstanceListInstanceListResult',
+    'GetDescribeHostCdnInstanceListFilterResult',
+    'GetDescribeHostCdnInstanceListInstanceListResult',
+    'GetDescribeHostClbInstanceListFilterResult',
+    'GetDescribeHostClbInstanceListInstanceListResult',
+    'GetDescribeHostClbInstanceListInstanceListListenerResult',
+    'GetDescribeHostClbInstanceListInstanceListListenerCertificateResult',
+    'GetDescribeHostClbInstanceListInstanceListListenerRuleResult',
+    'GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateResult',
+    'GetDescribeHostCosInstanceListFilterResult',
+    'GetDescribeHostCosInstanceListInstanceListResult',
+    'GetDescribeHostDdosInstanceListFilterResult',
+    'GetDescribeHostDdosInstanceListInstanceListResult',
+    'GetDescribeHostDeployRecordDeployRecordListResult',
+    'GetDescribeHostDeployRecordDetailDeployRecordDetailListResult',
+    'GetDescribeHostLighthouseInstanceListFilterResult',
+    'GetDescribeHostLighthouseInstanceListInstanceListResult',
+    'GetDescribeHostLiveInstanceListFilterResult',
+    'GetDescribeHostLiveInstanceListInstanceListResult',
+    'GetDescribeHostTeoInstanceListFilterResult',
+    'GetDescribeHostTeoInstanceListInstanceListResult',
+    'GetDescribeHostTkeInstanceListFilterResult',
+    'GetDescribeHostTkeInstanceListInstanceListResult',
+    'GetDescribeHostTkeInstanceListInstanceListNamespaceListResult',
+    'GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListResult',
+    'GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListResult',
+    'GetDescribeHostUpdateRecordDeployRecordListResult',
+    'GetDescribeHostUpdateRecordDetailRecordDetailListResult',
+    'GetDescribeHostUpdateRecordDetailRecordDetailListListResult',
+    'GetDescribeHostVodInstanceListFilterResult',
+    'GetDescribeHostVodInstanceListInstanceListResult',
+    'GetDescribeHostWafInstanceListFilterResult',
+    'GetDescribeHostWafInstanceListInstanceListResult',
+    'GetDescribeManagerDetailCompanyInfoResult',
+    'GetDescribeManagersManagerResult',
 ]
 
 @pulumi.output_type
@@ -108,11 +152,6 @@ class PayCertificateDvAuth(dict):
                  dv_auth_key: Optional[str] = None,
                  dv_auth_value: Optional[str] = None,
                  dv_auth_verify_type: Optional[str] = None):
-        """
-        :param str dv_auth_key: DV authentication key.
-        :param str dv_auth_value: DV authentication value.
-        :param str dv_auth_verify_type: DV authentication type.
-        """
         if dv_auth_key is not None:
             pulumi.set(__self__, "dv_auth_key", dv_auth_key)
         if dv_auth_value is not None:
@@ -123,25 +162,16 @@ class PayCertificateDvAuth(dict):
     @property
     @pulumi.getter(name="dvAuthKey")
     def dv_auth_key(self) -> Optional[str]:
-        """
-        DV authentication key.
-        """
         return pulumi.get(self, "dv_auth_key")
 
     @property
     @pulumi.getter(name="dvAuthValue")
     def dv_auth_value(self) -> Optional[str]:
-        """
-        DV authentication value.
-        """
         return pulumi.get(self, "dv_auth_value")
 
     @property
     @pulumi.getter(name="dvAuthVerifyType")
     def dv_auth_verify_type(self) -> Optional[str]:
-        """
-        DV authentication type.
-        """
         return pulumi.get(self, "dv_auth_verify_type")
 
 
@@ -497,6 +527,54 @@ class PayCertificateInformation(dict):
 
 
 @pulumi.output_type
+class UpdateCertificateInstanceOperationResourceTypesRegion(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "resourceType":
+            suggest = "resource_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in UpdateCertificateInstanceOperationResourceTypesRegion. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        UpdateCertificateInstanceOperationResourceTypesRegion.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        UpdateCertificateInstanceOperationResourceTypesRegion.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 regions: Optional[Sequence[str]] = None,
+                 resource_type: Optional[str] = None):
+        """
+        :param Sequence[str] regions: Region list.
+        :param str resource_type: Cloud resource type.
+        """
+        if regions is not None:
+            pulumi.set(__self__, "regions", regions)
+        if resource_type is not None:
+            pulumi.set(__self__, "resource_type", resource_type)
+
+    @property
+    @pulumi.getter
+    def regions(self) -> Optional[Sequence[str]]:
+        """
+        Region list.
+        """
+        return pulumi.get(self, "regions")
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> Optional[str]:
+        """
+        Cloud resource type.
+        """
+        return pulumi.get(self, "resource_type")
+
+
+@pulumi.output_type
 class GetCertificatesCertificateResult(dict):
     def __init__(__self__, *,
                  begin_time: str,
@@ -706,5 +784,3287 @@ class GetCertificatesCertificateDvAuthResult(dict):
         DV authentication type.
         """
         return pulumi.get(self, "dv_auth_verify_type")
+
+
+@pulumi.output_type
+class GetDescribeCertificateResultResult(dict):
+    def __init__(__self__, *,
+                 alias: str,
+                 c_a_common_names: Sequence[str],
+                 c_a_encrypt_algorithms: Sequence[str],
+                 c_a_end_times: Sequence[str],
+                 cert_begin_time: str,
+                 cert_end_time: str,
+                 certificate_extras: Sequence['outputs.GetDescribeCertificateResultCertificateExtraResult'],
+                 certificate_type: str,
+                 deployable: bool,
+                 domain: str,
+                 dv_auth_details: Sequence['outputs.GetDescribeCertificateResultDvAuthDetailResult'],
+                 dv_revoke_auth_details: Sequence['outputs.GetDescribeCertificateResultDvRevokeAuthDetailResult'],
+                 from_: str,
+                 insert_time: str,
+                 is_dv: bool,
+                 is_vip: bool,
+                 is_vulnerability: bool,
+                 is_wildcard: bool,
+                 order_id: str,
+                 owner_uin: str,
+                 package_type: str,
+                 package_type_name: str,
+                 product_zh_name: str,
+                 project_id: str,
+                 renew_able: bool,
+                 status: int,
+                 status_msg: str,
+                 status_name: str,
+                 subject_alt_names: Sequence[str],
+                 submitted_datas: Sequence['outputs.GetDescribeCertificateResultSubmittedDataResult'],
+                 validity_period: str,
+                 verify_type: str,
+                 vulnerability_report: str,
+                 vulnerability_status: str):
+        """
+        :param str alias: Remark name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param Sequence[str] c_a_common_names: All general names of the CA certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param Sequence[str] c_a_encrypt_algorithms: All encryption methods of CA certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param Sequence[str] c_a_end_times: CA certificate all maturity timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str cert_begin_time: Certificate takes effect time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str cert_end_time: The certificate is invalid time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param Sequence['GetDescribeCertificateResultCertificateExtraArgs'] certificate_extras: Certificate extension information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str certificate_type: Certificate type: CA = CA certificate, SVR = server certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param bool deployable: Whether it can be deployed.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str domain: domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param Sequence['GetDescribeCertificateResultDvAuthDetailArgs'] dv_auth_details: DV certification information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param Sequence['GetDescribeCertificateResultDvRevokeAuthDetailArgs'] dv_revoke_auth_details: DV certificate revoking verification valueNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str from_: Certificate source: Trustasia,uploadNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str insert_time: application time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param bool is_dv: Whether it is the DV version.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param bool is_vip: Whether it is a VIP customer.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param bool is_vulnerability: Whether the vulnerability scanning function is enabled.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param bool is_wildcard: Whether it is a pan -domain certificate certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str order_id: Order ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str owner_uin: Account UIN.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str package_type: Types of Certificate Package: 1 = Geotrust DV SSL CA -G3, 2 = Trustasia TLS RSA CA, 3 = SecureSite Enhanced Enterprise Edition (EV Pro), 4 = SecureSite enhanced (EV), 5 = SecureSite Enterprise Professional Edition (OVPro), 6 = SecureSite Enterprise (OV), 7 = SecureSite Enterprise (OV) compatriots, 8 = Geotrust enhanced type (EV), 9 = Geotrust Enterprise (OV), 10 = Geotrust Enterprise (OV) pass,11 = Trustasia Domain Multi -domain SSL certificate, 12 = Trustasia domain model (DV) passing, 13 = Trustasia Enterprise Passing Character (OV) SSL certificate (D3), 14 = Trustasia Enterprise (OV) SSL certificate (D3), 15= Trustasia Enterprise Multi -domain name (OV) SSL certificate (D3), 16 = Trustasia enhanced (EV) SSL certificate (D3), 17 = Trustasia enhanced multi -domain name (EV) SSL certificate (D3), 18 = GlobalSign enterprise type enterprise type(OV) SSL certificate, 19 = GlobalSign Enterprise Type -type STL Certificate, 20 = GlobalSign enhanced (EV) SSL certificate, 21 = Trustasia Enterprise Tongzhi Multi -domain name (OV) SSL certificate (D3), 22 = GlobalSignignMulti -domain name (OV) SSL certificate, 23 = GlobalSign Enterprise Type -type multi -domain name (OV) SSL certificate, 24 = GlobalSign enhanced multi -domain name (EV) SSL certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str package_type_name: Certificate type name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str product_zh_name: Certificate issuer name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str project_id: Project ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param bool renew_able: Whether you can issue a certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param int status: = Submitted information, to be uploaded to confirmation letter, 9 = Certificate is revoked, 10 = revoked, 11 = Re -issuance, 12 = Upload and revoke the confirmation letter.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str status_msg: status information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str status_name: status description.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param Sequence[str] subject_alt_names: The certificate contains multiple domain names (containing the main domain name).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param Sequence['GetDescribeCertificateResultSubmittedDataArgs'] submitted_datas: Submitted information information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str validity_period: Validity period: unit (month).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str verify_type: Verification type: DNS_AUTO = Automatic DNS verification, DNS = manual DNS verification, file = file verification, email = email verification.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str vulnerability_report: Vulnerability scanning evaluation report.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str vulnerability_status: Vulnerability scanning status.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "alias", alias)
+        pulumi.set(__self__, "c_a_common_names", c_a_common_names)
+        pulumi.set(__self__, "c_a_encrypt_algorithms", c_a_encrypt_algorithms)
+        pulumi.set(__self__, "c_a_end_times", c_a_end_times)
+        pulumi.set(__self__, "cert_begin_time", cert_begin_time)
+        pulumi.set(__self__, "cert_end_time", cert_end_time)
+        pulumi.set(__self__, "certificate_extras", certificate_extras)
+        pulumi.set(__self__, "certificate_type", certificate_type)
+        pulumi.set(__self__, "deployable", deployable)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "dv_auth_details", dv_auth_details)
+        pulumi.set(__self__, "dv_revoke_auth_details", dv_revoke_auth_details)
+        pulumi.set(__self__, "from_", from_)
+        pulumi.set(__self__, "insert_time", insert_time)
+        pulumi.set(__self__, "is_dv", is_dv)
+        pulumi.set(__self__, "is_vip", is_vip)
+        pulumi.set(__self__, "is_vulnerability", is_vulnerability)
+        pulumi.set(__self__, "is_wildcard", is_wildcard)
+        pulumi.set(__self__, "order_id", order_id)
+        pulumi.set(__self__, "owner_uin", owner_uin)
+        pulumi.set(__self__, "package_type", package_type)
+        pulumi.set(__self__, "package_type_name", package_type_name)
+        pulumi.set(__self__, "product_zh_name", product_zh_name)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "renew_able", renew_able)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "status_msg", status_msg)
+        pulumi.set(__self__, "status_name", status_name)
+        pulumi.set(__self__, "subject_alt_names", subject_alt_names)
+        pulumi.set(__self__, "submitted_datas", submitted_datas)
+        pulumi.set(__self__, "validity_period", validity_period)
+        pulumi.set(__self__, "verify_type", verify_type)
+        pulumi.set(__self__, "vulnerability_report", vulnerability_report)
+        pulumi.set(__self__, "vulnerability_status", vulnerability_status)
+
+    @property
+    @pulumi.getter
+    def alias(self) -> str:
+        """
+        Remark name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "alias")
+
+    @property
+    @pulumi.getter(name="cACommonNames")
+    def c_a_common_names(self) -> Sequence[str]:
+        """
+        All general names of the CA certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "c_a_common_names")
+
+    @property
+    @pulumi.getter(name="cAEncryptAlgorithms")
+    def c_a_encrypt_algorithms(self) -> Sequence[str]:
+        """
+        All encryption methods of CA certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "c_a_encrypt_algorithms")
+
+    @property
+    @pulumi.getter(name="cAEndTimes")
+    def c_a_end_times(self) -> Sequence[str]:
+        """
+        CA certificate all maturity timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "c_a_end_times")
+
+    @property
+    @pulumi.getter(name="certBeginTime")
+    def cert_begin_time(self) -> str:
+        """
+        Certificate takes effect time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "cert_begin_time")
+
+    @property
+    @pulumi.getter(name="certEndTime")
+    def cert_end_time(self) -> str:
+        """
+        The certificate is invalid time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "cert_end_time")
+
+    @property
+    @pulumi.getter(name="certificateExtras")
+    def certificate_extras(self) -> Sequence['outputs.GetDescribeCertificateResultCertificateExtraResult']:
+        """
+        Certificate extension information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "certificate_extras")
+
+    @property
+    @pulumi.getter(name="certificateType")
+    def certificate_type(self) -> str:
+        """
+        Certificate type: CA = CA certificate, SVR = server certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "certificate_type")
+
+    @property
+    @pulumi.getter
+    def deployable(self) -> bool:
+        """
+        Whether it can be deployed.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "deployable")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="dvAuthDetails")
+    def dv_auth_details(self) -> Sequence['outputs.GetDescribeCertificateResultDvAuthDetailResult']:
+        """
+        DV certification information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_details")
+
+    @property
+    @pulumi.getter(name="dvRevokeAuthDetails")
+    def dv_revoke_auth_details(self) -> Sequence['outputs.GetDescribeCertificateResultDvRevokeAuthDetailResult']:
+        """
+        DV certificate revoking verification valueNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_revoke_auth_details")
+
+    @property
+    @pulumi.getter(name="from")
+    def from_(self) -> str:
+        """
+        Certificate source: Trustasia,uploadNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "from_")
+
+    @property
+    @pulumi.getter(name="insertTime")
+    def insert_time(self) -> str:
+        """
+        application time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "insert_time")
+
+    @property
+    @pulumi.getter(name="isDv")
+    def is_dv(self) -> bool:
+        """
+        Whether it is the DV version.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "is_dv")
+
+    @property
+    @pulumi.getter(name="isVip")
+    def is_vip(self) -> bool:
+        """
+        Whether it is a VIP customer.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "is_vip")
+
+    @property
+    @pulumi.getter(name="isVulnerability")
+    def is_vulnerability(self) -> bool:
+        """
+        Whether the vulnerability scanning function is enabled.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "is_vulnerability")
+
+    @property
+    @pulumi.getter(name="isWildcard")
+    def is_wildcard(self) -> bool:
+        """
+        Whether it is a pan -domain certificate certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "is_wildcard")
+
+    @property
+    @pulumi.getter(name="orderId")
+    def order_id(self) -> str:
+        """
+        Order ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "order_id")
+
+    @property
+    @pulumi.getter(name="ownerUin")
+    def owner_uin(self) -> str:
+        """
+        Account UIN.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "owner_uin")
+
+    @property
+    @pulumi.getter(name="packageType")
+    def package_type(self) -> str:
+        """
+        Types of Certificate Package: 1 = Geotrust DV SSL CA -G3, 2 = Trustasia TLS RSA CA, 3 = SecureSite Enhanced Enterprise Edition (EV Pro), 4 = SecureSite enhanced (EV), 5 = SecureSite Enterprise Professional Edition (OVPro), 6 = SecureSite Enterprise (OV), 7 = SecureSite Enterprise (OV) compatriots, 8 = Geotrust enhanced type (EV), 9 = Geotrust Enterprise (OV), 10 = Geotrust Enterprise (OV) pass,11 = Trustasia Domain Multi -domain SSL certificate, 12 = Trustasia domain model (DV) passing, 13 = Trustasia Enterprise Passing Character (OV) SSL certificate (D3), 14 = Trustasia Enterprise (OV) SSL certificate (D3), 15= Trustasia Enterprise Multi -domain name (OV) SSL certificate (D3), 16 = Trustasia enhanced (EV) SSL certificate (D3), 17 = Trustasia enhanced multi -domain name (EV) SSL certificate (D3), 18 = GlobalSign enterprise type enterprise type(OV) SSL certificate, 19 = GlobalSign Enterprise Type -type STL Certificate, 20 = GlobalSign enhanced (EV) SSL certificate, 21 = Trustasia Enterprise Tongzhi Multi -domain name (OV) SSL certificate (D3), 22 = GlobalSignignMulti -domain name (OV) SSL certificate, 23 = GlobalSign Enterprise Type -type multi -domain name (OV) SSL certificate, 24 = GlobalSign enhanced multi -domain name (EV) SSL certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "package_type")
+
+    @property
+    @pulumi.getter(name="packageTypeName")
+    def package_type_name(self) -> str:
+        """
+        Certificate type name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "package_type_name")
+
+    @property
+    @pulumi.getter(name="productZhName")
+    def product_zh_name(self) -> str:
+        """
+        Certificate issuer name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "product_zh_name")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> str:
+        """
+        Project ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="renewAble")
+    def renew_able(self) -> bool:
+        """
+        Whether you can issue a certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "renew_able")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        = Submitted information, to be uploaded to confirmation letter, 9 = Certificate is revoked, 10 = revoked, 11 = Re -issuance, 12 = Upload and revoke the confirmation letter.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="statusMsg")
+    def status_msg(self) -> str:
+        """
+        status information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "status_msg")
+
+    @property
+    @pulumi.getter(name="statusName")
+    def status_name(self) -> str:
+        """
+        status description.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "status_name")
+
+    @property
+    @pulumi.getter(name="subjectAltNames")
+    def subject_alt_names(self) -> Sequence[str]:
+        """
+        The certificate contains multiple domain names (containing the main domain name).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "subject_alt_names")
+
+    @property
+    @pulumi.getter(name="submittedDatas")
+    def submitted_datas(self) -> Sequence['outputs.GetDescribeCertificateResultSubmittedDataResult']:
+        """
+        Submitted information information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "submitted_datas")
+
+    @property
+    @pulumi.getter(name="validityPeriod")
+    def validity_period(self) -> str:
+        """
+        Validity period: unit (month).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "validity_period")
+
+    @property
+    @pulumi.getter(name="verifyType")
+    def verify_type(self) -> str:
+        """
+        Verification type: DNS_AUTO = Automatic DNS verification, DNS = manual DNS verification, file = file verification, email = email verification.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "verify_type")
+
+    @property
+    @pulumi.getter(name="vulnerabilityReport")
+    def vulnerability_report(self) -> str:
+        """
+        Vulnerability scanning evaluation report.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "vulnerability_report")
+
+    @property
+    @pulumi.getter(name="vulnerabilityStatus")
+    def vulnerability_status(self) -> str:
+        """
+        Vulnerability scanning status.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "vulnerability_status")
+
+
+@pulumi.output_type
+class GetDescribeCertificateResultCertificateExtraResult(dict):
+    def __init__(__self__, *,
+                 company_type: int,
+                 domain_number: str,
+                 origin_certificate_id: str,
+                 renew_order: str,
+                 replaced_by: str,
+                 replaced_for: str,
+                 s_m_cert: int):
+        """
+        :param int company_type: Type of company. Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str domain_number: Certificate can be configured in the number of domain names.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str origin_certificate_id: Original certificate ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str renew_order: New order certificate ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str replaced_by: Re -issue the original ID of the certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str replaced_for: Re -issue a new ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param int s_m_cert: Is it a national secret certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "company_type", company_type)
+        pulumi.set(__self__, "domain_number", domain_number)
+        pulumi.set(__self__, "origin_certificate_id", origin_certificate_id)
+        pulumi.set(__self__, "renew_order", renew_order)
+        pulumi.set(__self__, "replaced_by", replaced_by)
+        pulumi.set(__self__, "replaced_for", replaced_for)
+        pulumi.set(__self__, "s_m_cert", s_m_cert)
+
+    @property
+    @pulumi.getter(name="companyType")
+    def company_type(self) -> int:
+        """
+        Type of company. Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "company_type")
+
+    @property
+    @pulumi.getter(name="domainNumber")
+    def domain_number(self) -> str:
+        """
+        Certificate can be configured in the number of domain names.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "domain_number")
+
+    @property
+    @pulumi.getter(name="originCertificateId")
+    def origin_certificate_id(self) -> str:
+        """
+        Original certificate ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "origin_certificate_id")
+
+    @property
+    @pulumi.getter(name="renewOrder")
+    def renew_order(self) -> str:
+        """
+        New order certificate ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "renew_order")
+
+    @property
+    @pulumi.getter(name="replacedBy")
+    def replaced_by(self) -> str:
+        """
+        Re -issue the original ID of the certificate.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "replaced_by")
+
+    @property
+    @pulumi.getter(name="replacedFor")
+    def replaced_for(self) -> str:
+        """
+        Re -issue a new ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "replaced_for")
+
+    @property
+    @pulumi.getter(name="sMCert")
+    def s_m_cert(self) -> int:
+        """
+        Is it a national secret certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "s_m_cert")
+
+
+@pulumi.output_type
+class GetDescribeCertificateResultDvAuthDetailResult(dict):
+    def __init__(__self__, *,
+                 dv_auth_domain: str,
+                 dv_auth_key: str,
+                 dv_auth_key_sub_domain: str,
+                 dv_auth_path: str,
+                 dv_auth_value: str,
+                 dv_auths: Sequence['outputs.GetDescribeCertificateResultDvAuthDetailDvAuthResult']):
+        """
+        :param str dv_auth_domain: DV authentication value domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str dv_auth_key: DV certification key.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str dv_auth_key_sub_domain: DV certification sub -domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str dv_auth_path: DV authentication value path.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str dv_auth_value: DV certification value.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param Sequence['GetDescribeCertificateResultDvAuthDetailDvAuthArgs'] dv_auths: DV certification information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "dv_auth_domain", dv_auth_domain)
+        pulumi.set(__self__, "dv_auth_key", dv_auth_key)
+        pulumi.set(__self__, "dv_auth_key_sub_domain", dv_auth_key_sub_domain)
+        pulumi.set(__self__, "dv_auth_path", dv_auth_path)
+        pulumi.set(__self__, "dv_auth_value", dv_auth_value)
+        pulumi.set(__self__, "dv_auths", dv_auths)
+
+    @property
+    @pulumi.getter(name="dvAuthDomain")
+    def dv_auth_domain(self) -> str:
+        """
+        DV authentication value domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_domain")
+
+    @property
+    @pulumi.getter(name="dvAuthKey")
+    def dv_auth_key(self) -> str:
+        """
+        DV certification key.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_key")
+
+    @property
+    @pulumi.getter(name="dvAuthKeySubDomain")
+    def dv_auth_key_sub_domain(self) -> str:
+        """
+        DV certification sub -domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_key_sub_domain")
+
+    @property
+    @pulumi.getter(name="dvAuthPath")
+    def dv_auth_path(self) -> str:
+        """
+        DV authentication value path.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_path")
+
+    @property
+    @pulumi.getter(name="dvAuthValue")
+    def dv_auth_value(self) -> str:
+        """
+        DV certification value.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_value")
+
+    @property
+    @pulumi.getter(name="dvAuths")
+    def dv_auths(self) -> Sequence['outputs.GetDescribeCertificateResultDvAuthDetailDvAuthResult']:
+        """
+        DV certification information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auths")
+
+
+@pulumi.output_type
+class GetDescribeCertificateResultDvAuthDetailDvAuthResult(dict):
+    def __init__(__self__, *,
+                 dv_auth_domain: str,
+                 dv_auth_key: str,
+                 dv_auth_path: str,
+                 dv_auth_sub_domain: str,
+                 dv_auth_value: str,
+                 dv_auth_verify_type: str):
+        """
+        :param str dv_auth_domain: DV authentication value domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str dv_auth_key: DV certification key.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str dv_auth_path: DV authentication value path.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str dv_auth_sub_domain: DV certification sub -domain name,Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str dv_auth_value: DV certification value.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str dv_auth_verify_type: DV certification type.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "dv_auth_domain", dv_auth_domain)
+        pulumi.set(__self__, "dv_auth_key", dv_auth_key)
+        pulumi.set(__self__, "dv_auth_path", dv_auth_path)
+        pulumi.set(__self__, "dv_auth_sub_domain", dv_auth_sub_domain)
+        pulumi.set(__self__, "dv_auth_value", dv_auth_value)
+        pulumi.set(__self__, "dv_auth_verify_type", dv_auth_verify_type)
+
+    @property
+    @pulumi.getter(name="dvAuthDomain")
+    def dv_auth_domain(self) -> str:
+        """
+        DV authentication value domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_domain")
+
+    @property
+    @pulumi.getter(name="dvAuthKey")
+    def dv_auth_key(self) -> str:
+        """
+        DV certification key.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_key")
+
+    @property
+    @pulumi.getter(name="dvAuthPath")
+    def dv_auth_path(self) -> str:
+        """
+        DV authentication value path.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_path")
+
+    @property
+    @pulumi.getter(name="dvAuthSubDomain")
+    def dv_auth_sub_domain(self) -> str:
+        """
+        DV certification sub -domain name,Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_sub_domain")
+
+    @property
+    @pulumi.getter(name="dvAuthValue")
+    def dv_auth_value(self) -> str:
+        """
+        DV certification value.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_value")
+
+    @property
+    @pulumi.getter(name="dvAuthVerifyType")
+    def dv_auth_verify_type(self) -> str:
+        """
+        DV certification type.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_verify_type")
+
+
+@pulumi.output_type
+class GetDescribeCertificateResultDvRevokeAuthDetailResult(dict):
+    def __init__(__self__, *,
+                 dv_auth_domain: str,
+                 dv_auth_key: str,
+                 dv_auth_path: str,
+                 dv_auth_sub_domain: str,
+                 dv_auth_value: str,
+                 dv_auth_verify_type: str):
+        """
+        :param str dv_auth_domain: DV authentication value domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str dv_auth_key: DV certification key.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str dv_auth_path: DV authentication value path.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str dv_auth_sub_domain: DV certification sub -domain name,Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str dv_auth_value: DV certification value.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str dv_auth_verify_type: DV certification type.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "dv_auth_domain", dv_auth_domain)
+        pulumi.set(__self__, "dv_auth_key", dv_auth_key)
+        pulumi.set(__self__, "dv_auth_path", dv_auth_path)
+        pulumi.set(__self__, "dv_auth_sub_domain", dv_auth_sub_domain)
+        pulumi.set(__self__, "dv_auth_value", dv_auth_value)
+        pulumi.set(__self__, "dv_auth_verify_type", dv_auth_verify_type)
+
+    @property
+    @pulumi.getter(name="dvAuthDomain")
+    def dv_auth_domain(self) -> str:
+        """
+        DV authentication value domain name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_domain")
+
+    @property
+    @pulumi.getter(name="dvAuthKey")
+    def dv_auth_key(self) -> str:
+        """
+        DV certification key.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_key")
+
+    @property
+    @pulumi.getter(name="dvAuthPath")
+    def dv_auth_path(self) -> str:
+        """
+        DV authentication value path.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_path")
+
+    @property
+    @pulumi.getter(name="dvAuthSubDomain")
+    def dv_auth_sub_domain(self) -> str:
+        """
+        DV certification sub -domain name,Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_sub_domain")
+
+    @property
+    @pulumi.getter(name="dvAuthValue")
+    def dv_auth_value(self) -> str:
+        """
+        DV certification value.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_value")
+
+    @property
+    @pulumi.getter(name="dvAuthVerifyType")
+    def dv_auth_verify_type(self) -> str:
+        """
+        DV certification type.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "dv_auth_verify_type")
+
+
+@pulumi.output_type
+class GetDescribeCertificateResultSubmittedDataResult(dict):
+    def __init__(__self__, *,
+                 admin_email: str,
+                 admin_first_name: str,
+                 admin_last_name: str,
+                 admin_phone_num: str,
+                 admin_position: str,
+                 certificate_domain: str,
+                 contact_email: str,
+                 contact_first_name: str,
+                 contact_last_name: str,
+                 contact_number: str,
+                 contact_position: str,
+                 csr_content: str,
+                 csr_type: str,
+                 domain_lists: Sequence[str],
+                 key_password: str,
+                 organization_address: str,
+                 organization_city: str,
+                 organization_country: str,
+                 organization_division: str,
+                 organization_name: str,
+                 organization_region: str,
+                 phone_area_code: str,
+                 phone_number: str,
+                 postal_code: str,
+                 verify_type: str):
+        """
+        :param str admin_email: Administrator mailbox address.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str admin_first_name: Administrator name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str admin_last_name: The surname of the administrator.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str admin_phone_num: Administrator phone number.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str admin_position: Administrator position.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str certificate_domain: Domain information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str contact_email: Contact mailbox address,Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str contact_first_name: Contact name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str contact_last_name: Contact surname.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str contact_number: Contact phone number.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str contact_position: Contact position.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str csr_content: CSR content.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str csr_type: CSR type, (online = online CSR, PARSE = paste CSR).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param Sequence[str] domain_lists: DNS information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str key_password: Private key password.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str organization_address: address.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str organization_city: city.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str organization_country: nation.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str organization_division: department.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str organization_name: Enterprise or unit name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str organization_region: Province.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str phone_area_code: Local region code.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str phone_number: Landline number.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str postal_code: Postal code.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str verify_type: Verification type: DNS_AUTO = Automatic DNS verification, DNS = manual DNS verification, file = file verification, email = email verification.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "admin_email", admin_email)
+        pulumi.set(__self__, "admin_first_name", admin_first_name)
+        pulumi.set(__self__, "admin_last_name", admin_last_name)
+        pulumi.set(__self__, "admin_phone_num", admin_phone_num)
+        pulumi.set(__self__, "admin_position", admin_position)
+        pulumi.set(__self__, "certificate_domain", certificate_domain)
+        pulumi.set(__self__, "contact_email", contact_email)
+        pulumi.set(__self__, "contact_first_name", contact_first_name)
+        pulumi.set(__self__, "contact_last_name", contact_last_name)
+        pulumi.set(__self__, "contact_number", contact_number)
+        pulumi.set(__self__, "contact_position", contact_position)
+        pulumi.set(__self__, "csr_content", csr_content)
+        pulumi.set(__self__, "csr_type", csr_type)
+        pulumi.set(__self__, "domain_lists", domain_lists)
+        pulumi.set(__self__, "key_password", key_password)
+        pulumi.set(__self__, "organization_address", organization_address)
+        pulumi.set(__self__, "organization_city", organization_city)
+        pulumi.set(__self__, "organization_country", organization_country)
+        pulumi.set(__self__, "organization_division", organization_division)
+        pulumi.set(__self__, "organization_name", organization_name)
+        pulumi.set(__self__, "organization_region", organization_region)
+        pulumi.set(__self__, "phone_area_code", phone_area_code)
+        pulumi.set(__self__, "phone_number", phone_number)
+        pulumi.set(__self__, "postal_code", postal_code)
+        pulumi.set(__self__, "verify_type", verify_type)
+
+    @property
+    @pulumi.getter(name="adminEmail")
+    def admin_email(self) -> str:
+        """
+        Administrator mailbox address.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "admin_email")
+
+    @property
+    @pulumi.getter(name="adminFirstName")
+    def admin_first_name(self) -> str:
+        """
+        Administrator name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "admin_first_name")
+
+    @property
+    @pulumi.getter(name="adminLastName")
+    def admin_last_name(self) -> str:
+        """
+        The surname of the administrator.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "admin_last_name")
+
+    @property
+    @pulumi.getter(name="adminPhoneNum")
+    def admin_phone_num(self) -> str:
+        """
+        Administrator phone number.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "admin_phone_num")
+
+    @property
+    @pulumi.getter(name="adminPosition")
+    def admin_position(self) -> str:
+        """
+        Administrator position.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "admin_position")
+
+    @property
+    @pulumi.getter(name="certificateDomain")
+    def certificate_domain(self) -> str:
+        """
+        Domain information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "certificate_domain")
+
+    @property
+    @pulumi.getter(name="contactEmail")
+    def contact_email(self) -> str:
+        """
+        Contact mailbox address,Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "contact_email")
+
+    @property
+    @pulumi.getter(name="contactFirstName")
+    def contact_first_name(self) -> str:
+        """
+        Contact name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "contact_first_name")
+
+    @property
+    @pulumi.getter(name="contactLastName")
+    def contact_last_name(self) -> str:
+        """
+        Contact surname.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "contact_last_name")
+
+    @property
+    @pulumi.getter(name="contactNumber")
+    def contact_number(self) -> str:
+        """
+        Contact phone number.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "contact_number")
+
+    @property
+    @pulumi.getter(name="contactPosition")
+    def contact_position(self) -> str:
+        """
+        Contact position.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "contact_position")
+
+    @property
+    @pulumi.getter(name="csrContent")
+    def csr_content(self) -> str:
+        """
+        CSR content.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "csr_content")
+
+    @property
+    @pulumi.getter(name="csrType")
+    def csr_type(self) -> str:
+        """
+        CSR type, (online = online CSR, PARSE = paste CSR).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "csr_type")
+
+    @property
+    @pulumi.getter(name="domainLists")
+    def domain_lists(self) -> Sequence[str]:
+        """
+        DNS information.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "domain_lists")
+
+    @property
+    @pulumi.getter(name="keyPassword")
+    def key_password(self) -> str:
+        """
+        Private key password.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "key_password")
+
+    @property
+    @pulumi.getter(name="organizationAddress")
+    def organization_address(self) -> str:
+        """
+        address.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "organization_address")
+
+    @property
+    @pulumi.getter(name="organizationCity")
+    def organization_city(self) -> str:
+        """
+        city.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "organization_city")
+
+    @property
+    @pulumi.getter(name="organizationCountry")
+    def organization_country(self) -> str:
+        """
+        nation.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "organization_country")
+
+    @property
+    @pulumi.getter(name="organizationDivision")
+    def organization_division(self) -> str:
+        """
+        department.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "organization_division")
+
+    @property
+    @pulumi.getter(name="organizationName")
+    def organization_name(self) -> str:
+        """
+        Enterprise or unit name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "organization_name")
+
+    @property
+    @pulumi.getter(name="organizationRegion")
+    def organization_region(self) -> str:
+        """
+        Province.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "organization_region")
+
+    @property
+    @pulumi.getter(name="phoneAreaCode")
+    def phone_area_code(self) -> str:
+        """
+        Local region code.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "phone_area_code")
+
+    @property
+    @pulumi.getter(name="phoneNumber")
+    def phone_number(self) -> str:
+        """
+        Landline number.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "phone_number")
+
+    @property
+    @pulumi.getter(name="postalCode")
+    def postal_code(self) -> str:
+        """
+        Postal code.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "postal_code")
+
+    @property
+    @pulumi.getter(name="verifyType")
+    def verify_type(self) -> str:
+        """
+        Verification type: DNS_AUTO = Automatic DNS verification, DNS = manual DNS verification, file = file verification, email = email verification.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "verify_type")
+
+
+@pulumi.output_type
+class GetDescribeCompaniesCompanyResult(dict):
+    def __init__(__self__, *,
+                 company_address: str,
+                 company_city: str,
+                 company_country: str,
+                 company_id: int,
+                 company_name: str,
+                 company_phone: str,
+                 company_province: str,
+                 id_number: str,
+                 id_type: str):
+        """
+        :param str company_address: Detailed address where the company is located.
+        :param str company_city: The city where the company is.
+        :param str company_country: Company country.
+        :param int company_id: Company ID.
+        :param str company_name: Company Name.
+        :param str company_phone: company phone.
+        :param str company_province: Province where the company is located.
+        :param str id_number: ID numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str id_type: typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "company_address", company_address)
+        pulumi.set(__self__, "company_city", company_city)
+        pulumi.set(__self__, "company_country", company_country)
+        pulumi.set(__self__, "company_id", company_id)
+        pulumi.set(__self__, "company_name", company_name)
+        pulumi.set(__self__, "company_phone", company_phone)
+        pulumi.set(__self__, "company_province", company_province)
+        pulumi.set(__self__, "id_number", id_number)
+        pulumi.set(__self__, "id_type", id_type)
+
+    @property
+    @pulumi.getter(name="companyAddress")
+    def company_address(self) -> str:
+        """
+        Detailed address where the company is located.
+        """
+        return pulumi.get(self, "company_address")
+
+    @property
+    @pulumi.getter(name="companyCity")
+    def company_city(self) -> str:
+        """
+        The city where the company is.
+        """
+        return pulumi.get(self, "company_city")
+
+    @property
+    @pulumi.getter(name="companyCountry")
+    def company_country(self) -> str:
+        """
+        Company country.
+        """
+        return pulumi.get(self, "company_country")
+
+    @property
+    @pulumi.getter(name="companyId")
+    def company_id(self) -> int:
+        """
+        Company ID.
+        """
+        return pulumi.get(self, "company_id")
+
+    @property
+    @pulumi.getter(name="companyName")
+    def company_name(self) -> str:
+        """
+        Company Name.
+        """
+        return pulumi.get(self, "company_name")
+
+    @property
+    @pulumi.getter(name="companyPhone")
+    def company_phone(self) -> str:
+        """
+        company phone.
+        """
+        return pulumi.get(self, "company_phone")
+
+    @property
+    @pulumi.getter(name="companyProvince")
+    def company_province(self) -> str:
+        """
+        Province where the company is located.
+        """
+        return pulumi.get(self, "company_province")
+
+    @property
+    @pulumi.getter(name="idNumber")
+    def id_number(self) -> str:
+        """
+        ID numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "id_number")
+
+    @property
+    @pulumi.getter(name="idType")
+    def id_type(self) -> str:
+        """
+        typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "id_type")
+
+
+@pulumi.output_type
+class GetDescribeHostApiGatewayInstanceListFilterResult(dict):
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+
+@pulumi.output_type
+class GetDescribeHostApiGatewayInstanceListInstanceListResult(dict):
+    def __init__(__self__, *,
+                 cert_id: str,
+                 domain: str,
+                 protocol: str,
+                 service_id: str,
+                 service_name: str):
+        """
+        :param str cert_id: Certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str domain: domain name.
+        :param str protocol: Use Agreement.
+        :param str service_id: Instance ID.
+        :param str service_name: Example name.
+        """
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "service_id", service_id)
+        pulumi.set(__self__, "service_name", service_name)
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        Certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        domain name.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Use Agreement.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> str:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "service_id")
+
+    @property
+    @pulumi.getter(name="serviceName")
+    def service_name(self) -> str:
+        """
+        Example name.
+        """
+        return pulumi.get(self, "service_name")
+
+
+@pulumi.output_type
+class GetDescribeHostCdnInstanceListFilterResult(dict):
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+
+@pulumi.output_type
+class GetDescribeHostCdnInstanceListInstanceListResult(dict):
+    def __init__(__self__, *,
+                 cert_id: str,
+                 domain: str,
+                 https_billing_switch: str,
+                 status: str):
+        """
+        :param str cert_id: Deployment certificate ID.
+        :param str domain: domain name.
+        :param str https_billing_switch: Domain name billing status.
+        :param str status: Domain name.
+        """
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "https_billing_switch", https_billing_switch)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        Deployment certificate ID.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        domain name.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="httpsBillingSwitch")
+    def https_billing_switch(self) -> str:
+        """
+        Domain name billing status.
+        """
+        return pulumi.get(self, "https_billing_switch")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Domain name.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetDescribeHostClbInstanceListFilterResult(dict):
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+
+@pulumi.output_type
+class GetDescribeHostClbInstanceListInstanceListResult(dict):
+    def __init__(__self__, *,
+                 listeners: Sequence['outputs.GetDescribeHostClbInstanceListInstanceListListenerResult'],
+                 load_balancer_id: str,
+                 load_balancer_name: str):
+        """
+        :param Sequence['GetDescribeHostClbInstanceListInstanceListListenerArgs'] listeners: CLB listener listNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str load_balancer_id: CLB instance ID.
+        :param str load_balancer_name: CLB instance name name.
+        """
+        pulumi.set(__self__, "listeners", listeners)
+        pulumi.set(__self__, "load_balancer_id", load_balancer_id)
+        pulumi.set(__self__, "load_balancer_name", load_balancer_name)
+
+    @property
+    @pulumi.getter
+    def listeners(self) -> Sequence['outputs.GetDescribeHostClbInstanceListInstanceListListenerResult']:
+        """
+        CLB listener listNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "listeners")
+
+    @property
+    @pulumi.getter(name="loadBalancerId")
+    def load_balancer_id(self) -> str:
+        """
+        CLB instance ID.
+        """
+        return pulumi.get(self, "load_balancer_id")
+
+    @property
+    @pulumi.getter(name="loadBalancerName")
+    def load_balancer_name(self) -> str:
+        """
+        CLB instance name name.
+        """
+        return pulumi.get(self, "load_balancer_name")
+
+
+@pulumi.output_type
+class GetDescribeHostClbInstanceListInstanceListListenerResult(dict):
+    def __init__(__self__, *,
+                 certificates: Sequence['outputs.GetDescribeHostClbInstanceListInstanceListListenerCertificateResult'],
+                 listener_id: str,
+                 listener_name: str,
+                 no_match_domains: Sequence[str],
+                 protocol: str,
+                 rules: Sequence['outputs.GetDescribeHostClbInstanceListInstanceListListenerRuleResult'],
+                 sni_switch: int):
+        """
+        :param Sequence['GetDescribeHostClbInstanceListInstanceListListenerCertificateArgs'] certificates: Certificate data that has been bound to the rulesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str listener_id: Listener ID.
+        :param str listener_name: Name of listeners.
+        :param Sequence[str] no_match_domains: List of non -matching fieldsNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str protocol: Type of listener protocol, https | TCP_SSL.
+        :param Sequence['GetDescribeHostClbInstanceListInstanceListListenerRuleArgs'] rules: List of listeners&#39; rulesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param int sni_switch: Whether to turn on SNI, 1 to open, 0 to close.
+        """
+        pulumi.set(__self__, "certificates", certificates)
+        pulumi.set(__self__, "listener_id", listener_id)
+        pulumi.set(__self__, "listener_name", listener_name)
+        pulumi.set(__self__, "no_match_domains", no_match_domains)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "rules", rules)
+        pulumi.set(__self__, "sni_switch", sni_switch)
+
+    @property
+    @pulumi.getter
+    def certificates(self) -> Sequence['outputs.GetDescribeHostClbInstanceListInstanceListListenerCertificateResult']:
+        """
+        Certificate data that has been bound to the rulesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "certificates")
+
+    @property
+    @pulumi.getter(name="listenerId")
+    def listener_id(self) -> str:
+        """
+        Listener ID.
+        """
+        return pulumi.get(self, "listener_id")
+
+    @property
+    @pulumi.getter(name="listenerName")
+    def listener_name(self) -> str:
+        """
+        Name of listeners.
+        """
+        return pulumi.get(self, "listener_name")
+
+    @property
+    @pulumi.getter(name="noMatchDomains")
+    def no_match_domains(self) -> Sequence[str]:
+        """
+        List of non -matching fieldsNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "no_match_domains")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Type of listener protocol, https | TCP_SSL.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter
+    def rules(self) -> Sequence['outputs.GetDescribeHostClbInstanceListInstanceListListenerRuleResult']:
+        """
+        List of listeners&#39; rulesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "rules")
+
+    @property
+    @pulumi.getter(name="sniSwitch")
+    def sni_switch(self) -> int:
+        """
+        Whether to turn on SNI, 1 to open, 0 to close.
+        """
+        return pulumi.get(self, "sni_switch")
+
+
+@pulumi.output_type
+class GetDescribeHostClbInstanceListInstanceListListenerCertificateResult(dict):
+    def __init__(__self__, *,
+                 cert_ca_id: str,
+                 cert_id: str,
+                 dns_names: Sequence[str],
+                 s_sl_mode: str):
+        """
+        :param str cert_ca_id: Root certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str cert_id: Certificate ID.
+        :param Sequence[str] dns_names: Domain name binding of certificates.
+        :param str s_sl_mode: Certificate certification mode: unidirectional unidirectional authentication, Mutual two -way certificationNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "cert_ca_id", cert_ca_id)
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "dns_names", dns_names)
+        pulumi.set(__self__, "s_sl_mode", s_sl_mode)
+
+    @property
+    @pulumi.getter(name="certCaId")
+    def cert_ca_id(self) -> str:
+        """
+        Root certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "cert_ca_id")
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        Certificate ID.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter(name="dnsNames")
+    def dns_names(self) -> Sequence[str]:
+        """
+        Domain name binding of certificates.
+        """
+        return pulumi.get(self, "dns_names")
+
+    @property
+    @pulumi.getter(name="sSLMode")
+    def s_sl_mode(self) -> str:
+        """
+        Certificate certification mode: unidirectional unidirectional authentication, Mutual two -way certificationNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "s_sl_mode")
+
+
+@pulumi.output_type
+class GetDescribeHostClbInstanceListInstanceListListenerRuleResult(dict):
+    def __init__(__self__, *,
+                 certificates: Sequence['outputs.GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateResult'],
+                 domain: str,
+                 is_match: bool,
+                 location_id: str,
+                 no_match_domains: Sequence[str]):
+        """
+        :param Sequence['GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateArgs'] certificates: Certificate data that has been bound to the rulesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str domain: Domain name binding.
+        :param bool is_match: Whether the rules match the domain name to be bound to the certificate.
+        :param str location_id: Rule ID.
+        :param Sequence[str] no_match_domains: List of non -matching fieldsNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "certificates", certificates)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "is_match", is_match)
+        pulumi.set(__self__, "location_id", location_id)
+        pulumi.set(__self__, "no_match_domains", no_match_domains)
+
+    @property
+    @pulumi.getter
+    def certificates(self) -> Sequence['outputs.GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateResult']:
+        """
+        Certificate data that has been bound to the rulesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "certificates")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        Domain name binding.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="isMatch")
+    def is_match(self) -> bool:
+        """
+        Whether the rules match the domain name to be bound to the certificate.
+        """
+        return pulumi.get(self, "is_match")
+
+    @property
+    @pulumi.getter(name="locationId")
+    def location_id(self) -> str:
+        """
+        Rule ID.
+        """
+        return pulumi.get(self, "location_id")
+
+    @property
+    @pulumi.getter(name="noMatchDomains")
+    def no_match_domains(self) -> Sequence[str]:
+        """
+        List of non -matching fieldsNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "no_match_domains")
+
+
+@pulumi.output_type
+class GetDescribeHostClbInstanceListInstanceListListenerRuleCertificateResult(dict):
+    def __init__(__self__, *,
+                 cert_ca_id: str,
+                 cert_id: str,
+                 dns_names: Sequence[str],
+                 s_sl_mode: str):
+        """
+        :param str cert_ca_id: Root certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str cert_id: Certificate ID.
+        :param Sequence[str] dns_names: Domain name binding of certificates.
+        :param str s_sl_mode: Certificate certification mode: unidirectional unidirectional authentication, Mutual two -way certificationNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "cert_ca_id", cert_ca_id)
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "dns_names", dns_names)
+        pulumi.set(__self__, "s_sl_mode", s_sl_mode)
+
+    @property
+    @pulumi.getter(name="certCaId")
+    def cert_ca_id(self) -> str:
+        """
+        Root certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "cert_ca_id")
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        Certificate ID.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter(name="dnsNames")
+    def dns_names(self) -> Sequence[str]:
+        """
+        Domain name binding of certificates.
+        """
+        return pulumi.get(self, "dns_names")
+
+    @property
+    @pulumi.getter(name="sSLMode")
+    def s_sl_mode(self) -> str:
+        """
+        Certificate certification mode: unidirectional unidirectional authentication, Mutual two -way certificationNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "s_sl_mode")
+
+
+@pulumi.output_type
+class GetDescribeHostCosInstanceListFilterResult(dict):
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+
+@pulumi.output_type
+class GetDescribeHostCosInstanceListInstanceListResult(dict):
+    def __init__(__self__, *,
+                 bucket: str,
+                 cert_id: str,
+                 domain: str,
+                 region: str,
+                 status: str):
+        """
+        :param str bucket: Reserve bucket nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str cert_id: Binded certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str domain: domain name.
+        :param str region: Barrel areaNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str status: Enabled: domain name online statusDisabled: Domain name offline status.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> str:
+        """
+        Reserve bucket nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "bucket")
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        Binded certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        domain name.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Barrel areaNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Enabled: domain name online statusDisabled: Domain name offline status.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetDescribeHostDdosInstanceListFilterResult(dict):
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+
+@pulumi.output_type
+class GetDescribeHostDdosInstanceListInstanceListResult(dict):
+    def __init__(__self__, *,
+                 cert_id: str,
+                 domain: str,
+                 instance_id: str,
+                 protocol: str,
+                 virtual_port: str):
+        """
+        :param str cert_id: Certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str domain: domain name.
+        :param str instance_id: Instance ID.
+        :param str protocol: agreement type.
+        :param str virtual_port: Forwarding port.
+        """
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "virtual_port", virtual_port)
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        Certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        domain name.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        agreement type.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="virtualPort")
+    def virtual_port(self) -> str:
+        """
+        Forwarding port.
+        """
+        return pulumi.get(self, "virtual_port")
+
+
+@pulumi.output_type
+class GetDescribeHostDeployRecordDeployRecordListResult(dict):
+    def __init__(__self__, *,
+                 cert_id: str,
+                 create_time: str,
+                 id: int,
+                 region: str,
+                 resource_type: str,
+                 status: int,
+                 update_time: str):
+        """
+        :param str cert_id: Deployment certificate ID.
+        :param str create_time: Deployment time.
+        :param int id: Deployment record ID.
+        :param str region: Deployment.
+        :param str resource_type: Resource Type.
+        :param int status: Deployment state.
+        :param str update_time: Recent update time.
+        """
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "resource_type", resource_type)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "update_time", update_time)
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        Deployment certificate ID.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Deployment time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def id(self) -> int:
+        """
+        Deployment record ID.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Deployment.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> str:
+        """
+        Resource Type.
+        """
+        return pulumi.get(self, "resource_type")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Deployment state.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        Recent update time.
+        """
+        return pulumi.get(self, "update_time")
+
+
+@pulumi.output_type
+class GetDescribeHostDeployRecordDetailDeployRecordDetailListResult(dict):
+    def __init__(__self__, *,
+                 bucket: str,
+                 cert_id: str,
+                 create_time: str,
+                 domains: Sequence[str],
+                 env_id: str,
+                 error_msg: str,
+                 id: int,
+                 instance_id: str,
+                 instance_name: str,
+                 listener_id: str,
+                 listener_name: str,
+                 namespace: str,
+                 old_cert_id: str,
+                 port: int,
+                 protocol: str,
+                 region: str,
+                 secret_name: str,
+                 sni_switch: int,
+                 status: int,
+                 tcb_type: str,
+                 update_time: str):
+        """
+        :param str bucket: COS storage barrel nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str cert_id: Deployment certificate ID.
+        :param str create_time: Deployment record details Create time.
+        :param Sequence[str] domains: List of deployment domain.
+        :param str env_id: TCB environment IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str error_msg: Deployment error messageNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param int id: Deployment record details ID.
+        :param str instance_id: Deployment instance ID.
+        :param str instance_name: Deployment example name.
+        :param str listener_id: Deployment monitor IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str listener_name: Delicate monitor name.
+        :param str namespace: Named space nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str old_cert_id: Original binding certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param int port: portNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str protocol: Deployment monitoring protocolNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str region: Deployed TCB regionNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str secret_name: Secret nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param int sni_switch: Whether to turn on SNI.
+        :param int status: Deployment state.
+        :param str tcb_type: Deployed TCB typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str update_time: Deployment record details last update time.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "domains", domains)
+        pulumi.set(__self__, "env_id", env_id)
+        pulumi.set(__self__, "error_msg", error_msg)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "listener_id", listener_id)
+        pulumi.set(__self__, "listener_name", listener_name)
+        pulumi.set(__self__, "namespace", namespace)
+        pulumi.set(__self__, "old_cert_id", old_cert_id)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "secret_name", secret_name)
+        pulumi.set(__self__, "sni_switch", sni_switch)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "tcb_type", tcb_type)
+        pulumi.set(__self__, "update_time", update_time)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> str:
+        """
+        COS storage barrel nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "bucket")
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        Deployment certificate ID.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Deployment record details Create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def domains(self) -> Sequence[str]:
+        """
+        List of deployment domain.
+        """
+        return pulumi.get(self, "domains")
+
+    @property
+    @pulumi.getter(name="envId")
+    def env_id(self) -> str:
+        """
+        TCB environment IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "env_id")
+
+    @property
+    @pulumi.getter(name="errorMsg")
+    def error_msg(self) -> str:
+        """
+        Deployment error messageNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "error_msg")
+
+    @property
+    @pulumi.getter
+    def id(self) -> int:
+        """
+        Deployment record details ID.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Deployment instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        """
+        Deployment example name.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter(name="listenerId")
+    def listener_id(self) -> str:
+        """
+        Deployment monitor IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "listener_id")
+
+    @property
+    @pulumi.getter(name="listenerName")
+    def listener_name(self) -> str:
+        """
+        Delicate monitor name.
+        """
+        return pulumi.get(self, "listener_name")
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> str:
+        """
+        Named space nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "namespace")
+
+    @property
+    @pulumi.getter(name="oldCertId")
+    def old_cert_id(self) -> str:
+        """
+        Original binding certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "old_cert_id")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        portNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Deployment monitoring protocolNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        Deployed TCB regionNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="secretName")
+    def secret_name(self) -> str:
+        """
+        Secret nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "secret_name")
+
+    @property
+    @pulumi.getter(name="sniSwitch")
+    def sni_switch(self) -> int:
+        """
+        Whether to turn on SNI.
+        """
+        return pulumi.get(self, "sni_switch")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Deployment state.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="tcbType")
+    def tcb_type(self) -> str:
+        """
+        Deployed TCB typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "tcb_type")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        Deployment record details last update time.
+        """
+        return pulumi.get(self, "update_time")
+
+
+@pulumi.output_type
+class GetDescribeHostLighthouseInstanceListFilterResult(dict):
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+
+@pulumi.output_type
+class GetDescribeHostLighthouseInstanceListInstanceListResult(dict):
+    def __init__(__self__, *,
+                 domains: Sequence[str],
+                 instance_id: str,
+                 instance_name: str,
+                 ips: Sequence[str]):
+        """
+        :param Sequence[str] domains: Optional domain name.
+        :param str instance_id: Instance ID.
+        :param str instance_name: Example name.
+        :param Sequence[str] ips: IP address.
+        """
+        pulumi.set(__self__, "domains", domains)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "ips", ips)
+
+    @property
+    @pulumi.getter
+    def domains(self) -> Sequence[str]:
+        """
+        Optional domain name.
+        """
+        return pulumi.get(self, "domains")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        """
+        Example name.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter
+    def ips(self) -> Sequence[str]:
+        """
+        IP address.
+        """
+        return pulumi.get(self, "ips")
+
+
+@pulumi.output_type
+class GetDescribeHostLiveInstanceListFilterResult(dict):
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+
+@pulumi.output_type
+class GetDescribeHostLiveInstanceListInstanceListResult(dict):
+    def __init__(__self__, *,
+                 cert_id: str,
+                 domain: str,
+                 status: int):
+        """
+        :param str cert_id: Binded certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str domain: domain name.
+        :param int status: -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+        """
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        Binded certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        domain name.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetDescribeHostTeoInstanceListFilterResult(dict):
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+
+@pulumi.output_type
+class GetDescribeHostTeoInstanceListInstanceListResult(dict):
+    def __init__(__self__, *,
+                 cert_id: str,
+                 host: str,
+                 status: str,
+                 zone_id: str):
+        """
+        :param str cert_id: Certificate ID.
+        :param str host: domain name.
+        :param str status: Domain name.
+        :param str zone_id: Regional IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        Certificate ID.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter
+    def host(self) -> str:
+        """
+        domain name.
+        """
+        return pulumi.get(self, "host")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Domain name.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> str:
+        """
+        Regional IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "zone_id")
+
+
+@pulumi.output_type
+class GetDescribeHostTkeInstanceListFilterResult(dict):
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+
+@pulumi.output_type
+class GetDescribeHostTkeInstanceListInstanceListResult(dict):
+    def __init__(__self__, *,
+                 cluster_id: str,
+                 cluster_name: str,
+                 cluster_type: str,
+                 cluster_version: str,
+                 namespace_lists: Sequence['outputs.GetDescribeHostTkeInstanceListInstanceListNamespaceListResult']):
+        """
+        :param str cluster_id: Cluster ID.
+        :param str cluster_name: Cluster name.
+        :param str cluster_type: Cluster.
+        :param str cluster_version: Cluster.
+        :param Sequence['GetDescribeHostTkeInstanceListInstanceListNamespaceListArgs'] namespace_lists: Cluster Naming Space List.
+        """
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "cluster_type", cluster_type)
+        pulumi.set(__self__, "cluster_version", cluster_version)
+        pulumi.set(__self__, "namespace_lists", namespace_lists)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        Cluster ID.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> str:
+        """
+        Cluster name.
+        """
+        return pulumi.get(self, "cluster_name")
+
+    @property
+    @pulumi.getter(name="clusterType")
+    def cluster_type(self) -> str:
+        """
+        Cluster.
+        """
+        return pulumi.get(self, "cluster_type")
+
+    @property
+    @pulumi.getter(name="clusterVersion")
+    def cluster_version(self) -> str:
+        """
+        Cluster.
+        """
+        return pulumi.get(self, "cluster_version")
+
+    @property
+    @pulumi.getter(name="namespaceLists")
+    def namespace_lists(self) -> Sequence['outputs.GetDescribeHostTkeInstanceListInstanceListNamespaceListResult']:
+        """
+        Cluster Naming Space List.
+        """
+        return pulumi.get(self, "namespace_lists")
+
+
+@pulumi.output_type
+class GetDescribeHostTkeInstanceListInstanceListNamespaceListResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 secret_lists: Sequence['outputs.GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListResult']):
+        """
+        :param str name: Secret name.
+        :param Sequence['GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListArgs'] secret_lists: Secret list.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "secret_lists", secret_lists)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Secret name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="secretLists")
+    def secret_lists(self) -> Sequence['outputs.GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListResult']:
+        """
+        Secret list.
+        """
+        return pulumi.get(self, "secret_lists")
+
+
+@pulumi.output_type
+class GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListResult(dict):
+    def __init__(__self__, *,
+                 cert_id: str,
+                 ingress_lists: Sequence['outputs.GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListResult'],
+                 name: str,
+                 no_match_domains: Sequence[str]):
+        """
+        :param str cert_id: Certificate ID.
+        :param Sequence['GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListArgs'] ingress_lists: Ingress list.
+        :param str name: Secret name.
+        :param Sequence[str] no_match_domains: List of domain names that are not matched with the new certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "ingress_lists", ingress_lists)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "no_match_domains", no_match_domains)
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        Certificate ID.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter(name="ingressLists")
+    def ingress_lists(self) -> Sequence['outputs.GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListResult']:
+        """
+        Ingress list.
+        """
+        return pulumi.get(self, "ingress_lists")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Secret name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="noMatchDomains")
+    def no_match_domains(self) -> Sequence[str]:
+        """
+        List of domain names that are not matched with the new certificateNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "no_match_domains")
+
+
+@pulumi.output_type
+class GetDescribeHostTkeInstanceListInstanceListNamespaceListSecretListIngressListResult(dict):
+    def __init__(__self__, *,
+                 domains: Sequence[str],
+                 ingress_name: str,
+                 tls_domains: Sequence[str]):
+        """
+        :param Sequence[str] domains: Ingress domain name list.
+        :param str ingress_name: Ingress name.
+        :param Sequence[str] tls_domains: TLS domain name list.
+        """
+        pulumi.set(__self__, "domains", domains)
+        pulumi.set(__self__, "ingress_name", ingress_name)
+        pulumi.set(__self__, "tls_domains", tls_domains)
+
+    @property
+    @pulumi.getter
+    def domains(self) -> Sequence[str]:
+        """
+        Ingress domain name list.
+        """
+        return pulumi.get(self, "domains")
+
+    @property
+    @pulumi.getter(name="ingressName")
+    def ingress_name(self) -> str:
+        """
+        Ingress name.
+        """
+        return pulumi.get(self, "ingress_name")
+
+    @property
+    @pulumi.getter(name="tlsDomains")
+    def tls_domains(self) -> Sequence[str]:
+        """
+        TLS domain name list.
+        """
+        return pulumi.get(self, "tls_domains")
+
+
+@pulumi.output_type
+class GetDescribeHostUpdateRecordDeployRecordListResult(dict):
+    def __init__(__self__, *,
+                 cert_id: str,
+                 create_time: str,
+                 id: int,
+                 old_cert_id: str,
+                 regions: Sequence[str],
+                 resource_types: Sequence[str],
+                 status: int,
+                 update_time: str):
+        """
+        :param str cert_id: New certificate ID.
+        :param str create_time: Deployment time.
+        :param int id: Record ID.
+        :param str old_cert_id: Original certificate ID.
+        :param Sequence[str] regions: List of regional deploymentNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param Sequence[str] resource_types: List of resource types.
+        :param int status: Deployment state.
+        :param str update_time: Last update time.
+        """
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "old_cert_id", old_cert_id)
+        pulumi.set(__self__, "regions", regions)
+        pulumi.set(__self__, "resource_types", resource_types)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "update_time", update_time)
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        New certificate ID.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Deployment time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def id(self) -> int:
+        """
+        Record ID.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="oldCertId")
+    def old_cert_id(self) -> str:
+        """
+        Original certificate ID.
+        """
+        return pulumi.get(self, "old_cert_id")
+
+    @property
+    @pulumi.getter
+    def regions(self) -> Sequence[str]:
+        """
+        List of regional deploymentNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "regions")
+
+    @property
+    @pulumi.getter(name="resourceTypes")
+    def resource_types(self) -> Sequence[str]:
+        """
+        List of resource types.
+        """
+        return pulumi.get(self, "resource_types")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Deployment state.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        Last update time.
+        """
+        return pulumi.get(self, "update_time")
+
+
+@pulumi.output_type
+class GetDescribeHostUpdateRecordDetailRecordDetailListResult(dict):
+    def __init__(__self__, *,
+                 lists: Sequence['outputs.GetDescribeHostUpdateRecordDetailRecordDetailListListResult'],
+                 resource_type: str,
+                 total_count: int):
+        """
+        :param Sequence['GetDescribeHostUpdateRecordDetailRecordDetailListListArgs'] lists: List of deployment resources details.
+        :param str resource_type: Deploy resource type.
+        :param int total_count: The total number of deployment resources.
+        """
+        pulumi.set(__self__, "lists", lists)
+        pulumi.set(__self__, "resource_type", resource_type)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter
+    def lists(self) -> Sequence['outputs.GetDescribeHostUpdateRecordDetailRecordDetailListListResult']:
+        """
+        List of deployment resources details.
+        """
+        return pulumi.get(self, "lists")
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> str:
+        """
+        Deploy resource type.
+        """
+        return pulumi.get(self, "resource_type")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        The total number of deployment resources.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetDescribeHostUpdateRecordDetailRecordDetailListListResult(dict):
+    def __init__(__self__, *,
+                 bucket: str,
+                 cert_id: str,
+                 create_time: str,
+                 domains: Sequence[str],
+                 env_id: str,
+                 error_msg: str,
+                 id: int,
+                 instance_id: str,
+                 instance_name: str,
+                 listener_id: str,
+                 listener_name: str,
+                 namespace: str,
+                 old_cert_id: str,
+                 port: int,
+                 protocol: str,
+                 region: str,
+                 resource_type: str,
+                 secret_name: str,
+                 sni_switch: int,
+                 status: int,
+                 t_cb_type: str,
+                 update_time: str):
+        """
+        :param str bucket: BUCKET name (COS dedicated)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str cert_id: New certificate ID.
+        :param str create_time: Deployment time.
+        :param Sequence[str] domains: List of deployment domainNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str env_id: Environment IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str error_msg: Deployment error messageNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param int id: Detailed record ID.
+        :param str instance_id: Deployment instance IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str instance_name: Deployment example nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str listener_id: Deploy listener ID (CLB for CLB)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str listener_name: Deploy listener name (CLB for CLB)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str namespace: Naming Space (TKE)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str old_cert_id: Old certificate ID.
+        :param int port: portNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str protocol: protocolNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str region: DeploymentNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str resource_type: Deploy resource type.
+        :param str secret_name: Secret Name (TKE for TKE)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param int sni_switch: Whether to turn on SNI (CLB dedicated)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param int status: Deployment state.
+        :param str t_cb_type: TCB deployment typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str update_time: Last update time.
+        """
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "domains", domains)
+        pulumi.set(__self__, "env_id", env_id)
+        pulumi.set(__self__, "error_msg", error_msg)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "listener_id", listener_id)
+        pulumi.set(__self__, "listener_name", listener_name)
+        pulumi.set(__self__, "namespace", namespace)
+        pulumi.set(__self__, "old_cert_id", old_cert_id)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "resource_type", resource_type)
+        pulumi.set(__self__, "secret_name", secret_name)
+        pulumi.set(__self__, "sni_switch", sni_switch)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "t_cb_type", t_cb_type)
+        pulumi.set(__self__, "update_time", update_time)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> str:
+        """
+        BUCKET name (COS dedicated)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "bucket")
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        New certificate ID.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Deployment time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def domains(self) -> Sequence[str]:
+        """
+        List of deployment domainNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "domains")
+
+    @property
+    @pulumi.getter(name="envId")
+    def env_id(self) -> str:
+        """
+        Environment IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "env_id")
+
+    @property
+    @pulumi.getter(name="errorMsg")
+    def error_msg(self) -> str:
+        """
+        Deployment error messageNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "error_msg")
+
+    @property
+    @pulumi.getter
+    def id(self) -> int:
+        """
+        Detailed record ID.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Deployment instance IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        """
+        Deployment example nameNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter(name="listenerId")
+    def listener_id(self) -> str:
+        """
+        Deploy listener ID (CLB for CLB)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "listener_id")
+
+    @property
+    @pulumi.getter(name="listenerName")
+    def listener_name(self) -> str:
+        """
+        Deploy listener name (CLB for CLB)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "listener_name")
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> str:
+        """
+        Naming Space (TKE)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "namespace")
+
+    @property
+    @pulumi.getter(name="oldCertId")
+    def old_cert_id(self) -> str:
+        """
+        Old certificate ID.
+        """
+        return pulumi.get(self, "old_cert_id")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        """
+        portNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        protocolNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        DeploymentNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> str:
+        """
+        Deploy resource type.
+        """
+        return pulumi.get(self, "resource_type")
+
+    @property
+    @pulumi.getter(name="secretName")
+    def secret_name(self) -> str:
+        """
+        Secret Name (TKE for TKE)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "secret_name")
+
+    @property
+    @pulumi.getter(name="sniSwitch")
+    def sni_switch(self) -> int:
+        """
+        Whether to turn on SNI (CLB dedicated)Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "sni_switch")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Deployment state.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="tCBType")
+    def t_cb_type(self) -> str:
+        """
+        TCB deployment typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "t_cb_type")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        Last update time.
+        """
+        return pulumi.get(self, "update_time")
+
+
+@pulumi.output_type
+class GetDescribeHostVodInstanceListFilterResult(dict):
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+
+@pulumi.output_type
+class GetDescribeHostVodInstanceListInstanceListResult(dict):
+    def __init__(__self__, *,
+                 cert_id: str,
+                 domain: str):
+        """
+        :param str cert_id: Certificate ID.
+        :param str domain: domain name.
+        """
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "domain", domain)
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        Certificate ID.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        domain name.
+        """
+        return pulumi.get(self, "domain")
+
+
+@pulumi.output_type
+class GetDescribeHostWafInstanceListFilterResult(dict):
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+
+@pulumi.output_type
+class GetDescribeHostWafInstanceListInstanceListResult(dict):
+    def __init__(__self__, *,
+                 cert_id: str,
+                 domain: str,
+                 status: int):
+        """
+        :param str cert_id: Binded certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str domain: domain name.
+        :param int status: -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+        """
+        pulumi.set(__self__, "cert_id", cert_id)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="certId")
+    def cert_id(self) -> str:
+        """
+        Binded certificate IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "cert_id")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        domain name.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetDescribeManagerDetailCompanyInfoResult(dict):
+    def __init__(__self__, *,
+                 company_address: str,
+                 company_city: str,
+                 company_country: str,
+                 company_id: int,
+                 company_name: str,
+                 company_phone: str,
+                 company_province: str,
+                 id_number: str,
+                 id_type: str):
+        """
+        :param str company_address: Detailed address where the company is located.
+        :param str company_city: The city where the company is.
+        :param str company_country: Company country.
+        :param int company_id: Company ID.
+        :param str company_name: Company Name.
+        :param str company_phone: company phone.
+        :param str company_province: Province where the company is located.
+        :param str id_number: ID numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str id_type: typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "company_address", company_address)
+        pulumi.set(__self__, "company_city", company_city)
+        pulumi.set(__self__, "company_country", company_country)
+        pulumi.set(__self__, "company_id", company_id)
+        pulumi.set(__self__, "company_name", company_name)
+        pulumi.set(__self__, "company_phone", company_phone)
+        pulumi.set(__self__, "company_province", company_province)
+        pulumi.set(__self__, "id_number", id_number)
+        pulumi.set(__self__, "id_type", id_type)
+
+    @property
+    @pulumi.getter(name="companyAddress")
+    def company_address(self) -> str:
+        """
+        Detailed address where the company is located.
+        """
+        return pulumi.get(self, "company_address")
+
+    @property
+    @pulumi.getter(name="companyCity")
+    def company_city(self) -> str:
+        """
+        The city where the company is.
+        """
+        return pulumi.get(self, "company_city")
+
+    @property
+    @pulumi.getter(name="companyCountry")
+    def company_country(self) -> str:
+        """
+        Company country.
+        """
+        return pulumi.get(self, "company_country")
+
+    @property
+    @pulumi.getter(name="companyId")
+    def company_id(self) -> int:
+        """
+        Company ID.
+        """
+        return pulumi.get(self, "company_id")
+
+    @property
+    @pulumi.getter(name="companyName")
+    def company_name(self) -> str:
+        """
+        Company Name.
+        """
+        return pulumi.get(self, "company_name")
+
+    @property
+    @pulumi.getter(name="companyPhone")
+    def company_phone(self) -> str:
+        """
+        company phone.
+        """
+        return pulumi.get(self, "company_phone")
+
+    @property
+    @pulumi.getter(name="companyProvince")
+    def company_province(self) -> str:
+        """
+        Province where the company is located.
+        """
+        return pulumi.get(self, "company_province")
+
+    @property
+    @pulumi.getter(name="idNumber")
+    def id_number(self) -> str:
+        """
+        ID numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "id_number")
+
+    @property
+    @pulumi.getter(name="idType")
+    def id_type(self) -> str:
+        """
+        typeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "id_type")
+
+
+@pulumi.output_type
+class GetDescribeManagersManagerResult(dict):
+    def __init__(__self__, *,
+                 cert_count: int,
+                 create_time: str,
+                 domain_count: int,
+                 expire_time: str,
+                 manager_department: str,
+                 manager_first_name: str,
+                 manager_id: int,
+                 manager_last_name: str,
+                 manager_mail: str,
+                 manager_phone: str,
+                 manager_position: str,
+                 status: str,
+                 submit_audit_time: str,
+                 verify_time: str):
+        """
+        :param int cert_count: Number of administrative certificates.
+        :param str create_time: Creation timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param int domain_count: Number of administrators.
+        :param str expire_time: Examine the validity expiration timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str manager_department: Administrator department.
+        :param str manager_first_name: Manager name.
+        :param int manager_id: Manager ID.
+        :param str manager_last_name: Manager name.
+        :param str manager_mail: Vague query manager email (will be abandoned), please use Searchkey.
+        :param str manager_phone: Manager phone call.
+        :param str manager_position: Manager position.
+        :param str status: Filter according to the status of the manager, and the value is available&amp;#39;None&amp;#39; Unable to submit review&amp;#39;Audit&amp;#39;, Asian Credit Review&amp;#39;Caaudit&amp;#39; CA review&amp;#39;OK&amp;#39; has been reviewed&amp;#39;Invalid&amp;#39; review failed&amp;#39;Expiring&amp;#39; is about to expire&amp;#39;Expired&amp;#39; expired.
+        :param str submit_audit_time: The last time the review timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        :param str verify_time: Examination timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        pulumi.set(__self__, "cert_count", cert_count)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "domain_count", domain_count)
+        pulumi.set(__self__, "expire_time", expire_time)
+        pulumi.set(__self__, "manager_department", manager_department)
+        pulumi.set(__self__, "manager_first_name", manager_first_name)
+        pulumi.set(__self__, "manager_id", manager_id)
+        pulumi.set(__self__, "manager_last_name", manager_last_name)
+        pulumi.set(__self__, "manager_mail", manager_mail)
+        pulumi.set(__self__, "manager_phone", manager_phone)
+        pulumi.set(__self__, "manager_position", manager_position)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "submit_audit_time", submit_audit_time)
+        pulumi.set(__self__, "verify_time", verify_time)
+
+    @property
+    @pulumi.getter(name="certCount")
+    def cert_count(self) -> int:
+        """
+        Number of administrative certificates.
+        """
+        return pulumi.get(self, "cert_count")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="domainCount")
+    def domain_count(self) -> int:
+        """
+        Number of administrators.
+        """
+        return pulumi.get(self, "domain_count")
+
+    @property
+    @pulumi.getter(name="expireTime")
+    def expire_time(self) -> str:
+        """
+        Examine the validity expiration timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "expire_time")
+
+    @property
+    @pulumi.getter(name="managerDepartment")
+    def manager_department(self) -> str:
+        """
+        Administrator department.
+        """
+        return pulumi.get(self, "manager_department")
+
+    @property
+    @pulumi.getter(name="managerFirstName")
+    def manager_first_name(self) -> str:
+        """
+        Manager name.
+        """
+        return pulumi.get(self, "manager_first_name")
+
+    @property
+    @pulumi.getter(name="managerId")
+    def manager_id(self) -> int:
+        """
+        Manager ID.
+        """
+        return pulumi.get(self, "manager_id")
+
+    @property
+    @pulumi.getter(name="managerLastName")
+    def manager_last_name(self) -> str:
+        """
+        Manager name.
+        """
+        return pulumi.get(self, "manager_last_name")
+
+    @property
+    @pulumi.getter(name="managerMail")
+    def manager_mail(self) -> str:
+        """
+        Vague query manager email (will be abandoned), please use Searchkey.
+        """
+        return pulumi.get(self, "manager_mail")
+
+    @property
+    @pulumi.getter(name="managerPhone")
+    def manager_phone(self) -> str:
+        """
+        Manager phone call.
+        """
+        return pulumi.get(self, "manager_phone")
+
+    @property
+    @pulumi.getter(name="managerPosition")
+    def manager_position(self) -> str:
+        """
+        Manager position.
+        """
+        return pulumi.get(self, "manager_position")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Filter according to the status of the manager, and the value is available&amp;#39;None&amp;#39; Unable to submit review&amp;#39;Audit&amp;#39;, Asian Credit Review&amp;#39;Caaudit&amp;#39; CA review&amp;#39;OK&amp;#39; has been reviewed&amp;#39;Invalid&amp;#39; review failed&amp;#39;Expiring&amp;#39; is about to expire&amp;#39;Expired&amp;#39; expired.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="submitAuditTime")
+    def submit_audit_time(self) -> str:
+        """
+        The last time the review timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "submit_audit_time")
+
+    @property
+    @pulumi.getter(name="verifyTime")
+    def verify_time(self) -> str:
+        """
+        Examination timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "verify_time")
 
 

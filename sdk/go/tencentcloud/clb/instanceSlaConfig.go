@@ -49,7 +49,7 @@ type InstanceSlaConfig struct {
 
 	// ID of the CLB instance.
 	LoadBalancerId pulumi.StringOutput `pulumi:"loadBalancerId"`
-	// To upgrade to LCU-supported CLB instances. It must be SLA.
+	// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
 	SlaType pulumi.StringOutput `pulumi:"slaType"`
 }
 
@@ -91,14 +91,14 @@ func GetInstanceSlaConfig(ctx *pulumi.Context,
 type instanceSlaConfigState struct {
 	// ID of the CLB instance.
 	LoadBalancerId *string `pulumi:"loadBalancerId"`
-	// To upgrade to LCU-supported CLB instances. It must be SLA.
+	// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
 	SlaType *string `pulumi:"slaType"`
 }
 
 type InstanceSlaConfigState struct {
 	// ID of the CLB instance.
 	LoadBalancerId pulumi.StringPtrInput
-	// To upgrade to LCU-supported CLB instances. It must be SLA.
+	// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
 	SlaType pulumi.StringPtrInput
 }
 
@@ -109,7 +109,7 @@ func (InstanceSlaConfigState) ElementType() reflect.Type {
 type instanceSlaConfigArgs struct {
 	// ID of the CLB instance.
 	LoadBalancerId string `pulumi:"loadBalancerId"`
-	// To upgrade to LCU-supported CLB instances. It must be SLA.
+	// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
 	SlaType string `pulumi:"slaType"`
 }
 
@@ -117,7 +117,7 @@ type instanceSlaConfigArgs struct {
 type InstanceSlaConfigArgs struct {
 	// ID of the CLB instance.
 	LoadBalancerId pulumi.StringInput
-	// To upgrade to LCU-supported CLB instances. It must be SLA.
+	// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
 	SlaType pulumi.StringInput
 }
 
@@ -213,7 +213,7 @@ func (o InstanceSlaConfigOutput) LoadBalancerId() pulumi.StringOutput {
 	return o.ApplyT(func(v *InstanceSlaConfig) pulumi.StringOutput { return v.LoadBalancerId }).(pulumi.StringOutput)
 }
 
-// To upgrade to LCU-supported CLB instances. It must be SLA.
+// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
 func (o InstanceSlaConfigOutput) SlaType() pulumi.StringOutput {
 	return o.ApplyT(func(v *InstanceSlaConfig) pulumi.StringOutput { return v.SlaType }).(pulumi.StringOutput)
 }

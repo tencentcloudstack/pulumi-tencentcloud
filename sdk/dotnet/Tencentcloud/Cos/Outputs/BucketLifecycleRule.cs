@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
     public sealed class BucketLifecycleRule
     {
         /// <summary>
+        /// Set the maximum time a multipart upload is allowed to remain running.
+        /// </summary>
+        public readonly Outputs.BucketLifecycleRuleAbortIncompleteMultipartUpload? AbortIncompleteMultipartUpload;
+        /// <summary>
         /// Specifies a period in the object's expire (documented below).
         /// </summary>
         public readonly Outputs.BucketLifecycleRuleExpiration? Expiration;
@@ -41,6 +45,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
 
         [OutputConstructor]
         private BucketLifecycleRule(
+            Outputs.BucketLifecycleRuleAbortIncompleteMultipartUpload? abortIncompleteMultipartUpload,
+
             Outputs.BucketLifecycleRuleExpiration? expiration,
 
             string filterPrefix,
@@ -53,6 +59,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
 
             ImmutableArray<Outputs.BucketLifecycleRuleTransition> transitions)
         {
+            AbortIncompleteMultipartUpload = abortIncompleteMultipartUpload;
             Expiration = expiration;
             FilterPrefix = filterPrefix;
             Id = id;

@@ -14,8 +14,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Outputs
     [OutputType]
     public sealed class CngwServiceRateLimitLimitDetailRateLimitResponse
     {
+        /// <summary>
+        /// custom response body, maybe bull.
+        /// </summary>
         public readonly string? Body;
+        /// <summary>
+        /// headrs.
+        /// </summary>
         public readonly ImmutableArray<Outputs.CngwServiceRateLimitLimitDetailRateLimitResponseHeader> Headers;
+        /// <summary>
+        /// http status code.
+        /// </summary>
         public readonly int? HttpStatus;
 
         [OutputConstructor]

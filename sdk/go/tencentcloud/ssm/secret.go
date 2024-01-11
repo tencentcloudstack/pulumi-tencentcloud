@@ -26,13 +26,13 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssm.NewSecret(ctx, "foo", &Ssm.SecretArgs{
-// 			Description:          pulumi.String("user defined secret"),
+// 		_, err := Ssm.NewSecret(ctx, "example", &Ssm.SecretArgs{
+// 			Description:          pulumi.String("desc."),
 // 			IsEnabled:            pulumi.Bool(true),
 // 			RecoveryWindowInDays: pulumi.Int(0),
-// 			SecretName:           pulumi.String("test"),
+// 			SecretName:           pulumi.String("tf-example"),
 // 			Tags: pulumi.AnyMap{
-// 				"test-tag": pulumi.Any("test"),
+// 				"createBy": pulumi.Any("terraform"),
 // 			},
 // 		})
 // 		if err != nil {
@@ -54,37 +54,70 @@ import (
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		instance, err := Redis.GetInstances(ctx, &redis.GetInstancesArgs{
-// 			Zone: pulumi.StringRef("ap-guangzhou-6"),
+// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+// 			TypeId: pulumi.IntRef(8),
 // 		}, nil)
 // 		if err != nil {
 // 			return err
 // 		}
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"Region":     "ap-guangzhou",
-// 			"Privilege":  "r",
-// 			"InstanceId": instance.InstanceLists[0].RedisId,
-// 			"ReadonlyPolicy": []string{
-// 				"master",
-// 			},
-// 			"Remark": "for tf test",
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
 // 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		json0 := string(tmpJSON0)
-// 		_, err = Ssm.NewSecret(ctx, "secret", &Ssm.SecretArgs{
-// 			SecretName:       pulumi.String("for-redis-test"),
-// 			Description:      pulumi.String("redis secret"),
-// 			IsEnabled:        pulumi.Bool(false),
-// 			SecretType:       pulumi.Int(4),
-// 			AdditionalConfig: pulumi.String(json0),
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			VpcId:            vpc.ID(),
+// 			AvailabilityZone: pulumi.String(zone.Lists[3].Zone),
+// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleInstance, err := Redis.NewInstance(ctx, "exampleInstance", &Redis.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(zone.Lists[3].Zone),
+// 			TypeId:           pulumi.Int(zone.Lists[3].TypeId),
+// 			Password:         pulumi.String("Qwer@234"),
+// 			MemSize:          pulumi.Int(zone.Lists[3].MemSizes[0]),
+// 			RedisShardNum:    pulumi.Int(zone.Lists[3].RedisShardNums[0]),
+// 			RedisReplicasNum: pulumi.Int(zone.Lists[3].RedisReplicasNums[0]),
+// 			Port:             pulumi.Int(6379),
+// 			VpcId:            vpc.ID(),
+// 			SubnetId:         subnet.ID(),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Ssm.NewSecret(ctx, "exampleSecret", &Ssm.SecretArgs{
+// 			SecretName:  pulumi.String("tf-example"),
+// 			Description: pulumi.String("redis desc."),
+// 			IsEnabled:   pulumi.Bool(true),
+// 			SecretType:  pulumi.Int(4),
+// 			AdditionalConfig: exampleInstance.ID().ApplyT(func(id string) (pulumi.String, error) {
+// 				var _zero pulumi.String
+// 				tmpJSON0, err := json.Marshal(map[string]interface{}{
+// 					"Region":     "ap-guangzhou",
+// 					"Privilege":  "r",
+// 					"InstanceId": id,
+// 					"ReadonlyPolicy": []string{
+// 						"master",
+// 					},
+// 					"Remark": "for tf test",
+// 				})
+// 				if err != nil {
+// 					return _zero, err
+// 				}
+// 				json0 := string(tmpJSON0)
+// 				return json0, nil
+// 			}).(pulumi.StringOutput),
 // 			Tags: pulumi.AnyMap{
-// 				"test-tag": pulumi.Any("test"),
+// 				"createdBy": pulumi.Any("terraform"),
 // 			},
 // 			RecoveryWindowInDays: pulumi.Int(0),
 // 		})
@@ -118,7 +151,7 @@ type Secret struct {
 	RecoveryWindowInDays pulumi.IntPtrOutput `pulumi:"recoveryWindowInDays"`
 	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName pulumi.StringOutput `pulumi:"secretName"`
-	// Type of secret. `0`: user-defined secret. `4`: redis secret.
+	// Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
 	SecretType pulumi.IntOutput `pulumi:"secretType"`
 	// Status of secret.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -171,7 +204,7 @@ type secretState struct {
 	RecoveryWindowInDays *int `pulumi:"recoveryWindowInDays"`
 	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName *string `pulumi:"secretName"`
-	// Type of secret. `0`: user-defined secret. `4`: redis secret.
+	// Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
 	SecretType *int `pulumi:"secretType"`
 	// Status of secret.
 	Status *string `pulumi:"status"`
@@ -192,7 +225,7 @@ type SecretState struct {
 	RecoveryWindowInDays pulumi.IntPtrInput
 	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName pulumi.StringPtrInput
-	// Type of secret. `0`: user-defined secret. `4`: redis secret.
+	// Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
 	SecretType pulumi.IntPtrInput
 	// Status of secret.
 	Status pulumi.StringPtrInput
@@ -217,7 +250,7 @@ type secretArgs struct {
 	RecoveryWindowInDays *int `pulumi:"recoveryWindowInDays"`
 	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName string `pulumi:"secretName"`
-	// Type of secret. `0`: user-defined secret. `4`: redis secret.
+	// Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
 	SecretType *int `pulumi:"secretType"`
 	// Tags of secret.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -237,7 +270,7 @@ type SecretArgs struct {
 	RecoveryWindowInDays pulumi.IntPtrInput
 	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
 	SecretName pulumi.StringInput
-	// Type of secret. `0`: user-defined secret. `4`: redis secret.
+	// Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
 	SecretType pulumi.IntPtrInput
 	// Tags of secret.
 	Tags pulumi.MapInput
@@ -360,7 +393,7 @@ func (o SecretOutput) SecretName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Secret) pulumi.StringOutput { return v.SecretName }).(pulumi.StringOutput)
 }
 
-// Type of secret. `0`: user-defined secret. `4`: redis secret.
+// Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
 func (o SecretOutput) SecretType() pulumi.IntOutput {
 	return o.ApplyT(func(v *Secret) pulumi.IntOutput { return v.SecretType }).(pulumi.IntOutput)
 }

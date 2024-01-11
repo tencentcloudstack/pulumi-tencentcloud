@@ -7,24 +7,39 @@ import * as utilities from "../utilities";
 /**
  * Provide a resource to create a SSM secret version.
  *
+ * > **Note:** A maximum of 10 versions can be supported under one credential. Only new versions can be added to credentials in the enabled and disabled states.
+ *
  * ## Example Usage
+ * ### Text type credential information plaintext
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.ssm.Secret("foo", {
- *     secretName: "test",
- *     description: "test secret",
+ * const example = new tencentcloud.ssm.Secret("example", {
+ *     secretName: "tf-example",
+ *     description: "desc.",
  *     recoveryWindowInDays: 0,
  *     isEnabled: true,
  *     tags: {
- *         "test-tag": "test",
+ *         createdBy: "terraform",
  *     },
  * });
  * const v1 = new tencentcloud.ssm.SecretVersion("v1", {
- *     secretName: foo.secretName,
+ *     secretName: example.secretName,
  *     versionId: "v1",
+ *     secretString: "this is secret string",
+ * });
+ * ```
+ * ### Binary credential information, encoded using base64
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const v2 = new tencentcloud.ssm.SecretVersion("v2", {
+ *     secretName: tencentcloud_ssm_secret.example.secret_name,
+ *     versionId: "v2",
  *     secretBinary: "MTIzMTIzMTIzMTIzMTIzQQ==",
  * });
  * ```

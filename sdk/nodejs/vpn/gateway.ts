@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *     zone: "ap-guangzhou-3",
  * });
  * ```
- * ### CCN IPEC VPN gateway
+ * ### CCN IPSEC VPN gateway
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -33,7 +33,7 @@ import * as utilities from "../utilities";
  *     tags: {
  *         test: "test",
  *     },
- *     type: "CCN",
+ *     type: "IPSEC",
  *     zone: "ap-guangzhou-3",
  * });
  * ```
@@ -201,7 +201,7 @@ export class Gateway extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: GatewayArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: GatewayArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: GatewayArgs | GatewayState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
@@ -227,9 +227,6 @@ export class Gateway extends pulumi.CustomResource {
             resourceInputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as GatewayArgs | undefined;
-            if ((!args || args.zone === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'zone'");
-            }
             resourceInputs["bandwidth"] = args ? args.bandwidth : undefined;
             resourceInputs["cdcId"] = args ? args.cdcId : undefined;
             resourceInputs["chargeType"] = args ? args.chargeType : undefined;
@@ -379,5 +376,5 @@ export interface GatewayArgs {
     /**
      * Zone of the VPN gateway.
      */
-    zone: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

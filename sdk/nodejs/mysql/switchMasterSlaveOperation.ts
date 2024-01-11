@@ -56,14 +56,6 @@ import * as utilities from "../utilities";
  *     waitSwitch: true,
  * });
  * ```
- *
- * ## Import
- *
- * mysql switch_master_slave_operation can be imported using the id, e.g.
- *
- * ```sh
- *  $ pulumi import tencentcloud:Mysql/switchMasterSlaveOperation:SwitchMasterSlaveOperation switch_master_slave_operation switch_master_slave_operation_id
- * ```
  */
 export class SwitchMasterSlaveOperation extends pulumi.CustomResource {
     /**

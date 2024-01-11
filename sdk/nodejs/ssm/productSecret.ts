@@ -9,34 +9,118 @@ import * as utilities from "../utilities";
  * Provides a resource to create a ssm productSecret
  *
  * ## Example Usage
+ * ### Ssm secret for mysql
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const kms = tencentcloud.Kms.getKeys({
- *     keyState: 1,
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "cdb",
  * });
- * const mysql = tencentcloud.Mysql.getInstance({
- *     mysqlId: "cdb-fitq5t9h",
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
  * });
- * const productSecret = new tencentcloud.ssm.ProductSecret("productSecret", {
- *     secretName: "tf-product-ssm-test",
- *     userNamePrefix: "test",
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+ * const exampleInstance = new tencentcloud.mysql.Instance("exampleInstance", {
+ *     internetService: 1,
+ *     engineVersion: "5.7",
+ *     chargeType: "POSTPAID",
+ *     rootPassword: "PassWord123",
+ *     slaveDeployMode: 0,
+ *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     slaveSyncMode: 1,
+ *     instanceName: "tf-example",
+ *     memSize: 4000,
+ *     volumeSize: 200,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     intranetPort: 3306,
+ *     securityGroups: [securityGroup.id],
+ *     tags: {
+ *         createBy: "terraform",
+ *     },
+ *     parameters: {
+ *         character_set_server: "utf8",
+ *         max_connections: "1000",
+ *     },
+ * });
+ * const exampleKey = new tencentcloud.kms.Key("exampleKey", {
+ *     alias: "tf-example-kms-key",
+ *     description: "example of kms key",
+ *     keyRotationEnabled: false,
+ *     isEnabled: true,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleProductSecret = new tencentcloud.ssm.ProductSecret("exampleProductSecret", {
+ *     secretName: "tf-example",
+ *     userNamePrefix: "prefix",
  *     productName: "Mysql",
- *     instanceId: mysql.then(mysql => mysql.instanceLists?[0]?.mysqlId),
+ *     instanceId: exampleInstance.id,
  *     domains: ["10.0.0.0"],
  *     privilegesLists: [{
  *         privilegeName: "GlobalPrivileges",
  *         privileges: ["ALTER ROUTINE"],
  *     }],
  *     description: "for ssm product test",
- *     kmsKeyId: kms.then(kms => kms.keyLists?[0]?.keyId),
+ *     kmsKeyId: exampleKey.id,
  *     status: "Enabled",
  *     enableRotation: true,
  *     rotationBeginTime: "2023-08-05 20:54:33",
  *     rotationFrequency: 30,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * ```
+ * ### Ssm secret for tdsql-c-mysql
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.ssm.ProductSecret("example", {
+ *     secretName: "tf-tdsql-c-example",
+ *     userNamePrefix: "prefix",
+ *     productName: "Tdsql_C_Mysql",
+ *     instanceId: "cynosdbmysql-xxxxxx",
+ *     domains: ["%"],
+ *     privilegesLists: [
+ *         {
+ *             privilegeName: "GlobalPrivileges",
+ *             privileges: [
+ *                 "ALTER",
+ *                 "CREATE",
+ *                 "DELETE",
+ *             ],
+ *         },
+ *         {
+ *             privilegeName: "DatabasePrivileges",
+ *             database: "test",
+ *             privileges: [
+ *                 "ALTER",
+ *                 "CREATE",
+ *                 "DELETE",
+ *                 "SELECT",
+ *             ],
+ *         },
+ *     ],
+ *     description: "test tdsql-c",
+ *     kmsKeyId: undefined,
+ *     status: "Enabled",
+ *     enableRotation: false,
+ *     rotationBeginTime: "2023-08-05 20:54:33",
+ *     rotationFrequency: 30,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
  * });
  * ```
  */
@@ -97,7 +181,7 @@ export class ProductSecret extends pulumi.CustomResource {
      */
     public readonly privilegesLists!: pulumi.Output<outputs.Ssm.ProductSecretPrivilegesList[]>;
     /**
-     * Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `tencentcloud.Ssm.getProducts` to query supported products.
+     * Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `tencentcloud.Ssm.getProducts` to query supported products.
      */
     public readonly productName!: pulumi.Output<string>;
     /**
@@ -120,6 +204,10 @@ export class ProductSecret extends pulumi.CustomResource {
      * Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
      */
     public readonly status!: pulumi.Output<string>;
+    /**
+     * Tags of secret.
+     */
+    public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
      * Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.
      */
@@ -151,6 +239,7 @@ export class ProductSecret extends pulumi.CustomResource {
             resourceInputs["secretName"] = state ? state.secretName : undefined;
             resourceInputs["secretType"] = state ? state.secretType : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["userNamePrefix"] = state ? state.userNamePrefix : undefined;
         } else {
             const args = argsOrState as ProductSecretArgs | undefined;
@@ -183,6 +272,7 @@ export class ProductSecret extends pulumi.CustomResource {
             resourceInputs["rotationFrequency"] = args ? args.rotationFrequency : undefined;
             resourceInputs["secretName"] = args ? args.secretName : undefined;
             resourceInputs["status"] = args ? args.status : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["userNamePrefix"] = args ? args.userNamePrefix : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["secretType"] = undefined /*out*/;
@@ -225,7 +315,7 @@ export interface ProductSecretState {
      */
     privilegesLists?: pulumi.Input<pulumi.Input<inputs.Ssm.ProductSecretPrivilegesList>[]>;
     /**
-     * Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `tencentcloud.Ssm.getProducts` to query supported products.
+     * Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `tencentcloud.Ssm.getProducts` to query supported products.
      */
     productName?: pulumi.Input<string>;
     /**
@@ -248,6 +338,10 @@ export interface ProductSecretState {
      * Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
      */
     status?: pulumi.Input<string>;
+    /**
+     * Tags of secret.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
     /**
      * Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.
      */
@@ -283,7 +377,7 @@ export interface ProductSecretArgs {
      */
     privilegesLists: pulumi.Input<pulumi.Input<inputs.Ssm.ProductSecretPrivilegesList>[]>;
     /**
-     * Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `tencentcloud.Ssm.getProducts` to query supported products.
+     * Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `tencentcloud.Ssm.getProducts` to query supported products.
      */
     productName: pulumi.Input<string>;
     /**
@@ -302,6 +396,10 @@ export interface ProductSecretArgs {
      * Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
      */
     status?: pulumi.Input<string>;
+    /**
+     * Tags of secret.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
     /**
      * Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.
      */

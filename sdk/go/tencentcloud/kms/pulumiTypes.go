@@ -10,6 +10,317 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint struct {
+	// Description.
+	Description *string `pulumi:"description"`
+	// identity.
+	Identity string `pulumi:"identity"`
+}
+
+// OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintInput is an input type that accepts OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArgs and OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput values.
+// You can construct a concrete instance of `OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintInput` via:
+//
+//          OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArgs{...}
+type OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintInput interface {
+	pulumi.Input
+
+	ToOverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput() OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput
+	ToOverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutputWithContext(context.Context) OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput
+}
+
+type OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArgs struct {
+	// Description.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// identity.
+	Identity pulumi.StringInput `pulumi:"identity"`
+}
+
+func (OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint)(nil)).Elem()
+}
+
+func (i OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArgs) ToOverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput() OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput {
+	return i.ToOverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutputWithContext(context.Background())
+}
+
+func (i OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArgs) ToOverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutputWithContext(ctx context.Context) OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput)
+}
+
+// OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayInput is an input type that accepts OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArray and OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput values.
+// You can construct a concrete instance of `OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayInput` via:
+//
+//          OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArray{ OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArgs{...} }
+type OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayInput interface {
+	pulumi.Input
+
+	ToOverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput() OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput
+	ToOverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutputWithContext(context.Context) OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput
+}
+
+type OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArray []OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintInput
+
+func (OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint)(nil)).Elem()
+}
+
+func (i OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArray) ToOverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput() OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput {
+	return i.ToOverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutputWithContext(context.Background())
+}
+
+func (i OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArray) ToOverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutputWithContext(ctx context.Context) OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput)
+}
+
+type OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput struct{ *pulumi.OutputState }
+
+func (OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint)(nil)).Elem()
+}
+
+func (o OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput) ToOverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput() OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput {
+	return o
+}
+
+func (o OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput) ToOverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutputWithContext(ctx context.Context) OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput {
+	return o
+}
+
+// Description.
+func (o OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// identity.
+func (o OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput) Identity() pulumi.StringOutput {
+	return o.ApplyT(func(v OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint) string { return v.Identity }).(pulumi.StringOutput)
+}
+
+type OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput struct{ *pulumi.OutputState }
+
+func (OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint)(nil)).Elem()
+}
+
+func (o OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput) ToOverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput() OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput {
+	return o
+}
+
+func (o OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput) ToOverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutputWithContext(ctx context.Context) OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput {
+	return o
+}
+
+func (o OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput) Index(i pulumi.IntInput) OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint {
+		return vs[0].([]OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint)[vs[1].(int)]
+	}).(OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput)
+}
+
+type GetDescribeKeysKeyList struct {
+	// Name of CMK.
+	Alias string `pulumi:"alias"`
+	// Create time of CMK.
+	CreateTime int `pulumi:"createTime"`
+	// Uin of CMK Creator.
+	CreatorUin int `pulumi:"creatorUin"`
+	// Delete time of CMK.
+	DeletionDate int `pulumi:"deletionDate"`
+	// Description of CMK.
+	Description string `pulumi:"description"`
+	// ID of CMK.
+	KeyId string `pulumi:"keyId"`
+	// Specify whether to enable key rotation.
+	KeyRotationEnabled bool `pulumi:"keyRotationEnabled"`
+	// State of CMK.
+	KeyState string `pulumi:"keyState"`
+	// Usage of CMK.
+	KeyUsage string `pulumi:"keyUsage"`
+	// Next rotate time of CMK when keyRotationEnabled is true.
+	NextRotateTime int `pulumi:"nextRotateTime"`
+	// Origin of CMK. `TENCENT_KMS` - CMK created by KMS, `EXTERNAL` - CMK imported by user.
+	Origin string `pulumi:"origin"`
+	// Creator of CMK.
+	Owner string `pulumi:"owner"`
+	// Valid when origin is `EXTERNAL`, it means the effective date of the key material.
+	ValidTo int `pulumi:"validTo"`
+}
+
+// GetDescribeKeysKeyListInput is an input type that accepts GetDescribeKeysKeyListArgs and GetDescribeKeysKeyListOutput values.
+// You can construct a concrete instance of `GetDescribeKeysKeyListInput` via:
+//
+//          GetDescribeKeysKeyListArgs{...}
+type GetDescribeKeysKeyListInput interface {
+	pulumi.Input
+
+	ToGetDescribeKeysKeyListOutput() GetDescribeKeysKeyListOutput
+	ToGetDescribeKeysKeyListOutputWithContext(context.Context) GetDescribeKeysKeyListOutput
+}
+
+type GetDescribeKeysKeyListArgs struct {
+	// Name of CMK.
+	Alias pulumi.StringInput `pulumi:"alias"`
+	// Create time of CMK.
+	CreateTime pulumi.IntInput `pulumi:"createTime"`
+	// Uin of CMK Creator.
+	CreatorUin pulumi.IntInput `pulumi:"creatorUin"`
+	// Delete time of CMK.
+	DeletionDate pulumi.IntInput `pulumi:"deletionDate"`
+	// Description of CMK.
+	Description pulumi.StringInput `pulumi:"description"`
+	// ID of CMK.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// Specify whether to enable key rotation.
+	KeyRotationEnabled pulumi.BoolInput `pulumi:"keyRotationEnabled"`
+	// State of CMK.
+	KeyState pulumi.StringInput `pulumi:"keyState"`
+	// Usage of CMK.
+	KeyUsage pulumi.StringInput `pulumi:"keyUsage"`
+	// Next rotate time of CMK when keyRotationEnabled is true.
+	NextRotateTime pulumi.IntInput `pulumi:"nextRotateTime"`
+	// Origin of CMK. `TENCENT_KMS` - CMK created by KMS, `EXTERNAL` - CMK imported by user.
+	Origin pulumi.StringInput `pulumi:"origin"`
+	// Creator of CMK.
+	Owner pulumi.StringInput `pulumi:"owner"`
+	// Valid when origin is `EXTERNAL`, it means the effective date of the key material.
+	ValidTo pulumi.IntInput `pulumi:"validTo"`
+}
+
+func (GetDescribeKeysKeyListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeKeysKeyList)(nil)).Elem()
+}
+
+func (i GetDescribeKeysKeyListArgs) ToGetDescribeKeysKeyListOutput() GetDescribeKeysKeyListOutput {
+	return i.ToGetDescribeKeysKeyListOutputWithContext(context.Background())
+}
+
+func (i GetDescribeKeysKeyListArgs) ToGetDescribeKeysKeyListOutputWithContext(ctx context.Context) GetDescribeKeysKeyListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeKeysKeyListOutput)
+}
+
+// GetDescribeKeysKeyListArrayInput is an input type that accepts GetDescribeKeysKeyListArray and GetDescribeKeysKeyListArrayOutput values.
+// You can construct a concrete instance of `GetDescribeKeysKeyListArrayInput` via:
+//
+//          GetDescribeKeysKeyListArray{ GetDescribeKeysKeyListArgs{...} }
+type GetDescribeKeysKeyListArrayInput interface {
+	pulumi.Input
+
+	ToGetDescribeKeysKeyListArrayOutput() GetDescribeKeysKeyListArrayOutput
+	ToGetDescribeKeysKeyListArrayOutputWithContext(context.Context) GetDescribeKeysKeyListArrayOutput
+}
+
+type GetDescribeKeysKeyListArray []GetDescribeKeysKeyListInput
+
+func (GetDescribeKeysKeyListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeKeysKeyList)(nil)).Elem()
+}
+
+func (i GetDescribeKeysKeyListArray) ToGetDescribeKeysKeyListArrayOutput() GetDescribeKeysKeyListArrayOutput {
+	return i.ToGetDescribeKeysKeyListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescribeKeysKeyListArray) ToGetDescribeKeysKeyListArrayOutputWithContext(ctx context.Context) GetDescribeKeysKeyListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescribeKeysKeyListArrayOutput)
+}
+
+type GetDescribeKeysKeyListOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeKeysKeyListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescribeKeysKeyList)(nil)).Elem()
+}
+
+func (o GetDescribeKeysKeyListOutput) ToGetDescribeKeysKeyListOutput() GetDescribeKeysKeyListOutput {
+	return o
+}
+
+func (o GetDescribeKeysKeyListOutput) ToGetDescribeKeysKeyListOutputWithContext(ctx context.Context) GetDescribeKeysKeyListOutput {
+	return o
+}
+
+// Name of CMK.
+func (o GetDescribeKeysKeyListOutput) Alias() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeKeysKeyList) string { return v.Alias }).(pulumi.StringOutput)
+}
+
+// Create time of CMK.
+func (o GetDescribeKeysKeyListOutput) CreateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeKeysKeyList) int { return v.CreateTime }).(pulumi.IntOutput)
+}
+
+// Uin of CMK Creator.
+func (o GetDescribeKeysKeyListOutput) CreatorUin() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeKeysKeyList) int { return v.CreatorUin }).(pulumi.IntOutput)
+}
+
+// Delete time of CMK.
+func (o GetDescribeKeysKeyListOutput) DeletionDate() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeKeysKeyList) int { return v.DeletionDate }).(pulumi.IntOutput)
+}
+
+// Description of CMK.
+func (o GetDescribeKeysKeyListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeKeysKeyList) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// ID of CMK.
+func (o GetDescribeKeysKeyListOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeKeysKeyList) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// Specify whether to enable key rotation.
+func (o GetDescribeKeysKeyListOutput) KeyRotationEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDescribeKeysKeyList) bool { return v.KeyRotationEnabled }).(pulumi.BoolOutput)
+}
+
+// State of CMK.
+func (o GetDescribeKeysKeyListOutput) KeyState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeKeysKeyList) string { return v.KeyState }).(pulumi.StringOutput)
+}
+
+// Usage of CMK.
+func (o GetDescribeKeysKeyListOutput) KeyUsage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeKeysKeyList) string { return v.KeyUsage }).(pulumi.StringOutput)
+}
+
+// Next rotate time of CMK when keyRotationEnabled is true.
+func (o GetDescribeKeysKeyListOutput) NextRotateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeKeysKeyList) int { return v.NextRotateTime }).(pulumi.IntOutput)
+}
+
+// Origin of CMK. `TENCENT_KMS` - CMK created by KMS, `EXTERNAL` - CMK imported by user.
+func (o GetDescribeKeysKeyListOutput) Origin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeKeysKeyList) string { return v.Origin }).(pulumi.StringOutput)
+}
+
+// Creator of CMK.
+func (o GetDescribeKeysKeyListOutput) Owner() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescribeKeysKeyList) string { return v.Owner }).(pulumi.StringOutput)
+}
+
+// Valid when origin is `EXTERNAL`, it means the effective date of the key material.
+func (o GetDescribeKeysKeyListOutput) ValidTo() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeKeysKeyList) int { return v.ValidTo }).(pulumi.IntOutput)
+}
+
+type GetDescribeKeysKeyListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescribeKeysKeyListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescribeKeysKeyList)(nil)).Elem()
+}
+
+func (o GetDescribeKeysKeyListArrayOutput) ToGetDescribeKeysKeyListArrayOutput() GetDescribeKeysKeyListArrayOutput {
+	return o
+}
+
+func (o GetDescribeKeysKeyListArrayOutput) ToGetDescribeKeysKeyListArrayOutputWithContext(ctx context.Context) GetDescribeKeysKeyListArrayOutput {
+	return o
+}
+
+func (o GetDescribeKeysKeyListArrayOutput) Index(i pulumi.IntInput) GetDescribeKeysKeyListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescribeKeysKeyList {
+		return vs[0].([]GetDescribeKeysKeyList)[vs[1].(int)]
+	}).(GetDescribeKeysKeyListOutput)
+}
+
 type GetKeysKeyList struct {
 	// Name of CMK.
 	Alias string `pulumi:"alias"`
@@ -215,9 +526,758 @@ func (o GetKeysKeyListArrayOutput) Index(i pulumi.IntInput) GetKeysKeyListOutput
 	}).(GetKeysKeyListOutput)
 }
 
+type GetListAlgorithmsAsymmetricAlgorithm struct {
+	// Algorithm.
+	Algorithm string `pulumi:"algorithm"`
+	// Key usage.
+	KeyUsage string `pulumi:"keyUsage"`
+}
+
+// GetListAlgorithmsAsymmetricAlgorithmInput is an input type that accepts GetListAlgorithmsAsymmetricAlgorithmArgs and GetListAlgorithmsAsymmetricAlgorithmOutput values.
+// You can construct a concrete instance of `GetListAlgorithmsAsymmetricAlgorithmInput` via:
+//
+//          GetListAlgorithmsAsymmetricAlgorithmArgs{...}
+type GetListAlgorithmsAsymmetricAlgorithmInput interface {
+	pulumi.Input
+
+	ToGetListAlgorithmsAsymmetricAlgorithmOutput() GetListAlgorithmsAsymmetricAlgorithmOutput
+	ToGetListAlgorithmsAsymmetricAlgorithmOutputWithContext(context.Context) GetListAlgorithmsAsymmetricAlgorithmOutput
+}
+
+type GetListAlgorithmsAsymmetricAlgorithmArgs struct {
+	// Algorithm.
+	Algorithm pulumi.StringInput `pulumi:"algorithm"`
+	// Key usage.
+	KeyUsage pulumi.StringInput `pulumi:"keyUsage"`
+}
+
+func (GetListAlgorithmsAsymmetricAlgorithmArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListAlgorithmsAsymmetricAlgorithm)(nil)).Elem()
+}
+
+func (i GetListAlgorithmsAsymmetricAlgorithmArgs) ToGetListAlgorithmsAsymmetricAlgorithmOutput() GetListAlgorithmsAsymmetricAlgorithmOutput {
+	return i.ToGetListAlgorithmsAsymmetricAlgorithmOutputWithContext(context.Background())
+}
+
+func (i GetListAlgorithmsAsymmetricAlgorithmArgs) ToGetListAlgorithmsAsymmetricAlgorithmOutputWithContext(ctx context.Context) GetListAlgorithmsAsymmetricAlgorithmOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListAlgorithmsAsymmetricAlgorithmOutput)
+}
+
+// GetListAlgorithmsAsymmetricAlgorithmArrayInput is an input type that accepts GetListAlgorithmsAsymmetricAlgorithmArray and GetListAlgorithmsAsymmetricAlgorithmArrayOutput values.
+// You can construct a concrete instance of `GetListAlgorithmsAsymmetricAlgorithmArrayInput` via:
+//
+//          GetListAlgorithmsAsymmetricAlgorithmArray{ GetListAlgorithmsAsymmetricAlgorithmArgs{...} }
+type GetListAlgorithmsAsymmetricAlgorithmArrayInput interface {
+	pulumi.Input
+
+	ToGetListAlgorithmsAsymmetricAlgorithmArrayOutput() GetListAlgorithmsAsymmetricAlgorithmArrayOutput
+	ToGetListAlgorithmsAsymmetricAlgorithmArrayOutputWithContext(context.Context) GetListAlgorithmsAsymmetricAlgorithmArrayOutput
+}
+
+type GetListAlgorithmsAsymmetricAlgorithmArray []GetListAlgorithmsAsymmetricAlgorithmInput
+
+func (GetListAlgorithmsAsymmetricAlgorithmArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListAlgorithmsAsymmetricAlgorithm)(nil)).Elem()
+}
+
+func (i GetListAlgorithmsAsymmetricAlgorithmArray) ToGetListAlgorithmsAsymmetricAlgorithmArrayOutput() GetListAlgorithmsAsymmetricAlgorithmArrayOutput {
+	return i.ToGetListAlgorithmsAsymmetricAlgorithmArrayOutputWithContext(context.Background())
+}
+
+func (i GetListAlgorithmsAsymmetricAlgorithmArray) ToGetListAlgorithmsAsymmetricAlgorithmArrayOutputWithContext(ctx context.Context) GetListAlgorithmsAsymmetricAlgorithmArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListAlgorithmsAsymmetricAlgorithmArrayOutput)
+}
+
+type GetListAlgorithmsAsymmetricAlgorithmOutput struct{ *pulumi.OutputState }
+
+func (GetListAlgorithmsAsymmetricAlgorithmOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListAlgorithmsAsymmetricAlgorithm)(nil)).Elem()
+}
+
+func (o GetListAlgorithmsAsymmetricAlgorithmOutput) ToGetListAlgorithmsAsymmetricAlgorithmOutput() GetListAlgorithmsAsymmetricAlgorithmOutput {
+	return o
+}
+
+func (o GetListAlgorithmsAsymmetricAlgorithmOutput) ToGetListAlgorithmsAsymmetricAlgorithmOutputWithContext(ctx context.Context) GetListAlgorithmsAsymmetricAlgorithmOutput {
+	return o
+}
+
+// Algorithm.
+func (o GetListAlgorithmsAsymmetricAlgorithmOutput) Algorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListAlgorithmsAsymmetricAlgorithm) string { return v.Algorithm }).(pulumi.StringOutput)
+}
+
+// Key usage.
+func (o GetListAlgorithmsAsymmetricAlgorithmOutput) KeyUsage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListAlgorithmsAsymmetricAlgorithm) string { return v.KeyUsage }).(pulumi.StringOutput)
+}
+
+type GetListAlgorithmsAsymmetricAlgorithmArrayOutput struct{ *pulumi.OutputState }
+
+func (GetListAlgorithmsAsymmetricAlgorithmArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListAlgorithmsAsymmetricAlgorithm)(nil)).Elem()
+}
+
+func (o GetListAlgorithmsAsymmetricAlgorithmArrayOutput) ToGetListAlgorithmsAsymmetricAlgorithmArrayOutput() GetListAlgorithmsAsymmetricAlgorithmArrayOutput {
+	return o
+}
+
+func (o GetListAlgorithmsAsymmetricAlgorithmArrayOutput) ToGetListAlgorithmsAsymmetricAlgorithmArrayOutputWithContext(ctx context.Context) GetListAlgorithmsAsymmetricAlgorithmArrayOutput {
+	return o
+}
+
+func (o GetListAlgorithmsAsymmetricAlgorithmArrayOutput) Index(i pulumi.IntInput) GetListAlgorithmsAsymmetricAlgorithmOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetListAlgorithmsAsymmetricAlgorithm {
+		return vs[0].([]GetListAlgorithmsAsymmetricAlgorithm)[vs[1].(int)]
+	}).(GetListAlgorithmsAsymmetricAlgorithmOutput)
+}
+
+type GetListAlgorithmsAsymmetricSignVerifyAlgorithm struct {
+	// Algorithm.
+	Algorithm string `pulumi:"algorithm"`
+	// Key usage.
+	KeyUsage string `pulumi:"keyUsage"`
+}
+
+// GetListAlgorithmsAsymmetricSignVerifyAlgorithmInput is an input type that accepts GetListAlgorithmsAsymmetricSignVerifyAlgorithmArgs and GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput values.
+// You can construct a concrete instance of `GetListAlgorithmsAsymmetricSignVerifyAlgorithmInput` via:
+//
+//          GetListAlgorithmsAsymmetricSignVerifyAlgorithmArgs{...}
+type GetListAlgorithmsAsymmetricSignVerifyAlgorithmInput interface {
+	pulumi.Input
+
+	ToGetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput() GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput
+	ToGetListAlgorithmsAsymmetricSignVerifyAlgorithmOutputWithContext(context.Context) GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput
+}
+
+type GetListAlgorithmsAsymmetricSignVerifyAlgorithmArgs struct {
+	// Algorithm.
+	Algorithm pulumi.StringInput `pulumi:"algorithm"`
+	// Key usage.
+	KeyUsage pulumi.StringInput `pulumi:"keyUsage"`
+}
+
+func (GetListAlgorithmsAsymmetricSignVerifyAlgorithmArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListAlgorithmsAsymmetricSignVerifyAlgorithm)(nil)).Elem()
+}
+
+func (i GetListAlgorithmsAsymmetricSignVerifyAlgorithmArgs) ToGetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput() GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput {
+	return i.ToGetListAlgorithmsAsymmetricSignVerifyAlgorithmOutputWithContext(context.Background())
+}
+
+func (i GetListAlgorithmsAsymmetricSignVerifyAlgorithmArgs) ToGetListAlgorithmsAsymmetricSignVerifyAlgorithmOutputWithContext(ctx context.Context) GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput)
+}
+
+// GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayInput is an input type that accepts GetListAlgorithmsAsymmetricSignVerifyAlgorithmArray and GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput values.
+// You can construct a concrete instance of `GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayInput` via:
+//
+//          GetListAlgorithmsAsymmetricSignVerifyAlgorithmArray{ GetListAlgorithmsAsymmetricSignVerifyAlgorithmArgs{...} }
+type GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayInput interface {
+	pulumi.Input
+
+	ToGetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput() GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput
+	ToGetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutputWithContext(context.Context) GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput
+}
+
+type GetListAlgorithmsAsymmetricSignVerifyAlgorithmArray []GetListAlgorithmsAsymmetricSignVerifyAlgorithmInput
+
+func (GetListAlgorithmsAsymmetricSignVerifyAlgorithmArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListAlgorithmsAsymmetricSignVerifyAlgorithm)(nil)).Elem()
+}
+
+func (i GetListAlgorithmsAsymmetricSignVerifyAlgorithmArray) ToGetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput() GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput {
+	return i.ToGetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutputWithContext(context.Background())
+}
+
+func (i GetListAlgorithmsAsymmetricSignVerifyAlgorithmArray) ToGetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutputWithContext(ctx context.Context) GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput)
+}
+
+type GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput struct{ *pulumi.OutputState }
+
+func (GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListAlgorithmsAsymmetricSignVerifyAlgorithm)(nil)).Elem()
+}
+
+func (o GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput) ToGetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput() GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput {
+	return o
+}
+
+func (o GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput) ToGetListAlgorithmsAsymmetricSignVerifyAlgorithmOutputWithContext(ctx context.Context) GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput {
+	return o
+}
+
+// Algorithm.
+func (o GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput) Algorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListAlgorithmsAsymmetricSignVerifyAlgorithm) string { return v.Algorithm }).(pulumi.StringOutput)
+}
+
+// Key usage.
+func (o GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput) KeyUsage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListAlgorithmsAsymmetricSignVerifyAlgorithm) string { return v.KeyUsage }).(pulumi.StringOutput)
+}
+
+type GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput struct{ *pulumi.OutputState }
+
+func (GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListAlgorithmsAsymmetricSignVerifyAlgorithm)(nil)).Elem()
+}
+
+func (o GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput) ToGetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput() GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput {
+	return o
+}
+
+func (o GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput) ToGetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutputWithContext(ctx context.Context) GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput {
+	return o
+}
+
+func (o GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput) Index(i pulumi.IntInput) GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetListAlgorithmsAsymmetricSignVerifyAlgorithm {
+		return vs[0].([]GetListAlgorithmsAsymmetricSignVerifyAlgorithm)[vs[1].(int)]
+	}).(GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput)
+}
+
+type GetListAlgorithmsSymmetricAlgorithm struct {
+	// Algorithm.
+	Algorithm string `pulumi:"algorithm"`
+	// Key usage.
+	KeyUsage string `pulumi:"keyUsage"`
+}
+
+// GetListAlgorithmsSymmetricAlgorithmInput is an input type that accepts GetListAlgorithmsSymmetricAlgorithmArgs and GetListAlgorithmsSymmetricAlgorithmOutput values.
+// You can construct a concrete instance of `GetListAlgorithmsSymmetricAlgorithmInput` via:
+//
+//          GetListAlgorithmsSymmetricAlgorithmArgs{...}
+type GetListAlgorithmsSymmetricAlgorithmInput interface {
+	pulumi.Input
+
+	ToGetListAlgorithmsSymmetricAlgorithmOutput() GetListAlgorithmsSymmetricAlgorithmOutput
+	ToGetListAlgorithmsSymmetricAlgorithmOutputWithContext(context.Context) GetListAlgorithmsSymmetricAlgorithmOutput
+}
+
+type GetListAlgorithmsSymmetricAlgorithmArgs struct {
+	// Algorithm.
+	Algorithm pulumi.StringInput `pulumi:"algorithm"`
+	// Key usage.
+	KeyUsage pulumi.StringInput `pulumi:"keyUsage"`
+}
+
+func (GetListAlgorithmsSymmetricAlgorithmArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListAlgorithmsSymmetricAlgorithm)(nil)).Elem()
+}
+
+func (i GetListAlgorithmsSymmetricAlgorithmArgs) ToGetListAlgorithmsSymmetricAlgorithmOutput() GetListAlgorithmsSymmetricAlgorithmOutput {
+	return i.ToGetListAlgorithmsSymmetricAlgorithmOutputWithContext(context.Background())
+}
+
+func (i GetListAlgorithmsSymmetricAlgorithmArgs) ToGetListAlgorithmsSymmetricAlgorithmOutputWithContext(ctx context.Context) GetListAlgorithmsSymmetricAlgorithmOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListAlgorithmsSymmetricAlgorithmOutput)
+}
+
+// GetListAlgorithmsSymmetricAlgorithmArrayInput is an input type that accepts GetListAlgorithmsSymmetricAlgorithmArray and GetListAlgorithmsSymmetricAlgorithmArrayOutput values.
+// You can construct a concrete instance of `GetListAlgorithmsSymmetricAlgorithmArrayInput` via:
+//
+//          GetListAlgorithmsSymmetricAlgorithmArray{ GetListAlgorithmsSymmetricAlgorithmArgs{...} }
+type GetListAlgorithmsSymmetricAlgorithmArrayInput interface {
+	pulumi.Input
+
+	ToGetListAlgorithmsSymmetricAlgorithmArrayOutput() GetListAlgorithmsSymmetricAlgorithmArrayOutput
+	ToGetListAlgorithmsSymmetricAlgorithmArrayOutputWithContext(context.Context) GetListAlgorithmsSymmetricAlgorithmArrayOutput
+}
+
+type GetListAlgorithmsSymmetricAlgorithmArray []GetListAlgorithmsSymmetricAlgorithmInput
+
+func (GetListAlgorithmsSymmetricAlgorithmArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListAlgorithmsSymmetricAlgorithm)(nil)).Elem()
+}
+
+func (i GetListAlgorithmsSymmetricAlgorithmArray) ToGetListAlgorithmsSymmetricAlgorithmArrayOutput() GetListAlgorithmsSymmetricAlgorithmArrayOutput {
+	return i.ToGetListAlgorithmsSymmetricAlgorithmArrayOutputWithContext(context.Background())
+}
+
+func (i GetListAlgorithmsSymmetricAlgorithmArray) ToGetListAlgorithmsSymmetricAlgorithmArrayOutputWithContext(ctx context.Context) GetListAlgorithmsSymmetricAlgorithmArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListAlgorithmsSymmetricAlgorithmArrayOutput)
+}
+
+type GetListAlgorithmsSymmetricAlgorithmOutput struct{ *pulumi.OutputState }
+
+func (GetListAlgorithmsSymmetricAlgorithmOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListAlgorithmsSymmetricAlgorithm)(nil)).Elem()
+}
+
+func (o GetListAlgorithmsSymmetricAlgorithmOutput) ToGetListAlgorithmsSymmetricAlgorithmOutput() GetListAlgorithmsSymmetricAlgorithmOutput {
+	return o
+}
+
+func (o GetListAlgorithmsSymmetricAlgorithmOutput) ToGetListAlgorithmsSymmetricAlgorithmOutputWithContext(ctx context.Context) GetListAlgorithmsSymmetricAlgorithmOutput {
+	return o
+}
+
+// Algorithm.
+func (o GetListAlgorithmsSymmetricAlgorithmOutput) Algorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListAlgorithmsSymmetricAlgorithm) string { return v.Algorithm }).(pulumi.StringOutput)
+}
+
+// Key usage.
+func (o GetListAlgorithmsSymmetricAlgorithmOutput) KeyUsage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListAlgorithmsSymmetricAlgorithm) string { return v.KeyUsage }).(pulumi.StringOutput)
+}
+
+type GetListAlgorithmsSymmetricAlgorithmArrayOutput struct{ *pulumi.OutputState }
+
+func (GetListAlgorithmsSymmetricAlgorithmArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListAlgorithmsSymmetricAlgorithm)(nil)).Elem()
+}
+
+func (o GetListAlgorithmsSymmetricAlgorithmArrayOutput) ToGetListAlgorithmsSymmetricAlgorithmArrayOutput() GetListAlgorithmsSymmetricAlgorithmArrayOutput {
+	return o
+}
+
+func (o GetListAlgorithmsSymmetricAlgorithmArrayOutput) ToGetListAlgorithmsSymmetricAlgorithmArrayOutputWithContext(ctx context.Context) GetListAlgorithmsSymmetricAlgorithmArrayOutput {
+	return o
+}
+
+func (o GetListAlgorithmsSymmetricAlgorithmArrayOutput) Index(i pulumi.IntInput) GetListAlgorithmsSymmetricAlgorithmOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetListAlgorithmsSymmetricAlgorithm {
+		return vs[0].([]GetListAlgorithmsSymmetricAlgorithm)[vs[1].(int)]
+	}).(GetListAlgorithmsSymmetricAlgorithmOutput)
+}
+
+type GetListKeysKey struct {
+	// ID of CMK.
+	KeyId string `pulumi:"keyId"`
+}
+
+// GetListKeysKeyInput is an input type that accepts GetListKeysKeyArgs and GetListKeysKeyOutput values.
+// You can construct a concrete instance of `GetListKeysKeyInput` via:
+//
+//          GetListKeysKeyArgs{...}
+type GetListKeysKeyInput interface {
+	pulumi.Input
+
+	ToGetListKeysKeyOutput() GetListKeysKeyOutput
+	ToGetListKeysKeyOutputWithContext(context.Context) GetListKeysKeyOutput
+}
+
+type GetListKeysKeyArgs struct {
+	// ID of CMK.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+}
+
+func (GetListKeysKeyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListKeysKey)(nil)).Elem()
+}
+
+func (i GetListKeysKeyArgs) ToGetListKeysKeyOutput() GetListKeysKeyOutput {
+	return i.ToGetListKeysKeyOutputWithContext(context.Background())
+}
+
+func (i GetListKeysKeyArgs) ToGetListKeysKeyOutputWithContext(ctx context.Context) GetListKeysKeyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListKeysKeyOutput)
+}
+
+// GetListKeysKeyArrayInput is an input type that accepts GetListKeysKeyArray and GetListKeysKeyArrayOutput values.
+// You can construct a concrete instance of `GetListKeysKeyArrayInput` via:
+//
+//          GetListKeysKeyArray{ GetListKeysKeyArgs{...} }
+type GetListKeysKeyArrayInput interface {
+	pulumi.Input
+
+	ToGetListKeysKeyArrayOutput() GetListKeysKeyArrayOutput
+	ToGetListKeysKeyArrayOutputWithContext(context.Context) GetListKeysKeyArrayOutput
+}
+
+type GetListKeysKeyArray []GetListKeysKeyInput
+
+func (GetListKeysKeyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListKeysKey)(nil)).Elem()
+}
+
+func (i GetListKeysKeyArray) ToGetListKeysKeyArrayOutput() GetListKeysKeyArrayOutput {
+	return i.ToGetListKeysKeyArrayOutputWithContext(context.Background())
+}
+
+func (i GetListKeysKeyArray) ToGetListKeysKeyArrayOutputWithContext(ctx context.Context) GetListKeysKeyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetListKeysKeyArrayOutput)
+}
+
+type GetListKeysKeyOutput struct{ *pulumi.OutputState }
+
+func (GetListKeysKeyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetListKeysKey)(nil)).Elem()
+}
+
+func (o GetListKeysKeyOutput) ToGetListKeysKeyOutput() GetListKeysKeyOutput {
+	return o
+}
+
+func (o GetListKeysKeyOutput) ToGetListKeysKeyOutputWithContext(ctx context.Context) GetListKeysKeyOutput {
+	return o
+}
+
+// ID of CMK.
+func (o GetListKeysKeyOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetListKeysKey) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+type GetListKeysKeyArrayOutput struct{ *pulumi.OutputState }
+
+func (GetListKeysKeyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetListKeysKey)(nil)).Elem()
+}
+
+func (o GetListKeysKeyArrayOutput) ToGetListKeysKeyArrayOutput() GetListKeysKeyArrayOutput {
+	return o
+}
+
+func (o GetListKeysKeyArrayOutput) ToGetListKeysKeyArrayOutputWithContext(ctx context.Context) GetListKeysKeyArrayOutput {
+	return o
+}
+
+func (o GetListKeysKeyArrayOutput) Index(i pulumi.IntInput) GetListKeysKeyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetListKeysKey {
+		return vs[0].([]GetListKeysKey)[vs[1].(int)]
+	}).(GetListKeysKeyOutput)
+}
+
+type GetWhiteBoxDeviceFingerprintsList struct {
+	// Description.
+	Description string `pulumi:"description"`
+	// identity.
+	Identity string `pulumi:"identity"`
+}
+
+// GetWhiteBoxDeviceFingerprintsListInput is an input type that accepts GetWhiteBoxDeviceFingerprintsListArgs and GetWhiteBoxDeviceFingerprintsListOutput values.
+// You can construct a concrete instance of `GetWhiteBoxDeviceFingerprintsListInput` via:
+//
+//          GetWhiteBoxDeviceFingerprintsListArgs{...}
+type GetWhiteBoxDeviceFingerprintsListInput interface {
+	pulumi.Input
+
+	ToGetWhiteBoxDeviceFingerprintsListOutput() GetWhiteBoxDeviceFingerprintsListOutput
+	ToGetWhiteBoxDeviceFingerprintsListOutputWithContext(context.Context) GetWhiteBoxDeviceFingerprintsListOutput
+}
+
+type GetWhiteBoxDeviceFingerprintsListArgs struct {
+	// Description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// identity.
+	Identity pulumi.StringInput `pulumi:"identity"`
+}
+
+func (GetWhiteBoxDeviceFingerprintsListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetWhiteBoxDeviceFingerprintsList)(nil)).Elem()
+}
+
+func (i GetWhiteBoxDeviceFingerprintsListArgs) ToGetWhiteBoxDeviceFingerprintsListOutput() GetWhiteBoxDeviceFingerprintsListOutput {
+	return i.ToGetWhiteBoxDeviceFingerprintsListOutputWithContext(context.Background())
+}
+
+func (i GetWhiteBoxDeviceFingerprintsListArgs) ToGetWhiteBoxDeviceFingerprintsListOutputWithContext(ctx context.Context) GetWhiteBoxDeviceFingerprintsListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetWhiteBoxDeviceFingerprintsListOutput)
+}
+
+// GetWhiteBoxDeviceFingerprintsListArrayInput is an input type that accepts GetWhiteBoxDeviceFingerprintsListArray and GetWhiteBoxDeviceFingerprintsListArrayOutput values.
+// You can construct a concrete instance of `GetWhiteBoxDeviceFingerprintsListArrayInput` via:
+//
+//          GetWhiteBoxDeviceFingerprintsListArray{ GetWhiteBoxDeviceFingerprintsListArgs{...} }
+type GetWhiteBoxDeviceFingerprintsListArrayInput interface {
+	pulumi.Input
+
+	ToGetWhiteBoxDeviceFingerprintsListArrayOutput() GetWhiteBoxDeviceFingerprintsListArrayOutput
+	ToGetWhiteBoxDeviceFingerprintsListArrayOutputWithContext(context.Context) GetWhiteBoxDeviceFingerprintsListArrayOutput
+}
+
+type GetWhiteBoxDeviceFingerprintsListArray []GetWhiteBoxDeviceFingerprintsListInput
+
+func (GetWhiteBoxDeviceFingerprintsListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetWhiteBoxDeviceFingerprintsList)(nil)).Elem()
+}
+
+func (i GetWhiteBoxDeviceFingerprintsListArray) ToGetWhiteBoxDeviceFingerprintsListArrayOutput() GetWhiteBoxDeviceFingerprintsListArrayOutput {
+	return i.ToGetWhiteBoxDeviceFingerprintsListArrayOutputWithContext(context.Background())
+}
+
+func (i GetWhiteBoxDeviceFingerprintsListArray) ToGetWhiteBoxDeviceFingerprintsListArrayOutputWithContext(ctx context.Context) GetWhiteBoxDeviceFingerprintsListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetWhiteBoxDeviceFingerprintsListArrayOutput)
+}
+
+type GetWhiteBoxDeviceFingerprintsListOutput struct{ *pulumi.OutputState }
+
+func (GetWhiteBoxDeviceFingerprintsListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetWhiteBoxDeviceFingerprintsList)(nil)).Elem()
+}
+
+func (o GetWhiteBoxDeviceFingerprintsListOutput) ToGetWhiteBoxDeviceFingerprintsListOutput() GetWhiteBoxDeviceFingerprintsListOutput {
+	return o
+}
+
+func (o GetWhiteBoxDeviceFingerprintsListOutput) ToGetWhiteBoxDeviceFingerprintsListOutputWithContext(ctx context.Context) GetWhiteBoxDeviceFingerprintsListOutput {
+	return o
+}
+
+// Description.
+func (o GetWhiteBoxDeviceFingerprintsListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWhiteBoxDeviceFingerprintsList) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// identity.
+func (o GetWhiteBoxDeviceFingerprintsListOutput) Identity() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWhiteBoxDeviceFingerprintsList) string { return v.Identity }).(pulumi.StringOutput)
+}
+
+type GetWhiteBoxDeviceFingerprintsListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetWhiteBoxDeviceFingerprintsListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetWhiteBoxDeviceFingerprintsList)(nil)).Elem()
+}
+
+func (o GetWhiteBoxDeviceFingerprintsListArrayOutput) ToGetWhiteBoxDeviceFingerprintsListArrayOutput() GetWhiteBoxDeviceFingerprintsListArrayOutput {
+	return o
+}
+
+func (o GetWhiteBoxDeviceFingerprintsListArrayOutput) ToGetWhiteBoxDeviceFingerprintsListArrayOutputWithContext(ctx context.Context) GetWhiteBoxDeviceFingerprintsListArrayOutput {
+	return o
+}
+
+func (o GetWhiteBoxDeviceFingerprintsListArrayOutput) Index(i pulumi.IntInput) GetWhiteBoxDeviceFingerprintsListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetWhiteBoxDeviceFingerprintsList {
+		return vs[0].([]GetWhiteBoxDeviceFingerprintsList)[vs[1].(int)]
+	}).(GetWhiteBoxDeviceFingerprintsListOutput)
+}
+
+type GetWhiteBoxKeyDetailsKeyInfo struct {
+	// The type of algorithm used by the key.
+	Algorithm string `pulumi:"algorithm"`
+	// As an alias for a key that is easier to identify and easier to understand, it cannot be empty and is a combination of 1-60 alphanumeric characters - _. The first character must be a letter or number. It cannot be repeated.
+	Alias string `pulumi:"alias"`
+	// Key creation time, Unix timestamp.
+	CreateTime int `pulumi:"createTime"`
+	// Creator.
+	CreatorUin int `pulumi:"creatorUin"`
+	// White box decryption key, base64 encoded.
+	DecryptKey string `pulumi:"decryptKey"`
+	// Description of the key.
+	Description string `pulumi:"description"`
+	// Is there a device fingerprint bound to the current key?.
+	DeviceFingerprintBind bool `pulumi:"deviceFingerprintBind"`
+	// White box encryption key, base64 encoded.
+	EncryptKey string `pulumi:"encryptKey"`
+	// Globally unique identifier for the white box key.
+	KeyId string `pulumi:"keyId"`
+	// Creator.
+	OwnerUin int `pulumi:"ownerUin"`
+	// Resource ID, format: creatorUin/$creatorUin/$keyId.
+	ResourceId string `pulumi:"resourceId"`
+	// The status of the white box key, the value is: Enabled | Disabled.
+	Status string `pulumi:"status"`
+}
+
+// GetWhiteBoxKeyDetailsKeyInfoInput is an input type that accepts GetWhiteBoxKeyDetailsKeyInfoArgs and GetWhiteBoxKeyDetailsKeyInfoOutput values.
+// You can construct a concrete instance of `GetWhiteBoxKeyDetailsKeyInfoInput` via:
+//
+//          GetWhiteBoxKeyDetailsKeyInfoArgs{...}
+type GetWhiteBoxKeyDetailsKeyInfoInput interface {
+	pulumi.Input
+
+	ToGetWhiteBoxKeyDetailsKeyInfoOutput() GetWhiteBoxKeyDetailsKeyInfoOutput
+	ToGetWhiteBoxKeyDetailsKeyInfoOutputWithContext(context.Context) GetWhiteBoxKeyDetailsKeyInfoOutput
+}
+
+type GetWhiteBoxKeyDetailsKeyInfoArgs struct {
+	// The type of algorithm used by the key.
+	Algorithm pulumi.StringInput `pulumi:"algorithm"`
+	// As an alias for a key that is easier to identify and easier to understand, it cannot be empty and is a combination of 1-60 alphanumeric characters - _. The first character must be a letter or number. It cannot be repeated.
+	Alias pulumi.StringInput `pulumi:"alias"`
+	// Key creation time, Unix timestamp.
+	CreateTime pulumi.IntInput `pulumi:"createTime"`
+	// Creator.
+	CreatorUin pulumi.IntInput `pulumi:"creatorUin"`
+	// White box decryption key, base64 encoded.
+	DecryptKey pulumi.StringInput `pulumi:"decryptKey"`
+	// Description of the key.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Is there a device fingerprint bound to the current key?.
+	DeviceFingerprintBind pulumi.BoolInput `pulumi:"deviceFingerprintBind"`
+	// White box encryption key, base64 encoded.
+	EncryptKey pulumi.StringInput `pulumi:"encryptKey"`
+	// Globally unique identifier for the white box key.
+	KeyId pulumi.StringInput `pulumi:"keyId"`
+	// Creator.
+	OwnerUin pulumi.IntInput `pulumi:"ownerUin"`
+	// Resource ID, format: creatorUin/$creatorUin/$keyId.
+	ResourceId pulumi.StringInput `pulumi:"resourceId"`
+	// The status of the white box key, the value is: Enabled | Disabled.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetWhiteBoxKeyDetailsKeyInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetWhiteBoxKeyDetailsKeyInfo)(nil)).Elem()
+}
+
+func (i GetWhiteBoxKeyDetailsKeyInfoArgs) ToGetWhiteBoxKeyDetailsKeyInfoOutput() GetWhiteBoxKeyDetailsKeyInfoOutput {
+	return i.ToGetWhiteBoxKeyDetailsKeyInfoOutputWithContext(context.Background())
+}
+
+func (i GetWhiteBoxKeyDetailsKeyInfoArgs) ToGetWhiteBoxKeyDetailsKeyInfoOutputWithContext(ctx context.Context) GetWhiteBoxKeyDetailsKeyInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetWhiteBoxKeyDetailsKeyInfoOutput)
+}
+
+// GetWhiteBoxKeyDetailsKeyInfoArrayInput is an input type that accepts GetWhiteBoxKeyDetailsKeyInfoArray and GetWhiteBoxKeyDetailsKeyInfoArrayOutput values.
+// You can construct a concrete instance of `GetWhiteBoxKeyDetailsKeyInfoArrayInput` via:
+//
+//          GetWhiteBoxKeyDetailsKeyInfoArray{ GetWhiteBoxKeyDetailsKeyInfoArgs{...} }
+type GetWhiteBoxKeyDetailsKeyInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetWhiteBoxKeyDetailsKeyInfoArrayOutput() GetWhiteBoxKeyDetailsKeyInfoArrayOutput
+	ToGetWhiteBoxKeyDetailsKeyInfoArrayOutputWithContext(context.Context) GetWhiteBoxKeyDetailsKeyInfoArrayOutput
+}
+
+type GetWhiteBoxKeyDetailsKeyInfoArray []GetWhiteBoxKeyDetailsKeyInfoInput
+
+func (GetWhiteBoxKeyDetailsKeyInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetWhiteBoxKeyDetailsKeyInfo)(nil)).Elem()
+}
+
+func (i GetWhiteBoxKeyDetailsKeyInfoArray) ToGetWhiteBoxKeyDetailsKeyInfoArrayOutput() GetWhiteBoxKeyDetailsKeyInfoArrayOutput {
+	return i.ToGetWhiteBoxKeyDetailsKeyInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetWhiteBoxKeyDetailsKeyInfoArray) ToGetWhiteBoxKeyDetailsKeyInfoArrayOutputWithContext(ctx context.Context) GetWhiteBoxKeyDetailsKeyInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetWhiteBoxKeyDetailsKeyInfoArrayOutput)
+}
+
+type GetWhiteBoxKeyDetailsKeyInfoOutput struct{ *pulumi.OutputState }
+
+func (GetWhiteBoxKeyDetailsKeyInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetWhiteBoxKeyDetailsKeyInfo)(nil)).Elem()
+}
+
+func (o GetWhiteBoxKeyDetailsKeyInfoOutput) ToGetWhiteBoxKeyDetailsKeyInfoOutput() GetWhiteBoxKeyDetailsKeyInfoOutput {
+	return o
+}
+
+func (o GetWhiteBoxKeyDetailsKeyInfoOutput) ToGetWhiteBoxKeyDetailsKeyInfoOutputWithContext(ctx context.Context) GetWhiteBoxKeyDetailsKeyInfoOutput {
+	return o
+}
+
+// The type of algorithm used by the key.
+func (o GetWhiteBoxKeyDetailsKeyInfoOutput) Algorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWhiteBoxKeyDetailsKeyInfo) string { return v.Algorithm }).(pulumi.StringOutput)
+}
+
+// As an alias for a key that is easier to identify and easier to understand, it cannot be empty and is a combination of 1-60 alphanumeric characters - _. The first character must be a letter or number. It cannot be repeated.
+func (o GetWhiteBoxKeyDetailsKeyInfoOutput) Alias() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWhiteBoxKeyDetailsKeyInfo) string { return v.Alias }).(pulumi.StringOutput)
+}
+
+// Key creation time, Unix timestamp.
+func (o GetWhiteBoxKeyDetailsKeyInfoOutput) CreateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetWhiteBoxKeyDetailsKeyInfo) int { return v.CreateTime }).(pulumi.IntOutput)
+}
+
+// Creator.
+func (o GetWhiteBoxKeyDetailsKeyInfoOutput) CreatorUin() pulumi.IntOutput {
+	return o.ApplyT(func(v GetWhiteBoxKeyDetailsKeyInfo) int { return v.CreatorUin }).(pulumi.IntOutput)
+}
+
+// White box decryption key, base64 encoded.
+func (o GetWhiteBoxKeyDetailsKeyInfoOutput) DecryptKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWhiteBoxKeyDetailsKeyInfo) string { return v.DecryptKey }).(pulumi.StringOutput)
+}
+
+// Description of the key.
+func (o GetWhiteBoxKeyDetailsKeyInfoOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWhiteBoxKeyDetailsKeyInfo) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Is there a device fingerprint bound to the current key?.
+func (o GetWhiteBoxKeyDetailsKeyInfoOutput) DeviceFingerprintBind() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetWhiteBoxKeyDetailsKeyInfo) bool { return v.DeviceFingerprintBind }).(pulumi.BoolOutput)
+}
+
+// White box encryption key, base64 encoded.
+func (o GetWhiteBoxKeyDetailsKeyInfoOutput) EncryptKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWhiteBoxKeyDetailsKeyInfo) string { return v.EncryptKey }).(pulumi.StringOutput)
+}
+
+// Globally unique identifier for the white box key.
+func (o GetWhiteBoxKeyDetailsKeyInfoOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWhiteBoxKeyDetailsKeyInfo) string { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// Creator.
+func (o GetWhiteBoxKeyDetailsKeyInfoOutput) OwnerUin() pulumi.IntOutput {
+	return o.ApplyT(func(v GetWhiteBoxKeyDetailsKeyInfo) int { return v.OwnerUin }).(pulumi.IntOutput)
+}
+
+// Resource ID, format: creatorUin/$creatorUin/$keyId.
+func (o GetWhiteBoxKeyDetailsKeyInfoOutput) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWhiteBoxKeyDetailsKeyInfo) string { return v.ResourceId }).(pulumi.StringOutput)
+}
+
+// The status of the white box key, the value is: Enabled | Disabled.
+func (o GetWhiteBoxKeyDetailsKeyInfoOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWhiteBoxKeyDetailsKeyInfo) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetWhiteBoxKeyDetailsKeyInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetWhiteBoxKeyDetailsKeyInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetWhiteBoxKeyDetailsKeyInfo)(nil)).Elem()
+}
+
+func (o GetWhiteBoxKeyDetailsKeyInfoArrayOutput) ToGetWhiteBoxKeyDetailsKeyInfoArrayOutput() GetWhiteBoxKeyDetailsKeyInfoArrayOutput {
+	return o
+}
+
+func (o GetWhiteBoxKeyDetailsKeyInfoArrayOutput) ToGetWhiteBoxKeyDetailsKeyInfoArrayOutputWithContext(ctx context.Context) GetWhiteBoxKeyDetailsKeyInfoArrayOutput {
+	return o
+}
+
+func (o GetWhiteBoxKeyDetailsKeyInfoArrayOutput) Index(i pulumi.IntInput) GetWhiteBoxKeyDetailsKeyInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetWhiteBoxKeyDetailsKeyInfo {
+		return vs[0].([]GetWhiteBoxKeyDetailsKeyInfo)[vs[1].(int)]
+	}).(GetWhiteBoxKeyDetailsKeyInfoOutput)
+}
+
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintInput)(nil)).Elem(), OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayInput)(nil)).Elem(), OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeKeysKeyListInput)(nil)).Elem(), GetDescribeKeysKeyListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescribeKeysKeyListArrayInput)(nil)).Elem(), GetDescribeKeysKeyListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetKeysKeyListInput)(nil)).Elem(), GetKeysKeyListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetKeysKeyListArrayInput)(nil)).Elem(), GetKeysKeyListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListAlgorithmsAsymmetricAlgorithmInput)(nil)).Elem(), GetListAlgorithmsAsymmetricAlgorithmArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListAlgorithmsAsymmetricAlgorithmArrayInput)(nil)).Elem(), GetListAlgorithmsAsymmetricAlgorithmArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListAlgorithmsAsymmetricSignVerifyAlgorithmInput)(nil)).Elem(), GetListAlgorithmsAsymmetricSignVerifyAlgorithmArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayInput)(nil)).Elem(), GetListAlgorithmsAsymmetricSignVerifyAlgorithmArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListAlgorithmsSymmetricAlgorithmInput)(nil)).Elem(), GetListAlgorithmsSymmetricAlgorithmArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListAlgorithmsSymmetricAlgorithmArrayInput)(nil)).Elem(), GetListAlgorithmsSymmetricAlgorithmArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListKeysKeyInput)(nil)).Elem(), GetListKeysKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetListKeysKeyArrayInput)(nil)).Elem(), GetListKeysKeyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetWhiteBoxDeviceFingerprintsListInput)(nil)).Elem(), GetWhiteBoxDeviceFingerprintsListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetWhiteBoxDeviceFingerprintsListArrayInput)(nil)).Elem(), GetWhiteBoxDeviceFingerprintsListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetWhiteBoxKeyDetailsKeyInfoInput)(nil)).Elem(), GetWhiteBoxKeyDetailsKeyInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetWhiteBoxKeyDetailsKeyInfoArrayInput)(nil)).Elem(), GetWhiteBoxKeyDetailsKeyInfoArray{})
+	pulumi.RegisterOutputType(OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintOutput{})
+	pulumi.RegisterOutputType(OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArrayOutput{})
+	pulumi.RegisterOutputType(GetDescribeKeysKeyListOutput{})
+	pulumi.RegisterOutputType(GetDescribeKeysKeyListArrayOutput{})
 	pulumi.RegisterOutputType(GetKeysKeyListOutput{})
 	pulumi.RegisterOutputType(GetKeysKeyListArrayOutput{})
+	pulumi.RegisterOutputType(GetListAlgorithmsAsymmetricAlgorithmOutput{})
+	pulumi.RegisterOutputType(GetListAlgorithmsAsymmetricAlgorithmArrayOutput{})
+	pulumi.RegisterOutputType(GetListAlgorithmsAsymmetricSignVerifyAlgorithmOutput{})
+	pulumi.RegisterOutputType(GetListAlgorithmsAsymmetricSignVerifyAlgorithmArrayOutput{})
+	pulumi.RegisterOutputType(GetListAlgorithmsSymmetricAlgorithmOutput{})
+	pulumi.RegisterOutputType(GetListAlgorithmsSymmetricAlgorithmArrayOutput{})
+	pulumi.RegisterOutputType(GetListKeysKeyOutput{})
+	pulumi.RegisterOutputType(GetListKeysKeyArrayOutput{})
+	pulumi.RegisterOutputType(GetWhiteBoxDeviceFingerprintsListOutput{})
+	pulumi.RegisterOutputType(GetWhiteBoxDeviceFingerprintsListArrayOutput{})
+	pulumi.RegisterOutputType(GetWhiteBoxKeyDetailsKeyInfoOutput{})
+	pulumi.RegisterOutputType(GetWhiteBoxKeyDetailsKeyInfoArrayOutput{})
 }

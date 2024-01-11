@@ -30,6 +30,8 @@ __all__ = [
     'DdosPolicyV2DdosSpeedLimitConfig',
     'DdosPolicyV2PacketFilter',
     'DdosPolicyV2ProtocolBlockConfig',
+    'DdosPolicyV2WaterPrintConfig',
+    'DdosPolicyV2WaterPrintConfigListener',
     'DdosPolicyWatermarkFilter',
     'DdosPolicyWatermarkKey',
     'L4RuleSourceList',
@@ -2173,6 +2175,135 @@ class DdosPolicyV2ProtocolBlockConfig(dict):
         UDP block, value [0 (block off), 1 (block on)].
         """
         return pulumi.get(self, "drop_udp")
+
+
+@pulumi.output_type
+class DdosPolicyV2WaterPrintConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "openStatus":
+            suggest = "open_status"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DdosPolicyV2WaterPrintConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DdosPolicyV2WaterPrintConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DdosPolicyV2WaterPrintConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 listeners: Sequence['outputs.DdosPolicyV2WaterPrintConfigListener'],
+                 offset: int,
+                 open_status: int,
+                 verify: str):
+        """
+        :param Sequence['DdosPolicyV2WaterPrintConfigListenerArgs'] listeners: List of forwarding listeners to which the watermark belongs.
+        :param int offset: Watermark offset, value range: [0-100].
+        :param int open_status: Whether it is enabled, value [0 (manual open), 1 (immediate operation)].
+        :param str verify: Watermark check mode, value [`checkall`(normal mode), `shortfpcheckall`(simplified mode)].
+        """
+        pulumi.set(__self__, "listeners", listeners)
+        pulumi.set(__self__, "offset", offset)
+        pulumi.set(__self__, "open_status", open_status)
+        pulumi.set(__self__, "verify", verify)
+
+    @property
+    @pulumi.getter
+    def listeners(self) -> Sequence['outputs.DdosPolicyV2WaterPrintConfigListener']:
+        """
+        List of forwarding listeners to which the watermark belongs.
+        """
+        return pulumi.get(self, "listeners")
+
+    @property
+    @pulumi.getter
+    def offset(self) -> int:
+        """
+        Watermark offset, value range: [0-100].
+        """
+        return pulumi.get(self, "offset")
+
+    @property
+    @pulumi.getter(name="openStatus")
+    def open_status(self) -> int:
+        """
+        Whether it is enabled, value [0 (manual open), 1 (immediate operation)].
+        """
+        return pulumi.get(self, "open_status")
+
+    @property
+    @pulumi.getter
+    def verify(self) -> str:
+        """
+        Watermark check mode, value [`checkall`(normal mode), `shortfpcheckall`(simplified mode)].
+        """
+        return pulumi.get(self, "verify")
+
+
+@pulumi.output_type
+class DdosPolicyV2WaterPrintConfigListener(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "forwardProtocol":
+            suggest = "forward_protocol"
+        elif key == "frontendPort":
+            suggest = "frontend_port"
+        elif key == "frontendPortEnd":
+            suggest = "frontend_port_end"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DdosPolicyV2WaterPrintConfigListener. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DdosPolicyV2WaterPrintConfigListener.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DdosPolicyV2WaterPrintConfigListener.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 forward_protocol: str,
+                 frontend_port: int,
+                 frontend_port_end: int):
+        """
+        :param str forward_protocol: Forwarding protocol, value [TCP, UDP].
+        :param int frontend_port: Lower limit of forwarding listening port. Values: [1-65535].
+        :param int frontend_port_end: Upper limit of forwarding listening port. Values: [1-65535].
+        """
+        pulumi.set(__self__, "forward_protocol", forward_protocol)
+        pulumi.set(__self__, "frontend_port", frontend_port)
+        pulumi.set(__self__, "frontend_port_end", frontend_port_end)
+
+    @property
+    @pulumi.getter(name="forwardProtocol")
+    def forward_protocol(self) -> str:
+        """
+        Forwarding protocol, value [TCP, UDP].
+        """
+        return pulumi.get(self, "forward_protocol")
+
+    @property
+    @pulumi.getter(name="frontendPort")
+    def frontend_port(self) -> int:
+        """
+        Lower limit of forwarding listening port. Values: [1-65535].
+        """
+        return pulumi.get(self, "frontend_port")
+
+    @property
+    @pulumi.getter(name="frontendPortEnd")
+    def frontend_port_end(self) -> int:
+        """
+        Upper limit of forwarding listening port. Values: [1-65535].
+        """
+        return pulumi.get(self, "frontend_port_end")
 
 
 @pulumi.output_type

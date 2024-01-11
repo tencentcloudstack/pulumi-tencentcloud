@@ -5,30 +5,65 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./getMembers";
+export * from "./getOrgAuthNode";
+export * from "./getOrgFinancialByMember";
+export * from "./getOrgFinancialByMonth";
+export * from "./getOrgFinancialByProduct";
+export * from "./instance";
+export * from "./orgIdentity";
 export * from "./orgMember";
+export * from "./orgMemberAuthIdentityAttachment";
+export * from "./orgMemberEmail";
+export * from "./orgMemberPolicyAttachment";
 export * from "./orgNode";
 export * from "./policySubAccountAttachment";
+export * from "./quitOrganizationOperation";
 
 // Import resources to register:
+import { Instance } from "./instance";
+import { OrgIdentity } from "./orgIdentity";
 import { OrgMember } from "./orgMember";
+import { OrgMemberAuthIdentityAttachment } from "./orgMemberAuthIdentityAttachment";
+import { OrgMemberEmail } from "./orgMemberEmail";
+import { OrgMemberPolicyAttachment } from "./orgMemberPolicyAttachment";
 import { OrgNode } from "./orgNode";
 import { PolicySubAccountAttachment } from "./policySubAccountAttachment";
+import { QuitOrganizationOperation } from "./quitOrganizationOperation";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Organization/instance:Instance":
+                return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Organization/orgIdentity:OrgIdentity":
+                return new OrgIdentity(name, <any>undefined, { urn })
             case "tencentcloud:Organization/orgMember:OrgMember":
                 return new OrgMember(name, <any>undefined, { urn })
+            case "tencentcloud:Organization/orgMemberAuthIdentityAttachment:OrgMemberAuthIdentityAttachment":
+                return new OrgMemberAuthIdentityAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Organization/orgMemberEmail:OrgMemberEmail":
+                return new OrgMemberEmail(name, <any>undefined, { urn })
+            case "tencentcloud:Organization/orgMemberPolicyAttachment:OrgMemberPolicyAttachment":
+                return new OrgMemberPolicyAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Organization/orgNode:OrgNode":
                 return new OrgNode(name, <any>undefined, { urn })
             case "tencentcloud:Organization/policySubAccountAttachment:PolicySubAccountAttachment":
                 return new PolicySubAccountAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Organization/quitOrganizationOperation:QuitOrganizationOperation":
+                return new QuitOrganizationOperation(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Organization/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgIdentity", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgMember", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgMemberAuthIdentityAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgMemberEmail", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgMemberPolicyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgNode", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/policySubAccountAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Organization/quitOrganizationOperation", _module)

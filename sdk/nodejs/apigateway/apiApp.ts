@@ -8,15 +8,38 @@ import * as utilities from "../utilities";
  * Provides a resource to create a APIGateway ApiApp
  *
  * ## Example Usage
+ * ### Create a basic apigateway apiApp
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const myApiApp = new tencentcloud.ApiGateway.ApiApp("my_api_app", {
+ * const example = new tencentcloud.ApiGateway.ApiApp("example", {
  *     apiAppDesc: "app desc.",
- *     apiAppName: "app_test1",
+ *     apiAppName: "tf_example",
  * });
+ * ```
+ * ### Bind Tag
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = new tencentcloud.ApiGateway.ApiApp("example", {
+ *     apiAppDesc: "app desc.",
+ *     apiAppName: "tf_example",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * apigateway api_app can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:ApiGateway/apiApp:ApiApp example app-poe0pyex
  * ```
  */
 export class ApiApp extends pulumi.CustomResource {
@@ -75,6 +98,10 @@ export class ApiApp extends pulumi.CustomResource {
      * Api app modified time.
      */
     public /*out*/ readonly modifiedTime!: pulumi.Output<string>;
+    /**
+     * Tag description list.
+     */
+    public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
 
     /**
      * Create a ApiApp resource with the given unique name, arguments, and options.
@@ -96,6 +123,7 @@ export class ApiApp extends pulumi.CustomResource {
             resourceInputs["apiAppSecret"] = state ? state.apiAppSecret : undefined;
             resourceInputs["createdTime"] = state ? state.createdTime : undefined;
             resourceInputs["modifiedTime"] = state ? state.modifiedTime : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as ApiAppArgs | undefined;
             if ((!args || args.apiAppName === undefined) && !opts.urn) {
@@ -103,6 +131,7 @@ export class ApiApp extends pulumi.CustomResource {
             }
             resourceInputs["apiAppDesc"] = args ? args.apiAppDesc : undefined;
             resourceInputs["apiAppName"] = args ? args.apiAppName : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["apiAppId"] = undefined /*out*/;
             resourceInputs["apiAppKey"] = undefined /*out*/;
             resourceInputs["apiAppSecret"] = undefined /*out*/;
@@ -146,6 +175,10 @@ export interface ApiAppState {
      * Api app modified time.
      */
     modifiedTime?: pulumi.Input<string>;
+    /**
+     * Tag description list.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
 }
 
 /**
@@ -160,4 +193,8 @@ export interface ApiAppArgs {
      * Api app name.
      */
     apiAppName: pulumi.Input<string>;
+    /**
+     * Tag description list.
+     */
+    tags?: pulumi.Input<{[key: string]: any}>;
 }

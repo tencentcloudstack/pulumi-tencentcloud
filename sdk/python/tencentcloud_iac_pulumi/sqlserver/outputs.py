@@ -31,6 +31,8 @@ __all__ = [
     'GetBackupsListResult',
     'GetBasicInstancesInstanceListResult',
     'GetDbsDbListResult',
+    'GetDescHaLogSwitchLogResult',
+    'GetInsAttributeSslConfigResult',
     'GetInsAttributeTdeConfigResult',
     'GetInstanceParamRecordsItemResult',
     'GetInstancesInstanceListResult',
@@ -1418,6 +1420,86 @@ class GetDbsDbListResult(dict):
         Database status. Valid values are `creating`, `running`, `modifying`, `dropping`.
         """
         return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetDescHaLogSwitchLogResult(dict):
+    def __init__(__self__, *,
+                 end_time: str,
+                 event_id: str,
+                 reason: str,
+                 start_time: str,
+                 switch_type: int):
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "event_id", event_id)
+        pulumi.set(__self__, "reason", reason)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "switch_type", switch_type)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> str:
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="eventId")
+    def event_id(self) -> str:
+        return pulumi.get(self, "event_id")
+
+    @property
+    @pulumi.getter
+    def reason(self) -> str:
+        return pulumi.get(self, "reason")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter(name="switchType")
+    def switch_type(self) -> int:
+        return pulumi.get(self, "switch_type")
+
+
+@pulumi.output_type
+class GetInsAttributeSslConfigResult(dict):
+    def __init__(__self__, *,
+                 encryption: str,
+                 ssl_validity: int,
+                 ssl_validity_period: str):
+        """
+        :param str encryption: TDE encryption, 'enable' - enabled, 'disable' - not enabled.
+        :param int ssl_validity: SSL certificate validity, 0-invalid, 1-valid Note: This field may return null, indicating that no valid value can be obtained.
+        :param str ssl_validity_period: SSL certificate validity period, time format YYYY-MM-DD HH:MM:SS Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "encryption", encryption)
+        pulumi.set(__self__, "ssl_validity", ssl_validity)
+        pulumi.set(__self__, "ssl_validity_period", ssl_validity_period)
+
+    @property
+    @pulumi.getter
+    def encryption(self) -> str:
+        """
+        TDE encryption, 'enable' - enabled, 'disable' - not enabled.
+        """
+        return pulumi.get(self, "encryption")
+
+    @property
+    @pulumi.getter(name="sslValidity")
+    def ssl_validity(self) -> int:
+        """
+        SSL certificate validity, 0-invalid, 1-valid Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ssl_validity")
+
+    @property
+    @pulumi.getter(name="sslValidityPeriod")
+    def ssl_validity_period(self) -> str:
+        """
+        SSL certificate validity period, time format YYYY-MM-DD HH:MM:SS Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ssl_validity_period")
 
 
 @pulumi.output_type

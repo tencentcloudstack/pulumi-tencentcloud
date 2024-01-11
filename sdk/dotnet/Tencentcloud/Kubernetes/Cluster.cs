@@ -154,6 +154,285 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// }
     /// ```
+    /// ### Create an empty cluster with a node pool
+    /// 
+    /// The cluster does not have any nodes, nodes will be added through node pool.
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var config = new Config();
+    ///         var defaultInstanceType = config.Get("defaultInstanceType") ?? "SA2.2XLARGE16";
+    ///         var availabilityZoneFirst = config.Get("availabilityZoneFirst") ?? "ap-guangzhou-3";
+    ///         var availabilityZoneSecond = config.Get("availabilityZoneSecond") ?? "ap-guangzhou-4";
+    ///         var exampleClusterCidr = config.Get("exampleClusterCidr") ?? "10.31.0.0/16";
+    ///         var vpcOne = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
+    ///         {
+    ///             IsDefault = true,
+    ///             AvailabilityZone = availabilityZoneFirst,
+    ///         }));
+    ///         var firstVpcId = vpcOne.Apply(vpcOne =&gt; vpcOne.InstanceLists?[0]?.VpcId);
+    ///         var firstSubnetId = vpcOne.Apply(vpcOne =&gt; vpcOne.InstanceLists?[0]?.SubnetId);
+    ///         var sg = new Tencentcloud.Security.Group("sg", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///         });
+    ///         var sgId = sg.Id;
+    ///         var vpcTwo = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
+    ///         {
+    ///             IsDefault = true,
+    ///             AvailabilityZone = availabilityZoneSecond,
+    ///         }));
+    ///         var sgRule = new Tencentcloud.Security.GroupLiteRule("sgRule", new Tencentcloud.Security.GroupLiteRuleArgs
+    ///         {
+    ///             SecurityGroupId = sg.Id,
+    ///             Ingresses = 
+    ///             {
+    ///                 "ACCEPT#10.0.0.0/16#ALL#ALL",
+    ///                 "ACCEPT#172.16.0.0/22#ALL#ALL",
+    ///                 "DROP#0.0.0.0/0#ALL#ALL",
+    ///             },
+    ///             Egresses = 
+    ///             {
+    ///                 "ACCEPT#172.16.0.0/22#ALL#ALL",
+    ///             },
+    ///         });
+    ///         var exampleCluster = new Tencentcloud.Kubernetes.Cluster("exampleCluster", new Tencentcloud.Kubernetes.ClusterArgs
+    ///         {
+    ///             VpcId = firstVpcId,
+    ///             ClusterCidr = exampleClusterCidr,
+    ///             ClusterMaxPodNum = 32,
+    ///             ClusterName = "tf_example_cluster_np",
+    ///             ClusterDesc = "example for tke cluster",
+    ///             ClusterMaxServiceNum = 32,
+    ///             ClusterVersion = "1.22.5",
+    ///             ClusterDeployType = "MANAGED_CLUSTER",
+    ///         });
+    ///         // without any worker config
+    ///         var exampleNodePool = new Tencentcloud.Kubernetes.NodePool("exampleNodePool", new Tencentcloud.Kubernetes.NodePoolArgs
+    ///         {
+    ///             ClusterId = exampleCluster.Id,
+    ///             MaxSize = 6,
+    ///             MinSize = 1,
+    ///             VpcId = firstVpcId,
+    ///             SubnetIds = 
+    ///             {
+    ///                 firstSubnetId,
+    ///             },
+    ///             RetryPolicy = "INCREMENTAL_INTERVALS",
+    ///             DesiredCapacity = 4,
+    ///             EnableAutoScale = true,
+    ///             MultiZoneSubnetPolicy = "EQUALITY",
+    ///             AutoScalingConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigArgs
+    ///             {
+    ///                 InstanceType = defaultInstanceType,
+    ///                 SystemDiskType = "CLOUD_PREMIUM",
+    ///                 SystemDiskSize = 50,
+    ///                 OrderlySecurityGroupIds = 
+    ///                 {
+    ///                     sgId,
+    ///                 },
+    ///                 DataDisks = 
+    ///                 {
+    ///                     new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigDataDiskArgs
+    ///                     {
+    ///                         DiskType = "CLOUD_PREMIUM",
+    ///                         DiskSize = 50,
+    ///                     },
+    ///                 },
+    ///                 InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+    ///                 InternetMaxBandwidthOut = 10,
+    ///                 PublicIpAssigned = true,
+    ///                 Password = "test123#",
+    ///                 EnhancedSecurityService = false,
+    ///                 EnhancedMonitorService = false,
+    ///                 HostName = "12.123.0.0",
+    ///                 HostNameStyle = "ORIGINAL",
+    ///             },
+    ///             Labels = 
+    ///             {
+    ///                 { "test1", "test1" },
+    ///                 { "test2", "test2" },
+    ///             },
+    ///             Taints = 
+    ///             {
+    ///                 new Tencentcloud.Kubernetes.Inputs.NodePoolTaintArgs
+    ///                 {
+    ///                     Key = "test_taint",
+    ///                     Value = "taint_value",
+    ///                     Effect = "PreferNoSchedule",
+    ///                 },
+    ///                 new Tencentcloud.Kubernetes.Inputs.NodePoolTaintArgs
+    ///                 {
+    ///                     Key = "test_taint2",
+    ///                     Value = "taint_value2",
+    ///                     Effect = "PreferNoSchedule",
+    ///                 },
+    ///             },
+    ///             NodeConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolNodeConfigArgs
+    ///             {
+    ///                 ExtraArgs = 
+    ///                 {
+    ///                     "root-dir=/var/lib/kubelet",
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Create a cluster with a node pool and open the network access with cluster endpoint
+    /// 
+    /// The cluster's internet and intranet access will be opened after nodes are added through node pool.
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var config = new Config();
+    ///         var defaultInstanceType = config.Get("defaultInstanceType") ?? "SA2.2XLARGE16";
+    ///         var availabilityZoneFirst = config.Get("availabilityZoneFirst") ?? "ap-guangzhou-3";
+    ///         var availabilityZoneSecond = config.Get("availabilityZoneSecond") ?? "ap-guangzhou-4";
+    ///         var exampleClusterCidr = config.Get("exampleClusterCidr") ?? "10.31.0.0/16";
+    ///         var vpcOne = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
+    ///         {
+    ///             IsDefault = true,
+    ///             AvailabilityZone = availabilityZoneFirst,
+    ///         }));
+    ///         var firstVpcId = vpcOne.Apply(vpcOne =&gt; vpcOne.InstanceLists?[0]?.VpcId);
+    ///         var firstSubnetId = vpcOne.Apply(vpcOne =&gt; vpcOne.InstanceLists?[0]?.SubnetId);
+    ///         var sg = new Tencentcloud.Security.Group("sg", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///         });
+    ///         var sgId = sg.Id;
+    ///         var vpcTwo = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
+    ///         {
+    ///             IsDefault = true,
+    ///             AvailabilityZone = availabilityZoneSecond,
+    ///         }));
+    ///         var sgRule = new Tencentcloud.Security.GroupLiteRule("sgRule", new Tencentcloud.Security.GroupLiteRuleArgs
+    ///         {
+    ///             SecurityGroupId = sg.Id,
+    ///             Ingresses = 
+    ///             {
+    ///                 "ACCEPT#10.0.0.0/16#ALL#ALL",
+    ///                 "ACCEPT#172.16.0.0/22#ALL#ALL",
+    ///                 "DROP#0.0.0.0/0#ALL#ALL",
+    ///             },
+    ///             Egresses = 
+    ///             {
+    ///                 "ACCEPT#172.16.0.0/22#ALL#ALL",
+    ///             },
+    ///         });
+    ///         var exampleCluster = new Tencentcloud.Kubernetes.Cluster("exampleCluster", new Tencentcloud.Kubernetes.ClusterArgs
+    ///         {
+    ///             VpcId = firstVpcId,
+    ///             ClusterCidr = exampleClusterCidr,
+    ///             ClusterMaxPodNum = 32,
+    ///             ClusterName = "tf_example_cluster",
+    ///             ClusterDesc = "example for tke cluster",
+    ///             ClusterMaxServiceNum = 32,
+    ///             ClusterInternet = false,
+    ///             ClusterVersion = "1.22.5",
+    ///             ClusterDeployType = "MANAGED_CLUSTER",
+    ///         });
+    ///         // without any worker config
+    ///         var exampleNodePool = new Tencentcloud.Kubernetes.NodePool("exampleNodePool", new Tencentcloud.Kubernetes.NodePoolArgs
+    ///         {
+    ///             ClusterId = exampleCluster.Id,
+    ///             MaxSize = 6,
+    ///             MinSize = 1,
+    ///             VpcId = firstVpcId,
+    ///             SubnetIds = 
+    ///             {
+    ///                 firstSubnetId,
+    ///             },
+    ///             RetryPolicy = "INCREMENTAL_INTERVALS",
+    ///             DesiredCapacity = 4,
+    ///             EnableAutoScale = true,
+    ///             MultiZoneSubnetPolicy = "EQUALITY",
+    ///             AutoScalingConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigArgs
+    ///             {
+    ///                 InstanceType = defaultInstanceType,
+    ///                 SystemDiskType = "CLOUD_PREMIUM",
+    ///                 SystemDiskSize = 50,
+    ///                 OrderlySecurityGroupIds = 
+    ///                 {
+    ///                     sgId,
+    ///                 },
+    ///                 DataDisks = 
+    ///                 {
+    ///                     new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigDataDiskArgs
+    ///                     {
+    ///                         DiskType = "CLOUD_PREMIUM",
+    ///                         DiskSize = 50,
+    ///                     },
+    ///                 },
+    ///                 InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+    ///                 InternetMaxBandwidthOut = 10,
+    ///                 PublicIpAssigned = true,
+    ///                 Password = "test123#",
+    ///                 EnhancedSecurityService = false,
+    ///                 EnhancedMonitorService = false,
+    ///                 HostName = "12.123.0.0",
+    ///                 HostNameStyle = "ORIGINAL",
+    ///             },
+    ///             Labels = 
+    ///             {
+    ///                 { "test1", "test1" },
+    ///                 { "test2", "test2" },
+    ///             },
+    ///             Taints = 
+    ///             {
+    ///                 new Tencentcloud.Kubernetes.Inputs.NodePoolTaintArgs
+    ///                 {
+    ///                     Key = "test_taint",
+    ///                     Value = "taint_value",
+    ///                     Effect = "PreferNoSchedule",
+    ///                 },
+    ///                 new Tencentcloud.Kubernetes.Inputs.NodePoolTaintArgs
+    ///                 {
+    ///                     Key = "test_taint2",
+    ///                     Value = "taint_value2",
+    ///                     Effect = "PreferNoSchedule",
+    ///                 },
+    ///             },
+    ///             NodeConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolNodeConfigArgs
+    ///             {
+    ///                 ExtraArgs = 
+    ///                 {
+    ///                     "root-dir=/var/lib/kubelet",
+    ///                 },
+    ///             },
+    ///         });
+    ///         var exampleClusterEndpoint = new Tencentcloud.Kubernetes.ClusterEndpoint("exampleClusterEndpoint", new Tencentcloud.Kubernetes.ClusterEndpointArgs
+    ///         {
+    ///             ClusterId = exampleCluster.Id,
+    ///             ClusterInternet = true,
+    ///             ClusterIntranet = true,
+    ///             ClusterInternetSecurityGroup = sgId,
+    ///             ClusterIntranetSubnetId = firstSubnetId,
+    ///         }, new CustomResourceOptions
+    ///         {
+    ///             DependsOn = 
+    ///             {
+    ///                 exampleNodePool,
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
     /// ### Use Kubelet
     /// 
     /// ```csharp
@@ -512,13 +791,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// Claim expired seconds to recycle ENI. This field can only set when field `network_type` is 'VPC-CNI'. `claim_expired_seconds` must greater or equal than 300 and less than 15768000.
         /// </summary>
         [Output("claimExpiredSeconds")]
-        public Output<int?> ClaimExpiredSeconds { get; private set; } = null!;
+        public Output<int> ClaimExpiredSeconds { get; private set; } = null!;
 
         /// <summary>
-        /// This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
+        /// (**Deprecated**) This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
         /// </summary>
         [Output("clusterAsEnabled")]
-        public Output<bool?> ClusterAsEnabled { get; private set; } = null!;
+        public Output<bool> ClusterAsEnabled { get; private set; } = null!;
 
         /// <summary>
         /// Specify Cluster Audit config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
@@ -557,7 +836,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<Outputs.ClusterClusterExtraArgs?> ClusterExtraArgs { get; private set; } = null!;
 
         /// <summary>
-        /// Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        /// Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
         /// </summary>
         [Output("clusterInternet")]
         public Output<bool?> ClusterInternet { get; private set; } = null!;
@@ -575,7 +854,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string?> ClusterInternetSecurityGroup { get; private set; } = null!;
 
         /// <summary>
-        /// Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        /// Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
         /// </summary>
         [Output("clusterIntranet")]
         public Output<bool?> ClusterIntranet { get; private set; } = null!;
@@ -639,6 +918,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Output("clusterOsType")]
         public Output<string?> ClusterOsType { get; private set; } = null!;
+
+        /// <summary>
+        /// Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+        /// </summary>
+        [Output("clusterSubnetId")]
+        public Output<string?> ClusterSubnetId { get; private set; } = null!;
 
         /// <summary>
         /// Version of the cluster. Use `tencentcloud.Kubernetes.getAvailableClusterVersions` to get the upgradable cluster version.
@@ -773,7 +1058,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string?> MountTarget { get; private set; } = null!;
 
         /// <summary>
-        /// Cluster network type, GR or VPC-CNI. Default is GR.
+        /// Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
         /// </summary>
         [Output("networkType")]
         public Output<string?> NetworkType { get; private set; } = null!;
@@ -849,6 +1134,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Output("userName")]
         public Output<string> UserName { get; private set; } = null!;
+
+        /// <summary>
+        /// Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eni_subnet_ids` and `vpc_cni_type` must be set to empty.
+        /// </summary>
+        [Output("vpcCniType")]
+        public Output<string> VpcCniType { get; private set; } = null!;
 
         /// <summary>
         /// Vpc Id of the cluster.
@@ -946,12 +1237,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<int>? ClaimExpiredSeconds { get; set; }
 
         /// <summary>
-        /// This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
-        /// </summary>
-        [Input("clusterAsEnabled")]
-        public Input<bool>? ClusterAsEnabled { get; set; }
-
-        /// <summary>
         /// Specify Cluster Audit config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
         /// </summary>
         [Input("clusterAudit")]
@@ -982,7 +1267,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<Inputs.ClusterClusterExtraArgsArgs>? ClusterExtraArgs { get; set; }
 
         /// <summary>
-        /// Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        /// Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
         /// </summary>
         [Input("clusterInternet")]
         public Input<bool>? ClusterInternet { get; set; }
@@ -1000,7 +1285,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? ClusterInternetSecurityGroup { get; set; }
 
         /// <summary>
-        /// Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        /// Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
         /// </summary>
         [Input("clusterIntranet")]
         public Input<bool>? ClusterIntranet { get; set; }
@@ -1058,6 +1343,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("clusterOsType")]
         public Input<string>? ClusterOsType { get; set; }
+
+        /// <summary>
+        /// Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+        /// </summary>
+        [Input("clusterSubnetId")]
+        public Input<string>? ClusterSubnetId { get; set; }
 
         /// <summary>
         /// Version of the cluster. Use `tencentcloud.Kubernetes.getAvailableClusterVersions` to get the upgradable cluster version.
@@ -1217,7 +1508,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? MountTarget { get; set; }
 
         /// <summary>
-        /// Cluster network type, GR or VPC-CNI. Default is GR.
+        /// Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
         /// </summary>
         [Input("networkType")]
         public Input<string>? NetworkType { get; set; }
@@ -1283,6 +1574,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<bool>? UpgradeInstancesFollowCluster { get; set; }
 
         /// <summary>
+        /// Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eni_subnet_ids` and `vpc_cni_type` must be set to empty.
+        /// </summary>
+        [Input("vpcCniType")]
+        public Input<string>? VpcCniType { get; set; }
+
+        /// <summary>
         /// Vpc Id of the cluster.
         /// </summary>
         [Input("vpcId", required: true)]
@@ -1344,7 +1641,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<int>? ClaimExpiredSeconds { get; set; }
 
         /// <summary>
-        /// This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
+        /// (**Deprecated**) This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
         /// </summary>
         [Input("clusterAsEnabled")]
         public Input<bool>? ClusterAsEnabled { get; set; }
@@ -1386,7 +1683,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<Inputs.ClusterClusterExtraArgsGetArgs>? ClusterExtraArgs { get; set; }
 
         /// <summary>
-        /// Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        /// Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
         /// </summary>
         [Input("clusterInternet")]
         public Input<bool>? ClusterInternet { get; set; }
@@ -1404,7 +1701,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? ClusterInternetSecurityGroup { get; set; }
 
         /// <summary>
-        /// Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint.
+        /// Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
         /// </summary>
         [Input("clusterIntranet")]
         public Input<bool>? ClusterIntranet { get; set; }
@@ -1468,6 +1765,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("clusterOsType")]
         public Input<string>? ClusterOsType { get; set; }
+
+        /// <summary>
+        /// Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+        /// </summary>
+        [Input("clusterSubnetId")]
+        public Input<string>? ClusterSubnetId { get; set; }
 
         /// <summary>
         /// Version of the cluster. Use `tencentcloud.Kubernetes.getAvailableClusterVersions` to get the upgradable cluster version.
@@ -1645,7 +1948,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? MountTarget { get; set; }
 
         /// <summary>
-        /// Cluster network type, GR or VPC-CNI. Default is GR.
+        /// Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
         /// </summary>
         [Input("networkType")]
         public Input<string>? NetworkType { get; set; }
@@ -1739,6 +2042,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("userName")]
         public Input<string>? UserName { get; set; }
+
+        /// <summary>
+        /// Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eni_subnet_ids` and `vpc_cni_type` must be set to empty.
+        /// </summary>
+        [Input("vpcCniType")]
+        public Input<string>? VpcCniType { get; set; }
 
         /// <summary>
         /// Vpc Id of the cluster.

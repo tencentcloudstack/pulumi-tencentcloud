@@ -75,6 +75,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public Output<string> CronExpression { get; private set; } = null!;
 
         /// <summary>
+        /// Cron job ID.
+        /// </summary>
+        [Output("cronJobId")]
+        public Output<string> CronJobId { get; private set; } = null!;
+
+        /// <summary>
         /// End Time; type: Timestamp ISO8601.
         /// </summary>
         [Output("endTime")]
@@ -289,6 +295,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         /// </summary>
         [Input("cronExpression")]
         public Input<string>? CronExpression { get; set; }
+
+        /// <summary>
+        /// Cron job ID.
+        /// </summary>
+        [Input("cronJobId")]
+        public Input<string>? CronJobId { get; set; }
 
         /// <summary>
         /// End Time; type: Timestamp ISO8601.

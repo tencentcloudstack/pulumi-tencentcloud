@@ -73,6 +73,8 @@ type GetInsAttributeResult struct {
 	// Archive backup policy. Valid values: years (yearly); quarters (quarterly);months` (monthly).
 	RegularBackupStrategy string  `pulumi:"regularBackupStrategy"`
 	ResultOutputFile      *string `pulumi:"resultOutputFile"`
+	// SSL encryption.
+	SslConfigs []GetInsAttributeSslConfig `pulumi:"sslConfigs"`
 	// TDE Transparent Data Encryption Configuration.
 	TdeConfigs []GetInsAttributeTdeConfig `pulumi:"tdeConfigs"`
 }
@@ -163,6 +165,11 @@ func (o GetInsAttributeResultOutput) RegularBackupStrategy() pulumi.StringOutput
 
 func (o GetInsAttributeResultOutput) ResultOutputFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetInsAttributeResult) *string { return v.ResultOutputFile }).(pulumi.StringPtrOutput)
+}
+
+// SSL encryption.
+func (o GetInsAttributeResultOutput) SslConfigs() GetInsAttributeSslConfigArrayOutput {
+	return o.ApplyT(func(v GetInsAttributeResult) []GetInsAttributeSslConfig { return v.SslConfigs }).(GetInsAttributeSslConfigArrayOutput)
 }
 
 // TDE Transparent Data Encryption Configuration.

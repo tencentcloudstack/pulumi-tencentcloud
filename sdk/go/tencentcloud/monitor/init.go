@@ -25,8 +25,14 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AlarmNotice{}
 	case "tencentcloud:Monitor/alarmPolicy:AlarmPolicy":
 		r = &AlarmPolicy{}
+	case "tencentcloud:Monitor/alarmPolicySetDefault:AlarmPolicySetDefault":
+		r = &AlarmPolicySetDefault{}
 	case "tencentcloud:Monitor/bindingReceiver:BindingReceiver":
 		r = &BindingReceiver{}
+	case "tencentcloud:Monitor/grafanaDnsConfig:GrafanaDnsConfig":
+		r = &GrafanaDnsConfig{}
+	case "tencentcloud:Monitor/grafanaEnvConfig:GrafanaEnvConfig":
+		r = &GrafanaEnvConfig{}
 	case "tencentcloud:Monitor/grafanaInstance:GrafanaInstance":
 		r = &GrafanaInstance{}
 	case "tencentcloud:Monitor/grafanaIntegration:GrafanaIntegration":
@@ -37,6 +43,14 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &GrafanaPlugin{}
 	case "tencentcloud:Monitor/grafanaSsoAccount:GrafanaSsoAccount":
 		r = &GrafanaSsoAccount{}
+	case "tencentcloud:Monitor/grafanaSsoCamConfig:GrafanaSsoCamConfig":
+		r = &GrafanaSsoCamConfig{}
+	case "tencentcloud:Monitor/grafanaSsoConfig:GrafanaSsoConfig":
+		r = &GrafanaSsoConfig{}
+	case "tencentcloud:Monitor/grafanaVersionUpgrade:GrafanaVersionUpgrade":
+		r = &GrafanaVersionUpgrade{}
+	case "tencentcloud:Monitor/grafanaWhitelistConfig:GrafanaWhitelistConfig":
+		r = &GrafanaWhitelistConfig{}
 	case "tencentcloud:Monitor/policyBindingObject:PolicyBindingObject":
 		r = &PolicyBindingObject{}
 	case "tencentcloud:Monitor/tmpAlertRule:TmpAlertRule":
@@ -96,7 +110,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Monitor/alarmPolicySetDefault",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Monitor/bindingReceiver",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/grafanaDnsConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/grafanaEnvConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -122,6 +151,26 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Monitor/grafanaSsoAccount",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/grafanaSsoCamConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/grafanaSsoConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/grafanaVersionUpgrade",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/grafanaWhitelistConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

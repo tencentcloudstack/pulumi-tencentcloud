@@ -16,19 +16,31 @@ class BackupPolicyArgs:
                  mysql_id: pulumi.Input[str],
                  backup_model: Optional[pulumi.Input[str]] = None,
                  backup_time: Optional[pulumi.Input[str]] = None,
+                 binlog_period: Optional[pulumi.Input[int]] = None,
+                 binlog_standby_days: Optional[pulumi.Input[int]] = None,
+                 enable_binlog_standby: Optional[pulumi.Input[str]] = None,
                  retention_period: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a BackupPolicy resource.
         :param pulumi.Input[str] mysql_id: Instance ID to which policies will be applied.
         :param pulumi.Input[str] backup_model: Backup method. Supported values include: `physical` - physical backup.
         :param pulumi.Input[str] backup_time: Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
-        :param pulumi.Input[int] retention_period: Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
+        :param pulumi.Input[int] binlog_period: Binlog retention time, in days. The minimum value is 7 days and the maximum value is 1830 days. This value cannot be set greater than the backup file retention time.
+        :param pulumi.Input[int] binlog_standby_days: The standard starting number of days for log backup storage. The log backup will be converted when it reaches the standard starting number of days for storage. The minimum is 30 days and must not be greater than the number of days for log backup retention.
+        :param pulumi.Input[str] enable_binlog_standby: Whether to enable the log backup standard storage policy, `off` - close, `on` - open, the default is off.
+        :param pulumi.Input[int] retention_period: The retention time of backup files, in days. The minimum value is 7 days and the maximum value is 1830 days. And default value is `7`.
         """
         pulumi.set(__self__, "mysql_id", mysql_id)
         if backup_model is not None:
             pulumi.set(__self__, "backup_model", backup_model)
         if backup_time is not None:
             pulumi.set(__self__, "backup_time", backup_time)
+        if binlog_period is not None:
+            pulumi.set(__self__, "binlog_period", binlog_period)
+        if binlog_standby_days is not None:
+            pulumi.set(__self__, "binlog_standby_days", binlog_standby_days)
+        if enable_binlog_standby is not None:
+            pulumi.set(__self__, "enable_binlog_standby", enable_binlog_standby)
         if retention_period is not None:
             pulumi.set(__self__, "retention_period", retention_period)
 
@@ -69,10 +81,46 @@ class BackupPolicyArgs:
         pulumi.set(self, "backup_time", value)
 
     @property
+    @pulumi.getter(name="binlogPeriod")
+    def binlog_period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Binlog retention time, in days. The minimum value is 7 days and the maximum value is 1830 days. This value cannot be set greater than the backup file retention time.
+        """
+        return pulumi.get(self, "binlog_period")
+
+    @binlog_period.setter
+    def binlog_period(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "binlog_period", value)
+
+    @property
+    @pulumi.getter(name="binlogStandbyDays")
+    def binlog_standby_days(self) -> Optional[pulumi.Input[int]]:
+        """
+        The standard starting number of days for log backup storage. The log backup will be converted when it reaches the standard starting number of days for storage. The minimum is 30 days and must not be greater than the number of days for log backup retention.
+        """
+        return pulumi.get(self, "binlog_standby_days")
+
+    @binlog_standby_days.setter
+    def binlog_standby_days(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "binlog_standby_days", value)
+
+    @property
+    @pulumi.getter(name="enableBinlogStandby")
+    def enable_binlog_standby(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to enable the log backup standard storage policy, `off` - close, `on` - open, the default is off.
+        """
+        return pulumi.get(self, "enable_binlog_standby")
+
+    @enable_binlog_standby.setter
+    def enable_binlog_standby(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "enable_binlog_standby", value)
+
+    @property
     @pulumi.getter(name="retentionPeriod")
     def retention_period(self) -> Optional[pulumi.Input[int]]:
         """
-        Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
+        The retention time of backup files, in days. The minimum value is 7 days and the maximum value is 1830 days. And default value is `7`.
         """
         return pulumi.get(self, "retention_period")
 
@@ -87,15 +135,19 @@ class _BackupPolicyState:
                  backup_model: Optional[pulumi.Input[str]] = None,
                  backup_time: Optional[pulumi.Input[str]] = None,
                  binlog_period: Optional[pulumi.Input[int]] = None,
+                 binlog_standby_days: Optional[pulumi.Input[int]] = None,
+                 enable_binlog_standby: Optional[pulumi.Input[str]] = None,
                  mysql_id: Optional[pulumi.Input[str]] = None,
                  retention_period: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering BackupPolicy resources.
         :param pulumi.Input[str] backup_model: Backup method. Supported values include: `physical` - physical backup.
         :param pulumi.Input[str] backup_time: Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
-        :param pulumi.Input[int] binlog_period: Retention period for binlog in days.
+        :param pulumi.Input[int] binlog_period: Binlog retention time, in days. The minimum value is 7 days and the maximum value is 1830 days. This value cannot be set greater than the backup file retention time.
+        :param pulumi.Input[int] binlog_standby_days: The standard starting number of days for log backup storage. The log backup will be converted when it reaches the standard starting number of days for storage. The minimum is 30 days and must not be greater than the number of days for log backup retention.
+        :param pulumi.Input[str] enable_binlog_standby: Whether to enable the log backup standard storage policy, `off` - close, `on` - open, the default is off.
         :param pulumi.Input[str] mysql_id: Instance ID to which policies will be applied.
-        :param pulumi.Input[int] retention_period: Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
+        :param pulumi.Input[int] retention_period: The retention time of backup files, in days. The minimum value is 7 days and the maximum value is 1830 days. And default value is `7`.
         """
         if backup_model is not None:
             pulumi.set(__self__, "backup_model", backup_model)
@@ -103,6 +155,10 @@ class _BackupPolicyState:
             pulumi.set(__self__, "backup_time", backup_time)
         if binlog_period is not None:
             pulumi.set(__self__, "binlog_period", binlog_period)
+        if binlog_standby_days is not None:
+            pulumi.set(__self__, "binlog_standby_days", binlog_standby_days)
+        if enable_binlog_standby is not None:
+            pulumi.set(__self__, "enable_binlog_standby", enable_binlog_standby)
         if mysql_id is not None:
             pulumi.set(__self__, "mysql_id", mysql_id)
         if retention_period is not None:
@@ -136,13 +192,37 @@ class _BackupPolicyState:
     @pulumi.getter(name="binlogPeriod")
     def binlog_period(self) -> Optional[pulumi.Input[int]]:
         """
-        Retention period for binlog in days.
+        Binlog retention time, in days. The minimum value is 7 days and the maximum value is 1830 days. This value cannot be set greater than the backup file retention time.
         """
         return pulumi.get(self, "binlog_period")
 
     @binlog_period.setter
     def binlog_period(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "binlog_period", value)
+
+    @property
+    @pulumi.getter(name="binlogStandbyDays")
+    def binlog_standby_days(self) -> Optional[pulumi.Input[int]]:
+        """
+        The standard starting number of days for log backup storage. The log backup will be converted when it reaches the standard starting number of days for storage. The minimum is 30 days and must not be greater than the number of days for log backup retention.
+        """
+        return pulumi.get(self, "binlog_standby_days")
+
+    @binlog_standby_days.setter
+    def binlog_standby_days(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "binlog_standby_days", value)
+
+    @property
+    @pulumi.getter(name="enableBinlogStandby")
+    def enable_binlog_standby(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether to enable the log backup standard storage policy, `off` - close, `on` - open, the default is off.
+        """
+        return pulumi.get(self, "enable_binlog_standby")
+
+    @enable_binlog_standby.setter
+    def enable_binlog_standby(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "enable_binlog_standby", value)
 
     @property
     @pulumi.getter(name="mysqlId")
@@ -160,7 +240,7 @@ class _BackupPolicyState:
     @pulumi.getter(name="retentionPeriod")
     def retention_period(self) -> Optional[pulumi.Input[int]]:
         """
-        Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
+        The retention time of backup files, in days. The minimum value is 7 days and the maximum value is 1830 days. And default value is `7`.
         """
         return pulumi.get(self, "retention_period")
 
@@ -176,6 +256,9 @@ class BackupPolicy(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  backup_model: Optional[pulumi.Input[str]] = None,
                  backup_time: Optional[pulumi.Input[str]] = None,
+                 binlog_period: Optional[pulumi.Input[int]] = None,
+                 binlog_standby_days: Optional[pulumi.Input[int]] = None,
+                 enable_binlog_standby: Optional[pulumi.Input[str]] = None,
                  mysql_id: Optional[pulumi.Input[str]] = None,
                  retention_period: Optional[pulumi.Input[int]] = None,
                  __props__=None):
@@ -221,15 +304,21 @@ class BackupPolicy(pulumi.CustomResource):
             mysql_id=example_instance.id,
             retention_period=7,
             backup_model="physical",
-            backup_time="01:00-05:00")
+            backup_time="22:00-02:00",
+            binlog_period=32,
+            enable_binlog_standby="off",
+            binlog_standby_days=31)
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] backup_model: Backup method. Supported values include: `physical` - physical backup.
         :param pulumi.Input[str] backup_time: Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
+        :param pulumi.Input[int] binlog_period: Binlog retention time, in days. The minimum value is 7 days and the maximum value is 1830 days. This value cannot be set greater than the backup file retention time.
+        :param pulumi.Input[int] binlog_standby_days: The standard starting number of days for log backup storage. The log backup will be converted when it reaches the standard starting number of days for storage. The minimum is 30 days and must not be greater than the number of days for log backup retention.
+        :param pulumi.Input[str] enable_binlog_standby: Whether to enable the log backup standard storage policy, `off` - close, `on` - open, the default is off.
         :param pulumi.Input[str] mysql_id: Instance ID to which policies will be applied.
-        :param pulumi.Input[int] retention_period: Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
+        :param pulumi.Input[int] retention_period: The retention time of backup files, in days. The minimum value is 7 days and the maximum value is 1830 days. And default value is `7`.
         """
         ...
     @overload
@@ -279,7 +368,10 @@ class BackupPolicy(pulumi.CustomResource):
             mysql_id=example_instance.id,
             retention_period=7,
             backup_model="physical",
-            backup_time="01:00-05:00")
+            backup_time="22:00-02:00",
+            binlog_period=32,
+            enable_binlog_standby="off",
+            binlog_standby_days=31)
         ```
 
         :param str resource_name: The name of the resource.
@@ -299,6 +391,9 @@ class BackupPolicy(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  backup_model: Optional[pulumi.Input[str]] = None,
                  backup_time: Optional[pulumi.Input[str]] = None,
+                 binlog_period: Optional[pulumi.Input[int]] = None,
+                 binlog_standby_days: Optional[pulumi.Input[int]] = None,
+                 enable_binlog_standby: Optional[pulumi.Input[str]] = None,
                  mysql_id: Optional[pulumi.Input[str]] = None,
                  retention_period: Optional[pulumi.Input[int]] = None,
                  __props__=None):
@@ -317,11 +412,13 @@ class BackupPolicy(pulumi.CustomResource):
 
             __props__.__dict__["backup_model"] = backup_model
             __props__.__dict__["backup_time"] = backup_time
+            __props__.__dict__["binlog_period"] = binlog_period
+            __props__.__dict__["binlog_standby_days"] = binlog_standby_days
+            __props__.__dict__["enable_binlog_standby"] = enable_binlog_standby
             if mysql_id is None and not opts.urn:
                 raise TypeError("Missing required property 'mysql_id'")
             __props__.__dict__["mysql_id"] = mysql_id
             __props__.__dict__["retention_period"] = retention_period
-            __props__.__dict__["binlog_period"] = None
         super(BackupPolicy, __self__).__init__(
             'tencentcloud:Mysql/backupPolicy:BackupPolicy',
             resource_name,
@@ -335,6 +432,8 @@ class BackupPolicy(pulumi.CustomResource):
             backup_model: Optional[pulumi.Input[str]] = None,
             backup_time: Optional[pulumi.Input[str]] = None,
             binlog_period: Optional[pulumi.Input[int]] = None,
+            binlog_standby_days: Optional[pulumi.Input[int]] = None,
+            enable_binlog_standby: Optional[pulumi.Input[str]] = None,
             mysql_id: Optional[pulumi.Input[str]] = None,
             retention_period: Optional[pulumi.Input[int]] = None) -> 'BackupPolicy':
         """
@@ -346,9 +445,11 @@ class BackupPolicy(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] backup_model: Backup method. Supported values include: `physical` - physical backup.
         :param pulumi.Input[str] backup_time: Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
-        :param pulumi.Input[int] binlog_period: Retention period for binlog in days.
+        :param pulumi.Input[int] binlog_period: Binlog retention time, in days. The minimum value is 7 days and the maximum value is 1830 days. This value cannot be set greater than the backup file retention time.
+        :param pulumi.Input[int] binlog_standby_days: The standard starting number of days for log backup storage. The log backup will be converted when it reaches the standard starting number of days for storage. The minimum is 30 days and must not be greater than the number of days for log backup retention.
+        :param pulumi.Input[str] enable_binlog_standby: Whether to enable the log backup standard storage policy, `off` - close, `on` - open, the default is off.
         :param pulumi.Input[str] mysql_id: Instance ID to which policies will be applied.
-        :param pulumi.Input[int] retention_period: Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
+        :param pulumi.Input[int] retention_period: The retention time of backup files, in days. The minimum value is 7 days and the maximum value is 1830 days. And default value is `7`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -357,6 +458,8 @@ class BackupPolicy(pulumi.CustomResource):
         __props__.__dict__["backup_model"] = backup_model
         __props__.__dict__["backup_time"] = backup_time
         __props__.__dict__["binlog_period"] = binlog_period
+        __props__.__dict__["binlog_standby_days"] = binlog_standby_days
+        __props__.__dict__["enable_binlog_standby"] = enable_binlog_standby
         __props__.__dict__["mysql_id"] = mysql_id
         __props__.__dict__["retention_period"] = retention_period
         return BackupPolicy(resource_name, opts=opts, __props__=__props__)
@@ -381,9 +484,25 @@ class BackupPolicy(pulumi.CustomResource):
     @pulumi.getter(name="binlogPeriod")
     def binlog_period(self) -> pulumi.Output[int]:
         """
-        Retention period for binlog in days.
+        Binlog retention time, in days. The minimum value is 7 days and the maximum value is 1830 days. This value cannot be set greater than the backup file retention time.
         """
         return pulumi.get(self, "binlog_period")
+
+    @property
+    @pulumi.getter(name="binlogStandbyDays")
+    def binlog_standby_days(self) -> pulumi.Output[int]:
+        """
+        The standard starting number of days for log backup storage. The log backup will be converted when it reaches the standard starting number of days for storage. The minimum is 30 days and must not be greater than the number of days for log backup retention.
+        """
+        return pulumi.get(self, "binlog_standby_days")
+
+    @property
+    @pulumi.getter(name="enableBinlogStandby")
+    def enable_binlog_standby(self) -> pulumi.Output[Optional[str]]:
+        """
+        Whether to enable the log backup standard storage policy, `off` - close, `on` - open, the default is off.
+        """
+        return pulumi.get(self, "enable_binlog_standby")
 
     @property
     @pulumi.getter(name="mysqlId")
@@ -397,7 +516,7 @@ class BackupPolicy(pulumi.CustomResource):
     @pulumi.getter(name="retentionPeriod")
     def retention_period(self) -> pulumi.Output[Optional[int]]:
         """
-        Instance backup retention days. Valid value ranges: [7~730]. And default value is `7`.
+        The retention time of backup files, in days. The minimum value is 7 days and the maximum value is 1830 days. And default value is `7`.
         """
         return pulumi.get(self, "retention_period")
 

@@ -105,6 +105,7 @@ class _DomainInstanceState:
                  group_id: Optional[pulumi.Input[int]] = None,
                  is_mark: Optional[pulumi.Input[str]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
+                 slave_dns: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering DomainInstance resources.
@@ -113,6 +114,7 @@ class _DomainInstanceState:
         :param pulumi.Input[int] group_id: The Group Id of Domain.
         :param pulumi.Input[str] is_mark: Whether to Mark the Domain.
         :param pulumi.Input[str] remark: The remark of Domain.
+        :param pulumi.Input[str] slave_dns: Is secondary DNS enabled.
         :param pulumi.Input[str] status: The status of Domain.
         """
         if create_time is not None:
@@ -125,6 +127,8 @@ class _DomainInstanceState:
             pulumi.set(__self__, "is_mark", is_mark)
         if remark is not None:
             pulumi.set(__self__, "remark", remark)
+        if slave_dns is not None:
+            pulumi.set(__self__, "slave_dns", slave_dns)
         if status is not None:
             pulumi.set(__self__, "status", status)
 
@@ -187,6 +191,18 @@ class _DomainInstanceState:
     @remark.setter
     def remark(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "remark", value)
+
+    @property
+    @pulumi.getter(name="slaveDns")
+    def slave_dns(self) -> Optional[pulumi.Input[str]]:
+        """
+        Is secondary DNS enabled.
+        """
+        return pulumi.get(self, "slave_dns")
+
+    @slave_dns.setter
+    def slave_dns(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "slave_dns", value)
 
     @property
     @pulumi.getter
@@ -312,6 +328,7 @@ class DomainInstance(pulumi.CustomResource):
             __props__.__dict__["remark"] = remark
             __props__.__dict__["status"] = status
             __props__.__dict__["create_time"] = None
+            __props__.__dict__["slave_dns"] = None
         super(DomainInstance, __self__).__init__(
             'tencentcloud:Dnspod/domainInstance:DomainInstance',
             resource_name,
@@ -327,6 +344,7 @@ class DomainInstance(pulumi.CustomResource):
             group_id: Optional[pulumi.Input[int]] = None,
             is_mark: Optional[pulumi.Input[str]] = None,
             remark: Optional[pulumi.Input[str]] = None,
+            slave_dns: Optional[pulumi.Input[str]] = None,
             status: Optional[pulumi.Input[str]] = None) -> 'DomainInstance':
         """
         Get an existing DomainInstance resource's state with the given name, id, and optional extra
@@ -340,6 +358,7 @@ class DomainInstance(pulumi.CustomResource):
         :param pulumi.Input[int] group_id: The Group Id of Domain.
         :param pulumi.Input[str] is_mark: Whether to Mark the Domain.
         :param pulumi.Input[str] remark: The remark of Domain.
+        :param pulumi.Input[str] slave_dns: Is secondary DNS enabled.
         :param pulumi.Input[str] status: The status of Domain.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -351,6 +370,7 @@ class DomainInstance(pulumi.CustomResource):
         __props__.__dict__["group_id"] = group_id
         __props__.__dict__["is_mark"] = is_mark
         __props__.__dict__["remark"] = remark
+        __props__.__dict__["slave_dns"] = slave_dns
         __props__.__dict__["status"] = status
         return DomainInstance(resource_name, opts=opts, __props__=__props__)
 
@@ -393,6 +413,14 @@ class DomainInstance(pulumi.CustomResource):
         The remark of Domain.
         """
         return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter(name="slaveDns")
+    def slave_dns(self) -> pulumi.Output[str]:
+        """
+        Is secondary DNS enabled.
+        """
+        return pulumi.get(self, "slave_dns")
 
     @property
     @pulumi.getter

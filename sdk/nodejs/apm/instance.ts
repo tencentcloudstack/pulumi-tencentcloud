@@ -7,6 +7,8 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a apm instance
  *
+ * > **NOTE:** To use the field `payMode`, you need to contact official customer service to join the whitelist.
+ *
  * ## Example Usage
  *
  * ```typescript
@@ -68,6 +70,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+     */
+    public readonly payMode!: pulumi.Output<number | undefined>;
+    /**
      * Quota Of Instance Reporting.
      */
     public readonly spanDailyCounters!: pulumi.Output<number | undefined>;
@@ -95,6 +101,7 @@ export class Instance extends pulumi.CustomResource {
             const state = argsOrState as InstanceState | undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["payMode"] = state ? state.payMode : undefined;
             resourceInputs["spanDailyCounters"] = state ? state.spanDailyCounters : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["traceDuration"] = state ? state.traceDuration : undefined;
@@ -102,6 +109,7 @@ export class Instance extends pulumi.CustomResource {
             const args = argsOrState as InstanceArgs | undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["payMode"] = args ? args.payMode : undefined;
             resourceInputs["spanDailyCounters"] = args ? args.spanDailyCounters : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["traceDuration"] = args ? args.traceDuration : undefined;
@@ -123,6 +131,10 @@ export interface InstanceState {
      * Name Of Instance.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+     */
+    payMode?: pulumi.Input<number>;
     /**
      * Quota Of Instance Reporting.
      */
@@ -149,6 +161,10 @@ export interface InstanceArgs {
      * Name Of Instance.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+     */
+    payMode?: pulumi.Input<number>;
     /**
      * Quota Of Instance Reporting.
      */

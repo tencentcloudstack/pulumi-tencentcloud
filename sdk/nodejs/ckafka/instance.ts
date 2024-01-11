@@ -8,8 +8,6 @@ import * as utilities from "../utilities";
 /**
  * Use this resource to create ckafka instance.
  *
- * > **NOTE:** It only support create prepaid ckafka instance.
- *
  * ## Example Usage
  * ### Basic Instance
  *
@@ -25,8 +23,8 @@ import * as utilities from "../utilities";
  *     name: "ap-guangzhou-3",
  *     product: "ckafka",
  * });
- * const kafkaInstance = new tencentcloud.ckafka.Instance("kafkaInstance", {
- *     instanceName: "ckafka-instance-type-tf-test",
+ * const kafkaInstancePrepaid = new tencentcloud.ckafka.Instance("kafkaInstancePrepaid", {
+ *     instanceName: "ckafka-instance-prepaid",
  *     zoneId: gz.then(gz => gz.zones?[0]?.id),
  *     period: 1,
  *     vpcId: vpcId,
@@ -34,10 +32,33 @@ import * as utilities from "../utilities";
  *     msgRetentionTime: 1300,
  *     renewFlag: 0,
  *     kafkaVersion: "2.4.1",
- *     diskSize: 1000,
+ *     diskSize: 200,
  *     diskType: "CLOUD_BASIC",
+ *     bandWidth: 20,
+ *     partition: 400,
  *     specificationsType: "standard",
  *     instanceType: 2,
+ *     config: {
+ *         autoCreateTopicEnable: true,
+ *         defaultNumPartitions: 3,
+ *         defaultReplicationFactor: 3,
+ *     },
+ *     dynamicRetentionConfig: {
+ *         enable: 1,
+ *     },
+ * });
+ * const kafkaInstancePostpaid = new tencentcloud.ckafka.Instance("kafkaInstancePostpaid", {
+ *     instanceName: "ckafka-instance-postpaid",
+ *     zoneId: gz.then(gz => gz.zones?[0]?.id),
+ *     vpcId: vpcId,
+ *     subnetId: subnetId,
+ *     msgRetentionTime: 1300,
+ *     kafkaVersion: "1.1.1",
+ *     diskSize: 200,
+ *     bandWidth: 20,
+ *     diskType: "CLOUD_BASIC",
+ *     partition: 400,
+ *     chargeType: "POSTPAID_BY_HOUR",
  *     config: {
  *         autoCreateTopicEnable: true,
  *         defaultNumPartitions: 3,
@@ -134,6 +155,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly bandWidth!: pulumi.Output<number>;
     /**
+     * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `PREPAID`.
+     */
+    public readonly chargeType!: pulumi.Output<string | undefined>;
+    /**
      * Instance configuration.
      */
     public readonly config!: pulumi.Output<outputs.Ckafka.InstanceConfig | undefined>;
@@ -214,6 +239,12 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly tags!: pulumi.Output<outputs.Ckafka.InstanceTag[]>;
     /**
+     * POSTPAID_BY_HOUR scale-down mode
+     * - 1: stable transformation;
+     * - 2: High-speed transformer.
+     */
+    public readonly upgradeStrategy!: pulumi.Output<number | undefined>;
+    /**
      * Vip of instance.
      */
     public /*out*/ readonly vip!: pulumi.Output<string>;
@@ -248,6 +279,7 @@ export class Instance extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as InstanceState | undefined;
             resourceInputs["bandWidth"] = state ? state.bandWidth : undefined;
+            resourceInputs["chargeType"] = state ? state.chargeType : undefined;
             resourceInputs["config"] = state ? state.config : undefined;
             resourceInputs["diskSize"] = state ? state.diskSize : undefined;
             resourceInputs["diskType"] = state ? state.diskType : undefined;
@@ -267,6 +299,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
             resourceInputs["tagSet"] = state ? state.tagSet : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["upgradeStrategy"] = state ? state.upgradeStrategy : undefined;
             resourceInputs["vip"] = state ? state.vip : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
             resourceInputs["vport"] = state ? state.vport : undefined;
@@ -281,6 +314,7 @@ export class Instance extends pulumi.CustomResource {
                 throw new Error("Missing required property 'zoneId'");
             }
             resourceInputs["bandWidth"] = args ? args.bandWidth : undefined;
+            resourceInputs["chargeType"] = args ? args.chargeType : undefined;
             resourceInputs["config"] = args ? args.config : undefined;
             resourceInputs["diskSize"] = args ? args.diskSize : undefined;
             resourceInputs["diskType"] = args ? args.diskType : undefined;
@@ -300,6 +334,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
             resourceInputs["tagSet"] = args ? args.tagSet : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["upgradeStrategy"] = args ? args.upgradeStrategy : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["zoneId"] = args ? args.zoneId : undefined;
             resourceInputs["zoneIds"] = args ? args.zoneIds : undefined;
@@ -319,6 +354,10 @@ export interface InstanceState {
      * Instance bandwidth in MBps.
      */
     bandWidth?: pulumi.Input<number>;
+    /**
+     * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `PREPAID`.
+     */
+    chargeType?: pulumi.Input<string>;
     /**
      * Instance configuration.
      */
@@ -400,6 +439,12 @@ export interface InstanceState {
      */
     tags?: pulumi.Input<pulumi.Input<inputs.Ckafka.InstanceTag>[]>;
     /**
+     * POSTPAID_BY_HOUR scale-down mode
+     * - 1: stable transformation;
+     * - 2: High-speed transformer.
+     */
+    upgradeStrategy?: pulumi.Input<number>;
+    /**
      * Vip of instance.
      */
     vip?: pulumi.Input<string>;
@@ -429,6 +474,10 @@ export interface InstanceArgs {
      * Instance bandwidth in MBps.
      */
     bandWidth?: pulumi.Input<number>;
+    /**
+     * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `PREPAID`.
+     */
+    chargeType?: pulumi.Input<string>;
     /**
      * Instance configuration.
      */
@@ -509,6 +558,12 @@ export interface InstanceArgs {
      * @deprecated It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
      */
     tags?: pulumi.Input<pulumi.Input<inputs.Ckafka.InstanceTag>[]>;
+    /**
+     * POSTPAID_BY_HOUR scale-down mode
+     * - 1: stable transformation;
+     * - 2: High-speed transformer.
+     */
+    upgradeStrategy?: pulumi.Input<number>;
     /**
      * Vpc id, it will be basic network if not set.
      */

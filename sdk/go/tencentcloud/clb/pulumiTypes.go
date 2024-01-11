@@ -968,6 +968,130 @@ func (o SnatIpIpArrayOutput) Index(i pulumi.IntInput) SnatIpIpOutput {
 	}).(SnatIpIpOutput)
 }
 
+type TargetGroupAttachmentsAssociation struct {
+	// Listener ID.
+	ListenerId *string `pulumi:"listenerId"`
+	// CLB instance ID, when the binding target is target group, loadBalancerId in associations is required.
+	LoadBalancerId *string `pulumi:"loadBalancerId"`
+	// Forwarding rule ID.
+	LocationId *string `pulumi:"locationId"`
+	// Target group ID, when the binding target is clb, the targetGroupId in associations is required.
+	TargetGroupId *string `pulumi:"targetGroupId"`
+}
+
+// TargetGroupAttachmentsAssociationInput is an input type that accepts TargetGroupAttachmentsAssociationArgs and TargetGroupAttachmentsAssociationOutput values.
+// You can construct a concrete instance of `TargetGroupAttachmentsAssociationInput` via:
+//
+//          TargetGroupAttachmentsAssociationArgs{...}
+type TargetGroupAttachmentsAssociationInput interface {
+	pulumi.Input
+
+	ToTargetGroupAttachmentsAssociationOutput() TargetGroupAttachmentsAssociationOutput
+	ToTargetGroupAttachmentsAssociationOutputWithContext(context.Context) TargetGroupAttachmentsAssociationOutput
+}
+
+type TargetGroupAttachmentsAssociationArgs struct {
+	// Listener ID.
+	ListenerId pulumi.StringPtrInput `pulumi:"listenerId"`
+	// CLB instance ID, when the binding target is target group, loadBalancerId in associations is required.
+	LoadBalancerId pulumi.StringPtrInput `pulumi:"loadBalancerId"`
+	// Forwarding rule ID.
+	LocationId pulumi.StringPtrInput `pulumi:"locationId"`
+	// Target group ID, when the binding target is clb, the targetGroupId in associations is required.
+	TargetGroupId pulumi.StringPtrInput `pulumi:"targetGroupId"`
+}
+
+func (TargetGroupAttachmentsAssociationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TargetGroupAttachmentsAssociation)(nil)).Elem()
+}
+
+func (i TargetGroupAttachmentsAssociationArgs) ToTargetGroupAttachmentsAssociationOutput() TargetGroupAttachmentsAssociationOutput {
+	return i.ToTargetGroupAttachmentsAssociationOutputWithContext(context.Background())
+}
+
+func (i TargetGroupAttachmentsAssociationArgs) ToTargetGroupAttachmentsAssociationOutputWithContext(ctx context.Context) TargetGroupAttachmentsAssociationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TargetGroupAttachmentsAssociationOutput)
+}
+
+// TargetGroupAttachmentsAssociationArrayInput is an input type that accepts TargetGroupAttachmentsAssociationArray and TargetGroupAttachmentsAssociationArrayOutput values.
+// You can construct a concrete instance of `TargetGroupAttachmentsAssociationArrayInput` via:
+//
+//          TargetGroupAttachmentsAssociationArray{ TargetGroupAttachmentsAssociationArgs{...} }
+type TargetGroupAttachmentsAssociationArrayInput interface {
+	pulumi.Input
+
+	ToTargetGroupAttachmentsAssociationArrayOutput() TargetGroupAttachmentsAssociationArrayOutput
+	ToTargetGroupAttachmentsAssociationArrayOutputWithContext(context.Context) TargetGroupAttachmentsAssociationArrayOutput
+}
+
+type TargetGroupAttachmentsAssociationArray []TargetGroupAttachmentsAssociationInput
+
+func (TargetGroupAttachmentsAssociationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TargetGroupAttachmentsAssociation)(nil)).Elem()
+}
+
+func (i TargetGroupAttachmentsAssociationArray) ToTargetGroupAttachmentsAssociationArrayOutput() TargetGroupAttachmentsAssociationArrayOutput {
+	return i.ToTargetGroupAttachmentsAssociationArrayOutputWithContext(context.Background())
+}
+
+func (i TargetGroupAttachmentsAssociationArray) ToTargetGroupAttachmentsAssociationArrayOutputWithContext(ctx context.Context) TargetGroupAttachmentsAssociationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TargetGroupAttachmentsAssociationArrayOutput)
+}
+
+type TargetGroupAttachmentsAssociationOutput struct{ *pulumi.OutputState }
+
+func (TargetGroupAttachmentsAssociationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TargetGroupAttachmentsAssociation)(nil)).Elem()
+}
+
+func (o TargetGroupAttachmentsAssociationOutput) ToTargetGroupAttachmentsAssociationOutput() TargetGroupAttachmentsAssociationOutput {
+	return o
+}
+
+func (o TargetGroupAttachmentsAssociationOutput) ToTargetGroupAttachmentsAssociationOutputWithContext(ctx context.Context) TargetGroupAttachmentsAssociationOutput {
+	return o
+}
+
+// Listener ID.
+func (o TargetGroupAttachmentsAssociationOutput) ListenerId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TargetGroupAttachmentsAssociation) *string { return v.ListenerId }).(pulumi.StringPtrOutput)
+}
+
+// CLB instance ID, when the binding target is target group, loadBalancerId in associations is required.
+func (o TargetGroupAttachmentsAssociationOutput) LoadBalancerId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TargetGroupAttachmentsAssociation) *string { return v.LoadBalancerId }).(pulumi.StringPtrOutput)
+}
+
+// Forwarding rule ID.
+func (o TargetGroupAttachmentsAssociationOutput) LocationId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TargetGroupAttachmentsAssociation) *string { return v.LocationId }).(pulumi.StringPtrOutput)
+}
+
+// Target group ID, when the binding target is clb, the targetGroupId in associations is required.
+func (o TargetGroupAttachmentsAssociationOutput) TargetGroupId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TargetGroupAttachmentsAssociation) *string { return v.TargetGroupId }).(pulumi.StringPtrOutput)
+}
+
+type TargetGroupAttachmentsAssociationArrayOutput struct{ *pulumi.OutputState }
+
+func (TargetGroupAttachmentsAssociationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TargetGroupAttachmentsAssociation)(nil)).Elem()
+}
+
+func (o TargetGroupAttachmentsAssociationArrayOutput) ToTargetGroupAttachmentsAssociationArrayOutput() TargetGroupAttachmentsAssociationArrayOutput {
+	return o
+}
+
+func (o TargetGroupAttachmentsAssociationArrayOutput) ToTargetGroupAttachmentsAssociationArrayOutputWithContext(ctx context.Context) TargetGroupAttachmentsAssociationArrayOutput {
+	return o
+}
+
+func (o TargetGroupAttachmentsAssociationArrayOutput) Index(i pulumi.IntInput) TargetGroupAttachmentsAssociationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TargetGroupAttachmentsAssociation {
+		return vs[0].([]TargetGroupAttachmentsAssociation)[vs[1].(int)]
+	}).(TargetGroupAttachmentsAssociationOutput)
+}
+
 type TargetGroupTargetGroupInstance struct {
 	// The internal ip of target group instance.
 	BindIp string `pulumi:"bindIp"`
@@ -9572,6 +9696,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ReplaceCertForLbsCertificatePtrInput)(nil)).Elem(), ReplaceCertForLbsCertificateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SnatIpIpInput)(nil)).Elem(), SnatIpIpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SnatIpIpArrayInput)(nil)).Elem(), SnatIpIpArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TargetGroupAttachmentsAssociationInput)(nil)).Elem(), TargetGroupAttachmentsAssociationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TargetGroupAttachmentsAssociationArrayInput)(nil)).Elem(), TargetGroupAttachmentsAssociationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TargetGroupTargetGroupInstanceInput)(nil)).Elem(), TargetGroupTargetGroupInstanceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TargetGroupTargetGroupInstanceArrayInput)(nil)).Elem(), TargetGroupTargetGroupInstanceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAttachmentsAttachmentListInput)(nil)).Elem(), GetAttachmentsAttachmentListArgs{})
@@ -9698,6 +9824,8 @@ func init() {
 	pulumi.RegisterOutputType(ReplaceCertForLbsCertificatePtrOutput{})
 	pulumi.RegisterOutputType(SnatIpIpOutput{})
 	pulumi.RegisterOutputType(SnatIpIpArrayOutput{})
+	pulumi.RegisterOutputType(TargetGroupAttachmentsAssociationOutput{})
+	pulumi.RegisterOutputType(TargetGroupAttachmentsAssociationArrayOutput{})
 	pulumi.RegisterOutputType(TargetGroupTargetGroupInstanceOutput{})
 	pulumi.RegisterOutputType(TargetGroupTargetGroupInstanceArrayOutput{})
 	pulumi.RegisterOutputType(GetAttachmentsAttachmentListOutput{})

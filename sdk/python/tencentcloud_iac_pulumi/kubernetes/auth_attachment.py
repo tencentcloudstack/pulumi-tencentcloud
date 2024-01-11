@@ -14,21 +14,33 @@ __all__ = ['AuthAttachmentArgs', 'AuthAttachment']
 class AuthAttachmentArgs:
     def __init__(__self__, *,
                  cluster_id: pulumi.Input[str],
+                 auto_create_client_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  auto_create_discovery_anonymous_auth: Optional[pulumi.Input[bool]] = None,
+                 auto_create_oidc_config: Optional[pulumi.Input[bool]] = None,
+                 auto_install_pod_identity_webhook_addon: Optional[pulumi.Input[bool]] = None,
                  issuer: Optional[pulumi.Input[str]] = None,
                  jwks_uri: Optional[pulumi.Input[str]] = None,
                  use_tke_default: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a AuthAttachment resource.
         :param pulumi.Input[str] cluster_id: ID of clusters.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] auto_create_client_ids: Creating ClientId of the identity provider.
         :param pulumi.Input[bool] auto_create_discovery_anonymous_auth: If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
+        :param pulumi.Input[bool] auto_create_oidc_config: Creating an identity provider.
+        :param pulumi.Input[bool] auto_install_pod_identity_webhook_addon: Creating the PodIdentityWebhook component. if `auto_create_oidc_config` is true, this field must set true.
         :param pulumi.Input[str] issuer: Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field.
         :param pulumi.Input[str] jwks_uri: Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field.
         :param pulumi.Input[bool] use_tke_default: If set to `true`, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
+        if auto_create_client_ids is not None:
+            pulumi.set(__self__, "auto_create_client_ids", auto_create_client_ids)
         if auto_create_discovery_anonymous_auth is not None:
             pulumi.set(__self__, "auto_create_discovery_anonymous_auth", auto_create_discovery_anonymous_auth)
+        if auto_create_oidc_config is not None:
+            pulumi.set(__self__, "auto_create_oidc_config", auto_create_oidc_config)
+        if auto_install_pod_identity_webhook_addon is not None:
+            pulumi.set(__self__, "auto_install_pod_identity_webhook_addon", auto_install_pod_identity_webhook_addon)
         if issuer is not None:
             pulumi.set(__self__, "issuer", issuer)
         if jwks_uri is not None:
@@ -49,6 +61,18 @@ class AuthAttachmentArgs:
         pulumi.set(self, "cluster_id", value)
 
     @property
+    @pulumi.getter(name="autoCreateClientIds")
+    def auto_create_client_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Creating ClientId of the identity provider.
+        """
+        return pulumi.get(self, "auto_create_client_ids")
+
+    @auto_create_client_ids.setter
+    def auto_create_client_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "auto_create_client_ids", value)
+
+    @property
     @pulumi.getter(name="autoCreateDiscoveryAnonymousAuth")
     def auto_create_discovery_anonymous_auth(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -59,6 +83,30 @@ class AuthAttachmentArgs:
     @auto_create_discovery_anonymous_auth.setter
     def auto_create_discovery_anonymous_auth(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "auto_create_discovery_anonymous_auth", value)
+
+    @property
+    @pulumi.getter(name="autoCreateOidcConfig")
+    def auto_create_oidc_config(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Creating an identity provider.
+        """
+        return pulumi.get(self, "auto_create_oidc_config")
+
+    @auto_create_oidc_config.setter
+    def auto_create_oidc_config(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "auto_create_oidc_config", value)
+
+    @property
+    @pulumi.getter(name="autoInstallPodIdentityWebhookAddon")
+    def auto_install_pod_identity_webhook_addon(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Creating the PodIdentityWebhook component. if `auto_create_oidc_config` is true, this field must set true.
+        """
+        return pulumi.get(self, "auto_install_pod_identity_webhook_addon")
+
+    @auto_install_pod_identity_webhook_addon.setter
+    def auto_install_pod_identity_webhook_addon(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "auto_install_pod_identity_webhook_addon", value)
 
     @property
     @pulumi.getter
@@ -100,7 +148,10 @@ class AuthAttachmentArgs:
 @pulumi.input_type
 class _AuthAttachmentState:
     def __init__(__self__, *,
+                 auto_create_client_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  auto_create_discovery_anonymous_auth: Optional[pulumi.Input[bool]] = None,
+                 auto_create_oidc_config: Optional[pulumi.Input[bool]] = None,
+                 auto_install_pod_identity_webhook_addon: Optional[pulumi.Input[bool]] = None,
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  issuer: Optional[pulumi.Input[str]] = None,
                  jwks_uri: Optional[pulumi.Input[str]] = None,
@@ -109,7 +160,10 @@ class _AuthAttachmentState:
                  use_tke_default: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering AuthAttachment resources.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] auto_create_client_ids: Creating ClientId of the identity provider.
         :param pulumi.Input[bool] auto_create_discovery_anonymous_auth: If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
+        :param pulumi.Input[bool] auto_create_oidc_config: Creating an identity provider.
+        :param pulumi.Input[bool] auto_install_pod_identity_webhook_addon: Creating the PodIdentityWebhook component. if `auto_create_oidc_config` is true, this field must set true.
         :param pulumi.Input[str] cluster_id: ID of clusters.
         :param pulumi.Input[str] issuer: Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field.
         :param pulumi.Input[str] jwks_uri: Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field.
@@ -117,8 +171,14 @@ class _AuthAttachmentState:
         :param pulumi.Input[str] tke_default_jwks_uri: The default jwks_uri of tke. If use_tke_default is set to `true`, this parameter will be set to the default value.
         :param pulumi.Input[bool] use_tke_default: If set to `true`, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.
         """
+        if auto_create_client_ids is not None:
+            pulumi.set(__self__, "auto_create_client_ids", auto_create_client_ids)
         if auto_create_discovery_anonymous_auth is not None:
             pulumi.set(__self__, "auto_create_discovery_anonymous_auth", auto_create_discovery_anonymous_auth)
+        if auto_create_oidc_config is not None:
+            pulumi.set(__self__, "auto_create_oidc_config", auto_create_oidc_config)
+        if auto_install_pod_identity_webhook_addon is not None:
+            pulumi.set(__self__, "auto_install_pod_identity_webhook_addon", auto_install_pod_identity_webhook_addon)
         if cluster_id is not None:
             pulumi.set(__self__, "cluster_id", cluster_id)
         if issuer is not None:
@@ -133,6 +193,18 @@ class _AuthAttachmentState:
             pulumi.set(__self__, "use_tke_default", use_tke_default)
 
     @property
+    @pulumi.getter(name="autoCreateClientIds")
+    def auto_create_client_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Creating ClientId of the identity provider.
+        """
+        return pulumi.get(self, "auto_create_client_ids")
+
+    @auto_create_client_ids.setter
+    def auto_create_client_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "auto_create_client_ids", value)
+
+    @property
     @pulumi.getter(name="autoCreateDiscoveryAnonymousAuth")
     def auto_create_discovery_anonymous_auth(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -143,6 +215,30 @@ class _AuthAttachmentState:
     @auto_create_discovery_anonymous_auth.setter
     def auto_create_discovery_anonymous_auth(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "auto_create_discovery_anonymous_auth", value)
+
+    @property
+    @pulumi.getter(name="autoCreateOidcConfig")
+    def auto_create_oidc_config(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Creating an identity provider.
+        """
+        return pulumi.get(self, "auto_create_oidc_config")
+
+    @auto_create_oidc_config.setter
+    def auto_create_oidc_config(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "auto_create_oidc_config", value)
+
+    @property
+    @pulumi.getter(name="autoInstallPodIdentityWebhookAddon")
+    def auto_install_pod_identity_webhook_addon(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Creating the PodIdentityWebhook component. if `auto_create_oidc_config` is true, this field must set true.
+        """
+        return pulumi.get(self, "auto_install_pod_identity_webhook_addon")
+
+    @auto_install_pod_identity_webhook_addon.setter
+    def auto_install_pod_identity_webhook_addon(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "auto_install_pod_identity_webhook_addon", value)
 
     @property
     @pulumi.getter(name="clusterId")
@@ -222,7 +318,10 @@ class AuthAttachment(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 auto_create_client_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  auto_create_discovery_anonymous_auth: Optional[pulumi.Input[bool]] = None,
+                 auto_create_oidc_config: Optional[pulumi.Input[bool]] = None,
+                 auto_install_pod_identity_webhook_addon: Optional[pulumi.Input[bool]] = None,
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  issuer: Optional[pulumi.Input[str]] = None,
                  jwks_uri: Optional[pulumi.Input[str]] = None,
@@ -343,10 +442,30 @@ class AuthAttachment(pulumi.CustomResource):
             auto_create_discovery_anonymous_auth=True,
             use_tke_default=True)
         ```
+        ### Use OIDC Config
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        test_auth_attach = tencentcloud.kubernetes.AuthAttachment("testAuthAttach",
+            cluster_id=tencentcloud_kubernetes_cluster["managed_cluster"]["id"],
+            use_tke_default=True,
+            auto_create_discovery_anonymous_auth=True,
+            auto_create_oidc_config=True,
+            auto_install_pod_identity_webhook_addon=True)
+        oidc_config = tencentcloud.Cam.get_oidc_config(name=tencentcloud_kubernetes_cluster["managed_cluster"]["id"])
+        pulumi.export("identityKey", oidc_config.identity_key)
+        pulumi.export("identityUrl", oidc_config.identity_url)
+        ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] auto_create_client_ids: Creating ClientId of the identity provider.
         :param pulumi.Input[bool] auto_create_discovery_anonymous_auth: If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
+        :param pulumi.Input[bool] auto_create_oidc_config: Creating an identity provider.
+        :param pulumi.Input[bool] auto_install_pod_identity_webhook_addon: Creating the PodIdentityWebhook component. if `auto_create_oidc_config` is true, this field must set true.
         :param pulumi.Input[str] cluster_id: ID of clusters.
         :param pulumi.Input[str] issuer: Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field.
         :param pulumi.Input[str] jwks_uri: Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field.
@@ -473,6 +592,23 @@ class AuthAttachment(pulumi.CustomResource):
             auto_create_discovery_anonymous_auth=True,
             use_tke_default=True)
         ```
+        ### Use OIDC Config
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        test_auth_attach = tencentcloud.kubernetes.AuthAttachment("testAuthAttach",
+            cluster_id=tencentcloud_kubernetes_cluster["managed_cluster"]["id"],
+            use_tke_default=True,
+            auto_create_discovery_anonymous_auth=True,
+            auto_create_oidc_config=True,
+            auto_install_pod_identity_webhook_addon=True)
+        oidc_config = tencentcloud.Cam.get_oidc_config(name=tencentcloud_kubernetes_cluster["managed_cluster"]["id"])
+        pulumi.export("identityKey", oidc_config.identity_key)
+        pulumi.export("identityUrl", oidc_config.identity_url)
+        ```
 
         :param str resource_name: The name of the resource.
         :param AuthAttachmentArgs args: The arguments to use to populate this resource's properties.
@@ -489,7 +625,10 @@ class AuthAttachment(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 auto_create_client_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  auto_create_discovery_anonymous_auth: Optional[pulumi.Input[bool]] = None,
+                 auto_create_oidc_config: Optional[pulumi.Input[bool]] = None,
+                 auto_install_pod_identity_webhook_addon: Optional[pulumi.Input[bool]] = None,
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  issuer: Optional[pulumi.Input[str]] = None,
                  jwks_uri: Optional[pulumi.Input[str]] = None,
@@ -508,7 +647,10 @@ class AuthAttachment(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = AuthAttachmentArgs.__new__(AuthAttachmentArgs)
 
+            __props__.__dict__["auto_create_client_ids"] = auto_create_client_ids
             __props__.__dict__["auto_create_discovery_anonymous_auth"] = auto_create_discovery_anonymous_auth
+            __props__.__dict__["auto_create_oidc_config"] = auto_create_oidc_config
+            __props__.__dict__["auto_install_pod_identity_webhook_addon"] = auto_install_pod_identity_webhook_addon
             if cluster_id is None and not opts.urn:
                 raise TypeError("Missing required property 'cluster_id'")
             __props__.__dict__["cluster_id"] = cluster_id
@@ -527,7 +669,10 @@ class AuthAttachment(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            auto_create_client_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             auto_create_discovery_anonymous_auth: Optional[pulumi.Input[bool]] = None,
+            auto_create_oidc_config: Optional[pulumi.Input[bool]] = None,
+            auto_install_pod_identity_webhook_addon: Optional[pulumi.Input[bool]] = None,
             cluster_id: Optional[pulumi.Input[str]] = None,
             issuer: Optional[pulumi.Input[str]] = None,
             jwks_uri: Optional[pulumi.Input[str]] = None,
@@ -541,7 +686,10 @@ class AuthAttachment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] auto_create_client_ids: Creating ClientId of the identity provider.
         :param pulumi.Input[bool] auto_create_discovery_anonymous_auth: If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
+        :param pulumi.Input[bool] auto_create_oidc_config: Creating an identity provider.
+        :param pulumi.Input[bool] auto_install_pod_identity_webhook_addon: Creating the PodIdentityWebhook component. if `auto_create_oidc_config` is true, this field must set true.
         :param pulumi.Input[str] cluster_id: ID of clusters.
         :param pulumi.Input[str] issuer: Specify service-account-issuer. If use_tke_default is set to `true`, please do not set this field.
         :param pulumi.Input[str] jwks_uri: Specify service-account-jwks-uri. If use_tke_default is set to `true`, please do not set this field.
@@ -553,7 +701,10 @@ class AuthAttachment(pulumi.CustomResource):
 
         __props__ = _AuthAttachmentState.__new__(_AuthAttachmentState)
 
+        __props__.__dict__["auto_create_client_ids"] = auto_create_client_ids
         __props__.__dict__["auto_create_discovery_anonymous_auth"] = auto_create_discovery_anonymous_auth
+        __props__.__dict__["auto_create_oidc_config"] = auto_create_oidc_config
+        __props__.__dict__["auto_install_pod_identity_webhook_addon"] = auto_install_pod_identity_webhook_addon
         __props__.__dict__["cluster_id"] = cluster_id
         __props__.__dict__["issuer"] = issuer
         __props__.__dict__["jwks_uri"] = jwks_uri
@@ -563,12 +714,36 @@ class AuthAttachment(pulumi.CustomResource):
         return AuthAttachment(resource_name, opts=opts, __props__=__props__)
 
     @property
+    @pulumi.getter(name="autoCreateClientIds")
+    def auto_create_client_ids(self) -> pulumi.Output[Sequence[str]]:
+        """
+        Creating ClientId of the identity provider.
+        """
+        return pulumi.get(self, "auto_create_client_ids")
+
+    @property
     @pulumi.getter(name="autoCreateDiscoveryAnonymousAuth")
     def auto_create_discovery_anonymous_auth(self) -> pulumi.Output[Optional[bool]]:
         """
         If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
         """
         return pulumi.get(self, "auto_create_discovery_anonymous_auth")
+
+    @property
+    @pulumi.getter(name="autoCreateOidcConfig")
+    def auto_create_oidc_config(self) -> pulumi.Output[bool]:
+        """
+        Creating an identity provider.
+        """
+        return pulumi.get(self, "auto_create_oidc_config")
+
+    @property
+    @pulumi.getter(name="autoInstallPodIdentityWebhookAddon")
+    def auto_install_pod_identity_webhook_addon(self) -> pulumi.Output[bool]:
+        """
+        Creating the PodIdentityWebhook component. if `auto_create_oidc_config` is true, this field must set true.
+        """
+        return pulumi.get(self, "auto_install_pod_identity_webhook_addon")
 
     @property
     @pulumi.getter(name="clusterId")

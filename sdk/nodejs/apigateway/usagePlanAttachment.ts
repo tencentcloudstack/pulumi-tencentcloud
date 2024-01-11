@@ -7,31 +7,34 @@ import * as utilities from "../utilities";
 /**
  * Use this resource to attach API gateway usage plan to service.
  *
+ * > **NOTE:** If the `authType` parameter of API is not `SECRET`, it cannot be bound access key.
+ *
  * ## Example Usage
+ * ### Normal creation
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const plan = new tencentcloud.apigateway.UsagePlan("plan", {
- *     usagePlanName: "my_plan",
- *     usagePlanDesc: "nice plan",
+ * const exampleUsagePlan = new tencentcloud.apigateway.UsagePlan("exampleUsagePlan", {
+ *     usagePlanName: "tf_example",
+ *     usagePlanDesc: "desc.",
  *     maxRequestNum: 100,
  *     maxRequestNumPreSec: 10,
  * });
- * const service = new tencentcloud.apigateway.Service("service", {
- *     serviceName: "niceservice",
+ * const exampleService = new tencentcloud.apigateway.Service("exampleService", {
+ *     serviceName: "tf_example",
  *     protocol: "http&https",
- *     serviceDesc: "your nice service",
+ *     serviceDesc: "desc.",
  *     netTypes: [
  *         "INNER",
  *         "OUTER",
  *     ],
  *     ipVersion: "IPv4",
  * });
- * const api = new tencentcloud.apigateway.Api("api", {
- *     serviceId: service.id,
- *     apiName: "hello_update",
+ * const exampleApi = new tencentcloud.apigateway.Api("exampleApi", {
+ *     serviceId: exampleService.id,
+ *     apiName: "tf_example",
  *     apiDesc: "my hello api update",
  *     authType: "SECRET",
  *     protocol: "HTTP",
@@ -42,8 +45,8 @@ import * as utilities from "../utilities";
  *         name: "email",
  *         position: "QUERY",
  *         type: "string",
- *         desc: "your email please?",
- *         defaultValue: "tom@qq.com",
+ *         desc: "desc.",
+ *         defaultValue: "test@qq.com",
  *         required: true,
  *     }],
  *     serviceConfigType: "HTTP",
@@ -55,19 +58,38 @@ import * as utilities from "../utilities";
  *     responseSuccessExample: "<note>success</note>",
  *     responseFailExample: "<note>fail</note>",
  *     responseErrorCodes: [{
- *         code: 10,
+ *         code: 500,
  *         msg: "system error",
  *         desc: "system error code",
- *         convertedCode: -10,
+ *         convertedCode: 5000,
  *         needConvert: true,
  *     }],
  * });
- * const attachService = new tencentcloud.apigateway.UsagePlanAttachment("attachService", {
- *     usagePlanId: plan.id,
- *     serviceId: service.id,
+ * const exampleUsagePlanAttachment = new tencentcloud.apigateway.UsagePlanAttachment("exampleUsagePlanAttachment", {
+ *     usagePlanId: exampleUsagePlan.id,
+ *     serviceId: exampleService.id,
  *     environment: "release",
  *     bindType: "API",
- *     apiId: api.id,
+ *     apiId: exampleApi.id,
+ * });
+ * ```
+ * ### Bind the key to a usage plan
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleApiKey = new tencentcloud.apigateway.ApiKey("exampleApiKey", {
+ *     secretName: "tf_example",
+ *     status: "on",
+ * });
+ * const exampleUsagePlanAttachment = new tencentcloud.apigateway.UsagePlanAttachment("exampleUsagePlanAttachment", {
+ *     usagePlanId: tencentcloud_api_gateway_usage_plan.example.id,
+ *     serviceId: tencentcloud_api_gateway_service.example.id,
+ *     environment: "release",
+ *     bindType: "API",
+ *     apiId: tencentcloud_api_gateway_api.example.id,
+ *     accessKeyIds: [exampleApiKey.id],
  * });
  * ```
  *
@@ -108,6 +130,10 @@ export class UsagePlanAttachment extends pulumi.CustomResource {
     }
 
     /**
+     * Array of key IDs to be bound.
+     */
+    public readonly accessKeyIds!: pulumi.Output<string[] | undefined>;
+    /**
      * ID of the API. This parameter will be required when `bindType` is `API`.
      */
     public readonly apiId!: pulumi.Output<string | undefined>;
@@ -141,6 +167,7 @@ export class UsagePlanAttachment extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as UsagePlanAttachmentState | undefined;
+            resourceInputs["accessKeyIds"] = state ? state.accessKeyIds : undefined;
             resourceInputs["apiId"] = state ? state.apiId : undefined;
             resourceInputs["bindType"] = state ? state.bindType : undefined;
             resourceInputs["environment"] = state ? state.environment : undefined;
@@ -157,6 +184,7 @@ export class UsagePlanAttachment extends pulumi.CustomResource {
             if ((!args || args.usagePlanId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'usagePlanId'");
             }
+            resourceInputs["accessKeyIds"] = args ? args.accessKeyIds : undefined;
             resourceInputs["apiId"] = args ? args.apiId : undefined;
             resourceInputs["bindType"] = args ? args.bindType : undefined;
             resourceInputs["environment"] = args ? args.environment : undefined;
@@ -172,6 +200,10 @@ export class UsagePlanAttachment extends pulumi.CustomResource {
  * Input properties used for looking up and filtering UsagePlanAttachment resources.
  */
 export interface UsagePlanAttachmentState {
+    /**
+     * Array of key IDs to be bound.
+     */
+    accessKeyIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * ID of the API. This parameter will be required when `bindType` is `API`.
      */
@@ -198,6 +230,10 @@ export interface UsagePlanAttachmentState {
  * The set of arguments for constructing a UsagePlanAttachment resource.
  */
 export interface UsagePlanAttachmentArgs {
+    /**
+     * Array of key IDs to be bound.
+     */
+    accessKeyIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * ID of the API. This parameter will be required when `bindType` is `API`.
      */

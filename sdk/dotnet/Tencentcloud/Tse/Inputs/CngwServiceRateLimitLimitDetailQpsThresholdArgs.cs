@@ -13,9 +13,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 
     public sealed class CngwServiceRateLimitLimitDetailQpsThresholdArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// the max threshold.
+        /// </summary>
         [Input("max", required: true)]
         public Input<int> Max { get; set; } = null!;
 
+        /// <summary>
+        /// qps threshold unit.Reference value:`second`, `minute`, `hour`, `day`, `month`, `year`.
+        /// </summary>
         [Input("unit", required: true)]
         public Input<string> Unit { get; set; } = null!;
 

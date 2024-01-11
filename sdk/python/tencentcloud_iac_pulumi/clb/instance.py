@@ -29,6 +29,7 @@ class InstanceArgs:
                  master_zone_id: Optional[pulumi.Input[str]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 sla_type: Optional[pulumi.Input[str]] = None,
                  slave_zone_id: Optional[pulumi.Input[str]] = None,
                  snat_ips: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceSnatIpArgs']]]] = None,
                  snat_pro: Optional[pulumi.Input[bool]] = None,
@@ -36,6 +37,7 @@ class InstanceArgs:
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  target_region_info_region: Optional[pulumi.Input[str]] = None,
                  target_region_info_vpc_id: Optional[pulumi.Input[str]] = None,
+                 vip_isp: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone_id: Optional[pulumi.Input[str]] = None):
         """
@@ -54,6 +56,7 @@ class InstanceArgs:
         :param pulumi.Input[str] master_zone_id: Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.
         :param pulumi.Input[int] project_id: ID of the project within the CLB instance, `0` - Default Project.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
+        :param pulumi.Input[str] sla_type: This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
         :param pulumi.Input[str] slave_zone_id: Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceSnatIpArgs']]] snat_ips: Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `Clb.SnatIp` to handle fixed ips.
         :param pulumi.Input[bool] snat_pro: Indicates whether Binding IPs of other VPCs feature switch.
@@ -61,6 +64,7 @@ class InstanceArgs:
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this CLB.
         :param pulumi.Input[str] target_region_info_region: Region information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
         :param pulumi.Input[str] target_region_info_vpc_id: Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
+        :param pulumi.Input[str] vip_isp: Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
         :param pulumi.Input[str] vpc_id: VPC ID of the CLB.
         :param pulumi.Input[str] zone_id: Available zone id, only applicable to open CLB.
         """
@@ -90,6 +94,8 @@ class InstanceArgs:
             pulumi.set(__self__, "project_id", project_id)
         if security_groups is not None:
             pulumi.set(__self__, "security_groups", security_groups)
+        if sla_type is not None:
+            pulumi.set(__self__, "sla_type", sla_type)
         if slave_zone_id is not None:
             pulumi.set(__self__, "slave_zone_id", slave_zone_id)
         if snat_ips is not None:
@@ -104,6 +110,8 @@ class InstanceArgs:
             pulumi.set(__self__, "target_region_info_region", target_region_info_region)
         if target_region_info_vpc_id is not None:
             pulumi.set(__self__, "target_region_info_vpc_id", target_region_info_vpc_id)
+        if vip_isp is not None:
+            pulumi.set(__self__, "vip_isp", vip_isp)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
         if zone_id is not None:
@@ -278,6 +286,18 @@ class InstanceArgs:
         pulumi.set(self, "security_groups", value)
 
     @property
+    @pulumi.getter(name="slaType")
+    def sla_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
+        """
+        return pulumi.get(self, "sla_type")
+
+    @sla_type.setter
+    def sla_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "sla_type", value)
+
+    @property
     @pulumi.getter(name="slaveZoneId")
     def slave_zone_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -362,6 +382,18 @@ class InstanceArgs:
         pulumi.set(self, "target_region_info_vpc_id", value)
 
     @property
+    @pulumi.getter(name="vipIsp")
+    def vip_isp(self) -> Optional[pulumi.Input[str]]:
+        """
+        Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
+        """
+        return pulumi.get(self, "vip_isp")
+
+    @vip_isp.setter
+    def vip_isp(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vip_isp", value)
+
+    @property
     @pulumi.getter(name="vpcId")
     def vpc_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -405,6 +437,7 @@ class _InstanceState:
                  network_type: Optional[pulumi.Input[str]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 sla_type: Optional[pulumi.Input[str]] = None,
                  slave_zone_id: Optional[pulumi.Input[str]] = None,
                  snat_ips: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceSnatIpArgs']]]] = None,
                  snat_pro: Optional[pulumi.Input[bool]] = None,
@@ -433,6 +466,7 @@ class _InstanceState:
         :param pulumi.Input[str] network_type: Type of CLB instance. Valid values: `OPEN` and `INTERNAL`.
         :param pulumi.Input[int] project_id: ID of the project within the CLB instance, `0` - Default Project.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
+        :param pulumi.Input[str] sla_type: This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
         :param pulumi.Input[str] slave_zone_id: Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceSnatIpArgs']]] snat_ips: Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `Clb.SnatIp` to handle fixed ips.
         :param pulumi.Input[bool] snat_pro: Indicates whether Binding IPs of other VPCs feature switch.
@@ -476,6 +510,8 @@ class _InstanceState:
             pulumi.set(__self__, "project_id", project_id)
         if security_groups is not None:
             pulumi.set(__self__, "security_groups", security_groups)
+        if sla_type is not None:
+            pulumi.set(__self__, "sla_type", sla_type)
         if slave_zone_id is not None:
             pulumi.set(__self__, "slave_zone_id", slave_zone_id)
         if snat_ips is not None:
@@ -690,6 +726,18 @@ class _InstanceState:
         pulumi.set(self, "security_groups", value)
 
     @property
+    @pulumi.getter(name="slaType")
+    def sla_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
+        """
+        return pulumi.get(self, "sla_type")
+
+    @sla_type.setter
+    def sla_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "sla_type", value)
+
+    @property
     @pulumi.getter(name="slaveZoneId")
     def slave_zone_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -829,6 +877,7 @@ class Instance(pulumi.CustomResource):
                  network_type: Optional[pulumi.Input[str]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 sla_type: Optional[pulumi.Input[str]] = None,
                  slave_zone_id: Optional[pulumi.Input[str]] = None,
                  snat_ips: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceSnatIpArgs']]]]] = None,
                  snat_pro: Optional[pulumi.Input[bool]] = None,
@@ -836,6 +885,7 @@ class Instance(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  target_region_info_region: Optional[pulumi.Input[str]] = None,
                  target_region_info_vpc_id: Optional[pulumi.Input[str]] = None,
+                 vip_isp: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -859,6 +909,23 @@ class Instance(pulumi.CustomResource):
             },
             vpc_id="vpc-7007ll7q")
         ```
+        ### LCU-supported CLB
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        internal_clb = tencentcloud.clb.Instance("internalClb",
+            clb_name="myclb",
+            network_type="INTERNAL",
+            project_id=0,
+            sla_type="clb.c3.medium",
+            subnet_id="subnet-o3a5nt20",
+            tags={
+                "test": "tf",
+            },
+            vpc_id="vpc-2hfyray3")
+        ```
         ### OPEN CLB
 
         ```python
@@ -876,6 +943,33 @@ class Instance(pulumi.CustomResource):
             target_region_info_region="ap-guangzhou",
             target_region_info_vpc_id="vpc-da7ffa61",
             vpc_id="vpc-da7ffa61")
+        ```
+        ### OPNE CLB with VipIsp
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.vpc.BandwidthPackage("example",
+            network_type="SINGLEISP_CMCC",
+            charge_type="ENHANCED95_POSTPAID_BY_MONTH",
+            bandwidth_package_name="tf-example",
+            internet_max_bandwidth=300,
+            egress="center_egress1",
+            tags={
+                "createdBy": "terraform",
+            })
+        open_clb = tencentcloud.clb.Instance("openClb",
+            network_type="OPEN",
+            clb_name="my-open-clb",
+            project_id=0,
+            vpc_id="vpc-4owdpnwr",
+            vip_isp="CMCC",
+            internet_charge_type="BANDWIDTH_PACKAGE",
+            bandwidth_package_id=example.id,
+            tags={
+                "test": "open",
+            })
         ```
         ### Dynamic Vip Instance
 
@@ -997,6 +1091,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] network_type: Type of CLB instance. Valid values: `OPEN` and `INTERNAL`.
         :param pulumi.Input[int] project_id: ID of the project within the CLB instance, `0` - Default Project.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
+        :param pulumi.Input[str] sla_type: This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
         :param pulumi.Input[str] slave_zone_id: Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceSnatIpArgs']]]] snat_ips: Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `Clb.SnatIp` to handle fixed ips.
         :param pulumi.Input[bool] snat_pro: Indicates whether Binding IPs of other VPCs feature switch.
@@ -1004,6 +1099,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this CLB.
         :param pulumi.Input[str] target_region_info_region: Region information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
         :param pulumi.Input[str] target_region_info_vpc_id: Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
+        :param pulumi.Input[str] vip_isp: Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
         :param pulumi.Input[str] vpc_id: VPC ID of the CLB.
         :param pulumi.Input[str] zone_id: Available zone id, only applicable to open CLB.
         """
@@ -1033,6 +1129,23 @@ class Instance(pulumi.CustomResource):
             },
             vpc_id="vpc-7007ll7q")
         ```
+        ### LCU-supported CLB
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        internal_clb = tencentcloud.clb.Instance("internalClb",
+            clb_name="myclb",
+            network_type="INTERNAL",
+            project_id=0,
+            sla_type="clb.c3.medium",
+            subnet_id="subnet-o3a5nt20",
+            tags={
+                "test": "tf",
+            },
+            vpc_id="vpc-2hfyray3")
+        ```
         ### OPEN CLB
 
         ```python
@@ -1050,6 +1163,33 @@ class Instance(pulumi.CustomResource):
             target_region_info_region="ap-guangzhou",
             target_region_info_vpc_id="vpc-da7ffa61",
             vpc_id="vpc-da7ffa61")
+        ```
+        ### OPNE CLB with VipIsp
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.vpc.BandwidthPackage("example",
+            network_type="SINGLEISP_CMCC",
+            charge_type="ENHANCED95_POSTPAID_BY_MONTH",
+            bandwidth_package_name="tf-example",
+            internet_max_bandwidth=300,
+            egress="center_egress1",
+            tags={
+                "createdBy": "terraform",
+            })
+        open_clb = tencentcloud.clb.Instance("openClb",
+            network_type="OPEN",
+            clb_name="my-open-clb",
+            project_id=0,
+            vpc_id="vpc-4owdpnwr",
+            vip_isp="CMCC",
+            internet_charge_type="BANDWIDTH_PACKAGE",
+            bandwidth_package_id=example.id,
+            tags={
+                "test": "open",
+            })
         ```
         ### Dynamic Vip Instance
 
@@ -1184,6 +1324,7 @@ class Instance(pulumi.CustomResource):
                  network_type: Optional[pulumi.Input[str]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 sla_type: Optional[pulumi.Input[str]] = None,
                  slave_zone_id: Optional[pulumi.Input[str]] = None,
                  snat_ips: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceSnatIpArgs']]]]] = None,
                  snat_pro: Optional[pulumi.Input[bool]] = None,
@@ -1191,6 +1332,7 @@ class Instance(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  target_region_info_region: Optional[pulumi.Input[str]] = None,
                  target_region_info_vpc_id: Optional[pulumi.Input[str]] = None,
+                 vip_isp: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -1225,6 +1367,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["network_type"] = network_type
             __props__.__dict__["project_id"] = project_id
             __props__.__dict__["security_groups"] = security_groups
+            __props__.__dict__["sla_type"] = sla_type
             __props__.__dict__["slave_zone_id"] = slave_zone_id
             __props__.__dict__["snat_ips"] = snat_ips
             __props__.__dict__["snat_pro"] = snat_pro
@@ -1232,11 +1375,11 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["tags"] = tags
             __props__.__dict__["target_region_info_region"] = target_region_info_region
             __props__.__dict__["target_region_info_vpc_id"] = target_region_info_vpc_id
+            __props__.__dict__["vip_isp"] = vip_isp
             __props__.__dict__["vpc_id"] = vpc_id
             __props__.__dict__["zone_id"] = zone_id
             __props__.__dict__["clb_vips"] = None
             __props__.__dict__["domain"] = None
-            __props__.__dict__["vip_isp"] = None
         super(Instance, __self__).__init__(
             'tencentcloud:Clb/instance:Instance',
             resource_name,
@@ -1263,6 +1406,7 @@ class Instance(pulumi.CustomResource):
             network_type: Optional[pulumi.Input[str]] = None,
             project_id: Optional[pulumi.Input[int]] = None,
             security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            sla_type: Optional[pulumi.Input[str]] = None,
             slave_zone_id: Optional[pulumi.Input[str]] = None,
             snat_ips: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceSnatIpArgs']]]]] = None,
             snat_pro: Optional[pulumi.Input[bool]] = None,
@@ -1296,6 +1440,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] network_type: Type of CLB instance. Valid values: `OPEN` and `INTERNAL`.
         :param pulumi.Input[int] project_id: ID of the project within the CLB instance, `0` - Default Project.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
+        :param pulumi.Input[str] sla_type: This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
         :param pulumi.Input[str] slave_zone_id: Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceSnatIpArgs']]]] snat_ips: Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `Clb.SnatIp` to handle fixed ips.
         :param pulumi.Input[bool] snat_pro: Indicates whether Binding IPs of other VPCs feature switch.
@@ -1327,6 +1472,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["network_type"] = network_type
         __props__.__dict__["project_id"] = project_id
         __props__.__dict__["security_groups"] = security_groups
+        __props__.__dict__["sla_type"] = sla_type
         __props__.__dict__["slave_zone_id"] = slave_zone_id
         __props__.__dict__["snat_ips"] = snat_ips
         __props__.__dict__["snat_pro"] = snat_pro
@@ -1466,6 +1612,14 @@ class Instance(pulumi.CustomResource):
         Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
         """
         return pulumi.get(self, "security_groups")
+
+    @property
+    @pulumi.getter(name="slaType")
+    def sla_type(self) -> pulumi.Output[str]:
+        """
+        This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
+        """
+        return pulumi.get(self, "sla_type")
 
     @property
     @pulumi.getter(name="slaveZoneId")

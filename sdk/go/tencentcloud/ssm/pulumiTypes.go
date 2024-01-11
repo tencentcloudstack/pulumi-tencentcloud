@@ -259,6 +259,8 @@ func (o GetSecretVersionsSecretVersionListArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type GetSecretsSecretList struct {
+	// When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.
+	AssociatedInstanceIds []string `pulumi:"associatedInstanceIds"`
 	// Create time of secret.
 	CreateTime int `pulumi:"createTime"`
 	// Uin of Creator.
@@ -269,10 +271,32 @@ type GetSecretsSecretList struct {
 	Description string `pulumi:"description"`
 	// KMS keyId used to encrypt secret.
 	KmsKeyId string `pulumi:"kmsKeyId"`
+	// KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.
+	KmsKeyType string `pulumi:"kmsKeyType"`
+	// Next rotation start time, uinx timestamp.
+	NextRotationTime int `pulumi:"nextRotationTime"`
+	// This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.
+	ProductName string `pulumi:"productName"`
+	// When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.
+	ProjectId int `pulumi:"projectId"`
+	// The cloud product instance ID number corresponding to the cloud product credentials.
+	ResourceId string `pulumi:"resourceId"`
+	// When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.
+	ResourceName string `pulumi:"resourceName"`
+	// The user specified rotation start time.
+	RotationBeginTime string `pulumi:"rotationBeginTime"`
+	// The frequency of rotation, in days, takes effect when rotation is on.
+	RotationFrequency int `pulumi:"rotationFrequency"`
+	// 1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.
+	RotationStatus int `pulumi:"rotationStatus"`
 	// Secret name used to filter result.
 	SecretName string `pulumi:"secretName"`
+	// 0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.
+	SecretType int `pulumi:"secretType"`
 	// Status of secret.
 	Status string `pulumi:"status"`
+	// When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.
+	TargetUin int `pulumi:"targetUin"`
 }
 
 // GetSecretsSecretListInput is an input type that accepts GetSecretsSecretListArgs and GetSecretsSecretListOutput values.
@@ -287,6 +311,8 @@ type GetSecretsSecretListInput interface {
 }
 
 type GetSecretsSecretListArgs struct {
+	// When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.
+	AssociatedInstanceIds pulumi.StringArrayInput `pulumi:"associatedInstanceIds"`
 	// Create time of secret.
 	CreateTime pulumi.IntInput `pulumi:"createTime"`
 	// Uin of Creator.
@@ -297,10 +323,32 @@ type GetSecretsSecretListArgs struct {
 	Description pulumi.StringInput `pulumi:"description"`
 	// KMS keyId used to encrypt secret.
 	KmsKeyId pulumi.StringInput `pulumi:"kmsKeyId"`
+	// KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.
+	KmsKeyType pulumi.StringInput `pulumi:"kmsKeyType"`
+	// Next rotation start time, uinx timestamp.
+	NextRotationTime pulumi.IntInput `pulumi:"nextRotationTime"`
+	// This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.
+	ProductName pulumi.StringInput `pulumi:"productName"`
+	// When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// The cloud product instance ID number corresponding to the cloud product credentials.
+	ResourceId pulumi.StringInput `pulumi:"resourceId"`
+	// When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.
+	ResourceName pulumi.StringInput `pulumi:"resourceName"`
+	// The user specified rotation start time.
+	RotationBeginTime pulumi.StringInput `pulumi:"rotationBeginTime"`
+	// The frequency of rotation, in days, takes effect when rotation is on.
+	RotationFrequency pulumi.IntInput `pulumi:"rotationFrequency"`
+	// 1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.
+	RotationStatus pulumi.IntInput `pulumi:"rotationStatus"`
 	// Secret name used to filter result.
 	SecretName pulumi.StringInput `pulumi:"secretName"`
+	// 0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.
+	SecretType pulumi.IntInput `pulumi:"secretType"`
 	// Status of secret.
 	Status pulumi.StringInput `pulumi:"status"`
+	// When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.
+	TargetUin pulumi.IntInput `pulumi:"targetUin"`
 }
 
 func (GetSecretsSecretListArgs) ElementType() reflect.Type {
@@ -354,6 +402,11 @@ func (o GetSecretsSecretListOutput) ToGetSecretsSecretListOutputWithContext(ctx 
 	return o
 }
 
+// When the credential type is SSH key pair credential, this field is valid and is used to represent the CVM instance ID associated with the SSH key pair.
+func (o GetSecretsSecretListOutput) AssociatedInstanceIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) []string { return v.AssociatedInstanceIds }).(pulumi.StringArrayOutput)
+}
+
 // Create time of secret.
 func (o GetSecretsSecretListOutput) CreateTime() pulumi.IntOutput {
 	return o.ApplyT(func(v GetSecretsSecretList) int { return v.CreateTime }).(pulumi.IntOutput)
@@ -379,14 +432,69 @@ func (o GetSecretsSecretListOutput) KmsKeyId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSecretsSecretList) string { return v.KmsKeyId }).(pulumi.StringOutput)
 }
 
+// KMS CMK type used to encrypt credentials, DEFAULT represents the default key created by SecretsManager, and CUSTOMER represents the user specified key.
+func (o GetSecretsSecretListOutput) KmsKeyType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) string { return v.KmsKeyType }).(pulumi.StringOutput)
+}
+
+// Next rotation start time, uinx timestamp.
+func (o GetSecretsSecretListOutput) NextRotationTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) int { return v.NextRotationTime }).(pulumi.IntOutput)
+}
+
+// This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.
+func (o GetSecretsSecretListOutput) ProductName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) string { return v.ProductName }).(pulumi.StringOutput)
+}
+
+// When the credential type is SSH key pair credential, this field is valid and represents the item ID to which the SSH key pair belongs.
+func (o GetSecretsSecretListOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// The cloud product instance ID number corresponding to the cloud product credentials.
+func (o GetSecretsSecretListOutput) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) string { return v.ResourceId }).(pulumi.StringOutput)
+}
+
+// When the credential type is SSH key pair credential, this field is valid and is used to represent the name of the SSH key pair credential.
+func (o GetSecretsSecretListOutput) ResourceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) string { return v.ResourceName }).(pulumi.StringOutput)
+}
+
+// The user specified rotation start time.
+func (o GetSecretsSecretListOutput) RotationBeginTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) string { return v.RotationBeginTime }).(pulumi.StringOutput)
+}
+
+// The frequency of rotation, in days, takes effect when rotation is on.
+func (o GetSecretsSecretListOutput) RotationFrequency() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) int { return v.RotationFrequency }).(pulumi.IntOutput)
+}
+
+// 1: - Turn on the rotation; 0- No rotation Note: This field may return null, indicating that a valid value cannot be obtained.
+func (o GetSecretsSecretListOutput) RotationStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) int { return v.RotationStatus }).(pulumi.IntOutput)
+}
+
 // Secret name used to filter result.
 func (o GetSecretsSecretListOutput) SecretName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSecretsSecretList) string { return v.SecretName }).(pulumi.StringOutput)
 }
 
+// 0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.
+func (o GetSecretsSecretListOutput) SecretType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) int { return v.SecretType }).(pulumi.IntOutput)
+}
+
 // Status of secret.
 func (o GetSecretsSecretListOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSecretsSecretList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// When the credential type is a cloud API key pair credential, this field is valid and is used to represent the user UIN to which the cloud API key pair belongs.
+func (o GetSecretsSecretListOutput) TargetUin() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSecretsSecretList) int { return v.TargetUin }).(pulumi.IntOutput)
 }
 
 type GetSecretsSecretListArrayOutput struct{ *pulumi.OutputState }

@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  * });
  * const api = new tencentcloud.apigateway.Api("api", {
  *     serviceId: service.id,
- *     apiName: "hello_update",
+ *     apiName: "tf_example",
  *     apiDesc: "my hello api update",
  *     authType: "SECRET",
  *     protocol: "HTTP",

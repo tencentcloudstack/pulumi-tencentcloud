@@ -85,7 +85,7 @@ type TableEntry struct {
 	DestinationCidrBlock pulumi.StringOutput `pulumi:"destinationCidrBlock"`
 	// Whether the entry is disabled, default is `false`.
 	Disabled pulumi.BoolPtrOutput `pulumi:"disabled"`
-	// ID of next-hop gateway. Note: when `nextType` is EIP, GatewayId should be `0`.
+	// ID of next-hop gateway. Note: when `nextType` is EIP, `nextHub` should be `0`.
 	NextHub pulumi.StringOutput `pulumi:"nextHub"`
 	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 	NextType pulumi.StringOutput `pulumi:"nextType"`
@@ -141,7 +141,7 @@ type tableEntryState struct {
 	DestinationCidrBlock *string `pulumi:"destinationCidrBlock"`
 	// Whether the entry is disabled, default is `false`.
 	Disabled *bool `pulumi:"disabled"`
-	// ID of next-hop gateway. Note: when `nextType` is EIP, GatewayId should be `0`.
+	// ID of next-hop gateway. Note: when `nextType` is EIP, `nextHub` should be `0`.
 	NextHub *string `pulumi:"nextHub"`
 	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 	NextType *string `pulumi:"nextType"`
@@ -156,7 +156,7 @@ type TableEntryState struct {
 	DestinationCidrBlock pulumi.StringPtrInput
 	// Whether the entry is disabled, default is `false`.
 	Disabled pulumi.BoolPtrInput
-	// ID of next-hop gateway. Note: when `nextType` is EIP, GatewayId should be `0`.
+	// ID of next-hop gateway. Note: when `nextType` is EIP, `nextHub` should be `0`.
 	NextHub pulumi.StringPtrInput
 	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 	NextType pulumi.StringPtrInput
@@ -175,7 +175,7 @@ type tableEntryArgs struct {
 	DestinationCidrBlock string `pulumi:"destinationCidrBlock"`
 	// Whether the entry is disabled, default is `false`.
 	Disabled *bool `pulumi:"disabled"`
-	// ID of next-hop gateway. Note: when `nextType` is EIP, GatewayId should be `0`.
+	// ID of next-hop gateway. Note: when `nextType` is EIP, `nextHub` should be `0`.
 	NextHub string `pulumi:"nextHub"`
 	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 	NextType string `pulumi:"nextType"`
@@ -191,7 +191,7 @@ type TableEntryArgs struct {
 	DestinationCidrBlock pulumi.StringInput
 	// Whether the entry is disabled, default is `false`.
 	Disabled pulumi.BoolPtrInput
-	// ID of next-hop gateway. Note: when `nextType` is EIP, GatewayId should be `0`.
+	// ID of next-hop gateway. Note: when `nextType` is EIP, `nextHub` should be `0`.
 	NextHub pulumi.StringInput
 	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 	NextType pulumi.StringInput
@@ -301,7 +301,7 @@ func (o TableEntryOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *TableEntry) pulumi.BoolPtrOutput { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
-// ID of next-hop gateway. Note: when `nextType` is EIP, GatewayId should be `0`.
+// ID of next-hop gateway. Note: when `nextType` is EIP, `nextHub` should be `0`.
 func (o TableEntryOutput) NextHub() pulumi.StringOutput {
 	return o.ApplyT(func(v *TableEntry) pulumi.StringOutput { return v.NextHub }).(pulumi.StringOutput)
 }

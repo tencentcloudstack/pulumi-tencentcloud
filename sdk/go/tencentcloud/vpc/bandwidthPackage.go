@@ -68,6 +68,35 @@ import (
 // 	})
 // }
 // ```
+// ### Bandwidth Package With Egress
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Vpc.NewBandwidthPackage(ctx, "example", &Vpc.BandwidthPackageArgs{
+// 			BandwidthPackageName: pulumi.String("tf-example"),
+// 			ChargeType:           pulumi.String("ENHANCED95_POSTPAID_BY_MONTH"),
+// 			Egress:               pulumi.String("center_egress2"),
+// 			InternetMaxBandwidth: pulumi.Int(400),
+// 			NetworkType:          pulumi.String("SINGLEISP_CMCC"),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 //
 // ## Import
 //
@@ -81,11 +110,13 @@ type BandwidthPackage struct {
 
 	// Bandwidth package name.
 	BandwidthPackageName pulumi.StringPtrOutput `pulumi:"bandwidthPackageName"`
-	// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+	// Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
+	// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	Egress pulumi.StringOutput `pulumi:"egress"`
 	// Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
 	InternetMaxBandwidth pulumi.IntPtrOutput `pulumi:"internetMaxBandwidth"`
-	// Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+	// Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
 	NetworkType pulumi.StringPtrOutput `pulumi:"networkType"`
 	// Tag description list.
 	Tags pulumi.MapOutput `pulumi:"tags"`
@@ -125,11 +156,13 @@ func GetBandwidthPackage(ctx *pulumi.Context,
 type bandwidthPackageState struct {
 	// Bandwidth package name.
 	BandwidthPackageName *string `pulumi:"bandwidthPackageName"`
-	// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+	// Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
 	ChargeType *string `pulumi:"chargeType"`
+	// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	Egress *string `pulumi:"egress"`
 	// Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
 	InternetMaxBandwidth *int `pulumi:"internetMaxBandwidth"`
-	// Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+	// Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
 	NetworkType *string `pulumi:"networkType"`
 	// Tag description list.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -140,11 +173,13 @@ type bandwidthPackageState struct {
 type BandwidthPackageState struct {
 	// Bandwidth package name.
 	BandwidthPackageName pulumi.StringPtrInput
-	// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+	// Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
 	ChargeType pulumi.StringPtrInput
+	// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	Egress pulumi.StringPtrInput
 	// Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
 	InternetMaxBandwidth pulumi.IntPtrInput
-	// Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+	// Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
 	NetworkType pulumi.StringPtrInput
 	// Tag description list.
 	Tags pulumi.MapInput
@@ -159,11 +194,13 @@ func (BandwidthPackageState) ElementType() reflect.Type {
 type bandwidthPackageArgs struct {
 	// Bandwidth package name.
 	BandwidthPackageName *string `pulumi:"bandwidthPackageName"`
-	// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+	// Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
 	ChargeType *string `pulumi:"chargeType"`
+	// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	Egress *string `pulumi:"egress"`
 	// Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
 	InternetMaxBandwidth *int `pulumi:"internetMaxBandwidth"`
-	// Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+	// Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
 	NetworkType *string `pulumi:"networkType"`
 	// Tag description list.
 	Tags map[string]interface{} `pulumi:"tags"`
@@ -175,11 +212,13 @@ type bandwidthPackageArgs struct {
 type BandwidthPackageArgs struct {
 	// Bandwidth package name.
 	BandwidthPackageName pulumi.StringPtrInput
-	// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+	// Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
 	ChargeType pulumi.StringPtrInput
+	// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	Egress pulumi.StringPtrInput
 	// Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
 	InternetMaxBandwidth pulumi.IntPtrInput
-	// Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+	// Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
 	NetworkType pulumi.StringPtrInput
 	// Tag description list.
 	Tags pulumi.MapInput
@@ -279,9 +318,14 @@ func (o BandwidthPackageOutput) BandwidthPackageName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *BandwidthPackage) pulumi.StringPtrOutput { return v.BandwidthPackageName }).(pulumi.StringPtrOutput)
 }
 
-// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+// Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
 func (o BandwidthPackageOutput) ChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *BandwidthPackage) pulumi.StringPtrOutput { return v.ChargeType }).(pulumi.StringPtrOutput)
+}
+
+// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+func (o BandwidthPackageOutput) Egress() pulumi.StringOutput {
+	return o.ApplyT(func(v *BandwidthPackage) pulumi.StringOutput { return v.Egress }).(pulumi.StringOutput)
 }
 
 // Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
@@ -289,7 +333,7 @@ func (o BandwidthPackageOutput) InternetMaxBandwidth() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *BandwidthPackage) pulumi.IntPtrOutput { return v.InternetMaxBandwidth }).(pulumi.IntPtrOutput)
 }
 
-// Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+// Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
 func (o BandwidthPackageOutput) NetworkType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *BandwidthPackage) pulumi.StringPtrOutput { return v.NetworkType }).(pulumi.StringPtrOutput)
 }

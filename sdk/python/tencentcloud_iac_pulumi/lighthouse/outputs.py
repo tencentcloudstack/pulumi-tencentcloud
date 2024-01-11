@@ -13,6 +13,7 @@ __all__ = [
     'DiskAutoMountConfiguration',
     'DiskDiskChargePrepaid',
     'FirewallRuleFirewallRule',
+    'FirewallTemplateTemplateRule',
     'InstanceContainer',
     'InstanceContainerEnv',
     'InstanceContainerPublishPort',
@@ -257,6 +258,91 @@ class FirewallRuleFirewallRule(dict):
     def port(self) -> Optional[str]:
         """
         Port. Valid values are ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign.
+        """
+        return pulumi.get(self, "port")
+
+
+@pulumi.output_type
+class FirewallTemplateTemplateRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "cidrBlock":
+            suggest = "cidr_block"
+        elif key == "firewallRuleDescription":
+            suggest = "firewall_rule_description"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in FirewallTemplateTemplateRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        FirewallTemplateTemplateRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        FirewallTemplateTemplateRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 protocol: str,
+                 action: Optional[str] = None,
+                 cidr_block: Optional[str] = None,
+                 firewall_rule_description: Optional[str] = None,
+                 port: Optional[str] = None):
+        """
+        :param str protocol: Protocol. Values: TCP, UDP, ICMP, ALL.
+        :param str action: Action. Values: ACCEPT, DROP. The default is `ACCEPT`.
+        :param str cidr_block: Network segment or IP (mutually exclusive). The default is `0.0.0.0`, indicating all sources.
+        :param str firewall_rule_description: Firewall rule description.
+        :param str port: Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.
+        """
+        pulumi.set(__self__, "protocol", protocol)
+        if action is not None:
+            pulumi.set(__self__, "action", action)
+        if cidr_block is not None:
+            pulumi.set(__self__, "cidr_block", cidr_block)
+        if firewall_rule_description is not None:
+            pulumi.set(__self__, "firewall_rule_description", firewall_rule_description)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        Protocol. Values: TCP, UDP, ICMP, ALL.
+        """
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter
+    def action(self) -> Optional[str]:
+        """
+        Action. Values: ACCEPT, DROP. The default is `ACCEPT`.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="cidrBlock")
+    def cidr_block(self) -> Optional[str]:
+        """
+        Network segment or IP (mutually exclusive). The default is `0.0.0.0`, indicating all sources.
+        """
+        return pulumi.get(self, "cidr_block")
+
+    @property
+    @pulumi.getter(name="firewallRuleDescription")
+    def firewall_rule_description(self) -> Optional[str]:
+        """
+        Firewall rule description.
+        """
+        return pulumi.get(self, "firewall_rule_description")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[str]:
+        """
+        Port. Values: ALL, Separate ports, comma-separated discrete ports, minus sign-separated port ranges.
         """
         return pulumi.get(self, "port")
 

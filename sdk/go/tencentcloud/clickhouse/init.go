@@ -21,8 +21,24 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Clickhouse/account:Account":
+		r = &Account{}
+	case "tencentcloud:Clickhouse/accountPermission:AccountPermission":
+		r = &AccountPermission{}
+	case "tencentcloud:Clickhouse/backup:Backup":
+		r = &Backup{}
+	case "tencentcloud:Clickhouse/backupStrategy:BackupStrategy":
+		r = &BackupStrategy{}
+	case "tencentcloud:Clickhouse/deleteBackupData:DeleteBackupData":
+		r = &DeleteBackupData{}
 	case "tencentcloud:Clickhouse/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Clickhouse/keyvalConfig:KeyvalConfig":
+		r = &KeyvalConfig{}
+	case "tencentcloud:Clickhouse/recoverBackupJob:RecoverBackupJob":
+		r = &RecoverBackupJob{}
+	case "tencentcloud:Clickhouse/xmlConfig:XmlConfig":
+		r = &XmlConfig{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -38,7 +54,47 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Clickhouse/account",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Clickhouse/accountPermission",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Clickhouse/backup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Clickhouse/backupStrategy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Clickhouse/deleteBackupData",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Clickhouse/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Clickhouse/keyvalConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Clickhouse/recoverBackupJob",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Clickhouse/xmlConfig",
 		&module{version},
 	)
 }

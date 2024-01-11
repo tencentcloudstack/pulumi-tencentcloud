@@ -25,6 +25,7 @@ export * from "./getSpecinfos";
 export * from "./getXlogs";
 export * from "./getZones";
 export * from "./instance";
+export * from "./instanceHaConfig";
 export * from "./isolateDbInstanceOperation";
 export * from "./modifyAccountRemarkOperation";
 export * from "./modifySwitchTimePeriodOperation";
@@ -44,6 +45,7 @@ import { BaseBackup } from "./baseBackup";
 import { DeleteLogBackupOperation } from "./deleteLogBackupOperation";
 import { DisisolateDbInstanceOperation } from "./disisolateDbInstanceOperation";
 import { Instance } from "./instance";
+import { InstanceHaConfig } from "./instanceHaConfig";
 import { IsolateDbInstanceOperation } from "./isolateDbInstanceOperation";
 import { ModifyAccountRemarkOperation } from "./modifyAccountRemarkOperation";
 import { ModifySwitchTimePeriodOperation } from "./modifySwitchTimePeriodOperation";
@@ -72,6 +74,8 @@ const _module = {
                 return new DisisolateDbInstanceOperation(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Postgresql/instanceHaConfig:InstanceHaConfig":
+                return new InstanceHaConfig(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/isolateDbInstanceOperation:IsolateDbInstanceOperation":
                 return new IsolateDbInstanceOperation(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/modifyAccountRemarkOperation:ModifyAccountRemarkOperation":
@@ -105,6 +109,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/baseBackup", _
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/deleteLogBackupOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/disisolateDbInstanceOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/instanceHaConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/isolateDbInstanceOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/modifyAccountRemarkOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/modifySwitchTimePeriodOperation", _module)

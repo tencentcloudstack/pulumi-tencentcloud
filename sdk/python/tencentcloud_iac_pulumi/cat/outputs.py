@@ -75,6 +75,7 @@ class GetNodeNodeDefineResult(dict):
                  name: str,
                  net_service: str,
                  node_define_status: int,
+                 task_types: Sequence[int],
                  type: int):
         """
         :param str city: City.
@@ -86,6 +87,7 @@ class GetNodeNodeDefineResult(dict):
         :param str name: Node name.
         :param str net_service: Network service provider.
         :param int node_define_status: Node status: 1=running, 2=offline.
+        :param Sequence[int] task_types: The task types supported by the node. `1`: page performance, `2`: file upload, `3`: file download, `4`: port performance, `5`: network quality, `6`: audio and video experience.
         :param int type: Node Type;1 = IDC,2 = LastMile,3 = Mobile.
         """
         pulumi.set(__self__, "city", city)
@@ -97,6 +99,7 @@ class GetNodeNodeDefineResult(dict):
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "net_service", net_service)
         pulumi.set(__self__, "node_define_status", node_define_status)
+        pulumi.set(__self__, "task_types", task_types)
         pulumi.set(__self__, "type", type)
 
     @property
@@ -170,6 +173,14 @@ class GetNodeNodeDefineResult(dict):
         Node status: 1=running, 2=offline.
         """
         return pulumi.get(self, "node_define_status")
+
+    @property
+    @pulumi.getter(name="taskTypes")
+    def task_types(self) -> Sequence[int]:
+        """
+        The task types supported by the node. `1`: page performance, `2`: file upload, `3`: file download, `4`: port performance, `5`: network quality, `6`: audio and video experience.
+        """
+        return pulumi.get(self, "task_types")
 
     @property
     @pulumi.getter

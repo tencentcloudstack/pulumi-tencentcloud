@@ -14,39 +14,98 @@ import (
 // Provides a resource to create a ssm productSecret
 //
 // ## Example Usage
+// ### Ssm secret for mysql
 //
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
 // 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		kms, err := Kms.GetKeys(ctx, &kms.GetKeysArgs{
-// 			KeyState: pulumi.IntRef(1),
+// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+// 			Product: "cdb",
 // 		}, nil)
 // 		if err != nil {
 // 			return err
 // 		}
-// 		mysql, err := Mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
-// 			MysqlId: pulumi.StringRef("cdb-fitq5t9h"),
-// 		}, nil)
+// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = Ssm.NewProductSecret(ctx, "productSecret", &Ssm.ProductSecretArgs{
-// 			SecretName:     pulumi.String("tf-product-ssm-test"),
-// 			UserNamePrefix: pulumi.String("test"),
+// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+// 			VpcId:            vpc.ID(),
+// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
+// 			IsMulticast:      pulumi.Bool(false),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+// 			Description: pulumi.String("desc."),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleInstance, err := Mysql.NewInstance(ctx, "exampleInstance", &Mysql.InstanceArgs{
+// 			InternetService:  pulumi.Int(1),
+// 			EngineVersion:    pulumi.String("5.7"),
+// 			ChargeType:       pulumi.String("POSTPAID"),
+// 			RootPassword:     pulumi.String("PassWord123"),
+// 			SlaveDeployMode:  pulumi.Int(0),
+// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+// 			SlaveSyncMode:    pulumi.Int(1),
+// 			InstanceName:     pulumi.String("tf-example"),
+// 			MemSize:          pulumi.Int(4000),
+// 			VolumeSize:       pulumi.Int(200),
+// 			VpcId:            vpc.ID(),
+// 			SubnetId:         subnet.ID(),
+// 			IntranetPort:     pulumi.Int(3306),
+// 			SecurityGroups: pulumi.StringArray{
+// 				securityGroup.ID(),
+// 			},
+// 			Tags: pulumi.AnyMap{
+// 				"createBy": pulumi.Any("terraform"),
+// 			},
+// 			Parameters: pulumi.AnyMap{
+// 				"character_set_server": pulumi.Any("utf8"),
+// 				"max_connections":      pulumi.Any("1000"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleKey, err := Kms.NewKey(ctx, "exampleKey", &Kms.KeyArgs{
+// 			Alias:              pulumi.String("tf-example-kms-key"),
+// 			Description:        pulumi.String("example of kms key"),
+// 			KeyRotationEnabled: pulumi.Bool(false),
+// 			IsEnabled:          pulumi.Bool(true),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Ssm.NewProductSecret(ctx, "exampleProductSecret", &Ssm.ProductSecretArgs{
+// 			SecretName:     pulumi.String("tf-example"),
+// 			UserNamePrefix: pulumi.String("prefix"),
 // 			ProductName:    pulumi.String("Mysql"),
-// 			InstanceId:     pulumi.String(mysql.InstanceLists[0].MysqlId),
+// 			InstanceId:     exampleInstance.ID(),
 // 			Domains: pulumi.StringArray{
 // 				pulumi.String("10.0.0.0"),
 // 			},
@@ -59,11 +118,72 @@ import (
 // 				},
 // 			},
 // 			Description:       pulumi.String("for ssm product test"),
-// 			KmsKeyId:          pulumi.String(kms.KeyLists[0].KeyId),
+// 			KmsKeyId:          exampleKey.ID(),
 // 			Status:            pulumi.String("Enabled"),
 // 			EnableRotation:    pulumi.Bool(true),
 // 			RotationBeginTime: pulumi.String("2023-08-05 20:54:33"),
 // 			RotationFrequency: pulumi.Int(30),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### Ssm secret for tdsql-c-mysql
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Ssm.NewProductSecret(ctx, "example", &Ssm.ProductSecretArgs{
+// 			SecretName:     pulumi.String("tf-tdsql-c-example"),
+// 			UserNamePrefix: pulumi.String("prefix"),
+// 			ProductName:    pulumi.String("Tdsql_C_Mysql"),
+// 			InstanceId:     pulumi.String("cynosdbmysql-xxxxxx"),
+// 			Domains: pulumi.StringArray{
+// 				pulumi.String("%"),
+// 			},
+// 			PrivilegesLists: ssm.ProductSecretPrivilegesListArray{
+// 				&ssm.ProductSecretPrivilegesListArgs{
+// 					PrivilegeName: pulumi.String("GlobalPrivileges"),
+// 					Privileges: pulumi.StringArray{
+// 						pulumi.String("ALTER"),
+// 						pulumi.String("CREATE"),
+// 						pulumi.String("DELETE"),
+// 					},
+// 				},
+// 				&ssm.ProductSecretPrivilegesListArgs{
+// 					PrivilegeName: pulumi.String("DatabasePrivileges"),
+// 					Database:      pulumi.String("test"),
+// 					Privileges: pulumi.StringArray{
+// 						pulumi.String("ALTER"),
+// 						pulumi.String("CREATE"),
+// 						pulumi.String("DELETE"),
+// 						pulumi.String("SELECT"),
+// 					},
+// 				},
+// 			},
+// 			Description:       pulumi.String("test tdsql-c"),
+// 			KmsKeyId:          nil,
+// 			Status:            pulumi.String("Enabled"),
+// 			EnableRotation:    pulumi.Bool(false),
+// 			RotationBeginTime: pulumi.String("2023-08-05 20:54:33"),
+// 			RotationFrequency: pulumi.Int(30),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
 // 		})
 // 		if err != nil {
 // 			return err
@@ -89,7 +209,7 @@ type ProductSecret struct {
 	KmsKeyId pulumi.StringPtrOutput `pulumi:"kmsKeyId"`
 	// List of permissions that need to be granted when the credential is bound to a Tencent Cloud service.
 	PrivilegesLists ProductSecretPrivilegesListArrayOutput `pulumi:"privilegesLists"`
-	// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `Ssm.getProducts` to query supported products.
+	// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `Ssm.getProducts` to query supported products.
 	ProductName pulumi.StringOutput `pulumi:"productName"`
 	// User-Defined rotation start time in the format of 2006-01-02 15:04:05.When `EnableRotation` is `True`, this parameter is required.
 	RotationBeginTime pulumi.StringOutput `pulumi:"rotationBeginTime"`
@@ -101,6 +221,8 @@ type ProductSecret struct {
 	SecretType pulumi.IntOutput `pulumi:"secretType"`
 	// Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
 	Status pulumi.StringOutput `pulumi:"status"`
+	// Tags of secret.
+	Tags pulumi.MapOutput `pulumi:"tags"`
 	// Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.
 	UserNamePrefix pulumi.StringOutput `pulumi:"userNamePrefix"`
 }
@@ -167,7 +289,7 @@ type productSecretState struct {
 	KmsKeyId *string `pulumi:"kmsKeyId"`
 	// List of permissions that need to be granted when the credential is bound to a Tencent Cloud service.
 	PrivilegesLists []ProductSecretPrivilegesList `pulumi:"privilegesLists"`
-	// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `Ssm.getProducts` to query supported products.
+	// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `Ssm.getProducts` to query supported products.
 	ProductName *string `pulumi:"productName"`
 	// User-Defined rotation start time in the format of 2006-01-02 15:04:05.When `EnableRotation` is `True`, this parameter is required.
 	RotationBeginTime *string `pulumi:"rotationBeginTime"`
@@ -179,6 +301,8 @@ type productSecretState struct {
 	SecretType *int `pulumi:"secretType"`
 	// Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
 	Status *string `pulumi:"status"`
+	// Tags of secret.
+	Tags map[string]interface{} `pulumi:"tags"`
 	// Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.
 	UserNamePrefix *string `pulumi:"userNamePrefix"`
 }
@@ -198,7 +322,7 @@ type ProductSecretState struct {
 	KmsKeyId pulumi.StringPtrInput
 	// List of permissions that need to be granted when the credential is bound to a Tencent Cloud service.
 	PrivilegesLists ProductSecretPrivilegesListArrayInput
-	// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `Ssm.getProducts` to query supported products.
+	// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `Ssm.getProducts` to query supported products.
 	ProductName pulumi.StringPtrInput
 	// User-Defined rotation start time in the format of 2006-01-02 15:04:05.When `EnableRotation` is `True`, this parameter is required.
 	RotationBeginTime pulumi.StringPtrInput
@@ -210,6 +334,8 @@ type ProductSecretState struct {
 	SecretType pulumi.IntPtrInput
 	// Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
 	Status pulumi.StringPtrInput
+	// Tags of secret.
+	Tags pulumi.MapInput
 	// Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.
 	UserNamePrefix pulumi.StringPtrInput
 }
@@ -231,7 +357,7 @@ type productSecretArgs struct {
 	KmsKeyId *string `pulumi:"kmsKeyId"`
 	// List of permissions that need to be granted when the credential is bound to a Tencent Cloud service.
 	PrivilegesLists []ProductSecretPrivilegesList `pulumi:"privilegesLists"`
-	// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `Ssm.getProducts` to query supported products.
+	// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `Ssm.getProducts` to query supported products.
 	ProductName string `pulumi:"productName"`
 	// User-Defined rotation start time in the format of 2006-01-02 15:04:05.When `EnableRotation` is `True`, this parameter is required.
 	RotationBeginTime *string `pulumi:"rotationBeginTime"`
@@ -241,6 +367,8 @@ type productSecretArgs struct {
 	SecretName string `pulumi:"secretName"`
 	// Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
 	Status *string `pulumi:"status"`
+	// Tags of secret.
+	Tags map[string]interface{} `pulumi:"tags"`
 	// Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.
 	UserNamePrefix string `pulumi:"userNamePrefix"`
 }
@@ -259,7 +387,7 @@ type ProductSecretArgs struct {
 	KmsKeyId pulumi.StringPtrInput
 	// List of permissions that need to be granted when the credential is bound to a Tencent Cloud service.
 	PrivilegesLists ProductSecretPrivilegesListArrayInput
-	// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `Ssm.getProducts` to query supported products.
+	// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `Ssm.getProducts` to query supported products.
 	ProductName pulumi.StringInput
 	// User-Defined rotation start time in the format of 2006-01-02 15:04:05.When `EnableRotation` is `True`, this parameter is required.
 	RotationBeginTime pulumi.StringPtrInput
@@ -269,6 +397,8 @@ type ProductSecretArgs struct {
 	SecretName pulumi.StringInput
 	// Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
 	Status pulumi.StringPtrInput
+	// Tags of secret.
+	Tags pulumi.MapInput
 	// Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.
 	UserNamePrefix pulumi.StringInput
 }
@@ -395,7 +525,7 @@ func (o ProductSecretOutput) PrivilegesLists() ProductSecretPrivilegesListArrayO
 	return o.ApplyT(func(v *ProductSecret) ProductSecretPrivilegesListArrayOutput { return v.PrivilegesLists }).(ProductSecretPrivilegesListArrayOutput)
 }
 
-// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`. you can use dataSource `Ssm.getProducts` to query supported products.
+// Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `Ssm.getProducts` to query supported products.
 func (o ProductSecretOutput) ProductName() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProductSecret) pulumi.StringOutput { return v.ProductName }).(pulumi.StringOutput)
 }
@@ -423,6 +553,11 @@ func (o ProductSecretOutput) SecretType() pulumi.IntOutput {
 // Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
 func (o ProductSecretOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProductSecret) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
+}
+
+// Tags of secret.
+func (o ProductSecretOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v *ProductSecret) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
 // Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.

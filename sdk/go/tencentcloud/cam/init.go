@@ -21,22 +21,30 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Cam/accessKey:AccessKey":
+		r = &AccessKey{}
 	case "tencentcloud:Cam/group:Group":
 		r = &Group{}
 	case "tencentcloud:Cam/groupMembership:GroupMembership":
 		r = &GroupMembership{}
 	case "tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment":
 		r = &GroupPolicyAttachment{}
+	case "tencentcloud:Cam/mfaFlag:MfaFlag":
+		r = &MfaFlag{}
 	case "tencentcloud:Cam/oidcSso:OidcSso":
 		r = &OidcSso{}
 	case "tencentcloud:Cam/policy:Policy":
 		r = &Policy{}
 	case "tencentcloud:Cam/policyByName:PolicyByName":
 		r = &PolicyByName{}
+	case "tencentcloud:Cam/policyVersion:PolicyVersion":
+		r = &PolicyVersion{}
 	case "tencentcloud:Cam/role:Role":
 		r = &Role{}
 	case "tencentcloud:Cam/roleByName:RoleByName":
 		r = &RoleByName{}
+	case "tencentcloud:Cam/rolePermissionBoundaryAttachment:RolePermissionBoundaryAttachment":
+		r = &RolePermissionBoundaryAttachment{}
 	case "tencentcloud:Cam/rolePolicyAttachment:RolePolicyAttachment":
 		r = &RolePolicyAttachment{}
 	case "tencentcloud:Cam/rolePolicyAttachmentByName:RolePolicyAttachmentByName":
@@ -47,8 +55,14 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &SamlProvider{}
 	case "tencentcloud:Cam/serviceLinkedRole:ServiceLinkedRole":
 		r = &ServiceLinkedRole{}
+	case "tencentcloud:Cam/setPolicyVersionConfig:SetPolicyVersionConfig":
+		r = &SetPolicyVersionConfig{}
+	case "tencentcloud:Cam/tagRoleAttachment:TagRoleAttachment":
+		r = &TagRoleAttachment{}
 	case "tencentcloud:Cam/user:User":
 		r = &User{}
+	case "tencentcloud:Cam/userPermissionBoundaryAttachment:UserPermissionBoundaryAttachment":
+		r = &UserPermissionBoundaryAttachment{}
 	case "tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment":
 		r = &UserPolicyAttachment{}
 	case "tencentcloud:Cam/userSamlConfig:UserSamlConfig":
@@ -68,6 +82,11 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cam/accessKey",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cam/group",
 		&module{version},
 	)
@@ -79,6 +98,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cam/groupPolicyAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cam/mfaFlag",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -98,12 +122,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cam/policyVersion",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cam/role",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cam/roleByName",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cam/rolePermissionBoundaryAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -133,7 +167,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cam/setPolicyVersionConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cam/tagRoleAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cam/user",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cam/userPermissionBoundaryAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

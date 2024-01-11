@@ -7,11 +7,1116 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
 
 __all__ = [
+    'GetDomainAnalyticsAliasDataResult',
+    'GetDomainAnalyticsAliasDataDataResult',
+    'GetDomainAnalyticsAliasDataInfoResult',
+    'GetDomainAnalyticsDataResult',
+    'GetDomainAnalyticsInfoResult',
+    'GetDomainListDomainListResult',
+    'GetDomainListDomainListTagListResult',
+    'GetDomainListTagResult',
+    'GetRecordAnalyticsAliasDataResult',
+    'GetRecordAnalyticsAliasDataDataResult',
+    'GetRecordAnalyticsAliasDataInfoResult',
+    'GetRecordAnalyticsDataResult',
+    'GetRecordAnalyticsInfoResult',
+    'GetRecordLineListLineGroupListResult',
+    'GetRecordLineListLineListResult',
+    'GetRecordListRecordCountInfoResult',
+    'GetRecordListRecordListResult',
     'GetRecordsRecordCountInfoResult',
     'GetRecordsResultResult',
 ]
+
+@pulumi.output_type
+class GetDomainAnalyticsAliasDataResult(dict):
+    def __init__(__self__, *,
+                 datas: Sequence['outputs.GetDomainAnalyticsAliasDataDataResult'],
+                 infos: Sequence['outputs.GetDomainAnalyticsAliasDataInfoResult']):
+        """
+        :param Sequence['GetDomainAnalyticsAliasDataDataArgs'] datas: Subtotal of resolution volume for the current statistical dimension.
+        :param Sequence['GetDomainAnalyticsAliasDataInfoArgs'] infos: Domain resolution volume statistics query information.
+        """
+        pulumi.set(__self__, "datas", datas)
+        pulumi.set(__self__, "infos", infos)
+
+    @property
+    @pulumi.getter
+    def datas(self) -> Sequence['outputs.GetDomainAnalyticsAliasDataDataResult']:
+        """
+        Subtotal of resolution volume for the current statistical dimension.
+        """
+        return pulumi.get(self, "datas")
+
+    @property
+    @pulumi.getter
+    def infos(self) -> Sequence['outputs.GetDomainAnalyticsAliasDataInfoResult']:
+        """
+        Domain resolution volume statistics query information.
+        """
+        return pulumi.get(self, "infos")
+
+
+@pulumi.output_type
+class GetDomainAnalyticsAliasDataDataResult(dict):
+    def __init__(__self__, *,
+                 date_key: str,
+                 hour_key: int,
+                 num: int):
+        """
+        :param str date_key: For daily statistics, it is the statistical date.
+        :param int hour_key: For hourly statistics, it is the hour of the current time (0-23), for example, when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+        :param int num: Subtotal of resolution volume for the current statistical dimension.
+        """
+        pulumi.set(__self__, "date_key", date_key)
+        pulumi.set(__self__, "hour_key", hour_key)
+        pulumi.set(__self__, "num", num)
+
+    @property
+    @pulumi.getter(name="dateKey")
+    def date_key(self) -> str:
+        """
+        For daily statistics, it is the statistical date.
+        """
+        return pulumi.get(self, "date_key")
+
+    @property
+    @pulumi.getter(name="hourKey")
+    def hour_key(self) -> int:
+        """
+        For hourly statistics, it is the hour of the current time (0-23), for example, when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "hour_key")
+
+    @property
+    @pulumi.getter
+    def num(self) -> int:
+        """
+        Subtotal of resolution volume for the current statistical dimension.
+        """
+        return pulumi.get(self, "num")
+
+
+@pulumi.output_type
+class GetDomainAnalyticsAliasDataInfoResult(dict):
+    def __init__(__self__, *,
+                 dns_format: str,
+                 dns_total: int,
+                 domain: str,
+                 end_date: str,
+                 start_date: str):
+        """
+        :param str dns_format: DATE: Statistics by day dimension HOUR: Statistics by hour dimension.
+        :param int dns_total: Total resolution volume for the current statistical period.
+        :param str domain: The domain name to query for resolution volume.
+        :param str end_date: The end date of the query, format: YYYY-MM-DD.
+        :param str start_date: The start date of the query, format: YYYY-MM-DD.
+        """
+        pulumi.set(__self__, "dns_format", dns_format)
+        pulumi.set(__self__, "dns_total", dns_total)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "end_date", end_date)
+        pulumi.set(__self__, "start_date", start_date)
+
+    @property
+    @pulumi.getter(name="dnsFormat")
+    def dns_format(self) -> str:
+        """
+        DATE: Statistics by day dimension HOUR: Statistics by hour dimension.
+        """
+        return pulumi.get(self, "dns_format")
+
+    @property
+    @pulumi.getter(name="dnsTotal")
+    def dns_total(self) -> int:
+        """
+        Total resolution volume for the current statistical period.
+        """
+        return pulumi.get(self, "dns_total")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        The domain name to query for resolution volume.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="endDate")
+    def end_date(self) -> str:
+        """
+        The end date of the query, format: YYYY-MM-DD.
+        """
+        return pulumi.get(self, "end_date")
+
+    @property
+    @pulumi.getter(name="startDate")
+    def start_date(self) -> str:
+        """
+        The start date of the query, format: YYYY-MM-DD.
+        """
+        return pulumi.get(self, "start_date")
+
+
+@pulumi.output_type
+class GetDomainAnalyticsDataResult(dict):
+    def __init__(__self__, *,
+                 date_key: str,
+                 hour_key: int,
+                 num: int):
+        """
+        :param str date_key: For daily statistics, it is the statistical date.
+        :param int hour_key: For hourly statistics, it is the hour of the current time (0-23), for example, when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+        :param int num: Subtotal of resolution volume for the current statistical dimension.
+        """
+        pulumi.set(__self__, "date_key", date_key)
+        pulumi.set(__self__, "hour_key", hour_key)
+        pulumi.set(__self__, "num", num)
+
+    @property
+    @pulumi.getter(name="dateKey")
+    def date_key(self) -> str:
+        """
+        For daily statistics, it is the statistical date.
+        """
+        return pulumi.get(self, "date_key")
+
+    @property
+    @pulumi.getter(name="hourKey")
+    def hour_key(self) -> int:
+        """
+        For hourly statistics, it is the hour of the current time (0-23), for example, when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "hour_key")
+
+    @property
+    @pulumi.getter
+    def num(self) -> int:
+        """
+        Subtotal of resolution volume for the current statistical dimension.
+        """
+        return pulumi.get(self, "num")
+
+
+@pulumi.output_type
+class GetDomainAnalyticsInfoResult(dict):
+    def __init__(__self__, *,
+                 dns_format: str,
+                 dns_total: int,
+                 domain: str,
+                 end_date: str,
+                 start_date: str):
+        """
+        :param str dns_format: DATE: Statistics by day dimension HOUR: Statistics by hour dimension.
+        :param int dns_total: Total resolution volume for the current statistical period.
+        :param str domain: The domain name to query for resolution volume.
+        :param str end_date: The end date of the query, format: YYYY-MM-DD.
+        :param str start_date: The start date of the query, format: YYYY-MM-DD.
+        """
+        pulumi.set(__self__, "dns_format", dns_format)
+        pulumi.set(__self__, "dns_total", dns_total)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "end_date", end_date)
+        pulumi.set(__self__, "start_date", start_date)
+
+    @property
+    @pulumi.getter(name="dnsFormat")
+    def dns_format(self) -> str:
+        """
+        DATE: Statistics by day dimension HOUR: Statistics by hour dimension.
+        """
+        return pulumi.get(self, "dns_format")
+
+    @property
+    @pulumi.getter(name="dnsTotal")
+    def dns_total(self) -> int:
+        """
+        Total resolution volume for the current statistical period.
+        """
+        return pulumi.get(self, "dns_total")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        The domain name to query for resolution volume.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="endDate")
+    def end_date(self) -> str:
+        """
+        The end date of the query, format: YYYY-MM-DD.
+        """
+        return pulumi.get(self, "end_date")
+
+    @property
+    @pulumi.getter(name="startDate")
+    def start_date(self) -> str:
+        """
+        The start date of the query, format: YYYY-MM-DD.
+        """
+        return pulumi.get(self, "start_date")
+
+
+@pulumi.output_type
+class GetDomainListDomainListResult(dict):
+    def __init__(__self__, *,
+                 cname_speedup: str,
+                 created_on: str,
+                 dns_status: str,
+                 domain_id: int,
+                 effective_dns: Sequence[str],
+                 grade: str,
+                 grade_level: int,
+                 grade_title: str,
+                 group_id: int,
+                 is_vip: str,
+                 name: str,
+                 owner: str,
+                 punycode: str,
+                 record_count: int,
+                 remark: str,
+                 search_engine_push: str,
+                 status: str,
+                 tag_lists: Sequence['outputs.GetDomainListDomainListTagListResult'],
+                 ttl: int,
+                 updated_on: str,
+                 vip_auto_renew: str,
+                 vip_end_at: str,
+                 vip_start_at: str):
+        """
+        :param str cname_speedup: Whether to enable CNAME acceleration, enabled: ENABLE, disabled: DISABLE.
+        :param str created_on: Domain addition time.
+        :param str dns_status: DNS settings status, error: DNSERROR, normal: empty string.
+        :param int domain_id: Unique identifier assigned to the domain by the system.
+        :param Sequence[str] effective_dns: Valid DNS assigned to the domain by the system.
+        :param str grade: Domain package level code.
+        :param int grade_level: Sequence number corresponding to the domain package level.
+        :param str grade_title: Package name.
+        :param int group_id: Get domain names based on domain group id, which can be obtained through the GroupId field in DescribeDomain or DescribeDomainList interface.
+        :param str is_vip: Whether it is a paid package.
+        :param str name: Original format of the domain.
+        :param str owner: Domain owner account.
+        :param str punycode: Punycode encoded domain format.
+        :param int record_count: Number of records under the domain.
+        :param str remark: Get domain names based on remark information.
+        :param str search_engine_push: Whether to enable search engine push optimization, YES: YES, NO: NO.
+        :param str status: Get domain names based on domain status. Available values are ENABLE, LOCK, PAUSE, SPAM. ENABLE: Normal LOCK: Locked PAUSE: Paused SPAM: Banned.
+        :param Sequence['GetDomainListDomainListTagListArgs'] tag_lists: Domain-related tag list Note: This field may return null, indicating that no valid value can be obtained.
+        :param int ttl: Default TTL value for domain resolution records.
+        :param str updated_on: Domain update time.
+        :param str vip_auto_renew: Whether the domain has VIP auto-renewal enabled, YES: YES, NO: NO, DEFAULT: DEFAULT.
+        :param str vip_end_at: Paid package expiration time.
+        :param str vip_start_at: Paid package activation time.
+        """
+        pulumi.set(__self__, "cname_speedup", cname_speedup)
+        pulumi.set(__self__, "created_on", created_on)
+        pulumi.set(__self__, "dns_status", dns_status)
+        pulumi.set(__self__, "domain_id", domain_id)
+        pulumi.set(__self__, "effective_dns", effective_dns)
+        pulumi.set(__self__, "grade", grade)
+        pulumi.set(__self__, "grade_level", grade_level)
+        pulumi.set(__self__, "grade_title", grade_title)
+        pulumi.set(__self__, "group_id", group_id)
+        pulumi.set(__self__, "is_vip", is_vip)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "owner", owner)
+        pulumi.set(__self__, "punycode", punycode)
+        pulumi.set(__self__, "record_count", record_count)
+        pulumi.set(__self__, "remark", remark)
+        pulumi.set(__self__, "search_engine_push", search_engine_push)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "tag_lists", tag_lists)
+        pulumi.set(__self__, "ttl", ttl)
+        pulumi.set(__self__, "updated_on", updated_on)
+        pulumi.set(__self__, "vip_auto_renew", vip_auto_renew)
+        pulumi.set(__self__, "vip_end_at", vip_end_at)
+        pulumi.set(__self__, "vip_start_at", vip_start_at)
+
+    @property
+    @pulumi.getter(name="cnameSpeedup")
+    def cname_speedup(self) -> str:
+        """
+        Whether to enable CNAME acceleration, enabled: ENABLE, disabled: DISABLE.
+        """
+        return pulumi.get(self, "cname_speedup")
+
+    @property
+    @pulumi.getter(name="createdOn")
+    def created_on(self) -> str:
+        """
+        Domain addition time.
+        """
+        return pulumi.get(self, "created_on")
+
+    @property
+    @pulumi.getter(name="dnsStatus")
+    def dns_status(self) -> str:
+        """
+        DNS settings status, error: DNSERROR, normal: empty string.
+        """
+        return pulumi.get(self, "dns_status")
+
+    @property
+    @pulumi.getter(name="domainId")
+    def domain_id(self) -> int:
+        """
+        Unique identifier assigned to the domain by the system.
+        """
+        return pulumi.get(self, "domain_id")
+
+    @property
+    @pulumi.getter(name="effectiveDns")
+    def effective_dns(self) -> Sequence[str]:
+        """
+        Valid DNS assigned to the domain by the system.
+        """
+        return pulumi.get(self, "effective_dns")
+
+    @property
+    @pulumi.getter
+    def grade(self) -> str:
+        """
+        Domain package level code.
+        """
+        return pulumi.get(self, "grade")
+
+    @property
+    @pulumi.getter(name="gradeLevel")
+    def grade_level(self) -> int:
+        """
+        Sequence number corresponding to the domain package level.
+        """
+        return pulumi.get(self, "grade_level")
+
+    @property
+    @pulumi.getter(name="gradeTitle")
+    def grade_title(self) -> str:
+        """
+        Package name.
+        """
+        return pulumi.get(self, "grade_title")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> int:
+        """
+        Get domain names based on domain group id, which can be obtained through the GroupId field in DescribeDomain or DescribeDomainList interface.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="isVip")
+    def is_vip(self) -> str:
+        """
+        Whether it is a paid package.
+        """
+        return pulumi.get(self, "is_vip")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Original format of the domain.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def owner(self) -> str:
+        """
+        Domain owner account.
+        """
+        return pulumi.get(self, "owner")
+
+    @property
+    @pulumi.getter
+    def punycode(self) -> str:
+        """
+        Punycode encoded domain format.
+        """
+        return pulumi.get(self, "punycode")
+
+    @property
+    @pulumi.getter(name="recordCount")
+    def record_count(self) -> int:
+        """
+        Number of records under the domain.
+        """
+        return pulumi.get(self, "record_count")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        """
+        Get domain names based on remark information.
+        """
+        return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter(name="searchEnginePush")
+    def search_engine_push(self) -> str:
+        """
+        Whether to enable search engine push optimization, YES: YES, NO: NO.
+        """
+        return pulumi.get(self, "search_engine_push")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Get domain names based on domain status. Available values are ENABLE, LOCK, PAUSE, SPAM. ENABLE: Normal LOCK: Locked PAUSE: Paused SPAM: Banned.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="tagLists")
+    def tag_lists(self) -> Sequence['outputs.GetDomainListDomainListTagListResult']:
+        """
+        Domain-related tag list Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "tag_lists")
+
+    @property
+    @pulumi.getter
+    def ttl(self) -> int:
+        """
+        Default TTL value for domain resolution records.
+        """
+        return pulumi.get(self, "ttl")
+
+    @property
+    @pulumi.getter(name="updatedOn")
+    def updated_on(self) -> str:
+        """
+        Domain update time.
+        """
+        return pulumi.get(self, "updated_on")
+
+    @property
+    @pulumi.getter(name="vipAutoRenew")
+    def vip_auto_renew(self) -> str:
+        """
+        Whether the domain has VIP auto-renewal enabled, YES: YES, NO: NO, DEFAULT: DEFAULT.
+        """
+        return pulumi.get(self, "vip_auto_renew")
+
+    @property
+    @pulumi.getter(name="vipEndAt")
+    def vip_end_at(self) -> str:
+        """
+        Paid package expiration time.
+        """
+        return pulumi.get(self, "vip_end_at")
+
+    @property
+    @pulumi.getter(name="vipStartAt")
+    def vip_start_at(self) -> str:
+        """
+        Paid package activation time.
+        """
+        return pulumi.get(self, "vip_start_at")
+
+
+@pulumi.output_type
+class GetDomainListDomainListTagListResult(dict):
+    def __init__(__self__, *,
+                 tag_key: str,
+                 tag_value: str):
+        """
+        :param str tag_key: Field to be filtered.
+        :param str tag_value: Filter value of the field.
+        """
+        pulumi.set(__self__, "tag_key", tag_key)
+        pulumi.set(__self__, "tag_value", tag_value)
+
+    @property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> str:
+        """
+        Field to be filtered.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> str:
+        """
+        Filter value of the field.
+        """
+        return pulumi.get(self, "tag_value")
+
+
+@pulumi.output_type
+class GetDomainListTagResult(dict):
+    def __init__(__self__, *,
+                 tag_key: str,
+                 tag_values: Sequence[str]):
+        """
+        :param str tag_key: Field to be filtered.
+        :param Sequence[str] tag_values: Filter value of the field.
+        """
+        pulumi.set(__self__, "tag_key", tag_key)
+        pulumi.set(__self__, "tag_values", tag_values)
+
+    @property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> str:
+        """
+        Field to be filtered.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @property
+    @pulumi.getter(name="tagValues")
+    def tag_values(self) -> Sequence[str]:
+        """
+        Filter value of the field.
+        """
+        return pulumi.get(self, "tag_values")
+
+
+@pulumi.output_type
+class GetRecordAnalyticsAliasDataResult(dict):
+    def __init__(__self__, *,
+                 datas: Sequence['outputs.GetRecordAnalyticsAliasDataDataResult'],
+                 infos: Sequence['outputs.GetRecordAnalyticsAliasDataInfoResult']):
+        """
+        :param Sequence['GetRecordAnalyticsAliasDataDataArgs'] datas: The subtotal of the resolution volume for the current statistical dimension.
+        :param Sequence['GetRecordAnalyticsAliasDataInfoArgs'] infos: Subdomain resolution statistics query information.
+        """
+        pulumi.set(__self__, "datas", datas)
+        pulumi.set(__self__, "infos", infos)
+
+    @property
+    @pulumi.getter
+    def datas(self) -> Sequence['outputs.GetRecordAnalyticsAliasDataDataResult']:
+        """
+        The subtotal of the resolution volume for the current statistical dimension.
+        """
+        return pulumi.get(self, "datas")
+
+    @property
+    @pulumi.getter
+    def infos(self) -> Sequence['outputs.GetRecordAnalyticsAliasDataInfoResult']:
+        """
+        Subdomain resolution statistics query information.
+        """
+        return pulumi.get(self, "infos")
+
+
+@pulumi.output_type
+class GetRecordAnalyticsAliasDataDataResult(dict):
+    def __init__(__self__, *,
+                 date_key: str,
+                 hour_key: int,
+                 num: int):
+        """
+        :param str date_key: For daily statistics, it is the statistical date.
+        :param int hour_key: For hourly statistics, it is the hour of the current time for statistics (0-23), e.g., when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+        :param int num: The subtotal of the resolution volume for the current statistical dimension.
+        """
+        pulumi.set(__self__, "date_key", date_key)
+        pulumi.set(__self__, "hour_key", hour_key)
+        pulumi.set(__self__, "num", num)
+
+    @property
+    @pulumi.getter(name="dateKey")
+    def date_key(self) -> str:
+        """
+        For daily statistics, it is the statistical date.
+        """
+        return pulumi.get(self, "date_key")
+
+    @property
+    @pulumi.getter(name="hourKey")
+    def hour_key(self) -> int:
+        """
+        For hourly statistics, it is the hour of the current time for statistics (0-23), e.g., when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "hour_key")
+
+    @property
+    @pulumi.getter
+    def num(self) -> int:
+        """
+        The subtotal of the resolution volume for the current statistical dimension.
+        """
+        return pulumi.get(self, "num")
+
+
+@pulumi.output_type
+class GetRecordAnalyticsAliasDataInfoResult(dict):
+    def __init__(__self__, *,
+                 dns_format: str,
+                 dns_total: int,
+                 domain: str,
+                 end_date: str,
+                 start_date: str,
+                 subdomain: str):
+        """
+        :param str dns_format: DATE: Statistics by day dimension, HOUR: Statistics by hour dimension.
+        :param int dns_total: Total resolution count for the current statistical period.
+        :param str domain: The domain to query for resolution volume.
+        :param str end_date: The end date of the query, format: YYYY-MM-DD.
+        :param str start_date: The start date of the query, format: YYYY-MM-DD.
+        :param str subdomain: The subdomain to query for resolution volume.
+        """
+        pulumi.set(__self__, "dns_format", dns_format)
+        pulumi.set(__self__, "dns_total", dns_total)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "end_date", end_date)
+        pulumi.set(__self__, "start_date", start_date)
+        pulumi.set(__self__, "subdomain", subdomain)
+
+    @property
+    @pulumi.getter(name="dnsFormat")
+    def dns_format(self) -> str:
+        """
+        DATE: Statistics by day dimension, HOUR: Statistics by hour dimension.
+        """
+        return pulumi.get(self, "dns_format")
+
+    @property
+    @pulumi.getter(name="dnsTotal")
+    def dns_total(self) -> int:
+        """
+        Total resolution count for the current statistical period.
+        """
+        return pulumi.get(self, "dns_total")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        The domain to query for resolution volume.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="endDate")
+    def end_date(self) -> str:
+        """
+        The end date of the query, format: YYYY-MM-DD.
+        """
+        return pulumi.get(self, "end_date")
+
+    @property
+    @pulumi.getter(name="startDate")
+    def start_date(self) -> str:
+        """
+        The start date of the query, format: YYYY-MM-DD.
+        """
+        return pulumi.get(self, "start_date")
+
+    @property
+    @pulumi.getter
+    def subdomain(self) -> str:
+        """
+        The subdomain to query for resolution volume.
+        """
+        return pulumi.get(self, "subdomain")
+
+
+@pulumi.output_type
+class GetRecordAnalyticsDataResult(dict):
+    def __init__(__self__, *,
+                 date_key: str,
+                 hour_key: int,
+                 num: int):
+        """
+        :param str date_key: For daily statistics, it is the statistical date.
+        :param int hour_key: For hourly statistics, it is the hour of the current time for statistics (0-23), e.g., when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+        :param int num: The subtotal of the resolution volume for the current statistical dimension.
+        """
+        pulumi.set(__self__, "date_key", date_key)
+        pulumi.set(__self__, "hour_key", hour_key)
+        pulumi.set(__self__, "num", num)
+
+    @property
+    @pulumi.getter(name="dateKey")
+    def date_key(self) -> str:
+        """
+        For daily statistics, it is the statistical date.
+        """
+        return pulumi.get(self, "date_key")
+
+    @property
+    @pulumi.getter(name="hourKey")
+    def hour_key(self) -> int:
+        """
+        For hourly statistics, it is the hour of the current time for statistics (0-23), e.g., when HourKey is 23, the statistical period is the resolution volume from 22:00 to 23:00. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "hour_key")
+
+    @property
+    @pulumi.getter
+    def num(self) -> int:
+        """
+        The subtotal of the resolution volume for the current statistical dimension.
+        """
+        return pulumi.get(self, "num")
+
+
+@pulumi.output_type
+class GetRecordAnalyticsInfoResult(dict):
+    def __init__(__self__, *,
+                 dns_format: str,
+                 dns_total: int,
+                 domain: str,
+                 end_date: str,
+                 start_date: str,
+                 subdomain: str):
+        """
+        :param str dns_format: DATE: Statistics by day dimension, HOUR: Statistics by hour dimension.
+        :param int dns_total: Total resolution count for the current statistical period.
+        :param str domain: The domain to query for resolution volume.
+        :param str end_date: The end date of the query, format: YYYY-MM-DD.
+        :param str start_date: The start date of the query, format: YYYY-MM-DD.
+        :param str subdomain: The subdomain to query for resolution volume.
+        """
+        pulumi.set(__self__, "dns_format", dns_format)
+        pulumi.set(__self__, "dns_total", dns_total)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "end_date", end_date)
+        pulumi.set(__self__, "start_date", start_date)
+        pulumi.set(__self__, "subdomain", subdomain)
+
+    @property
+    @pulumi.getter(name="dnsFormat")
+    def dns_format(self) -> str:
+        """
+        DATE: Statistics by day dimension, HOUR: Statistics by hour dimension.
+        """
+        return pulumi.get(self, "dns_format")
+
+    @property
+    @pulumi.getter(name="dnsTotal")
+    def dns_total(self) -> int:
+        """
+        Total resolution count for the current statistical period.
+        """
+        return pulumi.get(self, "dns_total")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        The domain to query for resolution volume.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="endDate")
+    def end_date(self) -> str:
+        """
+        The end date of the query, format: YYYY-MM-DD.
+        """
+        return pulumi.get(self, "end_date")
+
+    @property
+    @pulumi.getter(name="startDate")
+    def start_date(self) -> str:
+        """
+        The start date of the query, format: YYYY-MM-DD.
+        """
+        return pulumi.get(self, "start_date")
+
+    @property
+    @pulumi.getter
+    def subdomain(self) -> str:
+        """
+        The subdomain to query for resolution volume.
+        """
+        return pulumi.get(self, "subdomain")
+
+
+@pulumi.output_type
+class GetRecordLineListLineGroupListResult(dict):
+    def __init__(__self__, *,
+                 line_id: str,
+                 line_lists: Sequence[str],
+                 name: str,
+                 type: str):
+        """
+        :param str line_id: Line ID.
+        :param Sequence[str] line_lists: Line list.
+        :param str name: Line name.
+        :param str type: Group type.
+        """
+        pulumi.set(__self__, "line_id", line_id)
+        pulumi.set(__self__, "line_lists", line_lists)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="lineId")
+    def line_id(self) -> str:
+        """
+        Line ID.
+        """
+        return pulumi.get(self, "line_id")
+
+    @property
+    @pulumi.getter(name="lineLists")
+    def line_lists(self) -> Sequence[str]:
+        """
+        Line list.
+        """
+        return pulumi.get(self, "line_lists")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Line name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Group type.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetRecordLineListLineListResult(dict):
+    def __init__(__self__, *,
+                 line_id: str,
+                 name: str):
+        """
+        :param str line_id: Line ID.
+        :param str name: Line name.
+        """
+        pulumi.set(__self__, "line_id", line_id)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="lineId")
+    def line_id(self) -> str:
+        """
+        Line ID.
+        """
+        return pulumi.get(self, "line_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Line name.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetRecordListRecordCountInfoResult(dict):
+    def __init__(__self__, *,
+                 list_count: int,
+                 subdomain_count: int,
+                 total_count: int):
+        """
+        :param int list_count: Number of records returned in the list.
+        :param int subdomain_count: Number of subdomains.
+        :param int total_count: Total number of records.
+        """
+        pulumi.set(__self__, "list_count", list_count)
+        pulumi.set(__self__, "subdomain_count", subdomain_count)
+        pulumi.set(__self__, "total_count", total_count)
+
+    @property
+    @pulumi.getter(name="listCount")
+    def list_count(self) -> int:
+        """
+        Number of records returned in the list.
+        """
+        return pulumi.get(self, "list_count")
+
+    @property
+    @pulumi.getter(name="subdomainCount")
+    def subdomain_count(self) -> int:
+        """
+        Number of subdomains.
+        """
+        return pulumi.get(self, "subdomain_count")
+
+    @property
+    @pulumi.getter(name="totalCount")
+    def total_count(self) -> int:
+        """
+        Total number of records.
+        """
+        return pulumi.get(self, "total_count")
+
+
+@pulumi.output_type
+class GetRecordListRecordListResult(dict):
+    def __init__(__self__, *,
+                 default_ns: bool,
+                 line: str,
+                 line_id: str,
+                 monitor_status: str,
+                 mx: int,
+                 name: str,
+                 record_id: int,
+                 remark: str,
+                 status: str,
+                 ttl: int,
+                 type: str,
+                 updated_on: str,
+                 value: str,
+                 weight: int):
+        """
+        :param bool default_ns: Whether it is the default NS record.
+        :param str line: Record line.
+        :param str line_id: Line ID.
+        :param str monitor_status: Record monitoring status, normal: OK, alarm: WARN, downtime: DOWN, empty if monitoring is not set or paused.
+        :param int mx: MX value, only available for MX records Note: This field may return null, indicating that no valid value can be obtained.
+        :param str name: Host header.
+        :param int record_id: Record ID.
+        :param str remark: Get the resolution record based on the resolution record remark.
+        :param str status: Record status, enabled: ENABLE, paused: DISABLE.
+        :param int ttl: Record cache time.
+        :param str type: Record type.
+        :param str updated_on: Update time.
+        :param str value: Record value.
+        :param int weight: Record weight, used for load balancing records. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "default_ns", default_ns)
+        pulumi.set(__self__, "line", line)
+        pulumi.set(__self__, "line_id", line_id)
+        pulumi.set(__self__, "monitor_status", monitor_status)
+        pulumi.set(__self__, "mx", mx)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "record_id", record_id)
+        pulumi.set(__self__, "remark", remark)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "ttl", ttl)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "updated_on", updated_on)
+        pulumi.set(__self__, "value", value)
+        pulumi.set(__self__, "weight", weight)
+
+    @property
+    @pulumi.getter(name="defaultNs")
+    def default_ns(self) -> bool:
+        """
+        Whether it is the default NS record.
+        """
+        return pulumi.get(self, "default_ns")
+
+    @property
+    @pulumi.getter
+    def line(self) -> str:
+        """
+        Record line.
+        """
+        return pulumi.get(self, "line")
+
+    @property
+    @pulumi.getter(name="lineId")
+    def line_id(self) -> str:
+        """
+        Line ID.
+        """
+        return pulumi.get(self, "line_id")
+
+    @property
+    @pulumi.getter(name="monitorStatus")
+    def monitor_status(self) -> str:
+        """
+        Record monitoring status, normal: OK, alarm: WARN, downtime: DOWN, empty if monitoring is not set or paused.
+        """
+        return pulumi.get(self, "monitor_status")
+
+    @property
+    @pulumi.getter
+    def mx(self) -> int:
+        """
+        MX value, only available for MX records Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "mx")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Host header.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="recordId")
+    def record_id(self) -> int:
+        """
+        Record ID.
+        """
+        return pulumi.get(self, "record_id")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        """
+        Get the resolution record based on the resolution record remark.
+        """
+        return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Record status, enabled: ENABLE, paused: DISABLE.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def ttl(self) -> int:
+        """
+        Record cache time.
+        """
+        return pulumi.get(self, "ttl")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Record type.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="updatedOn")
+    def updated_on(self) -> str:
+        """
+        Update time.
+        """
+        return pulumi.get(self, "updated_on")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Record value.
+        """
+        return pulumi.get(self, "value")
+
+    @property
+    @pulumi.getter
+    def weight(self) -> int:
+        """
+        Record weight, used for load balancing records. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "weight")
+
 
 @pulumi.output_type
 class GetRecordsRecordCountInfoResult(dict):

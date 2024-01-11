@@ -10,6 +10,236 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type InstanceOrgPermission struct {
+	// Permissions ID.
+	Id *int `pulumi:"id"`
+	// Permission name.
+	Name *string `pulumi:"name"`
+}
+
+// InstanceOrgPermissionInput is an input type that accepts InstanceOrgPermissionArgs and InstanceOrgPermissionOutput values.
+// You can construct a concrete instance of `InstanceOrgPermissionInput` via:
+//
+//          InstanceOrgPermissionArgs{...}
+type InstanceOrgPermissionInput interface {
+	pulumi.Input
+
+	ToInstanceOrgPermissionOutput() InstanceOrgPermissionOutput
+	ToInstanceOrgPermissionOutputWithContext(context.Context) InstanceOrgPermissionOutput
+}
+
+type InstanceOrgPermissionArgs struct {
+	// Permissions ID.
+	Id pulumi.IntPtrInput `pulumi:"id"`
+	// Permission name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+}
+
+func (InstanceOrgPermissionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceOrgPermission)(nil)).Elem()
+}
+
+func (i InstanceOrgPermissionArgs) ToInstanceOrgPermissionOutput() InstanceOrgPermissionOutput {
+	return i.ToInstanceOrgPermissionOutputWithContext(context.Background())
+}
+
+func (i InstanceOrgPermissionArgs) ToInstanceOrgPermissionOutputWithContext(ctx context.Context) InstanceOrgPermissionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceOrgPermissionOutput)
+}
+
+// InstanceOrgPermissionArrayInput is an input type that accepts InstanceOrgPermissionArray and InstanceOrgPermissionArrayOutput values.
+// You can construct a concrete instance of `InstanceOrgPermissionArrayInput` via:
+//
+//          InstanceOrgPermissionArray{ InstanceOrgPermissionArgs{...} }
+type InstanceOrgPermissionArrayInput interface {
+	pulumi.Input
+
+	ToInstanceOrgPermissionArrayOutput() InstanceOrgPermissionArrayOutput
+	ToInstanceOrgPermissionArrayOutputWithContext(context.Context) InstanceOrgPermissionArrayOutput
+}
+
+type InstanceOrgPermissionArray []InstanceOrgPermissionInput
+
+func (InstanceOrgPermissionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceOrgPermission)(nil)).Elem()
+}
+
+func (i InstanceOrgPermissionArray) ToInstanceOrgPermissionArrayOutput() InstanceOrgPermissionArrayOutput {
+	return i.ToInstanceOrgPermissionArrayOutputWithContext(context.Background())
+}
+
+func (i InstanceOrgPermissionArray) ToInstanceOrgPermissionArrayOutputWithContext(ctx context.Context) InstanceOrgPermissionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceOrgPermissionArrayOutput)
+}
+
+type InstanceOrgPermissionOutput struct{ *pulumi.OutputState }
+
+func (InstanceOrgPermissionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceOrgPermission)(nil)).Elem()
+}
+
+func (o InstanceOrgPermissionOutput) ToInstanceOrgPermissionOutput() InstanceOrgPermissionOutput {
+	return o
+}
+
+func (o InstanceOrgPermissionOutput) ToInstanceOrgPermissionOutputWithContext(ctx context.Context) InstanceOrgPermissionOutput {
+	return o
+}
+
+// Permissions ID.
+func (o InstanceOrgPermissionOutput) Id() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v InstanceOrgPermission) *int { return v.Id }).(pulumi.IntPtrOutput)
+}
+
+// Permission name.
+func (o InstanceOrgPermissionOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstanceOrgPermission) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+type InstanceOrgPermissionArrayOutput struct{ *pulumi.OutputState }
+
+func (InstanceOrgPermissionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceOrgPermission)(nil)).Elem()
+}
+
+func (o InstanceOrgPermissionArrayOutput) ToInstanceOrgPermissionArrayOutput() InstanceOrgPermissionArrayOutput {
+	return o
+}
+
+func (o InstanceOrgPermissionArrayOutput) ToInstanceOrgPermissionArrayOutputWithContext(ctx context.Context) InstanceOrgPermissionArrayOutput {
+	return o
+}
+
+func (o InstanceOrgPermissionArrayOutput) Index(i pulumi.IntInput) InstanceOrgPermissionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstanceOrgPermission {
+		return vs[0].([]InstanceOrgPermission)[vs[1].(int)]
+	}).(InstanceOrgPermissionOutput)
+}
+
+type OrgIdentityIdentityPolicy struct {
+	// Customize policy content and follow CAM policy syntax. Valid and required when PolicyType is the 1-custom policy.
+	PolicyDocument *string `pulumi:"policyDocument"`
+	// CAM default policy ID. Valid and required when PolicyType is the 2-preset policy.
+	PolicyId *int `pulumi:"policyId"`
+	// CAM default policy name. Valid and required when PolicyType is the 2-preset policy.
+	PolicyName *string `pulumi:"policyName"`
+	// Policy type. Value 1-custom policy 2-preset policy; default value 2.
+	PolicyType *int `pulumi:"policyType"`
+}
+
+// OrgIdentityIdentityPolicyInput is an input type that accepts OrgIdentityIdentityPolicyArgs and OrgIdentityIdentityPolicyOutput values.
+// You can construct a concrete instance of `OrgIdentityIdentityPolicyInput` via:
+//
+//          OrgIdentityIdentityPolicyArgs{...}
+type OrgIdentityIdentityPolicyInput interface {
+	pulumi.Input
+
+	ToOrgIdentityIdentityPolicyOutput() OrgIdentityIdentityPolicyOutput
+	ToOrgIdentityIdentityPolicyOutputWithContext(context.Context) OrgIdentityIdentityPolicyOutput
+}
+
+type OrgIdentityIdentityPolicyArgs struct {
+	// Customize policy content and follow CAM policy syntax. Valid and required when PolicyType is the 1-custom policy.
+	PolicyDocument pulumi.StringPtrInput `pulumi:"policyDocument"`
+	// CAM default policy ID. Valid and required when PolicyType is the 2-preset policy.
+	PolicyId pulumi.IntPtrInput `pulumi:"policyId"`
+	// CAM default policy name. Valid and required when PolicyType is the 2-preset policy.
+	PolicyName pulumi.StringPtrInput `pulumi:"policyName"`
+	// Policy type. Value 1-custom policy 2-preset policy; default value 2.
+	PolicyType pulumi.IntPtrInput `pulumi:"policyType"`
+}
+
+func (OrgIdentityIdentityPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*OrgIdentityIdentityPolicy)(nil)).Elem()
+}
+
+func (i OrgIdentityIdentityPolicyArgs) ToOrgIdentityIdentityPolicyOutput() OrgIdentityIdentityPolicyOutput {
+	return i.ToOrgIdentityIdentityPolicyOutputWithContext(context.Background())
+}
+
+func (i OrgIdentityIdentityPolicyArgs) ToOrgIdentityIdentityPolicyOutputWithContext(ctx context.Context) OrgIdentityIdentityPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(OrgIdentityIdentityPolicyOutput)
+}
+
+// OrgIdentityIdentityPolicyArrayInput is an input type that accepts OrgIdentityIdentityPolicyArray and OrgIdentityIdentityPolicyArrayOutput values.
+// You can construct a concrete instance of `OrgIdentityIdentityPolicyArrayInput` via:
+//
+//          OrgIdentityIdentityPolicyArray{ OrgIdentityIdentityPolicyArgs{...} }
+type OrgIdentityIdentityPolicyArrayInput interface {
+	pulumi.Input
+
+	ToOrgIdentityIdentityPolicyArrayOutput() OrgIdentityIdentityPolicyArrayOutput
+	ToOrgIdentityIdentityPolicyArrayOutputWithContext(context.Context) OrgIdentityIdentityPolicyArrayOutput
+}
+
+type OrgIdentityIdentityPolicyArray []OrgIdentityIdentityPolicyInput
+
+func (OrgIdentityIdentityPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]OrgIdentityIdentityPolicy)(nil)).Elem()
+}
+
+func (i OrgIdentityIdentityPolicyArray) ToOrgIdentityIdentityPolicyArrayOutput() OrgIdentityIdentityPolicyArrayOutput {
+	return i.ToOrgIdentityIdentityPolicyArrayOutputWithContext(context.Background())
+}
+
+func (i OrgIdentityIdentityPolicyArray) ToOrgIdentityIdentityPolicyArrayOutputWithContext(ctx context.Context) OrgIdentityIdentityPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(OrgIdentityIdentityPolicyArrayOutput)
+}
+
+type OrgIdentityIdentityPolicyOutput struct{ *pulumi.OutputState }
+
+func (OrgIdentityIdentityPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*OrgIdentityIdentityPolicy)(nil)).Elem()
+}
+
+func (o OrgIdentityIdentityPolicyOutput) ToOrgIdentityIdentityPolicyOutput() OrgIdentityIdentityPolicyOutput {
+	return o
+}
+
+func (o OrgIdentityIdentityPolicyOutput) ToOrgIdentityIdentityPolicyOutputWithContext(ctx context.Context) OrgIdentityIdentityPolicyOutput {
+	return o
+}
+
+// Customize policy content and follow CAM policy syntax. Valid and required when PolicyType is the 1-custom policy.
+func (o OrgIdentityIdentityPolicyOutput) PolicyDocument() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v OrgIdentityIdentityPolicy) *string { return v.PolicyDocument }).(pulumi.StringPtrOutput)
+}
+
+// CAM default policy ID. Valid and required when PolicyType is the 2-preset policy.
+func (o OrgIdentityIdentityPolicyOutput) PolicyId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v OrgIdentityIdentityPolicy) *int { return v.PolicyId }).(pulumi.IntPtrOutput)
+}
+
+// CAM default policy name. Valid and required when PolicyType is the 2-preset policy.
+func (o OrgIdentityIdentityPolicyOutput) PolicyName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v OrgIdentityIdentityPolicy) *string { return v.PolicyName }).(pulumi.StringPtrOutput)
+}
+
+// Policy type. Value 1-custom policy 2-preset policy; default value 2.
+func (o OrgIdentityIdentityPolicyOutput) PolicyType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v OrgIdentityIdentityPolicy) *int { return v.PolicyType }).(pulumi.IntPtrOutput)
+}
+
+type OrgIdentityIdentityPolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (OrgIdentityIdentityPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]OrgIdentityIdentityPolicy)(nil)).Elem()
+}
+
+func (o OrgIdentityIdentityPolicyArrayOutput) ToOrgIdentityIdentityPolicyArrayOutput() OrgIdentityIdentityPolicyArrayOutput {
+	return o
+}
+
+func (o OrgIdentityIdentityPolicyArrayOutput) ToOrgIdentityIdentityPolicyArrayOutputWithContext(ctx context.Context) OrgIdentityIdentityPolicyArrayOutput {
+	return o
+}
+
+func (o OrgIdentityIdentityPolicyArrayOutput) Index(i pulumi.IntInput) OrgIdentityIdentityPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) OrgIdentityIdentityPolicy {
+		return vs[0].([]OrgIdentityIdentityPolicy)[vs[1].(int)]
+	}).(OrgIdentityIdentityPolicyOutput)
+}
+
 type OrgMemberOrgPermission struct {
 	// Permissions ID.
 	Id *int `pulumi:"id"`
@@ -116,9 +346,1095 @@ func (o OrgMemberOrgPermissionArrayOutput) Index(i pulumi.IntInput) OrgMemberOrg
 	}).(OrgMemberOrgPermissionOutput)
 }
 
+type GetMembersItem struct {
+	// Security information binding status. Valid values: `Unbound`, `Valid`, `Success`, `Failed`.Note: This field may return null, indicating that no valid values can be obtained.
+	BindStatus string `pulumi:"bindStatus"`
+	// Creation timeNote: This field may return null, indicating that no valid values can be obtained.
+	CreateTime string `pulumi:"createTime"`
+	// Whether the member is allowed to leave. Valid values: `Allow`, `Denied`.Note: This field may return null, indicating that no valid values can be obtained.
+	IsAllowQuit string `pulumi:"isAllowQuit"`
+	// Member type. Valid values: `Invite` (invited); `Create` (created).Note: This field may return null, indicating that no valid values can be obtained.
+	MemberType string `pulumi:"memberType"`
+	// Member UINNote: This field may return null, indicating that no valid values can be obtained.
+	MemberUin int `pulumi:"memberUin"`
+	// Permission name.
+	Name string `pulumi:"name"`
+	// Node IDNote: This field may return null, indicating that no valid values can be obtained.
+	NodeId int `pulumi:"nodeId"`
+	// Node nameNote: This field may return null, indicating that no valid values can be obtained.
+	NodeName string `pulumi:"nodeName"`
+	// Management identityNote: This field may return null, indicating that no valid values can be obtained.
+	OrgIdentities []GetMembersItemOrgIdentity `pulumi:"orgIdentities"`
+	// Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.
+	OrgPermissions []GetMembersItemOrgPermission `pulumi:"orgPermissions"`
+	// Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.
+	OrgPolicyName string `pulumi:"orgPolicyName"`
+	// Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.
+	OrgPolicyType string `pulumi:"orgPolicyType"`
+	// Payer nameNote: This field may return null, indicating that no valid values can be obtained.
+	PayName string `pulumi:"payName"`
+	// Payer UINNote: This field may return null, indicating that no valid values can be obtained.
+	PayUin string `pulumi:"payUin"`
+	// Member permission status. Valid values: `Confirmed`, `UnConfirmed`.Note: This field may return null, indicating that no valid values can be obtained.
+	PermissionStatus string `pulumi:"permissionStatus"`
+	// RemarksNote: This field may return null, indicating that no valid values can be obtained.
+	Remark string `pulumi:"remark"`
+	// Update timeNote: This field may return null, indicating that no valid values can be obtained.
+	UpdateTime string `pulumi:"updateTime"`
+}
+
+// GetMembersItemInput is an input type that accepts GetMembersItemArgs and GetMembersItemOutput values.
+// You can construct a concrete instance of `GetMembersItemInput` via:
+//
+//          GetMembersItemArgs{...}
+type GetMembersItemInput interface {
+	pulumi.Input
+
+	ToGetMembersItemOutput() GetMembersItemOutput
+	ToGetMembersItemOutputWithContext(context.Context) GetMembersItemOutput
+}
+
+type GetMembersItemArgs struct {
+	// Security information binding status. Valid values: `Unbound`, `Valid`, `Success`, `Failed`.Note: This field may return null, indicating that no valid values can be obtained.
+	BindStatus pulumi.StringInput `pulumi:"bindStatus"`
+	// Creation timeNote: This field may return null, indicating that no valid values can be obtained.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Whether the member is allowed to leave. Valid values: `Allow`, `Denied`.Note: This field may return null, indicating that no valid values can be obtained.
+	IsAllowQuit pulumi.StringInput `pulumi:"isAllowQuit"`
+	// Member type. Valid values: `Invite` (invited); `Create` (created).Note: This field may return null, indicating that no valid values can be obtained.
+	MemberType pulumi.StringInput `pulumi:"memberType"`
+	// Member UINNote: This field may return null, indicating that no valid values can be obtained.
+	MemberUin pulumi.IntInput `pulumi:"memberUin"`
+	// Permission name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Node IDNote: This field may return null, indicating that no valid values can be obtained.
+	NodeId pulumi.IntInput `pulumi:"nodeId"`
+	// Node nameNote: This field may return null, indicating that no valid values can be obtained.
+	NodeName pulumi.StringInput `pulumi:"nodeName"`
+	// Management identityNote: This field may return null, indicating that no valid values can be obtained.
+	OrgIdentities GetMembersItemOrgIdentityArrayInput `pulumi:"orgIdentities"`
+	// Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.
+	OrgPermissions GetMembersItemOrgPermissionArrayInput `pulumi:"orgPermissions"`
+	// Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.
+	OrgPolicyName pulumi.StringInput `pulumi:"orgPolicyName"`
+	// Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.
+	OrgPolicyType pulumi.StringInput `pulumi:"orgPolicyType"`
+	// Payer nameNote: This field may return null, indicating that no valid values can be obtained.
+	PayName pulumi.StringInput `pulumi:"payName"`
+	// Payer UINNote: This field may return null, indicating that no valid values can be obtained.
+	PayUin pulumi.StringInput `pulumi:"payUin"`
+	// Member permission status. Valid values: `Confirmed`, `UnConfirmed`.Note: This field may return null, indicating that no valid values can be obtained.
+	PermissionStatus pulumi.StringInput `pulumi:"permissionStatus"`
+	// RemarksNote: This field may return null, indicating that no valid values can be obtained.
+	Remark pulumi.StringInput `pulumi:"remark"`
+	// Update timeNote: This field may return null, indicating that no valid values can be obtained.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+}
+
+func (GetMembersItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMembersItem)(nil)).Elem()
+}
+
+func (i GetMembersItemArgs) ToGetMembersItemOutput() GetMembersItemOutput {
+	return i.ToGetMembersItemOutputWithContext(context.Background())
+}
+
+func (i GetMembersItemArgs) ToGetMembersItemOutputWithContext(ctx context.Context) GetMembersItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMembersItemOutput)
+}
+
+// GetMembersItemArrayInput is an input type that accepts GetMembersItemArray and GetMembersItemArrayOutput values.
+// You can construct a concrete instance of `GetMembersItemArrayInput` via:
+//
+//          GetMembersItemArray{ GetMembersItemArgs{...} }
+type GetMembersItemArrayInput interface {
+	pulumi.Input
+
+	ToGetMembersItemArrayOutput() GetMembersItemArrayOutput
+	ToGetMembersItemArrayOutputWithContext(context.Context) GetMembersItemArrayOutput
+}
+
+type GetMembersItemArray []GetMembersItemInput
+
+func (GetMembersItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMembersItem)(nil)).Elem()
+}
+
+func (i GetMembersItemArray) ToGetMembersItemArrayOutput() GetMembersItemArrayOutput {
+	return i.ToGetMembersItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetMembersItemArray) ToGetMembersItemArrayOutputWithContext(ctx context.Context) GetMembersItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMembersItemArrayOutput)
+}
+
+type GetMembersItemOutput struct{ *pulumi.OutputState }
+
+func (GetMembersItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMembersItem)(nil)).Elem()
+}
+
+func (o GetMembersItemOutput) ToGetMembersItemOutput() GetMembersItemOutput {
+	return o
+}
+
+func (o GetMembersItemOutput) ToGetMembersItemOutputWithContext(ctx context.Context) GetMembersItemOutput {
+	return o
+}
+
+// Security information binding status. Valid values: `Unbound`, `Valid`, `Success`, `Failed`.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) BindStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMembersItem) string { return v.BindStatus }).(pulumi.StringOutput)
+}
+
+// Creation timeNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMembersItem) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Whether the member is allowed to leave. Valid values: `Allow`, `Denied`.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) IsAllowQuit() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMembersItem) string { return v.IsAllowQuit }).(pulumi.StringOutput)
+}
+
+// Member type. Valid values: `Invite` (invited); `Create` (created).Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) MemberType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMembersItem) string { return v.MemberType }).(pulumi.StringOutput)
+}
+
+// Member UINNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) MemberUin() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMembersItem) int { return v.MemberUin }).(pulumi.IntOutput)
+}
+
+// Permission name.
+func (o GetMembersItemOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMembersItem) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Node IDNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) NodeId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMembersItem) int { return v.NodeId }).(pulumi.IntOutput)
+}
+
+// Node nameNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) NodeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMembersItem) string { return v.NodeName }).(pulumi.StringOutput)
+}
+
+// Management identityNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) OrgIdentities() GetMembersItemOrgIdentityArrayOutput {
+	return o.ApplyT(func(v GetMembersItem) []GetMembersItemOrgIdentity { return v.OrgIdentities }).(GetMembersItemOrgIdentityArrayOutput)
+}
+
+// Relationship policy permissionNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) OrgPermissions() GetMembersItemOrgPermissionArrayOutput {
+	return o.ApplyT(func(v GetMembersItem) []GetMembersItemOrgPermission { return v.OrgPermissions }).(GetMembersItemOrgPermissionArrayOutput)
+}
+
+// Relationship policy nameNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) OrgPolicyName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMembersItem) string { return v.OrgPolicyName }).(pulumi.StringOutput)
+}
+
+// Relationship policy typeNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) OrgPolicyType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMembersItem) string { return v.OrgPolicyType }).(pulumi.StringOutput)
+}
+
+// Payer nameNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) PayName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMembersItem) string { return v.PayName }).(pulumi.StringOutput)
+}
+
+// Payer UINNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) PayUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMembersItem) string { return v.PayUin }).(pulumi.StringOutput)
+}
+
+// Member permission status. Valid values: `Confirmed`, `UnConfirmed`.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) PermissionStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMembersItem) string { return v.PermissionStatus }).(pulumi.StringOutput)
+}
+
+// RemarksNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMembersItem) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+// Update timeNote: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMembersItem) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+type GetMembersItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMembersItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMembersItem)(nil)).Elem()
+}
+
+func (o GetMembersItemArrayOutput) ToGetMembersItemArrayOutput() GetMembersItemArrayOutput {
+	return o
+}
+
+func (o GetMembersItemArrayOutput) ToGetMembersItemArrayOutputWithContext(ctx context.Context) GetMembersItemArrayOutput {
+	return o
+}
+
+func (o GetMembersItemArrayOutput) Index(i pulumi.IntInput) GetMembersItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMembersItem {
+		return vs[0].([]GetMembersItem)[vs[1].(int)]
+	}).(GetMembersItemOutput)
+}
+
+type GetMembersItemOrgIdentity struct {
+	// Identity name.Note: This field may return null, indicating that no valid values can be obtained.
+	IdentityAliasName string `pulumi:"identityAliasName"`
+	// Identity ID.Note: This field may return null, indicating that no valid values can be obtained.
+	IdentityId int `pulumi:"identityId"`
+}
+
+// GetMembersItemOrgIdentityInput is an input type that accepts GetMembersItemOrgIdentityArgs and GetMembersItemOrgIdentityOutput values.
+// You can construct a concrete instance of `GetMembersItemOrgIdentityInput` via:
+//
+//          GetMembersItemOrgIdentityArgs{...}
+type GetMembersItemOrgIdentityInput interface {
+	pulumi.Input
+
+	ToGetMembersItemOrgIdentityOutput() GetMembersItemOrgIdentityOutput
+	ToGetMembersItemOrgIdentityOutputWithContext(context.Context) GetMembersItemOrgIdentityOutput
+}
+
+type GetMembersItemOrgIdentityArgs struct {
+	// Identity name.Note: This field may return null, indicating that no valid values can be obtained.
+	IdentityAliasName pulumi.StringInput `pulumi:"identityAliasName"`
+	// Identity ID.Note: This field may return null, indicating that no valid values can be obtained.
+	IdentityId pulumi.IntInput `pulumi:"identityId"`
+}
+
+func (GetMembersItemOrgIdentityArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMembersItemOrgIdentity)(nil)).Elem()
+}
+
+func (i GetMembersItemOrgIdentityArgs) ToGetMembersItemOrgIdentityOutput() GetMembersItemOrgIdentityOutput {
+	return i.ToGetMembersItemOrgIdentityOutputWithContext(context.Background())
+}
+
+func (i GetMembersItemOrgIdentityArgs) ToGetMembersItemOrgIdentityOutputWithContext(ctx context.Context) GetMembersItemOrgIdentityOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMembersItemOrgIdentityOutput)
+}
+
+// GetMembersItemOrgIdentityArrayInput is an input type that accepts GetMembersItemOrgIdentityArray and GetMembersItemOrgIdentityArrayOutput values.
+// You can construct a concrete instance of `GetMembersItemOrgIdentityArrayInput` via:
+//
+//          GetMembersItemOrgIdentityArray{ GetMembersItemOrgIdentityArgs{...} }
+type GetMembersItemOrgIdentityArrayInput interface {
+	pulumi.Input
+
+	ToGetMembersItemOrgIdentityArrayOutput() GetMembersItemOrgIdentityArrayOutput
+	ToGetMembersItemOrgIdentityArrayOutputWithContext(context.Context) GetMembersItemOrgIdentityArrayOutput
+}
+
+type GetMembersItemOrgIdentityArray []GetMembersItemOrgIdentityInput
+
+func (GetMembersItemOrgIdentityArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMembersItemOrgIdentity)(nil)).Elem()
+}
+
+func (i GetMembersItemOrgIdentityArray) ToGetMembersItemOrgIdentityArrayOutput() GetMembersItemOrgIdentityArrayOutput {
+	return i.ToGetMembersItemOrgIdentityArrayOutputWithContext(context.Background())
+}
+
+func (i GetMembersItemOrgIdentityArray) ToGetMembersItemOrgIdentityArrayOutputWithContext(ctx context.Context) GetMembersItemOrgIdentityArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMembersItemOrgIdentityArrayOutput)
+}
+
+type GetMembersItemOrgIdentityOutput struct{ *pulumi.OutputState }
+
+func (GetMembersItemOrgIdentityOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMembersItemOrgIdentity)(nil)).Elem()
+}
+
+func (o GetMembersItemOrgIdentityOutput) ToGetMembersItemOrgIdentityOutput() GetMembersItemOrgIdentityOutput {
+	return o
+}
+
+func (o GetMembersItemOrgIdentityOutput) ToGetMembersItemOrgIdentityOutputWithContext(ctx context.Context) GetMembersItemOrgIdentityOutput {
+	return o
+}
+
+// Identity name.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOrgIdentityOutput) IdentityAliasName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMembersItemOrgIdentity) string { return v.IdentityAliasName }).(pulumi.StringOutput)
+}
+
+// Identity ID.Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOrgIdentityOutput) IdentityId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMembersItemOrgIdentity) int { return v.IdentityId }).(pulumi.IntOutput)
+}
+
+type GetMembersItemOrgIdentityArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMembersItemOrgIdentityArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMembersItemOrgIdentity)(nil)).Elem()
+}
+
+func (o GetMembersItemOrgIdentityArrayOutput) ToGetMembersItemOrgIdentityArrayOutput() GetMembersItemOrgIdentityArrayOutput {
+	return o
+}
+
+func (o GetMembersItemOrgIdentityArrayOutput) ToGetMembersItemOrgIdentityArrayOutputWithContext(ctx context.Context) GetMembersItemOrgIdentityArrayOutput {
+	return o
+}
+
+func (o GetMembersItemOrgIdentityArrayOutput) Index(i pulumi.IntInput) GetMembersItemOrgIdentityOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMembersItemOrgIdentity {
+		return vs[0].([]GetMembersItemOrgIdentity)[vs[1].(int)]
+	}).(GetMembersItemOrgIdentityOutput)
+}
+
+type GetMembersItemOrgPermission struct {
+	// Permission ID.
+	Id int `pulumi:"id"`
+	// Permission name.
+	Name string `pulumi:"name"`
+}
+
+// GetMembersItemOrgPermissionInput is an input type that accepts GetMembersItemOrgPermissionArgs and GetMembersItemOrgPermissionOutput values.
+// You can construct a concrete instance of `GetMembersItemOrgPermissionInput` via:
+//
+//          GetMembersItemOrgPermissionArgs{...}
+type GetMembersItemOrgPermissionInput interface {
+	pulumi.Input
+
+	ToGetMembersItemOrgPermissionOutput() GetMembersItemOrgPermissionOutput
+	ToGetMembersItemOrgPermissionOutputWithContext(context.Context) GetMembersItemOrgPermissionOutput
+}
+
+type GetMembersItemOrgPermissionArgs struct {
+	// Permission ID.
+	Id pulumi.IntInput `pulumi:"id"`
+	// Permission name.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetMembersItemOrgPermissionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMembersItemOrgPermission)(nil)).Elem()
+}
+
+func (i GetMembersItemOrgPermissionArgs) ToGetMembersItemOrgPermissionOutput() GetMembersItemOrgPermissionOutput {
+	return i.ToGetMembersItemOrgPermissionOutputWithContext(context.Background())
+}
+
+func (i GetMembersItemOrgPermissionArgs) ToGetMembersItemOrgPermissionOutputWithContext(ctx context.Context) GetMembersItemOrgPermissionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMembersItemOrgPermissionOutput)
+}
+
+// GetMembersItemOrgPermissionArrayInput is an input type that accepts GetMembersItemOrgPermissionArray and GetMembersItemOrgPermissionArrayOutput values.
+// You can construct a concrete instance of `GetMembersItemOrgPermissionArrayInput` via:
+//
+//          GetMembersItemOrgPermissionArray{ GetMembersItemOrgPermissionArgs{...} }
+type GetMembersItemOrgPermissionArrayInput interface {
+	pulumi.Input
+
+	ToGetMembersItemOrgPermissionArrayOutput() GetMembersItemOrgPermissionArrayOutput
+	ToGetMembersItemOrgPermissionArrayOutputWithContext(context.Context) GetMembersItemOrgPermissionArrayOutput
+}
+
+type GetMembersItemOrgPermissionArray []GetMembersItemOrgPermissionInput
+
+func (GetMembersItemOrgPermissionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMembersItemOrgPermission)(nil)).Elem()
+}
+
+func (i GetMembersItemOrgPermissionArray) ToGetMembersItemOrgPermissionArrayOutput() GetMembersItemOrgPermissionArrayOutput {
+	return i.ToGetMembersItemOrgPermissionArrayOutputWithContext(context.Background())
+}
+
+func (i GetMembersItemOrgPermissionArray) ToGetMembersItemOrgPermissionArrayOutputWithContext(ctx context.Context) GetMembersItemOrgPermissionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMembersItemOrgPermissionArrayOutput)
+}
+
+type GetMembersItemOrgPermissionOutput struct{ *pulumi.OutputState }
+
+func (GetMembersItemOrgPermissionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMembersItemOrgPermission)(nil)).Elem()
+}
+
+func (o GetMembersItemOrgPermissionOutput) ToGetMembersItemOrgPermissionOutput() GetMembersItemOrgPermissionOutput {
+	return o
+}
+
+func (o GetMembersItemOrgPermissionOutput) ToGetMembersItemOrgPermissionOutputWithContext(ctx context.Context) GetMembersItemOrgPermissionOutput {
+	return o
+}
+
+// Permission ID.
+func (o GetMembersItemOrgPermissionOutput) Id() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMembersItemOrgPermission) int { return v.Id }).(pulumi.IntOutput)
+}
+
+// Permission name.
+func (o GetMembersItemOrgPermissionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMembersItemOrgPermission) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetMembersItemOrgPermissionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMembersItemOrgPermissionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMembersItemOrgPermission)(nil)).Elem()
+}
+
+func (o GetMembersItemOrgPermissionArrayOutput) ToGetMembersItemOrgPermissionArrayOutput() GetMembersItemOrgPermissionArrayOutput {
+	return o
+}
+
+func (o GetMembersItemOrgPermissionArrayOutput) ToGetMembersItemOrgPermissionArrayOutputWithContext(ctx context.Context) GetMembersItemOrgPermissionArrayOutput {
+	return o
+}
+
+func (o GetMembersItemOrgPermissionArrayOutput) Index(i pulumi.IntInput) GetMembersItemOrgPermissionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMembersItemOrgPermission {
+		return vs[0].([]GetMembersItemOrgPermission)[vs[1].(int)]
+	}).(GetMembersItemOrgPermissionOutput)
+}
+
+type GetOrgAuthNodeItem struct {
+	// Verified company name.
+	AuthName string `pulumi:"authName"`
+	// Organization auth manager.
+	Managers []GetOrgAuthNodeItemManager `pulumi:"managers"`
+	// Relationship Id.
+	RelationId int `pulumi:"relationId"`
+}
+
+// GetOrgAuthNodeItemInput is an input type that accepts GetOrgAuthNodeItemArgs and GetOrgAuthNodeItemOutput values.
+// You can construct a concrete instance of `GetOrgAuthNodeItemInput` via:
+//
+//          GetOrgAuthNodeItemArgs{...}
+type GetOrgAuthNodeItemInput interface {
+	pulumi.Input
+
+	ToGetOrgAuthNodeItemOutput() GetOrgAuthNodeItemOutput
+	ToGetOrgAuthNodeItemOutputWithContext(context.Context) GetOrgAuthNodeItemOutput
+}
+
+type GetOrgAuthNodeItemArgs struct {
+	// Verified company name.
+	AuthName pulumi.StringInput `pulumi:"authName"`
+	// Organization auth manager.
+	Managers GetOrgAuthNodeItemManagerArrayInput `pulumi:"managers"`
+	// Relationship Id.
+	RelationId pulumi.IntInput `pulumi:"relationId"`
+}
+
+func (GetOrgAuthNodeItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOrgAuthNodeItem)(nil)).Elem()
+}
+
+func (i GetOrgAuthNodeItemArgs) ToGetOrgAuthNodeItemOutput() GetOrgAuthNodeItemOutput {
+	return i.ToGetOrgAuthNodeItemOutputWithContext(context.Background())
+}
+
+func (i GetOrgAuthNodeItemArgs) ToGetOrgAuthNodeItemOutputWithContext(ctx context.Context) GetOrgAuthNodeItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOrgAuthNodeItemOutput)
+}
+
+// GetOrgAuthNodeItemArrayInput is an input type that accepts GetOrgAuthNodeItemArray and GetOrgAuthNodeItemArrayOutput values.
+// You can construct a concrete instance of `GetOrgAuthNodeItemArrayInput` via:
+//
+//          GetOrgAuthNodeItemArray{ GetOrgAuthNodeItemArgs{...} }
+type GetOrgAuthNodeItemArrayInput interface {
+	pulumi.Input
+
+	ToGetOrgAuthNodeItemArrayOutput() GetOrgAuthNodeItemArrayOutput
+	ToGetOrgAuthNodeItemArrayOutputWithContext(context.Context) GetOrgAuthNodeItemArrayOutput
+}
+
+type GetOrgAuthNodeItemArray []GetOrgAuthNodeItemInput
+
+func (GetOrgAuthNodeItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOrgAuthNodeItem)(nil)).Elem()
+}
+
+func (i GetOrgAuthNodeItemArray) ToGetOrgAuthNodeItemArrayOutput() GetOrgAuthNodeItemArrayOutput {
+	return i.ToGetOrgAuthNodeItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetOrgAuthNodeItemArray) ToGetOrgAuthNodeItemArrayOutputWithContext(ctx context.Context) GetOrgAuthNodeItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOrgAuthNodeItemArrayOutput)
+}
+
+type GetOrgAuthNodeItemOutput struct{ *pulumi.OutputState }
+
+func (GetOrgAuthNodeItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOrgAuthNodeItem)(nil)).Elem()
+}
+
+func (o GetOrgAuthNodeItemOutput) ToGetOrgAuthNodeItemOutput() GetOrgAuthNodeItemOutput {
+	return o
+}
+
+func (o GetOrgAuthNodeItemOutput) ToGetOrgAuthNodeItemOutputWithContext(ctx context.Context) GetOrgAuthNodeItemOutput {
+	return o
+}
+
+// Verified company name.
+func (o GetOrgAuthNodeItemOutput) AuthName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOrgAuthNodeItem) string { return v.AuthName }).(pulumi.StringOutput)
+}
+
+// Organization auth manager.
+func (o GetOrgAuthNodeItemOutput) Managers() GetOrgAuthNodeItemManagerArrayOutput {
+	return o.ApplyT(func(v GetOrgAuthNodeItem) []GetOrgAuthNodeItemManager { return v.Managers }).(GetOrgAuthNodeItemManagerArrayOutput)
+}
+
+// Relationship Id.
+func (o GetOrgAuthNodeItemOutput) RelationId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOrgAuthNodeItem) int { return v.RelationId }).(pulumi.IntOutput)
+}
+
+type GetOrgAuthNodeItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetOrgAuthNodeItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOrgAuthNodeItem)(nil)).Elem()
+}
+
+func (o GetOrgAuthNodeItemArrayOutput) ToGetOrgAuthNodeItemArrayOutput() GetOrgAuthNodeItemArrayOutput {
+	return o
+}
+
+func (o GetOrgAuthNodeItemArrayOutput) ToGetOrgAuthNodeItemArrayOutputWithContext(ctx context.Context) GetOrgAuthNodeItemArrayOutput {
+	return o
+}
+
+func (o GetOrgAuthNodeItemArrayOutput) Index(i pulumi.IntInput) GetOrgAuthNodeItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetOrgAuthNodeItem {
+		return vs[0].([]GetOrgAuthNodeItem)[vs[1].(int)]
+	}).(GetOrgAuthNodeItemOutput)
+}
+
+type GetOrgAuthNodeItemManager struct {
+	// Member name.
+	MemberName string `pulumi:"memberName"`
+	// Member uin.
+	MemberUin int `pulumi:"memberUin"`
+}
+
+// GetOrgAuthNodeItemManagerInput is an input type that accepts GetOrgAuthNodeItemManagerArgs and GetOrgAuthNodeItemManagerOutput values.
+// You can construct a concrete instance of `GetOrgAuthNodeItemManagerInput` via:
+//
+//          GetOrgAuthNodeItemManagerArgs{...}
+type GetOrgAuthNodeItemManagerInput interface {
+	pulumi.Input
+
+	ToGetOrgAuthNodeItemManagerOutput() GetOrgAuthNodeItemManagerOutput
+	ToGetOrgAuthNodeItemManagerOutputWithContext(context.Context) GetOrgAuthNodeItemManagerOutput
+}
+
+type GetOrgAuthNodeItemManagerArgs struct {
+	// Member name.
+	MemberName pulumi.StringInput `pulumi:"memberName"`
+	// Member uin.
+	MemberUin pulumi.IntInput `pulumi:"memberUin"`
+}
+
+func (GetOrgAuthNodeItemManagerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOrgAuthNodeItemManager)(nil)).Elem()
+}
+
+func (i GetOrgAuthNodeItemManagerArgs) ToGetOrgAuthNodeItemManagerOutput() GetOrgAuthNodeItemManagerOutput {
+	return i.ToGetOrgAuthNodeItemManagerOutputWithContext(context.Background())
+}
+
+func (i GetOrgAuthNodeItemManagerArgs) ToGetOrgAuthNodeItemManagerOutputWithContext(ctx context.Context) GetOrgAuthNodeItemManagerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOrgAuthNodeItemManagerOutput)
+}
+
+// GetOrgAuthNodeItemManagerArrayInput is an input type that accepts GetOrgAuthNodeItemManagerArray and GetOrgAuthNodeItemManagerArrayOutput values.
+// You can construct a concrete instance of `GetOrgAuthNodeItemManagerArrayInput` via:
+//
+//          GetOrgAuthNodeItemManagerArray{ GetOrgAuthNodeItemManagerArgs{...} }
+type GetOrgAuthNodeItemManagerArrayInput interface {
+	pulumi.Input
+
+	ToGetOrgAuthNodeItemManagerArrayOutput() GetOrgAuthNodeItemManagerArrayOutput
+	ToGetOrgAuthNodeItemManagerArrayOutputWithContext(context.Context) GetOrgAuthNodeItemManagerArrayOutput
+}
+
+type GetOrgAuthNodeItemManagerArray []GetOrgAuthNodeItemManagerInput
+
+func (GetOrgAuthNodeItemManagerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOrgAuthNodeItemManager)(nil)).Elem()
+}
+
+func (i GetOrgAuthNodeItemManagerArray) ToGetOrgAuthNodeItemManagerArrayOutput() GetOrgAuthNodeItemManagerArrayOutput {
+	return i.ToGetOrgAuthNodeItemManagerArrayOutputWithContext(context.Background())
+}
+
+func (i GetOrgAuthNodeItemManagerArray) ToGetOrgAuthNodeItemManagerArrayOutputWithContext(ctx context.Context) GetOrgAuthNodeItemManagerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOrgAuthNodeItemManagerArrayOutput)
+}
+
+type GetOrgAuthNodeItemManagerOutput struct{ *pulumi.OutputState }
+
+func (GetOrgAuthNodeItemManagerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOrgAuthNodeItemManager)(nil)).Elem()
+}
+
+func (o GetOrgAuthNodeItemManagerOutput) ToGetOrgAuthNodeItemManagerOutput() GetOrgAuthNodeItemManagerOutput {
+	return o
+}
+
+func (o GetOrgAuthNodeItemManagerOutput) ToGetOrgAuthNodeItemManagerOutputWithContext(ctx context.Context) GetOrgAuthNodeItemManagerOutput {
+	return o
+}
+
+// Member name.
+func (o GetOrgAuthNodeItemManagerOutput) MemberName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOrgAuthNodeItemManager) string { return v.MemberName }).(pulumi.StringOutput)
+}
+
+// Member uin.
+func (o GetOrgAuthNodeItemManagerOutput) MemberUin() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOrgAuthNodeItemManager) int { return v.MemberUin }).(pulumi.IntOutput)
+}
+
+type GetOrgAuthNodeItemManagerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetOrgAuthNodeItemManagerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOrgAuthNodeItemManager)(nil)).Elem()
+}
+
+func (o GetOrgAuthNodeItemManagerArrayOutput) ToGetOrgAuthNodeItemManagerArrayOutput() GetOrgAuthNodeItemManagerArrayOutput {
+	return o
+}
+
+func (o GetOrgAuthNodeItemManagerArrayOutput) ToGetOrgAuthNodeItemManagerArrayOutputWithContext(ctx context.Context) GetOrgAuthNodeItemManagerArrayOutput {
+	return o
+}
+
+func (o GetOrgAuthNodeItemManagerArrayOutput) Index(i pulumi.IntInput) GetOrgAuthNodeItemManagerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetOrgAuthNodeItemManager {
+		return vs[0].([]GetOrgAuthNodeItemManager)[vs[1].(int)]
+	}).(GetOrgAuthNodeItemManagerOutput)
+}
+
+type GetOrgFinancialByMemberItem struct {
+	// Member name.
+	MemberName string `pulumi:"memberName"`
+	// Member uin.
+	MemberUin int `pulumi:"memberUin"`
+	// The percentage of the organization total cost that is accounted for by the member.
+	Ratio string `pulumi:"ratio"`
+	// Total cost of the member.
+	TotalCost float64 `pulumi:"totalCost"`
+}
+
+// GetOrgFinancialByMemberItemInput is an input type that accepts GetOrgFinancialByMemberItemArgs and GetOrgFinancialByMemberItemOutput values.
+// You can construct a concrete instance of `GetOrgFinancialByMemberItemInput` via:
+//
+//          GetOrgFinancialByMemberItemArgs{...}
+type GetOrgFinancialByMemberItemInput interface {
+	pulumi.Input
+
+	ToGetOrgFinancialByMemberItemOutput() GetOrgFinancialByMemberItemOutput
+	ToGetOrgFinancialByMemberItemOutputWithContext(context.Context) GetOrgFinancialByMemberItemOutput
+}
+
+type GetOrgFinancialByMemberItemArgs struct {
+	// Member name.
+	MemberName pulumi.StringInput `pulumi:"memberName"`
+	// Member uin.
+	MemberUin pulumi.IntInput `pulumi:"memberUin"`
+	// The percentage of the organization total cost that is accounted for by the member.
+	Ratio pulumi.StringInput `pulumi:"ratio"`
+	// Total cost of the member.
+	TotalCost pulumi.Float64Input `pulumi:"totalCost"`
+}
+
+func (GetOrgFinancialByMemberItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOrgFinancialByMemberItem)(nil)).Elem()
+}
+
+func (i GetOrgFinancialByMemberItemArgs) ToGetOrgFinancialByMemberItemOutput() GetOrgFinancialByMemberItemOutput {
+	return i.ToGetOrgFinancialByMemberItemOutputWithContext(context.Background())
+}
+
+func (i GetOrgFinancialByMemberItemArgs) ToGetOrgFinancialByMemberItemOutputWithContext(ctx context.Context) GetOrgFinancialByMemberItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOrgFinancialByMemberItemOutput)
+}
+
+// GetOrgFinancialByMemberItemArrayInput is an input type that accepts GetOrgFinancialByMemberItemArray and GetOrgFinancialByMemberItemArrayOutput values.
+// You can construct a concrete instance of `GetOrgFinancialByMemberItemArrayInput` via:
+//
+//          GetOrgFinancialByMemberItemArray{ GetOrgFinancialByMemberItemArgs{...} }
+type GetOrgFinancialByMemberItemArrayInput interface {
+	pulumi.Input
+
+	ToGetOrgFinancialByMemberItemArrayOutput() GetOrgFinancialByMemberItemArrayOutput
+	ToGetOrgFinancialByMemberItemArrayOutputWithContext(context.Context) GetOrgFinancialByMemberItemArrayOutput
+}
+
+type GetOrgFinancialByMemberItemArray []GetOrgFinancialByMemberItemInput
+
+func (GetOrgFinancialByMemberItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOrgFinancialByMemberItem)(nil)).Elem()
+}
+
+func (i GetOrgFinancialByMemberItemArray) ToGetOrgFinancialByMemberItemArrayOutput() GetOrgFinancialByMemberItemArrayOutput {
+	return i.ToGetOrgFinancialByMemberItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetOrgFinancialByMemberItemArray) ToGetOrgFinancialByMemberItemArrayOutputWithContext(ctx context.Context) GetOrgFinancialByMemberItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOrgFinancialByMemberItemArrayOutput)
+}
+
+type GetOrgFinancialByMemberItemOutput struct{ *pulumi.OutputState }
+
+func (GetOrgFinancialByMemberItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOrgFinancialByMemberItem)(nil)).Elem()
+}
+
+func (o GetOrgFinancialByMemberItemOutput) ToGetOrgFinancialByMemberItemOutput() GetOrgFinancialByMemberItemOutput {
+	return o
+}
+
+func (o GetOrgFinancialByMemberItemOutput) ToGetOrgFinancialByMemberItemOutputWithContext(ctx context.Context) GetOrgFinancialByMemberItemOutput {
+	return o
+}
+
+// Member name.
+func (o GetOrgFinancialByMemberItemOutput) MemberName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOrgFinancialByMemberItem) string { return v.MemberName }).(pulumi.StringOutput)
+}
+
+// Member uin.
+func (o GetOrgFinancialByMemberItemOutput) MemberUin() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOrgFinancialByMemberItem) int { return v.MemberUin }).(pulumi.IntOutput)
+}
+
+// The percentage of the organization total cost that is accounted for by the member.
+func (o GetOrgFinancialByMemberItemOutput) Ratio() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOrgFinancialByMemberItem) string { return v.Ratio }).(pulumi.StringOutput)
+}
+
+// Total cost of the member.
+func (o GetOrgFinancialByMemberItemOutput) TotalCost() pulumi.Float64Output {
+	return o.ApplyT(func(v GetOrgFinancialByMemberItem) float64 { return v.TotalCost }).(pulumi.Float64Output)
+}
+
+type GetOrgFinancialByMemberItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetOrgFinancialByMemberItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOrgFinancialByMemberItem)(nil)).Elem()
+}
+
+func (o GetOrgFinancialByMemberItemArrayOutput) ToGetOrgFinancialByMemberItemArrayOutput() GetOrgFinancialByMemberItemArrayOutput {
+	return o
+}
+
+func (o GetOrgFinancialByMemberItemArrayOutput) ToGetOrgFinancialByMemberItemArrayOutputWithContext(ctx context.Context) GetOrgFinancialByMemberItemArrayOutput {
+	return o
+}
+
+func (o GetOrgFinancialByMemberItemArrayOutput) Index(i pulumi.IntInput) GetOrgFinancialByMemberItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetOrgFinancialByMemberItem {
+		return vs[0].([]GetOrgFinancialByMemberItem)[vs[1].(int)]
+	}).(GetOrgFinancialByMemberItemOutput)
+}
+
+type GetOrgFinancialByMonthItem struct {
+	// Growth rate compared to last month.
+	GrowthRate string `pulumi:"growthRate"`
+	// Record ID.
+	Id int `pulumi:"id"`
+	// Month.
+	Month string `pulumi:"month"`
+	// Total cost of the month.
+	TotalCost float64 `pulumi:"totalCost"`
+}
+
+// GetOrgFinancialByMonthItemInput is an input type that accepts GetOrgFinancialByMonthItemArgs and GetOrgFinancialByMonthItemOutput values.
+// You can construct a concrete instance of `GetOrgFinancialByMonthItemInput` via:
+//
+//          GetOrgFinancialByMonthItemArgs{...}
+type GetOrgFinancialByMonthItemInput interface {
+	pulumi.Input
+
+	ToGetOrgFinancialByMonthItemOutput() GetOrgFinancialByMonthItemOutput
+	ToGetOrgFinancialByMonthItemOutputWithContext(context.Context) GetOrgFinancialByMonthItemOutput
+}
+
+type GetOrgFinancialByMonthItemArgs struct {
+	// Growth rate compared to last month.
+	GrowthRate pulumi.StringInput `pulumi:"growthRate"`
+	// Record ID.
+	Id pulumi.IntInput `pulumi:"id"`
+	// Month.
+	Month pulumi.StringInput `pulumi:"month"`
+	// Total cost of the month.
+	TotalCost pulumi.Float64Input `pulumi:"totalCost"`
+}
+
+func (GetOrgFinancialByMonthItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOrgFinancialByMonthItem)(nil)).Elem()
+}
+
+func (i GetOrgFinancialByMonthItemArgs) ToGetOrgFinancialByMonthItemOutput() GetOrgFinancialByMonthItemOutput {
+	return i.ToGetOrgFinancialByMonthItemOutputWithContext(context.Background())
+}
+
+func (i GetOrgFinancialByMonthItemArgs) ToGetOrgFinancialByMonthItemOutputWithContext(ctx context.Context) GetOrgFinancialByMonthItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOrgFinancialByMonthItemOutput)
+}
+
+// GetOrgFinancialByMonthItemArrayInput is an input type that accepts GetOrgFinancialByMonthItemArray and GetOrgFinancialByMonthItemArrayOutput values.
+// You can construct a concrete instance of `GetOrgFinancialByMonthItemArrayInput` via:
+//
+//          GetOrgFinancialByMonthItemArray{ GetOrgFinancialByMonthItemArgs{...} }
+type GetOrgFinancialByMonthItemArrayInput interface {
+	pulumi.Input
+
+	ToGetOrgFinancialByMonthItemArrayOutput() GetOrgFinancialByMonthItemArrayOutput
+	ToGetOrgFinancialByMonthItemArrayOutputWithContext(context.Context) GetOrgFinancialByMonthItemArrayOutput
+}
+
+type GetOrgFinancialByMonthItemArray []GetOrgFinancialByMonthItemInput
+
+func (GetOrgFinancialByMonthItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOrgFinancialByMonthItem)(nil)).Elem()
+}
+
+func (i GetOrgFinancialByMonthItemArray) ToGetOrgFinancialByMonthItemArrayOutput() GetOrgFinancialByMonthItemArrayOutput {
+	return i.ToGetOrgFinancialByMonthItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetOrgFinancialByMonthItemArray) ToGetOrgFinancialByMonthItemArrayOutputWithContext(ctx context.Context) GetOrgFinancialByMonthItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOrgFinancialByMonthItemArrayOutput)
+}
+
+type GetOrgFinancialByMonthItemOutput struct{ *pulumi.OutputState }
+
+func (GetOrgFinancialByMonthItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOrgFinancialByMonthItem)(nil)).Elem()
+}
+
+func (o GetOrgFinancialByMonthItemOutput) ToGetOrgFinancialByMonthItemOutput() GetOrgFinancialByMonthItemOutput {
+	return o
+}
+
+func (o GetOrgFinancialByMonthItemOutput) ToGetOrgFinancialByMonthItemOutputWithContext(ctx context.Context) GetOrgFinancialByMonthItemOutput {
+	return o
+}
+
+// Growth rate compared to last month.
+func (o GetOrgFinancialByMonthItemOutput) GrowthRate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOrgFinancialByMonthItem) string { return v.GrowthRate }).(pulumi.StringOutput)
+}
+
+// Record ID.
+func (o GetOrgFinancialByMonthItemOutput) Id() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOrgFinancialByMonthItem) int { return v.Id }).(pulumi.IntOutput)
+}
+
+// Month.
+func (o GetOrgFinancialByMonthItemOutput) Month() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOrgFinancialByMonthItem) string { return v.Month }).(pulumi.StringOutput)
+}
+
+// Total cost of the month.
+func (o GetOrgFinancialByMonthItemOutput) TotalCost() pulumi.Float64Output {
+	return o.ApplyT(func(v GetOrgFinancialByMonthItem) float64 { return v.TotalCost }).(pulumi.Float64Output)
+}
+
+type GetOrgFinancialByMonthItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetOrgFinancialByMonthItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOrgFinancialByMonthItem)(nil)).Elem()
+}
+
+func (o GetOrgFinancialByMonthItemArrayOutput) ToGetOrgFinancialByMonthItemArrayOutput() GetOrgFinancialByMonthItemArrayOutput {
+	return o
+}
+
+func (o GetOrgFinancialByMonthItemArrayOutput) ToGetOrgFinancialByMonthItemArrayOutputWithContext(ctx context.Context) GetOrgFinancialByMonthItemArrayOutput {
+	return o
+}
+
+func (o GetOrgFinancialByMonthItemArrayOutput) Index(i pulumi.IntInput) GetOrgFinancialByMonthItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetOrgFinancialByMonthItem {
+		return vs[0].([]GetOrgFinancialByMonthItem)[vs[1].(int)]
+	}).(GetOrgFinancialByMonthItemOutput)
+}
+
+type GetOrgFinancialByProductItem struct {
+	// Product code.
+	ProductCode string `pulumi:"productCode"`
+	// Product name.
+	ProductName string `pulumi:"productName"`
+	// The percentage of the organization total cost that is accounted for by the product.
+	Ratio string `pulumi:"ratio"`
+	// Total cost of the product.
+	TotalCost float64 `pulumi:"totalCost"`
+}
+
+// GetOrgFinancialByProductItemInput is an input type that accepts GetOrgFinancialByProductItemArgs and GetOrgFinancialByProductItemOutput values.
+// You can construct a concrete instance of `GetOrgFinancialByProductItemInput` via:
+//
+//          GetOrgFinancialByProductItemArgs{...}
+type GetOrgFinancialByProductItemInput interface {
+	pulumi.Input
+
+	ToGetOrgFinancialByProductItemOutput() GetOrgFinancialByProductItemOutput
+	ToGetOrgFinancialByProductItemOutputWithContext(context.Context) GetOrgFinancialByProductItemOutput
+}
+
+type GetOrgFinancialByProductItemArgs struct {
+	// Product code.
+	ProductCode pulumi.StringInput `pulumi:"productCode"`
+	// Product name.
+	ProductName pulumi.StringInput `pulumi:"productName"`
+	// The percentage of the organization total cost that is accounted for by the product.
+	Ratio pulumi.StringInput `pulumi:"ratio"`
+	// Total cost of the product.
+	TotalCost pulumi.Float64Input `pulumi:"totalCost"`
+}
+
+func (GetOrgFinancialByProductItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOrgFinancialByProductItem)(nil)).Elem()
+}
+
+func (i GetOrgFinancialByProductItemArgs) ToGetOrgFinancialByProductItemOutput() GetOrgFinancialByProductItemOutput {
+	return i.ToGetOrgFinancialByProductItemOutputWithContext(context.Background())
+}
+
+func (i GetOrgFinancialByProductItemArgs) ToGetOrgFinancialByProductItemOutputWithContext(ctx context.Context) GetOrgFinancialByProductItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOrgFinancialByProductItemOutput)
+}
+
+// GetOrgFinancialByProductItemArrayInput is an input type that accepts GetOrgFinancialByProductItemArray and GetOrgFinancialByProductItemArrayOutput values.
+// You can construct a concrete instance of `GetOrgFinancialByProductItemArrayInput` via:
+//
+//          GetOrgFinancialByProductItemArray{ GetOrgFinancialByProductItemArgs{...} }
+type GetOrgFinancialByProductItemArrayInput interface {
+	pulumi.Input
+
+	ToGetOrgFinancialByProductItemArrayOutput() GetOrgFinancialByProductItemArrayOutput
+	ToGetOrgFinancialByProductItemArrayOutputWithContext(context.Context) GetOrgFinancialByProductItemArrayOutput
+}
+
+type GetOrgFinancialByProductItemArray []GetOrgFinancialByProductItemInput
+
+func (GetOrgFinancialByProductItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOrgFinancialByProductItem)(nil)).Elem()
+}
+
+func (i GetOrgFinancialByProductItemArray) ToGetOrgFinancialByProductItemArrayOutput() GetOrgFinancialByProductItemArrayOutput {
+	return i.ToGetOrgFinancialByProductItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetOrgFinancialByProductItemArray) ToGetOrgFinancialByProductItemArrayOutputWithContext(ctx context.Context) GetOrgFinancialByProductItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOrgFinancialByProductItemArrayOutput)
+}
+
+type GetOrgFinancialByProductItemOutput struct{ *pulumi.OutputState }
+
+func (GetOrgFinancialByProductItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOrgFinancialByProductItem)(nil)).Elem()
+}
+
+func (o GetOrgFinancialByProductItemOutput) ToGetOrgFinancialByProductItemOutput() GetOrgFinancialByProductItemOutput {
+	return o
+}
+
+func (o GetOrgFinancialByProductItemOutput) ToGetOrgFinancialByProductItemOutputWithContext(ctx context.Context) GetOrgFinancialByProductItemOutput {
+	return o
+}
+
+// Product code.
+func (o GetOrgFinancialByProductItemOutput) ProductCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOrgFinancialByProductItem) string { return v.ProductCode }).(pulumi.StringOutput)
+}
+
+// Product name.
+func (o GetOrgFinancialByProductItemOutput) ProductName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOrgFinancialByProductItem) string { return v.ProductName }).(pulumi.StringOutput)
+}
+
+// The percentage of the organization total cost that is accounted for by the product.
+func (o GetOrgFinancialByProductItemOutput) Ratio() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOrgFinancialByProductItem) string { return v.Ratio }).(pulumi.StringOutput)
+}
+
+// Total cost of the product.
+func (o GetOrgFinancialByProductItemOutput) TotalCost() pulumi.Float64Output {
+	return o.ApplyT(func(v GetOrgFinancialByProductItem) float64 { return v.TotalCost }).(pulumi.Float64Output)
+}
+
+type GetOrgFinancialByProductItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetOrgFinancialByProductItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOrgFinancialByProductItem)(nil)).Elem()
+}
+
+func (o GetOrgFinancialByProductItemArrayOutput) ToGetOrgFinancialByProductItemArrayOutput() GetOrgFinancialByProductItemArrayOutput {
+	return o
+}
+
+func (o GetOrgFinancialByProductItemArrayOutput) ToGetOrgFinancialByProductItemArrayOutputWithContext(ctx context.Context) GetOrgFinancialByProductItemArrayOutput {
+	return o
+}
+
+func (o GetOrgFinancialByProductItemArrayOutput) Index(i pulumi.IntInput) GetOrgFinancialByProductItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetOrgFinancialByProductItem {
+		return vs[0].([]GetOrgFinancialByProductItem)[vs[1].(int)]
+	}).(GetOrgFinancialByProductItemOutput)
+}
+
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceOrgPermissionInput)(nil)).Elem(), InstanceOrgPermissionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceOrgPermissionArrayInput)(nil)).Elem(), InstanceOrgPermissionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*OrgIdentityIdentityPolicyInput)(nil)).Elem(), OrgIdentityIdentityPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*OrgIdentityIdentityPolicyArrayInput)(nil)).Elem(), OrgIdentityIdentityPolicyArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*OrgMemberOrgPermissionInput)(nil)).Elem(), OrgMemberOrgPermissionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*OrgMemberOrgPermissionArrayInput)(nil)).Elem(), OrgMemberOrgPermissionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMembersItemInput)(nil)).Elem(), GetMembersItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMembersItemArrayInput)(nil)).Elem(), GetMembersItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMembersItemOrgIdentityInput)(nil)).Elem(), GetMembersItemOrgIdentityArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMembersItemOrgIdentityArrayInput)(nil)).Elem(), GetMembersItemOrgIdentityArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMembersItemOrgPermissionInput)(nil)).Elem(), GetMembersItemOrgPermissionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMembersItemOrgPermissionArrayInput)(nil)).Elem(), GetMembersItemOrgPermissionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgAuthNodeItemInput)(nil)).Elem(), GetOrgAuthNodeItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgAuthNodeItemArrayInput)(nil)).Elem(), GetOrgAuthNodeItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgAuthNodeItemManagerInput)(nil)).Elem(), GetOrgAuthNodeItemManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgAuthNodeItemManagerArrayInput)(nil)).Elem(), GetOrgAuthNodeItemManagerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgFinancialByMemberItemInput)(nil)).Elem(), GetOrgFinancialByMemberItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgFinancialByMemberItemArrayInput)(nil)).Elem(), GetOrgFinancialByMemberItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgFinancialByMonthItemInput)(nil)).Elem(), GetOrgFinancialByMonthItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgFinancialByMonthItemArrayInput)(nil)).Elem(), GetOrgFinancialByMonthItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgFinancialByProductItemInput)(nil)).Elem(), GetOrgFinancialByProductItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgFinancialByProductItemArrayInput)(nil)).Elem(), GetOrgFinancialByProductItemArray{})
+	pulumi.RegisterOutputType(InstanceOrgPermissionOutput{})
+	pulumi.RegisterOutputType(InstanceOrgPermissionArrayOutput{})
+	pulumi.RegisterOutputType(OrgIdentityIdentityPolicyOutput{})
+	pulumi.RegisterOutputType(OrgIdentityIdentityPolicyArrayOutput{})
 	pulumi.RegisterOutputType(OrgMemberOrgPermissionOutput{})
 	pulumi.RegisterOutputType(OrgMemberOrgPermissionArrayOutput{})
+	pulumi.RegisterOutputType(GetMembersItemOutput{})
+	pulumi.RegisterOutputType(GetMembersItemArrayOutput{})
+	pulumi.RegisterOutputType(GetMembersItemOrgIdentityOutput{})
+	pulumi.RegisterOutputType(GetMembersItemOrgIdentityArrayOutput{})
+	pulumi.RegisterOutputType(GetMembersItemOrgPermissionOutput{})
+	pulumi.RegisterOutputType(GetMembersItemOrgPermissionArrayOutput{})
+	pulumi.RegisterOutputType(GetOrgAuthNodeItemOutput{})
+	pulumi.RegisterOutputType(GetOrgAuthNodeItemArrayOutput{})
+	pulumi.RegisterOutputType(GetOrgAuthNodeItemManagerOutput{})
+	pulumi.RegisterOutputType(GetOrgAuthNodeItemManagerArrayOutput{})
+	pulumi.RegisterOutputType(GetOrgFinancialByMemberItemOutput{})
+	pulumi.RegisterOutputType(GetOrgFinancialByMemberItemArrayOutput{})
+	pulumi.RegisterOutputType(GetOrgFinancialByMonthItemOutput{})
+	pulumi.RegisterOutputType(GetOrgFinancialByMonthItemArrayOutput{})
+	pulumi.RegisterOutputType(GetOrgFinancialByProductItemOutput{})
+	pulumi.RegisterOutputType(GetOrgFinancialByProductItemArrayOutput{})
 }

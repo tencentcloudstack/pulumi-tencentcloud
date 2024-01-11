@@ -21,7 +21,7 @@ class BandwidthLimitArgs:
         The set of arguments for constructing a BandwidthLimit resource.
         :param pulumi.Input[str] ccn_id: ID of the CCN.
         :param pulumi.Input[str] region: Limitation of region.
-        :param pulumi.Input[int] bandwidth_limit: Limitation of bandwidth.
+        :param pulumi.Input[int] bandwidth_limit: Limitation of bandwidth. Default is `0`.
         :param pulumi.Input[str] dst_region: Destination area restriction. If the `CCN` rate limit type is `OUTER_REGION_LIMIT`, this value does not need to be set.
         """
         pulumi.set(__self__, "ccn_id", ccn_id)
@@ -59,7 +59,7 @@ class BandwidthLimitArgs:
     @pulumi.getter(name="bandwidthLimit")
     def bandwidth_limit(self) -> Optional[pulumi.Input[int]]:
         """
-        Limitation of bandwidth.
+        Limitation of bandwidth. Default is `0`.
         """
         return pulumi.get(self, "bandwidth_limit")
 
@@ -89,7 +89,7 @@ class _BandwidthLimitState:
                  region: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering BandwidthLimit resources.
-        :param pulumi.Input[int] bandwidth_limit: Limitation of bandwidth.
+        :param pulumi.Input[int] bandwidth_limit: Limitation of bandwidth. Default is `0`.
         :param pulumi.Input[str] ccn_id: ID of the CCN.
         :param pulumi.Input[str] dst_region: Destination area restriction. If the `CCN` rate limit type is `OUTER_REGION_LIMIT`, this value does not need to be set.
         :param pulumi.Input[str] region: Limitation of region.
@@ -107,7 +107,7 @@ class _BandwidthLimitState:
     @pulumi.getter(name="bandwidthLimit")
     def bandwidth_limit(self) -> Optional[pulumi.Input[int]]:
         """
-        Limitation of bandwidth.
+        Limitation of bandwidth. Default is `0`.
         """
         return pulumi.get(self, "bandwidth_limit")
 
@@ -210,7 +210,7 @@ class BandwidthLimit(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] bandwidth_limit: Limitation of bandwidth.
+        :param pulumi.Input[int] bandwidth_limit: Limitation of bandwidth. Default is `0`.
         :param pulumi.Input[str] ccn_id: ID of the CCN.
         :param pulumi.Input[str] dst_region: Destination area restriction. If the `CCN` rate limit type is `OUTER_REGION_LIMIT`, this value does not need to be set.
         :param pulumi.Input[str] region: Limitation of region.
@@ -329,7 +329,7 @@ class BandwidthLimit(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[int] bandwidth_limit: Limitation of bandwidth.
+        :param pulumi.Input[int] bandwidth_limit: Limitation of bandwidth. Default is `0`.
         :param pulumi.Input[str] ccn_id: ID of the CCN.
         :param pulumi.Input[str] dst_region: Destination area restriction. If the `CCN` rate limit type is `OUTER_REGION_LIMIT`, this value does not need to be set.
         :param pulumi.Input[str] region: Limitation of region.
@@ -348,7 +348,7 @@ class BandwidthLimit(pulumi.CustomResource):
     @pulumi.getter(name="bandwidthLimit")
     def bandwidth_limit(self) -> pulumi.Output[int]:
         """
-        Limitation of bandwidth.
+        Limitation of bandwidth. Default is `0`.
         """
         return pulumi.get(self, "bandwidth_limit")
 

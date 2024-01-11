@@ -23,15 +23,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// {
     ///     public MyStack()
     ///     {
+    ///         var firewallTemplate = new Tencentcloud.Lighthouse.FirewallTemplate("firewallTemplate", new Tencentcloud.Lighthouse.FirewallTemplateArgs
+    ///         {
+    ///             TemplateName = "empty-template",
+    ///         });
     ///         var lighthouse = new Tencentcloud.Lighthouse.Instance("lighthouse", new Tencentcloud.Lighthouse.InstanceArgs
     ///         {
-    ///             BlueprintId = "lhbp-f1lkcd41",
     ///             BundleId = "bundle2022_gen_01",
+    ///             BlueprintId = "lhbp-f1lkcd41",
+    ///             Period = 1,
+    ///             RenewFlag = "NOTIFY_AND_AUTO_RENEW",
+    ///             InstanceName = "hello world",
+    ///             Zone = "ap-guangzhou-3",
     ///             Containers = 
     ///             {
     ///                 new Tencentcloud.Lighthouse.Inputs.InstanceContainerArgs
     ///                 {
-    ///                     Command = "ls -l",
     ///                     ContainerImage = "ccr.ccs.tencentyun.com/qcloud/nginx",
     ///                     ContainerName = "nginx",
     ///                     Envs = 
@@ -51,15 +58,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     ///                     {
     ///                         new Tencentcloud.Lighthouse.Inputs.InstanceContainerPublishPortArgs
     ///                         {
-    ///                             ContainerPort = 80,
     ///                             HostPort = 80,
+    ///                             ContainerPort = 80,
     ///                             Ip = "127.0.0.1",
     ///                             Protocol = "tcp",
     ///                         },
     ///                         new Tencentcloud.Lighthouse.Inputs.InstanceContainerPublishPortArgs
     ///                         {
-    ///                             ContainerPort = 36000,
     ///                             HostPort = 36000,
+    ///                             ContainerPort = 36000,
     ///                             Ip = "127.0.0.1",
     ///                             Protocol = "tcp",
     ///                         },
@@ -77,10 +84,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     ///                             HostPath = "/tmp",
     ///                         },
     ///                     },
+    ///                     Command = "ls -l",
     ///                 },
     ///                 new Tencentcloud.Lighthouse.Inputs.InstanceContainerArgs
     ///                 {
-    ///                     Command = "echo \"hello\"",
     ///                     ContainerImage = "ccr.ccs.tencentyun.com/qcloud/resty",
     ///                     ContainerName = "resty",
     ///                     Envs = 
@@ -95,8 +102,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     ///                     {
     ///                         new Tencentcloud.Lighthouse.Inputs.InstanceContainerPublishPortArgs
     ///                         {
-    ///                             ContainerPort = 80,
     ///                             HostPort = 80,
+    ///                             ContainerPort = 80,
     ///                             Ip = "127.0.0.1",
     ///                             Protocol = "udp",
     ///                         },
@@ -109,16 +116,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     ///                             HostPath = "/tmp",
     ///                         },
     ///                     },
+    ///                     Command = "echo \"hello\"",
     ///                 },
     ///             },
-    ///             InstanceName = "hello world",
-    ///             Period = 1,
-    ///             RenewFlag = "NOTIFY_AND_AUTO_RENEW",
-    ///             Zone = "ap-guangzhou-3",
+    ///             FirewallTemplateId = firewallTemplate.Id,
     ///         });
     ///     }
     /// 
     /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// lighthouse instance can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Lighthouse/instance:Instance lighthouse lhins-xxxxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/instance:Instance")]
@@ -153,6 +166,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// </summary>
         [Output("dryRun")]
         public Output<bool?> DryRun { get; private set; } = null!;
+
+        /// <summary>
+        /// Firewall template ID. If this parameter is not specified, the default firewall policy is used.
+        /// </summary>
+        [Output("firewallTemplateId")]
+        public Output<string> FirewallTemplateId { get; private set; } = null!;
 
         /// <summary>
         /// The display name of the Lighthouse instance.
@@ -286,6 +305,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public Input<bool>? DryRun { get; set; }
 
         /// <summary>
+        /// Firewall template ID. If this parameter is not specified, the default firewall policy is used.
+        /// </summary>
+        [Input("firewallTemplateId")]
+        public Input<string>? FirewallTemplateId { get; set; }
+
+        /// <summary>
         /// The display name of the Lighthouse instance.
         /// </summary>
         [Input("instanceName", required: true)]
@@ -375,6 +400,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// </summary>
         [Input("dryRun")]
         public Input<bool>? DryRun { get; set; }
+
+        /// <summary>
+        /// Firewall template ID. If this parameter is not specified, the default firewall policy is used.
+        /// </summary>
+        [Input("firewallTemplateId")]
+        public Input<string>? FirewallTemplateId { get; set; }
 
         /// <summary>
         /// The display name of the Lighthouse instance.

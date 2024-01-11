@@ -77,7 +77,7 @@ export class BandwidthLimit extends pulumi.CustomResource {
     }
 
     /**
-     * Limitation of bandwidth.
+     * Limitation of bandwidth. Default is `0`.
      */
     public readonly bandwidthLimit!: pulumi.Output<number>;
     /**
@@ -133,7 +133,7 @@ export class BandwidthLimit extends pulumi.CustomResource {
  */
 export interface BandwidthLimitState {
     /**
-     * Limitation of bandwidth.
+     * Limitation of bandwidth. Default is `0`.
      */
     bandwidthLimit?: pulumi.Input<number>;
     /**
@@ -155,7 +155,7 @@ export interface BandwidthLimitState {
  */
 export interface BandwidthLimitArgs {
     /**
-     * Limitation of bandwidth.
+     * Limitation of bandwidth. Default is `0`.
      */
     bandwidthLimit?: pulumi.Input<number>;
     /**

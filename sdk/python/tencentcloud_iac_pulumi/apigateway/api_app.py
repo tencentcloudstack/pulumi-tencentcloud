@@ -14,15 +14,19 @@ __all__ = ['ApiAppArgs', 'ApiApp']
 class ApiAppArgs:
     def __init__(__self__, *,
                  api_app_name: pulumi.Input[str],
-                 api_app_desc: Optional[pulumi.Input[str]] = None):
+                 api_app_desc: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a ApiApp resource.
         :param pulumi.Input[str] api_app_name: Api app name.
         :param pulumi.Input[str] api_app_desc: App description.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         pulumi.set(__self__, "api_app_name", api_app_name)
         if api_app_desc is not None:
             pulumi.set(__self__, "api_app_desc", api_app_desc)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="apiAppName")
@@ -48,6 +52,18 @@ class ApiAppArgs:
     def api_app_desc(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "api_app_desc", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _ApiAppState:
@@ -58,7 +74,8 @@ class _ApiAppState:
                  api_app_name: Optional[pulumi.Input[str]] = None,
                  api_app_secret: Optional[pulumi.Input[str]] = None,
                  created_time: Optional[pulumi.Input[str]] = None,
-                 modified_time: Optional[pulumi.Input[str]] = None):
+                 modified_time: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         Input properties used for looking up and filtering ApiApp resources.
         :param pulumi.Input[str] api_app_desc: App description.
@@ -68,6 +85,7 @@ class _ApiAppState:
         :param pulumi.Input[str] api_app_secret: Api app secret.
         :param pulumi.Input[str] created_time: Api app created time.
         :param pulumi.Input[str] modified_time: Api app modified time.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         if api_app_desc is not None:
             pulumi.set(__self__, "api_app_desc", api_app_desc)
@@ -83,6 +101,8 @@ class _ApiAppState:
             pulumi.set(__self__, "created_time", created_time)
         if modified_time is not None:
             pulumi.set(__self__, "modified_time", modified_time)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="apiAppDesc")
@@ -168,6 +188,18 @@ class _ApiAppState:
     def modified_time(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "modified_time", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 class ApiApp(pulumi.CustomResource):
     @overload
@@ -176,25 +208,49 @@ class ApiApp(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  api_app_desc: Optional[pulumi.Input[str]] = None,
                  api_app_name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
         Provides a resource to create a APIGateway ApiApp
 
         ## Example Usage
+        ### Create a basic apigateway api_app
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        my_api_app = tencentcloud.api_gateway.ApiApp("myApiApp",
+        example = tencentcloud.api_gateway.ApiApp("example",
             api_app_desc="app desc.",
-            api_app_name="app_test1")
+            api_app_name="tf_example")
+        ```
+        ### Bind Tag
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.api_gateway.ApiApp("example",
+            api_app_desc="app desc.",
+            api_app_name="tf_example",
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
+
+        ## Import
+
+        apigateway api_app can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:ApiGateway/apiApp:ApiApp example app-poe0pyex
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] api_app_desc: App description.
         :param pulumi.Input[str] api_app_name: Api app name.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         ...
     @overload
@@ -206,14 +262,36 @@ class ApiApp(pulumi.CustomResource):
         Provides a resource to create a APIGateway ApiApp
 
         ## Example Usage
+        ### Create a basic apigateway api_app
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        my_api_app = tencentcloud.api_gateway.ApiApp("myApiApp",
+        example = tencentcloud.api_gateway.ApiApp("example",
             api_app_desc="app desc.",
-            api_app_name="app_test1")
+            api_app_name="tf_example")
+        ```
+        ### Bind Tag
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.api_gateway.ApiApp("example",
+            api_app_desc="app desc.",
+            api_app_name="tf_example",
+            tags={
+                "createdBy": "terraform",
+            })
+        ```
+
+        ## Import
+
+        apigateway api_app can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:ApiGateway/apiApp:ApiApp example app-poe0pyex
         ```
 
         :param str resource_name: The name of the resource.
@@ -233,6 +311,7 @@ class ApiApp(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  api_app_desc: Optional[pulumi.Input[str]] = None,
                  api_app_name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -251,6 +330,7 @@ class ApiApp(pulumi.CustomResource):
             if api_app_name is None and not opts.urn:
                 raise TypeError("Missing required property 'api_app_name'")
             __props__.__dict__["api_app_name"] = api_app_name
+            __props__.__dict__["tags"] = tags
             __props__.__dict__["api_app_id"] = None
             __props__.__dict__["api_app_key"] = None
             __props__.__dict__["api_app_secret"] = None
@@ -272,7 +352,8 @@ class ApiApp(pulumi.CustomResource):
             api_app_name: Optional[pulumi.Input[str]] = None,
             api_app_secret: Optional[pulumi.Input[str]] = None,
             created_time: Optional[pulumi.Input[str]] = None,
-            modified_time: Optional[pulumi.Input[str]] = None) -> 'ApiApp':
+            modified_time: Optional[pulumi.Input[str]] = None,
+            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None) -> 'ApiApp':
         """
         Get an existing ApiApp resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -287,6 +368,7 @@ class ApiApp(pulumi.CustomResource):
         :param pulumi.Input[str] api_app_secret: Api app secret.
         :param pulumi.Input[str] created_time: Api app created time.
         :param pulumi.Input[str] modified_time: Api app modified time.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -299,6 +381,7 @@ class ApiApp(pulumi.CustomResource):
         __props__.__dict__["api_app_secret"] = api_app_secret
         __props__.__dict__["created_time"] = created_time
         __props__.__dict__["modified_time"] = modified_time
+        __props__.__dict__["tags"] = tags
         return ApiApp(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -356,4 +439,12 @@ class ApiApp(pulumi.CustomResource):
         Api app modified time.
         """
         return pulumi.get(self, "modified_time")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
 

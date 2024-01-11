@@ -9,29 +9,51 @@ import * as utilities from "../utilities";
  * Provide a resource to create a Private Dns Zone.
  *
  * ## Example Usage
+ * ### Create a basic Private Dns Zone
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.PrivateDns.Zone("foo", {
- *     accountVpcSets: [{
- *         region: "ap-guangzhou",
- *         uin: "454xxxxxxx",
- *         uniqVpcId: "vpc-xxxxx",
- *         vpcName: "test-redis",
- *     }],
- *     dnsForwardStatus: "DISABLED",
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const example = new tencentcloud.privatedns.Zone("example", {
  *     domain: "domain.com",
- *     remark: "test",
- *     tags: {
- *         created_by: [{}],
- *         terraform: [{}],
- *     },
+ *     remark: "remark.",
  *     vpcSets: [{
  *         region: "ap-guangzhou",
- *         uniqVpcId: "vpc-xxxxx",
+ *         uniqVpcId: vpc.id,
  *     }],
+ *     dnsForwardStatus: "DISABLED",
+ *     cnameSpeedupStatus: "ENABLED",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * ```
+ * ### Create a Private Dns Zone domain and bind associated accounts'VPC
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.privatedns.Zone("example", {
+ *     domain: "domain.com",
+ *     remark: "remark.",
+ *     vpcSets: [{
+ *         region: "ap-guangzhou",
+ *         uniqVpcId: tencentcloud_vpc.vpc.id,
+ *     }],
+ *     accountVpcSets: [{
+ *         uin: "123456789",
+ *         uniqVpcId: "vpc-adsebmya",
+ *         region: "ap-guangzhou",
+ *         vpcName: "vpc-name",
+ *     }],
+ *     dnsForwardStatus: "DISABLED",
+ *     cnameSpeedupStatus: "ENABLED",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
  * });
  * ```
  *
@@ -76,6 +98,10 @@ export class Zone extends pulumi.CustomResource {
      */
     public readonly accountVpcSets!: pulumi.Output<outputs.PrivateDns.ZoneAccountVpcSet[] | undefined>;
     /**
+     * CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
+     */
+    public readonly cnameSpeedupStatus!: pulumi.Output<string | undefined>;
+    /**
      * Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
      */
     public readonly dnsForwardStatus!: pulumi.Output<string | undefined>;
@@ -100,7 +126,7 @@ export class Zone extends pulumi.CustomResource {
     /**
      * Associates the private domain to a VPC when it is created.
      */
-    public readonly vpcSets!: pulumi.Output<outputs.PrivateDns.ZoneVpcSet[] | undefined>;
+    public readonly vpcSets!: pulumi.Output<outputs.PrivateDns.ZoneVpcSet[]>;
 
     /**
      * Create a Zone resource with the given unique name, arguments, and options.
@@ -116,6 +142,7 @@ export class Zone extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as ZoneState | undefined;
             resourceInputs["accountVpcSets"] = state ? state.accountVpcSets : undefined;
+            resourceInputs["cnameSpeedupStatus"] = state ? state.cnameSpeedupStatus : undefined;
             resourceInputs["dnsForwardStatus"] = state ? state.dnsForwardStatus : undefined;
             resourceInputs["domain"] = state ? state.domain : undefined;
             resourceInputs["remark"] = state ? state.remark : undefined;
@@ -128,6 +155,7 @@ export class Zone extends pulumi.CustomResource {
                 throw new Error("Missing required property 'domain'");
             }
             resourceInputs["accountVpcSets"] = args ? args.accountVpcSets : undefined;
+            resourceInputs["cnameSpeedupStatus"] = args ? args.cnameSpeedupStatus : undefined;
             resourceInputs["dnsForwardStatus"] = args ? args.dnsForwardStatus : undefined;
             resourceInputs["domain"] = args ? args.domain : undefined;
             resourceInputs["remark"] = args ? args.remark : undefined;
@@ -148,6 +176,10 @@ export interface ZoneState {
      * List of authorized accounts' VPCs to associate with the private domain.
      */
     accountVpcSets?: pulumi.Input<pulumi.Input<inputs.PrivateDns.ZoneAccountVpcSet>[]>;
+    /**
+     * CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
+     */
+    cnameSpeedupStatus?: pulumi.Input<string>;
     /**
      * Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
      */
@@ -184,6 +216,10 @@ export interface ZoneArgs {
      * List of authorized accounts' VPCs to associate with the private domain.
      */
     accountVpcSets?: pulumi.Input<pulumi.Input<inputs.PrivateDns.ZoneAccountVpcSet>[]>;
+    /**
+     * CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
+     */
+    cnameSpeedupStatus?: pulumi.Input<string>;
     /**
      * Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
      */

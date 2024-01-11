@@ -7,6 +7,8 @@ import * as utilities from "../utilities";
 /**
  * Provide a resource to create a DnsPod record.
  *
+ * > **NOTE:** Versions before v1.81.43 (including v1.81.43) do not support modifying remark or modifying remark has bug.
+ *
  * ## Example Usage
  *
  * ```typescript
@@ -63,7 +65,7 @@ export class Record extends pulumi.CustomResource {
      */
     public readonly domain!: pulumi.Output<string>;
     /**
-     * The D monitoring status of the record.
+     * The monitoring status of the record.
      */
     public /*out*/ readonly monitorStatus!: pulumi.Output<string>;
     /**
@@ -78,6 +80,10 @@ export class Record extends pulumi.CustomResource {
      * The record type.
      */
     public readonly recordType!: pulumi.Output<string>;
+    /**
+     * The Remark of record.
+     */
+    public readonly remark!: pulumi.Output<string | undefined>;
     /**
      * Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
      */
@@ -117,6 +123,7 @@ export class Record extends pulumi.CustomResource {
             resourceInputs["mx"] = state ? state.mx : undefined;
             resourceInputs["recordLine"] = state ? state.recordLine : undefined;
             resourceInputs["recordType"] = state ? state.recordType : undefined;
+            resourceInputs["remark"] = state ? state.remark : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["subDomain"] = state ? state.subDomain : undefined;
             resourceInputs["ttl"] = state ? state.ttl : undefined;
@@ -140,6 +147,7 @@ export class Record extends pulumi.CustomResource {
             resourceInputs["mx"] = args ? args.mx : undefined;
             resourceInputs["recordLine"] = args ? args.recordLine : undefined;
             resourceInputs["recordType"] = args ? args.recordType : undefined;
+            resourceInputs["remark"] = args ? args.remark : undefined;
             resourceInputs["status"] = args ? args.status : undefined;
             resourceInputs["subDomain"] = args ? args.subDomain : undefined;
             resourceInputs["ttl"] = args ? args.ttl : undefined;
@@ -161,7 +169,7 @@ export interface RecordState {
      */
     domain?: pulumi.Input<string>;
     /**
-     * The D monitoring status of the record.
+     * The monitoring status of the record.
      */
     monitorStatus?: pulumi.Input<string>;
     /**
@@ -176,6 +184,10 @@ export interface RecordState {
      * The record type.
      */
     recordType?: pulumi.Input<string>;
+    /**
+     * The Remark of record.
+     */
+    remark?: pulumi.Input<string>;
     /**
      * Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
      */
@@ -218,6 +230,10 @@ export interface RecordArgs {
      * The record type.
      */
     recordType: pulumi.Input<string>;
+    /**
+     * The Remark of record.
+     */
+    remark?: pulumi.Input<string>;
     /**
      * Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
      */

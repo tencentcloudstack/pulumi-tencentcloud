@@ -18,6 +18,12 @@ func GetDomain(ctx *pulumi.Context) string {
 	return config.Get(ctx, "tencentcloud:domain")
 }
 
+// The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+// variable. If not set, the default profile created with `tccli configure` will be used.
+func GetProfile(ctx *pulumi.Context) string {
+	return config.Get(ctx, "tencentcloud:profile")
+}
+
 // The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
 func GetProtocol(ctx *pulumi.Context) string {
 	return config.Get(ctx, "tencentcloud:protocol")
@@ -62,4 +68,10 @@ func GetSecurityToken(ctx *pulumi.Context) string {
 		return v
 	}
 	return getEnvOrDefault("", nil, "TENCENTCLOUD_SECURITY_TOKEN").(string)
+}
+
+// The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+// environment variable. If not set this defaults to ~/.tccli.
+func GetSharedCredentialsDir(ctx *pulumi.Context) string {
+	return config.Get(ctx, "tencentcloud:sharedCredentialsDir")
 }

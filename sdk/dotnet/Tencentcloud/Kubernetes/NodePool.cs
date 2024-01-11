@@ -71,7 +71,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///                 InstanceType = defaultInstanceType,
     ///                 SystemDiskType = "CLOUD_PREMIUM",
     ///                 SystemDiskSize = 50,
-    ///                 SecurityGroupIds = 
+    ///                 OrderlySecurityGroupIds = 
     ///                 {
     ///                     "sg-24vswocp",
     ///                 },
@@ -153,9 +153,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///                 InstanceType = @var.Default_instance_type,
     ///                 SystemDiskType = "CLOUD_PREMIUM",
     ///                 SystemDiskSize = 50,
-    ///                 SecurityGroupIds = 
+    ///                 OrderlySecurityGroupIds = 
     ///                 {
     ///                     "sg-24vswocp",
+    ///                     "sg-3qntci2v",
+    ///                     "sg-7y1t2wax",
     ///                 },
     ///                 InstanceChargeType = "SPOTPAID",
     ///                 SpotInstanceType = "one-time",
@@ -226,7 +228,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<bool?> DeleteKeepInstance { get; private set; } = null!;
 
         /// <summary>
-        /// Desired capacity ot the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
+        /// Indicates whether the node pool deletion protection is enabled.
+        /// </summary>
+        [Output("deletionProtection")]
+        public Output<bool> DeletionProtection { get; private set; } = null!;
+
+        /// <summary>
+        /// Desired capacity of the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
         /// </summary>
         [Output("desiredCapacity")]
         public Output<int> DesiredCapacity { get; private set; } = null!;
@@ -447,7 +455,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<bool>? DeleteKeepInstance { get; set; }
 
         /// <summary>
-        /// Desired capacity ot the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
+        /// Indicates whether the node pool deletion protection is enabled.
+        /// </summary>
+        [Input("deletionProtection")]
+        public Input<bool>? DeletionProtection { get; set; }
+
+        /// <summary>
+        /// Desired capacity of the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
         /// </summary>
         [Input("desiredCapacity")]
         public Input<int>? DesiredCapacity { get; set; }
@@ -646,7 +660,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<bool>? DeleteKeepInstance { get; set; }
 
         /// <summary>
-        /// Desired capacity ot the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
+        /// Indicates whether the node pool deletion protection is enabled.
+        /// </summary>
+        [Input("deletionProtection")]
+        public Input<bool>? DeletionProtection { get; set; }
+
+        /// <summary>
+        /// Desired capacity of the node. If `enable_auto_scale` is set `true`, this will be a computed parameter.
         /// </summary>
         [Input("desiredCapacity")]
         public Input<int>? DesiredCapacity { get; set; }

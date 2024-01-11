@@ -28,13 +28,15 @@ class ApplicationProxyArgs:
         The set of arguments for constructing a ApplicationProxy resource.
         :param pulumi.Input[int] accelerate_type: - `0`: Disable acceleration.- `1`: Enable acceleration.
         :param pulumi.Input[str] plat_type: Scheduling mode.- `ip`: Anycast IP.- `domain`: CNAME.
-        :param pulumi.Input[str] proxy_name: When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+        :param pulumi.Input[str] proxy_name: When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+               the name of proxy application.
         :param pulumi.Input[int] security_type: - `0`: Disable security protection.- `1`: Enable security protection.
         :param pulumi.Input[str] zone_id: Site ID.
         :param pulumi.Input['ApplicationProxyIpv6Args'] ipv6: IPv6 access configuration.
         :param pulumi.Input[str] proxy_type: Layer 4 proxy mode. Valid values:- `hostname`: subdomain mode.- `instance`: instance mode.
         :param pulumi.Input[int] session_persist_time: Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.
-        :param pulumi.Input[str] status: Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+        :param pulumi.Input[str] status: Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+               Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
         """
         pulumi.set(__self__, "accelerate_type", accelerate_type)
         pulumi.set(__self__, "plat_type", plat_type)
@@ -78,7 +80,8 @@ class ApplicationProxyArgs:
     @pulumi.getter(name="proxyName")
     def proxy_name(self) -> pulumi.Input[str]:
         """
-        When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+        When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+        the name of proxy application.
         """
         return pulumi.get(self, "proxy_name")
 
@@ -150,7 +153,8 @@ class ApplicationProxyArgs:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+        Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+        Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
         """
         return pulumi.get(self, "status")
 
@@ -186,12 +190,14 @@ class _ApplicationProxyState:
         :param pulumi.Input['ApplicationProxyIpv6Args'] ipv6: IPv6 access configuration.
         :param pulumi.Input[str] plat_type: Scheduling mode.- `ip`: Anycast IP.- `domain`: CNAME.
         :param pulumi.Input[str] proxy_id: Proxy ID.
-        :param pulumi.Input[str] proxy_name: When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+        :param pulumi.Input[str] proxy_name: When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+               the name of proxy application.
         :param pulumi.Input[str] proxy_type: Layer 4 proxy mode. Valid values:- `hostname`: subdomain mode.- `instance`: instance mode.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] schedule_values: Scheduling information.
         :param pulumi.Input[int] security_type: - `0`: Disable security protection.- `1`: Enable security protection.
         :param pulumi.Input[int] session_persist_time: Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.
-        :param pulumi.Input[str] status: Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+        :param pulumi.Input[str] status: Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+               Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
         :param pulumi.Input[str] update_time: Last modification date.
         :param pulumi.Input[str] zone_id: Site ID.
         """
@@ -314,7 +320,8 @@ class _ApplicationProxyState:
     @pulumi.getter(name="proxyName")
     def proxy_name(self) -> Optional[pulumi.Input[str]]:
         """
-        When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+        When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+        the name of proxy application.
         """
         return pulumi.get(self, "proxy_name")
 
@@ -374,7 +381,8 @@ class _ApplicationProxyState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+        Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+        Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
         """
         return pulumi.get(self, "status")
 
@@ -423,26 +431,19 @@ class ApplicationProxy(pulumi.CustomResource):
                  zone_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Provides a resource to create a teo application_proxy
-
-        ## Import
-
-        teo application_proxy can be imported using the zoneId#proxyId, e.g.
-
-        ```sh
-         $ pulumi import tencentcloud:Teo/applicationProxy:ApplicationProxy application_proxy zone-2983wizgxqvm#proxy-6972528a-373a-11ed-afca-52540044a456
-        ```
-
+        Create a ApplicationProxy resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] accelerate_type: - `0`: Disable acceleration.- `1`: Enable acceleration.
         :param pulumi.Input[pulumi.InputType['ApplicationProxyIpv6Args']] ipv6: IPv6 access configuration.
         :param pulumi.Input[str] plat_type: Scheduling mode.- `ip`: Anycast IP.- `domain`: CNAME.
-        :param pulumi.Input[str] proxy_name: When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+        :param pulumi.Input[str] proxy_name: When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+               the name of proxy application.
         :param pulumi.Input[str] proxy_type: Layer 4 proxy mode. Valid values:- `hostname`: subdomain mode.- `instance`: instance mode.
         :param pulumi.Input[int] security_type: - `0`: Disable security protection.- `1`: Enable security protection.
         :param pulumi.Input[int] session_persist_time: Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.
-        :param pulumi.Input[str] status: Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+        :param pulumi.Input[str] status: Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+               Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
         :param pulumi.Input[str] zone_id: Site ID.
         """
         ...
@@ -452,16 +453,7 @@ class ApplicationProxy(pulumi.CustomResource):
                  args: ApplicationProxyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a teo application_proxy
-
-        ## Import
-
-        teo application_proxy can be imported using the zoneId#proxyId, e.g.
-
-        ```sh
-         $ pulumi import tencentcloud:Teo/applicationProxy:ApplicationProxy application_proxy zone-2983wizgxqvm#proxy-6972528a-373a-11ed-afca-52540044a456
-        ```
-
+        Create a ApplicationProxy resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param ApplicationProxyArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -564,12 +556,14 @@ class ApplicationProxy(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['ApplicationProxyIpv6Args']] ipv6: IPv6 access configuration.
         :param pulumi.Input[str] plat_type: Scheduling mode.- `ip`: Anycast IP.- `domain`: CNAME.
         :param pulumi.Input[str] proxy_id: Proxy ID.
-        :param pulumi.Input[str] proxy_name: When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+        :param pulumi.Input[str] proxy_name: When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+               the name of proxy application.
         :param pulumi.Input[str] proxy_type: Layer 4 proxy mode. Valid values:- `hostname`: subdomain mode.- `instance`: instance mode.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] schedule_values: Scheduling information.
         :param pulumi.Input[int] security_type: - `0`: Disable security protection.- `1`: Enable security protection.
         :param pulumi.Input[int] session_persist_time: Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.
-        :param pulumi.Input[str] status: Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+        :param pulumi.Input[str] status: Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+               Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
         :param pulumi.Input[str] update_time: Last modification date.
         :param pulumi.Input[str] zone_id: Site ID.
         """
@@ -654,7 +648,8 @@ class ApplicationProxy(pulumi.CustomResource):
     @pulumi.getter(name="proxyName")
     def proxy_name(self) -> pulumi.Output[str]:
         """
-        When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
+        When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is
+        the name of proxy application.
         """
         return pulumi.get(self, "proxy_name")
 
@@ -694,7 +689,8 @@ class ApplicationProxy(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
         """
-        Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
+        Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`:
+        Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
         """
         return pulumi.get(self, "status")
 

@@ -159,6 +159,27 @@ import * as utilities from "../utilities";
  *     targetType: "TARGETGROUP",
  * });
  * ```
+ * ### Port Range Listener
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const clbBasic = new tencentcloud.clb.Instance("clbBasic", {
+ *     networkType: "OPEN",
+ *     clbName: "tf-listener-test",
+ * });
+ * const listenerBasic = new tencentcloud.clb.Listener("listenerBasic", {
+ *     clbId: clbBasic.id,
+ *     port: 1,
+ *     endPort: 6,
+ *     protocol: "TCP",
+ *     listenerName: "listener_basic",
+ *     sessionExpireTime: 30,
+ *     scheduler: "WRR",
+ *     targetType: "NODE",
+ * });
+ * ```
  *
  * ## Import
  *
@@ -212,6 +233,10 @@ export class Listener extends pulumi.CustomResource {
      * ID of the CLB.
      */
     public readonly clbId!: pulumi.Output<string>;
+    /**
+     * This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+     */
+    public readonly endPort!: pulumi.Output<number>;
     /**
      * Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
      */
@@ -273,6 +298,14 @@ export class Listener extends pulumi.CustomResource {
      */
     public readonly healthCheckUnhealthNum!: pulumi.Output<number>;
     /**
+     * Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+     */
+    public readonly healthSourceIpType!: pulumi.Output<number>;
+    /**
+     * Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+     */
+    public readonly keepaliveEnable!: pulumi.Output<number>;
+    /**
      * ID of this CLB listener.
      */
     public /*out*/ readonly listenerId!: pulumi.Output<string>;
@@ -296,6 +329,10 @@ export class Listener extends pulumi.CustomResource {
      * Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     public readonly sessionExpireTime!: pulumi.Output<number | undefined>;
+    /**
+     * Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+     */
+    public readonly sessionType!: pulumi.Output<string>;
     /**
      * Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `tencentcloud.Clb.ListenerRule`, otherwise all rules have a certificate.
      */
@@ -322,6 +359,7 @@ export class Listener extends pulumi.CustomResource {
             resourceInputs["certificateId"] = state ? state.certificateId : undefined;
             resourceInputs["certificateSslMode"] = state ? state.certificateSslMode : undefined;
             resourceInputs["clbId"] = state ? state.clbId : undefined;
+            resourceInputs["endPort"] = state ? state.endPort : undefined;
             resourceInputs["healthCheckContextType"] = state ? state.healthCheckContextType : undefined;
             resourceInputs["healthCheckHealthNum"] = state ? state.healthCheckHealthNum : undefined;
             resourceInputs["healthCheckHttpCode"] = state ? state.healthCheckHttpCode : undefined;
@@ -337,12 +375,15 @@ export class Listener extends pulumi.CustomResource {
             resourceInputs["healthCheckTimeOut"] = state ? state.healthCheckTimeOut : undefined;
             resourceInputs["healthCheckType"] = state ? state.healthCheckType : undefined;
             resourceInputs["healthCheckUnhealthNum"] = state ? state.healthCheckUnhealthNum : undefined;
+            resourceInputs["healthSourceIpType"] = state ? state.healthSourceIpType : undefined;
+            resourceInputs["keepaliveEnable"] = state ? state.keepaliveEnable : undefined;
             resourceInputs["listenerId"] = state ? state.listenerId : undefined;
             resourceInputs["listenerName"] = state ? state.listenerName : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
             resourceInputs["protocol"] = state ? state.protocol : undefined;
             resourceInputs["scheduler"] = state ? state.scheduler : undefined;
             resourceInputs["sessionExpireTime"] = state ? state.sessionExpireTime : undefined;
+            resourceInputs["sessionType"] = state ? state.sessionType : undefined;
             resourceInputs["sniSwitch"] = state ? state.sniSwitch : undefined;
             resourceInputs["targetType"] = state ? state.targetType : undefined;
         } else {
@@ -360,6 +401,7 @@ export class Listener extends pulumi.CustomResource {
             resourceInputs["certificateId"] = args ? args.certificateId : undefined;
             resourceInputs["certificateSslMode"] = args ? args.certificateSslMode : undefined;
             resourceInputs["clbId"] = args ? args.clbId : undefined;
+            resourceInputs["endPort"] = args ? args.endPort : undefined;
             resourceInputs["healthCheckContextType"] = args ? args.healthCheckContextType : undefined;
             resourceInputs["healthCheckHealthNum"] = args ? args.healthCheckHealthNum : undefined;
             resourceInputs["healthCheckHttpCode"] = args ? args.healthCheckHttpCode : undefined;
@@ -375,11 +417,14 @@ export class Listener extends pulumi.CustomResource {
             resourceInputs["healthCheckTimeOut"] = args ? args.healthCheckTimeOut : undefined;
             resourceInputs["healthCheckType"] = args ? args.healthCheckType : undefined;
             resourceInputs["healthCheckUnhealthNum"] = args ? args.healthCheckUnhealthNum : undefined;
+            resourceInputs["healthSourceIpType"] = args ? args.healthSourceIpType : undefined;
+            resourceInputs["keepaliveEnable"] = args ? args.keepaliveEnable : undefined;
             resourceInputs["listenerName"] = args ? args.listenerName : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["protocol"] = args ? args.protocol : undefined;
             resourceInputs["scheduler"] = args ? args.scheduler : undefined;
             resourceInputs["sessionExpireTime"] = args ? args.sessionExpireTime : undefined;
+            resourceInputs["sessionType"] = args ? args.sessionType : undefined;
             resourceInputs["sniSwitch"] = args ? args.sniSwitch : undefined;
             resourceInputs["targetType"] = args ? args.targetType : undefined;
             resourceInputs["listenerId"] = undefined /*out*/;
@@ -409,6 +454,10 @@ export interface ListenerState {
      * ID of the CLB.
      */
     clbId?: pulumi.Input<string>;
+    /**
+     * This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+     */
+    endPort?: pulumi.Input<number>;
     /**
      * Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
      */
@@ -470,6 +519,14 @@ export interface ListenerState {
      */
     healthCheckUnhealthNum?: pulumi.Input<number>;
     /**
+     * Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+     */
+    healthSourceIpType?: pulumi.Input<number>;
+    /**
+     * Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+     */
+    keepaliveEnable?: pulumi.Input<number>;
+    /**
      * ID of this CLB listener.
      */
     listenerId?: pulumi.Input<string>;
@@ -493,6 +550,10 @@ export interface ListenerState {
      * Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     sessionExpireTime?: pulumi.Input<number>;
+    /**
+     * Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+     */
+    sessionType?: pulumi.Input<string>;
     /**
      * Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `tencentcloud.Clb.ListenerRule`, otherwise all rules have a certificate.
      */
@@ -524,6 +585,10 @@ export interface ListenerArgs {
      */
     clbId: pulumi.Input<string>;
     /**
+     * This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+     */
+    endPort?: pulumi.Input<number>;
+    /**
      * Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
      */
     healthCheckContextType?: pulumi.Input<string>;
@@ -584,6 +649,14 @@ export interface ListenerArgs {
      */
     healthCheckUnhealthNum?: pulumi.Input<number>;
     /**
+     * Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+     */
+    healthSourceIpType?: pulumi.Input<number>;
+    /**
+     * Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+     */
+    keepaliveEnable?: pulumi.Input<number>;
+    /**
      * Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
      */
     listenerName: pulumi.Input<string>;
@@ -603,6 +676,10 @@ export interface ListenerArgs {
      * Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
      */
     sessionExpireTime?: pulumi.Input<number>;
+    /**
+     * Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+     */
+    sessionType?: pulumi.Input<string>;
     /**
      * Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `tencentcloud.Clb.ListenerRule`, otherwise all rules have a certificate.
      */

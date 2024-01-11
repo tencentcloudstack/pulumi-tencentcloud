@@ -13,47 +13,87 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 
     public sealed class CngwServiceRateLimitLimitDetailGetArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// status of service rate limit.
+        /// </summary>
         [Input("enabled", required: true)]
         public Input<bool> Enabled { get; set; } = null!;
 
+        /// <summary>
+        /// external redis information, maybe null.
+        /// </summary>
         [Input("externalRedis")]
         public Input<Inputs.CngwServiceRateLimitLimitDetailExternalRedisGetArgs>? ExternalRedis { get; set; }
 
+        /// <summary>
+        /// request headers that require rate limit.
+        /// </summary>
         [Input("header")]
         public Input<string>? Header { get; set; }
 
+        /// <summary>
+        /// whether to hide the headers of client.
+        /// </summary>
         [Input("hideClientHeaders", required: true)]
         public Input<bool> HideClientHeaders { get; set; } = null!;
 
+        /// <summary>
+        /// whether to enable request queuing.
+        /// </summary>
         [Input("isDelay", required: true)]
         public Input<bool> IsDelay { get; set; } = null!;
 
+        /// <summary>
+        /// basis for service rate limit.Reference value: `ip`, `service`, `consumer`, `credential`, `path`, `header`.
+        /// </summary>
         [Input("limitBy", required: true)]
         public Input<string> LimitBy { get; set; } = null!;
 
+        /// <summary>
+        /// queue time.
+        /// </summary>
         [Input("lineUpTime")]
         public Input<int>? LineUpTime { get; set; }
 
+        /// <summary>
+        /// request paths that require rate limit.
+        /// </summary>
         [Input("path")]
         public Input<string>? Path { get; set; }
 
+        /// <summary>
+        /// counter policy.Reference value: `local`, `redis`, `external_redis`.
+        /// </summary>
         [Input("policy")]
         public Input<string>? Policy { get; set; }
 
         [Input("qpsThresholds", required: true)]
         private InputList<Inputs.CngwServiceRateLimitLimitDetailQpsThresholdGetArgs>? _qpsThresholds;
+
+        /// <summary>
+        /// qps threshold.
+        /// </summary>
         public InputList<Inputs.CngwServiceRateLimitLimitDetailQpsThresholdGetArgs> QpsThresholds
         {
             get => _qpsThresholds ?? (_qpsThresholds = new InputList<Inputs.CngwServiceRateLimitLimitDetailQpsThresholdGetArgs>());
             set => _qpsThresholds = value;
         }
 
+        /// <summary>
+        /// response configuration, the response strategy is text, maybe null.
+        /// </summary>
         [Input("rateLimitResponse")]
         public Input<Inputs.CngwServiceRateLimitLimitDetailRateLimitResponseGetArgs>? RateLimitResponse { get; set; }
 
+        /// <summary>
+        /// request forwarding address, maybe null.
+        /// </summary>
         [Input("rateLimitResponseUrl")]
         public Input<string>? RateLimitResponseUrl { get; set; }
 
+        /// <summary>
+        /// response strategy.Reference value: `url`: forward request according to url, `text`: response configuration, `default`: return directly.
+        /// </summary>
         [Input("responseType", required: true)]
         public Input<string> ResponseType { get; set; } = null!;
 

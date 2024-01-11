@@ -13,6 +13,72 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// <summary>
     /// Provides a resource to create a teo origin_group
     /// 
+    /// ## Example Usage
+    /// ### Self origin group
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var originGroup = new Tencentcloud.Teo.OriginGroup("originGroup", new Tencentcloud.Teo.OriginGroupArgs
+    ///         {
+    ///             ConfigurationType = "weight",
+    ///             OriginGroupName = "test-group",
+    ///             OriginRecords = 
+    ///             {
+    ///                 new Tencentcloud.Teo.Inputs.OriginGroupOriginRecordArgs
+    ///                 {
+    ///                     Areas = {},
+    ///                     Port = 8080,
+    ///                     Private = false,
+    ///                     Record = "150.109.8.1",
+    ///                     Weight = 100,
+    ///                 },
+    ///             },
+    ///             OriginType = "self",
+    ///             ZoneId = "zone-297z8rf93cfw",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// ### Cos origin group
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var originGroup = new Tencentcloud.Teo.OriginGroup("originGroup", new Tencentcloud.Teo.OriginGroupArgs
+    ///         {
+    ///             ConfigurationType = "weight",
+    ///             OriginGroupName = "test",
+    ///             OriginRecords = 
+    ///             {
+    ///                 new Tencentcloud.Teo.Inputs.OriginGroupOriginRecordArgs
+    ///                 {
+    ///                     Areas = {},
+    ///                     Port = 0,
+    ///                     Private = true,
+    ///                     Record = "test-ruichaolin-1310708577.cos.ap-nanjing.myqcloud.com",
+    ///                     Weight = 100,
+    ///                 },
+    ///             },
+    ///             OriginType = "cos",
+    ///             ZoneId = "zone-2o3h21ed8bpu",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// teo origin_group can be imported using the zone_id#originGroup_id, e.g. `
@@ -27,7 +93,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public partial class OriginGroup : Pulumi.CustomResource
     {
         /// <summary>
-        /// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+        /// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
         /// </summary>
         [Output("configurationType")]
         public Output<string> ConfigurationType { get; private set; } = null!;
@@ -51,7 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<ImmutableArray<Outputs.OriginGroupOriginRecord>> OriginRecords { get; private set; } = null!;
 
         /// <summary>
-        /// Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `third_party`: third party cos.
+        /// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `third_party`: third party cos.
         /// </summary>
         [Output("originType")]
         public Output<string> OriginType { get; private set; } = null!;
@@ -116,7 +182,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public sealed class OriginGroupArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+        /// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
         /// </summary>
         [Input("configurationType", required: true)]
         public Input<string> ConfigurationType { get; set; } = null!;
@@ -140,7 +206,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
 
         /// <summary>
-        /// Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `third_party`: third party cos.
+        /// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `third_party`: third party cos.
         /// </summary>
         [Input("originType", required: true)]
         public Input<string> OriginType { get; set; } = null!;
@@ -159,7 +225,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public sealed class OriginGroupState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values:- `area`: select an origin by using Geo info of the client IP and `Area` field in Records.- `weight`: weighted select an origin by using `Weight` field in Records.- `proto`: config by HTTP protocol.
+        /// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
         /// </summary>
         [Input("configurationType")]
         public Input<string>? ConfigurationType { get; set; }
@@ -189,7 +255,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
 
         /// <summary>
-        /// Type of the origin site. Valid values:- `self`: self-build website.- `cos`: tencent cos.- `third_party`: third party cos.
+        /// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `third_party`: third party cos.
         /// </summary>
         [Input("originType")]
         public Input<string>? OriginType { get; set; }

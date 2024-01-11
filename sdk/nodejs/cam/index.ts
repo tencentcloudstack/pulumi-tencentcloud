@@ -5,47 +5,68 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export * from "./accessKey";
+export * from "./getAccountSummary";
 export * from "./getGroupMemberships";
 export * from "./getGroupPolicyAttachments";
+export * from "./getGroupUserAccount";
 export * from "./getGroups";
+export * from "./getListAttachedUserPolicy";
+export * from "./getListEntitiesForPolicy";
+export * from "./getOidcConfig";
 export * from "./getPolicies";
+export * from "./getPolicyGrantingServiceAccess";
 export * from "./getRolePolicyAttachments";
 export * from "./getRoles";
 export * from "./getSamlProviders";
+export * from "./getSecretLastUsedTime";
 export * from "./getUserPolicyAttachments";
 export * from "./getUsers";
 export * from "./group";
 export * from "./groupMembership";
 export * from "./groupPolicyAttachment";
+export * from "./mfaFlag";
 export * from "./oidcSso";
 export * from "./policy";
 export * from "./policyByName";
+export * from "./policyVersion";
 export * from "./role";
 export * from "./roleByName";
+export * from "./rolePermissionBoundaryAttachment";
 export * from "./rolePolicyAttachment";
 export * from "./rolePolicyAttachmentByName";
 export * from "./roleSso";
 export * from "./samlProvider";
 export * from "./serviceLinkedRole";
+export * from "./setPolicyVersionConfig";
+export * from "./tagRoleAttachment";
 export * from "./user";
+export * from "./userPermissionBoundaryAttachment";
 export * from "./userPolicyAttachment";
 export * from "./userSamlConfig";
 
 // Import resources to register:
+import { AccessKey } from "./accessKey";
 import { Group } from "./group";
 import { GroupMembership } from "./groupMembership";
 import { GroupPolicyAttachment } from "./groupPolicyAttachment";
+import { MfaFlag } from "./mfaFlag";
 import { OidcSso } from "./oidcSso";
 import { Policy } from "./policy";
 import { PolicyByName } from "./policyByName";
+import { PolicyVersion } from "./policyVersion";
 import { Role } from "./role";
 import { RoleByName } from "./roleByName";
+import { RolePermissionBoundaryAttachment } from "./rolePermissionBoundaryAttachment";
 import { RolePolicyAttachment } from "./rolePolicyAttachment";
 import { RolePolicyAttachmentByName } from "./rolePolicyAttachmentByName";
 import { RoleSso } from "./roleSso";
 import { SamlProvider } from "./samlProvider";
 import { ServiceLinkedRole } from "./serviceLinkedRole";
+import { SetPolicyVersionConfig } from "./setPolicyVersionConfig";
+import { TagRoleAttachment } from "./tagRoleAttachment";
 import { User } from "./user";
+import { UserPermissionBoundaryAttachment } from "./userPermissionBoundaryAttachment";
 import { UserPolicyAttachment } from "./userPolicyAttachment";
 import { UserSamlConfig } from "./userSamlConfig";
 
@@ -53,22 +74,30 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Cam/accessKey:AccessKey":
+                return new AccessKey(name, <any>undefined, { urn })
             case "tencentcloud:Cam/group:Group":
                 return new Group(name, <any>undefined, { urn })
             case "tencentcloud:Cam/groupMembership:GroupMembership":
                 return new GroupMembership(name, <any>undefined, { urn })
             case "tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment":
                 return new GroupPolicyAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Cam/mfaFlag:MfaFlag":
+                return new MfaFlag(name, <any>undefined, { urn })
             case "tencentcloud:Cam/oidcSso:OidcSso":
                 return new OidcSso(name, <any>undefined, { urn })
             case "tencentcloud:Cam/policy:Policy":
                 return new Policy(name, <any>undefined, { urn })
             case "tencentcloud:Cam/policyByName:PolicyByName":
                 return new PolicyByName(name, <any>undefined, { urn })
+            case "tencentcloud:Cam/policyVersion:PolicyVersion":
+                return new PolicyVersion(name, <any>undefined, { urn })
             case "tencentcloud:Cam/role:Role":
                 return new Role(name, <any>undefined, { urn })
             case "tencentcloud:Cam/roleByName:RoleByName":
                 return new RoleByName(name, <any>undefined, { urn })
+            case "tencentcloud:Cam/rolePermissionBoundaryAttachment:RolePermissionBoundaryAttachment":
+                return new RolePermissionBoundaryAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Cam/rolePolicyAttachment:RolePolicyAttachment":
                 return new RolePolicyAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Cam/rolePolicyAttachmentByName:RolePolicyAttachmentByName":
@@ -79,8 +108,14 @@ const _module = {
                 return new SamlProvider(name, <any>undefined, { urn })
             case "tencentcloud:Cam/serviceLinkedRole:ServiceLinkedRole":
                 return new ServiceLinkedRole(name, <any>undefined, { urn })
+            case "tencentcloud:Cam/setPolicyVersionConfig:SetPolicyVersionConfig":
+                return new SetPolicyVersionConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Cam/tagRoleAttachment:TagRoleAttachment":
+                return new TagRoleAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Cam/user:User":
                 return new User(name, <any>undefined, { urn })
+            case "tencentcloud:Cam/userPermissionBoundaryAttachment:UserPermissionBoundaryAttachment":
+                return new UserPermissionBoundaryAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment":
                 return new UserPolicyAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Cam/userSamlConfig:UserSamlConfig":
@@ -90,19 +125,26 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Cam/accessKey", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/group", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/groupMembership", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/groupPolicyAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cam/mfaFlag", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/oidcSso", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/policy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/policyByName", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cam/policyVersion", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/role", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/roleByName", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cam/rolePermissionBoundaryAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/rolePolicyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/rolePolicyAttachmentByName", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/roleSso", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/samlProvider", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/serviceLinkedRole", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cam/setPolicyVersionConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cam/tagRoleAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/user", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cam/userPermissionBoundaryAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/userPolicyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/userSamlConfig", _module)

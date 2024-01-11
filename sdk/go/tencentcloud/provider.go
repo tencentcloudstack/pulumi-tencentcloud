@@ -19,6 +19,9 @@ type Provider struct {
 
 	// The root domain of the API request, Default is `tencentcloudapi.com`.
 	Domain pulumi.StringPtrOutput `pulumi:"domain"`
+	// The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+	// variable. If not set, the default profile created with `tccli configure` will be used.
+	Profile pulumi.StringPtrOutput `pulumi:"profile"`
 	// The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
 	Protocol pulumi.StringPtrOutput `pulumi:"protocol"`
 	// This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
@@ -34,6 +37,9 @@ type Provider struct {
 	// environment variable. Notice: for supported products, please refer to: [temporary key supported
 	// products](https://intl.cloud.tencent.com/document/product/598/10588).
 	SecurityToken pulumi.StringPtrOutput `pulumi:"securityToken"`
+	// The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+	// environment variable. If not set this defaults to ~/.tccli.
+	SharedCredentialsDir pulumi.StringPtrOutput `pulumi:"sharedCredentialsDir"`
 }
 
 // NewProvider registers a new resource with the given unique name, arguments, and options.
@@ -69,6 +75,9 @@ type providerArgs struct {
 	AssumeRole *ProviderAssumeRole `pulumi:"assumeRole"`
 	// The root domain of the API request, Default is `tencentcloudapi.com`.
 	Domain *string `pulumi:"domain"`
+	// The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+	// variable. If not set, the default profile created with `tccli configure` will be used.
+	Profile *string `pulumi:"profile"`
 	// The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
 	Protocol *string `pulumi:"protocol"`
 	// This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
@@ -84,6 +93,9 @@ type providerArgs struct {
 	// environment variable. Notice: for supported products, please refer to: [temporary key supported
 	// products](https://intl.cloud.tencent.com/document/product/598/10588).
 	SecurityToken *string `pulumi:"securityToken"`
+	// The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+	// environment variable. If not set this defaults to ~/.tccli.
+	SharedCredentialsDir *string `pulumi:"sharedCredentialsDir"`
 }
 
 // The set of arguments for constructing a Provider resource.
@@ -92,6 +104,9 @@ type ProviderArgs struct {
 	AssumeRole ProviderAssumeRolePtrInput
 	// The root domain of the API request, Default is `tencentcloudapi.com`.
 	Domain pulumi.StringPtrInput
+	// The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+	// variable. If not set, the default profile created with `tccli configure` will be used.
+	Profile pulumi.StringPtrInput
 	// The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
 	Protocol pulumi.StringPtrInput
 	// This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
@@ -107,6 +122,9 @@ type ProviderArgs struct {
 	// environment variable. Notice: for supported products, please refer to: [temporary key supported
 	// products](https://intl.cloud.tencent.com/document/product/598/10588).
 	SecurityToken pulumi.StringPtrInput
+	// The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+	// environment variable. If not set this defaults to ~/.tccli.
+	SharedCredentialsDir pulumi.StringPtrInput
 }
 
 func (ProviderArgs) ElementType() reflect.Type {
@@ -151,6 +169,12 @@ func (o ProviderOutput) Domain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Domain }).(pulumi.StringPtrOutput)
 }
 
+// The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
+// variable. If not set, the default profile created with `tccli configure` will be used.
+func (o ProviderOutput) Profile() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Profile }).(pulumi.StringPtrOutput)
+}
+
 // The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
 func (o ProviderOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Protocol }).(pulumi.StringPtrOutput)
@@ -179,6 +203,12 @@ func (o ProviderOutput) SecretKey() pulumi.StringPtrOutput {
 // products](https://intl.cloud.tencent.com/document/product/598/10588).
 func (o ProviderOutput) SecurityToken() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.SecurityToken }).(pulumi.StringPtrOutput)
+}
+
+// The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
+// environment variable. If not set this defaults to ~/.tccli.
+func (o ProviderOutput) SharedCredentialsDir() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.SharedCredentialsDir }).(pulumi.StringPtrOutput)
 }
 
 func init() {

@@ -170,6 +170,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<string> ListenerId { get; private set; } = null!;
 
         /// <summary>
+        /// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
+        /// </summary>
+        [Output("quic")]
+        public Output<bool> Quic { get; private set; } = null!;
+
+        /// <summary>
         /// ID of this CLB listener rule.
         /// </summary>
         [Output("ruleId")]
@@ -355,6 +361,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string> ListenerId { get; set; } = null!;
 
         /// <summary>
+        /// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
+        /// </summary>
+        [Input("quic")]
+        public Input<bool>? Quic { get; set; }
+
+        /// <summary>
         /// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
         /// </summary>
         [Input("scheduler")]
@@ -492,6 +504,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Input("listenerId")]
         public Input<string>? ListenerId { get; set; }
+
+        /// <summary>
+        /// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
+        /// </summary>
+        [Input("quic")]
+        public Input<bool>? Quic { get; set; }
 
         /// <summary>
         /// ID of this CLB listener rule.

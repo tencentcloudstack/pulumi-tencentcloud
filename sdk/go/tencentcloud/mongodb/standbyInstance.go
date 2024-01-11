@@ -102,7 +102,7 @@ type StandbyInstance struct {
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
 	// Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
 	Status pulumi.IntOutput `pulumi:"status"`
@@ -192,7 +192,7 @@ type standbyInstanceState struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId *int `pulumi:"projectId"`
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
 	Status *int `pulumi:"status"`
@@ -235,7 +235,7 @@ type StandbyInstanceState struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrInput
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups pulumi.StringArrayInput
 	// Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
 	Status pulumi.IntPtrInput
@@ -276,7 +276,7 @@ type standbyInstanceArgs struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId *int `pulumi:"projectId"`
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// ID of the subnet within this VPC. The value is required if `vpcId` is set.
 	SubnetId *string `pulumi:"subnetId"`
@@ -308,7 +308,7 @@ type StandbyInstanceArgs struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrInput
-	// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+	// ID of the security group.
 	SecurityGroups pulumi.StringArrayInput
 	// ID of the subnet within this VPC. The value is required if `vpcId` is set.
 	SubnetId pulumi.StringPtrInput
@@ -467,7 +467,7 @@ func (o StandbyInstanceOutput) ProjectId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *StandbyInstance) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
 }
 
-// ID of the security group. NOTE: for instance which `engineVersion` is `MONGO_40_WT`, `securityGroups` is not supported.
+// ID of the security group.
 func (o StandbyInstanceOutput) SecurityGroups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *StandbyInstance) pulumi.StringArrayOutput { return v.SecurityGroups }).(pulumi.StringArrayOutput)
 }

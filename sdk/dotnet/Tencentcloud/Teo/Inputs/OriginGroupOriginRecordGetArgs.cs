@@ -17,7 +17,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         private InputList<string>? _areas;
 
         /// <summary>
-        /// Indicating origin site&amp;#39;s area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.- 2 characters ISO 3166 area code.
+        /// Indicating origin sites area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.
         /// </summary>
         public InputList<string> Areas
         {
@@ -59,7 +59,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<string>? RecordId { get; set; }
 
         /// <summary>
-        /// Indicating origin site&amp;#39;s weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
+        /// Indicating origin sites weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
         /// </summary>
         [Input("weight")]
         public Input<int>? Weight { get; set; }

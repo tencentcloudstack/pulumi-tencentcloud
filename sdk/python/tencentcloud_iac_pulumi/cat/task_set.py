@@ -22,6 +22,8 @@ class TaskSetArgs:
                  task_category: pulumi.Input[int],
                  task_type: pulumi.Input[int],
                  cron: Optional[pulumi.Input[str]] = None,
+                 node_ip_type: Optional[pulumi.Input[int]] = None,
+                 operate: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a TaskSet resource.
@@ -32,6 +34,8 @@ class TaskSetArgs:
         :param pulumi.Input[int] task_category: Task category,1:PC,2:Mobile.
         :param pulumi.Input[int] task_type: Task Type 1:Page Performance, 2:File upload,3:File Download,4:Port performance 5:Audio and video.
         :param pulumi.Input[str] cron: Timer task cron expression.
+        :param pulumi.Input[int] node_ip_type: `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+        :param pulumi.Input[str] operate: The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         pulumi.set(__self__, "batch_tasks", batch_tasks)
@@ -42,6 +46,10 @@ class TaskSetArgs:
         pulumi.set(__self__, "task_type", task_type)
         if cron is not None:
             pulumi.set(__self__, "cron", cron)
+        if node_ip_type is not None:
+            pulumi.set(__self__, "node_ip_type", node_ip_type)
+        if operate is not None:
+            pulumi.set(__self__, "operate", operate)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
 
@@ -130,6 +138,30 @@ class TaskSetArgs:
         pulumi.set(self, "cron", value)
 
     @property
+    @pulumi.getter(name="nodeIpType")
+    def node_ip_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+        """
+        return pulumi.get(self, "node_ip_type")
+
+    @node_ip_type.setter
+    def node_ip_type(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "node_ip_type", value)
+
+    @property
+    @pulumi.getter
+    def operate(self) -> Optional[pulumi.Input[str]]:
+        """
+        The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+        """
+        return pulumi.get(self, "operate")
+
+    @operate.setter
+    def operate(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "operate", value)
+
+    @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
@@ -148,7 +180,9 @@ class _TaskSetState:
                  batch_tasks: Optional[pulumi.Input['TaskSetBatchTasksArgs']] = None,
                  cron: Optional[pulumi.Input[str]] = None,
                  interval: Optional[pulumi.Input[int]] = None,
+                 node_ip_type: Optional[pulumi.Input[int]] = None,
                  nodes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 operate: Optional[pulumi.Input[str]] = None,
                  parameters: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -160,7 +194,9 @@ class _TaskSetState:
         :param pulumi.Input['TaskSetBatchTasksArgs'] batch_tasks: Batch task name address.
         :param pulumi.Input[str] cron: Timer task cron expression.
         :param pulumi.Input[int] interval: Task interval minutes in (1,5,10,15,30,60,120,240).
+        :param pulumi.Input[int] node_ip_type: `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] nodes: Task Nodes.
+        :param pulumi.Input[str] operate: The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
         :param pulumi.Input[str] parameters: tasks parameters.
         :param pulumi.Input[int] status: Task status 1:TaskPending, 2:TaskRunning,3:TaskRunException,4:TaskSuspending 5:TaskSuspendException,6:TaskSuspendException,7:TaskSuspended,9:TaskDeleted.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
@@ -174,8 +210,12 @@ class _TaskSetState:
             pulumi.set(__self__, "cron", cron)
         if interval is not None:
             pulumi.set(__self__, "interval", interval)
+        if node_ip_type is not None:
+            pulumi.set(__self__, "node_ip_type", node_ip_type)
         if nodes is not None:
             pulumi.set(__self__, "nodes", nodes)
+        if operate is not None:
+            pulumi.set(__self__, "operate", operate)
         if parameters is not None:
             pulumi.set(__self__, "parameters", parameters)
         if status is not None:
@@ -226,6 +266,18 @@ class _TaskSetState:
         pulumi.set(self, "interval", value)
 
     @property
+    @pulumi.getter(name="nodeIpType")
+    def node_ip_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+        """
+        return pulumi.get(self, "node_ip_type")
+
+    @node_ip_type.setter
+    def node_ip_type(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "node_ip_type", value)
+
+    @property
     @pulumi.getter
     def nodes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -236,6 +288,18 @@ class _TaskSetState:
     @nodes.setter
     def nodes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "nodes", value)
+
+    @property
+    @pulumi.getter
+    def operate(self) -> Optional[pulumi.Input[str]]:
+        """
+        The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+        """
+        return pulumi.get(self, "operate")
+
+    @operate.setter
+    def operate(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "operate", value)
 
     @property
     @pulumi.getter
@@ -318,7 +382,9 @@ class TaskSet(pulumi.CustomResource):
                  batch_tasks: Optional[pulumi.Input[pulumi.InputType['TaskSetBatchTasksArgs']]] = None,
                  cron: Optional[pulumi.Input[str]] = None,
                  interval: Optional[pulumi.Input[int]] = None,
+                 node_ip_type: Optional[pulumi.Input[int]] = None,
                  nodes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 operate: Optional[pulumi.Input[str]] = None,
                  parameters: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  task_category: Optional[pulumi.Input[int]] = None,
@@ -392,7 +458,9 @@ class TaskSet(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['TaskSetBatchTasksArgs']] batch_tasks: Batch task name address.
         :param pulumi.Input[str] cron: Timer task cron expression.
         :param pulumi.Input[int] interval: Task interval minutes in (1,5,10,15,30,60,120,240).
+        :param pulumi.Input[int] node_ip_type: `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] nodes: Task Nodes.
+        :param pulumi.Input[str] operate: The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
         :param pulumi.Input[str] parameters: tasks parameters.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[int] task_category: Task category,1:PC,2:Mobile.
@@ -485,7 +553,9 @@ class TaskSet(pulumi.CustomResource):
                  batch_tasks: Optional[pulumi.Input[pulumi.InputType['TaskSetBatchTasksArgs']]] = None,
                  cron: Optional[pulumi.Input[str]] = None,
                  interval: Optional[pulumi.Input[int]] = None,
+                 node_ip_type: Optional[pulumi.Input[int]] = None,
                  nodes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 operate: Optional[pulumi.Input[str]] = None,
                  parameters: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  task_category: Optional[pulumi.Input[int]] = None,
@@ -511,9 +581,11 @@ class TaskSet(pulumi.CustomResource):
             if interval is None and not opts.urn:
                 raise TypeError("Missing required property 'interval'")
             __props__.__dict__["interval"] = interval
+            __props__.__dict__["node_ip_type"] = node_ip_type
             if nodes is None and not opts.urn:
                 raise TypeError("Missing required property 'nodes'")
             __props__.__dict__["nodes"] = nodes
+            __props__.__dict__["operate"] = operate
             if parameters is None and not opts.urn:
                 raise TypeError("Missing required property 'parameters'")
             __props__.__dict__["parameters"] = parameters
@@ -539,7 +611,9 @@ class TaskSet(pulumi.CustomResource):
             batch_tasks: Optional[pulumi.Input[pulumi.InputType['TaskSetBatchTasksArgs']]] = None,
             cron: Optional[pulumi.Input[str]] = None,
             interval: Optional[pulumi.Input[int]] = None,
+            node_ip_type: Optional[pulumi.Input[int]] = None,
             nodes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            operate: Optional[pulumi.Input[str]] = None,
             parameters: Optional[pulumi.Input[str]] = None,
             status: Optional[pulumi.Input[int]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -556,7 +630,9 @@ class TaskSet(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['TaskSetBatchTasksArgs']] batch_tasks: Batch task name address.
         :param pulumi.Input[str] cron: Timer task cron expression.
         :param pulumi.Input[int] interval: Task interval minutes in (1,5,10,15,30,60,120,240).
+        :param pulumi.Input[int] node_ip_type: `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] nodes: Task Nodes.
+        :param pulumi.Input[str] operate: The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
         :param pulumi.Input[str] parameters: tasks parameters.
         :param pulumi.Input[int] status: Task status 1:TaskPending, 2:TaskRunning,3:TaskRunException,4:TaskSuspending 5:TaskSuspendException,6:TaskSuspendException,7:TaskSuspended,9:TaskDeleted.
         :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
@@ -571,7 +647,9 @@ class TaskSet(pulumi.CustomResource):
         __props__.__dict__["batch_tasks"] = batch_tasks
         __props__.__dict__["cron"] = cron
         __props__.__dict__["interval"] = interval
+        __props__.__dict__["node_ip_type"] = node_ip_type
         __props__.__dict__["nodes"] = nodes
+        __props__.__dict__["operate"] = operate
         __props__.__dict__["parameters"] = parameters
         __props__.__dict__["status"] = status
         __props__.__dict__["tags"] = tags
@@ -605,12 +683,28 @@ class TaskSet(pulumi.CustomResource):
         return pulumi.get(self, "interval")
 
     @property
+    @pulumi.getter(name="nodeIpType")
+    def node_ip_type(self) -> pulumi.Output[int]:
+        """
+        `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+        """
+        return pulumi.get(self, "node_ip_type")
+
+    @property
     @pulumi.getter
     def nodes(self) -> pulumi.Output[Sequence[str]]:
         """
         Task Nodes.
         """
         return pulumi.get(self, "nodes")
+
+    @property
+    @pulumi.getter
+    def operate(self) -> pulumi.Output[Optional[str]]:
+        """
+        The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+        """
+        return pulumi.get(self, "operate")
 
     @property
     @pulumi.getter

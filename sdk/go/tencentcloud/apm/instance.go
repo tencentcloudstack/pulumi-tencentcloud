@@ -12,6 +12,8 @@ import (
 
 // Provides a resource to create a apm instance
 //
+// > **NOTE:** To use the field `payMode`, you need to contact official customer service to join the whitelist.
+//
 // ## Example Usage
 //
 // ```go
@@ -54,6 +56,8 @@ type Instance struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// Name Of Instance.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+	PayMode pulumi.IntPtrOutput `pulumi:"payMode"`
 	// Quota Of Instance Reporting.
 	SpanDailyCounters pulumi.IntPtrOutput `pulumi:"spanDailyCounters"`
 	// Tag description list.
@@ -96,6 +100,8 @@ type instanceState struct {
 	Description *string `pulumi:"description"`
 	// Name Of Instance.
 	Name *string `pulumi:"name"`
+	// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+	PayMode *int `pulumi:"payMode"`
 	// Quota Of Instance Reporting.
 	SpanDailyCounters *int `pulumi:"spanDailyCounters"`
 	// Tag description list.
@@ -109,6 +115,8 @@ type InstanceState struct {
 	Description pulumi.StringPtrInput
 	// Name Of Instance.
 	Name pulumi.StringPtrInput
+	// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+	PayMode pulumi.IntPtrInput
 	// Quota Of Instance Reporting.
 	SpanDailyCounters pulumi.IntPtrInput
 	// Tag description list.
@@ -126,6 +134,8 @@ type instanceArgs struct {
 	Description *string `pulumi:"description"`
 	// Name Of Instance.
 	Name *string `pulumi:"name"`
+	// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+	PayMode *int `pulumi:"payMode"`
 	// Quota Of Instance Reporting.
 	SpanDailyCounters *int `pulumi:"spanDailyCounters"`
 	// Tag description list.
@@ -140,6 +150,8 @@ type InstanceArgs struct {
 	Description pulumi.StringPtrInput
 	// Name Of Instance.
 	Name pulumi.StringPtrInput
+	// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+	PayMode pulumi.IntPtrInput
 	// Quota Of Instance Reporting.
 	SpanDailyCounters pulumi.IntPtrInput
 	// Tag description list.
@@ -243,6 +255,11 @@ func (o InstanceOutput) Description() pulumi.StringPtrOutput {
 // Name Of Instance.
 func (o InstanceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
+func (o InstanceOutput) PayMode() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.PayMode }).(pulumi.IntPtrOutput)
 }
 
 // Quota Of Instance Reporting.

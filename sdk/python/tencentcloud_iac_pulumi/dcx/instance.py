@@ -21,6 +21,7 @@ class InstanceArgs:
                  customer_address: Optional[pulumi.Input[str]] = None,
                  dc_owner_account: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 network_region: Optional[pulumi.Input[str]] = None,
                  network_type: Optional[pulumi.Input[str]] = None,
                  route_filter_prefixes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  route_type: Optional[pulumi.Input[str]] = None,
@@ -37,6 +38,7 @@ class InstanceArgs:
         :param pulumi.Input[str] customer_address: Interconnect IP of the DC within client.
         :param pulumi.Input[str] dc_owner_account: Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
         :param pulumi.Input[str] name: Name of the dedicated tunnel.
+        :param pulumi.Input[str] network_region: Network region.
         :param pulumi.Input[str] network_type: Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] route_filter_prefixes: Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
         :param pulumi.Input[str] route_type: Type of the route, and available values include BGP and STATIC. The default value is `BGP`.
@@ -58,6 +60,8 @@ class InstanceArgs:
             pulumi.set(__self__, "dc_owner_account", dc_owner_account)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if network_region is not None:
+            pulumi.set(__self__, "network_region", network_region)
         if network_type is not None:
             pulumi.set(__self__, "network_type", network_type)
         if route_filter_prefixes is not None:
@@ -168,6 +172,18 @@ class InstanceArgs:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="networkRegion")
+    def network_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        Network region.
+        """
+        return pulumi.get(self, "network_region")
+
+    @network_region.setter
+    def network_region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "network_region", value)
+
+    @property
     @pulumi.getter(name="networkType")
     def network_type(self) -> Optional[pulumi.Input[str]]:
         """
@@ -252,6 +268,7 @@ class _InstanceState:
                  dc_owner_account: Optional[pulumi.Input[str]] = None,
                  dcg_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 network_region: Optional[pulumi.Input[str]] = None,
                  network_type: Optional[pulumi.Input[str]] = None,
                  route_filter_prefixes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  route_type: Optional[pulumi.Input[str]] = None,
@@ -270,6 +287,7 @@ class _InstanceState:
         :param pulumi.Input[str] dc_owner_account: Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
         :param pulumi.Input[str] dcg_id: ID of the DC Gateway. Currently only new in the console.
         :param pulumi.Input[str] name: Name of the dedicated tunnel.
+        :param pulumi.Input[str] network_region: Network region.
         :param pulumi.Input[str] network_type: Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] route_filter_prefixes: Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
         :param pulumi.Input[str] route_type: Type of the route, and available values include BGP and STATIC. The default value is `BGP`.
@@ -296,6 +314,8 @@ class _InstanceState:
             pulumi.set(__self__, "dcg_id", dcg_id)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if network_region is not None:
+            pulumi.set(__self__, "network_region", network_region)
         if network_type is not None:
             pulumi.set(__self__, "network_type", network_type)
         if route_filter_prefixes is not None:
@@ -420,6 +440,18 @@ class _InstanceState:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="networkRegion")
+    def network_region(self) -> Optional[pulumi.Input[str]]:
+        """
+        Network region.
+        """
+        return pulumi.get(self, "network_region")
+
+    @network_region.setter
+    def network_region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "network_region", value)
+
+    @property
     @pulumi.getter(name="networkType")
     def network_type(self) -> Optional[pulumi.Input[str]]:
         """
@@ -517,6 +549,7 @@ class Instance(pulumi.CustomResource):
                  dc_owner_account: Optional[pulumi.Input[str]] = None,
                  dcg_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 network_region: Optional[pulumi.Input[str]] = None,
                  network_type: Optional[pulumi.Input[str]] = None,
                  route_filter_prefixes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  route_type: Optional[pulumi.Input[str]] = None,
@@ -567,6 +600,14 @@ class Instance(pulumi.CustomResource):
             customer_address="100.93.46.2/30")
         ```
 
+        ## Import
+
+        DCX instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Dcx/instance:Instance foo dcx-cbbr1gjk
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] bandwidth: Bandwidth of the DC.
@@ -577,6 +618,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] dc_owner_account: Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
         :param pulumi.Input[str] dcg_id: ID of the DC Gateway. Currently only new in the console.
         :param pulumi.Input[str] name: Name of the dedicated tunnel.
+        :param pulumi.Input[str] network_region: Network region.
         :param pulumi.Input[str] network_type: Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] route_filter_prefixes: Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
         :param pulumi.Input[str] route_type: Type of the route, and available values include BGP and STATIC. The default value is `BGP`.
@@ -633,6 +675,14 @@ class Instance(pulumi.CustomResource):
             customer_address="100.93.46.2/30")
         ```
 
+        ## Import
+
+        DCX instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Dcx/instance:Instance foo dcx-cbbr1gjk
+        ```
+
         :param str resource_name: The name of the resource.
         :param InstanceArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -656,6 +706,7 @@ class Instance(pulumi.CustomResource):
                  dc_owner_account: Optional[pulumi.Input[str]] = None,
                  dcg_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 network_region: Optional[pulumi.Input[str]] = None,
                  network_type: Optional[pulumi.Input[str]] = None,
                  route_filter_prefixes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  route_type: Optional[pulumi.Input[str]] = None,
@@ -688,6 +739,7 @@ class Instance(pulumi.CustomResource):
                 raise TypeError("Missing required property 'dcg_id'")
             __props__.__dict__["dcg_id"] = dcg_id
             __props__.__dict__["name"] = name
+            __props__.__dict__["network_region"] = network_region
             __props__.__dict__["network_type"] = network_type
             __props__.__dict__["route_filter_prefixes"] = route_filter_prefixes
             __props__.__dict__["route_type"] = route_type
@@ -715,6 +767,7 @@ class Instance(pulumi.CustomResource):
             dc_owner_account: Optional[pulumi.Input[str]] = None,
             dcg_id: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
+            network_region: Optional[pulumi.Input[str]] = None,
             network_type: Optional[pulumi.Input[str]] = None,
             route_filter_prefixes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             route_type: Optional[pulumi.Input[str]] = None,
@@ -738,6 +791,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] dc_owner_account: Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
         :param pulumi.Input[str] dcg_id: ID of the DC Gateway. Currently only new in the console.
         :param pulumi.Input[str] name: Name of the dedicated tunnel.
+        :param pulumi.Input[str] network_region: Network region.
         :param pulumi.Input[str] network_type: Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] route_filter_prefixes: Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
         :param pulumi.Input[str] route_type: Type of the route, and available values include BGP and STATIC. The default value is `BGP`.
@@ -759,6 +813,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["dc_owner_account"] = dc_owner_account
         __props__.__dict__["dcg_id"] = dcg_id
         __props__.__dict__["name"] = name
+        __props__.__dict__["network_region"] = network_region
         __props__.__dict__["network_type"] = network_type
         __props__.__dict__["route_filter_prefixes"] = route_filter_prefixes
         __props__.__dict__["route_type"] = route_type
@@ -839,6 +894,14 @@ class Instance(pulumi.CustomResource):
         Name of the dedicated tunnel.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="networkRegion")
+    def network_region(self) -> pulumi.Output[Optional[str]]:
+        """
+        Network region.
+        """
+        return pulumi.get(self, "network_region")
 
     @property
     @pulumi.getter(name="networkType")

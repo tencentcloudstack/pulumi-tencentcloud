@@ -2813,6 +2813,239 @@ func (o GetDbsDbListArrayOutput) Index(i pulumi.IntInput) GetDbsDbListOutput {
 	}).(GetDbsDbListOutput)
 }
 
+type GetDescHaLogSwitchLog struct {
+	EndTime    string `pulumi:"endTime"`
+	EventId    string `pulumi:"eventId"`
+	Reason     string `pulumi:"reason"`
+	StartTime  string `pulumi:"startTime"`
+	SwitchType int    `pulumi:"switchType"`
+}
+
+// GetDescHaLogSwitchLogInput is an input type that accepts GetDescHaLogSwitchLogArgs and GetDescHaLogSwitchLogOutput values.
+// You can construct a concrete instance of `GetDescHaLogSwitchLogInput` via:
+//
+//          GetDescHaLogSwitchLogArgs{...}
+type GetDescHaLogSwitchLogInput interface {
+	pulumi.Input
+
+	ToGetDescHaLogSwitchLogOutput() GetDescHaLogSwitchLogOutput
+	ToGetDescHaLogSwitchLogOutputWithContext(context.Context) GetDescHaLogSwitchLogOutput
+}
+
+type GetDescHaLogSwitchLogArgs struct {
+	EndTime    pulumi.StringInput `pulumi:"endTime"`
+	EventId    pulumi.StringInput `pulumi:"eventId"`
+	Reason     pulumi.StringInput `pulumi:"reason"`
+	StartTime  pulumi.StringInput `pulumi:"startTime"`
+	SwitchType pulumi.IntInput    `pulumi:"switchType"`
+}
+
+func (GetDescHaLogSwitchLogArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescHaLogSwitchLog)(nil)).Elem()
+}
+
+func (i GetDescHaLogSwitchLogArgs) ToGetDescHaLogSwitchLogOutput() GetDescHaLogSwitchLogOutput {
+	return i.ToGetDescHaLogSwitchLogOutputWithContext(context.Background())
+}
+
+func (i GetDescHaLogSwitchLogArgs) ToGetDescHaLogSwitchLogOutputWithContext(ctx context.Context) GetDescHaLogSwitchLogOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescHaLogSwitchLogOutput)
+}
+
+// GetDescHaLogSwitchLogArrayInput is an input type that accepts GetDescHaLogSwitchLogArray and GetDescHaLogSwitchLogArrayOutput values.
+// You can construct a concrete instance of `GetDescHaLogSwitchLogArrayInput` via:
+//
+//          GetDescHaLogSwitchLogArray{ GetDescHaLogSwitchLogArgs{...} }
+type GetDescHaLogSwitchLogArrayInput interface {
+	pulumi.Input
+
+	ToGetDescHaLogSwitchLogArrayOutput() GetDescHaLogSwitchLogArrayOutput
+	ToGetDescHaLogSwitchLogArrayOutputWithContext(context.Context) GetDescHaLogSwitchLogArrayOutput
+}
+
+type GetDescHaLogSwitchLogArray []GetDescHaLogSwitchLogInput
+
+func (GetDescHaLogSwitchLogArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescHaLogSwitchLog)(nil)).Elem()
+}
+
+func (i GetDescHaLogSwitchLogArray) ToGetDescHaLogSwitchLogArrayOutput() GetDescHaLogSwitchLogArrayOutput {
+	return i.ToGetDescHaLogSwitchLogArrayOutputWithContext(context.Background())
+}
+
+func (i GetDescHaLogSwitchLogArray) ToGetDescHaLogSwitchLogArrayOutputWithContext(ctx context.Context) GetDescHaLogSwitchLogArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDescHaLogSwitchLogArrayOutput)
+}
+
+type GetDescHaLogSwitchLogOutput struct{ *pulumi.OutputState }
+
+func (GetDescHaLogSwitchLogOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDescHaLogSwitchLog)(nil)).Elem()
+}
+
+func (o GetDescHaLogSwitchLogOutput) ToGetDescHaLogSwitchLogOutput() GetDescHaLogSwitchLogOutput {
+	return o
+}
+
+func (o GetDescHaLogSwitchLogOutput) ToGetDescHaLogSwitchLogOutputWithContext(ctx context.Context) GetDescHaLogSwitchLogOutput {
+	return o
+}
+
+func (o GetDescHaLogSwitchLogOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescHaLogSwitchLog) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+func (o GetDescHaLogSwitchLogOutput) EventId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescHaLogSwitchLog) string { return v.EventId }).(pulumi.StringOutput)
+}
+
+func (o GetDescHaLogSwitchLogOutput) Reason() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescHaLogSwitchLog) string { return v.Reason }).(pulumi.StringOutput)
+}
+
+func (o GetDescHaLogSwitchLogOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDescHaLogSwitchLog) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+func (o GetDescHaLogSwitchLogOutput) SwitchType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescHaLogSwitchLog) int { return v.SwitchType }).(pulumi.IntOutput)
+}
+
+type GetDescHaLogSwitchLogArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDescHaLogSwitchLogArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDescHaLogSwitchLog)(nil)).Elem()
+}
+
+func (o GetDescHaLogSwitchLogArrayOutput) ToGetDescHaLogSwitchLogArrayOutput() GetDescHaLogSwitchLogArrayOutput {
+	return o
+}
+
+func (o GetDescHaLogSwitchLogArrayOutput) ToGetDescHaLogSwitchLogArrayOutputWithContext(ctx context.Context) GetDescHaLogSwitchLogArrayOutput {
+	return o
+}
+
+func (o GetDescHaLogSwitchLogArrayOutput) Index(i pulumi.IntInput) GetDescHaLogSwitchLogOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDescHaLogSwitchLog {
+		return vs[0].([]GetDescHaLogSwitchLog)[vs[1].(int)]
+	}).(GetDescHaLogSwitchLogOutput)
+}
+
+type GetInsAttributeSslConfig struct {
+	// TDE encryption, 'enable' - enabled, 'disable' - not enabled.
+	Encryption string `pulumi:"encryption"`
+	// SSL certificate validity, 0-invalid, 1-valid Note: This field may return null, indicating that no valid value can be obtained.
+	SslValidity int `pulumi:"sslValidity"`
+	// SSL certificate validity period, time format YYYY-MM-DD HH:MM:SS Note: This field may return null, indicating that no valid value can be obtained.
+	SslValidityPeriod string `pulumi:"sslValidityPeriod"`
+}
+
+// GetInsAttributeSslConfigInput is an input type that accepts GetInsAttributeSslConfigArgs and GetInsAttributeSslConfigOutput values.
+// You can construct a concrete instance of `GetInsAttributeSslConfigInput` via:
+//
+//          GetInsAttributeSslConfigArgs{...}
+type GetInsAttributeSslConfigInput interface {
+	pulumi.Input
+
+	ToGetInsAttributeSslConfigOutput() GetInsAttributeSslConfigOutput
+	ToGetInsAttributeSslConfigOutputWithContext(context.Context) GetInsAttributeSslConfigOutput
+}
+
+type GetInsAttributeSslConfigArgs struct {
+	// TDE encryption, 'enable' - enabled, 'disable' - not enabled.
+	Encryption pulumi.StringInput `pulumi:"encryption"`
+	// SSL certificate validity, 0-invalid, 1-valid Note: This field may return null, indicating that no valid value can be obtained.
+	SslValidity pulumi.IntInput `pulumi:"sslValidity"`
+	// SSL certificate validity period, time format YYYY-MM-DD HH:MM:SS Note: This field may return null, indicating that no valid value can be obtained.
+	SslValidityPeriod pulumi.StringInput `pulumi:"sslValidityPeriod"`
+}
+
+func (GetInsAttributeSslConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInsAttributeSslConfig)(nil)).Elem()
+}
+
+func (i GetInsAttributeSslConfigArgs) ToGetInsAttributeSslConfigOutput() GetInsAttributeSslConfigOutput {
+	return i.ToGetInsAttributeSslConfigOutputWithContext(context.Background())
+}
+
+func (i GetInsAttributeSslConfigArgs) ToGetInsAttributeSslConfigOutputWithContext(ctx context.Context) GetInsAttributeSslConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInsAttributeSslConfigOutput)
+}
+
+// GetInsAttributeSslConfigArrayInput is an input type that accepts GetInsAttributeSslConfigArray and GetInsAttributeSslConfigArrayOutput values.
+// You can construct a concrete instance of `GetInsAttributeSslConfigArrayInput` via:
+//
+//          GetInsAttributeSslConfigArray{ GetInsAttributeSslConfigArgs{...} }
+type GetInsAttributeSslConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetInsAttributeSslConfigArrayOutput() GetInsAttributeSslConfigArrayOutput
+	ToGetInsAttributeSslConfigArrayOutputWithContext(context.Context) GetInsAttributeSslConfigArrayOutput
+}
+
+type GetInsAttributeSslConfigArray []GetInsAttributeSslConfigInput
+
+func (GetInsAttributeSslConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInsAttributeSslConfig)(nil)).Elem()
+}
+
+func (i GetInsAttributeSslConfigArray) ToGetInsAttributeSslConfigArrayOutput() GetInsAttributeSslConfigArrayOutput {
+	return i.ToGetInsAttributeSslConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetInsAttributeSslConfigArray) ToGetInsAttributeSslConfigArrayOutputWithContext(ctx context.Context) GetInsAttributeSslConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInsAttributeSslConfigArrayOutput)
+}
+
+type GetInsAttributeSslConfigOutput struct{ *pulumi.OutputState }
+
+func (GetInsAttributeSslConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInsAttributeSslConfig)(nil)).Elem()
+}
+
+func (o GetInsAttributeSslConfigOutput) ToGetInsAttributeSslConfigOutput() GetInsAttributeSslConfigOutput {
+	return o
+}
+
+func (o GetInsAttributeSslConfigOutput) ToGetInsAttributeSslConfigOutputWithContext(ctx context.Context) GetInsAttributeSslConfigOutput {
+	return o
+}
+
+// TDE encryption, 'enable' - enabled, 'disable' - not enabled.
+func (o GetInsAttributeSslConfigOutput) Encryption() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInsAttributeSslConfig) string { return v.Encryption }).(pulumi.StringOutput)
+}
+
+// SSL certificate validity, 0-invalid, 1-valid Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetInsAttributeSslConfigOutput) SslValidity() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInsAttributeSslConfig) int { return v.SslValidity }).(pulumi.IntOutput)
+}
+
+// SSL certificate validity period, time format YYYY-MM-DD HH:MM:SS Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetInsAttributeSslConfigOutput) SslValidityPeriod() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInsAttributeSslConfig) string { return v.SslValidityPeriod }).(pulumi.StringOutput)
+}
+
+type GetInsAttributeSslConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInsAttributeSslConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInsAttributeSslConfig)(nil)).Elem()
+}
+
+func (o GetInsAttributeSslConfigArrayOutput) ToGetInsAttributeSslConfigArrayOutput() GetInsAttributeSslConfigArrayOutput {
+	return o
+}
+
+func (o GetInsAttributeSslConfigArrayOutput) ToGetInsAttributeSslConfigArrayOutputWithContext(ctx context.Context) GetInsAttributeSslConfigArrayOutput {
+	return o
+}
+
+func (o GetInsAttributeSslConfigArrayOutput) Index(i pulumi.IntInput) GetInsAttributeSslConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInsAttributeSslConfig {
+		return vs[0].([]GetInsAttributeSslConfig)[vs[1].(int)]
+	}).(GetInsAttributeSslConfigOutput)
+}
+
 type GetInsAttributeTdeConfig struct {
 	// Certificate ownership. Self - indicates using the account's own certificate, others - indicates referencing certificates from other accounts, and none - indicates no certificate.
 	CertificateAttribution string `pulumi:"certificateAttribution"`
@@ -5121,6 +5354,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBasicInstancesInstanceListArrayInput)(nil)).Elem(), GetBasicInstancesInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbsDbListInput)(nil)).Elem(), GetDbsDbListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbsDbListArrayInput)(nil)).Elem(), GetDbsDbListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescHaLogSwitchLogInput)(nil)).Elem(), GetDescHaLogSwitchLogArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDescHaLogSwitchLogArrayInput)(nil)).Elem(), GetDescHaLogSwitchLogArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInsAttributeSslConfigInput)(nil)).Elem(), GetInsAttributeSslConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInsAttributeSslConfigArrayInput)(nil)).Elem(), GetInsAttributeSslConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInsAttributeTdeConfigInput)(nil)).Elem(), GetInsAttributeTdeConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInsAttributeTdeConfigArrayInput)(nil)).Elem(), GetInsAttributeTdeConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceParamRecordsItemInput)(nil)).Elem(), GetInstanceParamRecordsItemArgs{})
@@ -5193,6 +5430,10 @@ func init() {
 	pulumi.RegisterOutputType(GetBasicInstancesInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetDbsDbListOutput{})
 	pulumi.RegisterOutputType(GetDbsDbListArrayOutput{})
+	pulumi.RegisterOutputType(GetDescHaLogSwitchLogOutput{})
+	pulumi.RegisterOutputType(GetDescHaLogSwitchLogArrayOutput{})
+	pulumi.RegisterOutputType(GetInsAttributeSslConfigOutput{})
+	pulumi.RegisterOutputType(GetInsAttributeSslConfigArrayOutput{})
 	pulumi.RegisterOutputType(GetInsAttributeTdeConfigOutput{})
 	pulumi.RegisterOutputType(GetInsAttributeTdeConfigArrayOutput{})
 	pulumi.RegisterOutputType(GetInstanceParamRecordsItemOutput{})

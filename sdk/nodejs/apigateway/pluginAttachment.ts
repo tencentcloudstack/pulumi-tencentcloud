@@ -11,13 +11,70 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const pluginAttachment = new tencentcloud.ApiGateway.PluginAttachment("plugin_attachment", {
- *     apiId: "api-6tfrdysk",
- *     environmentName: "test",
- *     pluginId: "plugin-ny74siyz",
- *     serviceId: "service-n1mgl0sq",
+ * const examplePlugin = new tencentcloud.apigateway.Plugin("examplePlugin", {
+ *     pluginName: "tf-example",
+ *     pluginType: "IPControl",
+ *     pluginData: JSON.stringify({
+ *         type: "white_list",
+ *         blocks: "1.1.1.1",
+ *     }),
+ *     description: "desc.",
+ * });
+ * const exampleService = new tencentcloud.apigateway.Service("exampleService", {
+ *     serviceName: "tf_example_service",
+ *     protocol: "http&https",
+ *     serviceDesc: "your nice service",
+ *     netTypes: [
+ *         "INNER",
+ *         "OUTER",
+ *     ],
+ *     ipVersion: "IPv4",
+ * });
+ * const exampleApi = new tencentcloud.apigateway.Api("exampleApi", {
+ *     serviceId: exampleService.id,
+ *     apiName: "tf_example_api",
+ *     apiDesc: "desc.",
+ *     authType: "APP",
+ *     protocol: "HTTP",
+ *     enableCors: true,
+ *     requestConfigPath: "/user/info",
+ *     requestConfigMethod: "GET",
+ *     requestParameters: [{
+ *         name: "name",
+ *         position: "QUERY",
+ *         type: "string",
+ *         desc: "desc.",
+ *         defaultValue: "terraform",
+ *         required: true,
+ *     }],
+ *     serviceConfigType: "HTTP",
+ *     serviceConfigTimeout: 15,
+ *     serviceConfigUrl: "https://www.qq.com",
+ *     serviceConfigPath: "/user",
+ *     serviceConfigMethod: "GET",
+ *     responseType: "HTML",
+ *     responseSuccessExample: "success",
+ *     responseFailExample: "fail",
+ *     responseErrorCodes: [{
+ *         code: 400,
+ *         msg: "system error msg.",
+ *         desc: "system error desc.",
+ *         convertedCode: 407,
+ *         needConvert: true,
+ *     }],
+ * });
+ * const exampleServiceRelease = new tencentcloud.apigateway.ServiceRelease("exampleServiceRelease", {
+ *     serviceId: exampleApi.serviceId,
+ *     environmentName: "release",
+ *     releaseDesc: "desc.",
+ * });
+ * const examplePluginAttachment = new tencentcloud.apigateway.PluginAttachment("examplePluginAttachment", {
+ *     pluginId: examplePlugin.id,
+ *     serviceId: exampleServiceRelease.serviceId,
+ *     apiId: exampleApi.id,
+ *     environmentName: "release",
  * });
  * ```
  *
@@ -26,7 +83,7 @@ import * as utilities from "../utilities";
  * apiGateway plugin_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:ApiGateway/pluginAttachment:PluginAttachment plugin_attachment pluginId#serviceId#environmentName#apiId
+ *  $ pulumi import tencentcloud:ApiGateway/pluginAttachment:PluginAttachment example plugin-hnqntalp#service-q3f533ja#release#api-62ud9woa
  * ```
  */
 export class PluginAttachment extends pulumi.CustomResource {

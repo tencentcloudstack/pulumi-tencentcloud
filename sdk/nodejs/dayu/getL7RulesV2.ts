@@ -16,8 +16,8 @@ import * as utilities from "../utilities";
  *
  * const test = pulumi.output(tencentcloud.Dayu.getL7RulesV2({
  *     business: "bgpip",
- *     limit: 10,
- *     offset: 0,
+ *     domain: "qq.com",
+ *     protocol: "https",
  * }));
  * ```
  */
@@ -55,11 +55,15 @@ export interface GetL7RulesV2Args {
      */
     ip?: string;
     /**
-     * The number of pages, default is `10`.
+     * It has been deprecated from version 1.81.21. The number of pages, default is `10`.
+     *
+     * @deprecated It has been deprecated from version 1.81.21.
      */
     limit?: number;
     /**
-     * The page start offset, default is `0`.
+     * It has been deprecated from version 1.81.21. The page start offset, default is `0`.
+     *
+     * @deprecated It has been deprecated from version 1.81.21.
      */
     offset?: number;
     /**
@@ -89,11 +93,17 @@ export interface GetL7RulesV2Result {
      * Ip of the resource.
      */
     readonly ip?: string;
+    /**
+     * @deprecated It has been deprecated from version 1.81.21.
+     */
     readonly limit?: number;
     /**
      * A list of layer 4 rules. Each element contains the following attributes:
      */
     readonly lists: outputs.Dayu.GetL7RulesV2List[];
+    /**
+     * @deprecated It has been deprecated from version 1.81.21.
+     */
     readonly offset?: number;
     /**
      * Protocol of resource, value range [`http`, `https`].
@@ -123,11 +133,15 @@ export interface GetL7RulesV2OutputArgs {
      */
     ip?: pulumi.Input<string>;
     /**
-     * The number of pages, default is `10`.
+     * It has been deprecated from version 1.81.21. The number of pages, default is `10`.
+     *
+     * @deprecated It has been deprecated from version 1.81.21.
      */
     limit?: pulumi.Input<number>;
     /**
-     * The page start offset, default is `0`.
+     * It has been deprecated from version 1.81.21. The page start offset, default is `0`.
+     *
+     * @deprecated It has been deprecated from version 1.81.21.
      */
     offset?: pulumi.Input<number>;
     /**

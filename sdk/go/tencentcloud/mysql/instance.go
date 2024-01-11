@@ -228,6 +228,8 @@ type Instance struct {
 	VolumeSize pulumi.IntOutput `pulumi:"volumeSize"`
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
+	// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+	WaitSwitch pulumi.IntPtrOutput `pulumi:"waitSwitch"`
 }
 
 // NewInstance registers a new resource with the given unique name, arguments, and options.
@@ -347,6 +349,8 @@ type instanceState struct {
 	VolumeSize *int `pulumi:"volumeSize"`
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
 	VpcId *string `pulumi:"vpcId"`
+	// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+	WaitSwitch *int `pulumi:"waitSwitch"`
 }
 
 type InstanceState struct {
@@ -428,6 +432,8 @@ type InstanceState struct {
 	VolumeSize pulumi.IntPtrInput
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
 	VpcId pulumi.StringPtrInput
+	// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+	WaitSwitch pulumi.IntPtrInput
 }
 
 func (InstanceState) ElementType() reflect.Type {
@@ -499,6 +505,8 @@ type instanceArgs struct {
 	VolumeSize int `pulumi:"volumeSize"`
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
 	VpcId *string `pulumi:"vpcId"`
+	// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+	WaitSwitch *int `pulumi:"waitSwitch"`
 }
 
 // The set of arguments for constructing a Instance resource.
@@ -567,6 +575,8 @@ type InstanceArgs struct {
 	VolumeSize pulumi.IntInput
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
 	VpcId pulumi.StringPtrInput
+	// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+	WaitSwitch pulumi.IntPtrInput
 }
 
 func (InstanceArgs) ElementType() reflect.Type {
@@ -843,6 +853,11 @@ func (o InstanceOutput) VolumeSize() pulumi.IntOutput {
 // ID of VPC, which can be modified once every 24 hours and can't be removed.
 func (o InstanceOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+func (o InstanceOutput) WaitSwitch() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.WaitSwitch }).(pulumi.IntPtrOutput)
 }
 
 type InstanceArrayOutput struct{ *pulumi.OutputState }

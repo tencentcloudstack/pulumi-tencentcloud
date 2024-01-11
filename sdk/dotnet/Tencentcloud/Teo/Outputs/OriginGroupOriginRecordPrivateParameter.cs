@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class OriginGroupOriginRecordPrivateParameter
     {
         /// <summary>
-        /// Parameter Name. Valid values:- AccessKeyId:Access Key ID.- SecretAccessKey:Secret Access Key.
+        /// Parameter Name. Valid values: `AccessKeyId`: Access Key ID; `SecretAccessKey`: Secret Access Key.
         /// </summary>
         public readonly string Name;
         /// <summary>

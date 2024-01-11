@@ -25,7 +25,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     ///     {
     ///         var serviceLinkedRole = new Tencentcloud.Cam.ServiceLinkedRole("serviceLinkedRole", new Tencentcloud.Cam.ServiceLinkedRoleArgs
     ///         {
-    ///             CustomSuffix = "x-1",
+    ///             CustomSuffix = "tf",
     ///             Description = "desc cam",
     ///             QcsServiceNames = 
     ///             {
@@ -46,10 +46,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     public partial class ServiceLinkedRole : Pulumi.CustomResource
     {
         /// <summary>
-        /// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+        /// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
         /// </summary>
         [Output("customSuffix")]
-        public Output<string?> CustomSuffix { get; private set; } = null!;
+        public Output<string> CustomSuffix { get; private set; } = null!;
 
         /// <summary>
         /// role description.
@@ -117,7 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     public sealed class ServiceLinkedRoleArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+        /// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
         /// </summary>
         [Input("customSuffix")]
         public Input<string>? CustomSuffix { get; set; }
@@ -160,7 +160,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     public sealed class ServiceLinkedRoleState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name.
+        /// The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
         /// </summary>
         [Input("customSuffix")]
         public Input<string>? CustomSuffix { get; set; }

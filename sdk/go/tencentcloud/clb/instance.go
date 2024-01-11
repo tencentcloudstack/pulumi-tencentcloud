@@ -43,6 +43,36 @@ import (
 // 	})
 // }
 // ```
+// ### LCU-supported CLB
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := Clb.NewInstance(ctx, "internalClb", &Clb.InstanceArgs{
+// 			ClbName:     pulumi.String("myclb"),
+// 			NetworkType: pulumi.String("INTERNAL"),
+// 			ProjectId:   pulumi.Int(0),
+// 			SlaType:     pulumi.String("clb.c3.medium"),
+// 			SubnetId:    pulumi.String("subnet-o3a5nt20"),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("tf"),
+// 			},
+// 			VpcId: pulumi.String("vpc-2hfyray3"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 // ### OPEN CLB
 //
 // ```go
@@ -68,6 +98,51 @@ import (
 // 			TargetRegionInfoRegion: pulumi.String("ap-guangzhou"),
 // 			TargetRegionInfoVpcId:  pulumi.String("vpc-da7ffa61"),
 // 			VpcId:                  pulumi.String("vpc-da7ffa61"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+// ### OPNE CLB with VipIsp
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		example, err := Vpc.NewBandwidthPackage(ctx, "example", &Vpc.BandwidthPackageArgs{
+// 			NetworkType:          pulumi.String("SINGLEISP_CMCC"),
+// 			ChargeType:           pulumi.String("ENHANCED95_POSTPAID_BY_MONTH"),
+// 			BandwidthPackageName: pulumi.String("tf-example"),
+// 			InternetMaxBandwidth: pulumi.Int(300),
+// 			Egress:               pulumi.String("center_egress1"),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Clb.NewInstance(ctx, "openClb", &Clb.InstanceArgs{
+// 			NetworkType:        pulumi.String("OPEN"),
+// 			ClbName:            pulumi.String("my-open-clb"),
+// 			ProjectId:          pulumi.Int(0),
+// 			VpcId:              pulumi.String("vpc-4owdpnwr"),
+// 			VipIsp:             pulumi.String("CMCC"),
+// 			InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
+// 			BandwidthPackageId: example.ID(),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("open"),
+// 			},
 // 		})
 // 		if err != nil {
 // 			return err
@@ -321,6 +396,8 @@ type Instance struct {
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
 	// Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
+	// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
+	SlaType pulumi.StringOutput `pulumi:"slaType"`
 	// Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
 	SlaveZoneId pulumi.StringPtrOutput `pulumi:"slaveZoneId"`
 	// Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `Clb.SnatIp` to handle fixed ips.
@@ -411,6 +488,8 @@ type instanceState struct {
 	ProjectId *int `pulumi:"projectId"`
 	// Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
 	SecurityGroups []string `pulumi:"securityGroups"`
+	// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
+	SlaType *string `pulumi:"slaType"`
 	// Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
 	SlaveZoneId *string `pulumi:"slaveZoneId"`
 	// Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `Clb.SnatIp` to handle fixed ips.
@@ -466,6 +545,8 @@ type InstanceState struct {
 	ProjectId pulumi.IntPtrInput
 	// Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
 	SecurityGroups pulumi.StringArrayInput
+	// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
+	SlaType pulumi.StringPtrInput
 	// Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
 	SlaveZoneId pulumi.StringPtrInput
 	// Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `Clb.SnatIp` to handle fixed ips.
@@ -521,6 +602,8 @@ type instanceArgs struct {
 	ProjectId *int `pulumi:"projectId"`
 	// Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
 	SecurityGroups []string `pulumi:"securityGroups"`
+	// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
+	SlaType *string `pulumi:"slaType"`
 	// Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
 	SlaveZoneId *string `pulumi:"slaveZoneId"`
 	// Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `Clb.SnatIp` to handle fixed ips.
@@ -535,6 +618,8 @@ type instanceArgs struct {
 	TargetRegionInfoRegion *string `pulumi:"targetRegionInfoRegion"`
 	// Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
 	TargetRegionInfoVpcId *string `pulumi:"targetRegionInfoVpcId"`
+	// Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
+	VipIsp *string `pulumi:"vipIsp"`
 	// VPC ID of the CLB.
 	VpcId *string `pulumi:"vpcId"`
 	// Available zone id, only applicable to open CLB.
@@ -571,6 +656,8 @@ type InstanceArgs struct {
 	ProjectId pulumi.IntPtrInput
 	// Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
 	SecurityGroups pulumi.StringArrayInput
+	// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
+	SlaType pulumi.StringPtrInput
 	// Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
 	SlaveZoneId pulumi.StringPtrInput
 	// Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `Clb.SnatIp` to handle fixed ips.
@@ -585,6 +672,8 @@ type InstanceArgs struct {
 	TargetRegionInfoRegion pulumi.StringPtrInput
 	// Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
 	TargetRegionInfoVpcId pulumi.StringPtrInput
+	// Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
+	VipIsp pulumi.StringPtrInput
 	// VPC ID of the CLB.
 	VpcId pulumi.StringPtrInput
 	// Available zone id, only applicable to open CLB.
@@ -756,6 +845,11 @@ func (o InstanceOutput) ProjectId() pulumi.IntPtrOutput {
 // Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
 func (o InstanceOutput) SecurityGroups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.SecurityGroups }).(pulumi.StringArrayOutput)
+}
+
+// This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
+func (o InstanceOutput) SlaType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.SlaType }).(pulumi.StringOutput)
 }
 
 // Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.

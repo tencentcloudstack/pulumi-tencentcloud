@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class ZoneSettingCacheNoCacheGetArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether to cache the configuration.- `on`: Do not cache.- `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Whether to cache the configuration. Valid values: `on`: Do not cache; `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }

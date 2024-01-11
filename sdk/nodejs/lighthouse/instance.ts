@@ -12,14 +12,18 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
  *
- * const lighthouse = new tencentcloud.Lighthouse.Instance("lighthouse", {
- *     blueprintId: "lhbp-f1lkcd41",
+ * const firewallTemplate = new tencentcloud.lighthouse.FirewallTemplate("firewallTemplate", {templateName: "empty-template"});
+ * const lighthouse = new tencentcloud.lighthouse.Instance("lighthouse", {
  *     bundleId: "bundle2022_gen_01",
+ *     blueprintId: "lhbp-f1lkcd41",
+ *     period: 1,
+ *     renewFlag: "NOTIFY_AND_AUTO_RENEW",
+ *     instanceName: "hello world",
+ *     zone: "ap-guangzhou-3",
  *     containers: [
  *         {
- *             command: "ls -l",
  *             containerImage: "ccr.ccs.tencentyun.com/qcloud/nginx",
  *             containerName: "nginx",
  *             envs: [
@@ -34,14 +38,14 @@ import * as utilities from "../utilities";
  *             ],
  *             publishPorts: [
  *                 {
- *                     containerPort: 80,
  *                     hostPort: 80,
+ *                     containerPort: 80,
  *                     ip: "127.0.0.1",
  *                     protocol: "tcp",
  *                 },
  *                 {
- *                     containerPort: 36000,
  *                     hostPort: 36000,
+ *                     containerPort: 36000,
  *                     ip: "127.0.0.1",
  *                     protocol: "tcp",
  *                 },
@@ -56,9 +60,9 @@ import * as utilities from "../utilities";
  *                     hostPath: "/tmp",
  *                 },
  *             ],
+ *             command: "ls -l",
  *         },
  *         {
- *             command: "echo \"hello\"",
  *             containerImage: "ccr.ccs.tencentyun.com/qcloud/resty",
  *             containerName: "resty",
  *             envs: [{
@@ -66,8 +70,8 @@ import * as utilities from "../utilities";
  *                 value: "value2",
  *             }],
  *             publishPorts: [{
- *                 containerPort: 80,
  *                 hostPort: 80,
+ *                 containerPort: 80,
  *                 ip: "127.0.0.1",
  *                 protocol: "udp",
  *             }],
@@ -75,13 +79,19 @@ import * as utilities from "../utilities";
  *                 containerPath: "/var",
  *                 hostPath: "/tmp",
  *             }],
+ *             command: "echo \"hello\"",
  *         },
  *     ],
- *     instanceName: "hello world",
- *     period: 1,
- *     renewFlag: "NOTIFY_AND_AUTO_RENEW",
- *     zone: "ap-guangzhou-3",
+ *     firewallTemplateId: firewallTemplate.id,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * lighthouse instance can be imported using the id, e.g.
+ *
+ * ```sh
+ *  $ pulumi import tencentcloud:Lighthouse/instance:Instance lighthouse lhins-xxxxxx
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -132,6 +142,10 @@ export class Instance extends pulumi.CustomResource {
      * Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.
      */
     public readonly dryRun!: pulumi.Output<boolean | undefined>;
+    /**
+     * Firewall template ID. If this parameter is not specified, the default firewall policy is used.
+     */
+    public readonly firewallTemplateId!: pulumi.Output<string>;
     /**
      * The display name of the Lighthouse instance.
      */
@@ -185,6 +199,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["clientToken"] = state ? state.clientToken : undefined;
             resourceInputs["containers"] = state ? state.containers : undefined;
             resourceInputs["dryRun"] = state ? state.dryRun : undefined;
+            resourceInputs["firewallTemplateId"] = state ? state.firewallTemplateId : undefined;
             resourceInputs["instanceName"] = state ? state.instanceName : undefined;
             resourceInputs["isUpdateBundleIdAutoVoucher"] = state ? state.isUpdateBundleIdAutoVoucher : undefined;
             resourceInputs["isolateDataDisk"] = state ? state.isolateDataDisk : undefined;
@@ -215,6 +230,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["clientToken"] = args ? args.clientToken : undefined;
             resourceInputs["containers"] = args ? args.containers : undefined;
             resourceInputs["dryRun"] = args ? args.dryRun : undefined;
+            resourceInputs["firewallTemplateId"] = args ? args.firewallTemplateId : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
             resourceInputs["isUpdateBundleIdAutoVoucher"] = args ? args.isUpdateBundleIdAutoVoucher : undefined;
             resourceInputs["isolateDataDisk"] = args ? args.isolateDataDisk : undefined;
@@ -253,6 +269,10 @@ export interface InstanceState {
      * Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.
      */
     dryRun?: pulumi.Input<boolean>;
+    /**
+     * Firewall template ID. If this parameter is not specified, the default firewall policy is used.
+     */
+    firewallTemplateId?: pulumi.Input<string>;
     /**
      * The display name of the Lighthouse instance.
      */
@@ -313,6 +333,10 @@ export interface InstanceArgs {
      * Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.
      */
     dryRun?: pulumi.Input<boolean>;
+    /**
+     * Firewall template ID. If this parameter is not specified, the default firewall policy is used.
+     */
+    firewallTemplateId?: pulumi.Input<string>;
     /**
      * The display name of the Lighthouse instance.
      */

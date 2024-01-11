@@ -430,6 +430,7 @@ class SyncConfig(pulumi.CustomResource):
         Provides a resource to create a dts sync_config
 
         ## Example Usage
+        ### Sync mysql database to cynosdb through cdb access type
 
         ```python
         import pulumi
@@ -510,7 +511,7 @@ class SyncConfig(pulumi.CustomResource):
             src_info=tencentcloud.dts.SyncConfigSrcInfoArgs(
                 region="ap-guangzhou",
                 instance_id="cdb-fitq5t9h",
-                user="keep_dts",
+                user="your_user_name",
                 password="*",
                 db_name="tf_ci_test",
                 vpc_id=local["vpc_id"],
@@ -524,6 +525,68 @@ class SyncConfig(pulumi.CustomResource):
                 db_name="tf_ci_test_new",
                 vpc_id=local["vpc_id"],
                 subnet_id=local["subnet_id"],
+            ),
+            auto_retry_time_range_minutes=0)
+        ```
+        ### Sync mysql database using CCN to route from ap-shanghai to ap-guangzhou
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        vpc_id_sh = "vpc-evtcyb3g"
+        subnet_id_sh = "subnet-1t83cxkp"
+        src_mysql = tencentcloud.Mysql.get_instance(instance_name="your_user_name_mysql_src")
+        src_ip = src_mysql.instance_lists[0].intranet_ip
+        src_port = src_mysql.instance_lists[0].intranet_port
+        ccns = tencentcloud.Ccn.get_instances(name="keep-ccn-dts-sh")
+        ccn_id = ccns.instance_lists[0].ccn_id
+        dst_mysql = tencentcloud.Mysql.get_instance(instance_name="your_user_name_mysql_src")
+        dst_mysql_id = dst_mysql.instance_lists[0].mysql_id
+        config = pulumi.Config()
+        src_az_sh = config.get("srcAzSh")
+        if src_az_sh is None:
+            src_az_sh = "ap-shanghai"
+        dst_az_gz = config.get("dstAzGz")
+        if dst_az_gz is None:
+            dst_az_gz = "ap-guangzhou"
+        sync_jobs = tencentcloud.Dts.get_sync_jobs(job_name="keep_sync_config_ccn_2_cdb")
+        sync_config = tencentcloud.dts.SyncConfig("syncConfig",
+            job_id=sync_jobs.lists[0].job_id,
+            src_access_type="ccn",
+            dst_access_type="cdb",
+            job_mode="liteMode",
+            run_mode="Immediate",
+            objects=tencentcloud.dts.SyncConfigObjectsArgs(
+                mode="Partial",
+                databases=[tencentcloud.dts.SyncConfigObjectsDatabaseArgs(
+                    db_name="tf_ci_test",
+                    new_db_name="tf_ci_test_new",
+                    db_mode="Partial",
+                    table_mode="All",
+                    tables=[tencentcloud.dts.SyncConfigObjectsDatabaseTableArgs(
+                        table_name="test",
+                        new_table_name="test_new",
+                    )],
+                )],
+            ),
+            src_info=tencentcloud.dts.SyncConfigSrcInfoArgs(
+                region=src_az_sh,
+                user="your_user_name",
+                password="your_pass_word",
+                ip=src_ip,
+                port=src_port,
+                vpc_id=vpc_id_sh,
+                subnet_id=subnet_id_sh,
+                ccn_id=ccn_id,
+                database_net_env="TencentVPC",
+            ),
+            dst_info=tencentcloud.dts.SyncConfigDstInfoArgs(
+                region=dst_az_gz,
+                instance_id=dst_mysql_id,
+                user="your_user_name",
+                password="your_pass_word",
             ),
             auto_retry_time_range_minutes=0)
         ```
@@ -561,6 +624,7 @@ class SyncConfig(pulumi.CustomResource):
         Provides a resource to create a dts sync_config
 
         ## Example Usage
+        ### Sync mysql database to cynosdb through cdb access type
 
         ```python
         import pulumi
@@ -641,7 +705,7 @@ class SyncConfig(pulumi.CustomResource):
             src_info=tencentcloud.dts.SyncConfigSrcInfoArgs(
                 region="ap-guangzhou",
                 instance_id="cdb-fitq5t9h",
-                user="keep_dts",
+                user="your_user_name",
                 password="*",
                 db_name="tf_ci_test",
                 vpc_id=local["vpc_id"],
@@ -655,6 +719,68 @@ class SyncConfig(pulumi.CustomResource):
                 db_name="tf_ci_test_new",
                 vpc_id=local["vpc_id"],
                 subnet_id=local["subnet_id"],
+            ),
+            auto_retry_time_range_minutes=0)
+        ```
+        ### Sync mysql database using CCN to route from ap-shanghai to ap-guangzhou
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        vpc_id_sh = "vpc-evtcyb3g"
+        subnet_id_sh = "subnet-1t83cxkp"
+        src_mysql = tencentcloud.Mysql.get_instance(instance_name="your_user_name_mysql_src")
+        src_ip = src_mysql.instance_lists[0].intranet_ip
+        src_port = src_mysql.instance_lists[0].intranet_port
+        ccns = tencentcloud.Ccn.get_instances(name="keep-ccn-dts-sh")
+        ccn_id = ccns.instance_lists[0].ccn_id
+        dst_mysql = tencentcloud.Mysql.get_instance(instance_name="your_user_name_mysql_src")
+        dst_mysql_id = dst_mysql.instance_lists[0].mysql_id
+        config = pulumi.Config()
+        src_az_sh = config.get("srcAzSh")
+        if src_az_sh is None:
+            src_az_sh = "ap-shanghai"
+        dst_az_gz = config.get("dstAzGz")
+        if dst_az_gz is None:
+            dst_az_gz = "ap-guangzhou"
+        sync_jobs = tencentcloud.Dts.get_sync_jobs(job_name="keep_sync_config_ccn_2_cdb")
+        sync_config = tencentcloud.dts.SyncConfig("syncConfig",
+            job_id=sync_jobs.lists[0].job_id,
+            src_access_type="ccn",
+            dst_access_type="cdb",
+            job_mode="liteMode",
+            run_mode="Immediate",
+            objects=tencentcloud.dts.SyncConfigObjectsArgs(
+                mode="Partial",
+                databases=[tencentcloud.dts.SyncConfigObjectsDatabaseArgs(
+                    db_name="tf_ci_test",
+                    new_db_name="tf_ci_test_new",
+                    db_mode="Partial",
+                    table_mode="All",
+                    tables=[tencentcloud.dts.SyncConfigObjectsDatabaseTableArgs(
+                        table_name="test",
+                        new_table_name="test_new",
+                    )],
+                )],
+            ),
+            src_info=tencentcloud.dts.SyncConfigSrcInfoArgs(
+                region=src_az_sh,
+                user="your_user_name",
+                password="your_pass_word",
+                ip=src_ip,
+                port=src_port,
+                vpc_id=vpc_id_sh,
+                subnet_id=subnet_id_sh,
+                ccn_id=ccn_id,
+                database_net_env="TencentVPC",
+            ),
+            dst_info=tencentcloud.dts.SyncConfigDstInfoArgs(
+                region=dst_az_gz,
+                instance_id=dst_mysql_id,
+                user="your_user_name",
+                password="your_pass_word",
             ),
             auto_retry_time_range_minutes=0)
         ```
@@ -838,7 +964,7 @@ class SyncConfig(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="jobName")
-    def job_name(self) -> pulumi.Output[Optional[str]]:
+    def job_name(self) -> pulumi.Output[str]:
         """
         Sync job name.
         """

@@ -29,18 +29,50 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AiRecognitionTemplate{}
 	case "tencentcloud:Mps/animatedGraphicsTemplate:AnimatedGraphicsTemplate":
 		r = &AnimatedGraphicsTemplate{}
+	case "tencentcloud:Mps/contentReviewTemplate:ContentReviewTemplate":
+		r = &ContentReviewTemplate{}
+	case "tencentcloud:Mps/editMediaOperation:EditMediaOperation":
+		r = &EditMediaOperation{}
+	case "tencentcloud:Mps/enableScheduleConfig:EnableScheduleConfig":
+		r = &EnableScheduleConfig{}
+	case "tencentcloud:Mps/enableWorkflowConfig:EnableWorkflowConfig":
+		r = &EnableWorkflowConfig{}
+	case "tencentcloud:Mps/event:Event":
+		r = &Event{}
+	case "tencentcloud:Mps/executeFunctionOperation:ExecuteFunctionOperation":
+		r = &ExecuteFunctionOperation{}
+	case "tencentcloud:Mps/flow:Flow":
+		r = &Flow{}
 	case "tencentcloud:Mps/imageSpriteTemplate:ImageSpriteTemplate":
 		r = &ImageSpriteTemplate{}
+	case "tencentcloud:Mps/input:Input":
+		r = &Input{}
+	case "tencentcloud:Mps/manageTaskOperation:ManageTaskOperation":
+		r = &ManageTaskOperation{}
+	case "tencentcloud:Mps/output:Output":
+		r = &Output{}
 	case "tencentcloud:Mps/personSample:PersonSample":
 		r = &PersonSample{}
+	case "tencentcloud:Mps/processLiveStreamOperation:ProcessLiveStreamOperation":
+		r = &ProcessLiveStreamOperation{}
+	case "tencentcloud:Mps/processMediaOperation:ProcessMediaOperation":
+		r = &ProcessMediaOperation{}
 	case "tencentcloud:Mps/sampleSnapshotTemplate:SampleSnapshotTemplate":
 		r = &SampleSnapshotTemplate{}
+	case "tencentcloud:Mps/schedule:Schedule":
+		r = &Schedule{}
 	case "tencentcloud:Mps/snapshotByTimeoffsetTemplate:SnapshotByTimeoffsetTemplate":
 		r = &SnapshotByTimeoffsetTemplate{}
+	case "tencentcloud:Mps/startFlowOperation:StartFlowOperation":
+		r = &StartFlowOperation{}
 	case "tencentcloud:Mps/transcodeTemplate:TranscodeTemplate":
 		r = &TranscodeTemplate{}
 	case "tencentcloud:Mps/watermarkTemplate:WatermarkTemplate":
 		r = &WatermarkTemplate{}
+	case "tencentcloud:Mps/withdrawsWatermarkOperation:WithdrawsWatermarkOperation":
+		r = &WithdrawsWatermarkOperation{}
+	case "tencentcloud:Mps/wordSample:WordSample":
+		r = &WordSample{}
 	case "tencentcloud:Mps/workflow:Workflow":
 		r = &Workflow{}
 	default:
@@ -78,7 +110,57 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Mps/contentReviewTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mps/editMediaOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mps/enableScheduleConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mps/enableWorkflowConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mps/event",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mps/executeFunctionOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mps/flow",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Mps/imageSpriteTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mps/input",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mps/manageTaskOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mps/output",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -88,12 +170,32 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Mps/processLiveStreamOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mps/processMediaOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Mps/sampleSnapshotTemplate",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Mps/schedule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Mps/snapshotByTimeoffsetTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mps/startFlowOperation",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -104,6 +206,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Mps/watermarkTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mps/withdrawsWatermarkOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mps/wordSample",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

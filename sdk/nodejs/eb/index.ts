@@ -6,15 +6,22 @@ import * as utilities from "../utilities";
 
 // Export members:
 export * from "./eventBus";
+export * from "./eventConnector";
 export * from "./eventRule";
 export * from "./eventTarget";
 export * from "./eventTransform";
 export * from "./getBus";
+export * from "./getEventRules";
+export * from "./getPlateformEventTemplate";
+export * from "./getPlatformEventNames";
+export * from "./getPlatformEventPatterns";
+export * from "./getPlatformProducts";
 export * from "./getSearch";
 export * from "./putEvents";
 
 // Import resources to register:
 import { EventBus } from "./eventBus";
+import { EventConnector } from "./eventConnector";
 import { EventRule } from "./eventRule";
 import { EventTarget } from "./eventTarget";
 import { EventTransform } from "./eventTransform";
@@ -26,6 +33,8 @@ const _module = {
         switch (type) {
             case "tencentcloud:Eb/eventBus:EventBus":
                 return new EventBus(name, <any>undefined, { urn })
+            case "tencentcloud:Eb/eventConnector:EventConnector":
+                return new EventConnector(name, <any>undefined, { urn })
             case "tencentcloud:Eb/eventRule:EventRule":
                 return new EventRule(name, <any>undefined, { urn })
             case "tencentcloud:Eb/eventTarget:EventTarget":
@@ -40,6 +49,7 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Eb/eventBus", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Eb/eventConnector", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Eb/eventRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Eb/eventTarget", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Eb/eventTransform", _module)

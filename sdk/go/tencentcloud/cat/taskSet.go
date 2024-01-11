@@ -101,8 +101,12 @@ type TaskSet struct {
 	Cron pulumi.StringPtrOutput `pulumi:"cron"`
 	// Task interval minutes in (1,5,10,15,30,60,120,240).
 	Interval pulumi.IntOutput `pulumi:"interval"`
+	// `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+	NodeIpType pulumi.IntOutput `pulumi:"nodeIpType"`
 	// Task Nodes.
 	Nodes pulumi.StringArrayOutput `pulumi:"nodes"`
+	// The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+	Operate pulumi.StringPtrOutput `pulumi:"operate"`
 	// tasks parameters.
 	Parameters pulumi.StringOutput `pulumi:"parameters"`
 	// Task status 1:TaskPending, 2:TaskRunning,3:TaskRunException,4:TaskSuspending 5:TaskSuspendException,6:TaskSuspendException,7:TaskSuspended,9:TaskDeleted.
@@ -171,8 +175,12 @@ type taskSetState struct {
 	Cron *string `pulumi:"cron"`
 	// Task interval minutes in (1,5,10,15,30,60,120,240).
 	Interval *int `pulumi:"interval"`
+	// `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+	NodeIpType *int `pulumi:"nodeIpType"`
 	// Task Nodes.
 	Nodes []string `pulumi:"nodes"`
+	// The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+	Operate *string `pulumi:"operate"`
 	// tasks parameters.
 	Parameters *string `pulumi:"parameters"`
 	// Task status 1:TaskPending, 2:TaskRunning,3:TaskRunException,4:TaskSuspending 5:TaskSuspendException,6:TaskSuspendException,7:TaskSuspended,9:TaskDeleted.
@@ -194,8 +202,12 @@ type TaskSetState struct {
 	Cron pulumi.StringPtrInput
 	// Task interval minutes in (1,5,10,15,30,60,120,240).
 	Interval pulumi.IntPtrInput
+	// `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+	NodeIpType pulumi.IntPtrInput
 	// Task Nodes.
 	Nodes pulumi.StringArrayInput
+	// The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+	Operate pulumi.StringPtrInput
 	// tasks parameters.
 	Parameters pulumi.StringPtrInput
 	// Task status 1:TaskPending, 2:TaskRunning,3:TaskRunException,4:TaskSuspending 5:TaskSuspendException,6:TaskSuspendException,7:TaskSuspended,9:TaskDeleted.
@@ -221,8 +233,12 @@ type taskSetArgs struct {
 	Cron *string `pulumi:"cron"`
 	// Task interval minutes in (1,5,10,15,30,60,120,240).
 	Interval int `pulumi:"interval"`
+	// `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+	NodeIpType *int `pulumi:"nodeIpType"`
 	// Task Nodes.
 	Nodes []string `pulumi:"nodes"`
+	// The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+	Operate *string `pulumi:"operate"`
 	// tasks parameters.
 	Parameters string `pulumi:"parameters"`
 	// Tag description list.
@@ -241,8 +257,12 @@ type TaskSetArgs struct {
 	Cron pulumi.StringPtrInput
 	// Task interval minutes in (1,5,10,15,30,60,120,240).
 	Interval pulumi.IntInput
+	// `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+	NodeIpType pulumi.IntPtrInput
 	// Task Nodes.
 	Nodes pulumi.StringArrayInput
+	// The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+	Operate pulumi.StringPtrInput
 	// tasks parameters.
 	Parameters pulumi.StringInput
 	// Tag description list.
@@ -355,9 +375,19 @@ func (o TaskSetOutput) Interval() pulumi.IntOutput {
 	return o.ApplyT(func(v *TaskSet) pulumi.IntOutput { return v.Interval }).(pulumi.IntOutput)
 }
 
+// `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
+func (o TaskSetOutput) NodeIpType() pulumi.IntOutput {
+	return o.ApplyT(func(v *TaskSet) pulumi.IntOutput { return v.NodeIpType }).(pulumi.IntOutput)
+}
+
 // Task Nodes.
 func (o TaskSetOutput) Nodes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *TaskSet) pulumi.StringArrayOutput { return v.Nodes }).(pulumi.StringArrayOutput)
+}
+
+// The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
+func (o TaskSetOutput) Operate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TaskSet) pulumi.StringPtrOutput { return v.Operate }).(pulumi.StringPtrOutput)
 }
 
 // tasks parameters.

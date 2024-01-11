@@ -9,19 +9,23 @@ export * from "./provider";
 
 // Export sub-modules:
 import * as address from "./address";
+import * as antiddos from "./antiddos";
 import * as apigateway from "./apigateway";
 import * as apm from "./apm";
 import * as as from "./as";
 import * as audit from "./audit";
 import * as audits from "./audits";
 import * as availability from "./availability";
+import * as bi from "./bi";
 import * as cam from "./cam";
 import * as cat from "./cat";
 import * as cbs from "./cbs";
 import * as ccn from "./ccn";
 import * as cdh from "./cdh";
 import * as cdn from "./cdn";
+import * as cdwpg from "./cdwpg";
 import * as cfs from "./cfs";
+import * as cfw from "./cfw";
 import * as chdfs from "./chdfs";
 import * as ci from "./ci";
 import * as ciam from "./ciam";
@@ -33,12 +37,15 @@ import * as config from "./config";
 import * as cos from "./cos";
 import * as css from "./css";
 import * as cvm from "./cvm";
+import * as cwp from "./cwp";
 import * as cynosdb from "./cynosdb";
+import * as dasb from "./dasb";
 import * as dayu from "./dayu";
 import * as dbbrain from "./dbbrain";
 import * as dc from "./dc";
 import * as dcdb from "./dcdb";
 import * as dcx from "./dcx";
+import * as dlc from "./dlc";
 import * as dnat from "./dnat";
 import * as dnats from "./dnats";
 import * as dnspod from "./dnspod";
@@ -69,6 +76,7 @@ import * as monitor from "./monitor";
 import * as mps from "./mps";
 import * as mysql from "./mysql";
 import * as nat from "./nat";
+import * as oceanus from "./oceanus";
 import * as organization from "./organization";
 import * as placement from "./placement";
 import * as postgresql from "./postgresql";
@@ -100,6 +108,7 @@ import * as tdcpg from "./tdcpg";
 import * as tdmq from "./tdmq";
 import * as tem from "./tem";
 import * as teo from "./teo";
+import * as trocket from "./trocket";
 import * as tse from "./tse";
 import * as tsf from "./tsf";
 import * as types from "./types";
@@ -107,22 +116,28 @@ import * as user from "./user";
 import * as vod from "./vod";
 import * as vpc from "./vpc";
 import * as vpn from "./vpn";
+import * as waf from "./waf";
+import * as wedata from "./wedata";
 
 export {
     address,
+    antiddos,
     apigateway,
     apm,
     as,
     audit,
     audits,
     availability,
+    bi,
     cam,
     cat,
     cbs,
     ccn,
     cdh,
     cdn,
+    cdwpg,
     cfs,
+    cfw,
     chdfs,
     ci,
     ciam,
@@ -134,12 +149,15 @@ export {
     cos,
     css,
     cvm,
+    cwp,
     cynosdb,
+    dasb,
     dayu,
     dbbrain,
     dc,
     dcdb,
     dcx,
+    dlc,
     dnat,
     dnats,
     dnspod,
@@ -170,6 +188,7 @@ export {
     mps,
     mysql,
     nat,
+    oceanus,
     organization,
     placement,
     postgresql,
@@ -201,6 +220,7 @@ export {
     tdmq,
     tem,
     teo,
+    trocket,
     tse,
     tsf,
     types,
@@ -208,6 +228,8 @@ export {
     vod,
     vpc,
     vpn,
+    waf,
+    wedata,
 };
 
 import { Provider } from "./provider";

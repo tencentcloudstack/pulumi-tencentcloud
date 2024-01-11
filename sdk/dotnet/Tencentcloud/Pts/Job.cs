@@ -101,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public Output<double> ErrorRate { get; private set; } = null!;
 
         /// <summary>
+        /// Job Id.
+        /// </summary>
+        [Output("jobId")]
+        public Output<string> JobId { get; private set; } = null!;
+
+        /// <summary>
         /// Job owner.
         /// </summary>
         [Output("jobOwner")]
@@ -381,6 +387,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         /// </summary>
         [Input("errorRate")]
         public Input<double>? ErrorRate { get; set; }
+
+        /// <summary>
+        /// Job Id.
+        /// </summary>
+        [Input("jobId")]
+        public Input<string>? JobId { get; set; }
 
         /// <summary>
         /// Job owner.

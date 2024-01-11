@@ -14,20 +14,65 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Outputs
     [OutputType]
     public sealed class GetGatewayRoutesResultRouteListResult
     {
+        /// <summary>
+        /// created time.
+        /// </summary>
         public readonly string CreatedTime;
+        /// <summary>
+        /// destination port for Layer 4 matching.
+        /// </summary>
         public readonly ImmutableArray<int> DestinationPorts;
+        /// <summary>
+        /// whether to enable forced HTTPS, no longer use.
+        /// </summary>
         public readonly bool ForceHttps;
+        /// <summary>
+        /// the headers of route.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetGatewayRoutesResultRouteListHeaderResult> Headers;
+        /// <summary>
+        /// host list.
+        /// </summary>
         public readonly ImmutableArray<string> Hosts;
+        /// <summary>
+        /// https redirection status code.
+        /// </summary>
         public readonly int HttpsRedirectStatusCode;
+        /// <summary>
+        /// service ID.
+        /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// method list.
+        /// </summary>
         public readonly ImmutableArray<string> Methods;
+        /// <summary>
+        /// service name.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// path list.
+        /// </summary>
         public readonly ImmutableArray<string> Paths;
+        /// <summary>
+        /// whether to keep the host when forwarding to the backend.
+        /// </summary>
         public readonly bool PreserveHost;
+        /// <summary>
+        /// protocol list.
+        /// </summary>
         public readonly ImmutableArray<string> Protocols;
+        /// <summary>
+        /// service ID.
+        /// </summary>
         public readonly string ServiceId;
+        /// <summary>
+        /// service name.
+        /// </summary>
         public readonly string ServiceName;
+        /// <summary>
+        /// whether to strip path when forwarding to the backend.
+        /// </summary>
         public readonly bool StripPath;
 
         [OutputConstructor]

@@ -161,6 +161,8 @@ type ReadonlyInstance struct {
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
 	// Security groups to use.
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
+	// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
+	SlaveDeployMode pulumi.IntPtrOutput `pulumi:"slaveDeployMode"`
 	// Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
 	Status pulumi.IntOutput `pulumi:"status"`
 	// Private network ID. If `vpcId` is set, this value is required.
@@ -173,6 +175,8 @@ type ReadonlyInstance struct {
 	VolumeSize pulumi.IntOutput `pulumi:"volumeSize"`
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
+	// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+	WaitSwitch pulumi.IntPtrOutput `pulumi:"waitSwitch"`
 	// Zone information, this parameter defaults to, the system automatically selects an Availability Zone.
 	Zone pulumi.StringOutput `pulumi:"zone"`
 }
@@ -259,6 +263,8 @@ type readonlyInstanceState struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// Security groups to use.
 	SecurityGroups []string `pulumi:"securityGroups"`
+	// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
+	SlaveDeployMode *int `pulumi:"slaveDeployMode"`
 	// Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
 	Status *int `pulumi:"status"`
 	// Private network ID. If `vpcId` is set, this value is required.
@@ -271,6 +277,8 @@ type readonlyInstanceState struct {
 	VolumeSize *int `pulumi:"volumeSize"`
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
 	VpcId *string `pulumi:"vpcId"`
+	// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+	WaitSwitch *int `pulumi:"waitSwitch"`
 	// Zone information, this parameter defaults to, the system automatically selects an Availability Zone.
 	Zone *string `pulumi:"zone"`
 }
@@ -316,6 +324,8 @@ type ReadonlyInstanceState struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// Security groups to use.
 	SecurityGroups pulumi.StringArrayInput
+	// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
+	SlaveDeployMode pulumi.IntPtrInput
 	// Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
 	Status pulumi.IntPtrInput
 	// Private network ID. If `vpcId` is set, this value is required.
@@ -328,6 +338,8 @@ type ReadonlyInstanceState struct {
 	VolumeSize pulumi.IntPtrInput
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
 	VpcId pulumi.StringPtrInput
+	// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+	WaitSwitch pulumi.IntPtrInput
 	// Zone information, this parameter defaults to, the system automatically selects an Availability Zone.
 	Zone pulumi.StringPtrInput
 }
@@ -373,6 +385,8 @@ type readonlyInstanceArgs struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// Security groups to use.
 	SecurityGroups []string `pulumi:"securityGroups"`
+	// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
+	SlaveDeployMode *int `pulumi:"slaveDeployMode"`
 	// Private network ID. If `vpcId` is set, this value is required.
 	SubnetId *string `pulumi:"subnetId"`
 	// Instance tags.
@@ -381,6 +395,8 @@ type readonlyInstanceArgs struct {
 	VolumeSize int `pulumi:"volumeSize"`
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
 	VpcId *string `pulumi:"vpcId"`
+	// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+	WaitSwitch *int `pulumi:"waitSwitch"`
 	// Zone information, this parameter defaults to, the system automatically selects an Availability Zone.
 	Zone *string `pulumi:"zone"`
 }
@@ -423,6 +439,8 @@ type ReadonlyInstanceArgs struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// Security groups to use.
 	SecurityGroups pulumi.StringArrayInput
+	// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
+	SlaveDeployMode pulumi.IntPtrInput
 	// Private network ID. If `vpcId` is set, this value is required.
 	SubnetId pulumi.StringPtrInput
 	// Instance tags.
@@ -431,6 +449,8 @@ type ReadonlyInstanceArgs struct {
 	VolumeSize pulumi.IntInput
 	// ID of VPC, which can be modified once every 24 hours and can't be removed.
 	VpcId pulumi.StringPtrInput
+	// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+	WaitSwitch pulumi.IntPtrInput
 	// Zone information, this parameter defaults to, the system automatically selects an Availability Zone.
 	Zone pulumi.StringPtrInput
 }
@@ -616,6 +636,11 @@ func (o ReadonlyInstanceOutput) SecurityGroups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringArrayOutput { return v.SecurityGroups }).(pulumi.StringArrayOutput)
 }
 
+// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
+func (o ReadonlyInstanceOutput) SlaveDeployMode() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.SlaveDeployMode }).(pulumi.IntPtrOutput)
+}
+
 // Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
 func (o ReadonlyInstanceOutput) Status() pulumi.IntOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntOutput { return v.Status }).(pulumi.IntOutput)
@@ -644,6 +669,11 @@ func (o ReadonlyInstanceOutput) VolumeSize() pulumi.IntOutput {
 // ID of VPC, which can be modified once every 24 hours and can't be removed.
 func (o ReadonlyInstanceOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+func (o ReadonlyInstanceOutput) WaitSwitch() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.WaitSwitch }).(pulumi.IntPtrOutput)
 }
 
 // Zone information, this parameter defaults to, the system automatically selects an Availability Zone.

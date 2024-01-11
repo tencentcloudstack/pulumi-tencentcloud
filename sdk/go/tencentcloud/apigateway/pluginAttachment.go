@@ -19,17 +19,98 @@ import (
 // package main
 //
 // import (
+// 	"encoding/json"
+//
+// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
 // 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewPluginAttachment(ctx, "pluginAttachment", &ApiGateway.PluginAttachmentArgs{
-// 			ApiId:           pulumi.String("api-6tfrdysk"),
-// 			EnvironmentName: pulumi.String("test"),
-// 			PluginId:        pulumi.String("plugin-ny74siyz"),
-// 			ServiceId:       pulumi.String("service-n1mgl0sq"),
+// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
+// 			"type":   "white_list",
+// 			"blocks": "1.1.1.1",
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		json0 := string(tmpJSON0)
+// 		examplePlugin, err := ApiGateway.NewPlugin(ctx, "examplePlugin", &ApiGateway.PluginArgs{
+// 			PluginName:  pulumi.String("tf-example"),
+// 			PluginType:  pulumi.String("IPControl"),
+// 			PluginData:  pulumi.String(json0),
+// 			Description: pulumi.String("desc."),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleService, err := ApiGateway.NewService(ctx, "exampleService", &ApiGateway.ServiceArgs{
+// 			ServiceName: pulumi.String("tf_example_service"),
+// 			Protocol:    pulumi.String("http&https"),
+// 			ServiceDesc: pulumi.String("your nice service"),
+// 			NetTypes: pulumi.StringArray{
+// 				pulumi.String("INNER"),
+// 				pulumi.String("OUTER"),
+// 			},
+// 			IpVersion: pulumi.String("IPv4"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleApi, err := ApiGateway.NewApi(ctx, "exampleApi", &ApiGateway.ApiArgs{
+// 			ServiceId:           exampleService.ID(),
+// 			ApiName:             pulumi.String("tf_example_api"),
+// 			ApiDesc:             pulumi.String("desc."),
+// 			AuthType:            pulumi.String("APP"),
+// 			Protocol:            pulumi.String("HTTP"),
+// 			EnableCors:          pulumi.Bool(true),
+// 			RequestConfigPath:   pulumi.String("/user/info"),
+// 			RequestConfigMethod: pulumi.String("GET"),
+// 			RequestParameters: apigateway.ApiRequestParameterArray{
+// 				&apigateway.ApiRequestParameterArgs{
+// 					Name:         pulumi.String("name"),
+// 					Position:     pulumi.String("QUERY"),
+// 					Type:         pulumi.String("string"),
+// 					Desc:         pulumi.String("desc."),
+// 					DefaultValue: pulumi.String("terraform"),
+// 					Required:     pulumi.Bool(true),
+// 				},
+// 			},
+// 			ServiceConfigType:      pulumi.String("HTTP"),
+// 			ServiceConfigTimeout:   pulumi.Int(15),
+// 			ServiceConfigUrl:       pulumi.String("https://www.qq.com"),
+// 			ServiceConfigPath:      pulumi.String("/user"),
+// 			ServiceConfigMethod:    pulumi.String("GET"),
+// 			ResponseType:           pulumi.String("HTML"),
+// 			ResponseSuccessExample: pulumi.String("success"),
+// 			ResponseFailExample:    pulumi.String("fail"),
+// 			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
+// 				&apigateway.ApiResponseErrorCodeArgs{
+// 					Code:          pulumi.Int(400),
+// 					Msg:           pulumi.String("system error msg."),
+// 					Desc:          pulumi.String("system error desc."),
+// 					ConvertedCode: pulumi.Int(407),
+// 					NeedConvert:   pulumi.Bool(true),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleServiceRelease, err := ApiGateway.NewServiceRelease(ctx, "exampleServiceRelease", &ApiGateway.ServiceReleaseArgs{
+// 			ServiceId:       exampleApi.ServiceId,
+// 			EnvironmentName: pulumi.String("release"),
+// 			ReleaseDesc:     pulumi.String("desc."),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = ApiGateway.NewPluginAttachment(ctx, "examplePluginAttachment", &ApiGateway.PluginAttachmentArgs{
+// 			PluginId:        examplePlugin.ID(),
+// 			ServiceId:       exampleServiceRelease.ServiceId,
+// 			ApiId:           exampleApi.ID(),
+// 			EnvironmentName: pulumi.String("release"),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -44,7 +125,7 @@ import (
 // apiGateway plugin_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:ApiGateway/pluginAttachment:PluginAttachment plugin_attachment pluginId#serviceId#environmentName#apiId
+//  $ pulumi import tencentcloud:ApiGateway/pluginAttachment:PluginAttachment example plugin-hnqntalp#service-q3f533ja#release#api-62ud9woa
 // ```
 type PluginAttachment struct {
 	pulumi.CustomResourceState

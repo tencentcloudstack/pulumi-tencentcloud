@@ -119,6 +119,26 @@ import * as utilities from "../utilities";
  *     useTkeDefault: true,
  * });
  * ```
+ * ### Use OIDC Config
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const testAuthAttach = new tencentcloud.kubernetes.AuthAttachment("testAuthAttach", {
+ *     clusterId: tencentcloud_kubernetes_cluster.managed_cluster.id,
+ *     useTkeDefault: true,
+ *     autoCreateDiscoveryAnonymousAuth: true,
+ *     autoCreateOidcConfig: true,
+ *     autoInstallPodIdentityWebhookAddon: true,
+ * });
+ * const oidcConfig = tencentcloud.Cam.getOidcConfig({
+ *     name: tencentcloud_kubernetes_cluster.managed_cluster.id,
+ * });
+ * export const identityKey = oidcConfig.then(oidcConfig => oidcConfig.identityKey);
+ * export const identityUrl = oidcConfig.then(oidcConfig => oidcConfig.identityUrl);
+ * ```
  */
 export class AuthAttachment extends pulumi.CustomResource {
     /**
@@ -149,9 +169,21 @@ export class AuthAttachment extends pulumi.CustomResource {
     }
 
     /**
+     * Creating ClientId of the identity provider.
+     */
+    public readonly autoCreateClientIds!: pulumi.Output<string[]>;
+    /**
      * If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
      */
     public readonly autoCreateDiscoveryAnonymousAuth!: pulumi.Output<boolean | undefined>;
+    /**
+     * Creating an identity provider.
+     */
+    public readonly autoCreateOidcConfig!: pulumi.Output<boolean>;
+    /**
+     * Creating the PodIdentityWebhook component. if `autoCreateOidcConfig` is true, this field must set true.
+     */
+    public readonly autoInstallPodIdentityWebhookAddon!: pulumi.Output<boolean>;
     /**
      * ID of clusters.
      */
@@ -190,7 +222,10 @@ export class AuthAttachment extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as AuthAttachmentState | undefined;
+            resourceInputs["autoCreateClientIds"] = state ? state.autoCreateClientIds : undefined;
             resourceInputs["autoCreateDiscoveryAnonymousAuth"] = state ? state.autoCreateDiscoveryAnonymousAuth : undefined;
+            resourceInputs["autoCreateOidcConfig"] = state ? state.autoCreateOidcConfig : undefined;
+            resourceInputs["autoInstallPodIdentityWebhookAddon"] = state ? state.autoInstallPodIdentityWebhookAddon : undefined;
             resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["issuer"] = state ? state.issuer : undefined;
             resourceInputs["jwksUri"] = state ? state.jwksUri : undefined;
@@ -202,7 +237,10 @@ export class AuthAttachment extends pulumi.CustomResource {
             if ((!args || args.clusterId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'clusterId'");
             }
+            resourceInputs["autoCreateClientIds"] = args ? args.autoCreateClientIds : undefined;
             resourceInputs["autoCreateDiscoveryAnonymousAuth"] = args ? args.autoCreateDiscoveryAnonymousAuth : undefined;
+            resourceInputs["autoCreateOidcConfig"] = args ? args.autoCreateOidcConfig : undefined;
+            resourceInputs["autoInstallPodIdentityWebhookAddon"] = args ? args.autoInstallPodIdentityWebhookAddon : undefined;
             resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["issuer"] = args ? args.issuer : undefined;
             resourceInputs["jwksUri"] = args ? args.jwksUri : undefined;
@@ -220,9 +258,21 @@ export class AuthAttachment extends pulumi.CustomResource {
  */
 export interface AuthAttachmentState {
     /**
+     * Creating ClientId of the identity provider.
+     */
+    autoCreateClientIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
      */
     autoCreateDiscoveryAnonymousAuth?: pulumi.Input<boolean>;
+    /**
+     * Creating an identity provider.
+     */
+    autoCreateOidcConfig?: pulumi.Input<boolean>;
+    /**
+     * Creating the PodIdentityWebhook component. if `autoCreateOidcConfig` is true, this field must set true.
+     */
+    autoInstallPodIdentityWebhookAddon?: pulumi.Input<boolean>;
     /**
      * ID of clusters.
      */
@@ -254,9 +304,21 @@ export interface AuthAttachmentState {
  */
 export interface AuthAttachmentArgs {
     /**
+     * Creating ClientId of the identity provider.
+     */
+    autoCreateClientIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
      */
     autoCreateDiscoveryAnonymousAuth?: pulumi.Input<boolean>;
+    /**
+     * Creating an identity provider.
+     */
+    autoCreateOidcConfig?: pulumi.Input<boolean>;
+    /**
+     * Creating the PodIdentityWebhook component. if `autoCreateOidcConfig` is true, this field must set true.
+     */
+    autoInstallPodIdentityWebhookAddon?: pulumi.Input<boolean>;
     /**
      * ID of clusters.
      */

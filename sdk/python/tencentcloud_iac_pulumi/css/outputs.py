@@ -7,11 +7,37 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
 
 __all__ = [
     'PlayDomainCertAttachmentDomainInfo',
     'PullStreamTaskWatermarkList',
+    'RecordTemplateAacParam',
+    'RecordTemplateFlvParam',
+    'RecordTemplateFlvSpecialParam',
+    'RecordTemplateHlsParam',
+    'RecordTemplateHlsSpecialParam',
+    'RecordTemplateMp3Param',
+    'RecordTemplateMp4Param',
+    'StreamMonitorInputList',
+    'StreamMonitorNotifyPolicy',
+    'StreamMonitorOutputInfo',
+    'GetBackupStreamStreamInfoListResult',
+    'GetBackupStreamStreamInfoListBackupListResult',
+    'GetDeliverLogDownListLogInfoListResult',
     'GetDomainsDomainListResult',
+    'GetMonitorReportDiagnoseResultResult',
+    'GetMonitorReportMpsResultResult',
+    'GetPadTemplatesTemplateResult',
+    'GetPullStreamTaskStatusTaskStatusInfoResult',
+    'GetStreamMonitorListLiveStreamMonitorResult',
+    'GetStreamMonitorListLiveStreamMonitorInputListResult',
+    'GetStreamMonitorListLiveStreamMonitorNotifyPolicyResult',
+    'GetStreamMonitorListLiveStreamMonitorOutputInfoResult',
+    'GetTimeShiftRecordDetailRecordListResult',
+    'GetTimeShiftStreamListStreamListResult',
+    'GetWatermarksWatermarkListResult',
+    'GetXp2pDetailInfoListDataInfoListResult',
 ]
 
 @pulumi.output_type
@@ -155,6 +181,932 @@ class PullStreamTaskWatermarkList(dict):
 
 
 @pulumi.output_type
+class RecordTemplateAacParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "classId":
+            suggest = "class_id"
+        elif key == "recordInterval":
+            suggest = "record_interval"
+        elif key == "storageMode":
+            suggest = "storage_mode"
+        elif key == "storageTime":
+            suggest = "storage_time"
+        elif key == "vodFileName":
+            suggest = "vod_file_name"
+        elif key == "vodSubAppId":
+            suggest = "vod_sub_app_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RecordTemplateAacParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RecordTemplateAacParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RecordTemplateAacParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 class_id: Optional[int] = None,
+                 enable: Optional[int] = None,
+                 procedure: Optional[str] = None,
+                 record_interval: Optional[int] = None,
+                 storage_mode: Optional[str] = None,
+                 storage_time: Optional[int] = None,
+                 vod_file_name: Optional[str] = None,
+                 vod_sub_app_id: Optional[int] = None):
+        if class_id is not None:
+            pulumi.set(__self__, "class_id", class_id)
+        if enable is not None:
+            pulumi.set(__self__, "enable", enable)
+        if procedure is not None:
+            pulumi.set(__self__, "procedure", procedure)
+        if record_interval is not None:
+            pulumi.set(__self__, "record_interval", record_interval)
+        if storage_mode is not None:
+            pulumi.set(__self__, "storage_mode", storage_mode)
+        if storage_time is not None:
+            pulumi.set(__self__, "storage_time", storage_time)
+        if vod_file_name is not None:
+            pulumi.set(__self__, "vod_file_name", vod_file_name)
+        if vod_sub_app_id is not None:
+            pulumi.set(__self__, "vod_sub_app_id", vod_sub_app_id)
+
+    @property
+    @pulumi.getter(name="classId")
+    def class_id(self) -> Optional[int]:
+        return pulumi.get(self, "class_id")
+
+    @property
+    @pulumi.getter
+    def enable(self) -> Optional[int]:
+        return pulumi.get(self, "enable")
+
+    @property
+    @pulumi.getter
+    def procedure(self) -> Optional[str]:
+        return pulumi.get(self, "procedure")
+
+    @property
+    @pulumi.getter(name="recordInterval")
+    def record_interval(self) -> Optional[int]:
+        return pulumi.get(self, "record_interval")
+
+    @property
+    @pulumi.getter(name="storageMode")
+    def storage_mode(self) -> Optional[str]:
+        return pulumi.get(self, "storage_mode")
+
+    @property
+    @pulumi.getter(name="storageTime")
+    def storage_time(self) -> Optional[int]:
+        return pulumi.get(self, "storage_time")
+
+    @property
+    @pulumi.getter(name="vodFileName")
+    def vod_file_name(self) -> Optional[str]:
+        return pulumi.get(self, "vod_file_name")
+
+    @property
+    @pulumi.getter(name="vodSubAppId")
+    def vod_sub_app_id(self) -> Optional[int]:
+        return pulumi.get(self, "vod_sub_app_id")
+
+
+@pulumi.output_type
+class RecordTemplateFlvParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "classId":
+            suggest = "class_id"
+        elif key == "recordInterval":
+            suggest = "record_interval"
+        elif key == "storageMode":
+            suggest = "storage_mode"
+        elif key == "storageTime":
+            suggest = "storage_time"
+        elif key == "vodFileName":
+            suggest = "vod_file_name"
+        elif key == "vodSubAppId":
+            suggest = "vod_sub_app_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RecordTemplateFlvParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RecordTemplateFlvParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RecordTemplateFlvParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 class_id: Optional[int] = None,
+                 enable: Optional[int] = None,
+                 procedure: Optional[str] = None,
+                 record_interval: Optional[int] = None,
+                 storage_mode: Optional[str] = None,
+                 storage_time: Optional[int] = None,
+                 vod_file_name: Optional[str] = None,
+                 vod_sub_app_id: Optional[int] = None):
+        if class_id is not None:
+            pulumi.set(__self__, "class_id", class_id)
+        if enable is not None:
+            pulumi.set(__self__, "enable", enable)
+        if procedure is not None:
+            pulumi.set(__self__, "procedure", procedure)
+        if record_interval is not None:
+            pulumi.set(__self__, "record_interval", record_interval)
+        if storage_mode is not None:
+            pulumi.set(__self__, "storage_mode", storage_mode)
+        if storage_time is not None:
+            pulumi.set(__self__, "storage_time", storage_time)
+        if vod_file_name is not None:
+            pulumi.set(__self__, "vod_file_name", vod_file_name)
+        if vod_sub_app_id is not None:
+            pulumi.set(__self__, "vod_sub_app_id", vod_sub_app_id)
+
+    @property
+    @pulumi.getter(name="classId")
+    def class_id(self) -> Optional[int]:
+        return pulumi.get(self, "class_id")
+
+    @property
+    @pulumi.getter
+    def enable(self) -> Optional[int]:
+        return pulumi.get(self, "enable")
+
+    @property
+    @pulumi.getter
+    def procedure(self) -> Optional[str]:
+        return pulumi.get(self, "procedure")
+
+    @property
+    @pulumi.getter(name="recordInterval")
+    def record_interval(self) -> Optional[int]:
+        return pulumi.get(self, "record_interval")
+
+    @property
+    @pulumi.getter(name="storageMode")
+    def storage_mode(self) -> Optional[str]:
+        return pulumi.get(self, "storage_mode")
+
+    @property
+    @pulumi.getter(name="storageTime")
+    def storage_time(self) -> Optional[int]:
+        return pulumi.get(self, "storage_time")
+
+    @property
+    @pulumi.getter(name="vodFileName")
+    def vod_file_name(self) -> Optional[str]:
+        return pulumi.get(self, "vod_file_name")
+
+    @property
+    @pulumi.getter(name="vodSubAppId")
+    def vod_sub_app_id(self) -> Optional[int]:
+        return pulumi.get(self, "vod_sub_app_id")
+
+
+@pulumi.output_type
+class RecordTemplateFlvSpecialParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "uploadInRecording":
+            suggest = "upload_in_recording"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RecordTemplateFlvSpecialParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RecordTemplateFlvSpecialParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RecordTemplateFlvSpecialParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 upload_in_recording: Optional[bool] = None):
+        if upload_in_recording is not None:
+            pulumi.set(__self__, "upload_in_recording", upload_in_recording)
+
+    @property
+    @pulumi.getter(name="uploadInRecording")
+    def upload_in_recording(self) -> Optional[bool]:
+        return pulumi.get(self, "upload_in_recording")
+
+
+@pulumi.output_type
+class RecordTemplateHlsParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "classId":
+            suggest = "class_id"
+        elif key == "recordInterval":
+            suggest = "record_interval"
+        elif key == "storageMode":
+            suggest = "storage_mode"
+        elif key == "storageTime":
+            suggest = "storage_time"
+        elif key == "vodFileName":
+            suggest = "vod_file_name"
+        elif key == "vodSubAppId":
+            suggest = "vod_sub_app_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RecordTemplateHlsParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RecordTemplateHlsParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RecordTemplateHlsParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 class_id: Optional[int] = None,
+                 enable: Optional[int] = None,
+                 procedure: Optional[str] = None,
+                 record_interval: Optional[int] = None,
+                 storage_mode: Optional[str] = None,
+                 storage_time: Optional[int] = None,
+                 vod_file_name: Optional[str] = None,
+                 vod_sub_app_id: Optional[int] = None):
+        if class_id is not None:
+            pulumi.set(__self__, "class_id", class_id)
+        if enable is not None:
+            pulumi.set(__self__, "enable", enable)
+        if procedure is not None:
+            pulumi.set(__self__, "procedure", procedure)
+        if record_interval is not None:
+            pulumi.set(__self__, "record_interval", record_interval)
+        if storage_mode is not None:
+            pulumi.set(__self__, "storage_mode", storage_mode)
+        if storage_time is not None:
+            pulumi.set(__self__, "storage_time", storage_time)
+        if vod_file_name is not None:
+            pulumi.set(__self__, "vod_file_name", vod_file_name)
+        if vod_sub_app_id is not None:
+            pulumi.set(__self__, "vod_sub_app_id", vod_sub_app_id)
+
+    @property
+    @pulumi.getter(name="classId")
+    def class_id(self) -> Optional[int]:
+        return pulumi.get(self, "class_id")
+
+    @property
+    @pulumi.getter
+    def enable(self) -> Optional[int]:
+        return pulumi.get(self, "enable")
+
+    @property
+    @pulumi.getter
+    def procedure(self) -> Optional[str]:
+        return pulumi.get(self, "procedure")
+
+    @property
+    @pulumi.getter(name="recordInterval")
+    def record_interval(self) -> Optional[int]:
+        return pulumi.get(self, "record_interval")
+
+    @property
+    @pulumi.getter(name="storageMode")
+    def storage_mode(self) -> Optional[str]:
+        return pulumi.get(self, "storage_mode")
+
+    @property
+    @pulumi.getter(name="storageTime")
+    def storage_time(self) -> Optional[int]:
+        return pulumi.get(self, "storage_time")
+
+    @property
+    @pulumi.getter(name="vodFileName")
+    def vod_file_name(self) -> Optional[str]:
+        return pulumi.get(self, "vod_file_name")
+
+    @property
+    @pulumi.getter(name="vodSubAppId")
+    def vod_sub_app_id(self) -> Optional[int]:
+        return pulumi.get(self, "vod_sub_app_id")
+
+
+@pulumi.output_type
+class RecordTemplateHlsSpecialParam(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "flowContinueDuration":
+            suggest = "flow_continue_duration"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RecordTemplateHlsSpecialParam. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RecordTemplateHlsSpecialParam.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RecordTemplateHlsSpecialParam.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 flow_continue_duration: Optional[int] = None):
+        if flow_continue_duration is not None:
+            pulumi.set(__self__, "flow_continue_duration", flow_continue_duration)
+
+    @property
+    @pulumi.getter(name="flowContinueDuration")
+    def flow_continue_duration(self) -> Optional[int]:
+        return pulumi.get(self, "flow_continue_duration")
+
+
+@pulumi.output_type
+class RecordTemplateMp3Param(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "classId":
+            suggest = "class_id"
+        elif key == "recordInterval":
+            suggest = "record_interval"
+        elif key == "storageMode":
+            suggest = "storage_mode"
+        elif key == "storageTime":
+            suggest = "storage_time"
+        elif key == "vodFileName":
+            suggest = "vod_file_name"
+        elif key == "vodSubAppId":
+            suggest = "vod_sub_app_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RecordTemplateMp3Param. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RecordTemplateMp3Param.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RecordTemplateMp3Param.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 class_id: Optional[int] = None,
+                 enable: Optional[int] = None,
+                 procedure: Optional[str] = None,
+                 record_interval: Optional[int] = None,
+                 storage_mode: Optional[str] = None,
+                 storage_time: Optional[int] = None,
+                 vod_file_name: Optional[str] = None,
+                 vod_sub_app_id: Optional[int] = None):
+        if class_id is not None:
+            pulumi.set(__self__, "class_id", class_id)
+        if enable is not None:
+            pulumi.set(__self__, "enable", enable)
+        if procedure is not None:
+            pulumi.set(__self__, "procedure", procedure)
+        if record_interval is not None:
+            pulumi.set(__self__, "record_interval", record_interval)
+        if storage_mode is not None:
+            pulumi.set(__self__, "storage_mode", storage_mode)
+        if storage_time is not None:
+            pulumi.set(__self__, "storage_time", storage_time)
+        if vod_file_name is not None:
+            pulumi.set(__self__, "vod_file_name", vod_file_name)
+        if vod_sub_app_id is not None:
+            pulumi.set(__self__, "vod_sub_app_id", vod_sub_app_id)
+
+    @property
+    @pulumi.getter(name="classId")
+    def class_id(self) -> Optional[int]:
+        return pulumi.get(self, "class_id")
+
+    @property
+    @pulumi.getter
+    def enable(self) -> Optional[int]:
+        return pulumi.get(self, "enable")
+
+    @property
+    @pulumi.getter
+    def procedure(self) -> Optional[str]:
+        return pulumi.get(self, "procedure")
+
+    @property
+    @pulumi.getter(name="recordInterval")
+    def record_interval(self) -> Optional[int]:
+        return pulumi.get(self, "record_interval")
+
+    @property
+    @pulumi.getter(name="storageMode")
+    def storage_mode(self) -> Optional[str]:
+        return pulumi.get(self, "storage_mode")
+
+    @property
+    @pulumi.getter(name="storageTime")
+    def storage_time(self) -> Optional[int]:
+        return pulumi.get(self, "storage_time")
+
+    @property
+    @pulumi.getter(name="vodFileName")
+    def vod_file_name(self) -> Optional[str]:
+        return pulumi.get(self, "vod_file_name")
+
+    @property
+    @pulumi.getter(name="vodSubAppId")
+    def vod_sub_app_id(self) -> Optional[int]:
+        return pulumi.get(self, "vod_sub_app_id")
+
+
+@pulumi.output_type
+class RecordTemplateMp4Param(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "classId":
+            suggest = "class_id"
+        elif key == "recordInterval":
+            suggest = "record_interval"
+        elif key == "storageMode":
+            suggest = "storage_mode"
+        elif key == "storageTime":
+            suggest = "storage_time"
+        elif key == "vodFileName":
+            suggest = "vod_file_name"
+        elif key == "vodSubAppId":
+            suggest = "vod_sub_app_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RecordTemplateMp4Param. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RecordTemplateMp4Param.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RecordTemplateMp4Param.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 class_id: Optional[int] = None,
+                 enable: Optional[int] = None,
+                 procedure: Optional[str] = None,
+                 record_interval: Optional[int] = None,
+                 storage_mode: Optional[str] = None,
+                 storage_time: Optional[int] = None,
+                 vod_file_name: Optional[str] = None,
+                 vod_sub_app_id: Optional[int] = None):
+        if class_id is not None:
+            pulumi.set(__self__, "class_id", class_id)
+        if enable is not None:
+            pulumi.set(__self__, "enable", enable)
+        if procedure is not None:
+            pulumi.set(__self__, "procedure", procedure)
+        if record_interval is not None:
+            pulumi.set(__self__, "record_interval", record_interval)
+        if storage_mode is not None:
+            pulumi.set(__self__, "storage_mode", storage_mode)
+        if storage_time is not None:
+            pulumi.set(__self__, "storage_time", storage_time)
+        if vod_file_name is not None:
+            pulumi.set(__self__, "vod_file_name", vod_file_name)
+        if vod_sub_app_id is not None:
+            pulumi.set(__self__, "vod_sub_app_id", vod_sub_app_id)
+
+    @property
+    @pulumi.getter(name="classId")
+    def class_id(self) -> Optional[int]:
+        return pulumi.get(self, "class_id")
+
+    @property
+    @pulumi.getter
+    def enable(self) -> Optional[int]:
+        return pulumi.get(self, "enable")
+
+    @property
+    @pulumi.getter
+    def procedure(self) -> Optional[str]:
+        return pulumi.get(self, "procedure")
+
+    @property
+    @pulumi.getter(name="recordInterval")
+    def record_interval(self) -> Optional[int]:
+        return pulumi.get(self, "record_interval")
+
+    @property
+    @pulumi.getter(name="storageMode")
+    def storage_mode(self) -> Optional[str]:
+        return pulumi.get(self, "storage_mode")
+
+    @property
+    @pulumi.getter(name="storageTime")
+    def storage_time(self) -> Optional[int]:
+        return pulumi.get(self, "storage_time")
+
+    @property
+    @pulumi.getter(name="vodFileName")
+    def vod_file_name(self) -> Optional[str]:
+        return pulumi.get(self, "vod_file_name")
+
+    @property
+    @pulumi.getter(name="vodSubAppId")
+    def vod_sub_app_id(self) -> Optional[int]:
+        return pulumi.get(self, "vod_sub_app_id")
+
+
+@pulumi.output_type
+class StreamMonitorInputList(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "inputStreamName":
+            suggest = "input_stream_name"
+        elif key == "inputApp":
+            suggest = "input_app"
+        elif key == "inputDomain":
+            suggest = "input_domain"
+        elif key == "inputUrl":
+            suggest = "input_url"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in StreamMonitorInputList. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        StreamMonitorInputList.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        StreamMonitorInputList.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 input_stream_name: str,
+                 description: Optional[str] = None,
+                 input_app: Optional[str] = None,
+                 input_domain: Optional[str] = None,
+                 input_url: Optional[str] = None):
+        """
+        :param str input_stream_name: Wait monitor input stream name.limit 256 bytes.
+        :param str description: Description content.limit 256 bytes.
+        :param str input_app: Wait monitor input push path.limit 32 bytes.
+        :param str input_domain: Wait monitor input push domain.limit 128 bytes.
+        :param str input_url: Wait monitor input stream push url.
+        """
+        pulumi.set(__self__, "input_stream_name", input_stream_name)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if input_app is not None:
+            pulumi.set(__self__, "input_app", input_app)
+        if input_domain is not None:
+            pulumi.set(__self__, "input_domain", input_domain)
+        if input_url is not None:
+            pulumi.set(__self__, "input_url", input_url)
+
+    @property
+    @pulumi.getter(name="inputStreamName")
+    def input_stream_name(self) -> str:
+        """
+        Wait monitor input stream name.limit 256 bytes.
+        """
+        return pulumi.get(self, "input_stream_name")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        """
+        Description content.limit 256 bytes.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="inputApp")
+    def input_app(self) -> Optional[str]:
+        """
+        Wait monitor input push path.limit 32 bytes.
+        """
+        return pulumi.get(self, "input_app")
+
+    @property
+    @pulumi.getter(name="inputDomain")
+    def input_domain(self) -> Optional[str]:
+        """
+        Wait monitor input push domain.limit 128 bytes.
+        """
+        return pulumi.get(self, "input_domain")
+
+    @property
+    @pulumi.getter(name="inputUrl")
+    def input_url(self) -> Optional[str]:
+        """
+        Wait monitor input stream push url.
+        """
+        return pulumi.get(self, "input_url")
+
+
+@pulumi.output_type
+class StreamMonitorNotifyPolicy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "callbackUrl":
+            suggest = "callback_url"
+        elif key == "notifyPolicyType":
+            suggest = "notify_policy_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in StreamMonitorNotifyPolicy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        StreamMonitorNotifyPolicy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        StreamMonitorNotifyPolicy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 callback_url: Optional[str] = None,
+                 notify_policy_type: Optional[int] = None):
+        """
+        :param str callback_url: Callback url.limit [0,512].only http or https.
+        :param int notify_policy_type: Notify policy type.0: not notify.1: use global policy.
+        """
+        if callback_url is not None:
+            pulumi.set(__self__, "callback_url", callback_url)
+        if notify_policy_type is not None:
+            pulumi.set(__self__, "notify_policy_type", notify_policy_type)
+
+    @property
+    @pulumi.getter(name="callbackUrl")
+    def callback_url(self) -> Optional[str]:
+        """
+        Callback url.limit [0,512].only http or https.
+        """
+        return pulumi.get(self, "callback_url")
+
+    @property
+    @pulumi.getter(name="notifyPolicyType")
+    def notify_policy_type(self) -> Optional[int]:
+        """
+        Notify policy type.0: not notify.1: use global policy.
+        """
+        return pulumi.get(self, "notify_policy_type")
+
+
+@pulumi.output_type
+class StreamMonitorOutputInfo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "outputStreamHeight":
+            suggest = "output_stream_height"
+        elif key == "outputStreamWidth":
+            suggest = "output_stream_width"
+        elif key == "outputApp":
+            suggest = "output_app"
+        elif key == "outputDomain":
+            suggest = "output_domain"
+        elif key == "outputStreamName":
+            suggest = "output_stream_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in StreamMonitorOutputInfo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        StreamMonitorOutputInfo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        StreamMonitorOutputInfo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 output_stream_height: int,
+                 output_stream_width: int,
+                 output_app: Optional[str] = None,
+                 output_domain: Optional[str] = None,
+                 output_stream_name: Optional[str] = None):
+        """
+        :param int output_stream_height: Monitor task output height, limit[1, 1080].
+        :param int output_stream_width: Output stream width, limit[1, 1920].
+        :param str output_app: Monitor task play path.limit 32 bytes.
+        :param str output_domain: Monitor task output play domain.limit 128 bytes.
+        :param str output_stream_name: Monitor task output stream name.limit 256 bytes.
+        """
+        pulumi.set(__self__, "output_stream_height", output_stream_height)
+        pulumi.set(__self__, "output_stream_width", output_stream_width)
+        if output_app is not None:
+            pulumi.set(__self__, "output_app", output_app)
+        if output_domain is not None:
+            pulumi.set(__self__, "output_domain", output_domain)
+        if output_stream_name is not None:
+            pulumi.set(__self__, "output_stream_name", output_stream_name)
+
+    @property
+    @pulumi.getter(name="outputStreamHeight")
+    def output_stream_height(self) -> int:
+        """
+        Monitor task output height, limit[1, 1080].
+        """
+        return pulumi.get(self, "output_stream_height")
+
+    @property
+    @pulumi.getter(name="outputStreamWidth")
+    def output_stream_width(self) -> int:
+        """
+        Output stream width, limit[1, 1920].
+        """
+        return pulumi.get(self, "output_stream_width")
+
+    @property
+    @pulumi.getter(name="outputApp")
+    def output_app(self) -> Optional[str]:
+        """
+        Monitor task play path.limit 32 bytes.
+        """
+        return pulumi.get(self, "output_app")
+
+    @property
+    @pulumi.getter(name="outputDomain")
+    def output_domain(self) -> Optional[str]:
+        """
+        Monitor task output play domain.limit 128 bytes.
+        """
+        return pulumi.get(self, "output_domain")
+
+    @property
+    @pulumi.getter(name="outputStreamName")
+    def output_stream_name(self) -> Optional[str]:
+        """
+        Monitor task output stream name.limit 256 bytes.
+        """
+        return pulumi.get(self, "output_stream_name")
+
+
+@pulumi.output_type
+class GetBackupStreamStreamInfoListResult(dict):
+    def __init__(__self__, *,
+                 backup_lists: Sequence['outputs.GetBackupStreamStreamInfoListBackupListResult'],
+                 host_group_name: str,
+                 optimal_enable: int,
+                 stream_name: str):
+        """
+        :param Sequence['GetBackupStreamStreamInfoListBackupListArgs'] backup_lists: Backup stream info.
+        :param str host_group_name: Group name.
+        :param int optimal_enable: Optimal switch, 1-enable, 0-disable.
+        :param str stream_name: Stream id.
+        """
+        pulumi.set(__self__, "backup_lists", backup_lists)
+        pulumi.set(__self__, "host_group_name", host_group_name)
+        pulumi.set(__self__, "optimal_enable", optimal_enable)
+        pulumi.set(__self__, "stream_name", stream_name)
+
+    @property
+    @pulumi.getter(name="backupLists")
+    def backup_lists(self) -> Sequence['outputs.GetBackupStreamStreamInfoListBackupListResult']:
+        """
+        Backup stream info.
+        """
+        return pulumi.get(self, "backup_lists")
+
+    @property
+    @pulumi.getter(name="hostGroupName")
+    def host_group_name(self) -> str:
+        """
+        Group name.
+        """
+        return pulumi.get(self, "host_group_name")
+
+    @property
+    @pulumi.getter(name="optimalEnable")
+    def optimal_enable(self) -> int:
+        """
+        Optimal switch, 1-enable, 0-disable.
+        """
+        return pulumi.get(self, "optimal_enable")
+
+    @property
+    @pulumi.getter(name="streamName")
+    def stream_name(self) -> str:
+        """
+        Stream id.
+        """
+        return pulumi.get(self, "stream_name")
+
+
+@pulumi.output_type
+class GetBackupStreamStreamInfoListBackupListResult(dict):
+    def __init__(__self__, *,
+                 app_name: str,
+                 domain_name: str,
+                 master_flag: int,
+                 publish_time: str,
+                 source_from: str,
+                 upstream_sequence: str):
+        """
+        :param str app_name: Push path.
+        :param str domain_name: Push domain.
+        :param int master_flag: Master stream flag.
+        :param str publish_time: UTC time, eg, 2018-06-29T19:00:00Z.
+        :param str source_from: Source from.
+        :param str upstream_sequence: Push stream sequence.
+        """
+        pulumi.set(__self__, "app_name", app_name)
+        pulumi.set(__self__, "domain_name", domain_name)
+        pulumi.set(__self__, "master_flag", master_flag)
+        pulumi.set(__self__, "publish_time", publish_time)
+        pulumi.set(__self__, "source_from", source_from)
+        pulumi.set(__self__, "upstream_sequence", upstream_sequence)
+
+    @property
+    @pulumi.getter(name="appName")
+    def app_name(self) -> str:
+        """
+        Push path.
+        """
+        return pulumi.get(self, "app_name")
+
+    @property
+    @pulumi.getter(name="domainName")
+    def domain_name(self) -> str:
+        """
+        Push domain.
+        """
+        return pulumi.get(self, "domain_name")
+
+    @property
+    @pulumi.getter(name="masterFlag")
+    def master_flag(self) -> int:
+        """
+        Master stream flag.
+        """
+        return pulumi.get(self, "master_flag")
+
+    @property
+    @pulumi.getter(name="publishTime")
+    def publish_time(self) -> str:
+        """
+        UTC time, eg, 2018-06-29T19:00:00Z.
+        """
+        return pulumi.get(self, "publish_time")
+
+    @property
+    @pulumi.getter(name="sourceFrom")
+    def source_from(self) -> str:
+        """
+        Source from.
+        """
+        return pulumi.get(self, "source_from")
+
+    @property
+    @pulumi.getter(name="upstreamSequence")
+    def upstream_sequence(self) -> str:
+        """
+        Push stream sequence.
+        """
+        return pulumi.get(self, "upstream_sequence")
+
+
+@pulumi.output_type
+class GetDeliverLogDownListLogInfoListResult(dict):
+    def __init__(__self__, *,
+                 file_size: int,
+                 log_name: str,
+                 log_time: str,
+                 log_url: str):
+        pulumi.set(__self__, "file_size", file_size)
+        pulumi.set(__self__, "log_name", log_name)
+        pulumi.set(__self__, "log_time", log_time)
+        pulumi.set(__self__, "log_url", log_url)
+
+    @property
+    @pulumi.getter(name="fileSize")
+    def file_size(self) -> int:
+        return pulumi.get(self, "file_size")
+
+    @property
+    @pulumi.getter(name="logName")
+    def log_name(self) -> str:
+        return pulumi.get(self, "log_name")
+
+    @property
+    @pulumi.getter(name="logTime")
+    def log_time(self) -> str:
+        return pulumi.get(self, "log_time")
+
+    @property
+    @pulumi.getter(name="logUrl")
+    def log_url(self) -> str:
+        return pulumi.get(self, "log_url")
+
+
+@pulumi.output_type
 class GetDomainsDomainListResult(dict):
     def __init__(__self__, *,
                  b_c_name: int,
@@ -289,6 +1241,1014 @@ class GetDomainsDomainListResult(dict):
     def type(self) -> int:
         """
         Domain Type: 0: push stream. 1: Play.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetMonitorReportDiagnoseResultResult(dict):
+    def __init__(__self__, *,
+                 low_frame_rate_results: Sequence[str],
+                 stream_broken_results: Sequence[str],
+                 stream_format_results: Sequence[str]):
+        """
+        :param Sequence[str] low_frame_rate_results: The information about low frame rate.Note: This field may return null, indicating that no valid value was found.
+        :param Sequence[str] stream_broken_results: The information about the stream interruption.Note: This field may return null, indicating that no valid value was found.
+        :param Sequence[str] stream_format_results: The information about the stream format diagnosis.Note: This field may return null, indicating that no valid value was found.
+        """
+        pulumi.set(__self__, "low_frame_rate_results", low_frame_rate_results)
+        pulumi.set(__self__, "stream_broken_results", stream_broken_results)
+        pulumi.set(__self__, "stream_format_results", stream_format_results)
+
+    @property
+    @pulumi.getter(name="lowFrameRateResults")
+    def low_frame_rate_results(self) -> Sequence[str]:
+        """
+        The information about low frame rate.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "low_frame_rate_results")
+
+    @property
+    @pulumi.getter(name="streamBrokenResults")
+    def stream_broken_results(self) -> Sequence[str]:
+        """
+        The information about the stream interruption.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "stream_broken_results")
+
+    @property
+    @pulumi.getter(name="streamFormatResults")
+    def stream_format_results(self) -> Sequence[str]:
+        """
+        The information about the stream format diagnosis.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "stream_format_results")
+
+
+@pulumi.output_type
+class GetMonitorReportMpsResultResult(dict):
+    def __init__(__self__, *,
+                 ai_asr_results: Sequence[str],
+                 ai_ocr_results: Sequence[str]):
+        """
+        :param Sequence[str] ai_asr_results: The result of intelligent speech recognition.Note: This field may return null, indicating that no valid value was found.
+        :param Sequence[str] ai_ocr_results: The result of intelligent text recognition.Note: This field may return null, indicating that no valid value was found.
+        """
+        pulumi.set(__self__, "ai_asr_results", ai_asr_results)
+        pulumi.set(__self__, "ai_ocr_results", ai_ocr_results)
+
+    @property
+    @pulumi.getter(name="aiAsrResults")
+    def ai_asr_results(self) -> Sequence[str]:
+        """
+        The result of intelligent speech recognition.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "ai_asr_results")
+
+    @property
+    @pulumi.getter(name="aiOcrResults")
+    def ai_ocr_results(self) -> Sequence[str]:
+        """
+        The result of intelligent text recognition.Note: This field may return null, indicating that no valid value was found.
+        """
+        return pulumi.get(self, "ai_ocr_results")
+
+
+@pulumi.output_type
+class GetPadTemplatesTemplateResult(dict):
+    def __init__(__self__, *,
+                 create_time: str,
+                 description: str,
+                 max_duration: int,
+                 template_id: int,
+                 template_name: str,
+                 type: int,
+                 update_time: str,
+                 url: str,
+                 wait_duration: int):
+        """
+        :param str create_time: Template create time.
+        :param str description: Description info.
+        :param int max_duration: Maximum pad duration.Value range: 0 - positive infinity.Unit: milliseconds.
+        :param int template_id: Template id.
+        :param str template_name: Template name.
+        :param int type: Pad content type: 1: Image, 2: Video. Default value: 1.
+        :param str update_time: Template modify time.
+        :param str url: Pad content.
+        :param int wait_duration: Stream interruption waiting time.Value range: 0-30000.Unit: milliseconds.
+        """
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "max_duration", max_duration)
+        pulumi.set(__self__, "template_id", template_id)
+        pulumi.set(__self__, "template_name", template_name)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "update_time", update_time)
+        pulumi.set(__self__, "url", url)
+        pulumi.set(__self__, "wait_duration", wait_duration)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Template create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Description info.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="maxDuration")
+    def max_duration(self) -> int:
+        """
+        Maximum pad duration.Value range: 0 - positive infinity.Unit: milliseconds.
+        """
+        return pulumi.get(self, "max_duration")
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> int:
+        """
+        Template id.
+        """
+        return pulumi.get(self, "template_id")
+
+    @property
+    @pulumi.getter(name="templateName")
+    def template_name(self) -> str:
+        """
+        Template name.
+        """
+        return pulumi.get(self, "template_name")
+
+    @property
+    @pulumi.getter
+    def type(self) -> int:
+        """
+        Pad content type: 1: Image, 2: Video. Default value: 1.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        Template modify time.
+        """
+        return pulumi.get(self, "update_time")
+
+    @property
+    @pulumi.getter
+    def url(self) -> str:
+        """
+        Pad content.
+        """
+        return pulumi.get(self, "url")
+
+    @property
+    @pulumi.getter(name="waitDuration")
+    def wait_duration(self) -> int:
+        """
+        Stream interruption waiting time.Value range: 0-30000.Unit: milliseconds.
+        """
+        return pulumi.get(self, "wait_duration")
+
+
+@pulumi.output_type
+class GetPullStreamTaskStatusTaskStatusInfoResult(dict):
+    def __init__(__self__, *,
+                 file_duration: int,
+                 file_url: str,
+                 looped_times: int,
+                 next_file_url: str,
+                 offset_time: int,
+                 report_time: str,
+                 run_status: str):
+        """
+        :param int file_duration: The duration of the VOD source file, in seconds.
+        :param str file_url: Current use source url.
+        :param int looped_times: The number of times a VOD source task is played in a loop.
+        :param str next_file_url: The URL of the next progress VOD file.
+        :param int offset_time: The playback offset of the VOD source, in seconds.
+        :param str report_time: The latest heartbeat reporting time in UTC format, for example: 2022-02-11T10:00:00Z.Note: UTC time is 8 hours ahead of Beijing time.
+        :param str run_status: Real run status:active,inactive.
+        """
+        pulumi.set(__self__, "file_duration", file_duration)
+        pulumi.set(__self__, "file_url", file_url)
+        pulumi.set(__self__, "looped_times", looped_times)
+        pulumi.set(__self__, "next_file_url", next_file_url)
+        pulumi.set(__self__, "offset_time", offset_time)
+        pulumi.set(__self__, "report_time", report_time)
+        pulumi.set(__self__, "run_status", run_status)
+
+    @property
+    @pulumi.getter(name="fileDuration")
+    def file_duration(self) -> int:
+        """
+        The duration of the VOD source file, in seconds.
+        """
+        return pulumi.get(self, "file_duration")
+
+    @property
+    @pulumi.getter(name="fileUrl")
+    def file_url(self) -> str:
+        """
+        Current use source url.
+        """
+        return pulumi.get(self, "file_url")
+
+    @property
+    @pulumi.getter(name="loopedTimes")
+    def looped_times(self) -> int:
+        """
+        The number of times a VOD source task is played in a loop.
+        """
+        return pulumi.get(self, "looped_times")
+
+    @property
+    @pulumi.getter(name="nextFileUrl")
+    def next_file_url(self) -> str:
+        """
+        The URL of the next progress VOD file.
+        """
+        return pulumi.get(self, "next_file_url")
+
+    @property
+    @pulumi.getter(name="offsetTime")
+    def offset_time(self) -> int:
+        """
+        The playback offset of the VOD source, in seconds.
+        """
+        return pulumi.get(self, "offset_time")
+
+    @property
+    @pulumi.getter(name="reportTime")
+    def report_time(self) -> str:
+        """
+        The latest heartbeat reporting time in UTC format, for example: 2022-02-11T10:00:00Z.Note: UTC time is 8 hours ahead of Beijing time.
+        """
+        return pulumi.get(self, "report_time")
+
+    @property
+    @pulumi.getter(name="runStatus")
+    def run_status(self) -> str:
+        """
+        Real run status:active,inactive.
+        """
+        return pulumi.get(self, "run_status")
+
+
+@pulumi.output_type
+class GetStreamMonitorListLiveStreamMonitorResult(dict):
+    def __init__(__self__, *,
+                 ai_asr_input_index_lists: Sequence[int],
+                 ai_format_diagnose: int,
+                 ai_ocr_input_index_lists: Sequence[int],
+                 allow_monitor_report: int,
+                 asr_language: int,
+                 audible_input_index_lists: Sequence[int],
+                 check_stream_broken: int,
+                 check_stream_low_frame_rate: int,
+                 create_time: int,
+                 input_lists: Sequence['outputs.GetStreamMonitorListLiveStreamMonitorInputListResult'],
+                 monitor_id: str,
+                 monitor_name: str,
+                 notify_policies: Sequence['outputs.GetStreamMonitorListLiveStreamMonitorNotifyPolicyResult'],
+                 ocr_language: int,
+                 output_infos: Sequence['outputs.GetStreamMonitorListLiveStreamMonitorOutputInfoResult'],
+                 start_time: int,
+                 status: int,
+                 stop_time: int,
+                 update_time: int):
+        """
+        :param Sequence[int] ai_asr_input_index_lists: The list of input indices for enabling intelligent speech recognition.Note: This field may return null, indicating that no valid value is available.
+        :param int ai_format_diagnose: Whether to enable format diagnosis. Note: This field may return null, indicating that no valid value is available.
+        :param Sequence[int] ai_ocr_input_index_lists: The list of input indices for enabling intelligent text recognition.Note: This field may return null, indicating that no valid value is available.
+        :param int allow_monitor_report: Whether to store monitoring events in the monitoring report and allow querying of the monitoring report.Note: This field may return null, indicating that no valid value is available.
+        :param int asr_language: The language for intelligent speech recognition:0: Disabled1: Chinese2: English3: Japanese4: KoreanNote: This field may return null, indicating that no valid value is available.
+        :param Sequence[int] audible_input_index_lists: The list of input indices for the output audio.Note: This field may return null, indicating that no valid value is available.
+        :param int check_stream_broken: Whether to enable stream disconnection detection.Note: This field may return null, indicating that no valid value is available.
+        :param int check_stream_low_frame_rate: Whether to enable low frame rate detection.Note: This field may return null, indicating that no valid value is available.
+        :param int create_time: The creation time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+        :param Sequence['GetStreamMonitorListLiveStreamMonitorInputListArgs'] input_lists: The input stream information for the monitoring task.Note: This field may return null, indicating that no valid value is available.
+        :param str monitor_id: Monitoring task ID.Note: This field may return null, indicating that no valid value is available.
+        :param str monitor_name: Monitoring task name. Up to 128 bytes.Note: This field may return null, indicating that no valid value is available.
+        :param Sequence['GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs'] notify_policies: The notification policy for monitoring events.Note: This field may return null, indicating that no valid value is available.
+        :param int ocr_language: The language for intelligent text recognition:0: Disabled1: Chinese and EnglishNote: This field may return null, indicating that no valid value is available.
+        :param Sequence['GetStreamMonitorListLiveStreamMonitorOutputInfoArgs'] output_infos: Monitoring task output information.Note: This field may return null, indicating that no valid value is available.
+        :param int start_time: The last start time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+        :param int status: The status of the monitoring task.  0: Represents idle.  1: Represents monitoring in progress.Note: This field may return null, indicating that no valid value is available.
+        :param int stop_time: The last stop time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+        :param int update_time: The update time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+        """
+        pulumi.set(__self__, "ai_asr_input_index_lists", ai_asr_input_index_lists)
+        pulumi.set(__self__, "ai_format_diagnose", ai_format_diagnose)
+        pulumi.set(__self__, "ai_ocr_input_index_lists", ai_ocr_input_index_lists)
+        pulumi.set(__self__, "allow_monitor_report", allow_monitor_report)
+        pulumi.set(__self__, "asr_language", asr_language)
+        pulumi.set(__self__, "audible_input_index_lists", audible_input_index_lists)
+        pulumi.set(__self__, "check_stream_broken", check_stream_broken)
+        pulumi.set(__self__, "check_stream_low_frame_rate", check_stream_low_frame_rate)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "input_lists", input_lists)
+        pulumi.set(__self__, "monitor_id", monitor_id)
+        pulumi.set(__self__, "monitor_name", monitor_name)
+        pulumi.set(__self__, "notify_policies", notify_policies)
+        pulumi.set(__self__, "ocr_language", ocr_language)
+        pulumi.set(__self__, "output_infos", output_infos)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "stop_time", stop_time)
+        pulumi.set(__self__, "update_time", update_time)
+
+    @property
+    @pulumi.getter(name="aiAsrInputIndexLists")
+    def ai_asr_input_index_lists(self) -> Sequence[int]:
+        """
+        The list of input indices for enabling intelligent speech recognition.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "ai_asr_input_index_lists")
+
+    @property
+    @pulumi.getter(name="aiFormatDiagnose")
+    def ai_format_diagnose(self) -> int:
+        """
+        Whether to enable format diagnosis. Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "ai_format_diagnose")
+
+    @property
+    @pulumi.getter(name="aiOcrInputIndexLists")
+    def ai_ocr_input_index_lists(self) -> Sequence[int]:
+        """
+        The list of input indices for enabling intelligent text recognition.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "ai_ocr_input_index_lists")
+
+    @property
+    @pulumi.getter(name="allowMonitorReport")
+    def allow_monitor_report(self) -> int:
+        """
+        Whether to store monitoring events in the monitoring report and allow querying of the monitoring report.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "allow_monitor_report")
+
+    @property
+    @pulumi.getter(name="asrLanguage")
+    def asr_language(self) -> int:
+        """
+        The language for intelligent speech recognition:0: Disabled1: Chinese2: English3: Japanese4: KoreanNote: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "asr_language")
+
+    @property
+    @pulumi.getter(name="audibleInputIndexLists")
+    def audible_input_index_lists(self) -> Sequence[int]:
+        """
+        The list of input indices for the output audio.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "audible_input_index_lists")
+
+    @property
+    @pulumi.getter(name="checkStreamBroken")
+    def check_stream_broken(self) -> int:
+        """
+        Whether to enable stream disconnection detection.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "check_stream_broken")
+
+    @property
+    @pulumi.getter(name="checkStreamLowFrameRate")
+    def check_stream_low_frame_rate(self) -> int:
+        """
+        Whether to enable low frame rate detection.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "check_stream_low_frame_rate")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> int:
+        """
+        The creation time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="inputLists")
+    def input_lists(self) -> Sequence['outputs.GetStreamMonitorListLiveStreamMonitorInputListResult']:
+        """
+        The input stream information for the monitoring task.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "input_lists")
+
+    @property
+    @pulumi.getter(name="monitorId")
+    def monitor_id(self) -> str:
+        """
+        Monitoring task ID.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "monitor_id")
+
+    @property
+    @pulumi.getter(name="monitorName")
+    def monitor_name(self) -> str:
+        """
+        Monitoring task name. Up to 128 bytes.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "monitor_name")
+
+    @property
+    @pulumi.getter(name="notifyPolicies")
+    def notify_policies(self) -> Sequence['outputs.GetStreamMonitorListLiveStreamMonitorNotifyPolicyResult']:
+        """
+        The notification policy for monitoring events.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "notify_policies")
+
+    @property
+    @pulumi.getter(name="ocrLanguage")
+    def ocr_language(self) -> int:
+        """
+        The language for intelligent text recognition:0: Disabled1: Chinese and EnglishNote: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "ocr_language")
+
+    @property
+    @pulumi.getter(name="outputInfos")
+    def output_infos(self) -> Sequence['outputs.GetStreamMonitorListLiveStreamMonitorOutputInfoResult']:
+        """
+        Monitoring task output information.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "output_infos")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> int:
+        """
+        The last start time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        The status of the monitoring task.  0: Represents idle.  1: Represents monitoring in progress.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="stopTime")
+    def stop_time(self) -> int:
+        """
+        The last stop time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "stop_time")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> int:
+        """
+        The update time of the monitoring task, in Unix timestamp format.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "update_time")
+
+
+@pulumi.output_type
+class GetStreamMonitorListLiveStreamMonitorInputListResult(dict):
+    def __init__(__self__, *,
+                 description: str,
+                 input_app: str,
+                 input_domain: str,
+                 input_stream_name: str,
+                 input_url: str):
+        """
+        :param str description: Description of the monitoring task.It should be within 256 bytes.Note: This field may return null, indicating that no valid value is available.
+        :param str input_app: The push path for the input stream to be monitored.It should be within 32 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+        :param str input_domain: The push domain for the input stream to be monitored.It should be within 128 bytes and can only be filled with an enabled push domain.Note: This field may return null, indicating that no valid value is available.
+        :param str input_stream_name: The name of the input stream for the monitoring task.It should be within 256 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+        :param str input_url: The push URL for the input stream to be monitored. In most cases, this parameter is not required.Note: This field may return null, indicating that no valid value is available.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "input_app", input_app)
+        pulumi.set(__self__, "input_domain", input_domain)
+        pulumi.set(__self__, "input_stream_name", input_stream_name)
+        pulumi.set(__self__, "input_url", input_url)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Description of the monitoring task.It should be within 256 bytes.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="inputApp")
+    def input_app(self) -> str:
+        """
+        The push path for the input stream to be monitored.It should be within 32 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "input_app")
+
+    @property
+    @pulumi.getter(name="inputDomain")
+    def input_domain(self) -> str:
+        """
+        The push domain for the input stream to be monitored.It should be within 128 bytes and can only be filled with an enabled push domain.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "input_domain")
+
+    @property
+    @pulumi.getter(name="inputStreamName")
+    def input_stream_name(self) -> str:
+        """
+        The name of the input stream for the monitoring task.It should be within 256 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "input_stream_name")
+
+    @property
+    @pulumi.getter(name="inputUrl")
+    def input_url(self) -> str:
+        """
+        The push URL for the input stream to be monitored. In most cases, this parameter is not required.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "input_url")
+
+
+@pulumi.output_type
+class GetStreamMonitorListLiveStreamMonitorNotifyPolicyResult(dict):
+    def __init__(__self__, *,
+                 callback_url: str,
+                 notify_policy_type: int):
+        """
+        :param str callback_url: The callback URL for notifications. It should be of length [0,512] and only support URLs with the http and https types.Note: This field may return null, indicating that no valid value is available.
+        :param int notify_policy_type: The type of notification policy: Range [0,1]  0: Represents no notification policy is used.  1: Represents the use of a global callback policy, where all events are notified to the CallbackUrl.Note: This field may return null, indicating that no valid value is available.
+        """
+        pulumi.set(__self__, "callback_url", callback_url)
+        pulumi.set(__self__, "notify_policy_type", notify_policy_type)
+
+    @property
+    @pulumi.getter(name="callbackUrl")
+    def callback_url(self) -> str:
+        """
+        The callback URL for notifications. It should be of length [0,512] and only support URLs with the http and https types.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "callback_url")
+
+    @property
+    @pulumi.getter(name="notifyPolicyType")
+    def notify_policy_type(self) -> int:
+        """
+        The type of notification policy: Range [0,1]  0: Represents no notification policy is used.  1: Represents the use of a global callback policy, where all events are notified to the CallbackUrl.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "notify_policy_type")
+
+
+@pulumi.output_type
+class GetStreamMonitorListLiveStreamMonitorOutputInfoResult(dict):
+    def __init__(__self__, *,
+                 output_app: str,
+                 output_domain: str,
+                 output_stream_height: int,
+                 output_stream_name: str,
+                 output_stream_width: int):
+        """
+        :param str output_app: The playback path for the monitoring task.It should be within 32 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+        :param str output_domain: The playback domain for the monitoring task.It should be within 128 bytes and can only be filled with an enabled playback domain.Note: This field may return null, indicating that no valid value is available.
+        :param int output_stream_height: The height of the output stream in pixels for the monitoring task. The range is [1, 1080]. It is recommended to be at least 100 pixels.Note: This field may return null, indicating that no valid value is available.
+        :param str output_stream_name: The name of the output stream for the monitoring task.If not specified, the system will generate a name automatically.The name should be within 256 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+        :param int output_stream_width: The width of the output stream in pixels for the monitoring task. The range is [1, 1920]. It is recommended to be at least 100 pixels.Note: This field may return null, indicating that no valid value is available.
+        """
+        pulumi.set(__self__, "output_app", output_app)
+        pulumi.set(__self__, "output_domain", output_domain)
+        pulumi.set(__self__, "output_stream_height", output_stream_height)
+        pulumi.set(__self__, "output_stream_name", output_stream_name)
+        pulumi.set(__self__, "output_stream_width", output_stream_width)
+
+    @property
+    @pulumi.getter(name="outputApp")
+    def output_app(self) -> str:
+        """
+        The playback path for the monitoring task.It should be within 32 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "output_app")
+
+    @property
+    @pulumi.getter(name="outputDomain")
+    def output_domain(self) -> str:
+        """
+        The playback domain for the monitoring task.It should be within 128 bytes and can only be filled with an enabled playback domain.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "output_domain")
+
+    @property
+    @pulumi.getter(name="outputStreamHeight")
+    def output_stream_height(self) -> int:
+        """
+        The height of the output stream in pixels for the monitoring task. The range is [1, 1080]. It is recommended to be at least 100 pixels.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "output_stream_height")
+
+    @property
+    @pulumi.getter(name="outputStreamName")
+    def output_stream_name(self) -> str:
+        """
+        The name of the output stream for the monitoring task.If not specified, the system will generate a name automatically.The name should be within 256 bytes and can only contain letters, numbers, `-`, `_`, and `.` characters.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "output_stream_name")
+
+    @property
+    @pulumi.getter(name="outputStreamWidth")
+    def output_stream_width(self) -> int:
+        """
+        The width of the output stream in pixels for the monitoring task. The range is [1, 1920]. It is recommended to be at least 100 pixels.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "output_stream_width")
+
+
+@pulumi.output_type
+class GetTimeShiftRecordDetailRecordListResult(dict):
+    def __init__(__self__, *,
+                 end_time: int,
+                 sid: str,
+                 start_time: int):
+        """
+        :param int end_time: The ending time of the query range is specified in Unix timestamp.
+        :param str sid: The identifier for the time-shift recording session.
+        :param int start_time: The starting time of the query range is specified in Unix timestamp.
+        """
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "sid", sid)
+        pulumi.set(__self__, "start_time", start_time)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> int:
+        """
+        The ending time of the query range is specified in Unix timestamp.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter
+    def sid(self) -> str:
+        """
+        The identifier for the time-shift recording session.
+        """
+        return pulumi.get(self, "sid")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> int:
+        """
+        The starting time of the query range is specified in Unix timestamp.
+        """
+        return pulumi.get(self, "start_time")
+
+
+@pulumi.output_type
+class GetTimeShiftStreamListStreamListResult(dict):
+    def __init__(__self__, *,
+                 app_name: str,
+                 domain: str,
+                 domain_group: str,
+                 duration: int,
+                 end_time: int,
+                 start_time: int,
+                 stream_name: str,
+                 stream_type: int,
+                 trans_code_id: int):
+        """
+        :param str app_name: The push path.
+        :param str domain: The push domain.
+        :param str domain_group: The group the push domain belongs to.
+        :param int duration: The storage duration (seconds) of the recording.Note: This field may return null, indicating that no valid values can be obtained.
+        :param int end_time: The end time, which must be a Unix timestamp.
+        :param int start_time: The start time, which must be a Unix timestamp.
+        :param str stream_name: The stream name.
+        :param int stream_type: The stream type. `0`: The original stream; `1`: The watermarked stream; `2`: The transcoded stream.
+        :param int trans_code_id: The transcoding template ID.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "app_name", app_name)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "domain_group", domain_group)
+        pulumi.set(__self__, "duration", duration)
+        pulumi.set(__self__, "end_time", end_time)
+        pulumi.set(__self__, "start_time", start_time)
+        pulumi.set(__self__, "stream_name", stream_name)
+        pulumi.set(__self__, "stream_type", stream_type)
+        pulumi.set(__self__, "trans_code_id", trans_code_id)
+
+    @property
+    @pulumi.getter(name="appName")
+    def app_name(self) -> str:
+        """
+        The push path.
+        """
+        return pulumi.get(self, "app_name")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        The push domain.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="domainGroup")
+    def domain_group(self) -> str:
+        """
+        The group the push domain belongs to.
+        """
+        return pulumi.get(self, "domain_group")
+
+    @property
+    @pulumi.getter
+    def duration(self) -> int:
+        """
+        The storage duration (seconds) of the recording.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "duration")
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> int:
+        """
+        The end time, which must be a Unix timestamp.
+        """
+        return pulumi.get(self, "end_time")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> int:
+        """
+        The start time, which must be a Unix timestamp.
+        """
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter(name="streamName")
+    def stream_name(self) -> str:
+        """
+        The stream name.
+        """
+        return pulumi.get(self, "stream_name")
+
+    @property
+    @pulumi.getter(name="streamType")
+    def stream_type(self) -> int:
+        """
+        The stream type. `0`: The original stream; `1`: The watermarked stream; `2`: The transcoded stream.
+        """
+        return pulumi.get(self, "stream_type")
+
+    @property
+    @pulumi.getter(name="transCodeId")
+    def trans_code_id(self) -> int:
+        """
+        The transcoding template ID.Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "trans_code_id")
+
+
+@pulumi.output_type
+class GetWatermarksWatermarkListResult(dict):
+    def __init__(__self__, *,
+                 create_time: str,
+                 height: int,
+                 picture_url: str,
+                 status: int,
+                 watermark_id: int,
+                 watermark_name: str,
+                 width: int,
+                 x_position: int,
+                 y_position: int):
+        """
+        :param str create_time: The time when the watermark was added.Note: Beijing time (UTC+8) is used.
+        :param int height: Watermark height.
+        :param str picture_url: Watermark image URL.
+        :param int status: Current status. 0: not used. 1: in use.
+        :param int watermark_id: Watermark ID.
+        :param str watermark_name: Watermark name.
+        :param int width: Watermark width.
+        :param int x_position: Display position: X-axis offset.
+        :param int y_position: Display position: Y-axis offset.
+        """
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "height", height)
+        pulumi.set(__self__, "picture_url", picture_url)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "watermark_id", watermark_id)
+        pulumi.set(__self__, "watermark_name", watermark_name)
+        pulumi.set(__self__, "width", width)
+        pulumi.set(__self__, "x_position", x_position)
+        pulumi.set(__self__, "y_position", y_position)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        The time when the watermark was added.Note: Beijing time (UTC+8) is used.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter
+    def height(self) -> int:
+        """
+        Watermark height.
+        """
+        return pulumi.get(self, "height")
+
+    @property
+    @pulumi.getter(name="pictureUrl")
+    def picture_url(self) -> str:
+        """
+        Watermark image URL.
+        """
+        return pulumi.get(self, "picture_url")
+
+    @property
+    @pulumi.getter
+    def status(self) -> int:
+        """
+        Current status. 0: not used. 1: in use.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="watermarkId")
+    def watermark_id(self) -> int:
+        """
+        Watermark ID.
+        """
+        return pulumi.get(self, "watermark_id")
+
+    @property
+    @pulumi.getter(name="watermarkName")
+    def watermark_name(self) -> str:
+        """
+        Watermark name.
+        """
+        return pulumi.get(self, "watermark_name")
+
+    @property
+    @pulumi.getter
+    def width(self) -> int:
+        """
+        Watermark width.
+        """
+        return pulumi.get(self, "width")
+
+    @property
+    @pulumi.getter(name="xPosition")
+    def x_position(self) -> int:
+        """
+        Display position: X-axis offset.
+        """
+        return pulumi.get(self, "x_position")
+
+    @property
+    @pulumi.getter(name="yPosition")
+    def y_position(self) -> int:
+        """
+        Display position: Y-axis offset.
+        """
+        return pulumi.get(self, "y_position")
+
+
+@pulumi.output_type
+class GetXp2pDetailInfoListDataInfoListResult(dict):
+    def __init__(__self__, *,
+                 app_id: str,
+                 cdn_bytes: int,
+                 online_people: int,
+                 p2p_bytes: int,
+                 request: int,
+                 request_success: int,
+                 stream_name: str,
+                 stuck_people: int,
+                 stuck_times: int,
+                 time: str,
+                 type: str):
+        """
+        :param str app_id: AppId. Note: This field may return null, indicating that no valid value is available.
+        :param int cdn_bytes: CDN traffic.
+        :param int online_people: Online numbers.
+        :param int p2p_bytes: P2P traffic.
+        :param int request: Request numbers.
+        :param int request_success: Success numbers.
+        :param str stream_name: Stream ID.Note: This field may return null, indicating that no valid value is available.
+        :param int stuck_people: People count.
+        :param int stuck_times: Count.
+        :param str time: The requested format for time in UTC with one-minute granularity is yyyy-mm-ddTHH:MM:SSZ. This format follows the ISO 8601 standard and is commonly used for representing timestamps in UTC. For more information and examples, you can refer to the link provided: https://cloud.tencent.com/document/product/266/11732#I.
+        :param str type: The type array can be used to specify the type of media content to be queried. The two available options are live for live streaming and vod for video on demand. If no type is specified, the query will include both live and VOD content by default.
+        """
+        pulumi.set(__self__, "app_id", app_id)
+        pulumi.set(__self__, "cdn_bytes", cdn_bytes)
+        pulumi.set(__self__, "online_people", online_people)
+        pulumi.set(__self__, "p2p_bytes", p2p_bytes)
+        pulumi.set(__self__, "request", request)
+        pulumi.set(__self__, "request_success", request_success)
+        pulumi.set(__self__, "stream_name", stream_name)
+        pulumi.set(__self__, "stuck_people", stuck_people)
+        pulumi.set(__self__, "stuck_times", stuck_times)
+        pulumi.set(__self__, "time", time)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="appId")
+    def app_id(self) -> str:
+        """
+        AppId. Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "app_id")
+
+    @property
+    @pulumi.getter(name="cdnBytes")
+    def cdn_bytes(self) -> int:
+        """
+        CDN traffic.
+        """
+        return pulumi.get(self, "cdn_bytes")
+
+    @property
+    @pulumi.getter(name="onlinePeople")
+    def online_people(self) -> int:
+        """
+        Online numbers.
+        """
+        return pulumi.get(self, "online_people")
+
+    @property
+    @pulumi.getter(name="p2pBytes")
+    def p2p_bytes(self) -> int:
+        """
+        P2P traffic.
+        """
+        return pulumi.get(self, "p2p_bytes")
+
+    @property
+    @pulumi.getter
+    def request(self) -> int:
+        """
+        Request numbers.
+        """
+        return pulumi.get(self, "request")
+
+    @property
+    @pulumi.getter(name="requestSuccess")
+    def request_success(self) -> int:
+        """
+        Success numbers.
+        """
+        return pulumi.get(self, "request_success")
+
+    @property
+    @pulumi.getter(name="streamName")
+    def stream_name(self) -> str:
+        """
+        Stream ID.Note: This field may return null, indicating that no valid value is available.
+        """
+        return pulumi.get(self, "stream_name")
+
+    @property
+    @pulumi.getter(name="stuckPeople")
+    def stuck_people(self) -> int:
+        """
+        People count.
+        """
+        return pulumi.get(self, "stuck_people")
+
+    @property
+    @pulumi.getter(name="stuckTimes")
+    def stuck_times(self) -> int:
+        """
+        Count.
+        """
+        return pulumi.get(self, "stuck_times")
+
+    @property
+    @pulumi.getter
+    def time(self) -> str:
+        """
+        The requested format for time in UTC with one-minute granularity is yyyy-mm-ddTHH:MM:SSZ. This format follows the ISO 8601 standard and is commonly used for representing timestamps in UTC. For more information and examples, you can refer to the link provided: https://cloud.tencent.com/document/product/266/11732#I.
+        """
+        return pulumi.get(self, "time")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        The type array can be used to specify the type of media content to be queried. The two available options are live for live streaming and vod for video on demand. If no type is specified, the query will include both live and VOD content by default.
         """
         return pulumi.get(self, "type")
 

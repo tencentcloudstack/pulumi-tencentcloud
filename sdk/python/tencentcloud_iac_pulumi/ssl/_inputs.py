@@ -12,6 +12,18 @@ __all__ = [
     'FreeCertificateDvAuthArgs',
     'PayCertificateDvAuthArgs',
     'PayCertificateInformationArgs',
+    'UpdateCertificateInstanceOperationResourceTypesRegionArgs',
+    'GetDescribeHostApiGatewayInstanceListFilterArgs',
+    'GetDescribeHostCdnInstanceListFilterArgs',
+    'GetDescribeHostClbInstanceListFilterArgs',
+    'GetDescribeHostCosInstanceListFilterArgs',
+    'GetDescribeHostDdosInstanceListFilterArgs',
+    'GetDescribeHostLighthouseInstanceListFilterArgs',
+    'GetDescribeHostLiveInstanceListFilterArgs',
+    'GetDescribeHostTeoInstanceListFilterArgs',
+    'GetDescribeHostTkeInstanceListFilterArgs',
+    'GetDescribeHostVodInstanceListFilterArgs',
+    'GetDescribeHostWafInstanceListFilterArgs',
 ]
 
 @pulumi.input_type
@@ -75,11 +87,6 @@ class PayCertificateDvAuthArgs:
                  dv_auth_key: Optional[pulumi.Input[str]] = None,
                  dv_auth_value: Optional[pulumi.Input[str]] = None,
                  dv_auth_verify_type: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] dv_auth_key: DV authentication key.
-        :param pulumi.Input[str] dv_auth_value: DV authentication value.
-        :param pulumi.Input[str] dv_auth_verify_type: DV authentication type.
-        """
         if dv_auth_key is not None:
             pulumi.set(__self__, "dv_auth_key", dv_auth_key)
         if dv_auth_value is not None:
@@ -90,9 +97,6 @@ class PayCertificateDvAuthArgs:
     @property
     @pulumi.getter(name="dvAuthKey")
     def dv_auth_key(self) -> Optional[pulumi.Input[str]]:
-        """
-        DV authentication key.
-        """
         return pulumi.get(self, "dv_auth_key")
 
     @dv_auth_key.setter
@@ -102,9 +106,6 @@ class PayCertificateDvAuthArgs:
     @property
     @pulumi.getter(name="dvAuthValue")
     def dv_auth_value(self) -> Optional[pulumi.Input[str]]:
-        """
-        DV authentication value.
-        """
         return pulumi.get(self, "dv_auth_value")
 
     @dv_auth_value.setter
@@ -114,9 +115,6 @@ class PayCertificateDvAuthArgs:
     @property
     @pulumi.getter(name="dvAuthVerifyType")
     def dv_auth_verify_type(self) -> Optional[pulumi.Input[str]]:
-        """
-        DV authentication type.
-        """
         return pulumi.get(self, "dv_auth_verify_type")
 
     @dv_auth_verify_type.setter
@@ -508,5 +506,451 @@ class PayCertificateInformationArgs:
     @key_password.setter
     def key_password(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "key_password", value)
+
+
+@pulumi.input_type
+class UpdateCertificateInstanceOperationResourceTypesRegionArgs:
+    def __init__(__self__, *,
+                 regions: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 resource_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] regions: Region list.
+        :param pulumi.Input[str] resource_type: Cloud resource type.
+        """
+        if regions is not None:
+            pulumi.set(__self__, "regions", regions)
+        if resource_type is not None:
+            pulumi.set(__self__, "resource_type", resource_type)
+
+    @property
+    @pulumi.getter
+    def regions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Region list.
+        """
+        return pulumi.get(self, "regions")
+
+    @regions.setter
+    def regions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "regions", value)
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cloud resource type.
+        """
+        return pulumi.get(self, "resource_type")
+
+    @resource_type.setter
+    def resource_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource_type", value)
+
+
+@pulumi.input_type
+class GetDescribeHostApiGatewayInstanceListFilterArgs:
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @filter_key.setter
+    def filter_key(self, value: str):
+        pulumi.set(self, "filter_key", value)
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+    @filter_value.setter
+    def filter_value(self, value: str):
+        pulumi.set(self, "filter_value", value)
+
+
+@pulumi.input_type
+class GetDescribeHostCdnInstanceListFilterArgs:
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @filter_key.setter
+    def filter_key(self, value: str):
+        pulumi.set(self, "filter_key", value)
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+    @filter_value.setter
+    def filter_value(self, value: str):
+        pulumi.set(self, "filter_value", value)
+
+
+@pulumi.input_type
+class GetDescribeHostClbInstanceListFilterArgs:
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @filter_key.setter
+    def filter_key(self, value: str):
+        pulumi.set(self, "filter_key", value)
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+    @filter_value.setter
+    def filter_value(self, value: str):
+        pulumi.set(self, "filter_value", value)
+
+
+@pulumi.input_type
+class GetDescribeHostCosInstanceListFilterArgs:
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @filter_key.setter
+    def filter_key(self, value: str):
+        pulumi.set(self, "filter_key", value)
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+    @filter_value.setter
+    def filter_value(self, value: str):
+        pulumi.set(self, "filter_value", value)
+
+
+@pulumi.input_type
+class GetDescribeHostDdosInstanceListFilterArgs:
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @filter_key.setter
+    def filter_key(self, value: str):
+        pulumi.set(self, "filter_key", value)
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+    @filter_value.setter
+    def filter_value(self, value: str):
+        pulumi.set(self, "filter_value", value)
+
+
+@pulumi.input_type
+class GetDescribeHostLighthouseInstanceListFilterArgs:
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @filter_key.setter
+    def filter_key(self, value: str):
+        pulumi.set(self, "filter_key", value)
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+    @filter_value.setter
+    def filter_value(self, value: str):
+        pulumi.set(self, "filter_value", value)
+
+
+@pulumi.input_type
+class GetDescribeHostLiveInstanceListFilterArgs:
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @filter_key.setter
+    def filter_key(self, value: str):
+        pulumi.set(self, "filter_key", value)
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+    @filter_value.setter
+    def filter_value(self, value: str):
+        pulumi.set(self, "filter_value", value)
+
+
+@pulumi.input_type
+class GetDescribeHostTeoInstanceListFilterArgs:
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @filter_key.setter
+    def filter_key(self, value: str):
+        pulumi.set(self, "filter_key", value)
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+    @filter_value.setter
+    def filter_value(self, value: str):
+        pulumi.set(self, "filter_value", value)
+
+
+@pulumi.input_type
+class GetDescribeHostTkeInstanceListFilterArgs:
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @filter_key.setter
+    def filter_key(self, value: str):
+        pulumi.set(self, "filter_key", value)
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+    @filter_value.setter
+    def filter_value(self, value: str):
+        pulumi.set(self, "filter_value", value)
+
+
+@pulumi.input_type
+class GetDescribeHostVodInstanceListFilterArgs:
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @filter_key.setter
+    def filter_key(self, value: str):
+        pulumi.set(self, "filter_key", value)
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+    @filter_value.setter
+    def filter_value(self, value: str):
+        pulumi.set(self, "filter_value", value)
+
+
+@pulumi.input_type
+class GetDescribeHostWafInstanceListFilterArgs:
+    def __init__(__self__, *,
+                 filter_key: str,
+                 filter_value: str):
+        """
+        :param str filter_key: Filter parameter key.
+        :param str filter_value: Filter parameter value.
+        """
+        pulumi.set(__self__, "filter_key", filter_key)
+        pulumi.set(__self__, "filter_value", filter_value)
+
+    @property
+    @pulumi.getter(name="filterKey")
+    def filter_key(self) -> str:
+        """
+        Filter parameter key.
+        """
+        return pulumi.get(self, "filter_key")
+
+    @filter_key.setter
+    def filter_key(self, value: str):
+        pulumi.set(self, "filter_key", value)
+
+    @property
+    @pulumi.getter(name="filterValue")
+    def filter_value(self) -> str:
+        """
+        Filter parameter value.
+        """
+        return pulumi.get(self, "filter_value")
+
+    @filter_value.setter
+    def filter_value(self, value: str):
+        pulumi.set(self, "filter_value", value)
 
 

@@ -36,6 +36,20 @@ import * as utilities from "../utilities";
  *     type: "AntiDDoSEIP",
  * });
  * ```
+ * ### Eip With Network Egress
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = new tencentcloud.Eip.Instance("foo", {
+ *     egress: "center_egress2",
+ *     internetChargeType: "BANDWIDTH_PACKAGE",
+ *     internetMaxBandwidthOut: 1,
+ *     internetServiceProvider: "CMCC",
+ *     type: "EIP",
+ * });
+ * ```
  *
  * ## Import
  *
@@ -96,6 +110,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly bandwidthPackageId!: pulumi.Output<string>;
     /**
+     * Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+     */
+    public readonly egress!: pulumi.Output<string>;
+    /**
      * The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
      */
     public readonly internetChargeType!: pulumi.Output<string>;
@@ -150,6 +168,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["applicableForClb"] = state ? state.applicableForClb : undefined;
             resourceInputs["autoRenewFlag"] = state ? state.autoRenewFlag : undefined;
             resourceInputs["bandwidthPackageId"] = state ? state.bandwidthPackageId : undefined;
+            resourceInputs["egress"] = state ? state.egress : undefined;
             resourceInputs["internetChargeType"] = state ? state.internetChargeType : undefined;
             resourceInputs["internetMaxBandwidthOut"] = state ? state.internetMaxBandwidthOut : undefined;
             resourceInputs["internetServiceProvider"] = state ? state.internetServiceProvider : undefined;
@@ -166,6 +185,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["applicableForClb"] = args ? args.applicableForClb : undefined;
             resourceInputs["autoRenewFlag"] = args ? args.autoRenewFlag : undefined;
             resourceInputs["bandwidthPackageId"] = args ? args.bandwidthPackageId : undefined;
+            resourceInputs["egress"] = args ? args.egress : undefined;
             resourceInputs["internetChargeType"] = args ? args.internetChargeType : undefined;
             resourceInputs["internetMaxBandwidthOut"] = args ? args.internetMaxBandwidthOut : undefined;
             resourceInputs["internetServiceProvider"] = args ? args.internetServiceProvider : undefined;
@@ -207,6 +227,10 @@ export interface InstanceState {
      * ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
      */
     bandwidthPackageId?: pulumi.Input<string>;
+    /**
+     * Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+     */
+    egress?: pulumi.Input<string>;
     /**
      * The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
      */
@@ -271,6 +295,10 @@ export interface InstanceArgs {
      * ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
      */
     bandwidthPackageId?: pulumi.Input<string>;
+    /**
+     * Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+     */
+    egress?: pulumi.Input<string>;
     /**
      * The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
      */

@@ -7,7 +7,6 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -40,7 +39,7 @@ import (
 // 	})
 // }
 // ```
-// ### CCN IPEC VPN gateway
+// ### CCN IPSEC VPN gateway
 //
 // ```go
 // package main
@@ -57,7 +56,7 @@ import (
 // 			Tags: pulumi.AnyMap{
 // 				"test": pulumi.Any("test"),
 // 			},
-// 			Type: pulumi.String("CCN"),
+// 			Type: pulumi.String("IPSEC"),
 // 			Zone: pulumi.String("ap-guangzhou-3"),
 // 		})
 // 		if err != nil {
@@ -203,12 +202,9 @@ type Gateway struct {
 func NewGateway(ctx *pulumi.Context,
 	name string, args *GatewayArgs, opts ...pulumi.ResourceOption) (*Gateway, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &GatewayArgs{}
 	}
 
-	if args.Zone == nil {
-		return nil, errors.New("invalid value for required argument 'Zone'")
-	}
 	opts = pkgResourceDefaultOpts(opts)
 	var resource Gateway
 	err := ctx.RegisterResource("tencentcloud:Vpn/gateway:Gateway", name, args, &resource, opts...)
@@ -335,7 +331,7 @@ type gatewayArgs struct {
 	// ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
 	VpcId *string `pulumi:"vpcId"`
 	// Zone of the VPN gateway.
-	Zone string `pulumi:"zone"`
+	Zone *string `pulumi:"zone"`
 }
 
 // The set of arguments for constructing a Gateway resource.
@@ -361,7 +357,7 @@ type GatewayArgs struct {
 	// ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
 	VpcId pulumi.StringPtrInput
 	// Zone of the VPN gateway.
-	Zone pulumi.StringInput
+	Zone pulumi.StringPtrInput
 }
 
 func (GatewayArgs) ElementType() reflect.Type {

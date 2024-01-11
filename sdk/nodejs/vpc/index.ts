@@ -52,6 +52,9 @@ export * from "./localGateway";
 export * from "./netDetect";
 export * from "./networkAclQuintuple";
 export * from "./notifyRoutes";
+export * from "./peerConnectAcceptOperation";
+export * from "./peerConnectManager";
+export * from "./peerConnectRejectOperation";
 export * from "./resumeSnapshotInstance";
 export * from "./snapshotPolicy";
 export * from "./snapshotPolicyAttachment";
@@ -80,6 +83,9 @@ import { LocalGateway } from "./localGateway";
 import { NetDetect } from "./netDetect";
 import { NetworkAclQuintuple } from "./networkAclQuintuple";
 import { NotifyRoutes } from "./notifyRoutes";
+import { PeerConnectAcceptOperation } from "./peerConnectAcceptOperation";
+import { PeerConnectManager } from "./peerConnectManager";
+import { PeerConnectRejectOperation } from "./peerConnectRejectOperation";
 import { ResumeSnapshotInstance } from "./resumeSnapshotInstance";
 import { SnapshotPolicy } from "./snapshotPolicy";
 import { SnapshotPolicyAttachment } from "./snapshotPolicyAttachment";
@@ -132,6 +138,12 @@ const _module = {
                 return new NetworkAclQuintuple(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/notifyRoutes:NotifyRoutes":
                 return new NotifyRoutes(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/peerConnectAcceptOperation:PeerConnectAcceptOperation":
+                return new PeerConnectAcceptOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/peerConnectManager:PeerConnectManager":
+                return new PeerConnectManager(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/peerConnectRejectOperation:PeerConnectRejectOperation":
+                return new PeerConnectRejectOperation(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/resumeSnapshotInstance:ResumeSnapshotInstance":
                 return new ResumeSnapshotInstance(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/snapshotPolicy:SnapshotPolicy":
@@ -168,6 +180,9 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/localGateway", _modul
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/netDetect", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/networkAclQuintuple", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/notifyRoutes", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/peerConnectAcceptOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/peerConnectManager", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/peerConnectRejectOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/resumeSnapshotInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/snapshotPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/snapshotPolicyAttachment", _module)

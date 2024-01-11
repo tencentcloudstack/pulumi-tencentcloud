@@ -23,6 +23,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Outputs
         /// </summary>
         public readonly string ConfigDisplay;
         /// <summary>
+        /// Create time.
+        /// </summary>
+        public readonly string CreateTime;
+        /// <summary>
         /// Instance expiration time, in milliseconds.
         /// </summary>
         public readonly int ExpireTime;
@@ -75,6 +79,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Outputs
         /// </summary>
         public readonly string SubnetId;
         /// <summary>
+        /// Tag list.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetProInstancesInstanceTagResult> Tags;
+        /// <summary>
         /// Id of the VPCNote: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         public readonly string VpcId;
@@ -84,6 +92,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Outputs
             int autoRenewFlag,
 
             string configDisplay,
+
+            string createTime,
 
             int expireTime,
 
@@ -111,10 +121,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Outputs
 
             string subnetId,
 
+            ImmutableArray<Outputs.GetProInstancesInstanceTagResult> tags,
+
             string vpcId)
         {
             AutoRenewFlag = autoRenewFlag;
             ConfigDisplay = configDisplay;
+            CreateTime = createTime;
             ExpireTime = expireTime;
             InstanceId = instanceId;
             InstanceName = instanceName;
@@ -128,6 +141,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Outputs
             SpecName = specName;
             Status = status;
             SubnetId = subnetId;
+            Tags = tags;
             VpcId = vpcId;
         }
     }

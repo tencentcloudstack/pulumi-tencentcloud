@@ -25,6 +25,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Api{}
 	case "tencentcloud:ApiGateway/apiApp:ApiApp":
 		r = &ApiApp{}
+	case "tencentcloud:ApiGateway/apiAppAttachment:ApiAppAttachment":
+		r = &ApiAppAttachment{}
 	case "tencentcloud:ApiGateway/apiDoc:ApiDoc":
 		r = &ApiDoc{}
 	case "tencentcloud:ApiGateway/apiKey:ApiKey":
@@ -33,6 +35,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ApiKeyAttachment{}
 	case "tencentcloud:ApiGateway/customDomain:CustomDomain":
 		r = &CustomDomain{}
+	case "tencentcloud:ApiGateway/importOpenApi:ImportOpenApi":
+		r = &ImportOpenApi{}
 	case "tencentcloud:ApiGateway/ipStrategy:IpStrategy":
 		r = &IpStrategy{}
 	case "tencentcloud:ApiGateway/plugin:Plugin":
@@ -45,6 +49,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ServiceRelease{}
 	case "tencentcloud:ApiGateway/strategyAttachment:StrategyAttachment":
 		r = &StrategyAttachment{}
+	case "tencentcloud:ApiGateway/updateApiAppKey:UpdateApiAppKey":
+		r = &UpdateApiAppKey{}
+	case "tencentcloud:ApiGateway/upstream:Upstream":
+		r = &Upstream{}
 	case "tencentcloud:ApiGateway/usagePlan:UsagePlan":
 		r = &UsagePlan{}
 	case "tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment":
@@ -74,6 +82,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"ApiGateway/apiAppAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"ApiGateway/apiDoc",
 		&module{version},
 	)
@@ -90,6 +103,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"ApiGateway/customDomain",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"ApiGateway/importOpenApi",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -120,6 +138,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"ApiGateway/strategyAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"ApiGateway/updateApiAppKey",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"ApiGateway/upstream",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

@@ -12,6 +12,7 @@ export * from "./disk";
 export * from "./diskAttachment";
 export * from "./diskBackup";
 export * from "./firewallRule";
+export * from "./firewallTemplate";
 export * from "./getAllScene";
 export * from "./getBundle";
 export * from "./getDiskConfig";
@@ -44,6 +45,7 @@ import { Disk } from "./disk";
 import { DiskAttachment } from "./diskAttachment";
 import { DiskBackup } from "./diskBackup";
 import { FirewallRule } from "./firewallRule";
+import { FirewallTemplate } from "./firewallTemplate";
 import { Instance } from "./instance";
 import { KeyPair } from "./keyPair";
 import { KeyPairAttachment } from "./keyPairAttachment";
@@ -72,6 +74,8 @@ const _module = {
                 return new DiskBackup(name, <any>undefined, { urn })
             case "tencentcloud:Lighthouse/firewallRule:FirewallRule":
                 return new FirewallRule(name, <any>undefined, { urn })
+            case "tencentcloud:Lighthouse/firewallTemplate:FirewallTemplate":
+                return new FirewallTemplate(name, <any>undefined, { urn })
             case "tencentcloud:Lighthouse/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
             case "tencentcloud:Lighthouse/keyPair:KeyPair":
@@ -102,6 +106,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/disk", _module
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/diskAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/diskBackup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/firewallRule", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/firewallTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/keyPair", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/keyPairAttachment", _module)

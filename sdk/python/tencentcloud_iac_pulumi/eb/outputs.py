@@ -10,6 +10,9 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'EventConnectorConnectionDescription',
+    'EventConnectorConnectionDescriptionApiGwParams',
+    'EventConnectorConnectionDescriptionCkafkaParams',
     'EventTargetTargetDescription',
     'EventTargetTargetDescriptionCkafkaTargetParams',
     'EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicy',
@@ -26,10 +29,155 @@ __all__ = [
     'GetBusEventBusConnectionBriefResult',
     'GetBusEventBusTargetBriefResult',
     'GetBusFilterResult',
+    'GetEventRulesRuleResult',
+    'GetEventRulesRuleDeadLetterConfigResult',
+    'GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamResult',
+    'GetEventRulesRuleTargetResult',
+    'GetPlatformEventNamesEventNameResult',
+    'GetPlatformEventPatternsEventPatternResult',
+    'GetPlatformProductsPlatformProductResult',
     'GetSearchFilterResult',
     'GetSearchFilterFilterResult',
     'GetSearchResultResult',
 ]
+
+@pulumi.output_type
+class EventConnectorConnectionDescription(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "resourceDescription":
+            suggest = "resource_description"
+        elif key == "apiGwParams":
+            suggest = "api_gw_params"
+        elif key == "ckafkaParams":
+            suggest = "ckafka_params"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in EventConnectorConnectionDescription. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        EventConnectorConnectionDescription.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        EventConnectorConnectionDescription.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 resource_description: str,
+                 api_gw_params: Optional['outputs.EventConnectorConnectionDescriptionApiGwParams'] = None,
+                 ckafka_params: Optional['outputs.EventConnectorConnectionDescriptionCkafkaParams'] = None):
+        """
+        :param str resource_description: Resource qcs six-segment style, more reference [resource six-segment style](https://cloud.tencent.com/document/product/598/10606).
+        :param 'EventConnectorConnectionDescriptionApiGwParamsArgs' api_gw_params: apigw parameter,Note: This field may return null, indicating that no valid value can be obtained.
+        :param 'EventConnectorConnectionDescriptionCkafkaParamsArgs' ckafka_params: ckafka parameter, note: this field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "resource_description", resource_description)
+        if api_gw_params is not None:
+            pulumi.set(__self__, "api_gw_params", api_gw_params)
+        if ckafka_params is not None:
+            pulumi.set(__self__, "ckafka_params", ckafka_params)
+
+    @property
+    @pulumi.getter(name="resourceDescription")
+    def resource_description(self) -> str:
+        """
+        Resource qcs six-segment style, more reference [resource six-segment style](https://cloud.tencent.com/document/product/598/10606).
+        """
+        return pulumi.get(self, "resource_description")
+
+    @property
+    @pulumi.getter(name="apiGwParams")
+    def api_gw_params(self) -> Optional['outputs.EventConnectorConnectionDescriptionApiGwParams']:
+        """
+        apigw parameter,Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "api_gw_params")
+
+    @property
+    @pulumi.getter(name="ckafkaParams")
+    def ckafka_params(self) -> Optional['outputs.EventConnectorConnectionDescriptionCkafkaParams']:
+        """
+        ckafka parameter, note: this field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ckafka_params")
+
+
+@pulumi.output_type
+class EventConnectorConnectionDescriptionApiGwParams(dict):
+    def __init__(__self__, *,
+                 method: str,
+                 protocol: str):
+        """
+        :param str method: POST.
+        :param str protocol: HTTPS.
+        """
+        pulumi.set(__self__, "method", method)
+        pulumi.set(__self__, "protocol", protocol)
+
+    @property
+    @pulumi.getter
+    def method(self) -> str:
+        """
+        POST.
+        """
+        return pulumi.get(self, "method")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        """
+        HTTPS.
+        """
+        return pulumi.get(self, "protocol")
+
+
+@pulumi.output_type
+class EventConnectorConnectionDescriptionCkafkaParams(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "topicName":
+            suggest = "topic_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in EventConnectorConnectionDescriptionCkafkaParams. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        EventConnectorConnectionDescriptionCkafkaParams.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        EventConnectorConnectionDescriptionCkafkaParams.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 offset: str,
+                 topic_name: str):
+        """
+        :param str offset: kafka offset.
+        :param str topic_name: ckafka  topic.
+        """
+        pulumi.set(__self__, "offset", offset)
+        pulumi.set(__self__, "topic_name", topic_name)
+
+    @property
+    @pulumi.getter
+    def offset(self) -> str:
+        """
+        kafka offset.
+        """
+        return pulumi.get(self, "offset")
+
+    @property
+    @pulumi.getter(name="topicName")
+    def topic_name(self) -> str:
+        """
+        ckafka  topic.
+        """
+        return pulumi.get(self, "topic_name")
+
 
 @pulumi.output_type
 class EventTargetTargetDescription(dict):
@@ -884,6 +1032,297 @@ class GetBusFilterResult(dict):
         One or more filter values.
         """
         return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetEventRulesRuleResult(dict):
+    def __init__(__self__, *,
+                 add_time: str,
+                 dead_letter_configs: Sequence['outputs.GetEventRulesRuleDeadLetterConfigResult'],
+                 description: str,
+                 enable: bool,
+                 event_bus_id: str,
+                 mod_time: str,
+                 rule_id: str,
+                 rule_name: str,
+                 status: str,
+                 targets: Sequence['outputs.GetEventRulesRuleTargetResult']):
+        """
+        :param str add_time: create time.
+        :param Sequence['GetEventRulesRuleDeadLetterConfigArgs'] dead_letter_configs: The dlq rule set by rule. It may be null. Note: this field may return null, indicating that no valid value can be obtained.
+        :param str description: description.
+        :param bool enable: enable switch.
+        :param str event_bus_id: event bus Id.
+        :param str mod_time: modify time.
+        :param str rule_id: rule Id.
+        :param str rule_name: rule name.
+        :param str status: Status.
+        :param Sequence['GetEventRulesRuleTargetArgs'] targets: Target brief information, note: this field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "add_time", add_time)
+        pulumi.set(__self__, "dead_letter_configs", dead_letter_configs)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "enable", enable)
+        pulumi.set(__self__, "event_bus_id", event_bus_id)
+        pulumi.set(__self__, "mod_time", mod_time)
+        pulumi.set(__self__, "rule_id", rule_id)
+        pulumi.set(__self__, "rule_name", rule_name)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "targets", targets)
+
+    @property
+    @pulumi.getter(name="addTime")
+    def add_time(self) -> str:
+        """
+        create time.
+        """
+        return pulumi.get(self, "add_time")
+
+    @property
+    @pulumi.getter(name="deadLetterConfigs")
+    def dead_letter_configs(self) -> Sequence['outputs.GetEventRulesRuleDeadLetterConfigResult']:
+        """
+        The dlq rule set by rule. It may be null. Note: this field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "dead_letter_configs")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def enable(self) -> bool:
+        """
+        enable switch.
+        """
+        return pulumi.get(self, "enable")
+
+    @property
+    @pulumi.getter(name="eventBusId")
+    def event_bus_id(self) -> str:
+        """
+        event bus Id.
+        """
+        return pulumi.get(self, "event_bus_id")
+
+    @property
+    @pulumi.getter(name="modTime")
+    def mod_time(self) -> str:
+        """
+        modify time.
+        """
+        return pulumi.get(self, "mod_time")
+
+    @property
+    @pulumi.getter(name="ruleId")
+    def rule_id(self) -> str:
+        """
+        rule Id.
+        """
+        return pulumi.get(self, "rule_id")
+
+    @property
+    @pulumi.getter(name="ruleName")
+    def rule_name(self) -> str:
+        """
+        rule name.
+        """
+        return pulumi.get(self, "rule_name")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        """
+        Status.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def targets(self) -> Sequence['outputs.GetEventRulesRuleTargetResult']:
+        """
+        Target brief information, note: this field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "targets")
+
+
+@pulumi.output_type
+class GetEventRulesRuleDeadLetterConfigResult(dict):
+    def __init__(__self__, *,
+                 ckafka_delivery_params: Sequence['outputs.GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamResult'],
+                 dispose_method: str):
+        """
+        :param Sequence['GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArgs'] ckafka_delivery_params: After setting the DLQ mode, this option is required. The error message will be delivered to the corresponding kafka topic Note: This field may return null, indicating that no valid value can be obtained.
+        :param str dispose_method: Support three modes of dlq, discarding, ignoring errors and continuing to pass, corresponding to: DLQ, DROP, IGNORE_ERROR.
+        """
+        pulumi.set(__self__, "ckafka_delivery_params", ckafka_delivery_params)
+        pulumi.set(__self__, "dispose_method", dispose_method)
+
+    @property
+    @pulumi.getter(name="ckafkaDeliveryParams")
+    def ckafka_delivery_params(self) -> Sequence['outputs.GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamResult']:
+        """
+        After setting the DLQ mode, this option is required. The error message will be delivered to the corresponding kafka topic Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "ckafka_delivery_params")
+
+    @property
+    @pulumi.getter(name="disposeMethod")
+    def dispose_method(self) -> str:
+        """
+        Support three modes of dlq, discarding, ignoring errors and continuing to pass, corresponding to: DLQ, DROP, IGNORE_ERROR.
+        """
+        return pulumi.get(self, "dispose_method")
+
+
+@pulumi.output_type
+class GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamResult(dict):
+    def __init__(__self__, *,
+                 resource_description: str,
+                 topic_name: str):
+        """
+        :param str resource_description: ckafka resource qcs six-segment.
+        :param str topic_name: ckafka topic name.
+        """
+        pulumi.set(__self__, "resource_description", resource_description)
+        pulumi.set(__self__, "topic_name", topic_name)
+
+    @property
+    @pulumi.getter(name="resourceDescription")
+    def resource_description(self) -> str:
+        """
+        ckafka resource qcs six-segment.
+        """
+        return pulumi.get(self, "resource_description")
+
+    @property
+    @pulumi.getter(name="topicName")
+    def topic_name(self) -> str:
+        """
+        ckafka topic name.
+        """
+        return pulumi.get(self, "topic_name")
+
+
+@pulumi.output_type
+class GetEventRulesRuleTargetResult(dict):
+    def __init__(__self__, *,
+                 target_id: str,
+                 type: str):
+        """
+        :param str target_id: target Id.
+        :param str type: target type.
+        """
+        pulumi.set(__self__, "target_id", target_id)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="targetId")
+    def target_id(self) -> str:
+        """
+        target Id.
+        """
+        return pulumi.get(self, "target_id")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        target type.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetPlatformEventNamesEventNameResult(dict):
+    def __init__(__self__, *,
+                 event_name: str,
+                 event_type: str):
+        """
+        :param str event_name: Event name.Note: This field may return null, indicating that no valid value can be obtained.
+        :param str event_type: Event type.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "event_name", event_name)
+        pulumi.set(__self__, "event_type", event_type)
+
+    @property
+    @pulumi.getter(name="eventName")
+    def event_name(self) -> str:
+        """
+        Event name.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "event_name")
+
+    @property
+    @pulumi.getter(name="eventType")
+    def event_type(self) -> str:
+        """
+        Event type.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "event_type")
+
+
+@pulumi.output_type
+class GetPlatformEventPatternsEventPatternResult(dict):
+    def __init__(__self__, *,
+                 event_name: str,
+                 event_pattern: str):
+        """
+        :param str event_name: Platform event name.Note: This field may return null, indicating that no valid value can be obtained.
+        :param str event_pattern: Platform event matching rules.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "event_name", event_name)
+        pulumi.set(__self__, "event_pattern", event_pattern)
+
+    @property
+    @pulumi.getter(name="eventName")
+    def event_name(self) -> str:
+        """
+        Platform event name.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "event_name")
+
+    @property
+    @pulumi.getter(name="eventPattern")
+    def event_pattern(self) -> str:
+        """
+        Platform event matching rules.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "event_pattern")
+
+
+@pulumi.output_type
+class GetPlatformProductsPlatformProductResult(dict):
+    def __init__(__self__, *,
+                 product_name: str,
+                 product_type: str):
+        """
+        :param str product_name: Platform product name.
+        :param str product_type: Platform product type.
+        """
+        pulumi.set(__self__, "product_name", product_name)
+        pulumi.set(__self__, "product_type", product_type)
+
+    @property
+    @pulumi.getter(name="productName")
+    def product_name(self) -> str:
+        """
+        Platform product name.
+        """
+        return pulumi.get(self, "product_name")
+
+    @property
+    @pulumi.getter(name="productType")
+    def product_type(self) -> str:
+        """
+        Platform product type.
+        """
+        return pulumi.get(self, "product_type")
 
 
 @pulumi.output_type

@@ -3126,6 +3126,245 @@ func (o DdosPolicyV2ProtocolBlockConfigArrayOutput) Index(i pulumi.IntInput) Ddo
 	}).(DdosPolicyV2ProtocolBlockConfigOutput)
 }
 
+type DdosPolicyV2WaterPrintConfig struct {
+	// List of forwarding listeners to which the watermark belongs.
+	Listeners []DdosPolicyV2WaterPrintConfigListener `pulumi:"listeners"`
+	// Watermark offset, value range: [0-100].
+	Offset int `pulumi:"offset"`
+	// Whether it is enabled, value [0 (manual open), 1 (immediate operation)].
+	OpenStatus int `pulumi:"openStatus"`
+	// Watermark check mode, value [`checkall`(normal mode), `shortfpcheckall`(simplified mode)].
+	Verify string `pulumi:"verify"`
+}
+
+// DdosPolicyV2WaterPrintConfigInput is an input type that accepts DdosPolicyV2WaterPrintConfigArgs and DdosPolicyV2WaterPrintConfigOutput values.
+// You can construct a concrete instance of `DdosPolicyV2WaterPrintConfigInput` via:
+//
+//          DdosPolicyV2WaterPrintConfigArgs{...}
+type DdosPolicyV2WaterPrintConfigInput interface {
+	pulumi.Input
+
+	ToDdosPolicyV2WaterPrintConfigOutput() DdosPolicyV2WaterPrintConfigOutput
+	ToDdosPolicyV2WaterPrintConfigOutputWithContext(context.Context) DdosPolicyV2WaterPrintConfigOutput
+}
+
+type DdosPolicyV2WaterPrintConfigArgs struct {
+	// List of forwarding listeners to which the watermark belongs.
+	Listeners DdosPolicyV2WaterPrintConfigListenerArrayInput `pulumi:"listeners"`
+	// Watermark offset, value range: [0-100].
+	Offset pulumi.IntInput `pulumi:"offset"`
+	// Whether it is enabled, value [0 (manual open), 1 (immediate operation)].
+	OpenStatus pulumi.IntInput `pulumi:"openStatus"`
+	// Watermark check mode, value [`checkall`(normal mode), `shortfpcheckall`(simplified mode)].
+	Verify pulumi.StringInput `pulumi:"verify"`
+}
+
+func (DdosPolicyV2WaterPrintConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DdosPolicyV2WaterPrintConfig)(nil)).Elem()
+}
+
+func (i DdosPolicyV2WaterPrintConfigArgs) ToDdosPolicyV2WaterPrintConfigOutput() DdosPolicyV2WaterPrintConfigOutput {
+	return i.ToDdosPolicyV2WaterPrintConfigOutputWithContext(context.Background())
+}
+
+func (i DdosPolicyV2WaterPrintConfigArgs) ToDdosPolicyV2WaterPrintConfigOutputWithContext(ctx context.Context) DdosPolicyV2WaterPrintConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyV2WaterPrintConfigOutput)
+}
+
+// DdosPolicyV2WaterPrintConfigArrayInput is an input type that accepts DdosPolicyV2WaterPrintConfigArray and DdosPolicyV2WaterPrintConfigArrayOutput values.
+// You can construct a concrete instance of `DdosPolicyV2WaterPrintConfigArrayInput` via:
+//
+//          DdosPolicyV2WaterPrintConfigArray{ DdosPolicyV2WaterPrintConfigArgs{...} }
+type DdosPolicyV2WaterPrintConfigArrayInput interface {
+	pulumi.Input
+
+	ToDdosPolicyV2WaterPrintConfigArrayOutput() DdosPolicyV2WaterPrintConfigArrayOutput
+	ToDdosPolicyV2WaterPrintConfigArrayOutputWithContext(context.Context) DdosPolicyV2WaterPrintConfigArrayOutput
+}
+
+type DdosPolicyV2WaterPrintConfigArray []DdosPolicyV2WaterPrintConfigInput
+
+func (DdosPolicyV2WaterPrintConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DdosPolicyV2WaterPrintConfig)(nil)).Elem()
+}
+
+func (i DdosPolicyV2WaterPrintConfigArray) ToDdosPolicyV2WaterPrintConfigArrayOutput() DdosPolicyV2WaterPrintConfigArrayOutput {
+	return i.ToDdosPolicyV2WaterPrintConfigArrayOutputWithContext(context.Background())
+}
+
+func (i DdosPolicyV2WaterPrintConfigArray) ToDdosPolicyV2WaterPrintConfigArrayOutputWithContext(ctx context.Context) DdosPolicyV2WaterPrintConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyV2WaterPrintConfigArrayOutput)
+}
+
+type DdosPolicyV2WaterPrintConfigOutput struct{ *pulumi.OutputState }
+
+func (DdosPolicyV2WaterPrintConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DdosPolicyV2WaterPrintConfig)(nil)).Elem()
+}
+
+func (o DdosPolicyV2WaterPrintConfigOutput) ToDdosPolicyV2WaterPrintConfigOutput() DdosPolicyV2WaterPrintConfigOutput {
+	return o
+}
+
+func (o DdosPolicyV2WaterPrintConfigOutput) ToDdosPolicyV2WaterPrintConfigOutputWithContext(ctx context.Context) DdosPolicyV2WaterPrintConfigOutput {
+	return o
+}
+
+// List of forwarding listeners to which the watermark belongs.
+func (o DdosPolicyV2WaterPrintConfigOutput) Listeners() DdosPolicyV2WaterPrintConfigListenerArrayOutput {
+	return o.ApplyT(func(v DdosPolicyV2WaterPrintConfig) []DdosPolicyV2WaterPrintConfigListener { return v.Listeners }).(DdosPolicyV2WaterPrintConfigListenerArrayOutput)
+}
+
+// Watermark offset, value range: [0-100].
+func (o DdosPolicyV2WaterPrintConfigOutput) Offset() pulumi.IntOutput {
+	return o.ApplyT(func(v DdosPolicyV2WaterPrintConfig) int { return v.Offset }).(pulumi.IntOutput)
+}
+
+// Whether it is enabled, value [0 (manual open), 1 (immediate operation)].
+func (o DdosPolicyV2WaterPrintConfigOutput) OpenStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v DdosPolicyV2WaterPrintConfig) int { return v.OpenStatus }).(pulumi.IntOutput)
+}
+
+// Watermark check mode, value [`checkall`(normal mode), `shortfpcheckall`(simplified mode)].
+func (o DdosPolicyV2WaterPrintConfigOutput) Verify() pulumi.StringOutput {
+	return o.ApplyT(func(v DdosPolicyV2WaterPrintConfig) string { return v.Verify }).(pulumi.StringOutput)
+}
+
+type DdosPolicyV2WaterPrintConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (DdosPolicyV2WaterPrintConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DdosPolicyV2WaterPrintConfig)(nil)).Elem()
+}
+
+func (o DdosPolicyV2WaterPrintConfigArrayOutput) ToDdosPolicyV2WaterPrintConfigArrayOutput() DdosPolicyV2WaterPrintConfigArrayOutput {
+	return o
+}
+
+func (o DdosPolicyV2WaterPrintConfigArrayOutput) ToDdosPolicyV2WaterPrintConfigArrayOutputWithContext(ctx context.Context) DdosPolicyV2WaterPrintConfigArrayOutput {
+	return o
+}
+
+func (o DdosPolicyV2WaterPrintConfigArrayOutput) Index(i pulumi.IntInput) DdosPolicyV2WaterPrintConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DdosPolicyV2WaterPrintConfig {
+		return vs[0].([]DdosPolicyV2WaterPrintConfig)[vs[1].(int)]
+	}).(DdosPolicyV2WaterPrintConfigOutput)
+}
+
+type DdosPolicyV2WaterPrintConfigListener struct {
+	// Forwarding protocol, value [TCP, UDP].
+	ForwardProtocol string `pulumi:"forwardProtocol"`
+	// Lower limit of forwarding listening port. Values: [1-65535].
+	FrontendPort int `pulumi:"frontendPort"`
+	// Upper limit of forwarding listening port. Values: [1-65535].
+	FrontendPortEnd int `pulumi:"frontendPortEnd"`
+}
+
+// DdosPolicyV2WaterPrintConfigListenerInput is an input type that accepts DdosPolicyV2WaterPrintConfigListenerArgs and DdosPolicyV2WaterPrintConfigListenerOutput values.
+// You can construct a concrete instance of `DdosPolicyV2WaterPrintConfigListenerInput` via:
+//
+//          DdosPolicyV2WaterPrintConfigListenerArgs{...}
+type DdosPolicyV2WaterPrintConfigListenerInput interface {
+	pulumi.Input
+
+	ToDdosPolicyV2WaterPrintConfigListenerOutput() DdosPolicyV2WaterPrintConfigListenerOutput
+	ToDdosPolicyV2WaterPrintConfigListenerOutputWithContext(context.Context) DdosPolicyV2WaterPrintConfigListenerOutput
+}
+
+type DdosPolicyV2WaterPrintConfigListenerArgs struct {
+	// Forwarding protocol, value [TCP, UDP].
+	ForwardProtocol pulumi.StringInput `pulumi:"forwardProtocol"`
+	// Lower limit of forwarding listening port. Values: [1-65535].
+	FrontendPort pulumi.IntInput `pulumi:"frontendPort"`
+	// Upper limit of forwarding listening port. Values: [1-65535].
+	FrontendPortEnd pulumi.IntInput `pulumi:"frontendPortEnd"`
+}
+
+func (DdosPolicyV2WaterPrintConfigListenerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DdosPolicyV2WaterPrintConfigListener)(nil)).Elem()
+}
+
+func (i DdosPolicyV2WaterPrintConfigListenerArgs) ToDdosPolicyV2WaterPrintConfigListenerOutput() DdosPolicyV2WaterPrintConfigListenerOutput {
+	return i.ToDdosPolicyV2WaterPrintConfigListenerOutputWithContext(context.Background())
+}
+
+func (i DdosPolicyV2WaterPrintConfigListenerArgs) ToDdosPolicyV2WaterPrintConfigListenerOutputWithContext(ctx context.Context) DdosPolicyV2WaterPrintConfigListenerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyV2WaterPrintConfigListenerOutput)
+}
+
+// DdosPolicyV2WaterPrintConfigListenerArrayInput is an input type that accepts DdosPolicyV2WaterPrintConfigListenerArray and DdosPolicyV2WaterPrintConfigListenerArrayOutput values.
+// You can construct a concrete instance of `DdosPolicyV2WaterPrintConfigListenerArrayInput` via:
+//
+//          DdosPolicyV2WaterPrintConfigListenerArray{ DdosPolicyV2WaterPrintConfigListenerArgs{...} }
+type DdosPolicyV2WaterPrintConfigListenerArrayInput interface {
+	pulumi.Input
+
+	ToDdosPolicyV2WaterPrintConfigListenerArrayOutput() DdosPolicyV2WaterPrintConfigListenerArrayOutput
+	ToDdosPolicyV2WaterPrintConfigListenerArrayOutputWithContext(context.Context) DdosPolicyV2WaterPrintConfigListenerArrayOutput
+}
+
+type DdosPolicyV2WaterPrintConfigListenerArray []DdosPolicyV2WaterPrintConfigListenerInput
+
+func (DdosPolicyV2WaterPrintConfigListenerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DdosPolicyV2WaterPrintConfigListener)(nil)).Elem()
+}
+
+func (i DdosPolicyV2WaterPrintConfigListenerArray) ToDdosPolicyV2WaterPrintConfigListenerArrayOutput() DdosPolicyV2WaterPrintConfigListenerArrayOutput {
+	return i.ToDdosPolicyV2WaterPrintConfigListenerArrayOutputWithContext(context.Background())
+}
+
+func (i DdosPolicyV2WaterPrintConfigListenerArray) ToDdosPolicyV2WaterPrintConfigListenerArrayOutputWithContext(ctx context.Context) DdosPolicyV2WaterPrintConfigListenerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DdosPolicyV2WaterPrintConfigListenerArrayOutput)
+}
+
+type DdosPolicyV2WaterPrintConfigListenerOutput struct{ *pulumi.OutputState }
+
+func (DdosPolicyV2WaterPrintConfigListenerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DdosPolicyV2WaterPrintConfigListener)(nil)).Elem()
+}
+
+func (o DdosPolicyV2WaterPrintConfigListenerOutput) ToDdosPolicyV2WaterPrintConfigListenerOutput() DdosPolicyV2WaterPrintConfigListenerOutput {
+	return o
+}
+
+func (o DdosPolicyV2WaterPrintConfigListenerOutput) ToDdosPolicyV2WaterPrintConfigListenerOutputWithContext(ctx context.Context) DdosPolicyV2WaterPrintConfigListenerOutput {
+	return o
+}
+
+// Forwarding protocol, value [TCP, UDP].
+func (o DdosPolicyV2WaterPrintConfigListenerOutput) ForwardProtocol() pulumi.StringOutput {
+	return o.ApplyT(func(v DdosPolicyV2WaterPrintConfigListener) string { return v.ForwardProtocol }).(pulumi.StringOutput)
+}
+
+// Lower limit of forwarding listening port. Values: [1-65535].
+func (o DdosPolicyV2WaterPrintConfigListenerOutput) FrontendPort() pulumi.IntOutput {
+	return o.ApplyT(func(v DdosPolicyV2WaterPrintConfigListener) int { return v.FrontendPort }).(pulumi.IntOutput)
+}
+
+// Upper limit of forwarding listening port. Values: [1-65535].
+func (o DdosPolicyV2WaterPrintConfigListenerOutput) FrontendPortEnd() pulumi.IntOutput {
+	return o.ApplyT(func(v DdosPolicyV2WaterPrintConfigListener) int { return v.FrontendPortEnd }).(pulumi.IntOutput)
+}
+
+type DdosPolicyV2WaterPrintConfigListenerArrayOutput struct{ *pulumi.OutputState }
+
+func (DdosPolicyV2WaterPrintConfigListenerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DdosPolicyV2WaterPrintConfigListener)(nil)).Elem()
+}
+
+func (o DdosPolicyV2WaterPrintConfigListenerArrayOutput) ToDdosPolicyV2WaterPrintConfigListenerArrayOutput() DdosPolicyV2WaterPrintConfigListenerArrayOutput {
+	return o
+}
+
+func (o DdosPolicyV2WaterPrintConfigListenerArrayOutput) ToDdosPolicyV2WaterPrintConfigListenerArrayOutputWithContext(ctx context.Context) DdosPolicyV2WaterPrintConfigListenerArrayOutput {
+	return o
+}
+
+func (o DdosPolicyV2WaterPrintConfigListenerArrayOutput) Index(i pulumi.IntInput) DdosPolicyV2WaterPrintConfigListenerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DdosPolicyV2WaterPrintConfigListener {
+		return vs[0].([]DdosPolicyV2WaterPrintConfigListener)[vs[1].(int)]
+	}).(DdosPolicyV2WaterPrintConfigListenerOutput)
+}
+
 type DdosPolicyWatermarkFilter struct {
 	// Indicate whether to auto-remove the watermark or not.
 	AutoRemove *bool `pulumi:"autoRemove"`
@@ -7794,6 +8033,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyV2PacketFilterArrayInput)(nil)).Elem(), DdosPolicyV2PacketFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyV2ProtocolBlockConfigInput)(nil)).Elem(), DdosPolicyV2ProtocolBlockConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyV2ProtocolBlockConfigArrayInput)(nil)).Elem(), DdosPolicyV2ProtocolBlockConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyV2WaterPrintConfigInput)(nil)).Elem(), DdosPolicyV2WaterPrintConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyV2WaterPrintConfigArrayInput)(nil)).Elem(), DdosPolicyV2WaterPrintConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyV2WaterPrintConfigListenerInput)(nil)).Elem(), DdosPolicyV2WaterPrintConfigListenerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyV2WaterPrintConfigListenerArrayInput)(nil)).Elem(), DdosPolicyV2WaterPrintConfigListenerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyWatermarkFilterInput)(nil)).Elem(), DdosPolicyWatermarkFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyWatermarkFilterArrayInput)(nil)).Elem(), DdosPolicyWatermarkFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DdosPolicyWatermarkKeyInput)(nil)).Elem(), DdosPolicyWatermarkKeyArgs{})
@@ -7888,6 +8131,10 @@ func init() {
 	pulumi.RegisterOutputType(DdosPolicyV2PacketFilterArrayOutput{})
 	pulumi.RegisterOutputType(DdosPolicyV2ProtocolBlockConfigOutput{})
 	pulumi.RegisterOutputType(DdosPolicyV2ProtocolBlockConfigArrayOutput{})
+	pulumi.RegisterOutputType(DdosPolicyV2WaterPrintConfigOutput{})
+	pulumi.RegisterOutputType(DdosPolicyV2WaterPrintConfigArrayOutput{})
+	pulumi.RegisterOutputType(DdosPolicyV2WaterPrintConfigListenerOutput{})
+	pulumi.RegisterOutputType(DdosPolicyV2WaterPrintConfigListenerArrayOutput{})
 	pulumi.RegisterOutputType(DdosPolicyWatermarkFilterOutput{})
 	pulumi.RegisterOutputType(DdosPolicyWatermarkFilterArrayOutput{})
 	pulumi.RegisterOutputType(DdosPolicyWatermarkKeyOutput{})

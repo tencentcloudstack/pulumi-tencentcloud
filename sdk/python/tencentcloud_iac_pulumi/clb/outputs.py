@@ -16,6 +16,7 @@ __all__ = [
     'InstanceSnatIp',
     'ReplaceCertForLbsCertificate',
     'SnatIpIp',
+    'TargetGroupAttachmentsAssociation',
     'TargetGroupTargetGroupInstance',
     'GetAttachmentsAttachmentListResult',
     'GetAttachmentsAttachmentListTargetResult',
@@ -478,6 +479,84 @@ class SnatIpIp(dict):
         Subnet ID.
         """
         return pulumi.get(self, "subnet_id")
+
+
+@pulumi.output_type
+class TargetGroupAttachmentsAssociation(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "listenerId":
+            suggest = "listener_id"
+        elif key == "loadBalancerId":
+            suggest = "load_balancer_id"
+        elif key == "locationId":
+            suggest = "location_id"
+        elif key == "targetGroupId":
+            suggest = "target_group_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TargetGroupAttachmentsAssociation. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TargetGroupAttachmentsAssociation.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TargetGroupAttachmentsAssociation.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 listener_id: Optional[str] = None,
+                 load_balancer_id: Optional[str] = None,
+                 location_id: Optional[str] = None,
+                 target_group_id: Optional[str] = None):
+        """
+        :param str listener_id: Listener ID.
+        :param str load_balancer_id: CLB instance ID, when the binding target is target group, load_balancer_id in associations is required.
+        :param str location_id: Forwarding rule ID.
+        :param str target_group_id: Target group ID, when the binding target is clb, the target_group_id in associations is required.
+        """
+        if listener_id is not None:
+            pulumi.set(__self__, "listener_id", listener_id)
+        if load_balancer_id is not None:
+            pulumi.set(__self__, "load_balancer_id", load_balancer_id)
+        if location_id is not None:
+            pulumi.set(__self__, "location_id", location_id)
+        if target_group_id is not None:
+            pulumi.set(__self__, "target_group_id", target_group_id)
+
+    @property
+    @pulumi.getter(name="listenerId")
+    def listener_id(self) -> Optional[str]:
+        """
+        Listener ID.
+        """
+        return pulumi.get(self, "listener_id")
+
+    @property
+    @pulumi.getter(name="loadBalancerId")
+    def load_balancer_id(self) -> Optional[str]:
+        """
+        CLB instance ID, when the binding target is target group, load_balancer_id in associations is required.
+        """
+        return pulumi.get(self, "load_balancer_id")
+
+    @property
+    @pulumi.getter(name="locationId")
+    def location_id(self) -> Optional[str]:
+        """
+        Forwarding rule ID.
+        """
+        return pulumi.get(self, "location_id")
+
+    @property
+    @pulumi.getter(name="targetGroupId")
+    def target_group_id(self) -> Optional[str]:
+        """
+        Target group ID, when the binding target is clb, the target_group_id in associations is required.
+        """
+        return pulumi.get(self, "target_group_id")
 
 
 @pulumi.output_type

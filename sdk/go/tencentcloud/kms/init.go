@@ -21,10 +21,16 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Kms/cloudResourceAttachment:CloudResourceAttachment":
+		r = &CloudResourceAttachment{}
 	case "tencentcloud:Kms/externalKey:ExternalKey":
 		r = &ExternalKey{}
 	case "tencentcloud:Kms/key:Key":
 		r = &Key{}
+	case "tencentcloud:Kms/overwriteWhiteBoxDeviceFingerprints:OverwriteWhiteBoxDeviceFingerprints":
+		r = &OverwriteWhiteBoxDeviceFingerprints{}
+	case "tencentcloud:Kms/whiteBoxKey:WhiteBoxKey":
+		r = &WhiteBoxKey{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -40,12 +46,27 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Kms/cloudResourceAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Kms/externalKey",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Kms/key",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Kms/overwriteWhiteBoxDeviceFingerprints",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Kms/whiteBoxKey",
 		&module{version},
 	)
 }

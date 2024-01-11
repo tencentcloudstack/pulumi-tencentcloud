@@ -25,7 +25,7 @@ class RocketmqVipInstanceArgs:
         """
         The set of arguments for constructing a RocketmqVipInstance resource.
         :param pulumi.Input[int] node_count: Number of nodes, minimum 2, maximum 20.
-        :param pulumi.Input[str] spec: Instance specification:Basic type, rocket-vip-basic-1Standard type, rocket-vip-basic-2Advanced Type I, rocket-vip-basic-3Advanced Type II, rocket-vip-basic-4.
+        :param pulumi.Input[str] spec: Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
         :param pulumi.Input[int] storage_size: Single node storage space, in GB, minimum 200GB.
         :param pulumi.Input[int] time_span: Purchase period, in months.
         :param pulumi.Input['RocketmqVipInstanceVpcInfoArgs'] vpc_info: VPC information.
@@ -57,7 +57,7 @@ class RocketmqVipInstanceArgs:
     @pulumi.getter
     def spec(self) -> pulumi.Input[str]:
         """
-        Instance specification:Basic type, rocket-vip-basic-1Standard type, rocket-vip-basic-2Advanced Type I, rocket-vip-basic-3Advanced Type II, rocket-vip-basic-4.
+        Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
         """
         return pulumi.get(self, "spec")
 
@@ -140,7 +140,7 @@ class _RocketmqVipInstanceState:
         Input properties used for looking up and filtering RocketmqVipInstance resources.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[int] node_count: Number of nodes, minimum 2, maximum 20.
-        :param pulumi.Input[str] spec: Instance specification:Basic type, rocket-vip-basic-1Standard type, rocket-vip-basic-2Advanced Type I, rocket-vip-basic-3Advanced Type II, rocket-vip-basic-4.
+        :param pulumi.Input[str] spec: Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
         :param pulumi.Input[int] storage_size: Single node storage space, in GB, minimum 200GB.
         :param pulumi.Input[int] time_span: Purchase period, in months.
         :param pulumi.Input['RocketmqVipInstanceVpcInfoArgs'] vpc_info: VPC information.
@@ -189,7 +189,7 @@ class _RocketmqVipInstanceState:
     @pulumi.getter
     def spec(self) -> Optional[pulumi.Input[str]]:
         """
-        Instance specification:Basic type, rocket-vip-basic-1Standard type, rocket-vip-basic-2Advanced Type I, rocket-vip-basic-3Advanced Type II, rocket-vip-basic-4.
+        Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
         """
         return pulumi.get(self, "spec")
 
@@ -268,7 +268,7 @@ class RocketmqVipInstance(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[int] node_count: Number of nodes, minimum 2, maximum 20.
-        :param pulumi.Input[str] spec: Instance specification:Basic type, rocket-vip-basic-1Standard type, rocket-vip-basic-2Advanced Type I, rocket-vip-basic-3Advanced Type II, rocket-vip-basic-4.
+        :param pulumi.Input[str] spec: Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
         :param pulumi.Input[int] storage_size: Single node storage space, in GB, minimum 200GB.
         :param pulumi.Input[int] time_span: Purchase period, in months.
         :param pulumi.Input[pulumi.InputType['RocketmqVipInstanceVpcInfoArgs']] vpc_info: VPC information.
@@ -366,7 +366,7 @@ class RocketmqVipInstance(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[int] node_count: Number of nodes, minimum 2, maximum 20.
-        :param pulumi.Input[str] spec: Instance specification:Basic type, rocket-vip-basic-1Standard type, rocket-vip-basic-2Advanced Type I, rocket-vip-basic-3Advanced Type II, rocket-vip-basic-4.
+        :param pulumi.Input[str] spec: Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
         :param pulumi.Input[int] storage_size: Single node storage space, in GB, minimum 200GB.
         :param pulumi.Input[int] time_span: Purchase period, in months.
         :param pulumi.Input[pulumi.InputType['RocketmqVipInstanceVpcInfoArgs']] vpc_info: VPC information.
@@ -405,7 +405,7 @@ class RocketmqVipInstance(pulumi.CustomResource):
     @pulumi.getter
     def spec(self) -> pulumi.Output[str]:
         """
-        Instance specification:Basic type, rocket-vip-basic-1Standard type, rocket-vip-basic-2Advanced Type I, rocket-vip-basic-3Advanced Type II, rocket-vip-basic-4.
+        Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
         """
         return pulumi.get(self, "spec")
 

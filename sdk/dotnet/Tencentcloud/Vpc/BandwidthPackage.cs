@@ -63,6 +63,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// }
     /// ```
+    /// ### Bandwidth Package With Egress
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var example = new Tencentcloud.Vpc.BandwidthPackage("example", new Tencentcloud.Vpc.BandwidthPackageArgs
+    ///         {
+    ///             BandwidthPackageName = "tf-example",
+    ///             ChargeType = "ENHANCED95_POSTPAID_BY_MONTH",
+    ///             Egress = "center_egress2",
+    ///             InternetMaxBandwidth = 400,
+    ///             NetworkType = "SINGLEISP_CMCC",
+    ///             Tags = 
+    ///             {
+    ///                 { "createdBy", "terraform" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
     /// 
     /// ## Import
     /// 
@@ -82,10 +108,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Output<string?> BandwidthPackageName { get; private set; } = null!;
 
         /// <summary>
-        /// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+        /// Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
         /// </summary>
         [Output("chargeType")]
         public Output<string?> ChargeType { get; private set; } = null!;
+
+        /// <summary>
+        /// Network egress. It defaults to `center_egress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        /// </summary>
+        [Output("egress")]
+        public Output<string> Egress { get; private set; } = null!;
 
         /// <summary>
         /// Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
@@ -94,7 +126,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Output<int?> InternetMaxBandwidth { get; private set; } = null!;
 
         /// <summary>
-        /// Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+        /// Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
         /// </summary>
         [Output("networkType")]
         public Output<string?> NetworkType { get; private set; } = null!;
@@ -165,10 +197,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Input<string>? BandwidthPackageName { get; set; }
 
         /// <summary>
-        /// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+        /// Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
+
+        /// <summary>
+        /// Network egress. It defaults to `center_egress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        /// </summary>
+        [Input("egress")]
+        public Input<string>? Egress { get; set; }
 
         /// <summary>
         /// Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
@@ -177,7 +215,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Input<int>? InternetMaxBandwidth { get; set; }
 
         /// <summary>
-        /// Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+        /// Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
         /// </summary>
         [Input("networkType")]
         public Input<string>? NetworkType { get; set; }
@@ -214,10 +252,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Input<string>? BandwidthPackageName { get; set; }
 
         /// <summary>
-        /// Bandwidth package billing type, default: TOP5_POSTPAID_BY_MONTH. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
+        /// Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
+
+        /// <summary>
+        /// Network egress. It defaults to `center_egress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        /// </summary>
+        [Input("egress")]
+        public Input<string>? Egress { get; set; }
 
         /// <summary>
         /// Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
@@ -226,7 +270,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Input<int>? InternetMaxBandwidth { get; set; }
 
         /// <summary>
-        /// Bandwidth packet type, default:BGP, optional:- `BGP`: common BGP shared bandwidth package- `HIGH_QUALITY_BGP`: Quality BGP Shared Bandwidth Package.
+        /// Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
         /// </summary>
         [Input("networkType")]
         public Input<string>? NetworkType { get; set; }

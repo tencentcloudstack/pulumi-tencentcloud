@@ -61,6 +61,8 @@ type CronJob struct {
 	CreatedAt pulumi.StringOutput `pulumi:"createdAt"`
 	// Cron expression, When setting cronExpression at that time, frequencyType must be greater than 1.
 	CronExpression pulumi.StringOutput `pulumi:"cronExpression"`
+	// Cron job ID.
+	CronJobId pulumi.StringOutput `pulumi:"cronJobId"`
 	// End Time; type: Timestamp ISO8601.
 	EndTime pulumi.StringPtrOutput `pulumi:"endTime"`
 	// Execution frequency type, `1`: execute only once; `2`: daily granularity; `3`: weekly granularity; `4`: advanced.
@@ -145,6 +147,8 @@ type cronJobState struct {
 	CreatedAt *string `pulumi:"createdAt"`
 	// Cron expression, When setting cronExpression at that time, frequencyType must be greater than 1.
 	CronExpression *string `pulumi:"cronExpression"`
+	// Cron job ID.
+	CronJobId *string `pulumi:"cronJobId"`
 	// End Time; type: Timestamp ISO8601.
 	EndTime *string `pulumi:"endTime"`
 	// Execution frequency type, `1`: execute only once; `2`: daily granularity; `3`: weekly granularity; `4`: advanced.
@@ -182,6 +186,8 @@ type CronJobState struct {
 	CreatedAt pulumi.StringPtrInput
 	// Cron expression, When setting cronExpression at that time, frequencyType must be greater than 1.
 	CronExpression pulumi.StringPtrInput
+	// Cron job ID.
+	CronJobId pulumi.StringPtrInput
 	// End Time; type: Timestamp ISO8601.
 	EndTime pulumi.StringPtrInput
 	// Execution frequency type, `1`: execute only once; `2`: daily granularity; `3`: weekly granularity; `4`: advanced.
@@ -366,6 +372,11 @@ func (o CronJobOutput) CreatedAt() pulumi.StringOutput {
 // Cron expression, When setting cronExpression at that time, frequencyType must be greater than 1.
 func (o CronJobOutput) CronExpression() pulumi.StringOutput {
 	return o.ApplyT(func(v *CronJob) pulumi.StringOutput { return v.CronExpression }).(pulumi.StringOutput)
+}
+
+// Cron job ID.
+func (o CronJobOutput) CronJobId() pulumi.StringOutput {
+	return o.ApplyT(func(v *CronJob) pulumi.StringOutput { return v.CronJobId }).(pulumi.StringOutput)
 }
 
 // End Time; type: Timestamp ISO8601.

@@ -30,9 +30,11 @@ class ReadonlyInstanceArgs:
                  period: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 slave_deploy_mode: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
+                 wait_switch: Optional[pulumi.Input[int]] = None,
                  zone: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ReadonlyInstance resource.
@@ -53,9 +55,11 @@ class ReadonlyInstanceArgs:
         :param pulumi.Input[int] period: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[int] prepaid_period: Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups to use.
+        :param pulumi.Input[int] slave_deploy_mode: Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
         :param pulumi.Input[str] subnet_id: Private network ID. If `vpc_id` is set, this value is required.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
         :param pulumi.Input[str] vpc_id: ID of VPC, which can be modified once every 24 hours and can't be removed.
+        :param pulumi.Input[int] wait_switch: Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
         :param pulumi.Input[str] zone: Zone information, this parameter defaults to, the system automatically selects an Availability Zone.
         """
         pulumi.set(__self__, "instance_name", instance_name)
@@ -94,12 +98,16 @@ class ReadonlyInstanceArgs:
             pulumi.set(__self__, "prepaid_period", prepaid_period)
         if security_groups is not None:
             pulumi.set(__self__, "security_groups", security_groups)
+        if slave_deploy_mode is not None:
+            pulumi.set(__self__, "slave_deploy_mode", slave_deploy_mode)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
+        if wait_switch is not None:
+            pulumi.set(__self__, "wait_switch", wait_switch)
         if zone is not None:
             pulumi.set(__self__, "zone", zone)
 
@@ -308,6 +316,18 @@ class ReadonlyInstanceArgs:
         pulumi.set(self, "security_groups", value)
 
     @property
+    @pulumi.getter(name="slaveDeployMode")
+    def slave_deploy_mode(self) -> Optional[pulumi.Input[int]]:
+        """
+        Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
+        """
+        return pulumi.get(self, "slave_deploy_mode")
+
+    @slave_deploy_mode.setter
+    def slave_deploy_mode(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "slave_deploy_mode", value)
+
+    @property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -344,6 +364,18 @@ class ReadonlyInstanceArgs:
         pulumi.set(self, "vpc_id", value)
 
     @property
+    @pulumi.getter(name="waitSwitch")
+    def wait_switch(self) -> Optional[pulumi.Input[int]]:
+        """
+        Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+        """
+        return pulumi.get(self, "wait_switch")
+
+    @wait_switch.setter
+    def wait_switch(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "wait_switch", value)
+
+    @property
     @pulumi.getter
     def zone(self) -> Optional[pulumi.Input[str]]:
         """
@@ -377,12 +409,14 @@ class _ReadonlyInstanceState:
                  period: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 slave_deploy_mode: Optional[pulumi.Input[int]] = None,
                  status: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  task_status: Optional[pulumi.Input[int]] = None,
                  volume_size: Optional[pulumi.Input[int]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
+                 wait_switch: Optional[pulumi.Input[int]] = None,
                  zone: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering ReadonlyInstance resources.
@@ -404,12 +438,14 @@ class _ReadonlyInstanceState:
         :param pulumi.Input[int] period: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[int] prepaid_period: Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups to use.
+        :param pulumi.Input[int] slave_deploy_mode: Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
         :param pulumi.Input[int] status: Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
         :param pulumi.Input[str] subnet_id: Private network ID. If `vpc_id` is set, this value is required.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
         :param pulumi.Input[int] task_status: Indicates which kind of operations is being executed.
         :param pulumi.Input[int] volume_size: Disk size (in GB).
         :param pulumi.Input[str] vpc_id: ID of VPC, which can be modified once every 24 hours and can't be removed.
+        :param pulumi.Input[int] wait_switch: Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
         :param pulumi.Input[str] zone: Zone information, this parameter defaults to, the system automatically selects an Availability Zone.
         """
         if auto_renew_flag is not None:
@@ -454,6 +490,8 @@ class _ReadonlyInstanceState:
             pulumi.set(__self__, "prepaid_period", prepaid_period)
         if security_groups is not None:
             pulumi.set(__self__, "security_groups", security_groups)
+        if slave_deploy_mode is not None:
+            pulumi.set(__self__, "slave_deploy_mode", slave_deploy_mode)
         if status is not None:
             pulumi.set(__self__, "status", status)
         if subnet_id is not None:
@@ -466,6 +504,8 @@ class _ReadonlyInstanceState:
             pulumi.set(__self__, "volume_size", volume_size)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
+        if wait_switch is not None:
+            pulumi.set(__self__, "wait_switch", wait_switch)
         if zone is not None:
             pulumi.set(__self__, "zone", zone)
 
@@ -686,6 +726,18 @@ class _ReadonlyInstanceState:
         pulumi.set(self, "security_groups", value)
 
     @property
+    @pulumi.getter(name="slaveDeployMode")
+    def slave_deploy_mode(self) -> Optional[pulumi.Input[int]]:
+        """
+        Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
+        """
+        return pulumi.get(self, "slave_deploy_mode")
+
+    @slave_deploy_mode.setter
+    def slave_deploy_mode(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "slave_deploy_mode", value)
+
+    @property
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[int]]:
         """
@@ -758,6 +810,18 @@ class _ReadonlyInstanceState:
         pulumi.set(self, "vpc_id", value)
 
     @property
+    @pulumi.getter(name="waitSwitch")
+    def wait_switch(self) -> Optional[pulumi.Input[int]]:
+        """
+        Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+        """
+        return pulumi.get(self, "wait_switch")
+
+    @wait_switch.setter
+    def wait_switch(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "wait_switch", value)
+
+    @property
     @pulumi.getter
     def zone(self) -> Optional[pulumi.Input[str]]:
         """
@@ -791,10 +855,12 @@ class ReadonlyInstance(pulumi.CustomResource):
                  period: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 slave_deploy_mode: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  volume_size: Optional[pulumi.Input[int]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
+                 wait_switch: Optional[pulumi.Input[int]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -880,10 +946,12 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[int] period: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[int] prepaid_period: Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups to use.
+        :param pulumi.Input[int] slave_deploy_mode: Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
         :param pulumi.Input[str] subnet_id: Private network ID. If `vpc_id` is set, this value is required.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
         :param pulumi.Input[int] volume_size: Disk size (in GB).
         :param pulumi.Input[str] vpc_id: ID of VPC, which can be modified once every 24 hours and can't be removed.
+        :param pulumi.Input[int] wait_switch: Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
         :param pulumi.Input[str] zone: Zone information, this parameter defaults to, the system automatically selects an Availability Zone.
         """
         ...
@@ -988,10 +1056,12 @@ class ReadonlyInstance(pulumi.CustomResource):
                  period: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 slave_deploy_mode: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  volume_size: Optional[pulumi.Input[int]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
+                 wait_switch: Optional[pulumi.Input[int]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
@@ -1035,12 +1105,14 @@ class ReadonlyInstance(pulumi.CustomResource):
             __props__.__dict__["period"] = period
             __props__.__dict__["prepaid_period"] = prepaid_period
             __props__.__dict__["security_groups"] = security_groups
+            __props__.__dict__["slave_deploy_mode"] = slave_deploy_mode
             __props__.__dict__["subnet_id"] = subnet_id
             __props__.__dict__["tags"] = tags
             if volume_size is None and not opts.urn:
                 raise TypeError("Missing required property 'volume_size'")
             __props__.__dict__["volume_size"] = volume_size
             __props__.__dict__["vpc_id"] = vpc_id
+            __props__.__dict__["wait_switch"] = wait_switch
             __props__.__dict__["zone"] = zone
             __props__.__dict__["intranet_ip"] = None
             __props__.__dict__["locked"] = None
@@ -1074,12 +1146,14 @@ class ReadonlyInstance(pulumi.CustomResource):
             period: Optional[pulumi.Input[int]] = None,
             prepaid_period: Optional[pulumi.Input[int]] = None,
             security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            slave_deploy_mode: Optional[pulumi.Input[int]] = None,
             status: Optional[pulumi.Input[int]] = None,
             subnet_id: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             task_status: Optional[pulumi.Input[int]] = None,
             volume_size: Optional[pulumi.Input[int]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None,
+            wait_switch: Optional[pulumi.Input[int]] = None,
             zone: Optional[pulumi.Input[str]] = None) -> 'ReadonlyInstance':
         """
         Get an existing ReadonlyInstance resource's state with the given name, id, and optional extra
@@ -1106,12 +1180,14 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[int] period: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[int] prepaid_period: Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups to use.
+        :param pulumi.Input[int] slave_deploy_mode: Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
         :param pulumi.Input[int] status: Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
         :param pulumi.Input[str] subnet_id: Private network ID. If `vpc_id` is set, this value is required.
         :param pulumi.Input[Mapping[str, Any]] tags: Instance tags.
         :param pulumi.Input[int] task_status: Indicates which kind of operations is being executed.
         :param pulumi.Input[int] volume_size: Disk size (in GB).
         :param pulumi.Input[str] vpc_id: ID of VPC, which can be modified once every 24 hours and can't be removed.
+        :param pulumi.Input[int] wait_switch: Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
         :param pulumi.Input[str] zone: Zone information, this parameter defaults to, the system automatically selects an Availability Zone.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -1136,12 +1212,14 @@ class ReadonlyInstance(pulumi.CustomResource):
         __props__.__dict__["period"] = period
         __props__.__dict__["prepaid_period"] = prepaid_period
         __props__.__dict__["security_groups"] = security_groups
+        __props__.__dict__["slave_deploy_mode"] = slave_deploy_mode
         __props__.__dict__["status"] = status
         __props__.__dict__["subnet_id"] = subnet_id
         __props__.__dict__["tags"] = tags
         __props__.__dict__["task_status"] = task_status
         __props__.__dict__["volume_size"] = volume_size
         __props__.__dict__["vpc_id"] = vpc_id
+        __props__.__dict__["wait_switch"] = wait_switch
         __props__.__dict__["zone"] = zone
         return ReadonlyInstance(resource_name, opts=opts, __props__=__props__)
 
@@ -1290,6 +1368,14 @@ class ReadonlyInstance(pulumi.CustomResource):
         return pulumi.get(self, "security_groups")
 
     @property
+    @pulumi.getter(name="slaveDeployMode")
+    def slave_deploy_mode(self) -> pulumi.Output[Optional[int]]:
+        """
+        Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
+        """
+        return pulumi.get(self, "slave_deploy_mode")
+
+    @property
     @pulumi.getter
     def status(self) -> pulumi.Output[int]:
         """
@@ -1336,6 +1422,14 @@ class ReadonlyInstance(pulumi.CustomResource):
         ID of VPC, which can be modified once every 24 hours and can't be removed.
         """
         return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter(name="waitSwitch")
+    def wait_switch(self) -> pulumi.Output[Optional[int]]:
+        """
+        Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
+        """
+        return pulumi.get(self, "wait_switch")
 
     @property
     @pulumi.getter

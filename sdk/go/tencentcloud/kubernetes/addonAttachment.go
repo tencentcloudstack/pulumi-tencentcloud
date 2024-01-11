@@ -133,7 +133,7 @@ import (
 // 					return fmt.Sprintf("%v%v", "global.imagePullSecretsCrs[1].dockerPassword=", token), nil
 // 				}).(pulumi.StringOutput),
 // 				tcrName.ApplyT(func(tcrName string) (string, error) {
-// 					return fmt.Sprintf("%v%v%v", "global.imagePullSecretsCrs[1].dockerServer=", tcrName, "-tencentcloudcr.com"), nil
+// 					return fmt.Sprintf("%v%v%v", "global.imagePullSecretsCrs[1].dockerServer=", tcrName, ".tencentcloudcr.com"), nil
 // 				}).(pulumi.StringOutput),
 // 				pulumi.String("global.cluster.region=gz"),
 // 				pulumi.String("global.cluster.longregion=ap-guangzhou"),
@@ -145,7 +145,7 @@ import (
 // 				}).(pulumi.StringOutput),
 // 				pulumi.String("global.hosts[0].disabled=false"),
 // 				tcrName.ApplyT(func(tcrName string) (string, error) {
-// 					return fmt.Sprintf("%v%v%v", "global.hosts[1].domain=", tcrName, "-tencentcloudcr.com"), nil
+// 					return fmt.Sprintf("%v%v%v", "global.hosts[1].domain=", tcrName, ".tencentcloudcr.com"), nil
 // 				}).(pulumi.StringOutput),
 // 				endPoint.ApplyT(func(endPoint string) (string, error) {
 // 					return fmt.Sprintf("%v%v", "global.hosts[1].ip=", endPoint), nil
@@ -200,6 +200,10 @@ type AddonAttachment struct {
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
 	// Name of addon.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// Raw Values. Conflict with `requestBody`. Required with `rawValuesType`.
+	RawValues pulumi.StringOutput `pulumi:"rawValues"`
+	// The type of raw Values. Required with `rawValues`.
+	RawValuesType pulumi.StringOutput `pulumi:"rawValuesType"`
 	// Serialized json string as request body of addon spec. If set, will ignore `version` and `values`.
 	RequestBody pulumi.StringPtrOutput `pulumi:"requestBody"`
 	// Addon response body.
@@ -249,6 +253,10 @@ type addonAttachmentState struct {
 	ClusterId *string `pulumi:"clusterId"`
 	// Name of addon.
 	Name *string `pulumi:"name"`
+	// Raw Values. Conflict with `requestBody`. Required with `rawValuesType`.
+	RawValues *string `pulumi:"rawValues"`
+	// The type of raw Values. Required with `rawValues`.
+	RawValuesType *string `pulumi:"rawValuesType"`
 	// Serialized json string as request body of addon spec. If set, will ignore `version` and `values`.
 	RequestBody *string `pulumi:"requestBody"`
 	// Addon response body.
@@ -266,6 +274,10 @@ type AddonAttachmentState struct {
 	ClusterId pulumi.StringPtrInput
 	// Name of addon.
 	Name pulumi.StringPtrInput
+	// Raw Values. Conflict with `requestBody`. Required with `rawValuesType`.
+	RawValues pulumi.StringPtrInput
+	// The type of raw Values. Required with `rawValues`.
+	RawValuesType pulumi.StringPtrInput
 	// Serialized json string as request body of addon spec. If set, will ignore `version` and `values`.
 	RequestBody pulumi.StringPtrInput
 	// Addon response body.
@@ -287,6 +299,10 @@ type addonAttachmentArgs struct {
 	ClusterId string `pulumi:"clusterId"`
 	// Name of addon.
 	Name *string `pulumi:"name"`
+	// Raw Values. Conflict with `requestBody`. Required with `rawValuesType`.
+	RawValues *string `pulumi:"rawValues"`
+	// The type of raw Values. Required with `rawValues`.
+	RawValuesType *string `pulumi:"rawValuesType"`
 	// Serialized json string as request body of addon spec. If set, will ignore `version` and `values`.
 	RequestBody *string `pulumi:"requestBody"`
 	// Values the addon passthroughs. Conflict with `requestBody`.
@@ -301,6 +317,10 @@ type AddonAttachmentArgs struct {
 	ClusterId pulumi.StringInput
 	// Name of addon.
 	Name pulumi.StringPtrInput
+	// Raw Values. Conflict with `requestBody`. Required with `rawValuesType`.
+	RawValues pulumi.StringPtrInput
+	// The type of raw Values. Required with `rawValues`.
+	RawValuesType pulumi.StringPtrInput
 	// Serialized json string as request body of addon spec. If set, will ignore `version` and `values`.
 	RequestBody pulumi.StringPtrInput
 	// Values the addon passthroughs. Conflict with `requestBody`.
@@ -404,6 +424,16 @@ func (o AddonAttachmentOutput) ClusterId() pulumi.StringOutput {
 // Name of addon.
 func (o AddonAttachmentOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *AddonAttachment) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Raw Values. Conflict with `requestBody`. Required with `rawValuesType`.
+func (o AddonAttachmentOutput) RawValues() pulumi.StringOutput {
+	return o.ApplyT(func(v *AddonAttachment) pulumi.StringOutput { return v.RawValues }).(pulumi.StringOutput)
+}
+
+// The type of raw Values. Required with `rawValues`.
+func (o AddonAttachmentOutput) RawValuesType() pulumi.StringOutput {
+	return o.ApplyT(func(v *AddonAttachment) pulumi.StringOutput { return v.RawValuesType }).(pulumi.StringOutput)
 }
 
 // Serialized json string as request body of addon spec. If set, will ignore `version` and `values`.

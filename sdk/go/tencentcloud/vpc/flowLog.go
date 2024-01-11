@@ -27,7 +27,7 @@ import (
 type FlowLog struct {
 	pulumi.CustomResourceState
 
-	// Specify flow log storage id.
+	// Specify flow log storage id, just set cls topic id.
 	CloudLogId pulumi.StringPtrOutput `pulumi:"cloudLogId"`
 	// Specify flow log storage region, default using current.
 	CloudLogRegion pulumi.StringOutput `pulumi:"cloudLogRegion"`
@@ -93,7 +93,7 @@ func GetFlowLog(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering FlowLog resources.
 type flowLogState struct {
-	// Specify flow log storage id.
+	// Specify flow log storage id, just set cls topic id.
 	CloudLogId *string `pulumi:"cloudLogId"`
 	// Specify flow log storage region, default using current.
 	CloudLogRegion *string `pulumi:"cloudLogRegion"`
@@ -118,7 +118,7 @@ type flowLogState struct {
 }
 
 type FlowLogState struct {
-	// Specify flow log storage id.
+	// Specify flow log storage id, just set cls topic id.
 	CloudLogId pulumi.StringPtrInput
 	// Specify flow log storage region, default using current.
 	CloudLogRegion pulumi.StringPtrInput
@@ -147,7 +147,7 @@ func (FlowLogState) ElementType() reflect.Type {
 }
 
 type flowLogArgs struct {
-	// Specify flow log storage id.
+	// Specify flow log storage id, just set cls topic id.
 	CloudLogId *string `pulumi:"cloudLogId"`
 	// Specify flow log storage region, default using current.
 	CloudLogRegion *string `pulumi:"cloudLogRegion"`
@@ -173,7 +173,7 @@ type flowLogArgs struct {
 
 // The set of arguments for constructing a FlowLog resource.
 type FlowLogArgs struct {
-	// Specify flow log storage id.
+	// Specify flow log storage id, just set cls topic id.
 	CloudLogId pulumi.StringPtrInput
 	// Specify flow log storage region, default using current.
 	CloudLogRegion pulumi.StringPtrInput
@@ -284,7 +284,7 @@ func (o FlowLogOutput) ToFlowLogOutputWithContext(ctx context.Context) FlowLogOu
 	return o
 }
 
-// Specify flow log storage id.
+// Specify flow log storage id, just set cls topic id.
 func (o FlowLogOutput) CloudLogId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *FlowLog) pulumi.StringPtrOutput { return v.CloudLogId }).(pulumi.StringPtrOutput)
 }

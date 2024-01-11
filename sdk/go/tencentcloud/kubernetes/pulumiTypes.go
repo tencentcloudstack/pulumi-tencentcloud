@@ -4020,17 +4020,21 @@ type NodePoolAutoScalingConfig struct {
 	InstanceName *string `pulumi:"instanceName"`
 	// Specified types of CVM instance.
 	InstanceType string `pulumi:"instanceType"`
-	// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+	// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType *string `pulumi:"internetChargeType"`
 	// Max bandwidth of Internet access in Mbps. Default is `0`.
 	InternetMaxBandwidthOut *int `pulumi:"internetMaxBandwidthOut"`
 	// ID list of keys.
 	KeyIds []string `pulumi:"keyIds"`
+	// Ordered security groups to which a CVM instance belongs.
+	OrderlySecurityGroupIds []string `pulumi:"orderlySecurityGroupIds"`
 	// Password to access.
 	Password *string `pulumi:"password"`
 	// Specify whether to assign an Internet IP address.
 	PublicIpAssigned *bool `pulumi:"publicIpAssigned"`
-	// Security groups to which a CVM instance belongs.
+	// The order of elements in this field cannot be guaranteed. Use `orderlySecurityGroupIds` instead. Security groups to which a CVM instance belongs.
+	//
+	// Deprecated: The order of elements in this field cannot be guaranteed. Use `orderly_security_group_ids` instead.
 	SecurityGroupIds []string `pulumi:"securityGroupIds"`
 	// Type of spot instance, only support `one-time` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
 	SpotInstanceType *string `pulumi:"spotInstanceType"`
@@ -4080,17 +4084,21 @@ type NodePoolAutoScalingConfigArgs struct {
 	InstanceName pulumi.StringPtrInput `pulumi:"instanceName"`
 	// Specified types of CVM instance.
 	InstanceType pulumi.StringInput `pulumi:"instanceType"`
-	// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+	// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType pulumi.StringPtrInput `pulumi:"internetChargeType"`
 	// Max bandwidth of Internet access in Mbps. Default is `0`.
 	InternetMaxBandwidthOut pulumi.IntPtrInput `pulumi:"internetMaxBandwidthOut"`
 	// ID list of keys.
 	KeyIds pulumi.StringArrayInput `pulumi:"keyIds"`
+	// Ordered security groups to which a CVM instance belongs.
+	OrderlySecurityGroupIds pulumi.StringArrayInput `pulumi:"orderlySecurityGroupIds"`
 	// Password to access.
 	Password pulumi.StringPtrInput `pulumi:"password"`
 	// Specify whether to assign an Internet IP address.
 	PublicIpAssigned pulumi.BoolPtrInput `pulumi:"publicIpAssigned"`
-	// Security groups to which a CVM instance belongs.
+	// The order of elements in this field cannot be guaranteed. Use `orderlySecurityGroupIds` instead. Security groups to which a CVM instance belongs.
+	//
+	// Deprecated: The order of elements in this field cannot be guaranteed. Use `orderly_security_group_ids` instead.
 	SecurityGroupIds pulumi.StringArrayInput `pulumi:"securityGroupIds"`
 	// Type of spot instance, only support `one-time` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
 	SpotInstanceType pulumi.StringPtrInput `pulumi:"spotInstanceType"`
@@ -4244,7 +4252,7 @@ func (o NodePoolAutoScalingConfigOutput) InstanceType() pulumi.StringOutput {
 	return o.ApplyT(func(v NodePoolAutoScalingConfig) string { return v.InstanceType }).(pulumi.StringOutput)
 }
 
-// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 func (o NodePoolAutoScalingConfigOutput) InternetChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NodePoolAutoScalingConfig) *string { return v.InternetChargeType }).(pulumi.StringPtrOutput)
 }
@@ -4259,6 +4267,11 @@ func (o NodePoolAutoScalingConfigOutput) KeyIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v NodePoolAutoScalingConfig) []string { return v.KeyIds }).(pulumi.StringArrayOutput)
 }
 
+// Ordered security groups to which a CVM instance belongs.
+func (o NodePoolAutoScalingConfigOutput) OrderlySecurityGroupIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NodePoolAutoScalingConfig) []string { return v.OrderlySecurityGroupIds }).(pulumi.StringArrayOutput)
+}
+
 // Password to access.
 func (o NodePoolAutoScalingConfigOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NodePoolAutoScalingConfig) *string { return v.Password }).(pulumi.StringPtrOutput)
@@ -4269,7 +4282,9 @@ func (o NodePoolAutoScalingConfigOutput) PublicIpAssigned() pulumi.BoolPtrOutput
 	return o.ApplyT(func(v NodePoolAutoScalingConfig) *bool { return v.PublicIpAssigned }).(pulumi.BoolPtrOutput)
 }
 
-// Security groups to which a CVM instance belongs.
+// The order of elements in this field cannot be guaranteed. Use `orderlySecurityGroupIds` instead. Security groups to which a CVM instance belongs.
+//
+// Deprecated: The order of elements in this field cannot be guaranteed. Use `orderly_security_group_ids` instead.
 func (o NodePoolAutoScalingConfigOutput) SecurityGroupIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v NodePoolAutoScalingConfig) []string { return v.SecurityGroupIds }).(pulumi.StringArrayOutput)
 }
@@ -4448,7 +4463,7 @@ func (o NodePoolAutoScalingConfigPtrOutput) InstanceType() pulumi.StringPtrOutpu
 	}).(pulumi.StringPtrOutput)
 }
 
-// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 func (o NodePoolAutoScalingConfigPtrOutput) InternetChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *NodePoolAutoScalingConfig) *string {
 		if v == nil {
@@ -4478,6 +4493,16 @@ func (o NodePoolAutoScalingConfigPtrOutput) KeyIds() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
+// Ordered security groups to which a CVM instance belongs.
+func (o NodePoolAutoScalingConfigPtrOutput) OrderlySecurityGroupIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *NodePoolAutoScalingConfig) []string {
+		if v == nil {
+			return nil
+		}
+		return v.OrderlySecurityGroupIds
+	}).(pulumi.StringArrayOutput)
+}
+
 // Password to access.
 func (o NodePoolAutoScalingConfigPtrOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *NodePoolAutoScalingConfig) *string {
@@ -4498,7 +4523,9 @@ func (o NodePoolAutoScalingConfigPtrOutput) PublicIpAssigned() pulumi.BoolPtrOut
 	}).(pulumi.BoolPtrOutput)
 }
 
-// Security groups to which a CVM instance belongs.
+// The order of elements in this field cannot be guaranteed. Use `orderlySecurityGroupIds` instead. Security groups to which a CVM instance belongs.
+//
+// Deprecated: The order of elements in this field cannot be guaranteed. Use `orderly_security_group_ids` instead.
 func (o NodePoolAutoScalingConfigPtrOutput) SecurityGroupIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *NodePoolAutoScalingConfig) []string {
 		if v == nil {
@@ -4553,7 +4580,7 @@ type NodePoolAutoScalingConfigDataDisk struct {
 	DeleteWithInstance *bool `pulumi:"deleteWithInstance"`
 	// Volume of disk in GB. Default is `0`.
 	DiskSize *int `pulumi:"diskSize"`
-	// Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+	// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
 	DiskType *string `pulumi:"diskType"`
 	// Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role `QcloudKMSAccessForCVMRole` was provided.
 	Encrypt *bool `pulumi:"encrypt"`
@@ -4579,7 +4606,7 @@ type NodePoolAutoScalingConfigDataDiskArgs struct {
 	DeleteWithInstance pulumi.BoolPtrInput `pulumi:"deleteWithInstance"`
 	// Volume of disk in GB. Default is `0`.
 	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
-	// Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+	// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
 	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
 	// Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role `QcloudKMSAccessForCVMRole` was provided.
 	Encrypt pulumi.BoolPtrInput `pulumi:"encrypt"`
@@ -4650,7 +4677,7 @@ func (o NodePoolAutoScalingConfigDataDiskOutput) DiskSize() pulumi.IntPtrOutput 
 	return o.ApplyT(func(v NodePoolAutoScalingConfigDataDisk) *int { return v.DiskSize }).(pulumi.IntPtrOutput)
 }
 
-// Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
 func (o NodePoolAutoScalingConfigDataDiskOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NodePoolAutoScalingConfigDataDisk) *string { return v.DiskType }).(pulumi.StringPtrOutput)
 }
@@ -4967,7 +4994,7 @@ type NodePoolNodeConfigDataDisk struct {
 	DiskPartition *string `pulumi:"diskPartition"`
 	// Volume of disk in GB. Default is `0`.
 	DiskSize *int `pulumi:"diskSize"`
-	// Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+	// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
 	DiskType *string `pulumi:"diskType"`
 	// File system, e.g. `ext3/ext4/xfs`.
 	FileSystem *string `pulumi:"fileSystem"`
@@ -4993,7 +5020,7 @@ type NodePoolNodeConfigDataDiskArgs struct {
 	DiskPartition pulumi.StringPtrInput `pulumi:"diskPartition"`
 	// Volume of disk in GB. Default is `0`.
 	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
-	// Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+	// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
 	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
 	// File system, e.g. `ext3/ext4/xfs`.
 	FileSystem pulumi.StringPtrInput `pulumi:"fileSystem"`
@@ -5067,7 +5094,7 @@ func (o NodePoolNodeConfigDataDiskOutput) DiskSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v NodePoolNodeConfigDataDisk) *int { return v.DiskSize }).(pulumi.IntPtrOutput)
 }
 
-// Types of disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
 func (o NodePoolNodeConfigDataDiskOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NodePoolNodeConfigDataDisk) *string { return v.DiskType }).(pulumi.StringPtrOutput)
 }
@@ -7496,6 +7523,1527 @@ func (o GetClusterCommonNamesListArrayOutput) Index(i pulumi.IntInput) GetCluste
 	}).(GetClusterCommonNamesListOutput)
 }
 
+type GetClusterInstancesFilter struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name string `pulumi:"name"`
+	// Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+	Values []string `pulumi:"values"`
+}
+
+// GetClusterInstancesFilterInput is an input type that accepts GetClusterInstancesFilterArgs and GetClusterInstancesFilterOutput values.
+// You can construct a concrete instance of `GetClusterInstancesFilterInput` via:
+//
+//          GetClusterInstancesFilterArgs{...}
+type GetClusterInstancesFilterInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesFilterOutput() GetClusterInstancesFilterOutput
+	ToGetClusterInstancesFilterOutputWithContext(context.Context) GetClusterInstancesFilterOutput
+}
+
+type GetClusterInstancesFilterArgs struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetClusterInstancesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesFilter)(nil)).Elem()
+}
+
+func (i GetClusterInstancesFilterArgs) ToGetClusterInstancesFilterOutput() GetClusterInstancesFilterOutput {
+	return i.ToGetClusterInstancesFilterOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesFilterArgs) ToGetClusterInstancesFilterOutputWithContext(ctx context.Context) GetClusterInstancesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesFilterOutput)
+}
+
+// GetClusterInstancesFilterArrayInput is an input type that accepts GetClusterInstancesFilterArray and GetClusterInstancesFilterArrayOutput values.
+// You can construct a concrete instance of `GetClusterInstancesFilterArrayInput` via:
+//
+//          GetClusterInstancesFilterArray{ GetClusterInstancesFilterArgs{...} }
+type GetClusterInstancesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesFilterArrayOutput() GetClusterInstancesFilterArrayOutput
+	ToGetClusterInstancesFilterArrayOutputWithContext(context.Context) GetClusterInstancesFilterArrayOutput
+}
+
+type GetClusterInstancesFilterArray []GetClusterInstancesFilterInput
+
+func (GetClusterInstancesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesFilter)(nil)).Elem()
+}
+
+func (i GetClusterInstancesFilterArray) ToGetClusterInstancesFilterArrayOutput() GetClusterInstancesFilterArrayOutput {
+	return i.ToGetClusterInstancesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesFilterArray) ToGetClusterInstancesFilterArrayOutputWithContext(ctx context.Context) GetClusterInstancesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesFilterArrayOutput)
+}
+
+type GetClusterInstancesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesFilter)(nil)).Elem()
+}
+
+func (o GetClusterInstancesFilterOutput) ToGetClusterInstancesFilterOutput() GetClusterInstancesFilterOutput {
+	return o
+}
+
+func (o GetClusterInstancesFilterOutput) ToGetClusterInstancesFilterOutputWithContext(ctx context.Context) GetClusterInstancesFilterOutput {
+	return o
+}
+
+// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+func (o GetClusterInstancesFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+func (o GetClusterInstancesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterInstancesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetClusterInstancesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesFilter)(nil)).Elem()
+}
+
+func (o GetClusterInstancesFilterArrayOutput) ToGetClusterInstancesFilterArrayOutput() GetClusterInstancesFilterArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesFilterArrayOutput) ToGetClusterInstancesFilterArrayOutputWithContext(ctx context.Context) GetClusterInstancesFilterArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesFilterArrayOutput) Index(i pulumi.IntInput) GetClusterInstancesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterInstancesFilter {
+		return vs[0].([]GetClusterInstancesFilter)[vs[1].(int)]
+	}).(GetClusterInstancesFilterOutput)
+}
+
+type GetClusterInstancesInstanceSet struct {
+	// Auto scaling group ID.
+	AutoscalingGroupId string `pulumi:"autoscalingGroupId"`
+	// Add time.
+	CreatedTime string `pulumi:"createdTime"`
+	// Whether the instance is blocked.
+	DrainStatus string `pulumi:"drainStatus"`
+	// Reasons for instance exception (or being initialized).
+	FailedReason string `pulumi:"failedReason"`
+	// Node configuration.
+	InstanceAdvancedSettings []GetClusterInstancesInstanceSetInstanceAdvancedSetting `pulumi:"instanceAdvancedSettings"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Node role, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, default is WORKER.
+	InstanceRole string `pulumi:"instanceRole"`
+	// The status of the instance (running, initializing, failed).
+	InstanceState string `pulumi:"instanceState"`
+	// Node intranet IP.
+	LanIp string `pulumi:"lanIp"`
+	// Resource pool ID.
+	NodePoolId string `pulumi:"nodePoolId"`
+}
+
+// GetClusterInstancesInstanceSetInput is an input type that accepts GetClusterInstancesInstanceSetArgs and GetClusterInstancesInstanceSetOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInput` via:
+//
+//          GetClusterInstancesInstanceSetArgs{...}
+type GetClusterInstancesInstanceSetInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetOutput() GetClusterInstancesInstanceSetOutput
+	ToGetClusterInstancesInstanceSetOutputWithContext(context.Context) GetClusterInstancesInstanceSetOutput
+}
+
+type GetClusterInstancesInstanceSetArgs struct {
+	// Auto scaling group ID.
+	AutoscalingGroupId pulumi.StringInput `pulumi:"autoscalingGroupId"`
+	// Add time.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// Whether the instance is blocked.
+	DrainStatus pulumi.StringInput `pulumi:"drainStatus"`
+	// Reasons for instance exception (or being initialized).
+	FailedReason pulumi.StringInput `pulumi:"failedReason"`
+	// Node configuration.
+	InstanceAdvancedSettings GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayInput `pulumi:"instanceAdvancedSettings"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Node role, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, default is WORKER.
+	InstanceRole pulumi.StringInput `pulumi:"instanceRole"`
+	// The status of the instance (running, initializing, failed).
+	InstanceState pulumi.StringInput `pulumi:"instanceState"`
+	// Node intranet IP.
+	LanIp pulumi.StringInput `pulumi:"lanIp"`
+	// Resource pool ID.
+	NodePoolId pulumi.StringInput `pulumi:"nodePoolId"`
+}
+
+func (GetClusterInstancesInstanceSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSet)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetArgs) ToGetClusterInstancesInstanceSetOutput() GetClusterInstancesInstanceSetOutput {
+	return i.ToGetClusterInstancesInstanceSetOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetArgs) ToGetClusterInstancesInstanceSetOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetOutput)
+}
+
+// GetClusterInstancesInstanceSetArrayInput is an input type that accepts GetClusterInstancesInstanceSetArray and GetClusterInstancesInstanceSetArrayOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetArrayInput` via:
+//
+//          GetClusterInstancesInstanceSetArray{ GetClusterInstancesInstanceSetArgs{...} }
+type GetClusterInstancesInstanceSetArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetArrayOutput() GetClusterInstancesInstanceSetArrayOutput
+	ToGetClusterInstancesInstanceSetArrayOutputWithContext(context.Context) GetClusterInstancesInstanceSetArrayOutput
+}
+
+type GetClusterInstancesInstanceSetArray []GetClusterInstancesInstanceSetInput
+
+func (GetClusterInstancesInstanceSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSet)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetArray) ToGetClusterInstancesInstanceSetArrayOutput() GetClusterInstancesInstanceSetArrayOutput {
+	return i.ToGetClusterInstancesInstanceSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetArray) ToGetClusterInstancesInstanceSetArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetArrayOutput)
+}
+
+type GetClusterInstancesInstanceSetOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSet)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetOutput) ToGetClusterInstancesInstanceSetOutput() GetClusterInstancesInstanceSetOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetOutput) ToGetClusterInstancesInstanceSetOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetOutput {
+	return o
+}
+
+// Auto scaling group ID.
+func (o GetClusterInstancesInstanceSetOutput) AutoscalingGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSet) string { return v.AutoscalingGroupId }).(pulumi.StringOutput)
+}
+
+// Add time.
+func (o GetClusterInstancesInstanceSetOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSet) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// Whether the instance is blocked.
+func (o GetClusterInstancesInstanceSetOutput) DrainStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSet) string { return v.DrainStatus }).(pulumi.StringOutput)
+}
+
+// Reasons for instance exception (or being initialized).
+func (o GetClusterInstancesInstanceSetOutput) FailedReason() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSet) string { return v.FailedReason }).(pulumi.StringOutput)
+}
+
+// Node configuration.
+func (o GetClusterInstancesInstanceSetOutput) InstanceAdvancedSettings() GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSet) []GetClusterInstancesInstanceSetInstanceAdvancedSetting {
+		return v.InstanceAdvancedSettings
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput)
+}
+
+// Instance ID.
+func (o GetClusterInstancesInstanceSetOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSet) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Node role, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, default is WORKER.
+func (o GetClusterInstancesInstanceSetOutput) InstanceRole() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSet) string { return v.InstanceRole }).(pulumi.StringOutput)
+}
+
+// The status of the instance (running, initializing, failed).
+func (o GetClusterInstancesInstanceSetOutput) InstanceState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSet) string { return v.InstanceState }).(pulumi.StringOutput)
+}
+
+// Node intranet IP.
+func (o GetClusterInstancesInstanceSetOutput) LanIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSet) string { return v.LanIp }).(pulumi.StringOutput)
+}
+
+// Resource pool ID.
+func (o GetClusterInstancesInstanceSetOutput) NodePoolId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSet) string { return v.NodePoolId }).(pulumi.StringOutput)
+}
+
+type GetClusterInstancesInstanceSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSet)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetArrayOutput) ToGetClusterInstancesInstanceSetArrayOutput() GetClusterInstancesInstanceSetArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetArrayOutput) ToGetClusterInstancesInstanceSetArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetArrayOutput) Index(i pulumi.IntInput) GetClusterInstancesInstanceSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterInstancesInstanceSet {
+		return vs[0].([]GetClusterInstancesInstanceSet)[vs[1].(int)]
+	}).(GetClusterInstancesInstanceSetOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSetting struct {
+	// Multi-disk data disk mounting information.
+	DataDisks []GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDisk `pulumi:"dataDisks"`
+	// When the node belongs to the podCIDR size customization mode, you can specify the upper limit of the number of pods running on the node.
+	DesiredPodNumber int `pulumi:"desiredPodNumber"`
+	// Dockerd --graph specifies the value, the default is /var/lib/docker.
+	DockerGraphPath string `pulumi:"dockerGraphPath"`
+	// Node-related custom parameter information.
+	ExtraArgs []GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArg `pulumi:"extraArgs"`
+	// GPU driver related parameters, obtain related GPU parameters: https://cloud.tencent.com/document/api/213/15715.
+	GpuArgs []GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArg `pulumi:"gpuArgs"`
+	// Node Label array.
+	Labels []GetClusterInstancesInstanceSetInstanceAdvancedSettingLabel `pulumi:"labels"`
+	// Data disk mount point, the data disk is not mounted by default. Formatted ext3, ext4, xfs file system data disks will be mounted directly. Other file systems or unformatted data disks will be automatically formatted as ext4 (tlinux system formatted as xfs) and mounted. Please pay attention to backing up the data. This setting does not take effect for cloud hosts that have no data disks or multiple data disks.
+	MountTarget string `pulumi:"mountTarget"`
+	// Base64 encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript string `pulumi:"preStartUserScript"`
+	// Node taint.
+	Taints []GetClusterInstancesInstanceSetInstanceAdvancedSettingTaint `pulumi:"taints"`
+	// Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
+	Unschedulable int `pulumi:"unschedulable"`
+	// Base64 encoded userscript.
+	UserScript string `pulumi:"userScript"`
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingArgs and GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingArgs{...}
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingArgs struct {
+	// Multi-disk data disk mounting information.
+	DataDisks GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayInput `pulumi:"dataDisks"`
+	// When the node belongs to the podCIDR size customization mode, you can specify the upper limit of the number of pods running on the node.
+	DesiredPodNumber pulumi.IntInput `pulumi:"desiredPodNumber"`
+	// Dockerd --graph specifies the value, the default is /var/lib/docker.
+	DockerGraphPath pulumi.StringInput `pulumi:"dockerGraphPath"`
+	// Node-related custom parameter information.
+	ExtraArgs GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayInput `pulumi:"extraArgs"`
+	// GPU driver related parameters, obtain related GPU parameters: https://cloud.tencent.com/document/api/213/15715.
+	GpuArgs GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayInput `pulumi:"gpuArgs"`
+	// Node Label array.
+	Labels GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayInput `pulumi:"labels"`
+	// Data disk mount point, the data disk is not mounted by default. Formatted ext3, ext4, xfs file system data disks will be mounted directly. Other file systems or unformatted data disks will be automatically formatted as ext4 (tlinux system formatted as xfs) and mounted. Please pay attention to backing up the data. This setting does not take effect for cloud hosts that have no data disks or multiple data disks.
+	MountTarget pulumi.StringInput `pulumi:"mountTarget"`
+	// Base64 encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript pulumi.StringInput `pulumi:"preStartUserScript"`
+	// Node taint.
+	Taints GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayInput `pulumi:"taints"`
+	// Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
+	Unschedulable pulumi.IntInput `pulumi:"unschedulable"`
+	// Base64 encoded userscript.
+	UserScript pulumi.StringInput `pulumi:"userScript"`
+}
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSetting)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput)
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingArray and GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingArray{ GetClusterInstancesInstanceSetInstanceAdvancedSettingArgs{...} }
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingArray []GetClusterInstancesInstanceSetInstanceAdvancedSettingInput
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSetting)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSetting)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput {
+	return o
+}
+
+// Multi-disk data disk mounting information.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput) DataDisks() GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSetting) []GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDisk {
+		return v.DataDisks
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput)
+}
+
+// When the node belongs to the podCIDR size customization mode, you can specify the upper limit of the number of pods running on the node.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput) DesiredPodNumber() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSetting) int { return v.DesiredPodNumber }).(pulumi.IntOutput)
+}
+
+// Dockerd --graph specifies the value, the default is /var/lib/docker.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput) DockerGraphPath() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSetting) string { return v.DockerGraphPath }).(pulumi.StringOutput)
+}
+
+// Node-related custom parameter information.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput) ExtraArgs() GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSetting) []GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArg {
+		return v.ExtraArgs
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput)
+}
+
+// GPU driver related parameters, obtain related GPU parameters: https://cloud.tencent.com/document/api/213/15715.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput) GpuArgs() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSetting) []GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArg {
+		return v.GpuArgs
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput)
+}
+
+// Node Label array.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput) Labels() GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSetting) []GetClusterInstancesInstanceSetInstanceAdvancedSettingLabel {
+		return v.Labels
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput)
+}
+
+// Data disk mount point, the data disk is not mounted by default. Formatted ext3, ext4, xfs file system data disks will be mounted directly. Other file systems or unformatted data disks will be automatically formatted as ext4 (tlinux system formatted as xfs) and mounted. Please pay attention to backing up the data. This setting does not take effect for cloud hosts that have no data disks or multiple data disks.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput) MountTarget() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSetting) string { return v.MountTarget }).(pulumi.StringOutput)
+}
+
+// Base64 encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput) PreStartUserScript() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSetting) string { return v.PreStartUserScript }).(pulumi.StringOutput)
+}
+
+// Node taint.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput) Taints() GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSetting) []GetClusterInstancesInstanceSetInstanceAdvancedSettingTaint {
+		return v.Taints
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput)
+}
+
+// Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput) Unschedulable() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSetting) int { return v.Unschedulable }).(pulumi.IntOutput)
+}
+
+// Base64 encoded userscript.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput) UserScript() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSetting) string { return v.UserScript }).(pulumi.StringOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSetting)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput) Index(i pulumi.IntInput) GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterInstancesInstanceSetInstanceAdvancedSetting {
+		return vs[0].([]GetClusterInstancesInstanceSetInstanceAdvancedSetting)[vs[1].(int)]
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDisk struct {
+	// Whether to automatically format the disk and mount it.
+	AutoFormatAndMount bool `pulumi:"autoFormatAndMount"`
+	// Mount device name or partition name, required when and only when adding an existing node.
+	DiskPartition string `pulumi:"diskPartition"`
+	// Cloud disk size (G).
+	DiskSize int `pulumi:"diskSize"`
+	// Cloud disk type.
+	DiskType string `pulumi:"diskType"`
+	// File system (ext3/ext4/xfs).
+	FileSystem string `pulumi:"fileSystem"`
+	// Data disk mount point, the data disk is not mounted by default. Formatted ext3, ext4, xfs file system data disks will be mounted directly. Other file systems or unformatted data disks will be automatically formatted as ext4 (tlinux system formatted as xfs) and mounted. Please pay attention to backing up the data. This setting does not take effect for cloud hosts that have no data disks or multiple data disks.
+	MountTarget string `pulumi:"mountTarget"`
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArgs and GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArgs{...}
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArgs struct {
+	// Whether to automatically format the disk and mount it.
+	AutoFormatAndMount pulumi.BoolInput `pulumi:"autoFormatAndMount"`
+	// Mount device name or partition name, required when and only when adding an existing node.
+	DiskPartition pulumi.StringInput `pulumi:"diskPartition"`
+	// Cloud disk size (G).
+	DiskSize pulumi.IntInput `pulumi:"diskSize"`
+	// Cloud disk type.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// File system (ext3/ext4/xfs).
+	FileSystem pulumi.StringInput `pulumi:"fileSystem"`
+	// Data disk mount point, the data disk is not mounted by default. Formatted ext3, ext4, xfs file system data disks will be mounted directly. Other file systems or unformatted data disks will be automatically formatted as ext4 (tlinux system formatted as xfs) and mounted. Please pay attention to backing up the data. This setting does not take effect for cloud hosts that have no data disks or multiple data disks.
+	MountTarget pulumi.StringInput `pulumi:"mountTarget"`
+}
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDisk)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput)
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArray and GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArray{ GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArgs{...} }
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArray []GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskInput
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDisk)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDisk)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput {
+	return o
+}
+
+// Whether to automatically format the disk and mount it.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput) AutoFormatAndMount() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDisk) bool {
+		return v.AutoFormatAndMount
+	}).(pulumi.BoolOutput)
+}
+
+// Mount device name or partition name, required when and only when adding an existing node.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput) DiskPartition() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDisk) string { return v.DiskPartition }).(pulumi.StringOutput)
+}
+
+// Cloud disk size (G).
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDisk) int { return v.DiskSize }).(pulumi.IntOutput)
+}
+
+// Cloud disk type.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDisk) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+// File system (ext3/ext4/xfs).
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput) FileSystem() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDisk) string { return v.FileSystem }).(pulumi.StringOutput)
+}
+
+// Data disk mount point, the data disk is not mounted by default. Formatted ext3, ext4, xfs file system data disks will be mounted directly. Other file systems or unformatted data disks will be automatically formatted as ext4 (tlinux system formatted as xfs) and mounted. Please pay attention to backing up the data. This setting does not take effect for cloud hosts that have no data disks or multiple data disks.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput) MountTarget() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDisk) string { return v.MountTarget }).(pulumi.StringOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDisk)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput) Index(i pulumi.IntInput) GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDisk {
+		return vs[0].([]GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDisk)[vs[1].(int)]
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArg struct {
+	// Kubelet custom parameters.
+	Kubelets []string `pulumi:"kubelets"`
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArgs and GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArgs{...}
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArgs struct {
+	// Kubelet custom parameters.
+	Kubelets pulumi.StringArrayInput `pulumi:"kubelets"`
+}
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArg)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput)
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArray and GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArray{ GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArgs{...} }
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArray []GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgInput
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArg)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArg)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput {
+	return o
+}
+
+// Kubelet custom parameters.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput) Kubelets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArg) []string { return v.Kubelets }).(pulumi.StringArrayOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArg)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput) Index(i pulumi.IntInput) GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArg {
+		return vs[0].([]GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArg)[vs[1].(int)]
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArg struct {
+	// CUDA version information.
+	Cudas []GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCuda `pulumi:"cudas"`
+	// CuDNN version information.
+	Cudnns []GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnn `pulumi:"cudnns"`
+	// Custom GPU driver information.
+	CustomDrivers []GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriver `pulumi:"customDrivers"`
+	// GPU driver version information.
+	Drivers []GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriver `pulumi:"drivers"`
+	// Whether to enable MIG features.
+	MigEnable bool `pulumi:"migEnable"`
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArgs and GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArgs{...}
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArgs struct {
+	// CUDA version information.
+	Cudas GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayInput `pulumi:"cudas"`
+	// CuDNN version information.
+	Cudnns GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayInput `pulumi:"cudnns"`
+	// Custom GPU driver information.
+	CustomDrivers GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayInput `pulumi:"customDrivers"`
+	// GPU driver version information.
+	Drivers GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayInput `pulumi:"drivers"`
+	// Whether to enable MIG features.
+	MigEnable pulumi.BoolInput `pulumi:"migEnable"`
+}
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArg)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput)
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArray and GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArray{ GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArgs{...} }
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArray []GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgInput
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArg)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArg)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput {
+	return o
+}
+
+// CUDA version information.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput) Cudas() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArg) []GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCuda {
+		return v.Cudas
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput)
+}
+
+// CuDNN version information.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput) Cudnns() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArg) []GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnn {
+		return v.Cudnns
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput)
+}
+
+// Custom GPU driver information.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput) CustomDrivers() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArg) []GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriver {
+		return v.CustomDrivers
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput)
+}
+
+// GPU driver version information.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput) Drivers() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArg) []GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriver {
+		return v.Drivers
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput)
+}
+
+// Whether to enable MIG features.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput) MigEnable() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArg) bool { return v.MigEnable }).(pulumi.BoolOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArg)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput) Index(i pulumi.IntInput) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArg {
+		return vs[0].([]GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArg)[vs[1].(int)]
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCuda struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name string `pulumi:"name"`
+	// GPU driver or CUDA version.
+	Version string `pulumi:"version"`
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArgs and GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArgs{...}
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArgs struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name pulumi.StringInput `pulumi:"name"`
+	// GPU driver or CUDA version.
+	Version pulumi.StringInput `pulumi:"version"`
+}
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCuda)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput)
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArray and GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArray{ GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArgs{...} }
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArray []GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaInput
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCuda)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCuda)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput {
+	return o
+}
+
+// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCuda) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// GPU driver or CUDA version.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCuda) string { return v.Version }).(pulumi.StringOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCuda)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput) Index(i pulumi.IntInput) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCuda {
+		return vs[0].([]GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCuda)[vs[1].(int)]
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnn struct {
+	// Dev name of cuDNN.
+	DevName string `pulumi:"devName"`
+	// Doc name of cuDNN.
+	DocName string `pulumi:"docName"`
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name string `pulumi:"name"`
+	// GPU driver or CUDA version.
+	Version string `pulumi:"version"`
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArgs and GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArgs{...}
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArgs struct {
+	// Dev name of cuDNN.
+	DevName pulumi.StringInput `pulumi:"devName"`
+	// Doc name of cuDNN.
+	DocName pulumi.StringInput `pulumi:"docName"`
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name pulumi.StringInput `pulumi:"name"`
+	// GPU driver or CUDA version.
+	Version pulumi.StringInput `pulumi:"version"`
+}
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnn)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput)
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArray and GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArray{ GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArgs{...} }
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArray []GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnInput
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnn)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnn)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput {
+	return o
+}
+
+// Dev name of cuDNN.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput) DevName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnn) string { return v.DevName }).(pulumi.StringOutput)
+}
+
+// Doc name of cuDNN.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput) DocName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnn) string { return v.DocName }).(pulumi.StringOutput)
+}
+
+// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnn) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// GPU driver or CUDA version.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnn) string { return v.Version }).(pulumi.StringOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnn)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput) Index(i pulumi.IntInput) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnn {
+		return vs[0].([]GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnn)[vs[1].(int)]
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriver struct {
+	// Custom GPU driver address link.
+	Address string `pulumi:"address"`
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArgs and GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArgs{...}
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArgs struct {
+	// Custom GPU driver address link.
+	Address pulumi.StringInput `pulumi:"address"`
+}
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriver)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput)
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArray and GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArray{ GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArgs{...} }
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArray []GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverInput
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriver)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriver)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput {
+	return o
+}
+
+// Custom GPU driver address link.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput) Address() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriver) string {
+		return v.Address
+	}).(pulumi.StringOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriver)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput) Index(i pulumi.IntInput) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriver {
+		return vs[0].([]GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriver)[vs[1].(int)]
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriver struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name string `pulumi:"name"`
+	// GPU driver or CUDA version.
+	Version string `pulumi:"version"`
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArgs and GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArgs{...}
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArgs struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name pulumi.StringInput `pulumi:"name"`
+	// GPU driver or CUDA version.
+	Version pulumi.StringInput `pulumi:"version"`
+}
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriver)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput)
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArray and GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArray{ GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArgs{...} }
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArray []GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverInput
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriver)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriver)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput {
+	return o
+}
+
+// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriver) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// GPU driver or CUDA version.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriver) string { return v.Version }).(pulumi.StringOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriver)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput) Index(i pulumi.IntInput) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriver {
+		return vs[0].([]GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriver)[vs[1].(int)]
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingLabel struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name string `pulumi:"name"`
+	// Value of taints mark.
+	Value string `pulumi:"value"`
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArgs and GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArgs{...}
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArgs struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Value of taints mark.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingLabel)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput)
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArray and GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArray{ GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArgs{...} }
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArray []GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelInput
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingLabel)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingLabel)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput {
+	return o
+}
+
+// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingLabel) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Value of taints mark.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingLabel) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingLabel)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput) Index(i pulumi.IntInput) GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterInstancesInstanceSetInstanceAdvancedSettingLabel {
+		return vs[0].([]GetClusterInstancesInstanceSetInstanceAdvancedSettingLabel)[vs[1].(int)]
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingTaint struct {
+	// Effect of taints mark.
+	Effect string `pulumi:"effect"`
+	// Key of taints mark.
+	Key string `pulumi:"key"`
+	// Value of taints mark.
+	Value string `pulumi:"value"`
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArgs and GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArgs{...}
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArgs struct {
+	// Effect of taints mark.
+	Effect pulumi.StringInput `pulumi:"effect"`
+	// Key of taints mark.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Value of taints mark.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingTaint)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArgs) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput)
+}
+
+// GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayInput is an input type that accepts GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArray and GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput values.
+// You can construct a concrete instance of `GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayInput` via:
+//
+//          GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArray{ GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArgs{...} }
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput
+	ToGetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutputWithContext(context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArray []GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintInput
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingTaint)(nil)).Elem()
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput {
+	return i.ToGetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArray) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingTaint)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput {
+	return o
+}
+
+// Effect of taints mark.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput) Effect() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingTaint) string { return v.Effect }).(pulumi.StringOutput)
+}
+
+// Key of taints mark.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingTaint) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Value of taints mark.
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterInstancesInstanceSetInstanceAdvancedSettingTaint) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterInstancesInstanceSetInstanceAdvancedSettingTaint)(nil)).Elem()
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput() GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput) ToGetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutputWithContext(ctx context.Context) GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput {
+	return o
+}
+
+func (o GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput) Index(i pulumi.IntInput) GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterInstancesInstanceSetInstanceAdvancedSettingTaint {
+		return vs[0].([]GetClusterInstancesInstanceSetInstanceAdvancedSettingTaint)[vs[1].(int)]
+	}).(GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput)
+}
+
 type GetClusterLevelsList struct {
 	// Alias used for pass to cluster level arguments.
 	Alias string `pulumi:"alias"`
@@ -7656,6 +9204,1934 @@ func (o GetClusterLevelsListArrayOutput) Index(i pulumi.IntInput) GetClusterLeve
 	}).(GetClusterLevelsListOutput)
 }
 
+type GetClusterNodePoolsFilter struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name string `pulumi:"name"`
+	// Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+	Values []string `pulumi:"values"`
+}
+
+// GetClusterNodePoolsFilterInput is an input type that accepts GetClusterNodePoolsFilterArgs and GetClusterNodePoolsFilterOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsFilterInput` via:
+//
+//          GetClusterNodePoolsFilterArgs{...}
+type GetClusterNodePoolsFilterInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsFilterOutput() GetClusterNodePoolsFilterOutput
+	ToGetClusterNodePoolsFilterOutputWithContext(context.Context) GetClusterNodePoolsFilterOutput
+}
+
+type GetClusterNodePoolsFilterArgs struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetClusterNodePoolsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsFilter)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsFilterArgs) ToGetClusterNodePoolsFilterOutput() GetClusterNodePoolsFilterOutput {
+	return i.ToGetClusterNodePoolsFilterOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsFilterArgs) ToGetClusterNodePoolsFilterOutputWithContext(ctx context.Context) GetClusterNodePoolsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsFilterOutput)
+}
+
+// GetClusterNodePoolsFilterArrayInput is an input type that accepts GetClusterNodePoolsFilterArray and GetClusterNodePoolsFilterArrayOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsFilterArrayInput` via:
+//
+//          GetClusterNodePoolsFilterArray{ GetClusterNodePoolsFilterArgs{...} }
+type GetClusterNodePoolsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsFilterArrayOutput() GetClusterNodePoolsFilterArrayOutput
+	ToGetClusterNodePoolsFilterArrayOutputWithContext(context.Context) GetClusterNodePoolsFilterArrayOutput
+}
+
+type GetClusterNodePoolsFilterArray []GetClusterNodePoolsFilterInput
+
+func (GetClusterNodePoolsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsFilter)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsFilterArray) ToGetClusterNodePoolsFilterArrayOutput() GetClusterNodePoolsFilterArrayOutput {
+	return i.ToGetClusterNodePoolsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsFilterArray) ToGetClusterNodePoolsFilterArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsFilterArrayOutput)
+}
+
+type GetClusterNodePoolsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsFilter)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsFilterOutput) ToGetClusterNodePoolsFilterOutput() GetClusterNodePoolsFilterOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsFilterOutput) ToGetClusterNodePoolsFilterOutputWithContext(ctx context.Context) GetClusterNodePoolsFilterOutput {
+	return o
+}
+
+// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+func (o GetClusterNodePoolsFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+func (o GetClusterNodePoolsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetClusterNodePoolsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsFilter)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsFilterArrayOutput) ToGetClusterNodePoolsFilterArrayOutput() GetClusterNodePoolsFilterArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsFilterArrayOutput) ToGetClusterNodePoolsFilterArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsFilterArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsFilterArrayOutput) Index(i pulumi.IntInput) GetClusterNodePoolsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNodePoolsFilter {
+		return vs[0].([]GetClusterNodePoolsFilter)[vs[1].(int)]
+	}).(GetClusterNodePoolsFilterOutput)
+}
+
+type GetClusterNodePoolsNodePoolSet struct {
+	// ID of autoscaling group.
+	AutoscalingGroupId string `pulumi:"autoscalingGroupId"`
+	// Status information.
+	AutoscalingGroupStatus string `pulumi:"autoscalingGroupStatus"`
+	// ID of the cluster.
+	ClusterInstanceId string `pulumi:"clusterInstanceId"`
+	// Multi disk data disk mounting information.
+	DataDisks []GetClusterNodePoolsNodePoolSetDataDisk `pulumi:"dataDisks"`
+	// Remove protection switch.
+	DeletionProtection bool `pulumi:"deletionProtection"`
+	// Expected number of nodes.
+	DesiredNodesNum int `pulumi:"desiredNodesNum"`
+	// When the cluster belongs to the node podCIDR size customization mode, the node pool needs to have the pod number attribute.
+	DesiredPodNum int `pulumi:"desiredPodNum"`
+	// Dockerd --graph specified value, default to /var/lib/docker.
+	DockerGraphPath string `pulumi:"dockerGraphPath"`
+	// Node configuration.
+	ExtraArgs []GetClusterNodePoolsNodePoolSetExtraArg `pulumi:"extraArgs"`
+	// GPU driver related parameters.
+	GpuArgs []GetClusterNodePoolsNodePoolSetGpuArg `pulumi:"gpuArgs"`
+	// ID of image.
+	ImageId string `pulumi:"imageId"`
+	// Labels of the node pool.
+	Labels []GetClusterNodePoolsNodePoolSetLabel `pulumi:"labels"`
+	// ID of launch configuration.
+	LaunchConfigurationId string `pulumi:"launchConfigurationId"`
+	// Life cycle state of the node pool, include: creating, normal, updating, deleting, deleted.
+	LifeState string `pulumi:"lifeState"`
+	// Maximum number of nodes.
+	MaxNodesNum int `pulumi:"maxNodesNum"`
+	// Minimum number of nodes.
+	MinNodesNum int `pulumi:"minNodesNum"`
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name string `pulumi:"name"`
+	// Node List.
+	NodeCountSummaries []GetClusterNodePoolsNodePoolSetNodeCountSummary `pulumi:"nodeCountSummaries"`
+	// ID of the node pool.
+	NodePoolId string `pulumi:"nodePoolId"`
+	// Node Pool OS Name.
+	NodePoolOs string `pulumi:"nodePoolOs"`
+	// Mirror version of container.
+	OsCustomizeType string `pulumi:"osCustomizeType"`
+	// User defined script, executed before User Script.
+	PreStartUserScript string `pulumi:"preStartUserScript"`
+	// Resource tags.
+	Tags []GetClusterNodePoolsNodePoolSetTag `pulumi:"tags"`
+	// Labels of the node pool.
+	Taints []GetClusterNodePoolsNodePoolSetTaint `pulumi:"taints"`
+	// Is it not schedulable.
+	Unschedulable int `pulumi:"unschedulable"`
+	// User defined scripts.
+	UserScript string `pulumi:"userScript"`
+}
+
+// GetClusterNodePoolsNodePoolSetInput is an input type that accepts GetClusterNodePoolsNodePoolSetArgs and GetClusterNodePoolsNodePoolSetOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetArgs{...}
+type GetClusterNodePoolsNodePoolSetInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetOutput() GetClusterNodePoolsNodePoolSetOutput
+	ToGetClusterNodePoolsNodePoolSetOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetOutput
+}
+
+type GetClusterNodePoolsNodePoolSetArgs struct {
+	// ID of autoscaling group.
+	AutoscalingGroupId pulumi.StringInput `pulumi:"autoscalingGroupId"`
+	// Status information.
+	AutoscalingGroupStatus pulumi.StringInput `pulumi:"autoscalingGroupStatus"`
+	// ID of the cluster.
+	ClusterInstanceId pulumi.StringInput `pulumi:"clusterInstanceId"`
+	// Multi disk data disk mounting information.
+	DataDisks GetClusterNodePoolsNodePoolSetDataDiskArrayInput `pulumi:"dataDisks"`
+	// Remove protection switch.
+	DeletionProtection pulumi.BoolInput `pulumi:"deletionProtection"`
+	// Expected number of nodes.
+	DesiredNodesNum pulumi.IntInput `pulumi:"desiredNodesNum"`
+	// When the cluster belongs to the node podCIDR size customization mode, the node pool needs to have the pod number attribute.
+	DesiredPodNum pulumi.IntInput `pulumi:"desiredPodNum"`
+	// Dockerd --graph specified value, default to /var/lib/docker.
+	DockerGraphPath pulumi.StringInput `pulumi:"dockerGraphPath"`
+	// Node configuration.
+	ExtraArgs GetClusterNodePoolsNodePoolSetExtraArgArrayInput `pulumi:"extraArgs"`
+	// GPU driver related parameters.
+	GpuArgs GetClusterNodePoolsNodePoolSetGpuArgArrayInput `pulumi:"gpuArgs"`
+	// ID of image.
+	ImageId pulumi.StringInput `pulumi:"imageId"`
+	// Labels of the node pool.
+	Labels GetClusterNodePoolsNodePoolSetLabelArrayInput `pulumi:"labels"`
+	// ID of launch configuration.
+	LaunchConfigurationId pulumi.StringInput `pulumi:"launchConfigurationId"`
+	// Life cycle state of the node pool, include: creating, normal, updating, deleting, deleted.
+	LifeState pulumi.StringInput `pulumi:"lifeState"`
+	// Maximum number of nodes.
+	MaxNodesNum pulumi.IntInput `pulumi:"maxNodesNum"`
+	// Minimum number of nodes.
+	MinNodesNum pulumi.IntInput `pulumi:"minNodesNum"`
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Node List.
+	NodeCountSummaries GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayInput `pulumi:"nodeCountSummaries"`
+	// ID of the node pool.
+	NodePoolId pulumi.StringInput `pulumi:"nodePoolId"`
+	// Node Pool OS Name.
+	NodePoolOs pulumi.StringInput `pulumi:"nodePoolOs"`
+	// Mirror version of container.
+	OsCustomizeType pulumi.StringInput `pulumi:"osCustomizeType"`
+	// User defined script, executed before User Script.
+	PreStartUserScript pulumi.StringInput `pulumi:"preStartUserScript"`
+	// Resource tags.
+	Tags GetClusterNodePoolsNodePoolSetTagArrayInput `pulumi:"tags"`
+	// Labels of the node pool.
+	Taints GetClusterNodePoolsNodePoolSetTaintArrayInput `pulumi:"taints"`
+	// Is it not schedulable.
+	Unschedulable pulumi.IntInput `pulumi:"unschedulable"`
+	// User defined scripts.
+	UserScript pulumi.StringInput `pulumi:"userScript"`
+}
+
+func (GetClusterNodePoolsNodePoolSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSet)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetArgs) ToGetClusterNodePoolsNodePoolSetOutput() GetClusterNodePoolsNodePoolSetOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetArgs) ToGetClusterNodePoolsNodePoolSetOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetOutput)
+}
+
+// GetClusterNodePoolsNodePoolSetArrayInput is an input type that accepts GetClusterNodePoolsNodePoolSetArray and GetClusterNodePoolsNodePoolSetArrayOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetArrayInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetArray{ GetClusterNodePoolsNodePoolSetArgs{...} }
+type GetClusterNodePoolsNodePoolSetArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetArrayOutput() GetClusterNodePoolsNodePoolSetArrayOutput
+	ToGetClusterNodePoolsNodePoolSetArrayOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetArrayOutput
+}
+
+type GetClusterNodePoolsNodePoolSetArray []GetClusterNodePoolsNodePoolSetInput
+
+func (GetClusterNodePoolsNodePoolSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSet)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetArray) ToGetClusterNodePoolsNodePoolSetArrayOutput() GetClusterNodePoolsNodePoolSetArrayOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetArray) ToGetClusterNodePoolsNodePoolSetArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetArrayOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSet)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetOutput) ToGetClusterNodePoolsNodePoolSetOutput() GetClusterNodePoolsNodePoolSetOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetOutput) ToGetClusterNodePoolsNodePoolSetOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetOutput {
+	return o
+}
+
+// ID of autoscaling group.
+func (o GetClusterNodePoolsNodePoolSetOutput) AutoscalingGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) string { return v.AutoscalingGroupId }).(pulumi.StringOutput)
+}
+
+// Status information.
+func (o GetClusterNodePoolsNodePoolSetOutput) AutoscalingGroupStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) string { return v.AutoscalingGroupStatus }).(pulumi.StringOutput)
+}
+
+// ID of the cluster.
+func (o GetClusterNodePoolsNodePoolSetOutput) ClusterInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) string { return v.ClusterInstanceId }).(pulumi.StringOutput)
+}
+
+// Multi disk data disk mounting information.
+func (o GetClusterNodePoolsNodePoolSetOutput) DataDisks() GetClusterNodePoolsNodePoolSetDataDiskArrayOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) []GetClusterNodePoolsNodePoolSetDataDisk { return v.DataDisks }).(GetClusterNodePoolsNodePoolSetDataDiskArrayOutput)
+}
+
+// Remove protection switch.
+func (o GetClusterNodePoolsNodePoolSetOutput) DeletionProtection() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) bool { return v.DeletionProtection }).(pulumi.BoolOutput)
+}
+
+// Expected number of nodes.
+func (o GetClusterNodePoolsNodePoolSetOutput) DesiredNodesNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) int { return v.DesiredNodesNum }).(pulumi.IntOutput)
+}
+
+// When the cluster belongs to the node podCIDR size customization mode, the node pool needs to have the pod number attribute.
+func (o GetClusterNodePoolsNodePoolSetOutput) DesiredPodNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) int { return v.DesiredPodNum }).(pulumi.IntOutput)
+}
+
+// Dockerd --graph specified value, default to /var/lib/docker.
+func (o GetClusterNodePoolsNodePoolSetOutput) DockerGraphPath() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) string { return v.DockerGraphPath }).(pulumi.StringOutput)
+}
+
+// Node configuration.
+func (o GetClusterNodePoolsNodePoolSetOutput) ExtraArgs() GetClusterNodePoolsNodePoolSetExtraArgArrayOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) []GetClusterNodePoolsNodePoolSetExtraArg { return v.ExtraArgs }).(GetClusterNodePoolsNodePoolSetExtraArgArrayOutput)
+}
+
+// GPU driver related parameters.
+func (o GetClusterNodePoolsNodePoolSetOutput) GpuArgs() GetClusterNodePoolsNodePoolSetGpuArgArrayOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) []GetClusterNodePoolsNodePoolSetGpuArg { return v.GpuArgs }).(GetClusterNodePoolsNodePoolSetGpuArgArrayOutput)
+}
+
+// ID of image.
+func (o GetClusterNodePoolsNodePoolSetOutput) ImageId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) string { return v.ImageId }).(pulumi.StringOutput)
+}
+
+// Labels of the node pool.
+func (o GetClusterNodePoolsNodePoolSetOutput) Labels() GetClusterNodePoolsNodePoolSetLabelArrayOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) []GetClusterNodePoolsNodePoolSetLabel { return v.Labels }).(GetClusterNodePoolsNodePoolSetLabelArrayOutput)
+}
+
+// ID of launch configuration.
+func (o GetClusterNodePoolsNodePoolSetOutput) LaunchConfigurationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) string { return v.LaunchConfigurationId }).(pulumi.StringOutput)
+}
+
+// Life cycle state of the node pool, include: creating, normal, updating, deleting, deleted.
+func (o GetClusterNodePoolsNodePoolSetOutput) LifeState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) string { return v.LifeState }).(pulumi.StringOutput)
+}
+
+// Maximum number of nodes.
+func (o GetClusterNodePoolsNodePoolSetOutput) MaxNodesNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) int { return v.MaxNodesNum }).(pulumi.IntOutput)
+}
+
+// Minimum number of nodes.
+func (o GetClusterNodePoolsNodePoolSetOutput) MinNodesNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) int { return v.MinNodesNum }).(pulumi.IntOutput)
+}
+
+// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+func (o GetClusterNodePoolsNodePoolSetOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Node List.
+func (o GetClusterNodePoolsNodePoolSetOutput) NodeCountSummaries() GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) []GetClusterNodePoolsNodePoolSetNodeCountSummary {
+		return v.NodeCountSummaries
+	}).(GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput)
+}
+
+// ID of the node pool.
+func (o GetClusterNodePoolsNodePoolSetOutput) NodePoolId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) string { return v.NodePoolId }).(pulumi.StringOutput)
+}
+
+// Node Pool OS Name.
+func (o GetClusterNodePoolsNodePoolSetOutput) NodePoolOs() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) string { return v.NodePoolOs }).(pulumi.StringOutput)
+}
+
+// Mirror version of container.
+func (o GetClusterNodePoolsNodePoolSetOutput) OsCustomizeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) string { return v.OsCustomizeType }).(pulumi.StringOutput)
+}
+
+// User defined script, executed before User Script.
+func (o GetClusterNodePoolsNodePoolSetOutput) PreStartUserScript() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) string { return v.PreStartUserScript }).(pulumi.StringOutput)
+}
+
+// Resource tags.
+func (o GetClusterNodePoolsNodePoolSetOutput) Tags() GetClusterNodePoolsNodePoolSetTagArrayOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) []GetClusterNodePoolsNodePoolSetTag { return v.Tags }).(GetClusterNodePoolsNodePoolSetTagArrayOutput)
+}
+
+// Labels of the node pool.
+func (o GetClusterNodePoolsNodePoolSetOutput) Taints() GetClusterNodePoolsNodePoolSetTaintArrayOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) []GetClusterNodePoolsNodePoolSetTaint { return v.Taints }).(GetClusterNodePoolsNodePoolSetTaintArrayOutput)
+}
+
+// Is it not schedulable.
+func (o GetClusterNodePoolsNodePoolSetOutput) Unschedulable() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) int { return v.Unschedulable }).(pulumi.IntOutput)
+}
+
+// User defined scripts.
+func (o GetClusterNodePoolsNodePoolSetOutput) UserScript() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSet) string { return v.UserScript }).(pulumi.StringOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSet)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetArrayOutput) ToGetClusterNodePoolsNodePoolSetArrayOutput() GetClusterNodePoolsNodePoolSetArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetArrayOutput) ToGetClusterNodePoolsNodePoolSetArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetArrayOutput) Index(i pulumi.IntInput) GetClusterNodePoolsNodePoolSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNodePoolsNodePoolSet {
+		return vs[0].([]GetClusterNodePoolsNodePoolSet)[vs[1].(int)]
+	}).(GetClusterNodePoolsNodePoolSetOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetDataDisk struct {
+	// Whether to automate the format disk and mount it.
+	AutoFormatAndMount bool `pulumi:"autoFormatAndMount"`
+	// Mount device name or partition name.
+	DiskPartition string `pulumi:"diskPartition"`
+	// Cloud disk size(G).
+	DiskSize int `pulumi:"diskSize"`
+	// Cloud disk type.
+	DiskType string `pulumi:"diskType"`
+	// File system(ext3/ext4/xfs).
+	FileSystem string `pulumi:"fileSystem"`
+	// Mount directory.
+	MountTarget string `pulumi:"mountTarget"`
+}
+
+// GetClusterNodePoolsNodePoolSetDataDiskInput is an input type that accepts GetClusterNodePoolsNodePoolSetDataDiskArgs and GetClusterNodePoolsNodePoolSetDataDiskOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetDataDiskInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetDataDiskArgs{...}
+type GetClusterNodePoolsNodePoolSetDataDiskInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetDataDiskOutput() GetClusterNodePoolsNodePoolSetDataDiskOutput
+	ToGetClusterNodePoolsNodePoolSetDataDiskOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetDataDiskOutput
+}
+
+type GetClusterNodePoolsNodePoolSetDataDiskArgs struct {
+	// Whether to automate the format disk and mount it.
+	AutoFormatAndMount pulumi.BoolInput `pulumi:"autoFormatAndMount"`
+	// Mount device name or partition name.
+	DiskPartition pulumi.StringInput `pulumi:"diskPartition"`
+	// Cloud disk size(G).
+	DiskSize pulumi.IntInput `pulumi:"diskSize"`
+	// Cloud disk type.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// File system(ext3/ext4/xfs).
+	FileSystem pulumi.StringInput `pulumi:"fileSystem"`
+	// Mount directory.
+	MountTarget pulumi.StringInput `pulumi:"mountTarget"`
+}
+
+func (GetClusterNodePoolsNodePoolSetDataDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetDataDisk)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetDataDiskArgs) ToGetClusterNodePoolsNodePoolSetDataDiskOutput() GetClusterNodePoolsNodePoolSetDataDiskOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetDataDiskOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetDataDiskArgs) ToGetClusterNodePoolsNodePoolSetDataDiskOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetDataDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetDataDiskOutput)
+}
+
+// GetClusterNodePoolsNodePoolSetDataDiskArrayInput is an input type that accepts GetClusterNodePoolsNodePoolSetDataDiskArray and GetClusterNodePoolsNodePoolSetDataDiskArrayOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetDataDiskArrayInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetDataDiskArray{ GetClusterNodePoolsNodePoolSetDataDiskArgs{...} }
+type GetClusterNodePoolsNodePoolSetDataDiskArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetDataDiskArrayOutput() GetClusterNodePoolsNodePoolSetDataDiskArrayOutput
+	ToGetClusterNodePoolsNodePoolSetDataDiskArrayOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetDataDiskArrayOutput
+}
+
+type GetClusterNodePoolsNodePoolSetDataDiskArray []GetClusterNodePoolsNodePoolSetDataDiskInput
+
+func (GetClusterNodePoolsNodePoolSetDataDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetDataDisk)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetDataDiskArray) ToGetClusterNodePoolsNodePoolSetDataDiskArrayOutput() GetClusterNodePoolsNodePoolSetDataDiskArrayOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetDataDiskArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetDataDiskArray) ToGetClusterNodePoolsNodePoolSetDataDiskArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetDataDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetDataDiskArrayOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetDataDiskOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetDataDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetDataDisk)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetDataDiskOutput) ToGetClusterNodePoolsNodePoolSetDataDiskOutput() GetClusterNodePoolsNodePoolSetDataDiskOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetDataDiskOutput) ToGetClusterNodePoolsNodePoolSetDataDiskOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetDataDiskOutput {
+	return o
+}
+
+// Whether to automate the format disk and mount it.
+func (o GetClusterNodePoolsNodePoolSetDataDiskOutput) AutoFormatAndMount() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetDataDisk) bool { return v.AutoFormatAndMount }).(pulumi.BoolOutput)
+}
+
+// Mount device name or partition name.
+func (o GetClusterNodePoolsNodePoolSetDataDiskOutput) DiskPartition() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetDataDisk) string { return v.DiskPartition }).(pulumi.StringOutput)
+}
+
+// Cloud disk size(G).
+func (o GetClusterNodePoolsNodePoolSetDataDiskOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetDataDisk) int { return v.DiskSize }).(pulumi.IntOutput)
+}
+
+// Cloud disk type.
+func (o GetClusterNodePoolsNodePoolSetDataDiskOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetDataDisk) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+// File system(ext3/ext4/xfs).
+func (o GetClusterNodePoolsNodePoolSetDataDiskOutput) FileSystem() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetDataDisk) string { return v.FileSystem }).(pulumi.StringOutput)
+}
+
+// Mount directory.
+func (o GetClusterNodePoolsNodePoolSetDataDiskOutput) MountTarget() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetDataDisk) string { return v.MountTarget }).(pulumi.StringOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetDataDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetDataDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetDataDisk)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetDataDiskArrayOutput) ToGetClusterNodePoolsNodePoolSetDataDiskArrayOutput() GetClusterNodePoolsNodePoolSetDataDiskArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetDataDiskArrayOutput) ToGetClusterNodePoolsNodePoolSetDataDiskArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetDataDiskArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetDataDiskArrayOutput) Index(i pulumi.IntInput) GetClusterNodePoolsNodePoolSetDataDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNodePoolsNodePoolSetDataDisk {
+		return vs[0].([]GetClusterNodePoolsNodePoolSetDataDisk)[vs[1].(int)]
+	}).(GetClusterNodePoolsNodePoolSetDataDiskOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetExtraArg struct {
+	// Kubelet custom parameters.
+	Kubelets []string `pulumi:"kubelets"`
+}
+
+// GetClusterNodePoolsNodePoolSetExtraArgInput is an input type that accepts GetClusterNodePoolsNodePoolSetExtraArgArgs and GetClusterNodePoolsNodePoolSetExtraArgOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetExtraArgInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetExtraArgArgs{...}
+type GetClusterNodePoolsNodePoolSetExtraArgInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetExtraArgOutput() GetClusterNodePoolsNodePoolSetExtraArgOutput
+	ToGetClusterNodePoolsNodePoolSetExtraArgOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetExtraArgOutput
+}
+
+type GetClusterNodePoolsNodePoolSetExtraArgArgs struct {
+	// Kubelet custom parameters.
+	Kubelets pulumi.StringArrayInput `pulumi:"kubelets"`
+}
+
+func (GetClusterNodePoolsNodePoolSetExtraArgArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetExtraArg)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetExtraArgArgs) ToGetClusterNodePoolsNodePoolSetExtraArgOutput() GetClusterNodePoolsNodePoolSetExtraArgOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetExtraArgOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetExtraArgArgs) ToGetClusterNodePoolsNodePoolSetExtraArgOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetExtraArgOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetExtraArgOutput)
+}
+
+// GetClusterNodePoolsNodePoolSetExtraArgArrayInput is an input type that accepts GetClusterNodePoolsNodePoolSetExtraArgArray and GetClusterNodePoolsNodePoolSetExtraArgArrayOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetExtraArgArrayInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetExtraArgArray{ GetClusterNodePoolsNodePoolSetExtraArgArgs{...} }
+type GetClusterNodePoolsNodePoolSetExtraArgArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetExtraArgArrayOutput() GetClusterNodePoolsNodePoolSetExtraArgArrayOutput
+	ToGetClusterNodePoolsNodePoolSetExtraArgArrayOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetExtraArgArrayOutput
+}
+
+type GetClusterNodePoolsNodePoolSetExtraArgArray []GetClusterNodePoolsNodePoolSetExtraArgInput
+
+func (GetClusterNodePoolsNodePoolSetExtraArgArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetExtraArg)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetExtraArgArray) ToGetClusterNodePoolsNodePoolSetExtraArgArrayOutput() GetClusterNodePoolsNodePoolSetExtraArgArrayOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetExtraArgArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetExtraArgArray) ToGetClusterNodePoolsNodePoolSetExtraArgArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetExtraArgArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetExtraArgArrayOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetExtraArgOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetExtraArgOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetExtraArg)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetExtraArgOutput) ToGetClusterNodePoolsNodePoolSetExtraArgOutput() GetClusterNodePoolsNodePoolSetExtraArgOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetExtraArgOutput) ToGetClusterNodePoolsNodePoolSetExtraArgOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetExtraArgOutput {
+	return o
+}
+
+// Kubelet custom parameters.
+func (o GetClusterNodePoolsNodePoolSetExtraArgOutput) Kubelets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetExtraArg) []string { return v.Kubelets }).(pulumi.StringArrayOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetExtraArgArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetExtraArgArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetExtraArg)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetExtraArgArrayOutput) ToGetClusterNodePoolsNodePoolSetExtraArgArrayOutput() GetClusterNodePoolsNodePoolSetExtraArgArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetExtraArgArrayOutput) ToGetClusterNodePoolsNodePoolSetExtraArgArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetExtraArgArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetExtraArgArrayOutput) Index(i pulumi.IntInput) GetClusterNodePoolsNodePoolSetExtraArgOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNodePoolsNodePoolSetExtraArg {
+		return vs[0].([]GetClusterNodePoolsNodePoolSetExtraArg)[vs[1].(int)]
+	}).(GetClusterNodePoolsNodePoolSetExtraArgOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArg struct {
+	// CUDA version information.
+	Cudas []GetClusterNodePoolsNodePoolSetGpuArgCuda `pulumi:"cudas"`
+	// CuDNN version information.
+	Cudnns []GetClusterNodePoolsNodePoolSetGpuArgCudnn `pulumi:"cudnns"`
+	// Custom GPU driver information.
+	CustomDrivers []GetClusterNodePoolsNodePoolSetGpuArgCustomDriver `pulumi:"customDrivers"`
+	// GPU driver version information.
+	Drivers []GetClusterNodePoolsNodePoolSetGpuArgDriver `pulumi:"drivers"`
+	// Is the MIG feature enabled.
+	MigEnable bool `pulumi:"migEnable"`
+}
+
+// GetClusterNodePoolsNodePoolSetGpuArgInput is an input type that accepts GetClusterNodePoolsNodePoolSetGpuArgArgs and GetClusterNodePoolsNodePoolSetGpuArgOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetGpuArgInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetGpuArgArgs{...}
+type GetClusterNodePoolsNodePoolSetGpuArgInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetGpuArgOutput() GetClusterNodePoolsNodePoolSetGpuArgOutput
+	ToGetClusterNodePoolsNodePoolSetGpuArgOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetGpuArgOutput
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgArgs struct {
+	// CUDA version information.
+	Cudas GetClusterNodePoolsNodePoolSetGpuArgCudaArrayInput `pulumi:"cudas"`
+	// CuDNN version information.
+	Cudnns GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayInput `pulumi:"cudnns"`
+	// Custom GPU driver information.
+	CustomDrivers GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayInput `pulumi:"customDrivers"`
+	// GPU driver version information.
+	Drivers GetClusterNodePoolsNodePoolSetGpuArgDriverArrayInput `pulumi:"drivers"`
+	// Is the MIG feature enabled.
+	MigEnable pulumi.BoolInput `pulumi:"migEnable"`
+}
+
+func (GetClusterNodePoolsNodePoolSetGpuArgArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArg)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgArgs) ToGetClusterNodePoolsNodePoolSetGpuArgOutput() GetClusterNodePoolsNodePoolSetGpuArgOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetGpuArgOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgArgs) ToGetClusterNodePoolsNodePoolSetGpuArgOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetGpuArgOutput)
+}
+
+// GetClusterNodePoolsNodePoolSetGpuArgArrayInput is an input type that accepts GetClusterNodePoolsNodePoolSetGpuArgArray and GetClusterNodePoolsNodePoolSetGpuArgArrayOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetGpuArgArrayInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetGpuArgArray{ GetClusterNodePoolsNodePoolSetGpuArgArgs{...} }
+type GetClusterNodePoolsNodePoolSetGpuArgArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetGpuArgArrayOutput() GetClusterNodePoolsNodePoolSetGpuArgArrayOutput
+	ToGetClusterNodePoolsNodePoolSetGpuArgArrayOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetGpuArgArrayOutput
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgArray []GetClusterNodePoolsNodePoolSetGpuArgInput
+
+func (GetClusterNodePoolsNodePoolSetGpuArgArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetGpuArg)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgArray) ToGetClusterNodePoolsNodePoolSetGpuArgArrayOutput() GetClusterNodePoolsNodePoolSetGpuArgArrayOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetGpuArgArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgArray) ToGetClusterNodePoolsNodePoolSetGpuArgArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetGpuArgArrayOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetGpuArgOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArg)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgOutput) ToGetClusterNodePoolsNodePoolSetGpuArgOutput() GetClusterNodePoolsNodePoolSetGpuArgOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgOutput) ToGetClusterNodePoolsNodePoolSetGpuArgOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgOutput {
+	return o
+}
+
+// CUDA version information.
+func (o GetClusterNodePoolsNodePoolSetGpuArgOutput) Cudas() GetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetGpuArg) []GetClusterNodePoolsNodePoolSetGpuArgCuda {
+		return v.Cudas
+	}).(GetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput)
+}
+
+// CuDNN version information.
+func (o GetClusterNodePoolsNodePoolSetGpuArgOutput) Cudnns() GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetGpuArg) []GetClusterNodePoolsNodePoolSetGpuArgCudnn {
+		return v.Cudnns
+	}).(GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput)
+}
+
+// Custom GPU driver information.
+func (o GetClusterNodePoolsNodePoolSetGpuArgOutput) CustomDrivers() GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetGpuArg) []GetClusterNodePoolsNodePoolSetGpuArgCustomDriver {
+		return v.CustomDrivers
+	}).(GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput)
+}
+
+// GPU driver version information.
+func (o GetClusterNodePoolsNodePoolSetGpuArgOutput) Drivers() GetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetGpuArg) []GetClusterNodePoolsNodePoolSetGpuArgDriver {
+		return v.Drivers
+	}).(GetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput)
+}
+
+// Is the MIG feature enabled.
+func (o GetClusterNodePoolsNodePoolSetGpuArgOutput) MigEnable() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetGpuArg) bool { return v.MigEnable }).(pulumi.BoolOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetGpuArgArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetGpuArg)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgArrayOutput) ToGetClusterNodePoolsNodePoolSetGpuArgArrayOutput() GetClusterNodePoolsNodePoolSetGpuArgArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgArrayOutput) ToGetClusterNodePoolsNodePoolSetGpuArgArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgArrayOutput) Index(i pulumi.IntInput) GetClusterNodePoolsNodePoolSetGpuArgOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNodePoolsNodePoolSetGpuArg {
+		return vs[0].([]GetClusterNodePoolsNodePoolSetGpuArg)[vs[1].(int)]
+	}).(GetClusterNodePoolsNodePoolSetGpuArgOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgCuda struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name string `pulumi:"name"`
+	// GPU driver or CUDA version.
+	Version string `pulumi:"version"`
+}
+
+// GetClusterNodePoolsNodePoolSetGpuArgCudaInput is an input type that accepts GetClusterNodePoolsNodePoolSetGpuArgCudaArgs and GetClusterNodePoolsNodePoolSetGpuArgCudaOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetGpuArgCudaInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetGpuArgCudaArgs{...}
+type GetClusterNodePoolsNodePoolSetGpuArgCudaInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetGpuArgCudaOutput() GetClusterNodePoolsNodePoolSetGpuArgCudaOutput
+	ToGetClusterNodePoolsNodePoolSetGpuArgCudaOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetGpuArgCudaOutput
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgCudaArgs struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name pulumi.StringInput `pulumi:"name"`
+	// GPU driver or CUDA version.
+	Version pulumi.StringInput `pulumi:"version"`
+}
+
+func (GetClusterNodePoolsNodePoolSetGpuArgCudaArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgCuda)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgCudaArgs) ToGetClusterNodePoolsNodePoolSetGpuArgCudaOutput() GetClusterNodePoolsNodePoolSetGpuArgCudaOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetGpuArgCudaOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgCudaArgs) ToGetClusterNodePoolsNodePoolSetGpuArgCudaOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgCudaOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetGpuArgCudaOutput)
+}
+
+// GetClusterNodePoolsNodePoolSetGpuArgCudaArrayInput is an input type that accepts GetClusterNodePoolsNodePoolSetGpuArgCudaArray and GetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetGpuArgCudaArrayInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetGpuArgCudaArray{ GetClusterNodePoolsNodePoolSetGpuArgCudaArgs{...} }
+type GetClusterNodePoolsNodePoolSetGpuArgCudaArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput() GetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput
+	ToGetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgCudaArray []GetClusterNodePoolsNodePoolSetGpuArgCudaInput
+
+func (GetClusterNodePoolsNodePoolSetGpuArgCudaArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetGpuArgCuda)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgCudaArray) ToGetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput() GetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgCudaArray) ToGetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgCudaOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetGpuArgCudaOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgCuda)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgCudaOutput) ToGetClusterNodePoolsNodePoolSetGpuArgCudaOutput() GetClusterNodePoolsNodePoolSetGpuArgCudaOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgCudaOutput) ToGetClusterNodePoolsNodePoolSetGpuArgCudaOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgCudaOutput {
+	return o
+}
+
+// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+func (o GetClusterNodePoolsNodePoolSetGpuArgCudaOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetGpuArgCuda) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// GPU driver or CUDA version.
+func (o GetClusterNodePoolsNodePoolSetGpuArgCudaOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetGpuArgCuda) string { return v.Version }).(pulumi.StringOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetGpuArgCuda)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput) ToGetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput() GetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput) ToGetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput) Index(i pulumi.IntInput) GetClusterNodePoolsNodePoolSetGpuArgCudaOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNodePoolsNodePoolSetGpuArgCuda {
+		return vs[0].([]GetClusterNodePoolsNodePoolSetGpuArgCuda)[vs[1].(int)]
+	}).(GetClusterNodePoolsNodePoolSetGpuArgCudaOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgCudnn struct {
+	// Dev name of cuDNN.
+	DevName string `pulumi:"devName"`
+	// Doc name of cuDNN.
+	DocName string `pulumi:"docName"`
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name string `pulumi:"name"`
+	// GPU driver or CUDA version.
+	Version string `pulumi:"version"`
+}
+
+// GetClusterNodePoolsNodePoolSetGpuArgCudnnInput is an input type that accepts GetClusterNodePoolsNodePoolSetGpuArgCudnnArgs and GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetGpuArgCudnnInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetGpuArgCudnnArgs{...}
+type GetClusterNodePoolsNodePoolSetGpuArgCudnnInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetGpuArgCudnnOutput() GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput
+	ToGetClusterNodePoolsNodePoolSetGpuArgCudnnOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgCudnnArgs struct {
+	// Dev name of cuDNN.
+	DevName pulumi.StringInput `pulumi:"devName"`
+	// Doc name of cuDNN.
+	DocName pulumi.StringInput `pulumi:"docName"`
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name pulumi.StringInput `pulumi:"name"`
+	// GPU driver or CUDA version.
+	Version pulumi.StringInput `pulumi:"version"`
+}
+
+func (GetClusterNodePoolsNodePoolSetGpuArgCudnnArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgCudnn)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgCudnnArgs) ToGetClusterNodePoolsNodePoolSetGpuArgCudnnOutput() GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetGpuArgCudnnOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgCudnnArgs) ToGetClusterNodePoolsNodePoolSetGpuArgCudnnOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput)
+}
+
+// GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayInput is an input type that accepts GetClusterNodePoolsNodePoolSetGpuArgCudnnArray and GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetGpuArgCudnnArray{ GetClusterNodePoolsNodePoolSetGpuArgCudnnArgs{...} }
+type GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput() GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput
+	ToGetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgCudnnArray []GetClusterNodePoolsNodePoolSetGpuArgCudnnInput
+
+func (GetClusterNodePoolsNodePoolSetGpuArgCudnnArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetGpuArgCudnn)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgCudnnArray) ToGetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput() GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgCudnnArray) ToGetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgCudnn)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput) ToGetClusterNodePoolsNodePoolSetGpuArgCudnnOutput() GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput) ToGetClusterNodePoolsNodePoolSetGpuArgCudnnOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput {
+	return o
+}
+
+// Dev name of cuDNN.
+func (o GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput) DevName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetGpuArgCudnn) string { return v.DevName }).(pulumi.StringOutput)
+}
+
+// Doc name of cuDNN.
+func (o GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput) DocName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetGpuArgCudnn) string { return v.DocName }).(pulumi.StringOutput)
+}
+
+// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+func (o GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetGpuArgCudnn) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// GPU driver or CUDA version.
+func (o GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetGpuArgCudnn) string { return v.Version }).(pulumi.StringOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetGpuArgCudnn)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput) ToGetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput() GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput) ToGetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput) Index(i pulumi.IntInput) GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNodePoolsNodePoolSetGpuArgCudnn {
+		return vs[0].([]GetClusterNodePoolsNodePoolSetGpuArgCudnn)[vs[1].(int)]
+	}).(GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgCustomDriver struct {
+	// Custom GPU driver address link.
+	Address string `pulumi:"address"`
+}
+
+// GetClusterNodePoolsNodePoolSetGpuArgCustomDriverInput is an input type that accepts GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArgs and GetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetGpuArgCustomDriverInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArgs{...}
+type GetClusterNodePoolsNodePoolSetGpuArgCustomDriverInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput() GetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput
+	ToGetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArgs struct {
+	// Custom GPU driver address link.
+	Address pulumi.StringInput `pulumi:"address"`
+}
+
+func (GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgCustomDriver)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArgs) ToGetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput() GetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArgs) ToGetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput)
+}
+
+// GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayInput is an input type that accepts GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArray and GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArray{ GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArgs{...} }
+type GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput() GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput
+	ToGetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArray []GetClusterNodePoolsNodePoolSetGpuArgCustomDriverInput
+
+func (GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetGpuArgCustomDriver)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArray) ToGetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput() GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArray) ToGetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgCustomDriver)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput) ToGetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput() GetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput) ToGetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput {
+	return o
+}
+
+// Custom GPU driver address link.
+func (o GetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput) Address() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetGpuArgCustomDriver) string { return v.Address }).(pulumi.StringOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetGpuArgCustomDriver)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput) ToGetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput() GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput) ToGetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput) Index(i pulumi.IntInput) GetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNodePoolsNodePoolSetGpuArgCustomDriver {
+		return vs[0].([]GetClusterNodePoolsNodePoolSetGpuArgCustomDriver)[vs[1].(int)]
+	}).(GetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgDriver struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name string `pulumi:"name"`
+	// GPU driver or CUDA version.
+	Version string `pulumi:"version"`
+}
+
+// GetClusterNodePoolsNodePoolSetGpuArgDriverInput is an input type that accepts GetClusterNodePoolsNodePoolSetGpuArgDriverArgs and GetClusterNodePoolsNodePoolSetGpuArgDriverOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetGpuArgDriverInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetGpuArgDriverArgs{...}
+type GetClusterNodePoolsNodePoolSetGpuArgDriverInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetGpuArgDriverOutput() GetClusterNodePoolsNodePoolSetGpuArgDriverOutput
+	ToGetClusterNodePoolsNodePoolSetGpuArgDriverOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetGpuArgDriverOutput
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgDriverArgs struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name pulumi.StringInput `pulumi:"name"`
+	// GPU driver or CUDA version.
+	Version pulumi.StringInput `pulumi:"version"`
+}
+
+func (GetClusterNodePoolsNodePoolSetGpuArgDriverArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgDriver)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgDriverArgs) ToGetClusterNodePoolsNodePoolSetGpuArgDriverOutput() GetClusterNodePoolsNodePoolSetGpuArgDriverOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetGpuArgDriverOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgDriverArgs) ToGetClusterNodePoolsNodePoolSetGpuArgDriverOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgDriverOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetGpuArgDriverOutput)
+}
+
+// GetClusterNodePoolsNodePoolSetGpuArgDriverArrayInput is an input type that accepts GetClusterNodePoolsNodePoolSetGpuArgDriverArray and GetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetGpuArgDriverArrayInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetGpuArgDriverArray{ GetClusterNodePoolsNodePoolSetGpuArgDriverArgs{...} }
+type GetClusterNodePoolsNodePoolSetGpuArgDriverArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput() GetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput
+	ToGetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgDriverArray []GetClusterNodePoolsNodePoolSetGpuArgDriverInput
+
+func (GetClusterNodePoolsNodePoolSetGpuArgDriverArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetGpuArgDriver)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgDriverArray) ToGetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput() GetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetGpuArgDriverArray) ToGetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgDriverOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetGpuArgDriverOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgDriver)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgDriverOutput) ToGetClusterNodePoolsNodePoolSetGpuArgDriverOutput() GetClusterNodePoolsNodePoolSetGpuArgDriverOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgDriverOutput) ToGetClusterNodePoolsNodePoolSetGpuArgDriverOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgDriverOutput {
+	return o
+}
+
+// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+func (o GetClusterNodePoolsNodePoolSetGpuArgDriverOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetGpuArgDriver) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// GPU driver or CUDA version.
+func (o GetClusterNodePoolsNodePoolSetGpuArgDriverOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetGpuArgDriver) string { return v.Version }).(pulumi.StringOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetGpuArgDriver)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput) ToGetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput() GetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput) ToGetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput) Index(i pulumi.IntInput) GetClusterNodePoolsNodePoolSetGpuArgDriverOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNodePoolsNodePoolSetGpuArgDriver {
+		return vs[0].([]GetClusterNodePoolsNodePoolSetGpuArgDriver)[vs[1].(int)]
+	}).(GetClusterNodePoolsNodePoolSetGpuArgDriverOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetLabel struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name string `pulumi:"name"`
+	// Value of taints mark.
+	Value string `pulumi:"value"`
+}
+
+// GetClusterNodePoolsNodePoolSetLabelInput is an input type that accepts GetClusterNodePoolsNodePoolSetLabelArgs and GetClusterNodePoolsNodePoolSetLabelOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetLabelInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetLabelArgs{...}
+type GetClusterNodePoolsNodePoolSetLabelInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetLabelOutput() GetClusterNodePoolsNodePoolSetLabelOutput
+	ToGetClusterNodePoolsNodePoolSetLabelOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetLabelOutput
+}
+
+type GetClusterNodePoolsNodePoolSetLabelArgs struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Value of taints mark.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetClusterNodePoolsNodePoolSetLabelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetLabel)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetLabelArgs) ToGetClusterNodePoolsNodePoolSetLabelOutput() GetClusterNodePoolsNodePoolSetLabelOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetLabelOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetLabelArgs) ToGetClusterNodePoolsNodePoolSetLabelOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetLabelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetLabelOutput)
+}
+
+// GetClusterNodePoolsNodePoolSetLabelArrayInput is an input type that accepts GetClusterNodePoolsNodePoolSetLabelArray and GetClusterNodePoolsNodePoolSetLabelArrayOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetLabelArrayInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetLabelArray{ GetClusterNodePoolsNodePoolSetLabelArgs{...} }
+type GetClusterNodePoolsNodePoolSetLabelArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetLabelArrayOutput() GetClusterNodePoolsNodePoolSetLabelArrayOutput
+	ToGetClusterNodePoolsNodePoolSetLabelArrayOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetLabelArrayOutput
+}
+
+type GetClusterNodePoolsNodePoolSetLabelArray []GetClusterNodePoolsNodePoolSetLabelInput
+
+func (GetClusterNodePoolsNodePoolSetLabelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetLabel)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetLabelArray) ToGetClusterNodePoolsNodePoolSetLabelArrayOutput() GetClusterNodePoolsNodePoolSetLabelArrayOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetLabelArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetLabelArray) ToGetClusterNodePoolsNodePoolSetLabelArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetLabelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetLabelArrayOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetLabelOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetLabelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetLabel)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetLabelOutput) ToGetClusterNodePoolsNodePoolSetLabelOutput() GetClusterNodePoolsNodePoolSetLabelOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetLabelOutput) ToGetClusterNodePoolsNodePoolSetLabelOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetLabelOutput {
+	return o
+}
+
+// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+func (o GetClusterNodePoolsNodePoolSetLabelOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetLabel) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Value of taints mark.
+func (o GetClusterNodePoolsNodePoolSetLabelOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetLabel) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetLabelArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetLabelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetLabel)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetLabelArrayOutput) ToGetClusterNodePoolsNodePoolSetLabelArrayOutput() GetClusterNodePoolsNodePoolSetLabelArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetLabelArrayOutput) ToGetClusterNodePoolsNodePoolSetLabelArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetLabelArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetLabelArrayOutput) Index(i pulumi.IntInput) GetClusterNodePoolsNodePoolSetLabelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNodePoolsNodePoolSetLabel {
+		return vs[0].([]GetClusterNodePoolsNodePoolSetLabel)[vs[1].(int)]
+	}).(GetClusterNodePoolsNodePoolSetLabelOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetNodeCountSummary struct {
+	// Automatically managed nodes.
+	AutoscalingAddeds []GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAdded `pulumi:"autoscalingAddeds"`
+	// Manually managed nodes.
+	ManuallyAddeds []GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAdded `pulumi:"manuallyAddeds"`
+}
+
+// GetClusterNodePoolsNodePoolSetNodeCountSummaryInput is an input type that accepts GetClusterNodePoolsNodePoolSetNodeCountSummaryArgs and GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetNodeCountSummaryInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetNodeCountSummaryArgs{...}
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetNodeCountSummaryOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput
+	ToGetClusterNodePoolsNodePoolSetNodeCountSummaryOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput
+}
+
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryArgs struct {
+	// Automatically managed nodes.
+	AutoscalingAddeds GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayInput `pulumi:"autoscalingAddeds"`
+	// Manually managed nodes.
+	ManuallyAddeds GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayInput `pulumi:"manuallyAddeds"`
+}
+
+func (GetClusterNodePoolsNodePoolSetNodeCountSummaryArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetNodeCountSummary)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetNodeCountSummaryArgs) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetNodeCountSummaryOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetNodeCountSummaryArgs) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput)
+}
+
+// GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayInput is an input type that accepts GetClusterNodePoolsNodePoolSetNodeCountSummaryArray and GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetNodeCountSummaryArray{ GetClusterNodePoolsNodePoolSetNodeCountSummaryArgs{...} }
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput
+	ToGetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput
+}
+
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryArray []GetClusterNodePoolsNodePoolSetNodeCountSummaryInput
+
+func (GetClusterNodePoolsNodePoolSetNodeCountSummaryArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetNodeCountSummary)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetNodeCountSummaryArray) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetNodeCountSummaryArray) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetNodeCountSummary)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput {
+	return o
+}
+
+// Automatically managed nodes.
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput) AutoscalingAddeds() GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetNodeCountSummary) []GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAdded {
+		return v.AutoscalingAddeds
+	}).(GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput)
+}
+
+// Manually managed nodes.
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput) ManuallyAddeds() GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetNodeCountSummary) []GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAdded {
+		return v.ManuallyAddeds
+	}).(GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetNodeCountSummary)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput) Index(i pulumi.IntInput) GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNodePoolsNodePoolSetNodeCountSummary {
+		return vs[0].([]GetClusterNodePoolsNodePoolSetNodeCountSummary)[vs[1].(int)]
+	}).(GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAdded struct {
+	// Number of nodes in initialization.
+	Initializing int `pulumi:"initializing"`
+	// Number of nodes joining.
+	Joining int `pulumi:"joining"`
+	// Normal number of nodes.
+	Normal int `pulumi:"normal"`
+	// Total number of nodes.
+	Total int `pulumi:"total"`
+}
+
+// GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedInput is an input type that accepts GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArgs and GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArgs{...}
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput
+	ToGetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput
+}
+
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArgs struct {
+	// Number of nodes in initialization.
+	Initializing pulumi.IntInput `pulumi:"initializing"`
+	// Number of nodes joining.
+	Joining pulumi.IntInput `pulumi:"joining"`
+	// Normal number of nodes.
+	Normal pulumi.IntInput `pulumi:"normal"`
+	// Total number of nodes.
+	Total pulumi.IntInput `pulumi:"total"`
+}
+
+func (GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAdded)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArgs) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArgs) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput)
+}
+
+// GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayInput is an input type that accepts GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArray and GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArray{ GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArgs{...} }
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput
+	ToGetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput
+}
+
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArray []GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedInput
+
+func (GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAdded)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArray) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArray) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAdded)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput {
+	return o
+}
+
+// Number of nodes in initialization.
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput) Initializing() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAdded) int { return v.Initializing }).(pulumi.IntOutput)
+}
+
+// Number of nodes joining.
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput) Joining() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAdded) int { return v.Joining }).(pulumi.IntOutput)
+}
+
+// Normal number of nodes.
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput) Normal() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAdded) int { return v.Normal }).(pulumi.IntOutput)
+}
+
+// Total number of nodes.
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput) Total() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAdded) int { return v.Total }).(pulumi.IntOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAdded)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput) Index(i pulumi.IntInput) GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAdded {
+		return vs[0].([]GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAdded)[vs[1].(int)]
+	}).(GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAdded struct {
+	// Number of nodes in initialization.
+	Initializing int `pulumi:"initializing"`
+	// Number of nodes joining.
+	Joining int `pulumi:"joining"`
+	// Normal number of nodes.
+	Normal int `pulumi:"normal"`
+	// Total number of nodes.
+	Total int `pulumi:"total"`
+}
+
+// GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedInput is an input type that accepts GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArgs and GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArgs{...}
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput
+	ToGetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput
+}
+
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArgs struct {
+	// Number of nodes in initialization.
+	Initializing pulumi.IntInput `pulumi:"initializing"`
+	// Number of nodes joining.
+	Joining pulumi.IntInput `pulumi:"joining"`
+	// Normal number of nodes.
+	Normal pulumi.IntInput `pulumi:"normal"`
+	// Total number of nodes.
+	Total pulumi.IntInput `pulumi:"total"`
+}
+
+func (GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAdded)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArgs) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArgs) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput)
+}
+
+// GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayInput is an input type that accepts GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArray and GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArray{ GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArgs{...} }
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput
+	ToGetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput
+}
+
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArray []GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedInput
+
+func (GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAdded)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArray) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArray) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAdded)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput {
+	return o
+}
+
+// Number of nodes in initialization.
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput) Initializing() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAdded) int { return v.Initializing }).(pulumi.IntOutput)
+}
+
+// Number of nodes joining.
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput) Joining() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAdded) int { return v.Joining }).(pulumi.IntOutput)
+}
+
+// Normal number of nodes.
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput) Normal() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAdded) int { return v.Normal }).(pulumi.IntOutput)
+}
+
+// Total number of nodes.
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput) Total() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAdded) int { return v.Total }).(pulumi.IntOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAdded)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput() GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput) ToGetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput) Index(i pulumi.IntInput) GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAdded {
+		return vs[0].([]GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAdded)[vs[1].(int)]
+	}).(GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetTag struct {
+	// Key of taints mark.
+	Key string `pulumi:"key"`
+	// Value of taints mark.
+	Value string `pulumi:"value"`
+}
+
+// GetClusterNodePoolsNodePoolSetTagInput is an input type that accepts GetClusterNodePoolsNodePoolSetTagArgs and GetClusterNodePoolsNodePoolSetTagOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetTagInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetTagArgs{...}
+type GetClusterNodePoolsNodePoolSetTagInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetTagOutput() GetClusterNodePoolsNodePoolSetTagOutput
+	ToGetClusterNodePoolsNodePoolSetTagOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetTagOutput
+}
+
+type GetClusterNodePoolsNodePoolSetTagArgs struct {
+	// Key of taints mark.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Value of taints mark.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetClusterNodePoolsNodePoolSetTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetTag)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetTagArgs) ToGetClusterNodePoolsNodePoolSetTagOutput() GetClusterNodePoolsNodePoolSetTagOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetTagOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetTagArgs) ToGetClusterNodePoolsNodePoolSetTagOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetTagOutput)
+}
+
+// GetClusterNodePoolsNodePoolSetTagArrayInput is an input type that accepts GetClusterNodePoolsNodePoolSetTagArray and GetClusterNodePoolsNodePoolSetTagArrayOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetTagArrayInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetTagArray{ GetClusterNodePoolsNodePoolSetTagArgs{...} }
+type GetClusterNodePoolsNodePoolSetTagArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetTagArrayOutput() GetClusterNodePoolsNodePoolSetTagArrayOutput
+	ToGetClusterNodePoolsNodePoolSetTagArrayOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetTagArrayOutput
+}
+
+type GetClusterNodePoolsNodePoolSetTagArray []GetClusterNodePoolsNodePoolSetTagInput
+
+func (GetClusterNodePoolsNodePoolSetTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetTag)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetTagArray) ToGetClusterNodePoolsNodePoolSetTagArrayOutput() GetClusterNodePoolsNodePoolSetTagArrayOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetTagArray) ToGetClusterNodePoolsNodePoolSetTagArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetTagArrayOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetTagOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetTag)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetTagOutput) ToGetClusterNodePoolsNodePoolSetTagOutput() GetClusterNodePoolsNodePoolSetTagOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetTagOutput) ToGetClusterNodePoolsNodePoolSetTagOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetTagOutput {
+	return o
+}
+
+// Key of taints mark.
+func (o GetClusterNodePoolsNodePoolSetTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Value of taints mark.
+func (o GetClusterNodePoolsNodePoolSetTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetTag)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetTagArrayOutput) ToGetClusterNodePoolsNodePoolSetTagArrayOutput() GetClusterNodePoolsNodePoolSetTagArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetTagArrayOutput) ToGetClusterNodePoolsNodePoolSetTagArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetTagArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetTagArrayOutput) Index(i pulumi.IntInput) GetClusterNodePoolsNodePoolSetTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNodePoolsNodePoolSetTag {
+		return vs[0].([]GetClusterNodePoolsNodePoolSetTag)[vs[1].(int)]
+	}).(GetClusterNodePoolsNodePoolSetTagOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetTaint struct {
+	// Effect of taints mark.
+	Effect string `pulumi:"effect"`
+	// Key of taints mark.
+	Key string `pulumi:"key"`
+	// Value of taints mark.
+	Value string `pulumi:"value"`
+}
+
+// GetClusterNodePoolsNodePoolSetTaintInput is an input type that accepts GetClusterNodePoolsNodePoolSetTaintArgs and GetClusterNodePoolsNodePoolSetTaintOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetTaintInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetTaintArgs{...}
+type GetClusterNodePoolsNodePoolSetTaintInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetTaintOutput() GetClusterNodePoolsNodePoolSetTaintOutput
+	ToGetClusterNodePoolsNodePoolSetTaintOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetTaintOutput
+}
+
+type GetClusterNodePoolsNodePoolSetTaintArgs struct {
+	// Effect of taints mark.
+	Effect pulumi.StringInput `pulumi:"effect"`
+	// Key of taints mark.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Value of taints mark.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetClusterNodePoolsNodePoolSetTaintArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetTaint)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetTaintArgs) ToGetClusterNodePoolsNodePoolSetTaintOutput() GetClusterNodePoolsNodePoolSetTaintOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetTaintOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetTaintArgs) ToGetClusterNodePoolsNodePoolSetTaintOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetTaintOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetTaintOutput)
+}
+
+// GetClusterNodePoolsNodePoolSetTaintArrayInput is an input type that accepts GetClusterNodePoolsNodePoolSetTaintArray and GetClusterNodePoolsNodePoolSetTaintArrayOutput values.
+// You can construct a concrete instance of `GetClusterNodePoolsNodePoolSetTaintArrayInput` via:
+//
+//          GetClusterNodePoolsNodePoolSetTaintArray{ GetClusterNodePoolsNodePoolSetTaintArgs{...} }
+type GetClusterNodePoolsNodePoolSetTaintArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNodePoolsNodePoolSetTaintArrayOutput() GetClusterNodePoolsNodePoolSetTaintArrayOutput
+	ToGetClusterNodePoolsNodePoolSetTaintArrayOutputWithContext(context.Context) GetClusterNodePoolsNodePoolSetTaintArrayOutput
+}
+
+type GetClusterNodePoolsNodePoolSetTaintArray []GetClusterNodePoolsNodePoolSetTaintInput
+
+func (GetClusterNodePoolsNodePoolSetTaintArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetTaint)(nil)).Elem()
+}
+
+func (i GetClusterNodePoolsNodePoolSetTaintArray) ToGetClusterNodePoolsNodePoolSetTaintArrayOutput() GetClusterNodePoolsNodePoolSetTaintArrayOutput {
+	return i.ToGetClusterNodePoolsNodePoolSetTaintArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNodePoolsNodePoolSetTaintArray) ToGetClusterNodePoolsNodePoolSetTaintArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetTaintArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNodePoolsNodePoolSetTaintArrayOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetTaintOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetTaintOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNodePoolsNodePoolSetTaint)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetTaintOutput) ToGetClusterNodePoolsNodePoolSetTaintOutput() GetClusterNodePoolsNodePoolSetTaintOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetTaintOutput) ToGetClusterNodePoolsNodePoolSetTaintOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetTaintOutput {
+	return o
+}
+
+// Effect of taints mark.
+func (o GetClusterNodePoolsNodePoolSetTaintOutput) Effect() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetTaint) string { return v.Effect }).(pulumi.StringOutput)
+}
+
+// Key of taints mark.
+func (o GetClusterNodePoolsNodePoolSetTaintOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetTaint) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Value of taints mark.
+func (o GetClusterNodePoolsNodePoolSetTaintOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNodePoolsNodePoolSetTaint) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetClusterNodePoolsNodePoolSetTaintArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNodePoolsNodePoolSetTaintArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNodePoolsNodePoolSetTaint)(nil)).Elem()
+}
+
+func (o GetClusterNodePoolsNodePoolSetTaintArrayOutput) ToGetClusterNodePoolsNodePoolSetTaintArrayOutput() GetClusterNodePoolsNodePoolSetTaintArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetTaintArrayOutput) ToGetClusterNodePoolsNodePoolSetTaintArrayOutputWithContext(ctx context.Context) GetClusterNodePoolsNodePoolSetTaintArrayOutput {
+	return o
+}
+
+func (o GetClusterNodePoolsNodePoolSetTaintArrayOutput) Index(i pulumi.IntInput) GetClusterNodePoolsNodePoolSetTaintOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNodePoolsNodePoolSetTaint {
+		return vs[0].([]GetClusterNodePoolsNodePoolSetTaint)[vs[1].(int)]
+	}).(GetClusterNodePoolsNodePoolSetTaintOutput)
+}
+
 type GetClustersList struct {
 	// The certificate used for access.
 	CertificationAuthority string `pulumi:"certificationAuthority"`
@@ -7727,6 +11203,8 @@ type GetClustersList struct {
 	Tags map[string]interface{} `pulumi:"tags"`
 	// User name of account.
 	UserName string `pulumi:"userName"`
+	// Distinguish between shared network card multi-IP mode and independent network card mode.
+	VpcCniType string `pulumi:"vpcCniType"`
 	// Vpc ID of the cluster.
 	VpcId string `pulumi:"vpcId"`
 	// An information list of cvm within the WORKER clusters. Each element contains the following attributes.
@@ -7815,6 +11293,8 @@ type GetClustersListArgs struct {
 	Tags pulumi.MapInput `pulumi:"tags"`
 	// User name of account.
 	UserName pulumi.StringInput `pulumi:"userName"`
+	// Distinguish between shared network card multi-IP mode and independent network card mode.
+	VpcCniType pulumi.StringInput `pulumi:"vpcCniType"`
 	// Vpc ID of the cluster.
 	VpcId pulumi.StringInput `pulumi:"vpcId"`
 	// An information list of cvm within the WORKER clusters. Each element contains the following attributes.
@@ -8042,6 +11522,11 @@ func (o GetClustersListOutput) Tags() pulumi.MapOutput {
 // User name of account.
 func (o GetClustersListOutput) UserName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetClustersList) string { return v.UserName }).(pulumi.StringOutput)
+}
+
+// Distinguish between shared network card multi-IP mode and independent network card mode.
+func (o GetClustersListOutput) VpcCniType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.VpcCniType }).(pulumi.StringOutput)
 }
 
 // Vpc ID of the cluster.
@@ -8401,8 +11886,62 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAuthenticationOptionsServiceAccountArrayInput)(nil)).Elem(), GetClusterAuthenticationOptionsServiceAccountArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterCommonNamesListInput)(nil)).Elem(), GetClusterCommonNamesListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterCommonNamesListArrayInput)(nil)).Elem(), GetClusterCommonNamesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesFilterInput)(nil)).Elem(), GetClusterInstancesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesFilterArrayInput)(nil)).Elem(), GetClusterInstancesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInput)(nil)).Elem(), GetClusterInstancesInstanceSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetArrayInput)(nil)).Elem(), GetClusterInstancesInstanceSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterLevelsListInput)(nil)).Elem(), GetClusterLevelsListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterLevelsListArrayInput)(nil)).Elem(), GetClusterLevelsListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsFilterInput)(nil)).Elem(), GetClusterNodePoolsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsFilterArrayInput)(nil)).Elem(), GetClusterNodePoolsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetArrayInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetDataDiskInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetDataDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetDataDiskArrayInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetExtraArgInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetExtraArgArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetExtraArgArrayInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetExtraArgArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetGpuArgArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgArrayInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetGpuArgArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgCudaInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetGpuArgCudaArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgCudaArrayInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetGpuArgCudaArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgCudnnInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetGpuArgCudnnArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetGpuArgCudnnArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgCustomDriverInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgDriverInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetGpuArgDriverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetGpuArgDriverArrayInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetGpuArgDriverArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetLabelInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetLabelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetLabelArrayInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetLabelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetNodeCountSummaryInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetNodeCountSummaryArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetNodeCountSummaryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetTagInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetTagArrayInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetTaintInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetTaintArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetTaintArrayInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetTaintArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListInput)(nil)).Elem(), GetClustersListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListArrayInput)(nil)).Elem(), GetClustersListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListClusterExtraArgInput)(nil)).Elem(), GetClustersListClusterExtraArgArgs{})
@@ -8487,8 +12026,62 @@ func init() {
 	pulumi.RegisterOutputType(GetClusterAuthenticationOptionsServiceAccountArrayOutput{})
 	pulumi.RegisterOutputType(GetClusterCommonNamesListOutput{})
 	pulumi.RegisterOutputType(GetClusterCommonNamesListArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesFilterOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingExtraArgArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudaArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCudnnArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgCustomDriverArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingGpuArgDriverArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintOutput{})
+	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput{})
 	pulumi.RegisterOutputType(GetClusterLevelsListOutput{})
 	pulumi.RegisterOutputType(GetClusterLevelsListArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsFilterOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetDataDiskOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetExtraArgOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetExtraArgArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetGpuArgOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetGpuArgArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetGpuArgCudaOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetGpuArgCudaArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetGpuArgCudnnOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetGpuArgCudnnArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetGpuArgCustomDriverOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetGpuArgCustomDriverArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetGpuArgDriverOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetGpuArgDriverArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetLabelOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetLabelArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetNodeCountSummaryOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetNodeCountSummaryArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetNodeCountSummaryAutoscalingAddedArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetNodeCountSummaryManuallyAddedArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetTagOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetTagArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetTaintOutput{})
+	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetTaintArrayOutput{})
 	pulumi.RegisterOutputType(GetClustersListOutput{})
 	pulumi.RegisterOutputType(GetClustersListArrayOutput{})
 	pulumi.RegisterOutputType(GetClustersListClusterExtraArgOutput{})

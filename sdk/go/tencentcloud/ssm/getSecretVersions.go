@@ -25,13 +25,28 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssm.GetSecretVersions(ctx, &ssm.GetSecretVersionsArgs{
-// 			SecretName: "test",
-// 			VersionId:  pulumi.StringRef("v1"),
-// 		}, nil)
+// 		exampleSecret, err := Ssm.NewSecret(ctx, "exampleSecret", &Ssm.SecretArgs{
+// 			SecretName:  pulumi.String("tf-example"),
+// 			Description: pulumi.String("desc."),
+// 			Tags: pulumi.AnyMap{
+// 				"createdBy": pulumi.Any("terraform"),
+// 			},
+// 		})
 // 		if err != nil {
 // 			return err
 // 		}
+// 		v1, err := Ssm.NewSecretVersion(ctx, "v1", &Ssm.SecretVersionArgs{
+// 			SecretName:   exampleSecret.SecretName,
+// 			VersionId:    pulumi.String("v1"),
+// 			SecretBinary: pulumi.String("MTIzMTIzMTIzMTIzMTIzQQ=="),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_ = Ssm.GetSecretVersionsOutput(ctx, ssm.GetSecretVersionsOutputArgs{
+// 			SecretName: v1.SecretName,
+// 			VersionId:  v1.VersionId,
+// 		}, nil)
 // 		return nil
 // 	})
 // }

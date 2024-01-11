@@ -14,11 +14,11 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const plan = new tencentcloud.ApiGateway.UsagePlan("plan", {
+ * const example = new tencentcloud.ApiGateway.UsagePlan("example", {
  *     maxRequestNum: 100,
  *     maxRequestNumPreSec: 10,
- *     usagePlanDesc: "nice plan",
- *     usagePlanName: "my_plan",
+ *     usagePlanDesc: "desc.",
+ *     usagePlanName: "tf_example",
  * });
  * ```
  *

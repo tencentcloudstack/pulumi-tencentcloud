@@ -44,6 +44,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public Input<string>? CvmInstanceId { get; set; }
 
         /// <summary>
+        /// The network environment to which the database belongs. It is required when AccessType is Cloud Network (CCN). `UserIDC` represents the user IDC. `TencentVPC` represents Tencent Cloud VPC. Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
+        [Input("databaseNetEnv")]
+        public Input<string>? DatabaseNetEnv { get; set; }
+
+        /// <summary>
         /// Database kernel type, used to distinguish different kernels in tdsql: percona, mariadb, mysql. Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         [Input("dbKernel")]

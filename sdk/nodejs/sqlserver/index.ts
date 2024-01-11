@@ -37,6 +37,7 @@ export * from "./getBasicInstances";
 export * from "./getCrossRegionZone";
 export * from "./getDbCharsets";
 export * from "./getDbs";
+export * from "./getDescHaLog";
 export * from "./getInsAttribute";
 export * from "./getInstanceParamRecords";
 export * from "./getInstances";
@@ -52,6 +53,7 @@ export * from "./getUploadIncrementalInfo";
 export * from "./getZoneConfig";
 export * from "./increBackupMigration";
 export * from "./instance";
+export * from "./instanceSsl";
 export * from "./instanceTde";
 export * from "./migration";
 export * from "./publishSubscribe";
@@ -90,6 +92,7 @@ import { GeneralCloudRoInstance } from "./generalCloudRoInstance";
 import { GeneralCommunication } from "./generalCommunication";
 import { IncreBackupMigration } from "./increBackupMigration";
 import { Instance } from "./instance";
+import { InstanceSsl } from "./instanceSsl";
 import { InstanceTde } from "./instanceTde";
 import { Migration } from "./migration";
 import { PublishSubscribe } from "./publishSubscribe";
@@ -155,6 +158,8 @@ const _module = {
                 return new IncreBackupMigration(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/instanceSsl:InstanceSsl":
+                return new InstanceSsl(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/instanceTde:InstanceTde":
                 return new InstanceTde(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/migration:Migration":
@@ -208,6 +213,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/generalCloudRoI
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/generalCommunication", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/increBackupMigration", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/instanceSsl", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/instanceTde", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/migration", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/publishSubscribe", _module)
