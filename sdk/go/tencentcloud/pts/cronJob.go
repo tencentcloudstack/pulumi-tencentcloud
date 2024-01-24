@@ -19,28 +19,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Pts.NewCronJob(ctx, "cronJob", &Pts.CronJobArgs{
-// 			CronExpression: pulumi.String("* 1 * * *"),
-// 			FrequencyType:  pulumi.Int(2),
-// 			JobOwner:       pulumi.String("userName"),
-// 			Note:           pulumi.String("desc"),
-// 			NoticeId:       pulumi.String("notice-vp6i38jt"),
-// 			ProjectId:      pulumi.String("project-7qkzxhea"),
-// 			ScenarioId:     pulumi.String("scenario-c22lqb1w"),
-// 			ScenarioName:   pulumi.String("pts-js(2022-11-10 21:53:53)"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Pts.NewCronJob(ctx, "cronJob", &Pts.CronJobArgs{
+//				CronExpression: pulumi.String("* 1 * * *"),
+//				FrequencyType:  pulumi.Int(2),
+//				JobOwner:       pulumi.String("userName"),
+//				Note:           pulumi.String("desc"),
+//				NoticeId:       pulumi.String("notice-vp6i38jt"),
+//				ProjectId:      pulumi.String("project-7qkzxhea"),
+//				ScenarioId:     pulumi.String("scenario-c22lqb1w"),
+//				ScenarioName:   pulumi.String("pts-js(2022-11-10 21:53:53)"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -48,7 +51,9 @@ import (
 // pts cron_job can be imported using the projectId#cronJobId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Pts/cronJob:CronJob cron_job project-7qkzxhea#scenario-c22lqb1w
+//
+//	$ pulumi import tencentcloud:Pts/cronJob:CronJob cron_job project-7qkzxhea#scenario-c22lqb1w
+//
 // ```
 type CronJob struct {
 	pulumi.CustomResourceState
@@ -293,7 +298,7 @@ func (i *CronJob) ToCronJobOutputWithContext(ctx context.Context) CronJobOutput 
 // CronJobArrayInput is an input type that accepts CronJobArray and CronJobArrayOutput values.
 // You can construct a concrete instance of `CronJobArrayInput` via:
 //
-//          CronJobArray{ CronJobArgs{...} }
+//	CronJobArray{ CronJobArgs{...} }
 type CronJobArrayInput interface {
 	pulumi.Input
 
@@ -318,7 +323,7 @@ func (i CronJobArray) ToCronJobArrayOutputWithContext(ctx context.Context) CronJ
 // CronJobMapInput is an input type that accepts CronJobMap and CronJobMapOutput values.
 // You can construct a concrete instance of `CronJobMapInput` via:
 //
-//          CronJobMap{ "key": CronJobArgs{...} }
+//	CronJobMap{ "key": CronJobArgs{...} }
 type CronJobMapInput interface {
 	pulumi.Input
 

@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Antiddos.NewIpAlarmThresholdConfig(ctx, "ipAlarmThresholdConfig", &Antiddos.IpAlarmThresholdConfigArgs{
-// 			AlarmThreshold: pulumi.Int(2),
-// 			AlarmType:      pulumi.Int(1),
-// 			InstanceId:     pulumi.String("bgp-xxxxxx"),
-// 			InstanceIp:     pulumi.String("xxx.xxx.xxx.xxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Antiddos.NewIpAlarmThresholdConfig(ctx, "ipAlarmThresholdConfig", &Antiddos.IpAlarmThresholdConfigArgs{
+//				AlarmThreshold: pulumi.Int(2),
+//				AlarmType:      pulumi.Int(1),
+//				InstanceId:     pulumi.String("bgp-xxxxxx"),
+//				InstanceIp:     pulumi.String("xxx.xxx.xxx.xxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // antiddos ip_alarm_threshold_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Antiddos/ipAlarmThresholdConfig:IpAlarmThresholdConfig ip_alarm_threshold_config ${instanceId}#${instanceIp}#${alarmType}
+//
+//	$ pulumi import tencentcloud:Antiddos/ipAlarmThresholdConfig:IpAlarmThresholdConfig ip_alarm_threshold_config ${instanceId}#${instanceIp}#${alarmType}
+//
 // ```
 type IpAlarmThresholdConfig struct {
 	pulumi.CustomResourceState
@@ -175,7 +180,7 @@ func (i *IpAlarmThresholdConfig) ToIpAlarmThresholdConfigOutputWithContext(ctx c
 // IpAlarmThresholdConfigArrayInput is an input type that accepts IpAlarmThresholdConfigArray and IpAlarmThresholdConfigArrayOutput values.
 // You can construct a concrete instance of `IpAlarmThresholdConfigArrayInput` via:
 //
-//          IpAlarmThresholdConfigArray{ IpAlarmThresholdConfigArgs{...} }
+//	IpAlarmThresholdConfigArray{ IpAlarmThresholdConfigArgs{...} }
 type IpAlarmThresholdConfigArrayInput interface {
 	pulumi.Input
 
@@ -200,7 +205,7 @@ func (i IpAlarmThresholdConfigArray) ToIpAlarmThresholdConfigArrayOutputWithCont
 // IpAlarmThresholdConfigMapInput is an input type that accepts IpAlarmThresholdConfigMap and IpAlarmThresholdConfigMapOutput values.
 // You can construct a concrete instance of `IpAlarmThresholdConfigMapInput` via:
 //
-//          IpAlarmThresholdConfigMap{ "key": IpAlarmThresholdConfigArgs{...} }
+//	IpAlarmThresholdConfigMap{ "key": IpAlarmThresholdConfigArgs{...} }
 type IpAlarmThresholdConfigMapInput interface {
 	pulumi.Input
 

@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewSnapshotRuleAttachment(ctx, "snapshotRule", &Css.SnapshotRuleAttachmentArgs{
-// 			AppName:    pulumi.String("qqq"),
-// 			DomainName: pulumi.String("177154.push.tlivecloud.com"),
-// 			StreamName: pulumi.String("ppp"),
-// 			TemplateId: pulumi.Int(12838073),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewSnapshotRuleAttachment(ctx, "snapshotRule", &Css.SnapshotRuleAttachmentArgs{
+//				AppName:    pulumi.String("qqq"),
+//				DomainName: pulumi.String("177154.push.tlivecloud.com"),
+//				StreamName: pulumi.String("ppp"),
+//				TemplateId: pulumi.Int(12838073),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // css snapshot_rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/snapshotRuleAttachment:SnapshotRuleAttachment snapshot_rule templateId#domainName
+//
+//	$ pulumi import tencentcloud:Css/snapshotRuleAttachment:SnapshotRuleAttachment snapshot_rule templateId#domainName
+//
 // ```
 type SnapshotRuleAttachment struct {
 	pulumi.CustomResourceState
@@ -169,7 +174,7 @@ func (i *SnapshotRuleAttachment) ToSnapshotRuleAttachmentOutputWithContext(ctx c
 // SnapshotRuleAttachmentArrayInput is an input type that accepts SnapshotRuleAttachmentArray and SnapshotRuleAttachmentArrayOutput values.
 // You can construct a concrete instance of `SnapshotRuleAttachmentArrayInput` via:
 //
-//          SnapshotRuleAttachmentArray{ SnapshotRuleAttachmentArgs{...} }
+//	SnapshotRuleAttachmentArray{ SnapshotRuleAttachmentArgs{...} }
 type SnapshotRuleAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -194,7 +199,7 @@ func (i SnapshotRuleAttachmentArray) ToSnapshotRuleAttachmentArrayOutputWithCont
 // SnapshotRuleAttachmentMapInput is an input type that accepts SnapshotRuleAttachmentMap and SnapshotRuleAttachmentMapOutput values.
 // You can construct a concrete instance of `SnapshotRuleAttachmentMapInput` via:
 //
-//          SnapshotRuleAttachmentMap{ "key": SnapshotRuleAttachmentArgs{...} }
+//	SnapshotRuleAttachmentMap{ "key": SnapshotRuleAttachmentArgs{...} }
 type SnapshotRuleAttachmentMapInput interface {
 	pulumi.Input
 

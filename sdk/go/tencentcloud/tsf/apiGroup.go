@@ -19,28 +19,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewApiGroup(ctx, "apiGroup", &Tsf.ApiGroupArgs{
-// 			AuthType:                 pulumi.String("none"),
-// 			Description:              pulumi.String("terraform-test"),
-// 			GatewayInstanceId:        pulumi.String("gw-ins-i6mjpgm8"),
-// 			GroupContext:             pulumi.String("/terraform-test"),
-// 			GroupName:                pulumi.String("terraform_test_group"),
-// 			GroupType:                pulumi.String("ms"),
-// 			NamespaceNameKeyPosition: pulumi.String("path"),
-// 			ServiceNameKeyPosition:   pulumi.String("path"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewApiGroup(ctx, "apiGroup", &Tsf.ApiGroupArgs{
+//				AuthType:                 pulumi.String("none"),
+//				Description:              pulumi.String("terraform-test"),
+//				GatewayInstanceId:        pulumi.String("gw-ins-i6mjpgm8"),
+//				GroupContext:             pulumi.String("/terraform-test"),
+//				GroupName:                pulumi.String("terraform_test_group"),
+//				GroupType:                pulumi.String("ms"),
+//				NamespaceNameKeyPosition: pulumi.String("path"),
+//				ServiceNameKeyPosition:   pulumi.String("path"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -48,7 +51,9 @@ import (
 // tsf api_group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tsf/apiGroup:ApiGroup api_group api_group_id
+//
+//	$ pulumi import tencentcloud:Tsf/apiGroup:ApiGroup api_group api_group_id
+//
 // ```
 type ApiGroup struct {
 	pulumi.CustomResourceState
@@ -281,7 +286,7 @@ func (i *ApiGroup) ToApiGroupOutputWithContext(ctx context.Context) ApiGroupOutp
 // ApiGroupArrayInput is an input type that accepts ApiGroupArray and ApiGroupArrayOutput values.
 // You can construct a concrete instance of `ApiGroupArrayInput` via:
 //
-//          ApiGroupArray{ ApiGroupArgs{...} }
+//	ApiGroupArray{ ApiGroupArgs{...} }
 type ApiGroupArrayInput interface {
 	pulumi.Input
 
@@ -306,7 +311,7 @@ func (i ApiGroupArray) ToApiGroupArrayOutputWithContext(ctx context.Context) Api
 // ApiGroupMapInput is an input type that accepts ApiGroupMap and ApiGroupMapOutput values.
 // You can construct a concrete instance of `ApiGroupMapInput` via:
 //
-//          ApiGroupMap{ "key": ApiGroupArgs{...} }
+//	ApiGroupMap{ "key": ApiGroupArgs{...} }
 type ApiGroupMapInput interface {
 	pulumi.Input
 

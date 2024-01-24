@@ -18,21 +18,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewDeployCertificateRecordRollbackOperation(ctx, "deployCertificateRecordRollback", &Ssl.DeployCertificateRecordRollbackOperationArgs{
-// 			DeployRecordId: pulumi.Int(35471),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.NewDeployCertificateRecordRollbackOperation(ctx, "deployCertificateRecordRollback", &Ssl.DeployCertificateRecordRollbackOperationArgs{
+//				DeployRecordId: pulumi.Int(35471),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -40,7 +43,9 @@ import (
 // ssl deploy_certificate_record_rollback can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssl/deployCertificateRecordRollbackOperation:DeployCertificateRecordRollbackOperation deploy_certificate_record_rollback deploy_certificate_record_rollback_id
+//
+//	$ pulumi import tencentcloud:Ssl/deployCertificateRecordRollbackOperation:DeployCertificateRecordRollbackOperation deploy_certificate_record_rollback deploy_certificate_record_rollback_id
+//
 // ```
 type DeployCertificateRecordRollbackOperation struct {
 	pulumi.CustomResourceState
@@ -129,7 +134,7 @@ func (i *DeployCertificateRecordRollbackOperation) ToDeployCertificateRecordRoll
 // DeployCertificateRecordRollbackOperationArrayInput is an input type that accepts DeployCertificateRecordRollbackOperationArray and DeployCertificateRecordRollbackOperationArrayOutput values.
 // You can construct a concrete instance of `DeployCertificateRecordRollbackOperationArrayInput` via:
 //
-//          DeployCertificateRecordRollbackOperationArray{ DeployCertificateRecordRollbackOperationArgs{...} }
+//	DeployCertificateRecordRollbackOperationArray{ DeployCertificateRecordRollbackOperationArgs{...} }
 type DeployCertificateRecordRollbackOperationArrayInput interface {
 	pulumi.Input
 
@@ -154,7 +159,7 @@ func (i DeployCertificateRecordRollbackOperationArray) ToDeployCertificateRecord
 // DeployCertificateRecordRollbackOperationMapInput is an input type that accepts DeployCertificateRecordRollbackOperationMap and DeployCertificateRecordRollbackOperationMapOutput values.
 // You can construct a concrete instance of `DeployCertificateRecordRollbackOperationMapInput` via:
 //
-//          DeployCertificateRecordRollbackOperationMap{ "key": DeployCertificateRecordRollbackOperationArgs{...} }
+//	DeployCertificateRecordRollbackOperationMap{ "key": DeployCertificateRecordRollbackOperationArgs{...} }
 type DeployCertificateRecordRollbackOperationMapInput interface {
 	pulumi.Input
 

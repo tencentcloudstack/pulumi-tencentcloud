@@ -26,7 +26,7 @@ type InstancesAcceptAttachInstance struct {
 // InstancesAcceptAttachInstanceInput is an input type that accepts InstancesAcceptAttachInstanceArgs and InstancesAcceptAttachInstanceOutput values.
 // You can construct a concrete instance of `InstancesAcceptAttachInstanceInput` via:
 //
-//          InstancesAcceptAttachInstanceArgs{...}
+//	InstancesAcceptAttachInstanceArgs{...}
 type InstancesAcceptAttachInstanceInput interface {
 	pulumi.Input
 
@@ -62,7 +62,7 @@ func (i InstancesAcceptAttachInstanceArgs) ToInstancesAcceptAttachInstanceOutput
 // InstancesAcceptAttachInstanceArrayInput is an input type that accepts InstancesAcceptAttachInstanceArray and InstancesAcceptAttachInstanceArrayOutput values.
 // You can construct a concrete instance of `InstancesAcceptAttachInstanceArrayInput` via:
 //
-//          InstancesAcceptAttachInstanceArray{ InstancesAcceptAttachInstanceArgs{...} }
+//	InstancesAcceptAttachInstanceArray{ InstancesAcceptAttachInstanceArgs{...} }
 type InstancesAcceptAttachInstanceArrayInput interface {
 	pulumi.Input
 
@@ -159,7 +159,7 @@ type InstancesRejectAttachInstance struct {
 // InstancesRejectAttachInstanceInput is an input type that accepts InstancesRejectAttachInstanceArgs and InstancesRejectAttachInstanceOutput values.
 // You can construct a concrete instance of `InstancesRejectAttachInstanceInput` via:
 //
-//          InstancesRejectAttachInstanceArgs{...}
+//	InstancesRejectAttachInstanceArgs{...}
 type InstancesRejectAttachInstanceInput interface {
 	pulumi.Input
 
@@ -195,7 +195,7 @@ func (i InstancesRejectAttachInstanceArgs) ToInstancesRejectAttachInstanceOutput
 // InstancesRejectAttachInstanceArrayInput is an input type that accepts InstancesRejectAttachInstanceArray and InstancesRejectAttachInstanceArrayOutput values.
 // You can construct a concrete instance of `InstancesRejectAttachInstanceArrayInput` via:
 //
-//          InstancesRejectAttachInstanceArray{ InstancesRejectAttachInstanceArgs{...} }
+//	InstancesRejectAttachInstanceArray{ InstancesRejectAttachInstanceArgs{...} }
 type InstancesRejectAttachInstanceArrayInput interface {
 	pulumi.Input
 
@@ -292,7 +292,7 @@ type InstancesResetAttachInstance struct {
 // InstancesResetAttachInstanceInput is an input type that accepts InstancesResetAttachInstanceArgs and InstancesResetAttachInstanceOutput values.
 // You can construct a concrete instance of `InstancesResetAttachInstanceInput` via:
 //
-//          InstancesResetAttachInstanceArgs{...}
+//	InstancesResetAttachInstanceArgs{...}
 type InstancesResetAttachInstanceInput interface {
 	pulumi.Input
 
@@ -328,7 +328,7 @@ func (i InstancesResetAttachInstanceArgs) ToInstancesResetAttachInstanceOutputWi
 // InstancesResetAttachInstanceArrayInput is an input type that accepts InstancesResetAttachInstanceArray and InstancesResetAttachInstanceArrayOutput values.
 // You can construct a concrete instance of `InstancesResetAttachInstanceArrayInput` via:
 //
-//          InstancesResetAttachInstanceArray{ InstancesResetAttachInstanceArgs{...} }
+//	InstancesResetAttachInstanceArray{ InstancesResetAttachInstanceArgs{...} }
 type InstancesResetAttachInstanceArrayInput interface {
 	pulumi.Input
 
@@ -421,7 +421,7 @@ type GetBandwidthLimitsLimit struct {
 // GetBandwidthLimitsLimitInput is an input type that accepts GetBandwidthLimitsLimitArgs and GetBandwidthLimitsLimitOutput values.
 // You can construct a concrete instance of `GetBandwidthLimitsLimitInput` via:
 //
-//          GetBandwidthLimitsLimitArgs{...}
+//	GetBandwidthLimitsLimitArgs{...}
 type GetBandwidthLimitsLimitInput interface {
 	pulumi.Input
 
@@ -453,7 +453,7 @@ func (i GetBandwidthLimitsLimitArgs) ToGetBandwidthLimitsLimitOutputWithContext(
 // GetBandwidthLimitsLimitArrayInput is an input type that accepts GetBandwidthLimitsLimitArray and GetBandwidthLimitsLimitArrayOutput values.
 // You can construct a concrete instance of `GetBandwidthLimitsLimitArrayInput` via:
 //
-//          GetBandwidthLimitsLimitArray{ GetBandwidthLimitsLimitArgs{...} }
+//	GetBandwidthLimitsLimitArray{ GetBandwidthLimitsLimitArgs{...} }
 type GetBandwidthLimitsLimitArrayInput interface {
 	pulumi.Input
 
@@ -538,7 +538,7 @@ type GetCrossBorderFlowMonitorCrossBorderFlowMonitorData struct {
 // GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataInput is an input type that accepts GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArgs and GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput values.
 // You can construct a concrete instance of `GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataInput` via:
 //
-//          GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArgs{...}
+//	GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArgs{...}
 type GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataInput interface {
 	pulumi.Input
 
@@ -572,7 +572,7 @@ func (i GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArgs) ToGetCrossBorde
 // GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayInput is an input type that accepts GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArray and GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayOutput values.
 // You can construct a concrete instance of `GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayInput` via:
 //
-//          GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArray{ GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArgs{...} }
+//	GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArray{ GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArgs{...} }
 type GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArrayInput interface {
 	pulumi.Input
 
@@ -678,7 +678,7 @@ type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSet struct {
 // GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetInput is an input type that accepts GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArgs and GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetOutput values.
 // You can construct a concrete instance of `GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetInput` via:
 //
-//          GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArgs{...}
+//	GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArgs{...}
 type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetInput interface {
 	pulumi.Input
 
@@ -728,7 +728,7 @@ func (i GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArgs) ToGetCrossBorder
 // GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayInput is an input type that accepts GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArray and GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayOutput values.
 // You can construct a concrete instance of `GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayInput` via:
 //
-//          GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArray{ GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArgs{...} }
+//	GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArray{ GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArgs{...} }
 type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetArrayInput interface {
 	pulumi.Input
 
@@ -858,7 +858,7 @@ type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimit s
 // GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitInput is an input type that accepts GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArgs and GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitOutput values.
 // You can construct a concrete instance of `GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitInput` via:
 //
-//          GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArgs{...}
+//	GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArgs{...}
 type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitInput interface {
 	pulumi.Input
 
@@ -890,7 +890,7 @@ func (i GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimi
 // GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayInput is an input type that accepts GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArray and GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayOutput values.
 // You can construct a concrete instance of `GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayInput` via:
 //
-//          GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArray{ GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArgs{...} }
+//	GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArray{ GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArgs{...} }
 type GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetCcnRegionBandwidthLimitArrayInput interface {
 	pulumi.Input
 
@@ -977,7 +977,7 @@ type GetCrossBorderRegionBandwidthLimitsFilter struct {
 // GetCrossBorderRegionBandwidthLimitsFilterInput is an input type that accepts GetCrossBorderRegionBandwidthLimitsFilterArgs and GetCrossBorderRegionBandwidthLimitsFilterOutput values.
 // You can construct a concrete instance of `GetCrossBorderRegionBandwidthLimitsFilterInput` via:
 //
-//          GetCrossBorderRegionBandwidthLimitsFilterArgs{...}
+//	GetCrossBorderRegionBandwidthLimitsFilterArgs{...}
 type GetCrossBorderRegionBandwidthLimitsFilterInput interface {
 	pulumi.Input
 
@@ -1007,7 +1007,7 @@ func (i GetCrossBorderRegionBandwidthLimitsFilterArgs) ToGetCrossBorderRegionBan
 // GetCrossBorderRegionBandwidthLimitsFilterArrayInput is an input type that accepts GetCrossBorderRegionBandwidthLimitsFilterArray and GetCrossBorderRegionBandwidthLimitsFilterArrayOutput values.
 // You can construct a concrete instance of `GetCrossBorderRegionBandwidthLimitsFilterArrayInput` via:
 //
-//          GetCrossBorderRegionBandwidthLimitsFilterArray{ GetCrossBorderRegionBandwidthLimitsFilterArgs{...} }
+//	GetCrossBorderRegionBandwidthLimitsFilterArray{ GetCrossBorderRegionBandwidthLimitsFilterArgs{...} }
 type GetCrossBorderRegionBandwidthLimitsFilterArrayInput interface {
 	pulumi.Input
 
@@ -1097,7 +1097,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -1141,7 +1141,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -1260,7 +1260,7 @@ type GetInstancesInstanceListAttachmentList struct {
 // GetInstancesInstanceListAttachmentListInput is an input type that accepts GetInstancesInstanceListAttachmentListArgs and GetInstancesInstanceListAttachmentListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListAttachmentListInput` via:
 //
-//          GetInstancesInstanceListAttachmentListArgs{...}
+//	GetInstancesInstanceListAttachmentListArgs{...}
 type GetInstancesInstanceListAttachmentListInput interface {
 	pulumi.Input
 
@@ -1298,7 +1298,7 @@ func (i GetInstancesInstanceListAttachmentListArgs) ToGetInstancesInstanceListAt
 // GetInstancesInstanceListAttachmentListArrayInput is an input type that accepts GetInstancesInstanceListAttachmentListArray and GetInstancesInstanceListAttachmentListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListAttachmentListArrayInput` via:
 //
-//          GetInstancesInstanceListAttachmentListArray{ GetInstancesInstanceListAttachmentListArgs{...} }
+//	GetInstancesInstanceListAttachmentListArray{ GetInstancesInstanceListAttachmentListArgs{...} }
 type GetInstancesInstanceListAttachmentListArrayInput interface {
 	pulumi.Input
 

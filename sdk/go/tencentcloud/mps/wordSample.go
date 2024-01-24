@@ -19,30 +19,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewWordSample(ctx, "wordSample", &Mps.WordSampleArgs{
-// 			Keyword: pulumi.String("tf_test_kw_1"),
-// 			Tags: pulumi.StringArray{
-// 				pulumi.String("tags_1"),
-// 				pulumi.String("tags_2"),
-// 			},
-// 			Usages: pulumi.StringArray{
-// 				pulumi.String("Recognition.Ocr"),
-// 				pulumi.String("Review.Ocr"),
-// 				pulumi.String("Review.Asr"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewWordSample(ctx, "wordSample", &Mps.WordSampleArgs{
+//				Keyword: pulumi.String("tf_test_kw_1"),
+//				Tags: pulumi.StringArray{
+//					pulumi.String("tags_1"),
+//					pulumi.String("tags_2"),
+//				},
+//				Usages: pulumi.StringArray{
+//					pulumi.String("Recognition.Ocr"),
+//					pulumi.String("Review.Ocr"),
+//					pulumi.String("Review.Asr"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -50,7 +53,9 @@ import (
 // mps word_sample can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/wordSample:WordSample word_sample keyword
+//
+//	$ pulumi import tencentcloud:Mps/wordSample:WordSample word_sample keyword
+//
 // ```
 type WordSample struct {
 	pulumi.CustomResourceState
@@ -165,7 +170,7 @@ func (i *WordSample) ToWordSampleOutputWithContext(ctx context.Context) WordSamp
 // WordSampleArrayInput is an input type that accepts WordSampleArray and WordSampleArrayOutput values.
 // You can construct a concrete instance of `WordSampleArrayInput` via:
 //
-//          WordSampleArray{ WordSampleArgs{...} }
+//	WordSampleArray{ WordSampleArgs{...} }
 type WordSampleArrayInput interface {
 	pulumi.Input
 
@@ -190,7 +195,7 @@ func (i WordSampleArray) ToWordSampleArrayOutputWithContext(ctx context.Context)
 // WordSampleMapInput is an input type that accepts WordSampleMap and WordSampleMapOutput values.
 // You can construct a concrete instance of `WordSampleMapInput` via:
 //
-//          WordSampleMap{ "key": WordSampleArgs{...} }
+//	WordSampleMap{ "key": WordSampleArgs{...} }
 type WordSampleMapInput interface {
 	pulumi.Input
 

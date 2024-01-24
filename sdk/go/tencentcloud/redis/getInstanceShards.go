@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.GetInstanceShards(ctx, &redis.GetInstanceShardsArgs{
-// 			FilterSlave: pulumi.BoolRef(false),
-// 			InstanceId:  "crs-c1nl9rpv",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Redis.GetInstanceShards(ctx, &redis.GetInstanceShardsArgs{
+//				FilterSlave: pulumi.BoolRef(false),
+//				InstanceId:  "crs-c1nl9rpv",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetInstanceShards(ctx *pulumi.Context, args *GetInstanceShardsArgs, opts ...pulumi.InvokeOption) (*GetInstanceShardsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

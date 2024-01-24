@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.NewModifyRecordGroupOperation(ctx, "modifyRecordGroup", &Dnspod.ModifyRecordGroupOperationArgs{
-// 			Domain:   pulumi.String("dnspod.cn"),
-// 			DomainId: pulumi.Int(123),
-// 			GroupId:  pulumi.Int(1),
-// 			RecordId: pulumi.String("234|345"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.NewModifyRecordGroupOperation(ctx, "modifyRecordGroup", &Dnspod.ModifyRecordGroupOperationArgs{
+//				Domain:   pulumi.String("dnspod.cn"),
+//				DomainId: pulumi.Int(123),
+//				GroupId:  pulumi.Int(1),
+//				RecordId: pulumi.String("234|345"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ModifyRecordGroupOperation struct {
 	pulumi.CustomResourceState
@@ -164,7 +167,7 @@ func (i *ModifyRecordGroupOperation) ToModifyRecordGroupOperationOutputWithConte
 // ModifyRecordGroupOperationArrayInput is an input type that accepts ModifyRecordGroupOperationArray and ModifyRecordGroupOperationArrayOutput values.
 // You can construct a concrete instance of `ModifyRecordGroupOperationArrayInput` via:
 //
-//          ModifyRecordGroupOperationArray{ ModifyRecordGroupOperationArgs{...} }
+//	ModifyRecordGroupOperationArray{ ModifyRecordGroupOperationArgs{...} }
 type ModifyRecordGroupOperationArrayInput interface {
 	pulumi.Input
 
@@ -189,7 +192,7 @@ func (i ModifyRecordGroupOperationArray) ToModifyRecordGroupOperationArrayOutput
 // ModifyRecordGroupOperationMapInput is an input type that accepts ModifyRecordGroupOperationMap and ModifyRecordGroupOperationMapOutput values.
 // You can construct a concrete instance of `ModifyRecordGroupOperationMapInput` via:
 //
-//          ModifyRecordGroupOperationMap{ "key": ModifyRecordGroupOperationArgs{...} }
+//	ModifyRecordGroupOperationMap{ "key": ModifyRecordGroupOperationArgs{...} }
 type ModifyRecordGroupOperationMapInput interface {
 	pulumi.Input
 

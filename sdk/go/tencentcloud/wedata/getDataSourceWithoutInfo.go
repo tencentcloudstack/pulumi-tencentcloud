@@ -18,35 +18,38 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Wedata.GetDataSourceWithoutInfo(ctx, &wedata.GetDataSourceWithoutInfoArgs{
-// 			Filters: []wedata.GetDataSourceWithoutInfoFilter{
-// 				wedata.GetDataSourceWithoutInfoFilter{
-// 					Name: pulumi.StringRef("ownerProjectId"),
-// 					Values: []string{
-// 						"1612982498218618880",
-// 					},
-// 				},
-// 			},
-// 			OrderFields: []wedata.GetDataSourceWithoutInfoOrderField{
-// 				wedata.GetDataSourceWithoutInfoOrderField{
-// 					Direction: "DESC",
-// 					Name:      "create_time",
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Wedata.GetDataSourceWithoutInfo(ctx, &wedata.GetDataSourceWithoutInfoArgs{
+//				Filters: []wedata.GetDataSourceWithoutInfoFilter{
+//					wedata.GetDataSourceWithoutInfoFilter{
+//						Name: pulumi.StringRef("ownerProjectId"),
+//						Values: []string{
+//							"1612982498218618880",
+//						},
+//					},
+//				},
+//				OrderFields: []wedata.GetDataSourceWithoutInfoOrderField{
+//					wedata.GetDataSourceWithoutInfoOrderField{
+//						Direction: "DESC",
+//						Name:      "create_time",
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDataSourceWithoutInfo(ctx *pulumi.Context, args *GetDataSourceWithoutInfoArgs, opts ...pulumi.InvokeOption) (*GetDataSourceWithoutInfoResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

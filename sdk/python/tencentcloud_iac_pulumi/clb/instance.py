@@ -37,6 +37,7 @@ class InstanceArgs:
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  target_region_info_region: Optional[pulumi.Input[str]] = None,
                  target_region_info_vpc_id: Optional[pulumi.Input[str]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
                  vip_isp: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone_id: Optional[pulumi.Input[str]] = None):
@@ -64,6 +65,7 @@ class InstanceArgs:
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this CLB.
         :param pulumi.Input[str] target_region_info_region: Region information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
         :param pulumi.Input[str] target_region_info_vpc_id: Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
+        :param pulumi.Input[str] vip: Applies for CLB instances for a specified VIP, only applicable to open CLB.
         :param pulumi.Input[str] vip_isp: Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
         :param pulumi.Input[str] vpc_id: VPC ID of the CLB.
         :param pulumi.Input[str] zone_id: Available zone id, only applicable to open CLB.
@@ -110,6 +112,8 @@ class InstanceArgs:
             pulumi.set(__self__, "target_region_info_region", target_region_info_region)
         if target_region_info_vpc_id is not None:
             pulumi.set(__self__, "target_region_info_vpc_id", target_region_info_vpc_id)
+        if vip is not None:
+            pulumi.set(__self__, "vip", vip)
         if vip_isp is not None:
             pulumi.set(__self__, "vip_isp", vip_isp)
         if vpc_id is not None:
@@ -382,6 +386,18 @@ class InstanceArgs:
         pulumi.set(self, "target_region_info_vpc_id", value)
 
     @property
+    @pulumi.getter
+    def vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        Applies for CLB instances for a specified VIP, only applicable to open CLB.
+        """
+        return pulumi.get(self, "vip")
+
+    @vip.setter
+    def vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vip", value)
+
+    @property
     @pulumi.getter(name="vipIsp")
     def vip_isp(self) -> Optional[pulumi.Input[str]]:
         """
@@ -445,6 +461,7 @@ class _InstanceState:
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  target_region_info_region: Optional[pulumi.Input[str]] = None,
                  target_region_info_vpc_id: Optional[pulumi.Input[str]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
                  vip_isp: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone_id: Optional[pulumi.Input[str]] = None):
@@ -474,6 +491,7 @@ class _InstanceState:
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this CLB.
         :param pulumi.Input[str] target_region_info_region: Region information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
         :param pulumi.Input[str] target_region_info_vpc_id: Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
+        :param pulumi.Input[str] vip: Applies for CLB instances for a specified VIP, only applicable to open CLB.
         :param pulumi.Input[str] vip_isp: Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
         :param pulumi.Input[str] vpc_id: VPC ID of the CLB.
         :param pulumi.Input[str] zone_id: Available zone id, only applicable to open CLB.
@@ -526,6 +544,8 @@ class _InstanceState:
             pulumi.set(__self__, "target_region_info_region", target_region_info_region)
         if target_region_info_vpc_id is not None:
             pulumi.set(__self__, "target_region_info_vpc_id", target_region_info_vpc_id)
+        if vip is not None:
+            pulumi.set(__self__, "vip", vip)
         if vip_isp is not None:
             pulumi.set(__self__, "vip_isp", vip_isp)
         if vpc_id is not None:
@@ -822,6 +842,18 @@ class _InstanceState:
         pulumi.set(self, "target_region_info_vpc_id", value)
 
     @property
+    @pulumi.getter
+    def vip(self) -> Optional[pulumi.Input[str]]:
+        """
+        Applies for CLB instances for a specified VIP, only applicable to open CLB.
+        """
+        return pulumi.get(self, "vip")
+
+    @vip.setter
+    def vip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "vip", value)
+
+    @property
     @pulumi.getter(name="vipIsp")
     def vip_isp(self) -> Optional[pulumi.Input[str]]:
         """
@@ -885,6 +917,7 @@ class Instance(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  target_region_info_region: Optional[pulumi.Input[str]] = None,
                  target_region_info_vpc_id: Optional[pulumi.Input[str]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
                  vip_isp: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone_id: Optional[pulumi.Input[str]] = None,
@@ -993,6 +1026,26 @@ class Instance(pulumi.CustomResource):
             })
         pulumi.export("domain", clb_open.domain)
         ```
+        ### Specified  Vip Instance
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo_group = tencentcloud.security.Group("fooGroup")
+        foo_instance = tencentcloud.vpc.Instance("fooInstance", cidr_block="10.0.0.0/16")
+        clb_open = tencentcloud.clb.Instance("clbOpen",
+            network_type="OPEN",
+            clb_name="clb-instance-open",
+            project_id=0,
+            vpc_id=foo_instance.id,
+            security_groups=[foo_group.id],
+            vip="111.230.4.204",
+            tags={
+                "test": "tf",
+            })
+        pulumi.export("domain", tencentcloud_clb_instance["vip"])
+        ```
         ### Default enable
 
         ```python
@@ -1099,6 +1152,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this CLB.
         :param pulumi.Input[str] target_region_info_region: Region information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
         :param pulumi.Input[str] target_region_info_vpc_id: Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
+        :param pulumi.Input[str] vip: Applies for CLB instances for a specified VIP, only applicable to open CLB.
         :param pulumi.Input[str] vip_isp: Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
         :param pulumi.Input[str] vpc_id: VPC ID of the CLB.
         :param pulumi.Input[str] zone_id: Available zone id, only applicable to open CLB.
@@ -1212,6 +1266,26 @@ class Instance(pulumi.CustomResource):
                 "test": "tf",
             })
         pulumi.export("domain", clb_open.domain)
+        ```
+        ### Specified  Vip Instance
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo_group = tencentcloud.security.Group("fooGroup")
+        foo_instance = tencentcloud.vpc.Instance("fooInstance", cidr_block="10.0.0.0/16")
+        clb_open = tencentcloud.clb.Instance("clbOpen",
+            network_type="OPEN",
+            clb_name="clb-instance-open",
+            project_id=0,
+            vpc_id=foo_instance.id,
+            security_groups=[foo_group.id],
+            vip="111.230.4.204",
+            tags={
+                "test": "tf",
+            })
+        pulumi.export("domain", tencentcloud_clb_instance["vip"])
         ```
         ### Default enable
 
@@ -1332,6 +1406,7 @@ class Instance(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  target_region_info_region: Optional[pulumi.Input[str]] = None,
                  target_region_info_vpc_id: Optional[pulumi.Input[str]] = None,
+                 vip: Optional[pulumi.Input[str]] = None,
                  vip_isp: Optional[pulumi.Input[str]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  zone_id: Optional[pulumi.Input[str]] = None,
@@ -1375,6 +1450,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["tags"] = tags
             __props__.__dict__["target_region_info_region"] = target_region_info_region
             __props__.__dict__["target_region_info_vpc_id"] = target_region_info_vpc_id
+            __props__.__dict__["vip"] = vip
             __props__.__dict__["vip_isp"] = vip_isp
             __props__.__dict__["vpc_id"] = vpc_id
             __props__.__dict__["zone_id"] = zone_id
@@ -1414,6 +1490,7 @@ class Instance(pulumi.CustomResource):
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             target_region_info_region: Optional[pulumi.Input[str]] = None,
             target_region_info_vpc_id: Optional[pulumi.Input[str]] = None,
+            vip: Optional[pulumi.Input[str]] = None,
             vip_isp: Optional[pulumi.Input[str]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None,
             zone_id: Optional[pulumi.Input[str]] = None) -> 'Instance':
@@ -1448,6 +1525,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[Mapping[str, Any]] tags: The available tags within this CLB.
         :param pulumi.Input[str] target_region_info_region: Region information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
         :param pulumi.Input[str] target_region_info_vpc_id: Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
+        :param pulumi.Input[str] vip: Applies for CLB instances for a specified VIP, only applicable to open CLB.
         :param pulumi.Input[str] vip_isp: Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
         :param pulumi.Input[str] vpc_id: VPC ID of the CLB.
         :param pulumi.Input[str] zone_id: Available zone id, only applicable to open CLB.
@@ -1480,6 +1558,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["tags"] = tags
         __props__.__dict__["target_region_info_region"] = target_region_info_region
         __props__.__dict__["target_region_info_vpc_id"] = target_region_info_vpc_id
+        __props__.__dict__["vip"] = vip
         __props__.__dict__["vip_isp"] = vip_isp
         __props__.__dict__["vpc_id"] = vpc_id
         __props__.__dict__["zone_id"] = zone_id
@@ -1676,6 +1755,14 @@ class Instance(pulumi.CustomResource):
         Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
         """
         return pulumi.get(self, "target_region_info_vpc_id")
+
+    @property
+    @pulumi.getter
+    def vip(self) -> pulumi.Output[str]:
+        """
+        Applies for CLB instances for a specified VIP, only applicable to open CLB.
+        """
+        return pulumi.get(self, "vip")
 
     @property
     @pulumi.getter(name="vipIsp")

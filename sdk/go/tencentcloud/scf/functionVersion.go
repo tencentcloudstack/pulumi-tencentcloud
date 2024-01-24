@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewFunctionVersion(ctx, "functionVersion", &Scf.FunctionVersionArgs{
-// 			Description:  pulumi.String("for-terraform-test"),
-// 			FunctionName: pulumi.String("keep-1676351130"),
-// 			Namespace:    pulumi.String("default"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunctionVersion(ctx, "functionVersion", &Scf.FunctionVersionArgs{
+//				Description:  pulumi.String("for-terraform-test"),
+//				FunctionName: pulumi.String("keep-1676351130"),
+//				Namespace:    pulumi.String("default"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // scf function_version can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Scf/functionVersion:FunctionVersion function_version functionName#namespace#functionVersion
+//
+//	$ pulumi import tencentcloud:Scf/functionVersion:FunctionVersion function_version functionName#namespace#functionVersion
+//
 // ```
 type FunctionVersion struct {
 	pulumi.CustomResourceState
@@ -161,7 +166,7 @@ func (i *FunctionVersion) ToFunctionVersionOutputWithContext(ctx context.Context
 // FunctionVersionArrayInput is an input type that accepts FunctionVersionArray and FunctionVersionArrayOutput values.
 // You can construct a concrete instance of `FunctionVersionArrayInput` via:
 //
-//          FunctionVersionArray{ FunctionVersionArgs{...} }
+//	FunctionVersionArray{ FunctionVersionArgs{...} }
 type FunctionVersionArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +191,7 @@ func (i FunctionVersionArray) ToFunctionVersionArrayOutputWithContext(ctx contex
 // FunctionVersionMapInput is an input type that accepts FunctionVersionMap and FunctionVersionMapOutput values.
 // You can construct a concrete instance of `FunctionVersionMapInput` via:
 //
-//          FunctionVersionMap{ "key": FunctionVersionArgs{...} }
+//	FunctionVersionMap{ "key": FunctionVersionArgs{...} }
 type FunctionVersionMapInput interface {
 	pulumi.Input
 

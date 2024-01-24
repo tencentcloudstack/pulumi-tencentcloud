@@ -21,21 +21,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ses.NewBlackListDelete(ctx, "blackList", &Ses.BlackListDeleteArgs{
-// 			EmailAddress: pulumi.String("terraform-tf@gmail.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ses.NewBlackListDelete(ctx, "blackList", &Ses.BlackListDeleteArgs{
+//				EmailAddress: pulumi.String("terraform-tf@gmail.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type BlackListDelete struct {
 	pulumi.CustomResourceState
@@ -127,7 +130,7 @@ func (i *BlackListDelete) ToBlackListDeleteOutputWithContext(ctx context.Context
 // BlackListDeleteArrayInput is an input type that accepts BlackListDeleteArray and BlackListDeleteArrayOutput values.
 // You can construct a concrete instance of `BlackListDeleteArrayInput` via:
 //
-//          BlackListDeleteArray{ BlackListDeleteArgs{...} }
+//	BlackListDeleteArray{ BlackListDeleteArgs{...} }
 type BlackListDeleteArrayInput interface {
 	pulumi.Input
 
@@ -152,7 +155,7 @@ func (i BlackListDeleteArray) ToBlackListDeleteArrayOutputWithContext(ctx contex
 // BlackListDeleteMapInput is an input type that accepts BlackListDeleteMap and BlackListDeleteMapOutput values.
 // You can construct a concrete instance of `BlackListDeleteMapInput` via:
 //
-//          BlackListDeleteMap{ "key": BlackListDeleteArgs{...} }
+//	BlackListDeleteMap{ "key": BlackListDeleteArgs{...} }
 type BlackListDeleteMapInput interface {
 	pulumi.Input
 

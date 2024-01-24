@@ -18,26 +18,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Rum.GetLogExport(ctx, &rum.GetLogExportArgs{
-// 			EndTime:   "1692609240000",
-// 			Name:      "log",
-// 			ProjectId: 1,
-// 			Query:     "id:123 AND type: \"log\"",
-// 			StartTime: "1692594840000",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Rum.GetLogExport(ctx, &rum.GetLogExportArgs{
+//				EndTime:   "1692609240000",
+//				Name:      "log",
+//				ProjectId: 1,
+//				Query:     "id:123 AND type: \"log\"",
+//				StartTime: "1692594840000",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetLogExport(ctx *pulumi.Context, args *GetLogExportArgs, opts ...pulumi.InvokeOption) (*GetLogExportResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

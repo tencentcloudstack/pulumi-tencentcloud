@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewCallbackTemplate(ctx, "callbackTemplate", &Css.CallbackTemplateArgs{
-// 			CallbackKey:             pulumi.String("adasda131312"),
-// 			Description:             pulumi.String("this is demo"),
-// 			PornCensorshipNotifyUrl: pulumi.String("http://www.yourdomain.com/api/notify?action=porn"),
-// 			PushExceptionNotifyUrl:  pulumi.String("http://www.yourdomain.com/api/notify?action=pushException"),
-// 			RecordNotifyUrl:         pulumi.String("http://www.yourdomain.com/api/notify?action=record"),
-// 			SnapshotNotifyUrl:       pulumi.String("http://www.yourdomain.com/api/notify?action=snapshot"),
-// 			StreamBeginNotifyUrl:    pulumi.String("http://www.yourdomain.com/api/notify?action=streamBegin"),
-// 			StreamEndNotifyUrl:      pulumi.String("http://www.yourdomain.com/api/notify?action=streamEnd"),
-// 			TemplateName:            pulumi.String("tf-test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewCallbackTemplate(ctx, "callbackTemplate", &Css.CallbackTemplateArgs{
+//				CallbackKey:             pulumi.String("adasda131312"),
+//				Description:             pulumi.String("this is demo"),
+//				PornCensorshipNotifyUrl: pulumi.String("http://www.yourdomain.com/api/notify?action=porn"),
+//				PushExceptionNotifyUrl:  pulumi.String("http://www.yourdomain.com/api/notify?action=pushException"),
+//				RecordNotifyUrl:         pulumi.String("http://www.yourdomain.com/api/notify?action=record"),
+//				SnapshotNotifyUrl:       pulumi.String("http://www.yourdomain.com/api/notify?action=snapshot"),
+//				StreamBeginNotifyUrl:    pulumi.String("http://www.yourdomain.com/api/notify?action=streamBegin"),
+//				StreamEndNotifyUrl:      pulumi.String("http://www.yourdomain.com/api/notify?action=streamEnd"),
+//				TemplateName:            pulumi.String("tf-test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -49,7 +52,9 @@ import (
 // css callback_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/callbackTemplate:CallbackTemplate callback_template templateId
+//
+//	$ pulumi import tencentcloud:Css/callbackTemplate:CallbackTemplate callback_template templateId
+//
 // ```
 type CallbackTemplate struct {
 	pulumi.CustomResourceState
@@ -221,7 +226,7 @@ func (i *CallbackTemplate) ToCallbackTemplateOutputWithContext(ctx context.Conte
 // CallbackTemplateArrayInput is an input type that accepts CallbackTemplateArray and CallbackTemplateArrayOutput values.
 // You can construct a concrete instance of `CallbackTemplateArrayInput` via:
 //
-//          CallbackTemplateArray{ CallbackTemplateArgs{...} }
+//	CallbackTemplateArray{ CallbackTemplateArgs{...} }
 type CallbackTemplateArrayInput interface {
 	pulumi.Input
 
@@ -246,7 +251,7 @@ func (i CallbackTemplateArray) ToCallbackTemplateArrayOutputWithContext(ctx cont
 // CallbackTemplateMapInput is an input type that accepts CallbackTemplateMap and CallbackTemplateMapOutput values.
 // You can construct a concrete instance of `CallbackTemplateMapInput` via:
 //
-//          CallbackTemplateMap{ "key": CallbackTemplateArgs{...} }
+//	CallbackTemplateMap{ "key": CallbackTemplateArgs{...} }
 type CallbackTemplateMapInput interface {
 	pulumi.Input
 

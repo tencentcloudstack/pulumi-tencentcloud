@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewEnableEndPointConnect(ctx, "enableEndPointConnect", &Vpc.EnableEndPointConnectArgs{
-// 			AcceptFlag: pulumi.Bool(true),
-// 			EndPointIds: pulumi.StringArray{
-// 				pulumi.String("vpce-6q0ftmke"),
-// 			},
-// 			EndPointServiceId: pulumi.String("vpcsvc-98jddhcz"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.NewEnableEndPointConnect(ctx, "enableEndPointConnect", &Vpc.EnableEndPointConnectArgs{
+//				AcceptFlag: pulumi.Bool(true),
+//				EndPointIds: pulumi.StringArray{
+//					pulumi.String("vpce-6q0ftmke"),
+//				},
+//				EndPointServiceId: pulumi.String("vpcsvc-98jddhcz"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type EnableEndPointConnect struct {
 	pulumi.CustomResourceState
@@ -155,7 +158,7 @@ func (i *EnableEndPointConnect) ToEnableEndPointConnectOutputWithContext(ctx con
 // EnableEndPointConnectArrayInput is an input type that accepts EnableEndPointConnectArray and EnableEndPointConnectArrayOutput values.
 // You can construct a concrete instance of `EnableEndPointConnectArrayInput` via:
 //
-//          EnableEndPointConnectArray{ EnableEndPointConnectArgs{...} }
+//	EnableEndPointConnectArray{ EnableEndPointConnectArgs{...} }
 type EnableEndPointConnectArrayInput interface {
 	pulumi.Input
 
@@ -180,7 +183,7 @@ func (i EnableEndPointConnectArray) ToEnableEndPointConnectArrayOutputWithContex
 // EnableEndPointConnectMapInput is an input type that accepts EnableEndPointConnectMap and EnableEndPointConnectMapOutput values.
 // You can construct a concrete instance of `EnableEndPointConnectMapInput` via:
 //
-//          EnableEndPointConnectMap{ "key": EnableEndPointConnectArgs{...} }
+//	EnableEndPointConnectMap{ "key": EnableEndPointConnectArgs{...} }
 type EnableEndPointConnectMapInput interface {
 	pulumi.Input
 

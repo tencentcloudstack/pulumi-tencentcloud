@@ -18,28 +18,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.GetPrice(ctx, &mariadb.GetPriceArgs{
-// 			BuyCount:  1,
-// 			Memory:    2,
-// 			NodeCount: 2,
-// 			Paymode:   pulumi.StringRef("prepaid"),
-// 			Period:    pulumi.IntRef(1),
-// 			Storage:   20,
-// 			Zone:      "ap-guangzhou-3",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.GetPrice(ctx, &mariadb.GetPriceArgs{
+//				BuyCount:  1,
+//				Memory:    2,
+//				NodeCount: 2,
+//				Paymode:   pulumi.StringRef("prepaid"),
+//				Period:    pulumi.IntRef(1),
+//				Storage:   20,
+//				Zone:      "ap-guangzhou-3",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetPrice(ctx *pulumi.Context, args *GetPriceArgs, opts ...pulumi.InvokeOption) (*GetPriceResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

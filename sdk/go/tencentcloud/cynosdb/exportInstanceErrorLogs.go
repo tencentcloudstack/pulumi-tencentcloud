@@ -19,32 +19,35 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewExportInstanceErrorLogs(ctx, "exportInstanceErrorLogs", &Cynosdb.ExportInstanceErrorLogsArgs{
-// 			EndTime:    pulumi.String("2022-01-01 14:00:00"),
-// 			FileType:   pulumi.String("csv"),
-// 			InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
-// 			KeyWords: pulumi.StringArray{
-// 				pulumi.String("content"),
-// 			},
-// 			LogLevels: pulumi.StringArray{
-// 				pulumi.String("note"),
-// 			},
-// 			OrderBy:     pulumi.String("Timestamp"),
-// 			OrderByType: pulumi.String("ASC"),
-// 			StartTime:   pulumi.String("2022-01-01 12:00:00"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewExportInstanceErrorLogs(ctx, "exportInstanceErrorLogs", &Cynosdb.ExportInstanceErrorLogsArgs{
+//				EndTime:    pulumi.String("2022-01-01 14:00:00"),
+//				FileType:   pulumi.String("csv"),
+//				InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
+//				KeyWords: pulumi.StringArray{
+//					pulumi.String("content"),
+//				},
+//				LogLevels: pulumi.StringArray{
+//					pulumi.String("note"),
+//				},
+//				OrderBy:     pulumi.String("Timestamp"),
+//				OrderByType: pulumi.String("ASC"),
+//				StartTime:   pulumi.String("2022-01-01 12:00:00"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ExportInstanceErrorLogs struct {
 	pulumi.CustomResourceState
@@ -212,7 +215,7 @@ func (i *ExportInstanceErrorLogs) ToExportInstanceErrorLogsOutputWithContext(ctx
 // ExportInstanceErrorLogsArrayInput is an input type that accepts ExportInstanceErrorLogsArray and ExportInstanceErrorLogsArrayOutput values.
 // You can construct a concrete instance of `ExportInstanceErrorLogsArrayInput` via:
 //
-//          ExportInstanceErrorLogsArray{ ExportInstanceErrorLogsArgs{...} }
+//	ExportInstanceErrorLogsArray{ ExportInstanceErrorLogsArgs{...} }
 type ExportInstanceErrorLogsArrayInput interface {
 	pulumi.Input
 
@@ -237,7 +240,7 @@ func (i ExportInstanceErrorLogsArray) ToExportInstanceErrorLogsArrayOutputWithCo
 // ExportInstanceErrorLogsMapInput is an input type that accepts ExportInstanceErrorLogsMap and ExportInstanceErrorLogsMapOutput values.
 // You can construct a concrete instance of `ExportInstanceErrorLogsMapInput` via:
 //
-//          ExportInstanceErrorLogsMap{ "key": ExportInstanceErrorLogsArgs{...} }
+//	ExportInstanceErrorLogsMap{ "key": ExportInstanceErrorLogsArgs{...} }
 type ExportInstanceErrorLogsMapInput interface {
 	pulumi.Input
 

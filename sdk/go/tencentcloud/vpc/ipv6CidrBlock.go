@@ -19,27 +19,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Vpc.NewIpv6CidrBlock(ctx, "example", &Vpc.Ipv6CidrBlockArgs{
-// 			VpcId: vpc.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Vpc.NewIpv6CidrBlock(ctx, "example", &Vpc.Ipv6CidrBlockArgs{
+//				VpcId: vpc.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -47,7 +50,9 @@ import (
 // vpc ipv6_cidr_block can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/ipv6CidrBlock:Ipv6CidrBlock ipv6_cidr_block vpc_id
+//
+//	$ pulumi import tencentcloud:Vpc/ipv6CidrBlock:Ipv6CidrBlock ipv6_cidr_block vpc_id
+//
 // ```
 type Ipv6CidrBlock struct {
 	pulumi.CustomResourceState
@@ -145,7 +150,7 @@ func (i *Ipv6CidrBlock) ToIpv6CidrBlockOutputWithContext(ctx context.Context) Ip
 // Ipv6CidrBlockArrayInput is an input type that accepts Ipv6CidrBlockArray and Ipv6CidrBlockArrayOutput values.
 // You can construct a concrete instance of `Ipv6CidrBlockArrayInput` via:
 //
-//          Ipv6CidrBlockArray{ Ipv6CidrBlockArgs{...} }
+//	Ipv6CidrBlockArray{ Ipv6CidrBlockArgs{...} }
 type Ipv6CidrBlockArrayInput interface {
 	pulumi.Input
 
@@ -170,7 +175,7 @@ func (i Ipv6CidrBlockArray) ToIpv6CidrBlockArrayOutputWithContext(ctx context.Co
 // Ipv6CidrBlockMapInput is an input type that accepts Ipv6CidrBlockMap and Ipv6CidrBlockMapOutput values.
 // You can construct a concrete instance of `Ipv6CidrBlockMapInput` via:
 //
-//          Ipv6CidrBlockMap{ "key": Ipv6CidrBlockArgs{...} }
+//	Ipv6CidrBlockMap{ "key": Ipv6CidrBlockArgs{...} }
 type Ipv6CidrBlockMapInput interface {
 	pulumi.Input
 

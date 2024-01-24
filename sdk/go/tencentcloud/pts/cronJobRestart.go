@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Pts.NewCronJobRestart(ctx, "cronJobRestart", &Pts.CronJobRestartArgs{
-// 			CronJobId: pulumi.String("job-dtm93vx0"),
-// 			ProjectId: pulumi.String("project-abc"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Pts.NewCronJobRestart(ctx, "cronJobRestart", &Pts.CronJobRestartArgs{
+//				CronJobId: pulumi.String("job-dtm93vx0"),
+//				ProjectId: pulumi.String("project-abc"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type CronJobRestart struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *CronJobRestart) ToCronJobRestartOutputWithContext(ctx context.Context) 
 // CronJobRestartArrayInput is an input type that accepts CronJobRestartArray and CronJobRestartArrayOutput values.
 // You can construct a concrete instance of `CronJobRestartArrayInput` via:
 //
-//          CronJobRestartArray{ CronJobRestartArgs{...} }
+//	CronJobRestartArray{ CronJobRestartArgs{...} }
 type CronJobRestartArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i CronJobRestartArray) ToCronJobRestartArrayOutputWithContext(ctx context.
 // CronJobRestartMapInput is an input type that accepts CronJobRestartMap and CronJobRestartMapOutput values.
 // You can construct a concrete instance of `CronJobRestartMapInput` via:
 //
-//          CronJobRestartMap{ "key": CronJobRestartArgs{...} }
+//	CronJobRestartMap{ "key": CronJobRestartArgs{...} }
 type CronJobRestartMapInput interface {
 	pulumi.Input
 

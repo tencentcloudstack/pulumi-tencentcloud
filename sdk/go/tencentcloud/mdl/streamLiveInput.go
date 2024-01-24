@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mdl"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mdl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mdl.NewStreamLiveInput(ctx, "streamLiveInput", &Mdl.StreamLiveInputArgs{
-// 			SecurityGroupIds: pulumi.StringArray{
-// 				pulumi.String("6405DF9D000007DFB4EC"),
-// 			},
-// 			Type: pulumi.String("RTP_PUSH"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mdl.NewStreamLiveInput(ctx, "streamLiveInput", &Mdl.StreamLiveInputArgs{
+//				SecurityGroupIds: pulumi.StringArray{
+//					pulumi.String("6405DF9D000007DFB4EC"),
+//				},
+//				Type: pulumi.String("RTP_PUSH"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // mdl stream_live_input can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mdl/streamLiveInput:StreamLiveInput stream_live_input id
+//
+//	$ pulumi import tencentcloud:Mdl/streamLiveInput:StreamLiveInput stream_live_input id
+//
 // ```
 type StreamLiveInput struct {
 	pulumi.CustomResourceState
@@ -166,7 +171,7 @@ func (i *StreamLiveInput) ToStreamLiveInputOutputWithContext(ctx context.Context
 // StreamLiveInputArrayInput is an input type that accepts StreamLiveInputArray and StreamLiveInputArrayOutput values.
 // You can construct a concrete instance of `StreamLiveInputArrayInput` via:
 //
-//          StreamLiveInputArray{ StreamLiveInputArgs{...} }
+//	StreamLiveInputArray{ StreamLiveInputArgs{...} }
 type StreamLiveInputArrayInput interface {
 	pulumi.Input
 
@@ -191,7 +196,7 @@ func (i StreamLiveInputArray) ToStreamLiveInputArrayOutputWithContext(ctx contex
 // StreamLiveInputMapInput is an input type that accepts StreamLiveInputMap and StreamLiveInputMapOutput values.
 // You can construct a concrete instance of `StreamLiveInputMapInput` via:
 //
-//          StreamLiveInputMap{ "key": StreamLiveInputArgs{...} }
+//	StreamLiveInputMap{ "key": StreamLiveInputArgs{...} }
 type StreamLiveInputMapInput interface {
 	pulumi.Input
 

@@ -20,92 +20,95 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "sqlserver",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-// 			VpcId:            vpc.ID(),
-// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-// 			Description: pulumi.String("desc."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleBasicInstance, err := Sqlserver.NewBasicInstance(ctx, "exampleBasicInstance", &Sqlserver.BasicInstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-// 			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			ProjectId:        pulumi.Int(0),
-// 			Memory:           pulumi.Int(4),
-// 			Storage:          pulumi.Int(100),
-// 			Cpu:              pulumi.Int(2),
-// 			MachineType:      pulumi.String("CLOUD_PREMIUM"),
-// 			MaintenanceWeekSets: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(2),
-// 				pulumi.Int(3),
-// 			},
-// 			MaintenanceStartTime: pulumi.String("09:00"),
-// 			MaintenanceTimeSpan:  pulumi.Int(3),
-// 			SecurityGroups: pulumi.StringArray{
-// 				securityGroup.ID(),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Sqlserver.NewConfigBackupStrategy(ctx, "exampleConfigBackupStrategy", &Sqlserver.ConfigBackupStrategyArgs{
-// 			InstanceId:  exampleBasicInstance.ID(),
-// 			BackupType:  pulumi.String("daily"),
-// 			BackupTime:  pulumi.Int(0),
-// 			BackupDay:   pulumi.Int(1),
-// 			BackupModel: pulumi.String("master_no_pkg"),
-// 			BackupCycles: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 			},
-// 			BackupSaveDays:        pulumi.Int(7),
-// 			RegularBackupEnable:   pulumi.String("disable"),
-// 			RegularBackupSaveDays: pulumi.Int(90),
-// 			RegularBackupStrategy: pulumi.String("months"),
-// 			RegularBackupCounts:   pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "sqlserver",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+//				Description: pulumi.String("desc."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleBasicInstance, err := Sqlserver.NewBasicInstance(ctx, "exampleBasicInstance", &Sqlserver.BasicInstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				ProjectId:        pulumi.Int(0),
+//				Memory:           pulumi.Int(4),
+//				Storage:          pulumi.Int(100),
+//				Cpu:              pulumi.Int(2),
+//				MachineType:      pulumi.String("CLOUD_PREMIUM"),
+//				MaintenanceWeekSets: pulumi.IntArray{
+//					pulumi.Int(1),
+//					pulumi.Int(2),
+//					pulumi.Int(3),
+//				},
+//				MaintenanceStartTime: pulumi.String("09:00"),
+//				MaintenanceTimeSpan:  pulumi.Int(3),
+//				SecurityGroups: pulumi.StringArray{
+//					securityGroup.ID(),
+//				},
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Sqlserver.NewConfigBackupStrategy(ctx, "exampleConfigBackupStrategy", &Sqlserver.ConfigBackupStrategyArgs{
+//				InstanceId:  exampleBasicInstance.ID(),
+//				BackupType:  pulumi.String("daily"),
+//				BackupTime:  pulumi.Int(0),
+//				BackupDay:   pulumi.Int(1),
+//				BackupModel: pulumi.String("master_no_pkg"),
+//				BackupCycles: pulumi.IntArray{
+//					pulumi.Int(1),
+//				},
+//				BackupSaveDays:        pulumi.Int(7),
+//				RegularBackupEnable:   pulumi.String("disable"),
+//				RegularBackupSaveDays: pulumi.Int(90),
+//				RegularBackupStrategy: pulumi.String("months"),
+//				RegularBackupCounts:   pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Weekly backup
 //
@@ -113,34 +116,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.NewConfigBackupStrategy(ctx, "example", &Sqlserver.ConfigBackupStrategyArgs{
-// 			InstanceId:  pulumi.Any(tencentcloud_sqlserver_basic_instance.Example.Id),
-// 			BackupType:  pulumi.String("weekly"),
-// 			BackupTime:  pulumi.Int(0),
-// 			BackupModel: pulumi.String("master_no_pkg"),
-// 			BackupCycles: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(3),
-// 				pulumi.Int(5),
-// 			},
-// 			BackupSaveDays:        pulumi.Int(7),
-// 			RegularBackupEnable:   pulumi.String("disable"),
-// 			RegularBackupSaveDays: pulumi.Int(90),
-// 			RegularBackupStrategy: pulumi.String("months"),
-// 			RegularBackupCounts:   pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.NewConfigBackupStrategy(ctx, "example", &Sqlserver.ConfigBackupStrategyArgs{
+//				InstanceId:  pulumi.Any(tencentcloud_sqlserver_basic_instance.Example.Id),
+//				BackupType:  pulumi.String("weekly"),
+//				BackupTime:  pulumi.Int(0),
+//				BackupModel: pulumi.String("master_no_pkg"),
+//				BackupCycles: pulumi.IntArray{
+//					pulumi.Int(1),
+//					pulumi.Int(3),
+//					pulumi.Int(5),
+//				},
+//				BackupSaveDays:        pulumi.Int(7),
+//				RegularBackupEnable:   pulumi.String("disable"),
+//				RegularBackupSaveDays: pulumi.Int(90),
+//				RegularBackupStrategy: pulumi.String("months"),
+//				RegularBackupCounts:   pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Regular backup
 //
@@ -148,35 +154,38 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.NewConfigBackupStrategy(ctx, "example", &Sqlserver.ConfigBackupStrategyArgs{
-// 			InstanceId:  pulumi.Any(tencentcloud_sqlserver_basic_instance.Example.Id),
-// 			BackupTime:  pulumi.Int(0),
-// 			BackupModel: pulumi.String("master_no_pkg"),
-// 			BackupCycles: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(3),
-// 			},
-// 			BackupSaveDays:         pulumi.Int(7),
-// 			RegularBackupEnable:    pulumi.String("enable"),
-// 			RegularBackupSaveDays:  pulumi.Int(120),
-// 			RegularBackupStrategy:  pulumi.String("months"),
-// 			RegularBackupCounts:    pulumi.Int(1),
-// 			RegularBackupStartTime: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.NewConfigBackupStrategy(ctx, "example", &Sqlserver.ConfigBackupStrategyArgs{
+//				InstanceId:  pulumi.Any(tencentcloud_sqlserver_basic_instance.Example.Id),
+//				BackupTime:  pulumi.Int(0),
+//				BackupModel: pulumi.String("master_no_pkg"),
+//				BackupCycles: pulumi.IntArray{
+//					pulumi.Int(1),
+//					pulumi.Int(3),
+//				},
+//				BackupSaveDays:         pulumi.Int(7),
+//				RegularBackupEnable:    pulumi.String("enable"),
+//				RegularBackupSaveDays:  pulumi.Int(120),
+//				RegularBackupStrategy:  pulumi.String("months"),
+//				RegularBackupCounts:    pulumi.Int(1),
+//				RegularBackupStartTime: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -184,7 +193,9 @@ import (
 // sqlserver config_backup_strategy can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/configBackupStrategy:ConfigBackupStrategy example mssql-si2823jyl
+//
+//	$ pulumi import tencentcloud:Sqlserver/configBackupStrategy:ConfigBackupStrategy example mssql-si2823jyl
+//
 // ```
 type ConfigBackupStrategy struct {
 	pulumi.CustomResourceState
@@ -386,7 +397,7 @@ func (i *ConfigBackupStrategy) ToConfigBackupStrategyOutputWithContext(ctx conte
 // ConfigBackupStrategyArrayInput is an input type that accepts ConfigBackupStrategyArray and ConfigBackupStrategyArrayOutput values.
 // You can construct a concrete instance of `ConfigBackupStrategyArrayInput` via:
 //
-//          ConfigBackupStrategyArray{ ConfigBackupStrategyArgs{...} }
+//	ConfigBackupStrategyArray{ ConfigBackupStrategyArgs{...} }
 type ConfigBackupStrategyArrayInput interface {
 	pulumi.Input
 
@@ -411,7 +422,7 @@ func (i ConfigBackupStrategyArray) ToConfigBackupStrategyArrayOutputWithContext(
 // ConfigBackupStrategyMapInput is an input type that accepts ConfigBackupStrategyMap and ConfigBackupStrategyMapOutput values.
 // You can construct a concrete instance of `ConfigBackupStrategyMapInput` via:
 //
-//          ConfigBackupStrategyMap{ "key": ConfigBackupStrategyArgs{...} }
+//	ConfigBackupStrategyMap{ "key": ConfigBackupStrategyArgs{...} }
 type ConfigBackupStrategyMapInput interface {
 	pulumi.Input
 

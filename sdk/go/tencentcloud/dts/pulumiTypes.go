@@ -20,7 +20,7 @@ type CompareTaskObjects struct {
 // CompareTaskObjectsInput is an input type that accepts CompareTaskObjectsArgs and CompareTaskObjectsOutput values.
 // You can construct a concrete instance of `CompareTaskObjectsInput` via:
 //
-//          CompareTaskObjectsArgs{...}
+//	CompareTaskObjectsArgs{...}
 type CompareTaskObjectsInput interface {
 	pulumi.Input
 
@@ -58,11 +58,11 @@ func (i CompareTaskObjectsArgs) ToCompareTaskObjectsPtrOutputWithContext(ctx con
 // CompareTaskObjectsPtrInput is an input type that accepts CompareTaskObjectsArgs, CompareTaskObjectsPtr and CompareTaskObjectsPtrOutput values.
 // You can construct a concrete instance of `CompareTaskObjectsPtrInput` via:
 //
-//          CompareTaskObjectsArgs{...}
+//	        CompareTaskObjectsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type CompareTaskObjectsPtrInput interface {
 	pulumi.Input
 
@@ -186,7 +186,7 @@ type CompareTaskObjectsObjectItem struct {
 // CompareTaskObjectsObjectItemInput is an input type that accepts CompareTaskObjectsObjectItemArgs and CompareTaskObjectsObjectItemOutput values.
 // You can construct a concrete instance of `CompareTaskObjectsObjectItemInput` via:
 //
-//          CompareTaskObjectsObjectItemArgs{...}
+//	CompareTaskObjectsObjectItemArgs{...}
 type CompareTaskObjectsObjectItemInput interface {
 	pulumi.Input
 
@@ -226,7 +226,7 @@ func (i CompareTaskObjectsObjectItemArgs) ToCompareTaskObjectsObjectItemOutputWi
 // CompareTaskObjectsObjectItemArrayInput is an input type that accepts CompareTaskObjectsObjectItemArray and CompareTaskObjectsObjectItemArrayOutput values.
 // You can construct a concrete instance of `CompareTaskObjectsObjectItemArrayInput` via:
 //
-//          CompareTaskObjectsObjectItemArray{ CompareTaskObjectsObjectItemArgs{...} }
+//	CompareTaskObjectsObjectItemArray{ CompareTaskObjectsObjectItemArgs{...} }
 type CompareTaskObjectsObjectItemArrayInput interface {
 	pulumi.Input
 
@@ -325,7 +325,7 @@ type CompareTaskObjectsObjectItemTable struct {
 // CompareTaskObjectsObjectItemTableInput is an input type that accepts CompareTaskObjectsObjectItemTableArgs and CompareTaskObjectsObjectItemTableOutput values.
 // You can construct a concrete instance of `CompareTaskObjectsObjectItemTableInput` via:
 //
-//          CompareTaskObjectsObjectItemTableArgs{...}
+//	CompareTaskObjectsObjectItemTableArgs{...}
 type CompareTaskObjectsObjectItemTableInput interface {
 	pulumi.Input
 
@@ -353,7 +353,7 @@ func (i CompareTaskObjectsObjectItemTableArgs) ToCompareTaskObjectsObjectItemTab
 // CompareTaskObjectsObjectItemTableArrayInput is an input type that accepts CompareTaskObjectsObjectItemTableArray and CompareTaskObjectsObjectItemTableArrayOutput values.
 // You can construct a concrete instance of `CompareTaskObjectsObjectItemTableArrayInput` via:
 //
-//          CompareTaskObjectsObjectItemTableArray{ CompareTaskObjectsObjectItemTableArgs{...} }
+//	CompareTaskObjectsObjectItemTableArray{ CompareTaskObjectsObjectItemTableArgs{...} }
 type CompareTaskObjectsObjectItemTableArrayInput interface {
 	pulumi.Input
 
@@ -422,7 +422,7 @@ type CompareTaskObjectsObjectItemView struct {
 // CompareTaskObjectsObjectItemViewInput is an input type that accepts CompareTaskObjectsObjectItemViewArgs and CompareTaskObjectsObjectItemViewOutput values.
 // You can construct a concrete instance of `CompareTaskObjectsObjectItemViewInput` via:
 //
-//          CompareTaskObjectsObjectItemViewArgs{...}
+//	CompareTaskObjectsObjectItemViewArgs{...}
 type CompareTaskObjectsObjectItemViewInput interface {
 	pulumi.Input
 
@@ -450,7 +450,7 @@ func (i CompareTaskObjectsObjectItemViewArgs) ToCompareTaskObjectsObjectItemView
 // CompareTaskObjectsObjectItemViewArrayInput is an input type that accepts CompareTaskObjectsObjectItemViewArray and CompareTaskObjectsObjectItemViewArrayOutput values.
 // You can construct a concrete instance of `CompareTaskObjectsObjectItemViewArrayInput` via:
 //
-//          CompareTaskObjectsObjectItemViewArray{ CompareTaskObjectsObjectItemViewArgs{...} }
+//	CompareTaskObjectsObjectItemViewArray{ CompareTaskObjectsObjectItemViewArgs{...} }
 type CompareTaskObjectsObjectItemViewArrayInput interface {
 	pulumi.Input
 
@@ -531,7 +531,7 @@ type MigrateJobDstInfo struct {
 // MigrateJobDstInfoInput is an input type that accepts MigrateJobDstInfoArgs and MigrateJobDstInfoOutput values.
 // You can construct a concrete instance of `MigrateJobDstInfoInput` via:
 //
-//          MigrateJobDstInfoArgs{...}
+//	MigrateJobDstInfoArgs{...}
 type MigrateJobDstInfoInput interface {
 	pulumi.Input
 
@@ -579,11 +579,11 @@ func (i MigrateJobDstInfoArgs) ToMigrateJobDstInfoPtrOutputWithContext(ctx conte
 // MigrateJobDstInfoPtrInput is an input type that accepts MigrateJobDstInfoArgs, MigrateJobDstInfoPtr and MigrateJobDstInfoPtrOutput values.
 // You can construct a concrete instance of `MigrateJobDstInfoPtrInput` via:
 //
-//          MigrateJobDstInfoArgs{...}
+//	        MigrateJobDstInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MigrateJobDstInfoPtrInput interface {
 	pulumi.Input
 
@@ -772,7 +772,7 @@ type MigrateJobDstInfoExtraAttr struct {
 // MigrateJobDstInfoExtraAttrInput is an input type that accepts MigrateJobDstInfoExtraAttrArgs and MigrateJobDstInfoExtraAttrOutput values.
 // You can construct a concrete instance of `MigrateJobDstInfoExtraAttrInput` via:
 //
-//          MigrateJobDstInfoExtraAttrArgs{...}
+//	MigrateJobDstInfoExtraAttrArgs{...}
 type MigrateJobDstInfoExtraAttrInput interface {
 	pulumi.Input
 
@@ -802,7 +802,7 @@ func (i MigrateJobDstInfoExtraAttrArgs) ToMigrateJobDstInfoExtraAttrOutputWithCo
 // MigrateJobDstInfoExtraAttrArrayInput is an input type that accepts MigrateJobDstInfoExtraAttrArray and MigrateJobDstInfoExtraAttrArrayOutput values.
 // You can construct a concrete instance of `MigrateJobDstInfoExtraAttrArrayInput` via:
 //
-//          MigrateJobDstInfoExtraAttrArray{ MigrateJobDstInfoExtraAttrArgs{...} }
+//	MigrateJobDstInfoExtraAttrArray{ MigrateJobDstInfoExtraAttrArgs{...} }
 type MigrateJobDstInfoExtraAttrArrayInput interface {
 	pulumi.Input
 
@@ -914,7 +914,7 @@ type MigrateJobDstInfoInfo struct {
 // MigrateJobDstInfoInfoInput is an input type that accepts MigrateJobDstInfoInfoArgs and MigrateJobDstInfoInfoOutput values.
 // You can construct a concrete instance of `MigrateJobDstInfoInfoInput` via:
 //
-//          MigrateJobDstInfoInfoArgs{...}
+//	MigrateJobDstInfoInfoArgs{...}
 type MigrateJobDstInfoInfoInput interface {
 	pulumi.Input
 
@@ -980,7 +980,7 @@ func (i MigrateJobDstInfoInfoArgs) ToMigrateJobDstInfoInfoOutputWithContext(ctx 
 // MigrateJobDstInfoInfoArrayInput is an input type that accepts MigrateJobDstInfoInfoArray and MigrateJobDstInfoInfoArrayOutput values.
 // You can construct a concrete instance of `MigrateJobDstInfoInfoArrayInput` via:
 //
-//          MigrateJobDstInfoInfoArray{ MigrateJobDstInfoInfoArgs{...} }
+//	MigrateJobDstInfoInfoArray{ MigrateJobDstInfoInfoArgs{...} }
 type MigrateJobDstInfoInfoArrayInput interface {
 	pulumi.Input
 
@@ -1156,7 +1156,7 @@ type MigrateJobMigrateOption struct {
 // MigrateJobMigrateOptionInput is an input type that accepts MigrateJobMigrateOptionArgs and MigrateJobMigrateOptionOutput values.
 // You can construct a concrete instance of `MigrateJobMigrateOptionInput` via:
 //
-//          MigrateJobMigrateOptionArgs{...}
+//	MigrateJobMigrateOptionArgs{...}
 type MigrateJobMigrateOptionInput interface {
 	pulumi.Input
 
@@ -1204,11 +1204,11 @@ func (i MigrateJobMigrateOptionArgs) ToMigrateJobMigrateOptionPtrOutputWithConte
 // MigrateJobMigrateOptionPtrInput is an input type that accepts MigrateJobMigrateOptionArgs, MigrateJobMigrateOptionPtr and MigrateJobMigrateOptionPtrOutput values.
 // You can construct a concrete instance of `MigrateJobMigrateOptionPtrInput` via:
 //
-//          MigrateJobMigrateOptionArgs{...}
+//	        MigrateJobMigrateOptionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MigrateJobMigrateOptionPtrInput interface {
 	pulumi.Input
 
@@ -1395,7 +1395,7 @@ type MigrateJobMigrateOptionConsistency struct {
 // MigrateJobMigrateOptionConsistencyInput is an input type that accepts MigrateJobMigrateOptionConsistencyArgs and MigrateJobMigrateOptionConsistencyOutput values.
 // You can construct a concrete instance of `MigrateJobMigrateOptionConsistencyInput` via:
 //
-//          MigrateJobMigrateOptionConsistencyArgs{...}
+//	MigrateJobMigrateOptionConsistencyArgs{...}
 type MigrateJobMigrateOptionConsistencyInput interface {
 	pulumi.Input
 
@@ -1431,11 +1431,11 @@ func (i MigrateJobMigrateOptionConsistencyArgs) ToMigrateJobMigrateOptionConsist
 // MigrateJobMigrateOptionConsistencyPtrInput is an input type that accepts MigrateJobMigrateOptionConsistencyArgs, MigrateJobMigrateOptionConsistencyPtr and MigrateJobMigrateOptionConsistencyPtrOutput values.
 // You can construct a concrete instance of `MigrateJobMigrateOptionConsistencyPtrInput` via:
 //
-//          MigrateJobMigrateOptionConsistencyArgs{...}
+//	        MigrateJobMigrateOptionConsistencyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MigrateJobMigrateOptionConsistencyPtrInput interface {
 	pulumi.Input
 
@@ -1536,7 +1536,7 @@ type MigrateJobMigrateOptionDatabaseTable struct {
 // MigrateJobMigrateOptionDatabaseTableInput is an input type that accepts MigrateJobMigrateOptionDatabaseTableArgs and MigrateJobMigrateOptionDatabaseTableOutput values.
 // You can construct a concrete instance of `MigrateJobMigrateOptionDatabaseTableInput` via:
 //
-//          MigrateJobMigrateOptionDatabaseTableArgs{...}
+//	MigrateJobMigrateOptionDatabaseTableArgs{...}
 type MigrateJobMigrateOptionDatabaseTableInput interface {
 	pulumi.Input
 
@@ -1576,11 +1576,11 @@ func (i MigrateJobMigrateOptionDatabaseTableArgs) ToMigrateJobMigrateOptionDatab
 // MigrateJobMigrateOptionDatabaseTablePtrInput is an input type that accepts MigrateJobMigrateOptionDatabaseTableArgs, MigrateJobMigrateOptionDatabaseTablePtr and MigrateJobMigrateOptionDatabaseTablePtrOutput values.
 // You can construct a concrete instance of `MigrateJobMigrateOptionDatabaseTablePtrInput` via:
 //
-//          MigrateJobMigrateOptionDatabaseTableArgs{...}
+//	        MigrateJobMigrateOptionDatabaseTableArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MigrateJobMigrateOptionDatabaseTablePtrInput interface {
 	pulumi.Input
 
@@ -1747,7 +1747,7 @@ type MigrateJobMigrateOptionDatabaseTableDatabase struct {
 // MigrateJobMigrateOptionDatabaseTableDatabaseInput is an input type that accepts MigrateJobMigrateOptionDatabaseTableDatabaseArgs and MigrateJobMigrateOptionDatabaseTableDatabaseOutput values.
 // You can construct a concrete instance of `MigrateJobMigrateOptionDatabaseTableDatabaseInput` via:
 //
-//          MigrateJobMigrateOptionDatabaseTableDatabaseArgs{...}
+//	MigrateJobMigrateOptionDatabaseTableDatabaseArgs{...}
 type MigrateJobMigrateOptionDatabaseTableDatabaseInput interface {
 	pulumi.Input
 
@@ -1813,7 +1813,7 @@ func (i MigrateJobMigrateOptionDatabaseTableDatabaseArgs) ToMigrateJobMigrateOpt
 // MigrateJobMigrateOptionDatabaseTableDatabaseArrayInput is an input type that accepts MigrateJobMigrateOptionDatabaseTableDatabaseArray and MigrateJobMigrateOptionDatabaseTableDatabaseArrayOutput values.
 // You can construct a concrete instance of `MigrateJobMigrateOptionDatabaseTableDatabaseArrayInput` via:
 //
-//          MigrateJobMigrateOptionDatabaseTableDatabaseArray{ MigrateJobMigrateOptionDatabaseTableDatabaseArgs{...} }
+//	MigrateJobMigrateOptionDatabaseTableDatabaseArray{ MigrateJobMigrateOptionDatabaseTableDatabaseArgs{...} }
 type MigrateJobMigrateOptionDatabaseTableDatabaseArrayInput interface {
 	pulumi.Input
 
@@ -1985,7 +1985,7 @@ type MigrateJobMigrateOptionDatabaseTableDatabaseRole struct {
 // MigrateJobMigrateOptionDatabaseTableDatabaseRoleInput is an input type that accepts MigrateJobMigrateOptionDatabaseTableDatabaseRoleArgs and MigrateJobMigrateOptionDatabaseTableDatabaseRoleOutput values.
 // You can construct a concrete instance of `MigrateJobMigrateOptionDatabaseTableDatabaseRoleInput` via:
 //
-//          MigrateJobMigrateOptionDatabaseTableDatabaseRoleArgs{...}
+//	MigrateJobMigrateOptionDatabaseTableDatabaseRoleArgs{...}
 type MigrateJobMigrateOptionDatabaseTableDatabaseRoleInput interface {
 	pulumi.Input
 
@@ -2015,7 +2015,7 @@ func (i MigrateJobMigrateOptionDatabaseTableDatabaseRoleArgs) ToMigrateJobMigrat
 // MigrateJobMigrateOptionDatabaseTableDatabaseRoleArrayInput is an input type that accepts MigrateJobMigrateOptionDatabaseTableDatabaseRoleArray and MigrateJobMigrateOptionDatabaseTableDatabaseRoleArrayOutput values.
 // You can construct a concrete instance of `MigrateJobMigrateOptionDatabaseTableDatabaseRoleArrayInput` via:
 //
-//          MigrateJobMigrateOptionDatabaseTableDatabaseRoleArray{ MigrateJobMigrateOptionDatabaseTableDatabaseRoleArgs{...} }
+//	MigrateJobMigrateOptionDatabaseTableDatabaseRoleArray{ MigrateJobMigrateOptionDatabaseTableDatabaseRoleArgs{...} }
 type MigrateJobMigrateOptionDatabaseTableDatabaseRoleArrayInput interface {
 	pulumi.Input
 
@@ -2095,7 +2095,7 @@ type MigrateJobMigrateOptionDatabaseTableDatabaseTable struct {
 // MigrateJobMigrateOptionDatabaseTableDatabaseTableInput is an input type that accepts MigrateJobMigrateOptionDatabaseTableDatabaseTableArgs and MigrateJobMigrateOptionDatabaseTableDatabaseTableOutput values.
 // You can construct a concrete instance of `MigrateJobMigrateOptionDatabaseTableDatabaseTableInput` via:
 //
-//          MigrateJobMigrateOptionDatabaseTableDatabaseTableArgs{...}
+//	MigrateJobMigrateOptionDatabaseTableDatabaseTableArgs{...}
 type MigrateJobMigrateOptionDatabaseTableDatabaseTableInput interface {
 	pulumi.Input
 
@@ -2129,7 +2129,7 @@ func (i MigrateJobMigrateOptionDatabaseTableDatabaseTableArgs) ToMigrateJobMigra
 // MigrateJobMigrateOptionDatabaseTableDatabaseTableArrayInput is an input type that accepts MigrateJobMigrateOptionDatabaseTableDatabaseTableArray and MigrateJobMigrateOptionDatabaseTableDatabaseTableArrayOutput values.
 // You can construct a concrete instance of `MigrateJobMigrateOptionDatabaseTableDatabaseTableArrayInput` via:
 //
-//          MigrateJobMigrateOptionDatabaseTableDatabaseTableArray{ MigrateJobMigrateOptionDatabaseTableDatabaseTableArgs{...} }
+//	MigrateJobMigrateOptionDatabaseTableDatabaseTableArray{ MigrateJobMigrateOptionDatabaseTableDatabaseTableArgs{...} }
 type MigrateJobMigrateOptionDatabaseTableDatabaseTableArrayInput interface {
 	pulumi.Input
 
@@ -2215,7 +2215,7 @@ type MigrateJobMigrateOptionDatabaseTableDatabaseView struct {
 // MigrateJobMigrateOptionDatabaseTableDatabaseViewInput is an input type that accepts MigrateJobMigrateOptionDatabaseTableDatabaseViewArgs and MigrateJobMigrateOptionDatabaseTableDatabaseViewOutput values.
 // You can construct a concrete instance of `MigrateJobMigrateOptionDatabaseTableDatabaseViewInput` via:
 //
-//          MigrateJobMigrateOptionDatabaseTableDatabaseViewArgs{...}
+//	MigrateJobMigrateOptionDatabaseTableDatabaseViewArgs{...}
 type MigrateJobMigrateOptionDatabaseTableDatabaseViewInput interface {
 	pulumi.Input
 
@@ -2245,7 +2245,7 @@ func (i MigrateJobMigrateOptionDatabaseTableDatabaseViewArgs) ToMigrateJobMigrat
 // MigrateJobMigrateOptionDatabaseTableDatabaseViewArrayInput is an input type that accepts MigrateJobMigrateOptionDatabaseTableDatabaseViewArray and MigrateJobMigrateOptionDatabaseTableDatabaseViewArrayOutput values.
 // You can construct a concrete instance of `MigrateJobMigrateOptionDatabaseTableDatabaseViewArrayInput` via:
 //
-//          MigrateJobMigrateOptionDatabaseTableDatabaseViewArray{ MigrateJobMigrateOptionDatabaseTableDatabaseViewArgs{...} }
+//	MigrateJobMigrateOptionDatabaseTableDatabaseViewArray{ MigrateJobMigrateOptionDatabaseTableDatabaseViewArgs{...} }
 type MigrateJobMigrateOptionDatabaseTableDatabaseViewArrayInput interface {
 	pulumi.Input
 
@@ -2321,7 +2321,7 @@ type MigrateJobMigrateOptionExtraAttr struct {
 // MigrateJobMigrateOptionExtraAttrInput is an input type that accepts MigrateJobMigrateOptionExtraAttrArgs and MigrateJobMigrateOptionExtraAttrOutput values.
 // You can construct a concrete instance of `MigrateJobMigrateOptionExtraAttrInput` via:
 //
-//          MigrateJobMigrateOptionExtraAttrArgs{...}
+//	MigrateJobMigrateOptionExtraAttrArgs{...}
 type MigrateJobMigrateOptionExtraAttrInput interface {
 	pulumi.Input
 
@@ -2351,7 +2351,7 @@ func (i MigrateJobMigrateOptionExtraAttrArgs) ToMigrateJobMigrateOptionExtraAttr
 // MigrateJobMigrateOptionExtraAttrArrayInput is an input type that accepts MigrateJobMigrateOptionExtraAttrArray and MigrateJobMigrateOptionExtraAttrArrayOutput values.
 // You can construct a concrete instance of `MigrateJobMigrateOptionExtraAttrArrayInput` via:
 //
-//          MigrateJobMigrateOptionExtraAttrArray{ MigrateJobMigrateOptionExtraAttrArgs{...} }
+//	MigrateJobMigrateOptionExtraAttrArray{ MigrateJobMigrateOptionExtraAttrArgs{...} }
 type MigrateJobMigrateOptionExtraAttrArrayInput interface {
 	pulumi.Input
 
@@ -2437,7 +2437,7 @@ type MigrateJobSrcInfo struct {
 // MigrateJobSrcInfoInput is an input type that accepts MigrateJobSrcInfoArgs and MigrateJobSrcInfoOutput values.
 // You can construct a concrete instance of `MigrateJobSrcInfoInput` via:
 //
-//          MigrateJobSrcInfoArgs{...}
+//	MigrateJobSrcInfoArgs{...}
 type MigrateJobSrcInfoInput interface {
 	pulumi.Input
 
@@ -2485,11 +2485,11 @@ func (i MigrateJobSrcInfoArgs) ToMigrateJobSrcInfoPtrOutputWithContext(ctx conte
 // MigrateJobSrcInfoPtrInput is an input type that accepts MigrateJobSrcInfoArgs, MigrateJobSrcInfoPtr and MigrateJobSrcInfoPtrOutput values.
 // You can construct a concrete instance of `MigrateJobSrcInfoPtrInput` via:
 //
-//          MigrateJobSrcInfoArgs{...}
+//	        MigrateJobSrcInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MigrateJobSrcInfoPtrInput interface {
 	pulumi.Input
 
@@ -2678,7 +2678,7 @@ type MigrateJobSrcInfoExtraAttr struct {
 // MigrateJobSrcInfoExtraAttrInput is an input type that accepts MigrateJobSrcInfoExtraAttrArgs and MigrateJobSrcInfoExtraAttrOutput values.
 // You can construct a concrete instance of `MigrateJobSrcInfoExtraAttrInput` via:
 //
-//          MigrateJobSrcInfoExtraAttrArgs{...}
+//	MigrateJobSrcInfoExtraAttrArgs{...}
 type MigrateJobSrcInfoExtraAttrInput interface {
 	pulumi.Input
 
@@ -2708,7 +2708,7 @@ func (i MigrateJobSrcInfoExtraAttrArgs) ToMigrateJobSrcInfoExtraAttrOutputWithCo
 // MigrateJobSrcInfoExtraAttrArrayInput is an input type that accepts MigrateJobSrcInfoExtraAttrArray and MigrateJobSrcInfoExtraAttrArrayOutput values.
 // You can construct a concrete instance of `MigrateJobSrcInfoExtraAttrArrayInput` via:
 //
-//          MigrateJobSrcInfoExtraAttrArray{ MigrateJobSrcInfoExtraAttrArgs{...} }
+//	MigrateJobSrcInfoExtraAttrArray{ MigrateJobSrcInfoExtraAttrArgs{...} }
 type MigrateJobSrcInfoExtraAttrArrayInput interface {
 	pulumi.Input
 
@@ -2820,7 +2820,7 @@ type MigrateJobSrcInfoInfo struct {
 // MigrateJobSrcInfoInfoInput is an input type that accepts MigrateJobSrcInfoInfoArgs and MigrateJobSrcInfoInfoOutput values.
 // You can construct a concrete instance of `MigrateJobSrcInfoInfoInput` via:
 //
-//          MigrateJobSrcInfoInfoArgs{...}
+//	MigrateJobSrcInfoInfoArgs{...}
 type MigrateJobSrcInfoInfoInput interface {
 	pulumi.Input
 
@@ -2886,7 +2886,7 @@ func (i MigrateJobSrcInfoInfoArgs) ToMigrateJobSrcInfoInfoOutputWithContext(ctx 
 // MigrateJobSrcInfoInfoArrayInput is an input type that accepts MigrateJobSrcInfoInfoArray and MigrateJobSrcInfoInfoArrayOutput values.
 // You can construct a concrete instance of `MigrateJobSrcInfoInfoArrayInput` via:
 //
-//          MigrateJobSrcInfoInfoArray{ MigrateJobSrcInfoInfoArgs{...} }
+//	MigrateJobSrcInfoInfoArray{ MigrateJobSrcInfoInfoArgs{...} }
 type MigrateJobSrcInfoInfoArrayInput interface {
 	pulumi.Input
 
@@ -3052,7 +3052,7 @@ type MigrateServiceTag struct {
 // MigrateServiceTagInput is an input type that accepts MigrateServiceTagArgs and MigrateServiceTagOutput values.
 // You can construct a concrete instance of `MigrateServiceTagInput` via:
 //
-//          MigrateServiceTagArgs{...}
+//	MigrateServiceTagArgs{...}
 type MigrateServiceTagInput interface {
 	pulumi.Input
 
@@ -3082,7 +3082,7 @@ func (i MigrateServiceTagArgs) ToMigrateServiceTagOutputWithContext(ctx context.
 // MigrateServiceTagArrayInput is an input type that accepts MigrateServiceTagArray and MigrateServiceTagArrayOutput values.
 // You can construct a concrete instance of `MigrateServiceTagArrayInput` via:
 //
-//          MigrateServiceTagArray{ MigrateServiceTagArgs{...} }
+//	MigrateServiceTagArray{ MigrateServiceTagArgs{...} }
 type MigrateServiceTagArrayInput interface {
 	pulumi.Input
 
@@ -3206,7 +3206,7 @@ type SyncConfigDstInfo struct {
 // SyncConfigDstInfoInput is an input type that accepts SyncConfigDstInfoArgs and SyncConfigDstInfoOutput values.
 // You can construct a concrete instance of `SyncConfigDstInfoInput` via:
 //
-//          SyncConfigDstInfoArgs{...}
+//	SyncConfigDstInfoArgs{...}
 type SyncConfigDstInfoInput interface {
 	pulumi.Input
 
@@ -3292,11 +3292,11 @@ func (i SyncConfigDstInfoArgs) ToSyncConfigDstInfoPtrOutputWithContext(ctx conte
 // SyncConfigDstInfoPtrInput is an input type that accepts SyncConfigDstInfoArgs, SyncConfigDstInfoPtr and SyncConfigDstInfoPtrOutput values.
 // You can construct a concrete instance of `SyncConfigDstInfoPtrInput` via:
 //
-//          SyncConfigDstInfoArgs{...}
+//	        SyncConfigDstInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type SyncConfigDstInfoPtrInput interface {
 	pulumi.Input
 
@@ -3774,7 +3774,7 @@ type SyncConfigObjects struct {
 // SyncConfigObjectsInput is an input type that accepts SyncConfigObjectsArgs and SyncConfigObjectsOutput values.
 // You can construct a concrete instance of `SyncConfigObjectsInput` via:
 //
-//          SyncConfigObjectsArgs{...}
+//	SyncConfigObjectsArgs{...}
 type SyncConfigObjectsInput interface {
 	pulumi.Input
 
@@ -3816,11 +3816,11 @@ func (i SyncConfigObjectsArgs) ToSyncConfigObjectsPtrOutputWithContext(ctx conte
 // SyncConfigObjectsPtrInput is an input type that accepts SyncConfigObjectsArgs, SyncConfigObjectsPtr and SyncConfigObjectsPtrOutput values.
 // You can construct a concrete instance of `SyncConfigObjectsPtrInput` via:
 //
-//          SyncConfigObjectsArgs{...}
+//	        SyncConfigObjectsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type SyncConfigObjectsPtrInput interface {
 	pulumi.Input
 
@@ -3994,7 +3994,7 @@ type SyncConfigObjectsDatabase struct {
 // SyncConfigObjectsDatabaseInput is an input type that accepts SyncConfigObjectsDatabaseArgs and SyncConfigObjectsDatabaseOutput values.
 // You can construct a concrete instance of `SyncConfigObjectsDatabaseInput` via:
 //
-//          SyncConfigObjectsDatabaseArgs{...}
+//	SyncConfigObjectsDatabaseArgs{...}
 type SyncConfigObjectsDatabaseInput interface {
 	pulumi.Input
 
@@ -4054,7 +4054,7 @@ func (i SyncConfigObjectsDatabaseArgs) ToSyncConfigObjectsDatabaseOutputWithCont
 // SyncConfigObjectsDatabaseArrayInput is an input type that accepts SyncConfigObjectsDatabaseArray and SyncConfigObjectsDatabaseArrayOutput values.
 // You can construct a concrete instance of `SyncConfigObjectsDatabaseArrayInput` via:
 //
-//          SyncConfigObjectsDatabaseArray{ SyncConfigObjectsDatabaseArgs{...} }
+//	SyncConfigObjectsDatabaseArray{ SyncConfigObjectsDatabaseArgs{...} }
 type SyncConfigObjectsDatabaseArrayInput interface {
 	pulumi.Input
 
@@ -4207,7 +4207,7 @@ type SyncConfigObjectsDatabaseTable struct {
 // SyncConfigObjectsDatabaseTableInput is an input type that accepts SyncConfigObjectsDatabaseTableArgs and SyncConfigObjectsDatabaseTableOutput values.
 // You can construct a concrete instance of `SyncConfigObjectsDatabaseTableInput` via:
 //
-//          SyncConfigObjectsDatabaseTableArgs{...}
+//	SyncConfigObjectsDatabaseTableArgs{...}
 type SyncConfigObjectsDatabaseTableInput interface {
 	pulumi.Input
 
@@ -4239,7 +4239,7 @@ func (i SyncConfigObjectsDatabaseTableArgs) ToSyncConfigObjectsDatabaseTableOutp
 // SyncConfigObjectsDatabaseTableArrayInput is an input type that accepts SyncConfigObjectsDatabaseTableArray and SyncConfigObjectsDatabaseTableArrayOutput values.
 // You can construct a concrete instance of `SyncConfigObjectsDatabaseTableArrayInput` via:
 //
-//          SyncConfigObjectsDatabaseTableArray{ SyncConfigObjectsDatabaseTableArgs{...} }
+//	SyncConfigObjectsDatabaseTableArray{ SyncConfigObjectsDatabaseTableArgs{...} }
 type SyncConfigObjectsDatabaseTableArrayInput interface {
 	pulumi.Input
 
@@ -4320,7 +4320,7 @@ type SyncConfigObjectsDatabaseView struct {
 // SyncConfigObjectsDatabaseViewInput is an input type that accepts SyncConfigObjectsDatabaseViewArgs and SyncConfigObjectsDatabaseViewOutput values.
 // You can construct a concrete instance of `SyncConfigObjectsDatabaseViewInput` via:
 //
-//          SyncConfigObjectsDatabaseViewArgs{...}
+//	SyncConfigObjectsDatabaseViewArgs{...}
 type SyncConfigObjectsDatabaseViewInput interface {
 	pulumi.Input
 
@@ -4350,7 +4350,7 @@ func (i SyncConfigObjectsDatabaseViewArgs) ToSyncConfigObjectsDatabaseViewOutput
 // SyncConfigObjectsDatabaseViewArrayInput is an input type that accepts SyncConfigObjectsDatabaseViewArray and SyncConfigObjectsDatabaseViewArrayOutput values.
 // You can construct a concrete instance of `SyncConfigObjectsDatabaseViewArrayInput` via:
 //
-//          SyncConfigObjectsDatabaseViewArray{ SyncConfigObjectsDatabaseViewArgs{...} }
+//	SyncConfigObjectsDatabaseViewArray{ SyncConfigObjectsDatabaseViewArgs{...} }
 type SyncConfigObjectsDatabaseViewArrayInput interface {
 	pulumi.Input
 
@@ -4424,7 +4424,7 @@ type SyncConfigObjectsOnlineDdl struct {
 // SyncConfigObjectsOnlineDdlInput is an input type that accepts SyncConfigObjectsOnlineDdlArgs and SyncConfigObjectsOnlineDdlOutput values.
 // You can construct a concrete instance of `SyncConfigObjectsOnlineDdlInput` via:
 //
-//          SyncConfigObjectsOnlineDdlArgs{...}
+//	SyncConfigObjectsOnlineDdlArgs{...}
 type SyncConfigObjectsOnlineDdlInput interface {
 	pulumi.Input
 
@@ -4460,11 +4460,11 @@ func (i SyncConfigObjectsOnlineDdlArgs) ToSyncConfigObjectsOnlineDdlPtrOutputWit
 // SyncConfigObjectsOnlineDdlPtrInput is an input type that accepts SyncConfigObjectsOnlineDdlArgs, SyncConfigObjectsOnlineDdlPtr and SyncConfigObjectsOnlineDdlPtrOutput values.
 // You can construct a concrete instance of `SyncConfigObjectsOnlineDdlPtrInput` via:
 //
-//          SyncConfigObjectsOnlineDdlArgs{...}
+//	        SyncConfigObjectsOnlineDdlArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type SyncConfigObjectsOnlineDdlPtrInput interface {
 	pulumi.Input
 
@@ -4573,7 +4573,7 @@ type SyncConfigOptions struct {
 // SyncConfigOptionsInput is an input type that accepts SyncConfigOptionsArgs and SyncConfigOptionsOutput values.
 // You can construct a concrete instance of `SyncConfigOptionsInput` via:
 //
-//          SyncConfigOptionsArgs{...}
+//	SyncConfigOptionsArgs{...}
 type SyncConfigOptionsInput interface {
 	pulumi.Input
 
@@ -4621,11 +4621,11 @@ func (i SyncConfigOptionsArgs) ToSyncConfigOptionsPtrOutputWithContext(ctx conte
 // SyncConfigOptionsPtrInput is an input type that accepts SyncConfigOptionsArgs, SyncConfigOptionsPtr and SyncConfigOptionsPtrOutput values.
 // You can construct a concrete instance of `SyncConfigOptionsPtrInput` via:
 //
-//          SyncConfigOptionsArgs{...}
+//	        SyncConfigOptionsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type SyncConfigOptionsPtrInput interface {
 	pulumi.Input
 
@@ -4816,7 +4816,7 @@ type SyncConfigOptionsConflictHandleOption struct {
 // SyncConfigOptionsConflictHandleOptionInput is an input type that accepts SyncConfigOptionsConflictHandleOptionArgs and SyncConfigOptionsConflictHandleOptionOutput values.
 // You can construct a concrete instance of `SyncConfigOptionsConflictHandleOptionInput` via:
 //
-//          SyncConfigOptionsConflictHandleOptionArgs{...}
+//	SyncConfigOptionsConflictHandleOptionArgs{...}
 type SyncConfigOptionsConflictHandleOptionInput interface {
 	pulumi.Input
 
@@ -4856,11 +4856,11 @@ func (i SyncConfigOptionsConflictHandleOptionArgs) ToSyncConfigOptionsConflictHa
 // SyncConfigOptionsConflictHandleOptionPtrInput is an input type that accepts SyncConfigOptionsConflictHandleOptionArgs, SyncConfigOptionsConflictHandleOptionPtr and SyncConfigOptionsConflictHandleOptionPtrOutput values.
 // You can construct a concrete instance of `SyncConfigOptionsConflictHandleOptionPtrInput` via:
 //
-//          SyncConfigOptionsConflictHandleOptionArgs{...}
+//	        SyncConfigOptionsConflictHandleOptionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type SyncConfigOptionsConflictHandleOptionPtrInput interface {
 	pulumi.Input
 
@@ -4989,7 +4989,7 @@ type SyncConfigOptionsDdlOption struct {
 // SyncConfigOptionsDdlOptionInput is an input type that accepts SyncConfigOptionsDdlOptionArgs and SyncConfigOptionsDdlOptionOutput values.
 // You can construct a concrete instance of `SyncConfigOptionsDdlOptionInput` via:
 //
-//          SyncConfigOptionsDdlOptionArgs{...}
+//	SyncConfigOptionsDdlOptionArgs{...}
 type SyncConfigOptionsDdlOptionInput interface {
 	pulumi.Input
 
@@ -5019,7 +5019,7 @@ func (i SyncConfigOptionsDdlOptionArgs) ToSyncConfigOptionsDdlOptionOutputWithCo
 // SyncConfigOptionsDdlOptionArrayInput is an input type that accepts SyncConfigOptionsDdlOptionArray and SyncConfigOptionsDdlOptionArrayOutput values.
 // You can construct a concrete instance of `SyncConfigOptionsDdlOptionArrayInput` via:
 //
-//          SyncConfigOptionsDdlOptionArray{ SyncConfigOptionsDdlOptionArgs{...} }
+//	SyncConfigOptionsDdlOptionArray{ SyncConfigOptionsDdlOptionArgs{...} }
 type SyncConfigOptionsDdlOptionArrayInput interface {
 	pulumi.Input
 
@@ -5143,7 +5143,7 @@ type SyncConfigSrcInfo struct {
 // SyncConfigSrcInfoInput is an input type that accepts SyncConfigSrcInfoArgs and SyncConfigSrcInfoOutput values.
 // You can construct a concrete instance of `SyncConfigSrcInfoInput` via:
 //
-//          SyncConfigSrcInfoArgs{...}
+//	SyncConfigSrcInfoArgs{...}
 type SyncConfigSrcInfoInput interface {
 	pulumi.Input
 
@@ -5229,11 +5229,11 @@ func (i SyncConfigSrcInfoArgs) ToSyncConfigSrcInfoPtrOutputWithContext(ctx conte
 // SyncConfigSrcInfoPtrInput is an input type that accepts SyncConfigSrcInfoArgs, SyncConfigSrcInfoPtr and SyncConfigSrcInfoPtrOutput values.
 // You can construct a concrete instance of `SyncConfigSrcInfoPtrInput` via:
 //
-//          SyncConfigSrcInfoArgs{...}
+//	        SyncConfigSrcInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type SyncConfigSrcInfoPtrInput interface {
 	pulumi.Input
 
@@ -5707,7 +5707,7 @@ type SyncJobTag struct {
 // SyncJobTagInput is an input type that accepts SyncJobTagArgs and SyncJobTagOutput values.
 // You can construct a concrete instance of `SyncJobTagInput` via:
 //
-//          SyncJobTagArgs{...}
+//	SyncJobTagArgs{...}
 type SyncJobTagInput interface {
 	pulumi.Input
 
@@ -5737,7 +5737,7 @@ func (i SyncJobTagArgs) ToSyncJobTagOutputWithContext(ctx context.Context) SyncJ
 // SyncJobTagArrayInput is an input type that accepts SyncJobTagArray and SyncJobTagArrayOutput values.
 // You can construct a concrete instance of `SyncJobTagArrayInput` via:
 //
-//          SyncJobTagArray{ SyncJobTagArgs{...} }
+//	SyncJobTagArray{ SyncJobTagArgs{...} }
 type SyncJobTagArrayInput interface {
 	pulumi.Input
 
@@ -5831,7 +5831,7 @@ type GetCompareTasksList struct {
 // GetCompareTasksListInput is an input type that accepts GetCompareTasksListArgs and GetCompareTasksListOutput values.
 // You can construct a concrete instance of `GetCompareTasksListInput` via:
 //
-//          GetCompareTasksListArgs{...}
+//	GetCompareTasksListArgs{...}
 type GetCompareTasksListInput interface {
 	pulumi.Input
 
@@ -5879,7 +5879,7 @@ func (i GetCompareTasksListArgs) ToGetCompareTasksListOutputWithContext(ctx cont
 // GetCompareTasksListArrayInput is an input type that accepts GetCompareTasksListArray and GetCompareTasksListArrayOutput values.
 // You can construct a concrete instance of `GetCompareTasksListArrayInput` via:
 //
-//          GetCompareTasksListArray{ GetCompareTasksListArgs{...} }
+//	GetCompareTasksListArray{ GetCompareTasksListArgs{...} }
 type GetCompareTasksListArrayInput interface {
 	pulumi.Input
 
@@ -6008,7 +6008,7 @@ type GetCompareTasksListCheckProcess struct {
 // GetCompareTasksListCheckProcessInput is an input type that accepts GetCompareTasksListCheckProcessArgs and GetCompareTasksListCheckProcessOutput values.
 // You can construct a concrete instance of `GetCompareTasksListCheckProcessInput` via:
 //
-//          GetCompareTasksListCheckProcessArgs{...}
+//	GetCompareTasksListCheckProcessArgs{...}
 type GetCompareTasksListCheckProcessInput interface {
 	pulumi.Input
 
@@ -6046,7 +6046,7 @@ func (i GetCompareTasksListCheckProcessArgs) ToGetCompareTasksListCheckProcessOu
 // GetCompareTasksListCheckProcessArrayInput is an input type that accepts GetCompareTasksListCheckProcessArray and GetCompareTasksListCheckProcessArrayOutput values.
 // You can construct a concrete instance of `GetCompareTasksListCheckProcessArrayInput` via:
 //
-//          GetCompareTasksListCheckProcessArray{ GetCompareTasksListCheckProcessArgs{...} }
+//	GetCompareTasksListCheckProcessArray{ GetCompareTasksListCheckProcessArgs{...} }
 type GetCompareTasksListCheckProcessArrayInput interface {
 	pulumi.Input
 
@@ -6149,7 +6149,7 @@ type GetCompareTasksListCheckProcessStep struct {
 // GetCompareTasksListCheckProcessStepInput is an input type that accepts GetCompareTasksListCheckProcessStepArgs and GetCompareTasksListCheckProcessStepOutput values.
 // You can construct a concrete instance of `GetCompareTasksListCheckProcessStepInput` via:
 //
-//          GetCompareTasksListCheckProcessStepArgs{...}
+//	GetCompareTasksListCheckProcessStepArgs{...}
 type GetCompareTasksListCheckProcessStepInput interface {
 	pulumi.Input
 
@@ -6186,7 +6186,7 @@ func (i GetCompareTasksListCheckProcessStepArgs) ToGetCompareTasksListCheckProce
 // GetCompareTasksListCheckProcessStepArrayInput is an input type that accepts GetCompareTasksListCheckProcessStepArray and GetCompareTasksListCheckProcessStepArrayOutput values.
 // You can construct a concrete instance of `GetCompareTasksListCheckProcessStepArrayInput` via:
 //
-//          GetCompareTasksListCheckProcessStepArray{ GetCompareTasksListCheckProcessStepArgs{...} }
+//	GetCompareTasksListCheckProcessStepArray{ GetCompareTasksListCheckProcessStepArgs{...} }
 type GetCompareTasksListCheckProcessStepArrayInput interface {
 	pulumi.Input
 
@@ -6294,7 +6294,7 @@ type GetCompareTasksListCheckProcessStepError struct {
 // GetCompareTasksListCheckProcessStepErrorInput is an input type that accepts GetCompareTasksListCheckProcessStepErrorArgs and GetCompareTasksListCheckProcessStepErrorOutput values.
 // You can construct a concrete instance of `GetCompareTasksListCheckProcessStepErrorInput` via:
 //
-//          GetCompareTasksListCheckProcessStepErrorArgs{...}
+//	GetCompareTasksListCheckProcessStepErrorArgs{...}
 type GetCompareTasksListCheckProcessStepErrorInput interface {
 	pulumi.Input
 
@@ -6324,7 +6324,7 @@ func (i GetCompareTasksListCheckProcessStepErrorArgs) ToGetCompareTasksListCheck
 // GetCompareTasksListCheckProcessStepErrorArrayInput is an input type that accepts GetCompareTasksListCheckProcessStepErrorArray and GetCompareTasksListCheckProcessStepErrorArrayOutput values.
 // You can construct a concrete instance of `GetCompareTasksListCheckProcessStepErrorArrayInput` via:
 //
-//          GetCompareTasksListCheckProcessStepErrorArray{ GetCompareTasksListCheckProcessStepErrorArgs{...} }
+//	GetCompareTasksListCheckProcessStepErrorArray{ GetCompareTasksListCheckProcessStepErrorArgs{...} }
 type GetCompareTasksListCheckProcessStepErrorArrayInput interface {
 	pulumi.Input
 
@@ -6403,7 +6403,7 @@ type GetCompareTasksListCheckProcessStepWarning struct {
 // GetCompareTasksListCheckProcessStepWarningInput is an input type that accepts GetCompareTasksListCheckProcessStepWarningArgs and GetCompareTasksListCheckProcessStepWarningOutput values.
 // You can construct a concrete instance of `GetCompareTasksListCheckProcessStepWarningInput` via:
 //
-//          GetCompareTasksListCheckProcessStepWarningArgs{...}
+//	GetCompareTasksListCheckProcessStepWarningArgs{...}
 type GetCompareTasksListCheckProcessStepWarningInput interface {
 	pulumi.Input
 
@@ -6433,7 +6433,7 @@ func (i GetCompareTasksListCheckProcessStepWarningArgs) ToGetCompareTasksListChe
 // GetCompareTasksListCheckProcessStepWarningArrayInput is an input type that accepts GetCompareTasksListCheckProcessStepWarningArray and GetCompareTasksListCheckProcessStepWarningArrayOutput values.
 // You can construct a concrete instance of `GetCompareTasksListCheckProcessStepWarningArrayInput` via:
 //
-//          GetCompareTasksListCheckProcessStepWarningArray{ GetCompareTasksListCheckProcessStepWarningArgs{...} }
+//	GetCompareTasksListCheckProcessStepWarningArray{ GetCompareTasksListCheckProcessStepWarningArgs{...} }
 type GetCompareTasksListCheckProcessStepWarningArrayInput interface {
 	pulumi.Input
 
@@ -6520,7 +6520,7 @@ type GetCompareTasksListCompareProcess struct {
 // GetCompareTasksListCompareProcessInput is an input type that accepts GetCompareTasksListCompareProcessArgs and GetCompareTasksListCompareProcessOutput values.
 // You can construct a concrete instance of `GetCompareTasksListCompareProcessInput` via:
 //
-//          GetCompareTasksListCompareProcessArgs{...}
+//	GetCompareTasksListCompareProcessArgs{...}
 type GetCompareTasksListCompareProcessInput interface {
 	pulumi.Input
 
@@ -6558,7 +6558,7 @@ func (i GetCompareTasksListCompareProcessArgs) ToGetCompareTasksListCompareProce
 // GetCompareTasksListCompareProcessArrayInput is an input type that accepts GetCompareTasksListCompareProcessArray and GetCompareTasksListCompareProcessArrayOutput values.
 // You can construct a concrete instance of `GetCompareTasksListCompareProcessArrayInput` via:
 //
-//          GetCompareTasksListCompareProcessArray{ GetCompareTasksListCompareProcessArgs{...} }
+//	GetCompareTasksListCompareProcessArray{ GetCompareTasksListCompareProcessArgs{...} }
 type GetCompareTasksListCompareProcessArrayInput interface {
 	pulumi.Input
 
@@ -6661,7 +6661,7 @@ type GetCompareTasksListCompareProcessStep struct {
 // GetCompareTasksListCompareProcessStepInput is an input type that accepts GetCompareTasksListCompareProcessStepArgs and GetCompareTasksListCompareProcessStepOutput values.
 // You can construct a concrete instance of `GetCompareTasksListCompareProcessStepInput` via:
 //
-//          GetCompareTasksListCompareProcessStepArgs{...}
+//	GetCompareTasksListCompareProcessStepArgs{...}
 type GetCompareTasksListCompareProcessStepInput interface {
 	pulumi.Input
 
@@ -6698,7 +6698,7 @@ func (i GetCompareTasksListCompareProcessStepArgs) ToGetCompareTasksListCompareP
 // GetCompareTasksListCompareProcessStepArrayInput is an input type that accepts GetCompareTasksListCompareProcessStepArray and GetCompareTasksListCompareProcessStepArrayOutput values.
 // You can construct a concrete instance of `GetCompareTasksListCompareProcessStepArrayInput` via:
 //
-//          GetCompareTasksListCompareProcessStepArray{ GetCompareTasksListCompareProcessStepArgs{...} }
+//	GetCompareTasksListCompareProcessStepArray{ GetCompareTasksListCompareProcessStepArgs{...} }
 type GetCompareTasksListCompareProcessStepArrayInput interface {
 	pulumi.Input
 
@@ -6806,7 +6806,7 @@ type GetCompareTasksListCompareProcessStepError struct {
 // GetCompareTasksListCompareProcessStepErrorInput is an input type that accepts GetCompareTasksListCompareProcessStepErrorArgs and GetCompareTasksListCompareProcessStepErrorOutput values.
 // You can construct a concrete instance of `GetCompareTasksListCompareProcessStepErrorInput` via:
 //
-//          GetCompareTasksListCompareProcessStepErrorArgs{...}
+//	GetCompareTasksListCompareProcessStepErrorArgs{...}
 type GetCompareTasksListCompareProcessStepErrorInput interface {
 	pulumi.Input
 
@@ -6836,7 +6836,7 @@ func (i GetCompareTasksListCompareProcessStepErrorArgs) ToGetCompareTasksListCom
 // GetCompareTasksListCompareProcessStepErrorArrayInput is an input type that accepts GetCompareTasksListCompareProcessStepErrorArray and GetCompareTasksListCompareProcessStepErrorArrayOutput values.
 // You can construct a concrete instance of `GetCompareTasksListCompareProcessStepErrorArrayInput` via:
 //
-//          GetCompareTasksListCompareProcessStepErrorArray{ GetCompareTasksListCompareProcessStepErrorArgs{...} }
+//	GetCompareTasksListCompareProcessStepErrorArray{ GetCompareTasksListCompareProcessStepErrorArgs{...} }
 type GetCompareTasksListCompareProcessStepErrorArrayInput interface {
 	pulumi.Input
 
@@ -6915,7 +6915,7 @@ type GetCompareTasksListCompareProcessStepWarning struct {
 // GetCompareTasksListCompareProcessStepWarningInput is an input type that accepts GetCompareTasksListCompareProcessStepWarningArgs and GetCompareTasksListCompareProcessStepWarningOutput values.
 // You can construct a concrete instance of `GetCompareTasksListCompareProcessStepWarningInput` via:
 //
-//          GetCompareTasksListCompareProcessStepWarningArgs{...}
+//	GetCompareTasksListCompareProcessStepWarningArgs{...}
 type GetCompareTasksListCompareProcessStepWarningInput interface {
 	pulumi.Input
 
@@ -6945,7 +6945,7 @@ func (i GetCompareTasksListCompareProcessStepWarningArgs) ToGetCompareTasksListC
 // GetCompareTasksListCompareProcessStepWarningArrayInput is an input type that accepts GetCompareTasksListCompareProcessStepWarningArray and GetCompareTasksListCompareProcessStepWarningArrayOutput values.
 // You can construct a concrete instance of `GetCompareTasksListCompareProcessStepWarningArrayInput` via:
 //
-//          GetCompareTasksListCompareProcessStepWarningArray{ GetCompareTasksListCompareProcessStepWarningArgs{...} }
+//	GetCompareTasksListCompareProcessStepWarningArray{ GetCompareTasksListCompareProcessStepWarningArgs{...} }
 type GetCompareTasksListCompareProcessStepWarningArrayInput interface {
 	pulumi.Input
 
@@ -7024,7 +7024,7 @@ type GetCompareTasksListConfig struct {
 // GetCompareTasksListConfigInput is an input type that accepts GetCompareTasksListConfigArgs and GetCompareTasksListConfigOutput values.
 // You can construct a concrete instance of `GetCompareTasksListConfigInput` via:
 //
-//          GetCompareTasksListConfigArgs{...}
+//	GetCompareTasksListConfigArgs{...}
 type GetCompareTasksListConfigInput interface {
 	pulumi.Input
 
@@ -7054,7 +7054,7 @@ func (i GetCompareTasksListConfigArgs) ToGetCompareTasksListConfigOutputWithCont
 // GetCompareTasksListConfigArrayInput is an input type that accepts GetCompareTasksListConfigArray and GetCompareTasksListConfigArrayOutput values.
 // You can construct a concrete instance of `GetCompareTasksListConfigArrayInput` via:
 //
-//          GetCompareTasksListConfigArray{ GetCompareTasksListConfigArgs{...} }
+//	GetCompareTasksListConfigArray{ GetCompareTasksListConfigArgs{...} }
 type GetCompareTasksListConfigArrayInput interface {
 	pulumi.Input
 
@@ -7133,7 +7133,7 @@ type GetCompareTasksListConfigObjectItem struct {
 // GetCompareTasksListConfigObjectItemInput is an input type that accepts GetCompareTasksListConfigObjectItemArgs and GetCompareTasksListConfigObjectItemOutput values.
 // You can construct a concrete instance of `GetCompareTasksListConfigObjectItemInput` via:
 //
-//          GetCompareTasksListConfigObjectItemArgs{...}
+//	GetCompareTasksListConfigObjectItemArgs{...}
 type GetCompareTasksListConfigObjectItemInput interface {
 	pulumi.Input
 
@@ -7166,7 +7166,7 @@ func (i GetCompareTasksListConfigObjectItemArgs) ToGetCompareTasksListConfigObje
 // GetCompareTasksListConfigObjectItemArrayInput is an input type that accepts GetCompareTasksListConfigObjectItemArray and GetCompareTasksListConfigObjectItemArrayOutput values.
 // You can construct a concrete instance of `GetCompareTasksListConfigObjectItemArrayInput` via:
 //
-//          GetCompareTasksListConfigObjectItemArray{ GetCompareTasksListConfigObjectItemArgs{...} }
+//	GetCompareTasksListConfigObjectItemArray{ GetCompareTasksListConfigObjectItemArgs{...} }
 type GetCompareTasksListConfigObjectItemArrayInput interface {
 	pulumi.Input
 
@@ -7259,7 +7259,7 @@ type GetCompareTasksListConfigObjectItemTable struct {
 // GetCompareTasksListConfigObjectItemTableInput is an input type that accepts GetCompareTasksListConfigObjectItemTableArgs and GetCompareTasksListConfigObjectItemTableOutput values.
 // You can construct a concrete instance of `GetCompareTasksListConfigObjectItemTableInput` via:
 //
-//          GetCompareTasksListConfigObjectItemTableArgs{...}
+//	GetCompareTasksListConfigObjectItemTableArgs{...}
 type GetCompareTasksListConfigObjectItemTableInput interface {
 	pulumi.Input
 
@@ -7286,7 +7286,7 @@ func (i GetCompareTasksListConfigObjectItemTableArgs) ToGetCompareTasksListConfi
 // GetCompareTasksListConfigObjectItemTableArrayInput is an input type that accepts GetCompareTasksListConfigObjectItemTableArray and GetCompareTasksListConfigObjectItemTableArrayOutput values.
 // You can construct a concrete instance of `GetCompareTasksListConfigObjectItemTableArrayInput` via:
 //
-//          GetCompareTasksListConfigObjectItemTableArray{ GetCompareTasksListConfigObjectItemTableArgs{...} }
+//	GetCompareTasksListConfigObjectItemTableArray{ GetCompareTasksListConfigObjectItemTableArgs{...} }
 type GetCompareTasksListConfigObjectItemTableArrayInput interface {
 	pulumi.Input
 
@@ -7353,7 +7353,7 @@ type GetCompareTasksListConfigObjectItemView struct {
 // GetCompareTasksListConfigObjectItemViewInput is an input type that accepts GetCompareTasksListConfigObjectItemViewArgs and GetCompareTasksListConfigObjectItemViewOutput values.
 // You can construct a concrete instance of `GetCompareTasksListConfigObjectItemViewInput` via:
 //
-//          GetCompareTasksListConfigObjectItemViewArgs{...}
+//	GetCompareTasksListConfigObjectItemViewArgs{...}
 type GetCompareTasksListConfigObjectItemViewInput interface {
 	pulumi.Input
 
@@ -7380,7 +7380,7 @@ func (i GetCompareTasksListConfigObjectItemViewArgs) ToGetCompareTasksListConfig
 // GetCompareTasksListConfigObjectItemViewArrayInput is an input type that accepts GetCompareTasksListConfigObjectItemViewArray and GetCompareTasksListConfigObjectItemViewArrayOutput values.
 // You can construct a concrete instance of `GetCompareTasksListConfigObjectItemViewArrayInput` via:
 //
-//          GetCompareTasksListConfigObjectItemViewArray{ GetCompareTasksListConfigObjectItemViewArgs{...} }
+//	GetCompareTasksListConfigObjectItemViewArray{ GetCompareTasksListConfigObjectItemViewArgs{...} }
 type GetCompareTasksListConfigObjectItemViewArrayInput interface {
 	pulumi.Input
 
@@ -7458,7 +7458,7 @@ type GetMigrateDbInstancesInstance struct {
 // GetMigrateDbInstancesInstanceInput is an input type that accepts GetMigrateDbInstancesInstanceArgs and GetMigrateDbInstancesInstanceOutput values.
 // You can construct a concrete instance of `GetMigrateDbInstancesInstanceInput` via:
 //
-//          GetMigrateDbInstancesInstanceArgs{...}
+//	GetMigrateDbInstancesInstanceArgs{...}
 type GetMigrateDbInstancesInstanceInput interface {
 	pulumi.Input
 
@@ -7496,7 +7496,7 @@ func (i GetMigrateDbInstancesInstanceArgs) ToGetMigrateDbInstancesInstanceOutput
 // GetMigrateDbInstancesInstanceArrayInput is an input type that accepts GetMigrateDbInstancesInstanceArray and GetMigrateDbInstancesInstanceArrayOutput values.
 // You can construct a concrete instance of `GetMigrateDbInstancesInstanceArrayInput` via:
 //
-//          GetMigrateDbInstancesInstanceArray{ GetMigrateDbInstancesInstanceArgs{...} }
+//	GetMigrateDbInstancesInstanceArray{ GetMigrateDbInstancesInstanceArgs{...} }
 type GetMigrateDbInstancesInstanceArrayInput interface {
 	pulumi.Input
 
@@ -7622,7 +7622,7 @@ type GetMigrateJobsList struct {
 // GetMigrateJobsListInput is an input type that accepts GetMigrateJobsListArgs and GetMigrateJobsListOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListInput` via:
 //
-//          GetMigrateJobsListArgs{...}
+//	GetMigrateJobsListArgs{...}
 type GetMigrateJobsListInput interface {
 	pulumi.Input
 
@@ -7682,7 +7682,7 @@ func (i GetMigrateJobsListArgs) ToGetMigrateJobsListOutputWithContext(ctx contex
 // GetMigrateJobsListArrayInput is an input type that accepts GetMigrateJobsListArray and GetMigrateJobsListArrayOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListArrayInput` via:
 //
-//          GetMigrateJobsListArray{ GetMigrateJobsListArgs{...} }
+//	GetMigrateJobsListArray{ GetMigrateJobsListArgs{...} }
 type GetMigrateJobsListArrayInput interface {
 	pulumi.Input
 
@@ -7833,7 +7833,7 @@ type GetMigrateJobsListAction struct {
 // GetMigrateJobsListActionInput is an input type that accepts GetMigrateJobsListActionArgs and GetMigrateJobsListActionOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListActionInput` via:
 //
-//          GetMigrateJobsListActionArgs{...}
+//	GetMigrateJobsListActionArgs{...}
 type GetMigrateJobsListActionInput interface {
 	pulumi.Input
 
@@ -7863,7 +7863,7 @@ func (i GetMigrateJobsListActionArgs) ToGetMigrateJobsListActionOutputWithContex
 // GetMigrateJobsListActionArrayInput is an input type that accepts GetMigrateJobsListActionArray and GetMigrateJobsListActionArrayOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListActionArrayInput` via:
 //
-//          GetMigrateJobsListActionArray{ GetMigrateJobsListActionArgs{...} }
+//	GetMigrateJobsListActionArray{ GetMigrateJobsListActionArgs{...} }
 type GetMigrateJobsListActionArrayInput interface {
 	pulumi.Input
 
@@ -7939,7 +7939,7 @@ type GetMigrateJobsListCompareTask struct {
 // GetMigrateJobsListCompareTaskInput is an input type that accepts GetMigrateJobsListCompareTaskArgs and GetMigrateJobsListCompareTaskOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListCompareTaskInput` via:
 //
-//          GetMigrateJobsListCompareTaskArgs{...}
+//	GetMigrateJobsListCompareTaskArgs{...}
 type GetMigrateJobsListCompareTaskInput interface {
 	pulumi.Input
 
@@ -7969,7 +7969,7 @@ func (i GetMigrateJobsListCompareTaskArgs) ToGetMigrateJobsListCompareTaskOutput
 // GetMigrateJobsListCompareTaskArrayInput is an input type that accepts GetMigrateJobsListCompareTaskArray and GetMigrateJobsListCompareTaskArrayOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListCompareTaskArrayInput` via:
 //
-//          GetMigrateJobsListCompareTaskArray{ GetMigrateJobsListCompareTaskArgs{...} }
+//	GetMigrateJobsListCompareTaskArray{ GetMigrateJobsListCompareTaskArgs{...} }
 type GetMigrateJobsListCompareTaskArrayInput interface {
 	pulumi.Input
 
@@ -8051,7 +8051,7 @@ type GetMigrateJobsListDstInfo struct {
 // GetMigrateJobsListDstInfoInput is an input type that accepts GetMigrateJobsListDstInfoArgs and GetMigrateJobsListDstInfoOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListDstInfoInput` via:
 //
-//          GetMigrateJobsListDstInfoArgs{...}
+//	GetMigrateJobsListDstInfoArgs{...}
 type GetMigrateJobsListDstInfoInput interface {
 	pulumi.Input
 
@@ -8087,7 +8087,7 @@ func (i GetMigrateJobsListDstInfoArgs) ToGetMigrateJobsListDstInfoOutputWithCont
 // GetMigrateJobsListDstInfoArrayInput is an input type that accepts GetMigrateJobsListDstInfoArray and GetMigrateJobsListDstInfoArrayOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListDstInfoArrayInput` via:
 //
-//          GetMigrateJobsListDstInfoArray{ GetMigrateJobsListDstInfoArgs{...} }
+//	GetMigrateJobsListDstInfoArray{ GetMigrateJobsListDstInfoArgs{...} }
 type GetMigrateJobsListDstInfoArrayInput interface {
 	pulumi.Input
 
@@ -8212,7 +8212,7 @@ type GetMigrateJobsListDstInfoInfo struct {
 // GetMigrateJobsListDstInfoInfoInput is an input type that accepts GetMigrateJobsListDstInfoInfoArgs and GetMigrateJobsListDstInfoInfoOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListDstInfoInfoInput` via:
 //
-//          GetMigrateJobsListDstInfoInfoArgs{...}
+//	GetMigrateJobsListDstInfoInfoArgs{...}
 type GetMigrateJobsListDstInfoInfoInput interface {
 	pulumi.Input
 
@@ -8276,7 +8276,7 @@ func (i GetMigrateJobsListDstInfoInfoArgs) ToGetMigrateJobsListDstInfoInfoOutput
 // GetMigrateJobsListDstInfoInfoArrayInput is an input type that accepts GetMigrateJobsListDstInfoInfoArray and GetMigrateJobsListDstInfoInfoArrayOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListDstInfoInfoArrayInput` via:
 //
-//          GetMigrateJobsListDstInfoInfoArray{ GetMigrateJobsListDstInfoInfoArgs{...} }
+//	GetMigrateJobsListDstInfoInfoArray{ GetMigrateJobsListDstInfoInfoArgs{...} }
 type GetMigrateJobsListDstInfoInfoArrayInput interface {
 	pulumi.Input
 
@@ -8447,7 +8447,7 @@ type GetMigrateJobsListSrcInfo struct {
 // GetMigrateJobsListSrcInfoInput is an input type that accepts GetMigrateJobsListSrcInfoArgs and GetMigrateJobsListSrcInfoOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListSrcInfoInput` via:
 //
-//          GetMigrateJobsListSrcInfoArgs{...}
+//	GetMigrateJobsListSrcInfoArgs{...}
 type GetMigrateJobsListSrcInfoInput interface {
 	pulumi.Input
 
@@ -8487,7 +8487,7 @@ func (i GetMigrateJobsListSrcInfoArgs) ToGetMigrateJobsListSrcInfoOutputWithCont
 // GetMigrateJobsListSrcInfoArrayInput is an input type that accepts GetMigrateJobsListSrcInfoArray and GetMigrateJobsListSrcInfoArrayOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListSrcInfoArrayInput` via:
 //
-//          GetMigrateJobsListSrcInfoArray{ GetMigrateJobsListSrcInfoArgs{...} }
+//	GetMigrateJobsListSrcInfoArray{ GetMigrateJobsListSrcInfoArgs{...} }
 type GetMigrateJobsListSrcInfoArrayInput interface {
 	pulumi.Input
 
@@ -8588,7 +8588,7 @@ type GetMigrateJobsListSrcInfoExtraAttr struct {
 // GetMigrateJobsListSrcInfoExtraAttrInput is an input type that accepts GetMigrateJobsListSrcInfoExtraAttrArgs and GetMigrateJobsListSrcInfoExtraAttrOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListSrcInfoExtraAttrInput` via:
 //
-//          GetMigrateJobsListSrcInfoExtraAttrArgs{...}
+//	GetMigrateJobsListSrcInfoExtraAttrArgs{...}
 type GetMigrateJobsListSrcInfoExtraAttrInput interface {
 	pulumi.Input
 
@@ -8618,7 +8618,7 @@ func (i GetMigrateJobsListSrcInfoExtraAttrArgs) ToGetMigrateJobsListSrcInfoExtra
 // GetMigrateJobsListSrcInfoExtraAttrArrayInput is an input type that accepts GetMigrateJobsListSrcInfoExtraAttrArray and GetMigrateJobsListSrcInfoExtraAttrArrayOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListSrcInfoExtraAttrArrayInput` via:
 //
-//          GetMigrateJobsListSrcInfoExtraAttrArray{ GetMigrateJobsListSrcInfoExtraAttrArgs{...} }
+//	GetMigrateJobsListSrcInfoExtraAttrArray{ GetMigrateJobsListSrcInfoExtraAttrArgs{...} }
 type GetMigrateJobsListSrcInfoExtraAttrArrayInput interface {
 	pulumi.Input
 
@@ -8728,7 +8728,7 @@ type GetMigrateJobsListSrcInfoInfo struct {
 // GetMigrateJobsListSrcInfoInfoInput is an input type that accepts GetMigrateJobsListSrcInfoInfoArgs and GetMigrateJobsListSrcInfoInfoOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListSrcInfoInfoInput` via:
 //
-//          GetMigrateJobsListSrcInfoInfoArgs{...}
+//	GetMigrateJobsListSrcInfoInfoArgs{...}
 type GetMigrateJobsListSrcInfoInfoInput interface {
 	pulumi.Input
 
@@ -8792,7 +8792,7 @@ func (i GetMigrateJobsListSrcInfoInfoArgs) ToGetMigrateJobsListSrcInfoInfoOutput
 // GetMigrateJobsListSrcInfoInfoArrayInput is an input type that accepts GetMigrateJobsListSrcInfoInfoArray and GetMigrateJobsListSrcInfoInfoArrayOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListSrcInfoInfoArrayInput` via:
 //
-//          GetMigrateJobsListSrcInfoInfoArray{ GetMigrateJobsListSrcInfoInfoArgs{...} }
+//	GetMigrateJobsListSrcInfoInfoArray{ GetMigrateJobsListSrcInfoInfoArgs{...} }
 type GetMigrateJobsListSrcInfoInfoArrayInput interface {
 	pulumi.Input
 
@@ -8959,7 +8959,7 @@ type GetMigrateJobsListStepInfo struct {
 // GetMigrateJobsListStepInfoInput is an input type that accepts GetMigrateJobsListStepInfoArgs and GetMigrateJobsListStepInfoOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListStepInfoInput` via:
 //
-//          GetMigrateJobsListStepInfoArgs{...}
+//	GetMigrateJobsListStepInfoArgs{...}
 type GetMigrateJobsListStepInfoInput interface {
 	pulumi.Input
 
@@ -8995,7 +8995,7 @@ func (i GetMigrateJobsListStepInfoArgs) ToGetMigrateJobsListStepInfoOutputWithCo
 // GetMigrateJobsListStepInfoArrayInput is an input type that accepts GetMigrateJobsListStepInfoArray and GetMigrateJobsListStepInfoArrayOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListStepInfoArrayInput` via:
 //
-//          GetMigrateJobsListStepInfoArray{ GetMigrateJobsListStepInfoArgs{...} }
+//	GetMigrateJobsListStepInfoArray{ GetMigrateJobsListStepInfoArgs{...} }
 type GetMigrateJobsListStepInfoArrayInput interface {
 	pulumi.Input
 
@@ -9100,7 +9100,7 @@ type GetMigrateJobsListStepInfoStepInfo struct {
 // GetMigrateJobsListStepInfoStepInfoInput is an input type that accepts GetMigrateJobsListStepInfoStepInfoArgs and GetMigrateJobsListStepInfoStepInfoOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListStepInfoStepInfoInput` via:
 //
-//          GetMigrateJobsListStepInfoStepInfoArgs{...}
+//	GetMigrateJobsListStepInfoStepInfoArgs{...}
 type GetMigrateJobsListStepInfoStepInfoInput interface {
 	pulumi.Input
 
@@ -9144,7 +9144,7 @@ func (i GetMigrateJobsListStepInfoStepInfoArgs) ToGetMigrateJobsListStepInfoStep
 // GetMigrateJobsListStepInfoStepInfoArrayInput is an input type that accepts GetMigrateJobsListStepInfoStepInfoArray and GetMigrateJobsListStepInfoStepInfoArrayOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListStepInfoStepInfoArrayInput` via:
 //
-//          GetMigrateJobsListStepInfoStepInfoArray{ GetMigrateJobsListStepInfoStepInfoArgs{...} }
+//	GetMigrateJobsListStepInfoStepInfoArray{ GetMigrateJobsListStepInfoStepInfoArgs{...} }
 type GetMigrateJobsListStepInfoStepInfoArrayInput interface {
 	pulumi.Input
 
@@ -9259,7 +9259,7 @@ type GetMigrateJobsListStepInfoStepInfoError struct {
 // GetMigrateJobsListStepInfoStepInfoErrorInput is an input type that accepts GetMigrateJobsListStepInfoStepInfoErrorArgs and GetMigrateJobsListStepInfoStepInfoErrorOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListStepInfoStepInfoErrorInput` via:
 //
-//          GetMigrateJobsListStepInfoStepInfoErrorArgs{...}
+//	GetMigrateJobsListStepInfoStepInfoErrorArgs{...}
 type GetMigrateJobsListStepInfoStepInfoErrorInput interface {
 	pulumi.Input
 
@@ -9291,7 +9291,7 @@ func (i GetMigrateJobsListStepInfoStepInfoErrorArgs) ToGetMigrateJobsListStepInf
 // GetMigrateJobsListStepInfoStepInfoErrorArrayInput is an input type that accepts GetMigrateJobsListStepInfoStepInfoErrorArray and GetMigrateJobsListStepInfoStepInfoErrorArrayOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListStepInfoStepInfoErrorArrayInput` via:
 //
-//          GetMigrateJobsListStepInfoStepInfoErrorArray{ GetMigrateJobsListStepInfoStepInfoErrorArgs{...} }
+//	GetMigrateJobsListStepInfoStepInfoErrorArray{ GetMigrateJobsListStepInfoStepInfoErrorArgs{...} }
 type GetMigrateJobsListStepInfoStepInfoErrorArrayInput interface {
 	pulumi.Input
 
@@ -9374,7 +9374,7 @@ type GetMigrateJobsListStepInfoStepInfoWarning struct {
 // GetMigrateJobsListStepInfoStepInfoWarningInput is an input type that accepts GetMigrateJobsListStepInfoStepInfoWarningArgs and GetMigrateJobsListStepInfoStepInfoWarningOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListStepInfoStepInfoWarningInput` via:
 //
-//          GetMigrateJobsListStepInfoStepInfoWarningArgs{...}
+//	GetMigrateJobsListStepInfoStepInfoWarningArgs{...}
 type GetMigrateJobsListStepInfoStepInfoWarningInput interface {
 	pulumi.Input
 
@@ -9406,7 +9406,7 @@ func (i GetMigrateJobsListStepInfoStepInfoWarningArgs) ToGetMigrateJobsListStepI
 // GetMigrateJobsListStepInfoStepInfoWarningArrayInput is an input type that accepts GetMigrateJobsListStepInfoStepInfoWarningArray and GetMigrateJobsListStepInfoStepInfoWarningArrayOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListStepInfoStepInfoWarningArrayInput` via:
 //
-//          GetMigrateJobsListStepInfoStepInfoWarningArray{ GetMigrateJobsListStepInfoStepInfoWarningArgs{...} }
+//	GetMigrateJobsListStepInfoStepInfoWarningArray{ GetMigrateJobsListStepInfoStepInfoWarningArgs{...} }
 type GetMigrateJobsListStepInfoStepInfoWarningArrayInput interface {
 	pulumi.Input
 
@@ -9487,7 +9487,7 @@ type GetMigrateJobsListTag struct {
 // GetMigrateJobsListTagInput is an input type that accepts GetMigrateJobsListTagArgs and GetMigrateJobsListTagOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListTagInput` via:
 //
-//          GetMigrateJobsListTagArgs{...}
+//	GetMigrateJobsListTagArgs{...}
 type GetMigrateJobsListTagInput interface {
 	pulumi.Input
 
@@ -9517,7 +9517,7 @@ func (i GetMigrateJobsListTagArgs) ToGetMigrateJobsListTagOutputWithContext(ctx 
 // GetMigrateJobsListTagArrayInput is an input type that accepts GetMigrateJobsListTagArray and GetMigrateJobsListTagArrayOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListTagArrayInput` via:
 //
-//          GetMigrateJobsListTagArray{ GetMigrateJobsListTagArgs{...} }
+//	GetMigrateJobsListTagArray{ GetMigrateJobsListTagArgs{...} }
 type GetMigrateJobsListTagArrayInput interface {
 	pulumi.Input
 
@@ -9611,7 +9611,7 @@ type GetMigrateJobsListTradeInfo struct {
 // GetMigrateJobsListTradeInfoInput is an input type that accepts GetMigrateJobsListTradeInfoArgs and GetMigrateJobsListTradeInfoOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListTradeInfoInput` via:
 //
-//          GetMigrateJobsListTradeInfoArgs{...}
+//	GetMigrateJobsListTradeInfoArgs{...}
 type GetMigrateJobsListTradeInfoInput interface {
 	pulumi.Input
 
@@ -9659,7 +9659,7 @@ func (i GetMigrateJobsListTradeInfoArgs) ToGetMigrateJobsListTradeInfoOutputWith
 // GetMigrateJobsListTradeInfoArrayInput is an input type that accepts GetMigrateJobsListTradeInfoArray and GetMigrateJobsListTradeInfoArrayOutput values.
 // You can construct a concrete instance of `GetMigrateJobsListTradeInfoArrayInput` via:
 //
-//          GetMigrateJobsListTradeInfoArray{ GetMigrateJobsListTradeInfoArgs{...} }
+//	GetMigrateJobsListTradeInfoArray{ GetMigrateJobsListTradeInfoArgs{...} }
 type GetMigrateJobsListTradeInfoArrayInput interface {
 	pulumi.Input
 
@@ -9780,7 +9780,7 @@ type GetMigrateJobsTagFilter struct {
 // GetMigrateJobsTagFilterInput is an input type that accepts GetMigrateJobsTagFilterArgs and GetMigrateJobsTagFilterOutput values.
 // You can construct a concrete instance of `GetMigrateJobsTagFilterInput` via:
 //
-//          GetMigrateJobsTagFilterArgs{...}
+//	GetMigrateJobsTagFilterArgs{...}
 type GetMigrateJobsTagFilterInput interface {
 	pulumi.Input
 
@@ -9810,7 +9810,7 @@ func (i GetMigrateJobsTagFilterArgs) ToGetMigrateJobsTagFilterOutputWithContext(
 // GetMigrateJobsTagFilterArrayInput is an input type that accepts GetMigrateJobsTagFilterArray and GetMigrateJobsTagFilterArrayOutput values.
 // You can construct a concrete instance of `GetMigrateJobsTagFilterArrayInput` via:
 //
-//          GetMigrateJobsTagFilterArray{ GetMigrateJobsTagFilterArgs{...} }
+//	GetMigrateJobsTagFilterArray{ GetMigrateJobsTagFilterArgs{...} }
 type GetMigrateJobsTagFilterArrayInput interface {
 	pulumi.Input
 
@@ -9931,7 +9931,7 @@ type GetSyncJobsList struct {
 // GetSyncJobsListInput is an input type that accepts GetSyncJobsListArgs and GetSyncJobsListOutput values.
 // You can construct a concrete instance of `GetSyncJobsListInput` via:
 //
-//          GetSyncJobsListArgs{...}
+//	GetSyncJobsListArgs{...}
 type GetSyncJobsListInput interface {
 	pulumi.Input
 
@@ -10006,7 +10006,7 @@ func (i GetSyncJobsListArgs) ToGetSyncJobsListOutputWithContext(ctx context.Cont
 // GetSyncJobsListArrayInput is an input type that accepts GetSyncJobsListArray and GetSyncJobsListArrayOutput values.
 // You can construct a concrete instance of `GetSyncJobsListArrayInput` via:
 //
-//          GetSyncJobsListArray{ GetSyncJobsListArgs{...} }
+//	GetSyncJobsListArray{ GetSyncJobsListArgs{...} }
 type GetSyncJobsListArrayInput interface {
 	pulumi.Input
 
@@ -10208,7 +10208,7 @@ type GetSyncJobsListDetail struct {
 // GetSyncJobsListDetailInput is an input type that accepts GetSyncJobsListDetailArgs and GetSyncJobsListDetailOutput values.
 // You can construct a concrete instance of `GetSyncJobsListDetailInput` via:
 //
-//          GetSyncJobsListDetailArgs{...}
+//	GetSyncJobsListDetailArgs{...}
 type GetSyncJobsListDetailInput interface {
 	pulumi.Input
 
@@ -10250,7 +10250,7 @@ func (i GetSyncJobsListDetailArgs) ToGetSyncJobsListDetailOutputWithContext(ctx 
 // GetSyncJobsListDetailArrayInput is an input type that accepts GetSyncJobsListDetailArray and GetSyncJobsListDetailArrayOutput values.
 // You can construct a concrete instance of `GetSyncJobsListDetailArrayInput` via:
 //
-//          GetSyncJobsListDetailArray{ GetSyncJobsListDetailArgs{...} }
+//	GetSyncJobsListDetailArray{ GetSyncJobsListDetailArgs{...} }
 type GetSyncJobsListDetailArrayInput interface {
 	pulumi.Input
 
@@ -10368,7 +10368,7 @@ type GetSyncJobsListDetailStepInfo struct {
 // GetSyncJobsListDetailStepInfoInput is an input type that accepts GetSyncJobsListDetailStepInfoArgs and GetSyncJobsListDetailStepInfoOutput values.
 // You can construct a concrete instance of `GetSyncJobsListDetailStepInfoInput` via:
 //
-//          GetSyncJobsListDetailStepInfoArgs{...}
+//	GetSyncJobsListDetailStepInfoArgs{...}
 type GetSyncJobsListDetailStepInfoInput interface {
 	pulumi.Input
 
@@ -10410,7 +10410,7 @@ func (i GetSyncJobsListDetailStepInfoArgs) ToGetSyncJobsListDetailStepInfoOutput
 // GetSyncJobsListDetailStepInfoArrayInput is an input type that accepts GetSyncJobsListDetailStepInfoArray and GetSyncJobsListDetailStepInfoArrayOutput values.
 // You can construct a concrete instance of `GetSyncJobsListDetailStepInfoArrayInput` via:
 //
-//          GetSyncJobsListDetailStepInfoArray{ GetSyncJobsListDetailStepInfoArgs{...} }
+//	GetSyncJobsListDetailStepInfoArray{ GetSyncJobsListDetailStepInfoArgs{...} }
 type GetSyncJobsListDetailStepInfoArrayInput interface {
 	pulumi.Input
 
@@ -10520,7 +10520,7 @@ type GetSyncJobsListDetailStepInfoError struct {
 // GetSyncJobsListDetailStepInfoErrorInput is an input type that accepts GetSyncJobsListDetailStepInfoErrorArgs and GetSyncJobsListDetailStepInfoErrorOutput values.
 // You can construct a concrete instance of `GetSyncJobsListDetailStepInfoErrorInput` via:
 //
-//          GetSyncJobsListDetailStepInfoErrorArgs{...}
+//	GetSyncJobsListDetailStepInfoErrorArgs{...}
 type GetSyncJobsListDetailStepInfoErrorInput interface {
 	pulumi.Input
 
@@ -10554,7 +10554,7 @@ func (i GetSyncJobsListDetailStepInfoErrorArgs) ToGetSyncJobsListDetailStepInfoE
 // GetSyncJobsListDetailStepInfoErrorArrayInput is an input type that accepts GetSyncJobsListDetailStepInfoErrorArray and GetSyncJobsListDetailStepInfoErrorArrayOutput values.
 // You can construct a concrete instance of `GetSyncJobsListDetailStepInfoErrorArrayInput` via:
 //
-//          GetSyncJobsListDetailStepInfoErrorArray{ GetSyncJobsListDetailStepInfoErrorArgs{...} }
+//	GetSyncJobsListDetailStepInfoErrorArray{ GetSyncJobsListDetailStepInfoErrorArgs{...} }
 type GetSyncJobsListDetailStepInfoErrorArrayInput interface {
 	pulumi.Input
 
@@ -10644,7 +10644,7 @@ type GetSyncJobsListDetailStepInfoWarning struct {
 // GetSyncJobsListDetailStepInfoWarningInput is an input type that accepts GetSyncJobsListDetailStepInfoWarningArgs and GetSyncJobsListDetailStepInfoWarningOutput values.
 // You can construct a concrete instance of `GetSyncJobsListDetailStepInfoWarningInput` via:
 //
-//          GetSyncJobsListDetailStepInfoWarningArgs{...}
+//	GetSyncJobsListDetailStepInfoWarningArgs{...}
 type GetSyncJobsListDetailStepInfoWarningInput interface {
 	pulumi.Input
 
@@ -10678,7 +10678,7 @@ func (i GetSyncJobsListDetailStepInfoWarningArgs) ToGetSyncJobsListDetailStepInf
 // GetSyncJobsListDetailStepInfoWarningArrayInput is an input type that accepts GetSyncJobsListDetailStepInfoWarningArray and GetSyncJobsListDetailStepInfoWarningArrayOutput values.
 // You can construct a concrete instance of `GetSyncJobsListDetailStepInfoWarningArrayInput` via:
 //
-//          GetSyncJobsListDetailStepInfoWarningArray{ GetSyncJobsListDetailStepInfoWarningArgs{...} }
+//	GetSyncJobsListDetailStepInfoWarningArray{ GetSyncJobsListDetailStepInfoWarningArgs{...} }
 type GetSyncJobsListDetailStepInfoWarningArrayInput interface {
 	pulumi.Input
 
@@ -10804,7 +10804,7 @@ type GetSyncJobsListDstInfo struct {
 // GetSyncJobsListDstInfoInput is an input type that accepts GetSyncJobsListDstInfoArgs and GetSyncJobsListDstInfoOutput values.
 // You can construct a concrete instance of `GetSyncJobsListDstInfoInput` via:
 //
-//          GetSyncJobsListDstInfoArgs{...}
+//	GetSyncJobsListDstInfoArgs{...}
 type GetSyncJobsListDstInfoInput interface {
 	pulumi.Input
 
@@ -10874,7 +10874,7 @@ func (i GetSyncJobsListDstInfoArgs) ToGetSyncJobsListDstInfoOutputWithContext(ct
 // GetSyncJobsListDstInfoArrayInput is an input type that accepts GetSyncJobsListDstInfoArray and GetSyncJobsListDstInfoArrayOutput values.
 // You can construct a concrete instance of `GetSyncJobsListDstInfoArrayInput` via:
 //
-//          GetSyncJobsListDstInfoArray{ GetSyncJobsListDstInfoArgs{...} }
+//	GetSyncJobsListDstInfoArray{ GetSyncJobsListDstInfoArgs{...} }
 type GetSyncJobsListDstInfoArrayInput interface {
 	pulumi.Input
 
@@ -11052,7 +11052,7 @@ type GetSyncJobsListObject struct {
 // GetSyncJobsListObjectInput is an input type that accepts GetSyncJobsListObjectArgs and GetSyncJobsListObjectOutput values.
 // You can construct a concrete instance of `GetSyncJobsListObjectInput` via:
 //
-//          GetSyncJobsListObjectArgs{...}
+//	GetSyncJobsListObjectArgs{...}
 type GetSyncJobsListObjectInput interface {
 	pulumi.Input
 
@@ -11084,7 +11084,7 @@ func (i GetSyncJobsListObjectArgs) ToGetSyncJobsListObjectOutputWithContext(ctx 
 // GetSyncJobsListObjectArrayInput is an input type that accepts GetSyncJobsListObjectArray and GetSyncJobsListObjectArrayOutput values.
 // You can construct a concrete instance of `GetSyncJobsListObjectArrayInput` via:
 //
-//          GetSyncJobsListObjectArray{ GetSyncJobsListObjectArgs{...} }
+//	GetSyncJobsListObjectArray{ GetSyncJobsListObjectArgs{...} }
 type GetSyncJobsListObjectArrayInput interface {
 	pulumi.Input
 
@@ -11187,7 +11187,7 @@ type GetSyncJobsListObjectDatabase struct {
 // GetSyncJobsListObjectDatabaseInput is an input type that accepts GetSyncJobsListObjectDatabaseArgs and GetSyncJobsListObjectDatabaseOutput values.
 // You can construct a concrete instance of `GetSyncJobsListObjectDatabaseInput` via:
 //
-//          GetSyncJobsListObjectDatabaseArgs{...}
+//	GetSyncJobsListObjectDatabaseArgs{...}
 type GetSyncJobsListObjectDatabaseInput interface {
 	pulumi.Input
 
@@ -11239,7 +11239,7 @@ func (i GetSyncJobsListObjectDatabaseArgs) ToGetSyncJobsListObjectDatabaseOutput
 // GetSyncJobsListObjectDatabaseArrayInput is an input type that accepts GetSyncJobsListObjectDatabaseArray and GetSyncJobsListObjectDatabaseArrayOutput values.
 // You can construct a concrete instance of `GetSyncJobsListObjectDatabaseArrayInput` via:
 //
-//          GetSyncJobsListObjectDatabaseArray{ GetSyncJobsListObjectDatabaseArgs{...} }
+//	GetSyncJobsListObjectDatabaseArray{ GetSyncJobsListObjectDatabaseArgs{...} }
 type GetSyncJobsListObjectDatabaseArrayInput interface {
 	pulumi.Input
 
@@ -11372,7 +11372,7 @@ type GetSyncJobsListObjectDatabaseTable struct {
 // GetSyncJobsListObjectDatabaseTableInput is an input type that accepts GetSyncJobsListObjectDatabaseTableArgs and GetSyncJobsListObjectDatabaseTableOutput values.
 // You can construct a concrete instance of `GetSyncJobsListObjectDatabaseTableInput` via:
 //
-//          GetSyncJobsListObjectDatabaseTableArgs{...}
+//	GetSyncJobsListObjectDatabaseTableArgs{...}
 type GetSyncJobsListObjectDatabaseTableInput interface {
 	pulumi.Input
 
@@ -11404,7 +11404,7 @@ func (i GetSyncJobsListObjectDatabaseTableArgs) ToGetSyncJobsListObjectDatabaseT
 // GetSyncJobsListObjectDatabaseTableArrayInput is an input type that accepts GetSyncJobsListObjectDatabaseTableArray and GetSyncJobsListObjectDatabaseTableArrayOutput values.
 // You can construct a concrete instance of `GetSyncJobsListObjectDatabaseTableArrayInput` via:
 //
-//          GetSyncJobsListObjectDatabaseTableArray{ GetSyncJobsListObjectDatabaseTableArgs{...} }
+//	GetSyncJobsListObjectDatabaseTableArray{ GetSyncJobsListObjectDatabaseTableArgs{...} }
 type GetSyncJobsListObjectDatabaseTableArrayInput interface {
 	pulumi.Input
 
@@ -11485,7 +11485,7 @@ type GetSyncJobsListObjectDatabaseView struct {
 // GetSyncJobsListObjectDatabaseViewInput is an input type that accepts GetSyncJobsListObjectDatabaseViewArgs and GetSyncJobsListObjectDatabaseViewOutput values.
 // You can construct a concrete instance of `GetSyncJobsListObjectDatabaseViewInput` via:
 //
-//          GetSyncJobsListObjectDatabaseViewArgs{...}
+//	GetSyncJobsListObjectDatabaseViewArgs{...}
 type GetSyncJobsListObjectDatabaseViewInput interface {
 	pulumi.Input
 
@@ -11515,7 +11515,7 @@ func (i GetSyncJobsListObjectDatabaseViewArgs) ToGetSyncJobsListObjectDatabaseVi
 // GetSyncJobsListObjectDatabaseViewArrayInput is an input type that accepts GetSyncJobsListObjectDatabaseViewArray and GetSyncJobsListObjectDatabaseViewArrayOutput values.
 // You can construct a concrete instance of `GetSyncJobsListObjectDatabaseViewArrayInput` via:
 //
-//          GetSyncJobsListObjectDatabaseViewArray{ GetSyncJobsListObjectDatabaseViewArgs{...} }
+//	GetSyncJobsListObjectDatabaseViewArray{ GetSyncJobsListObjectDatabaseViewArgs{...} }
 type GetSyncJobsListObjectDatabaseViewArrayInput interface {
 	pulumi.Input
 
@@ -11601,7 +11601,7 @@ type GetSyncJobsListOption struct {
 // GetSyncJobsListOptionInput is an input type that accepts GetSyncJobsListOptionArgs and GetSyncJobsListOptionOutput values.
 // You can construct a concrete instance of `GetSyncJobsListOptionInput` via:
 //
-//          GetSyncJobsListOptionArgs{...}
+//	GetSyncJobsListOptionArgs{...}
 type GetSyncJobsListOptionInput interface {
 	pulumi.Input
 
@@ -11641,7 +11641,7 @@ func (i GetSyncJobsListOptionArgs) ToGetSyncJobsListOptionOutputWithContext(ctx 
 // GetSyncJobsListOptionArrayInput is an input type that accepts GetSyncJobsListOptionArray and GetSyncJobsListOptionArrayOutput values.
 // You can construct a concrete instance of `GetSyncJobsListOptionArrayInput` via:
 //
-//          GetSyncJobsListOptionArray{ GetSyncJobsListOptionArgs{...} }
+//	GetSyncJobsListOptionArray{ GetSyncJobsListOptionArgs{...} }
 type GetSyncJobsListOptionArrayInput interface {
 	pulumi.Input
 
@@ -11746,7 +11746,7 @@ type GetSyncJobsListOptionConflictHandleOption struct {
 // GetSyncJobsListOptionConflictHandleOptionInput is an input type that accepts GetSyncJobsListOptionConflictHandleOptionArgs and GetSyncJobsListOptionConflictHandleOptionOutput values.
 // You can construct a concrete instance of `GetSyncJobsListOptionConflictHandleOptionInput` via:
 //
-//          GetSyncJobsListOptionConflictHandleOptionArgs{...}
+//	GetSyncJobsListOptionConflictHandleOptionArgs{...}
 type GetSyncJobsListOptionConflictHandleOptionInput interface {
 	pulumi.Input
 
@@ -11778,7 +11778,7 @@ func (i GetSyncJobsListOptionConflictHandleOptionArgs) ToGetSyncJobsListOptionCo
 // GetSyncJobsListOptionConflictHandleOptionArrayInput is an input type that accepts GetSyncJobsListOptionConflictHandleOptionArray and GetSyncJobsListOptionConflictHandleOptionArrayOutput values.
 // You can construct a concrete instance of `GetSyncJobsListOptionConflictHandleOptionArrayInput` via:
 //
-//          GetSyncJobsListOptionConflictHandleOptionArray{ GetSyncJobsListOptionConflictHandleOptionArgs{...} }
+//	GetSyncJobsListOptionConflictHandleOptionArray{ GetSyncJobsListOptionConflictHandleOptionArgs{...} }
 type GetSyncJobsListOptionConflictHandleOptionArrayInput interface {
 	pulumi.Input
 
@@ -11859,7 +11859,7 @@ type GetSyncJobsListOptionDdlOption struct {
 // GetSyncJobsListOptionDdlOptionInput is an input type that accepts GetSyncJobsListOptionDdlOptionArgs and GetSyncJobsListOptionDdlOptionOutput values.
 // You can construct a concrete instance of `GetSyncJobsListOptionDdlOptionInput` via:
 //
-//          GetSyncJobsListOptionDdlOptionArgs{...}
+//	GetSyncJobsListOptionDdlOptionArgs{...}
 type GetSyncJobsListOptionDdlOptionInput interface {
 	pulumi.Input
 
@@ -11889,7 +11889,7 @@ func (i GetSyncJobsListOptionDdlOptionArgs) ToGetSyncJobsListOptionDdlOptionOutp
 // GetSyncJobsListOptionDdlOptionArrayInput is an input type that accepts GetSyncJobsListOptionDdlOptionArray and GetSyncJobsListOptionDdlOptionArrayOutput values.
 // You can construct a concrete instance of `GetSyncJobsListOptionDdlOptionArrayInput` via:
 //
-//          GetSyncJobsListOptionDdlOptionArray{ GetSyncJobsListOptionDdlOptionArgs{...} }
+//	GetSyncJobsListOptionDdlOptionArray{ GetSyncJobsListOptionDdlOptionArgs{...} }
 type GetSyncJobsListOptionDdlOptionArrayInput interface {
 	pulumi.Input
 
@@ -12005,7 +12005,7 @@ type GetSyncJobsListSrcInfo struct {
 // GetSyncJobsListSrcInfoInput is an input type that accepts GetSyncJobsListSrcInfoArgs and GetSyncJobsListSrcInfoOutput values.
 // You can construct a concrete instance of `GetSyncJobsListSrcInfoInput` via:
 //
-//          GetSyncJobsListSrcInfoArgs{...}
+//	GetSyncJobsListSrcInfoArgs{...}
 type GetSyncJobsListSrcInfoInput interface {
 	pulumi.Input
 
@@ -12075,7 +12075,7 @@ func (i GetSyncJobsListSrcInfoArgs) ToGetSyncJobsListSrcInfoOutputWithContext(ct
 // GetSyncJobsListSrcInfoArrayInput is an input type that accepts GetSyncJobsListSrcInfoArray and GetSyncJobsListSrcInfoArrayOutput values.
 // You can construct a concrete instance of `GetSyncJobsListSrcInfoArrayInput` via:
 //
-//          GetSyncJobsListSrcInfoArray{ GetSyncJobsListSrcInfoArgs{...} }
+//	GetSyncJobsListSrcInfoArray{ GetSyncJobsListSrcInfoArgs{...} }
 type GetSyncJobsListSrcInfoArrayInput interface {
 	pulumi.Input
 
@@ -12251,7 +12251,7 @@ type GetSyncJobsListTag struct {
 // GetSyncJobsListTagInput is an input type that accepts GetSyncJobsListTagArgs and GetSyncJobsListTagOutput values.
 // You can construct a concrete instance of `GetSyncJobsListTagInput` via:
 //
-//          GetSyncJobsListTagArgs{...}
+//	GetSyncJobsListTagArgs{...}
 type GetSyncJobsListTagInput interface {
 	pulumi.Input
 
@@ -12281,7 +12281,7 @@ func (i GetSyncJobsListTagArgs) ToGetSyncJobsListTagOutputWithContext(ctx contex
 // GetSyncJobsListTagArrayInput is an input type that accepts GetSyncJobsListTagArray and GetSyncJobsListTagArrayOutput values.
 // You can construct a concrete instance of `GetSyncJobsListTagArrayInput` via:
 //
-//          GetSyncJobsListTagArray{ GetSyncJobsListTagArgs{...} }
+//	GetSyncJobsListTagArray{ GetSyncJobsListTagArgs{...} }
 type GetSyncJobsListTagArrayInput interface {
 	pulumi.Input
 
@@ -12357,7 +12357,7 @@ type GetSyncJobsTagFilter struct {
 // GetSyncJobsTagFilterInput is an input type that accepts GetSyncJobsTagFilterArgs and GetSyncJobsTagFilterOutput values.
 // You can construct a concrete instance of `GetSyncJobsTagFilterInput` via:
 //
-//          GetSyncJobsTagFilterArgs{...}
+//	GetSyncJobsTagFilterArgs{...}
 type GetSyncJobsTagFilterInput interface {
 	pulumi.Input
 
@@ -12387,7 +12387,7 @@ func (i GetSyncJobsTagFilterArgs) ToGetSyncJobsTagFilterOutputWithContext(ctx co
 // GetSyncJobsTagFilterArrayInput is an input type that accepts GetSyncJobsTagFilterArray and GetSyncJobsTagFilterArrayOutput values.
 // You can construct a concrete instance of `GetSyncJobsTagFilterArrayInput` via:
 //
-//          GetSyncJobsTagFilterArray{ GetSyncJobsTagFilterArgs{...} }
+//	GetSyncJobsTagFilterArray{ GetSyncJobsTagFilterArgs{...} }
 type GetSyncJobsTagFilterArrayInput interface {
 	pulumi.Input
 

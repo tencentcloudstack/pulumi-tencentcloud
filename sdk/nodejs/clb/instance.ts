@@ -115,6 +115,27 @@ import * as utilities from "../utilities";
  * });
  * export const domain = clbOpen.domain;
  * ```
+ * ### Specified  Vip Instance
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as pulumi from "@tencentcloud_iac/pulumi";
+ *
+ * const fooGroup = new tencentcloud.security.Group("fooGroup", {});
+ * const fooInstance = new tencentcloud.vpc.Instance("fooInstance", {cidrBlock: "10.0.0.0/16"});
+ * const clbOpen = new tencentcloud.clb.Instance("clbOpen", {
+ *     networkType: "OPEN",
+ *     clbName: "clb-instance-open",
+ *     projectId: 0,
+ *     vpcId: fooInstance.id,
+ *     securityGroups: [fooGroup.id],
+ *     vip: "111.230.4.204",
+ *     tags: {
+ *         test: "tf",
+ *     },
+ * });
+ * export const domain = tencentcloud_clb_instance.vip;
+ * ```
  * ### Default enable
  *
  * ```typescript
@@ -336,6 +357,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly targetRegionInfoVpcId!: pulumi.Output<string>;
     /**
+     * Applies for CLB instances for a specified VIP, only applicable to open CLB.
+     */
+    public readonly vip!: pulumi.Output<string>;
+    /**
      * Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
      */
     public readonly vipIsp!: pulumi.Output<string>;
@@ -385,6 +410,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["targetRegionInfoRegion"] = state ? state.targetRegionInfoRegion : undefined;
             resourceInputs["targetRegionInfoVpcId"] = state ? state.targetRegionInfoVpcId : undefined;
+            resourceInputs["vip"] = state ? state.vip : undefined;
             resourceInputs["vipIsp"] = state ? state.vipIsp : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
             resourceInputs["zoneId"] = state ? state.zoneId : undefined;
@@ -418,6 +444,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["targetRegionInfoRegion"] = args ? args.targetRegionInfoRegion : undefined;
             resourceInputs["targetRegionInfoVpcId"] = args ? args.targetRegionInfoVpcId : undefined;
+            resourceInputs["vip"] = args ? args.vip : undefined;
             resourceInputs["vipIsp"] = args ? args.vipIsp : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["zoneId"] = args ? args.zoneId : undefined;
@@ -530,6 +557,10 @@ export interface InstanceState {
      */
     targetRegionInfoVpcId?: pulumi.Input<string>;
     /**
+     * Applies for CLB instances for a specified VIP, only applicable to open CLB.
+     */
+    vip?: pulumi.Input<string>;
+    /**
      * Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
      */
     vipIsp?: pulumi.Input<string>;
@@ -635,6 +666,10 @@ export interface InstanceArgs {
      * Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
      */
     targetRegionInfoVpcId?: pulumi.Input<string>;
+    /**
+     * Applies for CLB instances for a specified VIP, only applicable to open CLB.
+     */
+    vip?: pulumi.Input<string>;
     /**
      * Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
      */

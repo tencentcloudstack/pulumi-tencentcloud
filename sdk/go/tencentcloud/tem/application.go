@@ -19,30 +19,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tem.NewApplication(ctx, "application", &Tem.ApplicationArgs{
-// 			ApplicationName: pulumi.String("demo"),
-// 			CodingLanguage:  pulumi.String("JAVA"),
-// 			Description:     pulumi.String("demo for test"),
-// 			RepoName:        pulumi.String("qcloud/nginx"),
-// 			RepoServer:      pulumi.String("ccr.ccs.tencentyun.com"),
-// 			RepoType:        pulumi.Int(2),
-// 			Tags: pulumi.AnyMap{
-// 				"created": pulumi.Any("terraform"),
-// 			},
-// 			UseDefaultImageService: pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tem.NewApplication(ctx, "application", &Tem.ApplicationArgs{
+//				ApplicationName: pulumi.String("demo"),
+//				CodingLanguage:  pulumi.String("JAVA"),
+//				Description:     pulumi.String("demo for test"),
+//				RepoName:        pulumi.String("qcloud/nginx"),
+//				RepoServer:      pulumi.String("ccr.ccs.tencentyun.com"),
+//				RepoType:        pulumi.Int(2),
+//				Tags: pulumi.AnyMap{
+//					"created": pulumi.Any("terraform"),
+//				},
+//				UseDefaultImageService: pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Application struct {
 	pulumi.CustomResourceState
@@ -220,7 +223,7 @@ func (i *Application) ToApplicationOutputWithContext(ctx context.Context) Applic
 // ApplicationArrayInput is an input type that accepts ApplicationArray and ApplicationArrayOutput values.
 // You can construct a concrete instance of `ApplicationArrayInput` via:
 //
-//          ApplicationArray{ ApplicationArgs{...} }
+//	ApplicationArray{ ApplicationArgs{...} }
 type ApplicationArrayInput interface {
 	pulumi.Input
 
@@ -245,7 +248,7 @@ func (i ApplicationArray) ToApplicationArrayOutputWithContext(ctx context.Contex
 // ApplicationMapInput is an input type that accepts ApplicationMap and ApplicationMapOutput values.
 // You can construct a concrete instance of `ApplicationMapInput` via:
 //
-//          ApplicationMap{ "key": ApplicationArgs{...} }
+//	ApplicationMap{ "key": ApplicationArgs{...} }
 type ApplicationMapInput interface {
 	pulumi.Input
 

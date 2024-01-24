@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewModifyAccessPeriod(ctx, "example", &Waf.ModifyAccessPeriodArgs{
-// 			Period:  pulumi.Int(30),
-// 			TopicId: pulumi.String("1ae37c76-df99-4e2b-998c-20f39eba6226"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewModifyAccessPeriod(ctx, "example", &Waf.ModifyAccessPeriodArgs{
+//				Period:  pulumi.Int(30),
+//				TopicId: pulumi.String("1ae37c76-df99-4e2b-998c-20f39eba6226"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ModifyAccessPeriod struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *ModifyAccessPeriod) ToModifyAccessPeriodOutputWithContext(ctx context.C
 // ModifyAccessPeriodArrayInput is an input type that accepts ModifyAccessPeriodArray and ModifyAccessPeriodArrayOutput values.
 // You can construct a concrete instance of `ModifyAccessPeriodArrayInput` via:
 //
-//          ModifyAccessPeriodArray{ ModifyAccessPeriodArgs{...} }
+//	ModifyAccessPeriodArray{ ModifyAccessPeriodArgs{...} }
 type ModifyAccessPeriodArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i ModifyAccessPeriodArray) ToModifyAccessPeriodArrayOutputWithContext(ctx 
 // ModifyAccessPeriodMapInput is an input type that accepts ModifyAccessPeriodMap and ModifyAccessPeriodMapOutput values.
 // You can construct a concrete instance of `ModifyAccessPeriodMapInput` via:
 //
-//          ModifyAccessPeriodMap{ "key": ModifyAccessPeriodArgs{...} }
+//	ModifyAccessPeriodMap{ "key": ModifyAccessPeriodArgs{...} }
 type ModifyAccessPeriodMapInput interface {
 	pulumi.Input
 

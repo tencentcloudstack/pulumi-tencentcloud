@@ -21,106 +21,109 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		internal, err := Security.GetGroups(ctx, &security.GetGroupsArgs{
-// 			Name: pulumi.StringRef("default"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.GetInstances(ctx, &vpc.GetInstancesArgs{
-// 			Name: pulumi.StringRef("Default-VPC"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			VpcId: pulumi.StringRef(vpc.InstanceLists[0].VpcId),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpcId := subnet.InstanceLists[0].VpcId
-// 		subnetId := subnet.InstanceLists[0].SubnetId
-// 		sgId := internal.SecurityGroups[0].SecurityGroupId
-// 		prepaidInstance, err := Dcdb.NewDbInstance(ctx, "prepaidInstance", &Dcdb.DbInstanceArgs{
-// 			InstanceName: pulumi.String("test_dcdb_db_post_instance"),
-// 			Zones: pulumi.StringArray{
-// 				pulumi.Any(_var.Default_az),
-// 			},
-// 			Period:         pulumi.Int(1),
-// 			ShardMemory:    pulumi.Int(2),
-// 			ShardStorage:   pulumi.Int(10),
-// 			ShardNodeCount: pulumi.Int(2),
-// 			ShardCount:     pulumi.Int(2),
-// 			VpcId:          pulumi.String(vpcId),
-// 			SubnetId:       pulumi.String(subnetId),
-// 			DbVersionId:    pulumi.String("8.0"),
-// 			ResourceTags: dcdb.DbInstanceResourceTagArray{
-// 				&dcdb.DbInstanceResourceTagArgs{
-// 					TagKey:   pulumi.String("aaa"),
-// 					TagValue: pulumi.String("bbb"),
-// 				},
-// 			},
-// 			SecurityGroupIds: pulumi.StringArray{
-// 				pulumi.String(sgId),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		hourdbInstance, err := Dcdb.NewHourdbInstance(ctx, "hourdbInstance", &Dcdb.HourdbInstanceArgs{
-// 			InstanceName: pulumi.String("test_dcdb_db_hourdb_instance"),
-// 			Zones: pulumi.StringArray{
-// 				pulumi.Any(_var.Default_az),
-// 			},
-// 			ShardMemory:     pulumi.Int(2),
-// 			ShardStorage:    pulumi.Int(10),
-// 			ShardNodeCount:  pulumi.Int(2),
-// 			ShardCount:      pulumi.Int(2),
-// 			VpcId:           pulumi.String(vpcId),
-// 			SubnetId:        pulumi.String(subnetId),
-// 			SecurityGroupId: pulumi.String(sgId),
-// 			DbVersionId:     pulumi.String("8.0"),
-// 			ResourceTags: dcdb.HourdbInstanceResourceTagArray{
-// 				&dcdb.HourdbInstanceResourceTagArgs{
-// 					TagKey:   pulumi.String("aaa"),
-// 					TagValue: pulumi.String("bbb"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		prepaidDcdbId := prepaidInstance.ID()
-// 		hourdbDcdbId := hourdbInstance.ID()
-// 		_, err = Dcdb.NewEncryptAttributesConfig(ctx, "configHourdb", &Dcdb.EncryptAttributesConfigArgs{
-// 			InstanceId:     pulumi.String(hourdbDcdbId),
-// 			EncryptEnabled: pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Dcdb.NewEncryptAttributesConfig(ctx, "configPrepaid", &Dcdb.EncryptAttributesConfigArgs{
-// 			InstanceId:     pulumi.String(prepaidDcdbId),
-// 			EncryptEnabled: pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			internal, err := Security.GetGroups(ctx, &security.GetGroupsArgs{
+//				Name: pulumi.StringRef("default"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.GetInstances(ctx, &vpc.GetInstancesArgs{
+//				Name: pulumi.StringRef("Default-VPC"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//				VpcId: pulumi.StringRef(vpc.InstanceLists[0].VpcId),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpcId := subnet.InstanceLists[0].VpcId
+//			subnetId := subnet.InstanceLists[0].SubnetId
+//			sgId := internal.SecurityGroups[0].SecurityGroupId
+//			prepaidInstance, err := Dcdb.NewDbInstance(ctx, "prepaidInstance", &Dcdb.DbInstanceArgs{
+//				InstanceName: pulumi.String("test_dcdb_db_post_instance"),
+//				Zones: pulumi.StringArray{
+//					pulumi.Any(_var.Default_az),
+//				},
+//				Period:         pulumi.Int(1),
+//				ShardMemory:    pulumi.Int(2),
+//				ShardStorage:   pulumi.Int(10),
+//				ShardNodeCount: pulumi.Int(2),
+//				ShardCount:     pulumi.Int(2),
+//				VpcId:          pulumi.String(vpcId),
+//				SubnetId:       pulumi.String(subnetId),
+//				DbVersionId:    pulumi.String("8.0"),
+//				ResourceTags: dcdb.DbInstanceResourceTagArray{
+//					&dcdb.DbInstanceResourceTagArgs{
+//						TagKey:   pulumi.String("aaa"),
+//						TagValue: pulumi.String("bbb"),
+//					},
+//				},
+//				SecurityGroupIds: pulumi.StringArray{
+//					pulumi.String(sgId),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			hourdbInstance, err := Dcdb.NewHourdbInstance(ctx, "hourdbInstance", &Dcdb.HourdbInstanceArgs{
+//				InstanceName: pulumi.String("test_dcdb_db_hourdb_instance"),
+//				Zones: pulumi.StringArray{
+//					pulumi.Any(_var.Default_az),
+//				},
+//				ShardMemory:     pulumi.Int(2),
+//				ShardStorage:    pulumi.Int(10),
+//				ShardNodeCount:  pulumi.Int(2),
+//				ShardCount:      pulumi.Int(2),
+//				VpcId:           pulumi.String(vpcId),
+//				SubnetId:        pulumi.String(subnetId),
+//				SecurityGroupId: pulumi.String(sgId),
+//				DbVersionId:     pulumi.String("8.0"),
+//				ResourceTags: dcdb.HourdbInstanceResourceTagArray{
+//					&dcdb.HourdbInstanceResourceTagArgs{
+//						TagKey:   pulumi.String("aaa"),
+//						TagValue: pulumi.String("bbb"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			prepaidDcdbId := prepaidInstance.ID()
+//			hourdbDcdbId := hourdbInstance.ID()
+//			_, err = Dcdb.NewEncryptAttributesConfig(ctx, "configHourdb", &Dcdb.EncryptAttributesConfigArgs{
+//				InstanceId:     pulumi.String(hourdbDcdbId),
+//				EncryptEnabled: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dcdb.NewEncryptAttributesConfig(ctx, "configPrepaid", &Dcdb.EncryptAttributesConfigArgs{
+//				InstanceId:     pulumi.String(prepaidDcdbId),
+//				EncryptEnabled: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -128,7 +131,9 @@ import (
 // dcdb encrypt_attributes_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dcdb/encryptAttributesConfig:EncryptAttributesConfig encrypt_attributes_config encrypt_attributes_config_id
+//
+//	$ pulumi import tencentcloud:Dcdb/encryptAttributesConfig:EncryptAttributesConfig encrypt_attributes_config encrypt_attributes_config_id
+//
 // ```
 type EncryptAttributesConfig struct {
 	pulumi.CustomResourceState
@@ -233,7 +238,7 @@ func (i *EncryptAttributesConfig) ToEncryptAttributesConfigOutputWithContext(ctx
 // EncryptAttributesConfigArrayInput is an input type that accepts EncryptAttributesConfigArray and EncryptAttributesConfigArrayOutput values.
 // You can construct a concrete instance of `EncryptAttributesConfigArrayInput` via:
 //
-//          EncryptAttributesConfigArray{ EncryptAttributesConfigArgs{...} }
+//	EncryptAttributesConfigArray{ EncryptAttributesConfigArgs{...} }
 type EncryptAttributesConfigArrayInput interface {
 	pulumi.Input
 
@@ -258,7 +263,7 @@ func (i EncryptAttributesConfigArray) ToEncryptAttributesConfigArrayOutputWithCo
 // EncryptAttributesConfigMapInput is an input type that accepts EncryptAttributesConfigMap and EncryptAttributesConfigMapOutput values.
 // You can construct a concrete instance of `EncryptAttributesConfigMapInput` via:
 //
-//          EncryptAttributesConfigMap{ "key": EncryptAttributesConfigArgs{...} }
+//	EncryptAttributesConfigMap{ "key": EncryptAttributesConfigArgs{...} }
 type EncryptAttributesConfigMapInput interface {
 	pulumi.Input
 

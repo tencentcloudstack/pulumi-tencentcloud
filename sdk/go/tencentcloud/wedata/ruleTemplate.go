@@ -18,7 +18,9 @@ import (
 // wedata rule_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Wedata/ruleTemplate:RuleTemplate rule_template rule_template_id
+//
+//	$ pulumi import tencentcloud:Wedata/ruleTemplate:RuleTemplate rule_template rule_template_id
+//
 // ```
 type RuleTemplate struct {
 	pulumi.CustomResourceState
@@ -200,7 +202,7 @@ func (i *RuleTemplate) ToRuleTemplateOutputWithContext(ctx context.Context) Rule
 // RuleTemplateArrayInput is an input type that accepts RuleTemplateArray and RuleTemplateArrayOutput values.
 // You can construct a concrete instance of `RuleTemplateArrayInput` via:
 //
-//          RuleTemplateArray{ RuleTemplateArgs{...} }
+//	RuleTemplateArray{ RuleTemplateArgs{...} }
 type RuleTemplateArrayInput interface {
 	pulumi.Input
 
@@ -225,7 +227,7 @@ func (i RuleTemplateArray) ToRuleTemplateArrayOutputWithContext(ctx context.Cont
 // RuleTemplateMapInput is an input type that accepts RuleTemplateMap and RuleTemplateMapOutput values.
 // You can construct a concrete instance of `RuleTemplateMapInput` via:
 //
-//          RuleTemplateMap{ "key": RuleTemplateArgs{...} }
+//	RuleTemplateMap{ "key": RuleTemplateArgs{...} }
 type RuleTemplateMapInput interface {
 	pulumi.Input
 

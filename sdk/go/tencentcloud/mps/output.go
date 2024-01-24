@@ -20,38 +20,41 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewOutput(ctx, "output", &Mps.OutputArgs{
-// 			FlowId: pulumi.String("your_flow_id"),
-// 			Output: mps.OutputOutputArgs{
-// 				Description:  pulumi.String("tf mps output group"),
-// 				OutputName:   pulumi.String("your_output_name"),
-// 				OutputRegion: pulumi.String("ap-guangzhou"),
-// 				Protocol:     pulumi.String("RTP"),
-// 				RtpSettings: &mps.OutputOutputRtpSettingsArgs{
-// 					Destinations: mps.OutputOutputRtpSettingsDestinationArray{
-// 						&mps.OutputOutputRtpSettingsDestinationArgs{
-// 							Ip:   pulumi.String("203.205.141.84"),
-// 							Port: pulumi.Int(65535),
-// 						},
-// 					},
-// 					Fec:         pulumi.String("none"),
-// 					IdleTimeout: pulumi.Int(1000),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewOutput(ctx, "output", &Mps.OutputArgs{
+//				FlowId: pulumi.String("your_flow_id"),
+//				Output: mps.OutputOutputArgs{
+//					Description:  pulumi.String("tf mps output group"),
+//					OutputName:   pulumi.String("your_output_name"),
+//					OutputRegion: pulumi.String("ap-guangzhou"),
+//					Protocol:     pulumi.String("RTP"),
+//					RtpSettings: &mps.OutputOutputRtpSettingsArgs{
+//						Destinations: mps.OutputOutputRtpSettingsDestinationArray{
+//							&mps.OutputOutputRtpSettingsDestinationArgs{
+//								Ip:   pulumi.String("203.205.141.84"),
+//								Port: pulumi.Int(65535),
+//							},
+//						},
+//						Fec:         pulumi.String("none"),
+//						IdleTimeout: pulumi.Int(1000),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -59,7 +62,9 @@ import (
 // mps output can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/output:Output output flow_id#output_id
+//
+//	$ pulumi import tencentcloud:Mps/output:Output output flow_id#output_id
+//
 // ```
 type Output struct {
 	pulumi.CustomResourceState
@@ -164,7 +169,7 @@ func (i *Output) ToOutputOutputWithContext(ctx context.Context) OutputOutput {
 // OutputArrayInput is an input type that accepts OutputArray and OutputArrayOutput values.
 // You can construct a concrete instance of `OutputArrayInput` via:
 //
-//          OutputArray{ OutputArgs{...} }
+//	OutputArray{ OutputArgs{...} }
 type OutputArrayInput interface {
 	pulumi.Input
 
@@ -189,7 +194,7 @@ func (i OutputArray) ToOutputArrayOutputWithContext(ctx context.Context) OutputA
 // OutputMapInput is an input type that accepts OutputMap and OutputMapOutput values.
 // You can construct a concrete instance of `OutputMapInput` via:
 //
-//          OutputMap{ "key": OutputArgs{...} }
+//	OutputMap{ "key": OutputArgs{...} }
 type OutputMapInput interface {
 	pulumi.Input
 

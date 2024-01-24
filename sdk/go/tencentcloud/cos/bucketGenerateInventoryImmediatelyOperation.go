@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cos.NewBucketGenerateInventoryImmediatelyOperation(ctx, "generateInventoryImmediately", &Cos.BucketGenerateInventoryImmediatelyOperationArgs{
-// 			Bucket:      pulumi.String("keep-test-xxxxxx"),
-// 			InventoryId: pulumi.String("test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cos.NewBucketGenerateInventoryImmediatelyOperation(ctx, "generateInventoryImmediately", &Cos.BucketGenerateInventoryImmediatelyOperationArgs{
+//				Bucket:      pulumi.String("keep-test-xxxxxx"),
+//				InventoryId: pulumi.String("test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type BucketGenerateInventoryImmediatelyOperation struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *BucketGenerateInventoryImmediatelyOperation) ToBucketGenerateInventoryI
 // BucketGenerateInventoryImmediatelyOperationArrayInput is an input type that accepts BucketGenerateInventoryImmediatelyOperationArray and BucketGenerateInventoryImmediatelyOperationArrayOutput values.
 // You can construct a concrete instance of `BucketGenerateInventoryImmediatelyOperationArrayInput` via:
 //
-//          BucketGenerateInventoryImmediatelyOperationArray{ BucketGenerateInventoryImmediatelyOperationArgs{...} }
+//	BucketGenerateInventoryImmediatelyOperationArray{ BucketGenerateInventoryImmediatelyOperationArgs{...} }
 type BucketGenerateInventoryImmediatelyOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i BucketGenerateInventoryImmediatelyOperationArray) ToBucketGenerateInvent
 // BucketGenerateInventoryImmediatelyOperationMapInput is an input type that accepts BucketGenerateInventoryImmediatelyOperationMap and BucketGenerateInventoryImmediatelyOperationMapOutput values.
 // You can construct a concrete instance of `BucketGenerateInventoryImmediatelyOperationMapInput` via:
 //
-//          BucketGenerateInventoryImmediatelyOperationMap{ "key": BucketGenerateInventoryImmediatelyOperationArgs{...} }
+//	BucketGenerateInventoryImmediatelyOperationMap{ "key": BucketGenerateInventoryImmediatelyOperationArgs{...} }
 type BucketGenerateInventoryImmediatelyOperationMapInput interface {
 	pulumi.Input
 

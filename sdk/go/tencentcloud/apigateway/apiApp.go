@@ -20,22 +20,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewApiApp(ctx, "example", &ApiGateway.ApiAppArgs{
-// 			ApiAppDesc: pulumi.String("app desc."),
-// 			ApiAppName: pulumi.String("tf_example"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.NewApiApp(ctx, "example", &ApiGateway.ApiAppArgs{
+//				ApiAppDesc: pulumi.String("app desc."),
+//				ApiAppName: pulumi.String("tf_example"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Bind Tag
 //
@@ -43,25 +46,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewApiApp(ctx, "example", &ApiGateway.ApiAppArgs{
-// 			ApiAppDesc: pulumi.String("app desc."),
-// 			ApiAppName: pulumi.String("tf_example"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.NewApiApp(ctx, "example", &ApiGateway.ApiAppArgs{
+//				ApiAppDesc: pulumi.String("app desc."),
+//				ApiAppName: pulumi.String("tf_example"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -69,7 +75,9 @@ import (
 // apigateway api_app can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:ApiGateway/apiApp:ApiApp example app-poe0pyex
+//
+//	$ pulumi import tencentcloud:ApiGateway/apiApp:ApiApp example app-poe0pyex
+//
 // ```
 type ApiApp struct {
 	pulumi.CustomResourceState
@@ -211,7 +219,7 @@ func (i *ApiApp) ToApiAppOutputWithContext(ctx context.Context) ApiAppOutput {
 // ApiAppArrayInput is an input type that accepts ApiAppArray and ApiAppArrayOutput values.
 // You can construct a concrete instance of `ApiAppArrayInput` via:
 //
-//          ApiAppArray{ ApiAppArgs{...} }
+//	ApiAppArray{ ApiAppArgs{...} }
 type ApiAppArrayInput interface {
 	pulumi.Input
 
@@ -236,7 +244,7 @@ func (i ApiAppArray) ToApiAppArrayOutputWithContext(ctx context.Context) ApiAppA
 // ApiAppMapInput is an input type that accepts ApiAppMap and ApiAppMapOutput values.
 // You can construct a concrete instance of `ApiAppMapInput` via:
 //
-//          ApiAppMap{ "key": ApiAppArgs{...} }
+//	ApiAppMap{ "key": ApiAppArgs{...} }
 type ApiAppMapInput interface {
 	pulumi.Input
 

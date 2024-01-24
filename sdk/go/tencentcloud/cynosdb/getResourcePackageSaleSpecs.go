@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.GetResourcePackageSaleSpecs(ctx, &cynosdb.GetResourcePackageSaleSpecsArgs{
-// 			InstanceType:  "cynosdb-serverless",
-// 			PackageRegion: "china",
-// 			PackageType:   "CCU",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.GetResourcePackageSaleSpecs(ctx, &cynosdb.GetResourcePackageSaleSpecsArgs{
+//				InstanceType:  "cynosdb-serverless",
+//				PackageRegion: "china",
+//				PackageType:   "CCU",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetResourcePackageSaleSpecs(ctx *pulumi.Context, args *GetResourcePackageSaleSpecsArgs, opts ...pulumi.InvokeOption) (*GetResourcePackageSaleSpecsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

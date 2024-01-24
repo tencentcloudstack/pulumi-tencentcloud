@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cos.NewObjectCopyOperation(ctx, "objectCopy", &Cos.ObjectCopyOperationArgs{
-// 			Bucket:    pulumi.String("keep-copy-xxxxxxx"),
-// 			Key:       pulumi.String("copy-acl.txt"),
-// 			SourceUrl: pulumi.String("keep-test-xxxxxx.cos.ap-guangzhou.myqcloud.com/acl.txt"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cos.NewObjectCopyOperation(ctx, "objectCopy", &Cos.ObjectCopyOperationArgs{
+//				Bucket:    pulumi.String("keep-copy-xxxxxxx"),
+//				Key:       pulumi.String("copy-acl.txt"),
+//				SourceUrl: pulumi.String("keep-test-xxxxxx.cos.ap-guangzhou.myqcloud.com/acl.txt"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ObjectCopyOperation struct {
 	pulumi.CustomResourceState
@@ -153,7 +156,7 @@ func (i *ObjectCopyOperation) ToObjectCopyOperationOutputWithContext(ctx context
 // ObjectCopyOperationArrayInput is an input type that accepts ObjectCopyOperationArray and ObjectCopyOperationArrayOutput values.
 // You can construct a concrete instance of `ObjectCopyOperationArrayInput` via:
 //
-//          ObjectCopyOperationArray{ ObjectCopyOperationArgs{...} }
+//	ObjectCopyOperationArray{ ObjectCopyOperationArgs{...} }
 type ObjectCopyOperationArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +181,7 @@ func (i ObjectCopyOperationArray) ToObjectCopyOperationArrayOutputWithContext(ct
 // ObjectCopyOperationMapInput is an input type that accepts ObjectCopyOperationMap and ObjectCopyOperationMapOutput values.
 // You can construct a concrete instance of `ObjectCopyOperationMapInput` via:
 //
-//          ObjectCopyOperationMap{ "key": ObjectCopyOperationArgs{...} }
+//	ObjectCopyOperationMap{ "key": ObjectCopyOperationArgs{...} }
 type ObjectCopyOperationMapInput interface {
 	pulumi.Input
 

@@ -16,40 +16,43 @@ import (
 // ## Example Usage
 // ### If upstreamType is 0
 //
-// Create a basic waf saas domain
+// # Create a basic waf saas domain
 //
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewSaasDomain(ctx, "example", &Waf.SaasDomainArgs{
-// 			Domain:     pulumi.String("tf.example.com"),
-// 			InstanceId: pulumi.String("waf_2kxtlbky01b3wceb"),
-// 			Ports: waf.SaasDomainPortArray{
-// 				&waf.SaasDomainPortArgs{
-// 					Port:             pulumi.String("80"),
-// 					Protocol:         pulumi.String("http"),
-// 					UpstreamPort:     pulumi.String("80"),
-// 					UpstreamProtocol: pulumi.String("http"),
-// 				},
-// 			},
-// 			SrcLists: pulumi.StringArray{
-// 				pulumi.String("1.1.1.1"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewSaasDomain(ctx, "example", &Waf.SaasDomainArgs{
+//				Domain:     pulumi.String("tf.example.com"),
+//				InstanceId: pulumi.String("waf_2kxtlbky01b3wceb"),
+//				Ports: waf.SaasDomainPortArray{
+//					&waf.SaasDomainPortArgs{
+//						Port:             pulumi.String("80"),
+//						Protocol:         pulumi.String("http"),
+//						UpstreamPort:     pulumi.String("80"),
+//						UpstreamProtocol: pulumi.String("http"),
+//					},
+//				},
+//				SrcLists: pulumi.StringArray{
+//					pulumi.String("1.1.1.1"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Create a load balancing strategy is weighted polling saas domain
 //
@@ -57,40 +60,43 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewSaasDomain(ctx, "example", &Waf.SaasDomainArgs{
-// 			Domain:      pulumi.String("tf.example.com"),
-// 			InstanceId:  pulumi.String("waf_2kxtlbky01b3wceb"),
-// 			LoadBalance: pulumi.String("2"),
-// 			Ports: waf.SaasDomainPortArray{
-// 				&waf.SaasDomainPortArgs{
-// 					Port:             pulumi.String("80"),
-// 					Protocol:         pulumi.String("http"),
-// 					UpstreamPort:     pulumi.String("80"),
-// 					UpstreamProtocol: pulumi.String("http"),
-// 				},
-// 			},
-// 			SrcLists: pulumi.StringArray{
-// 				pulumi.String("1.1.1.1"),
-// 				pulumi.String("2.2.2.2"),
-// 			},
-// 			Weights: pulumi.IntArray{
-// 				pulumi.Int(30),
-// 				pulumi.Int(50),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewSaasDomain(ctx, "example", &Waf.SaasDomainArgs{
+//				Domain:      pulumi.String("tf.example.com"),
+//				InstanceId:  pulumi.String("waf_2kxtlbky01b3wceb"),
+//				LoadBalance: pulumi.String("2"),
+//				Ports: waf.SaasDomainPortArray{
+//					&waf.SaasDomainPortArgs{
+//						Port:             pulumi.String("80"),
+//						Protocol:         pulumi.String("http"),
+//						UpstreamPort:     pulumi.String("80"),
+//						UpstreamProtocol: pulumi.String("http"),
+//					},
+//				},
+//				SrcLists: pulumi.StringArray{
+//					pulumi.String("1.1.1.1"),
+//					pulumi.String("2.2.2.2"),
+//				},
+//				Weights: pulumi.IntArray{
+//					pulumi.Int(30),
+//					pulumi.Int(50),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### If upstreamType is 1
 //
@@ -98,33 +104,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewSaasDomain(ctx, "example", &Waf.SaasDomainArgs{
-// 			Domain:     pulumi.String("tf.example.com"),
-// 			InstanceId: pulumi.String("waf_2kxtlbky01b3wceb"),
-// 			Ports: waf.SaasDomainPortArray{
-// 				&waf.SaasDomainPortArgs{
-// 					Port:             pulumi.String("80"),
-// 					Protocol:         pulumi.String("http"),
-// 					UpstreamPort:     pulumi.String("80"),
-// 					UpstreamProtocol: pulumi.String("http"),
-// 				},
-// 			},
-// 			UpstreamDomain: pulumi.String("test.com"),
-// 			UpstreamType:   pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewSaasDomain(ctx, "example", &Waf.SaasDomainArgs{
+//				Domain:     pulumi.String("tf.example.com"),
+//				InstanceId: pulumi.String("waf_2kxtlbky01b3wceb"),
+//				Ports: waf.SaasDomainPortArray{
+//					&waf.SaasDomainPortArgs{
+//						Port:             pulumi.String("80"),
+//						Protocol:         pulumi.String("http"),
+//						UpstreamPort:     pulumi.String("80"),
+//						UpstreamProtocol: pulumi.String("http"),
+//					},
+//				},
+//				UpstreamDomain: pulumi.String("test.com"),
+//				UpstreamType:   pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Create a waf saas domain with set Http&Https
 //
@@ -132,56 +141,59 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewSaasDomain(ctx, "example", &Waf.SaasDomainArgs{
-// 			CertType:     pulumi.Int(2),
-// 			Domain:       pulumi.String("tf.example.com"),
-// 			HttpsRewrite: pulumi.Int(1),
-// 			InstanceId:   pulumi.String("waf_2kxtlbky01b3wceb"),
-// 			IpHeaders: pulumi.StringArray{
-// 				pulumi.String("headers_1"),
-// 				pulumi.String("headers_2"),
-// 				pulumi.String("headers_3"),
-// 			},
-// 			IsCdn:       pulumi.Int(3),
-// 			LoadBalance: pulumi.String("2"),
-// 			Ports: waf.SaasDomainPortArray{
-// 				&waf.SaasDomainPortArgs{
-// 					Port:             pulumi.String("80"),
-// 					Protocol:         pulumi.String("http"),
-// 					UpstreamPort:     pulumi.String("80"),
-// 					UpstreamProtocol: pulumi.String("http"),
-// 				},
-// 				&waf.SaasDomainPortArgs{
-// 					Port:             pulumi.String("443"),
-// 					Protocol:         pulumi.String("https"),
-// 					UpstreamPort:     pulumi.String("443"),
-// 					UpstreamProtocol: pulumi.String("https"),
-// 				},
-// 			},
-// 			SrcLists: pulumi.StringArray{
-// 				pulumi.String("1.1.1.1"),
-// 				pulumi.String("2.2.2.2"),
-// 			},
-// 			SslId:          pulumi.String("3a6B5y8v"),
-// 			UpstreamScheme: pulumi.String("https"),
-// 			Weights: pulumi.IntArray{
-// 				pulumi.Int(50),
-// 				pulumi.Int(60),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewSaasDomain(ctx, "example", &Waf.SaasDomainArgs{
+//				CertType:     pulumi.Int(2),
+//				Domain:       pulumi.String("tf.example.com"),
+//				HttpsRewrite: pulumi.Int(1),
+//				InstanceId:   pulumi.String("waf_2kxtlbky01b3wceb"),
+//				IpHeaders: pulumi.StringArray{
+//					pulumi.String("headers_1"),
+//					pulumi.String("headers_2"),
+//					pulumi.String("headers_3"),
+//				},
+//				IsCdn:       pulumi.Int(3),
+//				LoadBalance: pulumi.String("2"),
+//				Ports: waf.SaasDomainPortArray{
+//					&waf.SaasDomainPortArgs{
+//						Port:             pulumi.String("80"),
+//						Protocol:         pulumi.String("http"),
+//						UpstreamPort:     pulumi.String("80"),
+//						UpstreamProtocol: pulumi.String("http"),
+//					},
+//					&waf.SaasDomainPortArgs{
+//						Port:             pulumi.String("443"),
+//						Protocol:         pulumi.String("https"),
+//						UpstreamPort:     pulumi.String("443"),
+//						UpstreamProtocol: pulumi.String("https"),
+//					},
+//				},
+//				SrcLists: pulumi.StringArray{
+//					pulumi.String("1.1.1.1"),
+//					pulumi.String("2.2.2.2"),
+//				},
+//				SslId:          pulumi.String("3a6B5y8v"),
+//				UpstreamScheme: pulumi.String("https"),
+//				Weights: pulumi.IntArray{
+//					pulumi.Int(50),
+//					pulumi.Int(60),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Create a complete waf saas domain
 //
@@ -189,68 +201,71 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewSaasDomain(ctx, "example", &Waf.SaasDomainArgs{
-// 			ActiveCheck:    pulumi.Int(1),
-// 			ApiSafeStatus:  pulumi.Int(1),
-// 			BotStatus:      pulumi.Int(1),
-// 			CertType:       pulumi.Int(2),
-// 			CipherTemplate: pulumi.Int(1),
-// 			Domain:         pulumi.String("tf.example.com"),
-// 			HttpsRewrite:   pulumi.Int(1),
-// 			InstanceId:     pulumi.String("waf_2kxtlbky01b3wceb"),
-// 			IpHeaders: pulumi.StringArray{
-// 				pulumi.String("headers_1"),
-// 				pulumi.String("headers_2"),
-// 				pulumi.String("headers_3"),
-// 			},
-// 			IsCdn:       pulumi.Int(3),
-// 			IsHttp2:     pulumi.Int(1),
-// 			IsKeepAlive: pulumi.String("1"),
-// 			LoadBalance: pulumi.String("2"),
-// 			Ports: waf.SaasDomainPortArray{
-// 				&waf.SaasDomainPortArgs{
-// 					Port:             pulumi.String("80"),
-// 					Protocol:         pulumi.String("http"),
-// 					UpstreamPort:     pulumi.String("80"),
-// 					UpstreamProtocol: pulumi.String("http"),
-// 				},
-// 				&waf.SaasDomainPortArgs{
-// 					Port:             pulumi.String("443"),
-// 					Protocol:         pulumi.String("https"),
-// 					UpstreamPort:     pulumi.String("443"),
-// 					UpstreamProtocol: pulumi.String("https"),
-// 				},
-// 			},
-// 			ProxyReadTimeout: pulumi.Int(500),
-// 			ProxySendTimeout: pulumi.Int(500),
-// 			SniHost:          pulumi.String("3.3.3.3"),
-// 			SniType:          pulumi.Int(3),
-// 			SrcLists: pulumi.StringArray{
-// 				pulumi.String("1.1.1.1"),
-// 				pulumi.String("2.2.2.2"),
-// 			},
-// 			SslId:          pulumi.String("3a6B5y8v"),
-// 			TlsVersion:     pulumi.Int(3),
-// 			UpstreamScheme: pulumi.String("https"),
-// 			Weights: pulumi.IntArray{
-// 				pulumi.Int(50),
-// 				pulumi.Int(60),
-// 			},
-// 			XffReset: pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewSaasDomain(ctx, "example", &Waf.SaasDomainArgs{
+//				ActiveCheck:    pulumi.Int(1),
+//				ApiSafeStatus:  pulumi.Int(1),
+//				BotStatus:      pulumi.Int(1),
+//				CertType:       pulumi.Int(2),
+//				CipherTemplate: pulumi.Int(1),
+//				Domain:         pulumi.String("tf.example.com"),
+//				HttpsRewrite:   pulumi.Int(1),
+//				InstanceId:     pulumi.String("waf_2kxtlbky01b3wceb"),
+//				IpHeaders: pulumi.StringArray{
+//					pulumi.String("headers_1"),
+//					pulumi.String("headers_2"),
+//					pulumi.String("headers_3"),
+//				},
+//				IsCdn:       pulumi.Int(3),
+//				IsHttp2:     pulumi.Int(1),
+//				IsKeepAlive: pulumi.String("1"),
+//				LoadBalance: pulumi.String("2"),
+//				Ports: waf.SaasDomainPortArray{
+//					&waf.SaasDomainPortArgs{
+//						Port:             pulumi.String("80"),
+//						Protocol:         pulumi.String("http"),
+//						UpstreamPort:     pulumi.String("80"),
+//						UpstreamProtocol: pulumi.String("http"),
+//					},
+//					&waf.SaasDomainPortArgs{
+//						Port:             pulumi.String("443"),
+//						Protocol:         pulumi.String("https"),
+//						UpstreamPort:     pulumi.String("443"),
+//						UpstreamProtocol: pulumi.String("https"),
+//					},
+//				},
+//				ProxyReadTimeout: pulumi.Int(500),
+//				ProxySendTimeout: pulumi.Int(500),
+//				SniHost:          pulumi.String("3.3.3.3"),
+//				SniType:          pulumi.Int(3),
+//				SrcLists: pulumi.StringArray{
+//					pulumi.String("1.1.1.1"),
+//					pulumi.String("2.2.2.2"),
+//				},
+//				SslId:          pulumi.String("3a6B5y8v"),
+//				TlsVersion:     pulumi.Int(3),
+//				UpstreamScheme: pulumi.String("https"),
+//				Weights: pulumi.IntArray{
+//					pulumi.Int(50),
+//					pulumi.Int(60),
+//				},
+//				XffReset: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -258,7 +273,9 @@ import (
 // waf saas_domain can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Waf/saasDomain:SaasDomain example waf_2kxtlbky01b3wceb#tf.example.com#9647c91da0aa5f5aaa49d0ca40e2af24
+//
+//	$ pulumi import tencentcloud:Waf/saasDomain:SaasDomain example waf_2kxtlbky01b3wceb#tf.example.com#9647c91da0aa5f5aaa49d0ca40e2af24
+//
 // ```
 type SaasDomain struct {
 	pulumi.CustomResourceState
@@ -682,7 +699,7 @@ func (i *SaasDomain) ToSaasDomainOutputWithContext(ctx context.Context) SaasDoma
 // SaasDomainArrayInput is an input type that accepts SaasDomainArray and SaasDomainArrayOutput values.
 // You can construct a concrete instance of `SaasDomainArrayInput` via:
 //
-//          SaasDomainArray{ SaasDomainArgs{...} }
+//	SaasDomainArray{ SaasDomainArgs{...} }
 type SaasDomainArrayInput interface {
 	pulumi.Input
 
@@ -707,7 +724,7 @@ func (i SaasDomainArray) ToSaasDomainArrayOutputWithContext(ctx context.Context)
 // SaasDomainMapInput is an input type that accepts SaasDomainMap and SaasDomainMapOutput values.
 // You can construct a concrete instance of `SaasDomainMapInput` via:
 //
-//          SaasDomainMap{ "key": SaasDomainArgs{...} }
+//	SaasDomainMap{ "key": SaasDomainArgs{...} }
 type SaasDomainMapInput interface {
 	pulumi.Input
 

@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.GetPodInstances(ctx, &tsf.GetPodInstancesArgs{
-// 			GroupId: "group-ynd95rea",
-// 			PodNameLists: []string{
-// 				"keep-terraform-6f8f977688-zvphm",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.GetPodInstances(ctx, &tsf.GetPodInstancesArgs{
+//				GroupId: "group-ynd95rea",
+//				PodNameLists: []string{
+//					"keep-terraform-6f8f977688-zvphm",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupPodInstances(ctx *pulumi.Context, args *LookupPodInstancesArgs, opts ...pulumi.InvokeOption) (*LookupPodInstancesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

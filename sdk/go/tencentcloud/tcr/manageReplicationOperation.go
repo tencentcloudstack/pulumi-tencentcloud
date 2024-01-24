@@ -160,7 +160,7 @@ func (i *ManageReplicationOperation) ToManageReplicationOperationOutputWithConte
 // ManageReplicationOperationArrayInput is an input type that accepts ManageReplicationOperationArray and ManageReplicationOperationArrayOutput values.
 // You can construct a concrete instance of `ManageReplicationOperationArrayInput` via:
 //
-//          ManageReplicationOperationArray{ ManageReplicationOperationArgs{...} }
+//	ManageReplicationOperationArray{ ManageReplicationOperationArgs{...} }
 type ManageReplicationOperationArrayInput interface {
 	pulumi.Input
 
@@ -185,7 +185,7 @@ func (i ManageReplicationOperationArray) ToManageReplicationOperationArrayOutput
 // ManageReplicationOperationMapInput is an input type that accepts ManageReplicationOperationMap and ManageReplicationOperationMapOutput values.
 // You can construct a concrete instance of `ManageReplicationOperationMapInput` via:
 //
-//          ManageReplicationOperationMap{ "key": ManageReplicationOperationArgs{...} }
+//	ManageReplicationOperationMap{ "key": ManageReplicationOperationArgs{...} }
 type ManageReplicationOperationMapInput interface {
 	pulumi.Input
 

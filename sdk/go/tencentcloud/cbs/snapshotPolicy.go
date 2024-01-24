@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cbs.NewSnapshotPolicy(ctx, "snapshotPolicy", &Cbs.SnapshotPolicyArgs{
-// 			RepeatHours: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 			},
-// 			RepeatWeekdays: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(4),
-// 			},
-// 			RetentionDays:      pulumi.Int(7),
-// 			SnapshotPolicyName: pulumi.String("mysnapshotpolicyname"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cbs.NewSnapshotPolicy(ctx, "snapshotPolicy", &Cbs.SnapshotPolicyArgs{
+//				RepeatHours: pulumi.IntArray{
+//					pulumi.Int(1),
+//				},
+//				RepeatWeekdays: pulumi.IntArray{
+//					pulumi.Int(1),
+//					pulumi.Int(4),
+//				},
+//				RetentionDays:      pulumi.Int(7),
+//				SnapshotPolicyName: pulumi.String("mysnapshotpolicyname"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -49,7 +52,9 @@ import (
 // CBS snapshot policy can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy snapshot_policy asp-jliex1tn
+//
+//	$ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy snapshot_policy asp-jliex1tn
+//
 // ```
 type SnapshotPolicy struct {
 	pulumi.CustomResourceState
@@ -177,7 +182,7 @@ func (i *SnapshotPolicy) ToSnapshotPolicyOutputWithContext(ctx context.Context) 
 // SnapshotPolicyArrayInput is an input type that accepts SnapshotPolicyArray and SnapshotPolicyArrayOutput values.
 // You can construct a concrete instance of `SnapshotPolicyArrayInput` via:
 //
-//          SnapshotPolicyArray{ SnapshotPolicyArgs{...} }
+//	SnapshotPolicyArray{ SnapshotPolicyArgs{...} }
 type SnapshotPolicyArrayInput interface {
 	pulumi.Input
 
@@ -202,7 +207,7 @@ func (i SnapshotPolicyArray) ToSnapshotPolicyArrayOutputWithContext(ctx context.
 // SnapshotPolicyMapInput is an input type that accepts SnapshotPolicyMap and SnapshotPolicyMapOutput values.
 // You can construct a concrete instance of `SnapshotPolicyMapInput` via:
 //
-//          SnapshotPolicyMap{ "key": SnapshotPolicyArgs{...} }
+//	SnapshotPolicyMap{ "key": SnapshotPolicyArgs{...} }
 type SnapshotPolicyMapInput interface {
 	pulumi.Input
 

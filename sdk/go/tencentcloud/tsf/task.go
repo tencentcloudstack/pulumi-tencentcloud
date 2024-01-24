@@ -19,39 +19,42 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewTask(ctx, "task", &Tsf.TaskArgs{
-// 			AdvanceSettings: &tsf.TaskAdvanceSettingsArgs{
-// 				SubTaskConcurrency: pulumi.Int(2),
-// 			},
-// 			ExecuteType:     pulumi.String("unicast"),
-// 			GroupId:         pulumi.String("group-y8pnmoga"),
-// 			RetryCount:      pulumi.Int(0),
-// 			RetryInterval:   pulumi.Int(0),
-// 			SuccessOperator: pulumi.String("GTE"),
-// 			SuccessRatio:    pulumi.String("100"),
-// 			TaskArgument:    pulumi.String("a=c"),
-// 			TaskContent:     pulumi.String("/test"),
-// 			TaskName:        pulumi.String("terraform-test"),
-// 			TaskRule: &tsf.TaskTaskRuleArgs{
-// 				Expression: pulumi.String("0 * 1 * * ? "),
-// 				RuleType:   pulumi.String("Cron"),
-// 			},
-// 			TaskType: pulumi.String("java"),
-// 			TimeOut:  pulumi.Int(60000),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewTask(ctx, "task", &Tsf.TaskArgs{
+//				AdvanceSettings: &tsf.TaskAdvanceSettingsArgs{
+//					SubTaskConcurrency: pulumi.Int(2),
+//				},
+//				ExecuteType:     pulumi.String("unicast"),
+//				GroupId:         pulumi.String("group-y8pnmoga"),
+//				RetryCount:      pulumi.Int(0),
+//				RetryInterval:   pulumi.Int(0),
+//				SuccessOperator: pulumi.String("GTE"),
+//				SuccessRatio:    pulumi.String("100"),
+//				TaskArgument:    pulumi.String("a=c"),
+//				TaskContent:     pulumi.String("/test"),
+//				TaskName:        pulumi.String("terraform-test"),
+//				TaskRule: &tsf.TaskTaskRuleArgs{
+//					Expression: pulumi.String("0 * 1 * * ? "),
+//					RuleType:   pulumi.String("Cron"),
+//				},
+//				TaskType: pulumi.String("java"),
+//				TimeOut:  pulumi.Int(60000),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -59,7 +62,9 @@ import (
 // tsf task can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tsf/task:Task task task-y37eqq95
+//
+//	$ pulumi import tencentcloud:Tsf/task:Task task task-y37eqq95
+//
 // ```
 type Task struct {
 	pulumi.CustomResourceState
@@ -346,7 +351,7 @@ func (i *Task) ToTaskOutputWithContext(ctx context.Context) TaskOutput {
 // TaskArrayInput is an input type that accepts TaskArray and TaskArrayOutput values.
 // You can construct a concrete instance of `TaskArrayInput` via:
 //
-//          TaskArray{ TaskArgs{...} }
+//	TaskArray{ TaskArgs{...} }
 type TaskArrayInput interface {
 	pulumi.Input
 
@@ -371,7 +376,7 @@ func (i TaskArray) ToTaskArrayOutputWithContext(ctx context.Context) TaskArrayOu
 // TaskMapInput is an input type that accepts TaskMap and TaskMapOutput values.
 // You can construct a concrete instance of `TaskMapInput` via:
 //
-//          TaskMap{ "key": TaskArgs{...} }
+//	TaskMap{ "key": TaskArgs{...} }
 type TaskMapInput interface {
 	pulumi.Input
 

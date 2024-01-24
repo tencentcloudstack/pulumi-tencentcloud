@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Organization.NewPolicySubAccountAttachment(ctx, "policySubAccountAttachment", &Organization.PolicySubAccountAttachmentArgs{
-// 			MemberUin:        pulumi.Int(100028582828),
-// 			OrgSubAccountUin: pulumi.Int(100028223737),
-// 			PolicyId:         pulumi.Int(144256499),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Organization.NewPolicySubAccountAttachment(ctx, "policySubAccountAttachment", &Organization.PolicySubAccountAttachmentArgs{
+//				MemberUin:        pulumi.Int(100028582828),
+//				OrgSubAccountUin: pulumi.Int(100028223737),
+//				PolicyId:         pulumi.Int(144256499),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // organization policy_sub_account_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Organization/policySubAccountAttachment:PolicySubAccountAttachment policy_sub_account_attachment policyId#memberUin#orgSubAccountUin
+//
+//	$ pulumi import tencentcloud:Organization/policySubAccountAttachment:PolicySubAccountAttachment policy_sub_account_attachment policyId#memberUin#orgSubAccountUin
+//
 // ```
 type PolicySubAccountAttachment struct {
 	pulumi.CustomResourceState
@@ -203,7 +208,7 @@ func (i *PolicySubAccountAttachment) ToPolicySubAccountAttachmentOutputWithConte
 // PolicySubAccountAttachmentArrayInput is an input type that accepts PolicySubAccountAttachmentArray and PolicySubAccountAttachmentArrayOutput values.
 // You can construct a concrete instance of `PolicySubAccountAttachmentArrayInput` via:
 //
-//          PolicySubAccountAttachmentArray{ PolicySubAccountAttachmentArgs{...} }
+//	PolicySubAccountAttachmentArray{ PolicySubAccountAttachmentArgs{...} }
 type PolicySubAccountAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -228,7 +233,7 @@ func (i PolicySubAccountAttachmentArray) ToPolicySubAccountAttachmentArrayOutput
 // PolicySubAccountAttachmentMapInput is an input type that accepts PolicySubAccountAttachmentMap and PolicySubAccountAttachmentMapOutput values.
 // You can construct a concrete instance of `PolicySubAccountAttachmentMapInput` via:
 //
-//          PolicySubAccountAttachmentMap{ "key": PolicySubAccountAttachmentArgs{...} }
+//	PolicySubAccountAttachmentMap{ "key": PolicySubAccountAttachmentArgs{...} }
 type PolicySubAccountAttachmentMapInput interface {
 	pulumi.Input
 

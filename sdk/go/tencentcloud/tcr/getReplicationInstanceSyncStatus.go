@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.GetReplicationInstanceSyncStatus(ctx, &tcr.GetReplicationInstanceSyncStatusArgs{
-// 			RegistryId:            local.Src_registry_id,
-// 			ReplicationRegistryId: local.Dst_registry_id,
-// 			ReplicationRegionId:   pulumi.IntRef(local.Dst_region_id),
-// 			ShowReplicationLog:    pulumi.BoolRef(false),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcr.GetReplicationInstanceSyncStatus(ctx, &tcr.GetReplicationInstanceSyncStatusArgs{
+//				RegistryId:            local.Src_registry_id,
+//				ReplicationRegistryId: local.Dst_registry_id,
+//				ReplicationRegionId:   pulumi.IntRef(local.Dst_region_id),
+//				ShowReplicationLog:    pulumi.BoolRef(false),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetReplicationInstanceSyncStatus(ctx *pulumi.Context, args *GetReplicationInstanceSyncStatusArgs, opts ...pulumi.InvokeOption) (*GetReplicationInstanceSyncStatusResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

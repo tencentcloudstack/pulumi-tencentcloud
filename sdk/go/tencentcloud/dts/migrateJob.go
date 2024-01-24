@@ -19,144 +19,147 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Cynosdb.NewCluster(ctx, "foo", &Cynosdb.ClusterArgs{
-// 			AvailableZone:             pulumi.Any(_var.Availability_zone),
-// 			VpcId:                     pulumi.Any(local.Vpc_id),
-// 			SubnetId:                  pulumi.Any(local.Subnet_id),
-// 			DbType:                    pulumi.String("MYSQL"),
-// 			DbVersion:                 pulumi.String("5.7"),
-// 			StorageLimit:              pulumi.Int(1000),
-// 			ClusterName:               pulumi.String("tf-cynosdb-mysql"),
-// 			Password:                  pulumi.String("cynos@123"),
-// 			InstanceMaintainDuration:  pulumi.Int(3600),
-// 			InstanceMaintainStartTime: pulumi.Int(10800),
-// 			InstanceMaintainWeekdays: pulumi.StringArray{
-// 				pulumi.String("Fri"),
-// 				pulumi.String("Mon"),
-// 				pulumi.String("Sat"),
-// 				pulumi.String("Sun"),
-// 				pulumi.String("Thu"),
-// 				pulumi.String("Wed"),
-// 				pulumi.String("Tue"),
-// 			},
-// 			InstanceCpuCore:    pulumi.Int(1),
-// 			InstanceMemorySize: pulumi.Int(2),
-// 			ParamItems: cynosdb.ClusterParamItemArray{
-// 				&cynosdb.ClusterParamItemArgs{
-// 					Name:         pulumi.String("character_set_server"),
-// 					CurrentValue: pulumi.String("utf8"),
-// 				},
-// 				&cynosdb.ClusterParamItemArgs{
-// 					Name:         pulumi.String("time_zone"),
-// 					CurrentValue: pulumi.String("+09:00"),
-// 				},
-// 				&cynosdb.ClusterParamItemArgs{
-// 					Name:         pulumi.String("lower_case_table_names"),
-// 					CurrentValue: pulumi.String("1"),
-// 				},
-// 			},
-// 			ForceDelete: pulumi.Bool(true),
-// 			RwGroupSgs: pulumi.StringArray{
-// 				pulumi.Any(local.Sg_id),
-// 			},
-// 			RoGroupSgs: pulumi.StringArray{
-// 				pulumi.Any(local.Sg_id),
-// 			},
-// 			PrarmTemplateId: pulumi.Any(_var.My_param_template),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		service, err := Dts.NewMigrateService(ctx, "service", &Dts.MigrateServiceArgs{
-// 			SrcDatabaseType: pulumi.String("mysql"),
-// 			DstDatabaseType: pulumi.String("cynosdbmysql"),
-// 			SrcRegion:       pulumi.String("ap-guangzhou"),
-// 			DstRegion:       pulumi.String("ap-guangzhou"),
-// 			InstanceClass:   pulumi.String("small"),
-// 			JobName:         pulumi.String("tf_test_migration_service_1"),
-// 			Tags: dts.MigrateServiceTagArray{
-// 				&dts.MigrateServiceTagArgs{
-// 					TagKey:   pulumi.String("aaa"),
-// 					TagValue: pulumi.String("bbb"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		job, err := Dts.NewMigrateJob(ctx, "job", &Dts.MigrateJobArgs{
-// 			ServiceId: service.ID(),
-// 			RunMode:   pulumi.String("immediate"),
-// 			MigrateOption: &dts.MigrateJobMigrateOptionArgs{
-// 				DatabaseTable: &dts.MigrateJobMigrateOptionDatabaseTableArgs{
-// 					ObjectMode: pulumi.String("partial"),
-// 					Databases: dts.MigrateJobMigrateOptionDatabaseTableDatabaseArray{
-// 						&dts.MigrateJobMigrateOptionDatabaseTableDatabaseArgs{
-// 							DbName:    pulumi.String("tf_ci_test"),
-// 							DbMode:    pulumi.String("partial"),
-// 							TableMode: pulumi.String("partial"),
-// 							Tables: dts.MigrateJobMigrateOptionDatabaseTableDatabaseTableArray{
-// 								&dts.MigrateJobMigrateOptionDatabaseTableDatabaseTableArgs{
-// 									TableName:     pulumi.String("test"),
-// 									NewTableName:  pulumi.String(fmt.Sprintf("%v%v%v", "test_", "%", "s")),
-// 									TableEditMode: pulumi.String("rename"),
-// 								},
-// 							},
-// 						},
-// 					},
-// 				},
-// 			},
-// 			SrcInfo: &dts.MigrateJobSrcInfoArgs{
-// 				Region:       pulumi.String("ap-guangzhou"),
-// 				AccessType:   pulumi.String("cdb"),
-// 				DatabaseType: pulumi.String("mysql"),
-// 				NodeType:     pulumi.String("simple"),
-// 				Infos: dts.MigrateJobSrcInfoInfoArray{
-// 					&dts.MigrateJobSrcInfoInfoArgs{
-// 						User:       pulumi.String("user_name"),
-// 						Password:   pulumi.String("your_pw"),
-// 						InstanceId: pulumi.String("cdb-fitq5t9h"),
-// 					},
-// 				},
-// 			},
-// 			DstInfo: &dts.MigrateJobDstInfoArgs{
-// 				Region:       pulumi.String("ap-guangzhou"),
-// 				AccessType:   pulumi.String("cdb"),
-// 				DatabaseType: pulumi.String("cynosdbmysql"),
-// 				NodeType:     pulumi.String("simple"),
-// 				Infos: dts.MigrateJobDstInfoInfoArray{
-// 					&dts.MigrateJobDstInfoInfoArgs{
-// 						User:       pulumi.String("user_name"),
-// 						Password:   pulumi.String("your_pw"),
-// 						InstanceId: foo.ID(),
-// 					},
-// 				},
-// 			},
-// 			AutoRetryTimeRangeMinutes: pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Dts.NewMigrateJobStartOperation(ctx, "start", &Dts.MigrateJobStartOperationArgs{
-// 			JobId: job.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			foo, err := Cynosdb.NewCluster(ctx, "foo", &Cynosdb.ClusterArgs{
+//				AvailableZone:             pulumi.Any(_var.Availability_zone),
+//				VpcId:                     pulumi.Any(local.Vpc_id),
+//				SubnetId:                  pulumi.Any(local.Subnet_id),
+//				DbType:                    pulumi.String("MYSQL"),
+//				DbVersion:                 pulumi.String("5.7"),
+//				StorageLimit:              pulumi.Int(1000),
+//				ClusterName:               pulumi.String("tf-cynosdb-mysql"),
+//				Password:                  pulumi.String("cynos@123"),
+//				InstanceMaintainDuration:  pulumi.Int(3600),
+//				InstanceMaintainStartTime: pulumi.Int(10800),
+//				InstanceMaintainWeekdays: pulumi.StringArray{
+//					pulumi.String("Fri"),
+//					pulumi.String("Mon"),
+//					pulumi.String("Sat"),
+//					pulumi.String("Sun"),
+//					pulumi.String("Thu"),
+//					pulumi.String("Wed"),
+//					pulumi.String("Tue"),
+//				},
+//				InstanceCpuCore:    pulumi.Int(1),
+//				InstanceMemorySize: pulumi.Int(2),
+//				ParamItems: cynosdb.ClusterParamItemArray{
+//					&cynosdb.ClusterParamItemArgs{
+//						Name:         pulumi.String("character_set_server"),
+//						CurrentValue: pulumi.String("utf8"),
+//					},
+//					&cynosdb.ClusterParamItemArgs{
+//						Name:         pulumi.String("time_zone"),
+//						CurrentValue: pulumi.String("+09:00"),
+//					},
+//					&cynosdb.ClusterParamItemArgs{
+//						Name:         pulumi.String("lower_case_table_names"),
+//						CurrentValue: pulumi.String("1"),
+//					},
+//				},
+//				ForceDelete: pulumi.Bool(true),
+//				RwGroupSgs: pulumi.StringArray{
+//					pulumi.Any(local.Sg_id),
+//				},
+//				RoGroupSgs: pulumi.StringArray{
+//					pulumi.Any(local.Sg_id),
+//				},
+//				PrarmTemplateId: pulumi.Any(_var.My_param_template),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			service, err := Dts.NewMigrateService(ctx, "service", &Dts.MigrateServiceArgs{
+//				SrcDatabaseType: pulumi.String("mysql"),
+//				DstDatabaseType: pulumi.String("cynosdbmysql"),
+//				SrcRegion:       pulumi.String("ap-guangzhou"),
+//				DstRegion:       pulumi.String("ap-guangzhou"),
+//				InstanceClass:   pulumi.String("small"),
+//				JobName:         pulumi.String("tf_test_migration_service_1"),
+//				Tags: dts.MigrateServiceTagArray{
+//					&dts.MigrateServiceTagArgs{
+//						TagKey:   pulumi.String("aaa"),
+//						TagValue: pulumi.String("bbb"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			job, err := Dts.NewMigrateJob(ctx, "job", &Dts.MigrateJobArgs{
+//				ServiceId: service.ID(),
+//				RunMode:   pulumi.String("immediate"),
+//				MigrateOption: &dts.MigrateJobMigrateOptionArgs{
+//					DatabaseTable: &dts.MigrateJobMigrateOptionDatabaseTableArgs{
+//						ObjectMode: pulumi.String("partial"),
+//						Databases: dts.MigrateJobMigrateOptionDatabaseTableDatabaseArray{
+//							&dts.MigrateJobMigrateOptionDatabaseTableDatabaseArgs{
+//								DbName:    pulumi.String("tf_ci_test"),
+//								DbMode:    pulumi.String("partial"),
+//								TableMode: pulumi.String("partial"),
+//								Tables: dts.MigrateJobMigrateOptionDatabaseTableDatabaseTableArray{
+//									&dts.MigrateJobMigrateOptionDatabaseTableDatabaseTableArgs{
+//										TableName:     pulumi.String("test"),
+//										NewTableName:  pulumi.String(fmt.Sprintf("%v%v%v", "test_", "%", "s")),
+//										TableEditMode: pulumi.String("rename"),
+//									},
+//								},
+//							},
+//						},
+//					},
+//				},
+//				SrcInfo: &dts.MigrateJobSrcInfoArgs{
+//					Region:       pulumi.String("ap-guangzhou"),
+//					AccessType:   pulumi.String("cdb"),
+//					DatabaseType: pulumi.String("mysql"),
+//					NodeType:     pulumi.String("simple"),
+//					Infos: dts.MigrateJobSrcInfoInfoArray{
+//						&dts.MigrateJobSrcInfoInfoArgs{
+//							User:       pulumi.String("user_name"),
+//							Password:   pulumi.String("your_pw"),
+//							InstanceId: pulumi.String("cdb-fitq5t9h"),
+//						},
+//					},
+//				},
+//				DstInfo: &dts.MigrateJobDstInfoArgs{
+//					Region:       pulumi.String("ap-guangzhou"),
+//					AccessType:   pulumi.String("cdb"),
+//					DatabaseType: pulumi.String("cynosdbmysql"),
+//					NodeType:     pulumi.String("simple"),
+//					Infos: dts.MigrateJobDstInfoInfoArray{
+//						&dts.MigrateJobDstInfoInfoArgs{
+//							User:       pulumi.String("user_name"),
+//							Password:   pulumi.String("your_pw"),
+//							InstanceId: foo.ID(),
+//						},
+//					},
+//				},
+//				AutoRetryTimeRangeMinutes: pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dts.NewMigrateJobStartOperation(ctx, "start", &Dts.MigrateJobStartOperationArgs{
+//				JobId: job.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -164,7 +167,9 @@ import (
 // dts migrate_job can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dts/migrateJob:MigrateJob migrate_job migrate_config_id
+//
+//	$ pulumi import tencentcloud:Dts/migrateJob:MigrateJob migrate_job migrate_config_id
+//
 // ```
 type MigrateJob struct {
 	pulumi.CustomResourceState
@@ -334,7 +339,7 @@ func (i *MigrateJob) ToMigrateJobOutputWithContext(ctx context.Context) MigrateJ
 // MigrateJobArrayInput is an input type that accepts MigrateJobArray and MigrateJobArrayOutput values.
 // You can construct a concrete instance of `MigrateJobArrayInput` via:
 //
-//          MigrateJobArray{ MigrateJobArgs{...} }
+//	MigrateJobArray{ MigrateJobArgs{...} }
 type MigrateJobArrayInput interface {
 	pulumi.Input
 
@@ -359,7 +364,7 @@ func (i MigrateJobArray) ToMigrateJobArrayOutputWithContext(ctx context.Context)
 // MigrateJobMapInput is an input type that accepts MigrateJobMap and MigrateJobMapOutput values.
 // You can construct a concrete instance of `MigrateJobMapInput` via:
 //
-//          MigrateJobMap{ "key": MigrateJobArgs{...} }
+//	MigrateJobMap{ "key": MigrateJobArgs{...} }
 type MigrateJobMapInput interface {
 	pulumi.Input
 

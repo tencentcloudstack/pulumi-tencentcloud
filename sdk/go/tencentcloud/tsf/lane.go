@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewLane(ctx, "lane", &Tsf.LaneArgs{
-// 			LaneGroupLists: tsf.LaneLaneGroupListArray{
-// 				&tsf.LaneLaneGroupListArgs{
-// 					Entrance: pulumi.Bool(true),
-// 					GroupId:  pulumi.String("group-yn7j5l8a"),
-// 				},
-// 			},
-// 			LaneName: pulumi.String("lane-name-1"),
-// 			Remark:   pulumi.String("lane desc1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewLane(ctx, "lane", &Tsf.LaneArgs{
+//				LaneGroupLists: tsf.LaneLaneGroupListArray{
+//					&tsf.LaneLaneGroupListArgs{
+//						Entrance: pulumi.Bool(true),
+//						GroupId:  pulumi.String("group-yn7j5l8a"),
+//					},
+//				},
+//				LaneName: pulumi.String("lane-name-1"),
+//				Remark:   pulumi.String("lane desc1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Lane struct {
 	pulumi.CustomResourceState
@@ -199,7 +202,7 @@ func (i *Lane) ToLaneOutputWithContext(ctx context.Context) LaneOutput {
 // LaneArrayInput is an input type that accepts LaneArray and LaneArrayOutput values.
 // You can construct a concrete instance of `LaneArrayInput` via:
 //
-//          LaneArray{ LaneArgs{...} }
+//	LaneArray{ LaneArgs{...} }
 type LaneArrayInput interface {
 	pulumi.Input
 
@@ -224,7 +227,7 @@ func (i LaneArray) ToLaneArrayOutputWithContext(ctx context.Context) LaneArrayOu
 // LaneMapInput is an input type that accepts LaneMap and LaneMapOutput values.
 // You can construct a concrete instance of `LaneMapInput` via:
 //
-//          LaneMap{ "key": LaneArgs{...} }
+//	LaneMap{ "key": LaneArgs{...} }
 type LaneMapInput interface {
 	pulumi.Input
 

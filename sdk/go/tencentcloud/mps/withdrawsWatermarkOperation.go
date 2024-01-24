@@ -20,48 +20,51 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleBucket, err := Cos.NewBucket(ctx, "exampleBucket", &Cos.BucketArgs{
-// 			Bucket: pulumi.String(fmt.Sprintf("%v%v", "tf-test-mps-wm-", local.App_id)),
-// 			Acl:    pulumi.String("public-read"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleBucketObject, err := Cos.NewBucketObject(ctx, "exampleBucketObject", &Cos.BucketObjectArgs{
-// 			Bucket: exampleBucket.Bucket,
-// 			Key:    pulumi.String("/test-file/test.mov"),
-// 			Source: pulumi.String("/Users/luoyin/Downloads/file_example_MOV_480_700kB.mov"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mps.NewWithdrawsWatermarkOperation(ctx, "operation", &Mps.WithdrawsWatermarkOperationArgs{
-// 			InputInfo: &mps.WithdrawsWatermarkOperationInputInfoArgs{
-// 				Type: pulumi.String("COS"),
-// 				CosInputInfo: &mps.WithdrawsWatermarkOperationInputInfoCosInputInfoArgs{
-// 					Bucket: exampleBucketObject.Bucket,
-// 					Region: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 					Object: exampleBucketObject.Key,
-// 				},
-// 			},
-// 			SessionContext: pulumi.String("this is a example session context"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleBucket, err := Cos.NewBucket(ctx, "exampleBucket", &Cos.BucketArgs{
+//				Bucket: pulumi.String(fmt.Sprintf("%v%v", "tf-test-mps-wm-", local.App_id)),
+//				Acl:    pulumi.String("public-read"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleBucketObject, err := Cos.NewBucketObject(ctx, "exampleBucketObject", &Cos.BucketObjectArgs{
+//				Bucket: exampleBucket.Bucket,
+//				Key:    pulumi.String("/test-file/test.mov"),
+//				Source: pulumi.String("/Users/luoyin/Downloads/file_example_MOV_480_700kB.mov"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mps.NewWithdrawsWatermarkOperation(ctx, "operation", &Mps.WithdrawsWatermarkOperationArgs{
+//				InputInfo: &mps.WithdrawsWatermarkOperationInputInfoArgs{
+//					Type: pulumi.String("COS"),
+//					CosInputInfo: &mps.WithdrawsWatermarkOperationInputInfoCosInputInfoArgs{
+//						Bucket: exampleBucketObject.Bucket,
+//						Region: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//						Object: exampleBucketObject.Key,
+//					},
+//				},
+//				SessionContext: pulumi.String("this is a example session context"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type WithdrawsWatermarkOperation struct {
 	pulumi.CustomResourceState
@@ -173,7 +176,7 @@ func (i *WithdrawsWatermarkOperation) ToWithdrawsWatermarkOperationOutputWithCon
 // WithdrawsWatermarkOperationArrayInput is an input type that accepts WithdrawsWatermarkOperationArray and WithdrawsWatermarkOperationArrayOutput values.
 // You can construct a concrete instance of `WithdrawsWatermarkOperationArrayInput` via:
 //
-//          WithdrawsWatermarkOperationArray{ WithdrawsWatermarkOperationArgs{...} }
+//	WithdrawsWatermarkOperationArray{ WithdrawsWatermarkOperationArgs{...} }
 type WithdrawsWatermarkOperationArrayInput interface {
 	pulumi.Input
 
@@ -198,7 +201,7 @@ func (i WithdrawsWatermarkOperationArray) ToWithdrawsWatermarkOperationArrayOutp
 // WithdrawsWatermarkOperationMapInput is an input type that accepts WithdrawsWatermarkOperationMap and WithdrawsWatermarkOperationMapOutput values.
 // You can construct a concrete instance of `WithdrawsWatermarkOperationMapInput` via:
 //
-//          WithdrawsWatermarkOperationMap{ "key": WithdrawsWatermarkOperationArgs{...} }
+//	WithdrawsWatermarkOperationMap{ "key": WithdrawsWatermarkOperationArgs{...} }
 type WithdrawsWatermarkOperationMapInput interface {
 	pulumi.Input
 

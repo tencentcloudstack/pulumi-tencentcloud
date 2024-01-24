@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.NewUpdatePluginsOperation(ctx, "updatePluginsOperation", &Elasticsearch.UpdatePluginsOperationArgs{
-// 			ForceRestart: pulumi.Bool(false),
-// 			ForceUpdate:  pulumi.Bool(true),
-// 			InstallPluginLists: pulumi.StringArray{
-// 				pulumi.String("analysis-pinyin"),
-// 			},
-// 			InstanceId: pulumi.String("es-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.NewUpdatePluginsOperation(ctx, "updatePluginsOperation", &Elasticsearch.UpdatePluginsOperationArgs{
+//				ForceRestart: pulumi.Bool(false),
+//				ForceUpdate:  pulumi.Bool(true),
+//				InstallPluginLists: pulumi.StringArray{
+//					pulumi.String("analysis-pinyin"),
+//				},
+//				InstanceId: pulumi.String("es-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type UpdatePluginsOperation struct {
 	pulumi.CustomResourceState
@@ -180,7 +183,7 @@ func (i *UpdatePluginsOperation) ToUpdatePluginsOperationOutputWithContext(ctx c
 // UpdatePluginsOperationArrayInput is an input type that accepts UpdatePluginsOperationArray and UpdatePluginsOperationArrayOutput values.
 // You can construct a concrete instance of `UpdatePluginsOperationArrayInput` via:
 //
-//          UpdatePluginsOperationArray{ UpdatePluginsOperationArgs{...} }
+//	UpdatePluginsOperationArray{ UpdatePluginsOperationArgs{...} }
 type UpdatePluginsOperationArrayInput interface {
 	pulumi.Input
 
@@ -205,7 +208,7 @@ func (i UpdatePluginsOperationArray) ToUpdatePluginsOperationArrayOutputWithCont
 // UpdatePluginsOperationMapInput is an input type that accepts UpdatePluginsOperationMap and UpdatePluginsOperationMapOutput values.
 // You can construct a concrete instance of `UpdatePluginsOperationMapInput` via:
 //
-//          UpdatePluginsOperationMap{ "key": UpdatePluginsOperationArgs{...} }
+//	UpdatePluginsOperationMap{ "key": UpdatePluginsOperationArgs{...} }
 type UpdatePluginsOperationMapInput interface {
 	pulumi.Input
 

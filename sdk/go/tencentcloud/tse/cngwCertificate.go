@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.NewCngwCertificate(ctx, "cngwCertificate", &Tse.CngwCertificateArgs{
-// 			BindDomains: pulumi.StringArray{
-// 				pulumi.String("example1.com"),
-// 			},
-// 			CertId:    pulumi.String("vYSQkJ3K"),
-// 			GatewayId: pulumi.String("gateway-ddbb709b"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.NewCngwCertificate(ctx, "cngwCertificate", &Tse.CngwCertificateArgs{
+//				BindDomains: pulumi.StringArray{
+//					pulumi.String("example1.com"),
+//				},
+//				CertId:    pulumi.String("vYSQkJ3K"),
+//				GatewayId: pulumi.String("gateway-ddbb709b"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +48,9 @@ import (
 // tse cngw_certificate can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tse/cngwCertificate:CngwCertificate cngw_certificate gatewayId#Id
+//
+//	$ pulumi import tencentcloud:Tse/cngwCertificate:CngwCertificate cngw_certificate gatewayId#Id
+//
 // ```
 type CngwCertificate struct {
 	pulumi.CustomResourceState
@@ -185,7 +190,7 @@ func (i *CngwCertificate) ToCngwCertificateOutputWithContext(ctx context.Context
 // CngwCertificateArrayInput is an input type that accepts CngwCertificateArray and CngwCertificateArrayOutput values.
 // You can construct a concrete instance of `CngwCertificateArrayInput` via:
 //
-//          CngwCertificateArray{ CngwCertificateArgs{...} }
+//	CngwCertificateArray{ CngwCertificateArgs{...} }
 type CngwCertificateArrayInput interface {
 	pulumi.Input
 
@@ -210,7 +215,7 @@ func (i CngwCertificateArray) ToCngwCertificateArrayOutputWithContext(ctx contex
 // CngwCertificateMapInput is an input type that accepts CngwCertificateMap and CngwCertificateMapOutput values.
 // You can construct a concrete instance of `CngwCertificateMapInput` via:
 //
-//          CngwCertificateMap{ "key": CngwCertificateArgs{...} }
+//	CngwCertificateMap{ "key": CngwCertificateArgs{...} }
 type CngwCertificateMapInput interface {
 	pulumi.Input
 

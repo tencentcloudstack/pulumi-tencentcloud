@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.GetBackupList(ctx, &mysql.GetBackupListArgs{
-// 			MaxNumber:        pulumi.IntRef(10),
-// 			MysqlId:          "terraform-test-local-database",
-// 			ResultOutputFile: pulumi.StringRef("mytestpath"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mysql.GetBackupList(ctx, &mysql.GetBackupListArgs{
+//				MaxNumber:        pulumi.IntRef(10),
+//				MysqlId:          "terraform-test-local-database",
+//				ResultOutputFile: pulumi.StringRef("mytestpath"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetBackupList(ctx *pulumi.Context, args *GetBackupListArgs, opts ...pulumi.InvokeOption) (*GetBackupListResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -18,21 +18,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Kubernetes.GetClusterLevels(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("level5", foo.Lists[0].Alias)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			foo, err := Kubernetes.GetClusterLevels(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("level5", foo.Lists[0].Alias)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetClusterLevels(ctx *pulumi.Context, args *GetClusterLevelsArgs, opts ...pulumi.InvokeOption) (*GetClusterLevelsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

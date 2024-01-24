@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.NewBackupTime(ctx, "backupTime", &Mariadb.BackupTimeArgs{
-// 			EndBackupTime:   pulumi.String("04:00"),
-// 			InstanceId:      pulumi.String("tdsql-9vqvls95"),
-// 			StartBackupTime: pulumi.String("01:00"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.NewBackupTime(ctx, "backupTime", &Mariadb.BackupTimeArgs{
+//				EndBackupTime:   pulumi.String("04:00"),
+//				InstanceId:      pulumi.String("tdsql-9vqvls95"),
+//				StartBackupTime: pulumi.String("01:00"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // mariadb backup_time can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mariadb/backupTime:BackupTime backup_time backup_time_id
+//
+//	$ pulumi import tencentcloud:Mariadb/backupTime:BackupTime backup_time backup_time_id
+//
 // ```
 type BackupTime struct {
 	pulumi.CustomResourceState
@@ -161,7 +166,7 @@ func (i *BackupTime) ToBackupTimeOutputWithContext(ctx context.Context) BackupTi
 // BackupTimeArrayInput is an input type that accepts BackupTimeArray and BackupTimeArrayOutput values.
 // You can construct a concrete instance of `BackupTimeArrayInput` via:
 //
-//          BackupTimeArray{ BackupTimeArgs{...} }
+//	BackupTimeArray{ BackupTimeArgs{...} }
 type BackupTimeArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +191,7 @@ func (i BackupTimeArray) ToBackupTimeArrayOutputWithContext(ctx context.Context)
 // BackupTimeMapInput is an input type that accepts BackupTimeMap and BackupTimeMapOutput values.
 // You can construct a concrete instance of `BackupTimeMapInput` via:
 //
-//          BackupTimeMap{ "key": BackupTimeArgs{...} }
+//	BackupTimeMap{ "key": BackupTimeArgs{...} }
 type BackupTimeMapInput interface {
 	pulumi.Input
 

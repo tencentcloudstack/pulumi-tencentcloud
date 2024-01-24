@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Bi.GetUserProject(ctx, &bi.GetUserProjectArgs{
-// 			AllPage:   pulumi.BoolRef(true),
-// 			ProjectId: pulumi.IntRef(123),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Bi.GetUserProject(ctx, &bi.GetUserProjectArgs{
+//				AllPage:   pulumi.BoolRef(true),
+//				ProjectId: pulumi.IntRef(123),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetUserProject(ctx *pulumi.Context, args *GetUserProjectArgs, opts ...pulumi.InvokeOption) (*GetUserProjectResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

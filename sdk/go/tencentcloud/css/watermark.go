@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewWatermark(ctx, "watermark", &Css.WatermarkArgs{
-// 			Height:        pulumi.Int(0),
-// 			PictureUrl:    pulumi.String("picture_url"),
-// 			WatermarkName: pulumi.String("watermark_name"),
-// 			Width:         pulumi.Int(0),
-// 			XPosition:     pulumi.Int(0),
-// 			YPosition:     pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewWatermark(ctx, "watermark", &Css.WatermarkArgs{
+//				Height:        pulumi.Int(0),
+//				PictureUrl:    pulumi.String("picture_url"),
+//				WatermarkName: pulumi.String("watermark_name"),
+//				Width:         pulumi.Int(0),
+//				XPosition:     pulumi.Int(0),
+//				YPosition:     pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +49,9 @@ import (
 // css watermark can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/watermark:Watermark watermark watermark_id
+//
+//	$ pulumi import tencentcloud:Css/watermark:Watermark watermark watermark_id
+//
 // ```
 type Watermark struct {
 	pulumi.CustomResourceState
@@ -197,7 +202,7 @@ func (i *Watermark) ToWatermarkOutputWithContext(ctx context.Context) WatermarkO
 // WatermarkArrayInput is an input type that accepts WatermarkArray and WatermarkArrayOutput values.
 // You can construct a concrete instance of `WatermarkArrayInput` via:
 //
-//          WatermarkArray{ WatermarkArgs{...} }
+//	WatermarkArray{ WatermarkArgs{...} }
 type WatermarkArrayInput interface {
 	pulumi.Input
 
@@ -222,7 +227,7 @@ func (i WatermarkArray) ToWatermarkArrayOutputWithContext(ctx context.Context) W
 // WatermarkMapInput is an input type that accepts WatermarkMap and WatermarkMapOutput values.
 // You can construct a concrete instance of `WatermarkMapInput` via:
 //
-//          WatermarkMap{ "key": WatermarkArgs{...} }
+//	WatermarkMap{ "key": WatermarkArgs{...} }
 type WatermarkMapInput interface {
 	pulumi.Input
 

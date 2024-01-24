@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.GetAttackLogHistogram(ctx, &waf.GetAttackLogHistogramArgs{
-// 			Domain:      "domain.com",
-// 			EndTime:     "2023-09-29 00:00:00",
-// 			QueryString: "method:GET",
-// 			StartTime:   "2023-09-01 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.GetAttackLogHistogram(ctx, &waf.GetAttackLogHistogramArgs{
+//				Domain:      "domain.com",
+//				EndTime:     "2023-09-29 00:00:00",
+//				QueryString: "method:GET",
+//				StartTime:   "2023-09-01 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Obtain all domain name log information
 //
@@ -45,25 +48,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.GetAttackLogHistogram(ctx, &waf.GetAttackLogHistogramArgs{
-// 			Domain:      "all",
-// 			EndTime:     "2023-09-29 00:00:00",
-// 			QueryString: "method:GET",
-// 			StartTime:   "2023-09-01 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.GetAttackLogHistogram(ctx, &waf.GetAttackLogHistogramArgs{
+//				Domain:      "all",
+//				EndTime:     "2023-09-29 00:00:00",
+//				QueryString: "method:GET",
+//				StartTime:   "2023-09-01 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetAttackLogHistogram(ctx *pulumi.Context, args *GetAttackLogHistogramArgs, opts ...pulumi.InvokeOption) (*GetAttackLogHistogramResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

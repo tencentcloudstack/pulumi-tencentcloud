@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dayu.NewEip(ctx, "test", &Dayu.EipArgs{
-// 			BindResourceId:     pulumi.String("ins-4m0jvxic"),
-// 			BindResourceRegion: pulumi.String("hk"),
-// 			BindResourceType:   pulumi.String("cvm"),
-// 			Eip:                pulumi.String("162.62.163.50"),
-// 			ResourceId:         pulumi.String("bgpip-000004xg"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dayu.NewEip(ctx, "test", &Dayu.EipArgs{
+//				BindResourceId:     pulumi.String("ins-4m0jvxic"),
+//				BindResourceRegion: pulumi.String("hk"),
+//				BindResourceType:   pulumi.String("cvm"),
+//				Eip:                pulumi.String("162.62.163.50"),
+//				ResourceId:         pulumi.String("bgpip-000004xg"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Eip struct {
 	pulumi.CustomResourceState
@@ -235,7 +238,7 @@ func (i *Eip) ToEipOutputWithContext(ctx context.Context) EipOutput {
 // EipArrayInput is an input type that accepts EipArray and EipArrayOutput values.
 // You can construct a concrete instance of `EipArrayInput` via:
 //
-//          EipArray{ EipArgs{...} }
+//	EipArray{ EipArgs{...} }
 type EipArrayInput interface {
 	pulumi.Input
 
@@ -260,7 +263,7 @@ func (i EipArray) ToEipArrayOutputWithContext(ctx context.Context) EipArrayOutpu
 // EipMapInput is an input type that accepts EipMap and EipMapOutput values.
 // You can construct a concrete instance of `EipMapInput` via:
 //
-//          EipMap{ "key": EipArgs{...} }
+//	EipMap{ "key": EipArgs{...} }
 type EipMapInput interface {
 	pulumi.Input
 

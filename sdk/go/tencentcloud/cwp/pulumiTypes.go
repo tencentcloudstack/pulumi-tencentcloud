@@ -22,7 +22,7 @@ type GetMachinesSimpleFilter struct {
 // GetMachinesSimpleFilterInput is an input type that accepts GetMachinesSimpleFilterArgs and GetMachinesSimpleFilterOutput values.
 // You can construct a concrete instance of `GetMachinesSimpleFilterInput` via:
 //
-//          GetMachinesSimpleFilterArgs{...}
+//	GetMachinesSimpleFilterArgs{...}
 type GetMachinesSimpleFilterInput interface {
 	pulumi.Input
 
@@ -54,7 +54,7 @@ func (i GetMachinesSimpleFilterArgs) ToGetMachinesSimpleFilterOutputWithContext(
 // GetMachinesSimpleFilterArrayInput is an input type that accepts GetMachinesSimpleFilterArray and GetMachinesSimpleFilterArrayOutput values.
 // You can construct a concrete instance of `GetMachinesSimpleFilterArrayInput` via:
 //
-//          GetMachinesSimpleFilterArray{ GetMachinesSimpleFilterArgs{...} }
+//	GetMachinesSimpleFilterArray{ GetMachinesSimpleFilterArgs{...} }
 type GetMachinesSimpleFilterArrayInput interface {
 	pulumi.Input
 
@@ -167,7 +167,7 @@ type GetMachinesSimpleMachine struct {
 // GetMachinesSimpleMachineInput is an input type that accepts GetMachinesSimpleMachineArgs and GetMachinesSimpleMachineOutput values.
 // You can construct a concrete instance of `GetMachinesSimpleMachineInput` via:
 //
-//          GetMachinesSimpleMachineArgs{...}
+//	GetMachinesSimpleMachineArgs{...}
 type GetMachinesSimpleMachineInput interface {
 	pulumi.Input
 
@@ -229,7 +229,7 @@ func (i GetMachinesSimpleMachineArgs) ToGetMachinesSimpleMachineOutputWithContex
 // GetMachinesSimpleMachineArrayInput is an input type that accepts GetMachinesSimpleMachineArray and GetMachinesSimpleMachineArrayOutput values.
 // You can construct a concrete instance of `GetMachinesSimpleMachineArrayInput` via:
 //
-//          GetMachinesSimpleMachineArray{ GetMachinesSimpleMachineArgs{...} }
+//	GetMachinesSimpleMachineArray{ GetMachinesSimpleMachineArgs{...} }
 type GetMachinesSimpleMachineArrayInput interface {
 	pulumi.Input
 
@@ -385,7 +385,7 @@ type GetMachinesSimpleMachineCloudTag struct {
 // GetMachinesSimpleMachineCloudTagInput is an input type that accepts GetMachinesSimpleMachineCloudTagArgs and GetMachinesSimpleMachineCloudTagOutput values.
 // You can construct a concrete instance of `GetMachinesSimpleMachineCloudTagInput` via:
 //
-//          GetMachinesSimpleMachineCloudTagArgs{...}
+//	GetMachinesSimpleMachineCloudTagArgs{...}
 type GetMachinesSimpleMachineCloudTagInput interface {
 	pulumi.Input
 
@@ -415,7 +415,7 @@ func (i GetMachinesSimpleMachineCloudTagArgs) ToGetMachinesSimpleMachineCloudTag
 // GetMachinesSimpleMachineCloudTagArrayInput is an input type that accepts GetMachinesSimpleMachineCloudTagArray and GetMachinesSimpleMachineCloudTagArrayOutput values.
 // You can construct a concrete instance of `GetMachinesSimpleMachineCloudTagArrayInput` via:
 //
-//          GetMachinesSimpleMachineCloudTagArray{ GetMachinesSimpleMachineCloudTagArgs{...} }
+//	GetMachinesSimpleMachineCloudTagArray{ GetMachinesSimpleMachineCloudTagArgs{...} }
 type GetMachinesSimpleMachineCloudTagArrayInput interface {
 	pulumi.Input
 
@@ -497,7 +497,7 @@ type GetMachinesSimpleMachineLicenseOrder struct {
 // GetMachinesSimpleMachineLicenseOrderInput is an input type that accepts GetMachinesSimpleMachineLicenseOrderArgs and GetMachinesSimpleMachineLicenseOrderOutput values.
 // You can construct a concrete instance of `GetMachinesSimpleMachineLicenseOrderInput` via:
 //
-//          GetMachinesSimpleMachineLicenseOrderArgs{...}
+//	GetMachinesSimpleMachineLicenseOrderArgs{...}
 type GetMachinesSimpleMachineLicenseOrderInput interface {
 	pulumi.Input
 
@@ -533,7 +533,7 @@ func (i GetMachinesSimpleMachineLicenseOrderArgs) ToGetMachinesSimpleMachineLice
 // GetMachinesSimpleMachineLicenseOrderArrayInput is an input type that accepts GetMachinesSimpleMachineLicenseOrderArray and GetMachinesSimpleMachineLicenseOrderArrayOutput values.
 // You can construct a concrete instance of `GetMachinesSimpleMachineLicenseOrderArrayInput` via:
 //
-//          GetMachinesSimpleMachineLicenseOrderArray{ GetMachinesSimpleMachineLicenseOrderArgs{...} }
+//	GetMachinesSimpleMachineLicenseOrderArray{ GetMachinesSimpleMachineLicenseOrderArgs{...} }
 type GetMachinesSimpleMachineLicenseOrderArrayInput interface {
 	pulumi.Input
 
@@ -630,7 +630,7 @@ type GetMachinesSimpleMachineRegionInfo struct {
 // GetMachinesSimpleMachineRegionInfoInput is an input type that accepts GetMachinesSimpleMachineRegionInfoArgs and GetMachinesSimpleMachineRegionInfoOutput values.
 // You can construct a concrete instance of `GetMachinesSimpleMachineRegionInfoInput` via:
 //
-//          GetMachinesSimpleMachineRegionInfoArgs{...}
+//	GetMachinesSimpleMachineRegionInfoArgs{...}
 type GetMachinesSimpleMachineRegionInfoInput interface {
 	pulumi.Input
 
@@ -666,7 +666,7 @@ func (i GetMachinesSimpleMachineRegionInfoArgs) ToGetMachinesSimpleMachineRegion
 // GetMachinesSimpleMachineRegionInfoArrayInput is an input type that accepts GetMachinesSimpleMachineRegionInfoArray and GetMachinesSimpleMachineRegionInfoArrayOutput values.
 // You can construct a concrete instance of `GetMachinesSimpleMachineRegionInfoArrayInput` via:
 //
-//          GetMachinesSimpleMachineRegionInfoArray{ GetMachinesSimpleMachineRegionInfoArgs{...} }
+//	GetMachinesSimpleMachineRegionInfoArray{ GetMachinesSimpleMachineRegionInfoArgs{...} }
 type GetMachinesSimpleMachineRegionInfoArrayInput interface {
 	pulumi.Input
 
@@ -759,7 +759,7 @@ type GetMachinesSimpleMachineTag struct {
 // GetMachinesSimpleMachineTagInput is an input type that accepts GetMachinesSimpleMachineTagArgs and GetMachinesSimpleMachineTagOutput values.
 // You can construct a concrete instance of `GetMachinesSimpleMachineTagInput` via:
 //
-//          GetMachinesSimpleMachineTagArgs{...}
+//	GetMachinesSimpleMachineTagArgs{...}
 type GetMachinesSimpleMachineTagInput interface {
 	pulumi.Input
 
@@ -791,7 +791,7 @@ func (i GetMachinesSimpleMachineTagArgs) ToGetMachinesSimpleMachineTagOutputWith
 // GetMachinesSimpleMachineTagArrayInput is an input type that accepts GetMachinesSimpleMachineTagArray and GetMachinesSimpleMachineTagArrayOutput values.
 // You can construct a concrete instance of `GetMachinesSimpleMachineTagArrayInput` via:
 //
-//          GetMachinesSimpleMachineTagArray{ GetMachinesSimpleMachineTagArgs{...} }
+//	GetMachinesSimpleMachineTagArray{ GetMachinesSimpleMachineTagArgs{...} }
 type GetMachinesSimpleMachineTagArrayInput interface {
 	pulumi.Input
 

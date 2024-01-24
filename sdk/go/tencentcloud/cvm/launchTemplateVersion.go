@@ -19,30 +19,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cvm.NewLaunchTemplateVersion(ctx, "foo", &Cvm.LaunchTemplateVersionArgs{
-// 			DisableApiTermination:            pulumi.Bool(false),
-// 			ImageId:                          pulumi.String("img-9qrfy1xt"),
-// 			InstanceType:                     pulumi.String("S5.MEDIUM4"),
-// 			LaunchTemplateId:                 pulumi.String("lt-r9ajalbi"),
-// 			LaunchTemplateVersionDescription: pulumi.String("version description"),
-// 			Placement: &cvm.LaunchTemplateVersionPlacementArgs{
-// 				ProjectId: pulumi.Int(0),
-// 				Zone:      pulumi.String("ap-guangzhou-6"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cvm.NewLaunchTemplateVersion(ctx, "foo", &Cvm.LaunchTemplateVersionArgs{
+//				DisableApiTermination:            pulumi.Bool(false),
+//				ImageId:                          pulumi.String("img-9qrfy1xt"),
+//				InstanceType:                     pulumi.String("S5.MEDIUM4"),
+//				LaunchTemplateId:                 pulumi.String("lt-r9ajalbi"),
+//				LaunchTemplateVersionDescription: pulumi.String("version description"),
+//				Placement: &cvm.LaunchTemplateVersionPlacementArgs{
+//					ProjectId: pulumi.Int(0),
+//					Zone:      pulumi.String("ap-guangzhou-6"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -50,7 +53,9 @@ import (
 // cvm launch_template_version can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cvm/launchTemplateVersion:LaunchTemplateVersion launch_template_version ${launch_template_id}#${launch_template_version}
+//
+//	$ pulumi import tencentcloud:Cvm/launchTemplateVersion:LaunchTemplateVersion launch_template_version ${launch_template_id}#${launch_template_version}
+//
 // ```
 type LaunchTemplateVersion struct {
 	pulumi.CustomResourceState
@@ -415,7 +420,7 @@ func (i *LaunchTemplateVersion) ToLaunchTemplateVersionOutputWithContext(ctx con
 // LaunchTemplateVersionArrayInput is an input type that accepts LaunchTemplateVersionArray and LaunchTemplateVersionArrayOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionArrayInput` via:
 //
-//          LaunchTemplateVersionArray{ LaunchTemplateVersionArgs{...} }
+//	LaunchTemplateVersionArray{ LaunchTemplateVersionArgs{...} }
 type LaunchTemplateVersionArrayInput interface {
 	pulumi.Input
 
@@ -440,7 +445,7 @@ func (i LaunchTemplateVersionArray) ToLaunchTemplateVersionArrayOutputWithContex
 // LaunchTemplateVersionMapInput is an input type that accepts LaunchTemplateVersionMap and LaunchTemplateVersionMapOutput values.
 // You can construct a concrete instance of `LaunchTemplateVersionMapInput` via:
 //
-//          LaunchTemplateVersionMap{ "key": LaunchTemplateVersionArgs{...} }
+//	LaunchTemplateVersionMap{ "key": LaunchTemplateVersionArgs{...} }
 type LaunchTemplateVersionMapInput interface {
 	pulumi.Input
 

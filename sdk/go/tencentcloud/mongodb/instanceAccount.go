@@ -19,32 +19,35 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mongodb.NewInstanceAccount(ctx, "instanceAccount", &Mongodb.InstanceAccountArgs{
-// 			AuthRoles: mongodb.InstanceAccountAuthRoleArray{
-// 				&mongodb.InstanceAccountAuthRoleArgs{
-// 					Mask:      pulumi.Int(0),
-// 					Namespace: pulumi.String("*"),
-// 				},
-// 			},
-// 			InstanceId:        pulumi.String("cmgo-lxaz2c9b"),
-// 			MongoUserPassword: pulumi.String("xxxxxxxxx"),
-// 			Password:          pulumi.String("xxxxxxxx"),
-// 			UserDesc:          pulumi.String("test account"),
-// 			UserName:          pulumi.String("test_account"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mongodb.NewInstanceAccount(ctx, "instanceAccount", &Mongodb.InstanceAccountArgs{
+//				AuthRoles: mongodb.InstanceAccountAuthRoleArray{
+//					&mongodb.InstanceAccountAuthRoleArgs{
+//						Mask:      pulumi.Int(0),
+//						Namespace: pulumi.String("*"),
+//					},
+//				},
+//				InstanceId:        pulumi.String("cmgo-lxaz2c9b"),
+//				MongoUserPassword: pulumi.String("xxxxxxxxx"),
+//				Password:          pulumi.String("xxxxxxxx"),
+//				UserDesc:          pulumi.String("test account"),
+//				UserName:          pulumi.String("test_account"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type InstanceAccount struct {
 	pulumi.CustomResourceState
@@ -195,7 +198,7 @@ func (i *InstanceAccount) ToInstanceAccountOutputWithContext(ctx context.Context
 // InstanceAccountArrayInput is an input type that accepts InstanceAccountArray and InstanceAccountArrayOutput values.
 // You can construct a concrete instance of `InstanceAccountArrayInput` via:
 //
-//          InstanceAccountArray{ InstanceAccountArgs{...} }
+//	InstanceAccountArray{ InstanceAccountArgs{...} }
 type InstanceAccountArrayInput interface {
 	pulumi.Input
 
@@ -220,7 +223,7 @@ func (i InstanceAccountArray) ToInstanceAccountArrayOutputWithContext(ctx contex
 // InstanceAccountMapInput is an input type that accepts InstanceAccountMap and InstanceAccountMapOutput values.
 // You can construct a concrete instance of `InstanceAccountMapInput` via:
 //
-//          InstanceAccountMap{ "key": InstanceAccountArgs{...} }
+//	InstanceAccountMap{ "key": InstanceAccountArgs{...} }
 type InstanceAccountMapInput interface {
 	pulumi.Input
 

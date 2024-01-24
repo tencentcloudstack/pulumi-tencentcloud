@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.GetDescribeDataEnginePythonSparkImages(ctx, &dlc.GetDescribeDataEnginePythonSparkImagesArgs{
-// 			ChildImageVersionId: "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.GetDescribeDataEnginePythonSparkImages(ctx, &dlc.GetDescribeDataEnginePythonSparkImagesArgs{
+//				ChildImageVersionId: "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDescribeDataEnginePythonSparkImages(ctx *pulumi.Context, args *GetDescribeDataEnginePythonSparkImagesArgs, opts ...pulumi.InvokeOption) (*GetDescribeDataEnginePythonSparkImagesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

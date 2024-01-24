@@ -22,88 +22,91 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleUsagePlan, err := ApiGateway.NewUsagePlan(ctx, "exampleUsagePlan", &ApiGateway.UsagePlanArgs{
-// 			UsagePlanName:       pulumi.String("tf_example"),
-// 			UsagePlanDesc:       pulumi.String("desc."),
-// 			MaxRequestNum:       pulumi.Int(100),
-// 			MaxRequestNumPreSec: pulumi.Int(10),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleService, err := ApiGateway.NewService(ctx, "exampleService", &ApiGateway.ServiceArgs{
-// 			ServiceName: pulumi.String("tf_example"),
-// 			Protocol:    pulumi.String("http&https"),
-// 			ServiceDesc: pulumi.String("desc."),
-// 			NetTypes: pulumi.StringArray{
-// 				pulumi.String("INNER"),
-// 				pulumi.String("OUTER"),
-// 			},
-// 			IpVersion: pulumi.String("IPv4"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleApi, err := ApiGateway.NewApi(ctx, "exampleApi", &ApiGateway.ApiArgs{
-// 			ServiceId:           exampleService.ID(),
-// 			ApiName:             pulumi.String("tf_example"),
-// 			ApiDesc:             pulumi.String("my hello api update"),
-// 			AuthType:            pulumi.String("SECRET"),
-// 			Protocol:            pulumi.String("HTTP"),
-// 			EnableCors:          pulumi.Bool(true),
-// 			RequestConfigPath:   pulumi.String("/user/info"),
-// 			RequestConfigMethod: pulumi.String("POST"),
-// 			RequestParameters: apigateway.ApiRequestParameterArray{
-// 				&apigateway.ApiRequestParameterArgs{
-// 					Name:         pulumi.String("email"),
-// 					Position:     pulumi.String("QUERY"),
-// 					Type:         pulumi.String("string"),
-// 					Desc:         pulumi.String("desc."),
-// 					DefaultValue: pulumi.String("test@qq.com"),
-// 					Required:     pulumi.Bool(true),
-// 				},
-// 			},
-// 			ServiceConfigType:      pulumi.String("HTTP"),
-// 			ServiceConfigTimeout:   pulumi.Int(10),
-// 			ServiceConfigUrl:       pulumi.String("http://www.tencent.com"),
-// 			ServiceConfigPath:      pulumi.String("/user"),
-// 			ServiceConfigMethod:    pulumi.String("POST"),
-// 			ResponseType:           pulumi.String("XML"),
-// 			ResponseSuccessExample: pulumi.String("<note>success</note>"),
-// 			ResponseFailExample:    pulumi.String("<note>fail</note>"),
-// 			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
-// 				&apigateway.ApiResponseErrorCodeArgs{
-// 					Code:          pulumi.Int(500),
-// 					Msg:           pulumi.String("system error"),
-// 					Desc:          pulumi.String("system error code"),
-// 					ConvertedCode: pulumi.Int(5000),
-// 					NeedConvert:   pulumi.Bool(true),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = ApiGateway.NewUsagePlanAttachment(ctx, "exampleUsagePlanAttachment", &ApiGateway.UsagePlanAttachmentArgs{
-// 			UsagePlanId: exampleUsagePlan.ID(),
-// 			ServiceId:   exampleService.ID(),
-// 			Environment: pulumi.String("release"),
-// 			BindType:    pulumi.String("API"),
-// 			ApiId:       exampleApi.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleUsagePlan, err := ApiGateway.NewUsagePlan(ctx, "exampleUsagePlan", &ApiGateway.UsagePlanArgs{
+//				UsagePlanName:       pulumi.String("tf_example"),
+//				UsagePlanDesc:       pulumi.String("desc."),
+//				MaxRequestNum:       pulumi.Int(100),
+//				MaxRequestNumPreSec: pulumi.Int(10),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleService, err := ApiGateway.NewService(ctx, "exampleService", &ApiGateway.ServiceArgs{
+//				ServiceName: pulumi.String("tf_example"),
+//				Protocol:    pulumi.String("http&https"),
+//				ServiceDesc: pulumi.String("desc."),
+//				NetTypes: pulumi.StringArray{
+//					pulumi.String("INNER"),
+//					pulumi.String("OUTER"),
+//				},
+//				IpVersion: pulumi.String("IPv4"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleApi, err := ApiGateway.NewApi(ctx, "exampleApi", &ApiGateway.ApiArgs{
+//				ServiceId:           exampleService.ID(),
+//				ApiName:             pulumi.String("tf_example"),
+//				ApiDesc:             pulumi.String("my hello api update"),
+//				AuthType:            pulumi.String("SECRET"),
+//				Protocol:            pulumi.String("HTTP"),
+//				EnableCors:          pulumi.Bool(true),
+//				RequestConfigPath:   pulumi.String("/user/info"),
+//				RequestConfigMethod: pulumi.String("POST"),
+//				RequestParameters: apigateway.ApiRequestParameterArray{
+//					&apigateway.ApiRequestParameterArgs{
+//						Name:         pulumi.String("email"),
+//						Position:     pulumi.String("QUERY"),
+//						Type:         pulumi.String("string"),
+//						Desc:         pulumi.String("desc."),
+//						DefaultValue: pulumi.String("test@qq.com"),
+//						Required:     pulumi.Bool(true),
+//					},
+//				},
+//				ServiceConfigType:      pulumi.String("HTTP"),
+//				ServiceConfigTimeout:   pulumi.Int(10),
+//				ServiceConfigUrl:       pulumi.String("http://www.tencent.com"),
+//				ServiceConfigPath:      pulumi.String("/user"),
+//				ServiceConfigMethod:    pulumi.String("POST"),
+//				ResponseType:           pulumi.String("XML"),
+//				ResponseSuccessExample: pulumi.String("<note>success</note>"),
+//				ResponseFailExample:    pulumi.String("<note>fail</note>"),
+//				ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
+//					&apigateway.ApiResponseErrorCodeArgs{
+//						Code:          pulumi.Int(500),
+//						Msg:           pulumi.String("system error"),
+//						Desc:          pulumi.String("system error code"),
+//						ConvertedCode: pulumi.Int(5000),
+//						NeedConvert:   pulumi.Bool(true),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = ApiGateway.NewUsagePlanAttachment(ctx, "exampleUsagePlanAttachment", &ApiGateway.UsagePlanAttachmentArgs{
+//				UsagePlanId: exampleUsagePlan.ID(),
+//				ServiceId:   exampleService.ID(),
+//				Environment: pulumi.String("release"),
+//				BindType:    pulumi.String("API"),
+//				ApiId:       exampleApi.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Bind the key to a usage plan
 //
@@ -111,35 +114,38 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleApiKey, err := ApiGateway.NewApiKey(ctx, "exampleApiKey", &ApiGateway.ApiKeyArgs{
-// 			SecretName: pulumi.String("tf_example"),
-// 			Status:     pulumi.String("on"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = ApiGateway.NewUsagePlanAttachment(ctx, "exampleUsagePlanAttachment", &ApiGateway.UsagePlanAttachmentArgs{
-// 			UsagePlanId: pulumi.Any(tencentcloud_api_gateway_usage_plan.Example.Id),
-// 			ServiceId:   pulumi.Any(tencentcloud_api_gateway_service.Example.Id),
-// 			Environment: pulumi.String("release"),
-// 			BindType:    pulumi.String("API"),
-// 			ApiId:       pulumi.Any(tencentcloud_api_gateway_api.Example.Id),
-// 			AccessKeyIds: pulumi.StringArray{
-// 				exampleApiKey.ID(),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleApiKey, err := ApiGateway.NewApiKey(ctx, "exampleApiKey", &ApiGateway.ApiKeyArgs{
+//				SecretName: pulumi.String("tf_example"),
+//				Status:     pulumi.String("on"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = ApiGateway.NewUsagePlanAttachment(ctx, "exampleUsagePlanAttachment", &ApiGateway.UsagePlanAttachmentArgs{
+//				UsagePlanId: pulumi.Any(tencentcloud_api_gateway_usage_plan.Example.Id),
+//				ServiceId:   pulumi.Any(tencentcloud_api_gateway_service.Example.Id),
+//				Environment: pulumi.String("release"),
+//				BindType:    pulumi.String("API"),
+//				ApiId:       pulumi.Any(tencentcloud_api_gateway_api.Example.Id),
+//				AccessKeyIds: pulumi.StringArray{
+//					exampleApiKey.ID(),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -147,7 +153,9 @@ import (
 // API gateway usage plan attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment attach_service usagePlan-pe7fbdgn#service-kuqd6xqk#release#API#api-p8gtanvy
+//
+//	$ pulumi import tencentcloud:ApiGateway/usagePlanAttachment:UsagePlanAttachment attach_service usagePlan-pe7fbdgn#service-kuqd6xqk#release#API#api-p8gtanvy
+//
 // ```
 type UsagePlanAttachment struct {
 	pulumi.CustomResourceState
@@ -295,7 +303,7 @@ func (i *UsagePlanAttachment) ToUsagePlanAttachmentOutputWithContext(ctx context
 // UsagePlanAttachmentArrayInput is an input type that accepts UsagePlanAttachmentArray and UsagePlanAttachmentArrayOutput values.
 // You can construct a concrete instance of `UsagePlanAttachmentArrayInput` via:
 //
-//          UsagePlanAttachmentArray{ UsagePlanAttachmentArgs{...} }
+//	UsagePlanAttachmentArray{ UsagePlanAttachmentArgs{...} }
 type UsagePlanAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -320,7 +328,7 @@ func (i UsagePlanAttachmentArray) ToUsagePlanAttachmentArrayOutputWithContext(ct
 // UsagePlanAttachmentMapInput is an input type that accepts UsagePlanAttachmentMap and UsagePlanAttachmentMapOutput values.
 // You can construct a concrete instance of `UsagePlanAttachmentMapInput` via:
 //
-//          UsagePlanAttachmentMap{ "key": UsagePlanAttachmentArgs{...} }
+//	UsagePlanAttachmentMap{ "key": UsagePlanAttachmentArgs{...} }
 type UsagePlanAttachmentMapInput interface {
 	pulumi.Input
 

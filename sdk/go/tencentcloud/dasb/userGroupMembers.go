@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewUserGroupMembers(ctx, "example", &Dasb.UserGroupMembersArgs{
-// 			MemberIdSets: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(2),
-// 				pulumi.Int(3),
-// 			},
-// 			UserGroupId: pulumi.Int(3),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewUserGroupMembers(ctx, "example", &Dasb.UserGroupMembersArgs{
+//				MemberIdSets: pulumi.IntArray{
+//					pulumi.Int(1),
+//					pulumi.Int(2),
+//					pulumi.Int(3),
+//				},
+//				UserGroupId: pulumi.Int(3),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +49,9 @@ import (
 // dasb user_group_members can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dasb/userGroupMembers:UserGroupMembers example 3#1,2,3
+//
+//	$ pulumi import tencentcloud:Dasb/userGroupMembers:UserGroupMembers example 3#1,2,3
+//
 // ```
 type UserGroupMembers struct {
 	pulumi.CustomResourceState
@@ -151,7 +156,7 @@ func (i *UserGroupMembers) ToUserGroupMembersOutputWithContext(ctx context.Conte
 // UserGroupMembersArrayInput is an input type that accepts UserGroupMembersArray and UserGroupMembersArrayOutput values.
 // You can construct a concrete instance of `UserGroupMembersArrayInput` via:
 //
-//          UserGroupMembersArray{ UserGroupMembersArgs{...} }
+//	UserGroupMembersArray{ UserGroupMembersArgs{...} }
 type UserGroupMembersArrayInput interface {
 	pulumi.Input
 
@@ -176,7 +181,7 @@ func (i UserGroupMembersArray) ToUserGroupMembersArrayOutputWithContext(ctx cont
 // UserGroupMembersMapInput is an input type that accepts UserGroupMembersMap and UserGroupMembersMapOutput values.
 // You can construct a concrete instance of `UserGroupMembersMapInput` via:
 //
-//          UserGroupMembersMap{ "key": UserGroupMembersArgs{...} }
+//	UserGroupMembersMap{ "key": UserGroupMembersArgs{...} }
 type UserGroupMembersMapInput interface {
 	pulumi.Input
 

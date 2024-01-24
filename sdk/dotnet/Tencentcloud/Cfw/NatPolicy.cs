@@ -71,6 +71,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public Output<string?> Enable { get; private set; } = null!;
 
         /// <summary>
+        /// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
+        [Output("paramTemplateId")]
+        public Output<string> ParamTemplateId { get; private set; } = null!;
+
+        /// <summary>
         /// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
         /// </summary>
         [Output("port")]
@@ -249,6 +255,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// </summary>
         [Input("enable")]
         public Input<string>? Enable { get; set; }
+
+        /// <summary>
+        /// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
+        [Input("paramTemplateId")]
+        public Input<string>? ParamTemplateId { get; set; }
 
         /// <summary>
         /// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.

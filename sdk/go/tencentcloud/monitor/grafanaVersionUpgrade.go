@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewGrafanaVersionUpgrade(ctx, "grafanaVersionUpgrade", &Monitor.GrafanaVersionUpgradeArgs{
-// 			Alias:      pulumi.String("v8.2.7"),
-// 			InstanceId: pulumi.String("grafana-dp2hnnfa"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.NewGrafanaVersionUpgrade(ctx, "grafanaVersionUpgrade", &Monitor.GrafanaVersionUpgradeArgs{
+//				Alias:      pulumi.String("v8.2.7"),
+//				InstanceId: pulumi.String("grafana-dp2hnnfa"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // monitor grafana_version_upgrade can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/grafanaVersionUpgrade:GrafanaVersionUpgrade grafana_version_upgrade instance_id
+//
+//	$ pulumi import tencentcloud:Monitor/grafanaVersionUpgrade:GrafanaVersionUpgrade grafana_version_upgrade instance_id
+//
 // ```
 type GrafanaVersionUpgrade struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *GrafanaVersionUpgrade) ToGrafanaVersionUpgradeOutputWithContext(ctx con
 // GrafanaVersionUpgradeArrayInput is an input type that accepts GrafanaVersionUpgradeArray and GrafanaVersionUpgradeArrayOutput values.
 // You can construct a concrete instance of `GrafanaVersionUpgradeArrayInput` via:
 //
-//          GrafanaVersionUpgradeArray{ GrafanaVersionUpgradeArgs{...} }
+//	GrafanaVersionUpgradeArray{ GrafanaVersionUpgradeArgs{...} }
 type GrafanaVersionUpgradeArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i GrafanaVersionUpgradeArray) ToGrafanaVersionUpgradeArrayOutputWithContex
 // GrafanaVersionUpgradeMapInput is an input type that accepts GrafanaVersionUpgradeMap and GrafanaVersionUpgradeMapOutput values.
 // You can construct a concrete instance of `GrafanaVersionUpgradeMapInput` via:
 //
-//          GrafanaVersionUpgradeMap{ "key": GrafanaVersionUpgradeArgs{...} }
+//	GrafanaVersionUpgradeMap{ "key": GrafanaVersionUpgradeArgs{...} }
 type GrafanaVersionUpgradeMapInput interface {
 	pulumi.Input
 

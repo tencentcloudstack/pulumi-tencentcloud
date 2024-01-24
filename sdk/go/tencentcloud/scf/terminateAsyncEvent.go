@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewTerminateAsyncEvent(ctx, "terminateAsyncEvent", &Scf.TerminateAsyncEventArgs{
-// 			FunctionName:    pulumi.String("keep-1676351130"),
-// 			GraceShutdown:   pulumi.Bool(true),
-// 			InvokeRequestId: pulumi.String("9de9405a-e33a-498d-bb59-e80b7bed1191"),
-// 			Namespace:       pulumi.String("default"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewTerminateAsyncEvent(ctx, "terminateAsyncEvent", &Scf.TerminateAsyncEventArgs{
+//				FunctionName:    pulumi.String("keep-1676351130"),
+//				GraceShutdown:   pulumi.Bool(true),
+//				InvokeRequestId: pulumi.String("9de9405a-e33a-498d-bb59-e80b7bed1191"),
+//				Namespace:       pulumi.String("default"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type TerminateAsyncEvent struct {
 	pulumi.CustomResourceState
@@ -161,7 +164,7 @@ func (i *TerminateAsyncEvent) ToTerminateAsyncEventOutputWithContext(ctx context
 // TerminateAsyncEventArrayInput is an input type that accepts TerminateAsyncEventArray and TerminateAsyncEventArrayOutput values.
 // You can construct a concrete instance of `TerminateAsyncEventArrayInput` via:
 //
-//          TerminateAsyncEventArray{ TerminateAsyncEventArgs{...} }
+//	TerminateAsyncEventArray{ TerminateAsyncEventArgs{...} }
 type TerminateAsyncEventArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +189,7 @@ func (i TerminateAsyncEventArray) ToTerminateAsyncEventArrayOutputWithContext(ct
 // TerminateAsyncEventMapInput is an input type that accepts TerminateAsyncEventMap and TerminateAsyncEventMapOutput values.
 // You can construct a concrete instance of `TerminateAsyncEventMapInput` via:
 //
-//          TerminateAsyncEventMap{ "key": TerminateAsyncEventArgs{...} }
+//	TerminateAsyncEventMap{ "key": TerminateAsyncEventArgs{...} }
 type TerminateAsyncEventMapInput interface {
 	pulumi.Input
 

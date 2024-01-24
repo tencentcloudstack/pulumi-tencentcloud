@@ -18,32 +18,35 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cvm.GetChcHosts(ctx, &cvm.GetChcHostsArgs{
-// 			ChcIds: []string{
-// 				"chc-xxxxxx",
-// 			},
-// 			Filters: []cvm.GetChcHostsFilter{
-// 				cvm.GetChcHostsFilter{
-// 					Name: "zone",
-// 					Values: []string{
-// 						"ap-guangzhou-7",
-// 					},
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cvm.GetChcHosts(ctx, &cvm.GetChcHostsArgs{
+//				ChcIds: []string{
+//					"chc-xxxxxx",
+//				},
+//				Filters: []cvm.GetChcHostsFilter{
+//					cvm.GetChcHostsFilter{
+//						Name: "zone",
+//						Values: []string{
+//							"ap-guangzhou-7",
+//						},
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetChcHosts(ctx *pulumi.Context, args *GetChcHostsArgs, opts ...pulumi.InvokeOption) (*GetChcHostsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

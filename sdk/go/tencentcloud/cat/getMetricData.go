@@ -18,28 +18,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cat.GetMetricData(ctx, &cat.GetMetricDataArgs{
-// 			AnalyzeTaskType: "AnalyzeTaskType_Network",
-// 			Field:           "avg(\"ping_time\")",
-// 			Filters: []string{
-// 				"\"host\" = 'www.qq.com'",
-// 				"time >= now()-1h",
-// 			},
-// 			MetricType: "gauge",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cat.GetMetricData(ctx, &cat.GetMetricDataArgs{
+//				AnalyzeTaskType: "AnalyzeTaskType_Network",
+//				Field:           "avg(\"ping_time\")",
+//				Filters: []string{
+//					"\"host\" = 'www.qq.com'",
+//					"time >= now()-1h",
+//				},
+//				MetricType: "gauge",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetMetricData(ctx *pulumi.Context, args *GetMetricDataArgs, opts ...pulumi.InvokeOption) (*GetMetricDataResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

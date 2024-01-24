@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eip.NewPublicAddressAdjust(ctx, "publicAddressAdjust", &Eip.PublicAddressAdjustArgs{
-// 			AddressId:  pulumi.String("eip-erft45fu"),
-// 			InstanceId: pulumi.String("ins-cr2rfq78"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Eip.NewPublicAddressAdjust(ctx, "publicAddressAdjust", &Eip.PublicAddressAdjustArgs{
+//				AddressId:  pulumi.String("eip-erft45fu"),
+//				InstanceId: pulumi.String("ins-cr2rfq78"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type PublicAddressAdjust struct {
 	pulumi.CustomResourceState
@@ -132,7 +135,7 @@ func (i *PublicAddressAdjust) ToPublicAddressAdjustOutputWithContext(ctx context
 // PublicAddressAdjustArrayInput is an input type that accepts PublicAddressAdjustArray and PublicAddressAdjustArrayOutput values.
 // You can construct a concrete instance of `PublicAddressAdjustArrayInput` via:
 //
-//          PublicAddressAdjustArray{ PublicAddressAdjustArgs{...} }
+//	PublicAddressAdjustArray{ PublicAddressAdjustArgs{...} }
 type PublicAddressAdjustArrayInput interface {
 	pulumi.Input
 
@@ -157,7 +160,7 @@ func (i PublicAddressAdjustArray) ToPublicAddressAdjustArrayOutputWithContext(ct
 // PublicAddressAdjustMapInput is an input type that accepts PublicAddressAdjustMap and PublicAddressAdjustMapOutput values.
 // You can construct a concrete instance of `PublicAddressAdjustMapInput` via:
 //
-//          PublicAddressAdjustMap{ "key": PublicAddressAdjustArgs{...} }
+//	PublicAddressAdjustMap{ "key": PublicAddressAdjustArgs{...} }
 type PublicAddressAdjustMapInput interface {
 	pulumi.Input
 

@@ -19,39 +19,42 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ses.NewBatchSendEmail(ctx, "batchSendEmail", &Ses.BatchSendEmailArgs{
-// 			AdLocation: pulumi.Int(0),
-// 			CycleParam: &ses.BatchSendEmailCycleParamArgs{
-// 				BeginTime:    pulumi.String("2023-09-07 15:10:00"),
-// 				IntervalTime: pulumi.Int(1),
-// 			},
-// 			FromEmailAddress: pulumi.String("aaa@iac-tf.cloud"),
-// 			ReceiverId:       pulumi.Int(1063742),
-// 			ReplyToAddresses: pulumi.String("reply@mail.qcloud.com"),
-// 			Subject:          pulumi.String("terraform test"),
-// 			TaskType:         pulumi.Int(1),
-// 			Template: &ses.BatchSendEmailTemplateArgs{
-// 				TemplateData: pulumi.String("{\"name\":\"xxx\",\"age\":\"xx\"}"),
-// 				TemplateId:   pulumi.Int(99629),
-// 			},
-// 			TimedParam: &ses.BatchSendEmailTimedParamArgs{
-// 				BeginTime: pulumi.String("2023-09-07 15:20:00"),
-// 			},
-// 			Unsubscribe: pulumi.String("0"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ses.NewBatchSendEmail(ctx, "batchSendEmail", &Ses.BatchSendEmailArgs{
+//				AdLocation: pulumi.Int(0),
+//				CycleParam: &ses.BatchSendEmailCycleParamArgs{
+//					BeginTime:    pulumi.String("2023-09-07 15:10:00"),
+//					IntervalTime: pulumi.Int(1),
+//				},
+//				FromEmailAddress: pulumi.String("aaa@iac-tf.cloud"),
+//				ReceiverId:       pulumi.Int(1063742),
+//				ReplyToAddresses: pulumi.String("reply@mail.qcloud.com"),
+//				Subject:          pulumi.String("terraform test"),
+//				TaskType:         pulumi.Int(1),
+//				Template: &ses.BatchSendEmailTemplateArgs{
+//					TemplateData: pulumi.String("{\"name\":\"xxx\",\"age\":\"xx\"}"),
+//					TemplateId:   pulumi.Int(99629),
+//				},
+//				TimedParam: &ses.BatchSendEmailTimedParamArgs{
+//					BeginTime: pulumi.String("2023-09-07 15:20:00"),
+//				},
+//				Unsubscribe: pulumi.String("0"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type BatchSendEmail struct {
 	pulumi.CustomResourceState
@@ -252,7 +255,7 @@ func (i *BatchSendEmail) ToBatchSendEmailOutputWithContext(ctx context.Context) 
 // BatchSendEmailArrayInput is an input type that accepts BatchSendEmailArray and BatchSendEmailArrayOutput values.
 // You can construct a concrete instance of `BatchSendEmailArrayInput` via:
 //
-//          BatchSendEmailArray{ BatchSendEmailArgs{...} }
+//	BatchSendEmailArray{ BatchSendEmailArgs{...} }
 type BatchSendEmailArrayInput interface {
 	pulumi.Input
 
@@ -277,7 +280,7 @@ func (i BatchSendEmailArray) ToBatchSendEmailArrayOutputWithContext(ctx context.
 // BatchSendEmailMapInput is an input type that accepts BatchSendEmailMap and BatchSendEmailMapOutput values.
 // You can construct a concrete instance of `BatchSendEmailMapInput` via:
 //
-//          BatchSendEmailMap{ "key": BatchSendEmailArgs{...} }
+//	BatchSendEmailMap{ "key": BatchSendEmailArgs{...} }
 type BatchSendEmailMapInput interface {
 	pulumi.Input
 

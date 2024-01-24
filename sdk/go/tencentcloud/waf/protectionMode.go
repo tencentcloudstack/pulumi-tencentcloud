@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewProtectionMode(ctx, "example", &Waf.ProtectionModeArgs{
-// 			Domain:  pulumi.String("keep.qcloudwaf.com"),
-// 			Edition: pulumi.String("sparta-waf"),
-// 			Mode:    pulumi.Int(10),
-// 			Type:    pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewProtectionMode(ctx, "example", &Waf.ProtectionModeArgs{
+//				Domain:  pulumi.String("keep.qcloudwaf.com"),
+//				Edition: pulumi.String("sparta-waf"),
+//				Mode:    pulumi.Int(10),
+//				Type:    pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ProtectionMode struct {
 	pulumi.CustomResourceState
@@ -161,7 +164,7 @@ func (i *ProtectionMode) ToProtectionModeOutputWithContext(ctx context.Context) 
 // ProtectionModeArrayInput is an input type that accepts ProtectionModeArray and ProtectionModeArrayOutput values.
 // You can construct a concrete instance of `ProtectionModeArrayInput` via:
 //
-//          ProtectionModeArray{ ProtectionModeArgs{...} }
+//	ProtectionModeArray{ ProtectionModeArgs{...} }
 type ProtectionModeArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +189,7 @@ func (i ProtectionModeArray) ToProtectionModeArrayOutputWithContext(ctx context.
 // ProtectionModeMapInput is an input type that accepts ProtectionModeMap and ProtectionModeMapOutput values.
 // You can construct a concrete instance of `ProtectionModeMapInput` via:
 //
-//          ProtectionModeMap{ "key": ProtectionModeArgs{...} }
+//	ProtectionModeMap{ "key": ProtectionModeArgs{...} }
 type ProtectionModeMapInput interface {
 	pulumi.Input
 

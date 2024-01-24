@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpn.GetDefaultHealthCheckIp(ctx, &vpn.GetDefaultHealthCheckIpArgs{
-// 			VpnGatewayId: "vpngw-gt8bianl",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpn.GetDefaultHealthCheckIp(ctx, &vpn.GetDefaultHealthCheckIpArgs{
+//				VpnGatewayId: "vpngw-gt8bianl",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDefaultHealthCheckIp(ctx *pulumi.Context, args *GetDefaultHealthCheckIpArgs, opts ...pulumi.InvokeOption) (*GetDefaultHealthCheckIpResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

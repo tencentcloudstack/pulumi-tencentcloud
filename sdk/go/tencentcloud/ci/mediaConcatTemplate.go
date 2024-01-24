@@ -19,70 +19,73 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewMediaConcatTemplate(ctx, "mediaConcatTemplate", &Ci.MediaConcatTemplateArgs{
-// 			Bucket: pulumi.String("terraform-ci-xxxxxx"),
-// 			ConcatTemplate: &ci.MediaConcatTemplateConcatTemplateArgs{
-// 				Audio: &ci.MediaConcatTemplateConcatTemplateAudioArgs{
-// 					Bitrate:    pulumi.String(""),
-// 					Channels:   pulumi.String(""),
-// 					Codec:      pulumi.String("mp3"),
-// 					Samplerate: pulumi.String(""),
-// 				},
-// 				AudioMixes: ci.MediaConcatTemplateConcatTemplateAudioMixArray{
-// 					&ci.MediaConcatTemplateConcatTemplateAudioMixArgs{
-// 						AudioSource: pulumi.String(fmt.Sprintf("%v%v%v", "https://terraform-ci-xxxxxx.cos.ap-guangzhou.myqcloud.com/mp3", "%", "2Fnizhan-test.mp3")),
-// 						EffectConfig: &ci.MediaConcatTemplateConcatTemplateAudioMixEffectConfigArgs{
-// 							BgmFadeTime:       pulumi.String("1.7"),
-// 							EnableBgmFade:     pulumi.String("true"),
-// 							EnableEndFadeout:  pulumi.String("false"),
-// 							EnableStartFadein: pulumi.String("true"),
-// 							EndFadeoutTime:    pulumi.String("0.1"),
-// 							StartFadeinTime:   pulumi.String("3"),
-// 						},
-// 						MixMode: pulumi.String("Once"),
-// 						Replace: pulumi.String("true"),
-// 					},
-// 				},
-// 				ConcatFragments: ci.MediaConcatTemplateConcatTemplateConcatFragmentArray{
-// 					&ci.MediaConcatTemplateConcatTemplateConcatFragmentArgs{
-// 						Mode: pulumi.String("Start"),
-// 						Url:  pulumi.String(fmt.Sprintf("%v%v%v", "https://terraform-ci-xxxxxx.cos.ap-guangzhou.myqcloud.com/mp4", "%", "2Fmp4-test.mp4")),
-// 					},
-// 					&ci.MediaConcatTemplateConcatTemplateConcatFragmentArgs{
-// 						Mode: pulumi.String("End"),
-// 						Url:  pulumi.String(fmt.Sprintf("%v%v%v", "https://terraform-ci-xxxxxx.cos.ap-guangzhou.myqcloud.com/mp4", "%", "2Fmp4-test.mp4")),
-// 					},
-// 				},
-// 				Container: &ci.MediaConcatTemplateConcatTemplateContainerArgs{
-// 					Format: pulumi.String("mp4"),
-// 				},
-// 				Video: &ci.MediaConcatTemplateConcatTemplateVideoArgs{
-// 					Bitrate: pulumi.String("1000"),
-// 					Codec:   pulumi.String("H.264"),
-// 					Crf:     pulumi.String(""),
-// 					Fps:     pulumi.String("25"),
-// 					Height:  pulumi.String(""),
-// 					Remove:  pulumi.String(""),
-// 					Rotate:  pulumi.String(""),
-// 					Width:   pulumi.String("1280"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewMediaConcatTemplate(ctx, "mediaConcatTemplate", &Ci.MediaConcatTemplateArgs{
+//				Bucket: pulumi.String("terraform-ci-xxxxxx"),
+//				ConcatTemplate: &ci.MediaConcatTemplateConcatTemplateArgs{
+//					Audio: &ci.MediaConcatTemplateConcatTemplateAudioArgs{
+//						Bitrate:    pulumi.String(""),
+//						Channels:   pulumi.String(""),
+//						Codec:      pulumi.String("mp3"),
+//						Samplerate: pulumi.String(""),
+//					},
+//					AudioMixes: ci.MediaConcatTemplateConcatTemplateAudioMixArray{
+//						&ci.MediaConcatTemplateConcatTemplateAudioMixArgs{
+//							AudioSource: pulumi.String(fmt.Sprintf("%v%v%v", "https://terraform-ci-xxxxxx.cos.ap-guangzhou.myqcloud.com/mp3", "%", "2Fnizhan-test.mp3")),
+//							EffectConfig: &ci.MediaConcatTemplateConcatTemplateAudioMixEffectConfigArgs{
+//								BgmFadeTime:       pulumi.String("1.7"),
+//								EnableBgmFade:     pulumi.String("true"),
+//								EnableEndFadeout:  pulumi.String("false"),
+//								EnableStartFadein: pulumi.String("true"),
+//								EndFadeoutTime:    pulumi.String("0.1"),
+//								StartFadeinTime:   pulumi.String("3"),
+//							},
+//							MixMode: pulumi.String("Once"),
+//							Replace: pulumi.String("true"),
+//						},
+//					},
+//					ConcatFragments: ci.MediaConcatTemplateConcatTemplateConcatFragmentArray{
+//						&ci.MediaConcatTemplateConcatTemplateConcatFragmentArgs{
+//							Mode: pulumi.String("Start"),
+//							Url:  pulumi.String(fmt.Sprintf("%v%v%v", "https://terraform-ci-xxxxxx.cos.ap-guangzhou.myqcloud.com/mp4", "%", "2Fmp4-test.mp4")),
+//						},
+//						&ci.MediaConcatTemplateConcatTemplateConcatFragmentArgs{
+//							Mode: pulumi.String("End"),
+//							Url:  pulumi.String(fmt.Sprintf("%v%v%v", "https://terraform-ci-xxxxxx.cos.ap-guangzhou.myqcloud.com/mp4", "%", "2Fmp4-test.mp4")),
+//						},
+//					},
+//					Container: &ci.MediaConcatTemplateConcatTemplateContainerArgs{
+//						Format: pulumi.String("mp4"),
+//					},
+//					Video: &ci.MediaConcatTemplateConcatTemplateVideoArgs{
+//						Bitrate: pulumi.String("1000"),
+//						Codec:   pulumi.String("H.264"),
+//						Crf:     pulumi.String(""),
+//						Fps:     pulumi.String("25"),
+//						Height:  pulumi.String(""),
+//						Remove:  pulumi.String(""),
+//						Rotate:  pulumi.String(""),
+//						Width:   pulumi.String("1280"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -90,7 +93,9 @@ import (
 // ci media_concat_template can be imported using the bucket#templateId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/mediaConcatTemplate:MediaConcatTemplate media_concat_template id=terraform-ci-xxxxxx#t1cb115dfa1fcc414284f83b7c69bcedcf
+//
+//	$ pulumi import tencentcloud:Ci/mediaConcatTemplate:MediaConcatTemplate media_concat_template id=terraform-ci-xxxxxx#t1cb115dfa1fcc414284f83b7c69bcedcf
+//
 // ```
 type MediaConcatTemplate struct {
 	pulumi.CustomResourceState
@@ -205,7 +210,7 @@ func (i *MediaConcatTemplate) ToMediaConcatTemplateOutputWithContext(ctx context
 // MediaConcatTemplateArrayInput is an input type that accepts MediaConcatTemplateArray and MediaConcatTemplateArrayOutput values.
 // You can construct a concrete instance of `MediaConcatTemplateArrayInput` via:
 //
-//          MediaConcatTemplateArray{ MediaConcatTemplateArgs{...} }
+//	MediaConcatTemplateArray{ MediaConcatTemplateArgs{...} }
 type MediaConcatTemplateArrayInput interface {
 	pulumi.Input
 
@@ -230,7 +235,7 @@ func (i MediaConcatTemplateArray) ToMediaConcatTemplateArrayOutputWithContext(ct
 // MediaConcatTemplateMapInput is an input type that accepts MediaConcatTemplateMap and MediaConcatTemplateMapOutput values.
 // You can construct a concrete instance of `MediaConcatTemplateMapInput` via:
 //
-//          MediaConcatTemplateMap{ "key": MediaConcatTemplateArgs{...} }
+//	MediaConcatTemplateMap{ "key": MediaConcatTemplateArgs{...} }
 type MediaConcatTemplateMapInput interface {
 	pulumi.Input
 

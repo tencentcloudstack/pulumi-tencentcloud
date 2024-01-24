@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.NewRestartInstance(ctx, "restartInstance", &Mariadb.RestartInstanceArgs{
-// 			InstanceId: pulumi.String("tdsql-9vqvls95"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.NewRestartInstance(ctx, "restartInstance", &Mariadb.RestartInstanceArgs{
+//				InstanceId: pulumi.String("tdsql-9vqvls95"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type RestartInstance struct {
 	pulumi.CustomResourceState
@@ -135,7 +138,7 @@ func (i *RestartInstance) ToRestartInstanceOutputWithContext(ctx context.Context
 // RestartInstanceArrayInput is an input type that accepts RestartInstanceArray and RestartInstanceArrayOutput values.
 // You can construct a concrete instance of `RestartInstanceArrayInput` via:
 //
-//          RestartInstanceArray{ RestartInstanceArgs{...} }
+//	RestartInstanceArray{ RestartInstanceArgs{...} }
 type RestartInstanceArrayInput interface {
 	pulumi.Input
 
@@ -160,7 +163,7 @@ func (i RestartInstanceArray) ToRestartInstanceArrayOutputWithContext(ctx contex
 // RestartInstanceMapInput is an input type that accepts RestartInstanceMap and RestartInstanceMapOutput values.
 // You can construct a concrete instance of `RestartInstanceMapInput` via:
 //
-//          RestartInstanceMap{ "key": RestartInstanceArgs{...} }
+//	RestartInstanceMap{ "key": RestartInstanceArgs{...} }
 type RestartInstanceMapInput interface {
 	pulumi.Input
 

@@ -114,7 +114,7 @@ func (i *InstanceSsl) ToInstanceSslOutputWithContext(ctx context.Context) Instan
 // InstanceSslArrayInput is an input type that accepts InstanceSslArray and InstanceSslArrayOutput values.
 // You can construct a concrete instance of `InstanceSslArrayInput` via:
 //
-//          InstanceSslArray{ InstanceSslArgs{...} }
+//	InstanceSslArray{ InstanceSslArgs{...} }
 type InstanceSslArrayInput interface {
 	pulumi.Input
 
@@ -139,7 +139,7 @@ func (i InstanceSslArray) ToInstanceSslArrayOutputWithContext(ctx context.Contex
 // InstanceSslMapInput is an input type that accepts InstanceSslMap and InstanceSslMapOutput values.
 // You can construct a concrete instance of `InstanceSslMapInput` via:
 //
-//          InstanceSslMap{ "key": InstanceSslArgs{...} }
+//	InstanceSslMap{ "key": InstanceSslArgs{...} }
 type InstanceSslMapInput interface {
 	pulumi.Input
 

@@ -20,35 +20,38 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdmq.NewProfessionalCluster(ctx, "professionalCluster", &Tdmq.ProfessionalClusterArgs{
-// 			AutoRenewFlag: pulumi.Int(1),
-// 			ClusterName:   pulumi.String("single_zone_cluster"),
-// 			ProductName:   pulumi.String("PULSAR.P1.MINI2"),
-// 			StorageSize:   pulumi.Int(600),
-// 			Tags: pulumi.AnyMap{
-// 				"createby": pulumi.Any("terrafrom"),
-// 			},
-// 			Vpc: &tdmq.ProfessionalClusterVpcArgs{
-// 				SubnetId: pulumi.String("subnet-xxxx"),
-// 				VpcId:    pulumi.String("vpc-xxxx"),
-// 			},
-// 			ZoneIds: pulumi.IntArray{
-// 				pulumi.Int(100004),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tdmq.NewProfessionalCluster(ctx, "professionalCluster", &Tdmq.ProfessionalClusterArgs{
+//				AutoRenewFlag: pulumi.Int(1),
+//				ClusterName:   pulumi.String("single_zone_cluster"),
+//				ProductName:   pulumi.String("PULSAR.P1.MINI2"),
+//				StorageSize:   pulumi.Int(600),
+//				Tags: pulumi.AnyMap{
+//					"createby": pulumi.Any("terrafrom"),
+//				},
+//				Vpc: &tdmq.ProfessionalClusterVpcArgs{
+//					SubnetId: pulumi.String("subnet-xxxx"),
+//					VpcId:    pulumi.String("vpc-xxxx"),
+//				},
+//				ZoneIds: pulumi.IntArray{
+//					pulumi.Int(100004),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Multi-zone Professional Cluster
 //
@@ -56,38 +59,41 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdmq.NewProfessionalCluster(ctx, "professionalCluster", &Tdmq.ProfessionalClusterArgs{
-// 			AutoRenewFlag: pulumi.Int(1),
-// 			ClusterName:   pulumi.String("multi_zone_cluster"),
-// 			ProductName:   pulumi.String("PULSAR.P1.MINI2"),
-// 			StorageSize:   pulumi.Int(200),
-// 			Tags: pulumi.AnyMap{
-// 				"key":  pulumi.Any("value1"),
-// 				"key2": pulumi.Any("value2"),
-// 			},
-// 			Vpc: &tdmq.ProfessionalClusterVpcArgs{
-// 				SubnetId: pulumi.String("subnet-xxxx"),
-// 				VpcId:    pulumi.String("vpc-xxxx"),
-// 			},
-// 			ZoneIds: pulumi.IntArray{
-// 				pulumi.Int(330001),
-// 				pulumi.Int(330002),
-// 				pulumi.Int(330003),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tdmq.NewProfessionalCluster(ctx, "professionalCluster", &Tdmq.ProfessionalClusterArgs{
+//				AutoRenewFlag: pulumi.Int(1),
+//				ClusterName:   pulumi.String("multi_zone_cluster"),
+//				ProductName:   pulumi.String("PULSAR.P1.MINI2"),
+//				StorageSize:   pulumi.Int(200),
+//				Tags: pulumi.AnyMap{
+//					"key":  pulumi.Any("value1"),
+//					"key2": pulumi.Any("value2"),
+//				},
+//				Vpc: &tdmq.ProfessionalClusterVpcArgs{
+//					SubnetId: pulumi.String("subnet-xxxx"),
+//					VpcId:    pulumi.String("vpc-xxxx"),
+//				},
+//				ZoneIds: pulumi.IntArray{
+//					pulumi.Int(330001),
+//					pulumi.Int(330002),
+//					pulumi.Int(330003),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -95,7 +101,9 @@ import (
 // tdmq professional_cluster can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster professional_cluster professional_cluster_id
+//
+//	$ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster professional_cluster professional_cluster_id
+//
 // ```
 type ProfessionalCluster struct {
 	pulumi.CustomResourceState
@@ -279,7 +287,7 @@ func (i *ProfessionalCluster) ToProfessionalClusterOutputWithContext(ctx context
 // ProfessionalClusterArrayInput is an input type that accepts ProfessionalClusterArray and ProfessionalClusterArrayOutput values.
 // You can construct a concrete instance of `ProfessionalClusterArrayInput` via:
 //
-//          ProfessionalClusterArray{ ProfessionalClusterArgs{...} }
+//	ProfessionalClusterArray{ ProfessionalClusterArgs{...} }
 type ProfessionalClusterArrayInput interface {
 	pulumi.Input
 
@@ -304,7 +312,7 @@ func (i ProfessionalClusterArray) ToProfessionalClusterArrayOutputWithContext(ct
 // ProfessionalClusterMapInput is an input type that accepts ProfessionalClusterMap and ProfessionalClusterMapOutput values.
 // You can construct a concrete instance of `ProfessionalClusterMapInput` via:
 //
-//          ProfessionalClusterMap{ "key": ProfessionalClusterArgs{...} }
+//	ProfessionalClusterMap{ "key": ProfessionalClusterArgs{...} }
 type ProfessionalClusterMapInput interface {
 	pulumi.Input
 

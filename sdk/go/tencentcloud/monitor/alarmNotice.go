@@ -19,71 +19,74 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewAlarmNotice(ctx, "example", &Monitor.AlarmNoticeArgs{
-// 			NoticeLanguage: pulumi.String("zh-CN"),
-// 			NoticeType:     pulumi.String("ALL"),
-// 			UrlNotices: monitor.AlarmNoticeUrlNoticeArray{
-// 				&monitor.AlarmNoticeUrlNoticeArgs{
-// 					EndTime:   pulumi.Int(86399),
-// 					IsValid:   pulumi.Int(0),
-// 					StartTime: pulumi.Int(0),
-// 					Url:       pulumi.String("https://www.mytest.com/validate"),
-// 					Weekdays: pulumi.IntArray{
-// 						pulumi.Int(1),
-// 						pulumi.Int(2),
-// 						pulumi.Int(3),
-// 						pulumi.Int(4),
-// 						pulumi.Int(5),
-// 						pulumi.Int(6),
-// 						pulumi.Int(7),
-// 					},
-// 				},
-// 			},
-// 			UserNotices: monitor.AlarmNoticeUserNoticeArray{
-// 				&monitor.AlarmNoticeUserNoticeArgs{
-// 					EndTime:               pulumi.Int(86399),
-// 					GroupIds:              pulumi.IntArray{},
-// 					NeedPhoneArriveNotice: pulumi.Int(1),
-// 					NoticeWays: pulumi.StringArray{
-// 						pulumi.String("EMAIL"),
-// 						pulumi.String("SMS"),
-// 					},
-// 					PhoneCallType:       pulumi.String("CIRCLE"),
-// 					PhoneCircleInterval: pulumi.Int(180),
-// 					PhoneCircleTimes:    pulumi.Int(2),
-// 					PhoneInnerInterval:  pulumi.Int(180),
-// 					PhoneOrders:         pulumi.IntArray{},
-// 					ReceiverType:        pulumi.String("USER"),
-// 					StartTime:           pulumi.Int(0),
-// 					UserIds: pulumi.IntArray{
-// 						pulumi.Int(11082189),
-// 						pulumi.Int(11082190),
-// 					},
-// 					Weekdays: pulumi.IntArray{
-// 						pulumi.Int(1),
-// 						pulumi.Int(2),
-// 						pulumi.Int(3),
-// 						pulumi.Int(4),
-// 						pulumi.Int(5),
-// 						pulumi.Int(6),
-// 						pulumi.Int(7),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.NewAlarmNotice(ctx, "example", &Monitor.AlarmNoticeArgs{
+//				NoticeLanguage: pulumi.String("zh-CN"),
+//				NoticeType:     pulumi.String("ALL"),
+//				UrlNotices: monitor.AlarmNoticeUrlNoticeArray{
+//					&monitor.AlarmNoticeUrlNoticeArgs{
+//						EndTime:   pulumi.Int(86399),
+//						IsValid:   pulumi.Int(0),
+//						StartTime: pulumi.Int(0),
+//						Url:       pulumi.String("https://www.mytest.com/validate"),
+//						Weekdays: pulumi.IntArray{
+//							pulumi.Int(1),
+//							pulumi.Int(2),
+//							pulumi.Int(3),
+//							pulumi.Int(4),
+//							pulumi.Int(5),
+//							pulumi.Int(6),
+//							pulumi.Int(7),
+//						},
+//					},
+//				},
+//				UserNotices: monitor.AlarmNoticeUserNoticeArray{
+//					&monitor.AlarmNoticeUserNoticeArgs{
+//						EndTime:               pulumi.Int(86399),
+//						GroupIds:              pulumi.IntArray{},
+//						NeedPhoneArriveNotice: pulumi.Int(1),
+//						NoticeWays: pulumi.StringArray{
+//							pulumi.String("EMAIL"),
+//							pulumi.String("SMS"),
+//						},
+//						PhoneCallType:       pulumi.String("CIRCLE"),
+//						PhoneCircleInterval: pulumi.Int(180),
+//						PhoneCircleTimes:    pulumi.Int(2),
+//						PhoneInnerInterval:  pulumi.Int(180),
+//						PhoneOrders:         pulumi.IntArray{},
+//						ReceiverType:        pulumi.String("USER"),
+//						StartTime:           pulumi.Int(0),
+//						UserIds: pulumi.IntArray{
+//							pulumi.Int(11082189),
+//							pulumi.Int(11082190),
+//						},
+//						Weekdays: pulumi.IntArray{
+//							pulumi.Int(1),
+//							pulumi.Int(2),
+//							pulumi.Int(3),
+//							pulumi.Int(4),
+//							pulumi.Int(5),
+//							pulumi.Int(6),
+//							pulumi.Int(7),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -91,7 +94,9 @@ import (
 // Monitor Alarm Notice can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/alarmNotice:AlarmNotice import-test noticeId
+//
+//	$ pulumi import tencentcloud:Monitor/alarmNotice:AlarmNotice import-test noticeId
+//
 // ```
 type AlarmNotice struct {
 	pulumi.CustomResourceState
@@ -266,7 +271,7 @@ func (i *AlarmNotice) ToAlarmNoticeOutputWithContext(ctx context.Context) AlarmN
 // AlarmNoticeArrayInput is an input type that accepts AlarmNoticeArray and AlarmNoticeArrayOutput values.
 // You can construct a concrete instance of `AlarmNoticeArrayInput` via:
 //
-//          AlarmNoticeArray{ AlarmNoticeArgs{...} }
+//	AlarmNoticeArray{ AlarmNoticeArgs{...} }
 type AlarmNoticeArrayInput interface {
 	pulumi.Input
 
@@ -291,7 +296,7 @@ func (i AlarmNoticeArray) ToAlarmNoticeArrayOutputWithContext(ctx context.Contex
 // AlarmNoticeMapInput is an input type that accepts AlarmNoticeMap and AlarmNoticeMapOutput values.
 // You can construct a concrete instance of `AlarmNoticeMapInput` via:
 //
-//          AlarmNoticeMap{ "key": AlarmNoticeArgs{...} }
+//	AlarmNoticeMap{ "key": AlarmNoticeArgs{...} }
 type AlarmNoticeMapInput interface {
 	pulumi.Input
 

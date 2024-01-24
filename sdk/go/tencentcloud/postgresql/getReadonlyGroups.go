@@ -18,42 +18,45 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		group, err := Postgresql.NewReadonlyGroup(ctx, "group", &Postgresql.ReadonlyGroupArgs{
-// 			MasterDbInstanceId:       pulumi.String("postgres-gzg9jb2n"),
-// 			ProjectId:                pulumi.Int(0),
-// 			VpcId:                    pulumi.String("vpc-86v957zb"),
-// 			SubnetId:                 pulumi.String("subnet-enm92y0m"),
-// 			ReplayLagEliminate:       pulumi.Int(1),
-// 			ReplayLatencyEliminate:   pulumi.Int(1),
-// 			MaxReplayLag:             pulumi.Int(100),
-// 			MaxReplayLatency:         pulumi.Int(512),
-// 			MinDelayEliminateReserve: pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Postgresql.GetReadonlyGroupsOutput(ctx, postgresql.GetReadonlyGroupsOutputArgs{
-// 			Filters: postgresql.GetReadonlyGroupsFilterArray{
-// 				&postgresql.GetReadonlyGroupsFilterArgs{
-// 					Name: pulumi.String("db-master-instance-id"),
-// 					Values: pulumi.StringArray{
-// 						group.MasterDbInstanceId,
-// 					},
-// 				},
-// 			},
-// 			OrderBy:     pulumi.String("CreateTime"),
-// 			OrderByType: pulumi.String("asc"),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			group, err := Postgresql.NewReadonlyGroup(ctx, "group", &Postgresql.ReadonlyGroupArgs{
+//				MasterDbInstanceId:       pulumi.String("postgres-gzg9jb2n"),
+//				ProjectId:                pulumi.Int(0),
+//				VpcId:                    pulumi.String("vpc-86v957zb"),
+//				SubnetId:                 pulumi.String("subnet-enm92y0m"),
+//				ReplayLagEliminate:       pulumi.Int(1),
+//				ReplayLatencyEliminate:   pulumi.Int(1),
+//				MaxReplayLag:             pulumi.Int(100),
+//				MaxReplayLatency:         pulumi.Int(512),
+//				MinDelayEliminateReserve: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Postgresql.GetReadonlyGroupsOutput(ctx, postgresql.GetReadonlyGroupsOutputArgs{
+//				Filters: postgresql.GetReadonlyGroupsFilterArray{
+//					&postgresql.GetReadonlyGroupsFilterArgs{
+//						Name: pulumi.String("db-master-instance-id"),
+//						Values: pulumi.StringArray{
+//							group.MasterDbInstanceId,
+//						},
+//					},
+//				},
+//				OrderBy:     pulumi.String("CreateTime"),
+//				OrderByType: pulumi.String("asc"),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetReadonlyGroups(ctx *pulumi.Context, args *GetReadonlyGroupsArgs, opts ...pulumi.InvokeOption) (*GetReadonlyGroupsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -19,27 +19,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tat.NewInvocationInvokeAttachment(ctx, "invocationInvokeAttachment", &Tat.InvocationInvokeAttachmentArgs{
-// 			CommandId:          pulumi.String("cmd-rxbs7f5z"),
-// 			InstanceId:         pulumi.String("ins-881b1c8w"),
-// 			OutputCosBucketUrl: pulumi.String("https://BucketName-123454321.cos.ap-beijing.myqcloud.com"),
-// 			OutputCosKeyPrefix: pulumi.String("log"),
-// 			Timeout:            pulumi.Int(100),
-// 			Username:           pulumi.String("root"),
-// 			WorkingDirectory:   pulumi.String("/root"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tat.NewInvocationInvokeAttachment(ctx, "invocationInvokeAttachment", &Tat.InvocationInvokeAttachmentArgs{
+//				CommandId:          pulumi.String("cmd-rxbs7f5z"),
+//				InstanceId:         pulumi.String("ins-881b1c8w"),
+//				OutputCosBucketUrl: pulumi.String("https://BucketName-123454321.cos.ap-beijing.myqcloud.com"),
+//				OutputCosKeyPrefix: pulumi.String("log"),
+//				Timeout:            pulumi.Int(100),
+//				Username:           pulumi.String("root"),
+//				WorkingDirectory:   pulumi.String("/root"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -47,7 +50,9 @@ import (
 // tat invocation can be imported using the invocation_id#instance_id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tat/invocationInvokeAttachment:InvocationInvokeAttachment invocation_invoke_attachment inv-mhs6ca8z#ins-881b1c8w
+//
+//	$ pulumi import tencentcloud:Tat/invocationInvokeAttachment:InvocationInvokeAttachment invocation_invoke_attachment inv-mhs6ca8z#ins-881b1c8w
+//
 // ```
 type InvocationInvokeAttachment struct {
 	pulumi.CustomResourceState
@@ -212,7 +217,7 @@ func (i *InvocationInvokeAttachment) ToInvocationInvokeAttachmentOutputWithConte
 // InvocationInvokeAttachmentArrayInput is an input type that accepts InvocationInvokeAttachmentArray and InvocationInvokeAttachmentArrayOutput values.
 // You can construct a concrete instance of `InvocationInvokeAttachmentArrayInput` via:
 //
-//          InvocationInvokeAttachmentArray{ InvocationInvokeAttachmentArgs{...} }
+//	InvocationInvokeAttachmentArray{ InvocationInvokeAttachmentArgs{...} }
 type InvocationInvokeAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -237,7 +242,7 @@ func (i InvocationInvokeAttachmentArray) ToInvocationInvokeAttachmentArrayOutput
 // InvocationInvokeAttachmentMapInput is an input type that accepts InvocationInvokeAttachmentMap and InvocationInvokeAttachmentMapOutput values.
 // You can construct a concrete instance of `InvocationInvokeAttachmentMapInput` via:
 //
-//          InvocationInvokeAttachmentMap{ "key": InvocationInvokeAttachmentArgs{...} }
+//	InvocationInvokeAttachmentMap{ "key": InvocationInvokeAttachmentArgs{...} }
 type InvocationInvokeAttachmentMapInput interface {
 	pulumi.Input
 

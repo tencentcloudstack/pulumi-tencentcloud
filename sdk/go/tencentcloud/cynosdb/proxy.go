@@ -19,39 +19,42 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewProxy(ctx, "proxy", &Cynosdb.ProxyArgs{
-// 			ClusterId:             pulumi.String("cynosdbmysql-bws8h88b"),
-// 			ConnectionPoolTimeOut: pulumi.Int(30),
-// 			ConnectionPoolType:    pulumi.String("SessionConnectionPool"),
-// 			Cpu:                   pulumi.Int(2),
-// 			Description:           pulumi.String("desc sample"),
-// 			Mem:                   pulumi.Int(4000),
-// 			OpenConnectionPool:    pulumi.String("yes"),
-// 			ProxyZones: cynosdb.ProxyProxyZoneArray{
-// 				&cynosdb.ProxyProxyZoneArgs{
-// 					ProxyNodeCount: pulumi.Int(2),
-// 					ProxyNodeZone:  pulumi.String("ap-guangzhou-7"),
-// 				},
-// 			},
-// 			SecurityGroupIds: pulumi.StringArray{
-// 				pulumi.String("sg-baxfiao5"),
-// 			},
-// 			UniqueSubnetId: pulumi.String("subnet-jdi5xn22"),
-// 			UniqueVpcId:    pulumi.String("vpc-k1t8ickr"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewProxy(ctx, "proxy", &Cynosdb.ProxyArgs{
+//				ClusterId:             pulumi.String("cynosdbmysql-bws8h88b"),
+//				ConnectionPoolTimeOut: pulumi.Int(30),
+//				ConnectionPoolType:    pulumi.String("SessionConnectionPool"),
+//				Cpu:                   pulumi.Int(2),
+//				Description:           pulumi.String("desc sample"),
+//				Mem:                   pulumi.Int(4000),
+//				OpenConnectionPool:    pulumi.String("yes"),
+//				ProxyZones: cynosdb.ProxyProxyZoneArray{
+//					&cynosdb.ProxyProxyZoneArgs{
+//						ProxyNodeCount: pulumi.Int(2),
+//						ProxyNodeZone:  pulumi.String("ap-guangzhou-7"),
+//					},
+//				},
+//				SecurityGroupIds: pulumi.StringArray{
+//					pulumi.String("sg-baxfiao5"),
+//				},
+//				UniqueSubnetId: pulumi.String("subnet-jdi5xn22"),
+//				UniqueVpcId:    pulumi.String("vpc-k1t8ickr"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Proxy struct {
 	pulumi.CustomResourceState
@@ -271,7 +274,7 @@ func (i *Proxy) ToProxyOutputWithContext(ctx context.Context) ProxyOutput {
 // ProxyArrayInput is an input type that accepts ProxyArray and ProxyArrayOutput values.
 // You can construct a concrete instance of `ProxyArrayInput` via:
 //
-//          ProxyArray{ ProxyArgs{...} }
+//	ProxyArray{ ProxyArgs{...} }
 type ProxyArrayInput interface {
 	pulumi.Input
 
@@ -296,7 +299,7 @@ func (i ProxyArray) ToProxyArrayOutputWithContext(ctx context.Context) ProxyArra
 // ProxyMapInput is an input type that accepts ProxyMap and ProxyMapOutput values.
 // You can construct a concrete instance of `ProxyMapInput` via:
 //
-//          ProxyMap{ "key": ProxyArgs{...} }
+//	ProxyMap{ "key": ProxyArgs{...} }
 type ProxyMapInput interface {
 	pulumi.Input
 

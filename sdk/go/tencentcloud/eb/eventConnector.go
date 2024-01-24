@@ -22,87 +22,90 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooInfo, err := User.GetInfo(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooEventBus, err := Eb.NewEventBus(ctx, "fooEventBus", &Eb.EventBusArgs{
-// 			EventBusName: pulumi.String("tf-event_bus"),
-// 			Description:  pulumi.String("event bus desc"),
-// 			EnableStore:  pulumi.Bool(false),
-// 			SaveDays:     pulumi.Int(1),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		kafkaInstance, err := Ckafka.NewInstance(ctx, "kafkaInstance", &Ckafka.InstanceArgs{
-// 			InstanceName:  pulumi.String("ckafka-instance-maz-tf-test"),
-// 			ZoneId:        pulumi.Int(100003),
-// 			MultiZoneFlag: pulumi.Bool(true),
-// 			ZoneIds: pulumi.IntArray{
-// 				pulumi.Int(100003),
-// 				pulumi.Int(100006),
-// 			},
-// 			Period:           pulumi.Int(1),
-// 			VpcId:            pulumi.Any(_var.Vpc_id),
-// 			SubnetId:         pulumi.Any(_var.Subnet_id),
-// 			MsgRetentionTime: pulumi.Int(1300),
-// 			RenewFlag:        pulumi.Int(0),
-// 			KafkaVersion:     pulumi.String("1.1.1"),
-// 			DiskSize:         pulumi.Int(500),
-// 			DiskType:         pulumi.String("CLOUD_BASIC"),
-// 			Config: &ckafka.InstanceConfigArgs{
-// 				AutoCreateTopicEnable:    pulumi.Bool(true),
-// 				DefaultNumPartitions:     pulumi.Int(3),
-// 				DefaultReplicationFactor: pulumi.Int(3),
-// 			},
-// 			DynamicRetentionConfig: &ckafka.InstanceDynamicRetentionConfigArgs{
-// 				Enable: pulumi.Int(1),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ckafkaId := kafkaInstance.ID()
-// 		uin := fooInfo.OwnerUin
-// 		_, err = Eb.NewEventConnector(ctx, "eventConnector", &Eb.EventConnectorArgs{
-// 			EventBusId:     fooEventBus.ID(),
-// 			ConnectionName: pulumi.String("tf-event-connector"),
-// 			Description:    pulumi.String("event connector desc1"),
-// 			Enable:         pulumi.Bool(true),
-// 			Type:           pulumi.String("ckafka"),
-// 			ConnectionDescription: &eb.EventConnectorConnectionDescriptionArgs{
-// 				ResourceDescription: ckafkaId.ApplyT(func(ckafkaId string) (string, error) {
-// 					return fmt.Sprintf("%v%v%v%v%v%v", "qcs::ckafka:ap-guangzhou:uin/", uin, ":ckafkaId/uin/", uin, "/", ckafkaId), nil
-// 				}).(pulumi.StringOutput),
-// 				CkafkaParams: &eb.EventConnectorConnectionDescriptionCkafkaParamsArgs{
-// 					Offset:    pulumi.String("latest"),
-// 					TopicName: pulumi.String("dasdasd"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooInfo, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			fooEventBus, err := Eb.NewEventBus(ctx, "fooEventBus", &Eb.EventBusArgs{
+//				EventBusName: pulumi.String("tf-event_bus"),
+//				Description:  pulumi.String("event bus desc"),
+//				EnableStore:  pulumi.Bool(false),
+//				SaveDays:     pulumi.Int(1),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			kafkaInstance, err := Ckafka.NewInstance(ctx, "kafkaInstance", &Ckafka.InstanceArgs{
+//				InstanceName:  pulumi.String("ckafka-instance-maz-tf-test"),
+//				ZoneId:        pulumi.Int(100003),
+//				MultiZoneFlag: pulumi.Bool(true),
+//				ZoneIds: pulumi.IntArray{
+//					pulumi.Int(100003),
+//					pulumi.Int(100006),
+//				},
+//				Period:           pulumi.Int(1),
+//				VpcId:            pulumi.Any(_var.Vpc_id),
+//				SubnetId:         pulumi.Any(_var.Subnet_id),
+//				MsgRetentionTime: pulumi.Int(1300),
+//				RenewFlag:        pulumi.Int(0),
+//				KafkaVersion:     pulumi.String("1.1.1"),
+//				DiskSize:         pulumi.Int(500),
+//				DiskType:         pulumi.String("CLOUD_BASIC"),
+//				Config: &ckafka.InstanceConfigArgs{
+//					AutoCreateTopicEnable:    pulumi.Bool(true),
+//					DefaultNumPartitions:     pulumi.Int(3),
+//					DefaultReplicationFactor: pulumi.Int(3),
+//				},
+//				DynamicRetentionConfig: &ckafka.InstanceDynamicRetentionConfigArgs{
+//					Enable: pulumi.Int(1),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ckafkaId := kafkaInstance.ID()
+//			uin := fooInfo.OwnerUin
+//			_, err = Eb.NewEventConnector(ctx, "eventConnector", &Eb.EventConnectorArgs{
+//				EventBusId:     fooEventBus.ID(),
+//				ConnectionName: pulumi.String("tf-event-connector"),
+//				Description:    pulumi.String("event connector desc1"),
+//				Enable:         pulumi.Bool(true),
+//				Type:           pulumi.String("ckafka"),
+//				ConnectionDescription: &eb.EventConnectorConnectionDescriptionArgs{
+//					ResourceDescription: ckafkaId.ApplyT(func(ckafkaId string) (string, error) {
+//						return fmt.Sprintf("%v%v%v%v%v%v", "qcs::ckafka:ap-guangzhou:uin/", uin, ":ckafkaId/uin/", uin, "/", ckafkaId), nil
+//					}).(pulumi.StringOutput),
+//					CkafkaParams: &eb.EventConnectorConnectionDescriptionCkafkaParamsArgs{
+//						Offset:    pulumi.String("latest"),
+//						TopicName: pulumi.String("dasdasd"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Create apiGateway event connector
 //
@@ -110,71 +113,74 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooInfo, err := User.GetInfo(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooEventBus, err := Eb.NewEventBus(ctx, "fooEventBus", &Eb.EventBusArgs{
-// 			EventBusName: pulumi.String("tf-event_bus"),
-// 			Description:  pulumi.String("event bus desc"),
-// 			EnableStore:  pulumi.Bool(false),
-// 			SaveDays:     pulumi.Int(1),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
-// 			ServiceName: pulumi.String("tf-eb-service"),
-// 			Protocol:    pulumi.String("http&https"),
-// 			ServiceDesc: pulumi.String("your nice service"),
-// 			NetTypes: pulumi.StringArray{
-// 				pulumi.String("INNER"),
-// 				pulumi.String("OUTER"),
-// 			},
-// 			IpVersion: pulumi.String("IPv4"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		uin := fooInfo.OwnerUin
-// 		serviceId := service.ID()
-// 		_, err = Eb.NewEventConnector(ctx, "eventConnector", &Eb.EventConnectorArgs{
-// 			EventBusId:     fooEventBus.ID(),
-// 			ConnectionName: pulumi.String("tf-event-connector"),
-// 			Description:    pulumi.String("event connector desc1"),
-// 			Enable:         pulumi.Bool(false),
-// 			Type:           pulumi.String("apigw"),
-// 			ConnectionDescription: &eb.EventConnectorConnectionDescriptionArgs{
-// 				ResourceDescription: serviceId.ApplyT(func(serviceId string) (string, error) {
-// 					return fmt.Sprintf("%v%v%v%v", "qcs::apigw:ap-guangzhou:uin/", uin, ":serviceid/", serviceId), nil
-// 				}).(pulumi.StringOutput),
-// 				ApiGwParams: &eb.EventConnectorConnectionDescriptionApiGwParamsArgs{
-// 					Protocol: pulumi.String("HTTP"),
-// 					Method:   pulumi.String("GET"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooInfo, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			fooEventBus, err := Eb.NewEventBus(ctx, "fooEventBus", &Eb.EventBusArgs{
+//				EventBusName: pulumi.String("tf-event_bus"),
+//				Description:  pulumi.String("event bus desc"),
+//				EnableStore:  pulumi.Bool(false),
+//				SaveDays:     pulumi.Int(1),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
+//				ServiceName: pulumi.String("tf-eb-service"),
+//				Protocol:    pulumi.String("http&https"),
+//				ServiceDesc: pulumi.String("your nice service"),
+//				NetTypes: pulumi.StringArray{
+//					pulumi.String("INNER"),
+//					pulumi.String("OUTER"),
+//				},
+//				IpVersion: pulumi.String("IPv4"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			uin := fooInfo.OwnerUin
+//			serviceId := service.ID()
+//			_, err = Eb.NewEventConnector(ctx, "eventConnector", &Eb.EventConnectorArgs{
+//				EventBusId:     fooEventBus.ID(),
+//				ConnectionName: pulumi.String("tf-event-connector"),
+//				Description:    pulumi.String("event connector desc1"),
+//				Enable:         pulumi.Bool(false),
+//				Type:           pulumi.String("apigw"),
+//				ConnectionDescription: &eb.EventConnectorConnectionDescriptionArgs{
+//					ResourceDescription: serviceId.ApplyT(func(serviceId string) (string, error) {
+//						return fmt.Sprintf("%v%v%v%v", "qcs::apigw:ap-guangzhou:uin/", uin, ":serviceid/", serviceId), nil
+//					}).(pulumi.StringOutput),
+//					ApiGwParams: &eb.EventConnectorConnectionDescriptionApiGwParamsArgs{
+//						Protocol: pulumi.String("HTTP"),
+//						Method:   pulumi.String("GET"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -182,7 +188,9 @@ import (
 // eb event_connector can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Eb/eventConnector:EventConnector event_connector eventBusId#connectionId
+//
+//	$ pulumi import tencentcloud:Eb/eventConnector:EventConnector event_connector eventBusId#connectionId
+//
 // ```
 type EventConnector struct {
 	pulumi.CustomResourceState
@@ -330,7 +338,7 @@ func (i *EventConnector) ToEventConnectorOutputWithContext(ctx context.Context) 
 // EventConnectorArrayInput is an input type that accepts EventConnectorArray and EventConnectorArrayOutput values.
 // You can construct a concrete instance of `EventConnectorArrayInput` via:
 //
-//          EventConnectorArray{ EventConnectorArgs{...} }
+//	EventConnectorArray{ EventConnectorArgs{...} }
 type EventConnectorArrayInput interface {
 	pulumi.Input
 
@@ -355,7 +363,7 @@ func (i EventConnectorArray) ToEventConnectorArrayOutputWithContext(ctx context.
 // EventConnectorMapInput is an input type that accepts EventConnectorMap and EventConnectorMapOutput values.
 // You can construct a concrete instance of `EventConnectorMapInput` via:
 //
-//          EventConnectorMap{ "key": EventConnectorArgs{...} }
+//	EventConnectorMap{ "key": EventConnectorArgs{...} }
 type EventConnectorMapInput interface {
 	pulumi.Input
 

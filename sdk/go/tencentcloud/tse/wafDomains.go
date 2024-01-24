@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.NewWafDomains(ctx, "wafDomains", &Tse.WafDomainsArgs{
-// 			Domain:    pulumi.String("tse.exmaple.com"),
-// 			GatewayId: pulumi.String("gateway-ed63e957"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.NewWafDomains(ctx, "wafDomains", &Tse.WafDomainsArgs{
+//				Domain:    pulumi.String("tse.exmaple.com"),
+//				GatewayId: pulumi.String("gateway-ed63e957"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // tse waf_domains can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tse/wafDomains:WafDomains waf_domains waf_domains_id
+//
+//	$ pulumi import tencentcloud:Tse/wafDomains:WafDomains waf_domains waf_domains_id
+//
 // ```
 type WafDomains struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *WafDomains) ToWafDomainsOutputWithContext(ctx context.Context) WafDomai
 // WafDomainsArrayInput is an input type that accepts WafDomainsArray and WafDomainsArrayOutput values.
 // You can construct a concrete instance of `WafDomainsArrayInput` via:
 //
-//          WafDomainsArray{ WafDomainsArgs{...} }
+//	WafDomainsArray{ WafDomainsArgs{...} }
 type WafDomainsArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i WafDomainsArray) ToWafDomainsArrayOutputWithContext(ctx context.Context)
 // WafDomainsMapInput is an input type that accepts WafDomainsMap and WafDomainsMapOutput values.
 // You can construct a concrete instance of `WafDomainsMapInput` via:
 //
-//          WafDomainsMap{ "key": WafDomainsArgs{...} }
+//	WafDomainsMap{ "key": WafDomainsArgs{...} }
 type WafDomainsMapInput interface {
 	pulumi.Input
 

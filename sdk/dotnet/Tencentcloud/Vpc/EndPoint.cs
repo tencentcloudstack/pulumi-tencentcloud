@@ -28,6 +28,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     ///             EndPointName = "terraform-test",
     ///             EndPointServiceId = "vpcsvc-69y13tdb",
     ///             EndPointVip = "10.0.2.1",
+    ///             SecurityGroupsIds = 
+    ///             {
+    ///                 "sg-ghvp9djf",
+    ///                 "sg-if748odn",
+    ///                 "sg-3k7vtgf7",
+    ///             },
     ///             SubnetId = "subnet-ljyn7h30",
     ///             VpcId = "vpc-391sv4w3",
     ///         });
@@ -76,6 +82,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// </summary>
         [Output("endPointVip")]
         public Output<string?> EndPointVip { get; private set; } = null!;
+
+        /// <summary>
+        /// Ordered security groups associated with the endpoint.
+        /// </summary>
+        [Output("securityGroupsIds")]
+        public Output<ImmutableArray<string>> SecurityGroupsIds { get; private set; } = null!;
 
         /// <summary>
         /// state of end point.
@@ -160,6 +172,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         [Input("endPointVip")]
         public Input<string>? EndPointVip { get; set; }
 
+        [Input("securityGroupsIds")]
+        private InputList<string>? _securityGroupsIds;
+
+        /// <summary>
+        /// Ordered security groups associated with the endpoint.
+        /// </summary>
+        public InputList<string> SecurityGroupsIds
+        {
+            get => _securityGroupsIds ?? (_securityGroupsIds = new InputList<string>());
+            set => _securityGroupsIds = value;
+        }
+
         /// <summary>
         /// ID of subnet instance.
         /// </summary>
@@ -208,6 +232,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// </summary>
         [Input("endPointVip")]
         public Input<string>? EndPointVip { get; set; }
+
+        [Input("securityGroupsIds")]
+        private InputList<string>? _securityGroupsIds;
+
+        /// <summary>
+        /// Ordered security groups associated with the endpoint.
+        /// </summary>
+        public InputList<string> SecurityGroupsIds
+        {
+            get => _securityGroupsIds ?? (_securityGroupsIds = new InputList<string>());
+            set => _securityGroupsIds = value;
+        }
 
         /// <summary>
         /// state of end point.

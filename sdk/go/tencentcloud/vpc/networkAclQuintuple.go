@@ -114,7 +114,7 @@ func (i *NetworkAclQuintuple) ToNetworkAclQuintupleOutputWithContext(ctx context
 // NetworkAclQuintupleArrayInput is an input type that accepts NetworkAclQuintupleArray and NetworkAclQuintupleArrayOutput values.
 // You can construct a concrete instance of `NetworkAclQuintupleArrayInput` via:
 //
-//          NetworkAclQuintupleArray{ NetworkAclQuintupleArgs{...} }
+//	NetworkAclQuintupleArray{ NetworkAclQuintupleArgs{...} }
 type NetworkAclQuintupleArrayInput interface {
 	pulumi.Input
 
@@ -139,7 +139,7 @@ func (i NetworkAclQuintupleArray) ToNetworkAclQuintupleArrayOutputWithContext(ct
 // NetworkAclQuintupleMapInput is an input type that accepts NetworkAclQuintupleMap and NetworkAclQuintupleMapOutput values.
 // You can construct a concrete instance of `NetworkAclQuintupleMapInput` via:
 //
-//          NetworkAclQuintupleMap{ "key": NetworkAclQuintupleArgs{...} }
+//	NetworkAclQuintupleMap{ "key": NetworkAclQuintupleArgs{...} }
 type NetworkAclQuintupleMapInput interface {
 	pulumi.Input
 

@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Rum.GetScores(ctx, &rum.GetScoresArgs{
-// 			EndTime:   "2023082215",
-// 			IsDemo:    pulumi.IntRef(1),
-// 			ProjectId: pulumi.IntRef(1),
-// 			StartTime: "2023082214",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Rum.GetScores(ctx, &rum.GetScoresArgs{
+//				EndTime:   "2023082215",
+//				IsDemo:    pulumi.IntRef(1),
+//				ProjectId: pulumi.IntRef(1),
+//				StartTime: "2023082214",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetScores(ctx *pulumi.Context, args *GetScoresArgs, opts ...pulumi.InvokeOption) (*GetScoresResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

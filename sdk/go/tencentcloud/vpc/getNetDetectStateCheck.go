@@ -18,28 +18,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.GetNetDetectStateCheck(ctx, &vpc.GetNetDetectStateCheckArgs{
-// 			DetectDestinationIps: []string{
-// 				"10.0.0.3",
-// 				"10.0.0.2",
-// 			},
-// 			NetDetectId:        pulumi.StringRef("netd-12345678"),
-// 			NextHopDestination: "10.0.0.4",
-// 			NextHopType:        "NORMAL_CVM",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.GetNetDetectStateCheck(ctx, &vpc.GetNetDetectStateCheckArgs{
+//				DetectDestinationIps: []string{
+//					"10.0.0.3",
+//					"10.0.0.2",
+//				},
+//				NetDetectId:        pulumi.StringRef("netd-12345678"),
+//				NextHopDestination: "10.0.0.4",
+//				NextHopType:        "NORMAL_CVM",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetNetDetectStateCheck(ctx *pulumi.Context, args *GetNetDetectStateCheckArgs, opts ...pulumi.InvokeOption) (*GetNetDetectStateCheckResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -19,43 +19,46 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewDeployVmGroup(ctx, "deployVmGroup", &Tsf.DeployVmGroupArgs{
-// 			DeployDesc:        pulumi.String("deploy test"),
-// 			EnableHealthCheck: pulumi.Bool(true),
-// 			ForceStart:        pulumi.Bool(false),
-// 			GroupId:           pulumi.String("group-vzd97zpy"),
-// 			HealthCheckSettings: &tsf.DeployVmGroupHealthCheckSettingsArgs{
-// 				ReadinessProbe: &tsf.DeployVmGroupHealthCheckSettingsReadinessProbeArgs{
-// 					ActionType:          pulumi.String("HTTP"),
-// 					FailureThreshold:    pulumi.Int(3),
-// 					InitialDelaySeconds: pulumi.Int(10),
-// 					Path:                pulumi.String("/"),
-// 					PeriodSeconds:       pulumi.Int(10),
-// 					Port:                pulumi.Int(80),
-// 					Scheme:              pulumi.String("HTTP"),
-// 					SuccessThreshold:    pulumi.Int(1),
-// 					TimeoutSeconds:      pulumi.Int(2),
-// 				},
-// 			},
-// 			JdkName:           pulumi.String("konaJDK"),
-// 			JdkVersion:        pulumi.String("8"),
-// 			PkgId:             pulumi.String("pkg-131bc1d3"),
-// 			StartupParameters: pulumi.String("-Xms128m -Xmx512m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=512m"),
-// 			UpdateType:        pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewDeployVmGroup(ctx, "deployVmGroup", &Tsf.DeployVmGroupArgs{
+//				DeployDesc:        pulumi.String("deploy test"),
+//				EnableHealthCheck: pulumi.Bool(true),
+//				ForceStart:        pulumi.Bool(false),
+//				GroupId:           pulumi.String("group-vzd97zpy"),
+//				HealthCheckSettings: &tsf.DeployVmGroupHealthCheckSettingsArgs{
+//					ReadinessProbe: &tsf.DeployVmGroupHealthCheckSettingsReadinessProbeArgs{
+//						ActionType:          pulumi.String("HTTP"),
+//						FailureThreshold:    pulumi.Int(3),
+//						InitialDelaySeconds: pulumi.Int(10),
+//						Path:                pulumi.String("/"),
+//						PeriodSeconds:       pulumi.Int(10),
+//						Port:                pulumi.Int(80),
+//						Scheme:              pulumi.String("HTTP"),
+//						SuccessThreshold:    pulumi.Int(1),
+//						TimeoutSeconds:      pulumi.Int(2),
+//					},
+//				},
+//				JdkName:           pulumi.String("konaJDK"),
+//				JdkVersion:        pulumi.String("8"),
+//				PkgId:             pulumi.String("pkg-131bc1d3"),
+//				StartupParameters: pulumi.String("-Xms128m -Xmx512m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=512m"),
+//				UpdateType:        pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type DeployVmGroup struct {
 	pulumi.CustomResourceState
@@ -330,7 +333,7 @@ func (i *DeployVmGroup) ToDeployVmGroupOutputWithContext(ctx context.Context) De
 // DeployVmGroupArrayInput is an input type that accepts DeployVmGroupArray and DeployVmGroupArrayOutput values.
 // You can construct a concrete instance of `DeployVmGroupArrayInput` via:
 //
-//          DeployVmGroupArray{ DeployVmGroupArgs{...} }
+//	DeployVmGroupArray{ DeployVmGroupArgs{...} }
 type DeployVmGroupArrayInput interface {
 	pulumi.Input
 
@@ -355,7 +358,7 @@ func (i DeployVmGroupArray) ToDeployVmGroupArrayOutputWithContext(ctx context.Co
 // DeployVmGroupMapInput is an input type that accepts DeployVmGroupMap and DeployVmGroupMapOutput values.
 // You can construct a concrete instance of `DeployVmGroupMapInput` via:
 //
-//          DeployVmGroupMap{ "key": DeployVmGroupArgs{...} }
+//	DeployVmGroupMap{ "key": DeployVmGroupArgs{...} }
 type DeployVmGroupMapInput interface {
 	pulumi.Input
 

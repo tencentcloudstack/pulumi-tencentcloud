@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewDiskAttachment(ctx, "diskAttachment", &Lighthouse.DiskAttachmentArgs{
-// 			DiskId:     pulumi.String("lhdisk-xxxxxx"),
-// 			InstanceId: pulumi.String("lhins-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewDiskAttachment(ctx, "diskAttachment", &Lighthouse.DiskAttachmentArgs{
+//				DiskId:     pulumi.String("lhdisk-xxxxxx"),
+//				InstanceId: pulumi.String("lhins-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // lighthouse disk_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Lighthouse/diskAttachment:DiskAttachment disk_attachment disk_attachment_id
+//
+//	$ pulumi import tencentcloud:Lighthouse/diskAttachment:DiskAttachment disk_attachment disk_attachment_id
+//
 // ```
 type DiskAttachment struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *DiskAttachment) ToDiskAttachmentOutputWithContext(ctx context.Context) 
 // DiskAttachmentArrayInput is an input type that accepts DiskAttachmentArray and DiskAttachmentArrayOutput values.
 // You can construct a concrete instance of `DiskAttachmentArrayInput` via:
 //
-//          DiskAttachmentArray{ DiskAttachmentArgs{...} }
+//	DiskAttachmentArray{ DiskAttachmentArgs{...} }
 type DiskAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i DiskAttachmentArray) ToDiskAttachmentArrayOutputWithContext(ctx context.
 // DiskAttachmentMapInput is an input type that accepts DiskAttachmentMap and DiskAttachmentMapOutput values.
 // You can construct a concrete instance of `DiskAttachmentMapInput` via:
 //
-//          DiskAttachmentMap{ "key": DiskAttachmentArgs{...} }
+//	DiskAttachmentMap{ "key": DiskAttachmentArgs{...} }
 type DiskAttachmentMapInput interface {
 	pulumi.Input
 

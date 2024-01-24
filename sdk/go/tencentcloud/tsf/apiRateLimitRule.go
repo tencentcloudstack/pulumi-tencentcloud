@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewApiRateLimitRule(ctx, "apiRateLimitRule", &Tsf.ApiRateLimitRuleArgs{
-// 			ApiId:        pulumi.String("api-xxxxxx"),
-// 			MaxQps:       pulumi.Int(10),
-// 			UsableStatus: pulumi.String("enable"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewApiRateLimitRule(ctx, "apiRateLimitRule", &Tsf.ApiRateLimitRuleArgs{
+//				ApiId:        pulumi.String("api-xxxxxx"),
+//				MaxQps:       pulumi.Int(10),
+//				UsableStatus: pulumi.String("enable"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // tsf api_rate_limit_rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tsf/apiRateLimitRule:ApiRateLimitRule api_rate_limit_rule api_rate_limit_rule_id
+//
+//	$ pulumi import tencentcloud:Tsf/apiRateLimitRule:ApiRateLimitRule api_rate_limit_rule api_rate_limit_rule_id
+//
 // ```
 type ApiRateLimitRule struct {
 	pulumi.CustomResourceState
@@ -200,7 +205,7 @@ func (i *ApiRateLimitRule) ToApiRateLimitRuleOutputWithContext(ctx context.Conte
 // ApiRateLimitRuleArrayInput is an input type that accepts ApiRateLimitRuleArray and ApiRateLimitRuleArrayOutput values.
 // You can construct a concrete instance of `ApiRateLimitRuleArrayInput` via:
 //
-//          ApiRateLimitRuleArray{ ApiRateLimitRuleArgs{...} }
+//	ApiRateLimitRuleArray{ ApiRateLimitRuleArgs{...} }
 type ApiRateLimitRuleArrayInput interface {
 	pulumi.Input
 
@@ -225,7 +230,7 @@ func (i ApiRateLimitRuleArray) ToApiRateLimitRuleArrayOutputWithContext(ctx cont
 // ApiRateLimitRuleMapInput is an input type that accepts ApiRateLimitRuleMap and ApiRateLimitRuleMapOutput values.
 // You can construct a concrete instance of `ApiRateLimitRuleMapInput` via:
 //
-//          ApiRateLimitRuleMap{ "key": ApiRateLimitRuleArgs{...} }
+//	ApiRateLimitRuleMap{ "key": ApiRateLimitRuleArgs{...} }
 type ApiRateLimitRuleMapInput interface {
 	pulumi.Input
 

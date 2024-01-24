@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewRestartDbInstanceOperation(ctx, "restartDbInstanceOperation", &Postgresql.RestartDbInstanceOperationArgs{
-// 			DbInstanceId: pulumi.Any(local.Pgsql_id),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewRestartDbInstanceOperation(ctx, "restartDbInstanceOperation", &Postgresql.RestartDbInstanceOperationArgs{
+//				DbInstanceId: pulumi.Any(local.Pgsql_id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type RestartDbInstanceOperation struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *RestartDbInstanceOperation) ToRestartDbInstanceOperationOutputWithConte
 // RestartDbInstanceOperationArrayInput is an input type that accepts RestartDbInstanceOperationArray and RestartDbInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `RestartDbInstanceOperationArrayInput` via:
 //
-//          RestartDbInstanceOperationArray{ RestartDbInstanceOperationArgs{...} }
+//	RestartDbInstanceOperationArray{ RestartDbInstanceOperationArgs{...} }
 type RestartDbInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i RestartDbInstanceOperationArray) ToRestartDbInstanceOperationArrayOutput
 // RestartDbInstanceOperationMapInput is an input type that accepts RestartDbInstanceOperationMap and RestartDbInstanceOperationMapOutput values.
 // You can construct a concrete instance of `RestartDbInstanceOperationMapInput` via:
 //
-//          RestartDbInstanceOperationMap{ "key": RestartDbInstanceOperationArgs{...} }
+//	RestartDbInstanceOperationMap{ "key": RestartDbInstanceOperationArgs{...} }
 type RestartDbInstanceOperationMapInput interface {
 	pulumi.Input
 

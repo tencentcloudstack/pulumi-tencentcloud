@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewSyncInvokeFunction(ctx, "invokeFunction", &Scf.SyncInvokeFunctionArgs{
-// 			FunctionName: pulumi.String("keep-1676351130"),
-// 			Namespace:    pulumi.String("default"),
-// 			Qualifier:    pulumi.String("2"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewSyncInvokeFunction(ctx, "invokeFunction", &Scf.SyncInvokeFunctionArgs{
+//				FunctionName: pulumi.String("keep-1676351130"),
+//				Namespace:    pulumi.String("default"),
+//				Qualifier:    pulumi.String("2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SyncInvokeFunction struct {
 	pulumi.CustomResourceState
@@ -177,7 +180,7 @@ func (i *SyncInvokeFunction) ToSyncInvokeFunctionOutputWithContext(ctx context.C
 // SyncInvokeFunctionArrayInput is an input type that accepts SyncInvokeFunctionArray and SyncInvokeFunctionArrayOutput values.
 // You can construct a concrete instance of `SyncInvokeFunctionArrayInput` via:
 //
-//          SyncInvokeFunctionArray{ SyncInvokeFunctionArgs{...} }
+//	SyncInvokeFunctionArray{ SyncInvokeFunctionArgs{...} }
 type SyncInvokeFunctionArrayInput interface {
 	pulumi.Input
 
@@ -202,7 +205,7 @@ func (i SyncInvokeFunctionArray) ToSyncInvokeFunctionArrayOutputWithContext(ctx 
 // SyncInvokeFunctionMapInput is an input type that accepts SyncInvokeFunctionMap and SyncInvokeFunctionMapOutput values.
 // You can construct a concrete instance of `SyncInvokeFunctionMapInput` via:
 //
-//          SyncInvokeFunctionMap{ "key": SyncInvokeFunctionArgs{...} }
+//	SyncInvokeFunctionMap{ "key": SyncInvokeFunctionArgs{...} }
 type SyncInvokeFunctionMapInput interface {
 	pulumi.Input
 

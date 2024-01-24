@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewBinlogSaveDays(ctx, "binlogSaveDays", &Cynosdb.BinlogSaveDaysArgs{
-// 			BinlogSaveDays: pulumi.Int(7),
-// 			ClusterId:      pulumi.String("cynosdbmysql-123"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewBinlogSaveDays(ctx, "binlogSaveDays", &Cynosdb.BinlogSaveDaysArgs{
+//				BinlogSaveDays: pulumi.Int(7),
+//				ClusterId:      pulumi.String("cynosdbmysql-123"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // cynosdb binlog_save_days can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cynosdb/binlogSaveDays:BinlogSaveDays binlog_save_days binlog_save_days_id
+//
+//	$ pulumi import tencentcloud:Cynosdb/binlogSaveDays:BinlogSaveDays binlog_save_days binlog_save_days_id
+//
 // ```
 type BinlogSaveDays struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *BinlogSaveDays) ToBinlogSaveDaysOutputWithContext(ctx context.Context) 
 // BinlogSaveDaysArrayInput is an input type that accepts BinlogSaveDaysArray and BinlogSaveDaysArrayOutput values.
 // You can construct a concrete instance of `BinlogSaveDaysArrayInput` via:
 //
-//          BinlogSaveDaysArray{ BinlogSaveDaysArgs{...} }
+//	BinlogSaveDaysArray{ BinlogSaveDaysArgs{...} }
 type BinlogSaveDaysArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i BinlogSaveDaysArray) ToBinlogSaveDaysArrayOutputWithContext(ctx context.
 // BinlogSaveDaysMapInput is an input type that accepts BinlogSaveDaysMap and BinlogSaveDaysMapOutput values.
 // You can construct a concrete instance of `BinlogSaveDaysMapInput` via:
 //
-//          BinlogSaveDaysMap{ "key": BinlogSaveDaysArgs{...} }
+//	BinlogSaveDaysMap{ "key": BinlogSaveDaysArgs{...} }
 type BinlogSaveDaysMapInput interface {
 	pulumi.Input
 

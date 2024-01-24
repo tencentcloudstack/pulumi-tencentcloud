@@ -19,37 +19,40 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.NewDataEngine(ctx, "dataEngine", &Dlc.DataEngineArgs{
-// 			AutoResume:           pulumi.Bool(false),
-// 			AutoSuspend:          pulumi.Bool(false),
-// 			CidrBlock:            pulumi.String("10.255.0.0/16"),
-// 			ClusterType:          pulumi.String("spark_cu"),
-// 			CrontabResumeSuspend: pulumi.Int(0),
-// 			DataEngineName:       pulumi.String("testSpark"),
-// 			DefaultDataEngine:    pulumi.Bool(false),
-// 			EngineExecType:       pulumi.String("BATCH"),
-// 			EngineType:           pulumi.String("spark"),
-// 			MaxClusters:          pulumi.Int(1),
-// 			Message:              pulumi.String("test spark1"),
-// 			MinClusters:          pulumi.Int(1),
-// 			Mode:                 pulumi.Int(1),
-// 			PayMode:              pulumi.Int(0),
-// 			Size:                 pulumi.Int(16),
-// 			TimeSpan:             pulumi.Int(1),
-// 			TimeUnit:             pulumi.String("h"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.NewDataEngine(ctx, "dataEngine", &Dlc.DataEngineArgs{
+//				AutoResume:           pulumi.Bool(false),
+//				AutoSuspend:          pulumi.Bool(false),
+//				CidrBlock:            pulumi.String("10.255.0.0/16"),
+//				ClusterType:          pulumi.String("spark_cu"),
+//				CrontabResumeSuspend: pulumi.Int(0),
+//				DataEngineName:       pulumi.String("testSpark"),
+//				DefaultDataEngine:    pulumi.Bool(false),
+//				EngineExecType:       pulumi.String("BATCH"),
+//				EngineType:           pulumi.String("spark"),
+//				MaxClusters:          pulumi.Int(1),
+//				Message:              pulumi.String("test spark1"),
+//				MinClusters:          pulumi.Int(1),
+//				Mode:                 pulumi.Int(1),
+//				PayMode:              pulumi.Int(0),
+//				Size:                 pulumi.Int(16),
+//				TimeSpan:             pulumi.Int(1),
+//				TimeUnit:             pulumi.String("h"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -57,7 +60,9 @@ import (
 // dlc data_engine can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dlc/dataEngine:DataEngine data_engine data_engine_id
+//
+//	$ pulumi import tencentcloud:Dlc/dataEngine:DataEngine data_engine data_engine_id
+//
 // ```
 type DataEngine struct {
 	pulumi.CustomResourceState
@@ -441,7 +446,7 @@ func (i *DataEngine) ToDataEngineOutputWithContext(ctx context.Context) DataEngi
 // DataEngineArrayInput is an input type that accepts DataEngineArray and DataEngineArrayOutput values.
 // You can construct a concrete instance of `DataEngineArrayInput` via:
 //
-//          DataEngineArray{ DataEngineArgs{...} }
+//	DataEngineArray{ DataEngineArgs{...} }
 type DataEngineArrayInput interface {
 	pulumi.Input
 
@@ -466,7 +471,7 @@ func (i DataEngineArray) ToDataEngineArrayOutputWithContext(ctx context.Context)
 // DataEngineMapInput is an input type that accepts DataEngineMap and DataEngineMapOutput values.
 // You can construct a concrete instance of `DataEngineMapInput` via:
 //
-//          DataEngineMap{ "key": DataEngineArgs{...} }
+//	DataEngineMap{ "key": DataEngineArgs{...} }
 type DataEngineMapInput interface {
 	pulumi.Input
 

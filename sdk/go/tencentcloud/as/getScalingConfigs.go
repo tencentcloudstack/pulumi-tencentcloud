@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.GetScalingConfigs(ctx, &as.GetScalingConfigsArgs{
-// 			ConfigurationId:  pulumi.StringRef("asc-oqio4yyj"),
-// 			ResultOutputFile: pulumi.StringRef("my_test_path"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := As.GetScalingConfigs(ctx, &as.GetScalingConfigsArgs{
+//				ConfigurationId:  pulumi.StringRef("asc-oqio4yyj"),
+//				ResultOutputFile: pulumi.StringRef("my_test_path"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetScalingConfigs(ctx *pulumi.Context, args *GetScalingConfigsArgs, opts ...pulumi.InvokeOption) (*GetScalingConfigsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

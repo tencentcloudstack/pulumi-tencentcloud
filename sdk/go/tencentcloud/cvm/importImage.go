@@ -228,7 +228,7 @@ func (i *ImportImage) ToImportImageOutputWithContext(ctx context.Context) Import
 // ImportImageArrayInput is an input type that accepts ImportImageArray and ImportImageArrayOutput values.
 // You can construct a concrete instance of `ImportImageArrayInput` via:
 //
-//          ImportImageArray{ ImportImageArgs{...} }
+//	ImportImageArray{ ImportImageArgs{...} }
 type ImportImageArrayInput interface {
 	pulumi.Input
 
@@ -253,7 +253,7 @@ func (i ImportImageArray) ToImportImageArrayOutputWithContext(ctx context.Contex
 // ImportImageMapInput is an input type that accepts ImportImageMap and ImportImageMapOutput values.
 // You can construct a concrete instance of `ImportImageMapInput` via:
 //
-//          ImportImageMap{ "key": ImportImageArgs{...} }
+//	ImportImageMap{ "key": ImportImageArgs{...} }
 type ImportImageMapInput interface {
 	pulumi.Input
 

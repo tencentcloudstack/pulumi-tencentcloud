@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ses.NewEmailAddress(ctx, "emailAddress", &Ses.EmailAddressArgs{
-// 			EmailAddress:    pulumi.String("aaa@iac-tf.cloud"),
-// 			EmailSenderName: pulumi.String("aaa"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ses.NewEmailAddress(ctx, "emailAddress", &Ses.EmailAddressArgs{
+//				EmailAddress:    pulumi.String("aaa@iac-tf.cloud"),
+//				EmailSenderName: pulumi.String("aaa"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // ses email_address can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ses/emailAddress:EmailAddress email_address aaa@iac-tf.cloud
+//
+//	$ pulumi import tencentcloud:Ses/emailAddress:EmailAddress email_address aaa@iac-tf.cloud
+//
 // ```
 type EmailAddress struct {
 	pulumi.CustomResourceState
@@ -144,7 +149,7 @@ func (i *EmailAddress) ToEmailAddressOutputWithContext(ctx context.Context) Emai
 // EmailAddressArrayInput is an input type that accepts EmailAddressArray and EmailAddressArrayOutput values.
 // You can construct a concrete instance of `EmailAddressArrayInput` via:
 //
-//          EmailAddressArray{ EmailAddressArgs{...} }
+//	EmailAddressArray{ EmailAddressArgs{...} }
 type EmailAddressArrayInput interface {
 	pulumi.Input
 
@@ -169,7 +174,7 @@ func (i EmailAddressArray) ToEmailAddressArrayOutputWithContext(ctx context.Cont
 // EmailAddressMapInput is an input type that accepts EmailAddressMap and EmailAddressMapOutput values.
 // You can construct a concrete instance of `EmailAddressMapInput` via:
 //
-//          EmailAddressMap{ "key": EmailAddressArgs{...} }
+//	EmailAddressMap{ "key": EmailAddressArgs{...} }
 type EmailAddressMapInput interface {
 	pulumi.Input
 

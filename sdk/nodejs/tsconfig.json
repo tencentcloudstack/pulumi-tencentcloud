@@ -347,6 +347,7 @@
         "clickhouse/getBackupJobDetail.ts",
         "clickhouse/getBackupJobs.ts",
         "clickhouse/getBackupTables.ts",
+        "clickhouse/getInstanceNodes.ts",
         "clickhouse/getInstanceShards.ts",
         "clickhouse/getSpec.ts",
         "clickhouse/index.ts",

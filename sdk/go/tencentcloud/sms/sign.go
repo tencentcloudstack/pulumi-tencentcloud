@@ -20,26 +20,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sms"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sms"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sms.NewSign(ctx, "example", &Sms.SignArgs{
-// 			DocumentType:  pulumi.Int(4),
-// 			International: pulumi.Int(0),
-// 			ProofImage:    pulumi.String("your_proof_image"),
-// 			SignName:      pulumi.String("tf_example_sms_sign"),
-// 			SignPurpose:   pulumi.Int(0),
-// 			SignType:      pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sms.NewSign(ctx, "example", &Sms.SignArgs{
+//				DocumentType:  pulumi.Int(4),
+//				International: pulumi.Int(0),
+//				ProofImage:    pulumi.String("your_proof_image"),
+//				SignName:      pulumi.String("tf_example_sms_sign"),
+//				SignPurpose:   pulumi.Int(0),
+//				SignType:      pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Sign struct {
 	pulumi.CustomResourceState
@@ -216,7 +219,7 @@ func (i *Sign) ToSignOutputWithContext(ctx context.Context) SignOutput {
 // SignArrayInput is an input type that accepts SignArray and SignArrayOutput values.
 // You can construct a concrete instance of `SignArrayInput` via:
 //
-//          SignArray{ SignArgs{...} }
+//	SignArray{ SignArgs{...} }
 type SignArrayInput interface {
 	pulumi.Input
 
@@ -241,7 +244,7 @@ func (i SignArray) ToSignArrayOutputWithContext(ctx context.Context) SignArrayOu
 // SignMapInput is an input type that accepts SignMap and SignMapOutput values.
 // You can construct a concrete instance of `SignMapInput` via:
 //
-//          SignMap{ "key": SignArgs{...} }
+//	SignMap{ "key": SignArgs{...} }
 type SignMapInput interface {
 	pulumi.Input
 

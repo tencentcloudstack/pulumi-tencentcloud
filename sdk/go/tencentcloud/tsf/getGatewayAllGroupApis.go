@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.GetGatewayAllGroupApis(ctx, &tsf.GetGatewayAllGroupApisArgs{
-// 			GatewayDeployGroupId: "group-aeoej4qy",
-// 			SearchWord:           pulumi.StringRef("user"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.GetGatewayAllGroupApis(ctx, &tsf.GetGatewayAllGroupApisArgs{
+//				GatewayDeployGroupId: "group-aeoej4qy",
+//				SearchWord:           pulumi.StringRef("user"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupGatewayAllGroupApis(ctx *pulumi.Context, args *LookupGatewayAllGroupApisArgs, opts ...pulumi.InvokeOption) (*LookupGatewayAllGroupApisResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

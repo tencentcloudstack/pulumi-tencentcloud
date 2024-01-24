@@ -215,7 +215,7 @@ func (i *InstancesAttachment) ToInstancesAttachmentOutputWithContext(ctx context
 // InstancesAttachmentArrayInput is an input type that accepts InstancesAttachmentArray and InstancesAttachmentArrayOutput values.
 // You can construct a concrete instance of `InstancesAttachmentArrayInput` via:
 //
-//          InstancesAttachmentArray{ InstancesAttachmentArgs{...} }
+//	InstancesAttachmentArray{ InstancesAttachmentArgs{...} }
 type InstancesAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -240,7 +240,7 @@ func (i InstancesAttachmentArray) ToInstancesAttachmentArrayOutputWithContext(ct
 // InstancesAttachmentMapInput is an input type that accepts InstancesAttachmentMap and InstancesAttachmentMapOutput values.
 // You can construct a concrete instance of `InstancesAttachmentMapInput` via:
 //
-//          InstancesAttachmentMap{ "key": InstancesAttachmentArgs{...} }
+//	InstancesAttachmentMap{ "key": InstancesAttachmentArgs{...} }
 type InstancesAttachmentMapInput interface {
 	pulumi.Input
 

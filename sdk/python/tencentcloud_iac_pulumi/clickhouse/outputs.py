@@ -22,6 +22,8 @@ __all__ = [
     'GetBackupJobDetailTableContentResult',
     'GetBackupJobsBackUpJobResult',
     'GetBackupTablesAvailableTableResult',
+    'GetInstanceNodesInstanceNodesListResult',
+    'GetInstanceNodesInstanceNodesListNodeGroupResult',
     'GetSpecAttachCbsSpecResult',
     'GetSpecCommonSpecResult',
     'GetSpecCommonSpecDataDiskResult',
@@ -867,6 +869,163 @@ class GetBackupTablesAvailableTableResult(dict):
         Zk path.
         """
         return pulumi.get(self, "zoo_path")
+
+
+@pulumi.output_type
+class GetInstanceNodesInstanceNodesListResult(dict):
+    def __init__(__self__, *,
+                 cluster: str,
+                 core: int,
+                 disk_size: int,
+                 disk_type: str,
+                 ip: str,
+                 is_ch_proxy: bool,
+                 memory: int,
+                 node_groups: Sequence['outputs.GetInstanceNodesInstanceNodesListNodeGroupResult'],
+                 rip: str,
+                 spec: str):
+        """
+        :param str cluster: Name of the clickhouse cluster to which it belongs.
+        :param int core: CPU cores.
+        :param int disk_size: Disk size.
+        :param str disk_type: Disk type.
+        :param str ip: IP Address.
+        :param bool is_ch_proxy: When true, it indicates that the chproxy process has been deployed on the node.
+        :param int memory: Memory size.
+        :param Sequence['GetInstanceNodesInstanceNodesListNodeGroupArgs'] node_groups: Group information to which the node belongs.
+        :param str rip: VPC IP.
+        :param str spec: Model, such as S1.
+        """
+        pulumi.set(__self__, "cluster", cluster)
+        pulumi.set(__self__, "core", core)
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type", disk_type)
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "is_ch_proxy", is_ch_proxy)
+        pulumi.set(__self__, "memory", memory)
+        pulumi.set(__self__, "node_groups", node_groups)
+        pulumi.set(__self__, "rip", rip)
+        pulumi.set(__self__, "spec", spec)
+
+    @property
+    @pulumi.getter
+    def cluster(self) -> str:
+        """
+        Name of the clickhouse cluster to which it belongs.
+        """
+        return pulumi.get(self, "cluster")
+
+    @property
+    @pulumi.getter
+    def core(self) -> int:
+        """
+        CPU cores.
+        """
+        return pulumi.get(self, "core")
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        """
+        Disk size.
+        """
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> str:
+        """
+        Disk type.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @property
+    @pulumi.getter
+    def ip(self) -> str:
+        """
+        IP Address.
+        """
+        return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter(name="isChProxy")
+    def is_ch_proxy(self) -> bool:
+        """
+        When true, it indicates that the chproxy process has been deployed on the node.
+        """
+        return pulumi.get(self, "is_ch_proxy")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> int:
+        """
+        Memory size.
+        """
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter(name="nodeGroups")
+    def node_groups(self) -> Sequence['outputs.GetInstanceNodesInstanceNodesListNodeGroupResult']:
+        """
+        Group information to which the node belongs.
+        """
+        return pulumi.get(self, "node_groups")
+
+    @property
+    @pulumi.getter
+    def rip(self) -> str:
+        """
+        VPC IP.
+        """
+        return pulumi.get(self, "rip")
+
+    @property
+    @pulumi.getter
+    def spec(self) -> str:
+        """
+        Model, such as S1.
+        """
+        return pulumi.get(self, "spec")
+
+
+@pulumi.output_type
+class GetInstanceNodesInstanceNodesListNodeGroupResult(dict):
+    def __init__(__self__, *,
+                 group_name: str,
+                 replica_name: str,
+                 shard_name: str):
+        """
+        :param str group_name: Group Name.
+        :param str replica_name: Copy variable name.
+        :param str shard_name: Fragmented variable name.
+        """
+        pulumi.set(__self__, "group_name", group_name)
+        pulumi.set(__self__, "replica_name", replica_name)
+        pulumi.set(__self__, "shard_name", shard_name)
+
+    @property
+    @pulumi.getter(name="groupName")
+    def group_name(self) -> str:
+        """
+        Group Name.
+        """
+        return pulumi.get(self, "group_name")
+
+    @property
+    @pulumi.getter(name="replicaName")
+    def replica_name(self) -> str:
+        """
+        Copy variable name.
+        """
+        return pulumi.get(self, "replica_name")
+
+    @property
+    @pulumi.getter(name="shardName")
+    def shard_name(self) -> str:
+        """
+        Fragmented variable name.
+        """
+        return pulumi.get(self, "shard_name")
 
 
 @pulumi.output_type

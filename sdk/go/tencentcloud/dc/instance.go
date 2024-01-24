@@ -19,28 +19,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dc.NewInstance(ctx, "instance", &Dc.InstanceArgs{
-// 			AccessPointId:         pulumi.String("ap-shenzhen-b-ft"),
-// 			Bandwidth:             pulumi.Int(10),
-// 			CustomerContactNumber: pulumi.String("0"),
-// 			DirectConnectName:     pulumi.String("terraform-for-test"),
-// 			LineOperator:          pulumi.String("In-houseWiring"),
-// 			PortType:              pulumi.String("10GBase-LR"),
-// 			SignLaw:               pulumi.Bool(true),
-// 			Vlan:                  -1,
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dc.NewInstance(ctx, "instance", &Dc.InstanceArgs{
+//				AccessPointId:         pulumi.String("ap-shenzhen-b-ft"),
+//				Bandwidth:             pulumi.Int(10),
+//				CustomerContactNumber: pulumi.String("0"),
+//				DirectConnectName:     pulumi.String("terraform-for-test"),
+//				LineOperator:          pulumi.String("In-houseWiring"),
+//				PortType:              pulumi.String("10GBase-LR"),
+//				SignLaw:               pulumi.Bool(true),
+//				Vlan:                  -1,
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -48,7 +51,9 @@ import (
 // dc instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dc/instance:Instance instance dc_id
+//
+//	$ pulumi import tencentcloud:Dc/instance:Instance instance dc_id
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -309,7 +314,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -334,7 +339,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

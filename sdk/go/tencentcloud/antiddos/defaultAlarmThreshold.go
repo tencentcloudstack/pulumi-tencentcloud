@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Antiddos.NewDefaultAlarmThreshold(ctx, "defaultAlarmThreshold", &Antiddos.DefaultAlarmThresholdArgs{
-// 			DefaultAlarmConfig: &antiddos.DefaultAlarmThresholdDefaultAlarmConfigArgs{
-// 				AlarmThreshold: pulumi.Int(2000),
-// 				AlarmType:      pulumi.Int(1),
-// 			},
-// 			InstanceType: pulumi.String("bgp"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Antiddos.NewDefaultAlarmThreshold(ctx, "defaultAlarmThreshold", &Antiddos.DefaultAlarmThresholdArgs{
+//				DefaultAlarmConfig: &antiddos.DefaultAlarmThresholdDefaultAlarmConfigArgs{
+//					AlarmThreshold: pulumi.Int(2000),
+//					AlarmType:      pulumi.Int(1),
+//				},
+//				InstanceType: pulumi.String("bgp"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +49,9 @@ import (
 // antiddos default_alarm_threshold can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Antiddos/defaultAlarmThreshold:DefaultAlarmThreshold default_alarm_threshold ${instanceType}
+//
+//	$ pulumi import tencentcloud:Antiddos/defaultAlarmThreshold:DefaultAlarmThreshold default_alarm_threshold ${instanceType}
+//
 // ```
 type DefaultAlarmThreshold struct {
 	pulumi.CustomResourceState
@@ -151,7 +156,7 @@ func (i *DefaultAlarmThreshold) ToDefaultAlarmThresholdOutputWithContext(ctx con
 // DefaultAlarmThresholdArrayInput is an input type that accepts DefaultAlarmThresholdArray and DefaultAlarmThresholdArrayOutput values.
 // You can construct a concrete instance of `DefaultAlarmThresholdArrayInput` via:
 //
-//          DefaultAlarmThresholdArray{ DefaultAlarmThresholdArgs{...} }
+//	DefaultAlarmThresholdArray{ DefaultAlarmThresholdArgs{...} }
 type DefaultAlarmThresholdArrayInput interface {
 	pulumi.Input
 
@@ -176,7 +181,7 @@ func (i DefaultAlarmThresholdArray) ToDefaultAlarmThresholdArrayOutputWithContex
 // DefaultAlarmThresholdMapInput is an input type that accepts DefaultAlarmThresholdMap and DefaultAlarmThresholdMapOutput values.
 // You can construct a concrete instance of `DefaultAlarmThresholdMapInput` via:
 //
-//          DefaultAlarmThresholdMap{ "key": DefaultAlarmThresholdArgs{...} }
+//	DefaultAlarmThresholdMap{ "key": DefaultAlarmThresholdArgs{...} }
 type DefaultAlarmThresholdMapInput interface {
 	pulumi.Input
 

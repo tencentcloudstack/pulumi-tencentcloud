@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooNamespace, err := Scf.NewNamespace(ctx, "fooNamespace", &Scf.NamespaceArgs{
-// 			Namespace: pulumi.String("ci-test-scf"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Scf.GetNamespacesOutput(ctx, scf.GetNamespacesOutputArgs{
-// 			Namespace: fooNamespace.ID(),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooNamespace, err := Scf.NewNamespace(ctx, "fooNamespace", &Scf.NamespaceArgs{
+//				Namespace: pulumi.String("ci-test-scf"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Scf.GetNamespacesOutput(ctx, scf.GetNamespacesOutputArgs{
+//				Namespace: fooNamespace.ID(),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetNamespaces(ctx *pulumi.Context, args *GetNamespacesArgs, opts ...pulumi.InvokeOption) (*GetNamespacesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

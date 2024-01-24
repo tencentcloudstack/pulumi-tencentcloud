@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewCheckCertificateChainOperation(ctx, "checkCertificateChain", &Ssl.CheckCertificateChainOperationArgs{
-// 			CertificateChain: pulumi.String("-----BEGIN CERTIFICATE--·····---END CERTIFICATE-----"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.NewCheckCertificateChainOperation(ctx, "checkCertificateChain", &Ssl.CheckCertificateChainOperationArgs{
+//				CertificateChain: pulumi.String("-----BEGIN CERTIFICATE--·····---END CERTIFICATE-----"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -41,7 +44,9 @@ import (
 // ssl check_certificate_chain can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssl/checkCertificateChainOperation:CheckCertificateChainOperation check_certificate_chain check_certificate_chain_id
+//
+//	$ pulumi import tencentcloud:Ssl/checkCertificateChainOperation:CheckCertificateChainOperation check_certificate_chain check_certificate_chain_id
+//
 // ```
 type CheckCertificateChainOperation struct {
 	pulumi.CustomResourceState
@@ -133,7 +138,7 @@ func (i *CheckCertificateChainOperation) ToCheckCertificateChainOperationOutputW
 // CheckCertificateChainOperationArrayInput is an input type that accepts CheckCertificateChainOperationArray and CheckCertificateChainOperationArrayOutput values.
 // You can construct a concrete instance of `CheckCertificateChainOperationArrayInput` via:
 //
-//          CheckCertificateChainOperationArray{ CheckCertificateChainOperationArgs{...} }
+//	CheckCertificateChainOperationArray{ CheckCertificateChainOperationArgs{...} }
 type CheckCertificateChainOperationArrayInput interface {
 	pulumi.Input
 
@@ -158,7 +163,7 @@ func (i CheckCertificateChainOperationArray) ToCheckCertificateChainOperationArr
 // CheckCertificateChainOperationMapInput is an input type that accepts CheckCertificateChainOperationMap and CheckCertificateChainOperationMapOutput values.
 // You can construct a concrete instance of `CheckCertificateChainOperationMapInput` via:
 //
-//          CheckCertificateChainOperationMap{ "key": CheckCertificateChainOperationArgs{...} }
+//	CheckCertificateChainOperationMap{ "key": CheckCertificateChainOperationArgs{...} }
 type CheckCertificateChainOperationMapInput interface {
 	pulumi.Input
 

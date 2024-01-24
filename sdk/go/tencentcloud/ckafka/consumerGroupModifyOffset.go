@@ -19,27 +19,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.NewConsumerGroupModifyOffset(ctx, "consumerGroupModifyOffset", &Ckafka.ConsumerGroupModifyOffsetArgs{
-// 			Group:      pulumi.String("xxxxxx"),
-// 			InstanceId: pulumi.String("ckafka-xxxxxx"),
-// 			Offset:     pulumi.Int(0),
-// 			Strategy:   pulumi.Int(2),
-// 			Topics: pulumi.StringArray{
-// 				pulumi.String("xxxxxx"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.NewConsumerGroupModifyOffset(ctx, "consumerGroupModifyOffset", &Ckafka.ConsumerGroupModifyOffsetArgs{
+//				Group:      pulumi.String("xxxxxx"),
+//				InstanceId: pulumi.String("ckafka-xxxxxx"),
+//				Offset:     pulumi.Int(0),
+//				Strategy:   pulumi.Int(2),
+//				Topics: pulumi.StringArray{
+//					pulumi.String("xxxxxx"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ConsumerGroupModifyOffset struct {
 	pulumi.CustomResourceState
@@ -222,7 +225,7 @@ func (i *ConsumerGroupModifyOffset) ToConsumerGroupModifyOffsetOutputWithContext
 // ConsumerGroupModifyOffsetArrayInput is an input type that accepts ConsumerGroupModifyOffsetArray and ConsumerGroupModifyOffsetArrayOutput values.
 // You can construct a concrete instance of `ConsumerGroupModifyOffsetArrayInput` via:
 //
-//          ConsumerGroupModifyOffsetArray{ ConsumerGroupModifyOffsetArgs{...} }
+//	ConsumerGroupModifyOffsetArray{ ConsumerGroupModifyOffsetArgs{...} }
 type ConsumerGroupModifyOffsetArrayInput interface {
 	pulumi.Input
 
@@ -247,7 +250,7 @@ func (i ConsumerGroupModifyOffsetArray) ToConsumerGroupModifyOffsetArrayOutputWi
 // ConsumerGroupModifyOffsetMapInput is an input type that accepts ConsumerGroupModifyOffsetMap and ConsumerGroupModifyOffsetMapOutput values.
 // You can construct a concrete instance of `ConsumerGroupModifyOffsetMapInput` via:
 //
-//          ConsumerGroupModifyOffsetMap{ "key": ConsumerGroupModifyOffsetArgs{...} }
+//	ConsumerGroupModifyOffsetMap{ "key": ConsumerGroupModifyOffsetArgs{...} }
 type ConsumerGroupModifyOffsetMapInput interface {
 	pulumi.Input
 

@@ -20,23 +20,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.NewProtectInstances(ctx, "protect", &As.ProtectInstancesArgs{
-// 			AutoScalingGroupId:   pulumi.Any(tencentcloud_as_scaling_group.Example.Id),
-// 			InstanceIds:          pulumi.Any(tencentcloud_as_attachment.Attachment.Instance_ids),
-// 			ProtectedFromScaleIn: pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := As.NewProtectInstances(ctx, "protect", &As.ProtectInstancesArgs{
+//				AutoScalingGroupId:   pulumi.Any(tencentcloud_as_scaling_group.Example.Id),
+//				InstanceIds:          pulumi.Any(tencentcloud_as_attachment.Attachment.Instance_ids),
+//				ProtectedFromScaleIn: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ProtectInstances struct {
 	pulumi.CustomResourceState
@@ -154,7 +157,7 @@ func (i *ProtectInstances) ToProtectInstancesOutputWithContext(ctx context.Conte
 // ProtectInstancesArrayInput is an input type that accepts ProtectInstancesArray and ProtectInstancesArrayOutput values.
 // You can construct a concrete instance of `ProtectInstancesArrayInput` via:
 //
-//          ProtectInstancesArray{ ProtectInstancesArgs{...} }
+//	ProtectInstancesArray{ ProtectInstancesArgs{...} }
 type ProtectInstancesArrayInput interface {
 	pulumi.Input
 
@@ -179,7 +182,7 @@ func (i ProtectInstancesArray) ToProtectInstancesArrayOutputWithContext(ctx cont
 // ProtectInstancesMapInput is an input type that accepts ProtectInstancesMap and ProtectInstancesMapOutput values.
 // You can construct a concrete instance of `ProtectInstancesMapInput` via:
 //
-//          ProtectInstancesMap{ "key": ProtectInstancesArgs{...} }
+//	ProtectInstancesMap{ "key": ProtectInstancesArgs{...} }
 type ProtectInstancesMapInput interface {
 	pulumi.Input
 

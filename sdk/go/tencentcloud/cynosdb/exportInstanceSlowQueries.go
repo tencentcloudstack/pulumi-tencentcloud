@@ -19,27 +19,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewExportInstanceSlowQueries(ctx, "exportInstanceSlowQueries", &Cynosdb.ExportInstanceSlowQueriesArgs{
-// 			Database:   pulumi.String("db1"),
-// 			EndTime:    pulumi.String("2022-01-01 14:00:00"),
-// 			FileType:   pulumi.String("csv"),
-// 			Host:       pulumi.String("10.10.10.10"),
-// 			InstanceId: pulumi.String("cynosdbmysql-ins-123"),
-// 			StartTime:  pulumi.String("2022-01-01 12:00:00"),
-// 			Username:   pulumi.String("root"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewExportInstanceSlowQueries(ctx, "exportInstanceSlowQueries", &Cynosdb.ExportInstanceSlowQueriesArgs{
+//				Database:   pulumi.String("db1"),
+//				EndTime:    pulumi.String("2022-01-01 14:00:00"),
+//				FileType:   pulumi.String("csv"),
+//				Host:       pulumi.String("10.10.10.10"),
+//				InstanceId: pulumi.String("cynosdbmysql-ins-123"),
+//				StartTime:  pulumi.String("2022-01-01 12:00:00"),
+//				Username:   pulumi.String("root"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ExportInstanceSlowQueries struct {
 	pulumi.CustomResourceState
@@ -197,7 +200,7 @@ func (i *ExportInstanceSlowQueries) ToExportInstanceSlowQueriesOutputWithContext
 // ExportInstanceSlowQueriesArrayInput is an input type that accepts ExportInstanceSlowQueriesArray and ExportInstanceSlowQueriesArrayOutput values.
 // You can construct a concrete instance of `ExportInstanceSlowQueriesArrayInput` via:
 //
-//          ExportInstanceSlowQueriesArray{ ExportInstanceSlowQueriesArgs{...} }
+//	ExportInstanceSlowQueriesArray{ ExportInstanceSlowQueriesArgs{...} }
 type ExportInstanceSlowQueriesArrayInput interface {
 	pulumi.Input
 
@@ -222,7 +225,7 @@ func (i ExportInstanceSlowQueriesArray) ToExportInstanceSlowQueriesArrayOutputWi
 // ExportInstanceSlowQueriesMapInput is an input type that accepts ExportInstanceSlowQueriesMap and ExportInstanceSlowQueriesMapOutput values.
 // You can construct a concrete instance of `ExportInstanceSlowQueriesMapInput` via:
 //
-//          ExportInstanceSlowQueriesMap{ "key": ExportInstanceSlowQueriesArgs{...} }
+//	ExportInstanceSlowQueriesMap{ "key": ExportInstanceSlowQueriesArgs{...} }
 type ExportInstanceSlowQueriesMapInput interface {
 	pulumi.Input
 

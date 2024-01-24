@@ -20,120 +20,123 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "cvm",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		images, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-// 			ImageTypes: []string{
-// 				"PUBLIC_IMAGE",
-// 			},
-// 			ImageNameRegex: pulumi.StringRef("Final"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		instanceTypes, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
-// 			Filters: []instance.GetTypesFilter{
-// 				instance.GetTypesFilter{
-// 					Name: "instance-family",
-// 					Values: []string{
-// 						"S5",
-// 					},
-// 				},
-// 			},
-// 			CpuCoreCount:   pulumi.IntRef(2),
-// 			ExcludeSoldOut: pulumi.BoolRef(true),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[3].Name),
-// 			VpcId:            vpc.ID(),
-// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleInstance, err := Instance.NewInstance(ctx, "exampleInstance", &Instance.InstanceArgs{
-// 			InstanceName:     pulumi.String("tf_example"),
-// 			AvailabilityZone: pulumi.String(zones.Zones[3].Name),
-// 			ImageId:          pulumi.String(images.Images[0].ImageId),
-// 			InstanceType:     pulumi.String(instanceTypes.InstanceTypes[0].InstanceType),
-// 			SystemDiskType:   pulumi.String("CLOUD_PREMIUM"),
-// 			SystemDiskSize:   pulumi.Int(50),
-// 			Hostname:         pulumi.String("terraform"),
-// 			ProjectId:        pulumi.Int(0),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			DataDisks: instance.InstanceDataDiskArray{
-// 				&instance.InstanceDataDiskArgs{
-// 					DataDiskType: pulumi.String("CLOUD_PREMIUM"),
-// 					DataDiskSize: pulumi.Int(50),
-// 					Encrypt:      pulumi.Bool(false),
-// 				},
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"tagKey": pulumi.Any("tagValue"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = ApiGateway.NewUpstream(ctx, "exampleUpstream", &ApiGateway.UpstreamArgs{
-// 			Scheme:              pulumi.String("HTTP"),
-// 			Algorithm:           pulumi.String("ROUND-ROBIN"),
-// 			UniqVpcId:           vpc.ID(),
-// 			UpstreamName:        pulumi.String("tf_example"),
-// 			UpstreamDescription: pulumi.String("desc."),
-// 			UpstreamType:        pulumi.String("IP_PORT"),
-// 			Retries:             pulumi.Int(5),
-// 			Nodes: apigateway.UpstreamNodeArray{
-// 				&apigateway.UpstreamNodeArgs{
-// 					Host:         pulumi.String("1.1.1.1"),
-// 					Port:         pulumi.Int(9090),
-// 					Weight:       pulumi.Int(10),
-// 					VmInstanceId: exampleInstance.ID(),
-// 					Tags: pulumi.StringArray{
-// 						pulumi.String("tags"),
-// 					},
-// 				},
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "cvm",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			images, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+//				ImageTypes: []string{
+//					"PUBLIC_IMAGE",
+//				},
+//				ImageNameRegex: pulumi.StringRef("Final"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			instanceTypes, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
+//				Filters: []instance.GetTypesFilter{
+//					instance.GetTypesFilter{
+//						Name: "instance-family",
+//						Values: []string{
+//							"S5",
+//						},
+//					},
+//				},
+//				CpuCoreCount:   pulumi.IntRef(2),
+//				ExcludeSoldOut: pulumi.BoolRef(true),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[3].Name),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleInstance, err := Instance.NewInstance(ctx, "exampleInstance", &Instance.InstanceArgs{
+//				InstanceName:     pulumi.String("tf_example"),
+//				AvailabilityZone: pulumi.String(zones.Zones[3].Name),
+//				ImageId:          pulumi.String(images.Images[0].ImageId),
+//				InstanceType:     pulumi.String(instanceTypes.InstanceTypes[0].InstanceType),
+//				SystemDiskType:   pulumi.String("CLOUD_PREMIUM"),
+//				SystemDiskSize:   pulumi.Int(50),
+//				Hostname:         pulumi.String("terraform"),
+//				ProjectId:        pulumi.Int(0),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				DataDisks: instance.InstanceDataDiskArray{
+//					&instance.InstanceDataDiskArgs{
+//						DataDiskType: pulumi.String("CLOUD_PREMIUM"),
+//						DataDiskSize: pulumi.Int(50),
+//						Encrypt:      pulumi.Bool(false),
+//					},
+//				},
+//				Tags: pulumi.AnyMap{
+//					"tagKey": pulumi.Any("tagValue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = ApiGateway.NewUpstream(ctx, "exampleUpstream", &ApiGateway.UpstreamArgs{
+//				Scheme:              pulumi.String("HTTP"),
+//				Algorithm:           pulumi.String("ROUND-ROBIN"),
+//				UniqVpcId:           vpc.ID(),
+//				UpstreamName:        pulumi.String("tf_example"),
+//				UpstreamDescription: pulumi.String("desc."),
+//				UpstreamType:        pulumi.String("IP_PORT"),
+//				Retries:             pulumi.Int(5),
+//				Nodes: apigateway.UpstreamNodeArray{
+//					&apigateway.UpstreamNodeArgs{
+//						Host:         pulumi.String("1.1.1.1"),
+//						Port:         pulumi.Int(9090),
+//						Weight:       pulumi.Int(10),
+//						VmInstanceId: exampleInstance.ID(),
+//						Tags: pulumi.StringArray{
+//							pulumi.String("tags"),
+//						},
+//					},
+//				},
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Create a complete VPC channel
 //
@@ -141,55 +144,58 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewUpstream(ctx, "example", &ApiGateway.UpstreamArgs{
-// 			Scheme:              pulumi.String("HTTP"),
-// 			Algorithm:           pulumi.String("ROUND-ROBIN"),
-// 			UniqVpcId:           pulumi.Any(tencentcloud_vpc.Vpc.Id),
-// 			UpstreamName:        pulumi.String("tf_example"),
-// 			UpstreamDescription: pulumi.String("desc."),
-// 			UpstreamType:        pulumi.String("IP_PORT"),
-// 			Retries:             pulumi.Int(5),
-// 			Nodes: apigateway.UpstreamNodeArray{
-// 				&apigateway.UpstreamNodeArgs{
-// 					Host:         pulumi.String("1.1.1.1"),
-// 					Port:         pulumi.Int(9090),
-// 					Weight:       pulumi.Int(10),
-// 					VmInstanceId: pulumi.Any(tencentcloud_instance.Example.Id),
-// 					Tags: pulumi.StringArray{
-// 						pulumi.String("tags"),
-// 					},
-// 				},
-// 			},
-// 			HealthChecker: &apigateway.UpstreamHealthCheckerArgs{
-// 				EnableActiveCheck:    pulumi.Bool(true),
-// 				EnablePassiveCheck:   pulumi.Bool(true),
-// 				HealthyHttpStatus:    pulumi.String("200"),
-// 				UnhealthyHttpStatus:  pulumi.String("500"),
-// 				TcpFailureThreshold:  pulumi.Int(5),
-// 				TimeoutThreshold:     pulumi.Int(5),
-// 				HttpFailureThreshold: pulumi.Int(3),
-// 				ActiveCheckHttpPath:  pulumi.String("/"),
-// 				ActiveCheckTimeout:   pulumi.Int(5),
-// 				ActiveCheckInterval:  pulumi.Int(5),
-// 				UnhealthyTimeout:     pulumi.Int(30),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.NewUpstream(ctx, "example", &ApiGateway.UpstreamArgs{
+//				Scheme:              pulumi.String("HTTP"),
+//				Algorithm:           pulumi.String("ROUND-ROBIN"),
+//				UniqVpcId:           pulumi.Any(tencentcloud_vpc.Vpc.Id),
+//				UpstreamName:        pulumi.String("tf_example"),
+//				UpstreamDescription: pulumi.String("desc."),
+//				UpstreamType:        pulumi.String("IP_PORT"),
+//				Retries:             pulumi.Int(5),
+//				Nodes: apigateway.UpstreamNodeArray{
+//					&apigateway.UpstreamNodeArgs{
+//						Host:         pulumi.String("1.1.1.1"),
+//						Port:         pulumi.Int(9090),
+//						Weight:       pulumi.Int(10),
+//						VmInstanceId: pulumi.Any(tencentcloud_instance.Example.Id),
+//						Tags: pulumi.StringArray{
+//							pulumi.String("tags"),
+//						},
+//					},
+//				},
+//				HealthChecker: &apigateway.UpstreamHealthCheckerArgs{
+//					EnableActiveCheck:    pulumi.Bool(true),
+//					EnablePassiveCheck:   pulumi.Bool(true),
+//					HealthyHttpStatus:    pulumi.String("200"),
+//					UnhealthyHttpStatus:  pulumi.String("500"),
+//					TcpFailureThreshold:  pulumi.Int(5),
+//					TimeoutThreshold:     pulumi.Int(5),
+//					HttpFailureThreshold: pulumi.Int(3),
+//					ActiveCheckHttpPath:  pulumi.String("/"),
+//					ActiveCheckTimeout:   pulumi.Int(5),
+//					ActiveCheckInterval:  pulumi.Int(5),
+//					UnhealthyTimeout:     pulumi.Int(30),
+//				},
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -197,7 +203,9 @@ import (
 // apigateway upstream can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:ApiGateway/upstream:Upstream upstream upstream_id
+//
+//	$ pulumi import tencentcloud:ApiGateway/upstream:Upstream upstream upstream_id
+//
 // ```
 type Upstream struct {
 	pulumi.CustomResourceState
@@ -405,7 +413,7 @@ func (i *Upstream) ToUpstreamOutputWithContext(ctx context.Context) UpstreamOutp
 // UpstreamArrayInput is an input type that accepts UpstreamArray and UpstreamArrayOutput values.
 // You can construct a concrete instance of `UpstreamArrayInput` via:
 //
-//          UpstreamArray{ UpstreamArgs{...} }
+//	UpstreamArray{ UpstreamArgs{...} }
 type UpstreamArrayInput interface {
 	pulumi.Input
 
@@ -430,7 +438,7 @@ func (i UpstreamArray) ToUpstreamArrayOutputWithContext(ctx context.Context) Ups
 // UpstreamMapInput is an input type that accepts UpstreamMap and UpstreamMapOutput values.
 // You can construct a concrete instance of `UpstreamMapInput` via:
 //
-//          UpstreamMap{ "key": UpstreamArgs{...} }
+//	UpstreamMap{ "key": UpstreamArgs{...} }
 type UpstreamMapInput interface {
 	pulumi.Input
 

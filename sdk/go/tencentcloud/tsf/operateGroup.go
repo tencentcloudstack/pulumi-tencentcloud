@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewOperateGroup(ctx, "operateGroup", &Tsf.OperateGroupArgs{
-// 			GroupId: pulumi.String("group-ynd95rea"),
-// 			Operate: pulumi.String("start"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewOperateGroup(ctx, "operateGroup", &Tsf.OperateGroupArgs{
+//				GroupId: pulumi.String("group-ynd95rea"),
+//				Operate: pulumi.String("start"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type OperateGroup struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *OperateGroup) ToOperateGroupOutputWithContext(ctx context.Context) Oper
 // OperateGroupArrayInput is an input type that accepts OperateGroupArray and OperateGroupArrayOutput values.
 // You can construct a concrete instance of `OperateGroupArrayInput` via:
 //
-//          OperateGroupArray{ OperateGroupArgs{...} }
+//	OperateGroupArray{ OperateGroupArgs{...} }
 type OperateGroupArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i OperateGroupArray) ToOperateGroupArrayOutputWithContext(ctx context.Cont
 // OperateGroupMapInput is an input type that accepts OperateGroupMap and OperateGroupMapOutput values.
 // You can construct a concrete instance of `OperateGroupMapInput` via:
 //
-//          OperateGroupMap{ "key": OperateGroupArgs{...} }
+//	OperateGroupMap{ "key": OperateGroupArgs{...} }
 type OperateGroupMapInput interface {
 	pulumi.Input
 

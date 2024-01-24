@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.NewWorkGroup(ctx, "workGroup", &Dlc.WorkGroupArgs{
-// 			WorkGroupDescription: pulumi.String("dlc workgroup test"),
-// 			WorkGroupName:        pulumi.String("tf-demo"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.NewWorkGroup(ctx, "workGroup", &Dlc.WorkGroupArgs{
+//				WorkGroupDescription: pulumi.String("dlc workgroup test"),
+//				WorkGroupName:        pulumi.String("tf-demo"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // dlc work_group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dlc/workGroup:WorkGroup work_group work_group_id
+//
+//	$ pulumi import tencentcloud:Dlc/workGroup:WorkGroup work_group work_group_id
+//
 // ```
 type WorkGroup struct {
 	pulumi.CustomResourceState
@@ -150,7 +155,7 @@ func (i *WorkGroup) ToWorkGroupOutputWithContext(ctx context.Context) WorkGroupO
 // WorkGroupArrayInput is an input type that accepts WorkGroupArray and WorkGroupArrayOutput values.
 // You can construct a concrete instance of `WorkGroupArrayInput` via:
 //
-//          WorkGroupArray{ WorkGroupArgs{...} }
+//	WorkGroupArray{ WorkGroupArgs{...} }
 type WorkGroupArrayInput interface {
 	pulumi.Input
 
@@ -175,7 +180,7 @@ func (i WorkGroupArray) ToWorkGroupArrayOutputWithContext(ctx context.Context) W
 // WorkGroupMapInput is an input type that accepts WorkGroupMap and WorkGroupMapOutput values.
 // You can construct a concrete instance of `WorkGroupMapInput` via:
 //
-//          WorkGroupMap{ "key": WorkGroupArgs{...} }
+//	WorkGroupMap{ "key": WorkGroupArgs{...} }
 type WorkGroupMapInput interface {
 	pulumi.Input
 

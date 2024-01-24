@@ -68,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     public partial class GrafanaInstance : Pulumi.CustomResource
     {
         /// <summary>
+        /// Whether to automatically use vouchers.
+        /// </summary>
+        [Output("autoVoucher")]
+        public Output<bool?> AutoVoucher { get; private set; } = null!;
+
+        /// <summary>
         /// Control whether grafana could be accessed by internet.
         /// </summary>
         [Output("enableInternet")]
@@ -193,6 +199,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     public sealed class GrafanaInstanceArgs : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Whether to automatically use vouchers.
+        /// </summary>
+        [Input("autoVoucher")]
+        public Input<bool>? AutoVoucher { get; set; }
+
+        /// <summary>
         /// Control whether grafana could be accessed by internet.
         /// </summary>
         [Input("enableInternet")]
@@ -259,6 +271,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
 
     public sealed class GrafanaInstanceState : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Whether to automatically use vouchers.
+        /// </summary>
+        [Input("autoVoucher")]
+        public Input<bool>? AutoVoucher { get; set; }
+
         /// <summary>
         /// Control whether grafana could be accessed by internet.
         /// </summary>

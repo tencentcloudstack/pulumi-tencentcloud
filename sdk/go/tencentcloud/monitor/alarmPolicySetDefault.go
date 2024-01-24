@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewAlarmPolicySetDefault(ctx, "policySetDefault", &Monitor.AlarmPolicySetDefaultArgs{
-// 			Module:   pulumi.String("monitor"),
-// 			PolicyId: pulumi.String("policy-u4iykjkt"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.NewAlarmPolicySetDefault(ctx, "policySetDefault", &Monitor.AlarmPolicySetDefaultArgs{
+//				Module:   pulumi.String("monitor"),
+//				PolicyId: pulumi.String("policy-u4iykjkt"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type AlarmPolicySetDefault struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *AlarmPolicySetDefault) ToAlarmPolicySetDefaultOutputWithContext(ctx con
 // AlarmPolicySetDefaultArrayInput is an input type that accepts AlarmPolicySetDefaultArray and AlarmPolicySetDefaultArrayOutput values.
 // You can construct a concrete instance of `AlarmPolicySetDefaultArrayInput` via:
 //
-//          AlarmPolicySetDefaultArray{ AlarmPolicySetDefaultArgs{...} }
+//	AlarmPolicySetDefaultArray{ AlarmPolicySetDefaultArgs{...} }
 type AlarmPolicySetDefaultArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i AlarmPolicySetDefaultArray) ToAlarmPolicySetDefaultArrayOutputWithContex
 // AlarmPolicySetDefaultMapInput is an input type that accepts AlarmPolicySetDefaultMap and AlarmPolicySetDefaultMapOutput values.
 // You can construct a concrete instance of `AlarmPolicySetDefaultMapInput` via:
 //
-//          AlarmPolicySetDefaultMap{ "key": AlarmPolicySetDefaultArgs{...} }
+//	AlarmPolicySetDefaultMap{ "key": AlarmPolicySetDefaultArgs{...} }
 type AlarmPolicySetDefaultMapInput interface {
 	pulumi.Input
 

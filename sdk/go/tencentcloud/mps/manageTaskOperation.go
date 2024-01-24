@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewManageTaskOperation(ctx, "operation", &Mps.ManageTaskOperationArgs{
-// 			OperationType: pulumi.String("Abort"),
-// 			TaskId:        pulumi.String("2600010949-LiveScheduleTask-xxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewManageTaskOperation(ctx, "operation", &Mps.ManageTaskOperationArgs{
+//				OperationType: pulumi.String("Abort"),
+//				TaskId:        pulumi.String("2600010949-LiveScheduleTask-xxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ManageTaskOperation struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *ManageTaskOperation) ToManageTaskOperationOutputWithContext(ctx context
 // ManageTaskOperationArrayInput is an input type that accepts ManageTaskOperationArray and ManageTaskOperationArrayOutput values.
 // You can construct a concrete instance of `ManageTaskOperationArrayInput` via:
 //
-//          ManageTaskOperationArray{ ManageTaskOperationArgs{...} }
+//	ManageTaskOperationArray{ ManageTaskOperationArgs{...} }
 type ManageTaskOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i ManageTaskOperationArray) ToManageTaskOperationArrayOutputWithContext(ct
 // ManageTaskOperationMapInput is an input type that accepts ManageTaskOperationMap and ManageTaskOperationMapOutput values.
 // You can construct a concrete instance of `ManageTaskOperationMapInput` via:
 //
-//          ManageTaskOperationMap{ "key": ManageTaskOperationArgs{...} }
+//	ManageTaskOperationMap{ "key": ManageTaskOperationArgs{...} }
 type ManageTaskOperationMapInput interface {
 	pulumi.Input
 

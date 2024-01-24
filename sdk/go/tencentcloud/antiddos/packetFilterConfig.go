@@ -19,38 +19,41 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Antiddos.NewPacketFilterConfig(ctx, "packetFilterConfig", &Antiddos.PacketFilterConfigArgs{
-// 			InstanceId: pulumi.String("bgp-00000ry7"),
-// 			PacketFilterConfig: &antiddos.PacketFilterConfigPacketFilterConfigArgs{
-// 				Action:     pulumi.String("drop"),
-// 				Depth:      pulumi.Int(1),
-// 				DportEnd:   pulumi.Int(80),
-// 				DportStart: pulumi.Int(80),
-// 				IsNot:      pulumi.Int(0),
-// 				MatchBegin: pulumi.String("begin_l5"),
-// 				MatchType:  pulumi.String("pcre"),
-// 				Offset:     pulumi.Int(1),
-// 				PktlenMax:  pulumi.Int(1400),
-// 				PktlenMin:  pulumi.Int(1400),
-// 				Protocol:   pulumi.String("all"),
-// 				SportEnd:   pulumi.Int(8080),
-// 				SportStart: pulumi.Int(8080),
-// 				Str:        pulumi.String("a"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Antiddos.NewPacketFilterConfig(ctx, "packetFilterConfig", &Antiddos.PacketFilterConfigArgs{
+//				InstanceId: pulumi.String("bgp-00000ry7"),
+//				PacketFilterConfig: &antiddos.PacketFilterConfigPacketFilterConfigArgs{
+//					Action:     pulumi.String("drop"),
+//					Depth:      pulumi.Int(1),
+//					DportEnd:   pulumi.Int(80),
+//					DportStart: pulumi.Int(80),
+//					IsNot:      pulumi.Int(0),
+//					MatchBegin: pulumi.String("begin_l5"),
+//					MatchType:  pulumi.String("pcre"),
+//					Offset:     pulumi.Int(1),
+//					PktlenMax:  pulumi.Int(1400),
+//					PktlenMin:  pulumi.Int(1400),
+//					Protocol:   pulumi.String("all"),
+//					SportEnd:   pulumi.Int(8080),
+//					SportStart: pulumi.Int(8080),
+//					Str:        pulumi.String("a"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -58,7 +61,9 @@ import (
 // antiddos packet_filter_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Antiddos/packetFilterConfig:PacketFilterConfig packet_filter_config packet_filter_config_id
+//
+//	$ pulumi import tencentcloud:Antiddos/packetFilterConfig:PacketFilterConfig packet_filter_config packet_filter_config_id
+//
 // ```
 type PacketFilterConfig struct {
 	pulumi.CustomResourceState
@@ -163,7 +168,7 @@ func (i *PacketFilterConfig) ToPacketFilterConfigOutputWithContext(ctx context.C
 // PacketFilterConfigArrayInput is an input type that accepts PacketFilterConfigArray and PacketFilterConfigArrayOutput values.
 // You can construct a concrete instance of `PacketFilterConfigArrayInput` via:
 //
-//          PacketFilterConfigArray{ PacketFilterConfigArgs{...} }
+//	PacketFilterConfigArray{ PacketFilterConfigArgs{...} }
 type PacketFilterConfigArrayInput interface {
 	pulumi.Input
 
@@ -188,7 +193,7 @@ func (i PacketFilterConfigArray) ToPacketFilterConfigArrayOutputWithContext(ctx 
 // PacketFilterConfigMapInput is an input type that accepts PacketFilterConfigMap and PacketFilterConfigMapOutput values.
 // You can construct a concrete instance of `PacketFilterConfigMapInput` via:
 //
-//          PacketFilterConfigMap{ "key": PacketFilterConfigArgs{...} }
+//	PacketFilterConfigMap{ "key": PacketFilterConfigArgs{...} }
 type PacketFilterConfigMapInput interface {
 	pulumi.Input
 

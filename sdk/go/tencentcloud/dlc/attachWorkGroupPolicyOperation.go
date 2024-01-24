@@ -111,7 +111,7 @@ func (i *AttachWorkGroupPolicyOperation) ToAttachWorkGroupPolicyOperationOutputW
 // AttachWorkGroupPolicyOperationArrayInput is an input type that accepts AttachWorkGroupPolicyOperationArray and AttachWorkGroupPolicyOperationArrayOutput values.
 // You can construct a concrete instance of `AttachWorkGroupPolicyOperationArrayInput` via:
 //
-//          AttachWorkGroupPolicyOperationArray{ AttachWorkGroupPolicyOperationArgs{...} }
+//	AttachWorkGroupPolicyOperationArray{ AttachWorkGroupPolicyOperationArgs{...} }
 type AttachWorkGroupPolicyOperationArrayInput interface {
 	pulumi.Input
 
@@ -136,7 +136,7 @@ func (i AttachWorkGroupPolicyOperationArray) ToAttachWorkGroupPolicyOperationArr
 // AttachWorkGroupPolicyOperationMapInput is an input type that accepts AttachWorkGroupPolicyOperationMap and AttachWorkGroupPolicyOperationMapOutput values.
 // You can construct a concrete instance of `AttachWorkGroupPolicyOperationMapInput` via:
 //
-//          AttachWorkGroupPolicyOperationMap{ "key": AttachWorkGroupPolicyOperationArgs{...} }
+//	AttachWorkGroupPolicyOperationMap{ "key": AttachWorkGroupPolicyOperationArgs{...} }
 type AttachWorkGroupPolicyOperationMapInput interface {
 	pulumi.Input
 

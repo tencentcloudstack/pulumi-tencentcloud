@@ -19,100 +19,103 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		firewallTemplate, err := Lighthouse.NewFirewallTemplate(ctx, "firewallTemplate", &Lighthouse.FirewallTemplateArgs{
-// 			TemplateName: pulumi.String("empty-template"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Lighthouse.NewInstance(ctx, "lighthouse", &Lighthouse.InstanceArgs{
-// 			BundleId:     pulumi.String("bundle2022_gen_01"),
-// 			BlueprintId:  pulumi.String("lhbp-f1lkcd41"),
-// 			Period:       pulumi.Int(1),
-// 			RenewFlag:    pulumi.String("NOTIFY_AND_AUTO_RENEW"),
-// 			InstanceName: pulumi.String("hello world"),
-// 			Zone:         pulumi.String("ap-guangzhou-3"),
-// 			Containers: lighthouse.InstanceContainerArray{
-// 				&lighthouse.InstanceContainerArgs{
-// 					ContainerImage: pulumi.String("ccr.ccs.tencentyun.com/qcloud/nginx"),
-// 					ContainerName:  pulumi.String("nginx"),
-// 					Envs: lighthouse.InstanceContainerEnvArray{
-// 						&lighthouse.InstanceContainerEnvArgs{
-// 							Key:   pulumi.String("key"),
-// 							Value: pulumi.String("value"),
-// 						},
-// 						&lighthouse.InstanceContainerEnvArgs{
-// 							Key:   pulumi.String("key2"),
-// 							Value: pulumi.String("value2"),
-// 						},
-// 					},
-// 					PublishPorts: lighthouse.InstanceContainerPublishPortArray{
-// 						&lighthouse.InstanceContainerPublishPortArgs{
-// 							HostPort:      pulumi.Int(80),
-// 							ContainerPort: pulumi.Int(80),
-// 							Ip:            pulumi.String("127.0.0.1"),
-// 							Protocol:      pulumi.String("tcp"),
-// 						},
-// 						&lighthouse.InstanceContainerPublishPortArgs{
-// 							HostPort:      pulumi.Int(36000),
-// 							ContainerPort: pulumi.Int(36000),
-// 							Ip:            pulumi.String("127.0.0.1"),
-// 							Protocol:      pulumi.String("tcp"),
-// 						},
-// 					},
-// 					Volumes: lighthouse.InstanceContainerVolumeArray{
-// 						&lighthouse.InstanceContainerVolumeArgs{
-// 							ContainerPath: pulumi.String("/data"),
-// 							HostPath:      pulumi.String("/tmp"),
-// 						},
-// 						&lighthouse.InstanceContainerVolumeArgs{
-// 							ContainerPath: pulumi.String("/var"),
-// 							HostPath:      pulumi.String("/tmp"),
-// 						},
-// 					},
-// 					Command: pulumi.String("ls -l"),
-// 				},
-// 				&lighthouse.InstanceContainerArgs{
-// 					ContainerImage: pulumi.String("ccr.ccs.tencentyun.com/qcloud/resty"),
-// 					ContainerName:  pulumi.String("resty"),
-// 					Envs: lighthouse.InstanceContainerEnvArray{
-// 						&lighthouse.InstanceContainerEnvArgs{
-// 							Key:   pulumi.String("key2"),
-// 							Value: pulumi.String("value2"),
-// 						},
-// 					},
-// 					PublishPorts: lighthouse.InstanceContainerPublishPortArray{
-// 						&lighthouse.InstanceContainerPublishPortArgs{
-// 							HostPort:      pulumi.Int(80),
-// 							ContainerPort: pulumi.Int(80),
-// 							Ip:            pulumi.String("127.0.0.1"),
-// 							Protocol:      pulumi.String("udp"),
-// 						},
-// 					},
-// 					Volumes: lighthouse.InstanceContainerVolumeArray{
-// 						&lighthouse.InstanceContainerVolumeArgs{
-// 							ContainerPath: pulumi.String("/var"),
-// 							HostPath:      pulumi.String("/tmp"),
-// 						},
-// 					},
-// 					Command: pulumi.String("echo \"hello\""),
-// 				},
-// 			},
-// 			FirewallTemplateId: firewallTemplate.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			firewallTemplate, err := Lighthouse.NewFirewallTemplate(ctx, "firewallTemplate", &Lighthouse.FirewallTemplateArgs{
+//				TemplateName: pulumi.String("empty-template"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Lighthouse.NewInstance(ctx, "lighthouse", &Lighthouse.InstanceArgs{
+//				BundleId:     pulumi.String("bundle2022_gen_01"),
+//				BlueprintId:  pulumi.String("lhbp-f1lkcd41"),
+//				Period:       pulumi.Int(1),
+//				RenewFlag:    pulumi.String("NOTIFY_AND_AUTO_RENEW"),
+//				InstanceName: pulumi.String("hello world"),
+//				Zone:         pulumi.String("ap-guangzhou-3"),
+//				Containers: lighthouse.InstanceContainerArray{
+//					&lighthouse.InstanceContainerArgs{
+//						ContainerImage: pulumi.String("ccr.ccs.tencentyun.com/qcloud/nginx"),
+//						ContainerName:  pulumi.String("nginx"),
+//						Envs: lighthouse.InstanceContainerEnvArray{
+//							&lighthouse.InstanceContainerEnvArgs{
+//								Key:   pulumi.String("key"),
+//								Value: pulumi.String("value"),
+//							},
+//							&lighthouse.InstanceContainerEnvArgs{
+//								Key:   pulumi.String("key2"),
+//								Value: pulumi.String("value2"),
+//							},
+//						},
+//						PublishPorts: lighthouse.InstanceContainerPublishPortArray{
+//							&lighthouse.InstanceContainerPublishPortArgs{
+//								HostPort:      pulumi.Int(80),
+//								ContainerPort: pulumi.Int(80),
+//								Ip:            pulumi.String("127.0.0.1"),
+//								Protocol:      pulumi.String("tcp"),
+//							},
+//							&lighthouse.InstanceContainerPublishPortArgs{
+//								HostPort:      pulumi.Int(36000),
+//								ContainerPort: pulumi.Int(36000),
+//								Ip:            pulumi.String("127.0.0.1"),
+//								Protocol:      pulumi.String("tcp"),
+//							},
+//						},
+//						Volumes: lighthouse.InstanceContainerVolumeArray{
+//							&lighthouse.InstanceContainerVolumeArgs{
+//								ContainerPath: pulumi.String("/data"),
+//								HostPath:      pulumi.String("/tmp"),
+//							},
+//							&lighthouse.InstanceContainerVolumeArgs{
+//								ContainerPath: pulumi.String("/var"),
+//								HostPath:      pulumi.String("/tmp"),
+//							},
+//						},
+//						Command: pulumi.String("ls -l"),
+//					},
+//					&lighthouse.InstanceContainerArgs{
+//						ContainerImage: pulumi.String("ccr.ccs.tencentyun.com/qcloud/resty"),
+//						ContainerName:  pulumi.String("resty"),
+//						Envs: lighthouse.InstanceContainerEnvArray{
+//							&lighthouse.InstanceContainerEnvArgs{
+//								Key:   pulumi.String("key2"),
+//								Value: pulumi.String("value2"),
+//							},
+//						},
+//						PublishPorts: lighthouse.InstanceContainerPublishPortArray{
+//							&lighthouse.InstanceContainerPublishPortArgs{
+//								HostPort:      pulumi.Int(80),
+//								ContainerPort: pulumi.Int(80),
+//								Ip:            pulumi.String("127.0.0.1"),
+//								Protocol:      pulumi.String("udp"),
+//							},
+//						},
+//						Volumes: lighthouse.InstanceContainerVolumeArray{
+//							&lighthouse.InstanceContainerVolumeArgs{
+//								ContainerPath: pulumi.String("/var"),
+//								HostPath:      pulumi.String("/tmp"),
+//							},
+//						},
+//						Command: pulumi.String("echo \"hello\""),
+//					},
+//				},
+//				FirewallTemplateId: firewallTemplate.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -120,7 +123,9 @@ import (
 // lighthouse instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Lighthouse/instance:Instance lighthouse lhins-xxxxxx
+//
+//	$ pulumi import tencentcloud:Lighthouse/instance:Instance lighthouse lhins-xxxxxx
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -364,7 +369,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -389,7 +394,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

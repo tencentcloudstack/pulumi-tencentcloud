@@ -19,51 +19,54 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewStreamMonitor(ctx, "streamMonitor", &Css.StreamMonitorArgs{
-// 			AiAsrInputIndexLists: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 			},
-// 			AiFormatDiagnose: pulumi.Int(1),
-// 			AiOcrInputIndexLists: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 			},
-// 			AllowMonitorReport:      pulumi.Int(1),
-// 			AsrLanguage:             pulumi.Int(1),
-// 			CheckStreamBroken:       pulumi.Int(1),
-// 			CheckStreamLowFrameRate: pulumi.Int(1),
-// 			InputLists: css.StreamMonitorInputListArray{
-// 				&css.StreamMonitorInputListArgs{
-// 					InputApp:        pulumi.String("live"),
-// 					InputDomain:     pulumi.String("177154.push.tlivecloud.com"),
-// 					InputStreamName: pulumi.String("ppp"),
-// 				},
-// 			},
-// 			MonitorName: pulumi.String("test"),
-// 			NotifyPolicy: &css.StreamMonitorNotifyPolicyArgs{
-// 				CallbackUrl:      pulumi.String("http://example.com/test"),
-// 				NotifyPolicyType: pulumi.Int(1),
-// 			},
-// 			OcrLanguage: pulumi.Int(1),
-// 			OutputInfo: &css.StreamMonitorOutputInfoArgs{
-// 				OutputDomain:       pulumi.String("test122.jingxhu.top"),
-// 				OutputStreamHeight: pulumi.Int(1080),
-// 				OutputStreamName:   pulumi.String("afc7847d-1fe1-43bc-b1e4-20d86303c393"),
-// 				OutputStreamWidth:  pulumi.Int(1920),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewStreamMonitor(ctx, "streamMonitor", &Css.StreamMonitorArgs{
+//				AiAsrInputIndexLists: pulumi.IntArray{
+//					pulumi.Int(1),
+//				},
+//				AiFormatDiagnose: pulumi.Int(1),
+//				AiOcrInputIndexLists: pulumi.IntArray{
+//					pulumi.Int(1),
+//				},
+//				AllowMonitorReport:      pulumi.Int(1),
+//				AsrLanguage:             pulumi.Int(1),
+//				CheckStreamBroken:       pulumi.Int(1),
+//				CheckStreamLowFrameRate: pulumi.Int(1),
+//				InputLists: css.StreamMonitorInputListArray{
+//					&css.StreamMonitorInputListArgs{
+//						InputApp:        pulumi.String("live"),
+//						InputDomain:     pulumi.String("177154.push.tlivecloud.com"),
+//						InputStreamName: pulumi.String("ppp"),
+//					},
+//				},
+//				MonitorName: pulumi.String("test"),
+//				NotifyPolicy: &css.StreamMonitorNotifyPolicyArgs{
+//					CallbackUrl:      pulumi.String("http://example.com/test"),
+//					NotifyPolicyType: pulumi.Int(1),
+//				},
+//				OcrLanguage: pulumi.Int(1),
+//				OutputInfo: &css.StreamMonitorOutputInfoArgs{
+//					OutputDomain:       pulumi.String("test122.jingxhu.top"),
+//					OutputStreamHeight: pulumi.Int(1080),
+//					OutputStreamName:   pulumi.String("afc7847d-1fe1-43bc-b1e4-20d86303c393"),
+//					OutputStreamWidth:  pulumi.Int(1920),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -71,7 +74,9 @@ import (
 // css stream_monitor can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/streamMonitor:StreamMonitor stream_monitor stream_monitor_id
+//
+//	$ pulumi import tencentcloud:Css/streamMonitor:StreamMonitor stream_monitor stream_monitor_id
+//
 // ```
 type StreamMonitor struct {
 	pulumi.CustomResourceState
@@ -276,7 +281,7 @@ func (i *StreamMonitor) ToStreamMonitorOutputWithContext(ctx context.Context) St
 // StreamMonitorArrayInput is an input type that accepts StreamMonitorArray and StreamMonitorArrayOutput values.
 // You can construct a concrete instance of `StreamMonitorArrayInput` via:
 //
-//          StreamMonitorArray{ StreamMonitorArgs{...} }
+//	StreamMonitorArray{ StreamMonitorArgs{...} }
 type StreamMonitorArrayInput interface {
 	pulumi.Input
 
@@ -301,7 +306,7 @@ func (i StreamMonitorArray) ToStreamMonitorArrayOutputWithContext(ctx context.Co
 // StreamMonitorMapInput is an input type that accepts StreamMonitorMap and StreamMonitorMapOutput values.
 // You can construct a concrete instance of `StreamMonitorMapInput` via:
 //
-//          StreamMonitorMap{ "key": StreamMonitorArgs{...} }
+//	StreamMonitorMap{ "key": StreamMonitorArgs{...} }
 type StreamMonitorMapInput interface {
 	pulumi.Input
 

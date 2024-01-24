@@ -17,6 +17,11 @@ import * as utilities from "../utilities";
  *     endPointName: "terraform-test",
  *     endPointServiceId: "vpcsvc-69y13tdb",
  *     endPointVip: "10.0.2.1",
+ *     securityGroupsIds: [
+ *         "sg-ghvp9djf",
+ *         "sg-if748odn",
+ *         "sg-3k7vtgf7",
+ *     ],
  *     subnetId: "subnet-ljyn7h30",
  *     vpcId: "vpc-391sv4w3",
  * });
@@ -79,6 +84,10 @@ export class EndPoint extends pulumi.CustomResource {
      */
     public readonly endPointVip!: pulumi.Output<string | undefined>;
     /**
+     * Ordered security groups associated with the endpoint.
+     */
+    public readonly securityGroupsIds!: pulumi.Output<string[]>;
+    /**
      * state of end point.
      */
     public /*out*/ readonly state!: pulumi.Output<string>;
@@ -109,6 +118,7 @@ export class EndPoint extends pulumi.CustomResource {
             resourceInputs["endPointOwner"] = state ? state.endPointOwner : undefined;
             resourceInputs["endPointServiceId"] = state ? state.endPointServiceId : undefined;
             resourceInputs["endPointVip"] = state ? state.endPointVip : undefined;
+            resourceInputs["securityGroupsIds"] = state ? state.securityGroupsIds : undefined;
             resourceInputs["state"] = state ? state.state : undefined;
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
@@ -129,6 +139,7 @@ export class EndPoint extends pulumi.CustomResource {
             resourceInputs["endPointName"] = args ? args.endPointName : undefined;
             resourceInputs["endPointServiceId"] = args ? args.endPointServiceId : undefined;
             resourceInputs["endPointVip"] = args ? args.endPointVip : undefined;
+            resourceInputs["securityGroupsIds"] = args ? args.securityGroupsIds : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
@@ -165,6 +176,10 @@ export interface EndPointState {
      */
     endPointVip?: pulumi.Input<string>;
     /**
+     * Ordered security groups associated with the endpoint.
+     */
+    securityGroupsIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * state of end point.
      */
     state?: pulumi.Input<string>;
@@ -194,6 +209,10 @@ export interface EndPointArgs {
      * VIP of endpoint ip.
      */
     endPointVip?: pulumi.Input<string>;
+    /**
+     * Ordered security groups associated with the endpoint.
+     */
+    securityGroupsIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * ID of subnet instance.
      */

@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewPeerConnectRejectOperation(ctx, "peerConnectRejectOperation", &Vpc.PeerConnectRejectOperationArgs{
-// 			PeeringConnectionId: pulumi.String("pcx-abced"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.NewPeerConnectRejectOperation(ctx, "peerConnectRejectOperation", &Vpc.PeerConnectRejectOperationArgs{
+//				PeeringConnectionId: pulumi.String("pcx-abced"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type PeerConnectRejectOperation struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *PeerConnectRejectOperation) ToPeerConnectRejectOperationOutputWithConte
 // PeerConnectRejectOperationArrayInput is an input type that accepts PeerConnectRejectOperationArray and PeerConnectRejectOperationArrayOutput values.
 // You can construct a concrete instance of `PeerConnectRejectOperationArrayInput` via:
 //
-//          PeerConnectRejectOperationArray{ PeerConnectRejectOperationArgs{...} }
+//	PeerConnectRejectOperationArray{ PeerConnectRejectOperationArgs{...} }
 type PeerConnectRejectOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i PeerConnectRejectOperationArray) ToPeerConnectRejectOperationArrayOutput
 // PeerConnectRejectOperationMapInput is an input type that accepts PeerConnectRejectOperationMap and PeerConnectRejectOperationMapOutput values.
 // You can construct a concrete instance of `PeerConnectRejectOperationMapInput` via:
 //
-//          PeerConnectRejectOperationMap{ "key": PeerConnectRejectOperationArgs{...} }
+//	PeerConnectRejectOperationMap{ "key": PeerConnectRejectOperationArgs{...} }
 type PeerConnectRejectOperationMapInput interface {
 	pulumi.Input
 

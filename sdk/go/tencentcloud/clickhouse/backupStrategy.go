@@ -19,52 +19,55 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clickhouse.NewBackup(ctx, "backup", &Clickhouse.BackupArgs{
-// 			CosBucketName: pulumi.String("xxxxxx"),
-// 			InstanceId:    pulumi.String("cdwch-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Clickhouse.NewBackupStrategy(ctx, "backupStrategy", &Clickhouse.BackupStrategyArgs{
-// 			DataBackupStrategies: clickhouse.BackupStrategyDataBackupStrategyArray{
-// 				&clickhouse.BackupStrategyDataBackupStrategyArgs{
-// 					BackUpTables: clickhouse.BackupStrategyDataBackupStrategyBackUpTableArray{
-// 						&clickhouse.BackupStrategyDataBackupStrategyBackUpTableArgs{
-// 							Database:   pulumi.String("iac"),
-// 							Ips:        pulumi.String("10.0.0.35"),
-// 							Table:      pulumi.String("my_table"),
-// 							TotalBytes: pulumi.Int(0),
-// 							VCluster:   pulumi.String("default_cluster"),
-// 						},
-// 					},
-// 					ExecuteHour: pulumi.Int(1),
-// 					RetainDays:  pulumi.Int(2),
-// 					WeekDays:    pulumi.String("3"),
-// 				},
-// 			},
-// 			InstanceId: pulumi.String("cdwch-xxxxxx"),
-// 			MetaBackupStrategies: clickhouse.BackupStrategyMetaBackupStrategyArray{
-// 				&clickhouse.BackupStrategyMetaBackupStrategyArgs{
-// 					ExecuteHour: pulumi.Int(3),
-// 					RetainDays:  pulumi.Int(2),
-// 					WeekDays:    pulumi.String("1"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clickhouse.NewBackup(ctx, "backup", &Clickhouse.BackupArgs{
+//				CosBucketName: pulumi.String("xxxxxx"),
+//				InstanceId:    pulumi.String("cdwch-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Clickhouse.NewBackupStrategy(ctx, "backupStrategy", &Clickhouse.BackupStrategyArgs{
+//				DataBackupStrategies: clickhouse.BackupStrategyDataBackupStrategyArray{
+//					&clickhouse.BackupStrategyDataBackupStrategyArgs{
+//						BackUpTables: clickhouse.BackupStrategyDataBackupStrategyBackUpTableArray{
+//							&clickhouse.BackupStrategyDataBackupStrategyBackUpTableArgs{
+//								Database:   pulumi.String("iac"),
+//								Ips:        pulumi.String("10.0.0.35"),
+//								Table:      pulumi.String("my_table"),
+//								TotalBytes: pulumi.Int(0),
+//								VCluster:   pulumi.String("default_cluster"),
+//							},
+//						},
+//						ExecuteHour: pulumi.Int(1),
+//						RetainDays:  pulumi.Int(2),
+//						WeekDays:    pulumi.String("3"),
+//					},
+//				},
+//				InstanceId: pulumi.String("cdwch-xxxxxx"),
+//				MetaBackupStrategies: clickhouse.BackupStrategyMetaBackupStrategyArray{
+//					&clickhouse.BackupStrategyMetaBackupStrategyArgs{
+//						ExecuteHour: pulumi.Int(3),
+//						RetainDays:  pulumi.Int(2),
+//						WeekDays:    pulumi.String("1"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -72,7 +75,9 @@ import (
 // clickhouse backup_strategy can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clickhouse/backupStrategy:BackupStrategy backup_strategy instance_id
+//
+//	$ pulumi import tencentcloud:Clickhouse/backupStrategy:BackupStrategy backup_strategy instance_id
+//
 // ```
 type BackupStrategy struct {
 	pulumi.CustomResourceState
@@ -187,7 +192,7 @@ func (i *BackupStrategy) ToBackupStrategyOutputWithContext(ctx context.Context) 
 // BackupStrategyArrayInput is an input type that accepts BackupStrategyArray and BackupStrategyArrayOutput values.
 // You can construct a concrete instance of `BackupStrategyArrayInput` via:
 //
-//          BackupStrategyArray{ BackupStrategyArgs{...} }
+//	BackupStrategyArray{ BackupStrategyArgs{...} }
 type BackupStrategyArrayInput interface {
 	pulumi.Input
 
@@ -212,7 +217,7 @@ func (i BackupStrategyArray) ToBackupStrategyArrayOutputWithContext(ctx context.
 // BackupStrategyMapInput is an input type that accepts BackupStrategyMap and BackupStrategyMapOutput values.
 // You can construct a concrete instance of `BackupStrategyMapInput` via:
 //
-//          BackupStrategyMap{ "key": BackupStrategyArgs{...} }
+//	BackupStrategyMap{ "key": BackupStrategyArgs{...} }
 type BackupStrategyMapInput interface {
 	pulumi.Input
 

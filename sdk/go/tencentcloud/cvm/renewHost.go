@@ -124,7 +124,7 @@ func (i *RenewHost) ToRenewHostOutputWithContext(ctx context.Context) RenewHostO
 // RenewHostArrayInput is an input type that accepts RenewHostArray and RenewHostArrayOutput values.
 // You can construct a concrete instance of `RenewHostArrayInput` via:
 //
-//          RenewHostArray{ RenewHostArgs{...} }
+//	RenewHostArray{ RenewHostArgs{...} }
 type RenewHostArrayInput interface {
 	pulumi.Input
 
@@ -149,7 +149,7 @@ func (i RenewHostArray) ToRenewHostArrayOutputWithContext(ctx context.Context) R
 // RenewHostMapInput is an input type that accepts RenewHostMap and RenewHostMapOutput values.
 // You can construct a concrete instance of `RenewHostMapInput` via:
 //
-//          RenewHostMap{ "key": RenewHostArgs{...} }
+//	RenewHostMap{ "key": RenewHostArgs{...} }
 type RenewHostMapInput interface {
 	pulumi.Input
 

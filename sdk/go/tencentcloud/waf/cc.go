@@ -19,32 +19,35 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewCc(ctx, "example", &Waf.CcArgs{
-// 			ActionType: pulumi.String("22"),
-// 			Advance:    pulumi.String("0"),
-// 			Domain:     pulumi.String("www.demo.com"),
-// 			Edition:    pulumi.String("sparta-waf"),
-// 			Interval:   pulumi.String("60"),
-// 			Limit:      pulumi.String("60"),
-// 			MatchFunc:  pulumi.Int(0),
-// 			Priority:   pulumi.Int(50),
-// 			Status:     pulumi.Int(1),
-// 			Type:       pulumi.Int(1),
-// 			Url:        pulumi.String("/cc_demo"),
-// 			ValidTime:  pulumi.Int(600),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewCc(ctx, "example", &Waf.CcArgs{
+//				ActionType: pulumi.String("22"),
+//				Advance:    pulumi.String("0"),
+//				Domain:     pulumi.String("www.demo.com"),
+//				Edition:    pulumi.String("sparta-waf"),
+//				Interval:   pulumi.String("60"),
+//				Limit:      pulumi.String("60"),
+//				MatchFunc:  pulumi.Int(0),
+//				Priority:   pulumi.Int(50),
+//				Status:     pulumi.Int(1),
+//				Type:       pulumi.Int(1),
+//				Url:        pulumi.String("/cc_demo"),
+//				ValidTime:  pulumi.Int(600),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Cc struct {
 	pulumi.CustomResourceState
@@ -312,7 +315,7 @@ func (i *Cc) ToCcOutputWithContext(ctx context.Context) CcOutput {
 // CcArrayInput is an input type that accepts CcArray and CcArrayOutput values.
 // You can construct a concrete instance of `CcArrayInput` via:
 //
-//          CcArray{ CcArgs{...} }
+//	CcArray{ CcArgs{...} }
 type CcArrayInput interface {
 	pulumi.Input
 
@@ -337,7 +340,7 @@ func (i CcArray) ToCcArrayOutputWithContext(ctx context.Context) CcArrayOutput {
 // CcMapInput is an input type that accepts CcMap and CcMapOutput values.
 // You can construct a concrete instance of `CcMapInput` via:
 //
-//          CcMap{ "key": CcArgs{...} }
+//	CcMap{ "key": CcArgs{...} }
 type CcMapInput interface {
 	pulumi.Input
 

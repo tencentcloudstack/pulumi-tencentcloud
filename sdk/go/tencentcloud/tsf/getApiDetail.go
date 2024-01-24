@@ -18,26 +18,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.GetApiDetail(ctx, &tsf.GetApiDetailArgs{
-// 			ApplicationId:  "application-a24x29xv",
-// 			Method:         "GET",
-// 			MicroserviceId: "ms-yq3jo6jd",
-// 			Path:           "/printRequest",
-// 			PkgVersion:     "20210625192923",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.GetApiDetail(ctx, &tsf.GetApiDetailArgs{
+//				ApplicationId:  "application-a24x29xv",
+//				Method:         "GET",
+//				MicroserviceId: "ms-yq3jo6jd",
+//				Path:           "/printRequest",
+//				PkgVersion:     "20210625192923",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupApiDetail(ctx *pulumi.Context, args *LookupApiDetailArgs, opts ...pulumi.InvokeOption) (*LookupApiDetailResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

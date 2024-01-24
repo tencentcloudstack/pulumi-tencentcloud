@@ -19,36 +19,39 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.NewLogstashPipeline(ctx, "logstashPipeline", &Elasticsearch.LogstashPipelineArgs{
-// 			InstanceId: pulumi.String("ls-xxxxxx"),
-// 			OpType:     pulumi.Int(2),
-// 			Pipeline: &elasticsearch.LogstashPipelinePipelineArgs{
-// 				BatchDelay:            pulumi.Int(50),
-// 				BatchSize:             pulumi.Int(125),
-// 				Config:                pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v", "input{\n", "\n", "}\n", "filter{\n", "\n", "}\n", "output{\n", "\n", "}\n", "\n")),
-// 				PipelineDesc:          pulumi.String(""),
-// 				PipelineId:            pulumi.String("logstash-pipeline-test"),
-// 				QueueCheckPointWrites: pulumi.Int(0),
-// 				QueueMaxBytes:         pulumi.String(""),
-// 				QueueType:             pulumi.String("memory"),
-// 				Workers:               pulumi.Int(1),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.NewLogstashPipeline(ctx, "logstashPipeline", &Elasticsearch.LogstashPipelineArgs{
+//				InstanceId: pulumi.String("ls-xxxxxx"),
+//				OpType:     pulumi.Int(2),
+//				Pipeline: &elasticsearch.LogstashPipelinePipelineArgs{
+//					BatchDelay:            pulumi.Int(50),
+//					BatchSize:             pulumi.Int(125),
+//					Config:                pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v", "input{\n", "\n", "}\n", "filter{\n", "\n", "}\n", "output{\n", "\n", "}\n", "\n")),
+//					PipelineDesc:          pulumi.String(""),
+//					PipelineId:            pulumi.String("logstash-pipeline-test"),
+//					QueueCheckPointWrites: pulumi.Int(0),
+//					QueueMaxBytes:         pulumi.String(""),
+//					QueueType:             pulumi.String("memory"),
+//					Workers:               pulumi.Int(1),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -56,7 +59,9 @@ import (
 // elasticsearch logstash_pipeline can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Elasticsearch/logstashPipeline:LogstashPipeline logstash_pipeline ${instance_id}#${pipeline_id}
+//
+//	$ pulumi import tencentcloud:Elasticsearch/logstashPipeline:LogstashPipeline logstash_pipeline ${instance_id}#${pipeline_id}
+//
 // ```
 type LogstashPipeline struct {
 	pulumi.CustomResourceState
@@ -174,7 +179,7 @@ func (i *LogstashPipeline) ToLogstashPipelineOutputWithContext(ctx context.Conte
 // LogstashPipelineArrayInput is an input type that accepts LogstashPipelineArray and LogstashPipelineArrayOutput values.
 // You can construct a concrete instance of `LogstashPipelineArrayInput` via:
 //
-//          LogstashPipelineArray{ LogstashPipelineArgs{...} }
+//	LogstashPipelineArray{ LogstashPipelineArgs{...} }
 type LogstashPipelineArrayInput interface {
 	pulumi.Input
 
@@ -199,7 +204,7 @@ func (i LogstashPipelineArray) ToLogstashPipelineArrayOutputWithContext(ctx cont
 // LogstashPipelineMapInput is an input type that accepts LogstashPipelineMap and LogstashPipelineMapOutput values.
 // You can construct a concrete instance of `LogstashPipelineMapInput` via:
 //
-//          LogstashPipelineMap{ "key": LogstashPipelineArgs{...} }
+//	LogstashPipelineMap{ "key": LogstashPipelineArgs{...} }
 type LogstashPipelineMapInput interface {
 	pulumi.Input
 

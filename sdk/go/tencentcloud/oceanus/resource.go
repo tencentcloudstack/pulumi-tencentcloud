@@ -19,34 +19,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.NewResource(ctx, "example", &Oceanus.ResourceArgs{
-// 			FolderId:             pulumi.String("folder-7ctl246z"),
-// 			Remark:               pulumi.String("remark."),
-// 			ResourceConfigRemark: pulumi.String("config remark."),
-// 			ResourceLoc: &oceanus.ResourceResourceLocArgs{
-// 				Param: &oceanus.ResourceResourceLocParamArgs{
-// 					Bucket: pulumi.String("keep-terraform-1257058945"),
-// 					Path:   pulumi.String("OceanusResource/junit-4.13.2.jar"),
-// 					Region: pulumi.String("ap-guangzhou"),
-// 				},
-// 				StorageType: pulumi.Int(1),
-// 			},
-// 			ResourceType: pulumi.Int(1),
-// 			WorkSpaceId:  pulumi.String("space-2idq8wbr"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.NewResource(ctx, "example", &Oceanus.ResourceArgs{
+//				FolderId:             pulumi.String("folder-7ctl246z"),
+//				Remark:               pulumi.String("remark."),
+//				ResourceConfigRemark: pulumi.String("config remark."),
+//				ResourceLoc: &oceanus.ResourceResourceLocArgs{
+//					Param: &oceanus.ResourceResourceLocParamArgs{
+//						Bucket: pulumi.String("keep-terraform-1257058945"),
+//						Path:   pulumi.String("OceanusResource/junit-4.13.2.jar"),
+//						Region: pulumi.String("ap-guangzhou"),
+//					},
+//					StorageType: pulumi.Int(1),
+//				},
+//				ResourceType: pulumi.Int(1),
+//				WorkSpaceId:  pulumi.String("space-2idq8wbr"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Resource struct {
 	pulumi.CustomResourceState
@@ -213,7 +216,7 @@ func (i *Resource) ToResourceOutputWithContext(ctx context.Context) ResourceOutp
 // ResourceArrayInput is an input type that accepts ResourceArray and ResourceArrayOutput values.
 // You can construct a concrete instance of `ResourceArrayInput` via:
 //
-//          ResourceArray{ ResourceArgs{...} }
+//	ResourceArray{ ResourceArgs{...} }
 type ResourceArrayInput interface {
 	pulumi.Input
 
@@ -238,7 +241,7 @@ func (i ResourceArray) ToResourceArrayOutputWithContext(ctx context.Context) Res
 // ResourceMapInput is an input type that accepts ResourceMap and ResourceMapOutput values.
 // You can construct a concrete instance of `ResourceMapInput` via:
 //
-//          ResourceMap{ "key": ResourceArgs{...} }
+//	ResourceMap{ "key": ResourceArgs{...} }
 type ResourceMapInput interface {
 	pulumi.Input
 

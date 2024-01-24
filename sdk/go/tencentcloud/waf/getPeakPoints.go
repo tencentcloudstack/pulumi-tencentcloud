@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.GetPeakPoints(ctx, &waf.GetPeakPointsArgs{
-// 			FromTime: "2023-09-01 00:00:00",
-// 			ToTime:   "2023-09-07 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.GetPeakPoints(ctx, &waf.GetPeakPointsArgs{
+//				FromTime: "2023-09-01 00:00:00",
+//				ToTime:   "2023-09-07 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Query by filter
 //
@@ -43,27 +46,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.GetPeakPoints(ctx, &waf.GetPeakPointsArgs{
-// 			Domain:     pulumi.StringRef("domain.com"),
-// 			Edition:    pulumi.StringRef("clb-waf"),
-// 			FromTime:   "2023-09-01 00:00:00",
-// 			InstanceId: pulumi.StringRef("waf_2kxtlbky00b2v1fn"),
-// 			MetricName: pulumi.StringRef("access"),
-// 			ToTime:     "2023-09-07 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.GetPeakPoints(ctx, &waf.GetPeakPointsArgs{
+//				Domain:     pulumi.StringRef("domain.com"),
+//				Edition:    pulumi.StringRef("clb-waf"),
+//				FromTime:   "2023-09-01 00:00:00",
+//				InstanceId: pulumi.StringRef("waf_2kxtlbky00b2v1fn"),
+//				MetricName: pulumi.StringRef("access"),
+//				ToTime:     "2023-09-07 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetPeakPoints(ctx *pulumi.Context, args *GetPeakPointsArgs, opts ...pulumi.InvokeOption) (*GetPeakPointsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

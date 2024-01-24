@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.NewDiagnose(ctx, "diagnose", &Elasticsearch.DiagnoseArgs{
-// 			CronTime:   pulumi.String("15:00:00"),
-// 			InstanceId: pulumi.String("es-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.NewDiagnose(ctx, "diagnose", &Elasticsearch.DiagnoseArgs{
+//				CronTime:   pulumi.String("15:00:00"),
+//				InstanceId: pulumi.String("es-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // es diagnose can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Elasticsearch/diagnose:Diagnose diagnose diagnose_id
+//
+//	$ pulumi import tencentcloud:Elasticsearch/diagnose:Diagnose diagnose diagnose_id
+//
 // ```
 type Diagnose struct {
 	pulumi.CustomResourceState
@@ -156,7 +161,7 @@ func (i *Diagnose) ToDiagnoseOutputWithContext(ctx context.Context) DiagnoseOutp
 // DiagnoseArrayInput is an input type that accepts DiagnoseArray and DiagnoseArrayOutput values.
 // You can construct a concrete instance of `DiagnoseArrayInput` via:
 //
-//          DiagnoseArray{ DiagnoseArgs{...} }
+//	DiagnoseArray{ DiagnoseArgs{...} }
 type DiagnoseArrayInput interface {
 	pulumi.Input
 
@@ -181,7 +186,7 @@ func (i DiagnoseArray) ToDiagnoseArrayOutputWithContext(ctx context.Context) Dia
 // DiagnoseMapInput is an input type that accepts DiagnoseMap and DiagnoseMapOutput values.
 // You can construct a concrete instance of `DiagnoseMapInput` via:
 //
-//          DiagnoseMap{ "key": DiagnoseArgs{...} }
+//	DiagnoseMap{ "key": DiagnoseArgs{...} }
 type DiagnoseMapInput interface {
 	pulumi.Input
 

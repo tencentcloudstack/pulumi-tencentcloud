@@ -18,19 +18,22 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewSyncAsset(ctx, "example", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.NewSyncAsset(ctx, "example", nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SyncAsset struct {
 	pulumi.CustomResourceState
@@ -108,7 +111,7 @@ func (i *SyncAsset) ToSyncAssetOutputWithContext(ctx context.Context) SyncAssetO
 // SyncAssetArrayInput is an input type that accepts SyncAssetArray and SyncAssetArrayOutput values.
 // You can construct a concrete instance of `SyncAssetArrayInput` via:
 //
-//          SyncAssetArray{ SyncAssetArgs{...} }
+//	SyncAssetArray{ SyncAssetArgs{...} }
 type SyncAssetArrayInput interface {
 	pulumi.Input
 
@@ -133,7 +136,7 @@ func (i SyncAssetArray) ToSyncAssetArrayOutputWithContext(ctx context.Context) S
 // SyncAssetMapInput is an input type that accepts SyncAssetMap and SyncAssetMapOutput values.
 // You can construct a concrete instance of `SyncAssetMapInput` via:
 //
-//          SyncAssetMap{ "key": SyncAssetArgs{...} }
+//	SyncAssetMap{ "key": SyncAssetArgs{...} }
 type SyncAssetMapInput interface {
 	pulumi.Input
 

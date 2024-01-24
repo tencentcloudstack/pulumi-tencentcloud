@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.GetTopicSubscribeGroup(ctx, &ckafka.GetTopicSubscribeGroupArgs{
-// 			InstanceId: "ckafka-xxxxxx",
-// 			TopicName:  "xxxxxx",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.GetTopicSubscribeGroup(ctx, &ckafka.GetTopicSubscribeGroupArgs{
+//				InstanceId: "ckafka-xxxxxx",
+//				TopicName:  "xxxxxx",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetTopicSubscribeGroup(ctx *pulumi.Context, args *GetTopicSubscribeGroupArgs, opts ...pulumi.InvokeOption) (*GetTopicSubscribeGroupResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -19,99 +19,102 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		service, err := Dts.NewMigrateService(ctx, "service", &Dts.MigrateServiceArgs{
-// 			SrcDatabaseType: pulumi.String("mysql"),
-// 			DstDatabaseType: pulumi.String("cynosdbmysql"),
-// 			SrcRegion:       pulumi.String("ap-guangzhou"),
-// 			DstRegion:       pulumi.String("ap-guangzhou"),
-// 			InstanceClass:   pulumi.String("small"),
-// 			JobName:         pulumi.String("tf_test_xxx"),
-// 			Tags: dts.MigrateServiceTagArray{
-// 				&dts.MigrateServiceTagArgs{
-// 					TagKey:   pulumi.String("aaa"),
-// 					TagValue: pulumi.String("bbb"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		job, err := Dts.NewMigrateJob(ctx, "job", &Dts.MigrateJobArgs{
-// 			ServiceId: service.ID(),
-// 			RunMode:   pulumi.String("immediate"),
-// 			MigrateOption: &dts.MigrateJobMigrateOptionArgs{
-// 				DatabaseTable: &dts.MigrateJobMigrateOptionDatabaseTableArgs{
-// 					ObjectMode: pulumi.String("partial"),
-// 					Databases: dts.MigrateJobMigrateOptionDatabaseTableDatabaseArray{
-// 						&dts.MigrateJobMigrateOptionDatabaseTableDatabaseArgs{
-// 							DbName:    pulumi.String("tf_ci_test"),
-// 							DbMode:    pulumi.String("partial"),
-// 							TableMode: pulumi.String("partial"),
-// 							Tables: dts.MigrateJobMigrateOptionDatabaseTableDatabaseTableArray{
-// 								&dts.MigrateJobMigrateOptionDatabaseTableDatabaseTableArgs{
-// 									TableName:     pulumi.String("test"),
-// 									NewTableName:  pulumi.String("test_xxx"),
-// 									TableEditMode: pulumi.String("rename"),
-// 								},
-// 							},
-// 						},
-// 					},
-// 				},
-// 			},
-// 			SrcInfo: &dts.MigrateJobSrcInfoArgs{
-// 				Region:       pulumi.String("ap-guangzhou"),
-// 				AccessType:   pulumi.String("cdb"),
-// 				DatabaseType: pulumi.String("mysql"),
-// 				NodeType:     pulumi.String("simple"),
-// 				Infos: dts.MigrateJobSrcInfoInfoArray{
-// 					&dts.MigrateJobSrcInfoInfoArgs{
-// 						User:       pulumi.String("root"),
-// 						Password:   pulumi.String("xxx"),
-// 						InstanceId: pulumi.String("id"),
-// 					},
-// 				},
-// 			},
-// 			DstInfo: &dts.MigrateJobDstInfoArgs{
-// 				Region:       pulumi.String("ap-guangzhou"),
-// 				AccessType:   pulumi.String("cdb"),
-// 				DatabaseType: pulumi.String("cynosdbmysql"),
-// 				NodeType:     pulumi.String("simple"),
-// 				Infos: dts.MigrateJobDstInfoInfoArray{
-// 					&dts.MigrateJobDstInfoInfoArgs{
-// 						User:       pulumi.String("user"),
-// 						Password:   pulumi.String("xxx"),
-// 						InstanceId: pulumi.String("id"),
-// 					},
-// 				},
-// 			},
-// 			AutoRetryTimeRangeMinutes: pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		start, err := Dts.NewMigrateJobStartOperation(ctx, "start", &Dts.MigrateJobStartOperationArgs{
-// 			JobId: job.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Dts.NewMigrateJobConfig(ctx, "config", &Dts.MigrateJobConfigArgs{
-// 			JobId:  start.ID(),
-// 			Action: pulumi.String("pause"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			service, err := Dts.NewMigrateService(ctx, "service", &Dts.MigrateServiceArgs{
+//				SrcDatabaseType: pulumi.String("mysql"),
+//				DstDatabaseType: pulumi.String("cynosdbmysql"),
+//				SrcRegion:       pulumi.String("ap-guangzhou"),
+//				DstRegion:       pulumi.String("ap-guangzhou"),
+//				InstanceClass:   pulumi.String("small"),
+//				JobName:         pulumi.String("tf_test_xxx"),
+//				Tags: dts.MigrateServiceTagArray{
+//					&dts.MigrateServiceTagArgs{
+//						TagKey:   pulumi.String("aaa"),
+//						TagValue: pulumi.String("bbb"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			job, err := Dts.NewMigrateJob(ctx, "job", &Dts.MigrateJobArgs{
+//				ServiceId: service.ID(),
+//				RunMode:   pulumi.String("immediate"),
+//				MigrateOption: &dts.MigrateJobMigrateOptionArgs{
+//					DatabaseTable: &dts.MigrateJobMigrateOptionDatabaseTableArgs{
+//						ObjectMode: pulumi.String("partial"),
+//						Databases: dts.MigrateJobMigrateOptionDatabaseTableDatabaseArray{
+//							&dts.MigrateJobMigrateOptionDatabaseTableDatabaseArgs{
+//								DbName:    pulumi.String("tf_ci_test"),
+//								DbMode:    pulumi.String("partial"),
+//								TableMode: pulumi.String("partial"),
+//								Tables: dts.MigrateJobMigrateOptionDatabaseTableDatabaseTableArray{
+//									&dts.MigrateJobMigrateOptionDatabaseTableDatabaseTableArgs{
+//										TableName:     pulumi.String("test"),
+//										NewTableName:  pulumi.String("test_xxx"),
+//										TableEditMode: pulumi.String("rename"),
+//									},
+//								},
+//							},
+//						},
+//					},
+//				},
+//				SrcInfo: &dts.MigrateJobSrcInfoArgs{
+//					Region:       pulumi.String("ap-guangzhou"),
+//					AccessType:   pulumi.String("cdb"),
+//					DatabaseType: pulumi.String("mysql"),
+//					NodeType:     pulumi.String("simple"),
+//					Infos: dts.MigrateJobSrcInfoInfoArray{
+//						&dts.MigrateJobSrcInfoInfoArgs{
+//							User:       pulumi.String("root"),
+//							Password:   pulumi.String("xxx"),
+//							InstanceId: pulumi.String("id"),
+//						},
+//					},
+//				},
+//				DstInfo: &dts.MigrateJobDstInfoArgs{
+//					Region:       pulumi.String("ap-guangzhou"),
+//					AccessType:   pulumi.String("cdb"),
+//					DatabaseType: pulumi.String("cynosdbmysql"),
+//					NodeType:     pulumi.String("simple"),
+//					Infos: dts.MigrateJobDstInfoInfoArray{
+//						&dts.MigrateJobDstInfoInfoArgs{
+//							User:       pulumi.String("user"),
+//							Password:   pulumi.String("xxx"),
+//							InstanceId: pulumi.String("id"),
+//						},
+//					},
+//				},
+//				AutoRetryTimeRangeMinutes: pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			start, err := Dts.NewMigrateJobStartOperation(ctx, "start", &Dts.MigrateJobStartOperationArgs{
+//				JobId: job.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dts.NewMigrateJobConfig(ctx, "config", &Dts.MigrateJobConfigArgs{
+//				JobId:  start.ID(),
+//				Action: pulumi.String("pause"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Continue the a migration job
 //
@@ -119,22 +122,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewMigrateJobConfig(ctx, "config", &Dts.MigrateJobConfigArgs{
-// 			JobId:  pulumi.Any(tencentcloud_dts_migrate_job_start_operation.Start.Id),
-// 			Action: pulumi.String("continue"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewMigrateJobConfig(ctx, "config", &Dts.MigrateJobConfigArgs{
+//				JobId:  pulumi.Any(tencentcloud_dts_migrate_job_start_operation.Start.Id),
+//				Action: pulumi.String("continue"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Complete a migration job when the status is readyComplete
 //
@@ -142,22 +148,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewMigrateJobConfig(ctx, "config", &Dts.MigrateJobConfigArgs{
-// 			JobId:  pulumi.Any(tencentcloud_dts_migrate_job_start_operation.Start.Id),
-// 			Action: pulumi.String("continue"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewMigrateJobConfig(ctx, "config", &Dts.MigrateJobConfigArgs{
+//				JobId:  pulumi.Any(tencentcloud_dts_migrate_job_start_operation.Start.Id),
+//				Action: pulumi.String("continue"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Stop a running migration job
 //
@@ -165,22 +174,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewMigrateJobConfig(ctx, "config", &Dts.MigrateJobConfigArgs{
-// 			JobId:  pulumi.Any(tencentcloud_dts_migrate_job_start_operation.Start.Id),
-// 			Action: pulumi.String("stop"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewMigrateJobConfig(ctx, "config", &Dts.MigrateJobConfigArgs{
+//				JobId:  pulumi.Any(tencentcloud_dts_migrate_job_start_operation.Start.Id),
+//				Action: pulumi.String("stop"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Isolate a stopped/canceled migration job
 //
@@ -188,22 +200,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewMigrateJobConfig(ctx, "config", &Dts.MigrateJobConfigArgs{
-// 			JobId:  pulumi.Any(tencentcloud_dts_migrate_job_start_operation.Start.Id),
-// 			Action: pulumi.String("isolate"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewMigrateJobConfig(ctx, "config", &Dts.MigrateJobConfigArgs{
+//				JobId:  pulumi.Any(tencentcloud_dts_migrate_job_start_operation.Start.Id),
+//				Action: pulumi.String("isolate"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Recover a isolated migration job
 //
@@ -211,22 +226,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewMigrateJobConfig(ctx, "config", &Dts.MigrateJobConfigArgs{
-// 			JobId:  pulumi.Any(tencentcloud_dts_migrate_job_start_operation.Start.Id),
-// 			Action: pulumi.String("recover"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewMigrateJobConfig(ctx, "config", &Dts.MigrateJobConfigArgs{
+//				JobId:  pulumi.Any(tencentcloud_dts_migrate_job_start_operation.Start.Id),
+//				Action: pulumi.String("recover"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type MigrateJobConfig struct {
 	pulumi.CustomResourceState
@@ -341,7 +359,7 @@ func (i *MigrateJobConfig) ToMigrateJobConfigOutputWithContext(ctx context.Conte
 // MigrateJobConfigArrayInput is an input type that accepts MigrateJobConfigArray and MigrateJobConfigArrayOutput values.
 // You can construct a concrete instance of `MigrateJobConfigArrayInput` via:
 //
-//          MigrateJobConfigArray{ MigrateJobConfigArgs{...} }
+//	MigrateJobConfigArray{ MigrateJobConfigArgs{...} }
 type MigrateJobConfigArrayInput interface {
 	pulumi.Input
 
@@ -366,7 +384,7 @@ func (i MigrateJobConfigArray) ToMigrateJobConfigArrayOutputWithContext(ctx cont
 // MigrateJobConfigMapInput is an input type that accepts MigrateJobConfigMap and MigrateJobConfigMapOutput values.
 // You can construct a concrete instance of `MigrateJobConfigMapInput` via:
 //
-//          MigrateJobConfigMap{ "key": MigrateJobConfigArgs{...} }
+//	MigrateJobConfigMap{ "key": MigrateJobConfigArgs{...} }
 type MigrateJobConfigMapInput interface {
 	pulumi.Input
 

@@ -18,21 +18,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewUpdateCertificateRecordRollbackOperation(ctx, "updateCertificateRecordRollback", &Ssl.UpdateCertificateRecordRollbackOperationArgs{
-// 			DeployRecordId: pulumi.String("1603"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.NewUpdateCertificateRecordRollbackOperation(ctx, "updateCertificateRecordRollback", &Ssl.UpdateCertificateRecordRollbackOperationArgs{
+//				DeployRecordId: pulumi.String("1603"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -40,7 +43,9 @@ import (
 // ssl update_certificate_record_rollback can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssl/updateCertificateRecordRollbackOperation:UpdateCertificateRecordRollbackOperation update_certificate_record_rollback update_certificate_record_rollback_id
+//
+//	$ pulumi import tencentcloud:Ssl/updateCertificateRecordRollbackOperation:UpdateCertificateRecordRollbackOperation update_certificate_record_rollback update_certificate_record_rollback_id
+//
 // ```
 type UpdateCertificateRecordRollbackOperation struct {
 	pulumi.CustomResourceState
@@ -129,7 +134,7 @@ func (i *UpdateCertificateRecordRollbackOperation) ToUpdateCertificateRecordRoll
 // UpdateCertificateRecordRollbackOperationArrayInput is an input type that accepts UpdateCertificateRecordRollbackOperationArray and UpdateCertificateRecordRollbackOperationArrayOutput values.
 // You can construct a concrete instance of `UpdateCertificateRecordRollbackOperationArrayInput` via:
 //
-//          UpdateCertificateRecordRollbackOperationArray{ UpdateCertificateRecordRollbackOperationArgs{...} }
+//	UpdateCertificateRecordRollbackOperationArray{ UpdateCertificateRecordRollbackOperationArgs{...} }
 type UpdateCertificateRecordRollbackOperationArrayInput interface {
 	pulumi.Input
 
@@ -154,7 +159,7 @@ func (i UpdateCertificateRecordRollbackOperationArray) ToUpdateCertificateRecord
 // UpdateCertificateRecordRollbackOperationMapInput is an input type that accepts UpdateCertificateRecordRollbackOperationMap and UpdateCertificateRecordRollbackOperationMapOutput values.
 // You can construct a concrete instance of `UpdateCertificateRecordRollbackOperationMapInput` via:
 //
-//          UpdateCertificateRecordRollbackOperationMap{ "key": UpdateCertificateRecordRollbackOperationArgs{...} }
+//	UpdateCertificateRecordRollbackOperationMap{ "key": UpdateCertificateRecordRollbackOperationArgs{...} }
 type UpdateCertificateRecordRollbackOperationMapInput interface {
 	pulumi.Input
 

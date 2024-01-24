@@ -18,27 +18,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Antiddos.GetBgpBizTrend(ctx, &antiddos.GetBgpBizTrendArgs{
-// 			Business:   "bgp-multip",
-// 			EndTime:    "2023-11-22 10:25:00",
-// 			Flag:       0,
-// 			InstanceId: "bgp-00000ry7",
-// 			MetricName: "intraffic",
-// 			StartTime:  "2023-11-22 09:25:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Antiddos.GetBgpBizTrend(ctx, &antiddos.GetBgpBizTrendArgs{
+//				Business:   "bgp-multip",
+//				EndTime:    "2023-11-22 10:25:00",
+//				Flag:       0,
+//				InstanceId: "bgp-00000ry7",
+//				MetricName: "intraffic",
+//				StartTime:  "2023-11-22 09:25:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetBgpBizTrend(ctx *pulumi.Context, args *GetBgpBizTrendArgs, opts ...pulumi.InvokeOption) (*GetBgpBizTrendResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

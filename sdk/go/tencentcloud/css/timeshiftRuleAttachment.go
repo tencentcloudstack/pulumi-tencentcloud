@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewTimeshiftRuleAttachment(ctx, "timeshiftRuleAttachment", &Css.TimeshiftRuleAttachmentArgs{
-// 			AppName:    pulumi.String("qqq"),
-// 			DomainName: pulumi.String("177154.push.tlivecloud.com"),
-// 			StreamName: pulumi.String("ppp"),
-// 			TemplateId: pulumi.Int(252586),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewTimeshiftRuleAttachment(ctx, "timeshiftRuleAttachment", &Css.TimeshiftRuleAttachmentArgs{
+//				AppName:    pulumi.String("qqq"),
+//				DomainName: pulumi.String("177154.push.tlivecloud.com"),
+//				StreamName: pulumi.String("ppp"),
+//				TemplateId: pulumi.Int(252586),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // css timeshift_rule_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/timeshiftRuleAttachment:TimeshiftRuleAttachment timeshift_rule_attachment templateId#domainName
+//
+//	$ pulumi import tencentcloud:Css/timeshiftRuleAttachment:TimeshiftRuleAttachment timeshift_rule_attachment templateId#domainName
+//
 // ```
 type TimeshiftRuleAttachment struct {
 	pulumi.CustomResourceState
@@ -175,7 +180,7 @@ func (i *TimeshiftRuleAttachment) ToTimeshiftRuleAttachmentOutputWithContext(ctx
 // TimeshiftRuleAttachmentArrayInput is an input type that accepts TimeshiftRuleAttachmentArray and TimeshiftRuleAttachmentArrayOutput values.
 // You can construct a concrete instance of `TimeshiftRuleAttachmentArrayInput` via:
 //
-//          TimeshiftRuleAttachmentArray{ TimeshiftRuleAttachmentArgs{...} }
+//	TimeshiftRuleAttachmentArray{ TimeshiftRuleAttachmentArgs{...} }
 type TimeshiftRuleAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -200,7 +205,7 @@ func (i TimeshiftRuleAttachmentArray) ToTimeshiftRuleAttachmentArrayOutputWithCo
 // TimeshiftRuleAttachmentMapInput is an input type that accepts TimeshiftRuleAttachmentMap and TimeshiftRuleAttachmentMapOutput values.
 // You can construct a concrete instance of `TimeshiftRuleAttachmentMapInput` via:
 //
-//          TimeshiftRuleAttachmentMap{ "key": TimeshiftRuleAttachmentArgs{...} }
+//	TimeshiftRuleAttachmentMap{ "key": TimeshiftRuleAttachmentArgs{...} }
 type TimeshiftRuleAttachmentMapInput interface {
 	pulumi.Input
 

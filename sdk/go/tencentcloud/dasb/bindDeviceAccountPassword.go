@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewBindDeviceAccountPassword(ctx, "example", &Dasb.BindDeviceAccountPasswordArgs{
-// 			DeviceAccountId: pulumi.Int(16),
-// 			Password:        pulumi.String("TerraformPassword"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewBindDeviceAccountPassword(ctx, "example", &Dasb.BindDeviceAccountPasswordArgs{
+//				DeviceAccountId: pulumi.Int(16),
+//				Password:        pulumi.String("TerraformPassword"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type BindDeviceAccountPassword struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *BindDeviceAccountPassword) ToBindDeviceAccountPasswordOutputWithContext
 // BindDeviceAccountPasswordArrayInput is an input type that accepts BindDeviceAccountPasswordArray and BindDeviceAccountPasswordArrayOutput values.
 // You can construct a concrete instance of `BindDeviceAccountPasswordArrayInput` via:
 //
-//          BindDeviceAccountPasswordArray{ BindDeviceAccountPasswordArgs{...} }
+//	BindDeviceAccountPasswordArray{ BindDeviceAccountPasswordArgs{...} }
 type BindDeviceAccountPasswordArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i BindDeviceAccountPasswordArray) ToBindDeviceAccountPasswordArrayOutputWi
 // BindDeviceAccountPasswordMapInput is an input type that accepts BindDeviceAccountPasswordMap and BindDeviceAccountPasswordMapOutput values.
 // You can construct a concrete instance of `BindDeviceAccountPasswordMapInput` via:
 //
-//          BindDeviceAccountPasswordMap{ "key": BindDeviceAccountPasswordArgs{...} }
+//	BindDeviceAccountPasswordMap{ "key": BindDeviceAccountPasswordArgs{...} }
 type BindDeviceAccountPasswordMapInput interface {
 	pulumi.Input
 

@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.GetScalingGroups(ctx, &as.GetScalingGroupsArgs{
-// 			ConfigurationId:  pulumi.StringRef("asc-oqio4yyj"),
-// 			ResultOutputFile: pulumi.StringRef("my_test_path"),
-// 			ScalingGroupName: pulumi.StringRef("myasgroup"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := As.GetScalingGroups(ctx, &as.GetScalingGroupsArgs{
+//				ConfigurationId:  pulumi.StringRef("asc-oqio4yyj"),
+//				ResultOutputFile: pulumi.StringRef("my_test_path"),
+//				ScalingGroupName: pulumi.StringRef("myasgroup"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetScalingGroups(ctx *pulumi.Context, args *GetScalingGroupsArgs, opts ...pulumi.InvokeOption) (*GetScalingGroupsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

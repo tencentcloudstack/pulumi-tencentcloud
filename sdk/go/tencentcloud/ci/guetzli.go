@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewGuetzli(ctx, "foo", &Ci.GuetzliArgs{
-// 			Bucket: pulumi.String("examplebucket-1250000000"),
-// 			Status: pulumi.String("on"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewGuetzli(ctx, "foo", &Ci.GuetzliArgs{
+//				Bucket: pulumi.String("examplebucket-1250000000"),
+//				Status: pulumi.String("on"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // Resource guetzli can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/guetzli:Guetzli example examplebucket-1250000000
+//
+//	$ pulumi import tencentcloud:Ci/guetzli:Guetzli example examplebucket-1250000000
+//
 // ```
 type Guetzli struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *Guetzli) ToGuetzliOutputWithContext(ctx context.Context) GuetzliOutput 
 // GuetzliArrayInput is an input type that accepts GuetzliArray and GuetzliArrayOutput values.
 // You can construct a concrete instance of `GuetzliArrayInput` via:
 //
-//          GuetzliArray{ GuetzliArgs{...} }
+//	GuetzliArray{ GuetzliArgs{...} }
 type GuetzliArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i GuetzliArray) ToGuetzliArrayOutputWithContext(ctx context.Context) Guetz
 // GuetzliMapInput is an input type that accepts GuetzliMap and GuetzliMapOutput values.
 // You can construct a concrete instance of `GuetzliMapInput` via:
 //
-//          GuetzliMap{ "key": GuetzliArgs{...} }
+//	GuetzliMap{ "key": GuetzliArgs{...} }
 type GuetzliMapInput interface {
 	pulumi.Input
 

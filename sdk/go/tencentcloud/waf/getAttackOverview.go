@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.GetAttackOverview(ctx, &waf.GetAttackOverviewArgs{
-// 			FromTime: "2023-09-01 00:00:00",
-// 			ToTime:   "2023-09-07 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.GetAttackOverview(ctx, &waf.GetAttackOverviewArgs{
+//				FromTime: "2023-09-01 00:00:00",
+//				ToTime:   "2023-09-07 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Query by filter
 //
@@ -43,27 +46,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.GetAttackOverview(ctx, &waf.GetAttackOverviewArgs{
-// 			Appid:      pulumi.IntRef(1304251372),
-// 			Domain:     pulumi.StringRef("test.com"),
-// 			Edition:    pulumi.StringRef("clb-waf"),
-// 			FromTime:   "2023-09-01 00:00:00",
-// 			InstanceId: pulumi.StringRef("waf_2kxtlbky00b2v1fn"),
-// 			ToTime:     "2023-09-07 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.GetAttackOverview(ctx, &waf.GetAttackOverviewArgs{
+//				Appid:      pulumi.IntRef(1304251372),
+//				Domain:     pulumi.StringRef("test.com"),
+//				Edition:    pulumi.StringRef("clb-waf"),
+//				FromTime:   "2023-09-01 00:00:00",
+//				InstanceId: pulumi.StringRef("waf_2kxtlbky00b2v1fn"),
+//				ToTime:     "2023-09-07 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetAttackOverview(ctx *pulumi.Context, args *GetAttackOverviewArgs, opts ...pulumi.InvokeOption) (*GetAttackOverviewResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

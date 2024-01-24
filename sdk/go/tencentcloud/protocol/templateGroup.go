@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Protocol"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Protocol"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Protocol.NewTemplateGroup(ctx, "foo", &Protocol.TemplateGroupArgs{
-// 			TemplateIds: pulumi.StringArray{
-// 				pulumi.String("ipl-axaf24151"),
-// 				pulumi.String("ipl-axaf24152"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Protocol.NewTemplateGroup(ctx, "foo", &Protocol.TemplateGroupArgs{
+//				TemplateIds: pulumi.StringArray{
+//					pulumi.String("ipl-axaf24151"),
+//					pulumi.String("ipl-axaf24152"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // Protocol template group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Protocol/templateGroup:TemplateGroup foo ppmg-0np3u974
+//
+//	$ pulumi import tencentcloud:Protocol/templateGroup:TemplateGroup foo ppmg-0np3u974
+//
 // ```
 type TemplateGroup struct {
 	pulumi.CustomResourceState
@@ -146,7 +151,7 @@ func (i *TemplateGroup) ToTemplateGroupOutputWithContext(ctx context.Context) Te
 // TemplateGroupArrayInput is an input type that accepts TemplateGroupArray and TemplateGroupArrayOutput values.
 // You can construct a concrete instance of `TemplateGroupArrayInput` via:
 //
-//          TemplateGroupArray{ TemplateGroupArgs{...} }
+//	TemplateGroupArray{ TemplateGroupArgs{...} }
 type TemplateGroupArrayInput interface {
 	pulumi.Input
 
@@ -171,7 +176,7 @@ func (i TemplateGroupArray) ToTemplateGroupArrayOutputWithContext(ctx context.Co
 // TemplateGroupMapInput is an input type that accepts TemplateGroupMap and TemplateGroupMapOutput values.
 // You can construct a concrete instance of `TemplateGroupMapInput` via:
 //
-//          TemplateGroupMap{ "key": TemplateGroupArgs{...} }
+//	TemplateGroupMap{ "key": TemplateGroupArgs{...} }
 type TemplateGroupMapInput interface {
 	pulumi.Input
 

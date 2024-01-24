@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.NewUpgradeCacheVersionOperation(ctx, "upgradeCacheVersionOperation", &Redis.UpgradeCacheVersionOperationArgs{
-// 			CurrentRedisVersion:    pulumi.String("5.0.0"),
-// 			InstanceId:             pulumi.String("crs-c1nl9rpv"),
-// 			InstanceTypeUpgradeNow: pulumi.Int(1),
-// 			UpgradeRedisVersion:    pulumi.String("5.0.0"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Redis.NewUpgradeCacheVersionOperation(ctx, "upgradeCacheVersionOperation", &Redis.UpgradeCacheVersionOperationArgs{
+//				CurrentRedisVersion:    pulumi.String("5.0.0"),
+//				InstanceId:             pulumi.String("crs-c1nl9rpv"),
+//				InstanceTypeUpgradeNow: pulumi.Int(1),
+//				UpgradeRedisVersion:    pulumi.String("5.0.0"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type UpgradeCacheVersionOperation struct {
 	pulumi.CustomResourceState
@@ -167,7 +170,7 @@ func (i *UpgradeCacheVersionOperation) ToUpgradeCacheVersionOperationOutputWithC
 // UpgradeCacheVersionOperationArrayInput is an input type that accepts UpgradeCacheVersionOperationArray and UpgradeCacheVersionOperationArrayOutput values.
 // You can construct a concrete instance of `UpgradeCacheVersionOperationArrayInput` via:
 //
-//          UpgradeCacheVersionOperationArray{ UpgradeCacheVersionOperationArgs{...} }
+//	UpgradeCacheVersionOperationArray{ UpgradeCacheVersionOperationArgs{...} }
 type UpgradeCacheVersionOperationArrayInput interface {
 	pulumi.Input
 
@@ -192,7 +195,7 @@ func (i UpgradeCacheVersionOperationArray) ToUpgradeCacheVersionOperationArrayOu
 // UpgradeCacheVersionOperationMapInput is an input type that accepts UpgradeCacheVersionOperationMap and UpgradeCacheVersionOperationMapOutput values.
 // You can construct a concrete instance of `UpgradeCacheVersionOperationMapInput` via:
 //
-//          UpgradeCacheVersionOperationMap{ "key": UpgradeCacheVersionOperationArgs{...} }
+//	UpgradeCacheVersionOperationMap{ "key": UpgradeCacheVersionOperationArgs{...} }
 type UpgradeCacheVersionOperationMapInput interface {
 	pulumi.Input
 

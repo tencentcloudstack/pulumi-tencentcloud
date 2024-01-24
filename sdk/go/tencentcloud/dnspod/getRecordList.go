@@ -18,47 +18,50 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.GetRecordList(ctx, &dnspod.GetRecordListArgs{
-// 			Domain:           "iac-tf.cloud",
-// 			GroupIds:         []interface{}{},
-// 			IsExactSubDomain: pulumi.BoolRef(true),
-// 			Keyword:          pulumi.StringRef(""),
-// 			MxBegin:          pulumi.IntRef(0),
-// 			MxEnd:            pulumi.IntRef(10),
-// 			RecordStatuses: []string{
-// 				"ENABLE",
-// 			},
-// 			RecordTypes: []string{
-// 				"A",
-// 				"NS",
-// 				"CNAME",
-// 				"NS",
-// 				"AAAA",
-// 			},
-// 			RecordValue:    pulumi.StringRef("bicycle.dnspod.net"),
-// 			Remark:         pulumi.StringRef(""),
-// 			SortField:      pulumi.StringRef("UPDATED_ON"),
-// 			SortType:       pulumi.StringRef("DESC"),
-// 			TtlBegin:       pulumi.IntRef(1),
-// 			TtlEnd:         pulumi.IntRef(864000),
-// 			UpdatedAtBegin: pulumi.StringRef("2021-09-07"),
-// 			UpdatedAtEnd:   pulumi.StringRef("2023-12-07"),
-// 			WeightBegin:    pulumi.IntRef(0),
-// 			WeightEnd:      pulumi.IntRef(100),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.GetRecordList(ctx, &dnspod.GetRecordListArgs{
+//				Domain:           "iac-tf.cloud",
+//				GroupIds:         []interface{}{},
+//				IsExactSubDomain: pulumi.BoolRef(true),
+//				Keyword:          pulumi.StringRef(""),
+//				MxBegin:          pulumi.IntRef(0),
+//				MxEnd:            pulumi.IntRef(10),
+//				RecordStatuses: []string{
+//					"ENABLE",
+//				},
+//				RecordTypes: []string{
+//					"A",
+//					"NS",
+//					"CNAME",
+//					"NS",
+//					"AAAA",
+//				},
+//				RecordValue:    pulumi.StringRef("bicycle.dnspod.net"),
+//				Remark:         pulumi.StringRef(""),
+//				SortField:      pulumi.StringRef("UPDATED_ON"),
+//				SortType:       pulumi.StringRef("DESC"),
+//				TtlBegin:       pulumi.IntRef(1),
+//				TtlEnd:         pulumi.IntRef(864000),
+//				UpdatedAtBegin: pulumi.StringRef("2021-09-07"),
+//				UpdatedAtEnd:   pulumi.StringRef("2023-12-07"),
+//				WeightBegin:    pulumi.IntRef(0),
+//				WeightEnd:      pulumi.IntRef(100),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetRecordList(ctx *pulumi.Context, args *GetRecordListArgs, opts ...pulumi.InvokeOption) (*GetRecordListResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -127,7 +127,7 @@ func (i *RenewInstanceOperation) ToRenewInstanceOperationOutputWithContext(ctx c
 // RenewInstanceOperationArrayInput is an input type that accepts RenewInstanceOperationArray and RenewInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `RenewInstanceOperationArrayInput` via:
 //
-//          RenewInstanceOperationArray{ RenewInstanceOperationArgs{...} }
+//	RenewInstanceOperationArray{ RenewInstanceOperationArgs{...} }
 type RenewInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -152,7 +152,7 @@ func (i RenewInstanceOperationArray) ToRenewInstanceOperationArrayOutputWithCont
 // RenewInstanceOperationMapInput is an input type that accepts RenewInstanceOperationMap and RenewInstanceOperationMapOutput values.
 // You can construct a concrete instance of `RenewInstanceOperationMapInput` via:
 //
-//          RenewInstanceOperationMap{ "key": RenewInstanceOperationArgs{...} }
+//	RenewInstanceOperationMap{ "key": RenewInstanceOperationArgs{...} }
 type RenewInstanceOperationMapInput interface {
 	pulumi.Input
 

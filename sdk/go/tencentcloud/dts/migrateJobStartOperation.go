@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewMigrateJobStartOperation(ctx, "start", &Dts.MigrateJobStartOperationArgs{
-// 			JobId: pulumi.Any(tencentcloud_dts_migrate_job.Job.Id),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewMigrateJobStartOperation(ctx, "start", &Dts.MigrateJobStartOperationArgs{
+//				JobId: pulumi.Any(tencentcloud_dts_migrate_job.Job.Id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type MigrateJobStartOperation struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *MigrateJobStartOperation) ToMigrateJobStartOperationOutputWithContext(c
 // MigrateJobStartOperationArrayInput is an input type that accepts MigrateJobStartOperationArray and MigrateJobStartOperationArrayOutput values.
 // You can construct a concrete instance of `MigrateJobStartOperationArrayInput` via:
 //
-//          MigrateJobStartOperationArray{ MigrateJobStartOperationArgs{...} }
+//	MigrateJobStartOperationArray{ MigrateJobStartOperationArgs{...} }
 type MigrateJobStartOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i MigrateJobStartOperationArray) ToMigrateJobStartOperationArrayOutputWith
 // MigrateJobStartOperationMapInput is an input type that accepts MigrateJobStartOperationMap and MigrateJobStartOperationMapOutput values.
 // You can construct a concrete instance of `MigrateJobStartOperationMapInput` via:
 //
-//          MigrateJobStartOperationMap{ "key": MigrateJobStartOperationArgs{...} }
+//	MigrateJobStartOperationMap{ "key": MigrateJobStartOperationArgs{...} }
 type MigrateJobStartOperationMapInput interface {
 	pulumi.Input
 

@@ -119,7 +119,7 @@ func (i *EncryptAttributes) ToEncryptAttributesOutputWithContext(ctx context.Con
 // EncryptAttributesArrayInput is an input type that accepts EncryptAttributesArray and EncryptAttributesArrayOutput values.
 // You can construct a concrete instance of `EncryptAttributesArrayInput` via:
 //
-//          EncryptAttributesArray{ EncryptAttributesArgs{...} }
+//	EncryptAttributesArray{ EncryptAttributesArgs{...} }
 type EncryptAttributesArrayInput interface {
 	pulumi.Input
 
@@ -144,7 +144,7 @@ func (i EncryptAttributesArray) ToEncryptAttributesArrayOutputWithContext(ctx co
 // EncryptAttributesMapInput is an input type that accepts EncryptAttributesMap and EncryptAttributesMapOutput values.
 // You can construct a concrete instance of `EncryptAttributesMapInput` via:
 //
-//          EncryptAttributesMap{ "key": EncryptAttributesArgs{...} }
+//	EncryptAttributesMap{ "key": EncryptAttributesArgs{...} }
 type EncryptAttributesMapInput interface {
 	pulumi.Input
 

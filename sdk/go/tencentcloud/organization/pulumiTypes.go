@@ -20,7 +20,7 @@ type InstanceOrgPermission struct {
 // InstanceOrgPermissionInput is an input type that accepts InstanceOrgPermissionArgs and InstanceOrgPermissionOutput values.
 // You can construct a concrete instance of `InstanceOrgPermissionInput` via:
 //
-//          InstanceOrgPermissionArgs{...}
+//	InstanceOrgPermissionArgs{...}
 type InstanceOrgPermissionInput interface {
 	pulumi.Input
 
@@ -50,7 +50,7 @@ func (i InstanceOrgPermissionArgs) ToInstanceOrgPermissionOutputWithContext(ctx 
 // InstanceOrgPermissionArrayInput is an input type that accepts InstanceOrgPermissionArray and InstanceOrgPermissionArrayOutput values.
 // You can construct a concrete instance of `InstanceOrgPermissionArrayInput` via:
 //
-//          InstanceOrgPermissionArray{ InstanceOrgPermissionArgs{...} }
+//	InstanceOrgPermissionArray{ InstanceOrgPermissionArgs{...} }
 type InstanceOrgPermissionArrayInput interface {
 	pulumi.Input
 
@@ -130,7 +130,7 @@ type OrgIdentityIdentityPolicy struct {
 // OrgIdentityIdentityPolicyInput is an input type that accepts OrgIdentityIdentityPolicyArgs and OrgIdentityIdentityPolicyOutput values.
 // You can construct a concrete instance of `OrgIdentityIdentityPolicyInput` via:
 //
-//          OrgIdentityIdentityPolicyArgs{...}
+//	OrgIdentityIdentityPolicyArgs{...}
 type OrgIdentityIdentityPolicyInput interface {
 	pulumi.Input
 
@@ -164,7 +164,7 @@ func (i OrgIdentityIdentityPolicyArgs) ToOrgIdentityIdentityPolicyOutputWithCont
 // OrgIdentityIdentityPolicyArrayInput is an input type that accepts OrgIdentityIdentityPolicyArray and OrgIdentityIdentityPolicyArrayOutput values.
 // You can construct a concrete instance of `OrgIdentityIdentityPolicyArrayInput` via:
 //
-//          OrgIdentityIdentityPolicyArray{ OrgIdentityIdentityPolicyArgs{...} }
+//	OrgIdentityIdentityPolicyArray{ OrgIdentityIdentityPolicyArgs{...} }
 type OrgIdentityIdentityPolicyArrayInput interface {
 	pulumi.Input
 
@@ -250,7 +250,7 @@ type OrgMemberOrgPermission struct {
 // OrgMemberOrgPermissionInput is an input type that accepts OrgMemberOrgPermissionArgs and OrgMemberOrgPermissionOutput values.
 // You can construct a concrete instance of `OrgMemberOrgPermissionInput` via:
 //
-//          OrgMemberOrgPermissionArgs{...}
+//	OrgMemberOrgPermissionArgs{...}
 type OrgMemberOrgPermissionInput interface {
 	pulumi.Input
 
@@ -280,7 +280,7 @@ func (i OrgMemberOrgPermissionArgs) ToOrgMemberOrgPermissionOutputWithContext(ct
 // OrgMemberOrgPermissionArrayInput is an input type that accepts OrgMemberOrgPermissionArray and OrgMemberOrgPermissionArrayOutput values.
 // You can construct a concrete instance of `OrgMemberOrgPermissionArrayInput` via:
 //
-//          OrgMemberOrgPermissionArray{ OrgMemberOrgPermissionArgs{...} }
+//	OrgMemberOrgPermissionArray{ OrgMemberOrgPermissionArgs{...} }
 type OrgMemberOrgPermissionArrayInput interface {
 	pulumi.Input
 
@@ -386,7 +386,7 @@ type GetMembersItem struct {
 // GetMembersItemInput is an input type that accepts GetMembersItemArgs and GetMembersItemOutput values.
 // You can construct a concrete instance of `GetMembersItemInput` via:
 //
-//          GetMembersItemArgs{...}
+//	GetMembersItemArgs{...}
 type GetMembersItemInput interface {
 	pulumi.Input
 
@@ -446,7 +446,7 @@ func (i GetMembersItemArgs) ToGetMembersItemOutputWithContext(ctx context.Contex
 // GetMembersItemArrayInput is an input type that accepts GetMembersItemArray and GetMembersItemArrayOutput values.
 // You can construct a concrete instance of `GetMembersItemArrayInput` via:
 //
-//          GetMembersItemArray{ GetMembersItemArgs{...} }
+//	GetMembersItemArray{ GetMembersItemArgs{...} }
 type GetMembersItemArrayInput interface {
 	pulumi.Input
 
@@ -597,7 +597,7 @@ type GetMembersItemOrgIdentity struct {
 // GetMembersItemOrgIdentityInput is an input type that accepts GetMembersItemOrgIdentityArgs and GetMembersItemOrgIdentityOutput values.
 // You can construct a concrete instance of `GetMembersItemOrgIdentityInput` via:
 //
-//          GetMembersItemOrgIdentityArgs{...}
+//	GetMembersItemOrgIdentityArgs{...}
 type GetMembersItemOrgIdentityInput interface {
 	pulumi.Input
 
@@ -627,7 +627,7 @@ func (i GetMembersItemOrgIdentityArgs) ToGetMembersItemOrgIdentityOutputWithCont
 // GetMembersItemOrgIdentityArrayInput is an input type that accepts GetMembersItemOrgIdentityArray and GetMembersItemOrgIdentityArrayOutput values.
 // You can construct a concrete instance of `GetMembersItemOrgIdentityArrayInput` via:
 //
-//          GetMembersItemOrgIdentityArray{ GetMembersItemOrgIdentityArgs{...} }
+//	GetMembersItemOrgIdentityArray{ GetMembersItemOrgIdentityArgs{...} }
 type GetMembersItemOrgIdentityArrayInput interface {
 	pulumi.Input
 
@@ -703,7 +703,7 @@ type GetMembersItemOrgPermission struct {
 // GetMembersItemOrgPermissionInput is an input type that accepts GetMembersItemOrgPermissionArgs and GetMembersItemOrgPermissionOutput values.
 // You can construct a concrete instance of `GetMembersItemOrgPermissionInput` via:
 //
-//          GetMembersItemOrgPermissionArgs{...}
+//	GetMembersItemOrgPermissionArgs{...}
 type GetMembersItemOrgPermissionInput interface {
 	pulumi.Input
 
@@ -733,7 +733,7 @@ func (i GetMembersItemOrgPermissionArgs) ToGetMembersItemOrgPermissionOutputWith
 // GetMembersItemOrgPermissionArrayInput is an input type that accepts GetMembersItemOrgPermissionArray and GetMembersItemOrgPermissionArrayOutput values.
 // You can construct a concrete instance of `GetMembersItemOrgPermissionArrayInput` via:
 //
-//          GetMembersItemOrgPermissionArray{ GetMembersItemOrgPermissionArgs{...} }
+//	GetMembersItemOrgPermissionArray{ GetMembersItemOrgPermissionArgs{...} }
 type GetMembersItemOrgPermissionArrayInput interface {
 	pulumi.Input
 
@@ -811,7 +811,7 @@ type GetOrgAuthNodeItem struct {
 // GetOrgAuthNodeItemInput is an input type that accepts GetOrgAuthNodeItemArgs and GetOrgAuthNodeItemOutput values.
 // You can construct a concrete instance of `GetOrgAuthNodeItemInput` via:
 //
-//          GetOrgAuthNodeItemArgs{...}
+//	GetOrgAuthNodeItemArgs{...}
 type GetOrgAuthNodeItemInput interface {
 	pulumi.Input
 
@@ -843,7 +843,7 @@ func (i GetOrgAuthNodeItemArgs) ToGetOrgAuthNodeItemOutputWithContext(ctx contex
 // GetOrgAuthNodeItemArrayInput is an input type that accepts GetOrgAuthNodeItemArray and GetOrgAuthNodeItemArrayOutput values.
 // You can construct a concrete instance of `GetOrgAuthNodeItemArrayInput` via:
 //
-//          GetOrgAuthNodeItemArray{ GetOrgAuthNodeItemArgs{...} }
+//	GetOrgAuthNodeItemArray{ GetOrgAuthNodeItemArgs{...} }
 type GetOrgAuthNodeItemArrayInput interface {
 	pulumi.Input
 
@@ -924,7 +924,7 @@ type GetOrgAuthNodeItemManager struct {
 // GetOrgAuthNodeItemManagerInput is an input type that accepts GetOrgAuthNodeItemManagerArgs and GetOrgAuthNodeItemManagerOutput values.
 // You can construct a concrete instance of `GetOrgAuthNodeItemManagerInput` via:
 //
-//          GetOrgAuthNodeItemManagerArgs{...}
+//	GetOrgAuthNodeItemManagerArgs{...}
 type GetOrgAuthNodeItemManagerInput interface {
 	pulumi.Input
 
@@ -954,7 +954,7 @@ func (i GetOrgAuthNodeItemManagerArgs) ToGetOrgAuthNodeItemManagerOutputWithCont
 // GetOrgAuthNodeItemManagerArrayInput is an input type that accepts GetOrgAuthNodeItemManagerArray and GetOrgAuthNodeItemManagerArrayOutput values.
 // You can construct a concrete instance of `GetOrgAuthNodeItemManagerArrayInput` via:
 //
-//          GetOrgAuthNodeItemManagerArray{ GetOrgAuthNodeItemManagerArgs{...} }
+//	GetOrgAuthNodeItemManagerArray{ GetOrgAuthNodeItemManagerArgs{...} }
 type GetOrgAuthNodeItemManagerArrayInput interface {
 	pulumi.Input
 
@@ -1034,7 +1034,7 @@ type GetOrgFinancialByMemberItem struct {
 // GetOrgFinancialByMemberItemInput is an input type that accepts GetOrgFinancialByMemberItemArgs and GetOrgFinancialByMemberItemOutput values.
 // You can construct a concrete instance of `GetOrgFinancialByMemberItemInput` via:
 //
-//          GetOrgFinancialByMemberItemArgs{...}
+//	GetOrgFinancialByMemberItemArgs{...}
 type GetOrgFinancialByMemberItemInput interface {
 	pulumi.Input
 
@@ -1068,7 +1068,7 @@ func (i GetOrgFinancialByMemberItemArgs) ToGetOrgFinancialByMemberItemOutputWith
 // GetOrgFinancialByMemberItemArrayInput is an input type that accepts GetOrgFinancialByMemberItemArray and GetOrgFinancialByMemberItemArrayOutput values.
 // You can construct a concrete instance of `GetOrgFinancialByMemberItemArrayInput` via:
 //
-//          GetOrgFinancialByMemberItemArray{ GetOrgFinancialByMemberItemArgs{...} }
+//	GetOrgFinancialByMemberItemArray{ GetOrgFinancialByMemberItemArgs{...} }
 type GetOrgFinancialByMemberItemArrayInput interface {
 	pulumi.Input
 
@@ -1158,7 +1158,7 @@ type GetOrgFinancialByMonthItem struct {
 // GetOrgFinancialByMonthItemInput is an input type that accepts GetOrgFinancialByMonthItemArgs and GetOrgFinancialByMonthItemOutput values.
 // You can construct a concrete instance of `GetOrgFinancialByMonthItemInput` via:
 //
-//          GetOrgFinancialByMonthItemArgs{...}
+//	GetOrgFinancialByMonthItemArgs{...}
 type GetOrgFinancialByMonthItemInput interface {
 	pulumi.Input
 
@@ -1192,7 +1192,7 @@ func (i GetOrgFinancialByMonthItemArgs) ToGetOrgFinancialByMonthItemOutputWithCo
 // GetOrgFinancialByMonthItemArrayInput is an input type that accepts GetOrgFinancialByMonthItemArray and GetOrgFinancialByMonthItemArrayOutput values.
 // You can construct a concrete instance of `GetOrgFinancialByMonthItemArrayInput` via:
 //
-//          GetOrgFinancialByMonthItemArray{ GetOrgFinancialByMonthItemArgs{...} }
+//	GetOrgFinancialByMonthItemArray{ GetOrgFinancialByMonthItemArgs{...} }
 type GetOrgFinancialByMonthItemArrayInput interface {
 	pulumi.Input
 
@@ -1282,7 +1282,7 @@ type GetOrgFinancialByProductItem struct {
 // GetOrgFinancialByProductItemInput is an input type that accepts GetOrgFinancialByProductItemArgs and GetOrgFinancialByProductItemOutput values.
 // You can construct a concrete instance of `GetOrgFinancialByProductItemInput` via:
 //
-//          GetOrgFinancialByProductItemArgs{...}
+//	GetOrgFinancialByProductItemArgs{...}
 type GetOrgFinancialByProductItemInput interface {
 	pulumi.Input
 
@@ -1316,7 +1316,7 @@ func (i GetOrgFinancialByProductItemArgs) ToGetOrgFinancialByProductItemOutputWi
 // GetOrgFinancialByProductItemArrayInput is an input type that accepts GetOrgFinancialByProductItemArray and GetOrgFinancialByProductItemArrayOutput values.
 // You can construct a concrete instance of `GetOrgFinancialByProductItemArrayInput` via:
 //
-//          GetOrgFinancialByProductItemArray{ GetOrgFinancialByProductItemArgs{...} }
+//	GetOrgFinancialByProductItemArray{ GetOrgFinancialByProductItemArgs{...} }
 type GetOrgFinancialByProductItemArrayInput interface {
 	pulumi.Input
 

@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.GetGatewayRoutes(ctx, &tse.GetGatewayRoutesArgs{
-// 			GatewayId:   "gateway-ddbb709b",
-// 			RouteName:   pulumi.StringRef("keep-routes"),
-// 			ServiceName: pulumi.StringRef("test"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.GetGatewayRoutes(ctx, &tse.GetGatewayRoutesArgs{
+//				GatewayId:   "gateway-ddbb709b",
+//				RouteName:   pulumi.StringRef("keep-routes"),
+//				ServiceName: pulumi.StringRef("test"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupGatewayRoutes(ctx *pulumi.Context, args *LookupGatewayRoutesArgs, opts ...pulumi.InvokeOption) (*LookupGatewayRoutesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

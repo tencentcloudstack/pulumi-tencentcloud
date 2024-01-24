@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.GetSecurityGroups(ctx, &mariadb.GetSecurityGroupsArgs{
-// 			InstanceId: "tdsql-4pzs5b67",
-// 			Product:    "mariadb",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.GetSecurityGroups(ctx, &mariadb.GetSecurityGroupsArgs{
+//				InstanceId: "tdsql-4pzs5b67",
+//				Product:    "mariadb",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupSecurityGroups(ctx *pulumi.Context, args *LookupSecurityGroupsArgs, opts ...pulumi.InvokeOption) (*LookupSecurityGroupsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

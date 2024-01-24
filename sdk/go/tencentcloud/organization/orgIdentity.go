@@ -19,30 +19,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Organization.NewOrgIdentity(ctx, "orgIdentity", &Organization.OrgIdentityArgs{
-// 			Description:       pulumi.String("iac-test"),
-// 			IdentityAliasName: pulumi.String("example-iac-test"),
-// 			IdentityPolicies: organization.OrgIdentityIdentityPolicyArray{
-// 				&organization.OrgIdentityIdentityPolicyArgs{
-// 					PolicyId:   pulumi.Int(1),
-// 					PolicyName: pulumi.String("AdministratorAccess"),
-// 					PolicyType: pulumi.Int(2),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Organization.NewOrgIdentity(ctx, "orgIdentity", &Organization.OrgIdentityArgs{
+//				Description:       pulumi.String("iac-test"),
+//				IdentityAliasName: pulumi.String("example-iac-test"),
+//				IdentityPolicies: organization.OrgIdentityIdentityPolicyArray{
+//					&organization.OrgIdentityIdentityPolicyArgs{
+//						PolicyId:   pulumi.Int(1),
+//						PolicyName: pulumi.String("AdministratorAccess"),
+//						PolicyType: pulumi.Int(2),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -50,7 +53,9 @@ import (
 // organization org_identity can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Organization/orgIdentity:OrgIdentity org_identity org_identity_id
+//
+//	$ pulumi import tencentcloud:Organization/orgIdentity:OrgIdentity org_identity org_identity_id
+//
 // ```
 type OrgIdentity struct {
 	pulumi.CustomResourceState
@@ -165,7 +170,7 @@ func (i *OrgIdentity) ToOrgIdentityOutputWithContext(ctx context.Context) OrgIde
 // OrgIdentityArrayInput is an input type that accepts OrgIdentityArray and OrgIdentityArrayOutput values.
 // You can construct a concrete instance of `OrgIdentityArrayInput` via:
 //
-//          OrgIdentityArray{ OrgIdentityArgs{...} }
+//	OrgIdentityArray{ OrgIdentityArgs{...} }
 type OrgIdentityArrayInput interface {
 	pulumi.Input
 
@@ -190,7 +195,7 @@ func (i OrgIdentityArray) ToOrgIdentityArrayOutputWithContext(ctx context.Contex
 // OrgIdentityMapInput is an input type that accepts OrgIdentityMap and OrgIdentityMapOutput values.
 // You can construct a concrete instance of `OrgIdentityMapInput` via:
 //
-//          OrgIdentityMap{ "key": OrgIdentityArgs{...} }
+//	OrgIdentityMap{ "key": OrgIdentityArgs{...} }
 type OrgIdentityMapInput interface {
 	pulumi.Input
 

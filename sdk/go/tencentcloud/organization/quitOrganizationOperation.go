@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Organization.NewQuitOrganizationOperation(ctx, "quitOrganizationOperation", &Organization.QuitOrganizationOperationArgs{
-// 			OrgId: pulumi.Int(45155),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Organization.NewQuitOrganizationOperation(ctx, "quitOrganizationOperation", &Organization.QuitOrganizationOperationArgs{
+//				OrgId: pulumi.Int(45155),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -41,7 +44,9 @@ import (
 // organization quit_organization_operation can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Organization/quitOrganizationOperation:QuitOrganizationOperation quit_organization_operation quit_organization_operation_id
+//
+//	$ pulumi import tencentcloud:Organization/quitOrganizationOperation:QuitOrganizationOperation quit_organization_operation quit_organization_operation_id
+//
 // ```
 type QuitOrganizationOperation struct {
 	pulumi.CustomResourceState
@@ -133,7 +138,7 @@ func (i *QuitOrganizationOperation) ToQuitOrganizationOperationOutputWithContext
 // QuitOrganizationOperationArrayInput is an input type that accepts QuitOrganizationOperationArray and QuitOrganizationOperationArrayOutput values.
 // You can construct a concrete instance of `QuitOrganizationOperationArrayInput` via:
 //
-//          QuitOrganizationOperationArray{ QuitOrganizationOperationArgs{...} }
+//	QuitOrganizationOperationArray{ QuitOrganizationOperationArgs{...} }
 type QuitOrganizationOperationArrayInput interface {
 	pulumi.Input
 
@@ -158,7 +163,7 @@ func (i QuitOrganizationOperationArray) ToQuitOrganizationOperationArrayOutputWi
 // QuitOrganizationOperationMapInput is an input type that accepts QuitOrganizationOperationMap and QuitOrganizationOperationMapOutput values.
 // You can construct a concrete instance of `QuitOrganizationOperationMapInput` via:
 //
-//          QuitOrganizationOperationMap{ "key": QuitOrganizationOperationArgs{...} }
+//	QuitOrganizationOperationMap{ "key": QuitOrganizationOperationArgs{...} }
 type QuitOrganizationOperationMapInput interface {
 	pulumi.Input
 

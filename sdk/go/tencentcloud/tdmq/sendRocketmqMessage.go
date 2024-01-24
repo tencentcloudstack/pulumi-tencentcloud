@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdmq.NewSendRocketmqMessage(ctx, "sendRocketmqMessage", &Tdmq.SendRocketmqMessageArgs{
-// 			ClusterId:   pulumi.String("rocketmq-7k45z9dkpnne"),
-// 			MsgBody:     pulumi.String("msg key"),
-// 			MsgKey:      pulumi.String("msg tag"),
-// 			MsgTag:      pulumi.String("msg value"),
-// 			NamespaceId: pulumi.String("test_ns"),
-// 			TopicName:   pulumi.String("test_topic"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tdmq.NewSendRocketmqMessage(ctx, "sendRocketmqMessage", &Tdmq.SendRocketmqMessageArgs{
+//				ClusterId:   pulumi.String("rocketmq-7k45z9dkpnne"),
+//				MsgBody:     pulumi.String("msg key"),
+//				MsgKey:      pulumi.String("msg tag"),
+//				MsgTag:      pulumi.String("msg value"),
+//				NamespaceId: pulumi.String("test_ns"),
+//				TopicName:   pulumi.String("test_topic"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SendRocketmqMessage struct {
 	pulumi.CustomResourceState
@@ -189,7 +192,7 @@ func (i *SendRocketmqMessage) ToSendRocketmqMessageOutputWithContext(ctx context
 // SendRocketmqMessageArrayInput is an input type that accepts SendRocketmqMessageArray and SendRocketmqMessageArrayOutput values.
 // You can construct a concrete instance of `SendRocketmqMessageArrayInput` via:
 //
-//          SendRocketmqMessageArray{ SendRocketmqMessageArgs{...} }
+//	SendRocketmqMessageArray{ SendRocketmqMessageArgs{...} }
 type SendRocketmqMessageArrayInput interface {
 	pulumi.Input
 
@@ -214,7 +217,7 @@ func (i SendRocketmqMessageArray) ToSendRocketmqMessageArrayOutputWithContext(ct
 // SendRocketmqMessageMapInput is an input type that accepts SendRocketmqMessageMap and SendRocketmqMessageMapOutput values.
 // You can construct a concrete instance of `SendRocketmqMessageMapInput` via:
 //
-//          SendRocketmqMessageMap{ "key": SendRocketmqMessageArgs{...} }
+//	SendRocketmqMessageMap{ "key": SendRocketmqMessageArgs{...} }
 type SendRocketmqMessageMapInput interface {
 	pulumi.Input
 

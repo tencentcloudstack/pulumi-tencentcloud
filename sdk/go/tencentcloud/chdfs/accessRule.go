@@ -19,27 +19,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Chdfs"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Chdfs"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Chdfs"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Chdfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Chdfs.NewAccessRule(ctx, "accessRule", &Chdfs.AccessRuleArgs{
-// 			AccessGroupId: pulumi.String("ag-bvmzrbsm"),
-// 			AccessRule: &chdfs.AccessRuleAccessRuleArgs{
-// 				AccessMode: pulumi.Int(2),
-// 				Address:    pulumi.String("10.0.1.1"),
-// 				Priority:   pulumi.Int(12),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Chdfs.NewAccessRule(ctx, "accessRule", &Chdfs.AccessRuleArgs{
+//				AccessGroupId: pulumi.String("ag-bvmzrbsm"),
+//				AccessRule: &chdfs.AccessRuleAccessRuleArgs{
+//					AccessMode: pulumi.Int(2),
+//					Address:    pulumi.String("10.0.1.1"),
+//					Priority:   pulumi.Int(12),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -47,7 +50,9 @@ import (
 // chdfs access_rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Chdfs/accessRule:AccessRule access_rule access_group_id#access_rule_id
+//
+//	$ pulumi import tencentcloud:Chdfs/accessRule:AccessRule access_rule access_group_id#access_rule_id
+//
 // ```
 type AccessRule struct {
 	pulumi.CustomResourceState
@@ -152,7 +157,7 @@ func (i *AccessRule) ToAccessRuleOutputWithContext(ctx context.Context) AccessRu
 // AccessRuleArrayInput is an input type that accepts AccessRuleArray and AccessRuleArrayOutput values.
 // You can construct a concrete instance of `AccessRuleArrayInput` via:
 //
-//          AccessRuleArray{ AccessRuleArgs{...} }
+//	AccessRuleArray{ AccessRuleArgs{...} }
 type AccessRuleArrayInput interface {
 	pulumi.Input
 
@@ -177,7 +182,7 @@ func (i AccessRuleArray) ToAccessRuleArrayOutputWithContext(ctx context.Context)
 // AccessRuleMapInput is an input type that accepts AccessRuleMap and AccessRuleMapOutput values.
 // You can construct a concrete instance of `AccessRuleMapInput` via:
 //
-//          AccessRuleMap{ "key": AccessRuleArgs{...} }
+//	AccessRuleMap{ "key": AccessRuleArgs{...} }
 type AccessRuleMapInput interface {
 	pulumi.Input
 

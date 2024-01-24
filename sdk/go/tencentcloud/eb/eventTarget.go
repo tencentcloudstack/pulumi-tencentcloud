@@ -20,94 +20,97 @@ import (
 // package main
 //
 // import (
-// 	"encoding/json"
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//	"encoding/json"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		zone := "ap-guangzhou"
-// 		if param := cfg.Get("zone"); param != "" {
-// 			zone = param
-// 		}
-// 		namespace := "default"
-// 		if param := cfg.Get("namespace"); param != "" {
-// 			namespace = param
-// 		}
-// 		function := "keep-1676351130"
-// 		if param := cfg.Get("function"); param != "" {
-// 			function = param
-// 		}
-// 		functionVersion := fmt.Sprintf("%v%v", "$", "LATEST")
-// 		if param := cfg.Get("functionVersion"); param != "" {
-// 			functionVersion = param
-// 		}
-// 		fooUsers, err := Cam.GetUsers(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooEventBus, err := Eb.NewEventBus(ctx, "fooEventBus", &Eb.EventBusArgs{
-// 			EventBusName: pulumi.String("tf-event_bus"),
-// 			Description:  pulumi.String("event bus desc"),
-// 			EnableStore:  pulumi.Bool(false),
-// 			SaveDays:     pulumi.Int(1),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"source": "apigw.cloud.tencent",
-// 			"type": []string{
-// 				"connector:apigw",
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		fooEventRule, err := Eb.NewEventRule(ctx, "fooEventRule", &Eb.EventRuleArgs{
-// 			EventBusId:   fooEventBus.ID(),
-// 			RuleName:     pulumi.String("tf-event_rule"),
-// 			Description:  pulumi.String("event rule desc"),
-// 			Enable:       pulumi.Bool(true),
-// 			EventPattern: pulumi.String(json0),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Eb.NewEventTarget(ctx, "scfTarget", &Eb.EventTargetArgs{
-// 			EventBusId: fooEventBus.ID(),
-// 			RuleId:     fooEventRule.RuleId,
-// 			Type:       pulumi.String("scf"),
-// 			TargetDescription: &eb.EventTargetTargetDescriptionArgs{
-// 				ResourceDescription: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v", "qcs::scf:", zone, ":uin/", fooUsers.UserLists[0].Uin, ":namespace/", namespace, "/function/", function, "/", functionVersion)),
-// 				ScfParams: &eb.EventTargetTargetDescriptionScfParamsArgs{
-// 					BatchEventCount:     pulumi.Int(1),
-// 					BatchTimeout:        pulumi.Int(1),
-// 					EnableBatchDelivery: pulumi.Bool(true),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			zone := "ap-guangzhou"
+//			if param := cfg.Get("zone"); param != "" {
+//				zone = param
+//			}
+//			namespace := "default"
+//			if param := cfg.Get("namespace"); param != "" {
+//				namespace = param
+//			}
+//			function := "keep-1676351130"
+//			if param := cfg.Get("function"); param != "" {
+//				function = param
+//			}
+//			functionVersion := fmt.Sprintf("%v%v", "$", "LATEST")
+//			if param := cfg.Get("functionVersion"); param != "" {
+//				functionVersion = param
+//			}
+//			fooUsers, err := Cam.GetUsers(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			fooEventBus, err := Eb.NewEventBus(ctx, "fooEventBus", &Eb.EventBusArgs{
+//				EventBusName: pulumi.String("tf-event_bus"),
+//				Description:  pulumi.String("event bus desc"),
+//				EnableStore:  pulumi.Bool(false),
+//				SaveDays:     pulumi.Int(1),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"source": "apigw.cloud.tencent",
+//				"type": []string{
+//					"connector:apigw",
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			fooEventRule, err := Eb.NewEventRule(ctx, "fooEventRule", &Eb.EventRuleArgs{
+//				EventBusId:   fooEventBus.ID(),
+//				RuleName:     pulumi.String("tf-event_rule"),
+//				Description:  pulumi.String("event rule desc"),
+//				Enable:       pulumi.Bool(true),
+//				EventPattern: pulumi.String(json0),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Eb.NewEventTarget(ctx, "scfTarget", &Eb.EventTargetArgs{
+//				EventBusId: fooEventBus.ID(),
+//				RuleId:     fooEventRule.RuleId,
+//				Type:       pulumi.String("scf"),
+//				TargetDescription: &eb.EventTargetTargetDescriptionArgs{
+//					ResourceDescription: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v", "qcs::scf:", zone, ":uin/", fooUsers.UserLists[0].Uin, ":namespace/", namespace, "/function/", function, "/", functionVersion)),
+//					ScfParams: &eb.EventTargetTargetDescriptionScfParamsArgs{
+//						BatchEventCount:     pulumi.Int(1),
+//						BatchTimeout:        pulumi.Int(1),
+//						EnableBatchDelivery: pulumi.Bool(true),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Create an event target of type ckafka
 //
@@ -115,42 +118,45 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		ckafka := "ckafka-qzoeaqx8"
-// 		if param := cfg.Get("ckafka"); param != "" {
-// 			ckafka = param
-// 		}
-// 		_, err := Eb.NewEventTarget(ctx, "ckafkaTarget", &Eb.EventTargetArgs{
-// 			EventBusId: pulumi.Any(tencentcloud_eb_event_bus.Foo.Id),
-// 			RuleId:     pulumi.Any(tencentcloud_eb_event_rule.Foo.Rule_id),
-// 			Type:       pulumi.String("ckafka"),
-// 			TargetDescription: &eb.EventTargetTargetDescriptionArgs{
-// 				ResourceDescription: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v", "qcs::scf:", _var.Zone, ":uin/", data.Tencentcloud_cam_users.Foo.User_list[0].Uin, ":ckafkaId/uin/", data.Tencentcloud_cam_users.Foo.User_list[0].Uin, "/", ckafka)),
-// 				CkafkaTargetParams: &eb.EventTargetTargetDescriptionCkafkaTargetParamsArgs{
-// 					TopicName: pulumi.String("dasdasd"),
-// 					RetryPolicy: &eb.EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs{
-// 						MaxRetryAttempts: pulumi.Int(360),
-// 						RetryInterval:    pulumi.Int(60),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			ckafka := "ckafka-qzoeaqx8"
+//			if param := cfg.Get("ckafka"); param != "" {
+//				ckafka = param
+//			}
+//			_, err := Eb.NewEventTarget(ctx, "ckafkaTarget", &Eb.EventTargetArgs{
+//				EventBusId: pulumi.Any(tencentcloud_eb_event_bus.Foo.Id),
+//				RuleId:     pulumi.Any(tencentcloud_eb_event_rule.Foo.Rule_id),
+//				Type:       pulumi.String("ckafka"),
+//				TargetDescription: &eb.EventTargetTargetDescriptionArgs{
+//					ResourceDescription: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v", "qcs::scf:", _var.Zone, ":uin/", data.Tencentcloud_cam_users.Foo.User_list[0].Uin, ":ckafkaId/uin/", data.Tencentcloud_cam_users.Foo.User_list[0].Uin, "/", ckafka)),
+//					CkafkaTargetParams: &eb.EventTargetTargetDescriptionCkafkaTargetParamsArgs{
+//						TopicName: pulumi.String("dasdasd"),
+//						RetryPolicy: &eb.EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs{
+//							MaxRetryAttempts: pulumi.Int(360),
+//							RetryInterval:    pulumi.Int(60),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -158,7 +164,9 @@ import (
 // eb event_target can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Eb/eventTarget:EventTarget event_target event_target_id
+//
+//	$ pulumi import tencentcloud:Eb/eventTarget:EventTarget event_target event_target_id
+//
 // ```
 type EventTarget struct {
 	pulumi.CustomResourceState
@@ -289,7 +297,7 @@ func (i *EventTarget) ToEventTargetOutputWithContext(ctx context.Context) EventT
 // EventTargetArrayInput is an input type that accepts EventTargetArray and EventTargetArrayOutput values.
 // You can construct a concrete instance of `EventTargetArrayInput` via:
 //
-//          EventTargetArray{ EventTargetArgs{...} }
+//	EventTargetArray{ EventTargetArgs{...} }
 type EventTargetArrayInput interface {
 	pulumi.Input
 
@@ -314,7 +322,7 @@ func (i EventTargetArray) ToEventTargetArrayOutputWithContext(ctx context.Contex
 // EventTargetMapInput is an input type that accepts EventTargetMap and EventTargetMapOutput values.
 // You can construct a concrete instance of `EventTargetMapInput` via:
 //
-//          EventTargetMap{ "key": EventTargetArgs{...} }
+//	EventTargetMap{ "key": EventTargetArgs{...} }
 type EventTargetMapInput interface {
 	pulumi.Input
 

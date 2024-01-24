@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssm.NewRotateProductSecret(ctx, "example", &Ssm.RotateProductSecretArgs{
-// 			SecretName: pulumi.String("tf_example"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssm.NewRotateProductSecret(ctx, "example", &Ssm.RotateProductSecretArgs{
+//				SecretName: pulumi.String("tf_example"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type RotateProductSecret struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *RotateProductSecret) ToRotateProductSecretOutputWithContext(ctx context
 // RotateProductSecretArrayInput is an input type that accepts RotateProductSecretArray and RotateProductSecretArrayOutput values.
 // You can construct a concrete instance of `RotateProductSecretArrayInput` via:
 //
-//          RotateProductSecretArray{ RotateProductSecretArgs{...} }
+//	RotateProductSecretArray{ RotateProductSecretArgs{...} }
 type RotateProductSecretArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i RotateProductSecretArray) ToRotateProductSecretArrayOutputWithContext(ct
 // RotateProductSecretMapInput is an input type that accepts RotateProductSecretMap and RotateProductSecretMapOutput values.
 // You can construct a concrete instance of `RotateProductSecretMapInput` via:
 //
-//          RotateProductSecretMap{ "key": RotateProductSecretArgs{...} }
+//	RotateProductSecretMap{ "key": RotateProductSecretArgs{...} }
 type RotateProductSecretMapInput interface {
 	pulumi.Input
 

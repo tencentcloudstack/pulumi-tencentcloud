@@ -19,122 +19,125 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-6"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(availabilityZone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooGrafanaInstance, err := Monitor.NewGrafanaInstance(ctx, "fooGrafanaInstance", &Monitor.GrafanaInstanceArgs{
-// 			InstanceName: pulumi.String("test-grafana"),
-// 			VpcId:        vpc.ID(),
-// 			SubnetIds: pulumi.StringArray{
-// 				subnet.ID(),
-// 			},
-// 			GrafanaInitPassword: pulumi.String("1234567890"),
-// 			EnableInternet:      pulumi.Bool(false),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooAlarmNotice, err := Monitor.NewAlarmNotice(ctx, "fooAlarmNotice", &Monitor.AlarmNoticeArgs{
-// 			NoticeType:     pulumi.String("ALL"),
-// 			NoticeLanguage: pulumi.String("zh-CN"),
-// 			UserNotices: monitor.AlarmNoticeUserNoticeArray{
-// 				&monitor.AlarmNoticeUserNoticeArgs{
-// 					ReceiverType: pulumi.String("USER"),
-// 					StartTime:    pulumi.Int(0),
-// 					EndTime:      pulumi.Int(1),
-// 					NoticeWays: pulumi.StringArray{
-// 						pulumi.String("SMS"),
-// 						pulumi.String("EMAIL"),
-// 					},
-// 					UserIds: pulumi.IntArray{
-// 						pulumi.Int(10001),
-// 					},
-// 					GroupIds: pulumi.IntArray{},
-// 					PhoneOrders: pulumi.IntArray{
-// 						pulumi.Int(10001),
-// 					},
-// 					PhoneCircleTimes:      pulumi.Int(2),
-// 					PhoneCircleInterval:   pulumi.Int(50),
-// 					PhoneInnerInterval:    pulumi.Int(60),
-// 					NeedPhoneArriveNotice: pulumi.Int(1),
-// 					PhoneCallType:         pulumi.String("CIRCLE"),
-// 					Weekdays: pulumi.IntArray{
-// 						pulumi.Int(1),
-// 						pulumi.Int(2),
-// 						pulumi.Int(3),
-// 						pulumi.Int(4),
-// 						pulumi.Int(5),
-// 						pulumi.Int(6),
-// 						pulumi.Int(7),
-// 					},
-// 				},
-// 			},
-// 			UrlNotices: monitor.AlarmNoticeUrlNoticeArray{
-// 				&monitor.AlarmNoticeUrlNoticeArgs{
-// 					Url:       pulumi.String("https://www.mytest.com/validate"),
-// 					EndTime:   pulumi.Int(0),
-// 					StartTime: pulumi.Int(1),
-// 					Weekdays: pulumi.IntArray{
-// 						pulumi.Int(1),
-// 						pulumi.Int(2),
-// 						pulumi.Int(3),
-// 						pulumi.Int(4),
-// 						pulumi.Int(5),
-// 						pulumi.Int(6),
-// 						pulumi.Int(7),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Monitor.NewGrafanaNotificationChannel(ctx, "grafanaNotificationChannel", &Monitor.GrafanaNotificationChannelArgs{
-// 			InstanceId:  fooGrafanaInstance.ID(),
-// 			ChannelName: pulumi.String("tf-channel"),
-// 			OrgId:       pulumi.Int(1),
-// 			Receivers: pulumi.StringArray{
-// 				fooAlarmNotice.AmpConsumerId,
-// 			},
-// 			ExtraOrgIds: pulumi.StringArray{
-// 				pulumi.String("1"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-6"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooGrafanaInstance, err := Monitor.NewGrafanaInstance(ctx, "fooGrafanaInstance", &Monitor.GrafanaInstanceArgs{
+//				InstanceName: pulumi.String("test-grafana"),
+//				VpcId:        vpc.ID(),
+//				SubnetIds: pulumi.StringArray{
+//					subnet.ID(),
+//				},
+//				GrafanaInitPassword: pulumi.String("1234567890"),
+//				EnableInternet:      pulumi.Bool(false),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooAlarmNotice, err := Monitor.NewAlarmNotice(ctx, "fooAlarmNotice", &Monitor.AlarmNoticeArgs{
+//				NoticeType:     pulumi.String("ALL"),
+//				NoticeLanguage: pulumi.String("zh-CN"),
+//				UserNotices: monitor.AlarmNoticeUserNoticeArray{
+//					&monitor.AlarmNoticeUserNoticeArgs{
+//						ReceiverType: pulumi.String("USER"),
+//						StartTime:    pulumi.Int(0),
+//						EndTime:      pulumi.Int(1),
+//						NoticeWays: pulumi.StringArray{
+//							pulumi.String("SMS"),
+//							pulumi.String("EMAIL"),
+//						},
+//						UserIds: pulumi.IntArray{
+//							pulumi.Int(10001),
+//						},
+//						GroupIds: pulumi.IntArray{},
+//						PhoneOrders: pulumi.IntArray{
+//							pulumi.Int(10001),
+//						},
+//						PhoneCircleTimes:      pulumi.Int(2),
+//						PhoneCircleInterval:   pulumi.Int(50),
+//						PhoneInnerInterval:    pulumi.Int(60),
+//						NeedPhoneArriveNotice: pulumi.Int(1),
+//						PhoneCallType:         pulumi.String("CIRCLE"),
+//						Weekdays: pulumi.IntArray{
+//							pulumi.Int(1),
+//							pulumi.Int(2),
+//							pulumi.Int(3),
+//							pulumi.Int(4),
+//							pulumi.Int(5),
+//							pulumi.Int(6),
+//							pulumi.Int(7),
+//						},
+//					},
+//				},
+//				UrlNotices: monitor.AlarmNoticeUrlNoticeArray{
+//					&monitor.AlarmNoticeUrlNoticeArgs{
+//						Url:       pulumi.String("https://www.mytest.com/validate"),
+//						EndTime:   pulumi.Int(0),
+//						StartTime: pulumi.Int(1),
+//						Weekdays: pulumi.IntArray{
+//							pulumi.Int(1),
+//							pulumi.Int(2),
+//							pulumi.Int(3),
+//							pulumi.Int(4),
+//							pulumi.Int(5),
+//							pulumi.Int(6),
+//							pulumi.Int(7),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Monitor.NewGrafanaNotificationChannel(ctx, "grafanaNotificationChannel", &Monitor.GrafanaNotificationChannelArgs{
+//				InstanceId:  fooGrafanaInstance.ID(),
+//				ChannelName: pulumi.String("tf-channel"),
+//				OrgId:       pulumi.Int(1),
+//				Receivers: pulumi.StringArray{
+//					fooAlarmNotice.AmpConsumerId,
+//				},
+//				ExtraOrgIds: pulumi.StringArray{
+//					pulumi.String("1"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type GrafanaNotificationChannel struct {
 	pulumi.CustomResourceState
@@ -272,7 +275,7 @@ func (i *GrafanaNotificationChannel) ToGrafanaNotificationChannelOutputWithConte
 // GrafanaNotificationChannelArrayInput is an input type that accepts GrafanaNotificationChannelArray and GrafanaNotificationChannelArrayOutput values.
 // You can construct a concrete instance of `GrafanaNotificationChannelArrayInput` via:
 //
-//          GrafanaNotificationChannelArray{ GrafanaNotificationChannelArgs{...} }
+//	GrafanaNotificationChannelArray{ GrafanaNotificationChannelArgs{...} }
 type GrafanaNotificationChannelArrayInput interface {
 	pulumi.Input
 
@@ -297,7 +300,7 @@ func (i GrafanaNotificationChannelArray) ToGrafanaNotificationChannelArrayOutput
 // GrafanaNotificationChannelMapInput is an input type that accepts GrafanaNotificationChannelMap and GrafanaNotificationChannelMapOutput values.
 // You can construct a concrete instance of `GrafanaNotificationChannelMapInput` via:
 //
-//          GrafanaNotificationChannelMap{ "key": GrafanaNotificationChannelArgs{...} }
+//	GrafanaNotificationChannelMap{ "key": GrafanaNotificationChannelArgs{...} }
 type GrafanaNotificationChannelMapInput interface {
 	pulumi.Input
 

@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewGrafanaDnsConfig(ctx, "grafanaDnsConfig", &Monitor.GrafanaDnsConfigArgs{
-// 			InstanceId: pulumi.String("grafana-dp2hnnfa"),
-// 			NameServers: pulumi.StringArray{
-// 				pulumi.String("10.1.2.1"),
-// 				pulumi.String("10.1.2.2"),
-// 				pulumi.String("10.1.2.3"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.NewGrafanaDnsConfig(ctx, "grafanaDnsConfig", &Monitor.GrafanaDnsConfigArgs{
+//				InstanceId: pulumi.String("grafana-dp2hnnfa"),
+//				NameServers: pulumi.StringArray{
+//					pulumi.String("10.1.2.1"),
+//					pulumi.String("10.1.2.2"),
+//					pulumi.String("10.1.2.3"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +49,9 @@ import (
 // monitor grafana_dns_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/grafanaDnsConfig:GrafanaDnsConfig grafana_dns_config instance_id
+//
+//	$ pulumi import tencentcloud:Monitor/grafanaDnsConfig:GrafanaDnsConfig grafana_dns_config instance_id
+//
 // ```
 type GrafanaDnsConfig struct {
 	pulumi.CustomResourceState
@@ -148,7 +153,7 @@ func (i *GrafanaDnsConfig) ToGrafanaDnsConfigOutputWithContext(ctx context.Conte
 // GrafanaDnsConfigArrayInput is an input type that accepts GrafanaDnsConfigArray and GrafanaDnsConfigArrayOutput values.
 // You can construct a concrete instance of `GrafanaDnsConfigArrayInput` via:
 //
-//          GrafanaDnsConfigArray{ GrafanaDnsConfigArgs{...} }
+//	GrafanaDnsConfigArray{ GrafanaDnsConfigArgs{...} }
 type GrafanaDnsConfigArrayInput interface {
 	pulumi.Input
 
@@ -173,7 +178,7 @@ func (i GrafanaDnsConfigArray) ToGrafanaDnsConfigArrayOutputWithContext(ctx cont
 // GrafanaDnsConfigMapInput is an input type that accepts GrafanaDnsConfigMap and GrafanaDnsConfigMapOutput values.
 // You can construct a concrete instance of `GrafanaDnsConfigMapInput` via:
 //
-//          GrafanaDnsConfigMap{ "key": GrafanaDnsConfigArgs{...} }
+//	GrafanaDnsConfigMap{ "key": GrafanaDnsConfigArgs{...} }
 type GrafanaDnsConfigMapInput interface {
 	pulumi.Input
 

@@ -18,7 +18,9 @@ import (
 // tcmq subscribe can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcmq/subscribe:Subscribe subscribe subscribe_id
+//
+//	$ pulumi import tencentcloud:Tcmq/subscribe:Subscribe subscribe subscribe_id
+//
 // ```
 type Subscribe struct {
 	pulumi.CustomResourceState
@@ -199,7 +201,7 @@ func (i *Subscribe) ToSubscribeOutputWithContext(ctx context.Context) SubscribeO
 // SubscribeArrayInput is an input type that accepts SubscribeArray and SubscribeArrayOutput values.
 // You can construct a concrete instance of `SubscribeArrayInput` via:
 //
-//          SubscribeArray{ SubscribeArgs{...} }
+//	SubscribeArray{ SubscribeArgs{...} }
 type SubscribeArrayInput interface {
 	pulumi.Input
 
@@ -224,7 +226,7 @@ func (i SubscribeArray) ToSubscribeArrayOutputWithContext(ctx context.Context) S
 // SubscribeMapInput is an input type that accepts SubscribeMap and SubscribeMapOutput values.
 // You can construct a concrete instance of `SubscribeMapInput` via:
 //
-//          SubscribeMap{ "key": SubscribeArgs{...} }
+//	SubscribeMap{ "key": SubscribeArgs{...} }
 type SubscribeMapInput interface {
 	pulumi.Input
 

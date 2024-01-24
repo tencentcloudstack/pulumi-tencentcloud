@@ -20,77 +20,80 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
-// 			InstanceType: pulumi.String("basic"),
-// 			DeleteBucket: pulumi.Bool(true),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
-// 			InstanceId:   exampleInstance.ID(),
-// 			IsPublic:     pulumi.Bool(true),
-// 			IsAutoScan:   pulumi.Bool(true),
-// 			IsPreventVul: pulumi.Bool(true),
-// 			Severity:     pulumi.String("medium"),
-// 			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
-// 				&tcr.NamespaceCveWhitelistItemArgs{
-// 					CveId: pulumi.String("cve-xxxxx"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleNamespaces := Tcr.GetNamespacesOutput(ctx, tcr.GetNamespacesOutputArgs{
-// 			InstanceId: exampleNamespace.InstanceId,
-// 		}, nil)
-// 		_, err = Tcr.NewWebhookTrigger(ctx, "exampleWebhookTrigger", &Tcr.WebhookTriggerArgs{
-// 			RegistryId: exampleInstance.ID(),
-// 			Namespace:  exampleNamespace.Name,
-// 			Trigger: &tcr.WebhookTriggerTriggerArgs{
-// 				Name: pulumi.String("trigger-example"),
-// 				Targets: tcr.WebhookTriggerTriggerTargetArray{
-// 					&tcr.WebhookTriggerTriggerTargetArgs{
-// 						Address: pulumi.String("http://example.org/post"),
-// 						Headers: tcr.WebhookTriggerTriggerTargetHeaderArray{
-// 							&tcr.WebhookTriggerTriggerTargetHeaderArgs{
-// 								Key: pulumi.String("X-Custom-Header"),
-// 								Values: pulumi.StringArray{
-// 									pulumi.String("a"),
-// 								},
-// 							},
-// 						},
-// 					},
-// 				},
-// 				EventTypes: pulumi.StringArray{
-// 					pulumi.String("pushImage"),
-// 				},
-// 				Condition:   pulumi.String(".*"),
-// 				Enabled:     pulumi.Bool(true),
-// 				Description: pulumi.String("example for trigger description"),
-// 				NamespaceId: pulumi.Int(nsId),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+//				InstanceType: pulumi.String("basic"),
+//				DeleteBucket: pulumi.Bool(true),
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
+//				InstanceId:   exampleInstance.ID(),
+//				IsPublic:     pulumi.Bool(true),
+//				IsAutoScan:   pulumi.Bool(true),
+//				IsPreventVul: pulumi.Bool(true),
+//				Severity:     pulumi.String("medium"),
+//				CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+//					&tcr.NamespaceCveWhitelistItemArgs{
+//						CveId: pulumi.String("cve-xxxxx"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleNamespaces := Tcr.GetNamespacesOutput(ctx, tcr.GetNamespacesOutputArgs{
+//				InstanceId: exampleNamespace.InstanceId,
+//			}, nil)
+//			_, err = Tcr.NewWebhookTrigger(ctx, "exampleWebhookTrigger", &Tcr.WebhookTriggerArgs{
+//				RegistryId: exampleInstance.ID(),
+//				Namespace:  exampleNamespace.Name,
+//				Trigger: &tcr.WebhookTriggerTriggerArgs{
+//					Name: pulumi.String("trigger-example"),
+//					Targets: tcr.WebhookTriggerTriggerTargetArray{
+//						&tcr.WebhookTriggerTriggerTargetArgs{
+//							Address: pulumi.String("http://example.org/post"),
+//							Headers: tcr.WebhookTriggerTriggerTargetHeaderArray{
+//								&tcr.WebhookTriggerTriggerTargetHeaderArgs{
+//									Key: pulumi.String("X-Custom-Header"),
+//									Values: pulumi.StringArray{
+//										pulumi.String("a"),
+//									},
+//								},
+//							},
+//						},
+//					},
+//					EventTypes: pulumi.StringArray{
+//						pulumi.String("pushImage"),
+//					},
+//					Condition:   pulumi.String(".*"),
+//					Enabled:     pulumi.Bool(true),
+//					Description: pulumi.String("example for trigger description"),
+//					NamespaceId: pulumi.Int(nsId),
+//				},
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -98,7 +101,9 @@ import (
 // tcr webhook_trigger can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger example webhook_trigger_id
+//
+//	$ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger example webhook_trigger_id
+//
 // ```
 type WebhookTrigger struct {
 	pulumi.CustomResourceState
@@ -226,7 +231,7 @@ func (i *WebhookTrigger) ToWebhookTriggerOutputWithContext(ctx context.Context) 
 // WebhookTriggerArrayInput is an input type that accepts WebhookTriggerArray and WebhookTriggerArrayOutput values.
 // You can construct a concrete instance of `WebhookTriggerArrayInput` via:
 //
-//          WebhookTriggerArray{ WebhookTriggerArgs{...} }
+//	WebhookTriggerArray{ WebhookTriggerArgs{...} }
 type WebhookTriggerArrayInput interface {
 	pulumi.Input
 
@@ -251,7 +256,7 @@ func (i WebhookTriggerArray) ToWebhookTriggerArrayOutputWithContext(ctx context.
 // WebhookTriggerMapInput is an input type that accepts WebhookTriggerMap and WebhookTriggerMapOutput values.
 // You can construct a concrete instance of `WebhookTriggerMapInput` via:
 //
-//          WebhookTriggerMap{ "key": WebhookTriggerArgs{...} }
+//	WebhookTriggerMap{ "key": WebhookTriggerArgs{...} }
 type WebhookTriggerMapInput interface {
 	pulumi.Input
 

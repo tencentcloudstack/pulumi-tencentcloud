@@ -18,31 +18,34 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.GetMigrateDbInstances(ctx, &dts.GetMigrateDbInstancesArgs{
-// 			AccountMode:  pulumi.StringRef("self"),
-// 			DatabaseType: "mysql",
-// 			InstanceId:   pulumi.StringRef("cdb-ffulb2sg"),
-// 			InstanceName: pulumi.StringRef("cdb_test"),
-// 			Limit:        pulumi.IntRef(10),
-// 			MigrateRole:  pulumi.StringRef("src"),
-// 			Offset:       pulumi.IntRef(10),
-// 			TmpSecretId:  pulumi.StringRef("AKIDvBDyVmna9TadcS4YzfBZmkU5TbX12345"),
-// 			TmpSecretKey: pulumi.StringRef("ZswjGWWHm24qMeiX6QUJsELDpC12345"),
-// 			TmpToken:     pulumi.StringRef("JOqqCPVuWdNZvlVDLxxx"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.GetMigrateDbInstances(ctx, &dts.GetMigrateDbInstancesArgs{
+//				AccountMode:  pulumi.StringRef("self"),
+//				DatabaseType: "mysql",
+//				InstanceId:   pulumi.StringRef("cdb-ffulb2sg"),
+//				InstanceName: pulumi.StringRef("cdb_test"),
+//				Limit:        pulumi.IntRef(10),
+//				MigrateRole:  pulumi.StringRef("src"),
+//				Offset:       pulumi.IntRef(10),
+//				TmpSecretId:  pulumi.StringRef("AKIDvBDyVmna9TadcS4YzfBZmkU5TbX12345"),
+//				TmpSecretKey: pulumi.StringRef("ZswjGWWHm24qMeiX6QUJsELDpC12345"),
+//				TmpToken:     pulumi.StringRef("JOqqCPVuWdNZvlVDLxxx"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetMigrateDbInstances(ctx *pulumi.Context, args *GetMigrateDbInstancesArgs, opts ...pulumi.InvokeOption) (*GetMigrateDbInstancesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

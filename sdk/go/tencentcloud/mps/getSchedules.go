@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.GetSchedules(ctx, &mps.GetSchedulesArgs{
-// 			Status: pulumi.StringRef("Enabled"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.GetSchedules(ctx, &mps.GetSchedulesArgs{
+//				Status: pulumi.StringRef("Enabled"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetSchedules(ctx *pulumi.Context, args *GetSchedulesArgs, opts ...pulumi.InvokeOption) (*GetSchedulesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
@@ -133,7 +136,7 @@ func (o GetSchedulesResultOutput) ScheduleInfoSets() GetSchedulesScheduleInfoSet
 	return o.ApplyT(func(v GetSchedulesResult) []GetSchedulesScheduleInfoSet { return v.ScheduleInfoSets }).(GetSchedulesScheduleInfoSetArrayOutput)
 }
 
-// The scheme status. Valid values:`Enabled``Disabled`Note: This field may return null, indicating that no valid values can be obtained.
+// The scheme status. Valid values:`Enabled“Disabled`Note: This field may return null, indicating that no valid values can be obtained.
 func (o GetSchedulesResultOutput) Status() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetSchedulesResult) *string { return v.Status }).(pulumi.StringPtrOutput)
 }

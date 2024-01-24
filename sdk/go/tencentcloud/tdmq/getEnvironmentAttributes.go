@@ -18,39 +18,42 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleInstance, err := Tdmq.NewInstance(ctx, "exampleInstance", &Tdmq.InstanceArgs{
-// 			ClusterName: pulumi.String("tf_example"),
-// 			Remark:      pulumi.String("remark."),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleNamespace, err := Tdmq.NewNamespace(ctx, "exampleNamespace", &Tdmq.NamespaceArgs{
-// 			EnvironName: pulumi.String("tf_example"),
-// 			MsgTtl:      pulumi.Int(300),
-// 			ClusterId:   exampleInstance.ID(),
-// 			Remark:      pulumi.String("remark."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Tdmq.GetEnvironmentAttributesOutput(ctx, tdmq.GetEnvironmentAttributesOutputArgs{
-// 			EnvironmentId: exampleNamespace.EnvironName,
-// 			ClusterId:     exampleInstance.ID(),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleInstance, err := Tdmq.NewInstance(ctx, "exampleInstance", &Tdmq.InstanceArgs{
+//				ClusterName: pulumi.String("tf_example"),
+//				Remark:      pulumi.String("remark."),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleNamespace, err := Tdmq.NewNamespace(ctx, "exampleNamespace", &Tdmq.NamespaceArgs{
+//				EnvironName: pulumi.String("tf_example"),
+//				MsgTtl:      pulumi.Int(300),
+//				ClusterId:   exampleInstance.ID(),
+//				Remark:      pulumi.String("remark."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Tdmq.GetEnvironmentAttributesOutput(ctx, tdmq.GetEnvironmentAttributesOutputArgs{
+//				EnvironmentId: exampleNamespace.EnvironName,
+//				ClusterId:     exampleInstance.ID(),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetEnvironmentAttributes(ctx *pulumi.Context, args *GetEnvironmentAttributesArgs, opts ...pulumi.InvokeOption) (*GetEnvironmentAttributesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

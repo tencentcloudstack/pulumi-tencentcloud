@@ -22,7 +22,7 @@ type RocketmqInstanceIpRule struct {
 // RocketmqInstanceIpRuleInput is an input type that accepts RocketmqInstanceIpRuleArgs and RocketmqInstanceIpRuleOutput values.
 // You can construct a concrete instance of `RocketmqInstanceIpRuleInput` via:
 //
-//          RocketmqInstanceIpRuleArgs{...}
+//	RocketmqInstanceIpRuleArgs{...}
 type RocketmqInstanceIpRuleInput interface {
 	pulumi.Input
 
@@ -54,7 +54,7 @@ func (i RocketmqInstanceIpRuleArgs) ToRocketmqInstanceIpRuleOutputWithContext(ct
 // RocketmqInstanceIpRuleArrayInput is an input type that accepts RocketmqInstanceIpRuleArray and RocketmqInstanceIpRuleArrayOutput values.
 // You can construct a concrete instance of `RocketmqInstanceIpRuleArrayInput` via:
 //
-//          RocketmqInstanceIpRuleArray{ RocketmqInstanceIpRuleArgs{...} }
+//	RocketmqInstanceIpRuleArray{ RocketmqInstanceIpRuleArgs{...} }
 type RocketmqInstanceIpRuleArrayInput interface {
 	pulumi.Input
 

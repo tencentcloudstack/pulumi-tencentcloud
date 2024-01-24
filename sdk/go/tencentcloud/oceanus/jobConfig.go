@@ -20,49 +20,52 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.NewJobConfig(ctx, "example", &Oceanus.JobConfigArgs{
-// 			AutoRecover:        pulumi.Int(1),
-// 			ClsLogsetId:        pulumi.String("cd9adbb5-6b7d-48d2-9870-77658959c7a4"),
-// 			ClsTopicId:         pulumi.String("cec4c2f1-0bf3-470e-b1a5-b1c451e88838"),
-// 			DefaultParallelism: pulumi.Int(1),
-// 			EntrypointClass:    pulumi.String("tf_example"),
-// 			ExpertModeOn:       pulumi.Bool(false),
-// 			JobId:              pulumi.String("cql-4xwincyn"),
-// 			JobManagerSpec:     pulumi.Float64(1),
-// 			LogCollect:         pulumi.Bool(true),
-// 			LogCollectType:     pulumi.Int(2),
-// 			LogLevel:           pulumi.String("INFO"),
-// 			ProgramArgs:        pulumi.String("--conf Key=Value"),
-// 			Properties: oceanus.JobConfigPropertyArray{
-// 				&oceanus.JobConfigPropertyArgs{
-// 					Key:   pulumi.String("pipeline.max-parallelism"),
-// 					Value: pulumi.String("2048"),
-// 				},
-// 			},
-// 			Remark: pulumi.String("remark."),
-// 			ResourceRefs: oceanus.JobConfigResourceRefArray{
-// 				&oceanus.JobConfigResourceRefArgs{
-// 					ResourceId: pulumi.String("resource-q22ntswy"),
-// 					Type:       pulumi.Int(1),
-// 					Version:    pulumi.Int(1),
-// 				},
-// 			},
-// 			TaskManagerSpec: pulumi.Float64(1),
-// 			WorkSpaceId:     pulumi.String("space-2idq8wbr"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.NewJobConfig(ctx, "example", &Oceanus.JobConfigArgs{
+//				AutoRecover:        pulumi.Int(1),
+//				ClsLogsetId:        pulumi.String("cd9adbb5-6b7d-48d2-9870-77658959c7a4"),
+//				ClsTopicId:         pulumi.String("cec4c2f1-0bf3-470e-b1a5-b1c451e88838"),
+//				DefaultParallelism: pulumi.Int(1),
+//				EntrypointClass:    pulumi.String("tf_example"),
+//				ExpertModeOn:       pulumi.Bool(false),
+//				JobId:              pulumi.String("cql-4xwincyn"),
+//				JobManagerSpec:     pulumi.Float64(1),
+//				LogCollect:         pulumi.Bool(true),
+//				LogCollectType:     pulumi.Int(2),
+//				LogLevel:           pulumi.String("INFO"),
+//				ProgramArgs:        pulumi.String("--conf Key=Value"),
+//				Properties: oceanus.JobConfigPropertyArray{
+//					&oceanus.JobConfigPropertyArgs{
+//						Key:   pulumi.String("pipeline.max-parallelism"),
+//						Value: pulumi.String("2048"),
+//					},
+//				},
+//				Remark: pulumi.String("remark."),
+//				ResourceRefs: oceanus.JobConfigResourceRefArray{
+//					&oceanus.JobConfigResourceRefArgs{
+//						ResourceId: pulumi.String("resource-q22ntswy"),
+//						Type:       pulumi.Int(1),
+//						Version:    pulumi.Int(1),
+//					},
+//				},
+//				TaskManagerSpec: pulumi.Float64(1),
+//				WorkSpaceId:     pulumi.String("space-2idq8wbr"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### is 3
 //
@@ -70,50 +73,53 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.NewJobConfig(ctx, "example", &Oceanus.JobConfigArgs{
-// 			AutoRecover:        pulumi.Int(1),
-// 			ClsLogsetId:        pulumi.String("cd9adbb5-6b7d-48d2-9870-77658959c7a4"),
-// 			ClsTopicId:         pulumi.String("cec4c2f1-0bf3-470e-b1a5-b1c451e88838"),
-// 			CosBucket:          pulumi.String("autotest-gz-bucket-1257058945"),
-// 			DefaultParallelism: pulumi.Int(1),
-// 			EntrypointClass:    pulumi.String("tf_example"),
-// 			ExpertModeOn:       pulumi.Bool(false),
-// 			JobId:              pulumi.String("cql-4xwincyn"),
-// 			JobManagerSpec:     pulumi.Float64(1),
-// 			LogCollect:         pulumi.Bool(true),
-// 			LogCollectType:     pulumi.Int(3),
-// 			LogLevel:           pulumi.String("INFO"),
-// 			ProgramArgs:        pulumi.String("--conf Key=Value"),
-// 			Properties: oceanus.JobConfigPropertyArray{
-// 				&oceanus.JobConfigPropertyArgs{
-// 					Key:   pulumi.String("pipeline.max-parallelism"),
-// 					Value: pulumi.String("2048"),
-// 				},
-// 			},
-// 			Remark: pulumi.String("remark."),
-// 			ResourceRefs: oceanus.JobConfigResourceRefArray{
-// 				&oceanus.JobConfigResourceRefArgs{
-// 					ResourceId: pulumi.String("resource-q22ntswy"),
-// 					Type:       pulumi.Int(1),
-// 					Version:    pulumi.Int(1),
-// 				},
-// 			},
-// 			TaskManagerSpec: pulumi.Float64(1),
-// 			WorkSpaceId:     pulumi.String("space-2idq8wbr"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.NewJobConfig(ctx, "example", &Oceanus.JobConfigArgs{
+//				AutoRecover:        pulumi.Int(1),
+//				ClsLogsetId:        pulumi.String("cd9adbb5-6b7d-48d2-9870-77658959c7a4"),
+//				ClsTopicId:         pulumi.String("cec4c2f1-0bf3-470e-b1a5-b1c451e88838"),
+//				CosBucket:          pulumi.String("autotest-gz-bucket-1257058945"),
+//				DefaultParallelism: pulumi.Int(1),
+//				EntrypointClass:    pulumi.String("tf_example"),
+//				ExpertModeOn:       pulumi.Bool(false),
+//				JobId:              pulumi.String("cql-4xwincyn"),
+//				JobManagerSpec:     pulumi.Float64(1),
+//				LogCollect:         pulumi.Bool(true),
+//				LogCollectType:     pulumi.Int(3),
+//				LogLevel:           pulumi.String("INFO"),
+//				ProgramArgs:        pulumi.String("--conf Key=Value"),
+//				Properties: oceanus.JobConfigPropertyArray{
+//					&oceanus.JobConfigPropertyArgs{
+//						Key:   pulumi.String("pipeline.max-parallelism"),
+//						Value: pulumi.String("2048"),
+//					},
+//				},
+//				Remark: pulumi.String("remark."),
+//				ResourceRefs: oceanus.JobConfigResourceRefArray{
+//					&oceanus.JobConfigResourceRefArgs{
+//						ResourceId: pulumi.String("resource-q22ntswy"),
+//						Type:       pulumi.Int(1),
+//						Version:    pulumi.Int(1),
+//					},
+//				},
+//				TaskManagerSpec: pulumi.Float64(1),
+//				WorkSpaceId:     pulumi.String("space-2idq8wbr"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type JobConfig struct {
 	pulumi.CustomResourceState
@@ -405,7 +411,7 @@ func (i *JobConfig) ToJobConfigOutputWithContext(ctx context.Context) JobConfigO
 // JobConfigArrayInput is an input type that accepts JobConfigArray and JobConfigArrayOutput values.
 // You can construct a concrete instance of `JobConfigArrayInput` via:
 //
-//          JobConfigArray{ JobConfigArgs{...} }
+//	JobConfigArray{ JobConfigArgs{...} }
 type JobConfigArrayInput interface {
 	pulumi.Input
 
@@ -430,7 +436,7 @@ func (i JobConfigArray) ToJobConfigArrayOutputWithContext(ctx context.Context) J
 // JobConfigMapInput is an input type that accepts JobConfigMap and JobConfigMapOutput values.
 // You can construct a concrete instance of `JobConfigMapInput` via:
 //
-//          JobConfigMap{ "key": JobConfigArgs{...} }
+//	JobConfigMap{ "key": JobConfigArgs{...} }
 type JobConfigMapInput interface {
 	pulumi.Input
 

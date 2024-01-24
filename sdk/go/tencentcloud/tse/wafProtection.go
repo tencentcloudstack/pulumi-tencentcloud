@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.NewWafProtection(ctx, "wafProtection", &Tse.WafProtectionArgs{
-// 			GatewayId: pulumi.String("gateway-ed63e957"),
-// 			Lists: pulumi.StringArray{
-// 				pulumi.String("7324a769-9d87-48ce-a904-48c3defc4abd"),
-// 			},
-// 			Operate: pulumi.String("open"),
-// 			Type:    pulumi.String("Route"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.NewWafProtection(ctx, "wafProtection", &Tse.WafProtectionArgs{
+//				GatewayId: pulumi.String("gateway-ed63e957"),
+//				Lists: pulumi.StringArray{
+//					pulumi.String("7324a769-9d87-48ce-a904-48c3defc4abd"),
+//				},
+//				Operate: pulumi.String("open"),
+//				Type:    pulumi.String("Route"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type WafProtection struct {
 	pulumi.CustomResourceState
@@ -172,7 +175,7 @@ func (i *WafProtection) ToWafProtectionOutputWithContext(ctx context.Context) Wa
 // WafProtectionArrayInput is an input type that accepts WafProtectionArray and WafProtectionArrayOutput values.
 // You can construct a concrete instance of `WafProtectionArrayInput` via:
 //
-//          WafProtectionArray{ WafProtectionArgs{...} }
+//	WafProtectionArray{ WafProtectionArgs{...} }
 type WafProtectionArrayInput interface {
 	pulumi.Input
 
@@ -197,7 +200,7 @@ func (i WafProtectionArray) ToWafProtectionArrayOutputWithContext(ctx context.Co
 // WafProtectionMapInput is an input type that accepts WafProtectionMap and WafProtectionMapOutput values.
 // You can construct a concrete instance of `WafProtectionMapInput` via:
 //
-//          WafProtectionMap{ "key": WafProtectionArgs{...} }
+//	WafProtectionMap{ "key": WafProtectionArgs{...} }
 type WafProtectionMapInput interface {
 	pulumi.Input
 

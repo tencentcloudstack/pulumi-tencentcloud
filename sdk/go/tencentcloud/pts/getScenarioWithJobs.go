@@ -18,32 +18,35 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Pts.GetScenarioWithJobs(ctx, &pts.GetScenarioWithJobsArgs{
-// 			Ascend:        pulumi.BoolRef(true),
-// 			IgnoreDataset: pulumi.BoolRef(true),
-// 			IgnoreScript:  pulumi.BoolRef(true),
-// 			ProjectIds: []string{
-// 				"project-45vw7v82",
-// 			},
-// 			ScenarioIds: []string{
-// 				"scenario-koakp3h6",
-// 			},
-// 			ScenarioName: pulumi.StringRef("pts-jmeter"),
-// 			ScenarioType: pulumi.StringRef("pts-jmeter"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Pts.GetScenarioWithJobs(ctx, &pts.GetScenarioWithJobsArgs{
+//				Ascend:        pulumi.BoolRef(true),
+//				IgnoreDataset: pulumi.BoolRef(true),
+//				IgnoreScript:  pulumi.BoolRef(true),
+//				ProjectIds: []string{
+//					"project-45vw7v82",
+//				},
+//				ScenarioIds: []string{
+//					"scenario-koakp3h6",
+//				},
+//				ScenarioName: pulumi.StringRef("pts-jmeter"),
+//				ScenarioType: pulumi.StringRef("pts-jmeter"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetScenarioWithJobs(ctx *pulumi.Context, args *GetScenarioWithJobsArgs, opts ...pulumi.InvokeOption) (*GetScenarioWithJobsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

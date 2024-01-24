@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewUpgradeProxyVersion(ctx, "upgradeProxyVersion", &Cynosdb.UpgradeProxyVersionArgs{
-// 			ClusterId:       pulumi.String("cynosdbmysql-bws8h88b"),
-// 			DstProxyVersion: pulumi.String("1.3.7"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewUpgradeProxyVersion(ctx, "upgradeProxyVersion", &Cynosdb.UpgradeProxyVersionArgs{
+//				ClusterId:       pulumi.String("cynosdbmysql-bws8h88b"),
+//				DstProxyVersion: pulumi.String("1.3.7"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type UpgradeProxyVersion struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *UpgradeProxyVersion) ToUpgradeProxyVersionOutputWithContext(ctx context
 // UpgradeProxyVersionArrayInput is an input type that accepts UpgradeProxyVersionArray and UpgradeProxyVersionArrayOutput values.
 // You can construct a concrete instance of `UpgradeProxyVersionArrayInput` via:
 //
-//          UpgradeProxyVersionArray{ UpgradeProxyVersionArgs{...} }
+//	UpgradeProxyVersionArray{ UpgradeProxyVersionArgs{...} }
 type UpgradeProxyVersionArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i UpgradeProxyVersionArray) ToUpgradeProxyVersionArrayOutputWithContext(ct
 // UpgradeProxyVersionMapInput is an input type that accepts UpgradeProxyVersionMap and UpgradeProxyVersionMapOutput values.
 // You can construct a concrete instance of `UpgradeProxyVersionMapInput` via:
 //
-//          UpgradeProxyVersionMap{ "key": UpgradeProxyVersionArgs{...} }
+//	UpgradeProxyVersionMap{ "key": UpgradeProxyVersionArgs{...} }
 type UpgradeProxyVersionMapInput interface {
 	pulumi.Input
 

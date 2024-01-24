@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.GetDeliveryConfigByGroupId(ctx, &tsf.GetDeliveryConfigByGroupIdArgs{
-// 			GroupId: "group-yrjkln9v",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.GetDeliveryConfigByGroupId(ctx, &tsf.GetDeliveryConfigByGroupIdArgs{
+//				GroupId: "group-yrjkln9v",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupDeliveryConfigByGroupId(ctx *pulumi.Context, args *LookupDeliveryConfigByGroupIdArgs, opts ...pulumi.InvokeOption) (*LookupDeliveryConfigByGroupIdResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.NewLogFileRetentionPeriod(ctx, "logFileRetentionPeriod", &Mariadb.LogFileRetentionPeriodArgs{
-// 			Days:       pulumi.Int(8),
-// 			InstanceId: pulumi.String("tdsql-4pzs5b67"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.NewLogFileRetentionPeriod(ctx, "logFileRetentionPeriod", &Mariadb.LogFileRetentionPeriodArgs{
+//				Days:       pulumi.Int(8),
+//				InstanceId: pulumi.String("tdsql-4pzs5b67"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // mariadb log_file_retention_period can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mariadb/logFileRetentionPeriod:LogFileRetentionPeriod log_file_retention_period tdsql-4pzs5b67
+//
+//	$ pulumi import tencentcloud:Mariadb/logFileRetentionPeriod:LogFileRetentionPeriod log_file_retention_period tdsql-4pzs5b67
+//
 // ```
 type LogFileRetentionPeriod struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *LogFileRetentionPeriod) ToLogFileRetentionPeriodOutputWithContext(ctx c
 // LogFileRetentionPeriodArrayInput is an input type that accepts LogFileRetentionPeriodArray and LogFileRetentionPeriodArrayOutput values.
 // You can construct a concrete instance of `LogFileRetentionPeriodArrayInput` via:
 //
-//          LogFileRetentionPeriodArray{ LogFileRetentionPeriodArgs{...} }
+//	LogFileRetentionPeriodArray{ LogFileRetentionPeriodArgs{...} }
 type LogFileRetentionPeriodArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i LogFileRetentionPeriodArray) ToLogFileRetentionPeriodArrayOutputWithCont
 // LogFileRetentionPeriodMapInput is an input type that accepts LogFileRetentionPeriodMap and LogFileRetentionPeriodMapOutput values.
 // You can construct a concrete instance of `LogFileRetentionPeriodMapInput` via:
 //
-//          LogFileRetentionPeriodMap{ "key": LogFileRetentionPeriodArgs{...} }
+//	LogFileRetentionPeriodMap{ "key": LogFileRetentionPeriodArgs{...} }
 type LogFileRetentionPeriodMapInput interface {
 	pulumi.Input
 

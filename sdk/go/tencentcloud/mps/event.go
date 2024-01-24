@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewEvent(ctx, "event", &Mps.EventArgs{
-// 			Description: pulumi.String("event description"),
-// 			EventName:   pulumi.String("you-event-name"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewEvent(ctx, "event", &Mps.EventArgs{
+//				Description: pulumi.String("event description"),
+//				EventName:   pulumi.String("you-event-name"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // mps event can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/event:Event event event_id
+//
+//	$ pulumi import tencentcloud:Mps/event:Event event event_id
+//
 // ```
 type Event struct {
 	pulumi.CustomResourceState
@@ -144,7 +149,7 @@ func (i *Event) ToEventOutputWithContext(ctx context.Context) EventOutput {
 // EventArrayInput is an input type that accepts EventArray and EventArrayOutput values.
 // You can construct a concrete instance of `EventArrayInput` via:
 //
-//          EventArray{ EventArgs{...} }
+//	EventArray{ EventArgs{...} }
 type EventArrayInput interface {
 	pulumi.Input
 
@@ -169,7 +174,7 @@ func (i EventArray) ToEventArrayOutputWithContext(ctx context.Context) EventArra
 // EventMapInput is an input type that accepts EventMap and EventMapOutput values.
 // You can construct a concrete instance of `EventMapInput` via:
 //
-//          EventMap{ "key": EventArgs{...} }
+//	EventMap{ "key": EventArgs{...} }
 type EventMapInput interface {
 	pulumi.Input
 

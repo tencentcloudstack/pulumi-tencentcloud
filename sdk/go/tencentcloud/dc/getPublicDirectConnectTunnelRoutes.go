@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dc.GetPublicDirectConnectTunnelRoutes(ctx, &dc.GetPublicDirectConnectTunnelRoutesArgs{
-// 			DirectConnectTunnelId: "dcx-4z49tnws",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dc.GetPublicDirectConnectTunnelRoutes(ctx, &dc.GetPublicDirectConnectTunnelRoutesArgs{
+//				DirectConnectTunnelId: "dcx-4z49tnws",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetPublicDirectConnectTunnelRoutes(ctx *pulumi.Context, args *GetPublicDirectConnectTunnelRoutesArgs, opts ...pulumi.InvokeOption) (*GetPublicDirectConnectTunnelRoutesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

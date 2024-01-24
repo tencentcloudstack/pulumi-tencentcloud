@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.GetUpgradePrice(ctx, &mariadb.GetUpgradePriceArgs{
-// 			InstanceId: "tdsql-9vqvls95",
-// 			Memory:     4,
-// 			NodeCount:  pulumi.IntRef(2),
-// 			Storage:    40,
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.GetUpgradePrice(ctx, &mariadb.GetUpgradePriceArgs{
+//				InstanceId: "tdsql-9vqvls95",
+//				Memory:     4,
+//				NodeCount:  pulumi.IntRef(2),
+//				Storage:    40,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetUpgradePrice(ctx *pulumi.Context, args *GetUpgradePriceArgs, opts ...pulumi.InvokeOption) (*GetUpgradePriceResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

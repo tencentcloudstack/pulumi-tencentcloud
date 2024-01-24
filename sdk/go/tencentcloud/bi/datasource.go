@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Bi.NewDatasource(ctx, "datasource", &Bi.DatasourceArgs{
-// 			Charset:    pulumi.String("utf8"),
-// 			DbHost:     pulumi.String("bj-cdb-1lxqg5r6.sql.tencentcdb.com"),
-// 			DbName:     pulumi.String("tf-test"),
-// 			DbPort:     pulumi.Int(63694),
-// 			DbPwd:      pulumi.String("ABc123,,,"),
-// 			DbType:     pulumi.String("MYSQL"),
-// 			DbUser:     pulumi.String("root"),
-// 			ProjectId:  pulumi.Int(11015030),
-// 			SourceName: pulumi.String("tf-source-name"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Bi.NewDatasource(ctx, "datasource", &Bi.DatasourceArgs{
+//				Charset:    pulumi.String("utf8"),
+//				DbHost:     pulumi.String("bj-cdb-1lxqg5r6.sql.tencentcdb.com"),
+//				DbName:     pulumi.String("tf-test"),
+//				DbPort:     pulumi.Int(63694),
+//				DbPwd:      pulumi.String("ABc123,,,"),
+//				DbType:     pulumi.String("MYSQL"),
+//				DbUser:     pulumi.String("root"),
+//				ProjectId:  pulumi.Int(11015030),
+//				SourceName: pulumi.String("tf-source-name"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -49,7 +52,9 @@ import (
 // bi datasource can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Bi/datasource:Datasource datasource datasource_id
+//
+//	$ pulumi import tencentcloud:Bi/datasource:Datasource datasource datasource_id
+//
 // ```
 type Datasource struct {
 	pulumi.CustomResourceState
@@ -315,7 +320,7 @@ func (i *Datasource) ToDatasourceOutputWithContext(ctx context.Context) Datasour
 // DatasourceArrayInput is an input type that accepts DatasourceArray and DatasourceArrayOutput values.
 // You can construct a concrete instance of `DatasourceArrayInput` via:
 //
-//          DatasourceArray{ DatasourceArgs{...} }
+//	DatasourceArray{ DatasourceArgs{...} }
 type DatasourceArrayInput interface {
 	pulumi.Input
 
@@ -340,7 +345,7 @@ func (i DatasourceArray) ToDatasourceArrayOutputWithContext(ctx context.Context)
 // DatasourceMapInput is an input type that accepts DatasourceMap and DatasourceMapOutput values.
 // You can construct a concrete instance of `DatasourceMapInput` via:
 //
-//          DatasourceMap{ "key": DatasourceArgs{...} }
+//	DatasourceMap{ "key": DatasourceArgs{...} }
 type DatasourceMapInput interface {
 	pulumi.Input
 

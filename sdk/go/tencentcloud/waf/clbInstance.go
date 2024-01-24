@@ -22,22 +22,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewClbInstance(ctx, "example", &Waf.ClbInstanceArgs{
-// 			GoodsCategory: pulumi.String("premium_clb"),
-// 			InstanceName:  pulumi.String("tf-example-clb-waf"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewClbInstance(ctx, "example", &Waf.ClbInstanceArgs{
+//				GoodsCategory: pulumi.String("premium_clb"),
+//				InstanceName:  pulumi.String("tf-example-clb-waf"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Create a complete waf ultimateClb instance
 //
@@ -45,28 +48,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewClbInstance(ctx, "example", &Waf.ClbInstanceArgs{
-// 			ApiSecurity:   pulumi.Int(1),
-// 			AutoRenewFlag: pulumi.Int(1),
-// 			BotManagement: pulumi.Int(1),
-// 			ElasticMode:   pulumi.Int(1),
-// 			GoodsCategory: pulumi.String("ultimate_clb"),
-// 			InstanceName:  pulumi.String("tf-example-clb-waf"),
-// 			TimeSpan:      pulumi.Int(1),
-// 			TimeUnit:      pulumi.String("m"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewClbInstance(ctx, "example", &Waf.ClbInstanceArgs{
+//				ApiSecurity:   pulumi.Int(1),
+//				AutoRenewFlag: pulumi.Int(1),
+//				BotManagement: pulumi.Int(1),
+//				ElasticMode:   pulumi.Int(1),
+//				GoodsCategory: pulumi.String("ultimate_clb"),
+//				InstanceName:  pulumi.String("tf-example-clb-waf"),
+//				TimeSpan:      pulumi.Int(1),
+//				TimeUnit:      pulumi.String("m"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Set waf ultimateClb instance qps limit
 //
@@ -74,29 +80,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewClbInstance(ctx, "example", &Waf.ClbInstanceArgs{
-// 			ApiSecurity:   pulumi.Int(1),
-// 			AutoRenewFlag: pulumi.Int(1),
-// 			BotManagement: pulumi.Int(1),
-// 			ElasticMode:   pulumi.Int(1),
-// 			GoodsCategory: pulumi.String("ultimate_clb"),
-// 			InstanceName:  pulumi.String("tf-example-clb-waf"),
-// 			QpsLimit:      pulumi.Int(200000),
-// 			TimeSpan:      pulumi.Int(1),
-// 			TimeUnit:      pulumi.String("m"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewClbInstance(ctx, "example", &Waf.ClbInstanceArgs{
+//				ApiSecurity:   pulumi.Int(1),
+//				AutoRenewFlag: pulumi.Int(1),
+//				BotManagement: pulumi.Int(1),
+//				ElasticMode:   pulumi.Int(1),
+//				GoodsCategory: pulumi.String("ultimate_clb"),
+//				InstanceName:  pulumi.String("tf-example-clb-waf"),
+//				QpsLimit:      pulumi.Int(200000),
+//				TimeSpan:      pulumi.Int(1),
+//				TimeUnit:      pulumi.String("m"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ClbInstance struct {
 	pulumi.CustomResourceState
@@ -298,7 +307,7 @@ func (i *ClbInstance) ToClbInstanceOutputWithContext(ctx context.Context) ClbIns
 // ClbInstanceArrayInput is an input type that accepts ClbInstanceArray and ClbInstanceArrayOutput values.
 // You can construct a concrete instance of `ClbInstanceArrayInput` via:
 //
-//          ClbInstanceArray{ ClbInstanceArgs{...} }
+//	ClbInstanceArray{ ClbInstanceArgs{...} }
 type ClbInstanceArrayInput interface {
 	pulumi.Input
 
@@ -323,7 +332,7 @@ func (i ClbInstanceArray) ToClbInstanceArrayOutputWithContext(ctx context.Contex
 // ClbInstanceMapInput is an input type that accepts ClbInstanceMap and ClbInstanceMapOutput values.
 // You can construct a concrete instance of `ClbInstanceMapInput` via:
 //
-//          ClbInstanceMap{ "key": ClbInstanceArgs{...} }
+//	ClbInstanceMap{ "key": ClbInstanceArgs{...} }
 type ClbInstanceMapInput interface {
 	pulumi.Input
 

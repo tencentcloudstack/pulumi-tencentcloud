@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.GetGatewayNodes(ctx, &tse.GetGatewayNodesArgs{
-// 			GatewayId: "gateway-ddbb709b",
-// 			GroupId:   pulumi.StringRef("group-013c0d8e"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.GetGatewayNodes(ctx, &tse.GetGatewayNodesArgs{
+//				GatewayId: "gateway-ddbb709b",
+//				GroupId:   pulumi.StringRef("group-013c0d8e"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetGatewayNodes(ctx *pulumi.Context, args *GetGatewayNodesArgs, opts ...pulumi.InvokeOption) (*GetGatewayNodesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

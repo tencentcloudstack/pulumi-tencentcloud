@@ -18,40 +18,43 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.GetResourcePackageList(ctx, &cynosdb.GetResourcePackageListArgs{
-// 			OrderBies: []string{
-// 				"startTime",
-// 			},
-// 			OrderDirection: pulumi.StringRef("DESC"),
-// 			PackageIds: []string{
-// 				"package-hy4d2ppl",
-// 			},
-// 			PackageNames: []string{
-// 				"keep-package-disk",
-// 			},
-// 			PackageRegions: []string{
-// 				"china",
-// 			},
-// 			PackageTypes: []string{
-// 				"DISK",
-// 			},
-// 			Statuses: []string{
-// 				"using",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.GetResourcePackageList(ctx, &cynosdb.GetResourcePackageListArgs{
+//				OrderBies: []string{
+//					"startTime",
+//				},
+//				OrderDirection: pulumi.StringRef("DESC"),
+//				PackageIds: []string{
+//					"package-hy4d2ppl",
+//				},
+//				PackageNames: []string{
+//					"keep-package-disk",
+//				},
+//				PackageRegions: []string{
+//					"china",
+//				},
+//				PackageTypes: []string{
+//					"DISK",
+//				},
+//				Statuses: []string{
+//					"using",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetResourcePackageList(ctx *pulumi.Context, args *GetResourcePackageListArgs, opts ...pulumi.InvokeOption) (*GetResourcePackageListResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

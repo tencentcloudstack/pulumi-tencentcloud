@@ -19,175 +19,178 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "sqlserver",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-// 			VpcId:            vpc.ID(),
-// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-// 			Description: pulumi.String("desc."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		srcExample, err := Sqlserver.NewBasicInstance(ctx, "srcExample", &Sqlserver.BasicInstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-// 			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			ProjectId:        pulumi.Int(0),
-// 			Memory:           pulumi.Int(4),
-// 			Storage:          pulumi.Int(100),
-// 			Cpu:              pulumi.Int(2),
-// 			MachineType:      pulumi.String("CLOUD_PREMIUM"),
-// 			MaintenanceWeekSets: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(2),
-// 				pulumi.Int(3),
-// 			},
-// 			MaintenanceStartTime: pulumi.String("09:00"),
-// 			MaintenanceTimeSpan:  pulumi.Int(3),
-// 			SecurityGroups: pulumi.StringArray{
-// 				securityGroup.ID(),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		dstExample, err := Sqlserver.NewBasicInstance(ctx, "dstExample", &Sqlserver.BasicInstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-// 			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			ProjectId:        pulumi.Int(0),
-// 			Memory:           pulumi.Int(4),
-// 			Storage:          pulumi.Int(100),
-// 			Cpu:              pulumi.Int(2),
-// 			MachineType:      pulumi.String("CLOUD_PREMIUM"),
-// 			MaintenanceWeekSets: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(2),
-// 				pulumi.Int(3),
-// 			},
-// 			MaintenanceStartTime: pulumi.String("09:00"),
-// 			MaintenanceTimeSpan:  pulumi.Int(3),
-// 			SecurityGroups: pulumi.StringArray{
-// 				securityGroup.ID(),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		srcDb, err := Sqlserver.NewDb(ctx, "srcDb", &Sqlserver.DbArgs{
-// 			InstanceId: srcExample.ID(),
-// 			Charset:    pulumi.String("Chinese_PRC_BIN"),
-// 			Remark:     pulumi.String("testACC-remark"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		dstDb, err := Sqlserver.NewDb(ctx, "dstDb", &Sqlserver.DbArgs{
-// 			InstanceId: dstExample.ID(),
-// 			Charset:    pulumi.String("Chinese_PRC_BIN"),
-// 			Remark:     pulumi.String("testACC-remark"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		srcAccount, err := Sqlserver.NewAccount(ctx, "srcAccount", &Sqlserver.AccountArgs{
-// 			InstanceId: srcExample.ID(),
-// 			Password:   pulumi.String("Qwer@234"),
-// 			IsAdmin:    pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		dstAccount, err := Sqlserver.NewAccount(ctx, "dstAccount", &Sqlserver.AccountArgs{
-// 			InstanceId: dstExample.ID(),
-// 			Password:   pulumi.String("Qwer@234"),
-// 			IsAdmin:    pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Sqlserver.NewAccountDbAttachment(ctx, "srcAccountDbAttachment", &Sqlserver.AccountDbAttachmentArgs{
-// 			InstanceId:  srcExample.ID(),
-// 			AccountName: srcAccount.Name,
-// 			DbName:      srcDb.Name,
-// 			Privilege:   pulumi.String("ReadWrite"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Sqlserver.NewAccountDbAttachment(ctx, "dstAccountDbAttachment", &Sqlserver.AccountDbAttachmentArgs{
-// 			InstanceId:  dstExample.ID(),
-// 			AccountName: dstAccount.Name,
-// 			DbName:      dstDb.Name,
-// 			Privilege:   pulumi.String("ReadWrite"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Sqlserver.NewMigration(ctx, "migration", &Sqlserver.MigrationArgs{
-// 			MigrateName: pulumi.String("tf_test_migration"),
-// 			MigrateType: pulumi.Int(1),
-// 			SourceType:  pulumi.Int(1),
-// 			Source: &sqlserver.MigrationSourceArgs{
-// 				InstanceId: srcExample.ID(),
-// 				UserName:   srcAccount.Name,
-// 				Password:   srcAccount.Password,
-// 			},
-// 			Target: &sqlserver.MigrationTargetArgs{
-// 				InstanceId: dstExample.ID(),
-// 				UserName:   dstAccount.Name,
-// 				Password:   dstAccount.Password,
-// 			},
-// 			MigrateDbSets: sqlserver.MigrationMigrateDbSetArray{
-// 				&sqlserver.MigrationMigrateDbSetArgs{
-// 					DbName: srcDb.Name,
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "sqlserver",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+//				Description: pulumi.String("desc."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			srcExample, err := Sqlserver.NewBasicInstance(ctx, "srcExample", &Sqlserver.BasicInstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				ProjectId:        pulumi.Int(0),
+//				Memory:           pulumi.Int(4),
+//				Storage:          pulumi.Int(100),
+//				Cpu:              pulumi.Int(2),
+//				MachineType:      pulumi.String("CLOUD_PREMIUM"),
+//				MaintenanceWeekSets: pulumi.IntArray{
+//					pulumi.Int(1),
+//					pulumi.Int(2),
+//					pulumi.Int(3),
+//				},
+//				MaintenanceStartTime: pulumi.String("09:00"),
+//				MaintenanceTimeSpan:  pulumi.Int(3),
+//				SecurityGroups: pulumi.StringArray{
+//					securityGroup.ID(),
+//				},
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			dstExample, err := Sqlserver.NewBasicInstance(ctx, "dstExample", &Sqlserver.BasicInstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				ProjectId:        pulumi.Int(0),
+//				Memory:           pulumi.Int(4),
+//				Storage:          pulumi.Int(100),
+//				Cpu:              pulumi.Int(2),
+//				MachineType:      pulumi.String("CLOUD_PREMIUM"),
+//				MaintenanceWeekSets: pulumi.IntArray{
+//					pulumi.Int(1),
+//					pulumi.Int(2),
+//					pulumi.Int(3),
+//				},
+//				MaintenanceStartTime: pulumi.String("09:00"),
+//				MaintenanceTimeSpan:  pulumi.Int(3),
+//				SecurityGroups: pulumi.StringArray{
+//					securityGroup.ID(),
+//				},
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			srcDb, err := Sqlserver.NewDb(ctx, "srcDb", &Sqlserver.DbArgs{
+//				InstanceId: srcExample.ID(),
+//				Charset:    pulumi.String("Chinese_PRC_BIN"),
+//				Remark:     pulumi.String("testACC-remark"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			dstDb, err := Sqlserver.NewDb(ctx, "dstDb", &Sqlserver.DbArgs{
+//				InstanceId: dstExample.ID(),
+//				Charset:    pulumi.String("Chinese_PRC_BIN"),
+//				Remark:     pulumi.String("testACC-remark"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			srcAccount, err := Sqlserver.NewAccount(ctx, "srcAccount", &Sqlserver.AccountArgs{
+//				InstanceId: srcExample.ID(),
+//				Password:   pulumi.String("Qwer@234"),
+//				IsAdmin:    pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			dstAccount, err := Sqlserver.NewAccount(ctx, "dstAccount", &Sqlserver.AccountArgs{
+//				InstanceId: dstExample.ID(),
+//				Password:   pulumi.String("Qwer@234"),
+//				IsAdmin:    pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Sqlserver.NewAccountDbAttachment(ctx, "srcAccountDbAttachment", &Sqlserver.AccountDbAttachmentArgs{
+//				InstanceId:  srcExample.ID(),
+//				AccountName: srcAccount.Name,
+//				DbName:      srcDb.Name,
+//				Privilege:   pulumi.String("ReadWrite"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Sqlserver.NewAccountDbAttachment(ctx, "dstAccountDbAttachment", &Sqlserver.AccountDbAttachmentArgs{
+//				InstanceId:  dstExample.ID(),
+//				AccountName: dstAccount.Name,
+//				DbName:      dstDb.Name,
+//				Privilege:   pulumi.String("ReadWrite"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Sqlserver.NewMigration(ctx, "migration", &Sqlserver.MigrationArgs{
+//				MigrateName: pulumi.String("tf_test_migration"),
+//				MigrateType: pulumi.Int(1),
+//				SourceType:  pulumi.Int(1),
+//				Source: &sqlserver.MigrationSourceArgs{
+//					InstanceId: srcExample.ID(),
+//					UserName:   srcAccount.Name,
+//					Password:   srcAccount.Password,
+//				},
+//				Target: &sqlserver.MigrationTargetArgs{
+//					InstanceId: dstExample.ID(),
+//					UserName:   dstAccount.Name,
+//					Password:   dstAccount.Password,
+//				},
+//				MigrateDbSets: sqlserver.MigrationMigrateDbSetArray{
+//					&sqlserver.MigrationMigrateDbSetArgs{
+//						DbName: srcDb.Name,
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -195,7 +198,9 @@ import (
 // sqlserver migration can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/migration:Migration migration migration_id
+//
+//	$ pulumi import tencentcloud:Sqlserver/migration:Migration migration migration_id
+//
 // ```
 type Migration struct {
 	pulumi.CustomResourceState
@@ -359,7 +364,7 @@ func (i *Migration) ToMigrationOutputWithContext(ctx context.Context) MigrationO
 // MigrationArrayInput is an input type that accepts MigrationArray and MigrationArrayOutput values.
 // You can construct a concrete instance of `MigrationArrayInput` via:
 //
-//          MigrationArray{ MigrationArgs{...} }
+//	MigrationArray{ MigrationArgs{...} }
 type MigrationArrayInput interface {
 	pulumi.Input
 
@@ -384,7 +389,7 @@ func (i MigrationArray) ToMigrationArrayOutputWithContext(ctx context.Context) M
 // MigrationMapInput is an input type that accepts MigrationMap and MigrationMapOutput values.
 // You can construct a concrete instance of `MigrationMapInput` via:
 //
-//          MigrationMap{ "key": MigrationArgs{...} }
+//	MigrationMap{ "key": MigrationArgs{...} }
 type MigrationMapInput interface {
 	pulumi.Input
 

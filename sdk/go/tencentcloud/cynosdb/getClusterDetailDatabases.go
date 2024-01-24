@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.GetClusterDetailDatabases(ctx, &cynosdb.GetClusterDetailDatabasesArgs{
-// 			ClusterId: "cynosdbmysql-bws8h88b",
-// 			DbName:    pulumi.StringRef("users"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.GetClusterDetailDatabases(ctx, &cynosdb.GetClusterDetailDatabasesArgs{
+//				ClusterId: "cynosdbmysql-bws8h88b",
+//				DbName:    pulumi.StringRef("users"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetClusterDetailDatabases(ctx *pulumi.Context, args *GetClusterDetailDatabasesArgs, opts ...pulumi.InvokeOption) (*GetClusterDetailDatabasesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

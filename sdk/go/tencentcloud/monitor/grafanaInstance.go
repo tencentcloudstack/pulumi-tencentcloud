@@ -19,53 +19,56 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-6"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(availabilityZone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Monitor.NewGrafanaInstance(ctx, "foo", &Monitor.GrafanaInstanceArgs{
-// 			InstanceName: pulumi.String("test-grafana"),
-// 			VpcId:        vpc.ID(),
-// 			SubnetIds: pulumi.StringArray{
-// 				subnet.ID(),
-// 			},
-// 			GrafanaInitPassword: pulumi.String("1234567890"),
-// 			EnableInternet:      pulumi.Bool(false),
-// 			IsDestroy:           pulumi.Bool(true),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-6"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Monitor.NewGrafanaInstance(ctx, "foo", &Monitor.GrafanaInstanceArgs{
+//				InstanceName: pulumi.String("test-grafana"),
+//				VpcId:        vpc.ID(),
+//				SubnetIds: pulumi.StringArray{
+//					subnet.ID(),
+//				},
+//				GrafanaInitPassword: pulumi.String("1234567890"),
+//				EnableInternet:      pulumi.Bool(false),
+//				IsDestroy:           pulumi.Bool(true),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -73,11 +76,15 @@ import (
 // monitor grafanaInstance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/grafanaInstance:GrafanaInstance foo grafanaInstance_id
+//
+//	$ pulumi import tencentcloud:Monitor/grafanaInstance:GrafanaInstance foo grafanaInstance_id
+//
 // ```
 type GrafanaInstance struct {
 	pulumi.CustomResourceState
 
+	// Whether to automatically use vouchers.
+	AutoVoucher pulumi.BoolPtrOutput `pulumi:"autoVoucher"`
 	// Control whether grafana could be accessed by internet.
 	EnableInternet pulumi.BoolOutput `pulumi:"enableInternet"`
 	// Grafana server admin password.
@@ -141,6 +148,8 @@ func GetGrafanaInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering GrafanaInstance resources.
 type grafanaInstanceState struct {
+	// Whether to automatically use vouchers.
+	AutoVoucher *bool `pulumi:"autoVoucher"`
 	// Control whether grafana could be accessed by internet.
 	EnableInternet *bool `pulumi:"enableInternet"`
 	// Grafana server admin password.
@@ -172,6 +181,8 @@ type grafanaInstanceState struct {
 }
 
 type GrafanaInstanceState struct {
+	// Whether to automatically use vouchers.
+	AutoVoucher pulumi.BoolPtrInput
 	// Control whether grafana could be accessed by internet.
 	EnableInternet pulumi.BoolPtrInput
 	// Grafana server admin password.
@@ -207,6 +218,8 @@ func (GrafanaInstanceState) ElementType() reflect.Type {
 }
 
 type grafanaInstanceArgs struct {
+	// Whether to automatically use vouchers.
+	AutoVoucher *bool `pulumi:"autoVoucher"`
 	// Control whether grafana could be accessed by internet.
 	EnableInternet *bool `pulumi:"enableInternet"`
 	// Grafana server admin password.
@@ -229,6 +242,8 @@ type grafanaInstanceArgs struct {
 
 // The set of arguments for constructing a GrafanaInstance resource.
 type GrafanaInstanceArgs struct {
+	// Whether to automatically use vouchers.
+	AutoVoucher pulumi.BoolPtrInput
 	// Control whether grafana could be accessed by internet.
 	EnableInternet pulumi.BoolPtrInput
 	// Grafana server admin password.
@@ -275,7 +290,7 @@ func (i *GrafanaInstance) ToGrafanaInstanceOutputWithContext(ctx context.Context
 // GrafanaInstanceArrayInput is an input type that accepts GrafanaInstanceArray and GrafanaInstanceArrayOutput values.
 // You can construct a concrete instance of `GrafanaInstanceArrayInput` via:
 //
-//          GrafanaInstanceArray{ GrafanaInstanceArgs{...} }
+//	GrafanaInstanceArray{ GrafanaInstanceArgs{...} }
 type GrafanaInstanceArrayInput interface {
 	pulumi.Input
 
@@ -300,7 +315,7 @@ func (i GrafanaInstanceArray) ToGrafanaInstanceArrayOutputWithContext(ctx contex
 // GrafanaInstanceMapInput is an input type that accepts GrafanaInstanceMap and GrafanaInstanceMapOutput values.
 // You can construct a concrete instance of `GrafanaInstanceMapInput` via:
 //
-//          GrafanaInstanceMap{ "key": GrafanaInstanceArgs{...} }
+//	GrafanaInstanceMap{ "key": GrafanaInstanceArgs{...} }
 type GrafanaInstanceMapInput interface {
 	pulumi.Input
 
@@ -334,6 +349,11 @@ func (o GrafanaInstanceOutput) ToGrafanaInstanceOutput() GrafanaInstanceOutput {
 
 func (o GrafanaInstanceOutput) ToGrafanaInstanceOutputWithContext(ctx context.Context) GrafanaInstanceOutput {
 	return o
+}
+
+// Whether to automatically use vouchers.
+func (o GrafanaInstanceOutput) AutoVoucher() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *GrafanaInstance) pulumi.BoolPtrOutput { return v.AutoVoucher }).(pulumi.BoolPtrOutput)
 }
 
 // Control whether grafana could be accessed by internet.

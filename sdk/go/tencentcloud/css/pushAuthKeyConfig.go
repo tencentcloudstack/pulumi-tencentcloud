@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewPushAuthKeyConfig(ctx, "pushAuthKeyConfig", &Css.PushAuthKeyConfigArgs{
-// 			AuthDelta:     pulumi.Int(1800),
-// 			BackupAuthKey: pulumi.String("testbackkey"),
-// 			DomainName:    pulumi.String("your_push_domain_name"),
-// 			Enable:        pulumi.Int(1),
-// 			MasterAuthKey: pulumi.String("testmasterkey"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewPushAuthKeyConfig(ctx, "pushAuthKeyConfig", &Css.PushAuthKeyConfigArgs{
+//				AuthDelta:     pulumi.Int(1800),
+//				BackupAuthKey: pulumi.String("testbackkey"),
+//				DomainName:    pulumi.String("your_push_domain_name"),
+//				Enable:        pulumi.Int(1),
+//				MasterAuthKey: pulumi.String("testmasterkey"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +48,9 @@ import (
 // css push_auth_key_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/pushAuthKeyConfig:PushAuthKeyConfig push_auth_key_config push_auth_key_config_id
+//
+//	$ pulumi import tencentcloud:Css/pushAuthKeyConfig:PushAuthKeyConfig push_auth_key_config push_auth_key_config_id
+//
 // ```
 type PushAuthKeyConfig struct {
 	pulumi.CustomResourceState
@@ -177,7 +182,7 @@ func (i *PushAuthKeyConfig) ToPushAuthKeyConfigOutputWithContext(ctx context.Con
 // PushAuthKeyConfigArrayInput is an input type that accepts PushAuthKeyConfigArray and PushAuthKeyConfigArrayOutput values.
 // You can construct a concrete instance of `PushAuthKeyConfigArrayInput` via:
 //
-//          PushAuthKeyConfigArray{ PushAuthKeyConfigArgs{...} }
+//	PushAuthKeyConfigArray{ PushAuthKeyConfigArgs{...} }
 type PushAuthKeyConfigArrayInput interface {
 	pulumi.Input
 
@@ -202,7 +207,7 @@ func (i PushAuthKeyConfigArray) ToPushAuthKeyConfigArrayOutputWithContext(ctx co
 // PushAuthKeyConfigMapInput is an input type that accepts PushAuthKeyConfigMap and PushAuthKeyConfigMapOutput values.
 // You can construct a concrete instance of `PushAuthKeyConfigMapInput` via:
 //
-//          PushAuthKeyConfigMap{ "key": PushAuthKeyConfigArgs{...} }
+//	PushAuthKeyConfigMap{ "key": PushAuthKeyConfigArgs{...} }
 type PushAuthKeyConfigMapInput interface {
 	pulumi.Input
 

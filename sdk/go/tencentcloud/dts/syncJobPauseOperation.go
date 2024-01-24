@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewSyncJobPauseOperation(ctx, "syncJobPauseOperation", &Dts.SyncJobPauseOperationArgs{
-// 			JobId: pulumi.String("sync-werwfs23"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewSyncJobPauseOperation(ctx, "syncJobPauseOperation", &Dts.SyncJobPauseOperationArgs{
+//				JobId: pulumi.String("sync-werwfs23"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SyncJobPauseOperation struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *SyncJobPauseOperation) ToSyncJobPauseOperationOutputWithContext(ctx con
 // SyncJobPauseOperationArrayInput is an input type that accepts SyncJobPauseOperationArray and SyncJobPauseOperationArrayOutput values.
 // You can construct a concrete instance of `SyncJobPauseOperationArrayInput` via:
 //
-//          SyncJobPauseOperationArray{ SyncJobPauseOperationArgs{...} }
+//	SyncJobPauseOperationArray{ SyncJobPauseOperationArgs{...} }
 type SyncJobPauseOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i SyncJobPauseOperationArray) ToSyncJobPauseOperationArrayOutputWithContex
 // SyncJobPauseOperationMapInput is an input type that accepts SyncJobPauseOperationMap and SyncJobPauseOperationMapOutput values.
 // You can construct a concrete instance of `SyncJobPauseOperationMapInput` via:
 //
-//          SyncJobPauseOperationMap{ "key": SyncJobPauseOperationArgs{...} }
+//	SyncJobPauseOperationMap{ "key": SyncJobPauseOperationArgs{...} }
 type SyncJobPauseOperationMapInput interface {
 	pulumi.Input
 

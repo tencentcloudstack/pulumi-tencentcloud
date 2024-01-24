@@ -19,59 +19,62 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cls.NewAlarm(ctx, "alarm", &Cls.AlarmArgs{
-// 			AlarmNoticeIds: pulumi.StringArray{
-// 				pulumi.String("notice-0850756b-245d-4bc7-bb27-2a58fffc780b"),
-// 			},
-// 			AlarmPeriod: pulumi.Int(15),
-// 			AlarmTargets: cls.AlarmAlarmTargetArray{
-// 				&cls.AlarmAlarmTargetArgs{
-// 					EndTimeOffset:   pulumi.Int(0),
-// 					LogsetId:        pulumi.String("33aaf0ae-6163-411b-a415-9f27450f68db"),
-// 					Number:          pulumi.Int(1),
-// 					Query:           pulumi.String("status:>500 | select count(*) as errorCounts"),
-// 					StartTimeOffset: -15,
-// 					TopicId:         pulumi.String("88735a07-bea4-4985-8763-e9deb6da4fad"),
-// 				},
-// 			},
-// 			Analyses: cls.AlarmAnalysisArray{
-// 				&cls.AlarmAnalysisArgs{
-// 					ConfigInfos: cls.AlarmAnalysisConfigInfoArray{
-// 						&cls.AlarmAnalysisConfigInfoArgs{
-// 							Key:   pulumi.String("QueryIndex"),
-// 							Value: pulumi.String("1"),
-// 						},
-// 					},
-// 					Content: pulumi.String("__FILENAME__"),
-// 					Name:    pulumi.String("terraform"),
-// 					Type:    pulumi.String("field"),
-// 				},
-// 			},
-// 			Condition:       pulumi.String("test"),
-// 			MessageTemplate: pulumi.String("{{.Label}}"),
-// 			MonitorTime: &cls.AlarmMonitorTimeArgs{
-// 				Time: pulumi.Int(1),
-// 				Type: pulumi.String("Period"),
-// 			},
-// 			Status: pulumi.Bool(true),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 			TriggerCount: pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cls.NewAlarm(ctx, "alarm", &Cls.AlarmArgs{
+//				AlarmNoticeIds: pulumi.StringArray{
+//					pulumi.String("notice-0850756b-245d-4bc7-bb27-2a58fffc780b"),
+//				},
+//				AlarmPeriod: pulumi.Int(15),
+//				AlarmTargets: cls.AlarmAlarmTargetArray{
+//					&cls.AlarmAlarmTargetArgs{
+//						EndTimeOffset:   pulumi.Int(0),
+//						LogsetId:        pulumi.String("33aaf0ae-6163-411b-a415-9f27450f68db"),
+//						Number:          pulumi.Int(1),
+//						Query:           pulumi.String("status:>500 | select count(*) as errorCounts"),
+//						StartTimeOffset: -15,
+//						TopicId:         pulumi.String("88735a07-bea4-4985-8763-e9deb6da4fad"),
+//					},
+//				},
+//				Analyses: cls.AlarmAnalysisArray{
+//					&cls.AlarmAnalysisArgs{
+//						ConfigInfos: cls.AlarmAnalysisConfigInfoArray{
+//							&cls.AlarmAnalysisConfigInfoArgs{
+//								Key:   pulumi.String("QueryIndex"),
+//								Value: pulumi.String("1"),
+//							},
+//						},
+//						Content: pulumi.String("__FILENAME__"),
+//						Name:    pulumi.String("terraform"),
+//						Type:    pulumi.String("field"),
+//					},
+//				},
+//				Condition:       pulumi.String("test"),
+//				MessageTemplate: pulumi.String("{{.Label}}"),
+//				MonitorTime: &cls.AlarmMonitorTimeArgs{
+//					Time: pulumi.Int(1),
+//					Type: pulumi.String("Period"),
+//				},
+//				Status: pulumi.Bool(true),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//				TriggerCount: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -79,7 +82,9 @@ import (
 // cls alarm can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/alarm:Alarm alarm alarm_id
+//
+//	$ pulumi import tencentcloud:Cls/alarm:Alarm alarm alarm_id
+//
 // ```
 type Alarm struct {
 	pulumi.CustomResourceState
@@ -296,7 +301,7 @@ func (i *Alarm) ToAlarmOutputWithContext(ctx context.Context) AlarmOutput {
 // AlarmArrayInput is an input type that accepts AlarmArray and AlarmArrayOutput values.
 // You can construct a concrete instance of `AlarmArrayInput` via:
 //
-//          AlarmArray{ AlarmArgs{...} }
+//	AlarmArray{ AlarmArgs{...} }
 type AlarmArrayInput interface {
 	pulumi.Input
 
@@ -321,7 +326,7 @@ func (i AlarmArray) ToAlarmArrayOutputWithContext(ctx context.Context) AlarmArra
 // AlarmMapInput is an input type that accepts AlarmMap and AlarmMapOutput values.
 // You can construct a concrete instance of `AlarmMapInput` via:
 //
-//          AlarmMap{ "key": AlarmArgs{...} }
+//	AlarmMap{ "key": AlarmArgs{...} }
 type AlarmMapInput interface {
 	pulumi.Input
 

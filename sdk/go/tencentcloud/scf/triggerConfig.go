@@ -19,31 +19,34 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewTriggerConfig(ctx, "triggerConfig", &Scf.TriggerConfigArgs{
-// 			CustomArgument: pulumi.String("Information"),
-// 			Description:    pulumi.String("func"),
-// 			Enable:         pulumi.String("OPEN"),
-// 			FunctionName:   pulumi.String("keep-1676351130"),
-// 			Namespace:      pulumi.String("default"),
-// 			Qualifier:      pulumi.String(fmt.Sprintf("%v%v", "$", "DEFAULT")),
-// 			TriggerDesc:    pulumi.String("* 1 2 * * * *"),
-// 			TriggerName:    pulumi.String("SCF-timer-1685540160"),
-// 			Type:           pulumi.String("timer"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewTriggerConfig(ctx, "triggerConfig", &Scf.TriggerConfigArgs{
+//				CustomArgument: pulumi.String("Information"),
+//				Description:    pulumi.String("func"),
+//				Enable:         pulumi.String("OPEN"),
+//				FunctionName:   pulumi.String("keep-1676351130"),
+//				Namespace:      pulumi.String("default"),
+//				Qualifier:      pulumi.String(fmt.Sprintf("%v%v", "$", "DEFAULT")),
+//				TriggerDesc:    pulumi.String("* 1 2 * * * *"),
+//				TriggerName:    pulumi.String("SCF-timer-1685540160"),
+//				Type:           pulumi.String("timer"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -51,7 +54,9 @@ import (
 // scf trigger_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Scf/triggerConfig:TriggerConfig trigger_config functionName#namespace#triggerName
+//
+//	$ pulumi import tencentcloud:Scf/triggerConfig:TriggerConfig trigger_config functionName#namespace#triggerName
+//
 // ```
 type TriggerConfig struct {
 	pulumi.CustomResourceState
@@ -229,7 +234,7 @@ func (i *TriggerConfig) ToTriggerConfigOutputWithContext(ctx context.Context) Tr
 // TriggerConfigArrayInput is an input type that accepts TriggerConfigArray and TriggerConfigArrayOutput values.
 // You can construct a concrete instance of `TriggerConfigArrayInput` via:
 //
-//          TriggerConfigArray{ TriggerConfigArgs{...} }
+//	TriggerConfigArray{ TriggerConfigArgs{...} }
 type TriggerConfigArrayInput interface {
 	pulumi.Input
 
@@ -254,7 +259,7 @@ func (i TriggerConfigArray) ToTriggerConfigArrayOutputWithContext(ctx context.Co
 // TriggerConfigMapInput is an input type that accepts TriggerConfigMap and TriggerConfigMapOutput values.
 // You can construct a concrete instance of `TriggerConfigMapInput` via:
 //
-//          TriggerConfigMap{ "key": TriggerConfigArgs{...} }
+//	TriggerConfigMap{ "key": TriggerConfigArgs{...} }
 type TriggerConfigMapInput interface {
 	pulumi.Input
 

@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewTargetGroup(ctx, "test", &Clb.TargetGroupArgs{
-// 			Port:            pulumi.Int(33),
-// 			TargetGroupName: pulumi.String("test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewTargetGroup(ctx, "test", &Clb.TargetGroupArgs{
+//				Port:            pulumi.Int(33),
+//				TargetGroupName: pulumi.String("test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -41,7 +44,9 @@ import (
 // CLB target group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
+//
+//	$ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
+//
 // ```
 type TargetGroup struct {
 	pulumi.CustomResourceState
@@ -170,7 +175,7 @@ func (i *TargetGroup) ToTargetGroupOutputWithContext(ctx context.Context) Target
 // TargetGroupArrayInput is an input type that accepts TargetGroupArray and TargetGroupArrayOutput values.
 // You can construct a concrete instance of `TargetGroupArrayInput` via:
 //
-//          TargetGroupArray{ TargetGroupArgs{...} }
+//	TargetGroupArray{ TargetGroupArgs{...} }
 type TargetGroupArrayInput interface {
 	pulumi.Input
 
@@ -195,7 +200,7 @@ func (i TargetGroupArray) ToTargetGroupArrayOutputWithContext(ctx context.Contex
 // TargetGroupMapInput is an input type that accepts TargetGroupMap and TargetGroupMapOutput values.
 // You can construct a concrete instance of `TargetGroupMapInput` via:
 //
-//          TargetGroupMap{ "key": TargetGroupArgs{...} }
+//	TargetGroupMap{ "key": TargetGroupArgs{...} }
 type TargetGroupMapInput interface {
 	pulumi.Input
 

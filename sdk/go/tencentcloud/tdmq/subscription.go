@@ -19,62 +19,65 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleInstance, err := Tdmq.NewInstance(ctx, "exampleInstance", &Tdmq.InstanceArgs{
-// 			ClusterName: pulumi.String("tf_example"),
-// 			Remark:      pulumi.String("remark."),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleNamespace, err := Tdmq.NewNamespace(ctx, "exampleNamespace", &Tdmq.NamespaceArgs{
-// 			EnvironName: pulumi.String("tf_example"),
-// 			MsgTtl:      pulumi.Int(300),
-// 			ClusterId:   exampleInstance.ID(),
-// 			RetentionPolicy: &tdmq.NamespaceRetentionPolicyArgs{
-// 				TimeInMinutes: pulumi.Int(60),
-// 				SizeInMb:      pulumi.Int(10),
-// 			},
-// 			Remark: pulumi.String("remark."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleTopic, err := Tdmq.NewTopic(ctx, "exampleTopic", &Tdmq.TopicArgs{
-// 			ClusterId:       exampleInstance.ID(),
-// 			EnvironId:       exampleNamespace.EnvironName,
-// 			TopicName:       pulumi.String("tf-example-topic"),
-// 			Partitions:      pulumi.Int(1),
-// 			PulsarTopicType: pulumi.Int(3),
-// 			Remark:          pulumi.String("remark."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tdmq.NewSubscription(ctx, "exampleSubscription", &Tdmq.SubscriptionArgs{
-// 			ClusterId:             exampleInstance.ID(),
-// 			EnvironmentId:         exampleNamespace.EnvironName,
-// 			TopicName:             exampleTopic.TopicName,
-// 			SubscriptionName:      pulumi.String("tf-example-subscription"),
-// 			Remark:                pulumi.String("remark."),
-// 			AutoCreatePolicyTopic: pulumi.Bool(true),
-// 			AutoDeletePolicyTopic: pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleInstance, err := Tdmq.NewInstance(ctx, "exampleInstance", &Tdmq.InstanceArgs{
+//				ClusterName: pulumi.String("tf_example"),
+//				Remark:      pulumi.String("remark."),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleNamespace, err := Tdmq.NewNamespace(ctx, "exampleNamespace", &Tdmq.NamespaceArgs{
+//				EnvironName: pulumi.String("tf_example"),
+//				MsgTtl:      pulumi.Int(300),
+//				ClusterId:   exampleInstance.ID(),
+//				RetentionPolicy: &tdmq.NamespaceRetentionPolicyArgs{
+//					TimeInMinutes: pulumi.Int(60),
+//					SizeInMb:      pulumi.Int(10),
+//				},
+//				Remark: pulumi.String("remark."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleTopic, err := Tdmq.NewTopic(ctx, "exampleTopic", &Tdmq.TopicArgs{
+//				ClusterId:       exampleInstance.ID(),
+//				EnvironId:       exampleNamespace.EnvironName,
+//				TopicName:       pulumi.String("tf-example-topic"),
+//				Partitions:      pulumi.Int(1),
+//				PulsarTopicType: pulumi.Int(3),
+//				Remark:          pulumi.String("remark."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tdmq.NewSubscription(ctx, "exampleSubscription", &Tdmq.SubscriptionArgs{
+//				ClusterId:             exampleInstance.ID(),
+//				EnvironmentId:         exampleNamespace.EnvironName,
+//				TopicName:             exampleTopic.TopicName,
+//				SubscriptionName:      pulumi.String("tf-example-subscription"),
+//				Remark:                pulumi.String("remark."),
+//				AutoCreatePolicyTopic: pulumi.Bool(true),
+//				AutoDeletePolicyTopic: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -82,7 +85,9 @@ import (
 // tdmq subscription can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tdmq/subscription:Subscription example pulsar-q4k5898krpqj#tf_example#tf-example-topic#tf-example-subscription#true
+//
+//	$ pulumi import tencentcloud:Tdmq/subscription:Subscription example pulsar-q4k5898krpqj#tf_example#tf-example-topic#tf-example-subscription#true
+//
 // ```
 type Subscription struct {
 	pulumi.CustomResourceState
@@ -243,7 +248,7 @@ func (i *Subscription) ToSubscriptionOutputWithContext(ctx context.Context) Subs
 // SubscriptionArrayInput is an input type that accepts SubscriptionArray and SubscriptionArrayOutput values.
 // You can construct a concrete instance of `SubscriptionArrayInput` via:
 //
-//          SubscriptionArray{ SubscriptionArgs{...} }
+//	SubscriptionArray{ SubscriptionArgs{...} }
 type SubscriptionArrayInput interface {
 	pulumi.Input
 
@@ -268,7 +273,7 @@ func (i SubscriptionArray) ToSubscriptionArrayOutputWithContext(ctx context.Cont
 // SubscriptionMapInput is an input type that accepts SubscriptionMap and SubscriptionMapOutput values.
 // You can construct a concrete instance of `SubscriptionMapInput` via:
 //
-//          SubscriptionMap{ "key": SubscriptionArgs{...} }
+//	SubscriptionMap{ "key": SubscriptionArgs{...} }
 type SubscriptionMapInput interface {
 	pulumi.Input
 
