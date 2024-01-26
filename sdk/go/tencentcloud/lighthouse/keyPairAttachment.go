@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewKeyPairAttachment(ctx, "keyPairAttachment", &Lighthouse.KeyPairAttachmentArgs{
-// 			InstanceId: pulumi.String("lhins-xxxxxx"),
-// 			KeyId:      pulumi.String("lhkp-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewKeyPairAttachment(ctx, "keyPairAttachment", &Lighthouse.KeyPairAttachmentArgs{
+//				InstanceId: pulumi.String("lhins-xxxxxx"),
+//				KeyId:      pulumi.String("lhkp-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // lighthouse key_pair_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Lighthouse/keyPairAttachment:KeyPairAttachment key_pair_attachment key_pair_attachment_id
+//
+//	$ pulumi import tencentcloud:Lighthouse/keyPairAttachment:KeyPairAttachment key_pair_attachment key_pair_attachment_id
+//
 // ```
 type KeyPairAttachment struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *KeyPairAttachment) ToKeyPairAttachmentOutputWithContext(ctx context.Con
 // KeyPairAttachmentArrayInput is an input type that accepts KeyPairAttachmentArray and KeyPairAttachmentArrayOutput values.
 // You can construct a concrete instance of `KeyPairAttachmentArrayInput` via:
 //
-//          KeyPairAttachmentArray{ KeyPairAttachmentArgs{...} }
+//	KeyPairAttachmentArray{ KeyPairAttachmentArgs{...} }
 type KeyPairAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i KeyPairAttachmentArray) ToKeyPairAttachmentArrayOutputWithContext(ctx co
 // KeyPairAttachmentMapInput is an input type that accepts KeyPairAttachmentMap and KeyPairAttachmentMapOutput values.
 // You can construct a concrete instance of `KeyPairAttachmentMapInput` via:
 //
-//          KeyPairAttachmentMap{ "key": KeyPairAttachmentArgs{...} }
+//	KeyPairAttachmentMap{ "key": KeyPairAttachmentArgs{...} }
 type KeyPairAttachmentMapInput interface {
 	pulumi.Input
 

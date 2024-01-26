@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ccn.NewInstancesAcceptAttach(ctx, "ccnInstancesAcceptAttach", &Ccn.InstancesAcceptAttachArgs{
-// 			CcnId: pulumi.String("ccn-39lqkygf"),
-// 			Instances: ccn.InstancesAcceptAttachInstanceArray{
-// 				&ccn.InstancesAcceptAttachInstanceArgs{
-// 					InstanceId:     pulumi.String("vpc-j9yhbzpn"),
-// 					InstanceRegion: pulumi.String("ap-guangzhou"),
-// 					InstanceType:   pulumi.String("VPC"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ccn.NewInstancesAcceptAttach(ctx, "ccnInstancesAcceptAttach", &Ccn.InstancesAcceptAttachArgs{
+//				CcnId: pulumi.String("ccn-39lqkygf"),
+//				Instances: ccn.InstancesAcceptAttachInstanceArray{
+//					&ccn.InstancesAcceptAttachInstanceArgs{
+//						InstanceId:     pulumi.String("vpc-j9yhbzpn"),
+//						InstanceRegion: pulumi.String("ap-guangzhou"),
+//						InstanceType:   pulumi.String("VPC"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type InstancesAcceptAttach struct {
 	pulumi.CustomResourceState
@@ -146,7 +149,7 @@ func (i *InstancesAcceptAttach) ToInstancesAcceptAttachOutputWithContext(ctx con
 // InstancesAcceptAttachArrayInput is an input type that accepts InstancesAcceptAttachArray and InstancesAcceptAttachArrayOutput values.
 // You can construct a concrete instance of `InstancesAcceptAttachArrayInput` via:
 //
-//          InstancesAcceptAttachArray{ InstancesAcceptAttachArgs{...} }
+//	InstancesAcceptAttachArray{ InstancesAcceptAttachArgs{...} }
 type InstancesAcceptAttachArrayInput interface {
 	pulumi.Input
 
@@ -171,7 +174,7 @@ func (i InstancesAcceptAttachArray) ToInstancesAcceptAttachArrayOutputWithContex
 // InstancesAcceptAttachMapInput is an input type that accepts InstancesAcceptAttachMap and InstancesAcceptAttachMapOutput values.
 // You can construct a concrete instance of `InstancesAcceptAttachMapInput` via:
 //
-//          InstancesAcceptAttachMap{ "key": InstancesAcceptAttachArgs{...} }
+//	InstancesAcceptAttachMap{ "key": InstancesAcceptAttachArgs{...} }
 type InstancesAcceptAttachMapInput interface {
 	pulumi.Input
 

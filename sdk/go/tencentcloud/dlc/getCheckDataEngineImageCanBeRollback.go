@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.GetCheckDataEngineImageCanBeRollback(ctx, &dlc.GetCheckDataEngineImageCanBeRollbackArgs{
-// 			DataEngineId: "DataEngine-public-1308919341",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.GetCheckDataEngineImageCanBeRollback(ctx, &dlc.GetCheckDataEngineImageCanBeRollbackArgs{
+//				DataEngineId: "DataEngine-public-1308919341",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetCheckDataEngineImageCanBeRollback(ctx *pulumi.Context, args *GetCheckDataEngineImageCanBeRollbackArgs, opts ...pulumi.InvokeOption) (*GetCheckDataEngineImageCanBeRollbackResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

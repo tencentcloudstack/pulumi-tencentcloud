@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.NewSnapshotConfig(ctx, "snapshotConfig", &Dnspod.SnapshotConfigArgs{
-// 			Domain: pulumi.String("dnspod.cn"),
-// 			Period: pulumi.String("hourly"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.NewSnapshotConfig(ctx, "snapshotConfig", &Dnspod.SnapshotConfigArgs{
+//				Domain: pulumi.String("dnspod.cn"),
+//				Period: pulumi.String("hourly"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // dnspod snapshot_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dnspod/snapshotConfig:SnapshotConfig snapshot_config domain
+//
+//	$ pulumi import tencentcloud:Dnspod/snapshotConfig:SnapshotConfig snapshot_config domain
+//
 // ```
 type SnapshotConfig struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *SnapshotConfig) ToSnapshotConfigOutputWithContext(ctx context.Context) 
 // SnapshotConfigArrayInput is an input type that accepts SnapshotConfigArray and SnapshotConfigArrayOutput values.
 // You can construct a concrete instance of `SnapshotConfigArrayInput` via:
 //
-//          SnapshotConfigArray{ SnapshotConfigArgs{...} }
+//	SnapshotConfigArray{ SnapshotConfigArgs{...} }
 type SnapshotConfigArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i SnapshotConfigArray) ToSnapshotConfigArrayOutputWithContext(ctx context.
 // SnapshotConfigMapInput is an input type that accepts SnapshotConfigMap and SnapshotConfigMapOutput values.
 // You can construct a concrete instance of `SnapshotConfigMapInput` via:
 //
-//          SnapshotConfigMap{ "key": SnapshotConfigArgs{...} }
+//	SnapshotConfigMap{ "key": SnapshotConfigArgs{...} }
 type SnapshotConfigMapInput interface {
 	pulumi.Input
 

@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dayu.GetDdosPolicies(ctx, &dayu.GetDdosPoliciesArgs{
-// 			ResourceType: tencentcloud_dayu_ddos_policy.Test_policy.Resource_type,
-// 			PolicyId:     pulumi.StringRef(tencentcloud_dayu_ddos_policy.Test_policy.Policy_id),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dayu.GetDdosPolicies(ctx, &dayu.GetDdosPoliciesArgs{
+//				ResourceType: tencentcloud_dayu_ddos_policy.Test_policy.Resource_type,
+//				PolicyId:     pulumi.StringRef(tencentcloud_dayu_ddos_policy.Test_policy.Policy_id),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDdosPolicies(ctx *pulumi.Context, args *GetDdosPoliciesArgs, opts ...pulumi.InvokeOption) (*GetDdosPoliciesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewBindDeviceResource(ctx, "example", &Dasb.BindDeviceResourceArgs{
-// 			DeviceIdSets: pulumi.IntArray{
-// 				pulumi.Int(17),
-// 				pulumi.Int(18),
-// 			},
-// 			ResourceId: pulumi.String("bh-saas-ocmzo6lgxiv"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewBindDeviceResource(ctx, "example", &Dasb.BindDeviceResourceArgs{
+//				DeviceIdSets: pulumi.IntArray{
+//					pulumi.Int(17),
+//					pulumi.Int(18),
+//				},
+//				ResourceId: pulumi.String("bh-saas-ocmzo6lgxiv"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type BindDeviceResource struct {
 	pulumi.CustomResourceState
@@ -142,7 +145,7 @@ func (i *BindDeviceResource) ToBindDeviceResourceOutputWithContext(ctx context.C
 // BindDeviceResourceArrayInput is an input type that accepts BindDeviceResourceArray and BindDeviceResourceArrayOutput values.
 // You can construct a concrete instance of `BindDeviceResourceArrayInput` via:
 //
-//          BindDeviceResourceArray{ BindDeviceResourceArgs{...} }
+//	BindDeviceResourceArray{ BindDeviceResourceArgs{...} }
 type BindDeviceResourceArrayInput interface {
 	pulumi.Input
 
@@ -167,7 +170,7 @@ func (i BindDeviceResourceArray) ToBindDeviceResourceArrayOutputWithContext(ctx 
 // BindDeviceResourceMapInput is an input type that accepts BindDeviceResourceMap and BindDeviceResourceMapOutput values.
 // You can construct a concrete instance of `BindDeviceResourceMapInput` via:
 //
-//          BindDeviceResourceMap{ "key": BindDeviceResourceArgs{...} }
+//	BindDeviceResourceMap{ "key": BindDeviceResourceArgs{...} }
 type BindDeviceResourceMapInput interface {
 	pulumi.Input
 

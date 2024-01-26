@@ -19,38 +19,41 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewFirewallTemplate(ctx, "firewallTemplate", &Lighthouse.FirewallTemplateArgs{
-// 			TemplateName: pulumi.String("firewall-template-test"),
-// 			TemplateRules: lighthouse.FirewallTemplateTemplateRuleArray{
-// 				&lighthouse.FirewallTemplateTemplateRuleArgs{
-// 					Action:                  pulumi.String("ACCEPT"),
-// 					CidrBlock:               pulumi.String("127.0.0.1"),
-// 					FirewallRuleDescription: pulumi.String("test description"),
-// 					Port:                    pulumi.String("8080"),
-// 					Protocol:                pulumi.String("TCP"),
-// 				},
-// 				&lighthouse.FirewallTemplateTemplateRuleArgs{
-// 					Action:                  pulumi.String("DROP"),
-// 					CidrBlock:               pulumi.String("127.0.0.0/24"),
-// 					FirewallRuleDescription: pulumi.String("test description"),
-// 					Port:                    pulumi.String("8090"),
-// 					Protocol:                pulumi.String("TCP"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewFirewallTemplate(ctx, "firewallTemplate", &Lighthouse.FirewallTemplateArgs{
+//				TemplateName: pulumi.String("firewall-template-test"),
+//				TemplateRules: lighthouse.FirewallTemplateTemplateRuleArray{
+//					&lighthouse.FirewallTemplateTemplateRuleArgs{
+//						Action:                  pulumi.String("ACCEPT"),
+//						CidrBlock:               pulumi.String("127.0.0.1"),
+//						FirewallRuleDescription: pulumi.String("test description"),
+//						Port:                    pulumi.String("8080"),
+//						Protocol:                pulumi.String("TCP"),
+//					},
+//					&lighthouse.FirewallTemplateTemplateRuleArgs{
+//						Action:                  pulumi.String("DROP"),
+//						CidrBlock:               pulumi.String("127.0.0.0/24"),
+//						FirewallRuleDescription: pulumi.String("test description"),
+//						Port:                    pulumi.String("8090"),
+//						Protocol:                pulumi.String("TCP"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -58,7 +61,9 @@ import (
 // lighthouse firewall_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Lighthouse/firewallTemplate:FirewallTemplate firewall_template firewall_template_id
+//
+//	$ pulumi import tencentcloud:Lighthouse/firewallTemplate:FirewallTemplate firewall_template firewall_template_id
+//
 // ```
 type FirewallTemplate struct {
 	pulumi.CustomResourceState
@@ -160,7 +165,7 @@ func (i *FirewallTemplate) ToFirewallTemplateOutputWithContext(ctx context.Conte
 // FirewallTemplateArrayInput is an input type that accepts FirewallTemplateArray and FirewallTemplateArrayOutput values.
 // You can construct a concrete instance of `FirewallTemplateArrayInput` via:
 //
-//          FirewallTemplateArray{ FirewallTemplateArgs{...} }
+//	FirewallTemplateArray{ FirewallTemplateArgs{...} }
 type FirewallTemplateArrayInput interface {
 	pulumi.Input
 
@@ -185,7 +190,7 @@ func (i FirewallTemplateArray) ToFirewallTemplateArrayOutputWithContext(ctx cont
 // FirewallTemplateMapInput is an input type that accepts FirewallTemplateMap and FirewallTemplateMapOutput values.
 // You can construct a concrete instance of `FirewallTemplateMapInput` via:
 //
-//          FirewallTemplateMap{ "key": FirewallTemplateArgs{...} }
+//	FirewallTemplateMap{ "key": FirewallTemplateArgs{...} }
 type FirewallTemplateMapInput interface {
 	pulumi.Input
 

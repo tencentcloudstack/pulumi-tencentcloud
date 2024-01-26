@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewCcAutoStatus(ctx, "example", &Waf.CcAutoStatusArgs{
-// 			Domain:  pulumi.String("www.demo.com"),
-// 			Edition: pulumi.String("sparta-waf"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewCcAutoStatus(ctx, "example", &Waf.CcAutoStatusArgs{
+//				Domain:  pulumi.String("www.demo.com"),
+//				Edition: pulumi.String("sparta-waf"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // waf cc_auto_status can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Waf/ccAutoStatus:CcAutoStatus example www.demo.com#sparta-waf
+//
+//	$ pulumi import tencentcloud:Waf/ccAutoStatus:CcAutoStatus example www.demo.com#sparta-waf
+//
 // ```
 type CcAutoStatus struct {
 	pulumi.CustomResourceState
@@ -153,7 +158,7 @@ func (i *CcAutoStatus) ToCcAutoStatusOutputWithContext(ctx context.Context) CcAu
 // CcAutoStatusArrayInput is an input type that accepts CcAutoStatusArray and CcAutoStatusArrayOutput values.
 // You can construct a concrete instance of `CcAutoStatusArrayInput` via:
 //
-//          CcAutoStatusArray{ CcAutoStatusArgs{...} }
+//	CcAutoStatusArray{ CcAutoStatusArgs{...} }
 type CcAutoStatusArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +183,7 @@ func (i CcAutoStatusArray) ToCcAutoStatusArrayOutputWithContext(ctx context.Cont
 // CcAutoStatusMapInput is an input type that accepts CcAutoStatusMap and CcAutoStatusMapOutput values.
 // You can construct a concrete instance of `CcAutoStatusMapInput` via:
 //
-//          CcAutoStatusMap{ "key": CcAutoStatusArgs{...} }
+//	CcAutoStatusMap{ "key": CcAutoStatusArgs{...} }
 type CcAutoStatusMapInput interface {
 	pulumi.Input
 

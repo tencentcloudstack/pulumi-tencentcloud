@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Antiddos.NewSchedulingDomainUserName(ctx, "schedulingDomainUserName", &Antiddos.SchedulingDomainUserNameArgs{
-// 			DomainName:     pulumi.String("test.com"),
-// 			DomainUserName: pulumi.String(""),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Antiddos.NewSchedulingDomainUserName(ctx, "schedulingDomainUserName", &Antiddos.SchedulingDomainUserNameArgs{
+//				DomainName:     pulumi.String("test.com"),
+//				DomainUserName: pulumi.String(""),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // antiddos scheduling_domain_user_name can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Antiddos/schedulingDomainUserName:SchedulingDomainUserName scheduling_domain_user_name ${domainName}
+//
+//	$ pulumi import tencentcloud:Antiddos/schedulingDomainUserName:SchedulingDomainUserName scheduling_domain_user_name ${domainName}
+//
 // ```
 type SchedulingDomainUserName struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *SchedulingDomainUserName) ToSchedulingDomainUserNameOutputWithContext(c
 // SchedulingDomainUserNameArrayInput is an input type that accepts SchedulingDomainUserNameArray and SchedulingDomainUserNameArrayOutput values.
 // You can construct a concrete instance of `SchedulingDomainUserNameArrayInput` via:
 //
-//          SchedulingDomainUserNameArray{ SchedulingDomainUserNameArgs{...} }
+//	SchedulingDomainUserNameArray{ SchedulingDomainUserNameArgs{...} }
 type SchedulingDomainUserNameArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i SchedulingDomainUserNameArray) ToSchedulingDomainUserNameArrayOutputWith
 // SchedulingDomainUserNameMapInput is an input type that accepts SchedulingDomainUserNameMap and SchedulingDomainUserNameMapOutput values.
 // You can construct a concrete instance of `SchedulingDomainUserNameMapInput` via:
 //
-//          SchedulingDomainUserNameMap{ "key": SchedulingDomainUserNameArgs{...} }
+//	SchedulingDomainUserNameMap{ "key": SchedulingDomainUserNameArgs{...} }
 type SchedulingDomainUserNameMapInput interface {
 	pulumi.Input
 

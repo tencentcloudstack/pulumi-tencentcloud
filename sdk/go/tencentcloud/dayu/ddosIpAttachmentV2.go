@@ -112,7 +112,7 @@ func (i *DdosIpAttachmentV2) ToDdosIpAttachmentV2OutputWithContext(ctx context.C
 // DdosIpAttachmentV2ArrayInput is an input type that accepts DdosIpAttachmentV2Array and DdosIpAttachmentV2ArrayOutput values.
 // You can construct a concrete instance of `DdosIpAttachmentV2ArrayInput` via:
 //
-//          DdosIpAttachmentV2Array{ DdosIpAttachmentV2Args{...} }
+//	DdosIpAttachmentV2Array{ DdosIpAttachmentV2Args{...} }
 type DdosIpAttachmentV2ArrayInput interface {
 	pulumi.Input
 
@@ -137,7 +137,7 @@ func (i DdosIpAttachmentV2Array) ToDdosIpAttachmentV2ArrayOutputWithContext(ctx 
 // DdosIpAttachmentV2MapInput is an input type that accepts DdosIpAttachmentV2Map and DdosIpAttachmentV2MapOutput values.
 // You can construct a concrete instance of `DdosIpAttachmentV2MapInput` via:
 //
-//          DdosIpAttachmentV2Map{ "key": DdosIpAttachmentV2Args{...} }
+//	DdosIpAttachmentV2Map{ "key": DdosIpAttachmentV2Args{...} }
 type DdosIpAttachmentV2MapInput interface {
 	pulumi.Input
 

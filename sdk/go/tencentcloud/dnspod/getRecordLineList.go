@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.GetRecordLineList(ctx, &dnspod.GetRecordLineListArgs{
-// 			Domain:      "iac-tf.cloud",
-// 			DomainGrade: "DP_FREE",
-// 			DomainId:    pulumi.IntRef(123),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.GetRecordLineList(ctx, &dnspod.GetRecordLineListArgs{
+//				Domain:      "iac-tf.cloud",
+//				DomainGrade: "DP_FREE",
+//				DomainId:    pulumi.IntRef(123),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetRecordLineList(ctx *pulumi.Context, args *GetRecordLineListArgs, opts ...pulumi.InvokeOption) (*GetRecordLineListResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

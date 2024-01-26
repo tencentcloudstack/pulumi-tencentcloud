@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewStopInstance(ctx, "stopInstance", &Lighthouse.StopInstanceArgs{
-// 			InstanceId: pulumi.String("lhins-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewStopInstance(ctx, "stopInstance", &Lighthouse.StopInstanceArgs{
+//				InstanceId: pulumi.String("lhins-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type StopInstance struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *StopInstance) ToStopInstanceOutputWithContext(ctx context.Context) Stop
 // StopInstanceArrayInput is an input type that accepts StopInstanceArray and StopInstanceArrayOutput values.
 // You can construct a concrete instance of `StopInstanceArrayInput` via:
 //
-//          StopInstanceArray{ StopInstanceArgs{...} }
+//	StopInstanceArray{ StopInstanceArgs{...} }
 type StopInstanceArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i StopInstanceArray) ToStopInstanceArrayOutputWithContext(ctx context.Cont
 // StopInstanceMapInput is an input type that accepts StopInstanceMap and StopInstanceMapOutput values.
 // You can construct a concrete instance of `StopInstanceMapInput` via:
 //
-//          StopInstanceMap{ "key": StopInstanceArgs{...} }
+//	StopInstanceMap{ "key": StopInstanceArgs{...} }
 type StopInstanceMapInput interface {
 	pulumi.Input
 

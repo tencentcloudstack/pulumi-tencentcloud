@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewWan(ctx, "wan", &Cynosdb.WanArgs{
-// 			ClusterId:     pulumi.String("cynosdbmysql-bws8h88b"),
-// 			InstanceGrpId: pulumi.String("cynosdbmysql-grp-lxav0p9z"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewWan(ctx, "wan", &Cynosdb.WanArgs{
+//				ClusterId:     pulumi.String("cynosdbmysql-bws8h88b"),
+//				InstanceGrpId: pulumi.String("cynosdbmysql-grp-lxav0p9z"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // cynosdb wan can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cynosdb/wan:Wan wan cynosdbmysql-bws8h88b#cynosdbmysql-grp-lxav0p9z
+//
+//	$ pulumi import tencentcloud:Cynosdb/wan:Wan wan cynosdbmysql-bws8h88b#cynosdbmysql-grp-lxav0p9z
+//
 // ```
 type Wan struct {
 	pulumi.CustomResourceState
@@ -171,7 +176,7 @@ func (i *Wan) ToWanOutputWithContext(ctx context.Context) WanOutput {
 // WanArrayInput is an input type that accepts WanArray and WanArrayOutput values.
 // You can construct a concrete instance of `WanArrayInput` via:
 //
-//          WanArray{ WanArgs{...} }
+//	WanArray{ WanArgs{...} }
 type WanArrayInput interface {
 	pulumi.Input
 
@@ -196,7 +201,7 @@ func (i WanArray) ToWanArrayOutputWithContext(ctx context.Context) WanArrayOutpu
 // WanMapInput is an input type that accepts WanMap and WanMapOutput values.
 // You can construct a concrete instance of `WanMapInput` via:
 //
-//          WanMap{ "key": WanArgs{...} }
+//	WanMap{ "key": WanArgs{...} }
 type WanMapInput interface {
 	pulumi.Input
 

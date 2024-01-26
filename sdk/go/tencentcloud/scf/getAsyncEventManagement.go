@@ -18,28 +18,31 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.GetAsyncEventManagement(ctx, &scf.GetAsyncEventManagementArgs{
-// 			FunctionName: "keep-1676351130",
-// 			Namespace:    pulumi.StringRef("default"),
-// 			Order:        pulumi.StringRef("ASC"),
-// 			Orderby:      pulumi.StringRef("StartTime"),
-// 			Qualifier:    pulumi.StringRef(fmt.Sprintf("%v%v", "$", "LATEST")),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.GetAsyncEventManagement(ctx, &scf.GetAsyncEventManagementArgs{
+//				FunctionName: "keep-1676351130",
+//				Namespace:    pulumi.StringRef("default"),
+//				Order:        pulumi.StringRef("ASC"),
+//				Orderby:      pulumi.StringRef("StartTime"),
+//				Qualifier:    pulumi.StringRef(fmt.Sprintf("%v%v", "$", "LATEST")),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetAsyncEventManagement(ctx *pulumi.Context, args *GetAsyncEventManagementArgs, opts ...pulumi.InvokeOption) (*GetAsyncEventManagementResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

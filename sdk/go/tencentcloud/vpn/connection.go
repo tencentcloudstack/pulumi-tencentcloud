@@ -19,50 +19,53 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpn.NewConnection(ctx, "foo", &Vpn.ConnectionArgs{
-// 			CustomerGatewayId:       pulumi.String("cgw-xfqag"),
-// 			IkeDhGroupName:          pulumi.String("GROUP2"),
-// 			IkeExchangeMode:         pulumi.String("AGGRESSIVE"),
-// 			IkeLocalAddress:         pulumi.String("1.1.1.1"),
-// 			IkeLocalIdentity:        pulumi.String("ADDRESS"),
-// 			IkeProtoAuthenAlgorithm: pulumi.String("SHA"),
-// 			IkeProtoEncryAlgorithm:  pulumi.String("3DES-CBC"),
-// 			IkeRemoteAddress:        pulumi.String("2.2.2.2"),
-// 			IkeRemoteIdentity:       pulumi.String("ADDRESS"),
-// 			IkeSaLifetimeSeconds:    pulumi.Int(86401),
-// 			IpsecEncryptAlgorithm:   pulumi.String("3DES-CBC"),
-// 			IpsecIntegrityAlgorithm: pulumi.String("SHA1"),
-// 			IpsecPfsDhGroup:         pulumi.String("NULL"),
-// 			IpsecSaLifetimeSeconds:  pulumi.Int(7200),
-// 			IpsecSaLifetimeTraffic:  pulumi.Int(2570),
-// 			PreShareKey:             pulumi.String("testt"),
-// 			SecurityGroupPolicies: vpn.ConnectionSecurityGroupPolicyArray{
-// 				&vpn.ConnectionSecurityGroupPolicyArgs{
-// 					LocalCidrBlock: pulumi.String("172.16.0.0/16"),
-// 					RemoteCidrBlocks: pulumi.StringArray{
-// 						pulumi.String("2.2.2.0/26"),
-// 					},
-// 				},
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("testt"),
-// 			},
-// 			VpcId:        pulumi.String("vpc-dk8zmwuf"),
-// 			VpnGatewayId: pulumi.String("vpngw-8ccsnclt"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpn.NewConnection(ctx, "foo", &Vpn.ConnectionArgs{
+//				CustomerGatewayId:       pulumi.String("cgw-xfqag"),
+//				IkeDhGroupName:          pulumi.String("GROUP2"),
+//				IkeExchangeMode:         pulumi.String("AGGRESSIVE"),
+//				IkeLocalAddress:         pulumi.String("1.1.1.1"),
+//				IkeLocalIdentity:        pulumi.String("ADDRESS"),
+//				IkeProtoAuthenAlgorithm: pulumi.String("SHA"),
+//				IkeProtoEncryAlgorithm:  pulumi.String("3DES-CBC"),
+//				IkeRemoteAddress:        pulumi.String("2.2.2.2"),
+//				IkeRemoteIdentity:       pulumi.String("ADDRESS"),
+//				IkeSaLifetimeSeconds:    pulumi.Int(86401),
+//				IpsecEncryptAlgorithm:   pulumi.String("3DES-CBC"),
+//				IpsecIntegrityAlgorithm: pulumi.String("SHA1"),
+//				IpsecPfsDhGroup:         pulumi.String("NULL"),
+//				IpsecSaLifetimeSeconds:  pulumi.Int(7200),
+//				IpsecSaLifetimeTraffic:  pulumi.Int(2570),
+//				PreShareKey:             pulumi.String("testt"),
+//				SecurityGroupPolicies: vpn.ConnectionSecurityGroupPolicyArray{
+//					&vpn.ConnectionSecurityGroupPolicyArgs{
+//						LocalCidrBlock: pulumi.String("172.16.0.0/16"),
+//						RemoteCidrBlocks: pulumi.StringArray{
+//							pulumi.String("2.2.2.0/26"),
+//						},
+//					},
+//				},
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("testt"),
+//				},
+//				VpcId:        pulumi.String("vpc-dk8zmwuf"),
+//				VpnGatewayId: pulumi.String("vpngw-8ccsnclt"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -70,7 +73,9 @@ import (
 // VPN connection can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpn/connection:Connection foo vpnx-nadifg3s
+//
+//	$ pulumi import tencentcloud:Vpn/connection:Connection foo vpnx-nadifg3s
+//
 // ```
 type Connection struct {
 	pulumi.CustomResourceState
@@ -121,7 +126,7 @@ type Connection struct {
 	IpsecEncryptAlgorithm pulumi.StringPtrOutput `pulumi:"ipsecEncryptAlgorithm"`
 	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm pulumi.StringPtrOutput `pulumi:"ipsecIntegrityAlgorithm"`
-	// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+	// PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
 	IpsecPfsDhGroup pulumi.StringPtrOutput `pulumi:"ipsecPfsDhGroup"`
 	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
 	IpsecSaLifetimeSeconds pulumi.IntPtrOutput `pulumi:"ipsecSaLifetimeSeconds"`
@@ -236,7 +241,7 @@ type connectionState struct {
 	IpsecEncryptAlgorithm *string `pulumi:"ipsecEncryptAlgorithm"`
 	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm *string `pulumi:"ipsecIntegrityAlgorithm"`
-	// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+	// PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
 	IpsecPfsDhGroup *string `pulumi:"ipsecPfsDhGroup"`
 	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
 	IpsecSaLifetimeSeconds *int `pulumi:"ipsecSaLifetimeSeconds"`
@@ -313,7 +318,7 @@ type ConnectionState struct {
 	IpsecEncryptAlgorithm pulumi.StringPtrInput
 	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm pulumi.StringPtrInput
-	// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+	// PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
 	IpsecPfsDhGroup pulumi.StringPtrInput
 	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
 	IpsecSaLifetimeSeconds pulumi.IntPtrInput
@@ -390,7 +395,7 @@ type connectionArgs struct {
 	IpsecEncryptAlgorithm *string `pulumi:"ipsecEncryptAlgorithm"`
 	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm *string `pulumi:"ipsecIntegrityAlgorithm"`
-	// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+	// PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
 	IpsecPfsDhGroup *string `pulumi:"ipsecPfsDhGroup"`
 	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
 	IpsecSaLifetimeSeconds *int `pulumi:"ipsecSaLifetimeSeconds"`
@@ -456,7 +461,7 @@ type ConnectionArgs struct {
 	IpsecEncryptAlgorithm pulumi.StringPtrInput
 	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm pulumi.StringPtrInput
-	// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+	// PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
 	IpsecPfsDhGroup pulumi.StringPtrInput
 	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
 	IpsecSaLifetimeSeconds pulumi.IntPtrInput
@@ -504,7 +509,7 @@ func (i *Connection) ToConnectionOutputWithContext(ctx context.Context) Connecti
 // ConnectionArrayInput is an input type that accepts ConnectionArray and ConnectionArrayOutput values.
 // You can construct a concrete instance of `ConnectionArrayInput` via:
 //
-//          ConnectionArray{ ConnectionArgs{...} }
+//	ConnectionArray{ ConnectionArgs{...} }
 type ConnectionArrayInput interface {
 	pulumi.Input
 
@@ -529,7 +534,7 @@ func (i ConnectionArray) ToConnectionArrayOutputWithContext(ctx context.Context)
 // ConnectionMapInput is an input type that accepts ConnectionMap and ConnectionMapOutput values.
 // You can construct a concrete instance of `ConnectionMapInput` via:
 //
-//          ConnectionMap{ "key": ConnectionArgs{...} }
+//	ConnectionMap{ "key": ConnectionArgs{...} }
 type ConnectionMapInput interface {
 	pulumi.Input
 
@@ -680,7 +685,7 @@ func (o ConnectionOutput) IpsecIntegrityAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IpsecIntegrityAlgorithm }).(pulumi.StringPtrOutput)
 }
 
-// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+// PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
 func (o ConnectionOutput) IpsecPfsDhGroup() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IpsecPfsDhGroup }).(pulumi.StringPtrOutput)
 }

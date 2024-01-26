@@ -26,7 +26,7 @@ type AccelerationDomainOriginInfo struct {
 // AccelerationDomainOriginInfoInput is an input type that accepts AccelerationDomainOriginInfoArgs and AccelerationDomainOriginInfoOutput values.
 // You can construct a concrete instance of `AccelerationDomainOriginInfoInput` via:
 //
-//          AccelerationDomainOriginInfoArgs{...}
+//	AccelerationDomainOriginInfoArgs{...}
 type AccelerationDomainOriginInfoInput interface {
 	pulumi.Input
 
@@ -70,11 +70,11 @@ func (i AccelerationDomainOriginInfoArgs) ToAccelerationDomainOriginInfoPtrOutpu
 // AccelerationDomainOriginInfoPtrInput is an input type that accepts AccelerationDomainOriginInfoArgs, AccelerationDomainOriginInfoPtr and AccelerationDomainOriginInfoPtrOutput values.
 // You can construct a concrete instance of `AccelerationDomainOriginInfoPtrInput` via:
 //
-//          AccelerationDomainOriginInfoArgs{...}
+//	        AccelerationDomainOriginInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AccelerationDomainOriginInfoPtrInput interface {
 	pulumi.Input
 
@@ -235,7 +235,7 @@ type AccelerationDomainOriginInfoPrivateParameter struct {
 // AccelerationDomainOriginInfoPrivateParameterInput is an input type that accepts AccelerationDomainOriginInfoPrivateParameterArgs and AccelerationDomainOriginInfoPrivateParameterOutput values.
 // You can construct a concrete instance of `AccelerationDomainOriginInfoPrivateParameterInput` via:
 //
-//          AccelerationDomainOriginInfoPrivateParameterArgs{...}
+//	AccelerationDomainOriginInfoPrivateParameterArgs{...}
 type AccelerationDomainOriginInfoPrivateParameterInput interface {
 	pulumi.Input
 
@@ -265,7 +265,7 @@ func (i AccelerationDomainOriginInfoPrivateParameterArgs) ToAccelerationDomainOr
 // AccelerationDomainOriginInfoPrivateParameterArrayInput is an input type that accepts AccelerationDomainOriginInfoPrivateParameterArray and AccelerationDomainOriginInfoPrivateParameterArrayOutput values.
 // You can construct a concrete instance of `AccelerationDomainOriginInfoPrivateParameterArrayInput` via:
 //
-//          AccelerationDomainOriginInfoPrivateParameterArray{ AccelerationDomainOriginInfoPrivateParameterArgs{...} }
+//	AccelerationDomainOriginInfoPrivateParameterArray{ AccelerationDomainOriginInfoPrivateParameterArgs{...} }
 type AccelerationDomainOriginInfoPrivateParameterArrayInput interface {
 	pulumi.Input
 
@@ -338,7 +338,7 @@ type ApplicationProxyIpv6 struct {
 // ApplicationProxyIpv6Input is an input type that accepts ApplicationProxyIpv6Args and ApplicationProxyIpv6Output values.
 // You can construct a concrete instance of `ApplicationProxyIpv6Input` via:
 //
-//          ApplicationProxyIpv6Args{...}
+//	ApplicationProxyIpv6Args{...}
 type ApplicationProxyIpv6Input interface {
 	pulumi.Input
 
@@ -373,11 +373,11 @@ func (i ApplicationProxyIpv6Args) ToApplicationProxyIpv6PtrOutputWithContext(ctx
 // ApplicationProxyIpv6PtrInput is an input type that accepts ApplicationProxyIpv6Args, ApplicationProxyIpv6Ptr and ApplicationProxyIpv6PtrOutput values.
 // You can construct a concrete instance of `ApplicationProxyIpv6PtrInput` via:
 //
-//          ApplicationProxyIpv6Args{...}
+//	        ApplicationProxyIpv6Args{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ApplicationProxyIpv6PtrInput interface {
 	pulumi.Input
 
@@ -484,7 +484,7 @@ type CertificateConfigServerCertInfo struct {
 // CertificateConfigServerCertInfoInput is an input type that accepts CertificateConfigServerCertInfoArgs and CertificateConfigServerCertInfoOutput values.
 // You can construct a concrete instance of `CertificateConfigServerCertInfoInput` via:
 //
-//          CertificateConfigServerCertInfoArgs{...}
+//	CertificateConfigServerCertInfoArgs{...}
 type CertificateConfigServerCertInfoInput interface {
 	pulumi.Input
 
@@ -524,7 +524,7 @@ func (i CertificateConfigServerCertInfoArgs) ToCertificateConfigServerCertInfoOu
 // CertificateConfigServerCertInfoArrayInput is an input type that accepts CertificateConfigServerCertInfoArray and CertificateConfigServerCertInfoArrayOutput values.
 // You can construct a concrete instance of `CertificateConfigServerCertInfoArrayInput` via:
 //
-//          CertificateConfigServerCertInfoArray{ CertificateConfigServerCertInfoArgs{...} }
+//	CertificateConfigServerCertInfoArray{ CertificateConfigServerCertInfoArgs{...} }
 type CertificateConfigServerCertInfoArrayInput interface {
 	pulumi.Input
 
@@ -634,7 +634,7 @@ type OriginGroupOriginRecord struct {
 // OriginGroupOriginRecordInput is an input type that accepts OriginGroupOriginRecordArgs and OriginGroupOriginRecordOutput values.
 // You can construct a concrete instance of `OriginGroupOriginRecordInput` via:
 //
-//          OriginGroupOriginRecordArgs{...}
+//	OriginGroupOriginRecordArgs{...}
 type OriginGroupOriginRecordInput interface {
 	pulumi.Input
 
@@ -673,7 +673,7 @@ func (i OriginGroupOriginRecordArgs) ToOriginGroupOriginRecordOutputWithContext(
 // OriginGroupOriginRecordArrayInput is an input type that accepts OriginGroupOriginRecordArray and OriginGroupOriginRecordArrayOutput values.
 // You can construct a concrete instance of `OriginGroupOriginRecordArrayInput` via:
 //
-//          OriginGroupOriginRecordArray{ OriginGroupOriginRecordArgs{...} }
+//	OriginGroupOriginRecordArray{ OriginGroupOriginRecordArgs{...} }
 type OriginGroupOriginRecordArrayInput interface {
 	pulumi.Input
 
@@ -773,7 +773,7 @@ type OriginGroupOriginRecordPrivateParameter struct {
 // OriginGroupOriginRecordPrivateParameterInput is an input type that accepts OriginGroupOriginRecordPrivateParameterArgs and OriginGroupOriginRecordPrivateParameterOutput values.
 // You can construct a concrete instance of `OriginGroupOriginRecordPrivateParameterInput` via:
 //
-//          OriginGroupOriginRecordPrivateParameterArgs{...}
+//	OriginGroupOriginRecordPrivateParameterArgs{...}
 type OriginGroupOriginRecordPrivateParameterInput interface {
 	pulumi.Input
 
@@ -803,7 +803,7 @@ func (i OriginGroupOriginRecordPrivateParameterArgs) ToOriginGroupOriginRecordPr
 // OriginGroupOriginRecordPrivateParameterArrayInput is an input type that accepts OriginGroupOriginRecordPrivateParameterArray and OriginGroupOriginRecordPrivateParameterArrayOutput values.
 // You can construct a concrete instance of `OriginGroupOriginRecordPrivateParameterArrayInput` via:
 //
-//          OriginGroupOriginRecordPrivateParameterArray{ OriginGroupOriginRecordPrivateParameterArgs{...} }
+//	OriginGroupOriginRecordPrivateParameterArray{ OriginGroupOriginRecordPrivateParameterArgs{...} }
 type OriginGroupOriginRecordPrivateParameterArrayInput interface {
 	pulumi.Input
 
@@ -881,7 +881,7 @@ type RuleEngineRule struct {
 // RuleEngineRuleInput is an input type that accepts RuleEngineRuleArgs and RuleEngineRuleOutput values.
 // You can construct a concrete instance of `RuleEngineRuleInput` via:
 //
-//          RuleEngineRuleArgs{...}
+//	RuleEngineRuleArgs{...}
 type RuleEngineRuleInput interface {
 	pulumi.Input
 
@@ -913,7 +913,7 @@ func (i RuleEngineRuleArgs) ToRuleEngineRuleOutputWithContext(ctx context.Contex
 // RuleEngineRuleArrayInput is an input type that accepts RuleEngineRuleArray and RuleEngineRuleArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleArrayInput` via:
 //
-//          RuleEngineRuleArray{ RuleEngineRuleArgs{...} }
+//	RuleEngineRuleArray{ RuleEngineRuleArgs{...} }
 type RuleEngineRuleArrayInput interface {
 	pulumi.Input
 
@@ -996,7 +996,7 @@ type RuleEngineRuleAction struct {
 // RuleEngineRuleActionInput is an input type that accepts RuleEngineRuleActionArgs and RuleEngineRuleActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionInput` via:
 //
-//          RuleEngineRuleActionArgs{...}
+//	RuleEngineRuleActionArgs{...}
 type RuleEngineRuleActionInput interface {
 	pulumi.Input
 
@@ -1028,7 +1028,7 @@ func (i RuleEngineRuleActionArgs) ToRuleEngineRuleActionOutputWithContext(ctx co
 // RuleEngineRuleActionArrayInput is an input type that accepts RuleEngineRuleActionArray and RuleEngineRuleActionArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionArrayInput` via:
 //
-//          RuleEngineRuleActionArray{ RuleEngineRuleActionArgs{...} }
+//	RuleEngineRuleActionArray{ RuleEngineRuleActionArgs{...} }
 type RuleEngineRuleActionArrayInput interface {
 	pulumi.Input
 
@@ -1109,7 +1109,7 @@ type RuleEngineRuleActionCodeAction struct {
 // RuleEngineRuleActionCodeActionInput is an input type that accepts RuleEngineRuleActionCodeActionArgs and RuleEngineRuleActionCodeActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionCodeActionInput` via:
 //
-//          RuleEngineRuleActionCodeActionArgs{...}
+//	RuleEngineRuleActionCodeActionArgs{...}
 type RuleEngineRuleActionCodeActionInput interface {
 	pulumi.Input
 
@@ -1147,11 +1147,11 @@ func (i RuleEngineRuleActionCodeActionArgs) ToRuleEngineRuleActionCodeActionPtrO
 // RuleEngineRuleActionCodeActionPtrInput is an input type that accepts RuleEngineRuleActionCodeActionArgs, RuleEngineRuleActionCodeActionPtr and RuleEngineRuleActionCodeActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionCodeActionPtrInput` via:
 //
-//          RuleEngineRuleActionCodeActionArgs{...}
+//	        RuleEngineRuleActionCodeActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleActionCodeActionPtrInput interface {
 	pulumi.Input
 
@@ -1267,7 +1267,7 @@ type RuleEngineRuleActionCodeActionParameter struct {
 // RuleEngineRuleActionCodeActionParameterInput is an input type that accepts RuleEngineRuleActionCodeActionParameterArgs and RuleEngineRuleActionCodeActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionCodeActionParameterInput` via:
 //
-//          RuleEngineRuleActionCodeActionParameterArgs{...}
+//	RuleEngineRuleActionCodeActionParameterArgs{...}
 type RuleEngineRuleActionCodeActionParameterInput interface {
 	pulumi.Input
 
@@ -1299,7 +1299,7 @@ func (i RuleEngineRuleActionCodeActionParameterArgs) ToRuleEngineRuleActionCodeA
 // RuleEngineRuleActionCodeActionParameterArrayInput is an input type that accepts RuleEngineRuleActionCodeActionParameterArray and RuleEngineRuleActionCodeActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionCodeActionParameterArrayInput` via:
 //
-//          RuleEngineRuleActionCodeActionParameterArray{ RuleEngineRuleActionCodeActionParameterArgs{...} }
+//	RuleEngineRuleActionCodeActionParameterArray{ RuleEngineRuleActionCodeActionParameterArgs{...} }
 type RuleEngineRuleActionCodeActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -1380,7 +1380,7 @@ type RuleEngineRuleActionNormalAction struct {
 // RuleEngineRuleActionNormalActionInput is an input type that accepts RuleEngineRuleActionNormalActionArgs and RuleEngineRuleActionNormalActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionNormalActionInput` via:
 //
-//          RuleEngineRuleActionNormalActionArgs{...}
+//	RuleEngineRuleActionNormalActionArgs{...}
 type RuleEngineRuleActionNormalActionInput interface {
 	pulumi.Input
 
@@ -1418,11 +1418,11 @@ func (i RuleEngineRuleActionNormalActionArgs) ToRuleEngineRuleActionNormalAction
 // RuleEngineRuleActionNormalActionPtrInput is an input type that accepts RuleEngineRuleActionNormalActionArgs, RuleEngineRuleActionNormalActionPtr and RuleEngineRuleActionNormalActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionNormalActionPtrInput` via:
 //
-//          RuleEngineRuleActionNormalActionArgs{...}
+//	        RuleEngineRuleActionNormalActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleActionNormalActionPtrInput interface {
 	pulumi.Input
 
@@ -1538,7 +1538,7 @@ type RuleEngineRuleActionNormalActionParameter struct {
 // RuleEngineRuleActionNormalActionParameterInput is an input type that accepts RuleEngineRuleActionNormalActionParameterArgs and RuleEngineRuleActionNormalActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionNormalActionParameterInput` via:
 //
-//          RuleEngineRuleActionNormalActionParameterArgs{...}
+//	RuleEngineRuleActionNormalActionParameterArgs{...}
 type RuleEngineRuleActionNormalActionParameterInput interface {
 	pulumi.Input
 
@@ -1568,7 +1568,7 @@ func (i RuleEngineRuleActionNormalActionParameterArgs) ToRuleEngineRuleActionNor
 // RuleEngineRuleActionNormalActionParameterArrayInput is an input type that accepts RuleEngineRuleActionNormalActionParameterArray and RuleEngineRuleActionNormalActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionNormalActionParameterArrayInput` via:
 //
-//          RuleEngineRuleActionNormalActionParameterArray{ RuleEngineRuleActionNormalActionParameterArgs{...} }
+//	RuleEngineRuleActionNormalActionParameterArray{ RuleEngineRuleActionNormalActionParameterArgs{...} }
 type RuleEngineRuleActionNormalActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -1644,7 +1644,7 @@ type RuleEngineRuleActionRewriteAction struct {
 // RuleEngineRuleActionRewriteActionInput is an input type that accepts RuleEngineRuleActionRewriteActionArgs and RuleEngineRuleActionRewriteActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionRewriteActionInput` via:
 //
-//          RuleEngineRuleActionRewriteActionArgs{...}
+//	RuleEngineRuleActionRewriteActionArgs{...}
 type RuleEngineRuleActionRewriteActionInput interface {
 	pulumi.Input
 
@@ -1682,11 +1682,11 @@ func (i RuleEngineRuleActionRewriteActionArgs) ToRuleEngineRuleActionRewriteActi
 // RuleEngineRuleActionRewriteActionPtrInput is an input type that accepts RuleEngineRuleActionRewriteActionArgs, RuleEngineRuleActionRewriteActionPtr and RuleEngineRuleActionRewriteActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionRewriteActionPtrInput` via:
 //
-//          RuleEngineRuleActionRewriteActionArgs{...}
+//	        RuleEngineRuleActionRewriteActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleActionRewriteActionPtrInput interface {
 	pulumi.Input
 
@@ -1804,7 +1804,7 @@ type RuleEngineRuleActionRewriteActionParameter struct {
 // RuleEngineRuleActionRewriteActionParameterInput is an input type that accepts RuleEngineRuleActionRewriteActionParameterArgs and RuleEngineRuleActionRewriteActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionRewriteActionParameterInput` via:
 //
-//          RuleEngineRuleActionRewriteActionParameterArgs{...}
+//	RuleEngineRuleActionRewriteActionParameterArgs{...}
 type RuleEngineRuleActionRewriteActionParameterInput interface {
 	pulumi.Input
 
@@ -1836,7 +1836,7 @@ func (i RuleEngineRuleActionRewriteActionParameterArgs) ToRuleEngineRuleActionRe
 // RuleEngineRuleActionRewriteActionParameterArrayInput is an input type that accepts RuleEngineRuleActionRewriteActionParameterArray and RuleEngineRuleActionRewriteActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleActionRewriteActionParameterArrayInput` via:
 //
-//          RuleEngineRuleActionRewriteActionParameterArray{ RuleEngineRuleActionRewriteActionParameterArgs{...} }
+//	RuleEngineRuleActionRewriteActionParameterArray{ RuleEngineRuleActionRewriteActionParameterArgs{...} }
 type RuleEngineRuleActionRewriteActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -1915,7 +1915,7 @@ type RuleEngineRuleOr struct {
 // RuleEngineRuleOrInput is an input type that accepts RuleEngineRuleOrArgs and RuleEngineRuleOrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleOrInput` via:
 //
-//          RuleEngineRuleOrArgs{...}
+//	RuleEngineRuleOrArgs{...}
 type RuleEngineRuleOrInput interface {
 	pulumi.Input
 
@@ -1943,7 +1943,7 @@ func (i RuleEngineRuleOrArgs) ToRuleEngineRuleOrOutputWithContext(ctx context.Co
 // RuleEngineRuleOrArrayInput is an input type that accepts RuleEngineRuleOrArray and RuleEngineRuleOrArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleOrArrayInput` via:
 //
-//          RuleEngineRuleOrArray{ RuleEngineRuleOrArgs{...} }
+//	RuleEngineRuleOrArray{ RuleEngineRuleOrArgs{...} }
 type RuleEngineRuleOrArrayInput interface {
 	pulumi.Input
 
@@ -2020,7 +2020,7 @@ type RuleEngineRuleOrAnd struct {
 // RuleEngineRuleOrAndInput is an input type that accepts RuleEngineRuleOrAndArgs and RuleEngineRuleOrAndOutput values.
 // You can construct a concrete instance of `RuleEngineRuleOrAndInput` via:
 //
-//          RuleEngineRuleOrAndArgs{...}
+//	RuleEngineRuleOrAndArgs{...}
 type RuleEngineRuleOrAndInput interface {
 	pulumi.Input
 
@@ -2056,7 +2056,7 @@ func (i RuleEngineRuleOrAndArgs) ToRuleEngineRuleOrAndOutputWithContext(ctx cont
 // RuleEngineRuleOrAndArrayInput is an input type that accepts RuleEngineRuleOrAndArray and RuleEngineRuleOrAndArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleOrAndArrayInput` via:
 //
-//          RuleEngineRuleOrAndArray{ RuleEngineRuleOrAndArgs{...} }
+//	RuleEngineRuleOrAndArray{ RuleEngineRuleOrAndArgs{...} }
 type RuleEngineRuleOrAndArrayInput interface {
 	pulumi.Input
 
@@ -2147,7 +2147,7 @@ type RuleEngineRuleSubRule struct {
 // RuleEngineRuleSubRuleInput is an input type that accepts RuleEngineRuleSubRuleArgs and RuleEngineRuleSubRuleOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleInput` via:
 //
-//          RuleEngineRuleSubRuleArgs{...}
+//	RuleEngineRuleSubRuleArgs{...}
 type RuleEngineRuleSubRuleInput interface {
 	pulumi.Input
 
@@ -2177,7 +2177,7 @@ func (i RuleEngineRuleSubRuleArgs) ToRuleEngineRuleSubRuleOutputWithContext(ctx 
 // RuleEngineRuleSubRuleArrayInput is an input type that accepts RuleEngineRuleSubRuleArray and RuleEngineRuleSubRuleArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleArrayInput` via:
 //
-//          RuleEngineRuleSubRuleArray{ RuleEngineRuleSubRuleArgs{...} }
+//	RuleEngineRuleSubRuleArray{ RuleEngineRuleSubRuleArgs{...} }
 type RuleEngineRuleSubRuleArrayInput interface {
 	pulumi.Input
 
@@ -2253,7 +2253,7 @@ type RuleEngineRuleSubRuleRule struct {
 // RuleEngineRuleSubRuleRuleInput is an input type that accepts RuleEngineRuleSubRuleRuleArgs and RuleEngineRuleSubRuleRuleOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleInput` via:
 //
-//          RuleEngineRuleSubRuleRuleArgs{...}
+//	RuleEngineRuleSubRuleRuleArgs{...}
 type RuleEngineRuleSubRuleRuleInput interface {
 	pulumi.Input
 
@@ -2283,7 +2283,7 @@ func (i RuleEngineRuleSubRuleRuleArgs) ToRuleEngineRuleSubRuleRuleOutputWithCont
 // RuleEngineRuleSubRuleRuleArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleArray and RuleEngineRuleSubRuleRuleArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleArray{ RuleEngineRuleSubRuleRuleArgs{...} }
+//	RuleEngineRuleSubRuleRuleArray{ RuleEngineRuleSubRuleRuleArgs{...} }
 type RuleEngineRuleSubRuleRuleArrayInput interface {
 	pulumi.Input
 
@@ -2361,7 +2361,7 @@ type RuleEngineRuleSubRuleRuleAction struct {
 // RuleEngineRuleSubRuleRuleActionInput is an input type that accepts RuleEngineRuleSubRuleRuleActionArgs and RuleEngineRuleSubRuleRuleActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionArgs{...}
+//	RuleEngineRuleSubRuleRuleActionArgs{...}
 type RuleEngineRuleSubRuleRuleActionInput interface {
 	pulumi.Input
 
@@ -2393,7 +2393,7 @@ func (i RuleEngineRuleSubRuleRuleActionArgs) ToRuleEngineRuleSubRuleRuleActionOu
 // RuleEngineRuleSubRuleRuleActionArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleActionArray and RuleEngineRuleSubRuleRuleActionArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionArray{ RuleEngineRuleSubRuleRuleActionArgs{...} }
+//	RuleEngineRuleSubRuleRuleActionArray{ RuleEngineRuleSubRuleRuleActionArgs{...} }
 type RuleEngineRuleSubRuleRuleActionArrayInput interface {
 	pulumi.Input
 
@@ -2480,7 +2480,7 @@ type RuleEngineRuleSubRuleRuleActionCodeAction struct {
 // RuleEngineRuleSubRuleRuleActionCodeActionInput is an input type that accepts RuleEngineRuleSubRuleRuleActionCodeActionArgs and RuleEngineRuleSubRuleRuleActionCodeActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionCodeActionInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionCodeActionArgs{...}
+//	RuleEngineRuleSubRuleRuleActionCodeActionArgs{...}
 type RuleEngineRuleSubRuleRuleActionCodeActionInput interface {
 	pulumi.Input
 
@@ -2518,11 +2518,11 @@ func (i RuleEngineRuleSubRuleRuleActionCodeActionArgs) ToRuleEngineRuleSubRuleRu
 // RuleEngineRuleSubRuleRuleActionCodeActionPtrInput is an input type that accepts RuleEngineRuleSubRuleRuleActionCodeActionArgs, RuleEngineRuleSubRuleRuleActionCodeActionPtr and RuleEngineRuleSubRuleRuleActionCodeActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionCodeActionPtrInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionCodeActionArgs{...}
+//	        RuleEngineRuleSubRuleRuleActionCodeActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleSubRuleRuleActionCodeActionPtrInput interface {
 	pulumi.Input
 
@@ -2640,7 +2640,7 @@ type RuleEngineRuleSubRuleRuleActionCodeActionParameter struct {
 // RuleEngineRuleSubRuleRuleActionCodeActionParameterInput is an input type that accepts RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs and RuleEngineRuleSubRuleRuleActionCodeActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionCodeActionParameterInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs{...}
+//	RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs{...}
 type RuleEngineRuleSubRuleRuleActionCodeActionParameterInput interface {
 	pulumi.Input
 
@@ -2672,7 +2672,7 @@ func (i RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs) ToRuleEngineRule
 // RuleEngineRuleSubRuleRuleActionCodeActionParameterArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleActionCodeActionParameterArray and RuleEngineRuleSubRuleRuleActionCodeActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionCodeActionParameterArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionCodeActionParameterArray{ RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs{...} }
+//	RuleEngineRuleSubRuleRuleActionCodeActionParameterArray{ RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs{...} }
 type RuleEngineRuleSubRuleRuleActionCodeActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -2753,7 +2753,7 @@ type RuleEngineRuleSubRuleRuleActionNormalAction struct {
 // RuleEngineRuleSubRuleRuleActionNormalActionInput is an input type that accepts RuleEngineRuleSubRuleRuleActionNormalActionArgs and RuleEngineRuleSubRuleRuleActionNormalActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionNormalActionInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionNormalActionArgs{...}
+//	RuleEngineRuleSubRuleRuleActionNormalActionArgs{...}
 type RuleEngineRuleSubRuleRuleActionNormalActionInput interface {
 	pulumi.Input
 
@@ -2791,11 +2791,11 @@ func (i RuleEngineRuleSubRuleRuleActionNormalActionArgs) ToRuleEngineRuleSubRule
 // RuleEngineRuleSubRuleRuleActionNormalActionPtrInput is an input type that accepts RuleEngineRuleSubRuleRuleActionNormalActionArgs, RuleEngineRuleSubRuleRuleActionNormalActionPtr and RuleEngineRuleSubRuleRuleActionNormalActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionNormalActionPtrInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionNormalActionArgs{...}
+//	        RuleEngineRuleSubRuleRuleActionNormalActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleSubRuleRuleActionNormalActionPtrInput interface {
 	pulumi.Input
 
@@ -2911,7 +2911,7 @@ type RuleEngineRuleSubRuleRuleActionNormalActionParameter struct {
 // RuleEngineRuleSubRuleRuleActionNormalActionParameterInput is an input type that accepts RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs and RuleEngineRuleSubRuleRuleActionNormalActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionNormalActionParameterInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{...}
+//	RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{...}
 type RuleEngineRuleSubRuleRuleActionNormalActionParameterInput interface {
 	pulumi.Input
 
@@ -2941,7 +2941,7 @@ func (i RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs) ToRuleEngineRu
 // RuleEngineRuleSubRuleRuleActionNormalActionParameterArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleActionNormalActionParameterArray and RuleEngineRuleSubRuleRuleActionNormalActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionNormalActionParameterArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionNormalActionParameterArray{ RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{...} }
+//	RuleEngineRuleSubRuleRuleActionNormalActionParameterArray{ RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{...} }
 type RuleEngineRuleSubRuleRuleActionNormalActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -3017,7 +3017,7 @@ type RuleEngineRuleSubRuleRuleActionRewriteAction struct {
 // RuleEngineRuleSubRuleRuleActionRewriteActionInput is an input type that accepts RuleEngineRuleSubRuleRuleActionRewriteActionArgs and RuleEngineRuleSubRuleRuleActionRewriteActionOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionRewriteActionInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionRewriteActionArgs{...}
+//	RuleEngineRuleSubRuleRuleActionRewriteActionArgs{...}
 type RuleEngineRuleSubRuleRuleActionRewriteActionInput interface {
 	pulumi.Input
 
@@ -3055,11 +3055,11 @@ func (i RuleEngineRuleSubRuleRuleActionRewriteActionArgs) ToRuleEngineRuleSubRul
 // RuleEngineRuleSubRuleRuleActionRewriteActionPtrInput is an input type that accepts RuleEngineRuleSubRuleRuleActionRewriteActionArgs, RuleEngineRuleSubRuleRuleActionRewriteActionPtr and RuleEngineRuleSubRuleRuleActionRewriteActionPtrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionRewriteActionPtrInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionRewriteActionArgs{...}
+//	        RuleEngineRuleSubRuleRuleActionRewriteActionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RuleEngineRuleSubRuleRuleActionRewriteActionPtrInput interface {
 	pulumi.Input
 
@@ -3177,7 +3177,7 @@ type RuleEngineRuleSubRuleRuleActionRewriteActionParameter struct {
 // RuleEngineRuleSubRuleRuleActionRewriteActionParameterInput is an input type that accepts RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs and RuleEngineRuleSubRuleRuleActionRewriteActionParameterOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionRewriteActionParameterInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs{...}
+//	RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs{...}
 type RuleEngineRuleSubRuleRuleActionRewriteActionParameterInput interface {
 	pulumi.Input
 
@@ -3209,7 +3209,7 @@ func (i RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs) ToRuleEngineR
 // RuleEngineRuleSubRuleRuleActionRewriteActionParameterArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleActionRewriteActionParameterArray and RuleEngineRuleSubRuleRuleActionRewriteActionParameterArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleActionRewriteActionParameterArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleActionRewriteActionParameterArray{ RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs{...} }
+//	RuleEngineRuleSubRuleRuleActionRewriteActionParameterArray{ RuleEngineRuleSubRuleRuleActionRewriteActionParameterArgs{...} }
 type RuleEngineRuleSubRuleRuleActionRewriteActionParameterArrayInput interface {
 	pulumi.Input
 
@@ -3288,7 +3288,7 @@ type RuleEngineRuleSubRuleRuleOr struct {
 // RuleEngineRuleSubRuleRuleOrInput is an input type that accepts RuleEngineRuleSubRuleRuleOrArgs and RuleEngineRuleSubRuleRuleOrOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleOrInput` via:
 //
-//          RuleEngineRuleSubRuleRuleOrArgs{...}
+//	RuleEngineRuleSubRuleRuleOrArgs{...}
 type RuleEngineRuleSubRuleRuleOrInput interface {
 	pulumi.Input
 
@@ -3316,7 +3316,7 @@ func (i RuleEngineRuleSubRuleRuleOrArgs) ToRuleEngineRuleSubRuleRuleOrOutputWith
 // RuleEngineRuleSubRuleRuleOrArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleOrArray and RuleEngineRuleSubRuleRuleOrArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleOrArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleOrArray{ RuleEngineRuleSubRuleRuleOrArgs{...} }
+//	RuleEngineRuleSubRuleRuleOrArray{ RuleEngineRuleSubRuleRuleOrArgs{...} }
 type RuleEngineRuleSubRuleRuleOrArrayInput interface {
 	pulumi.Input
 
@@ -3393,7 +3393,7 @@ type RuleEngineRuleSubRuleRuleOrAnd struct {
 // RuleEngineRuleSubRuleRuleOrAndInput is an input type that accepts RuleEngineRuleSubRuleRuleOrAndArgs and RuleEngineRuleSubRuleRuleOrAndOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleOrAndInput` via:
 //
-//          RuleEngineRuleSubRuleRuleOrAndArgs{...}
+//	RuleEngineRuleSubRuleRuleOrAndArgs{...}
 type RuleEngineRuleSubRuleRuleOrAndInput interface {
 	pulumi.Input
 
@@ -3429,7 +3429,7 @@ func (i RuleEngineRuleSubRuleRuleOrAndArgs) ToRuleEngineRuleSubRuleRuleOrAndOutp
 // RuleEngineRuleSubRuleRuleOrAndArrayInput is an input type that accepts RuleEngineRuleSubRuleRuleOrAndArray and RuleEngineRuleSubRuleRuleOrAndArrayOutput values.
 // You can construct a concrete instance of `RuleEngineRuleSubRuleRuleOrAndArrayInput` via:
 //
-//          RuleEngineRuleSubRuleRuleOrAndArray{ RuleEngineRuleSubRuleRuleOrAndArgs{...} }
+//	RuleEngineRuleSubRuleRuleOrAndArray{ RuleEngineRuleSubRuleRuleOrAndArgs{...} }
 type RuleEngineRuleSubRuleRuleOrAndArrayInput interface {
 	pulumi.Input
 
@@ -3518,7 +3518,7 @@ type ZoneOwnershipVerification struct {
 // ZoneOwnershipVerificationInput is an input type that accepts ZoneOwnershipVerificationArgs and ZoneOwnershipVerificationOutput values.
 // You can construct a concrete instance of `ZoneOwnershipVerificationInput` via:
 //
-//          ZoneOwnershipVerificationArgs{...}
+//	ZoneOwnershipVerificationArgs{...}
 type ZoneOwnershipVerificationInput interface {
 	pulumi.Input
 
@@ -3546,7 +3546,7 @@ func (i ZoneOwnershipVerificationArgs) ToZoneOwnershipVerificationOutputWithCont
 // ZoneOwnershipVerificationArrayInput is an input type that accepts ZoneOwnershipVerificationArray and ZoneOwnershipVerificationArrayOutput values.
 // You can construct a concrete instance of `ZoneOwnershipVerificationArrayInput` via:
 //
-//          ZoneOwnershipVerificationArray{ ZoneOwnershipVerificationArgs{...} }
+//	ZoneOwnershipVerificationArray{ ZoneOwnershipVerificationArgs{...} }
 type ZoneOwnershipVerificationArrayInput interface {
 	pulumi.Input
 
@@ -3621,7 +3621,7 @@ type ZoneOwnershipVerificationDnsVerification struct {
 // ZoneOwnershipVerificationDnsVerificationInput is an input type that accepts ZoneOwnershipVerificationDnsVerificationArgs and ZoneOwnershipVerificationDnsVerificationOutput values.
 // You can construct a concrete instance of `ZoneOwnershipVerificationDnsVerificationInput` via:
 //
-//          ZoneOwnershipVerificationDnsVerificationArgs{...}
+//	ZoneOwnershipVerificationDnsVerificationArgs{...}
 type ZoneOwnershipVerificationDnsVerificationInput interface {
 	pulumi.Input
 
@@ -3653,7 +3653,7 @@ func (i ZoneOwnershipVerificationDnsVerificationArgs) ToZoneOwnershipVerificatio
 // ZoneOwnershipVerificationDnsVerificationArrayInput is an input type that accepts ZoneOwnershipVerificationDnsVerificationArray and ZoneOwnershipVerificationDnsVerificationArrayOutput values.
 // You can construct a concrete instance of `ZoneOwnershipVerificationDnsVerificationArrayInput` via:
 //
-//          ZoneOwnershipVerificationDnsVerificationArray{ ZoneOwnershipVerificationDnsVerificationArgs{...} }
+//	ZoneOwnershipVerificationDnsVerificationArray{ ZoneOwnershipVerificationDnsVerificationArgs{...} }
 type ZoneOwnershipVerificationDnsVerificationArrayInput interface {
 	pulumi.Input
 
@@ -3736,7 +3736,7 @@ type ZoneSettingCache struct {
 // ZoneSettingCacheInput is an input type that accepts ZoneSettingCacheArgs and ZoneSettingCacheOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheInput` via:
 //
-//          ZoneSettingCacheArgs{...}
+//	ZoneSettingCacheArgs{...}
 type ZoneSettingCacheInput interface {
 	pulumi.Input
 
@@ -3776,11 +3776,11 @@ func (i ZoneSettingCacheArgs) ToZoneSettingCachePtrOutputWithContext(ctx context
 // ZoneSettingCachePtrInput is an input type that accepts ZoneSettingCacheArgs, ZoneSettingCachePtr and ZoneSettingCachePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCachePtrInput` via:
 //
-//          ZoneSettingCacheArgs{...}
+//	        ZoneSettingCacheArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCachePtrInput interface {
 	pulumi.Input
 
@@ -3911,7 +3911,7 @@ type ZoneSettingCacheCache struct {
 // ZoneSettingCacheCacheInput is an input type that accepts ZoneSettingCacheCacheArgs and ZoneSettingCacheCacheOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheCacheInput` via:
 //
-//          ZoneSettingCacheCacheArgs{...}
+//	ZoneSettingCacheCacheArgs{...}
 type ZoneSettingCacheCacheInput interface {
 	pulumi.Input
 
@@ -3951,11 +3951,11 @@ func (i ZoneSettingCacheCacheArgs) ToZoneSettingCacheCachePtrOutputWithContext(c
 // ZoneSettingCacheCachePtrInput is an input type that accepts ZoneSettingCacheCacheArgs, ZoneSettingCacheCachePtr and ZoneSettingCacheCachePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheCachePtrInput` via:
 //
-//          ZoneSettingCacheCacheArgs{...}
+//	        ZoneSettingCacheCacheArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCacheCachePtrInput interface {
 	pulumi.Input
 
@@ -4082,7 +4082,7 @@ type ZoneSettingCacheFollowOrigin struct {
 // ZoneSettingCacheFollowOriginInput is an input type that accepts ZoneSettingCacheFollowOriginArgs and ZoneSettingCacheFollowOriginOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheFollowOriginInput` via:
 //
-//          ZoneSettingCacheFollowOriginArgs{...}
+//	ZoneSettingCacheFollowOriginArgs{...}
 type ZoneSettingCacheFollowOriginInput interface {
 	pulumi.Input
 
@@ -4118,11 +4118,11 @@ func (i ZoneSettingCacheFollowOriginArgs) ToZoneSettingCacheFollowOriginPtrOutpu
 // ZoneSettingCacheFollowOriginPtrInput is an input type that accepts ZoneSettingCacheFollowOriginArgs, ZoneSettingCacheFollowOriginPtr and ZoneSettingCacheFollowOriginPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheFollowOriginPtrInput` via:
 //
-//          ZoneSettingCacheFollowOriginArgs{...}
+//	        ZoneSettingCacheFollowOriginArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCacheFollowOriginPtrInput interface {
 	pulumi.Input
 
@@ -4223,7 +4223,7 @@ type ZoneSettingCacheKey struct {
 // ZoneSettingCacheKeyInput is an input type that accepts ZoneSettingCacheKeyArgs and ZoneSettingCacheKeyOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheKeyInput` via:
 //
-//          ZoneSettingCacheKeyArgs{...}
+//	ZoneSettingCacheKeyArgs{...}
 type ZoneSettingCacheKeyInput interface {
 	pulumi.Input
 
@@ -4263,11 +4263,11 @@ func (i ZoneSettingCacheKeyArgs) ToZoneSettingCacheKeyPtrOutputWithContext(ctx c
 // ZoneSettingCacheKeyPtrInput is an input type that accepts ZoneSettingCacheKeyArgs, ZoneSettingCacheKeyPtr and ZoneSettingCacheKeyPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheKeyPtrInput` via:
 //
-//          ZoneSettingCacheKeyArgs{...}
+//	        ZoneSettingCacheKeyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCacheKeyPtrInput interface {
 	pulumi.Input
 
@@ -4398,7 +4398,7 @@ type ZoneSettingCacheKeyQueryString struct {
 // ZoneSettingCacheKeyQueryStringInput is an input type that accepts ZoneSettingCacheKeyQueryStringArgs and ZoneSettingCacheKeyQueryStringOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheKeyQueryStringInput` via:
 //
-//          ZoneSettingCacheKeyQueryStringArgs{...}
+//	ZoneSettingCacheKeyQueryStringArgs{...}
 type ZoneSettingCacheKeyQueryStringInput interface {
 	pulumi.Input
 
@@ -4438,11 +4438,11 @@ func (i ZoneSettingCacheKeyQueryStringArgs) ToZoneSettingCacheKeyQueryStringPtrO
 // ZoneSettingCacheKeyQueryStringPtrInput is an input type that accepts ZoneSettingCacheKeyQueryStringArgs, ZoneSettingCacheKeyQueryStringPtr and ZoneSettingCacheKeyQueryStringPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheKeyQueryStringPtrInput` via:
 //
-//          ZoneSettingCacheKeyQueryStringArgs{...}
+//	        ZoneSettingCacheKeyQueryStringArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCacheKeyQueryStringPtrInput interface {
 	pulumi.Input
 
@@ -4569,7 +4569,7 @@ type ZoneSettingCacheNoCache struct {
 // ZoneSettingCacheNoCacheInput is an input type that accepts ZoneSettingCacheNoCacheArgs and ZoneSettingCacheNoCacheOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheNoCacheInput` via:
 //
-//          ZoneSettingCacheNoCacheArgs{...}
+//	ZoneSettingCacheNoCacheArgs{...}
 type ZoneSettingCacheNoCacheInput interface {
 	pulumi.Input
 
@@ -4605,11 +4605,11 @@ func (i ZoneSettingCacheNoCacheArgs) ToZoneSettingCacheNoCachePtrOutputWithConte
 // ZoneSettingCacheNoCachePtrInput is an input type that accepts ZoneSettingCacheNoCacheArgs, ZoneSettingCacheNoCachePtr and ZoneSettingCacheNoCachePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCacheNoCachePtrInput` via:
 //
-//          ZoneSettingCacheNoCacheArgs{...}
+//	        ZoneSettingCacheNoCacheArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCacheNoCachePtrInput interface {
 	pulumi.Input
 
@@ -4708,7 +4708,7 @@ type ZoneSettingCachePrefresh struct {
 // ZoneSettingCachePrefreshInput is an input type that accepts ZoneSettingCachePrefreshArgs and ZoneSettingCachePrefreshOutput values.
 // You can construct a concrete instance of `ZoneSettingCachePrefreshInput` via:
 //
-//          ZoneSettingCachePrefreshArgs{...}
+//	ZoneSettingCachePrefreshArgs{...}
 type ZoneSettingCachePrefreshInput interface {
 	pulumi.Input
 
@@ -4746,11 +4746,11 @@ func (i ZoneSettingCachePrefreshArgs) ToZoneSettingCachePrefreshPtrOutputWithCon
 // ZoneSettingCachePrefreshPtrInput is an input type that accepts ZoneSettingCachePrefreshArgs, ZoneSettingCachePrefreshPtr and ZoneSettingCachePrefreshPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCachePrefreshPtrInput` via:
 //
-//          ZoneSettingCachePrefreshArgs{...}
+//	        ZoneSettingCachePrefreshArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCachePrefreshPtrInput interface {
 	pulumi.Input
 
@@ -4864,7 +4864,7 @@ type ZoneSettingClientIpHeader struct {
 // ZoneSettingClientIpHeaderInput is an input type that accepts ZoneSettingClientIpHeaderArgs and ZoneSettingClientIpHeaderOutput values.
 // You can construct a concrete instance of `ZoneSettingClientIpHeaderInput` via:
 //
-//          ZoneSettingClientIpHeaderArgs{...}
+//	ZoneSettingClientIpHeaderArgs{...}
 type ZoneSettingClientIpHeaderInput interface {
 	pulumi.Input
 
@@ -4902,11 +4902,11 @@ func (i ZoneSettingClientIpHeaderArgs) ToZoneSettingClientIpHeaderPtrOutputWithC
 // ZoneSettingClientIpHeaderPtrInput is an input type that accepts ZoneSettingClientIpHeaderArgs, ZoneSettingClientIpHeaderPtr and ZoneSettingClientIpHeaderPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingClientIpHeaderPtrInput` via:
 //
-//          ZoneSettingClientIpHeaderArgs{...}
+//	        ZoneSettingClientIpHeaderArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingClientIpHeaderPtrInput interface {
 	pulumi.Input
 
@@ -5020,7 +5020,7 @@ type ZoneSettingCompression struct {
 // ZoneSettingCompressionInput is an input type that accepts ZoneSettingCompressionArgs and ZoneSettingCompressionOutput values.
 // You can construct a concrete instance of `ZoneSettingCompressionInput` via:
 //
-//          ZoneSettingCompressionArgs{...}
+//	ZoneSettingCompressionArgs{...}
 type ZoneSettingCompressionInput interface {
 	pulumi.Input
 
@@ -5058,11 +5058,11 @@ func (i ZoneSettingCompressionArgs) ToZoneSettingCompressionPtrOutputWithContext
 // ZoneSettingCompressionPtrInput is an input type that accepts ZoneSettingCompressionArgs, ZoneSettingCompressionPtr and ZoneSettingCompressionPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingCompressionPtrInput` via:
 //
-//          ZoneSettingCompressionArgs{...}
+//	        ZoneSettingCompressionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingCompressionPtrInput interface {
 	pulumi.Input
 
@@ -5176,7 +5176,7 @@ type ZoneSettingForceRedirect struct {
 // ZoneSettingForceRedirectInput is an input type that accepts ZoneSettingForceRedirectArgs and ZoneSettingForceRedirectOutput values.
 // You can construct a concrete instance of `ZoneSettingForceRedirectInput` via:
 //
-//          ZoneSettingForceRedirectArgs{...}
+//	ZoneSettingForceRedirectArgs{...}
 type ZoneSettingForceRedirectInput interface {
 	pulumi.Input
 
@@ -5214,11 +5214,11 @@ func (i ZoneSettingForceRedirectArgs) ToZoneSettingForceRedirectPtrOutputWithCon
 // ZoneSettingForceRedirectPtrInput is an input type that accepts ZoneSettingForceRedirectArgs, ZoneSettingForceRedirectPtr and ZoneSettingForceRedirectPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingForceRedirectPtrInput` via:
 //
-//          ZoneSettingForceRedirectArgs{...}
+//	        ZoneSettingForceRedirectArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingForceRedirectPtrInput interface {
 	pulumi.Input
 
@@ -5336,7 +5336,7 @@ type ZoneSettingHttps struct {
 // ZoneSettingHttpsInput is an input type that accepts ZoneSettingHttpsArgs and ZoneSettingHttpsOutput values.
 // You can construct a concrete instance of `ZoneSettingHttpsInput` via:
 //
-//          ZoneSettingHttpsArgs{...}
+//	ZoneSettingHttpsArgs{...}
 type ZoneSettingHttpsInput interface {
 	pulumi.Input
 
@@ -5378,11 +5378,11 @@ func (i ZoneSettingHttpsArgs) ToZoneSettingHttpsPtrOutputWithContext(ctx context
 // ZoneSettingHttpsPtrInput is an input type that accepts ZoneSettingHttpsArgs, ZoneSettingHttpsPtr and ZoneSettingHttpsPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingHttpsPtrInput` via:
 //
-//          ZoneSettingHttpsArgs{...}
+//	        ZoneSettingHttpsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingHttpsPtrInput interface {
 	pulumi.Input
 
@@ -5530,7 +5530,7 @@ type ZoneSettingHttpsHsts struct {
 // ZoneSettingHttpsHstsInput is an input type that accepts ZoneSettingHttpsHstsArgs and ZoneSettingHttpsHstsOutput values.
 // You can construct a concrete instance of `ZoneSettingHttpsHstsInput` via:
 //
-//          ZoneSettingHttpsHstsArgs{...}
+//	ZoneSettingHttpsHstsArgs{...}
 type ZoneSettingHttpsHstsInput interface {
 	pulumi.Input
 
@@ -5572,11 +5572,11 @@ func (i ZoneSettingHttpsHstsArgs) ToZoneSettingHttpsHstsPtrOutputWithContext(ctx
 // ZoneSettingHttpsHstsPtrInput is an input type that accepts ZoneSettingHttpsHstsArgs, ZoneSettingHttpsHstsPtr and ZoneSettingHttpsHstsPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingHttpsHstsPtrInput` via:
 //
-//          ZoneSettingHttpsHstsArgs{...}
+//	        ZoneSettingHttpsHstsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingHttpsHstsPtrInput interface {
 	pulumi.Input
 
@@ -5718,7 +5718,7 @@ type ZoneSettingIpv6 struct {
 // ZoneSettingIpv6Input is an input type that accepts ZoneSettingIpv6Args and ZoneSettingIpv6Output values.
 // You can construct a concrete instance of `ZoneSettingIpv6Input` via:
 //
-//          ZoneSettingIpv6Args{...}
+//	ZoneSettingIpv6Args{...}
 type ZoneSettingIpv6Input interface {
 	pulumi.Input
 
@@ -5754,11 +5754,11 @@ func (i ZoneSettingIpv6Args) ToZoneSettingIpv6PtrOutputWithContext(ctx context.C
 // ZoneSettingIpv6PtrInput is an input type that accepts ZoneSettingIpv6Args, ZoneSettingIpv6Ptr and ZoneSettingIpv6PtrOutput values.
 // You can construct a concrete instance of `ZoneSettingIpv6PtrInput` via:
 //
-//          ZoneSettingIpv6Args{...}
+//	        ZoneSettingIpv6Args{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingIpv6PtrInput interface {
 	pulumi.Input
 
@@ -5857,7 +5857,7 @@ type ZoneSettingMaxAge struct {
 // ZoneSettingMaxAgeInput is an input type that accepts ZoneSettingMaxAgeArgs and ZoneSettingMaxAgeOutput values.
 // You can construct a concrete instance of `ZoneSettingMaxAgeInput` via:
 //
-//          ZoneSettingMaxAgeArgs{...}
+//	ZoneSettingMaxAgeArgs{...}
 type ZoneSettingMaxAgeInput interface {
 	pulumi.Input
 
@@ -5895,11 +5895,11 @@ func (i ZoneSettingMaxAgeArgs) ToZoneSettingMaxAgePtrOutputWithContext(ctx conte
 // ZoneSettingMaxAgePtrInput is an input type that accepts ZoneSettingMaxAgeArgs, ZoneSettingMaxAgePtr and ZoneSettingMaxAgePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingMaxAgePtrInput` via:
 //
-//          ZoneSettingMaxAgeArgs{...}
+//	        ZoneSettingMaxAgeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingMaxAgePtrInput interface {
 	pulumi.Input
 
@@ -6011,7 +6011,7 @@ type ZoneSettingOfflineCache struct {
 // ZoneSettingOfflineCacheInput is an input type that accepts ZoneSettingOfflineCacheArgs and ZoneSettingOfflineCacheOutput values.
 // You can construct a concrete instance of `ZoneSettingOfflineCacheInput` via:
 //
-//          ZoneSettingOfflineCacheArgs{...}
+//	ZoneSettingOfflineCacheArgs{...}
 type ZoneSettingOfflineCacheInput interface {
 	pulumi.Input
 
@@ -6047,11 +6047,11 @@ func (i ZoneSettingOfflineCacheArgs) ToZoneSettingOfflineCachePtrOutputWithConte
 // ZoneSettingOfflineCachePtrInput is an input type that accepts ZoneSettingOfflineCacheArgs, ZoneSettingOfflineCachePtr and ZoneSettingOfflineCachePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingOfflineCachePtrInput` via:
 //
-//          ZoneSettingOfflineCacheArgs{...}
+//	        ZoneSettingOfflineCacheArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingOfflineCachePtrInput interface {
 	pulumi.Input
 
@@ -6154,7 +6154,7 @@ type ZoneSettingOrigin struct {
 // ZoneSettingOriginInput is an input type that accepts ZoneSettingOriginArgs and ZoneSettingOriginOutput values.
 // You can construct a concrete instance of `ZoneSettingOriginInput` via:
 //
-//          ZoneSettingOriginArgs{...}
+//	ZoneSettingOriginArgs{...}
 type ZoneSettingOriginInput interface {
 	pulumi.Input
 
@@ -6196,11 +6196,11 @@ func (i ZoneSettingOriginArgs) ToZoneSettingOriginPtrOutputWithContext(ctx conte
 // ZoneSettingOriginPtrInput is an input type that accepts ZoneSettingOriginArgs, ZoneSettingOriginPtr and ZoneSettingOriginPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingOriginPtrInput` via:
 //
-//          ZoneSettingOriginArgs{...}
+//	        ZoneSettingOriginArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingOriginPtrInput interface {
 	pulumi.Input
 
@@ -6344,7 +6344,7 @@ type ZoneSettingPostMaxSize struct {
 // ZoneSettingPostMaxSizeInput is an input type that accepts ZoneSettingPostMaxSizeArgs and ZoneSettingPostMaxSizeOutput values.
 // You can construct a concrete instance of `ZoneSettingPostMaxSizeInput` via:
 //
-//          ZoneSettingPostMaxSizeArgs{...}
+//	ZoneSettingPostMaxSizeArgs{...}
 type ZoneSettingPostMaxSizeInput interface {
 	pulumi.Input
 
@@ -6382,11 +6382,11 @@ func (i ZoneSettingPostMaxSizeArgs) ToZoneSettingPostMaxSizePtrOutputWithContext
 // ZoneSettingPostMaxSizePtrInput is an input type that accepts ZoneSettingPostMaxSizeArgs, ZoneSettingPostMaxSizePtr and ZoneSettingPostMaxSizePtrOutput values.
 // You can construct a concrete instance of `ZoneSettingPostMaxSizePtrInput` via:
 //
-//          ZoneSettingPostMaxSizeArgs{...}
+//	        ZoneSettingPostMaxSizeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingPostMaxSizePtrInput interface {
 	pulumi.Input
 
@@ -6498,7 +6498,7 @@ type ZoneSettingQuic struct {
 // ZoneSettingQuicInput is an input type that accepts ZoneSettingQuicArgs and ZoneSettingQuicOutput values.
 // You can construct a concrete instance of `ZoneSettingQuicInput` via:
 //
-//          ZoneSettingQuicArgs{...}
+//	ZoneSettingQuicArgs{...}
 type ZoneSettingQuicInput interface {
 	pulumi.Input
 
@@ -6534,11 +6534,11 @@ func (i ZoneSettingQuicArgs) ToZoneSettingQuicPtrOutputWithContext(ctx context.C
 // ZoneSettingQuicPtrInput is an input type that accepts ZoneSettingQuicArgs, ZoneSettingQuicPtr and ZoneSettingQuicPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingQuicPtrInput` via:
 //
-//          ZoneSettingQuicArgs{...}
+//	        ZoneSettingQuicArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingQuicPtrInput interface {
 	pulumi.Input
 
@@ -6635,7 +6635,7 @@ type ZoneSettingSmartRouting struct {
 // ZoneSettingSmartRoutingInput is an input type that accepts ZoneSettingSmartRoutingArgs and ZoneSettingSmartRoutingOutput values.
 // You can construct a concrete instance of `ZoneSettingSmartRoutingInput` via:
 //
-//          ZoneSettingSmartRoutingArgs{...}
+//	ZoneSettingSmartRoutingArgs{...}
 type ZoneSettingSmartRoutingInput interface {
 	pulumi.Input
 
@@ -6671,11 +6671,11 @@ func (i ZoneSettingSmartRoutingArgs) ToZoneSettingSmartRoutingPtrOutputWithConte
 // ZoneSettingSmartRoutingPtrInput is an input type that accepts ZoneSettingSmartRoutingArgs, ZoneSettingSmartRoutingPtr and ZoneSettingSmartRoutingPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingSmartRoutingPtrInput` via:
 //
-//          ZoneSettingSmartRoutingArgs{...}
+//	        ZoneSettingSmartRoutingArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingSmartRoutingPtrInput interface {
 	pulumi.Input
 
@@ -6772,7 +6772,7 @@ type ZoneSettingUpstreamHttp2 struct {
 // ZoneSettingUpstreamHttp2Input is an input type that accepts ZoneSettingUpstreamHttp2Args and ZoneSettingUpstreamHttp2Output values.
 // You can construct a concrete instance of `ZoneSettingUpstreamHttp2Input` via:
 //
-//          ZoneSettingUpstreamHttp2Args{...}
+//	ZoneSettingUpstreamHttp2Args{...}
 type ZoneSettingUpstreamHttp2Input interface {
 	pulumi.Input
 
@@ -6808,11 +6808,11 @@ func (i ZoneSettingUpstreamHttp2Args) ToZoneSettingUpstreamHttp2PtrOutputWithCon
 // ZoneSettingUpstreamHttp2PtrInput is an input type that accepts ZoneSettingUpstreamHttp2Args, ZoneSettingUpstreamHttp2Ptr and ZoneSettingUpstreamHttp2PtrOutput values.
 // You can construct a concrete instance of `ZoneSettingUpstreamHttp2PtrInput` via:
 //
-//          ZoneSettingUpstreamHttp2Args{...}
+//	        ZoneSettingUpstreamHttp2Args{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingUpstreamHttp2PtrInput interface {
 	pulumi.Input
 
@@ -6911,7 +6911,7 @@ type ZoneSettingWebSocket struct {
 // ZoneSettingWebSocketInput is an input type that accepts ZoneSettingWebSocketArgs and ZoneSettingWebSocketOutput values.
 // You can construct a concrete instance of `ZoneSettingWebSocketInput` via:
 //
-//          ZoneSettingWebSocketArgs{...}
+//	ZoneSettingWebSocketArgs{...}
 type ZoneSettingWebSocketInput interface {
 	pulumi.Input
 
@@ -6949,11 +6949,11 @@ func (i ZoneSettingWebSocketArgs) ToZoneSettingWebSocketPtrOutputWithContext(ctx
 // ZoneSettingWebSocketPtrInput is an input type that accepts ZoneSettingWebSocketArgs, ZoneSettingWebSocketPtr and ZoneSettingWebSocketPtrOutput values.
 // You can construct a concrete instance of `ZoneSettingWebSocketPtrInput` via:
 //
-//          ZoneSettingWebSocketArgs{...}
+//	        ZoneSettingWebSocketArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneSettingWebSocketPtrInput interface {
 	pulumi.Input
 
@@ -7067,7 +7067,7 @@ type GetRuleEngineSettingsAction struct {
 // GetRuleEngineSettingsActionInput is an input type that accepts GetRuleEngineSettingsActionArgs and GetRuleEngineSettingsActionOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionInput` via:
 //
-//          GetRuleEngineSettingsActionArgs{...}
+//	GetRuleEngineSettingsActionArgs{...}
 type GetRuleEngineSettingsActionInput interface {
 	pulumi.Input
 
@@ -7097,7 +7097,7 @@ func (i GetRuleEngineSettingsActionArgs) ToGetRuleEngineSettingsActionOutputWith
 // GetRuleEngineSettingsActionArrayInput is an input type that accepts GetRuleEngineSettingsActionArray and GetRuleEngineSettingsActionArrayOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionArrayInput` via:
 //
-//          GetRuleEngineSettingsActionArray{ GetRuleEngineSettingsActionArgs{...} }
+//	GetRuleEngineSettingsActionArray{ GetRuleEngineSettingsActionArgs{...} }
 type GetRuleEngineSettingsActionArrayInput interface {
 	pulumi.Input
 
@@ -7187,7 +7187,7 @@ type GetRuleEngineSettingsActionProperty struct {
 // GetRuleEngineSettingsActionPropertyInput is an input type that accepts GetRuleEngineSettingsActionPropertyArgs and GetRuleEngineSettingsActionPropertyOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyArgs{...}
+//	GetRuleEngineSettingsActionPropertyArgs{...}
 type GetRuleEngineSettingsActionPropertyInput interface {
 	pulumi.Input
 
@@ -7231,7 +7231,7 @@ func (i GetRuleEngineSettingsActionPropertyArgs) ToGetRuleEngineSettingsActionPr
 // GetRuleEngineSettingsActionPropertyArrayInput is an input type that accepts GetRuleEngineSettingsActionPropertyArray and GetRuleEngineSettingsActionPropertyArrayOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyArrayInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyArray{ GetRuleEngineSettingsActionPropertyArgs{...} }
+//	GetRuleEngineSettingsActionPropertyArray{ GetRuleEngineSettingsActionPropertyArgs{...} }
 type GetRuleEngineSettingsActionPropertyArrayInput interface {
 	pulumi.Input
 
@@ -7358,7 +7358,7 @@ type GetRuleEngineSettingsActionPropertyChoiceProperty struct {
 // GetRuleEngineSettingsActionPropertyChoicePropertyInput is an input type that accepts GetRuleEngineSettingsActionPropertyChoicePropertyArgs and GetRuleEngineSettingsActionPropertyChoicePropertyOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyChoicePropertyInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyChoicePropertyArgs{...}
+//	GetRuleEngineSettingsActionPropertyChoicePropertyArgs{...}
 type GetRuleEngineSettingsActionPropertyChoicePropertyInput interface {
 	pulumi.Input
 
@@ -7400,7 +7400,7 @@ func (i GetRuleEngineSettingsActionPropertyChoicePropertyArgs) ToGetRuleEngineSe
 // GetRuleEngineSettingsActionPropertyChoicePropertyArrayInput is an input type that accepts GetRuleEngineSettingsActionPropertyChoicePropertyArray and GetRuleEngineSettingsActionPropertyChoicePropertyArrayOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyChoicePropertyArrayInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyChoicePropertyArray{ GetRuleEngineSettingsActionPropertyChoicePropertyArgs{...} }
+//	GetRuleEngineSettingsActionPropertyChoicePropertyArray{ GetRuleEngineSettingsActionPropertyChoicePropertyArgs{...} }
 type GetRuleEngineSettingsActionPropertyChoicePropertyArrayInput interface {
 	pulumi.Input
 
@@ -7510,7 +7510,7 @@ type GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameter struct {
 // GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterInput is an input type that accepts GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs and GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs{...}
+//	GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs{...}
 type GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterInput interface {
 	pulumi.Input
 
@@ -7542,7 +7542,7 @@ func (i GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs) ToG
 // GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArrayInput is an input type that accepts GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArray and GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArrayOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArrayInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArray{ GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs{...} }
+//	GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArray{ GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArgs{...} }
 type GetRuleEngineSettingsActionPropertyChoicePropertyExtraParameterArrayInput interface {
 	pulumi.Input
 
@@ -7625,7 +7625,7 @@ type GetRuleEngineSettingsActionPropertyExtraParameter struct {
 // GetRuleEngineSettingsActionPropertyExtraParameterInput is an input type that accepts GetRuleEngineSettingsActionPropertyExtraParameterArgs and GetRuleEngineSettingsActionPropertyExtraParameterOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyExtraParameterInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyExtraParameterArgs{...}
+//	GetRuleEngineSettingsActionPropertyExtraParameterArgs{...}
 type GetRuleEngineSettingsActionPropertyExtraParameterInput interface {
 	pulumi.Input
 
@@ -7657,7 +7657,7 @@ func (i GetRuleEngineSettingsActionPropertyExtraParameterArgs) ToGetRuleEngineSe
 // GetRuleEngineSettingsActionPropertyExtraParameterArrayInput is an input type that accepts GetRuleEngineSettingsActionPropertyExtraParameterArray and GetRuleEngineSettingsActionPropertyExtraParameterArrayOutput values.
 // You can construct a concrete instance of `GetRuleEngineSettingsActionPropertyExtraParameterArrayInput` via:
 //
-//          GetRuleEngineSettingsActionPropertyExtraParameterArray{ GetRuleEngineSettingsActionPropertyExtraParameterArgs{...} }
+//	GetRuleEngineSettingsActionPropertyExtraParameterArray{ GetRuleEngineSettingsActionPropertyExtraParameterArgs{...} }
 type GetRuleEngineSettingsActionPropertyExtraParameterArrayInput interface {
 	pulumi.Input
 
@@ -7750,7 +7750,7 @@ type GetZoneAvailablePlansPlanInfoList struct {
 // GetZoneAvailablePlansPlanInfoListInput is an input type that accepts GetZoneAvailablePlansPlanInfoListArgs and GetZoneAvailablePlansPlanInfoListOutput values.
 // You can construct a concrete instance of `GetZoneAvailablePlansPlanInfoListInput` via:
 //
-//          GetZoneAvailablePlansPlanInfoListArgs{...}
+//	GetZoneAvailablePlansPlanInfoListArgs{...}
 type GetZoneAvailablePlansPlanInfoListInput interface {
 	pulumi.Input
 
@@ -7792,7 +7792,7 @@ func (i GetZoneAvailablePlansPlanInfoListArgs) ToGetZoneAvailablePlansPlanInfoLi
 // GetZoneAvailablePlansPlanInfoListArrayInput is an input type that accepts GetZoneAvailablePlansPlanInfoListArray and GetZoneAvailablePlansPlanInfoListArrayOutput values.
 // You can construct a concrete instance of `GetZoneAvailablePlansPlanInfoListArrayInput` via:
 //
-//          GetZoneAvailablePlansPlanInfoListArray{ GetZoneAvailablePlansPlanInfoListArgs{...} }
+//	GetZoneAvailablePlansPlanInfoListArray{ GetZoneAvailablePlansPlanInfoListArgs{...} }
 type GetZoneAvailablePlansPlanInfoListArrayInput interface {
 	pulumi.Input
 

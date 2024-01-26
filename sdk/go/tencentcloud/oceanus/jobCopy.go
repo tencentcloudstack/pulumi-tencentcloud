@@ -19,27 +19,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.NewJobCopy(ctx, "example", &Oceanus.JobCopyArgs{
-// 			JobType:         pulumi.Int(2),
-// 			SourceId:        pulumi.String("cql-0nob2hx8"),
-// 			SourceName:      pulumi.String("keep_jar"),
-// 			TargetClusterId: pulumi.String("cluster-1kcd524h"),
-// 			TargetFolderId:  pulumi.String("folder-7ctl246z"),
-// 			TargetName:      pulumi.String("tf_copy_example"),
-// 			WorkSpaceId:     pulumi.String("space-2idq8wbr"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.NewJobCopy(ctx, "example", &Oceanus.JobCopyArgs{
+//				JobType:         pulumi.Int(2),
+//				SourceId:        pulumi.String("cql-0nob2hx8"),
+//				SourceName:      pulumi.String("keep_jar"),
+//				TargetClusterId: pulumi.String("cluster-1kcd524h"),
+//				TargetFolderId:  pulumi.String("folder-7ctl246z"),
+//				TargetName:      pulumi.String("tf_copy_example"),
+//				WorkSpaceId:     pulumi.String("space-2idq8wbr"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type JobCopy struct {
 	pulumi.CustomResourceState
@@ -200,7 +203,7 @@ func (i *JobCopy) ToJobCopyOutputWithContext(ctx context.Context) JobCopyOutput 
 // JobCopyArrayInput is an input type that accepts JobCopyArray and JobCopyArrayOutput values.
 // You can construct a concrete instance of `JobCopyArrayInput` via:
 //
-//          JobCopyArray{ JobCopyArgs{...} }
+//	JobCopyArray{ JobCopyArgs{...} }
 type JobCopyArrayInput interface {
 	pulumi.Input
 
@@ -225,7 +228,7 @@ func (i JobCopyArray) ToJobCopyArrayOutputWithContext(ctx context.Context) JobCo
 // JobCopyMapInput is an input type that accepts JobCopyMap and JobCopyMapOutput values.
 // You can construct a concrete instance of `JobCopyMapInput` via:
 //
-//          JobCopyMap{ "key": JobCopyArgs{...} }
+//	JobCopyMap{ "key": JobCopyArgs{...} }
 type JobCopyMapInput interface {
 	pulumi.Input
 

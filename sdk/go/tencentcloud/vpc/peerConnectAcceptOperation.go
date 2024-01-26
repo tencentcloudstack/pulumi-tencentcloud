@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewPeerConnectAcceptOperation(ctx, "peerConnectAcceptOperation", &Vpc.PeerConnectAcceptOperationArgs{
-// 			PeeringConnectionId: pulumi.String("pcx-abced"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.NewPeerConnectAcceptOperation(ctx, "peerConnectAcceptOperation", &Vpc.PeerConnectAcceptOperationArgs{
+//				PeeringConnectionId: pulumi.String("pcx-abced"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type PeerConnectAcceptOperation struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *PeerConnectAcceptOperation) ToPeerConnectAcceptOperationOutputWithConte
 // PeerConnectAcceptOperationArrayInput is an input type that accepts PeerConnectAcceptOperationArray and PeerConnectAcceptOperationArrayOutput values.
 // You can construct a concrete instance of `PeerConnectAcceptOperationArrayInput` via:
 //
-//          PeerConnectAcceptOperationArray{ PeerConnectAcceptOperationArgs{...} }
+//	PeerConnectAcceptOperationArray{ PeerConnectAcceptOperationArgs{...} }
 type PeerConnectAcceptOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i PeerConnectAcceptOperationArray) ToPeerConnectAcceptOperationArrayOutput
 // PeerConnectAcceptOperationMapInput is an input type that accepts PeerConnectAcceptOperationMap and PeerConnectAcceptOperationMapOutput values.
 // You can construct a concrete instance of `PeerConnectAcceptOperationMapInput` via:
 //
-//          PeerConnectAcceptOperationMap{ "key": PeerConnectAcceptOperationArgs{...} }
+//	PeerConnectAcceptOperationMap{ "key": PeerConnectAcceptOperationArgs{...} }
 type PeerConnectAcceptOperationMapInput interface {
 	pulumi.Input
 

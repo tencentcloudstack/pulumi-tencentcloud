@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Nat.GetDcRoute(ctx, &nat.GetDcRouteArgs{
-// 			NatGatewayId: "nat-gnxkey2e",
-// 			VpcId:        "vpc-pyyv5k3v",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Nat.GetDcRoute(ctx, &nat.GetDcRouteArgs{
+//				NatGatewayId: "nat-gnxkey2e",
+//				VpcId:        "vpc-pyyv5k3v",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDcRoute(ctx *pulumi.Context, args *GetDcRouteArgs, opts ...pulumi.InvokeOption) (*GetDcRouteResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -19,31 +19,34 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewPullStreamTask(ctx, "pullStreamTask", &Css.PullStreamTaskArgs{
-// 			AppName:    pulumi.String("app_name"),
-// 			Comment:    pulumi.String("comment."),
-// 			DomainName: pulumi.String("domain_name"),
-// 			EndTime:    pulumi.String("2022-11-16T22:09:28Z"),
-// 			Operator:   pulumi.String("admin"),
-// 			SourceType: pulumi.String("source_type"),
-// 			SourceUrls: pulumi.StringArray{
-// 				pulumi.String("source_urls"),
-// 			},
-// 			StartTime:  pulumi.String("2022-11-16T22:09:28Z"),
-// 			StreamName: pulumi.String("stream_name"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewPullStreamTask(ctx, "pullStreamTask", &Css.PullStreamTaskArgs{
+//				AppName:    pulumi.String("app_name"),
+//				Comment:    pulumi.String("comment."),
+//				DomainName: pulumi.String("domain_name"),
+//				EndTime:    pulumi.String("2022-11-16T22:09:28Z"),
+//				Operator:   pulumi.String("admin"),
+//				SourceType: pulumi.String("source_type"),
+//				SourceUrls: pulumi.StringArray{
+//					pulumi.String("source_urls"),
+//				},
+//				StartTime:  pulumi.String("2022-11-16T22:09:28Z"),
+//				StreamName: pulumi.String("stream_name"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -51,7 +54,9 @@ import (
 // css pull_stream_task can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/pullStreamTask:PullStreamTask pull_stream_task pullStreamTask_id
+//
+//	$ pulumi import tencentcloud:Css/pullStreamTask:PullStreamTask pull_stream_task pullStreamTask_id
+//
 // ```
 type PullStreamTask struct {
 	pulumi.CustomResourceState
@@ -401,7 +406,7 @@ func (i *PullStreamTask) ToPullStreamTaskOutputWithContext(ctx context.Context) 
 // PullStreamTaskArrayInput is an input type that accepts PullStreamTaskArray and PullStreamTaskArrayOutput values.
 // You can construct a concrete instance of `PullStreamTaskArrayInput` via:
 //
-//          PullStreamTaskArray{ PullStreamTaskArgs{...} }
+//	PullStreamTaskArray{ PullStreamTaskArgs{...} }
 type PullStreamTaskArrayInput interface {
 	pulumi.Input
 
@@ -426,7 +431,7 @@ func (i PullStreamTaskArray) ToPullStreamTaskArrayOutputWithContext(ctx context.
 // PullStreamTaskMapInput is an input type that accepts PullStreamTaskMap and PullStreamTaskMapOutput values.
 // You can construct a concrete instance of `PullStreamTaskMapInput` via:
 //
-//          PullStreamTaskMap{ "key": PullStreamTaskArgs{...} }
+//	PullStreamTaskMap{ "key": PullStreamTaskArgs{...} }
 type PullStreamTaskMapInput interface {
 	pulumi.Input
 

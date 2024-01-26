@@ -20,51 +20,54 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		event, err := Mps.NewEvent(ctx, "event", &Mps.EventArgs{
-// 			EventName:   pulumi.String(fmt.Sprintf("%v%v%v", "tf_test_event_srt_", "%", "d")),
-// 			Description: pulumi.String("tf test mps event description"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mps.NewFlow(ctx, "flow", &Mps.FlowArgs{
-// 			FlowName:     pulumi.String(fmt.Sprintf("%v%v%v", "tf_test_mps_flow_srt_", "%", "d")),
-// 			MaxBandwidth: pulumi.Int(10000000),
-// 			InputGroups: mps.FlowInputGroupArray{
-// 				&mps.FlowInputGroupArgs{
-// 					InputName:   pulumi.String("test_inputname"),
-// 					Protocol:    pulumi.String("SRT"),
-// 					Description: pulumi.String("input name Description"),
-// 					AllowIpLists: pulumi.StringArray{
-// 						pulumi.String("0.0.0.0/0"),
-// 					},
-// 					SrtSettings: &mps.FlowInputGroupSrtSettingsArgs{
-// 						Mode:            pulumi.String("LISTENER"),
-// 						StreamId:        pulumi.String("#!::u=johnny,r=resource,h=xxx.com,t=stream,m=play"),
-// 						Latency:         pulumi.Int(1000),
-// 						RecvLatency:     pulumi.Int(1000),
-// 						PeerLatency:     pulumi.Int(1000),
-// 						PeerIdleTimeout: pulumi.Int(1000),
-// 					},
-// 				},
-// 			},
-// 			EventId: event.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			event, err := Mps.NewEvent(ctx, "event", &Mps.EventArgs{
+//				EventName:   pulumi.String(fmt.Sprintf("%v%v%v", "tf_test_event_srt_", "%", "d")),
+//				Description: pulumi.String("tf test mps event description"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mps.NewFlow(ctx, "flow", &Mps.FlowArgs{
+//				FlowName:     pulumi.String(fmt.Sprintf("%v%v%v", "tf_test_mps_flow_srt_", "%", "d")),
+//				MaxBandwidth: pulumi.Int(10000000),
+//				InputGroups: mps.FlowInputGroupArray{
+//					&mps.FlowInputGroupArgs{
+//						InputName:   pulumi.String("test_inputname"),
+//						Protocol:    pulumi.String("SRT"),
+//						Description: pulumi.String("input name Description"),
+//						AllowIpLists: pulumi.StringArray{
+//							pulumi.String("0.0.0.0/0"),
+//						},
+//						SrtSettings: &mps.FlowInputGroupSrtSettingsArgs{
+//							Mode:            pulumi.String("LISTENER"),
+//							StreamId:        pulumi.String("#!::u=johnny,r=resource,h=xxx.com,t=stream,m=play"),
+//							Latency:         pulumi.Int(1000),
+//							RecvLatency:     pulumi.Int(1000),
+//							PeerLatency:     pulumi.Int(1000),
+//							PeerIdleTimeout: pulumi.Int(1000),
+//						},
+//					},
+//				},
+//				EventId: event.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Create a mps RTP flow
 //
@@ -72,47 +75,50 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		eventRtp, err := Mps.NewEvent(ctx, "eventRtp", &Mps.EventArgs{
-// 			EventName:   pulumi.String(fmt.Sprintf("%v%v%v", "tf_test_event_rtp_", "%", "d")),
-// 			Description: pulumi.String("tf test mps event description"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mps.NewFlow(ctx, "flowRtp", &Mps.FlowArgs{
-// 			FlowName:     pulumi.String(fmt.Sprintf("%v%v%v", "tf_test_mps_flow_rtp_", "%", "d")),
-// 			MaxBandwidth: pulumi.Int(10000000),
-// 			InputGroups: mps.FlowInputGroupArray{
-// 				&mps.FlowInputGroupArgs{
-// 					InputName:   pulumi.String("test_inputname"),
-// 					Protocol:    pulumi.String("RTP"),
-// 					Description: pulumi.String("input name Description"),
-// 					AllowIpLists: pulumi.StringArray{
-// 						pulumi.String("0.0.0.0/0"),
-// 					},
-// 					RtpSettings: &mps.FlowInputGroupRtpSettingsArgs{
-// 						Fec:         pulumi.String("none"),
-// 						IdleTimeout: pulumi.Int(1000),
-// 					},
-// 				},
-// 			},
-// 			EventId: eventRtp.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			eventRtp, err := Mps.NewEvent(ctx, "eventRtp", &Mps.EventArgs{
+//				EventName:   pulumi.String(fmt.Sprintf("%v%v%v", "tf_test_event_rtp_", "%", "d")),
+//				Description: pulumi.String("tf test mps event description"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mps.NewFlow(ctx, "flowRtp", &Mps.FlowArgs{
+//				FlowName:     pulumi.String(fmt.Sprintf("%v%v%v", "tf_test_mps_flow_rtp_", "%", "d")),
+//				MaxBandwidth: pulumi.Int(10000000),
+//				InputGroups: mps.FlowInputGroupArray{
+//					&mps.FlowInputGroupArgs{
+//						InputName:   pulumi.String("test_inputname"),
+//						Protocol:    pulumi.String("RTP"),
+//						Description: pulumi.String("input name Description"),
+//						AllowIpLists: pulumi.StringArray{
+//							pulumi.String("0.0.0.0/0"),
+//						},
+//						RtpSettings: &mps.FlowInputGroupRtpSettingsArgs{
+//							Fec:         pulumi.String("none"),
+//							IdleTimeout: pulumi.Int(1000),
+//						},
+//					},
+//				},
+//				EventId: eventRtp.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Create a mps RTP flow and start it
 //
@@ -122,76 +128,79 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		eventRtp, err := Mps.NewEvent(ctx, "eventRtp", &Mps.EventArgs{
-// 			EventName:   pulumi.String("your_event_name"),
-// 			Description: pulumi.String("tf test mps event description"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		flowRtp, err := Mps.NewFlow(ctx, "flowRtp", &Mps.FlowArgs{
-// 			FlowName:     pulumi.String("your_flow_name"),
-// 			MaxBandwidth: pulumi.Int(10000000),
-// 			InputGroups: mps.FlowInputGroupArray{
-// 				&mps.FlowInputGroupArgs{
-// 					InputName:   pulumi.String("test_inputname"),
-// 					Protocol:    pulumi.String("RTP"),
-// 					Description: pulumi.String("input name Description"),
-// 					AllowIpLists: pulumi.StringArray{
-// 						pulumi.String("0.0.0.0/0"),
-// 					},
-// 					RtpSettings: &mps.FlowInputGroupRtpSettingsArgs{
-// 						Fec:         pulumi.String("none"),
-// 						IdleTimeout: pulumi.Int(1000),
-// 					},
-// 				},
-// 			},
-// 			EventId: eventRtp.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		output, err := Mps.NewOutput(ctx, "output", &Mps.OutputArgs{
-// 			FlowId: flowRtp.ID(),
-// 			Output: mps.OutputOutputArgs{
-// 				OutputName:   pulumi.String("your_output_name"),
-// 				Description:  pulumi.String("tf mps output group"),
-// 				Protocol:     pulumi.String("RTP"),
-// 				OutputRegion: pulumi.String("ap-guangzhou"),
-// 				RtpSettings: &mps.OutputOutputRtpSettingsArgs{
-// 					Destinations: mps.OutputOutputRtpSettingsDestinationArray{
-// 						&mps.OutputOutputRtpSettingsDestinationArgs{
-// 							Ip:   pulumi.String("203.205.141.84"),
-// 							Port: pulumi.Int(65535),
-// 						},
-// 					},
-// 					Fec:         pulumi.String("none"),
-// 					IdleTimeout: pulumi.Int(1000),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mps.NewStartFlowOperation(ctx, "operation", &Mps.StartFlowOperationArgs{
-// 			FlowId: flowRtp.ID(),
-// 			Start:  pulumi.Bool(true),
-// 		}, pulumi.DependsOn([]pulumi.Resource{
-// 			output,
-// 		}))
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			eventRtp, err := Mps.NewEvent(ctx, "eventRtp", &Mps.EventArgs{
+//				EventName:   pulumi.String("your_event_name"),
+//				Description: pulumi.String("tf test mps event description"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			flowRtp, err := Mps.NewFlow(ctx, "flowRtp", &Mps.FlowArgs{
+//				FlowName:     pulumi.String("your_flow_name"),
+//				MaxBandwidth: pulumi.Int(10000000),
+//				InputGroups: mps.FlowInputGroupArray{
+//					&mps.FlowInputGroupArgs{
+//						InputName:   pulumi.String("test_inputname"),
+//						Protocol:    pulumi.String("RTP"),
+//						Description: pulumi.String("input name Description"),
+//						AllowIpLists: pulumi.StringArray{
+//							pulumi.String("0.0.0.0/0"),
+//						},
+//						RtpSettings: &mps.FlowInputGroupRtpSettingsArgs{
+//							Fec:         pulumi.String("none"),
+//							IdleTimeout: pulumi.Int(1000),
+//						},
+//					},
+//				},
+//				EventId: eventRtp.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			output, err := Mps.NewOutput(ctx, "output", &Mps.OutputArgs{
+//				FlowId: flowRtp.ID(),
+//				Output: mps.OutputOutputArgs{
+//					OutputName:   pulumi.String("your_output_name"),
+//					Description:  pulumi.String("tf mps output group"),
+//					Protocol:     pulumi.String("RTP"),
+//					OutputRegion: pulumi.String("ap-guangzhou"),
+//					RtpSettings: &mps.OutputOutputRtpSettingsArgs{
+//						Destinations: mps.OutputOutputRtpSettingsDestinationArray{
+//							&mps.OutputOutputRtpSettingsDestinationArgs{
+//								Ip:   pulumi.String("203.205.141.84"),
+//								Port: pulumi.Int(65535),
+//							},
+//						},
+//						Fec:         pulumi.String("none"),
+//						IdleTimeout: pulumi.Int(1000),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mps.NewStartFlowOperation(ctx, "operation", &Mps.StartFlowOperationArgs{
+//				FlowId: flowRtp.ID(),
+//				Start:  pulumi.Bool(true),
+//			}, pulumi.DependsOn([]pulumi.Resource{
+//				output,
+//			}))
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -199,7 +208,9 @@ import (
 // mps flow can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/flow:Flow flow flow_id
+//
+//	$ pulumi import tencentcloud:Mps/flow:Flow flow flow_id
+//
 // ```
 type Flow struct {
 	pulumi.CustomResourceState
@@ -324,7 +335,7 @@ func (i *Flow) ToFlowOutputWithContext(ctx context.Context) FlowOutput {
 // FlowArrayInput is an input type that accepts FlowArray and FlowArrayOutput values.
 // You can construct a concrete instance of `FlowArrayInput` via:
 //
-//          FlowArray{ FlowArgs{...} }
+//	FlowArray{ FlowArgs{...} }
 type FlowArrayInput interface {
 	pulumi.Input
 
@@ -349,7 +360,7 @@ func (i FlowArray) ToFlowArrayOutputWithContext(ctx context.Context) FlowArrayOu
 // FlowMapInput is an input type that accepts FlowMap and FlowMapOutput values.
 // You can construct a concrete instance of `FlowMapInput` via:
 //
-//          FlowMap{ "key": FlowArgs{...} }
+//	FlowMap{ "key": FlowArgs{...} }
 type FlowMapInput interface {
 	pulumi.Input
 

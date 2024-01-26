@@ -19,105 +19,108 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.NewZoneSetting(ctx, "zoneSetting", &Teo.ZoneSettingArgs{
-// 			Cache: &teo.ZoneSettingCacheArgs{
-// 				FollowOrigin: &teo.ZoneSettingCacheFollowOriginArgs{
-// 					Switch: pulumi.String("on"),
-// 				},
-// 				NoCache: &teo.ZoneSettingCacheNoCacheArgs{
-// 					Switch: pulumi.String("off"),
-// 				},
-// 			},
-// 			CacheKey: &teo.ZoneSettingCacheKeyArgs{
-// 				FullUrlCache: pulumi.String("on"),
-// 				IgnoreCase:   pulumi.String("off"),
-// 				QueryString: &teo.ZoneSettingCacheKeyQueryStringArgs{
-// 					Action: pulumi.String("includeCustom"),
-// 					Switch: pulumi.String("off"),
-// 					Value:  []interface{}{},
-// 				},
-// 			},
-// 			CachePrefresh: &teo.ZoneSettingCachePrefreshArgs{
-// 				Percent: pulumi.Int(90),
-// 				Switch:  pulumi.String("off"),
-// 			},
-// 			ClientIpHeader: &teo.ZoneSettingClientIpHeaderArgs{
-// 				Switch: pulumi.String("off"),
-// 			},
-// 			Compression: &teo.ZoneSettingCompressionArgs{
-// 				Algorithms: pulumi.StringArray{
-// 					pulumi.String("brotli"),
-// 					pulumi.String("gzip"),
-// 				},
-// 				Switch: pulumi.String("on"),
-// 			},
-// 			ForceRedirect: &teo.ZoneSettingForceRedirectArgs{
-// 				RedirectStatusCode: pulumi.Int(302),
-// 				Switch:             pulumi.String("off"),
-// 			},
-// 			Https: &teo.ZoneSettingHttpsArgs{
-// 				Hsts: &teo.ZoneSettingHttpsHstsArgs{
-// 					IncludeSubDomains: pulumi.String("off"),
-// 					MaxAge:            pulumi.Int(0),
-// 					Preload:           pulumi.String("off"),
-// 					Switch:            pulumi.String("off"),
-// 				},
-// 				Http2:        pulumi.String("on"),
-// 				OcspStapling: pulumi.String("off"),
-// 				TlsVersions: pulumi.StringArray{
-// 					pulumi.String("TLSv1"),
-// 					pulumi.String("TLSv1.1"),
-// 					pulumi.String("TLSv1.2"),
-// 					pulumi.String("TLSv1.3"),
-// 				},
-// 			},
-// 			Ipv6: &teo.ZoneSettingIpv6Args{
-// 				Switch: pulumi.String("off"),
-// 			},
-// 			MaxAge: &teo.ZoneSettingMaxAgeArgs{
-// 				FollowOrigin: pulumi.String("on"),
-// 				MaxAgeTime:   pulumi.Int(0),
-// 			},
-// 			OfflineCache: &teo.ZoneSettingOfflineCacheArgs{
-// 				Switch: pulumi.String("on"),
-// 			},
-// 			Origin: &teo.ZoneSettingOriginArgs{
-// 				BackupOrigins:      pulumi.StringArray{},
-// 				OriginPullProtocol: pulumi.String("follow"),
-// 				Origins:            pulumi.StringArray{},
-// 			},
-// 			PostMaxSize: &teo.ZoneSettingPostMaxSizeArgs{
-// 				MaxSize: pulumi.Int(524288000),
-// 				Switch:  pulumi.String("on"),
-// 			},
-// 			Quic: &teo.ZoneSettingQuicArgs{
-// 				Switch: pulumi.String("off"),
-// 			},
-// 			SmartRouting: &teo.ZoneSettingSmartRoutingArgs{
-// 				Switch: pulumi.String("off"),
-// 			},
-// 			UpstreamHttp2: &teo.ZoneSettingUpstreamHttp2Args{
-// 				Switch: pulumi.String("off"),
-// 			},
-// 			WebSocket: &teo.ZoneSettingWebSocketArgs{
-// 				Switch:  pulumi.String("off"),
-// 				Timeout: pulumi.Int(30),
-// 			},
-// 			ZoneId: pulumi.String("zone-297z8rf93cfw"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Teo.NewZoneSetting(ctx, "zoneSetting", &Teo.ZoneSettingArgs{
+//				Cache: &teo.ZoneSettingCacheArgs{
+//					FollowOrigin: &teo.ZoneSettingCacheFollowOriginArgs{
+//						Switch: pulumi.String("on"),
+//					},
+//					NoCache: &teo.ZoneSettingCacheNoCacheArgs{
+//						Switch: pulumi.String("off"),
+//					},
+//				},
+//				CacheKey: &teo.ZoneSettingCacheKeyArgs{
+//					FullUrlCache: pulumi.String("on"),
+//					IgnoreCase:   pulumi.String("off"),
+//					QueryString: &teo.ZoneSettingCacheKeyQueryStringArgs{
+//						Action: pulumi.String("includeCustom"),
+//						Switch: pulumi.String("off"),
+//						Value:  []interface{}{},
+//					},
+//				},
+//				CachePrefresh: &teo.ZoneSettingCachePrefreshArgs{
+//					Percent: pulumi.Int(90),
+//					Switch:  pulumi.String("off"),
+//				},
+//				ClientIpHeader: &teo.ZoneSettingClientIpHeaderArgs{
+//					Switch: pulumi.String("off"),
+//				},
+//				Compression: &teo.ZoneSettingCompressionArgs{
+//					Algorithms: pulumi.StringArray{
+//						pulumi.String("brotli"),
+//						pulumi.String("gzip"),
+//					},
+//					Switch: pulumi.String("on"),
+//				},
+//				ForceRedirect: &teo.ZoneSettingForceRedirectArgs{
+//					RedirectStatusCode: pulumi.Int(302),
+//					Switch:             pulumi.String("off"),
+//				},
+//				Https: &teo.ZoneSettingHttpsArgs{
+//					Hsts: &teo.ZoneSettingHttpsHstsArgs{
+//						IncludeSubDomains: pulumi.String("off"),
+//						MaxAge:            pulumi.Int(0),
+//						Preload:           pulumi.String("off"),
+//						Switch:            pulumi.String("off"),
+//					},
+//					Http2:        pulumi.String("on"),
+//					OcspStapling: pulumi.String("off"),
+//					TlsVersions: pulumi.StringArray{
+//						pulumi.String("TLSv1"),
+//						pulumi.String("TLSv1.1"),
+//						pulumi.String("TLSv1.2"),
+//						pulumi.String("TLSv1.3"),
+//					},
+//				},
+//				Ipv6: &teo.ZoneSettingIpv6Args{
+//					Switch: pulumi.String("off"),
+//				},
+//				MaxAge: &teo.ZoneSettingMaxAgeArgs{
+//					FollowOrigin: pulumi.String("on"),
+//					MaxAgeTime:   pulumi.Int(0),
+//				},
+//				OfflineCache: &teo.ZoneSettingOfflineCacheArgs{
+//					Switch: pulumi.String("on"),
+//				},
+//				Origin: &teo.ZoneSettingOriginArgs{
+//					BackupOrigins:      pulumi.StringArray{},
+//					OriginPullProtocol: pulumi.String("follow"),
+//					Origins:            pulumi.StringArray{},
+//				},
+//				PostMaxSize: &teo.ZoneSettingPostMaxSizeArgs{
+//					MaxSize: pulumi.Int(524288000),
+//					Switch:  pulumi.String("on"),
+//				},
+//				Quic: &teo.ZoneSettingQuicArgs{
+//					Switch: pulumi.String("off"),
+//				},
+//				SmartRouting: &teo.ZoneSettingSmartRoutingArgs{
+//					Switch: pulumi.String("off"),
+//				},
+//				UpstreamHttp2: &teo.ZoneSettingUpstreamHttp2Args{
+//					Switch: pulumi.String("off"),
+//				},
+//				WebSocket: &teo.ZoneSettingWebSocketArgs{
+//					Switch:  pulumi.String("off"),
+//					Timeout: pulumi.Int(30),
+//				},
+//				ZoneId: pulumi.String("zone-297z8rf93cfw"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -125,7 +128,9 @@ import (
 // teo zone_setting can be imported using the zone_id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Teo/zoneSetting:ZoneSetting zone_setting zone-297z8rf93cfw#
+//
+//	$ pulumi import tencentcloud:Teo/zoneSetting:ZoneSetting zone_setting zone-297z8rf93cfw#
+//
 // ```
 type ZoneSetting struct {
 	pulumi.CustomResourceState
@@ -383,7 +388,7 @@ func (i *ZoneSetting) ToZoneSettingOutputWithContext(ctx context.Context) ZoneSe
 // ZoneSettingArrayInput is an input type that accepts ZoneSettingArray and ZoneSettingArrayOutput values.
 // You can construct a concrete instance of `ZoneSettingArrayInput` via:
 //
-//          ZoneSettingArray{ ZoneSettingArgs{...} }
+//	ZoneSettingArray{ ZoneSettingArgs{...} }
 type ZoneSettingArrayInput interface {
 	pulumi.Input
 
@@ -408,7 +413,7 @@ func (i ZoneSettingArray) ToZoneSettingArrayOutputWithContext(ctx context.Contex
 // ZoneSettingMapInput is an input type that accepts ZoneSettingMap and ZoneSettingMapOutput values.
 // You can construct a concrete instance of `ZoneSettingMapInput` via:
 //
-//          ZoneSettingMap{ "key": ZoneSettingArgs{...} }
+//	ZoneSettingMap{ "key": ZoneSettingArgs{...} }
 type ZoneSettingMapInput interface {
 	pulumi.Input
 

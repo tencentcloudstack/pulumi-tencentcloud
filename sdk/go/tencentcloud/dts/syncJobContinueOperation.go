@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewSyncJobContinueOperation(ctx, "syncJobContinueOperation", &Dts.SyncJobContinueOperationArgs{
-// 			JobId: pulumi.String("sync-werwfs23"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewSyncJobContinueOperation(ctx, "syncJobContinueOperation", &Dts.SyncJobContinueOperationArgs{
+//				JobId: pulumi.String("sync-werwfs23"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SyncJobContinueOperation struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *SyncJobContinueOperation) ToSyncJobContinueOperationOutputWithContext(c
 // SyncJobContinueOperationArrayInput is an input type that accepts SyncJobContinueOperationArray and SyncJobContinueOperationArrayOutput values.
 // You can construct a concrete instance of `SyncJobContinueOperationArrayInput` via:
 //
-//          SyncJobContinueOperationArray{ SyncJobContinueOperationArgs{...} }
+//	SyncJobContinueOperationArray{ SyncJobContinueOperationArgs{...} }
 type SyncJobContinueOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i SyncJobContinueOperationArray) ToSyncJobContinueOperationArrayOutputWith
 // SyncJobContinueOperationMapInput is an input type that accepts SyncJobContinueOperationMap and SyncJobContinueOperationMapOutput values.
 // You can construct a concrete instance of `SyncJobContinueOperationMapInput` via:
 //
-//          SyncJobContinueOperationMap{ "key": SyncJobContinueOperationArgs{...} }
+//	SyncJobContinueOperationMap{ "key": SyncJobContinueOperationArgs{...} }
 type SyncJobContinueOperationMapInput interface {
 	pulumi.Input
 

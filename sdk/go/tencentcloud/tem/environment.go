@@ -19,31 +19,34 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tem.NewEnvironment(ctx, "environment", &Tem.EnvironmentArgs{
-// 			Description:     pulumi.String("demo for test"),
-// 			EnvironmentName: pulumi.String("demo"),
-// 			SubnetIds: pulumi.StringArray{
-// 				pulumi.String("subnet-rdkj0agk"),
-// 				pulumi.String("subnet-r1c4pn5m"),
-// 				pulumi.String("subnet-02hcj95c"),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"created": pulumi.Any("terraform"),
-// 			},
-// 			Vpc: pulumi.String("vpc-2hfyray3"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tem.NewEnvironment(ctx, "environment", &Tem.EnvironmentArgs{
+//				Description:     pulumi.String("demo for test"),
+//				EnvironmentName: pulumi.String("demo"),
+//				SubnetIds: pulumi.StringArray{
+//					pulumi.String("subnet-rdkj0agk"),
+//					pulumi.String("subnet-r1c4pn5m"),
+//					pulumi.String("subnet-02hcj95c"),
+//				},
+//				Tags: pulumi.AnyMap{
+//					"created": pulumi.Any("terraform"),
+//				},
+//				Vpc: pulumi.String("vpc-2hfyray3"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -51,7 +54,9 @@ import (
 // tem environment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tem/environment:Environment environment environment_id
+//
+//	$ pulumi import tencentcloud:Tem/environment:Environment environment environment_id
+//
 // ```
 type Environment struct {
 	pulumi.CustomResourceState
@@ -189,7 +194,7 @@ func (i *Environment) ToEnvironmentOutputWithContext(ctx context.Context) Enviro
 // EnvironmentArrayInput is an input type that accepts EnvironmentArray and EnvironmentArrayOutput values.
 // You can construct a concrete instance of `EnvironmentArrayInput` via:
 //
-//          EnvironmentArray{ EnvironmentArgs{...} }
+//	EnvironmentArray{ EnvironmentArgs{...} }
 type EnvironmentArrayInput interface {
 	pulumi.Input
 
@@ -214,7 +219,7 @@ func (i EnvironmentArray) ToEnvironmentArrayOutputWithContext(ctx context.Contex
 // EnvironmentMapInput is an input type that accepts EnvironmentMap and EnvironmentMapOutput values.
 // You can construct a concrete instance of `EnvironmentMapInput` via:
 //
-//          EnvironmentMap{ "key": EnvironmentArgs{...} }
+//	EnvironmentMap{ "key": EnvironmentArgs{...} }
 type EnvironmentMapInput interface {
 	pulumi.Input
 

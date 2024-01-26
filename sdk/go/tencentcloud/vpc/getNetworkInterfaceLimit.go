@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.GetNetworkInterfaceLimit(ctx, &vpc.GetNetworkInterfaceLimitArgs{
-// 			InstanceId: "ins-cr2rfq78",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.GetNetworkInterfaceLimit(ctx, &vpc.GetNetworkInterfaceLimitArgs{
+//				InstanceId: "ins-cr2rfq78",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetNetworkInterfaceLimit(ctx *pulumi.Context, args *GetNetworkInterfaceLimitArgs, opts ...pulumi.InvokeOption) (*GetNetworkInterfaceLimitResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

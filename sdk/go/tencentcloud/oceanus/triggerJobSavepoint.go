@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.NewTriggerJobSavepoint(ctx, "example", &Oceanus.TriggerJobSavepointArgs{
-// 			Description: pulumi.String("description."),
-// 			JobId:       pulumi.String("cql-4xwincyn"),
-// 			WorkSpaceId: pulumi.String("space-2idq8wbr"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.NewTriggerJobSavepoint(ctx, "example", &Oceanus.TriggerJobSavepointArgs{
+//				Description: pulumi.String("description."),
+//				JobId:       pulumi.String("cql-4xwincyn"),
+//				WorkSpaceId: pulumi.String("space-2idq8wbr"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type TriggerJobSavepoint struct {
 	pulumi.CustomResourceState
@@ -147,7 +150,7 @@ func (i *TriggerJobSavepoint) ToTriggerJobSavepointOutputWithContext(ctx context
 // TriggerJobSavepointArrayInput is an input type that accepts TriggerJobSavepointArray and TriggerJobSavepointArrayOutput values.
 // You can construct a concrete instance of `TriggerJobSavepointArrayInput` via:
 //
-//          TriggerJobSavepointArray{ TriggerJobSavepointArgs{...} }
+//	TriggerJobSavepointArray{ TriggerJobSavepointArgs{...} }
 type TriggerJobSavepointArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +175,7 @@ func (i TriggerJobSavepointArray) ToTriggerJobSavepointArrayOutputWithContext(ct
 // TriggerJobSavepointMapInput is an input type that accepts TriggerJobSavepointMap and TriggerJobSavepointMapOutput values.
 // You can construct a concrete instance of `TriggerJobSavepointMapInput` via:
 //
-//          TriggerJobSavepointMap{ "key": TriggerJobSavepointArgs{...} }
+//	TriggerJobSavepointMap{ "key": TriggerJobSavepointArgs{...} }
 type TriggerJobSavepointMapInput interface {
 	pulumi.Input
 

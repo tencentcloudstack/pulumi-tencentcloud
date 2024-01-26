@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewMigrateJobResumeOperation(ctx, "resume", &Dts.MigrateJobResumeOperationArgs{
-// 			JobId:        pulumi.String("job_id"),
-// 			ResumeOption: pulumi.String("normal"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewMigrateJobResumeOperation(ctx, "resume", &Dts.MigrateJobResumeOperationArgs{
+//				JobId:        pulumi.String("job_id"),
+//				ResumeOption: pulumi.String("normal"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type MigrateJobResumeOperation struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *MigrateJobResumeOperation) ToMigrateJobResumeOperationOutputWithContext
 // MigrateJobResumeOperationArrayInput is an input type that accepts MigrateJobResumeOperationArray and MigrateJobResumeOperationArrayOutput values.
 // You can construct a concrete instance of `MigrateJobResumeOperationArrayInput` via:
 //
-//          MigrateJobResumeOperationArray{ MigrateJobResumeOperationArgs{...} }
+//	MigrateJobResumeOperationArray{ MigrateJobResumeOperationArgs{...} }
 type MigrateJobResumeOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i MigrateJobResumeOperationArray) ToMigrateJobResumeOperationArrayOutputWi
 // MigrateJobResumeOperationMapInput is an input type that accepts MigrateJobResumeOperationMap and MigrateJobResumeOperationMapOutput values.
 // You can construct a concrete instance of `MigrateJobResumeOperationMapInput` via:
 //
-//          MigrateJobResumeOperationMap{ "key": MigrateJobResumeOperationArgs{...} }
+//	MigrateJobResumeOperationMap{ "key": MigrateJobResumeOperationArgs{...} }
 type MigrateJobResumeOperationMapInput interface {
 	pulumi.Input
 

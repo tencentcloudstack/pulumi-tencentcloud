@@ -18,29 +18,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdmq.GetProInstances(ctx, &tdmq.GetProInstancesArgs{
-// 			Filters: []tdmq.GetProInstancesFilter{
-// 				tdmq.GetProInstancesFilter{
-// 					Name: pulumi.StringRef("InstanceName"),
-// 					Values: []string{
-// 						"keep",
-// 					},
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tdmq.GetProInstances(ctx, &tdmq.GetProInstancesArgs{
+//				Filters: []tdmq.GetProInstancesFilter{
+//					tdmq.GetProInstancesFilter{
+//						Name: pulumi.StringRef("InstanceName"),
+//						Values: []string{
+//							"keep",
+//						},
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetProInstances(ctx *pulumi.Context, args *GetProInstancesArgs, opts ...pulumi.InvokeOption) (*GetProInstancesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

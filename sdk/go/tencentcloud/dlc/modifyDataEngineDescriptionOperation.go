@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.NewModifyDataEngineDescriptionOperation(ctx, "modifyDataEngineDescriptionOperation", &Dlc.ModifyDataEngineDescriptionOperationArgs{
-// 			DataEngineName: pulumi.String("testEngine"),
-// 			Message:        pulumi.String("test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.NewModifyDataEngineDescriptionOperation(ctx, "modifyDataEngineDescriptionOperation", &Dlc.ModifyDataEngineDescriptionOperationArgs{
+//				DataEngineName: pulumi.String("testEngine"),
+//				Message:        pulumi.String("test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // dlc modify_data_engine_description_operation can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dlc/modifyDataEngineDescriptionOperation:ModifyDataEngineDescriptionOperation modify_data_engine_description_operation modify_data_engine_description_operation_id
+//
+//	$ pulumi import tencentcloud:Dlc/modifyDataEngineDescriptionOperation:ModifyDataEngineDescriptionOperation modify_data_engine_description_operation modify_data_engine_description_operation_id
+//
 // ```
 type ModifyDataEngineDescriptionOperation struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *ModifyDataEngineDescriptionOperation) ToModifyDataEngineDescriptionOper
 // ModifyDataEngineDescriptionOperationArrayInput is an input type that accepts ModifyDataEngineDescriptionOperationArray and ModifyDataEngineDescriptionOperationArrayOutput values.
 // You can construct a concrete instance of `ModifyDataEngineDescriptionOperationArrayInput` via:
 //
-//          ModifyDataEngineDescriptionOperationArray{ ModifyDataEngineDescriptionOperationArgs{...} }
+//	ModifyDataEngineDescriptionOperationArray{ ModifyDataEngineDescriptionOperationArgs{...} }
 type ModifyDataEngineDescriptionOperationArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i ModifyDataEngineDescriptionOperationArray) ToModifyDataEngineDescription
 // ModifyDataEngineDescriptionOperationMapInput is an input type that accepts ModifyDataEngineDescriptionOperationMap and ModifyDataEngineDescriptionOperationMapOutput values.
 // You can construct a concrete instance of `ModifyDataEngineDescriptionOperationMapInput` via:
 //
-//          ModifyDataEngineDescriptionOperationMap{ "key": ModifyDataEngineDescriptionOperationArgs{...} }
+//	ModifyDataEngineDescriptionOperationMap{ "key": ModifyDataEngineDescriptionOperationArgs{...} }
 type ModifyDataEngineDescriptionOperationMapInput interface {
 	pulumi.Input
 

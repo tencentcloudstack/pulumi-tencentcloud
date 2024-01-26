@@ -135,7 +135,7 @@ func (i *CompleteLifecycle) ToCompleteLifecycleOutputWithContext(ctx context.Con
 // CompleteLifecycleArrayInput is an input type that accepts CompleteLifecycleArray and CompleteLifecycleArrayOutput values.
 // You can construct a concrete instance of `CompleteLifecycleArrayInput` via:
 //
-//          CompleteLifecycleArray{ CompleteLifecycleArgs{...} }
+//	CompleteLifecycleArray{ CompleteLifecycleArgs{...} }
 type CompleteLifecycleArrayInput interface {
 	pulumi.Input
 
@@ -160,7 +160,7 @@ func (i CompleteLifecycleArray) ToCompleteLifecycleArrayOutputWithContext(ctx co
 // CompleteLifecycleMapInput is an input type that accepts CompleteLifecycleMap and CompleteLifecycleMapOutput values.
 // You can construct a concrete instance of `CompleteLifecycleMapInput` via:
 //
-//          CompleteLifecycleMap{ "key": CompleteLifecycleArgs{...} }
+//	CompleteLifecycleMap{ "key": CompleteLifecycleArgs{...} }
 type CompleteLifecycleMapInput interface {
 	pulumi.Input
 

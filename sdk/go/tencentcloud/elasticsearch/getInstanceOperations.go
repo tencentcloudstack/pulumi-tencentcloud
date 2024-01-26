@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.GetInstanceOperations(ctx, &elasticsearch.GetInstanceOperationsArgs{
-// 			EndTime:    "2023-10-31 10:12:45",
-// 			InstanceId: "es-xxxxxx",
-// 			StartTime:  "2018-01-01 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.GetInstanceOperations(ctx, &elasticsearch.GetInstanceOperationsArgs{
+//				EndTime:    "2023-10-31 10:12:45",
+//				InstanceId: "es-xxxxxx",
+//				StartTime:  "2018-01-01 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetInstanceOperations(ctx *pulumi.Context, args *GetInstanceOperationsArgs, opts ...pulumi.InvokeOption) (*GetInstanceOperationsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

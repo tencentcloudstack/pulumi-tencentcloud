@@ -21,21 +21,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ses.NewVerifyDomain(ctx, "verifyDomain", &Ses.VerifyDomainArgs{
-// 			EmailIdentity: pulumi.String("example.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ses.NewVerifyDomain(ctx, "verifyDomain", &Ses.VerifyDomainArgs{
+//				EmailIdentity: pulumi.String("example.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type VerifyDomain struct {
 	pulumi.CustomResourceState
@@ -127,7 +130,7 @@ func (i *VerifyDomain) ToVerifyDomainOutputWithContext(ctx context.Context) Veri
 // VerifyDomainArrayInput is an input type that accepts VerifyDomainArray and VerifyDomainArrayOutput values.
 // You can construct a concrete instance of `VerifyDomainArrayInput` via:
 //
-//          VerifyDomainArray{ VerifyDomainArgs{...} }
+//	VerifyDomainArray{ VerifyDomainArgs{...} }
 type VerifyDomainArrayInput interface {
 	pulumi.Input
 
@@ -152,7 +155,7 @@ func (i VerifyDomainArray) ToVerifyDomainArrayOutputWithContext(ctx context.Cont
 // VerifyDomainMapInput is an input type that accepts VerifyDomainMap and VerifyDomainMapOutput values.
 // You can construct a concrete instance of `VerifyDomainMapInput` via:
 //
-//          VerifyDomainMap{ "key": VerifyDomainArgs{...} }
+//	VerifyDomainMap{ "key": VerifyDomainArgs{...} }
 type VerifyDomainMapInput interface {
 	pulumi.Input
 

@@ -20,104 +20,107 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		example, err := Mps.NewWorkflow(ctx, "example", &Mps.WorkflowArgs{
-// 			OutputDir:    pulumi.String("/"),
-// 			TaskPriority: pulumi.Int(0),
-// 			WorkflowName: pulumi.String("tf-workflow-enable-config"),
-// 			MediaProcessTask: &mps.WorkflowMediaProcessTaskArgs{
-// 				AdaptiveDynamicStreamingTaskSets: mps.WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetArray{
-// 					&mps.WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetArgs{
-// 						Definition:          pulumi.Int(12),
-// 						OutputObjectPath:    pulumi.String("/out"),
-// 						SegmentObjectName:   pulumi.String("/out"),
-// 						SubStreamObjectName: pulumi.String("/out/out/"),
-// 						OutputStorage: &mps.WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageArgs{
-// 							Type: pulumi.String("COS"),
-// 							CosOutputStorage: &mps.WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageCosOutputStorageArgs{
-// 								Bucket: pulumi.String("cos-lock-1308919341"),
-// 								Region: pulumi.String("ap-guangzhou"),
-// 							},
-// 						},
-// 					},
-// 				},
-// 				SnapshotByTimeOffsetTaskSets: mps.WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetArray{
-// 					&mps.WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetArgs{
-// 						Definition: pulumi.Int(10),
-// 						ExtTimeOffsetSets: pulumi.StringArray{
-// 							pulumi.String("1s"),
-// 						},
-// 						OutputObjectPath: pulumi.String("/snapshot/"),
-// 						TimeOffsetSets:   pulumi.Float64Array{},
-// 						OutputStorage: &mps.WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageArgs{
-// 							Type: pulumi.String("COS"),
-// 							CosOutputStorage: &mps.WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageCosOutputStorageArgs{
-// 								Bucket: pulumi.String("cos-lock-1308919341"),
-// 								Region: pulumi.String("ap-guangzhou"),
-// 							},
-// 						},
-// 					},
-// 				},
-// 				AnimatedGraphicTaskSets: mps.WorkflowMediaProcessTaskAnimatedGraphicTaskSetArray{
-// 					&mps.WorkflowMediaProcessTaskAnimatedGraphicTaskSetArgs{
-// 						Definition:       pulumi.Int(20000),
-// 						EndTimeOffset:    pulumi.Float64(0),
-// 						OutputObjectPath: pulumi.String("/test/"),
-// 						StartTimeOffset:  pulumi.Float64(0),
-// 						OutputStorage: &mps.WorkflowMediaProcessTaskAnimatedGraphicTaskSetOutputStorageArgs{
-// 							Type: pulumi.String("COS"),
-// 							CosOutputStorage: &mps.WorkflowMediaProcessTaskAnimatedGraphicTaskSetOutputStorageCosOutputStorageArgs{
-// 								Bucket: pulumi.String("cos-lock-1308919341"),
-// 								Region: pulumi.String("ap-guangzhou"),
-// 							},
-// 						},
-// 					},
-// 				},
-// 			},
-// 			AiAnalysisTask: &mps.WorkflowAiAnalysisTaskArgs{
-// 				Definition: pulumi.Int(20),
-// 			},
-// 			AiContentReviewTask: &mps.WorkflowAiContentReviewTaskArgs{
-// 				Definition: pulumi.Int(20),
-// 			},
-// 			AiRecognitionTask: &mps.WorkflowAiRecognitionTaskArgs{
-// 				Definition: pulumi.Int(20),
-// 			},
-// 			OutputStorage: &mps.WorkflowOutputStorageArgs{
-// 				Type: pulumi.String("COS"),
-// 				CosOutputStorage: &mps.WorkflowOutputStorageCosOutputStorageArgs{
-// 					Bucket: pulumi.String("cos-lock-1308919341"),
-// 					Region: pulumi.String("ap-guangzhou"),
-// 				},
-// 			},
-// 			Trigger: &mps.WorkflowTriggerArgs{
-// 				Type: pulumi.String("CosFileUpload"),
-// 				CosFileUploadTrigger: &mps.WorkflowTriggerCosFileUploadTriggerArgs{
-// 					Bucket: pulumi.String("cos-lock-1308919341"),
-// 					Dir:    pulumi.String("/"),
-// 					Region: pulumi.String("ap-guangzhou"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mps.NewEnableWorkflowConfig(ctx, "config", &Mps.EnableWorkflowConfigArgs{
-// 			WorkflowId: example.ID(),
-// 			Enabled:    pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			example, err := Mps.NewWorkflow(ctx, "example", &Mps.WorkflowArgs{
+//				OutputDir:    pulumi.String("/"),
+//				TaskPriority: pulumi.Int(0),
+//				WorkflowName: pulumi.String("tf-workflow-enable-config"),
+//				MediaProcessTask: &mps.WorkflowMediaProcessTaskArgs{
+//					AdaptiveDynamicStreamingTaskSets: mps.WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetArray{
+//						&mps.WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetArgs{
+//							Definition:          pulumi.Int(12),
+//							OutputObjectPath:    pulumi.String("/out"),
+//							SegmentObjectName:   pulumi.String("/out"),
+//							SubStreamObjectName: pulumi.String("/out/out/"),
+//							OutputStorage: &mps.WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageArgs{
+//								Type: pulumi.String("COS"),
+//								CosOutputStorage: &mps.WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageCosOutputStorageArgs{
+//									Bucket: pulumi.String("cos-lock-1308919341"),
+//									Region: pulumi.String("ap-guangzhou"),
+//								},
+//							},
+//						},
+//					},
+//					SnapshotByTimeOffsetTaskSets: mps.WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetArray{
+//						&mps.WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetArgs{
+//							Definition: pulumi.Int(10),
+//							ExtTimeOffsetSets: pulumi.StringArray{
+//								pulumi.String("1s"),
+//							},
+//							OutputObjectPath: pulumi.String("/snapshot/"),
+//							TimeOffsetSets:   pulumi.Float64Array{},
+//							OutputStorage: &mps.WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageArgs{
+//								Type: pulumi.String("COS"),
+//								CosOutputStorage: &mps.WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageCosOutputStorageArgs{
+//									Bucket: pulumi.String("cos-lock-1308919341"),
+//									Region: pulumi.String("ap-guangzhou"),
+//								},
+//							},
+//						},
+//					},
+//					AnimatedGraphicTaskSets: mps.WorkflowMediaProcessTaskAnimatedGraphicTaskSetArray{
+//						&mps.WorkflowMediaProcessTaskAnimatedGraphicTaskSetArgs{
+//							Definition:       pulumi.Int(20000),
+//							EndTimeOffset:    pulumi.Float64(0),
+//							OutputObjectPath: pulumi.String("/test/"),
+//							StartTimeOffset:  pulumi.Float64(0),
+//							OutputStorage: &mps.WorkflowMediaProcessTaskAnimatedGraphicTaskSetOutputStorageArgs{
+//								Type: pulumi.String("COS"),
+//								CosOutputStorage: &mps.WorkflowMediaProcessTaskAnimatedGraphicTaskSetOutputStorageCosOutputStorageArgs{
+//									Bucket: pulumi.String("cos-lock-1308919341"),
+//									Region: pulumi.String("ap-guangzhou"),
+//								},
+//							},
+//						},
+//					},
+//				},
+//				AiAnalysisTask: &mps.WorkflowAiAnalysisTaskArgs{
+//					Definition: pulumi.Int(20),
+//				},
+//				AiContentReviewTask: &mps.WorkflowAiContentReviewTaskArgs{
+//					Definition: pulumi.Int(20),
+//				},
+//				AiRecognitionTask: &mps.WorkflowAiRecognitionTaskArgs{
+//					Definition: pulumi.Int(20),
+//				},
+//				OutputStorage: &mps.WorkflowOutputStorageArgs{
+//					Type: pulumi.String("COS"),
+//					CosOutputStorage: &mps.WorkflowOutputStorageCosOutputStorageArgs{
+//						Bucket: pulumi.String("cos-lock-1308919341"),
+//						Region: pulumi.String("ap-guangzhou"),
+//					},
+//				},
+//				Trigger: &mps.WorkflowTriggerArgs{
+//					Type: pulumi.String("CosFileUpload"),
+//					CosFileUploadTrigger: &mps.WorkflowTriggerCosFileUploadTriggerArgs{
+//						Bucket: pulumi.String("cos-lock-1308919341"),
+//						Dir:    pulumi.String("/"),
+//						Region: pulumi.String("ap-guangzhou"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mps.NewEnableWorkflowConfig(ctx, "config", &Mps.EnableWorkflowConfigArgs{
+//				WorkflowId: example.ID(),
+//				Enabled:    pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Disable the mps workflow
 //
@@ -125,22 +128,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewEnableWorkflowConfig(ctx, "config", &Mps.EnableWorkflowConfigArgs{
-// 			WorkflowId: pulumi.Any(tencentcloud_mps_workflow.Example.Id),
-// 			Enabled:    pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewEnableWorkflowConfig(ctx, "config", &Mps.EnableWorkflowConfigArgs{
+//				WorkflowId: pulumi.Any(tencentcloud_mps_workflow.Example.Id),
+//				Enabled:    pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -148,7 +154,9 @@ import (
 // mps enable_workflow_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/enableWorkflowConfig:EnableWorkflowConfig enable_workflow_config enable_workflow_config_id
+//
+//	$ pulumi import tencentcloud:Mps/enableWorkflowConfig:EnableWorkflowConfig enable_workflow_config enable_workflow_config_id
+//
 // ```
 type EnableWorkflowConfig struct {
 	pulumi.CustomResourceState
@@ -253,7 +261,7 @@ func (i *EnableWorkflowConfig) ToEnableWorkflowConfigOutputWithContext(ctx conte
 // EnableWorkflowConfigArrayInput is an input type that accepts EnableWorkflowConfigArray and EnableWorkflowConfigArrayOutput values.
 // You can construct a concrete instance of `EnableWorkflowConfigArrayInput` via:
 //
-//          EnableWorkflowConfigArray{ EnableWorkflowConfigArgs{...} }
+//	EnableWorkflowConfigArray{ EnableWorkflowConfigArgs{...} }
 type EnableWorkflowConfigArrayInput interface {
 	pulumi.Input
 
@@ -278,7 +286,7 @@ func (i EnableWorkflowConfigArray) ToEnableWorkflowConfigArrayOutputWithContext(
 // EnableWorkflowConfigMapInput is an input type that accepts EnableWorkflowConfigMap and EnableWorkflowConfigMapOutput values.
 // You can construct a concrete instance of `EnableWorkflowConfigMapInput` via:
 //
-//          EnableWorkflowConfigMap{ "key": EnableWorkflowConfigArgs{...} }
+//	EnableWorkflowConfigMap{ "key": EnableWorkflowConfigArgs{...} }
 type EnableWorkflowConfigMapInput interface {
 	pulumi.Input
 

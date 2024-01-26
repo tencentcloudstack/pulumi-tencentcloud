@@ -18,30 +18,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.GetWorkSpaces(ctx, &oceanus.GetWorkSpacesArgs{
-// 			Filters: []oceanus.GetWorkSpacesFilter{
-// 				oceanus.GetWorkSpacesFilter{
-// 					Name: "WorkSpaceName",
-// 					Values: []string{
-// 						"tf_example",
-// 					},
-// 				},
-// 			},
-// 			OrderType: pulumi.IntRef(1),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.GetWorkSpaces(ctx, &oceanus.GetWorkSpacesArgs{
+//				Filters: []oceanus.GetWorkSpacesFilter{
+//					oceanus.GetWorkSpacesFilter{
+//						Name: "WorkSpaceName",
+//						Values: []string{
+//							"tf_example",
+//						},
+//					},
+//				},
+//				OrderType: pulumi.IntRef(1),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetWorkSpaces(ctx *pulumi.Context, args *GetWorkSpacesArgs, opts ...pulumi.InvokeOption) (*GetWorkSpacesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

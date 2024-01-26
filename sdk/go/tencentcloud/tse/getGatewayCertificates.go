@@ -18,28 +18,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.GetGatewayCertificates(ctx, &tse.GetGatewayCertificatesArgs{
-// 			Filters: []tse.GetGatewayCertificatesFilter{
-// 				tse.GetGatewayCertificatesFilter{
-// 					Key:   pulumi.StringRef("BindDomain"),
-// 					Value: pulumi.StringRef("example.com"),
-// 				},
-// 			},
-// 			GatewayId: "gateway-ddbb709b",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.GetGatewayCertificates(ctx, &tse.GetGatewayCertificatesArgs{
+//				Filters: []tse.GetGatewayCertificatesFilter{
+//					tse.GetGatewayCertificatesFilter{
+//						Key:   pulumi.StringRef("BindDomain"),
+//						Value: pulumi.StringRef("example.com"),
+//					},
+//				},
+//				GatewayId: "gateway-ddbb709b",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupGatewayCertificates(ctx *pulumi.Context, args *LookupGatewayCertificatesArgs, opts ...pulumi.InvokeOption) (*LookupGatewayCertificatesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

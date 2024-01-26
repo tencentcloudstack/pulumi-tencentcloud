@@ -19,31 +19,34 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewResource(ctx, "example", &Dasb.ResourceArgs{
-// 			AutoRenewFlag:    pulumi.Int(1),
-// 			DeployRegion:     pulumi.String("ap-guangzhou"),
-// 			DeployZone:       pulumi.String("ap-guangzhou-6"),
-// 			PackageBandwidth: pulumi.Int(10),
-// 			PackageNode:      pulumi.Int(50),
-// 			ResourceEdition:  pulumi.String("standard"),
-// 			ResourceNode:     pulumi.Int(2),
-// 			SubnetId:         pulumi.String("subnet-7uhvm46o"),
-// 			TimeSpan:         pulumi.Int(1),
-// 			TimeUnit:         pulumi.String("m"),
-// 			VpcId:            pulumi.String("vpc-q1of50wz"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewResource(ctx, "example", &Dasb.ResourceArgs{
+//				AutoRenewFlag:    pulumi.Int(1),
+//				DeployRegion:     pulumi.String("ap-guangzhou"),
+//				DeployZone:       pulumi.String("ap-guangzhou-6"),
+//				PackageBandwidth: pulumi.Int(10),
+//				PackageNode:      pulumi.Int(50),
+//				ResourceEdition:  pulumi.String("standard"),
+//				ResourceNode:     pulumi.Int(2),
+//				SubnetId:         pulumi.String("subnet-7uhvm46o"),
+//				TimeSpan:         pulumi.Int(1),
+//				TimeUnit:         pulumi.String("m"),
+//				VpcId:            pulumi.String("vpc-q1of50wz"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -51,7 +54,9 @@ import (
 // dasb resource can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dasb/resource:Resource example bh-saas-kk5rabk0
+//
+//	$ pulumi import tencentcloud:Dasb/resource:Resource example bh-saas-kk5rabk0
+//
 // ```
 type Resource struct {
 	pulumi.CustomResourceState
@@ -264,7 +269,7 @@ func (i *Resource) ToResourceOutputWithContext(ctx context.Context) ResourceOutp
 // ResourceArrayInput is an input type that accepts ResourceArray and ResourceArrayOutput values.
 // You can construct a concrete instance of `ResourceArrayInput` via:
 //
-//          ResourceArray{ ResourceArgs{...} }
+//	ResourceArray{ ResourceArgs{...} }
 type ResourceArrayInput interface {
 	pulumi.Input
 
@@ -289,7 +294,7 @@ func (i ResourceArray) ToResourceArrayOutputWithContext(ctx context.Context) Res
 // ResourceMapInput is an input type that accepts ResourceMap and ResourceMapOutput values.
 // You can construct a concrete instance of `ResourceMapInput` via:
 //
-//          ResourceMap{ "key": ResourceArgs{...} }
+//	ResourceMap{ "key": ResourceArgs{...} }
 type ResourceMapInput interface {
 	pulumi.Input
 

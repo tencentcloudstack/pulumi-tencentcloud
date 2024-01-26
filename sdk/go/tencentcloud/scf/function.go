@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-// 			CosBucketName:   pulumi.String("scf-code-1234567890"),
-// 			CosBucketRegion: pulumi.String("ap-guangzhou"),
-// 			CosObjectName:   pulumi.String("code.zip"),
-// 			Handler:         pulumi.String("main.do_it"),
-// 			Runtime:         pulumi.String("Python3.6"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
+//				CosBucketName:   pulumi.String("scf-code-1234567890"),
+//				CosBucketRegion: pulumi.String("ap-guangzhou"),
+//				CosObjectName:   pulumi.String("code.zip"),
+//				Handler:         pulumi.String("main.do_it"),
+//				Runtime:         pulumi.String("Python3.6"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Using Zip file
 //
@@ -44,34 +47,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-// 			DnsCache:        pulumi.Bool(true),
-// 			EnablePublicNet: pulumi.Bool(true),
-// 			Handler:         pulumi.String("first.do_it_first"),
-// 			IntranetConfig: &scf.FunctionIntranetConfigArgs{
-// 				IpFixed: pulumi.String("ENABLE"),
-// 			},
-// 			Runtime:  pulumi.String("Python3.6"),
-// 			SubnetId: pulumi.String("subnet-ljyn7h30"),
-// 			Tags: pulumi.AnyMap{
-// 				"env": pulumi.Any("test"),
-// 			},
-// 			VpcId:   pulumi.String("vpc-391sv4w3"),
-// 			ZipFile: pulumi.String("/scf/first.zip"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
+//				DnsCache:        pulumi.Bool(true),
+//				EnablePublicNet: pulumi.Bool(true),
+//				Handler:         pulumi.String("first.do_it_first"),
+//				IntranetConfig: &scf.FunctionIntranetConfigArgs{
+//					IpFixed: pulumi.String("ENABLE"),
+//				},
+//				Runtime:  pulumi.String("Python3.6"),
+//				SubnetId: pulumi.String("subnet-ljyn7h30"),
+//				Tags: pulumi.AnyMap{
+//					"env": pulumi.Any("test"),
+//				},
+//				VpcId:   pulumi.String("vpc-391sv4w3"),
+//				ZipFile: pulumi.String("/scf/first.zip"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Using CFS config
 //
@@ -79,33 +85,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-// 			CfsConfigs: scf.FunctionCfsConfigArray{
-// 				&scf.FunctionCfsConfigArgs{
-// 					CfsId:          pulumi.String("cfs-xxxxxxxx"),
-// 					LocalMountDir:  pulumi.String("/mnt"),
-// 					MountInsId:     pulumi.String("cfs-xxxxxxxx"),
-// 					RemoteMountDir: pulumi.String("/"),
-// 					UserGroupId:    pulumi.String("10000"),
-// 					UserId:         pulumi.String("10000"),
-// 				},
-// 			},
-// 			Handler: pulumi.String("main.do_it"),
-// 			Runtime: pulumi.String("Python3.6"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
+//				CfsConfigs: scf.FunctionCfsConfigArray{
+//					&scf.FunctionCfsConfigArgs{
+//						CfsId:          pulumi.String("cfs-xxxxxxxx"),
+//						LocalMountDir:  pulumi.String("/mnt"),
+//						MountInsId:     pulumi.String("cfs-xxxxxxxx"),
+//						RemoteMountDir: pulumi.String("/"),
+//						UserGroupId:    pulumi.String("10000"),
+//						UserId:         pulumi.String("10000"),
+//					},
+//				},
+//				Handler: pulumi.String("main.do_it"),
+//				Runtime: pulumi.String("Python3.6"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Using triggers
 //
@@ -113,38 +122,41 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-// 			EnablePublicNet: pulumi.Bool(true),
-// 			Handler:         pulumi.String("first.do_it_first"),
-// 			Runtime:         pulumi.String("Python3.6"),
-// 			Triggers: scf.FunctionTriggerArray{
-// 				&scf.FunctionTriggerArgs{
-// 					Name:        pulumi.String("tf-test-fn-trigger"),
-// 					TriggerDesc: pulumi.String("*/5 * * * * * *"),
-// 					Type:        pulumi.String("timer"),
-// 				},
-// 				&scf.FunctionTriggerArgs{
-// 					CosRegion:   pulumi.String("ap-guangzhou"),
-// 					Name:        pulumi.String("scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com"),
-// 					TriggerDesc: pulumi.String("{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}"),
-// 					Type:        pulumi.String("cos"),
-// 				},
-// 			},
-// 			ZipFile: pulumi.String("/scf/first.zip"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
+//				EnablePublicNet: pulumi.Bool(true),
+//				Handler:         pulumi.String("first.do_it_first"),
+//				Runtime:         pulumi.String("Python3.6"),
+//				Triggers: scf.FunctionTriggerArray{
+//					&scf.FunctionTriggerArgs{
+//						Name:        pulumi.String("tf-test-fn-trigger"),
+//						TriggerDesc: pulumi.String("*/5 * * * * * *"),
+//						Type:        pulumi.String("timer"),
+//					},
+//					&scf.FunctionTriggerArgs{
+//						CosRegion:   pulumi.String("ap-guangzhou"),
+//						Name:        pulumi.String("scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com"),
+//						TriggerDesc: pulumi.String("{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}"),
+//						Type:        pulumi.String("cos"),
+//					},
+//				},
+//				ZipFile: pulumi.String("/scf/first.zip"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -152,7 +164,9 @@ import (
 // SCF function can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Scf/function:Function test default+test
+//
+//	$ pulumi import tencentcloud:Scf/function:Function test default+test
+//
 // ```
 type Function struct {
 	pulumi.CustomResourceState
@@ -599,7 +613,7 @@ func (i *Function) ToFunctionOutputWithContext(ctx context.Context) FunctionOutp
 // FunctionArrayInput is an input type that accepts FunctionArray and FunctionArrayOutput values.
 // You can construct a concrete instance of `FunctionArrayInput` via:
 //
-//          FunctionArray{ FunctionArgs{...} }
+//	FunctionArray{ FunctionArgs{...} }
 type FunctionArrayInput interface {
 	pulumi.Input
 
@@ -624,7 +638,7 @@ func (i FunctionArray) ToFunctionArrayOutputWithContext(ctx context.Context) Fun
 // FunctionMapInput is an input type that accepts FunctionMap and FunctionMapOutput values.
 // You can construct a concrete instance of `FunctionMapInput` via:
 //
-//          FunctionMap{ "key": FunctionArgs{...} }
+//	FunctionMap{ "key": FunctionArgs{...} }
 type FunctionMapInput interface {
 	pulumi.Input
 

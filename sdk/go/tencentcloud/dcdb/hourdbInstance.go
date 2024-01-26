@@ -19,40 +19,43 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.NewHourdbInstance(ctx, "hourdbInstance", &Dcdb.HourdbInstanceArgs{
-// 			InstanceName: pulumi.String("test_dcdc_dc_instance"),
-// 			Zones: pulumi.StringArray{
-// 				pulumi.String("ap-guangzhou-5"),
-// 				pulumi.String("ap-guangzhou-6"),
-// 			},
-// 			ShardMemory:     pulumi.Int(2),
-// 			ShardStorage:    pulumi.Int(10),
-// 			ShardNodeCount:  pulumi.Int(2),
-// 			ShardCount:      pulumi.Int(2),
-// 			VpcId:           pulumi.Any(local.Vpc_id),
-// 			SubnetId:        pulumi.Any(local.Subnet_id),
-// 			SecurityGroupId: pulumi.Any(local.Sg_id),
-// 			DbVersionId:     pulumi.String("8.0"),
-// 			ResourceTags: dcdb.HourdbInstanceResourceTagArray{
-// 				&dcdb.HourdbInstanceResourceTagArgs{
-// 					TagKey:   pulumi.String("aaa"),
-// 					TagValue: pulumi.String("bbb"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcdb.NewHourdbInstance(ctx, "hourdbInstance", &Dcdb.HourdbInstanceArgs{
+//				InstanceName: pulumi.String("test_dcdc_dc_instance"),
+//				Zones: pulumi.StringArray{
+//					pulumi.String("ap-guangzhou-5"),
+//					pulumi.String("ap-guangzhou-6"),
+//				},
+//				ShardMemory:     pulumi.Int(2),
+//				ShardStorage:    pulumi.Int(10),
+//				ShardNodeCount:  pulumi.Int(2),
+//				ShardCount:      pulumi.Int(2),
+//				VpcId:           pulumi.Any(local.Vpc_id),
+//				SubnetId:        pulumi.Any(local.Subnet_id),
+//				SecurityGroupId: pulumi.Any(local.Sg_id),
+//				DbVersionId:     pulumi.String("8.0"),
+//				ResourceTags: dcdb.HourdbInstanceResourceTagArray{
+//					&dcdb.HourdbInstanceResourceTagArgs{
+//						TagKey:   pulumi.String("aaa"),
+//						TagValue: pulumi.String("bbb"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -60,7 +63,9 @@ import (
 // dcdb hourdb_instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dcdb/hourdbInstance:HourdbInstance hourdb_instance hourdbInstance_id
+//
+//	$ pulumi import tencentcloud:Dcdb/hourdbInstance:HourdbInstance hourdb_instance hourdbInstance_id
+//
 // ```
 type HourdbInstance struct {
 	pulumi.CustomResourceState
@@ -337,7 +342,7 @@ func (i *HourdbInstance) ToHourdbInstanceOutputWithContext(ctx context.Context) 
 // HourdbInstanceArrayInput is an input type that accepts HourdbInstanceArray and HourdbInstanceArrayOutput values.
 // You can construct a concrete instance of `HourdbInstanceArrayInput` via:
 //
-//          HourdbInstanceArray{ HourdbInstanceArgs{...} }
+//	HourdbInstanceArray{ HourdbInstanceArgs{...} }
 type HourdbInstanceArrayInput interface {
 	pulumi.Input
 
@@ -362,7 +367,7 @@ func (i HourdbInstanceArray) ToHourdbInstanceArrayOutputWithContext(ctx context.
 // HourdbInstanceMapInput is an input type that accepts HourdbInstanceMap and HourdbInstanceMapOutput values.
 // You can construct a concrete instance of `HourdbInstanceMapInput` via:
 //
-//          HourdbInstanceMap{ "key": HourdbInstanceArgs{...} }
+//	HourdbInstanceMap{ "key": HourdbInstanceArgs{...} }
 type HourdbInstanceMapInput interface {
 	pulumi.Input
 

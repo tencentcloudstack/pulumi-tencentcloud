@@ -414,7 +414,7 @@ func (i *Set) ToSetOutputWithContext(ctx context.Context) SetOutput {
 // SetArrayInput is an input type that accepts SetArray and SetArrayOutput values.
 // You can construct a concrete instance of `SetArrayInput` via:
 //
-//          SetArray{ SetArgs{...} }
+//	SetArray{ SetArgs{...} }
 type SetArrayInput interface {
 	pulumi.Input
 
@@ -439,7 +439,7 @@ func (i SetArray) ToSetArrayOutputWithContext(ctx context.Context) SetArrayOutpu
 // SetMapInput is an input type that accepts SetMap and SetMapOutput values.
 // You can construct a concrete instance of `SetMapInput` via:
 //
-//          SetMap{ "key": SetArgs{...} }
+//	SetMap{ "key": SetArgs{...} }
 type SetMapInput interface {
 	pulumi.Input
 

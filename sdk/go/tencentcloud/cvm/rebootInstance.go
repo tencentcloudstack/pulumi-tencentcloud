@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cvm.NewRebootInstance(ctx, "rebootInstance", &Cvm.RebootInstanceArgs{
-// 			InstanceId: pulumi.String("ins-f9jr4bd2"),
-// 			StopType:   pulumi.String("SOFT_FIRST"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cvm.NewRebootInstance(ctx, "rebootInstance", &Cvm.RebootInstanceArgs{
+//				InstanceId: pulumi.String("ins-f9jr4bd2"),
+//				StopType:   pulumi.String("SOFT_FIRST"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type RebootInstance struct {
 	pulumi.CustomResourceState
@@ -156,7 +159,7 @@ func (i *RebootInstance) ToRebootInstanceOutputWithContext(ctx context.Context) 
 // RebootInstanceArrayInput is an input type that accepts RebootInstanceArray and RebootInstanceArrayOutput values.
 // You can construct a concrete instance of `RebootInstanceArrayInput` via:
 //
-//          RebootInstanceArray{ RebootInstanceArgs{...} }
+//	RebootInstanceArray{ RebootInstanceArgs{...} }
 type RebootInstanceArrayInput interface {
 	pulumi.Input
 
@@ -181,7 +184,7 @@ func (i RebootInstanceArray) ToRebootInstanceArrayOutputWithContext(ctx context.
 // RebootInstanceMapInput is an input type that accepts RebootInstanceMap and RebootInstanceMapOutput values.
 // You can construct a concrete instance of `RebootInstanceMapInput` via:
 //
-//          RebootInstanceMap{ "key": RebootInstanceArgs{...} }
+//	RebootInstanceMap{ "key": RebootInstanceArgs{...} }
 type RebootInstanceMapInput interface {
 	pulumi.Input
 

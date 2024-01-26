@@ -22,29 +22,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewTargetGroupAttachments(ctx, "targetGroupAttachments", &Clb.TargetGroupAttachmentsArgs{
-// 			Associations: clb.TargetGroupAttachmentsAssociationArray{
-// 				&clb.TargetGroupAttachmentsAssociationArgs{
-// 					ListenerId:    pulumi.String("lbl-m2q6sp9m"),
-// 					LocationId:    pulumi.String("loc-jjqr0ric"),
-// 					TargetGroupId: pulumi.String("lbtg-5xunivs0"),
-// 				},
-// 			},
-// 			LoadBalancerId: pulumi.String("lb-phbx2420"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewTargetGroupAttachments(ctx, "targetGroupAttachments", &Clb.TargetGroupAttachmentsArgs{
+//				Associations: clb.TargetGroupAttachmentsAssociationArray{
+//					&clb.TargetGroupAttachmentsAssociationArgs{
+//						ListenerId:    pulumi.String("lbl-m2q6sp9m"),
+//						LocationId:    pulumi.String("loc-jjqr0ric"),
+//						TargetGroupId: pulumi.String("lbtg-5xunivs0"),
+//					},
+//				},
+//				LoadBalancerId: pulumi.String("lb-phbx2420"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Target group binding to the load balancer
 //
@@ -52,29 +55,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewTargetGroupAttachments(ctx, "targetGroupAttachments", &Clb.TargetGroupAttachmentsArgs{
-// 			Associations: clb.TargetGroupAttachmentsAssociationArray{
-// 				&clb.TargetGroupAttachmentsAssociationArgs{
-// 					ListenerId:     pulumi.String("lbl-m2q6sp9m"),
-// 					LoadBalancerId: pulumi.String("lb-phbx2420"),
-// 					LocationId:     pulumi.String("loc-jjqr0ric"),
-// 				},
-// 			},
-// 			TargetGroupId: pulumi.String("lbtg-5xunivs0"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewTargetGroupAttachments(ctx, "targetGroupAttachments", &Clb.TargetGroupAttachmentsArgs{
+//				Associations: clb.TargetGroupAttachmentsAssociationArray{
+//					&clb.TargetGroupAttachmentsAssociationArgs{
+//						ListenerId:     pulumi.String("lbl-m2q6sp9m"),
+//						LoadBalancerId: pulumi.String("lb-phbx2420"),
+//						LocationId:     pulumi.String("loc-jjqr0ric"),
+//					},
+//				},
+//				TargetGroupId: pulumi.String("lbtg-5xunivs0"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type TargetGroupAttachments struct {
 	pulumi.CustomResourceState
@@ -186,7 +192,7 @@ func (i *TargetGroupAttachments) ToTargetGroupAttachmentsOutputWithContext(ctx c
 // TargetGroupAttachmentsArrayInput is an input type that accepts TargetGroupAttachmentsArray and TargetGroupAttachmentsArrayOutput values.
 // You can construct a concrete instance of `TargetGroupAttachmentsArrayInput` via:
 //
-//          TargetGroupAttachmentsArray{ TargetGroupAttachmentsArgs{...} }
+//	TargetGroupAttachmentsArray{ TargetGroupAttachmentsArgs{...} }
 type TargetGroupAttachmentsArrayInput interface {
 	pulumi.Input
 
@@ -211,7 +217,7 @@ func (i TargetGroupAttachmentsArray) ToTargetGroupAttachmentsArrayOutputWithCont
 // TargetGroupAttachmentsMapInput is an input type that accepts TargetGroupAttachmentsMap and TargetGroupAttachmentsMapOutput values.
 // You can construct a concrete instance of `TargetGroupAttachmentsMapInput` via:
 //
-//          TargetGroupAttachmentsMap{ "key": TargetGroupAttachmentsArgs{...} }
+//	TargetGroupAttachmentsMap{ "key": TargetGroupAttachmentsArgs{...} }
 type TargetGroupAttachmentsMapInput interface {
 	pulumi.Input
 

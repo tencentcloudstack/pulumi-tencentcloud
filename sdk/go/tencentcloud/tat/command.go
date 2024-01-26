@@ -19,34 +19,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tat.NewCommand(ctx, "command", &Tat.CommandArgs{
-// 			CommandName: pulumi.String("ls"),
-// 			CommandType: pulumi.String("SHELL"),
-// 			Content:     pulumi.String("bHM="),
-// 			Description: pulumi.String("xxx"),
-// 			Tags: tat.CommandTagArray{
-// 				&tat.CommandTagArgs{
-// 					Key:   pulumi.String(""),
-// 					Value: pulumi.String(""),
-// 				},
-// 			},
-// 			Timeout:          pulumi.Int(50),
-// 			Username:         pulumi.String("root"),
-// 			WorkingDirectory: pulumi.String("/root"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tat.NewCommand(ctx, "command", &Tat.CommandArgs{
+//				CommandName: pulumi.String("ls"),
+//				CommandType: pulumi.String("SHELL"),
+//				Content:     pulumi.String("bHM="),
+//				Description: pulumi.String("xxx"),
+//				Tags: tat.CommandTagArray{
+//					&tat.CommandTagArgs{
+//						Key:   pulumi.String(""),
+//						Value: pulumi.String(""),
+//					},
+//				},
+//				Timeout:          pulumi.Int(50),
+//				Username:         pulumi.String("root"),
+//				WorkingDirectory: pulumi.String("/root"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -54,7 +57,9 @@ import (
 // tat command can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tat/command:Command command cmd-6fydo27j
+//
+//	$ pulumi import tencentcloud:Tat/command:Command command cmd-6fydo27j
+//
 // ```
 type Command struct {
 	pulumi.CustomResourceState
@@ -283,7 +288,7 @@ func (i *Command) ToCommandOutputWithContext(ctx context.Context) CommandOutput 
 // CommandArrayInput is an input type that accepts CommandArray and CommandArrayOutput values.
 // You can construct a concrete instance of `CommandArrayInput` via:
 //
-//          CommandArray{ CommandArgs{...} }
+//	CommandArray{ CommandArgs{...} }
 type CommandArrayInput interface {
 	pulumi.Input
 
@@ -308,7 +313,7 @@ func (i CommandArray) ToCommandArrayOutputWithContext(ctx context.Context) Comma
 // CommandMapInput is an input type that accepts CommandMap and CommandMapOutput values.
 // You can construct a concrete instance of `CommandMapInput` via:
 //
-//          CommandMap{ "key": CommandArgs{...} }
+//	CommandMap{ "key": CommandArgs{...} }
 type CommandMapInput interface {
 	pulumi.Input
 

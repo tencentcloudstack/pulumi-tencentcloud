@@ -18,7 +18,9 @@ import (
 // cwp license_bind_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cwp/licenseBindAttachment:LicenseBindAttachment example cwplic-ab3edffa#44#2c7e5cce-1cec-4456-8d18-018f160dd987#0
+//
+//	$ pulumi import tencentcloud:Cwp/licenseBindAttachment:LicenseBindAttachment example cwplic-ab3edffa#44#2c7e5cce-1cec-4456-8d18-018f160dd987#0
+//
 // ```
 type LicenseBindAttachment struct {
 	pulumi.CustomResourceState
@@ -191,7 +193,7 @@ func (i *LicenseBindAttachment) ToLicenseBindAttachmentOutputWithContext(ctx con
 // LicenseBindAttachmentArrayInput is an input type that accepts LicenseBindAttachmentArray and LicenseBindAttachmentArrayOutput values.
 // You can construct a concrete instance of `LicenseBindAttachmentArrayInput` via:
 //
-//          LicenseBindAttachmentArray{ LicenseBindAttachmentArgs{...} }
+//	LicenseBindAttachmentArray{ LicenseBindAttachmentArgs{...} }
 type LicenseBindAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -216,7 +218,7 @@ func (i LicenseBindAttachmentArray) ToLicenseBindAttachmentArrayOutputWithContex
 // LicenseBindAttachmentMapInput is an input type that accepts LicenseBindAttachmentMap and LicenseBindAttachmentMapOutput values.
 // You can construct a concrete instance of `LicenseBindAttachmentMapInput` via:
 //
-//          LicenseBindAttachmentMap{ "key": LicenseBindAttachmentArgs{...} }
+//	LicenseBindAttachmentMap{ "key": LicenseBindAttachmentArgs{...} }
 type LicenseBindAttachmentMapInput interface {
 	pulumi.Input
 

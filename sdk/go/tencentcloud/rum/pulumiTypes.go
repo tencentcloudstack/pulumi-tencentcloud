@@ -48,7 +48,7 @@ type GetProjectProjectSet struct {
 // GetProjectProjectSetInput is an input type that accepts GetProjectProjectSetArgs and GetProjectProjectSetOutput values.
 // You can construct a concrete instance of `GetProjectProjectSetInput` via:
 //
-//          GetProjectProjectSetArgs{...}
+//	GetProjectProjectSetArgs{...}
 type GetProjectProjectSetInput interface {
 	pulumi.Input
 
@@ -106,7 +106,7 @@ func (i GetProjectProjectSetArgs) ToGetProjectProjectSetOutputWithContext(ctx co
 // GetProjectProjectSetArrayInput is an input type that accepts GetProjectProjectSetArray and GetProjectProjectSetArrayOutput values.
 // You can construct a concrete instance of `GetProjectProjectSetArrayInput` via:
 //
-//          GetProjectProjectSetArray{ GetProjectProjectSetArgs{...} }
+//	GetProjectProjectSetArray{ GetProjectProjectSetArgs{...} }
 type GetProjectProjectSetArrayInput interface {
 	pulumi.Input
 
@@ -276,7 +276,7 @@ type GetScoresScoreSet struct {
 // GetScoresScoreSetInput is an input type that accepts GetScoresScoreSetArgs and GetScoresScoreSetOutput values.
 // You can construct a concrete instance of `GetScoresScoreSetInput` via:
 //
-//          GetScoresScoreSetArgs{...}
+//	GetScoresScoreSetArgs{...}
 type GetScoresScoreSetInput interface {
 	pulumi.Input
 
@@ -330,7 +330,7 @@ func (i GetScoresScoreSetArgs) ToGetScoresScoreSetOutputWithContext(ctx context.
 // GetScoresScoreSetArrayInput is an input type that accepts GetScoresScoreSetArray and GetScoresScoreSetArrayOutput values.
 // You can construct a concrete instance of `GetScoresScoreSetArrayInput` via:
 //
-//          GetScoresScoreSetArray{ GetScoresScoreSetArgs{...} }
+//	GetScoresScoreSetArray{ GetScoresScoreSetArgs{...} }
 type GetScoresScoreSetArrayInput interface {
 	pulumi.Input
 
@@ -469,7 +469,7 @@ type GetTawAreaAreaSet struct {
 // GetTawAreaAreaSetInput is an input type that accepts GetTawAreaAreaSetArgs and GetTawAreaAreaSetOutput values.
 // You can construct a concrete instance of `GetTawAreaAreaSetInput` via:
 //
-//          GetTawAreaAreaSetArgs{...}
+//	GetTawAreaAreaSetArgs{...}
 type GetTawAreaAreaSetInput interface {
 	pulumi.Input
 
@@ -502,7 +502,7 @@ func (i GetTawAreaAreaSetArgs) ToGetTawAreaAreaSetOutputWithContext(ctx context.
 // GetTawAreaAreaSetArrayInput is an input type that accepts GetTawAreaAreaSetArray and GetTawAreaAreaSetArrayOutput values.
 // You can construct a concrete instance of `GetTawAreaAreaSetArrayInput` via:
 //
-//          GetTawAreaAreaSetArray{ GetTawAreaAreaSetArgs{...} }
+//	GetTawAreaAreaSetArray{ GetTawAreaAreaSetArgs{...} }
 type GetTawAreaAreaSetArrayInput interface {
 	pulumi.Input
 
@@ -616,7 +616,7 @@ type GetTawInstanceInstanceSet struct {
 // GetTawInstanceInstanceSetInput is an input type that accepts GetTawInstanceInstanceSetArgs and GetTawInstanceInstanceSetOutput values.
 // You can construct a concrete instance of `GetTawInstanceInstanceSetInput` via:
 //
-//          GetTawInstanceInstanceSetArgs{...}
+//	GetTawInstanceInstanceSetArgs{...}
 type GetTawInstanceInstanceSetInput interface {
 	pulumi.Input
 
@@ -666,7 +666,7 @@ func (i GetTawInstanceInstanceSetArgs) ToGetTawInstanceInstanceSetOutputWithCont
 // GetTawInstanceInstanceSetArrayInput is an input type that accepts GetTawInstanceInstanceSetArray and GetTawInstanceInstanceSetArrayOutput values.
 // You can construct a concrete instance of `GetTawInstanceInstanceSetArrayInput` via:
 //
-//          GetTawInstanceInstanceSetArray{ GetTawInstanceInstanceSetArgs{...} }
+//	GetTawInstanceInstanceSetArray{ GetTawInstanceInstanceSetArgs{...} }
 type GetTawInstanceInstanceSetArrayInput interface {
 	pulumi.Input
 
@@ -792,7 +792,7 @@ type GetTawInstanceInstanceSetTag struct {
 // GetTawInstanceInstanceSetTagInput is an input type that accepts GetTawInstanceInstanceSetTagArgs and GetTawInstanceInstanceSetTagOutput values.
 // You can construct a concrete instance of `GetTawInstanceInstanceSetTagInput` via:
 //
-//          GetTawInstanceInstanceSetTagArgs{...}
+//	GetTawInstanceInstanceSetTagArgs{...}
 type GetTawInstanceInstanceSetTagInput interface {
 	pulumi.Input
 
@@ -822,7 +822,7 @@ func (i GetTawInstanceInstanceSetTagArgs) ToGetTawInstanceInstanceSetTagOutputWi
 // GetTawInstanceInstanceSetTagArrayInput is an input type that accepts GetTawInstanceInstanceSetTagArray and GetTawInstanceInstanceSetTagArrayOutput values.
 // You can construct a concrete instance of `GetTawInstanceInstanceSetTagArrayInput` via:
 //
-//          GetTawInstanceInstanceSetTagArray{ GetTawInstanceInstanceSetTagArgs{...} }
+//	GetTawInstanceInstanceSetTagArray{ GetTawInstanceInstanceSetTagArgs{...} }
 type GetTawInstanceInstanceSetTagArrayInput interface {
 	pulumi.Input
 
@@ -908,7 +908,7 @@ type GetWhitelistWhitelistSet struct {
 // GetWhitelistWhitelistSetInput is an input type that accepts GetWhitelistWhitelistSetArgs and GetWhitelistWhitelistSetOutput values.
 // You can construct a concrete instance of `GetWhitelistWhitelistSetInput` via:
 //
-//          GetWhitelistWhitelistSetArgs{...}
+//	GetWhitelistWhitelistSetArgs{...}
 type GetWhitelistWhitelistSetInput interface {
 	pulumi.Input
 
@@ -948,7 +948,7 @@ func (i GetWhitelistWhitelistSetArgs) ToGetWhitelistWhitelistSetOutputWithContex
 // GetWhitelistWhitelistSetArrayInput is an input type that accepts GetWhitelistWhitelistSetArray and GetWhitelistWhitelistSetArrayOutput values.
 // You can construct a concrete instance of `GetWhitelistWhitelistSetArrayInput` via:
 //
-//          GetWhitelistWhitelistSetArray{ GetWhitelistWhitelistSetArgs{...} }
+//	GetWhitelistWhitelistSetArray{ GetWhitelistWhitelistSetArgs{...} }
 type GetWhitelistWhitelistSetArrayInput interface {
 	pulumi.Input
 

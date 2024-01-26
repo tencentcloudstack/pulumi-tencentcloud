@@ -20,22 +20,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewApiKey(ctx, "exampleAuto", &ApiGateway.ApiKeyArgs{
-// 			SecretName: pulumi.String("tf_example_auto"),
-// 			Status:     pulumi.String("on"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.NewApiKey(ctx, "exampleAuto", &ApiGateway.ApiKeyArgs{
+//				SecretName: pulumi.String("tf_example_auto"),
+//				Status:     pulumi.String("on"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Manually generate a secret key for API gateway access key.
 //
@@ -43,25 +46,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewApiKey(ctx, "exampleManual", &ApiGateway.ApiKeyArgs{
-// 			AccessKeyId:     pulumi.String("28e287e340507fa147b2c8284dab542f"),
-// 			AccessKeySecret: pulumi.String("0198a4b8c3105080f4acd9e507599eff"),
-// 			AccessKeyType:   pulumi.String("manual"),
-// 			SecretName:      pulumi.String("tf_example_manual"),
-// 			Status:          pulumi.String("on"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.NewApiKey(ctx, "exampleManual", &ApiGateway.ApiKeyArgs{
+//				AccessKeyId:     pulumi.String("28e287e340507fa147b2c8284dab542f"),
+//				AccessKeySecret: pulumi.String("0198a4b8c3105080f4acd9e507599eff"),
+//				AccessKeyType:   pulumi.String("manual"),
+//				SecretName:      pulumi.String("tf_example_manual"),
+//				Status:          pulumi.String("on"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -69,7 +75,9 @@ import (
 // API gateway access key can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:ApiGateway/apiKey:ApiKey test AKIDMZwceezso9ps5p8jkro8a9fwe1e7nzF2k50B
+//
+//	$ pulumi import tencentcloud:ApiGateway/apiKey:ApiKey test AKIDMZwceezso9ps5p8jkro8a9fwe1e7nzF2k50B
+//
 // ```
 type ApiKey struct {
 	pulumi.CustomResourceState
@@ -213,7 +221,7 @@ func (i *ApiKey) ToApiKeyOutputWithContext(ctx context.Context) ApiKeyOutput {
 // ApiKeyArrayInput is an input type that accepts ApiKeyArray and ApiKeyArrayOutput values.
 // You can construct a concrete instance of `ApiKeyArrayInput` via:
 //
-//          ApiKeyArray{ ApiKeyArgs{...} }
+//	ApiKeyArray{ ApiKeyArgs{...} }
 type ApiKeyArrayInput interface {
 	pulumi.Input
 
@@ -238,7 +246,7 @@ func (i ApiKeyArray) ToApiKeyArrayOutputWithContext(ctx context.Context) ApiKeyA
 // ApiKeyMapInput is an input type that accepts ApiKeyMap and ApiKeyMapOutput values.
 // You can construct a concrete instance of `ApiKeyMapInput` via:
 //
-//          ApiKeyMap{ "key": ApiKeyArgs{...} }
+//	ApiKeyMap{ "key": ApiKeyArgs{...} }
 type ApiKeyMapInput interface {
 	pulumi.Input
 

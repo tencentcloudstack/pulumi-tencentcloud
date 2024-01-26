@@ -20,40 +20,43 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
-// 			InstanceType: pulumi.String("premium"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
-// 			InstanceId:   exampleInstance.ID(),
-// 			IsPublic:     pulumi.Bool(true),
-// 			IsAutoScan:   pulumi.Bool(true),
-// 			IsPreventVul: pulumi.Bool(true),
-// 			Severity:     pulumi.String("medium"),
-// 			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
-// 				&tcr.NamespaceCveWhitelistItemArgs{
-// 					CveId: pulumi.String("cve-xxxxx"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+//				InstanceType: pulumi.String("premium"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
+//				InstanceId:   exampleInstance.ID(),
+//				IsPublic:     pulumi.Bool(true),
+//				IsAutoScan:   pulumi.Bool(true),
+//				IsPreventVul: pulumi.Bool(true),
+//				Severity:     pulumi.String("medium"),
+//				CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+//					&tcr.NamespaceCveWhitelistItemArgs{
+//						CveId: pulumi.String("cve-xxxxx"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -61,7 +64,9 @@ import (
 // tcr namespace can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcr/namespace:Namespace example tcr_instance_id#namespace_name
+//
+//	$ pulumi import tencentcloud:Tcr/namespace:Namespace example tcr_instance_id#namespace_name
+//
 // ```
 type Namespace struct {
 	pulumi.CustomResourceState
@@ -213,7 +218,7 @@ func (i *Namespace) ToNamespaceOutputWithContext(ctx context.Context) NamespaceO
 // NamespaceArrayInput is an input type that accepts NamespaceArray and NamespaceArrayOutput values.
 // You can construct a concrete instance of `NamespaceArrayInput` via:
 //
-//          NamespaceArray{ NamespaceArgs{...} }
+//	NamespaceArray{ NamespaceArgs{...} }
 type NamespaceArrayInput interface {
 	pulumi.Input
 
@@ -238,7 +243,7 @@ func (i NamespaceArray) ToNamespaceArrayOutputWithContext(ctx context.Context) N
 // NamespaceMapInput is an input type that accepts NamespaceMap and NamespaceMapOutput values.
 // You can construct a concrete instance of `NamespaceMapInput` via:
 //
-//          NamespaceMap{ "key": NamespaceArgs{...} }
+//	NamespaceMap{ "key": NamespaceArgs{...} }
 type NamespaceMapInput interface {
 	pulumi.Input
 

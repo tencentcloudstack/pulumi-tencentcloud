@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-// 			BandwidthLimitType: pulumi.String("INTER_REGION_LIMIT"),
-// 			ChargeType:         pulumi.String("PREPAID"),
-// 			Description:        pulumi.String("ci-temp-test-ccn-des"),
-// 			Qos:                pulumi.String("AG"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
+//				BandwidthLimitType: pulumi.String("INTER_REGION_LIMIT"),
+//				ChargeType:         pulumi.String("PREPAID"),
+//				Description:        pulumi.String("ci-temp-test-ccn-des"),
+//				Qos:                pulumi.String("AG"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Create a post-paid regional export speed limit type CCN
 //
@@ -44,24 +47,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-// 			BandwidthLimitType: pulumi.String("OUTER_REGION_LIMIT"),
-// 			ChargeType:         pulumi.String("POSTPAID"),
-// 			Description:        pulumi.String("ci-temp-test-ccn-des"),
-// 			Qos:                pulumi.String("AG"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
+//				BandwidthLimitType: pulumi.String("OUTER_REGION_LIMIT"),
+//				ChargeType:         pulumi.String("POSTPAID"),
+//				Description:        pulumi.String("ci-temp-test-ccn-des"),
+//				Qos:                pulumi.String("AG"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Create a post-paid inter-regional rate limit type CNN
 //
@@ -69,24 +75,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-// 			BandwidthLimitType: pulumi.String("INTER_REGION_LIMIT"),
-// 			ChargeType:         pulumi.String("POSTPAID"),
-// 			Description:        pulumi.String("ci-temp-test-ccn-des"),
-// 			Qos:                pulumi.String("AG"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
+//				BandwidthLimitType: pulumi.String("INTER_REGION_LIMIT"),
+//				ChargeType:         pulumi.String("POSTPAID"),
+//				Description:        pulumi.String("ci-temp-test-ccn-des"),
+//				Qos:                pulumi.String("AG"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -94,7 +103,9 @@ import (
 // Ccn instance can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ccn/instance:Instance test ccn-id
+//
+//	$ pulumi import tencentcloud:Ccn/instance:Instance test ccn-id
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -251,7 +262,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -276,7 +287,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

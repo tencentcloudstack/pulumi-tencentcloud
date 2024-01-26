@@ -19,34 +19,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tem.NewApplicationService(ctx, "applicationService", &Tem.ApplicationServiceArgs{
-// 			ApplicationId: pulumi.String("app-jrl3346j"),
-// 			EnvironmentId: pulumi.String("en-dpxyydl5"),
-// 			Service: &tem.ApplicationServiceServiceArgs{
-// 				PortMappingItemLists: tem.ApplicationServiceServicePortMappingItemListArray{
-// 					&tem.ApplicationServiceServicePortMappingItemListArgs{
-// 						Port:       pulumi.Int(80),
-// 						Protocol:   pulumi.String("TCP"),
-// 						TargetPort: pulumi.Int(80),
-// 					},
-// 				},
-// 				ServiceName: pulumi.String("test0-1"),
-// 				Type:        pulumi.String("CLUSTER"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tem.NewApplicationService(ctx, "applicationService", &Tem.ApplicationServiceArgs{
+//				ApplicationId: pulumi.String("app-jrl3346j"),
+//				EnvironmentId: pulumi.String("en-dpxyydl5"),
+//				Service: &tem.ApplicationServiceServiceArgs{
+//					PortMappingItemLists: tem.ApplicationServiceServicePortMappingItemListArray{
+//						&tem.ApplicationServiceServicePortMappingItemListArgs{
+//							Port:       pulumi.Int(80),
+//							Protocol:   pulumi.String("TCP"),
+//							TargetPort: pulumi.Int(80),
+//						},
+//					},
+//					ServiceName: pulumi.String("test0-1"),
+//					Type:        pulumi.String("CLUSTER"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -54,7 +57,9 @@ import (
 // tem application_service can be imported using the environmentId#applicationId#serviceName, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tem/applicationService:ApplicationService application_service en-dpxyydl5#app-jrl3346j#test0-1
+//
+//	$ pulumi import tencentcloud:Tem/applicationService:ApplicationService application_service en-dpxyydl5#app-jrl3346j#test0-1
+//
 // ```
 type ApplicationService struct {
 	pulumi.CustomResourceState
@@ -169,7 +174,7 @@ func (i *ApplicationService) ToApplicationServiceOutputWithContext(ctx context.C
 // ApplicationServiceArrayInput is an input type that accepts ApplicationServiceArray and ApplicationServiceArrayOutput values.
 // You can construct a concrete instance of `ApplicationServiceArrayInput` via:
 //
-//          ApplicationServiceArray{ ApplicationServiceArgs{...} }
+//	ApplicationServiceArray{ ApplicationServiceArgs{...} }
 type ApplicationServiceArrayInput interface {
 	pulumi.Input
 
@@ -194,7 +199,7 @@ func (i ApplicationServiceArray) ToApplicationServiceArrayOutputWithContext(ctx 
 // ApplicationServiceMapInput is an input type that accepts ApplicationServiceMap and ApplicationServiceMapOutput values.
 // You can construct a concrete instance of `ApplicationServiceMapInput` via:
 //
-//          ApplicationServiceMap{ "key": ApplicationServiceArgs{...} }
+//	ApplicationServiceMap{ "key": ApplicationServiceArgs{...} }
 type ApplicationServiceMapInput interface {
 	pulumi.Input
 

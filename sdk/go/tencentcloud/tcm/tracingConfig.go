@@ -21,46 +21,49 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcm.NewTracingConfig(ctx, "tracingConfig", &Tcm.TracingConfigArgs{
-// 			Apm: &tcm.TracingConfigApmArgs{
-// 				Enable:     pulumi.Bool(true),
-// 				InstanceId: pulumi.String("apm-xxx"),
-// 				Region:     pulumi.String("ap-guangzhou"),
-// 			},
-// 			Enable:   pulumi.Bool(true),
-// 			MeshId:   pulumi.String("mesh-xxxxxxxx"),
-// 			Sampling: pulumi.Float64(""),
-// 			Zipkin: &tcm.TracingConfigZipkinArgs{
-// 				Address: pulumi.String("10.10.10.10:9411"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tcm.NewTracingConfig(ctx, "deleteConfig", &Tcm.TracingConfigArgs{
-// 			Apm: &tcm.TracingConfigApmArgs{
-// 				Enable: pulumi.Bool(false),
-// 			},
-// 			Enable:   pulumi.Bool(true),
-// 			MeshId:   pulumi.String("mesh-rofjmxxx"),
-// 			Sampling: pulumi.Float64(0),
-// 			Zipkin: &tcm.TracingConfigZipkinArgs{
-// 				Address: pulumi.String(""),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcm.NewTracingConfig(ctx, "tracingConfig", &Tcm.TracingConfigArgs{
+//				Apm: &tcm.TracingConfigApmArgs{
+//					Enable:     pulumi.Bool(true),
+//					InstanceId: pulumi.String("apm-xxx"),
+//					Region:     pulumi.String("ap-guangzhou"),
+//				},
+//				Enable:   pulumi.Bool(true),
+//				MeshId:   pulumi.String("mesh-xxxxxxxx"),
+//				Sampling: pulumi.Float64(""),
+//				Zipkin: &tcm.TracingConfigZipkinArgs{
+//					Address: pulumi.String("10.10.10.10:9411"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcm.NewTracingConfig(ctx, "deleteConfig", &Tcm.TracingConfigArgs{
+//				Apm: &tcm.TracingConfigApmArgs{
+//					Enable: pulumi.Bool(false),
+//				},
+//				Enable:   pulumi.Bool(true),
+//				MeshId:   pulumi.String("mesh-rofjmxxx"),
+//				Sampling: pulumi.Float64(0),
+//				Zipkin: &tcm.TracingConfigZipkinArgs{
+//					Address: pulumi.String(""),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -68,7 +71,9 @@ import (
 // tcm tracing_config can be imported using the mesh_id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcm/tracingConfig:TracingConfig tracing_config mesh-rofjmxxx
+//
+//	$ pulumi import tencentcloud:Tcm/tracingConfig:TracingConfig tracing_config mesh-rofjmxxx
+//
 // ```
 type TracingConfig struct {
 	pulumi.CustomResourceState
@@ -200,7 +205,7 @@ func (i *TracingConfig) ToTracingConfigOutputWithContext(ctx context.Context) Tr
 // TracingConfigArrayInput is an input type that accepts TracingConfigArray and TracingConfigArrayOutput values.
 // You can construct a concrete instance of `TracingConfigArrayInput` via:
 //
-//          TracingConfigArray{ TracingConfigArgs{...} }
+//	TracingConfigArray{ TracingConfigArgs{...} }
 type TracingConfigArrayInput interface {
 	pulumi.Input
 
@@ -225,7 +230,7 @@ func (i TracingConfigArray) ToTracingConfigArrayOutputWithContext(ctx context.Co
 // TracingConfigMapInput is an input type that accepts TracingConfigMap and TracingConfigMapOutput values.
 // You can construct a concrete instance of `TracingConfigMapInput` via:
 //
-//          TracingConfigMap{ "key": TracingConfigArgs{...} }
+//	TracingConfigMap{ "key": TracingConfigArgs{...} }
 type TracingConfigMapInput interface {
 	pulumi.Input
 

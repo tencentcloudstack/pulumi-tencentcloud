@@ -21,60 +21,63 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleInstance, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-// 			ImageTypes: []string{
-// 				"PUBLIC_IMAGE",
-// 			},
-// 			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
-// 			ConfigurationName: pulumi.String("example-launch-configuration"),
-// 			ImageId:           pulumi.String(exampleInstance.Images[0].ImageId),
-// 			InstanceTypes: pulumi.StringArray{
-// 				pulumi.String("SA1.SMALL1"),
-// 			},
-// 			ProjectId:      pulumi.Int(0),
-// 			SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
-// 			SystemDiskSize: pulumi.Int(50),
-// 			DataDisks: as.ScalingConfigDataDiskArray{
-// 				&as.ScalingConfigDataDiskArgs{
-// 					DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 					DiskSize: pulumi.Int(50),
-// 				},
-// 			},
-// 			InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 			InternetMaxBandwidthOut: pulumi.Int(10),
-// 			PublicIpAssigned:        pulumi.Bool(true),
-// 			Password:                pulumi.String("Test@123#"),
-// 			EnhancedSecurityService: pulumi.Bool(false),
-// 			EnhancedMonitorService:  pulumi.Bool(false),
-// 			UserData:                pulumi.String("dGVzdA=="),
-// 			HostNameSettings: &as.ScalingConfigHostNameSettingsArgs{
-// 				HostName:      pulumi.String("host-name-test"),
-// 				HostNameStyle: pulumi.String("UNIQUE"),
-// 			},
-// 			InstanceTags: pulumi.AnyMap{
-// 				"tag": pulumi.Any("example"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleInstance, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+//				ImageTypes: []string{
+//					"PUBLIC_IMAGE",
+//				},
+//				OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
+//				ConfigurationName: pulumi.String("example-launch-configuration"),
+//				ImageId:           pulumi.String(exampleInstance.Images[0].ImageId),
+//				InstanceTypes: pulumi.StringArray{
+//					pulumi.String("SA1.SMALL1"),
+//				},
+//				ProjectId:      pulumi.Int(0),
+//				SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
+//				SystemDiskSize: pulumi.Int(50),
+//				DataDisks: as.ScalingConfigDataDiskArray{
+//					&as.ScalingConfigDataDiskArgs{
+//						DiskType: pulumi.String("CLOUD_PREMIUM"),
+//						DiskSize: pulumi.Int(50),
+//					},
+//				},
+//				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+//				InternetMaxBandwidthOut: pulumi.Int(10),
+//				PublicIpAssigned:        pulumi.Bool(true),
+//				Password:                pulumi.String("Test@123#"),
+//				EnhancedSecurityService: pulumi.Bool(false),
+//				EnhancedMonitorService:  pulumi.Bool(false),
+//				UserData:                pulumi.String("dGVzdA=="),
+//				HostNameSettings: &as.ScalingConfigHostNameSettingsArgs{
+//					HostName:      pulumi.String("host-name-test"),
+//					HostNameStyle: pulumi.String("UNIQUE"),
+//				},
+//				InstanceTags: pulumi.AnyMap{
+//					"tag": pulumi.Any("example"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### charge type
 //
@@ -82,39 +85,42 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleInstance, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-// 			ImageTypes: []string{
-// 				"PUBLIC_IMAGE",
-// 			},
-// 			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
-// 			ConfigurationName: pulumi.String("launch-configuration"),
-// 			ImageId:           pulumi.String(exampleInstance.Images[0].ImageId),
-// 			InstanceTypes: pulumi.StringArray{
-// 				pulumi.String("SA1.SMALL1"),
-// 			},
-// 			InstanceChargeType: pulumi.String("SPOTPAID"),
-// 			SpotInstanceType:   pulumi.String("one-time"),
-// 			SpotMaxPrice:       pulumi.String("1000"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleInstance, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+//				ImageTypes: []string{
+//					"PUBLIC_IMAGE",
+//				},
+//				OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
+//				ConfigurationName: pulumi.String("launch-configuration"),
+//				ImageId:           pulumi.String(exampleInstance.Images[0].ImageId),
+//				InstanceTypes: pulumi.StringArray{
+//					pulumi.String("SA1.SMALL1"),
+//				},
+//				InstanceChargeType: pulumi.String("SPOTPAID"),
+//				SpotInstanceType:   pulumi.String("one-time"),
+//				SpotMaxPrice:       pulumi.String("1000"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -122,7 +128,9 @@ import (
 // AutoScaling Configuration can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig example asc-n32ymck2
+//
+//	$ pulumi import tencentcloud:As/scalingConfig:ScalingConfig example asc-n32ymck2
+//
 // ```
 type ScalingConfig struct {
 	pulumi.CustomResourceState
@@ -492,7 +500,7 @@ func (i *ScalingConfig) ToScalingConfigOutputWithContext(ctx context.Context) Sc
 // ScalingConfigArrayInput is an input type that accepts ScalingConfigArray and ScalingConfigArrayOutput values.
 // You can construct a concrete instance of `ScalingConfigArrayInput` via:
 //
-//          ScalingConfigArray{ ScalingConfigArgs{...} }
+//	ScalingConfigArray{ ScalingConfigArgs{...} }
 type ScalingConfigArrayInput interface {
 	pulumi.Input
 
@@ -517,7 +525,7 @@ func (i ScalingConfigArray) ToScalingConfigArrayOutputWithContext(ctx context.Co
 // ScalingConfigMapInput is an input type that accepts ScalingConfigMap and ScalingConfigMapOutput values.
 // You can construct a concrete instance of `ScalingConfigMapInput` via:
 //
-//          ScalingConfigMap{ "key": ScalingConfigArgs{...} }
+//	ScalingConfigMap{ "key": ScalingConfigArgs{...} }
 type ScalingConfigMapInput interface {
 	pulumi.Input
 

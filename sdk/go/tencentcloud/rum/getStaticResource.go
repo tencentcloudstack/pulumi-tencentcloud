@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Rum.GetStaticResource(ctx, &rum.GetStaticResourceArgs{
-// 			EndTime:   1625454840,
-// 			ProjectId: 1,
-// 			StartTime: 1625444040,
-// 			Type:      "top",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Rum.GetStaticResource(ctx, &rum.GetStaticResourceArgs{
+//				EndTime:   1625454840,
+//				ProjectId: 1,
+//				StartTime: 1625444040,
+//				Type:      "top",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetStaticResource(ctx *pulumi.Context, args *GetStaticResourceArgs, opts ...pulumi.InvokeOption) (*GetStaticResourceResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

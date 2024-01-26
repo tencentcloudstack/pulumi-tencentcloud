@@ -20,174 +20,177 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		object, err := Cos.GetBucketObject(ctx, &cos.GetBucketObjectArgs{
-// 			Bucket: fmt.Sprintf("%v%v", "keep-bucket-", local.App_id),
-// 			Key:    "/mps-test/test.mov",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		output, err := Cos.NewBucket(ctx, "output", &Cos.BucketArgs{
-// 			Bucket:     pulumi.String(fmt.Sprintf("%v%v", "tf-bucket-mps-schedule-output-", local.App_id)),
-// 			ForceClean: pulumi.Bool(true),
-// 			Acl:        pulumi.String("public-read"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mps.NewSchedule(ctx, "schedule", &Mps.ScheduleArgs{
-// 			ScheduleName: pulumi.String(fmt.Sprintf("%v%v%v", "tf_test_mps_schedule_", "%", "d")),
-// 			Trigger: &mps.ScheduleTriggerArgs{
-// 				Type: pulumi.String("CosFileUpload"),
-// 				CosFileUploadTrigger: &mps.ScheduleTriggerCosFileUploadTriggerArgs{
-// 					Bucket: pulumi.String(object.Bucket),
-// 					Region: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 					Dir:    pulumi.String("/upload/"),
-// 					Formats: pulumi.StringArray{
-// 						pulumi.String("flv"),
-// 						pulumi.String("mov"),
-// 					},
-// 				},
-// 			},
-// 			Activities: mps.ScheduleActivityArray{
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("input"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(1),
-// 						pulumi.Int(2),
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(3),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(6),
-// 						pulumi.Int(7),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(4),
-// 						pulumi.Int(5),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(10),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(10),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(10),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(8),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(9),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(10),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("output"),
-// 				},
-// 			},
-// 			OutputStorage: &mps.ScheduleOutputStorageArgs{
-// 				Type: pulumi.String("COS"),
-// 				CosOutputStorage: &mps.ScheduleOutputStorageCosOutputStorageArgs{
-// 					Bucket: output.Bucket,
-// 					Region: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 				},
-// 			},
-// 			OutputDir: pulumi.String("output/"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			object, err := Cos.GetBucketObject(ctx, &cos.GetBucketObjectArgs{
+//				Bucket: fmt.Sprintf("%v%v", "keep-bucket-", local.App_id),
+//				Key:    "/mps-test/test.mov",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			output, err := Cos.NewBucket(ctx, "output", &Cos.BucketArgs{
+//				Bucket:     pulumi.String(fmt.Sprintf("%v%v", "tf-bucket-mps-schedule-output-", local.App_id)),
+//				ForceClean: pulumi.Bool(true),
+//				Acl:        pulumi.String("public-read"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mps.NewSchedule(ctx, "schedule", &Mps.ScheduleArgs{
+//				ScheduleName: pulumi.String(fmt.Sprintf("%v%v%v", "tf_test_mps_schedule_", "%", "d")),
+//				Trigger: &mps.ScheduleTriggerArgs{
+//					Type: pulumi.String("CosFileUpload"),
+//					CosFileUploadTrigger: &mps.ScheduleTriggerCosFileUploadTriggerArgs{
+//						Bucket: pulumi.String(object.Bucket),
+//						Region: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//						Dir:    pulumi.String("/upload/"),
+//						Formats: pulumi.StringArray{
+//							pulumi.String("flv"),
+//							pulumi.String("mov"),
+//						},
+//					},
+//				},
+//				Activities: mps.ScheduleActivityArray{
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("input"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(1),
+//							pulumi.Int(2),
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(3),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(6),
+//							pulumi.Int(7),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(4),
+//							pulumi.Int(5),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(10),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(10),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(10),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(8),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(9),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(10),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("output"),
+//					},
+//				},
+//				OutputStorage: &mps.ScheduleOutputStorageArgs{
+//					Type: pulumi.String("COS"),
+//					CosOutputStorage: &mps.ScheduleOutputStorageCosOutputStorageArgs{
+//						Bucket: output.Bucket,
+//						Region: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//					},
+//				},
+//				OutputDir: pulumi.String("output/"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -195,7 +198,9 @@ import (
 // mps schedule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/schedule:Schedule schedule schedule_id
+//
+//	$ pulumi import tencentcloud:Mps/schedule:Schedule schedule schedule_id
+//
 // ```
 type Schedule struct {
 	pulumi.CustomResourceState
@@ -343,7 +348,7 @@ func (i *Schedule) ToScheduleOutputWithContext(ctx context.Context) ScheduleOutp
 // ScheduleArrayInput is an input type that accepts ScheduleArray and ScheduleArrayOutput values.
 // You can construct a concrete instance of `ScheduleArrayInput` via:
 //
-//          ScheduleArray{ ScheduleArgs{...} }
+//	ScheduleArray{ ScheduleArgs{...} }
 type ScheduleArrayInput interface {
 	pulumi.Input
 
@@ -368,7 +373,7 @@ func (i ScheduleArray) ToScheduleArrayOutputWithContext(ctx context.Context) Sch
 // ScheduleMapInput is an input type that accepts ScheduleMap and ScheduleMapOutput values.
 // You can construct a concrete instance of `ScheduleMapInput` via:
 //
-//          ScheduleMap{ "key": ScheduleArgs{...} }
+//	ScheduleMap{ "key": ScheduleArgs{...} }
 type ScheduleMapInput interface {
 	pulumi.Input
 

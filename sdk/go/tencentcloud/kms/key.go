@@ -20,27 +20,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kms.NewKey(ctx, "example", &Kms.KeyArgs{
-// 			Alias:              pulumi.String("tf-example-kms-key"),
-// 			Description:        pulumi.String("example of kms key"),
-// 			IsEnabled:          pulumi.Bool(true),
-// 			KeyRotationEnabled: pulumi.Bool(false),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kms.NewKey(ctx, "example", &Kms.KeyArgs{
+//				Alias:              pulumi.String("tf-example-kms-key"),
+//				Description:        pulumi.String("example of kms key"),
+//				IsEnabled:          pulumi.Bool(true),
+//				KeyRotationEnabled: pulumi.Bool(false),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Specify the Key Usage as an asymmetry method.
 //
@@ -48,24 +51,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kms.NewKey(ctx, "example2", &Kms.KeyArgs{
-// 			Alias:       pulumi.String("tf-example-kms-key"),
-// 			Description: pulumi.String("example of kms key"),
-// 			IsEnabled:   pulumi.Bool(false),
-// 			KeyUsage:    pulumi.String("ASYMMETRIC_DECRYPT_RSA_2048"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kms.NewKey(ctx, "example2", &Kms.KeyArgs{
+//				Alias:       pulumi.String("tf-example-kms-key"),
+//				Description: pulumi.String("example of kms key"),
+//				IsEnabled:   pulumi.Bool(false),
+//				KeyUsage:    pulumi.String("ASYMMETRIC_DECRYPT_RSA_2048"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Disable the kms key instance.
 //
@@ -73,27 +79,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kms.NewKey(ctx, "example3", &Kms.KeyArgs{
-// 			Alias:              pulumi.String("tf-example-kms-key"),
-// 			Description:        pulumi.String("example of kms key"),
-// 			IsEnabled:          pulumi.Bool(false),
-// 			KeyRotationEnabled: pulumi.Bool(false),
-// 			Tags: pulumi.AnyMap{
-// 				"test-tag": pulumi.Any("unit-test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kms.NewKey(ctx, "example3", &Kms.KeyArgs{
+//				Alias:              pulumi.String("tf-example-kms-key"),
+//				Description:        pulumi.String("example of kms key"),
+//				IsEnabled:          pulumi.Bool(false),
+//				KeyRotationEnabled: pulumi.Bool(false),
+//				Tags: pulumi.AnyMap{
+//					"test-tag": pulumi.Any("unit-test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -101,7 +110,9 @@ import (
 // KMS keys can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Kms/key:Key foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
+//
+//	$ pulumi import tencentcloud:Kms/key:Key foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
+//
 // ```
 type Key struct {
 	pulumi.CustomResourceState
@@ -269,7 +280,7 @@ func (i *Key) ToKeyOutputWithContext(ctx context.Context) KeyOutput {
 // KeyArrayInput is an input type that accepts KeyArray and KeyArrayOutput values.
 // You can construct a concrete instance of `KeyArrayInput` via:
 //
-//          KeyArray{ KeyArgs{...} }
+//	KeyArray{ KeyArgs{...} }
 type KeyArrayInput interface {
 	pulumi.Input
 
@@ -294,7 +305,7 @@ func (i KeyArray) ToKeyArrayOutputWithContext(ctx context.Context) KeyArrayOutpu
 // KeyMapInput is an input type that accepts KeyMap and KeyMapOutput values.
 // You can construct a concrete instance of `KeyMapInput` via:
 //
-//          KeyMap{ "key": KeyArgs{...} }
+//	KeyMap{ "key": KeyArgs{...} }
 type KeyMapInput interface {
 	pulumi.Input
 

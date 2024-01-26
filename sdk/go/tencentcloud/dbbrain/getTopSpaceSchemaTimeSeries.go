@@ -18,28 +18,31 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.GetTopSpaceSchemaTimeSeries(ctx, &dbbrain.GetTopSpaceSchemaTimeSeriesArgs{
-// 			EndDate:    pulumi.StringRef(fmt.Sprintf("%v%v", "%", "s")),
-// 			InstanceId: fmt.Sprintf("%v%v", "%", "s"),
-// 			Product:    pulumi.StringRef("mysql"),
-// 			SortBy:     pulumi.StringRef("DataLength"),
-// 			StartDate:  pulumi.StringRef(fmt.Sprintf("%v%v", "%", "s")),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.GetTopSpaceSchemaTimeSeries(ctx, &dbbrain.GetTopSpaceSchemaTimeSeriesArgs{
+//				EndDate:    pulumi.StringRef(fmt.Sprintf("%v%v", "%", "s")),
+//				InstanceId: fmt.Sprintf("%v%v", "%", "s"),
+//				Product:    pulumi.StringRef("mysql"),
+//				SortBy:     pulumi.StringRef("DataLength"),
+//				StartDate:  pulumi.StringRef(fmt.Sprintf("%v%v", "%", "s")),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetTopSpaceSchemaTimeSeries(ctx *pulumi.Context, args *GetTopSpaceSchemaTimeSeriesArgs, opts ...pulumi.InvokeOption) (*GetTopSpaceSchemaTimeSeriesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

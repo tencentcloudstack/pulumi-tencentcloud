@@ -18,34 +18,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.GetSystemResource(ctx, &oceanus.GetSystemResourceArgs{
-// 			ClusterId: pulumi.StringRef("cluster-n8yaia0p"),
-// 			Filters: []oceanus.GetSystemResourceFilter{
-// 				oceanus.GetSystemResourceFilter{
-// 					Name: "Name",
-// 					Values: []string{
-// 						"tf_example",
-// 					},
-// 				},
-// 			},
-// 			FlinkVersion: pulumi.StringRef("Flink-1.11"),
-// 			ResourceIds: []string{
-// 				"resource-abd503yt",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.GetSystemResource(ctx, &oceanus.GetSystemResourceArgs{
+//				ClusterId: pulumi.StringRef("cluster-n8yaia0p"),
+//				Filters: []oceanus.GetSystemResourceFilter{
+//					oceanus.GetSystemResourceFilter{
+//						Name: "Name",
+//						Values: []string{
+//							"tf_example",
+//						},
+//					},
+//				},
+//				FlinkVersion: pulumi.StringRef("Flink-1.11"),
+//				ResourceIds: []string{
+//					"resource-abd503yt",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetSystemResource(ctx *pulumi.Context, args *GetSystemResourceArgs, opts ...pulumi.InvokeOption) (*GetSystemResourceResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

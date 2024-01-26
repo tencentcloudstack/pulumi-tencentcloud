@@ -19,32 +19,35 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cwp"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cwp"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cwp"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cwp"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cwp.GetMachinesSimple(ctx, &cwp.GetMachinesSimpleArgs{
-// 			Filters: []cwp.GetMachinesSimpleFilter{
-// 				cwp.GetMachinesSimpleFilter{
-// 					ExactMatch: pulumi.BoolRef(true),
-// 					Name:       "TagId",
-// 					Values: []string{
-// 						"13771",
-// 					},
-// 				},
-// 			},
-// 			MachineRegion: "all-regions",
-// 			MachineType:   "ALL",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cwp.GetMachinesSimple(ctx, &cwp.GetMachinesSimpleArgs{
+//				Filters: []cwp.GetMachinesSimpleFilter{
+//					cwp.GetMachinesSimpleFilter{
+//						ExactMatch: pulumi.BoolRef(true),
+//						Name:       "TagId",
+//						Values: []string{
+//							"13771",
+//						},
+//					},
+//				},
+//				MachineRegion: "all-regions",
+//				MachineType:   "ALL",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetMachinesSimple(ctx *pulumi.Context, args *GetMachinesSimpleArgs, opts ...pulumi.InvokeOption) (*GetMachinesSimpleResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

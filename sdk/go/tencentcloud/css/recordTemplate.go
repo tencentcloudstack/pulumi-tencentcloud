@@ -201,7 +201,7 @@ func (i *RecordTemplate) ToRecordTemplateOutputWithContext(ctx context.Context) 
 // RecordTemplateArrayInput is an input type that accepts RecordTemplateArray and RecordTemplateArrayOutput values.
 // You can construct a concrete instance of `RecordTemplateArrayInput` via:
 //
-//          RecordTemplateArray{ RecordTemplateArgs{...} }
+//	RecordTemplateArray{ RecordTemplateArgs{...} }
 type RecordTemplateArrayInput interface {
 	pulumi.Input
 
@@ -226,7 +226,7 @@ func (i RecordTemplateArray) ToRecordTemplateArrayOutputWithContext(ctx context.
 // RecordTemplateMapInput is an input type that accepts RecordTemplateMap and RecordTemplateMapOutput values.
 // You can construct a concrete instance of `RecordTemplateMapInput` via:
 //
-//          RecordTemplateMap{ "key": RecordTemplateArgs{...} }
+//	RecordTemplateMap{ "key": RecordTemplateArgs{...} }
 type RecordTemplateMapInput interface {
 	pulumi.Input
 

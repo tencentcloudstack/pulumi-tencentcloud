@@ -22,45 +22,48 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleZone, err := PrivateDns.NewZone(ctx, "exampleZone", &PrivateDns.ZoneArgs{
-// 			Domain:             pulumi.String("domain.com"),
-// 			Remark:             pulumi.String("remark."),
-// 			DnsForwardStatus:   pulumi.String("DISABLED"),
-// 			CnameSpeedupStatus: pulumi.String("ENABLED"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = PrivateDns.NewZoneVpcAttachment(ctx, "exampleZoneVpcAttachment", &PrivateDns.ZoneVpcAttachmentArgs{
-// 			ZoneId: exampleZone.ID(),
-// 			VpcSet: &privatedns.ZoneVpcAttachmentVpcSetArgs{
-// 				UniqVpcId: vpc.ID(),
-// 				Region:    pulumi.String("ap-guangzhou"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleZone, err := PrivateDns.NewZone(ctx, "exampleZone", &PrivateDns.ZoneArgs{
+//				Domain:             pulumi.String("domain.com"),
+//				Remark:             pulumi.String("remark."),
+//				DnsForwardStatus:   pulumi.String("DISABLED"),
+//				CnameSpeedupStatus: pulumi.String("ENABLED"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = PrivateDns.NewZoneVpcAttachment(ctx, "exampleZoneVpcAttachment", &PrivateDns.ZoneVpcAttachmentArgs{
+//				ZoneId: exampleZone.ID(),
+//				VpcSet: &privatedns.ZoneVpcAttachmentVpcSetArgs{
+//					UniqVpcId: vpc.ID(),
+//					Region:    pulumi.String("ap-guangzhou"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Add VPC information for associated accounts in the private dns zone
 //
@@ -68,27 +71,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/PrivateDns"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := PrivateDns.NewZoneVpcAttachment(ctx, "example", &PrivateDns.ZoneVpcAttachmentArgs{
-// 			ZoneId: pulumi.Any(tencentcloud_private_dns_zone.Example.Id),
-// 			AccountVpcSet: &privatedns.ZoneVpcAttachmentAccountVpcSetArgs{
-// 				UniqVpcId: pulumi.String("vpc-82znjzn3"),
-// 				Region:    pulumi.String("ap-guangzhou"),
-// 				Uin:       pulumi.String("100017155920"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := PrivateDns.NewZoneVpcAttachment(ctx, "example", &PrivateDns.ZoneVpcAttachmentArgs{
+//				ZoneId: pulumi.Any(tencentcloud_private_dns_zone.Example.Id),
+//				AccountVpcSet: &privatedns.ZoneVpcAttachmentAccountVpcSetArgs{
+//					UniqVpcId: pulumi.String("vpc-82znjzn3"),
+//					Region:    pulumi.String("ap-guangzhou"),
+//					Uin:       pulumi.String("100017155920"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -96,7 +102,9 @@ import (
 // PrivateDns zone_vpc_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:PrivateDns/zoneVpcAttachment:ZoneVpcAttachment example zone-6t11lof0#vpc-jdx11z0t
+//
+//	$ pulumi import tencentcloud:PrivateDns/zoneVpcAttachment:ZoneVpcAttachment example zone-6t11lof0#vpc-jdx11z0t
+//
 // ```
 type ZoneVpcAttachment struct {
 	pulumi.CustomResourceState
@@ -208,7 +216,7 @@ func (i *ZoneVpcAttachment) ToZoneVpcAttachmentOutputWithContext(ctx context.Con
 // ZoneVpcAttachmentArrayInput is an input type that accepts ZoneVpcAttachmentArray and ZoneVpcAttachmentArrayOutput values.
 // You can construct a concrete instance of `ZoneVpcAttachmentArrayInput` via:
 //
-//          ZoneVpcAttachmentArray{ ZoneVpcAttachmentArgs{...} }
+//	ZoneVpcAttachmentArray{ ZoneVpcAttachmentArgs{...} }
 type ZoneVpcAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -233,7 +241,7 @@ func (i ZoneVpcAttachmentArray) ToZoneVpcAttachmentArrayOutputWithContext(ctx co
 // ZoneVpcAttachmentMapInput is an input type that accepts ZoneVpcAttachmentMap and ZoneVpcAttachmentMapOutput values.
 // You can construct a concrete instance of `ZoneVpcAttachmentMapInput` via:
 //
-//          ZoneVpcAttachmentMap{ "key": ZoneVpcAttachmentArgs{...} }
+//	ZoneVpcAttachmentMap{ "key": ZoneVpcAttachmentArgs{...} }
 type ZoneVpcAttachmentMapInput interface {
 	pulumi.Input
 

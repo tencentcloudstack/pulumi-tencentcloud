@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eip.NewInstance(ctx, "foo", &Eip.InstanceArgs{
-// 			BandwidthPackageId: pulumi.String("bwp-jtvzuky6"),
-// 			InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
-// 			Type:               pulumi.String("EIP"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Eip.NewInstance(ctx, "foo", &Eip.InstanceArgs{
+//				BandwidthPackageId: pulumi.String("bwp-jtvzuky6"),
+//				InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
+//				Type:               pulumi.String("EIP"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### AntiDDos Eip
 //
@@ -43,27 +46,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eip.NewInstance(ctx, "foo", &Eip.InstanceArgs{
-// 			AntiDdosPackageId:  pulumi.String("xxxxxxxx"),
-// 			BandwidthPackageId: pulumi.String("bwp-4ocyia9s"),
-// 			InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 			Type: pulumi.String("AntiDDoSEIP"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Eip.NewInstance(ctx, "foo", &Eip.InstanceArgs{
+//				AntiDdosPackageId:  pulumi.String("xxxxxxxx"),
+//				BandwidthPackageId: pulumi.String("bwp-4ocyia9s"),
+//				InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("test"),
+//				},
+//				Type: pulumi.String("AntiDDoSEIP"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Eip With Network Egress
 //
@@ -71,25 +77,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eip.NewInstance(ctx, "foo", &Eip.InstanceArgs{
-// 			Egress:                  pulumi.String("center_egress2"),
-// 			InternetChargeType:      pulumi.String("BANDWIDTH_PACKAGE"),
-// 			InternetMaxBandwidthOut: pulumi.Int(1),
-// 			InternetServiceProvider: pulumi.String("CMCC"),
-// 			Type:                    pulumi.String("EIP"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Eip.NewInstance(ctx, "foo", &Eip.InstanceArgs{
+//				Egress:                  pulumi.String("center_egress2"),
+//				InternetChargeType:      pulumi.String("BANDWIDTH_PACKAGE"),
+//				InternetMaxBandwidthOut: pulumi.Int(1),
+//				InternetServiceProvider: pulumi.String("CMCC"),
+//				Type:                    pulumi.String("EIP"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -97,7 +106,9 @@ import (
 // EIP can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
+//
+//	$ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -328,7 +339,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -353,7 +364,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

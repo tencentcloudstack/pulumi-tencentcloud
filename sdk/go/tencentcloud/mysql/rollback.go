@@ -148,7 +148,7 @@ func (i *Rollback) ToRollbackOutputWithContext(ctx context.Context) RollbackOutp
 // RollbackArrayInput is an input type that accepts RollbackArray and RollbackArrayOutput values.
 // You can construct a concrete instance of `RollbackArrayInput` via:
 //
-//          RollbackArray{ RollbackArgs{...} }
+//	RollbackArray{ RollbackArgs{...} }
 type RollbackArrayInput interface {
 	pulumi.Input
 
@@ -173,7 +173,7 @@ func (i RollbackArray) ToRollbackArrayOutputWithContext(ctx context.Context) Rol
 // RollbackMapInput is an input type that accepts RollbackMap and RollbackMapOutput values.
 // You can construct a concrete instance of `RollbackMapInput` via:
 //
-//          RollbackMap{ "key": RollbackArgs{...} }
+//	RollbackMap{ "key": RollbackArgs{...} }
 type RollbackMapInput interface {
 	pulumi.Input
 

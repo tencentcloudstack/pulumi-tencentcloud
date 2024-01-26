@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		record, err := Dnspod.GetRecords(ctx, &dnspod.GetRecordsArgs{
-// 			Domain:    pulumi.StringRef("example.com"),
-// 			Subdomain: pulumi.StringRef("www"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("result", record.Results)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			record, err := Dnspod.GetRecords(ctx, &dnspod.GetRecordsArgs{
+//				Domain:    pulumi.StringRef("example.com"),
+//				Subdomain: pulumi.StringRef("www"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("result", record.Results)
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Use verbose filter
 //
@@ -43,28 +46,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		record, err := Dnspod.GetRecords(ctx, &dnspod.GetRecordsArgs{
-// 			Domain:     pulumi.StringRef("example.com"),
-// 			Subdomain:  pulumi.StringRef("www"),
-// 			Limit:      pulumi.IntRef(100),
-// 			RecordType: pulumi.StringRef("TXT"),
-// 			SortField:  pulumi.StringRef("updated_on"),
-// 			SortType:   pulumi.StringRef("DESC"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("result", record.Results)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			record, err := Dnspod.GetRecords(ctx, &dnspod.GetRecordsArgs{
+//				Domain:     pulumi.StringRef("example.com"),
+//				Subdomain:  pulumi.StringRef("www"),
+//				Limit:      pulumi.IntRef(100),
+//				RecordType: pulumi.StringRef("TXT"),
+//				SortField:  pulumi.StringRef("updated_on"),
+//				SortType:   pulumi.StringRef("DESC"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("result", record.Results)
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupRecords(ctx *pulumi.Context, args *LookupRecordsArgs, opts ...pulumi.InvokeOption) (*LookupRecordsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -19,30 +19,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		checkDataEngineImageCanBeRollback, err := Dlc.GetCheckDataEngineImageCanBeRollback(ctx, &dlc.GetCheckDataEngineImageCanBeRollbackArgs{
-// 			DataEngineId: "DataEngine-cgkvbas6",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Dlc.NewRollbackDataEngineImageOperation(ctx, "rollbackDataEngineImage", &Dlc.RollbackDataEngineImageOperationArgs{
-// 			DataEngineId: pulumi.String("DataEngine-cgkvbas6"),
-// 			FromRecordId: pulumi.String(checkDataEngineImageCanBeRollback.FromRecordId),
-// 			ToRecordId:   pulumi.String(checkDataEngineImageCanBeRollback.ToRecordId),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			checkDataEngineImageCanBeRollback, err := Dlc.GetCheckDataEngineImageCanBeRollback(ctx, &dlc.GetCheckDataEngineImageCanBeRollbackArgs{
+//				DataEngineId: "DataEngine-cgkvbas6",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dlc.NewRollbackDataEngineImageOperation(ctx, "rollbackDataEngineImage", &Dlc.RollbackDataEngineImageOperationArgs{
+//				DataEngineId: pulumi.String("DataEngine-cgkvbas6"),
+//				FromRecordId: pulumi.String(checkDataEngineImageCanBeRollback.FromRecordId),
+//				ToRecordId:   pulumi.String(checkDataEngineImageCanBeRollback.ToRecordId),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -50,7 +53,9 @@ import (
 // dlc rollback_data_engine_image can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dlc/rollbackDataEngineImageOperation:RollbackDataEngineImageOperation rollback_data_engine_image rollback_data_engine_image_id
+//
+//	$ pulumi import tencentcloud:Dlc/rollbackDataEngineImageOperation:RollbackDataEngineImageOperation rollback_data_engine_image rollback_data_engine_image_id
+//
 // ```
 type RollbackDataEngineImageOperation struct {
 	pulumi.CustomResourceState
@@ -162,7 +167,7 @@ func (i *RollbackDataEngineImageOperation) ToRollbackDataEngineImageOperationOut
 // RollbackDataEngineImageOperationArrayInput is an input type that accepts RollbackDataEngineImageOperationArray and RollbackDataEngineImageOperationArrayOutput values.
 // You can construct a concrete instance of `RollbackDataEngineImageOperationArrayInput` via:
 //
-//          RollbackDataEngineImageOperationArray{ RollbackDataEngineImageOperationArgs{...} }
+//	RollbackDataEngineImageOperationArray{ RollbackDataEngineImageOperationArgs{...} }
 type RollbackDataEngineImageOperationArrayInput interface {
 	pulumi.Input
 
@@ -187,7 +192,7 @@ func (i RollbackDataEngineImageOperationArray) ToRollbackDataEngineImageOperatio
 // RollbackDataEngineImageOperationMapInput is an input type that accepts RollbackDataEngineImageOperationMap and RollbackDataEngineImageOperationMapOutput values.
 // You can construct a concrete instance of `RollbackDataEngineImageOperationMapInput` via:
 //
-//          RollbackDataEngineImageOperationMap{ "key": RollbackDataEngineImageOperationArgs{...} }
+//	RollbackDataEngineImageOperationMap{ "key": RollbackDataEngineImageOperationArgs{...} }
 type RollbackDataEngineImageOperationMapInput interface {
 	pulumi.Input
 

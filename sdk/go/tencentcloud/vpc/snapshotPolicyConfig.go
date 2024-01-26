@@ -19,56 +19,59 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleBucket, err := Cos.NewBucket(ctx, "exampleBucket", &Cos.BucketArgs{
-// 			Bucket: pulumi.String("tf-example-1308919341"),
-// 			Acl:    pulumi.String("private"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleSnapshotPolicy, err := Vpc.NewSnapshotPolicy(ctx, "exampleSnapshotPolicy", &Vpc.SnapshotPolicyArgs{
-// 			SnapshotPolicyName: pulumi.String("tf-example"),
-// 			BackupType:         pulumi.String("time"),
-// 			CosBucket:          exampleBucket.Bucket,
-// 			CosRegion:          pulumi.String("ap-guangzhou"),
-// 			CreateNewCos:       pulumi.Bool(false),
-// 			KeepTime:           pulumi.Int(2),
-// 			BackupPolicies: vpc.SnapshotPolicyBackupPolicyArray{
-// 				&vpc.SnapshotPolicyBackupPolicyArgs{
-// 					BackupDay:  pulumi.String("monday"),
-// 					BackupTime: pulumi.String("00:00:00"),
-// 				},
-// 				&vpc.SnapshotPolicyBackupPolicyArgs{
-// 					BackupDay:  pulumi.String("tuesday"),
-// 					BackupTime: pulumi.String("01:00:00"),
-// 				},
-// 				&vpc.SnapshotPolicyBackupPolicyArgs{
-// 					BackupDay:  pulumi.String("wednesday"),
-// 					BackupTime: pulumi.String("02:00:00"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Vpc.NewSnapshotPolicyConfig(ctx, "config", &Vpc.SnapshotPolicyConfigArgs{
-// 			SnapshotPolicyId: exampleSnapshotPolicy.ID(),
-// 			Enable:           pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleBucket, err := Cos.NewBucket(ctx, "exampleBucket", &Cos.BucketArgs{
+//				Bucket: pulumi.String("tf-example-1308919341"),
+//				Acl:    pulumi.String("private"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleSnapshotPolicy, err := Vpc.NewSnapshotPolicy(ctx, "exampleSnapshotPolicy", &Vpc.SnapshotPolicyArgs{
+//				SnapshotPolicyName: pulumi.String("tf-example"),
+//				BackupType:         pulumi.String("time"),
+//				CosBucket:          exampleBucket.Bucket,
+//				CosRegion:          pulumi.String("ap-guangzhou"),
+//				CreateNewCos:       pulumi.Bool(false),
+//				KeepTime:           pulumi.Int(2),
+//				BackupPolicies: vpc.SnapshotPolicyBackupPolicyArray{
+//					&vpc.SnapshotPolicyBackupPolicyArgs{
+//						BackupDay:  pulumi.String("monday"),
+//						BackupTime: pulumi.String("00:00:00"),
+//					},
+//					&vpc.SnapshotPolicyBackupPolicyArgs{
+//						BackupDay:  pulumi.String("tuesday"),
+//						BackupTime: pulumi.String("01:00:00"),
+//					},
+//					&vpc.SnapshotPolicyBackupPolicyArgs{
+//						BackupDay:  pulumi.String("wednesday"),
+//						BackupTime: pulumi.String("02:00:00"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Vpc.NewSnapshotPolicyConfig(ctx, "config", &Vpc.SnapshotPolicyConfigArgs{
+//				SnapshotPolicyId: exampleSnapshotPolicy.ID(),
+//				Enable:           pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -76,7 +79,9 @@ import (
 // vpc snapshot_policy_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/snapshotPolicyConfig:SnapshotPolicyConfig snapshot_policy_config snapshot_policy_id
+//
+//	$ pulumi import tencentcloud:Vpc/snapshotPolicyConfig:SnapshotPolicyConfig snapshot_policy_config snapshot_policy_id
+//
 // ```
 type SnapshotPolicyConfig struct {
 	pulumi.CustomResourceState
@@ -181,7 +186,7 @@ func (i *SnapshotPolicyConfig) ToSnapshotPolicyConfigOutputWithContext(ctx conte
 // SnapshotPolicyConfigArrayInput is an input type that accepts SnapshotPolicyConfigArray and SnapshotPolicyConfigArrayOutput values.
 // You can construct a concrete instance of `SnapshotPolicyConfigArrayInput` via:
 //
-//          SnapshotPolicyConfigArray{ SnapshotPolicyConfigArgs{...} }
+//	SnapshotPolicyConfigArray{ SnapshotPolicyConfigArgs{...} }
 type SnapshotPolicyConfigArrayInput interface {
 	pulumi.Input
 
@@ -206,7 +211,7 @@ func (i SnapshotPolicyConfigArray) ToSnapshotPolicyConfigArrayOutputWithContext(
 // SnapshotPolicyConfigMapInput is an input type that accepts SnapshotPolicyConfigMap and SnapshotPolicyConfigMapOutput values.
 // You can construct a concrete instance of `SnapshotPolicyConfigMapInput` via:
 //
-//          SnapshotPolicyConfigMap{ "key": SnapshotPolicyConfigArgs{...} }
+//	SnapshotPolicyConfigMap{ "key": SnapshotPolicyConfigArgs{...} }
 type SnapshotPolicyConfigMapInput interface {
 	pulumi.Input
 

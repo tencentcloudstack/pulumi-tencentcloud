@@ -20,7 +20,9 @@ import (
 // vpc net_detect can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/netDetect:NetDetect net_detect net_detect_id
+//
+//	$ pulumi import tencentcloud:Vpc/netDetect:NetDetect net_detect net_detect_id
+//
 // ```
 type NetDetect struct {
 	pulumi.CustomResourceState
@@ -181,7 +183,7 @@ func (i *NetDetect) ToNetDetectOutputWithContext(ctx context.Context) NetDetectO
 // NetDetectArrayInput is an input type that accepts NetDetectArray and NetDetectArrayOutput values.
 // You can construct a concrete instance of `NetDetectArrayInput` via:
 //
-//          NetDetectArray{ NetDetectArgs{...} }
+//	NetDetectArray{ NetDetectArgs{...} }
 type NetDetectArrayInput interface {
 	pulumi.Input
 
@@ -206,7 +208,7 @@ func (i NetDetectArray) ToNetDetectArrayOutputWithContext(ctx context.Context) N
 // NetDetectMapInput is an input type that accepts NetDetectMap and NetDetectMapOutput values.
 // You can construct a concrete instance of `NetDetectMapInput` via:
 //
-//          NetDetectMap{ "key": NetDetectArgs{...} }
+//	NetDetectMap{ "key": NetDetectArgs{...} }
 type NetDetectMapInput interface {
 	pulumi.Input
 

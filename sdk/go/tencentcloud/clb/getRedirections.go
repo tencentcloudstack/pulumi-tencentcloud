@@ -18,27 +18,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.GetRedirections(ctx, &clb.GetRedirectionsArgs{
-// 			ClbId:            "lb-p7olt9e5",
-// 			ResultOutputFile: pulumi.StringRef("mytestpath"),
-// 			SourceListenerId: "lbl-jc1dx6ju",
-// 			SourceRuleId:     "loc-ft8fmngv",
-// 			TargetListenerId: pulumi.StringRef("lbl-asj1hzuo"),
-// 			TargetRuleId:     pulumi.StringRef("loc-4xxr2cy7"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.GetRedirections(ctx, &clb.GetRedirectionsArgs{
+//				ClbId:            "lb-p7olt9e5",
+//				ResultOutputFile: pulumi.StringRef("mytestpath"),
+//				SourceListenerId: "lbl-jc1dx6ju",
+//				SourceRuleId:     "loc-ft8fmngv",
+//				TargetListenerId: pulumi.StringRef("lbl-asj1hzuo"),
+//				TargetRuleId:     pulumi.StringRef("loc-4xxr2cy7"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetRedirections(ctx *pulumi.Context, args *GetRedirectionsArgs, opts ...pulumi.InvokeOption) (*GetRedirectionsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

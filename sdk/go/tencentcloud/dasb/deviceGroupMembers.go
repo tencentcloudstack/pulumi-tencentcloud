@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewDeviceGroupMembers(ctx, "example", &Dasb.DeviceGroupMembersArgs{
-// 			DeviceGroupId: pulumi.Int(3),
-// 			MemberIdSets: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(2),
-// 				pulumi.Int(3),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewDeviceGroupMembers(ctx, "example", &Dasb.DeviceGroupMembersArgs{
+//				DeviceGroupId: pulumi.Int(3),
+//				MemberIdSets: pulumi.IntArray{
+//					pulumi.Int(1),
+//					pulumi.Int(2),
+//					pulumi.Int(3),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +49,9 @@ import (
 // dasb device_group_members can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dasb/deviceGroupMembers:DeviceGroupMembers example 3#1,2,3
+//
+//	$ pulumi import tencentcloud:Dasb/deviceGroupMembers:DeviceGroupMembers example 3#1,2,3
+//
 // ```
 type DeviceGroupMembers struct {
 	pulumi.CustomResourceState
@@ -151,7 +156,7 @@ func (i *DeviceGroupMembers) ToDeviceGroupMembersOutputWithContext(ctx context.C
 // DeviceGroupMembersArrayInput is an input type that accepts DeviceGroupMembersArray and DeviceGroupMembersArrayOutput values.
 // You can construct a concrete instance of `DeviceGroupMembersArrayInput` via:
 //
-//          DeviceGroupMembersArray{ DeviceGroupMembersArgs{...} }
+//	DeviceGroupMembersArray{ DeviceGroupMembersArgs{...} }
 type DeviceGroupMembersArrayInput interface {
 	pulumi.Input
 
@@ -176,7 +181,7 @@ func (i DeviceGroupMembersArray) ToDeviceGroupMembersArrayOutputWithContext(ctx 
 // DeviceGroupMembersMapInput is an input type that accepts DeviceGroupMembersMap and DeviceGroupMembersMapOutput values.
 // You can construct a concrete instance of `DeviceGroupMembersMapInput` via:
 //
-//          DeviceGroupMembersMap{ "key": DeviceGroupMembersArgs{...} }
+//	DeviceGroupMembersMap{ "key": DeviceGroupMembersArgs{...} }
 type DeviceGroupMembersMapInput interface {
 	pulumi.Input
 

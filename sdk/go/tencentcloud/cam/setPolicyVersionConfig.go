@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewSetPolicyVersionConfig(ctx, "setPolicyVersionConfig", &Cam.SetPolicyVersionConfigArgs{
-// 			PolicyId:  pulumi.Int(171162811),
-// 			VersionId: pulumi.Int(2),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewSetPolicyVersionConfig(ctx, "setPolicyVersionConfig", &Cam.SetPolicyVersionConfigArgs{
+//				PolicyId:  pulumi.Int(171162811),
+//				VersionId: pulumi.Int(2),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // cam set_policy_version_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/setPolicyVersionConfig:SetPolicyVersionConfig set_policy_version_config set_policy_version_config_id
+//
+//	$ pulumi import tencentcloud:Cam/setPolicyVersionConfig:SetPolicyVersionConfig set_policy_version_config set_policy_version_config_id
+//
 // ```
 type SetPolicyVersionConfig struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *SetPolicyVersionConfig) ToSetPolicyVersionConfigOutputWithContext(ctx c
 // SetPolicyVersionConfigArrayInput is an input type that accepts SetPolicyVersionConfigArray and SetPolicyVersionConfigArrayOutput values.
 // You can construct a concrete instance of `SetPolicyVersionConfigArrayInput` via:
 //
-//          SetPolicyVersionConfigArray{ SetPolicyVersionConfigArgs{...} }
+//	SetPolicyVersionConfigArray{ SetPolicyVersionConfigArgs{...} }
 type SetPolicyVersionConfigArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i SetPolicyVersionConfigArray) ToSetPolicyVersionConfigArrayOutputWithCont
 // SetPolicyVersionConfigMapInput is an input type that accepts SetPolicyVersionConfigMap and SetPolicyVersionConfigMapOutput values.
 // You can construct a concrete instance of `SetPolicyVersionConfigMapInput` via:
 //
-//          SetPolicyVersionConfigMap{ "key": SetPolicyVersionConfigArgs{...} }
+//	SetPolicyVersionConfigMap{ "key": SetPolicyVersionConfigArgs{...} }
 type SetPolicyVersionConfigMapInput interface {
 	pulumi.Input
 

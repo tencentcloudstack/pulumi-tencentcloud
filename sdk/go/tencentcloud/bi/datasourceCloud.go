@@ -19,37 +19,40 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Bi.NewDatasourceCloud(ctx, "datasourceCloud", &Bi.DatasourceCloudArgs{
-// 			Charset:   pulumi.String("utf8"),
-// 			DbName:    pulumi.String("bi_dev"),
-// 			DbPwd:     pulumi.String("xxxxxx"),
-// 			DbType:    pulumi.String("MYSQL"),
-// 			DbUser:    pulumi.String("root"),
-// 			ProjectId: pulumi.String("11015056"),
-// 			RegionId:  pulumi.String("gz"),
-// 			ServiceType: &bi.DatasourceCloudServiceTypeArgs{
-// 				InstanceId: pulumi.String("cdb-12viotu5"),
-// 				Region:     pulumi.String("ap-guangzhou"),
-// 				Type:       pulumi.String("Cloud"),
-// 			},
-// 			SourceName: pulumi.String("tf-test1"),
-// 			Vip:        pulumi.String("10.0.0.4"),
-// 			VpcId:      pulumi.String("5292713"),
-// 			Vport:      pulumi.String("3306"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Bi.NewDatasourceCloud(ctx, "datasourceCloud", &Bi.DatasourceCloudArgs{
+//				Charset:   pulumi.String("utf8"),
+//				DbName:    pulumi.String("bi_dev"),
+//				DbPwd:     pulumi.String("xxxxxx"),
+//				DbType:    pulumi.String("MYSQL"),
+//				DbUser:    pulumi.String("root"),
+//				ProjectId: pulumi.String("11015056"),
+//				RegionId:  pulumi.String("gz"),
+//				ServiceType: &bi.DatasourceCloudServiceTypeArgs{
+//					InstanceId: pulumi.String("cdb-12viotu5"),
+//					Region:     pulumi.String("ap-guangzhou"),
+//					Type:       pulumi.String("Cloud"),
+//				},
+//				SourceName: pulumi.String("tf-test1"),
+//				Vip:        pulumi.String("10.0.0.4"),
+//				VpcId:      pulumi.String("5292713"),
+//				Vport:      pulumi.String("3306"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type DatasourceCloud struct {
 	pulumi.CustomResourceState
@@ -335,7 +338,7 @@ func (i *DatasourceCloud) ToDatasourceCloudOutputWithContext(ctx context.Context
 // DatasourceCloudArrayInput is an input type that accepts DatasourceCloudArray and DatasourceCloudArrayOutput values.
 // You can construct a concrete instance of `DatasourceCloudArrayInput` via:
 //
-//          DatasourceCloudArray{ DatasourceCloudArgs{...} }
+//	DatasourceCloudArray{ DatasourceCloudArgs{...} }
 type DatasourceCloudArrayInput interface {
 	pulumi.Input
 
@@ -360,7 +363,7 @@ func (i DatasourceCloudArray) ToDatasourceCloudArrayOutputWithContext(ctx contex
 // DatasourceCloudMapInput is an input type that accepts DatasourceCloudMap and DatasourceCloudMapOutput values.
 // You can construct a concrete instance of `DatasourceCloudMapInput` via:
 //
-//          DatasourceCloudMap{ "key": DatasourceCloudArgs{...} }
+//	DatasourceCloudMap{ "key": DatasourceCloudArgs{...} }
 type DatasourceCloudMapInput interface {
 	pulumi.Input
 

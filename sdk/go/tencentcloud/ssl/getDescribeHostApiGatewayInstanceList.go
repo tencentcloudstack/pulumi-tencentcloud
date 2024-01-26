@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.GetDescribeHostApiGatewayInstanceList(ctx, &ssl.GetDescribeHostApiGatewayInstanceListArgs{
-// 			CertificateId: "9Bpk7XOu",
-// 			ResourceType:  "apiGateway",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.GetDescribeHostApiGatewayInstanceList(ctx, &ssl.GetDescribeHostApiGatewayInstanceListArgs{
+//				CertificateId: "9Bpk7XOu",
+//				ResourceType:  "apiGateway",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDescribeHostApiGatewayInstanceList(ctx *pulumi.Context, args *GetDescribeHostApiGatewayInstanceListArgs, opts ...pulumi.InvokeOption) (*GetDescribeHostApiGatewayInstanceListResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

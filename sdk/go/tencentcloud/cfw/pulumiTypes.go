@@ -20,7 +20,7 @@ type NatInstanceNewModeItems struct {
 // NatInstanceNewModeItemsInput is an input type that accepts NatInstanceNewModeItemsArgs and NatInstanceNewModeItemsOutput values.
 // You can construct a concrete instance of `NatInstanceNewModeItemsInput` via:
 //
-//          NatInstanceNewModeItemsArgs{...}
+//	NatInstanceNewModeItemsArgs{...}
 type NatInstanceNewModeItemsInput interface {
 	pulumi.Input
 
@@ -58,11 +58,11 @@ func (i NatInstanceNewModeItemsArgs) ToNatInstanceNewModeItemsPtrOutputWithConte
 // NatInstanceNewModeItemsPtrInput is an input type that accepts NatInstanceNewModeItemsArgs, NatInstanceNewModeItemsPtr and NatInstanceNewModeItemsPtrOutput values.
 // You can construct a concrete instance of `NatInstanceNewModeItemsPtrInput` via:
 //
-//          NatInstanceNewModeItemsArgs{...}
+//	        NatInstanceNewModeItemsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type NatInstanceNewModeItemsPtrInput interface {
 	pulumi.Input
 
@@ -179,7 +179,7 @@ type VpcInstanceVpcFwInstance struct {
 // VpcInstanceVpcFwInstanceInput is an input type that accepts VpcInstanceVpcFwInstanceArgs and VpcInstanceVpcFwInstanceOutput values.
 // You can construct a concrete instance of `VpcInstanceVpcFwInstanceInput` via:
 //
-//          VpcInstanceVpcFwInstanceArgs{...}
+//	VpcInstanceVpcFwInstanceArgs{...}
 type VpcInstanceVpcFwInstanceInput interface {
 	pulumi.Input
 
@@ -212,7 +212,7 @@ func (i VpcInstanceVpcFwInstanceArgs) ToVpcInstanceVpcFwInstanceOutputWithContex
 // VpcInstanceVpcFwInstanceArrayInput is an input type that accepts VpcInstanceVpcFwInstanceArray and VpcInstanceVpcFwInstanceArrayOutput values.
 // You can construct a concrete instance of `VpcInstanceVpcFwInstanceArrayInput` via:
 //
-//          VpcInstanceVpcFwInstanceArray{ VpcInstanceVpcFwInstanceArgs{...} }
+//	VpcInstanceVpcFwInstanceArray{ VpcInstanceVpcFwInstanceArgs{...} }
 type VpcInstanceVpcFwInstanceArrayInput interface {
 	pulumi.Input
 
@@ -301,7 +301,7 @@ type VpcInstanceVpcFwInstanceFwDeploy struct {
 // VpcInstanceVpcFwInstanceFwDeployInput is an input type that accepts VpcInstanceVpcFwInstanceFwDeployArgs and VpcInstanceVpcFwInstanceFwDeployOutput values.
 // You can construct a concrete instance of `VpcInstanceVpcFwInstanceFwDeployInput` via:
 //
-//          VpcInstanceVpcFwInstanceFwDeployArgs{...}
+//	VpcInstanceVpcFwInstanceFwDeployArgs{...}
 type VpcInstanceVpcFwInstanceFwDeployInput interface {
 	pulumi.Input
 
@@ -366,6 +366,112 @@ func (o VpcInstanceVpcFwInstanceFwDeployOutput) ZoneSets() pulumi.StringArrayOut
 	return o.ApplyT(func(v VpcInstanceVpcFwInstanceFwDeploy) []string { return v.ZoneSets }).(pulumi.StringArrayOutput)
 }
 
+type VpcPolicyBetaList struct {
+	LastTime *string `pulumi:"lastTime"`
+	TaskId   *int    `pulumi:"taskId"`
+	TaskName *string `pulumi:"taskName"`
+}
+
+// VpcPolicyBetaListInput is an input type that accepts VpcPolicyBetaListArgs and VpcPolicyBetaListOutput values.
+// You can construct a concrete instance of `VpcPolicyBetaListInput` via:
+//
+//	VpcPolicyBetaListArgs{...}
+type VpcPolicyBetaListInput interface {
+	pulumi.Input
+
+	ToVpcPolicyBetaListOutput() VpcPolicyBetaListOutput
+	ToVpcPolicyBetaListOutputWithContext(context.Context) VpcPolicyBetaListOutput
+}
+
+type VpcPolicyBetaListArgs struct {
+	LastTime pulumi.StringPtrInput `pulumi:"lastTime"`
+	TaskId   pulumi.IntPtrInput    `pulumi:"taskId"`
+	TaskName pulumi.StringPtrInput `pulumi:"taskName"`
+}
+
+func (VpcPolicyBetaListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*VpcPolicyBetaList)(nil)).Elem()
+}
+
+func (i VpcPolicyBetaListArgs) ToVpcPolicyBetaListOutput() VpcPolicyBetaListOutput {
+	return i.ToVpcPolicyBetaListOutputWithContext(context.Background())
+}
+
+func (i VpcPolicyBetaListArgs) ToVpcPolicyBetaListOutputWithContext(ctx context.Context) VpcPolicyBetaListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VpcPolicyBetaListOutput)
+}
+
+// VpcPolicyBetaListArrayInput is an input type that accepts VpcPolicyBetaListArray and VpcPolicyBetaListArrayOutput values.
+// You can construct a concrete instance of `VpcPolicyBetaListArrayInput` via:
+//
+//	VpcPolicyBetaListArray{ VpcPolicyBetaListArgs{...} }
+type VpcPolicyBetaListArrayInput interface {
+	pulumi.Input
+
+	ToVpcPolicyBetaListArrayOutput() VpcPolicyBetaListArrayOutput
+	ToVpcPolicyBetaListArrayOutputWithContext(context.Context) VpcPolicyBetaListArrayOutput
+}
+
+type VpcPolicyBetaListArray []VpcPolicyBetaListInput
+
+func (VpcPolicyBetaListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]VpcPolicyBetaList)(nil)).Elem()
+}
+
+func (i VpcPolicyBetaListArray) ToVpcPolicyBetaListArrayOutput() VpcPolicyBetaListArrayOutput {
+	return i.ToVpcPolicyBetaListArrayOutputWithContext(context.Background())
+}
+
+func (i VpcPolicyBetaListArray) ToVpcPolicyBetaListArrayOutputWithContext(ctx context.Context) VpcPolicyBetaListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VpcPolicyBetaListArrayOutput)
+}
+
+type VpcPolicyBetaListOutput struct{ *pulumi.OutputState }
+
+func (VpcPolicyBetaListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*VpcPolicyBetaList)(nil)).Elem()
+}
+
+func (o VpcPolicyBetaListOutput) ToVpcPolicyBetaListOutput() VpcPolicyBetaListOutput {
+	return o
+}
+
+func (o VpcPolicyBetaListOutput) ToVpcPolicyBetaListOutputWithContext(ctx context.Context) VpcPolicyBetaListOutput {
+	return o
+}
+
+func (o VpcPolicyBetaListOutput) LastTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v VpcPolicyBetaList) *string { return v.LastTime }).(pulumi.StringPtrOutput)
+}
+
+func (o VpcPolicyBetaListOutput) TaskId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v VpcPolicyBetaList) *int { return v.TaskId }).(pulumi.IntPtrOutput)
+}
+
+func (o VpcPolicyBetaListOutput) TaskName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v VpcPolicyBetaList) *string { return v.TaskName }).(pulumi.StringPtrOutput)
+}
+
+type VpcPolicyBetaListArrayOutput struct{ *pulumi.OutputState }
+
+func (VpcPolicyBetaListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]VpcPolicyBetaList)(nil)).Elem()
+}
+
+func (o VpcPolicyBetaListArrayOutput) ToVpcPolicyBetaListArrayOutput() VpcPolicyBetaListArrayOutput {
+	return o
+}
+
+func (o VpcPolicyBetaListArrayOutput) ToVpcPolicyBetaListArrayOutputWithContext(ctx context.Context) VpcPolicyBetaListArrayOutput {
+	return o
+}
+
+func (o VpcPolicyBetaListArrayOutput) Index(i pulumi.IntInput) VpcPolicyBetaListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) VpcPolicyBetaList {
+		return vs[0].([]VpcPolicyBetaList)[vs[1].(int)]
+	}).(VpcPolicyBetaListOutput)
+}
+
 type GetEdgeFwSwitchesData struct {
 	// Asset Type.
 	AssetType string `pulumi:"assetType"`
@@ -392,7 +498,7 @@ type GetEdgeFwSwitchesData struct {
 // GetEdgeFwSwitchesDataInput is an input type that accepts GetEdgeFwSwitchesDataArgs and GetEdgeFwSwitchesDataOutput values.
 // You can construct a concrete instance of `GetEdgeFwSwitchesDataInput` via:
 //
-//          GetEdgeFwSwitchesDataArgs{...}
+//	GetEdgeFwSwitchesDataArgs{...}
 type GetEdgeFwSwitchesDataInput interface {
 	pulumi.Input
 
@@ -438,7 +544,7 @@ func (i GetEdgeFwSwitchesDataArgs) ToGetEdgeFwSwitchesDataOutputWithContext(ctx 
 // GetEdgeFwSwitchesDataArrayInput is an input type that accepts GetEdgeFwSwitchesDataArray and GetEdgeFwSwitchesDataArrayOutput values.
 // You can construct a concrete instance of `GetEdgeFwSwitchesDataArrayInput` via:
 //
-//          GetEdgeFwSwitchesDataArray{ GetEdgeFwSwitchesDataArgs{...} }
+//	GetEdgeFwSwitchesDataArray{ GetEdgeFwSwitchesDataArgs{...} }
 type GetEdgeFwSwitchesDataArrayInput interface {
 	pulumi.Input
 
@@ -584,7 +690,7 @@ type GetNatFwSwitchesData struct {
 // GetNatFwSwitchesDataInput is an input type that accepts GetNatFwSwitchesDataArgs and GetNatFwSwitchesDataOutput values.
 // You can construct a concrete instance of `GetNatFwSwitchesDataInput` via:
 //
-//          GetNatFwSwitchesDataArgs{...}
+//	GetNatFwSwitchesDataArgs{...}
 type GetNatFwSwitchesDataInput interface {
 	pulumi.Input
 
@@ -644,7 +750,7 @@ func (i GetNatFwSwitchesDataArgs) ToGetNatFwSwitchesDataOutputWithContext(ctx co
 // GetNatFwSwitchesDataArrayInput is an input type that accepts GetNatFwSwitchesDataArray and GetNatFwSwitchesDataArrayOutput values.
 // You can construct a concrete instance of `GetNatFwSwitchesDataArrayInput` via:
 //
-//          GetNatFwSwitchesDataArray{ GetNatFwSwitchesDataArgs{...} }
+//	GetNatFwSwitchesDataArray{ GetNatFwSwitchesDataArgs{...} }
 type GetNatFwSwitchesDataArrayInput interface {
 	pulumi.Input
 
@@ -801,7 +907,7 @@ type GetVpcFwSwitchesSwitchList struct {
 // GetVpcFwSwitchesSwitchListInput is an input type that accepts GetVpcFwSwitchesSwitchListArgs and GetVpcFwSwitchesSwitchListOutput values.
 // You can construct a concrete instance of `GetVpcFwSwitchesSwitchListInput` via:
 //
-//          GetVpcFwSwitchesSwitchListArgs{...}
+//	GetVpcFwSwitchesSwitchListArgs{...}
 type GetVpcFwSwitchesSwitchListInput interface {
 	pulumi.Input
 
@@ -837,7 +943,7 @@ func (i GetVpcFwSwitchesSwitchListArgs) ToGetVpcFwSwitchesSwitchListOutputWithCo
 // GetVpcFwSwitchesSwitchListArrayInput is an input type that accepts GetVpcFwSwitchesSwitchListArray and GetVpcFwSwitchesSwitchListArrayOutput values.
 // You can construct a concrete instance of `GetVpcFwSwitchesSwitchListArrayInput` via:
 //
-//          GetVpcFwSwitchesSwitchListArray{ GetVpcFwSwitchesSwitchListArgs{...} }
+//	GetVpcFwSwitchesSwitchListArray{ GetVpcFwSwitchesSwitchListArgs{...} }
 type GetVpcFwSwitchesSwitchListArrayInput interface {
 	pulumi.Input
 
@@ -924,6 +1030,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*VpcInstanceVpcFwInstanceInput)(nil)).Elem(), VpcInstanceVpcFwInstanceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VpcInstanceVpcFwInstanceArrayInput)(nil)).Elem(), VpcInstanceVpcFwInstanceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VpcInstanceVpcFwInstanceFwDeployInput)(nil)).Elem(), VpcInstanceVpcFwInstanceFwDeployArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VpcPolicyBetaListInput)(nil)).Elem(), VpcPolicyBetaListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VpcPolicyBetaListArrayInput)(nil)).Elem(), VpcPolicyBetaListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetEdgeFwSwitchesDataInput)(nil)).Elem(), GetEdgeFwSwitchesDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetEdgeFwSwitchesDataArrayInput)(nil)).Elem(), GetEdgeFwSwitchesDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNatFwSwitchesDataInput)(nil)).Elem(), GetNatFwSwitchesDataArgs{})
@@ -935,6 +1043,8 @@ func init() {
 	pulumi.RegisterOutputType(VpcInstanceVpcFwInstanceOutput{})
 	pulumi.RegisterOutputType(VpcInstanceVpcFwInstanceArrayOutput{})
 	pulumi.RegisterOutputType(VpcInstanceVpcFwInstanceFwDeployOutput{})
+	pulumi.RegisterOutputType(VpcPolicyBetaListOutput{})
+	pulumi.RegisterOutputType(VpcPolicyBetaListArrayOutput{})
 	pulumi.RegisterOutputType(GetEdgeFwSwitchesDataOutput{})
 	pulumi.RegisterOutputType(GetEdgeFwSwitchesDataArrayOutput{})
 	pulumi.RegisterOutputType(GetNatFwSwitchesDataOutput{})

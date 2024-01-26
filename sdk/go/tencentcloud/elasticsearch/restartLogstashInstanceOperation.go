@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.NewRestartLogstashInstanceOperation(ctx, "restartLogstashInstanceOperation", &Elasticsearch.RestartLogstashInstanceOperationArgs{
-// 			InstanceId: pulumi.String("ls-xxxxxx"),
-// 			Type:       pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.NewRestartLogstashInstanceOperation(ctx, "restartLogstashInstanceOperation", &Elasticsearch.RestartLogstashInstanceOperationArgs{
+//				InstanceId: pulumi.String("ls-xxxxxx"),
+//				Type:       pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type RestartLogstashInstanceOperation struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *RestartLogstashInstanceOperation) ToRestartLogstashInstanceOperationOut
 // RestartLogstashInstanceOperationArrayInput is an input type that accepts RestartLogstashInstanceOperationArray and RestartLogstashInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `RestartLogstashInstanceOperationArrayInput` via:
 //
-//          RestartLogstashInstanceOperationArray{ RestartLogstashInstanceOperationArgs{...} }
+//	RestartLogstashInstanceOperationArray{ RestartLogstashInstanceOperationArgs{...} }
 type RestartLogstashInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i RestartLogstashInstanceOperationArray) ToRestartLogstashInstanceOperatio
 // RestartLogstashInstanceOperationMapInput is an input type that accepts RestartLogstashInstanceOperationMap and RestartLogstashInstanceOperationMapOutput values.
 // You can construct a concrete instance of `RestartLogstashInstanceOperationMapInput` via:
 //
-//          RestartLogstashInstanceOperationMap{ "key": RestartLogstashInstanceOperationArgs{...} }
+//	RestartLogstashInstanceOperationMap{ "key": RestartLogstashInstanceOperationArgs{...} }
 type RestartLogstashInstanceOperationMapInput interface {
 	pulumi.Input
 

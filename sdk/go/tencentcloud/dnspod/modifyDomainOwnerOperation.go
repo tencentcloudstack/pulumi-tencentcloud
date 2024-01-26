@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.NewModifyDomainOwnerOperation(ctx, "modifyDomainOwner", &Dnspod.ModifyDomainOwnerOperationArgs{
-// 			Account:  pulumi.String("xxxxxxxxx"),
-// 			Domain:   pulumi.String("dnspod.cn"),
-// 			DomainId: pulumi.Int(123),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.NewModifyDomainOwnerOperation(ctx, "modifyDomainOwner", &Dnspod.ModifyDomainOwnerOperationArgs{
+//				Account:  pulumi.String("xxxxxxxxx"),
+//				Domain:   pulumi.String("dnspod.cn"),
+//				DomainId: pulumi.Int(123),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ModifyDomainOwnerOperation struct {
 	pulumi.CustomResourceState
@@ -150,7 +153,7 @@ func (i *ModifyDomainOwnerOperation) ToModifyDomainOwnerOperationOutputWithConte
 // ModifyDomainOwnerOperationArrayInput is an input type that accepts ModifyDomainOwnerOperationArray and ModifyDomainOwnerOperationArrayOutput values.
 // You can construct a concrete instance of `ModifyDomainOwnerOperationArrayInput` via:
 //
-//          ModifyDomainOwnerOperationArray{ ModifyDomainOwnerOperationArgs{...} }
+//	ModifyDomainOwnerOperationArray{ ModifyDomainOwnerOperationArgs{...} }
 type ModifyDomainOwnerOperationArrayInput interface {
 	pulumi.Input
 
@@ -175,7 +178,7 @@ func (i ModifyDomainOwnerOperationArray) ToModifyDomainOwnerOperationArrayOutput
 // ModifyDomainOwnerOperationMapInput is an input type that accepts ModifyDomainOwnerOperationMap and ModifyDomainOwnerOperationMapOutput values.
 // You can construct a concrete instance of `ModifyDomainOwnerOperationMapInput` via:
 //
-//          ModifyDomainOwnerOperationMap{ "key": ModifyDomainOwnerOperationArgs{...} }
+//	ModifyDomainOwnerOperationMap{ "key": ModifyDomainOwnerOperationArgs{...} }
 type ModifyDomainOwnerOperationMapInput interface {
 	pulumi.Input
 

@@ -19,43 +19,46 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewRollBackCluster(ctx, "rollBackCluster", &Cynosdb.RollBackClusterArgs{
-// 			ClusterId:        pulumi.String("cynosdbmysql-bws8h88b"),
-// 			ExpectTimeThresh: pulumi.Int(0),
-// 			RollbackDatabases: cynosdb.RollBackClusterRollbackDatabaseArray{
-// 				&cynosdb.RollBackClusterRollbackDatabaseArgs{
-// 					NewDatabase: pulumi.String("users_bak_1"),
-// 					OldDatabase: pulumi.String("users"),
-// 				},
-// 			},
-// 			RollbackId:       pulumi.Int(732725),
-// 			RollbackMode:     pulumi.String("full"),
-// 			RollbackStrategy: pulumi.String("snapRollback"),
-// 			RollbackTables: cynosdb.RollBackClusterRollbackTableArray{
-// 				&cynosdb.RollBackClusterRollbackTableArgs{
-// 					Database: pulumi.String("tf_ci_test"),
-// 					Tables: cynosdb.RollBackClusterRollbackTableTableArray{
-// 						&cynosdb.RollBackClusterRollbackTableTableArgs{
-// 							NewTable: pulumi.String("test_bak_111"),
-// 							OldTable: pulumi.String("test"),
-// 						},
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewRollBackCluster(ctx, "rollBackCluster", &Cynosdb.RollBackClusterArgs{
+//				ClusterId:        pulumi.String("cynosdbmysql-bws8h88b"),
+//				ExpectTimeThresh: pulumi.Int(0),
+//				RollbackDatabases: cynosdb.RollBackClusterRollbackDatabaseArray{
+//					&cynosdb.RollBackClusterRollbackDatabaseArgs{
+//						NewDatabase: pulumi.String("users_bak_1"),
+//						OldDatabase: pulumi.String("users"),
+//					},
+//				},
+//				RollbackId:       pulumi.Int(732725),
+//				RollbackMode:     pulumi.String("full"),
+//				RollbackStrategy: pulumi.String("snapRollback"),
+//				RollbackTables: cynosdb.RollBackClusterRollbackTableArray{
+//					&cynosdb.RollBackClusterRollbackTableArgs{
+//						Database: pulumi.String("tf_ci_test"),
+//						Tables: cynosdb.RollBackClusterRollbackTableTableArray{
+//							&cynosdb.RollBackClusterRollbackTableTableArgs{
+//								NewTable: pulumi.String("test_bak_111"),
+//								OldTable: pulumi.String("test"),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type RollBackCluster struct {
 	pulumi.CustomResourceState
@@ -223,7 +226,7 @@ func (i *RollBackCluster) ToRollBackClusterOutputWithContext(ctx context.Context
 // RollBackClusterArrayInput is an input type that accepts RollBackClusterArray and RollBackClusterArrayOutput values.
 // You can construct a concrete instance of `RollBackClusterArrayInput` via:
 //
-//          RollBackClusterArray{ RollBackClusterArgs{...} }
+//	RollBackClusterArray{ RollBackClusterArgs{...} }
 type RollBackClusterArrayInput interface {
 	pulumi.Input
 
@@ -248,7 +251,7 @@ func (i RollBackClusterArray) ToRollBackClusterArrayOutputWithContext(ctx contex
 // RollBackClusterMapInput is an input type that accepts RollBackClusterMap and RollBackClusterMapOutput values.
 // You can construct a concrete instance of `RollBackClusterMapInput` via:
 //
-//          RollBackClusterMap{ "key": RollBackClusterArgs{...} }
+//	RollBackClusterMap{ "key": RollBackClusterArgs{...} }
 type RollBackClusterMapInput interface {
 	pulumi.Input
 

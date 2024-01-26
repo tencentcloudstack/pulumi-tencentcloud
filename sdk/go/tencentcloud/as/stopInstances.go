@@ -125,7 +125,7 @@ func (i *StopInstances) ToStopInstancesOutputWithContext(ctx context.Context) St
 // StopInstancesArrayInput is an input type that accepts StopInstancesArray and StopInstancesArrayOutput values.
 // You can construct a concrete instance of `StopInstancesArrayInput` via:
 //
-//          StopInstancesArray{ StopInstancesArgs{...} }
+//	StopInstancesArray{ StopInstancesArgs{...} }
 type StopInstancesArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +150,7 @@ func (i StopInstancesArray) ToStopInstancesArrayOutputWithContext(ctx context.Co
 // StopInstancesMapInput is an input type that accepts StopInstancesMap and StopInstancesMapOutput values.
 // You can construct a concrete instance of `StopInstancesMapInput` via:
 //
-//          StopInstancesMap{ "key": StopInstancesArgs{...} }
+//	StopInstancesMap{ "key": StopInstancesArgs{...} }
 type StopInstancesMapInput interface {
 	pulumi.Input
 

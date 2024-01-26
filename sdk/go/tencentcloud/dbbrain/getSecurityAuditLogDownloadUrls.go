@@ -18,37 +18,40 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		task, err := Dbbrain.NewSecurityAuditLogExportTask(ctx, "task", &Dbbrain.SecurityAuditLogExportTaskArgs{
-// 			SecAuditGroupId: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			StartTime:       pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			EndTime:         pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			Product:         pulumi.String("mysql"),
-// 			DangerLevels: pulumi.IntArray{
-// 				pulumi.Int(0),
-// 				pulumi.Int(1),
-// 				pulumi.Int(2),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Dbbrain.GetSecurityAuditLogDownloadUrlsOutput(ctx, dbbrain.GetSecurityAuditLogDownloadUrlsOutputArgs{
-// 			SecAuditGroupId: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			AsyncRequestId:  task.AsyncRequestId,
-// 			Product:         pulumi.String("mysql"),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			task, err := Dbbrain.NewSecurityAuditLogExportTask(ctx, "task", &Dbbrain.SecurityAuditLogExportTaskArgs{
+//				SecAuditGroupId: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//				StartTime:       pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//				EndTime:         pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//				Product:         pulumi.String("mysql"),
+//				DangerLevels: pulumi.IntArray{
+//					pulumi.Int(0),
+//					pulumi.Int(1),
+//					pulumi.Int(2),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Dbbrain.GetSecurityAuditLogDownloadUrlsOutput(ctx, dbbrain.GetSecurityAuditLogDownloadUrlsOutputArgs{
+//				SecAuditGroupId: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//				AsyncRequestId:  task.AsyncRequestId,
+//				Product:         pulumi.String("mysql"),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetSecurityAuditLogDownloadUrls(ctx *pulumi.Context, args *GetSecurityAuditLogDownloadUrlsArgs, opts ...pulumi.InvokeOption) (*GetSecurityAuditLogDownloadUrlsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

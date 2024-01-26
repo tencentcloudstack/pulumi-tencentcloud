@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Chdfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Chdfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Chdfs.NewMountPoint(ctx, "mountPoint", &Chdfs.MountPointArgs{
-// 			FileSystemId:     pulumi.String("f14mpfy5lh4e"),
-// 			MountPointName:   pulumi.String("terraform-test"),
-// 			MountPointStatus: pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Chdfs.NewMountPoint(ctx, "mountPoint", &Chdfs.MountPointArgs{
+//				FileSystemId:     pulumi.String("f14mpfy5lh4e"),
+//				MountPointName:   pulumi.String("terraform-test"),
+//				MountPointStatus: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // chdfs mount_point can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Chdfs/mountPoint:MountPoint mount_point mount_point_id
+//
+//	$ pulumi import tencentcloud:Chdfs/mountPoint:MountPoint mount_point mount_point_id
+//
 // ```
 type MountPoint struct {
 	pulumi.CustomResourceState
@@ -161,7 +166,7 @@ func (i *MountPoint) ToMountPointOutputWithContext(ctx context.Context) MountPoi
 // MountPointArrayInput is an input type that accepts MountPointArray and MountPointArrayOutput values.
 // You can construct a concrete instance of `MountPointArrayInput` via:
 //
-//          MountPointArray{ MountPointArgs{...} }
+//	MountPointArray{ MountPointArgs{...} }
 type MountPointArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +191,7 @@ func (i MountPointArray) ToMountPointArrayOutputWithContext(ctx context.Context)
 // MountPointMapInput is an input type that accepts MountPointMap and MountPointMapOutput values.
 // You can construct a concrete instance of `MountPointMapInput` via:
 //
-//          MountPointMap{ "key": MountPointArgs{...} }
+//	MountPointMap{ "key": MountPointArgs{...} }
 type MountPointMapInput interface {
 	pulumi.Input
 

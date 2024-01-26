@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.GetLastActivity(ctx, &as.GetLastActivityArgs{
-// 			AutoScalingGroupIds: []string{
-// 				"asc-lo0b94oy",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := As.GetLastActivity(ctx, &as.GetLastActivityArgs{
+//				AutoScalingGroupIds: []string{
+//					"asc-lo0b94oy",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetLastActivity(ctx *pulumi.Context, args *GetLastActivityArgs, opts ...pulumi.InvokeOption) (*GetLastActivityResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

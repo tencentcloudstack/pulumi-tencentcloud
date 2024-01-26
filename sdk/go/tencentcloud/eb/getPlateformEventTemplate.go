@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eb.GetPlateformEventTemplate(ctx, &eb.GetPlateformEventTemplateArgs{
-// 			EventType: "eb_platform_test:TEST:ALL",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Eb.GetPlateformEventTemplate(ctx, &eb.GetPlateformEventTemplateArgs{
+//				EventType: "eb_platform_test:TEST:ALL",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetPlateformEventTemplate(ctx *pulumi.Context, args *GetPlateformEventTemplateArgs, opts ...pulumi.InvokeOption) (*GetPlateformEventTemplateResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

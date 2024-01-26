@@ -20,7 +20,7 @@ type BatchSendEmailAttachment struct {
 // BatchSendEmailAttachmentInput is an input type that accepts BatchSendEmailAttachmentArgs and BatchSendEmailAttachmentOutput values.
 // You can construct a concrete instance of `BatchSendEmailAttachmentInput` via:
 //
-//          BatchSendEmailAttachmentArgs{...}
+//	BatchSendEmailAttachmentArgs{...}
 type BatchSendEmailAttachmentInput interface {
 	pulumi.Input
 
@@ -50,7 +50,7 @@ func (i BatchSendEmailAttachmentArgs) ToBatchSendEmailAttachmentOutputWithContex
 // BatchSendEmailAttachmentArrayInput is an input type that accepts BatchSendEmailAttachmentArray and BatchSendEmailAttachmentArrayOutput values.
 // You can construct a concrete instance of `BatchSendEmailAttachmentArrayInput` via:
 //
-//          BatchSendEmailAttachmentArray{ BatchSendEmailAttachmentArgs{...} }
+//	BatchSendEmailAttachmentArray{ BatchSendEmailAttachmentArgs{...} }
 type BatchSendEmailAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -128,7 +128,7 @@ type BatchSendEmailCycleParam struct {
 // BatchSendEmailCycleParamInput is an input type that accepts BatchSendEmailCycleParamArgs and BatchSendEmailCycleParamOutput values.
 // You can construct a concrete instance of `BatchSendEmailCycleParamInput` via:
 //
-//          BatchSendEmailCycleParamArgs{...}
+//	BatchSendEmailCycleParamArgs{...}
 type BatchSendEmailCycleParamInput interface {
 	pulumi.Input
 
@@ -168,11 +168,11 @@ func (i BatchSendEmailCycleParamArgs) ToBatchSendEmailCycleParamPtrOutputWithCon
 // BatchSendEmailCycleParamPtrInput is an input type that accepts BatchSendEmailCycleParamArgs, BatchSendEmailCycleParamPtr and BatchSendEmailCycleParamPtrOutput values.
 // You can construct a concrete instance of `BatchSendEmailCycleParamPtrInput` via:
 //
-//          BatchSendEmailCycleParamArgs{...}
+//	        BatchSendEmailCycleParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type BatchSendEmailCycleParamPtrInput interface {
 	pulumi.Input
 
@@ -301,7 +301,7 @@ type BatchSendEmailTemplate struct {
 // BatchSendEmailTemplateInput is an input type that accepts BatchSendEmailTemplateArgs and BatchSendEmailTemplateOutput values.
 // You can construct a concrete instance of `BatchSendEmailTemplateInput` via:
 //
-//          BatchSendEmailTemplateArgs{...}
+//	BatchSendEmailTemplateArgs{...}
 type BatchSendEmailTemplateInput interface {
 	pulumi.Input
 
@@ -339,11 +339,11 @@ func (i BatchSendEmailTemplateArgs) ToBatchSendEmailTemplatePtrOutputWithContext
 // BatchSendEmailTemplatePtrInput is an input type that accepts BatchSendEmailTemplateArgs, BatchSendEmailTemplatePtr and BatchSendEmailTemplatePtrOutput values.
 // You can construct a concrete instance of `BatchSendEmailTemplatePtrInput` via:
 //
-//          BatchSendEmailTemplateArgs{...}
+//	        BatchSendEmailTemplateArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type BatchSendEmailTemplatePtrInput interface {
 	pulumi.Input
 
@@ -455,7 +455,7 @@ type BatchSendEmailTimedParam struct {
 // BatchSendEmailTimedParamInput is an input type that accepts BatchSendEmailTimedParamArgs and BatchSendEmailTimedParamOutput values.
 // You can construct a concrete instance of `BatchSendEmailTimedParamInput` via:
 //
-//          BatchSendEmailTimedParamArgs{...}
+//	BatchSendEmailTimedParamArgs{...}
 type BatchSendEmailTimedParamInput interface {
 	pulumi.Input
 
@@ -491,11 +491,11 @@ func (i BatchSendEmailTimedParamArgs) ToBatchSendEmailTimedParamPtrOutputWithCon
 // BatchSendEmailTimedParamPtrInput is an input type that accepts BatchSendEmailTimedParamArgs, BatchSendEmailTimedParamPtr and BatchSendEmailTimedParamPtrOutput values.
 // You can construct a concrete instance of `BatchSendEmailTimedParamPtrInput` via:
 //
-//          BatchSendEmailTimedParamArgs{...}
+//	        BatchSendEmailTimedParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type BatchSendEmailTimedParamPtrInput interface {
 	pulumi.Input
 
@@ -596,7 +596,7 @@ type DomainAttribute struct {
 // DomainAttributeInput is an input type that accepts DomainAttributeArgs and DomainAttributeOutput values.
 // You can construct a concrete instance of `DomainAttributeInput` via:
 //
-//          DomainAttributeArgs{...}
+//	DomainAttributeArgs{...}
 type DomainAttributeInput interface {
 	pulumi.Input
 
@@ -628,7 +628,7 @@ func (i DomainAttributeArgs) ToDomainAttributeOutputWithContext(ctx context.Cont
 // DomainAttributeArrayInput is an input type that accepts DomainAttributeArray and DomainAttributeArrayOutput values.
 // You can construct a concrete instance of `DomainAttributeArrayInput` via:
 //
-//          DomainAttributeArray{ DomainAttributeArgs{...} }
+//	DomainAttributeArray{ DomainAttributeArgs{...} }
 type DomainAttributeArrayInput interface {
 	pulumi.Input
 
@@ -709,7 +709,7 @@ type ReceiverData struct {
 // ReceiverDataInput is an input type that accepts ReceiverDataArgs and ReceiverDataOutput values.
 // You can construct a concrete instance of `ReceiverDataInput` via:
 //
-//          ReceiverDataArgs{...}
+//	ReceiverDataArgs{...}
 type ReceiverDataInput interface {
 	pulumi.Input
 
@@ -739,7 +739,7 @@ func (i ReceiverDataArgs) ToReceiverDataOutputWithContext(ctx context.Context) R
 // ReceiverDataArrayInput is an input type that accepts ReceiverDataArray and ReceiverDataArrayOutput values.
 // You can construct a concrete instance of `ReceiverDataArrayInput` via:
 //
-//          ReceiverDataArray{ ReceiverDataArgs{...} }
+//	ReceiverDataArray{ ReceiverDataArgs{...} }
 type ReceiverDataArrayInput interface {
 	pulumi.Input
 
@@ -815,7 +815,7 @@ type SendEmailAttachment struct {
 // SendEmailAttachmentInput is an input type that accepts SendEmailAttachmentArgs and SendEmailAttachmentOutput values.
 // You can construct a concrete instance of `SendEmailAttachmentInput` via:
 //
-//          SendEmailAttachmentArgs{...}
+//	SendEmailAttachmentArgs{...}
 type SendEmailAttachmentInput interface {
 	pulumi.Input
 
@@ -845,7 +845,7 @@ func (i SendEmailAttachmentArgs) ToSendEmailAttachmentOutputWithContext(ctx cont
 // SendEmailAttachmentArrayInput is an input type that accepts SendEmailAttachmentArray and SendEmailAttachmentArrayOutput values.
 // You can construct a concrete instance of `SendEmailAttachmentArrayInput` via:
 //
-//          SendEmailAttachmentArray{ SendEmailAttachmentArgs{...} }
+//	SendEmailAttachmentArray{ SendEmailAttachmentArgs{...} }
 type SendEmailAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -921,7 +921,7 @@ type SendEmailTemplate struct {
 // SendEmailTemplateInput is an input type that accepts SendEmailTemplateArgs and SendEmailTemplateOutput values.
 // You can construct a concrete instance of `SendEmailTemplateInput` via:
 //
-//          SendEmailTemplateArgs{...}
+//	SendEmailTemplateArgs{...}
 type SendEmailTemplateInput interface {
 	pulumi.Input
 
@@ -959,11 +959,11 @@ func (i SendEmailTemplateArgs) ToSendEmailTemplatePtrOutputWithContext(ctx conte
 // SendEmailTemplatePtrInput is an input type that accepts SendEmailTemplateArgs, SendEmailTemplatePtr and SendEmailTemplatePtrOutput values.
 // You can construct a concrete instance of `SendEmailTemplatePtrInput` via:
 //
-//          SendEmailTemplateArgs{...}
+//	        SendEmailTemplateArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type SendEmailTemplatePtrInput interface {
 	pulumi.Input
 
@@ -1077,7 +1077,7 @@ type TemplateTemplateContent struct {
 // TemplateTemplateContentInput is an input type that accepts TemplateTemplateContentArgs and TemplateTemplateContentOutput values.
 // You can construct a concrete instance of `TemplateTemplateContentInput` via:
 //
-//          TemplateTemplateContentArgs{...}
+//	TemplateTemplateContentArgs{...}
 type TemplateTemplateContentInput interface {
 	pulumi.Input
 
@@ -1115,11 +1115,11 @@ func (i TemplateTemplateContentArgs) ToTemplateTemplateContentPtrOutputWithConte
 // TemplateTemplateContentPtrInput is an input type that accepts TemplateTemplateContentArgs, TemplateTemplateContentPtr and TemplateTemplateContentPtrOutput values.
 // You can construct a concrete instance of `TemplateTemplateContentPtrInput` via:
 //
-//          TemplateTemplateContentArgs{...}
+//	        TemplateTemplateContentArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type TemplateTemplateContentPtrInput interface {
 	pulumi.Input
 
@@ -1233,7 +1233,7 @@ type GetBlackEmailAddressBlackList struct {
 // GetBlackEmailAddressBlackListInput is an input type that accepts GetBlackEmailAddressBlackListArgs and GetBlackEmailAddressBlackListOutput values.
 // You can construct a concrete instance of `GetBlackEmailAddressBlackListInput` via:
 //
-//          GetBlackEmailAddressBlackListArgs{...}
+//	GetBlackEmailAddressBlackListArgs{...}
 type GetBlackEmailAddressBlackListInput interface {
 	pulumi.Input
 
@@ -1263,7 +1263,7 @@ func (i GetBlackEmailAddressBlackListArgs) ToGetBlackEmailAddressBlackListOutput
 // GetBlackEmailAddressBlackListArrayInput is an input type that accepts GetBlackEmailAddressBlackListArray and GetBlackEmailAddressBlackListArrayOutput values.
 // You can construct a concrete instance of `GetBlackEmailAddressBlackListArrayInput` via:
 //
-//          GetBlackEmailAddressBlackListArray{ GetBlackEmailAddressBlackListArgs{...} }
+//	GetBlackEmailAddressBlackListArray{ GetBlackEmailAddressBlackListArgs{...} }
 type GetBlackEmailAddressBlackListArrayInput interface {
 	pulumi.Input
 
@@ -1345,7 +1345,7 @@ type GetEmailIdentitiesEmailIdentity struct {
 // GetEmailIdentitiesEmailIdentityInput is an input type that accepts GetEmailIdentitiesEmailIdentityArgs and GetEmailIdentitiesEmailIdentityOutput values.
 // You can construct a concrete instance of `GetEmailIdentitiesEmailIdentityInput` via:
 //
-//          GetEmailIdentitiesEmailIdentityArgs{...}
+//	GetEmailIdentitiesEmailIdentityArgs{...}
 type GetEmailIdentitiesEmailIdentityInput interface {
 	pulumi.Input
 
@@ -1381,7 +1381,7 @@ func (i GetEmailIdentitiesEmailIdentityArgs) ToGetEmailIdentitiesEmailIdentityOu
 // GetEmailIdentitiesEmailIdentityArrayInput is an input type that accepts GetEmailIdentitiesEmailIdentityArray and GetEmailIdentitiesEmailIdentityArrayOutput values.
 // You can construct a concrete instance of `GetEmailIdentitiesEmailIdentityArrayInput` via:
 //
-//          GetEmailIdentitiesEmailIdentityArray{ GetEmailIdentitiesEmailIdentityArgs{...} }
+//	GetEmailIdentitiesEmailIdentityArray{ GetEmailIdentitiesEmailIdentityArgs{...} }
 type GetEmailIdentitiesEmailIdentityArrayInput interface {
 	pulumi.Input
 
@@ -1480,7 +1480,7 @@ type GetReceiversData struct {
 // GetReceiversDataInput is an input type that accepts GetReceiversDataArgs and GetReceiversDataOutput values.
 // You can construct a concrete instance of `GetReceiversDataInput` via:
 //
-//          GetReceiversDataArgs{...}
+//	GetReceiversDataArgs{...}
 type GetReceiversDataInput interface {
 	pulumi.Input
 
@@ -1518,7 +1518,7 @@ func (i GetReceiversDataArgs) ToGetReceiversDataOutputWithContext(ctx context.Co
 // GetReceiversDataArrayInput is an input type that accepts GetReceiversDataArray and GetReceiversDataArrayOutput values.
 // You can construct a concrete instance of `GetReceiversDataArrayInput` via:
 //
-//          GetReceiversDataArray{ GetReceiversDataArgs{...} }
+//	GetReceiversDataArray{ GetReceiversDataArgs{...} }
 type GetReceiversDataArrayInput interface {
 	pulumi.Input
 
@@ -1634,7 +1634,7 @@ type GetSendEmailStatusEmailStatusList struct {
 // GetSendEmailStatusEmailStatusListInput is an input type that accepts GetSendEmailStatusEmailStatusListArgs and GetSendEmailStatusEmailStatusListOutput values.
 // You can construct a concrete instance of `GetSendEmailStatusEmailStatusListInput` via:
 //
-//          GetSendEmailStatusEmailStatusListArgs{...}
+//	GetSendEmailStatusEmailStatusListArgs{...}
 type GetSendEmailStatusEmailStatusListInput interface {
 	pulumi.Input
 
@@ -1684,7 +1684,7 @@ func (i GetSendEmailStatusEmailStatusListArgs) ToGetSendEmailStatusEmailStatusLi
 // GetSendEmailStatusEmailStatusListArrayInput is an input type that accepts GetSendEmailStatusEmailStatusListArray and GetSendEmailStatusEmailStatusListArrayOutput values.
 // You can construct a concrete instance of `GetSendEmailStatusEmailStatusListArrayInput` via:
 //
-//          GetSendEmailStatusEmailStatusListArray{ GetSendEmailStatusEmailStatusListArgs{...} }
+//	GetSendEmailStatusEmailStatusListArray{ GetSendEmailStatusEmailStatusListArgs{...} }
 type GetSendEmailStatusEmailStatusListArrayInput interface {
 	pulumi.Input
 
@@ -1838,7 +1838,7 @@ type GetSendTasksData struct {
 // GetSendTasksDataInput is an input type that accepts GetSendTasksDataArgs and GetSendTasksDataOutput values.
 // You can construct a concrete instance of `GetSendTasksDataInput` via:
 //
-//          GetSendTasksDataArgs{...}
+//	GetSendTasksDataArgs{...}
 type GetSendTasksDataInput interface {
 	pulumi.Input
 
@@ -1896,7 +1896,7 @@ func (i GetSendTasksDataArgs) ToGetSendTasksDataOutputWithContext(ctx context.Co
 // GetSendTasksDataArrayInput is an input type that accepts GetSendTasksDataArray and GetSendTasksDataArrayOutput values.
 // You can construct a concrete instance of `GetSendTasksDataArrayInput` via:
 //
-//          GetSendTasksDataArray{ GetSendTasksDataArgs{...} }
+//	GetSendTasksDataArray{ GetSendTasksDataArgs{...} }
 type GetSendTasksDataArrayInput interface {
 	pulumi.Input
 
@@ -2044,7 +2044,7 @@ type GetSendTasksDataCycleParam struct {
 // GetSendTasksDataCycleParamInput is an input type that accepts GetSendTasksDataCycleParamArgs and GetSendTasksDataCycleParamOutput values.
 // You can construct a concrete instance of `GetSendTasksDataCycleParamInput` via:
 //
-//          GetSendTasksDataCycleParamArgs{...}
+//	GetSendTasksDataCycleParamArgs{...}
 type GetSendTasksDataCycleParamInput interface {
 	pulumi.Input
 
@@ -2076,7 +2076,7 @@ func (i GetSendTasksDataCycleParamArgs) ToGetSendTasksDataCycleParamOutputWithCo
 // GetSendTasksDataCycleParamArrayInput is an input type that accepts GetSendTasksDataCycleParamArray and GetSendTasksDataCycleParamArrayOutput values.
 // You can construct a concrete instance of `GetSendTasksDataCycleParamArrayInput` via:
 //
-//          GetSendTasksDataCycleParamArray{ GetSendTasksDataCycleParamArgs{...} }
+//	GetSendTasksDataCycleParamArray{ GetSendTasksDataCycleParamArgs{...} }
 type GetSendTasksDataCycleParamArrayInput interface {
 	pulumi.Input
 
@@ -2157,7 +2157,7 @@ type GetSendTasksDataTemplate struct {
 // GetSendTasksDataTemplateInput is an input type that accepts GetSendTasksDataTemplateArgs and GetSendTasksDataTemplateOutput values.
 // You can construct a concrete instance of `GetSendTasksDataTemplateInput` via:
 //
-//          GetSendTasksDataTemplateArgs{...}
+//	GetSendTasksDataTemplateArgs{...}
 type GetSendTasksDataTemplateInput interface {
 	pulumi.Input
 
@@ -2187,7 +2187,7 @@ func (i GetSendTasksDataTemplateArgs) ToGetSendTasksDataTemplateOutputWithContex
 // GetSendTasksDataTemplateArrayInput is an input type that accepts GetSendTasksDataTemplateArray and GetSendTasksDataTemplateArrayOutput values.
 // You can construct a concrete instance of `GetSendTasksDataTemplateArrayInput` via:
 //
-//          GetSendTasksDataTemplateArray{ GetSendTasksDataTemplateArgs{...} }
+//	GetSendTasksDataTemplateArray{ GetSendTasksDataTemplateArgs{...} }
 type GetSendTasksDataTemplateArrayInput interface {
 	pulumi.Input
 
@@ -2261,7 +2261,7 @@ type GetSendTasksDataTimedParam struct {
 // GetSendTasksDataTimedParamInput is an input type that accepts GetSendTasksDataTimedParamArgs and GetSendTasksDataTimedParamOutput values.
 // You can construct a concrete instance of `GetSendTasksDataTimedParamInput` via:
 //
-//          GetSendTasksDataTimedParamArgs{...}
+//	GetSendTasksDataTimedParamArgs{...}
 type GetSendTasksDataTimedParamInput interface {
 	pulumi.Input
 
@@ -2289,7 +2289,7 @@ func (i GetSendTasksDataTimedParamArgs) ToGetSendTasksDataTimedParamOutputWithCo
 // GetSendTasksDataTimedParamArrayInput is an input type that accepts GetSendTasksDataTimedParamArray and GetSendTasksDataTimedParamArrayOutput values.
 // You can construct a concrete instance of `GetSendTasksDataTimedParamArrayInput` via:
 //
-//          GetSendTasksDataTimedParamArray{ GetSendTasksDataTimedParamArgs{...} }
+//	GetSendTasksDataTimedParamArray{ GetSendTasksDataTimedParamArgs{...} }
 type GetSendTasksDataTimedParamArrayInput interface {
 	pulumi.Input
 
@@ -2372,7 +2372,7 @@ type GetStatisticsReportDailyVolume struct {
 // GetStatisticsReportDailyVolumeInput is an input type that accepts GetStatisticsReportDailyVolumeArgs and GetStatisticsReportDailyVolumeOutput values.
 // You can construct a concrete instance of `GetStatisticsReportDailyVolumeInput` via:
 //
-//          GetStatisticsReportDailyVolumeArgs{...}
+//	GetStatisticsReportDailyVolumeArgs{...}
 type GetStatisticsReportDailyVolumeInput interface {
 	pulumi.Input
 
@@ -2414,7 +2414,7 @@ func (i GetStatisticsReportDailyVolumeArgs) ToGetStatisticsReportDailyVolumeOutp
 // GetStatisticsReportDailyVolumeArrayInput is an input type that accepts GetStatisticsReportDailyVolumeArray and GetStatisticsReportDailyVolumeArrayOutput values.
 // You can construct a concrete instance of `GetStatisticsReportDailyVolumeArrayInput` via:
 //
-//          GetStatisticsReportDailyVolumeArray{ GetStatisticsReportDailyVolumeArgs{...} }
+//	GetStatisticsReportDailyVolumeArray{ GetStatisticsReportDailyVolumeArgs{...} }
 type GetStatisticsReportDailyVolumeArrayInput interface {
 	pulumi.Input
 
@@ -2532,7 +2532,7 @@ type GetStatisticsReportOverallVolume struct {
 // GetStatisticsReportOverallVolumeInput is an input type that accepts GetStatisticsReportOverallVolumeArgs and GetStatisticsReportOverallVolumeOutput values.
 // You can construct a concrete instance of `GetStatisticsReportOverallVolumeInput` via:
 //
-//          GetStatisticsReportOverallVolumeArgs{...}
+//	GetStatisticsReportOverallVolumeArgs{...}
 type GetStatisticsReportOverallVolumeInput interface {
 	pulumi.Input
 
@@ -2574,7 +2574,7 @@ func (i GetStatisticsReportOverallVolumeArgs) ToGetStatisticsReportOverallVolume
 // GetStatisticsReportOverallVolumeArrayInput is an input type that accepts GetStatisticsReportOverallVolumeArray and GetStatisticsReportOverallVolumeArrayOutput values.
 // You can construct a concrete instance of `GetStatisticsReportOverallVolumeArrayInput` via:
 //
-//          GetStatisticsReportOverallVolumeArray{ GetStatisticsReportOverallVolumeArgs{...} }
+//	GetStatisticsReportOverallVolumeArray{ GetStatisticsReportOverallVolumeArgs{...} }
 type GetStatisticsReportOverallVolumeArrayInput interface {
 	pulumi.Input
 

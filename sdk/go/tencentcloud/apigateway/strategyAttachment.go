@@ -19,95 +19,98 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		serviceService, err := ApiGateway.NewService(ctx, "serviceService", &ApiGateway.ServiceArgs{
-// 			ServiceName: pulumi.String("niceservice"),
-// 			Protocol:    pulumi.String("http&https"),
-// 			ServiceDesc: pulumi.String("your nice service"),
-// 			NetTypes: pulumi.StringArray{
-// 				pulumi.String("INNER"),
-// 				pulumi.String("OUTER"),
-// 			},
-// 			IpVersion: pulumi.String("IPv4"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		testIpStrategy, err := ApiGateway.NewIpStrategy(ctx, "testIpStrategy", &ApiGateway.IpStrategyArgs{
-// 			ServiceId:    serviceService.ID(),
-// 			StrategyName: pulumi.String("tf_test"),
-// 			StrategyType: pulumi.String("BLACK"),
-// 			StrategyData: pulumi.String("9.9.9.9"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		api, err := ApiGateway.NewApi(ctx, "api", &ApiGateway.ApiArgs{
-// 			ServiceId:           serviceService.ID(),
-// 			ApiName:             pulumi.String("tf_example"),
-// 			ApiDesc:             pulumi.String("my hello api update"),
-// 			AuthType:            pulumi.String("SECRET"),
-// 			Protocol:            pulumi.String("HTTP"),
-// 			EnableCors:          pulumi.Bool(true),
-// 			RequestConfigPath:   pulumi.String("/user/info"),
-// 			RequestConfigMethod: pulumi.String("POST"),
-// 			RequestParameters: apigateway.ApiRequestParameterArray{
-// 				&apigateway.ApiRequestParameterArgs{
-// 					Name:         pulumi.String("email"),
-// 					Position:     pulumi.String("QUERY"),
-// 					Type:         pulumi.String("string"),
-// 					Desc:         pulumi.String("your email please?"),
-// 					DefaultValue: pulumi.String("tom@qq.com"),
-// 					Required:     pulumi.Bool(true),
-// 				},
-// 			},
-// 			ServiceConfigType:      pulumi.String("HTTP"),
-// 			ServiceConfigTimeout:   pulumi.Int(10),
-// 			ServiceConfigUrl:       pulumi.String("http://www.tencent.com"),
-// 			ServiceConfigPath:      pulumi.String("/user"),
-// 			ServiceConfigMethod:    pulumi.String("POST"),
-// 			ResponseType:           pulumi.String("XML"),
-// 			ResponseSuccessExample: pulumi.String("<note>success</note>"),
-// 			ResponseFailExample:    pulumi.String("<note>fail</note>"),
-// 			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
-// 				&apigateway.ApiResponseErrorCodeArgs{
-// 					Code:          pulumi.Int(10),
-// 					Msg:           pulumi.String("system error"),
-// 					Desc:          pulumi.String("system error code"),
-// 					ConvertedCode: -10,
-// 					NeedConvert:   pulumi.Bool(true),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		serviceServiceRelease, err := ApiGateway.NewServiceRelease(ctx, "serviceServiceRelease", &ApiGateway.ServiceReleaseArgs{
-// 			ServiceId:       serviceService.ID(),
-// 			EnvironmentName: pulumi.String("release"),
-// 			ReleaseDesc:     pulumi.String("test service release"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = ApiGateway.NewStrategyAttachment(ctx, "testStrategyAttachment", &ApiGateway.StrategyAttachmentArgs{
-// 			ServiceId:       serviceServiceRelease.ServiceId,
-// 			StrategyId:      testIpStrategy.StrategyId,
-// 			EnvironmentName: pulumi.String("release"),
-// 			BindApiId:       api.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			serviceService, err := ApiGateway.NewService(ctx, "serviceService", &ApiGateway.ServiceArgs{
+//				ServiceName: pulumi.String("niceservice"),
+//				Protocol:    pulumi.String("http&https"),
+//				ServiceDesc: pulumi.String("your nice service"),
+//				NetTypes: pulumi.StringArray{
+//					pulumi.String("INNER"),
+//					pulumi.String("OUTER"),
+//				},
+//				IpVersion: pulumi.String("IPv4"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			testIpStrategy, err := ApiGateway.NewIpStrategy(ctx, "testIpStrategy", &ApiGateway.IpStrategyArgs{
+//				ServiceId:    serviceService.ID(),
+//				StrategyName: pulumi.String("tf_test"),
+//				StrategyType: pulumi.String("BLACK"),
+//				StrategyData: pulumi.String("9.9.9.9"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			api, err := ApiGateway.NewApi(ctx, "api", &ApiGateway.ApiArgs{
+//				ServiceId:           serviceService.ID(),
+//				ApiName:             pulumi.String("tf_example"),
+//				ApiDesc:             pulumi.String("my hello api update"),
+//				AuthType:            pulumi.String("SECRET"),
+//				Protocol:            pulumi.String("HTTP"),
+//				EnableCors:          pulumi.Bool(true),
+//				RequestConfigPath:   pulumi.String("/user/info"),
+//				RequestConfigMethod: pulumi.String("POST"),
+//				RequestParameters: apigateway.ApiRequestParameterArray{
+//					&apigateway.ApiRequestParameterArgs{
+//						Name:         pulumi.String("email"),
+//						Position:     pulumi.String("QUERY"),
+//						Type:         pulumi.String("string"),
+//						Desc:         pulumi.String("your email please?"),
+//						DefaultValue: pulumi.String("tom@qq.com"),
+//						Required:     pulumi.Bool(true),
+//					},
+//				},
+//				ServiceConfigType:      pulumi.String("HTTP"),
+//				ServiceConfigTimeout:   pulumi.Int(10),
+//				ServiceConfigUrl:       pulumi.String("http://www.tencent.com"),
+//				ServiceConfigPath:      pulumi.String("/user"),
+//				ServiceConfigMethod:    pulumi.String("POST"),
+//				ResponseType:           pulumi.String("XML"),
+//				ResponseSuccessExample: pulumi.String("<note>success</note>"),
+//				ResponseFailExample:    pulumi.String("<note>fail</note>"),
+//				ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
+//					&apigateway.ApiResponseErrorCodeArgs{
+//						Code:          pulumi.Int(10),
+//						Msg:           pulumi.String("system error"),
+//						Desc:          pulumi.String("system error code"),
+//						ConvertedCode: -10,
+//						NeedConvert:   pulumi.Bool(true),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			serviceServiceRelease, err := ApiGateway.NewServiceRelease(ctx, "serviceServiceRelease", &ApiGateway.ServiceReleaseArgs{
+//				ServiceId:       serviceService.ID(),
+//				EnvironmentName: pulumi.String("release"),
+//				ReleaseDesc:     pulumi.String("test service release"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = ApiGateway.NewStrategyAttachment(ctx, "testStrategyAttachment", &ApiGateway.StrategyAttachmentArgs{
+//				ServiceId:       serviceServiceRelease.ServiceId,
+//				StrategyId:      testIpStrategy.StrategyId,
+//				EnvironmentName: pulumi.String("release"),
+//				BindApiId:       api.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -115,7 +118,9 @@ import (
 // IP strategy attachment of API gateway can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:ApiGateway/strategyAttachment:StrategyAttachment test service-pk2r6bcc#IPStrategy-4kz2ljfi#api-h3wc5r0s#release
+//
+//	$ pulumi import tencentcloud:ApiGateway/strategyAttachment:StrategyAttachment test service-pk2r6bcc#IPStrategy-4kz2ljfi#api-h3wc5r0s#release
+//
 // ```
 type StrategyAttachment struct {
 	pulumi.CustomResourceState
@@ -246,7 +251,7 @@ func (i *StrategyAttachment) ToStrategyAttachmentOutputWithContext(ctx context.C
 // StrategyAttachmentArrayInput is an input type that accepts StrategyAttachmentArray and StrategyAttachmentArrayOutput values.
 // You can construct a concrete instance of `StrategyAttachmentArrayInput` via:
 //
-//          StrategyAttachmentArray{ StrategyAttachmentArgs{...} }
+//	StrategyAttachmentArray{ StrategyAttachmentArgs{...} }
 type StrategyAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -271,7 +276,7 @@ func (i StrategyAttachmentArray) ToStrategyAttachmentArrayOutputWithContext(ctx 
 // StrategyAttachmentMapInput is an input type that accepts StrategyAttachmentMap and StrategyAttachmentMapOutput values.
 // You can construct a concrete instance of `StrategyAttachmentMapInput` via:
 //
-//          StrategyAttachmentMap{ "key": StrategyAttachmentArgs{...} }
+//	StrategyAttachmentMap{ "key": StrategyAttachmentArgs{...} }
 type StrategyAttachmentMapInput interface {
 	pulumi.Input
 

@@ -19,33 +19,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewMigrateService(ctx, "migrateService", &Dts.MigrateServiceArgs{
-// 			DstDatabaseType: pulumi.String("cynosdbmysql"),
-// 			DstRegion:       pulumi.String("ap-guangzhou"),
-// 			InstanceClass:   pulumi.String("small"),
-// 			JobName:         pulumi.String("tf_test_migration_job"),
-// 			SrcDatabaseType: pulumi.String("mysql"),
-// 			SrcRegion:       pulumi.String("ap-guangzhou"),
-// 			Tags: dts.MigrateServiceTagArray{
-// 				&dts.MigrateServiceTagArgs{
-// 					TagKey:   pulumi.String("aaa"),
-// 					TagValue: pulumi.String("bbb"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewMigrateService(ctx, "migrateService", &Dts.MigrateServiceArgs{
+//				DstDatabaseType: pulumi.String("cynosdbmysql"),
+//				DstRegion:       pulumi.String("ap-guangzhou"),
+//				InstanceClass:   pulumi.String("small"),
+//				JobName:         pulumi.String("tf_test_migration_job"),
+//				SrcDatabaseType: pulumi.String("mysql"),
+//				SrcRegion:       pulumi.String("ap-guangzhou"),
+//				Tags: dts.MigrateServiceTagArray{
+//					&dts.MigrateServiceTagArgs{
+//						TagKey:   pulumi.String("aaa"),
+//						TagValue: pulumi.String("bbb"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -53,7 +56,9 @@ import (
 // dts migrate_service can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dts/migrateService:MigrateService migrate_service migrateService_id
+//
+//	$ pulumi import tencentcloud:Dts/migrateService:MigrateService migrate_service migrateService_id
+//
 // ```
 type MigrateService struct {
 	pulumi.CustomResourceState
@@ -217,7 +222,7 @@ func (i *MigrateService) ToMigrateServiceOutputWithContext(ctx context.Context) 
 // MigrateServiceArrayInput is an input type that accepts MigrateServiceArray and MigrateServiceArrayOutput values.
 // You can construct a concrete instance of `MigrateServiceArrayInput` via:
 //
-//          MigrateServiceArray{ MigrateServiceArgs{...} }
+//	MigrateServiceArray{ MigrateServiceArgs{...} }
 type MigrateServiceArrayInput interface {
 	pulumi.Input
 
@@ -242,7 +247,7 @@ func (i MigrateServiceArray) ToMigrateServiceArrayOutputWithContext(ctx context.
 // MigrateServiceMapInput is an input type that accepts MigrateServiceMap and MigrateServiceMapOutput values.
 // You can construct a concrete instance of `MigrateServiceMapInput` via:
 //
-//          MigrateServiceMap{ "key": MigrateServiceArgs{...} }
+//	MigrateServiceMap{ "key": MigrateServiceArgs{...} }
 type MigrateServiceMapInput interface {
 	pulumi.Input
 

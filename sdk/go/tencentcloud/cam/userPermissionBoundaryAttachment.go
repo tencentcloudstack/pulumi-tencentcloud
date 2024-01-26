@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewUserPermissionBoundaryAttachment(ctx, "userPermissionBoundary", &Cam.UserPermissionBoundaryAttachmentArgs{
-// 			PolicyId:  pulumi.Int(151113272),
-// 			TargetUin: pulumi.Int(100032767426),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewUserPermissionBoundaryAttachment(ctx, "userPermissionBoundary", &Cam.UserPermissionBoundaryAttachmentArgs{
+//				PolicyId:  pulumi.Int(151113272),
+//				TargetUin: pulumi.Int(100032767426),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // cam user_permission_boundary can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/userPermissionBoundaryAttachment:UserPermissionBoundaryAttachment user_permission_boundary user_permission_boundary_id
+//
+//	$ pulumi import tencentcloud:Cam/userPermissionBoundaryAttachment:UserPermissionBoundaryAttachment user_permission_boundary user_permission_boundary_id
+//
 // ```
 type UserPermissionBoundaryAttachment struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *UserPermissionBoundaryAttachment) ToUserPermissionBoundaryAttachmentOut
 // UserPermissionBoundaryAttachmentArrayInput is an input type that accepts UserPermissionBoundaryAttachmentArray and UserPermissionBoundaryAttachmentArrayOutput values.
 // You can construct a concrete instance of `UserPermissionBoundaryAttachmentArrayInput` via:
 //
-//          UserPermissionBoundaryAttachmentArray{ UserPermissionBoundaryAttachmentArgs{...} }
+//	UserPermissionBoundaryAttachmentArray{ UserPermissionBoundaryAttachmentArgs{...} }
 type UserPermissionBoundaryAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i UserPermissionBoundaryAttachmentArray) ToUserPermissionBoundaryAttachmen
 // UserPermissionBoundaryAttachmentMapInput is an input type that accepts UserPermissionBoundaryAttachmentMap and UserPermissionBoundaryAttachmentMapOutput values.
 // You can construct a concrete instance of `UserPermissionBoundaryAttachmentMapInput` via:
 //
-//          UserPermissionBoundaryAttachmentMap{ "key": UserPermissionBoundaryAttachmentArgs{...} }
+//	UserPermissionBoundaryAttachmentMap{ "key": UserPermissionBoundaryAttachmentArgs{...} }
 type UserPermissionBoundaryAttachmentMapInput interface {
 	pulumi.Input
 

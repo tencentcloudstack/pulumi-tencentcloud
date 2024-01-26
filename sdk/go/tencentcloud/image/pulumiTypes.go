@@ -20,7 +20,7 @@ type GetInstanceFilter struct {
 // GetInstanceFilterInput is an input type that accepts GetInstanceFilterArgs and GetInstanceFilterOutput values.
 // You can construct a concrete instance of `GetInstanceFilterInput` via:
 //
-//          GetInstanceFilterArgs{...}
+//	GetInstanceFilterArgs{...}
 type GetInstanceFilterInput interface {
 	pulumi.Input
 
@@ -50,7 +50,7 @@ func (i GetInstanceFilterArgs) ToGetInstanceFilterOutputWithContext(ctx context.
 // GetInstanceFilterArrayInput is an input type that accepts GetInstanceFilterArray and GetInstanceFilterArrayOutput values.
 // You can construct a concrete instance of `GetInstanceFilterArrayInput` via:
 //
-//          GetInstanceFilterArray{ GetInstanceFilterArgs{...} }
+//	GetInstanceFilterArray{ GetInstanceFilterArgs{...} }
 type GetInstanceFilterArrayInput interface {
 	pulumi.Input
 

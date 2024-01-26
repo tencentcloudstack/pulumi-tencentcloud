@@ -18,29 +18,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleKey, err := Kms.NewKey(ctx, "exampleKey", &Kms.KeyArgs{
-// 			Alias:                     pulumi.String("tf-example-kms-key"),
-// 			Description:               pulumi.String("example of kms key"),
-// 			KeyUsage:                  pulumi.String("ASYMMETRIC_DECRYPT_RSA_2048"),
-// 			IsEnabled:                 pulumi.Bool(true),
-// 			PendingDeleteWindowInDays: pulumi.Int(7),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Kms.GetPublicKeyOutput(ctx, kms.GetPublicKeyOutputArgs{
-// 			KeyId: exampleKey.ID(),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleKey, err := Kms.NewKey(ctx, "exampleKey", &Kms.KeyArgs{
+//				Alias:                     pulumi.String("tf-example-kms-key"),
+//				Description:               pulumi.String("example of kms key"),
+//				KeyUsage:                  pulumi.String("ASYMMETRIC_DECRYPT_RSA_2048"),
+//				IsEnabled:                 pulumi.Bool(true),
+//				PendingDeleteWindowInDays: pulumi.Int(7),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Kms.GetPublicKeyOutput(ctx, kms.GetPublicKeyOutputArgs{
+//				KeyId: exampleKey.ID(),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetPublicKey(ctx *pulumi.Context, args *GetPublicKeyArgs, opts ...pulumi.InvokeOption) (*GetPublicKeyResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

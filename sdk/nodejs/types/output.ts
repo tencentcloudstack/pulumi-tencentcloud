@@ -3856,7 +3856,6 @@ export namespace Cam {
          */
         value: string;
     }
-
 }
 
 export namespace Cat {
@@ -6167,6 +6166,11 @@ export namespace Cfw {
         zoneSets: string[];
     }
 
+    export interface VpcPolicyBetaList {
+        lastTime?: string;
+        taskId?: number;
+        taskName?: string;
+    }
 }
 
 export namespace Chdfs {
@@ -16505,6 +16509,64 @@ export namespace Clickhouse {
         zooPath: string;
     }
 
+    export interface GetInstanceNodesInstanceNodesList {
+        /**
+         * Name of the clickhouse cluster to which it belongs.
+         */
+        cluster: string;
+        /**
+         * CPU cores.
+         */
+        core: number;
+        /**
+         * Disk size.
+         */
+        diskSize: number;
+        /**
+         * Disk type.
+         */
+        diskType: string;
+        /**
+         * IP Address.
+         */
+        ip: string;
+        /**
+         * When true, it indicates that the chproxy process has been deployed on the node.
+         */
+        isChProxy: boolean;
+        /**
+         * Memory size.
+         */
+        memory: number;
+        /**
+         * Group information to which the node belongs.
+         */
+        nodeGroups: outputs.Clickhouse.GetInstanceNodesInstanceNodesListNodeGroup[];
+        /**
+         * VPC IP.
+         */
+        rip: string;
+        /**
+         * Model, such as S1.
+         */
+        spec: string;
+    }
+
+    export interface GetInstanceNodesInstanceNodesListNodeGroup {
+        /**
+         * Group Name.
+         */
+        groupName: string;
+        /**
+         * Copy variable name.
+         */
+        replicaName: string;
+        /**
+         * Fragmented variable name.
+         */
+        shardName: string;
+    }
+
     export interface GetSpecAttachCbsSpec {
         /**
          * Number of disks.
@@ -20296,6 +20358,7 @@ export namespace Cvm {
          */
         renewFlag?: string;
     }
+
 }
 
 export namespace Cwp {
@@ -21981,7 +22044,6 @@ export namespace Cynosdb {
          */
         oldTable: string;
     }
-
 }
 
 export namespace Dayu {
@@ -23513,7 +23575,6 @@ export namespace Dayu {
         source: string;
         weight: number;
     }
-
 }
 
 export namespace Dbbrain {
@@ -25731,6 +25792,7 @@ export namespace Dcdb {
          */
         tagValue: string;
     }
+
 }
 
 export namespace Dcx {
@@ -30404,6 +30466,7 @@ export namespace Eb {
          */
         type: string;
     }
+
 }
 
 export namespace Eip {
@@ -36365,6 +36428,7 @@ export namespace Kubernetes {
          */
         value: string;
     }
+
 }
 
 export namespace Lighthouse {
@@ -38135,6 +38199,7 @@ export namespace Mariadb {
          */
         value: string;
     }
+
 }
 
 export namespace Mdl {
@@ -38572,6 +38637,7 @@ export namespace Mongodb {
          */
         standbyInstanceRegion: string;
     }
+
 }
 
 export namespace Monitor {
@@ -41302,6 +41368,67 @@ export namespace Monitor {
         uniqueId: string;
     }
 
+    export interface TmpAlertGroupCustomReceiver {
+        /**
+         * Time ranges which allow alert message send.
+         */
+        allowedTimeRanges?: outputs.Monitor.TmpAlertGroupCustomReceiverAllowedTimeRange[];
+        /**
+         * Only effect when alertmanager in user cluster, this cluster id.
+         */
+        clusterId?: string;
+        /**
+         * Only effect when alertmanager in user cluster, this cluster type (tke|eks|tdcc).
+         */
+        clusterType?: string;
+        /**
+         * Custom receiver type, webhook|alertmanager.
+         */
+        type?: string;
+        /**
+         * Custom receiver address, can be accessed by process in prometheus instance subnet.
+         */
+        url?: string;
+    }
+
+    export interface TmpAlertGroupCustomReceiverAllowedTimeRange {
+        /**
+         * Time range end, seconds since 0 o'clock.
+         */
+        end?: string;
+        /**
+         * Time range start, seconds since 0 o'clock.
+         */
+        start?: string;
+    }
+
+    export interface TmpAlertGroupRule {
+        /**
+         * Annotation of alert rule. `summary`, `description` is special annotation in prometheus, mapping `Alarm Object`, `Alarm Information` in alarm message.
+         */
+        annotations?: {[key: string]: any};
+        /**
+         * Rule alarm duration.
+         */
+        duration?: string;
+        /**
+         * Prometheus alert expression.
+         */
+        expr?: string;
+        /**
+         * Labels of alert rule.
+         */
+        labels?: {[key: string]: any};
+        /**
+         * Alert rule name.
+         */
+        ruleName?: string;
+        /**
+         * Rule state. `2`-enable, `3`-disable, default `2`.
+         */
+        state?: number;
+    }
+
     export interface TmpAlertRuleAnnotation {
         /**
          * key.
@@ -41835,6 +41962,7 @@ export namespace Monitor {
          */
         templateId?: string;
     }
+
 }
 
 export namespace Mps {
@@ -51841,7 +51969,6 @@ export namespace Mysql {
          */
         tableName: string;
     }
-
 }
 
 export namespace Nat {
@@ -53046,7 +53173,6 @@ export namespace Oceanus {
          */
         stopType: number;
     }
-
 }
 
 export namespace Organization {
@@ -54313,6 +54439,7 @@ export namespace Postgresql {
          */
         name: string;
     }
+
 }
 
 export namespace PrivateDns {
@@ -54448,7 +54575,6 @@ export namespace PrivateDns {
          */
         uniqVpcId: string;
     }
-
 }
 
 export namespace Projects {
@@ -57902,6 +58028,7 @@ export namespace Scf {
          */
         triggerProvisionedConcurrencyNum: number;
     }
+
 }
 
 export namespace Security {
@@ -58427,6 +58554,7 @@ export namespace Ses {
          */
         text?: string;
     }
+
 }
 
 export namespace Sqlserver {
@@ -62707,7 +62835,6 @@ export namespace Tcr {
          */
         values: string[];
     }
-
 }
 
 export namespace Tdcpg {
@@ -63565,6 +63692,7 @@ export namespace Tdmq {
          */
         vpcId: string;
     }
+
 }
 
 export namespace Tem {
@@ -64783,6 +64911,7 @@ export namespace Teo {
          */
         timeout?: number;
     }
+
 }
 
 export namespace Trocket {
@@ -66292,6 +66421,7 @@ export namespace Tse {
          */
         vpcId: string;
     }
+
 }
 
 export namespace Tsf {
@@ -70119,7 +70249,6 @@ export namespace Vod {
          */
         name: string;
     }
-
 }
 
 export namespace Vpc {
@@ -72172,6 +72301,7 @@ export namespace Waf {
          */
         upstreamProtocol: string;
     }
+
 }
 
 export namespace Wedata {
@@ -73805,6 +73935,7 @@ export namespace Wedata {
          */
         value?: string;
     }
+
 }
 
 export namespace config {

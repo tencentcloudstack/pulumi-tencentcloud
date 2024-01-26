@@ -139,7 +139,7 @@ func (i *ProgramFpgaImage) ToProgramFpgaImageOutputWithContext(ctx context.Conte
 // ProgramFpgaImageArrayInput is an input type that accepts ProgramFpgaImageArray and ProgramFpgaImageArrayOutput values.
 // You can construct a concrete instance of `ProgramFpgaImageArrayInput` via:
 //
-//          ProgramFpgaImageArray{ ProgramFpgaImageArgs{...} }
+//	ProgramFpgaImageArray{ ProgramFpgaImageArgs{...} }
 type ProgramFpgaImageArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +164,7 @@ func (i ProgramFpgaImageArray) ToProgramFpgaImageArrayOutputWithContext(ctx cont
 // ProgramFpgaImageMapInput is an input type that accepts ProgramFpgaImageMap and ProgramFpgaImageMapOutput values.
 // You can construct a concrete instance of `ProgramFpgaImageMapInput` via:
 //
-//          ProgramFpgaImageMap{ "key": ProgramFpgaImageArgs{...} }
+//	ProgramFpgaImageMap{ "key": ProgramFpgaImageArgs{...} }
 type ProgramFpgaImageMapInput interface {
 	pulumi.Input
 

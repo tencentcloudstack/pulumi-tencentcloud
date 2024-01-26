@@ -19,30 +19,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewClusterPasswordComplexity(ctx, "clusterPasswordComplexity", &Cynosdb.ClusterPasswordComplexityArgs{
-// 			ClusterId: pulumi.String("cynosdbmysql-cgd2gpwr"),
-// 			ValidatePasswordDictionaries: pulumi.StringArray{
-// 				pulumi.String("cccc"),
-// 				pulumi.String("xxxx"),
-// 			},
-// 			ValidatePasswordLength:           pulumi.Int(8),
-// 			ValidatePasswordMixedCaseCount:   pulumi.Int(1),
-// 			ValidatePasswordNumberCount:      pulumi.Int(1),
-// 			ValidatePasswordPolicy:           pulumi.String("STRONG"),
-// 			ValidatePasswordSpecialCharCount: pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewClusterPasswordComplexity(ctx, "clusterPasswordComplexity", &Cynosdb.ClusterPasswordComplexityArgs{
+//				ClusterId: pulumi.String("cynosdbmysql-cgd2gpwr"),
+//				ValidatePasswordDictionaries: pulumi.StringArray{
+//					pulumi.String("cccc"),
+//					pulumi.String("xxxx"),
+//				},
+//				ValidatePasswordLength:           pulumi.Int(8),
+//				ValidatePasswordMixedCaseCount:   pulumi.Int(1),
+//				ValidatePasswordNumberCount:      pulumi.Int(1),
+//				ValidatePasswordPolicy:           pulumi.String("STRONG"),
+//				ValidatePasswordSpecialCharCount: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -50,7 +53,9 @@ import (
 // cynosdb cluster_password_complexity can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cynosdb/clusterPasswordComplexity:ClusterPasswordComplexity cluster_password_complexity cluster_password_complexity_id
+//
+//	$ pulumi import tencentcloud:Cynosdb/clusterPasswordComplexity:ClusterPasswordComplexity cluster_password_complexity cluster_password_complexity_id
+//
 // ```
 type ClusterPasswordComplexity struct {
 	pulumi.CustomResourceState
@@ -217,7 +222,7 @@ func (i *ClusterPasswordComplexity) ToClusterPasswordComplexityOutputWithContext
 // ClusterPasswordComplexityArrayInput is an input type that accepts ClusterPasswordComplexityArray and ClusterPasswordComplexityArrayOutput values.
 // You can construct a concrete instance of `ClusterPasswordComplexityArrayInput` via:
 //
-//          ClusterPasswordComplexityArray{ ClusterPasswordComplexityArgs{...} }
+//	ClusterPasswordComplexityArray{ ClusterPasswordComplexityArgs{...} }
 type ClusterPasswordComplexityArrayInput interface {
 	pulumi.Input
 
@@ -242,7 +247,7 @@ func (i ClusterPasswordComplexityArray) ToClusterPasswordComplexityArrayOutputWi
 // ClusterPasswordComplexityMapInput is an input type that accepts ClusterPasswordComplexityMap and ClusterPasswordComplexityMapOutput values.
 // You can construct a concrete instance of `ClusterPasswordComplexityMapInput` via:
 //
-//          ClusterPasswordComplexityMap{ "key": ClusterPasswordComplexityArgs{...} }
+//	ClusterPasswordComplexityMap{ "key": ClusterPasswordComplexityArgs{...} }
 type ClusterPasswordComplexityMapInput interface {
 	pulumi.Input
 

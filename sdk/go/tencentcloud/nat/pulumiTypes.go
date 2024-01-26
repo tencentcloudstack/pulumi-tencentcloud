@@ -26,7 +26,7 @@ type GetDcRouteNatDirectConnectGatewayRouteSet struct {
 // GetDcRouteNatDirectConnectGatewayRouteSetInput is an input type that accepts GetDcRouteNatDirectConnectGatewayRouteSetArgs and GetDcRouteNatDirectConnectGatewayRouteSetOutput values.
 // You can construct a concrete instance of `GetDcRouteNatDirectConnectGatewayRouteSetInput` via:
 //
-//          GetDcRouteNatDirectConnectGatewayRouteSetArgs{...}
+//	GetDcRouteNatDirectConnectGatewayRouteSetArgs{...}
 type GetDcRouteNatDirectConnectGatewayRouteSetInput interface {
 	pulumi.Input
 
@@ -62,7 +62,7 @@ func (i GetDcRouteNatDirectConnectGatewayRouteSetArgs) ToGetDcRouteNatDirectConn
 // GetDcRouteNatDirectConnectGatewayRouteSetArrayInput is an input type that accepts GetDcRouteNatDirectConnectGatewayRouteSetArray and GetDcRouteNatDirectConnectGatewayRouteSetArrayOutput values.
 // You can construct a concrete instance of `GetDcRouteNatDirectConnectGatewayRouteSetArrayInput` via:
 //
-//          GetDcRouteNatDirectConnectGatewayRouteSetArray{ GetDcRouteNatDirectConnectGatewayRouteSetArgs{...} }
+//	GetDcRouteNatDirectConnectGatewayRouteSetArray{ GetDcRouteNatDirectConnectGatewayRouteSetArgs{...} }
 type GetDcRouteNatDirectConnectGatewayRouteSetArrayInput interface {
 	pulumi.Input
 
@@ -166,7 +166,7 @@ type GetGatewaySnatsSnatList struct {
 // GetGatewaySnatsSnatListInput is an input type that accepts GetGatewaySnatsSnatListArgs and GetGatewaySnatsSnatListOutput values.
 // You can construct a concrete instance of `GetGatewaySnatsSnatListInput` via:
 //
-//          GetGatewaySnatsSnatListArgs{...}
+//	GetGatewaySnatsSnatListArgs{...}
 type GetGatewaySnatsSnatListInput interface {
 	pulumi.Input
 
@@ -209,7 +209,7 @@ func (i GetGatewaySnatsSnatListArgs) ToGetGatewaySnatsSnatListOutputWithContext(
 // GetGatewaySnatsSnatListArrayInput is an input type that accepts GetGatewaySnatsSnatListArray and GetGatewaySnatsSnatListArrayOutput values.
 // You can construct a concrete instance of `GetGatewaySnatsSnatListArrayInput` via:
 //
-//          GetGatewaySnatsSnatListArray{ GetGatewaySnatsSnatListArgs{...} }
+//	GetGatewaySnatsSnatListArray{ GetGatewaySnatsSnatListArgs{...} }
 type GetGatewaySnatsSnatListArrayInput interface {
 	pulumi.Input
 
@@ -336,7 +336,7 @@ type GetGatewaysNat struct {
 // GetGatewaysNatInput is an input type that accepts GetGatewaysNatArgs and GetGatewaysNatOutput values.
 // You can construct a concrete instance of `GetGatewaysNatInput` via:
 //
-//          GetGatewaysNatArgs{...}
+//	GetGatewaysNatArgs{...}
 type GetGatewaysNatInput interface {
 	pulumi.Input
 
@@ -380,7 +380,7 @@ func (i GetGatewaysNatArgs) ToGetGatewaysNatOutputWithContext(ctx context.Contex
 // GetGatewaysNatArrayInput is an input type that accepts GetGatewaysNatArray and GetGatewaysNatArrayOutput values.
 // You can construct a concrete instance of `GetGatewaysNatArrayInput` via:
 //
-//          GetGatewaysNatArray{ GetGatewaysNatArgs{...} }
+//	GetGatewaysNatArray{ GetGatewaysNatArgs{...} }
 type GetGatewaysNatArrayInput interface {
 	pulumi.Input
 

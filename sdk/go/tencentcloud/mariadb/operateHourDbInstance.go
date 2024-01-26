@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.NewOperateHourDbInstance(ctx, "activateHourDbInstance", &Mariadb.OperateHourDbInstanceArgs{
-// 			InstanceId: pulumi.String("tdsql-9vqvls95"),
-// 			Operate:    pulumi.String("activate"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.NewOperateHourDbInstance(ctx, "activateHourDbInstance", &Mariadb.OperateHourDbInstanceArgs{
+//				InstanceId: pulumi.String("tdsql-9vqvls95"),
+//				Operate:    pulumi.String("activate"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type OperateHourDbInstance struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *OperateHourDbInstance) ToOperateHourDbInstanceOutputWithContext(ctx con
 // OperateHourDbInstanceArrayInput is an input type that accepts OperateHourDbInstanceArray and OperateHourDbInstanceArrayOutput values.
 // You can construct a concrete instance of `OperateHourDbInstanceArrayInput` via:
 //
-//          OperateHourDbInstanceArray{ OperateHourDbInstanceArgs{...} }
+//	OperateHourDbInstanceArray{ OperateHourDbInstanceArgs{...} }
 type OperateHourDbInstanceArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i OperateHourDbInstanceArray) ToOperateHourDbInstanceArrayOutputWithContex
 // OperateHourDbInstanceMapInput is an input type that accepts OperateHourDbInstanceMap and OperateHourDbInstanceMapOutput values.
 // You can construct a concrete instance of `OperateHourDbInstanceMapInput` via:
 //
-//          OperateHourDbInstanceMap{ "key": OperateHourDbInstanceArgs{...} }
+//	OperateHourDbInstanceMap{ "key": OperateHourDbInstanceArgs{...} }
 type OperateHourDbInstanceMapInput interface {
 	pulumi.Input
 

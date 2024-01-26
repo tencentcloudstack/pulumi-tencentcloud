@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.NewInstanceConfig(ctx, "instanceConfig", &Dcdb.InstanceConfigArgs{
-// 			InstanceId:       pulumi.Any(local.Dcdb_id),
-// 			RsAccessStrategy: pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcdb.NewInstanceConfig(ctx, "instanceConfig", &Dcdb.InstanceConfigArgs{
+//				InstanceId:       pulumi.Any(local.Dcdb_id),
+//				RsAccessStrategy: pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // dcdb instance_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dcdb/instanceConfig:InstanceConfig instance_config instance_config_id
+//
+//	$ pulumi import tencentcloud:Dcdb/instanceConfig:InstanceConfig instance_config instance_config_id
+//
 // ```
 type InstanceConfig struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *InstanceConfig) ToInstanceConfigOutputWithContext(ctx context.Context) 
 // InstanceConfigArrayInput is an input type that accepts InstanceConfigArray and InstanceConfigArrayOutput values.
 // You can construct a concrete instance of `InstanceConfigArrayInput` via:
 //
-//          InstanceConfigArray{ InstanceConfigArgs{...} }
+//	InstanceConfigArray{ InstanceConfigArgs{...} }
 type InstanceConfigArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i InstanceConfigArray) ToInstanceConfigArrayOutputWithContext(ctx context.
 // InstanceConfigMapInput is an input type that accepts InstanceConfigMap and InstanceConfigMapOutput values.
 // You can construct a concrete instance of `InstanceConfigMapInput` via:
 //
-//          InstanceConfigMap{ "key": InstanceConfigArgs{...} }
+//	InstanceConfigMap{ "key": InstanceConfigArgs{...} }
 type InstanceConfigMapInput interface {
 	pulumi.Input
 

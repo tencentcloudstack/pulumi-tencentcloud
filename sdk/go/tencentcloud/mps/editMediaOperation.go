@@ -20,60 +20,63 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		output, err := Cos.NewBucket(ctx, "output", &Cos.BucketArgs{
-// 			Bucket: pulumi.String(fmt.Sprintf("%v%v", "tf-bucket-mps-output-", local.App_id)),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		object, err := Cos.GetBucketObject(ctx, &cos.GetBucketObjectArgs{
-// 			Bucket: fmt.Sprintf("%v%v", "keep-bucket-", local.App_id),
-// 			Key:    "/mps-test/test.mov",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mps.NewEditMediaOperation(ctx, "operation", &Mps.EditMediaOperationArgs{
-// 			FileInfos: mps.EditMediaOperationFileInfoArray{
-// 				&mps.EditMediaOperationFileInfoArgs{
-// 					InputInfo: &mps.EditMediaOperationFileInfoInputInfoArgs{
-// 						Type: pulumi.String("COS"),
-// 						CosInputInfo: &mps.EditMediaOperationFileInfoInputInfoCosInputInfoArgs{
-// 							Bucket: pulumi.String(object.Bucket),
-// 							Region: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 							Object: pulumi.String(object.Key),
-// 						},
-// 					},
-// 					StartTimeOffset: pulumi.Float64(60),
-// 					EndTimeOffset:   pulumi.Float64(120),
-// 				},
-// 			},
-// 			OutputStorage: &mps.EditMediaOperationOutputStorageArgs{
-// 				Type: pulumi.String("COS"),
-// 				CosOutputStorage: &mps.EditMediaOperationOutputStorageCosOutputStorageArgs{
-// 					Bucket: output.Bucket,
-// 					Region: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 				},
-// 			},
-// 			OutputObjectPath: pulumi.String("/output"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			output, err := Cos.NewBucket(ctx, "output", &Cos.BucketArgs{
+//				Bucket: pulumi.String(fmt.Sprintf("%v%v", "tf-bucket-mps-output-", local.App_id)),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			object, err := Cos.GetBucketObject(ctx, &cos.GetBucketObjectArgs{
+//				Bucket: fmt.Sprintf("%v%v", "keep-bucket-", local.App_id),
+//				Key:    "/mps-test/test.mov",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mps.NewEditMediaOperation(ctx, "operation", &Mps.EditMediaOperationArgs{
+//				FileInfos: mps.EditMediaOperationFileInfoArray{
+//					&mps.EditMediaOperationFileInfoArgs{
+//						InputInfo: &mps.EditMediaOperationFileInfoInputInfoArgs{
+//							Type: pulumi.String("COS"),
+//							CosInputInfo: &mps.EditMediaOperationFileInfoInputInfoCosInputInfoArgs{
+//								Bucket: pulumi.String(object.Bucket),
+//								Region: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//								Object: pulumi.String(object.Key),
+//							},
+//						},
+//						StartTimeOffset: pulumi.Float64(60),
+//						EndTimeOffset:   pulumi.Float64(120),
+//					},
+//				},
+//				OutputStorage: &mps.EditMediaOperationOutputStorageArgs{
+//					Type: pulumi.String("COS"),
+//					CosOutputStorage: &mps.EditMediaOperationOutputStorageCosOutputStorageArgs{
+//						Bucket: output.Bucket,
+//						Region: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//					},
+//				},
+//				OutputObjectPath: pulumi.String("/output"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type EditMediaOperation struct {
 	pulumi.CustomResourceState
@@ -241,7 +244,7 @@ func (i *EditMediaOperation) ToEditMediaOperationOutputWithContext(ctx context.C
 // EditMediaOperationArrayInput is an input type that accepts EditMediaOperationArray and EditMediaOperationArrayOutput values.
 // You can construct a concrete instance of `EditMediaOperationArrayInput` via:
 //
-//          EditMediaOperationArray{ EditMediaOperationArgs{...} }
+//	EditMediaOperationArray{ EditMediaOperationArgs{...} }
 type EditMediaOperationArrayInput interface {
 	pulumi.Input
 
@@ -266,7 +269,7 @@ func (i EditMediaOperationArray) ToEditMediaOperationArrayOutputWithContext(ctx 
 // EditMediaOperationMapInput is an input type that accepts EditMediaOperationMap and EditMediaOperationMapOutput values.
 // You can construct a concrete instance of `EditMediaOperationMapInput` via:
 //
-//          EditMediaOperationMap{ "key": EditMediaOperationArgs{...} }
+//	EditMediaOperationMap{ "key": EditMediaOperationArgs{...} }
 type EditMediaOperationMapInput interface {
 	pulumi.Input
 

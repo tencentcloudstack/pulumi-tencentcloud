@@ -18,29 +18,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.GetAlarmAllNamespaces(ctx, &monitor.GetAlarmAllNamespacesArgs{
-// 			Ids: []string{
-// 				"qaap_tunnel_l4_listeners",
-// 			},
-// 			Module: "monitor",
-// 			MonitorTypes: []string{
-// 				"MT_QCE",
-// 			},
-// 			SceneType: "ST_ALARM",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.GetAlarmAllNamespaces(ctx, &monitor.GetAlarmAllNamespacesArgs{
+//				Ids: []string{
+//					"qaap_tunnel_l4_listeners",
+//				},
+//				Module: "monitor",
+//				MonitorTypes: []string{
+//					"MT_QCE",
+//				},
+//				SceneType: "ST_ALARM",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetAlarmAllNamespaces(ctx *pulumi.Context, args *GetAlarmAllNamespacesArgs, opts ...pulumi.InvokeOption) (*GetAlarmAllNamespacesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

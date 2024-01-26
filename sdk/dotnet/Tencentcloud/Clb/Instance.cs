@@ -180,6 +180,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     ///     public Output&lt;string&gt; Domain { get; set; }
     /// }
     /// ```
+    /// ### Specified  Vip Instance
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var fooGroup = new Tencentcloud.Security.Group("fooGroup", new Tencentcloud.Security.GroupArgs
+    ///         {
+    ///         });
+    ///         var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new Tencentcloud.Vpc.InstanceArgs
+    ///         {
+    ///             CidrBlock = "10.0.0.0/16",
+    ///         });
+    ///         var clbOpen = new Tencentcloud.Clb.Instance("clbOpen", new Tencentcloud.Clb.InstanceArgs
+    ///         {
+    ///             NetworkType = "OPEN",
+    ///             ClbName = "clb-instance-open",
+    ///             ProjectId = 0,
+    ///             VpcId = fooInstance.Id,
+    ///             SecurityGroups = 
+    ///             {
+    ///                 fooGroup.Id,
+    ///             },
+    ///             Vip = "111.230.4.204",
+    ///             Tags = 
+    ///             {
+    ///                 { "test", "tf" },
+    ///             },
+    ///         });
+    ///         this.Domain = tencentcloud_clb_instance.Vip;
+    ///     }
+    /// 
+    ///     [Output("domain")]
+    ///     public Output&lt;string&gt; Domain { get; set; }
+    /// }
+    /// ```
     /// ### Default enable
     /// 
     /// ```csharp
@@ -462,6 +502,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<string> TargetRegionInfoVpcId { get; private set; } = null!;
 
         /// <summary>
+        /// Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.
+        /// </summary>
+        [Output("vip")]
+        public Output<string> Vip { get; private set; } = null!;
+
+        /// <summary>
         /// Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
         /// </summary>
         [Output("vipIsp")]
@@ -677,6 +723,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? TargetRegionInfoVpcId { get; set; }
 
         /// <summary>
+        /// Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.
+        /// </summary>
+        [Input("vip")]
+        public Input<string>? Vip { get; set; }
+
+        /// <summary>
         /// Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
         /// </summary>
         [Input("vipIsp")]
@@ -868,6 +920,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Input("targetRegionInfoVpcId")]
         public Input<string>? TargetRegionInfoVpcId { get; set; }
+
+        /// <summary>
+        /// Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.
+        /// </summary>
+        [Input("vip")]
+        public Input<string>? Vip { get; set; }
 
         /// <summary>
         /// Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).

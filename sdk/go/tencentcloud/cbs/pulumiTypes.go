@@ -32,7 +32,7 @@ type GetSnapshotPoliciesSnapshotPolicyList struct {
 // GetSnapshotPoliciesSnapshotPolicyListInput is an input type that accepts GetSnapshotPoliciesSnapshotPolicyListArgs and GetSnapshotPoliciesSnapshotPolicyListOutput values.
 // You can construct a concrete instance of `GetSnapshotPoliciesSnapshotPolicyListInput` via:
 //
-//          GetSnapshotPoliciesSnapshotPolicyListArgs{...}
+//	GetSnapshotPoliciesSnapshotPolicyListArgs{...}
 type GetSnapshotPoliciesSnapshotPolicyListInput interface {
 	pulumi.Input
 
@@ -74,7 +74,7 @@ func (i GetSnapshotPoliciesSnapshotPolicyListArgs) ToGetSnapshotPoliciesSnapshot
 // GetSnapshotPoliciesSnapshotPolicyListArrayInput is an input type that accepts GetSnapshotPoliciesSnapshotPolicyListArray and GetSnapshotPoliciesSnapshotPolicyListArrayOutput values.
 // You can construct a concrete instance of `GetSnapshotPoliciesSnapshotPolicyListArrayInput` via:
 //
-//          GetSnapshotPoliciesSnapshotPolicyListArray{ GetSnapshotPoliciesSnapshotPolicyListArgs{...} }
+//	GetSnapshotPoliciesSnapshotPolicyListArray{ GetSnapshotPoliciesSnapshotPolicyListArgs{...} }
 type GetSnapshotPoliciesSnapshotPolicyListArrayInput interface {
 	pulumi.Input
 
@@ -196,7 +196,7 @@ type GetSnapshotsSnapshotList struct {
 // GetSnapshotsSnapshotListInput is an input type that accepts GetSnapshotsSnapshotListArgs and GetSnapshotsSnapshotListOutput values.
 // You can construct a concrete instance of `GetSnapshotsSnapshotListInput` via:
 //
-//          GetSnapshotsSnapshotListArgs{...}
+//	GetSnapshotsSnapshotListArgs{...}
 type GetSnapshotsSnapshotListInput interface {
 	pulumi.Input
 
@@ -242,7 +242,7 @@ func (i GetSnapshotsSnapshotListArgs) ToGetSnapshotsSnapshotListOutputWithContex
 // GetSnapshotsSnapshotListArrayInput is an input type that accepts GetSnapshotsSnapshotListArray and GetSnapshotsSnapshotListArrayOutput values.
 // You can construct a concrete instance of `GetSnapshotsSnapshotListArrayInput` via:
 //
-//          GetSnapshotsSnapshotListArray{ GetSnapshotsSnapshotListArgs{...} }
+//	GetSnapshotsSnapshotListArray{ GetSnapshotsSnapshotListArgs{...} }
 type GetSnapshotsSnapshotListArrayInput interface {
 	pulumi.Input
 
@@ -386,7 +386,7 @@ type GetStoragesSetStorageList struct {
 // GetStoragesSetStorageListInput is an input type that accepts GetStoragesSetStorageListArgs and GetStoragesSetStorageListOutput values.
 // You can construct a concrete instance of `GetStoragesSetStorageListInput` via:
 //
-//          GetStoragesSetStorageListArgs{...}
+//	GetStoragesSetStorageListArgs{...}
 type GetStoragesSetStorageListInput interface {
 	pulumi.Input
 
@@ -444,7 +444,7 @@ func (i GetStoragesSetStorageListArgs) ToGetStoragesSetStorageListOutputWithCont
 // GetStoragesSetStorageListArrayInput is an input type that accepts GetStoragesSetStorageListArray and GetStoragesSetStorageListArrayOutput values.
 // You can construct a concrete instance of `GetStoragesSetStorageListArrayInput` via:
 //
-//          GetStoragesSetStorageListArray{ GetStoragesSetStorageListArgs{...} }
+//	GetStoragesSetStorageListArray{ GetStoragesSetStorageListArgs{...} }
 type GetStoragesSetStorageListArrayInput interface {
 	pulumi.Input
 
@@ -618,7 +618,7 @@ type GetStoragesStorageList struct {
 // GetStoragesStorageListInput is an input type that accepts GetStoragesStorageListArgs and GetStoragesStorageListOutput values.
 // You can construct a concrete instance of `GetStoragesStorageListInput` via:
 //
-//          GetStoragesStorageListArgs{...}
+//	GetStoragesStorageListArgs{...}
 type GetStoragesStorageListInput interface {
 	pulumi.Input
 
@@ -676,7 +676,7 @@ func (i GetStoragesStorageListArgs) ToGetStoragesStorageListOutputWithContext(ct
 // GetStoragesStorageListArrayInput is an input type that accepts GetStoragesStorageListArray and GetStoragesStorageListArrayOutput values.
 // You can construct a concrete instance of `GetStoragesStorageListArrayInput` via:
 //
-//          GetStoragesStorageListArray{ GetStoragesStorageListArgs{...} }
+//	GetStoragesStorageListArray{ GetStoragesStorageListArgs{...} }
 type GetStoragesStorageListArrayInput interface {
 	pulumi.Input
 

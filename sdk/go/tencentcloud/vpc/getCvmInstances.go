@@ -18,29 +18,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.GetCvmInstances(ctx, &vpc.GetCvmInstancesArgs{
-// 			Filters: []vpc.GetCvmInstancesFilter{
-// 				vpc.GetCvmInstancesFilter{
-// 					Name: "vpc-id",
-// 					Values: []string{
-// 						"vpc-lh4nqig9",
-// 					},
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.GetCvmInstances(ctx, &vpc.GetCvmInstancesArgs{
+//				Filters: []vpc.GetCvmInstancesFilter{
+//					vpc.GetCvmInstancesFilter{
+//						Name: "vpc-id",
+//						Values: []string{
+//							"vpc-lh4nqig9",
+//						},
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetCvmInstances(ctx *pulumi.Context, args *GetCvmInstancesArgs, opts ...pulumi.InvokeOption) (*GetCvmInstancesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

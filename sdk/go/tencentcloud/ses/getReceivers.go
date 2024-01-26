@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ses.GetReceivers(ctx, &ses.GetReceiversArgs{
-// 			KeyWord: pulumi.StringRef("keep"),
-// 			Status:  pulumi.IntRef(3),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ses.GetReceivers(ctx, &ses.GetReceiversArgs{
+//				KeyWord: pulumi.StringRef("keep"),
+//				Status:  pulumi.IntRef(3),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetReceivers(ctx *pulumi.Context, args *GetReceiversArgs, opts ...pulumi.InvokeOption) (*GetReceiversResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

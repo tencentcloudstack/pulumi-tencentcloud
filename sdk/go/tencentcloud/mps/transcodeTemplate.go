@@ -19,41 +19,44 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewTranscodeTemplate(ctx, "transcodeTemplate", &Mps.TranscodeTemplateArgs{
-// 			AudioTemplate: &mps.TranscodeTemplateAudioTemplateArgs{
-// 				AudioChannel: pulumi.Int(2),
-// 				Bitrate:      pulumi.Int(27),
-// 				Codec:        pulumi.String("libfdk_aac"),
-// 				SampleRate:   pulumi.Int(32000),
-// 			},
-// 			Container:   pulumi.String("mp4"),
-// 			RemoveAudio: pulumi.Int(0),
-// 			RemoveVideo: pulumi.Int(0),
-// 			VideoTemplate: &mps.TranscodeTemplateVideoTemplateArgs{
-// 				Bitrate:            pulumi.Int(130),
-// 				Codec:              pulumi.String("libx264"),
-// 				FillType:           pulumi.String("black"),
-// 				Fps:                pulumi.Int(20),
-// 				Gop:                pulumi.Int(0),
-// 				Height:             pulumi.Int(4096),
-// 				ResolutionAdaptive: pulumi.String("close"),
-// 				Vcrf:               pulumi.Int(0),
-// 				Width:              pulumi.Int(128),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewTranscodeTemplate(ctx, "transcodeTemplate", &Mps.TranscodeTemplateArgs{
+//				AudioTemplate: &mps.TranscodeTemplateAudioTemplateArgs{
+//					AudioChannel: pulumi.Int(2),
+//					Bitrate:      pulumi.Int(27),
+//					Codec:        pulumi.String("libfdk_aac"),
+//					SampleRate:   pulumi.Int(32000),
+//				},
+//				Container:   pulumi.String("mp4"),
+//				RemoveAudio: pulumi.Int(0),
+//				RemoveVideo: pulumi.Int(0),
+//				VideoTemplate: &mps.TranscodeTemplateVideoTemplateArgs{
+//					Bitrate:            pulumi.Int(130),
+//					Codec:              pulumi.String("libx264"),
+//					FillType:           pulumi.String("black"),
+//					Fps:                pulumi.Int(20),
+//					Gop:                pulumi.Int(0),
+//					Height:             pulumi.Int(4096),
+//					ResolutionAdaptive: pulumi.String("close"),
+//					Vcrf:               pulumi.Int(0),
+//					Width:              pulumi.Int(128),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -61,7 +64,9 @@ import (
 // mps transcode_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/transcodeTemplate:TranscodeTemplate transcode_template transcode_template_id
+//
+//	$ pulumi import tencentcloud:Mps/transcodeTemplate:TranscodeTemplate transcode_template transcode_template_id
+//
 // ```
 type TranscodeTemplate struct {
 	pulumi.CustomResourceState
@@ -233,7 +238,7 @@ func (i *TranscodeTemplate) ToTranscodeTemplateOutputWithContext(ctx context.Con
 // TranscodeTemplateArrayInput is an input type that accepts TranscodeTemplateArray and TranscodeTemplateArrayOutput values.
 // You can construct a concrete instance of `TranscodeTemplateArrayInput` via:
 //
-//          TranscodeTemplateArray{ TranscodeTemplateArgs{...} }
+//	TranscodeTemplateArray{ TranscodeTemplateArgs{...} }
 type TranscodeTemplateArrayInput interface {
 	pulumi.Input
 
@@ -258,7 +263,7 @@ func (i TranscodeTemplateArray) ToTranscodeTemplateArrayOutputWithContext(ctx co
 // TranscodeTemplateMapInput is an input type that accepts TranscodeTemplateMap and TranscodeTemplateMapOutput values.
 // You can construct a concrete instance of `TranscodeTemplateMapInput` via:
 //
-//          TranscodeTemplateMap{ "key": TranscodeTemplateArgs{...} }
+//	TranscodeTemplateMap{ "key": TranscodeTemplateArgs{...} }
 type TranscodeTemplateMapInput interface {
 	pulumi.Input
 

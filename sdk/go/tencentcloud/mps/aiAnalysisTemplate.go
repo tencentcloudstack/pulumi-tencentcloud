@@ -18,33 +18,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewAiAnalysisTemplate(ctx, "aiAnalysisTemplate", &Mps.AiAnalysisTemplateArgs{
-// 			ClassificationConfigure: &mps.AiAnalysisTemplateClassificationConfigureArgs{
-// 				Switch: pulumi.String("OFF"),
-// 			},
-// 			CoverConfigure: &mps.AiAnalysisTemplateCoverConfigureArgs{
-// 				Switch: pulumi.String("ON"),
-// 			},
-// 			FrameTagConfigure: &mps.AiAnalysisTemplateFrameTagConfigureArgs{
-// 				Switch: pulumi.String("ON"),
-// 			},
-// 			TagConfigure: &mps.AiAnalysisTemplateTagConfigureArgs{
-// 				Switch: pulumi.String("ON"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewAiAnalysisTemplate(ctx, "aiAnalysisTemplate", &Mps.AiAnalysisTemplateArgs{
+//				ClassificationConfigure: &mps.AiAnalysisTemplateClassificationConfigureArgs{
+//					Switch: pulumi.String("OFF"),
+//				},
+//				CoverConfigure: &mps.AiAnalysisTemplateCoverConfigureArgs{
+//					Switch: pulumi.String("ON"),
+//				},
+//				FrameTagConfigure: &mps.AiAnalysisTemplateFrameTagConfigureArgs{
+//					Switch: pulumi.String("ON"),
+//				},
+//				TagConfigure: &mps.AiAnalysisTemplateTagConfigureArgs{
+//					Switch: pulumi.String("ON"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -52,7 +55,9 @@ import (
 // mps ai_analysis_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/aiAnalysisTemplate:AiAnalysisTemplate ai_analysis_template ai_analysis_template_id
+//
+//	$ pulumi import tencentcloud:Mps/aiAnalysisTemplate:AiAnalysisTemplate ai_analysis_template ai_analysis_template_id
+//
 // ```
 type AiAnalysisTemplate struct {
 	pulumi.CustomResourceState
@@ -191,7 +196,7 @@ func (i *AiAnalysisTemplate) ToAiAnalysisTemplateOutputWithContext(ctx context.C
 // AiAnalysisTemplateArrayInput is an input type that accepts AiAnalysisTemplateArray and AiAnalysisTemplateArrayOutput values.
 // You can construct a concrete instance of `AiAnalysisTemplateArrayInput` via:
 //
-//          AiAnalysisTemplateArray{ AiAnalysisTemplateArgs{...} }
+//	AiAnalysisTemplateArray{ AiAnalysisTemplateArgs{...} }
 type AiAnalysisTemplateArrayInput interface {
 	pulumi.Input
 
@@ -216,7 +221,7 @@ func (i AiAnalysisTemplateArray) ToAiAnalysisTemplateArrayOutputWithContext(ctx 
 // AiAnalysisTemplateMapInput is an input type that accepts AiAnalysisTemplateMap and AiAnalysisTemplateMapOutput values.
 // You can construct a concrete instance of `AiAnalysisTemplateMapInput` via:
 //
-//          AiAnalysisTemplateMap{ "key": AiAnalysisTemplateArgs{...} }
+//	AiAnalysisTemplateMap{ "key": AiAnalysisTemplateArgs{...} }
 type AiAnalysisTemplateMapInput interface {
 	pulumi.Input
 

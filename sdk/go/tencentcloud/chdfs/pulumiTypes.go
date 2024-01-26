@@ -24,7 +24,7 @@ type AccessRuleAccessRule struct {
 // AccessRuleAccessRuleInput is an input type that accepts AccessRuleAccessRuleArgs and AccessRuleAccessRuleOutput values.
 // You can construct a concrete instance of `AccessRuleAccessRuleInput` via:
 //
-//          AccessRuleAccessRuleArgs{...}
+//	AccessRuleAccessRuleArgs{...}
 type AccessRuleAccessRuleInput interface {
 	pulumi.Input
 
@@ -66,11 +66,11 @@ func (i AccessRuleAccessRuleArgs) ToAccessRuleAccessRulePtrOutputWithContext(ctx
 // AccessRuleAccessRulePtrInput is an input type that accepts AccessRuleAccessRuleArgs, AccessRuleAccessRulePtr and AccessRuleAccessRulePtrOutput values.
 // You can construct a concrete instance of `AccessRuleAccessRulePtrInput` via:
 //
-//          AccessRuleAccessRuleArgs{...}
+//	        AccessRuleAccessRuleArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AccessRuleAccessRulePtrInput interface {
 	pulumi.Input
 
@@ -231,7 +231,7 @@ type LifeCycleRuleLifeCycleRule struct {
 // LifeCycleRuleLifeCycleRuleInput is an input type that accepts LifeCycleRuleLifeCycleRuleArgs and LifeCycleRuleLifeCycleRuleOutput values.
 // You can construct a concrete instance of `LifeCycleRuleLifeCycleRuleInput` via:
 //
-//          LifeCycleRuleLifeCycleRuleArgs{...}
+//	LifeCycleRuleLifeCycleRuleArgs{...}
 type LifeCycleRuleLifeCycleRuleInput interface {
 	pulumi.Input
 
@@ -275,11 +275,11 @@ func (i LifeCycleRuleLifeCycleRuleArgs) ToLifeCycleRuleLifeCycleRulePtrOutputWit
 // LifeCycleRuleLifeCycleRulePtrInput is an input type that accepts LifeCycleRuleLifeCycleRuleArgs, LifeCycleRuleLifeCycleRulePtr and LifeCycleRuleLifeCycleRulePtrOutput values.
 // You can construct a concrete instance of `LifeCycleRuleLifeCycleRulePtrInput` via:
 //
-//          LifeCycleRuleLifeCycleRuleArgs{...}
+//	        LifeCycleRuleLifeCycleRuleArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LifeCycleRuleLifeCycleRulePtrInput interface {
 	pulumi.Input
 
@@ -449,7 +449,7 @@ type LifeCycleRuleLifeCycleRuleTransition struct {
 // LifeCycleRuleLifeCycleRuleTransitionInput is an input type that accepts LifeCycleRuleLifeCycleRuleTransitionArgs and LifeCycleRuleLifeCycleRuleTransitionOutput values.
 // You can construct a concrete instance of `LifeCycleRuleLifeCycleRuleTransitionInput` via:
 //
-//          LifeCycleRuleLifeCycleRuleTransitionArgs{...}
+//	LifeCycleRuleLifeCycleRuleTransitionArgs{...}
 type LifeCycleRuleLifeCycleRuleTransitionInput interface {
 	pulumi.Input
 
@@ -479,7 +479,7 @@ func (i LifeCycleRuleLifeCycleRuleTransitionArgs) ToLifeCycleRuleLifeCycleRuleTr
 // LifeCycleRuleLifeCycleRuleTransitionArrayInput is an input type that accepts LifeCycleRuleLifeCycleRuleTransitionArray and LifeCycleRuleLifeCycleRuleTransitionArrayOutput values.
 // You can construct a concrete instance of `LifeCycleRuleLifeCycleRuleTransitionArrayInput` via:
 //
-//          LifeCycleRuleLifeCycleRuleTransitionArray{ LifeCycleRuleLifeCycleRuleTransitionArgs{...} }
+//	LifeCycleRuleLifeCycleRuleTransitionArray{ LifeCycleRuleLifeCycleRuleTransitionArgs{...} }
 type LifeCycleRuleLifeCycleRuleTransitionArrayInput interface {
 	pulumi.Input
 
@@ -563,7 +563,7 @@ type GetAccessGroupsAccessGroup struct {
 // GetAccessGroupsAccessGroupInput is an input type that accepts GetAccessGroupsAccessGroupArgs and GetAccessGroupsAccessGroupOutput values.
 // You can construct a concrete instance of `GetAccessGroupsAccessGroupInput` via:
 //
-//          GetAccessGroupsAccessGroupArgs{...}
+//	GetAccessGroupsAccessGroupArgs{...}
 type GetAccessGroupsAccessGroupInput interface {
 	pulumi.Input
 
@@ -601,7 +601,7 @@ func (i GetAccessGroupsAccessGroupArgs) ToGetAccessGroupsAccessGroupOutputWithCo
 // GetAccessGroupsAccessGroupArrayInput is an input type that accepts GetAccessGroupsAccessGroupArray and GetAccessGroupsAccessGroupArrayOutput values.
 // You can construct a concrete instance of `GetAccessGroupsAccessGroupArrayInput` via:
 //
-//          GetAccessGroupsAccessGroupArray{ GetAccessGroupsAccessGroupArgs{...} }
+//	GetAccessGroupsAccessGroupArray{ GetAccessGroupsAccessGroupArgs{...} }
 type GetAccessGroupsAccessGroupArrayInput interface {
 	pulumi.Input
 
@@ -719,7 +719,7 @@ type GetFileSystemsFileSystem struct {
 // GetFileSystemsFileSystemInput is an input type that accepts GetFileSystemsFileSystemArgs and GetFileSystemsFileSystemOutput values.
 // You can construct a concrete instance of `GetFileSystemsFileSystemInput` via:
 //
-//          GetFileSystemsFileSystemArgs{...}
+//	GetFileSystemsFileSystemArgs{...}
 type GetFileSystemsFileSystemInput interface {
 	pulumi.Input
 
@@ -771,7 +771,7 @@ func (i GetFileSystemsFileSystemArgs) ToGetFileSystemsFileSystemOutputWithContex
 // GetFileSystemsFileSystemArrayInput is an input type that accepts GetFileSystemsFileSystemArray and GetFileSystemsFileSystemArrayOutput values.
 // You can construct a concrete instance of `GetFileSystemsFileSystemArrayInput` via:
 //
-//          GetFileSystemsFileSystemArray{ GetFileSystemsFileSystemArgs{...} }
+//	GetFileSystemsFileSystemArray{ GetFileSystemsFileSystemArgs{...} }
 type GetFileSystemsFileSystemArrayInput interface {
 	pulumi.Input
 
@@ -910,7 +910,7 @@ type GetMountPointsMountPoint struct {
 // GetMountPointsMountPointInput is an input type that accepts GetMountPointsMountPointArgs and GetMountPointsMountPointOutput values.
 // You can construct a concrete instance of `GetMountPointsMountPointInput` via:
 //
-//          GetMountPointsMountPointArgs{...}
+//	GetMountPointsMountPointArgs{...}
 type GetMountPointsMountPointInput interface {
 	pulumi.Input
 
@@ -948,7 +948,7 @@ func (i GetMountPointsMountPointArgs) ToGetMountPointsMountPointOutputWithContex
 // GetMountPointsMountPointArrayInput is an input type that accepts GetMountPointsMountPointArray and GetMountPointsMountPointArrayOutput values.
 // You can construct a concrete instance of `GetMountPointsMountPointArrayInput` via:
 //
-//          GetMountPointsMountPointArray{ GetMountPointsMountPointArgs{...} }
+//	GetMountPointsMountPointArray{ GetMountPointsMountPointArgs{...} }
 type GetMountPointsMountPointArrayInput interface {
 	pulumi.Input
 

@@ -19,66 +19,69 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Wedata.NewIntegrationOfflineTask(ctx, "example", &Wedata.IntegrationOfflineTaskArgs{
-// 			CycleStep:  pulumi.Int(1),
-// 			DelayTime:  pulumi.Int(0),
-// 			EndTime:    pulumi.String("2099-12-31 00:00:00"),
-// 			Notes:      pulumi.String("terraform example demo."),
-// 			ProjectId:  pulumi.String("1612982498218618880"),
-// 			StartTime:  pulumi.String("2023-12-31 00:00:00"),
-// 			TaskAction: pulumi.String("2"),
-// 			TaskInfo: &wedata.IntegrationOfflineTaskTaskInfoArgs{
-// 				Configs: wedata.IntegrationOfflineTaskTaskInfoConfigArray{
-// 					&wedata.IntegrationOfflineTaskTaskInfoConfigArgs{
-// 						Name:  pulumi.String("Args"),
-// 						Value: pulumi.String("args"),
-// 					},
-// 					&wedata.IntegrationOfflineTaskTaskInfoConfigArgs{
-// 						Name:  pulumi.String("dirtyDataThreshold"),
-// 						Value: pulumi.String("0"),
-// 					},
-// 					&wedata.IntegrationOfflineTaskTaskInfoConfigArgs{
-// 						Name:  pulumi.String("concurrency"),
-// 						Value: pulumi.String("1"),
-// 					},
-// 					&wedata.IntegrationOfflineTaskTaskInfoConfigArgs{
-// 						Name:  pulumi.String("syncRateLimitUnit"),
-// 						Value: pulumi.String("0"),
-// 					},
-// 				},
-// 				ExecutorId: pulumi.String("20230313175748567418"),
-// 				ExtConfigs: wedata.IntegrationOfflineTaskTaskInfoExtConfigArray{
-// 					&wedata.IntegrationOfflineTaskTaskInfoExtConfigArgs{
-// 						Name:  pulumi.String("TaskAlarmRegularList"),
-// 						Value: pulumi.String("73"),
-// 					},
-// 				},
-// 				Incharge: pulumi.String("demo"),
-// 				OfflineTaskAddEntity: &wedata.IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityArgs{
-// 					CrontabExpression: pulumi.String("0 0 1 * * ?"),
-// 					CycleType:         pulumi.Int(3),
-// 					Retriable:         pulumi.Int(1),
-// 					RetryWait:         pulumi.Int(5),
-// 					SelfDepend:        pulumi.Int(1),
-// 					TryLimit:          pulumi.Int(5),
-// 				},
-// 			},
-// 			TaskMode: pulumi.String("1"),
-// 			TaskName: pulumi.String("tf_example"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Wedata.NewIntegrationOfflineTask(ctx, "example", &Wedata.IntegrationOfflineTaskArgs{
+//				CycleStep:  pulumi.Int(1),
+//				DelayTime:  pulumi.Int(0),
+//				EndTime:    pulumi.String("2099-12-31 00:00:00"),
+//				Notes:      pulumi.String("terraform example demo."),
+//				ProjectId:  pulumi.String("1612982498218618880"),
+//				StartTime:  pulumi.String("2023-12-31 00:00:00"),
+//				TaskAction: pulumi.String("2"),
+//				TaskInfo: &wedata.IntegrationOfflineTaskTaskInfoArgs{
+//					Configs: wedata.IntegrationOfflineTaskTaskInfoConfigArray{
+//						&wedata.IntegrationOfflineTaskTaskInfoConfigArgs{
+//							Name:  pulumi.String("Args"),
+//							Value: pulumi.String("args"),
+//						},
+//						&wedata.IntegrationOfflineTaskTaskInfoConfigArgs{
+//							Name:  pulumi.String("dirtyDataThreshold"),
+//							Value: pulumi.String("0"),
+//						},
+//						&wedata.IntegrationOfflineTaskTaskInfoConfigArgs{
+//							Name:  pulumi.String("concurrency"),
+//							Value: pulumi.String("1"),
+//						},
+//						&wedata.IntegrationOfflineTaskTaskInfoConfigArgs{
+//							Name:  pulumi.String("syncRateLimitUnit"),
+//							Value: pulumi.String("0"),
+//						},
+//					},
+//					ExecutorId: pulumi.String("20230313175748567418"),
+//					ExtConfigs: wedata.IntegrationOfflineTaskTaskInfoExtConfigArray{
+//						&wedata.IntegrationOfflineTaskTaskInfoExtConfigArgs{
+//							Name:  pulumi.String("TaskAlarmRegularList"),
+//							Value: pulumi.String("73"),
+//						},
+//					},
+//					Incharge: pulumi.String("demo"),
+//					OfflineTaskAddEntity: &wedata.IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityArgs{
+//						CrontabExpression: pulumi.String("0 0 1 * * ?"),
+//						CycleType:         pulumi.Int(3),
+//						Retriable:         pulumi.Int(1),
+//						RetryWait:         pulumi.Int(5),
+//						SelfDepend:        pulumi.Int(1),
+//						TryLimit:          pulumi.Int(5),
+//					},
+//				},
+//				TaskMode: pulumi.String("1"),
+//				TaskName: pulumi.String("tf_example"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -86,7 +89,9 @@ import (
 // wedata integration_offline_task can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Wedata/integrationOfflineTask:IntegrationOfflineTask example 1612982498218618880#20231102200955095
+//
+//	$ pulumi import tencentcloud:Wedata/integrationOfflineTask:IntegrationOfflineTask example 1612982498218618880#20231102200955095
+//
 // ```
 type IntegrationOfflineTask struct {
 	pulumi.CustomResourceState
@@ -301,7 +306,7 @@ func (i *IntegrationOfflineTask) ToIntegrationOfflineTaskOutputWithContext(ctx c
 // IntegrationOfflineTaskArrayInput is an input type that accepts IntegrationOfflineTaskArray and IntegrationOfflineTaskArrayOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskArrayInput` via:
 //
-//          IntegrationOfflineTaskArray{ IntegrationOfflineTaskArgs{...} }
+//	IntegrationOfflineTaskArray{ IntegrationOfflineTaskArgs{...} }
 type IntegrationOfflineTaskArrayInput interface {
 	pulumi.Input
 
@@ -326,7 +331,7 @@ func (i IntegrationOfflineTaskArray) ToIntegrationOfflineTaskArrayOutputWithCont
 // IntegrationOfflineTaskMapInput is an input type that accepts IntegrationOfflineTaskMap and IntegrationOfflineTaskMapOutput values.
 // You can construct a concrete instance of `IntegrationOfflineTaskMapInput` via:
 //
-//          IntegrationOfflineTaskMap{ "key": IntegrationOfflineTaskArgs{...} }
+//	IntegrationOfflineTaskMap{ "key": IntegrationOfflineTaskArgs{...} }
 type IntegrationOfflineTaskMapInput interface {
 	pulumi.Input
 

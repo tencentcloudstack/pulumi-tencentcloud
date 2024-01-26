@@ -20,27 +20,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssm.NewSecret(ctx, "example", &Ssm.SecretArgs{
-// 			Description:          pulumi.String("desc."),
-// 			IsEnabled:            pulumi.Bool(true),
-// 			RecoveryWindowInDays: pulumi.Int(0),
-// 			SecretName:           pulumi.String("tf-example"),
-// 			Tags: pulumi.AnyMap{
-// 				"createBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssm.NewSecret(ctx, "example", &Ssm.SecretArgs{
+//				Description:          pulumi.String("desc."),
+//				IsEnabled:            pulumi.Bool(true),
+//				RecoveryWindowInDays: pulumi.Int(0),
+//				SecretName:           pulumi.String("tf-example"),
+//				Tags: pulumi.AnyMap{
+//					"createBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Create redis secret
 //
@@ -48,85 +51,88 @@ import (
 // package main
 //
 // import (
-// 	"encoding/json"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
-// 			TypeId: pulumi.IntRef(8),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(zone.Lists[3].Zone),
-// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleInstance, err := Redis.NewInstance(ctx, "exampleInstance", &Redis.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zone.Lists[3].Zone),
-// 			TypeId:           pulumi.Int(zone.Lists[3].TypeId),
-// 			Password:         pulumi.String("Qwer@234"),
-// 			MemSize:          pulumi.Int(zone.Lists[3].MemSizes[0]),
-// 			RedisShardNum:    pulumi.Int(zone.Lists[3].RedisShardNums[0]),
-// 			RedisReplicasNum: pulumi.Int(zone.Lists[3].RedisReplicasNums[0]),
-// 			Port:             pulumi.Int(6379),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Ssm.NewSecret(ctx, "exampleSecret", &Ssm.SecretArgs{
-// 			SecretName:  pulumi.String("tf-example"),
-// 			Description: pulumi.String("redis desc."),
-// 			IsEnabled:   pulumi.Bool(true),
-// 			SecretType:  pulumi.Int(4),
-// 			AdditionalConfig: exampleInstance.ID().ApplyT(func(id string) (pulumi.String, error) {
-// 				var _zero pulumi.String
-// 				tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 					"Region":     "ap-guangzhou",
-// 					"Privilege":  "r",
-// 					"InstanceId": id,
-// 					"ReadonlyPolicy": []string{
-// 						"master",
-// 					},
-// 					"Remark": "for tf test",
-// 				})
-// 				if err != nil {
-// 					return _zero, err
-// 				}
-// 				json0 := string(tmpJSON0)
-// 				return json0, nil
-// 			}).(pulumi.StringOutput),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 			RecoveryWindowInDays: pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+//				TypeId: pulumi.IntRef(8),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(zone.Lists[3].Zone),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleInstance, err := Redis.NewInstance(ctx, "exampleInstance", &Redis.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zone.Lists[3].Zone),
+//				TypeId:           pulumi.Int(zone.Lists[3].TypeId),
+//				Password:         pulumi.String("Qwer@234"),
+//				MemSize:          pulumi.Int(zone.Lists[3].MemSizes[0]),
+//				RedisShardNum:    pulumi.Int(zone.Lists[3].RedisShardNums[0]),
+//				RedisReplicasNum: pulumi.Int(zone.Lists[3].RedisReplicasNums[0]),
+//				Port:             pulumi.Int(6379),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Ssm.NewSecret(ctx, "exampleSecret", &Ssm.SecretArgs{
+//				SecretName:  pulumi.String("tf-example"),
+//				Description: pulumi.String("redis desc."),
+//				IsEnabled:   pulumi.Bool(true),
+//				SecretType:  pulumi.Int(4),
+//				AdditionalConfig: exampleInstance.ID().ApplyT(func(id string) (pulumi.String, error) {
+//					var _zero pulumi.String
+//					tmpJSON0, err := json.Marshal(map[string]interface{}{
+//						"Region":     "ap-guangzhou",
+//						"Privilege":  "r",
+//						"InstanceId": id,
+//						"ReadonlyPolicy": []string{
+//							"master",
+//						},
+//						"Remark": "for tf test",
+//					})
+//					if err != nil {
+//						return _zero, err
+//					}
+//					json0 := string(tmpJSON0)
+//					return json0, nil
+//				}).(pulumi.StringOutput),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//				RecoveryWindowInDays: pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -134,7 +140,9 @@ import (
 // SSM secret can be imported using the secretName, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssm/secret:Secret foo test
+//
+//	$ pulumi import tencentcloud:Ssm/secret:Secret foo test
+//
 // ```
 type Secret struct {
 	pulumi.CustomResourceState
@@ -302,7 +310,7 @@ func (i *Secret) ToSecretOutputWithContext(ctx context.Context) SecretOutput {
 // SecretArrayInput is an input type that accepts SecretArray and SecretArrayOutput values.
 // You can construct a concrete instance of `SecretArrayInput` via:
 //
-//          SecretArray{ SecretArgs{...} }
+//	SecretArray{ SecretArgs{...} }
 type SecretArrayInput interface {
 	pulumi.Input
 
@@ -327,7 +335,7 @@ func (i SecretArray) ToSecretArrayOutputWithContext(ctx context.Context) SecretA
 // SecretMapInput is an input type that accepts SecretMap and SecretMapOutput values.
 // You can construct a concrete instance of `SecretMapInput` via:
 //
-//          SecretMap{ "key": SecretArgs{...} }
+//	SecretMap{ "key": SecretArgs{...} }
 type SecretMapInput interface {
 	pulumi.Input
 

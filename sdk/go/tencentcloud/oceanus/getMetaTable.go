@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.GetMetaTable(ctx, &oceanus.GetMetaTableArgs{
-// 			Catalog:     "_dc",
-// 			Database:    "_db",
-// 			Table:       "tf_table",
-// 			WorkSpaceId: "space-6w8eab6f",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.GetMetaTable(ctx, &oceanus.GetMetaTableArgs{
+//				Catalog:     "_dc",
+//				Database:    "_db",
+//				Table:       "tf_table",
+//				WorkSpaceId: "space-6w8eab6f",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetMetaTable(ctx *pulumi.Context, args *GetMetaTableArgs, opts ...pulumi.InvokeOption) (*GetMetaTableResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

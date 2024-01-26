@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tat.GetInvokerRecords(ctx, &tat.GetInvokerRecordsArgs{
-// 			InvokerIds: []string{
-// 				"ivk-cas4upyf",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tat.GetInvokerRecords(ctx, &tat.GetInvokerRecordsArgs{
+//				InvokerIds: []string{
+//					"ivk-cas4upyf",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetInvokerRecords(ctx *pulumi.Context, args *GetInvokerRecordsArgs, opts ...pulumi.InvokeOption) (*GetInvokerRecordsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

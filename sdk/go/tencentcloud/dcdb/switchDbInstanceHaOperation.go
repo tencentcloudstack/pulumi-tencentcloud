@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.NewSwitchDbInstanceHaOperation(ctx, "switchOperation", &Dcdb.SwitchDbInstanceHaOperationArgs{
-// 			InstanceId: pulumi.Any(local.Dcdb_id),
-// 			Zone:       pulumi.String("ap-guangzhou-4"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcdb.NewSwitchDbInstanceHaOperation(ctx, "switchOperation", &Dcdb.SwitchDbInstanceHaOperationArgs{
+//				InstanceId: pulumi.Any(local.Dcdb_id),
+//				Zone:       pulumi.String("ap-guangzhou-4"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SwitchDbInstanceHaOperation struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *SwitchDbInstanceHaOperation) ToSwitchDbInstanceHaOperationOutputWithCon
 // SwitchDbInstanceHaOperationArrayInput is an input type that accepts SwitchDbInstanceHaOperationArray and SwitchDbInstanceHaOperationArrayOutput values.
 // You can construct a concrete instance of `SwitchDbInstanceHaOperationArrayInput` via:
 //
-//          SwitchDbInstanceHaOperationArray{ SwitchDbInstanceHaOperationArgs{...} }
+//	SwitchDbInstanceHaOperationArray{ SwitchDbInstanceHaOperationArgs{...} }
 type SwitchDbInstanceHaOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i SwitchDbInstanceHaOperationArray) ToSwitchDbInstanceHaOperationArrayOutp
 // SwitchDbInstanceHaOperationMapInput is an input type that accepts SwitchDbInstanceHaOperationMap and SwitchDbInstanceHaOperationMapOutput values.
 // You can construct a concrete instance of `SwitchDbInstanceHaOperationMapInput` via:
 //
-//          SwitchDbInstanceHaOperationMap{ "key": SwitchDbInstanceHaOperationArgs{...} }
+//	SwitchDbInstanceHaOperationMap{ "key": SwitchDbInstanceHaOperationArgs{...} }
 type SwitchDbInstanceHaOperationMapInput interface {
 	pulumi.Input
 

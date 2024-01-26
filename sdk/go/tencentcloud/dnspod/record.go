@@ -21,25 +21,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.NewRecord(ctx, "demo", &Dnspod.RecordArgs{
-// 			Domain:     pulumi.String("mikatong.com"),
-// 			RecordLine: pulumi.String("默认"),
-// 			RecordType: pulumi.String("A"),
-// 			SubDomain:  pulumi.String("demo"),
-// 			Value:      pulumi.String("1.2.3.9"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.NewRecord(ctx, "demo", &Dnspod.RecordArgs{
+//				Domain:     pulumi.String("mikatong.com"),
+//				RecordLine: pulumi.String("默认"),
+//				RecordType: pulumi.String("A"),
+//				SubDomain:  pulumi.String("demo"),
+//				Value:      pulumi.String("1.2.3.9"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -47,7 +50,9 @@ import (
 // DnsPod Domain record can be imported using the Domain#RecordId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dnspod/record:Record demo arunma.com#1194109872
+//
+//	$ pulumi import tencentcloud:Dnspod/record:Record demo arunma.com#1194109872
+//
 // ```
 type Record struct {
 	pulumi.CustomResourceState
@@ -244,7 +249,7 @@ func (i *Record) ToRecordOutputWithContext(ctx context.Context) RecordOutput {
 // RecordArrayInput is an input type that accepts RecordArray and RecordArrayOutput values.
 // You can construct a concrete instance of `RecordArrayInput` via:
 //
-//          RecordArray{ RecordArgs{...} }
+//	RecordArray{ RecordArgs{...} }
 type RecordArrayInput interface {
 	pulumi.Input
 
@@ -269,7 +274,7 @@ func (i RecordArray) ToRecordArrayOutputWithContext(ctx context.Context) RecordA
 // RecordMapInput is an input type that accepts RecordMap and RecordMapOutput values.
 // You can construct a concrete instance of `RecordMapInput` via:
 //
-//          RecordMap{ "key": RecordArgs{...} }
+//	RecordMap{ "key": RecordArgs{...} }
 type RecordMapInput interface {
 	pulumi.Input
 

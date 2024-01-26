@@ -19,70 +19,73 @@ import (
 // package main
 //
 // import (
-// 	"encoding/json"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"version": "2.0",
-// 			"statement": []map[string]interface{}{
-// 				map[string]interface{}{
-// 					"effect": "allow",
-// 					"action": []string{
-// 						"sts:AssumeRole",
-// 					},
-// 					"resource": []string{
-// 						"*",
-// 					},
-// 				},
-// 				map[string]interface{}{
-// 					"effect": "allow",
-// 					"action": []string{
-// 						"cos:PutObject",
-// 					},
-// 					"resource": []string{
-// 						"*",
-// 					},
-// 				},
-// 				map[string]interface{}{
-// 					"effect": "deny",
-// 					"action": []string{
-// 						"aa:*",
-// 					},
-// 					"resource": []string{
-// 						"*",
-// 					},
-// 				},
-// 				map[string]interface{}{
-// 					"effect": "deny",
-// 					"action": []string{
-// 						"aa:*",
-// 					},
-// 					"resource": []string{
-// 						"*",
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		_, err := Cam.NewPolicyVersion(ctx, "policyVersion", &Cam.PolicyVersionArgs{
-// 			PolicyId:       pulumi.Int(171173780),
-// 			PolicyDocument: pulumi.String(json0),
-// 			SetAsDefault:   pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"version": "2.0",
+//				"statement": []map[string]interface{}{
+//					map[string]interface{}{
+//						"effect": "allow",
+//						"action": []string{
+//							"sts:AssumeRole",
+//						},
+//						"resource": []string{
+//							"*",
+//						},
+//					},
+//					map[string]interface{}{
+//						"effect": "allow",
+//						"action": []string{
+//							"cos:PutObject",
+//						},
+//						"resource": []string{
+//							"*",
+//						},
+//					},
+//					map[string]interface{}{
+//						"effect": "deny",
+//						"action": []string{
+//							"aa:*",
+//						},
+//						"resource": []string{
+//							"*",
+//						},
+//					},
+//					map[string]interface{}{
+//						"effect": "deny",
+//						"action": []string{
+//							"aa:*",
+//						},
+//						"resource": []string{
+//							"*",
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err := Cam.NewPolicyVersion(ctx, "policyVersion", &Cam.PolicyVersionArgs{
+//				PolicyId:       pulumi.Int(171173780),
+//				PolicyDocument: pulumi.String(json0),
+//				SetAsDefault:   pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -90,7 +93,9 @@ import (
 // cam policy_version can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/policyVersion:PolicyVersion policy_version policy_version_id
+//
+//	$ pulumi import tencentcloud:Cam/policyVersion:PolicyVersion policy_version policy_version_id
+//
 // ```
 type PolicyVersion struct {
 	pulumi.CustomResourceState
@@ -218,7 +223,7 @@ func (i *PolicyVersion) ToPolicyVersionOutputWithContext(ctx context.Context) Po
 // PolicyVersionArrayInput is an input type that accepts PolicyVersionArray and PolicyVersionArrayOutput values.
 // You can construct a concrete instance of `PolicyVersionArrayInput` via:
 //
-//          PolicyVersionArray{ PolicyVersionArgs{...} }
+//	PolicyVersionArray{ PolicyVersionArgs{...} }
 type PolicyVersionArrayInput interface {
 	pulumi.Input
 
@@ -243,7 +248,7 @@ func (i PolicyVersionArray) ToPolicyVersionArrayOutputWithContext(ctx context.Co
 // PolicyVersionMapInput is an input type that accepts PolicyVersionMap and PolicyVersionMapOutput values.
 // You can construct a concrete instance of `PolicyVersionMapInput` via:
 //
-//          PolicyVersionMap{ "key": PolicyVersionArgs{...} }
+//	PolicyVersionMap{ "key": PolicyVersionArgs{...} }
 type PolicyVersionMapInput interface {
 	pulumi.Input
 

@@ -20,36 +20,39 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.NewBackupDownloadRestriction(ctx, "foo", &Redis.BackupDownloadRestrictionArgs{
-// 			LimitType:           pulumi.String("Customize"),
-// 			VpcComparisonSymbol: pulumi.String("In"),
-// 			IpComparisonSymbol:  pulumi.String("In"),
-// 			LimitVpcs: redis.BackupDownloadRestrictionLimitVpcArray{
-// 				&redis.BackupDownloadRestrictionLimitVpcArgs{
-// 					Region: pulumi.String("ap-guangzhou"),
-// 					VpcLists: pulumi.StringArray{
-// 						pulumi.Any(_var.Vpc_id),
-// 					},
-// 				},
-// 			},
-// 			LimitIps: pulumi.StringArray{
-// 				pulumi.String("10.1.1.12"),
-// 				pulumi.String("10.1.1.13"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Redis.NewBackupDownloadRestriction(ctx, "foo", &Redis.BackupDownloadRestrictionArgs{
+//				LimitType:           pulumi.String("Customize"),
+//				VpcComparisonSymbol: pulumi.String("In"),
+//				IpComparisonSymbol:  pulumi.String("In"),
+//				LimitVpcs: redis.BackupDownloadRestrictionLimitVpcArray{
+//					&redis.BackupDownloadRestrictionLimitVpcArgs{
+//						Region: pulumi.String("ap-guangzhou"),
+//						VpcLists: pulumi.StringArray{
+//							pulumi.Any(_var.Vpc_id),
+//						},
+//					},
+//				},
+//				LimitIps: pulumi.StringArray{
+//					pulumi.String("10.1.1.12"),
+//					pulumi.String("10.1.1.13"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -57,7 +60,9 @@ import (
 // redis backup_download_restriction can be imported using the region, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction foo ap-guangzhou
+//
+//	$ pulumi import tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction foo ap-guangzhou
+//
 // ```
 type BackupDownloadRestriction struct {
 	pulumi.CustomResourceState
@@ -189,7 +194,7 @@ func (i *BackupDownloadRestriction) ToBackupDownloadRestrictionOutputWithContext
 // BackupDownloadRestrictionArrayInput is an input type that accepts BackupDownloadRestrictionArray and BackupDownloadRestrictionArrayOutput values.
 // You can construct a concrete instance of `BackupDownloadRestrictionArrayInput` via:
 //
-//          BackupDownloadRestrictionArray{ BackupDownloadRestrictionArgs{...} }
+//	BackupDownloadRestrictionArray{ BackupDownloadRestrictionArgs{...} }
 type BackupDownloadRestrictionArrayInput interface {
 	pulumi.Input
 
@@ -214,7 +219,7 @@ func (i BackupDownloadRestrictionArray) ToBackupDownloadRestrictionArrayOutputWi
 // BackupDownloadRestrictionMapInput is an input type that accepts BackupDownloadRestrictionMap and BackupDownloadRestrictionMapOutput values.
 // You can construct a concrete instance of `BackupDownloadRestrictionMapInput` via:
 //
-//          BackupDownloadRestrictionMap{ "key": BackupDownloadRestrictionArgs{...} }
+//	BackupDownloadRestrictionMap{ "key": BackupDownloadRestrictionArgs{...} }
 type BackupDownloadRestrictionMapInput interface {
 	pulumi.Input
 

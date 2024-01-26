@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewPathRewrite(ctx, "pathRewrite", &Tsf.PathRewriteArgs{
-// 			Blocked:        pulumi.String("N"),
-// 			GatewayGroupId: pulumi.String("group-a2j9zxpv"),
-// 			Order:          pulumi.Int(2),
-// 			Regex:          pulumi.String("/test"),
-// 			Replacement:    pulumi.String("/tt"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewPathRewrite(ctx, "pathRewrite", &Tsf.PathRewriteArgs{
+//				Blocked:        pulumi.String("N"),
+//				GatewayGroupId: pulumi.String("group-a2j9zxpv"),
+//				Order:          pulumi.Int(2),
+//				Regex:          pulumi.String("/test"),
+//				Replacement:    pulumi.String("/tt"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +48,9 @@ import (
 // tsf path_rewrite can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tsf/pathRewrite:PathRewrite path_rewrite rewrite-nygq33v2
+//
+//	$ pulumi import tencentcloud:Tsf/pathRewrite:PathRewrite path_rewrite rewrite-nygq33v2
+//
 // ```
 type PathRewrite struct {
 	pulumi.CustomResourceState
@@ -195,7 +200,7 @@ func (i *PathRewrite) ToPathRewriteOutputWithContext(ctx context.Context) PathRe
 // PathRewriteArrayInput is an input type that accepts PathRewriteArray and PathRewriteArrayOutput values.
 // You can construct a concrete instance of `PathRewriteArrayInput` via:
 //
-//          PathRewriteArray{ PathRewriteArgs{...} }
+//	PathRewriteArray{ PathRewriteArgs{...} }
 type PathRewriteArrayInput interface {
 	pulumi.Input
 
@@ -220,7 +225,7 @@ func (i PathRewriteArray) ToPathRewriteArrayOutputWithContext(ctx context.Contex
 // PathRewriteMapInput is an input type that accepts PathRewriteMap and PathRewriteMapOutput values.
 // You can construct a concrete instance of `PathRewriteMapInput` via:
 //
-//          PathRewriteMap{ "key": PathRewriteArgs{...} }
+//	PathRewriteMap{ "key": PathRewriteArgs{...} }
 type PathRewriteMapInput interface {
 	pulumi.Input
 

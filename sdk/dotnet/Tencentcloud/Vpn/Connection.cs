@@ -214,7 +214,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Output<string?> IpsecIntegrityAlgorithm { get; private set; } = null!;
 
         /// <summary>
-        /// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+        /// PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
         /// </summary>
         [Output("ipsecPfsDhGroup")]
         public Output<string?> IpsecPfsDhGroup { get; private set; } = null!;
@@ -471,7 +471,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Input<string>? IpsecIntegrityAlgorithm { get; set; }
 
         /// <summary>
-        /// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+        /// PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
         /// </summary>
         [Input("ipsecPfsDhGroup")]
         public Input<string>? IpsecPfsDhGroup { get; set; }
@@ -688,7 +688,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Input<string>? IpsecIntegrityAlgorithm { get; set; }
 
         /// <summary>
-        /// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+        /// PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
         /// </summary>
         [Input("ipsecPfsDhGroup")]
         public Input<string>? IpsecPfsDhGroup { get; set; }

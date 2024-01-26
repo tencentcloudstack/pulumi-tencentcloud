@@ -20,34 +20,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.NewOriginGroup(ctx, "originGroup", &Teo.OriginGroupArgs{
-// 			ConfigurationType: pulumi.String("weight"),
-// 			OriginGroupName:   pulumi.String("test-group"),
-// 			OriginRecords: teo.OriginGroupOriginRecordArray{
-// 				&teo.OriginGroupOriginRecordArgs{
-// 					Areas:   pulumi.StringArray{},
-// 					Port:    pulumi.Int(8080),
-// 					Private: pulumi.Bool(false),
-// 					Record:  pulumi.String("150.109.8.1"),
-// 					Weight:  pulumi.Int(100),
-// 				},
-// 			},
-// 			OriginType: pulumi.String("self"),
-// 			ZoneId:     pulumi.String("zone-297z8rf93cfw"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Teo.NewOriginGroup(ctx, "originGroup", &Teo.OriginGroupArgs{
+//				ConfigurationType: pulumi.String("weight"),
+//				OriginGroupName:   pulumi.String("test-group"),
+//				OriginRecords: teo.OriginGroupOriginRecordArray{
+//					&teo.OriginGroupOriginRecordArgs{
+//						Areas:   pulumi.StringArray{},
+//						Port:    pulumi.Int(8080),
+//						Private: pulumi.Bool(false),
+//						Record:  pulumi.String("150.109.8.1"),
+//						Weight:  pulumi.Int(100),
+//					},
+//				},
+//				OriginType: pulumi.String("self"),
+//				ZoneId:     pulumi.String("zone-297z8rf93cfw"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Cos origin group
 //
@@ -55,34 +58,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.NewOriginGroup(ctx, "originGroup", &Teo.OriginGroupArgs{
-// 			ConfigurationType: pulumi.String("weight"),
-// 			OriginGroupName:   pulumi.String("test"),
-// 			OriginRecords: teo.OriginGroupOriginRecordArray{
-// 				&teo.OriginGroupOriginRecordArgs{
-// 					Areas:   pulumi.StringArray{},
-// 					Port:    pulumi.Int(0),
-// 					Private: pulumi.Bool(true),
-// 					Record:  pulumi.String("test-ruichaolin-1310708577.cos.ap-nanjing.myqcloud.com"),
-// 					Weight:  pulumi.Int(100),
-// 				},
-// 			},
-// 			OriginType: pulumi.String("cos"),
-// 			ZoneId:     pulumi.String("zone-2o3h21ed8bpu"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Teo.NewOriginGroup(ctx, "originGroup", &Teo.OriginGroupArgs{
+//				ConfigurationType: pulumi.String("weight"),
+//				OriginGroupName:   pulumi.String("test"),
+//				OriginRecords: teo.OriginGroupOriginRecordArray{
+//					&teo.OriginGroupOriginRecordArgs{
+//						Areas:   pulumi.StringArray{},
+//						Port:    pulumi.Int(0),
+//						Private: pulumi.Bool(true),
+//						Record:  pulumi.String("test-ruichaolin-1310708577.cos.ap-nanjing.myqcloud.com"),
+//						Weight:  pulumi.Int(100),
+//					},
+//				},
+//				OriginType: pulumi.String("cos"),
+//				ZoneId:     pulumi.String("zone-2o3h21ed8bpu"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -90,10 +96,12 @@ import (
 // teo origin_group can be imported using the zone_id#originGroup_id, e.g. `
 //
 // ```sh
-//  $ pulumi import tencentcloud:Teo/originGroup:OriginGroup origin_group zone-297z8rf93cfw#origin-4f8a30b2-3720-11ed-b66b-525400dceb86
+//
+//	$ pulumi import tencentcloud:Teo/originGroup:OriginGroup origin_group zone-297z8rf93cfw#origin-4f8a30b2-3720-11ed-b66b-525400dceb86
+//
 // ```
 //
-//  `
+//	`
 type OriginGroup struct {
 	pulumi.CustomResourceState
 
@@ -248,7 +256,7 @@ func (i *OriginGroup) ToOriginGroupOutputWithContext(ctx context.Context) Origin
 // OriginGroupArrayInput is an input type that accepts OriginGroupArray and OriginGroupArrayOutput values.
 // You can construct a concrete instance of `OriginGroupArrayInput` via:
 //
-//          OriginGroupArray{ OriginGroupArgs{...} }
+//	OriginGroupArray{ OriginGroupArgs{...} }
 type OriginGroupArrayInput interface {
 	pulumi.Input
 
@@ -273,7 +281,7 @@ func (i OriginGroupArray) ToOriginGroupArrayOutputWithContext(ctx context.Contex
 // OriginGroupMapInput is an input type that accepts OriginGroupMap and OriginGroupMapOutput values.
 // You can construct a concrete instance of `OriginGroupMapInput` via:
 //
-//          OriginGroupMap{ "key": OriginGroupArgs{...} }
+//	OriginGroupMap{ "key": OriginGroupArgs{...} }
 type OriginGroupMapInput interface {
 	pulumi.Input
 

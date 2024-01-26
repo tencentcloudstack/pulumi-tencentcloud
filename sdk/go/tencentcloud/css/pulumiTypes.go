@@ -20,7 +20,7 @@ type PlayDomainCertAttachmentDomainInfo struct {
 // PlayDomainCertAttachmentDomainInfoInput is an input type that accepts PlayDomainCertAttachmentDomainInfoArgs and PlayDomainCertAttachmentDomainInfoOutput values.
 // You can construct a concrete instance of `PlayDomainCertAttachmentDomainInfoInput` via:
 //
-//          PlayDomainCertAttachmentDomainInfoArgs{...}
+//	PlayDomainCertAttachmentDomainInfoArgs{...}
 type PlayDomainCertAttachmentDomainInfoInput interface {
 	pulumi.Input
 
@@ -58,11 +58,11 @@ func (i PlayDomainCertAttachmentDomainInfoArgs) ToPlayDomainCertAttachmentDomain
 // PlayDomainCertAttachmentDomainInfoPtrInput is an input type that accepts PlayDomainCertAttachmentDomainInfoArgs, PlayDomainCertAttachmentDomainInfoPtr and PlayDomainCertAttachmentDomainInfoPtrOutput values.
 // You can construct a concrete instance of `PlayDomainCertAttachmentDomainInfoPtrInput` via:
 //
-//          PlayDomainCertAttachmentDomainInfoArgs{...}
+//	        PlayDomainCertAttachmentDomainInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type PlayDomainCertAttachmentDomainInfoPtrInput interface {
 	pulumi.Input
 
@@ -184,7 +184,7 @@ type PullStreamTaskWatermarkList struct {
 // PullStreamTaskWatermarkListInput is an input type that accepts PullStreamTaskWatermarkListArgs and PullStreamTaskWatermarkListOutput values.
 // You can construct a concrete instance of `PullStreamTaskWatermarkListInput` via:
 //
-//          PullStreamTaskWatermarkListArgs{...}
+//	PullStreamTaskWatermarkListArgs{...}
 type PullStreamTaskWatermarkListInput interface {
 	pulumi.Input
 
@@ -222,7 +222,7 @@ func (i PullStreamTaskWatermarkListArgs) ToPullStreamTaskWatermarkListOutputWith
 // PullStreamTaskWatermarkListArrayInput is an input type that accepts PullStreamTaskWatermarkListArray and PullStreamTaskWatermarkListArrayOutput values.
 // You can construct a concrete instance of `PullStreamTaskWatermarkListArrayInput` via:
 //
-//          PullStreamTaskWatermarkListArray{ PullStreamTaskWatermarkListArgs{...} }
+//	PullStreamTaskWatermarkListArray{ PullStreamTaskWatermarkListArgs{...} }
 type PullStreamTaskWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -322,7 +322,7 @@ type RecordTemplateAacParam struct {
 // RecordTemplateAacParamInput is an input type that accepts RecordTemplateAacParamArgs and RecordTemplateAacParamOutput values.
 // You can construct a concrete instance of `RecordTemplateAacParamInput` via:
 //
-//          RecordTemplateAacParamArgs{...}
+//	RecordTemplateAacParamArgs{...}
 type RecordTemplateAacParamInput interface {
 	pulumi.Input
 
@@ -364,11 +364,11 @@ func (i RecordTemplateAacParamArgs) ToRecordTemplateAacParamPtrOutputWithContext
 // RecordTemplateAacParamPtrInput is an input type that accepts RecordTemplateAacParamArgs, RecordTemplateAacParamPtr and RecordTemplateAacParamPtrOutput values.
 // You can construct a concrete instance of `RecordTemplateAacParamPtrInput` via:
 //
-//          RecordTemplateAacParamArgs{...}
+//	        RecordTemplateAacParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RecordTemplateAacParamPtrInput interface {
 	pulumi.Input
 
@@ -560,7 +560,7 @@ type RecordTemplateFlvParam struct {
 // RecordTemplateFlvParamInput is an input type that accepts RecordTemplateFlvParamArgs and RecordTemplateFlvParamOutput values.
 // You can construct a concrete instance of `RecordTemplateFlvParamInput` via:
 //
-//          RecordTemplateFlvParamArgs{...}
+//	RecordTemplateFlvParamArgs{...}
 type RecordTemplateFlvParamInput interface {
 	pulumi.Input
 
@@ -602,11 +602,11 @@ func (i RecordTemplateFlvParamArgs) ToRecordTemplateFlvParamPtrOutputWithContext
 // RecordTemplateFlvParamPtrInput is an input type that accepts RecordTemplateFlvParamArgs, RecordTemplateFlvParamPtr and RecordTemplateFlvParamPtrOutput values.
 // You can construct a concrete instance of `RecordTemplateFlvParamPtrInput` via:
 //
-//          RecordTemplateFlvParamArgs{...}
+//	        RecordTemplateFlvParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RecordTemplateFlvParamPtrInput interface {
 	pulumi.Input
 
@@ -791,7 +791,7 @@ type RecordTemplateFlvSpecialParam struct {
 // RecordTemplateFlvSpecialParamInput is an input type that accepts RecordTemplateFlvSpecialParamArgs and RecordTemplateFlvSpecialParamOutput values.
 // You can construct a concrete instance of `RecordTemplateFlvSpecialParamInput` via:
 //
-//          RecordTemplateFlvSpecialParamArgs{...}
+//	RecordTemplateFlvSpecialParamArgs{...}
 type RecordTemplateFlvSpecialParamInput interface {
 	pulumi.Input
 
@@ -826,11 +826,11 @@ func (i RecordTemplateFlvSpecialParamArgs) ToRecordTemplateFlvSpecialParamPtrOut
 // RecordTemplateFlvSpecialParamPtrInput is an input type that accepts RecordTemplateFlvSpecialParamArgs, RecordTemplateFlvSpecialParamPtr and RecordTemplateFlvSpecialParamPtrOutput values.
 // You can construct a concrete instance of `RecordTemplateFlvSpecialParamPtrInput` via:
 //
-//          RecordTemplateFlvSpecialParamArgs{...}
+//	        RecordTemplateFlvSpecialParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RecordTemplateFlvSpecialParamPtrInput interface {
 	pulumi.Input
 
@@ -931,7 +931,7 @@ type RecordTemplateHlsParam struct {
 // RecordTemplateHlsParamInput is an input type that accepts RecordTemplateHlsParamArgs and RecordTemplateHlsParamOutput values.
 // You can construct a concrete instance of `RecordTemplateHlsParamInput` via:
 //
-//          RecordTemplateHlsParamArgs{...}
+//	RecordTemplateHlsParamArgs{...}
 type RecordTemplateHlsParamInput interface {
 	pulumi.Input
 
@@ -973,11 +973,11 @@ func (i RecordTemplateHlsParamArgs) ToRecordTemplateHlsParamPtrOutputWithContext
 // RecordTemplateHlsParamPtrInput is an input type that accepts RecordTemplateHlsParamArgs, RecordTemplateHlsParamPtr and RecordTemplateHlsParamPtrOutput values.
 // You can construct a concrete instance of `RecordTemplateHlsParamPtrInput` via:
 //
-//          RecordTemplateHlsParamArgs{...}
+//	        RecordTemplateHlsParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RecordTemplateHlsParamPtrInput interface {
 	pulumi.Input
 
@@ -1162,7 +1162,7 @@ type RecordTemplateHlsSpecialParam struct {
 // RecordTemplateHlsSpecialParamInput is an input type that accepts RecordTemplateHlsSpecialParamArgs and RecordTemplateHlsSpecialParamOutput values.
 // You can construct a concrete instance of `RecordTemplateHlsSpecialParamInput` via:
 //
-//          RecordTemplateHlsSpecialParamArgs{...}
+//	RecordTemplateHlsSpecialParamArgs{...}
 type RecordTemplateHlsSpecialParamInput interface {
 	pulumi.Input
 
@@ -1197,11 +1197,11 @@ func (i RecordTemplateHlsSpecialParamArgs) ToRecordTemplateHlsSpecialParamPtrOut
 // RecordTemplateHlsSpecialParamPtrInput is an input type that accepts RecordTemplateHlsSpecialParamArgs, RecordTemplateHlsSpecialParamPtr and RecordTemplateHlsSpecialParamPtrOutput values.
 // You can construct a concrete instance of `RecordTemplateHlsSpecialParamPtrInput` via:
 //
-//          RecordTemplateHlsSpecialParamArgs{...}
+//	        RecordTemplateHlsSpecialParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RecordTemplateHlsSpecialParamPtrInput interface {
 	pulumi.Input
 
@@ -1302,7 +1302,7 @@ type RecordTemplateMp3Param struct {
 // RecordTemplateMp3ParamInput is an input type that accepts RecordTemplateMp3ParamArgs and RecordTemplateMp3ParamOutput values.
 // You can construct a concrete instance of `RecordTemplateMp3ParamInput` via:
 //
-//          RecordTemplateMp3ParamArgs{...}
+//	RecordTemplateMp3ParamArgs{...}
 type RecordTemplateMp3ParamInput interface {
 	pulumi.Input
 
@@ -1344,11 +1344,11 @@ func (i RecordTemplateMp3ParamArgs) ToRecordTemplateMp3ParamPtrOutputWithContext
 // RecordTemplateMp3ParamPtrInput is an input type that accepts RecordTemplateMp3ParamArgs, RecordTemplateMp3ParamPtr and RecordTemplateMp3ParamPtrOutput values.
 // You can construct a concrete instance of `RecordTemplateMp3ParamPtrInput` via:
 //
-//          RecordTemplateMp3ParamArgs{...}
+//	        RecordTemplateMp3ParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RecordTemplateMp3ParamPtrInput interface {
 	pulumi.Input
 
@@ -1540,7 +1540,7 @@ type RecordTemplateMp4Param struct {
 // RecordTemplateMp4ParamInput is an input type that accepts RecordTemplateMp4ParamArgs and RecordTemplateMp4ParamOutput values.
 // You can construct a concrete instance of `RecordTemplateMp4ParamInput` via:
 //
-//          RecordTemplateMp4ParamArgs{...}
+//	RecordTemplateMp4ParamArgs{...}
 type RecordTemplateMp4ParamInput interface {
 	pulumi.Input
 
@@ -1582,11 +1582,11 @@ func (i RecordTemplateMp4ParamArgs) ToRecordTemplateMp4ParamPtrOutputWithContext
 // RecordTemplateMp4ParamPtrInput is an input type that accepts RecordTemplateMp4ParamArgs, RecordTemplateMp4ParamPtr and RecordTemplateMp4ParamPtrOutput values.
 // You can construct a concrete instance of `RecordTemplateMp4ParamPtrInput` via:
 //
-//          RecordTemplateMp4ParamArgs{...}
+//	        RecordTemplateMp4ParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type RecordTemplateMp4ParamPtrInput interface {
 	pulumi.Input
 
@@ -1780,7 +1780,7 @@ type StreamMonitorInputList struct {
 // StreamMonitorInputListInput is an input type that accepts StreamMonitorInputListArgs and StreamMonitorInputListOutput values.
 // You can construct a concrete instance of `StreamMonitorInputListInput` via:
 //
-//          StreamMonitorInputListArgs{...}
+//	StreamMonitorInputListArgs{...}
 type StreamMonitorInputListInput interface {
 	pulumi.Input
 
@@ -1816,7 +1816,7 @@ func (i StreamMonitorInputListArgs) ToStreamMonitorInputListOutputWithContext(ct
 // StreamMonitorInputListArrayInput is an input type that accepts StreamMonitorInputListArray and StreamMonitorInputListArrayOutput values.
 // You can construct a concrete instance of `StreamMonitorInputListArrayInput` via:
 //
-//          StreamMonitorInputListArray{ StreamMonitorInputListArgs{...} }
+//	StreamMonitorInputListArray{ StreamMonitorInputListArgs{...} }
 type StreamMonitorInputListArrayInput interface {
 	pulumi.Input
 
@@ -1907,7 +1907,7 @@ type StreamMonitorNotifyPolicy struct {
 // StreamMonitorNotifyPolicyInput is an input type that accepts StreamMonitorNotifyPolicyArgs and StreamMonitorNotifyPolicyOutput values.
 // You can construct a concrete instance of `StreamMonitorNotifyPolicyInput` via:
 //
-//          StreamMonitorNotifyPolicyArgs{...}
+//	StreamMonitorNotifyPolicyArgs{...}
 type StreamMonitorNotifyPolicyInput interface {
 	pulumi.Input
 
@@ -1945,11 +1945,11 @@ func (i StreamMonitorNotifyPolicyArgs) ToStreamMonitorNotifyPolicyPtrOutputWithC
 // StreamMonitorNotifyPolicyPtrInput is an input type that accepts StreamMonitorNotifyPolicyArgs, StreamMonitorNotifyPolicyPtr and StreamMonitorNotifyPolicyPtrOutput values.
 // You can construct a concrete instance of `StreamMonitorNotifyPolicyPtrInput` via:
 //
-//          StreamMonitorNotifyPolicyArgs{...}
+//	        StreamMonitorNotifyPolicyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type StreamMonitorNotifyPolicyPtrInput interface {
 	pulumi.Input
 
@@ -2069,7 +2069,7 @@ type StreamMonitorOutputInfo struct {
 // StreamMonitorOutputInfoInput is an input type that accepts StreamMonitorOutputInfoArgs and StreamMonitorOutputInfoOutput values.
 // You can construct a concrete instance of `StreamMonitorOutputInfoInput` via:
 //
-//          StreamMonitorOutputInfoArgs{...}
+//	StreamMonitorOutputInfoArgs{...}
 type StreamMonitorOutputInfoInput interface {
 	pulumi.Input
 
@@ -2113,11 +2113,11 @@ func (i StreamMonitorOutputInfoArgs) ToStreamMonitorOutputInfoPtrOutputWithConte
 // StreamMonitorOutputInfoPtrInput is an input type that accepts StreamMonitorOutputInfoArgs, StreamMonitorOutputInfoPtr and StreamMonitorOutputInfoPtrOutput values.
 // You can construct a concrete instance of `StreamMonitorOutputInfoPtrInput` via:
 //
-//          StreamMonitorOutputInfoArgs{...}
+//	        StreamMonitorOutputInfoArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type StreamMonitorOutputInfoPtrInput interface {
 	pulumi.Input
 
@@ -2280,7 +2280,7 @@ type GetBackupStreamStreamInfoList struct {
 // GetBackupStreamStreamInfoListInput is an input type that accepts GetBackupStreamStreamInfoListArgs and GetBackupStreamStreamInfoListOutput values.
 // You can construct a concrete instance of `GetBackupStreamStreamInfoListInput` via:
 //
-//          GetBackupStreamStreamInfoListArgs{...}
+//	GetBackupStreamStreamInfoListArgs{...}
 type GetBackupStreamStreamInfoListInput interface {
 	pulumi.Input
 
@@ -2314,7 +2314,7 @@ func (i GetBackupStreamStreamInfoListArgs) ToGetBackupStreamStreamInfoListOutput
 // GetBackupStreamStreamInfoListArrayInput is an input type that accepts GetBackupStreamStreamInfoListArray and GetBackupStreamStreamInfoListArrayOutput values.
 // You can construct a concrete instance of `GetBackupStreamStreamInfoListArrayInput` via:
 //
-//          GetBackupStreamStreamInfoListArray{ GetBackupStreamStreamInfoListArgs{...} }
+//	GetBackupStreamStreamInfoListArray{ GetBackupStreamStreamInfoListArgs{...} }
 type GetBackupStreamStreamInfoListArrayInput interface {
 	pulumi.Input
 
@@ -2408,7 +2408,7 @@ type GetBackupStreamStreamInfoListBackupList struct {
 // GetBackupStreamStreamInfoListBackupListInput is an input type that accepts GetBackupStreamStreamInfoListBackupListArgs and GetBackupStreamStreamInfoListBackupListOutput values.
 // You can construct a concrete instance of `GetBackupStreamStreamInfoListBackupListInput` via:
 //
-//          GetBackupStreamStreamInfoListBackupListArgs{...}
+//	GetBackupStreamStreamInfoListBackupListArgs{...}
 type GetBackupStreamStreamInfoListBackupListInput interface {
 	pulumi.Input
 
@@ -2446,7 +2446,7 @@ func (i GetBackupStreamStreamInfoListBackupListArgs) ToGetBackupStreamStreamInfo
 // GetBackupStreamStreamInfoListBackupListArrayInput is an input type that accepts GetBackupStreamStreamInfoListBackupListArray and GetBackupStreamStreamInfoListBackupListArrayOutput values.
 // You can construct a concrete instance of `GetBackupStreamStreamInfoListBackupListArrayInput` via:
 //
-//          GetBackupStreamStreamInfoListBackupListArray{ GetBackupStreamStreamInfoListBackupListArgs{...} }
+//	GetBackupStreamStreamInfoListBackupListArray{ GetBackupStreamStreamInfoListBackupListArgs{...} }
 type GetBackupStreamStreamInfoListBackupListArrayInput interface {
 	pulumi.Input
 
@@ -2542,7 +2542,7 @@ type GetDeliverLogDownListLogInfoList struct {
 // GetDeliverLogDownListLogInfoListInput is an input type that accepts GetDeliverLogDownListLogInfoListArgs and GetDeliverLogDownListLogInfoListOutput values.
 // You can construct a concrete instance of `GetDeliverLogDownListLogInfoListInput` via:
 //
-//          GetDeliverLogDownListLogInfoListArgs{...}
+//	GetDeliverLogDownListLogInfoListArgs{...}
 type GetDeliverLogDownListLogInfoListInput interface {
 	pulumi.Input
 
@@ -2572,7 +2572,7 @@ func (i GetDeliverLogDownListLogInfoListArgs) ToGetDeliverLogDownListLogInfoList
 // GetDeliverLogDownListLogInfoListArrayInput is an input type that accepts GetDeliverLogDownListLogInfoListArray and GetDeliverLogDownListLogInfoListArrayOutput values.
 // You can construct a concrete instance of `GetDeliverLogDownListLogInfoListArrayInput` via:
 //
-//          GetDeliverLogDownListLogInfoListArray{ GetDeliverLogDownListLogInfoListArgs{...} }
+//	GetDeliverLogDownListLogInfoListArray{ GetDeliverLogDownListLogInfoListArgs{...} }
 type GetDeliverLogDownListLogInfoListArrayInput interface {
 	pulumi.Input
 
@@ -2674,7 +2674,7 @@ type GetDomainsDomainList struct {
 // GetDomainsDomainListInput is an input type that accepts GetDomainsDomainListArgs and GetDomainsDomainListOutput values.
 // You can construct a concrete instance of `GetDomainsDomainListInput` via:
 //
-//          GetDomainsDomainListArgs{...}
+//	GetDomainsDomainListArgs{...}
 type GetDomainsDomainListInput interface {
 	pulumi.Input
 
@@ -2724,7 +2724,7 @@ func (i GetDomainsDomainListArgs) ToGetDomainsDomainListOutputWithContext(ctx co
 // GetDomainsDomainListArrayInput is an input type that accepts GetDomainsDomainListArray and GetDomainsDomainListArrayOutput values.
 // You can construct a concrete instance of `GetDomainsDomainListArrayInput` via:
 //
-//          GetDomainsDomainListArray{ GetDomainsDomainListArgs{...} }
+//	GetDomainsDomainListArray{ GetDomainsDomainListArgs{...} }
 type GetDomainsDomainListArrayInput interface {
 	pulumi.Input
 
@@ -2852,7 +2852,7 @@ type GetMonitorReportDiagnoseResult struct {
 // GetMonitorReportDiagnoseResultInput is an input type that accepts GetMonitorReportDiagnoseResultArgs and GetMonitorReportDiagnoseResultOutput values.
 // You can construct a concrete instance of `GetMonitorReportDiagnoseResultInput` via:
 //
-//          GetMonitorReportDiagnoseResultArgs{...}
+//	GetMonitorReportDiagnoseResultArgs{...}
 type GetMonitorReportDiagnoseResultInput interface {
 	pulumi.Input
 
@@ -2884,7 +2884,7 @@ func (i GetMonitorReportDiagnoseResultArgs) ToGetMonitorReportDiagnoseResultOutp
 // GetMonitorReportDiagnoseResultArrayInput is an input type that accepts GetMonitorReportDiagnoseResultArray and GetMonitorReportDiagnoseResultArrayOutput values.
 // You can construct a concrete instance of `GetMonitorReportDiagnoseResultArrayInput` via:
 //
-//          GetMonitorReportDiagnoseResultArray{ GetMonitorReportDiagnoseResultArgs{...} }
+//	GetMonitorReportDiagnoseResultArray{ GetMonitorReportDiagnoseResultArgs{...} }
 type GetMonitorReportDiagnoseResultArrayInput interface {
 	pulumi.Input
 
@@ -2965,7 +2965,7 @@ type GetMonitorReportMpsResult struct {
 // GetMonitorReportMpsResultInput is an input type that accepts GetMonitorReportMpsResultArgs and GetMonitorReportMpsResultOutput values.
 // You can construct a concrete instance of `GetMonitorReportMpsResultInput` via:
 //
-//          GetMonitorReportMpsResultArgs{...}
+//	GetMonitorReportMpsResultArgs{...}
 type GetMonitorReportMpsResultInput interface {
 	pulumi.Input
 
@@ -2995,7 +2995,7 @@ func (i GetMonitorReportMpsResultArgs) ToGetMonitorReportMpsResultOutputWithCont
 // GetMonitorReportMpsResultArrayInput is an input type that accepts GetMonitorReportMpsResultArray and GetMonitorReportMpsResultArrayOutput values.
 // You can construct a concrete instance of `GetMonitorReportMpsResultArrayInput` via:
 //
-//          GetMonitorReportMpsResultArray{ GetMonitorReportMpsResultArgs{...} }
+//	GetMonitorReportMpsResultArray{ GetMonitorReportMpsResultArgs{...} }
 type GetMonitorReportMpsResultArrayInput interface {
 	pulumi.Input
 
@@ -3085,7 +3085,7 @@ type GetPadTemplatesTemplate struct {
 // GetPadTemplatesTemplateInput is an input type that accepts GetPadTemplatesTemplateArgs and GetPadTemplatesTemplateOutput values.
 // You can construct a concrete instance of `GetPadTemplatesTemplateInput` via:
 //
-//          GetPadTemplatesTemplateArgs{...}
+//	GetPadTemplatesTemplateArgs{...}
 type GetPadTemplatesTemplateInput interface {
 	pulumi.Input
 
@@ -3129,7 +3129,7 @@ func (i GetPadTemplatesTemplateArgs) ToGetPadTemplatesTemplateOutputWithContext(
 // GetPadTemplatesTemplateArrayInput is an input type that accepts GetPadTemplatesTemplateArray and GetPadTemplatesTemplateArrayOutput values.
 // You can construct a concrete instance of `GetPadTemplatesTemplateArrayInput` via:
 //
-//          GetPadTemplatesTemplateArray{ GetPadTemplatesTemplateArgs{...} }
+//	GetPadTemplatesTemplateArray{ GetPadTemplatesTemplateArgs{...} }
 type GetPadTemplatesTemplateArrayInput interface {
 	pulumi.Input
 
@@ -3250,7 +3250,7 @@ type GetPullStreamTaskStatusTaskStatusInfo struct {
 // GetPullStreamTaskStatusTaskStatusInfoInput is an input type that accepts GetPullStreamTaskStatusTaskStatusInfoArgs and GetPullStreamTaskStatusTaskStatusInfoOutput values.
 // You can construct a concrete instance of `GetPullStreamTaskStatusTaskStatusInfoInput` via:
 //
-//          GetPullStreamTaskStatusTaskStatusInfoArgs{...}
+//	GetPullStreamTaskStatusTaskStatusInfoArgs{...}
 type GetPullStreamTaskStatusTaskStatusInfoInput interface {
 	pulumi.Input
 
@@ -3290,7 +3290,7 @@ func (i GetPullStreamTaskStatusTaskStatusInfoArgs) ToGetPullStreamTaskStatusTask
 // GetPullStreamTaskStatusTaskStatusInfoArrayInput is an input type that accepts GetPullStreamTaskStatusTaskStatusInfoArray and GetPullStreamTaskStatusTaskStatusInfoArrayOutput values.
 // You can construct a concrete instance of `GetPullStreamTaskStatusTaskStatusInfoArrayInput` via:
 //
-//          GetPullStreamTaskStatusTaskStatusInfoArray{ GetPullStreamTaskStatusTaskStatusInfoArgs{...} }
+//	GetPullStreamTaskStatusTaskStatusInfoArray{ GetPullStreamTaskStatusTaskStatusInfoArgs{...} }
 type GetPullStreamTaskStatusTaskStatusInfoArrayInput interface {
 	pulumi.Input
 
@@ -3425,7 +3425,7 @@ type GetStreamMonitorListLiveStreamMonitor struct {
 // GetStreamMonitorListLiveStreamMonitorInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorArgs and GetStreamMonitorListLiveStreamMonitorOutput values.
 // You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorInput` via:
 //
-//          GetStreamMonitorListLiveStreamMonitorArgs{...}
+//	GetStreamMonitorListLiveStreamMonitorArgs{...}
 type GetStreamMonitorListLiveStreamMonitorInput interface {
 	pulumi.Input
 
@@ -3489,7 +3489,7 @@ func (i GetStreamMonitorListLiveStreamMonitorArgs) ToGetStreamMonitorListLiveStr
 // GetStreamMonitorListLiveStreamMonitorArrayInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorArray and GetStreamMonitorListLiveStreamMonitorArrayOutput values.
 // You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorArrayInput` via:
 //
-//          GetStreamMonitorListLiveStreamMonitorArray{ GetStreamMonitorListLiveStreamMonitorArgs{...} }
+//	GetStreamMonitorListLiveStreamMonitorArray{ GetStreamMonitorListLiveStreamMonitorArgs{...} }
 type GetStreamMonitorListLiveStreamMonitorArrayInput interface {
 	pulumi.Input
 
@@ -3662,7 +3662,7 @@ type GetStreamMonitorListLiveStreamMonitorInputList struct {
 // GetStreamMonitorListLiveStreamMonitorInputListInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorInputListArgs and GetStreamMonitorListLiveStreamMonitorInputListOutput values.
 // You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorInputListInput` via:
 //
-//          GetStreamMonitorListLiveStreamMonitorInputListArgs{...}
+//	GetStreamMonitorListLiveStreamMonitorInputListArgs{...}
 type GetStreamMonitorListLiveStreamMonitorInputListInput interface {
 	pulumi.Input
 
@@ -3698,7 +3698,7 @@ func (i GetStreamMonitorListLiveStreamMonitorInputListArgs) ToGetStreamMonitorLi
 // GetStreamMonitorListLiveStreamMonitorInputListArrayInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorInputListArray and GetStreamMonitorListLiveStreamMonitorInputListArrayOutput values.
 // You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorInputListArrayInput` via:
 //
-//          GetStreamMonitorListLiveStreamMonitorInputListArray{ GetStreamMonitorListLiveStreamMonitorInputListArgs{...} }
+//	GetStreamMonitorListLiveStreamMonitorInputListArray{ GetStreamMonitorListLiveStreamMonitorInputListArgs{...} }
 type GetStreamMonitorListLiveStreamMonitorInputListArrayInput interface {
 	pulumi.Input
 
@@ -3789,7 +3789,7 @@ type GetStreamMonitorListLiveStreamMonitorNotifyPolicy struct {
 // GetStreamMonitorListLiveStreamMonitorNotifyPolicyInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs and GetStreamMonitorListLiveStreamMonitorNotifyPolicyOutput values.
 // You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorNotifyPolicyInput` via:
 //
-//          GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs{...}
+//	GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs{...}
 type GetStreamMonitorListLiveStreamMonitorNotifyPolicyInput interface {
 	pulumi.Input
 
@@ -3819,7 +3819,7 @@ func (i GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs) ToGetStreamMonito
 // GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorNotifyPolicyArray and GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayOutput values.
 // You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayInput` via:
 //
-//          GetStreamMonitorListLiveStreamMonitorNotifyPolicyArray{ GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs{...} }
+//	GetStreamMonitorListLiveStreamMonitorNotifyPolicyArray{ GetStreamMonitorListLiveStreamMonitorNotifyPolicyArgs{...} }
 type GetStreamMonitorListLiveStreamMonitorNotifyPolicyArrayInput interface {
 	pulumi.Input
 
@@ -3901,7 +3901,7 @@ type GetStreamMonitorListLiveStreamMonitorOutputInfo struct {
 // GetStreamMonitorListLiveStreamMonitorOutputInfoInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorOutputInfoArgs and GetStreamMonitorListLiveStreamMonitorOutputInfoOutput values.
 // You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorOutputInfoInput` via:
 //
-//          GetStreamMonitorListLiveStreamMonitorOutputInfoArgs{...}
+//	GetStreamMonitorListLiveStreamMonitorOutputInfoArgs{...}
 type GetStreamMonitorListLiveStreamMonitorOutputInfoInput interface {
 	pulumi.Input
 
@@ -3937,7 +3937,7 @@ func (i GetStreamMonitorListLiveStreamMonitorOutputInfoArgs) ToGetStreamMonitorL
 // GetStreamMonitorListLiveStreamMonitorOutputInfoArrayInput is an input type that accepts GetStreamMonitorListLiveStreamMonitorOutputInfoArray and GetStreamMonitorListLiveStreamMonitorOutputInfoArrayOutput values.
 // You can construct a concrete instance of `GetStreamMonitorListLiveStreamMonitorOutputInfoArrayInput` via:
 //
-//          GetStreamMonitorListLiveStreamMonitorOutputInfoArray{ GetStreamMonitorListLiveStreamMonitorOutputInfoArgs{...} }
+//	GetStreamMonitorListLiveStreamMonitorOutputInfoArray{ GetStreamMonitorListLiveStreamMonitorOutputInfoArgs{...} }
 type GetStreamMonitorListLiveStreamMonitorOutputInfoArrayInput interface {
 	pulumi.Input
 
@@ -4030,7 +4030,7 @@ type GetTimeShiftRecordDetailRecordList struct {
 // GetTimeShiftRecordDetailRecordListInput is an input type that accepts GetTimeShiftRecordDetailRecordListArgs and GetTimeShiftRecordDetailRecordListOutput values.
 // You can construct a concrete instance of `GetTimeShiftRecordDetailRecordListInput` via:
 //
-//          GetTimeShiftRecordDetailRecordListArgs{...}
+//	GetTimeShiftRecordDetailRecordListArgs{...}
 type GetTimeShiftRecordDetailRecordListInput interface {
 	pulumi.Input
 
@@ -4062,7 +4062,7 @@ func (i GetTimeShiftRecordDetailRecordListArgs) ToGetTimeShiftRecordDetailRecord
 // GetTimeShiftRecordDetailRecordListArrayInput is an input type that accepts GetTimeShiftRecordDetailRecordListArray and GetTimeShiftRecordDetailRecordListArrayOutput values.
 // You can construct a concrete instance of `GetTimeShiftRecordDetailRecordListArrayInput` via:
 //
-//          GetTimeShiftRecordDetailRecordListArray{ GetTimeShiftRecordDetailRecordListArgs{...} }
+//	GetTimeShiftRecordDetailRecordListArray{ GetTimeShiftRecordDetailRecordListArgs{...} }
 type GetTimeShiftRecordDetailRecordListArrayInput interface {
 	pulumi.Input
 
@@ -4157,7 +4157,7 @@ type GetTimeShiftStreamListStreamList struct {
 // GetTimeShiftStreamListStreamListInput is an input type that accepts GetTimeShiftStreamListStreamListArgs and GetTimeShiftStreamListStreamListOutput values.
 // You can construct a concrete instance of `GetTimeShiftStreamListStreamListInput` via:
 //
-//          GetTimeShiftStreamListStreamListArgs{...}
+//	GetTimeShiftStreamListStreamListArgs{...}
 type GetTimeShiftStreamListStreamListInput interface {
 	pulumi.Input
 
@@ -4201,7 +4201,7 @@ func (i GetTimeShiftStreamListStreamListArgs) ToGetTimeShiftStreamListStreamList
 // GetTimeShiftStreamListStreamListArrayInput is an input type that accepts GetTimeShiftStreamListStreamListArray and GetTimeShiftStreamListStreamListArrayOutput values.
 // You can construct a concrete instance of `GetTimeShiftStreamListStreamListArrayInput` via:
 //
-//          GetTimeShiftStreamListStreamListArray{ GetTimeShiftStreamListStreamListArgs{...} }
+//	GetTimeShiftStreamListStreamListArray{ GetTimeShiftStreamListStreamListArgs{...} }
 type GetTimeShiftStreamListStreamListArrayInput interface {
 	pulumi.Input
 
@@ -4326,7 +4326,7 @@ type GetWatermarksWatermarkList struct {
 // GetWatermarksWatermarkListInput is an input type that accepts GetWatermarksWatermarkListArgs and GetWatermarksWatermarkListOutput values.
 // You can construct a concrete instance of `GetWatermarksWatermarkListInput` via:
 //
-//          GetWatermarksWatermarkListArgs{...}
+//	GetWatermarksWatermarkListArgs{...}
 type GetWatermarksWatermarkListInput interface {
 	pulumi.Input
 
@@ -4370,7 +4370,7 @@ func (i GetWatermarksWatermarkListArgs) ToGetWatermarksWatermarkListOutputWithCo
 // GetWatermarksWatermarkListArrayInput is an input type that accepts GetWatermarksWatermarkListArray and GetWatermarksWatermarkListArrayOutput values.
 // You can construct a concrete instance of `GetWatermarksWatermarkListArrayInput` via:
 //
-//          GetWatermarksWatermarkListArray{ GetWatermarksWatermarkListArgs{...} }
+//	GetWatermarksWatermarkListArray{ GetWatermarksWatermarkListArgs{...} }
 type GetWatermarksWatermarkListArrayInput interface {
 	pulumi.Input
 
@@ -4499,7 +4499,7 @@ type GetXp2pDetailInfoListDataInfoList struct {
 // GetXp2pDetailInfoListDataInfoListInput is an input type that accepts GetXp2pDetailInfoListDataInfoListArgs and GetXp2pDetailInfoListDataInfoListOutput values.
 // You can construct a concrete instance of `GetXp2pDetailInfoListDataInfoListInput` via:
 //
-//          GetXp2pDetailInfoListDataInfoListArgs{...}
+//	GetXp2pDetailInfoListDataInfoListArgs{...}
 type GetXp2pDetailInfoListDataInfoListInput interface {
 	pulumi.Input
 
@@ -4547,7 +4547,7 @@ func (i GetXp2pDetailInfoListDataInfoListArgs) ToGetXp2pDetailInfoListDataInfoLi
 // GetXp2pDetailInfoListDataInfoListArrayInput is an input type that accepts GetXp2pDetailInfoListDataInfoListArray and GetXp2pDetailInfoListDataInfoListArrayOutput values.
 // You can construct a concrete instance of `GetXp2pDetailInfoListDataInfoListArrayInput` via:
 //
-//          GetXp2pDetailInfoListDataInfoListArray{ GetXp2pDetailInfoListDataInfoListArgs{...} }
+//	GetXp2pDetailInfoListDataInfoListArray{ GetXp2pDetailInfoListDataInfoListArgs{...} }
 type GetXp2pDetailInfoListDataInfoListArrayInput interface {
 	pulumi.Input
 

@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ipv6"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ipv6"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ipv6.NewAddressBandwidth(ctx, "ipv6AddressBandwidth", &Ipv6.AddressBandwidthArgs{
-// 			InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 			InternetMaxBandwidthOut: pulumi.Int(6),
-// 			Ipv6Address:             pulumi.String("2402:4e00:1019:9400:0:9905:a90b:2ef0"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ipv6.NewAddressBandwidth(ctx, "ipv6AddressBandwidth", &Ipv6.AddressBandwidthArgs{
+//				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+//				InternetMaxBandwidthOut: pulumi.Int(6),
+//				Ipv6Address:             pulumi.String("2402:4e00:1019:9400:0:9905:a90b:2ef0"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type AddressBandwidth struct {
 	pulumi.CustomResourceState
@@ -157,7 +160,7 @@ func (i *AddressBandwidth) ToAddressBandwidthOutputWithContext(ctx context.Conte
 // AddressBandwidthArrayInput is an input type that accepts AddressBandwidthArray and AddressBandwidthArrayOutput values.
 // You can construct a concrete instance of `AddressBandwidthArrayInput` via:
 //
-//          AddressBandwidthArray{ AddressBandwidthArgs{...} }
+//	AddressBandwidthArray{ AddressBandwidthArgs{...} }
 type AddressBandwidthArrayInput interface {
 	pulumi.Input
 
@@ -182,7 +185,7 @@ func (i AddressBandwidthArray) ToAddressBandwidthArrayOutputWithContext(ctx cont
 // AddressBandwidthMapInput is an input type that accepts AddressBandwidthMap and AddressBandwidthMapOutput values.
 // You can construct a concrete instance of `AddressBandwidthMapInput` via:
 //
-//          AddressBandwidthMap{ "key": AddressBandwidthArgs{...} }
+//	AddressBandwidthMap{ "key": AddressBandwidthArgs{...} }
 type AddressBandwidthMapInput interface {
 	pulumi.Input
 

@@ -19,33 +19,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ses.NewSendEmail(ctx, "sendEmail", &Ses.SendEmailArgs{
-// 			Destinations: pulumi.StringArray{
-// 				pulumi.String("1055482519@qq.com"),
-// 			},
-// 			FromEmailAddress: pulumi.String("aaa@iac-tf.cloud"),
-// 			ReplyToAddresses: pulumi.String("aaa@iac-tf.cloud"),
-// 			Subject:          pulumi.String("test subject"),
-// 			Template: &ses.SendEmailTemplateArgs{
-// 				TemplateData: pulumi.String("{\"name\":\"xxx\",\"age\":\"xx\"}"),
-// 				TemplateId:   pulumi.Int(99629),
-// 			},
-// 			TriggerType: pulumi.Int(1),
-// 			Unsubscribe: pulumi.String("1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ses.NewSendEmail(ctx, "sendEmail", &Ses.SendEmailArgs{
+//				Destinations: pulumi.StringArray{
+//					pulumi.String("1055482519@qq.com"),
+//				},
+//				FromEmailAddress: pulumi.String("aaa@iac-tf.cloud"),
+//				ReplyToAddresses: pulumi.String("aaa@iac-tf.cloud"),
+//				Subject:          pulumi.String("test subject"),
+//				Template: &ses.SendEmailTemplateArgs{
+//					TemplateData: pulumi.String("{\"name\":\"xxx\",\"age\":\"xx\"}"),
+//					TemplateId:   pulumi.Int(99629),
+//				},
+//				TriggerType: pulumi.Int(1),
+//				Unsubscribe: pulumi.String("1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SendEmail struct {
 	pulumi.CustomResourceState
@@ -233,7 +236,7 @@ func (i *SendEmail) ToSendEmailOutputWithContext(ctx context.Context) SendEmailO
 // SendEmailArrayInput is an input type that accepts SendEmailArray and SendEmailArrayOutput values.
 // You can construct a concrete instance of `SendEmailArrayInput` via:
 //
-//          SendEmailArray{ SendEmailArgs{...} }
+//	SendEmailArray{ SendEmailArgs{...} }
 type SendEmailArrayInput interface {
 	pulumi.Input
 
@@ -258,7 +261,7 @@ func (i SendEmailArray) ToSendEmailArrayOutputWithContext(ctx context.Context) S
 // SendEmailMapInput is an input type that accepts SendEmailMap and SendEmailMapOutput values.
 // You can construct a concrete instance of `SendEmailMapInput` via:
 //
-//          SendEmailMap{ "key": SendEmailArgs{...} }
+//	SendEmailMap{ "key": SendEmailArgs{...} }
 type SendEmailMapInput interface {
 	pulumi.Input
 

@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.NewSecurityGroup(ctx, "securityGroup", &Elasticsearch.SecurityGroupArgs{
-// 			InstanceId: pulumi.String("es-5wn36he6"),
-// 			SecurityGroupIds: pulumi.StringArray{
-// 				pulumi.String("sg-mayqdlt1"),
-// 				pulumi.String("sg-po2q8cg7"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.NewSecurityGroup(ctx, "securityGroup", &Elasticsearch.SecurityGroupArgs{
+//				InstanceId: pulumi.String("es-5wn36he6"),
+//				SecurityGroupIds: pulumi.StringArray{
+//					pulumi.String("sg-mayqdlt1"),
+//					pulumi.String("sg-po2q8cg7"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +48,9 @@ import (
 // elasticsearch security_group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Elasticsearch/securityGroup:SecurityGroup security_group instance_id
+//
+//	$ pulumi import tencentcloud:Elasticsearch/securityGroup:SecurityGroup security_group instance_id
+//
 // ```
 type SecurityGroup struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *SecurityGroup) ToSecurityGroupOutputWithContext(ctx context.Context) Se
 // SecurityGroupArrayInput is an input type that accepts SecurityGroupArray and SecurityGroupArrayOutput values.
 // You can construct a concrete instance of `SecurityGroupArrayInput` via:
 //
-//          SecurityGroupArray{ SecurityGroupArgs{...} }
+//	SecurityGroupArray{ SecurityGroupArgs{...} }
 type SecurityGroupArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i SecurityGroupArray) ToSecurityGroupArrayOutputWithContext(ctx context.Co
 // SecurityGroupMapInput is an input type that accepts SecurityGroupMap and SecurityGroupMapOutput values.
 // You can construct a concrete instance of `SecurityGroupMapInput` via:
 //
-//          SecurityGroupMap{ "key": SecurityGroupArgs{...} }
+//	SecurityGroupMap{ "key": SecurityGroupArgs{...} }
 type SecurityGroupMapInput interface {
 	pulumi.Input
 

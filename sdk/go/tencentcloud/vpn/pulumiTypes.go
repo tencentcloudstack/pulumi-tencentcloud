@@ -20,7 +20,7 @@ type ConnectionSecurityGroupPolicy struct {
 // ConnectionSecurityGroupPolicyInput is an input type that accepts ConnectionSecurityGroupPolicyArgs and ConnectionSecurityGroupPolicyOutput values.
 // You can construct a concrete instance of `ConnectionSecurityGroupPolicyInput` via:
 //
-//          ConnectionSecurityGroupPolicyArgs{...}
+//	ConnectionSecurityGroupPolicyArgs{...}
 type ConnectionSecurityGroupPolicyInput interface {
 	pulumi.Input
 
@@ -50,7 +50,7 @@ func (i ConnectionSecurityGroupPolicyArgs) ToConnectionSecurityGroupPolicyOutput
 // ConnectionSecurityGroupPolicyArrayInput is an input type that accepts ConnectionSecurityGroupPolicyArray and ConnectionSecurityGroupPolicyArrayOutput values.
 // You can construct a concrete instance of `ConnectionSecurityGroupPolicyArrayInput` via:
 //
-//          ConnectionSecurityGroupPolicyArray{ ConnectionSecurityGroupPolicyArgs{...} }
+//	ConnectionSecurityGroupPolicyArray{ ConnectionSecurityGroupPolicyArgs{...} }
 type ConnectionSecurityGroupPolicyArrayInput interface {
 	pulumi.Input
 
@@ -128,7 +128,7 @@ type CustomerGatewayConfigurationDownloadCustomerGatewayVendor struct {
 // CustomerGatewayConfigurationDownloadCustomerGatewayVendorInput is an input type that accepts CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs and CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput values.
 // You can construct a concrete instance of `CustomerGatewayConfigurationDownloadCustomerGatewayVendorInput` via:
 //
-//          CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{...}
+//	CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{...}
 type CustomerGatewayConfigurationDownloadCustomerGatewayVendorInput interface {
 	pulumi.Input
 
@@ -168,11 +168,11 @@ func (i CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs) ToCustome
 // CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrInput is an input type that accepts CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs, CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtr and CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput values.
 // You can construct a concrete instance of `CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrInput` via:
 //
-//          CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{...}
+//	        CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrInput interface {
 	pulumi.Input
 
@@ -359,7 +359,7 @@ type GetConnectionsConnectionList struct {
 // GetConnectionsConnectionListInput is an input type that accepts GetConnectionsConnectionListArgs and GetConnectionsConnectionListOutput values.
 // You can construct a concrete instance of `GetConnectionsConnectionListInput` via:
 //
-//          GetConnectionsConnectionListArgs{...}
+//	GetConnectionsConnectionListArgs{...}
 type GetConnectionsConnectionListInput interface {
 	pulumi.Input
 
@@ -447,7 +447,7 @@ func (i GetConnectionsConnectionListArgs) ToGetConnectionsConnectionListOutputWi
 // GetConnectionsConnectionListArrayInput is an input type that accepts GetConnectionsConnectionListArray and GetConnectionsConnectionListArrayOutput values.
 // You can construct a concrete instance of `GetConnectionsConnectionListArrayInput` via:
 //
-//          GetConnectionsConnectionListArray{ GetConnectionsConnectionListArgs{...} }
+//	GetConnectionsConnectionListArray{ GetConnectionsConnectionListArgs{...} }
 type GetConnectionsConnectionListArrayInput interface {
 	pulumi.Input
 
@@ -670,7 +670,7 @@ type GetConnectionsConnectionListSecurityGroupPolicy struct {
 // GetConnectionsConnectionListSecurityGroupPolicyInput is an input type that accepts GetConnectionsConnectionListSecurityGroupPolicyArgs and GetConnectionsConnectionListSecurityGroupPolicyOutput values.
 // You can construct a concrete instance of `GetConnectionsConnectionListSecurityGroupPolicyInput` via:
 //
-//          GetConnectionsConnectionListSecurityGroupPolicyArgs{...}
+//	GetConnectionsConnectionListSecurityGroupPolicyArgs{...}
 type GetConnectionsConnectionListSecurityGroupPolicyInput interface {
 	pulumi.Input
 
@@ -700,7 +700,7 @@ func (i GetConnectionsConnectionListSecurityGroupPolicyArgs) ToGetConnectionsCon
 // GetConnectionsConnectionListSecurityGroupPolicyArrayInput is an input type that accepts GetConnectionsConnectionListSecurityGroupPolicyArray and GetConnectionsConnectionListSecurityGroupPolicyArrayOutput values.
 // You can construct a concrete instance of `GetConnectionsConnectionListSecurityGroupPolicyArrayInput` via:
 //
-//          GetConnectionsConnectionListSecurityGroupPolicyArray{ GetConnectionsConnectionListSecurityGroupPolicyArgs{...} }
+//	GetConnectionsConnectionListSecurityGroupPolicyArray{ GetConnectionsConnectionListSecurityGroupPolicyArgs{...} }
 type GetConnectionsConnectionListSecurityGroupPolicyArrayInput interface {
 	pulumi.Input
 
@@ -778,7 +778,7 @@ type GetCustomerGatewayVendorsCustomerGatewayVendorSet struct {
 // GetCustomerGatewayVendorsCustomerGatewayVendorSetInput is an input type that accepts GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs and GetCustomerGatewayVendorsCustomerGatewayVendorSetOutput values.
 // You can construct a concrete instance of `GetCustomerGatewayVendorsCustomerGatewayVendorSetInput` via:
 //
-//          GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs{...}
+//	GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs{...}
 type GetCustomerGatewayVendorsCustomerGatewayVendorSetInput interface {
 	pulumi.Input
 
@@ -810,7 +810,7 @@ func (i GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs) ToGetCustomerGate
 // GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayInput is an input type that accepts GetCustomerGatewayVendorsCustomerGatewayVendorSetArray and GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayOutput values.
 // You can construct a concrete instance of `GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayInput` via:
 //
-//          GetCustomerGatewayVendorsCustomerGatewayVendorSetArray{ GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs{...} }
+//	GetCustomerGatewayVendorsCustomerGatewayVendorSetArray{ GetCustomerGatewayVendorsCustomerGatewayVendorSetArgs{...} }
 type GetCustomerGatewayVendorsCustomerGatewayVendorSetArrayInput interface {
 	pulumi.Input
 
@@ -897,7 +897,7 @@ type GetCustomerGatewaysGatewayList struct {
 // GetCustomerGatewaysGatewayListInput is an input type that accepts GetCustomerGatewaysGatewayListArgs and GetCustomerGatewaysGatewayListOutput values.
 // You can construct a concrete instance of `GetCustomerGatewaysGatewayListInput` via:
 //
-//          GetCustomerGatewaysGatewayListArgs{...}
+//	GetCustomerGatewaysGatewayListArgs{...}
 type GetCustomerGatewaysGatewayListInput interface {
 	pulumi.Input
 
@@ -933,7 +933,7 @@ func (i GetCustomerGatewaysGatewayListArgs) ToGetCustomerGatewaysGatewayListOutp
 // GetCustomerGatewaysGatewayListArrayInput is an input type that accepts GetCustomerGatewaysGatewayListArray and GetCustomerGatewaysGatewayListArrayOutput values.
 // You can construct a concrete instance of `GetCustomerGatewaysGatewayListArrayInput` via:
 //
-//          GetCustomerGatewaysGatewayListArray{ GetCustomerGatewaysGatewayListArgs{...} }
+//	GetCustomerGatewaysGatewayListArray{ GetCustomerGatewaysGatewayListArgs{...} }
 type GetCustomerGatewaysGatewayListArrayInput interface {
 	pulumi.Input
 
@@ -1037,7 +1037,7 @@ type GetGatewayRoutesVpnGatewayRouteList struct {
 // GetGatewayRoutesVpnGatewayRouteListInput is an input type that accepts GetGatewayRoutesVpnGatewayRouteListArgs and GetGatewayRoutesVpnGatewayRouteListOutput values.
 // You can construct a concrete instance of `GetGatewayRoutesVpnGatewayRouteListInput` via:
 //
-//          GetGatewayRoutesVpnGatewayRouteListArgs{...}
+//	GetGatewayRoutesVpnGatewayRouteListArgs{...}
 type GetGatewayRoutesVpnGatewayRouteListInput interface {
 	pulumi.Input
 
@@ -1080,7 +1080,7 @@ func (i GetGatewayRoutesVpnGatewayRouteListArgs) ToGetGatewayRoutesVpnGatewayRou
 // GetGatewayRoutesVpnGatewayRouteListArrayInput is an input type that accepts GetGatewayRoutesVpnGatewayRouteListArray and GetGatewayRoutesVpnGatewayRouteListArrayOutput values.
 // You can construct a concrete instance of `GetGatewayRoutesVpnGatewayRouteListArrayInput` via:
 //
-//          GetGatewayRoutesVpnGatewayRouteListArray{ GetGatewayRoutesVpnGatewayRouteListArgs{...} }
+//	GetGatewayRoutesVpnGatewayRouteListArray{ GetGatewayRoutesVpnGatewayRouteListArgs{...} }
 type GetGatewayRoutesVpnGatewayRouteListArrayInput interface {
 	pulumi.Input
 
@@ -1221,7 +1221,7 @@ type GetGatewaysGatewayList struct {
 // GetGatewaysGatewayListInput is an input type that accepts GetGatewaysGatewayListArgs and GetGatewaysGatewayListOutput values.
 // You can construct a concrete instance of `GetGatewaysGatewayListInput` via:
 //
-//          GetGatewaysGatewayListArgs{...}
+//	GetGatewaysGatewayListArgs{...}
 type GetGatewaysGatewayListInput interface {
 	pulumi.Input
 
@@ -1279,7 +1279,7 @@ func (i GetGatewaysGatewayListArgs) ToGetGatewaysGatewayListOutputWithContext(ct
 // GetGatewaysGatewayListArrayInput is an input type that accepts GetGatewaysGatewayListArray and GetGatewaysGatewayListArrayOutput values.
 // You can construct a concrete instance of `GetGatewaysGatewayListArrayInput` via:
 //
-//          GetGatewaysGatewayListArray{ GetGatewaysGatewayListArgs{...} }
+//	GetGatewaysGatewayListArray{ GetGatewaysGatewayListArgs{...} }
 type GetGatewaysGatewayListArrayInput interface {
 	pulumi.Input
 

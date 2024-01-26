@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.GetGroupInfo(ctx, &ckafka.GetGroupInfoArgs{
-// 			GroupLists: []string{
-// 				"xxxxxx",
-// 			},
-// 			InstanceId: "ckafka-xxxxxx",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.GetGroupInfo(ctx, &ckafka.GetGroupInfoArgs{
+//				GroupLists: []string{
+//					"xxxxxx",
+//				},
+//				InstanceId: "ckafka-xxxxxx",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupGroupInfo(ctx *pulumi.Context, args *LookupGroupInfoArgs, opts ...pulumi.InvokeOption) (*LookupGroupInfoResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

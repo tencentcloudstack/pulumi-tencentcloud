@@ -20,35 +20,38 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewNatInstance(ctx, "example", &Cfw.NatInstanceArgs{
-// 			CrossAZone: pulumi.Int(0),
-// 			Mode:       pulumi.Int(0),
-// 			NewModeItems: &cfw.NatInstanceNewModeItemsArgs{
-// 				Eips: pulumi.StringArray{
-// 					pulumi.String("152.136.168.192"),
-// 				},
-// 				VpcLists: pulumi.StringArray{
-// 					pulumi.String("vpc-5063ta4i"),
-// 				},
-// 			},
-// 			Width: pulumi.Int(20),
-// 			ZoneSets: pulumi.StringArray{
-// 				pulumi.String("ap-guangzhou-7"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.NewNatInstance(ctx, "example", &Cfw.NatInstanceArgs{
+//				CrossAZone: pulumi.Int(0),
+//				Mode:       pulumi.Int(0),
+//				NewModeItems: &cfw.NatInstanceNewModeItemsArgs{
+//					Eips: pulumi.StringArray{
+//						pulumi.String("152.136.168.192"),
+//					},
+//					VpcLists: pulumi.StringArray{
+//						pulumi.String("vpc-5063ta4i"),
+//					},
+//				},
+//				Width: pulumi.Int(20),
+//				ZoneSets: pulumi.StringArray{
+//					pulumi.String("ap-guangzhou-7"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### If mode is 1
 //
@@ -56,30 +59,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewNatInstance(ctx, "example", &Cfw.NatInstanceArgs{
-// 			CrossAZone: pulumi.Int(0),
-// 			Mode:       pulumi.Int(1),
-// 			NatGwLists: pulumi.StringArray{
-// 				pulumi.String("nat-9wwkz1kr"),
-// 			},
-// 			Width: pulumi.Int(20),
-// 			ZoneSets: pulumi.StringArray{
-// 				pulumi.String("ap-guangzhou-6"),
-// 				pulumi.String("ap-guangzhou-7"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.NewNatInstance(ctx, "example", &Cfw.NatInstanceArgs{
+//				CrossAZone: pulumi.Int(0),
+//				Mode:       pulumi.Int(1),
+//				NatGwLists: pulumi.StringArray{
+//					pulumi.String("nat-9wwkz1kr"),
+//				},
+//				Width: pulumi.Int(20),
+//				ZoneSets: pulumi.StringArray{
+//					pulumi.String("ap-guangzhou-6"),
+//					pulumi.String("ap-guangzhou-7"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -87,7 +93,9 @@ import (
 // cfw nat_instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfw/natInstance:NatInstance example cfwnat-54a21421
+//
+//	$ pulumi import tencentcloud:Cfw/natInstance:NatInstance example cfwnat-54a21421
+//
 // ```
 type NatInstance struct {
 	pulumi.CustomResourceState
@@ -245,7 +253,7 @@ func (i *NatInstance) ToNatInstanceOutputWithContext(ctx context.Context) NatIns
 // NatInstanceArrayInput is an input type that accepts NatInstanceArray and NatInstanceArrayOutput values.
 // You can construct a concrete instance of `NatInstanceArrayInput` via:
 //
-//          NatInstanceArray{ NatInstanceArgs{...} }
+//	NatInstanceArray{ NatInstanceArgs{...} }
 type NatInstanceArrayInput interface {
 	pulumi.Input
 
@@ -270,7 +278,7 @@ func (i NatInstanceArray) ToNatInstanceArrayOutputWithContext(ctx context.Contex
 // NatInstanceMapInput is an input type that accepts NatInstanceMap and NatInstanceMapOutput values.
 // You can construct a concrete instance of `NatInstanceMapInput` via:
 //
-//          NatInstanceMap{ "key": NatInstanceArgs{...} }
+//	NatInstanceMap{ "key": NatInstanceArgs{...} }
 type NatInstanceMapInput interface {
 	pulumi.Input
 

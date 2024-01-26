@@ -241,7 +241,7 @@ func (i *InvocationCommandAttachment) ToInvocationCommandAttachmentOutputWithCon
 // InvocationCommandAttachmentArrayInput is an input type that accepts InvocationCommandAttachmentArray and InvocationCommandAttachmentArrayOutput values.
 // You can construct a concrete instance of `InvocationCommandAttachmentArrayInput` via:
 //
-//          InvocationCommandAttachmentArray{ InvocationCommandAttachmentArgs{...} }
+//	InvocationCommandAttachmentArray{ InvocationCommandAttachmentArgs{...} }
 type InvocationCommandAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -266,7 +266,7 @@ func (i InvocationCommandAttachmentArray) ToInvocationCommandAttachmentArrayOutp
 // InvocationCommandAttachmentMapInput is an input type that accepts InvocationCommandAttachmentMap and InvocationCommandAttachmentMapOutput values.
 // You can construct a concrete instance of `InvocationCommandAttachmentMapInput` via:
 //
-//          InvocationCommandAttachmentMap{ "key": InvocationCommandAttachmentArgs{...} }
+//	InvocationCommandAttachmentMap{ "key": InvocationCommandAttachmentArgs{...} }
 type InvocationCommandAttachmentMapInput interface {
 	pulumi.Input
 

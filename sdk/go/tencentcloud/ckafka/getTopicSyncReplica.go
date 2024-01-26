@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.GetTopicSyncReplica(ctx, &ckafka.GetTopicSyncReplicaArgs{
-// 			InstanceId: "ckafka-xxxxxx",
-// 			TopicName:  "xxxxxx",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.GetTopicSyncReplica(ctx, &ckafka.GetTopicSyncReplicaArgs{
+//				InstanceId: "ckafka-xxxxxx",
+//				TopicName:  "xxxxxx",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetTopicSyncReplica(ctx *pulumi.Context, args *GetTopicSyncReplicaArgs, opts ...pulumi.InvokeOption) (*GetTopicSyncReplicaResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

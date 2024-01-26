@@ -19,70 +19,73 @@ import (
 // package main
 //
 // import (
-// 	"encoding/json"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"ipType":            0,
-// 			"grabBag":           0,
-// 			"filterIp":          0,
-// 			"netIcmpOn":         1,
-// 			"netIcmpActivex":    0,
-// 			"netIcmpTimeout":    20,
-// 			"netIcmpInterval":   0.5,
-// 			"netIcmpNum":        20,
-// 			"netIcmpSize":       32,
-// 			"netIcmpDataCut":    1,
-// 			"netDnsOn":          1,
-// 			"netDnsTimeout":     5,
-// 			"netDnsQuerymethod": 1,
-// 			"netDnsNs":          "",
-// 			"netDigOn":          1,
-// 			"netDnsServer":      2,
-// 			"netTracertOn":      1,
-// 			"netTracertTimeout": 60,
-// 			"netTracertNum":     30,
-// 			"whiteList":         "",
-// 			"blackList":         "",
-// 			"netIcmpActivexStr": "",
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		_, err := Cat.NewTaskSet(ctx, "taskSet", &Cat.TaskSetArgs{
-// 			BatchTasks: &cat.TaskSetBatchTasksArgs{
-// 				Name:          pulumi.String("demo"),
-// 				TargetAddress: pulumi.String("http://www.baidu.com"),
-// 			},
-// 			TaskType: pulumi.Int(5),
-// 			Nodes: pulumi.StringArray{
-// 				pulumi.String("12136"),
-// 				pulumi.String("12137"),
-// 				pulumi.String("12138"),
-// 				pulumi.String("12141"),
-// 				pulumi.String("12144"),
-// 			},
-// 			Interval:     pulumi.Int(6),
-// 			Parameters:   pulumi.String(json0),
-// 			TaskCategory: pulumi.Int(1),
-// 			Cron:         pulumi.String("* 0-6 * * *"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"ipType":            0,
+//				"grabBag":           0,
+//				"filterIp":          0,
+//				"netIcmpOn":         1,
+//				"netIcmpActivex":    0,
+//				"netIcmpTimeout":    20,
+//				"netIcmpInterval":   0.5,
+//				"netIcmpNum":        20,
+//				"netIcmpSize":       32,
+//				"netIcmpDataCut":    1,
+//				"netDnsOn":          1,
+//				"netDnsTimeout":     5,
+//				"netDnsQuerymethod": 1,
+//				"netDnsNs":          "",
+//				"netDigOn":          1,
+//				"netDnsServer":      2,
+//				"netTracertOn":      1,
+//				"netTracertTimeout": 60,
+//				"netTracertNum":     30,
+//				"whiteList":         "",
+//				"blackList":         "",
+//				"netIcmpActivexStr": "",
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err := Cat.NewTaskSet(ctx, "taskSet", &Cat.TaskSetArgs{
+//				BatchTasks: &cat.TaskSetBatchTasksArgs{
+//					Name:          pulumi.String("demo"),
+//					TargetAddress: pulumi.String("http://www.baidu.com"),
+//				},
+//				TaskType: pulumi.Int(5),
+//				Nodes: pulumi.StringArray{
+//					pulumi.String("12136"),
+//					pulumi.String("12137"),
+//					pulumi.String("12138"),
+//					pulumi.String("12141"),
+//					pulumi.String("12144"),
+//				},
+//				Interval:     pulumi.Int(6),
+//				Parameters:   pulumi.String(json0),
+//				TaskCategory: pulumi.Int(1),
+//				Cron:         pulumi.String("* 0-6 * * *"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -90,7 +93,9 @@ import (
 // cat task_set can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cat/taskSet:TaskSet task_set taskSet_id
+//
+//	$ pulumi import tencentcloud:Cat/taskSet:TaskSet task_set taskSet_id
+//
 // ```
 type TaskSet struct {
 	pulumi.CustomResourceState
@@ -299,7 +304,7 @@ func (i *TaskSet) ToTaskSetOutputWithContext(ctx context.Context) TaskSetOutput 
 // TaskSetArrayInput is an input type that accepts TaskSetArray and TaskSetArrayOutput values.
 // You can construct a concrete instance of `TaskSetArrayInput` via:
 //
-//          TaskSetArray{ TaskSetArgs{...} }
+//	TaskSetArray{ TaskSetArgs{...} }
 type TaskSetArrayInput interface {
 	pulumi.Input
 
@@ -324,7 +329,7 @@ func (i TaskSetArray) ToTaskSetArrayOutputWithContext(ctx context.Context) TaskS
 // TaskSetMapInput is an input type that accepts TaskSetMap and TaskSetMapOutput values.
 // You can construct a concrete instance of `TaskSetMapInput` via:
 //
-//          TaskSetMap{ "key": TaskSetArgs{...} }
+//	TaskSetMap{ "key": TaskSetArgs{...} }
 type TaskSetMapInput interface {
 	pulumi.Input
 

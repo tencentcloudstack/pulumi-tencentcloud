@@ -18,30 +18,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.GetPrice(ctx, &dcdb.GetPriceArgs{
-// 			InstanceCount:  1,
-// 			Zone:           _var.Default_az,
-// 			Period:         1,
-// 			ShardNodeCount: 2,
-// 			ShardMemory:    2,
-// 			ShardStorage:   10,
-// 			ShardCount:     2,
-// 			Paymode:        pulumi.StringRef("postpaid"),
-// 			AmountUnit:     pulumi.StringRef("pent"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcdb.GetPrice(ctx, &dcdb.GetPriceArgs{
+//				InstanceCount:  1,
+//				Zone:           _var.Default_az,
+//				Period:         1,
+//				ShardNodeCount: 2,
+//				ShardMemory:    2,
+//				ShardStorage:   10,
+//				ShardCount:     2,
+//				Paymode:        pulumi.StringRef("postpaid"),
+//				AmountUnit:     pulumi.StringRef("pent"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetPrice(ctx *pulumi.Context, args *GetPriceArgs, opts ...pulumi.InvokeOption) (*GetPriceResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -111,7 +111,7 @@ func (i *AttachUserPolicyOperation) ToAttachUserPolicyOperationOutputWithContext
 // AttachUserPolicyOperationArrayInput is an input type that accepts AttachUserPolicyOperationArray and AttachUserPolicyOperationArrayOutput values.
 // You can construct a concrete instance of `AttachUserPolicyOperationArrayInput` via:
 //
-//          AttachUserPolicyOperationArray{ AttachUserPolicyOperationArgs{...} }
+//	AttachUserPolicyOperationArray{ AttachUserPolicyOperationArgs{...} }
 type AttachUserPolicyOperationArrayInput interface {
 	pulumi.Input
 
@@ -136,7 +136,7 @@ func (i AttachUserPolicyOperationArray) ToAttachUserPolicyOperationArrayOutputWi
 // AttachUserPolicyOperationMapInput is an input type that accepts AttachUserPolicyOperationMap and AttachUserPolicyOperationMapOutput values.
 // You can construct a concrete instance of `AttachUserPolicyOperationMapInput` via:
 //
-//          AttachUserPolicyOperationMap{ "key": AttachUserPolicyOperationArgs{...} }
+//	AttachUserPolicyOperationMap{ "key": AttachUserPolicyOperationArgs{...} }
 type AttachUserPolicyOperationMapInput interface {
 	pulumi.Input
 

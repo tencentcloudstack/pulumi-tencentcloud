@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewApplicationFileConfigRelease(ctx, "applicationFileConfigRelease", &Tsf.ApplicationFileConfigReleaseArgs{
-// 			ConfigId:    pulumi.String("dcfg-f-123456"),
-// 			GroupId:     pulumi.String("group-123456"),
-// 			ReleaseDesc: pulumi.String("product release"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewApplicationFileConfigRelease(ctx, "applicationFileConfigRelease", &Tsf.ApplicationFileConfigReleaseArgs{
+//				ConfigId:    pulumi.String("dcfg-f-123456"),
+//				GroupId:     pulumi.String("group-123456"),
+//				ReleaseDesc: pulumi.String("product release"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // tsf applicationfile_config_release can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tsf/applicationFileConfigRelease:ApplicationFileConfigRelease application_file_config_release application_file_config_release_id
+//
+//	$ pulumi import tencentcloud:Tsf/applicationFileConfigRelease:ApplicationFileConfigRelease application_file_config_release application_file_config_release_id
+//
 // ```
 type ApplicationFileConfigRelease struct {
 	pulumi.CustomResourceState
@@ -158,7 +163,7 @@ func (i *ApplicationFileConfigRelease) ToApplicationFileConfigReleaseOutputWithC
 // ApplicationFileConfigReleaseArrayInput is an input type that accepts ApplicationFileConfigReleaseArray and ApplicationFileConfigReleaseArrayOutput values.
 // You can construct a concrete instance of `ApplicationFileConfigReleaseArrayInput` via:
 //
-//          ApplicationFileConfigReleaseArray{ ApplicationFileConfigReleaseArgs{...} }
+//	ApplicationFileConfigReleaseArray{ ApplicationFileConfigReleaseArgs{...} }
 type ApplicationFileConfigReleaseArrayInput interface {
 	pulumi.Input
 
@@ -183,7 +188,7 @@ func (i ApplicationFileConfigReleaseArray) ToApplicationFileConfigReleaseArrayOu
 // ApplicationFileConfigReleaseMapInput is an input type that accepts ApplicationFileConfigReleaseMap and ApplicationFileConfigReleaseMapOutput values.
 // You can construct a concrete instance of `ApplicationFileConfigReleaseMapInput` via:
 //
-//          ApplicationFileConfigReleaseMap{ "key": ApplicationFileConfigReleaseArgs{...} }
+//	ApplicationFileConfigReleaseMap{ "key": ApplicationFileConfigReleaseArgs{...} }
 type ApplicationFileConfigReleaseMapInput interface {
 	pulumi.Input
 

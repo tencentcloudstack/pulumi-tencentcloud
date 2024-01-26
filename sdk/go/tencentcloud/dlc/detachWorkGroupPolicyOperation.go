@@ -111,7 +111,7 @@ func (i *DetachWorkGroupPolicyOperation) ToDetachWorkGroupPolicyOperationOutputW
 // DetachWorkGroupPolicyOperationArrayInput is an input type that accepts DetachWorkGroupPolicyOperationArray and DetachWorkGroupPolicyOperationArrayOutput values.
 // You can construct a concrete instance of `DetachWorkGroupPolicyOperationArrayInput` via:
 //
-//          DetachWorkGroupPolicyOperationArray{ DetachWorkGroupPolicyOperationArgs{...} }
+//	DetachWorkGroupPolicyOperationArray{ DetachWorkGroupPolicyOperationArgs{...} }
 type DetachWorkGroupPolicyOperationArrayInput interface {
 	pulumi.Input
 
@@ -136,7 +136,7 @@ func (i DetachWorkGroupPolicyOperationArray) ToDetachWorkGroupPolicyOperationArr
 // DetachWorkGroupPolicyOperationMapInput is an input type that accepts DetachWorkGroupPolicyOperationMap and DetachWorkGroupPolicyOperationMapOutput values.
 // You can construct a concrete instance of `DetachWorkGroupPolicyOperationMapInput` via:
 //
-//          DetachWorkGroupPolicyOperationMap{ "key": DetachWorkGroupPolicyOperationArgs{...} }
+//	DetachWorkGroupPolicyOperationMap{ "key": DetachWorkGroupPolicyOperationArgs{...} }
 type DetachWorkGroupPolicyOperationMapInput interface {
 	pulumi.Input
 

@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Bi.NewEmbedIntervalApply(ctx, "embedInterval", &Bi.EmbedIntervalApplyArgs{
-// 			BiToken:   pulumi.String("4192d65b-d674-4117-9a59-xxxxxxxxx"),
-// 			PageId:    pulumi.Int(10520483),
-// 			ProjectId: pulumi.Int(11015030),
-// 			Scope:     pulumi.String("page"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Bi.NewEmbedIntervalApply(ctx, "embedInterval", &Bi.EmbedIntervalApplyArgs{
+//				BiToken:   pulumi.String("4192d65b-d674-4117-9a59-xxxxxxxxx"),
+//				PageId:    pulumi.Int(10520483),
+//				ProjectId: pulumi.Int(11015030),
+//				Scope:     pulumi.String("page"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type EmbedIntervalApply struct {
 	pulumi.CustomResourceState
@@ -154,7 +157,7 @@ func (i *EmbedIntervalApply) ToEmbedIntervalApplyOutputWithContext(ctx context.C
 // EmbedIntervalApplyArrayInput is an input type that accepts EmbedIntervalApplyArray and EmbedIntervalApplyArrayOutput values.
 // You can construct a concrete instance of `EmbedIntervalApplyArrayInput` via:
 //
-//          EmbedIntervalApplyArray{ EmbedIntervalApplyArgs{...} }
+//	EmbedIntervalApplyArray{ EmbedIntervalApplyArgs{...} }
 type EmbedIntervalApplyArrayInput interface {
 	pulumi.Input
 
@@ -179,7 +182,7 @@ func (i EmbedIntervalApplyArray) ToEmbedIntervalApplyArrayOutputWithContext(ctx 
 // EmbedIntervalApplyMapInput is an input type that accepts EmbedIntervalApplyMap and EmbedIntervalApplyMapOutput values.
 // You can construct a concrete instance of `EmbedIntervalApplyMapInput` via:
 //
-//          EmbedIntervalApplyMap{ "key": EmbedIntervalApplyArgs{...} }
+//	EmbedIntervalApplyMap{ "key": EmbedIntervalApplyArgs{...} }
 type EmbedIntervalApplyMapInput interface {
 	pulumi.Input
 

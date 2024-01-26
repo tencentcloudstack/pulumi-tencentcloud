@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewCompareTaskStopOperation(ctx, "compareTaskStopOperation", &Dts.CompareTaskStopOperationArgs{
-// 			CompareTaskId: pulumi.String("dts-8yv4w2i1-cmp-37skmii9"),
-// 			JobId:         pulumi.String("dts-8yv4w2i1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewCompareTaskStopOperation(ctx, "compareTaskStopOperation", &Dts.CompareTaskStopOperationArgs{
+//				CompareTaskId: pulumi.String("dts-8yv4w2i1-cmp-37skmii9"),
+//				JobId:         pulumi.String("dts-8yv4w2i1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type CompareTaskStopOperation struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *CompareTaskStopOperation) ToCompareTaskStopOperationOutputWithContext(c
 // CompareTaskStopOperationArrayInput is an input type that accepts CompareTaskStopOperationArray and CompareTaskStopOperationArrayOutput values.
 // You can construct a concrete instance of `CompareTaskStopOperationArrayInput` via:
 //
-//          CompareTaskStopOperationArray{ CompareTaskStopOperationArgs{...} }
+//	CompareTaskStopOperationArray{ CompareTaskStopOperationArgs{...} }
 type CompareTaskStopOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i CompareTaskStopOperationArray) ToCompareTaskStopOperationArrayOutputWith
 // CompareTaskStopOperationMapInput is an input type that accepts CompareTaskStopOperationMap and CompareTaskStopOperationMapOutput values.
 // You can construct a concrete instance of `CompareTaskStopOperationMapInput` via:
 //
-//          CompareTaskStopOperationMap{ "key": CompareTaskStopOperationArgs{...} }
+//	CompareTaskStopOperationMap{ "key": CompareTaskStopOperationArgs{...} }
 type CompareTaskStopOperationMapInput interface {
 	pulumi.Input
 

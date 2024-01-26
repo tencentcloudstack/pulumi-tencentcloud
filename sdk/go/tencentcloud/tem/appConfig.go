@@ -19,32 +19,35 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tem.NewAppConfig(ctx, "appConfig", &Tem.AppConfigArgs{
-// 			ConfigDatas: tem.AppConfigConfigDataArray{
-// 				&tem.AppConfigConfigDataArgs{
-// 					Key:   pulumi.String("key"),
-// 					Value: pulumi.String("value"),
-// 				},
-// 				&tem.AppConfigConfigDataArgs{
-// 					Key:   pulumi.String("key1"),
-// 					Value: pulumi.String("value1"),
-// 				},
-// 			},
-// 			EnvironmentId: pulumi.String("en-o5edaepv"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tem.NewAppConfig(ctx, "appConfig", &Tem.AppConfigArgs{
+//				ConfigDatas: tem.AppConfigConfigDataArray{
+//					&tem.AppConfigConfigDataArgs{
+//						Key:   pulumi.String("key"),
+//						Value: pulumi.String("value"),
+//					},
+//					&tem.AppConfigConfigDataArgs{
+//						Key:   pulumi.String("key1"),
+//						Value: pulumi.String("value1"),
+//					},
+//				},
+//				EnvironmentId: pulumi.String("en-o5edaepv"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -52,7 +55,9 @@ import (
 // tem appConfig can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tem/appConfig:AppConfig appConfig environmentId#name
+//
+//	$ pulumi import tencentcloud:Tem/appConfig:AppConfig appConfig environmentId#name
+//
 // ```
 type AppConfig struct {
 	pulumi.CustomResourceState
@@ -167,7 +172,7 @@ func (i *AppConfig) ToAppConfigOutputWithContext(ctx context.Context) AppConfigO
 // AppConfigArrayInput is an input type that accepts AppConfigArray and AppConfigArrayOutput values.
 // You can construct a concrete instance of `AppConfigArrayInput` via:
 //
-//          AppConfigArray{ AppConfigArgs{...} }
+//	AppConfigArray{ AppConfigArgs{...} }
 type AppConfigArrayInput interface {
 	pulumi.Input
 
@@ -192,7 +197,7 @@ func (i AppConfigArray) ToAppConfigArrayOutputWithContext(ctx context.Context) A
 // AppConfigMapInput is an input type that accepts AppConfigMap and AppConfigMapOutput values.
 // You can construct a concrete instance of `AppConfigMapInput` via:
 //
-//          AppConfigMap{ "key": AppConfigArgs{...} }
+//	AppConfigMap{ "key": AppConfigArgs{...} }
 type AppConfigMapInput interface {
 	pulumi.Input
 

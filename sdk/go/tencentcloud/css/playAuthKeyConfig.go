@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewPlayAuthKeyConfig(ctx, "playAuthKeyConfig", &Css.PlayAuthKeyConfigArgs{
-// 			AuthBackKey: pulumi.String("testbackkey"),
-// 			AuthDelta:   pulumi.Int(3600),
-// 			AuthKey:     pulumi.String("testauthkey"),
-// 			DomainName:  pulumi.String("your_play_domain_name"),
-// 			Enable:      pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewPlayAuthKeyConfig(ctx, "playAuthKeyConfig", &Css.PlayAuthKeyConfigArgs{
+//				AuthBackKey: pulumi.String("testbackkey"),
+//				AuthDelta:   pulumi.Int(3600),
+//				AuthKey:     pulumi.String("testauthkey"),
+//				DomainName:  pulumi.String("your_play_domain_name"),
+//				Enable:      pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +48,9 @@ import (
 // css play_auth_key_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/playAuthKeyConfig:PlayAuthKeyConfig play_auth_key_config play_auth_key_config_id
+//
+//	$ pulumi import tencentcloud:Css/playAuthKeyConfig:PlayAuthKeyConfig play_auth_key_config play_auth_key_config_id
+//
 // ```
 type PlayAuthKeyConfig struct {
 	pulumi.CustomResourceState
@@ -177,7 +182,7 @@ func (i *PlayAuthKeyConfig) ToPlayAuthKeyConfigOutputWithContext(ctx context.Con
 // PlayAuthKeyConfigArrayInput is an input type that accepts PlayAuthKeyConfigArray and PlayAuthKeyConfigArrayOutput values.
 // You can construct a concrete instance of `PlayAuthKeyConfigArrayInput` via:
 //
-//          PlayAuthKeyConfigArray{ PlayAuthKeyConfigArgs{...} }
+//	PlayAuthKeyConfigArray{ PlayAuthKeyConfigArgs{...} }
 type PlayAuthKeyConfigArrayInput interface {
 	pulumi.Input
 
@@ -202,7 +207,7 @@ func (i PlayAuthKeyConfigArray) ToPlayAuthKeyConfigArrayOutputWithContext(ctx co
 // PlayAuthKeyConfigMapInput is an input type that accepts PlayAuthKeyConfigMap and PlayAuthKeyConfigMapOutput values.
 // You can construct a concrete instance of `PlayAuthKeyConfigMapInput` via:
 //
-//          PlayAuthKeyConfigMap{ "key": PlayAuthKeyConfigArgs{...} }
+//	PlayAuthKeyConfigMap{ "key": PlayAuthKeyConfigArgs{...} }
 type PlayAuthKeyConfigMapInput interface {
 	pulumi.Input
 

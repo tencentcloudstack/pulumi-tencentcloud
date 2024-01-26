@@ -19,44 +19,47 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		info, err := User.GetInfo(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ownerUin := info.OwnerUin
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		desVpc, err := Vpc.NewInstance(ctx, "desVpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("172.16.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Vpc.NewPeerConnectManager(ctx, "peerConnectManager", &Vpc.PeerConnectManagerArgs{
-// 			SourceVpcId:           vpc.ID(),
-// 			PeeringConnectionName: pulumi.String("example-iac"),
-// 			DestinationVpcId:      desVpc.ID(),
-// 			DestinationUin:        pulumi.String(ownerUin),
-// 			DestinationRegion:     pulumi.String("ap-guangzhou"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ownerUin := info.OwnerUin
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			desVpc, err := Vpc.NewInstance(ctx, "desVpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("172.16.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Vpc.NewPeerConnectManager(ctx, "peerConnectManager", &Vpc.PeerConnectManagerArgs{
+//				SourceVpcId:           vpc.ID(),
+//				PeeringConnectionName: pulumi.String("example-iac"),
+//				DestinationVpcId:      desVpc.ID(),
+//				DestinationUin:        pulumi.String(ownerUin),
+//				DestinationRegion:     pulumi.String("ap-guangzhou"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -64,7 +67,9 @@ import (
 // vpc peer_connect_manager can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/peerConnectManager:PeerConnectManager peer_connect_manager peer_connect_manager_id
+//
+//	$ pulumi import tencentcloud:Vpc/peerConnectManager:PeerConnectManager peer_connect_manager peer_connect_manager_id
+//
 // ```
 type PeerConnectManager struct {
 	pulumi.CustomResourceState
@@ -248,7 +253,7 @@ func (i *PeerConnectManager) ToPeerConnectManagerOutputWithContext(ctx context.C
 // PeerConnectManagerArrayInput is an input type that accepts PeerConnectManagerArray and PeerConnectManagerArrayOutput values.
 // You can construct a concrete instance of `PeerConnectManagerArrayInput` via:
 //
-//          PeerConnectManagerArray{ PeerConnectManagerArgs{...} }
+//	PeerConnectManagerArray{ PeerConnectManagerArgs{...} }
 type PeerConnectManagerArrayInput interface {
 	pulumi.Input
 
@@ -273,7 +278,7 @@ func (i PeerConnectManagerArray) ToPeerConnectManagerArrayOutputWithContext(ctx 
 // PeerConnectManagerMapInput is an input type that accepts PeerConnectManagerMap and PeerConnectManagerMapOutput values.
 // You can construct a concrete instance of `PeerConnectManagerMapInput` via:
 //
-//          PeerConnectManagerMap{ "key": PeerConnectManagerArgs{...} }
+//	PeerConnectManagerMap{ "key": PeerConnectManagerArgs{...} }
 type PeerConnectManagerMapInput interface {
 	pulumi.Input
 

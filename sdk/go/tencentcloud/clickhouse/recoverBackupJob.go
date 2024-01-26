@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clickhouse.NewRecoverBackupJob(ctx, "recoverBackupJob", &Clickhouse.RecoverBackupJobArgs{
-// 			BackUpJobId: pulumi.Int(1234),
-// 			InstanceId:  pulumi.String("cdwch-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clickhouse.NewRecoverBackupJob(ctx, "recoverBackupJob", &Clickhouse.RecoverBackupJobArgs{
+//				BackUpJobId: pulumi.Int(1234),
+//				InstanceId:  pulumi.String("cdwch-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type RecoverBackupJob struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *RecoverBackupJob) ToRecoverBackupJobOutputWithContext(ctx context.Conte
 // RecoverBackupJobArrayInput is an input type that accepts RecoverBackupJobArray and RecoverBackupJobArrayOutput values.
 // You can construct a concrete instance of `RecoverBackupJobArrayInput` via:
 //
-//          RecoverBackupJobArray{ RecoverBackupJobArgs{...} }
+//	RecoverBackupJobArray{ RecoverBackupJobArgs{...} }
 type RecoverBackupJobArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i RecoverBackupJobArray) ToRecoverBackupJobArrayOutputWithContext(ctx cont
 // RecoverBackupJobMapInput is an input type that accepts RecoverBackupJobMap and RecoverBackupJobMapOutput values.
 // You can construct a concrete instance of `RecoverBackupJobMapInput` via:
 //
-//          RecoverBackupJobMap{ "key": RecoverBackupJobArgs{...} }
+//	RecoverBackupJobMap{ "key": RecoverBackupJobArgs{...} }
 type RecoverBackupJobMapInput interface {
 	pulumi.Input
 

@@ -19,91 +19,94 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dayu.NewDdosPolicy(ctx, "testPolicy", &Dayu.DdosPolicyArgs{
-// 			BlackIps: pulumi.StringArray{
-// 				pulumi.String("1.1.1.1"),
-// 			},
-// 			DropOptions: dayu.DdosPolicyDropOptionArray{
-// 				&dayu.DdosPolicyDropOptionArgs{
-// 					BadConnThreshold: pulumi.Int(100),
-// 					CheckSyncConn:    pulumi.Bool(true),
-// 					ConnTimeout:      pulumi.Int(500),
-// 					DConnLimit:       pulumi.Int(100),
-// 					DNewLimit:        pulumi.Int(100),
-// 					DropAbroad:       pulumi.Bool(true),
-// 					DropIcmp:         pulumi.Bool(true),
-// 					DropOther:        pulumi.Bool(true),
-// 					DropTcp:          pulumi.Bool(true),
-// 					DropUdp:          pulumi.Bool(true),
-// 					IcmpMbpsLimit:    pulumi.Int(100),
-// 					NullConnEnable:   pulumi.Bool(true),
-// 					OtherMbpsLimit:   pulumi.Int(100),
-// 					SConnLimit:       pulumi.Int(100),
-// 					SNewLimit:        pulumi.Int(100),
-// 					SynLimit:         pulumi.Int(100),
-// 					SynRate:          pulumi.Int(50),
-// 					TcpMbpsLimit:     pulumi.Int(100),
-// 					UdpMbpsLimit:     pulumi.Int(100),
-// 				},
-// 			},
-// 			PacketFilters: dayu.DdosPolicyPacketFilterArray{
-// 				&dayu.DdosPolicyPacketFilterArgs{
-// 					Action:       pulumi.String("drop"),
-// 					DEndPort:     pulumi.Int(1500),
-// 					DStartPort:   pulumi.Int(1000),
-// 					Depth:        pulumi.Int(1000),
-// 					IsInclude:    pulumi.Bool(true),
-// 					MatchBegin:   pulumi.String("begin_l5"),
-// 					MatchType:    pulumi.String("pcre"),
-// 					Offset:       pulumi.Int(500),
-// 					PktLengthMax: pulumi.Int(1400),
-// 					PktLengthMin: pulumi.Int(1000),
-// 					Protocol:     pulumi.String("tcp"),
-// 					SEndPort:     pulumi.Int(2500),
-// 					SStartPort:   pulumi.Int(2000),
-// 				},
-// 			},
-// 			PortFilters: dayu.DdosPolicyPortFilterArray{
-// 				&dayu.DdosPolicyPortFilterArgs{
-// 					Action:    pulumi.String("drop"),
-// 					EndPort:   pulumi.Int(2500),
-// 					Kind:      pulumi.Int(1),
-// 					Protocol:  pulumi.String("all"),
-// 					StartPort: pulumi.Int(2000),
-// 				},
-// 			},
-// 			ResourceType: pulumi.String("bgpip"),
-// 			WatermarkFilters: dayu.DdosPolicyWatermarkFilterArray{
-// 				&dayu.DdosPolicyWatermarkFilterArgs{
-// 					AutoRemove: pulumi.Bool(true),
-// 					Offset:     pulumi.Int(50),
-// 					OpenSwitch: pulumi.Bool(true),
-// 					TcpPortLists: pulumi.StringArray{
-// 						pulumi.String("2000-3000"),
-// 						pulumi.String("3500-4000"),
-// 					},
-// 					UdpPortLists: pulumi.StringArray{
-// 						pulumi.String("5000-6000"),
-// 					},
-// 				},
-// 			},
-// 			WhiteIps: pulumi.StringArray{
-// 				pulumi.String("2.2.2.2"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dayu.NewDdosPolicy(ctx, "testPolicy", &Dayu.DdosPolicyArgs{
+//				BlackIps: pulumi.StringArray{
+//					pulumi.String("1.1.1.1"),
+//				},
+//				DropOptions: dayu.DdosPolicyDropOptionArray{
+//					&dayu.DdosPolicyDropOptionArgs{
+//						BadConnThreshold: pulumi.Int(100),
+//						CheckSyncConn:    pulumi.Bool(true),
+//						ConnTimeout:      pulumi.Int(500),
+//						DConnLimit:       pulumi.Int(100),
+//						DNewLimit:        pulumi.Int(100),
+//						DropAbroad:       pulumi.Bool(true),
+//						DropIcmp:         pulumi.Bool(true),
+//						DropOther:        pulumi.Bool(true),
+//						DropTcp:          pulumi.Bool(true),
+//						DropUdp:          pulumi.Bool(true),
+//						IcmpMbpsLimit:    pulumi.Int(100),
+//						NullConnEnable:   pulumi.Bool(true),
+//						OtherMbpsLimit:   pulumi.Int(100),
+//						SConnLimit:       pulumi.Int(100),
+//						SNewLimit:        pulumi.Int(100),
+//						SynLimit:         pulumi.Int(100),
+//						SynRate:          pulumi.Int(50),
+//						TcpMbpsLimit:     pulumi.Int(100),
+//						UdpMbpsLimit:     pulumi.Int(100),
+//					},
+//				},
+//				PacketFilters: dayu.DdosPolicyPacketFilterArray{
+//					&dayu.DdosPolicyPacketFilterArgs{
+//						Action:       pulumi.String("drop"),
+//						DEndPort:     pulumi.Int(1500),
+//						DStartPort:   pulumi.Int(1000),
+//						Depth:        pulumi.Int(1000),
+//						IsInclude:    pulumi.Bool(true),
+//						MatchBegin:   pulumi.String("begin_l5"),
+//						MatchType:    pulumi.String("pcre"),
+//						Offset:       pulumi.Int(500),
+//						PktLengthMax: pulumi.Int(1400),
+//						PktLengthMin: pulumi.Int(1000),
+//						Protocol:     pulumi.String("tcp"),
+//						SEndPort:     pulumi.Int(2500),
+//						SStartPort:   pulumi.Int(2000),
+//					},
+//				},
+//				PortFilters: dayu.DdosPolicyPortFilterArray{
+//					&dayu.DdosPolicyPortFilterArgs{
+//						Action:    pulumi.String("drop"),
+//						EndPort:   pulumi.Int(2500),
+//						Kind:      pulumi.Int(1),
+//						Protocol:  pulumi.String("all"),
+//						StartPort: pulumi.Int(2000),
+//					},
+//				},
+//				ResourceType: pulumi.String("bgpip"),
+//				WatermarkFilters: dayu.DdosPolicyWatermarkFilterArray{
+//					&dayu.DdosPolicyWatermarkFilterArgs{
+//						AutoRemove: pulumi.Bool(true),
+//						Offset:     pulumi.Int(50),
+//						OpenSwitch: pulumi.Bool(true),
+//						TcpPortLists: pulumi.StringArray{
+//							pulumi.String("2000-3000"),
+//							pulumi.String("3500-4000"),
+//						},
+//						UdpPortLists: pulumi.StringArray{
+//							pulumi.String("5000-6000"),
+//						},
+//					},
+//				},
+//				WhiteIps: pulumi.StringArray{
+//					pulumi.String("2.2.2.2"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type DdosPolicy struct {
 	pulumi.CustomResourceState
@@ -292,7 +295,7 @@ func (i *DdosPolicy) ToDdosPolicyOutputWithContext(ctx context.Context) DdosPoli
 // DdosPolicyArrayInput is an input type that accepts DdosPolicyArray and DdosPolicyArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyArrayInput` via:
 //
-//          DdosPolicyArray{ DdosPolicyArgs{...} }
+//	DdosPolicyArray{ DdosPolicyArgs{...} }
 type DdosPolicyArrayInput interface {
 	pulumi.Input
 
@@ -317,7 +320,7 @@ func (i DdosPolicyArray) ToDdosPolicyArrayOutputWithContext(ctx context.Context)
 // DdosPolicyMapInput is an input type that accepts DdosPolicyMap and DdosPolicyMapOutput values.
 // You can construct a concrete instance of `DdosPolicyMapInput` via:
 //
-//          DdosPolicyMap{ "key": DdosPolicyArgs{...} }
+//	DdosPolicyMap{ "key": DdosPolicyArgs{...} }
 type DdosPolicyMapInput interface {
 	pulumi.Input
 

@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewDeviceAccount(ctx, "example", &Dasb.DeviceAccountArgs{
-// 			Account:  pulumi.String("root"),
-// 			DeviceId: pulumi.Int(100),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewDeviceAccount(ctx, "example", &Dasb.DeviceAccountArgs{
+//				Account:  pulumi.String("root"),
+//				DeviceId: pulumi.Int(100),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // dasb device_account can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dasb/deviceAccount:DeviceAccount example 11
+//
+//	$ pulumi import tencentcloud:Dasb/deviceAccount:DeviceAccount example 11
+//
 // ```
 type DeviceAccount struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *DeviceAccount) ToDeviceAccountOutputWithContext(ctx context.Context) De
 // DeviceAccountArrayInput is an input type that accepts DeviceAccountArray and DeviceAccountArrayOutput values.
 // You can construct a concrete instance of `DeviceAccountArrayInput` via:
 //
-//          DeviceAccountArray{ DeviceAccountArgs{...} }
+//	DeviceAccountArray{ DeviceAccountArgs{...} }
 type DeviceAccountArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i DeviceAccountArray) ToDeviceAccountArrayOutputWithContext(ctx context.Co
 // DeviceAccountMapInput is an input type that accepts DeviceAccountMap and DeviceAccountMapOutput values.
 // You can construct a concrete instance of `DeviceAccountMapInput` via:
 //
-//          DeviceAccountMap{ "key": DeviceAccountArgs{...} }
+//	DeviceAccountMap{ "key": DeviceAccountArgs{...} }
 type DeviceAccountMapInput interface {
 	pulumi.Input
 

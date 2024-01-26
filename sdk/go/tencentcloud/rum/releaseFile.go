@@ -166,7 +166,7 @@ func (i *ReleaseFile) ToReleaseFileOutputWithContext(ctx context.Context) Releas
 // ReleaseFileArrayInput is an input type that accepts ReleaseFileArray and ReleaseFileArrayOutput values.
 // You can construct a concrete instance of `ReleaseFileArrayInput` via:
 //
-//          ReleaseFileArray{ ReleaseFileArgs{...} }
+//	ReleaseFileArray{ ReleaseFileArgs{...} }
 type ReleaseFileArrayInput interface {
 	pulumi.Input
 
@@ -191,7 +191,7 @@ func (i ReleaseFileArray) ToReleaseFileArrayOutputWithContext(ctx context.Contex
 // ReleaseFileMapInput is an input type that accepts ReleaseFileMap and ReleaseFileMapOutput values.
 // You can construct a concrete instance of `ReleaseFileMapInput` via:
 //
-//          ReleaseFileMap{ "key": ReleaseFileArgs{...} }
+//	ReleaseFileMap{ "key": ReleaseFileArgs{...} }
 type ReleaseFileMapInput interface {
 	pulumi.Input
 

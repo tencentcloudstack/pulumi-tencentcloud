@@ -18,35 +18,38 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		diagHistory, err := Dbbrain.GetDiagHistory(ctx, &dbbrain.GetDiagHistoryArgs{
-// 			InstanceId: fmt.Sprintf("%v%v", "%", "s"),
-// 			StartTime:  fmt.Sprintf("%v%v", "%", "s"),
-// 			EndTime:    fmt.Sprintf("%v%v", "%", "s"),
-// 			Product:    pulumi.StringRef("mysql"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Dbbrain.GetDiagEvent(ctx, &dbbrain.GetDiagEventArgs{
-// 			InstanceId: fmt.Sprintf("%v%v", "%", "s"),
-// 			EventId:    pulumi.IntRef(diagHistory.Events[0].EventId),
-// 			Product:    pulumi.StringRef("mysql"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			diagHistory, err := Dbbrain.GetDiagHistory(ctx, &dbbrain.GetDiagHistoryArgs{
+//				InstanceId: fmt.Sprintf("%v%v", "%", "s"),
+//				StartTime:  fmt.Sprintf("%v%v", "%", "s"),
+//				EndTime:    fmt.Sprintf("%v%v", "%", "s"),
+//				Product:    pulumi.StringRef("mysql"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dbbrain.GetDiagEvent(ctx, &dbbrain.GetDiagEventArgs{
+//				InstanceId: fmt.Sprintf("%v%v", "%", "s"),
+//				EventId:    pulumi.IntRef(diagHistory.Events[0].EventId),
+//				Product:    pulumi.StringRef("mysql"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDiagEvent(ctx *pulumi.Context, args *GetDiagEventArgs, opts ...pulumi.InvokeOption) (*GetDiagEventResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

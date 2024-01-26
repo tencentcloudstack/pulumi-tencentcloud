@@ -19,31 +19,34 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tat.NewInvoker(ctx, "invoker", &Tat.InvokerArgs{
-// 			CommandId: pulumi.String("cmd-6fydo27j"),
-// 			InstanceIds: pulumi.StringArray{
-// 				pulumi.String("ins-3c7q2ebs"),
-// 			},
-// 			ScheduleSettings: &tat.InvokerScheduleSettingsArgs{
-// 				InvokeTime: pulumi.String("2099-11-17T16:00:00Z"),
-// 				Policy:     pulumi.String("ONCE"),
-// 			},
-// 			Type:     pulumi.String("SCHEDULE"),
-// 			Username: pulumi.String("root"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tat.NewInvoker(ctx, "invoker", &Tat.InvokerArgs{
+//				CommandId: pulumi.String("cmd-6fydo27j"),
+//				InstanceIds: pulumi.StringArray{
+//					pulumi.String("ins-3c7q2ebs"),
+//				},
+//				ScheduleSettings: &tat.InvokerScheduleSettingsArgs{
+//					InvokeTime: pulumi.String("2099-11-17T16:00:00Z"),
+//					Policy:     pulumi.String("ONCE"),
+//				},
+//				Type:     pulumi.String("SCHEDULE"),
+//				Username: pulumi.String("root"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -51,7 +54,9 @@ import (
 // tat invoker can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tat/invoker:Invoker invoker ivk-gwb4ztk5
+//
+//	$ pulumi import tencentcloud:Tat/invoker:Invoker invoker ivk-gwb4ztk5
+//
 // ```
 type Invoker struct {
 	pulumi.CustomResourceState
@@ -233,7 +238,7 @@ func (i *Invoker) ToInvokerOutputWithContext(ctx context.Context) InvokerOutput 
 // InvokerArrayInput is an input type that accepts InvokerArray and InvokerArrayOutput values.
 // You can construct a concrete instance of `InvokerArrayInput` via:
 //
-//          InvokerArray{ InvokerArgs{...} }
+//	InvokerArray{ InvokerArgs{...} }
 type InvokerArrayInput interface {
 	pulumi.Input
 
@@ -258,7 +263,7 @@ func (i InvokerArray) ToInvokerArrayOutputWithContext(ctx context.Context) Invok
 // InvokerMapInput is an input type that accepts InvokerMap and InvokerMapOutput values.
 // You can construct a concrete instance of `InvokerMapInput` via:
 //
-//          InvokerMap{ "key": InvokerArgs{...} }
+//	InvokerMap{ "key": InvokerArgs{...} }
 type InvokerMapInput interface {
 	pulumi.Input
 

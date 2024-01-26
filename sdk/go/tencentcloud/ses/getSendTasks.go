@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ses"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ses.GetSendTasks(ctx, &ses.GetSendTasksArgs{
-// 			ReceiverId: pulumi.IntRef(1063742),
-// 			Status:     pulumi.IntRef(10),
-// 			TaskType:   pulumi.IntRef(1),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ses.GetSendTasks(ctx, &ses.GetSendTasksArgs{
+//				ReceiverId: pulumi.IntRef(1063742),
+//				Status:     pulumi.IntRef(10),
+//				TaskType:   pulumi.IntRef(1),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetSendTasks(ctx *pulumi.Context, args *GetSendTasksArgs, opts ...pulumi.InvokeOption) (*GetSendTasksResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

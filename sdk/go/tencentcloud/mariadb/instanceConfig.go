@@ -18,7 +18,9 @@ import (
 // mariadb instance_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mariadb/instanceConfig:InstanceConfig test id
+//
+//	$ pulumi import tencentcloud:Mariadb/instanceConfig:InstanceConfig test id
+//
 // ```
 type InstanceConfig struct {
 	pulumi.CustomResourceState
@@ -130,7 +132,7 @@ func (i *InstanceConfig) ToInstanceConfigOutputWithContext(ctx context.Context) 
 // InstanceConfigArrayInput is an input type that accepts InstanceConfigArray and InstanceConfigArrayOutput values.
 // You can construct a concrete instance of `InstanceConfigArrayInput` via:
 //
-//          InstanceConfigArray{ InstanceConfigArgs{...} }
+//	InstanceConfigArray{ InstanceConfigArgs{...} }
 type InstanceConfigArrayInput interface {
 	pulumi.Input
 
@@ -155,7 +157,7 @@ func (i InstanceConfigArray) ToInstanceConfigArrayOutputWithContext(ctx context.
 // InstanceConfigMapInput is an input type that accepts InstanceConfigMap and InstanceConfigMapOutput values.
 // You can construct a concrete instance of `InstanceConfigMapInput` via:
 //
-//          InstanceConfigMap{ "key": InstanceConfigArgs{...} }
+//	InstanceConfigMap{ "key": InstanceConfigArgs{...} }
 type InstanceConfigMapInput interface {
 	pulumi.Input
 

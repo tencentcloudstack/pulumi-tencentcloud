@@ -19,61 +19,64 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Wedata.NewBaseline(ctx, "example", &Wedata.BaselineArgs{
-// 			BaselineCreateAlarmRuleRequest: &wedata.BaselineBaselineCreateAlarmRuleRequestArgs{
-// 				AlarmLevel: pulumi.Int(2),
-// 				AlarmRecipientIds: pulumi.StringArray{
-// 					pulumi.String("100028439226"),
-// 				},
-// 				AlarmRecipientType: pulumi.Int(1),
-// 				AlarmRecipients: pulumi.StringArray{
-// 					pulumi.String("tf_user"),
-// 				},
-// 				AlarmTypes: pulumi.StringArray{
-// 					pulumi.String("baseLineBroken"),
-// 					pulumi.String("baseLineWarning"),
-// 					pulumi.String("baseLineTaskFailure"),
-// 				},
-// 				AlarmWays: pulumi.StringArray{
-// 					pulumi.String("email"),
-// 					pulumi.String("sms"),
-// 				},
-// 			},
-// 			BaselineName: pulumi.String("tf_example"),
-// 			BaselineType: pulumi.String("D"),
-// 			CreateName:   pulumi.String("tf_user"),
-// 			CreateUin:    pulumi.String("100028439226"),
-// 			InChargeName: pulumi.String("100028439226"),
-// 			InChargeUin:  pulumi.String("tf_user"),
-// 			IsNewAlarm:   pulumi.Bool(true),
-// 			ProjectId:    pulumi.String("1927766435649077248"),
-// 			PromiseTasks: wedata.BaselinePromiseTaskArray{
-// 				&wedata.BaselinePromiseTaskArgs{
-// 					ProjectId:        pulumi.String("1927766435649077248"),
-// 					TaskCycle:        pulumi.String("D"),
-// 					TaskId:           pulumi.String("20231030145334153"),
-// 					TaskInChargeName: pulumi.String(";tf_user;"),
-// 					TaskName:         pulumi.String("tf_demo_task"),
-// 					WorkflowId:       pulumi.String("e4dafb2e-76eb-11ee-bfeb-b8cef68a6637"),
-// 					WorkflowName:     pulumi.String("dataflow_mpp"),
-// 				},
-// 			},
-// 			PromiseTime:   pulumi.String("00:00:00"),
-// 			WarningMargin: pulumi.Int(30),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Wedata.NewBaseline(ctx, "example", &Wedata.BaselineArgs{
+//				BaselineCreateAlarmRuleRequest: &wedata.BaselineBaselineCreateAlarmRuleRequestArgs{
+//					AlarmLevel: pulumi.Int(2),
+//					AlarmRecipientIds: pulumi.StringArray{
+//						pulumi.String("100028439226"),
+//					},
+//					AlarmRecipientType: pulumi.Int(1),
+//					AlarmRecipients: pulumi.StringArray{
+//						pulumi.String("tf_user"),
+//					},
+//					AlarmTypes: pulumi.StringArray{
+//						pulumi.String("baseLineBroken"),
+//						pulumi.String("baseLineWarning"),
+//						pulumi.String("baseLineTaskFailure"),
+//					},
+//					AlarmWays: pulumi.StringArray{
+//						pulumi.String("email"),
+//						pulumi.String("sms"),
+//					},
+//				},
+//				BaselineName: pulumi.String("tf_example"),
+//				BaselineType: pulumi.String("D"),
+//				CreateName:   pulumi.String("tf_user"),
+//				CreateUin:    pulumi.String("100028439226"),
+//				InChargeName: pulumi.String("100028439226"),
+//				InChargeUin:  pulumi.String("tf_user"),
+//				IsNewAlarm:   pulumi.Bool(true),
+//				ProjectId:    pulumi.String("1927766435649077248"),
+//				PromiseTasks: wedata.BaselinePromiseTaskArray{
+//					&wedata.BaselinePromiseTaskArgs{
+//						ProjectId:        pulumi.String("1927766435649077248"),
+//						TaskCycle:        pulumi.String("D"),
+//						TaskId:           pulumi.String("20231030145334153"),
+//						TaskInChargeName: pulumi.String(";tf_user;"),
+//						TaskName:         pulumi.String("tf_demo_task"),
+//						WorkflowId:       pulumi.String("e4dafb2e-76eb-11ee-bfeb-b8cef68a6637"),
+//						WorkflowName:     pulumi.String("dataflow_mpp"),
+//					},
+//				},
+//				PromiseTime:   pulumi.String("00:00:00"),
+//				WarningMargin: pulumi.Int(30),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -81,7 +84,9 @@ import (
 // wedata baseline can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Wedata/baseline:Baseline example 1927766435649077248#2
+//
+//	$ pulumi import tencentcloud:Wedata/baseline:Baseline example 1927766435649077248#2
+//
 // ```
 type Baseline struct {
 	pulumi.CustomResourceState
@@ -329,7 +334,7 @@ func (i *Baseline) ToBaselineOutputWithContext(ctx context.Context) BaselineOutp
 // BaselineArrayInput is an input type that accepts BaselineArray and BaselineArrayOutput values.
 // You can construct a concrete instance of `BaselineArrayInput` via:
 //
-//          BaselineArray{ BaselineArgs{...} }
+//	BaselineArray{ BaselineArgs{...} }
 type BaselineArrayInput interface {
 	pulumi.Input
 
@@ -354,7 +359,7 @@ func (i BaselineArray) ToBaselineArrayOutputWithContext(ctx context.Context) Bas
 // BaselineMapInput is an input type that accepts BaselineMap and BaselineMapOutput values.
 // You can construct a concrete instance of `BaselineMapInput` via:
 //
-//          BaselineMap{ "key": BaselineArgs{...} }
+//	BaselineMap{ "key": BaselineArgs{...} }
 type BaselineMapInput interface {
 	pulumi.Input
 

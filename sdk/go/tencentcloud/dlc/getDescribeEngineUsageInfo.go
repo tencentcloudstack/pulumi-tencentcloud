@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.GetDescribeEngineUsageInfo(ctx, &dlc.GetDescribeEngineUsageInfoArgs{
-// 			DataEngineId: "DataEngine-g5ds87d8",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.GetDescribeEngineUsageInfo(ctx, &dlc.GetDescribeEngineUsageInfoArgs{
+//				DataEngineId: "DataEngine-g5ds87d8",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDescribeEngineUsageInfo(ctx *pulumi.Context, args *GetDescribeEngineUsageInfoArgs, opts ...pulumi.InvokeOption) (*GetDescribeEngineUsageInfoResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

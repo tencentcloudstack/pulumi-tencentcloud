@@ -19,34 +19,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewSyncJob(ctx, "syncJob", &Dts.SyncJobArgs{
-// 			AutoRenew:       pulumi.Int(0),
-// 			DstDatabaseType: pulumi.String("cynosdbmysql"),
-// 			DstRegion:       pulumi.String("ap-guangzhou"),
-// 			InstanceClass:   pulumi.String("micro"),
-// 			PayMode:         pulumi.String("PostPay"),
-// 			SrcDatabaseType: pulumi.String("mysql"),
-// 			SrcRegion:       pulumi.String("ap-guangzhou"),
-// 			Tags: dts.SyncJobTagArray{
-// 				&dts.SyncJobTagArgs{
-// 					TagKey:   pulumi.String("aaa"),
-// 					TagValue: pulumi.String("bbb"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewSyncJob(ctx, "syncJob", &Dts.SyncJobArgs{
+//				AutoRenew:       pulumi.Int(0),
+//				DstDatabaseType: pulumi.String("cynosdbmysql"),
+//				DstRegion:       pulumi.String("ap-guangzhou"),
+//				InstanceClass:   pulumi.String("micro"),
+//				PayMode:         pulumi.String("PostPay"),
+//				SrcDatabaseType: pulumi.String("mysql"),
+//				SrcRegion:       pulumi.String("ap-guangzhou"),
+//				Tags: dts.SyncJobTagArray{
+//					&dts.SyncJobTagArgs{
+//						TagKey:   pulumi.String("aaa"),
+//						TagValue: pulumi.String("bbb"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SyncJob struct {
 	pulumi.CustomResourceState
@@ -256,7 +259,7 @@ func (i *SyncJob) ToSyncJobOutputWithContext(ctx context.Context) SyncJobOutput 
 // SyncJobArrayInput is an input type that accepts SyncJobArray and SyncJobArrayOutput values.
 // You can construct a concrete instance of `SyncJobArrayInput` via:
 //
-//          SyncJobArray{ SyncJobArgs{...} }
+//	SyncJobArray{ SyncJobArgs{...} }
 type SyncJobArrayInput interface {
 	pulumi.Input
 
@@ -281,7 +284,7 @@ func (i SyncJobArray) ToSyncJobArrayOutputWithContext(ctx context.Context) SyncJ
 // SyncJobMapInput is an input type that accepts SyncJobMap and SyncJobMapOutput values.
 // You can construct a concrete instance of `SyncJobMapInput` via:
 //
-//          SyncJobMap{ "key": SyncJobArgs{...} }
+//	SyncJobMap{ "key": SyncJobArgs{...} }
 type SyncJobMapInput interface {
 	pulumi.Input
 

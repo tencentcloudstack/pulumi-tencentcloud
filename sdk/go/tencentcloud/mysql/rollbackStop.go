@@ -20,21 +20,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.NewRollbackStop(ctx, "example", &Mysql.RollbackStopArgs{
-// 			InstanceId: pulumi.String("cdb-fitq5t9h"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mysql.NewRollbackStop(ctx, "example", &Mysql.RollbackStopArgs{
+//				InstanceId: pulumi.String("cdb-fitq5t9h"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type RollbackStop struct {
 	pulumi.CustomResourceState
@@ -126,7 +129,7 @@ func (i *RollbackStop) ToRollbackStopOutputWithContext(ctx context.Context) Roll
 // RollbackStopArrayInput is an input type that accepts RollbackStopArray and RollbackStopArrayOutput values.
 // You can construct a concrete instance of `RollbackStopArrayInput` via:
 //
-//          RollbackStopArray{ RollbackStopArgs{...} }
+//	RollbackStopArray{ RollbackStopArgs{...} }
 type RollbackStopArrayInput interface {
 	pulumi.Input
 
@@ -151,7 +154,7 @@ func (i RollbackStopArray) ToRollbackStopArrayOutputWithContext(ctx context.Cont
 // RollbackStopMapInput is an input type that accepts RollbackStopMap and RollbackStopMapOutput values.
 // You can construct a concrete instance of `RollbackStopMapInput` via:
 //
-//          RollbackStopMap{ "key": RollbackStopArgs{...} }
+//	RollbackStopMap{ "key": RollbackStopArgs{...} }
 type RollbackStopMapInput interface {
 	pulumi.Input
 

@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.GetDescribeHostWafInstanceList(ctx, &ssl.GetDescribeHostWafInstanceListArgs{
-// 			CertificateId: "8u8DII0l",
-// 			ResourceType:  "waf",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.GetDescribeHostWafInstanceList(ctx, &ssl.GetDescribeHostWafInstanceListArgs{
+//				CertificateId: "8u8DII0l",
+//				ResourceType:  "waf",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDescribeHostWafInstanceList(ctx *pulumi.Context, args *GetDescribeHostWafInstanceListArgs, opts ...pulumi.InvokeOption) (*GetDescribeHostWafInstanceListResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

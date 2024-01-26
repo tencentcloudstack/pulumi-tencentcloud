@@ -18,29 +18,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooFunction, err := Scf.NewFunction(ctx, "fooFunction", &Scf.FunctionArgs{
-// 			Handler:         pulumi.String("main.do_it"),
-// 			Runtime:         pulumi.String("Python3.6"),
-// 			CosBucketName:   pulumi.String("scf-code-1234567890"),
-// 			CosObjectName:   pulumi.String("code.zip"),
-// 			CosBucketRegion: pulumi.String("ap-guangzhou"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Scf.GetFunctionsOutput(ctx, scf.GetFunctionsOutputArgs{
-// 			Name: fooFunction.Name,
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooFunction, err := Scf.NewFunction(ctx, "fooFunction", &Scf.FunctionArgs{
+//				Handler:         pulumi.String("main.do_it"),
+//				Runtime:         pulumi.String("Python3.6"),
+//				CosBucketName:   pulumi.String("scf-code-1234567890"),
+//				CosObjectName:   pulumi.String("code.zip"),
+//				CosBucketRegion: pulumi.String("ap-guangzhou"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Scf.GetFunctionsOutput(ctx, scf.GetFunctionsOutputArgs{
+//				Name: fooFunction.Name,
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetFunctions(ctx *pulumi.Context, args *GetFunctionsArgs, opts ...pulumi.InvokeOption) (*GetFunctionsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -19,48 +19,51 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcm.NewAccessLogConfig(ctx, "accessLogConfig", &Tcm.AccessLogConfigArgs{
-// 			Address: pulumi.String("10.0.0.1"),
-// 			Cls: &tcm.AccessLogConfigClsArgs{
-// 				Enable: pulumi.Bool(false),
-// 			},
-// 			Enable:       pulumi.Bool(true),
-// 			EnableServer: pulumi.Bool(true),
-// 			EnableStdout: pulumi.Bool(true),
-// 			Encoding:     pulumi.String("JSON"),
-// 			Format: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "	\"authority\": \"", "%", "REQ(:AUTHORITY)", "%", "\",\n", "	\"bytes_received\": \"", "%", "BYTES_RECEIVED", "%", "\",\n", "	\"bytes_sent\": \"", "%", "BYTES_SENT", "%", "\",\n", "	\"downstream_local_address\": \"", "%", "DOWNSTREAM_LOCAL_ADDRESS", "%", "\",\n", "	\"downstream_remote_address\": \"", "%", "DOWNSTREAM_REMOTE_ADDRESS", "%", "\",\n", "	\"duration\": \"", "%", "DURATION", "%", "\",\n", "	\"istio_policy_status\": \"", "%", "DYNAMIC_METADATA(istio.mixer:status)", "%", "\",\n", "	\"method\": \"", "%", "REQ(:METHOD)", "%", "\",\n", "	\"path\": \"", "%", "REQ(X-ENVOY-ORIGINAL-PATH?:PATH)", "%", "\",\n", "	\"protocol\": \"", "%", "PROTOCOL", "%", "\",\n", "	\"request_id\": \"", "%", "REQ(X-REQUEST-ID)", "%", "\",\n", "	\"requested_server_name\": \"", "%", "REQUESTED_SERVER_NAME", "%", "\",\n", "	\"response_code\": \"", "%", "RESPONSE_CODE", "%", "\",\n", "	\"response_flags\": \"", "%", "RESPONSE_FLAGS", "%", "\",\n", "	\"route_name\": \"", "%", "ROUTE_NAME", "%", "\",\n", "	\"start_time\": \"", "%", "START_TIME", "%", "\",\n", "	\"upstream_cluster\": \"", "%", "UPSTREAM_CLUSTER", "%", "\",\n", "	\"upstream_host\": \"", "%", "UPSTREAM_HOST", "%", "\",\n", "	\"upstream_local_address\": \"", "%", "UPSTREAM_LOCAL_ADDRESS", "%", "\",\n", "	\"upstream_service_time\": \"", "%", "RESP(X-ENVOY-UPSTREAM-SERVICE-TIME)", "%", "\",\n", "	\"upstream_transport_failure_reason\": \"", "%", "UPSTREAM_TRANSPORT_FAILURE_REASON", "%", "\",\n", "	\"user_agent\": \"", "%", "REQ(USER-AGENT)", "%", "\",\n", "	\"x_forwarded_for\": \"", "%", "REQ(X-FORWARDED-FOR)", "%\"", "\n", "}\n", "\n")),
-// 			MeshName: pulumi.String("mesh-rofjmxxx"),
-// 			SelectedRange: &tcm.AccessLogConfigSelectedRangeArgs{
-// 				All: pulumi.Bool(true),
-// 			},
-// 			Template: pulumi.String("istio"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tcm.NewAccessLogConfig(ctx, "deleteLogConfig", &Tcm.AccessLogConfigArgs{
-// 			Cls: &tcm.AccessLogConfigClsArgs{
-// 				Enable: pulumi.Bool(false),
-// 			},
-// 			EnableServer: pulumi.Bool(false),
-// 			EnableStdout: pulumi.Bool(false),
-// 			MeshName:     pulumi.String("mesh-rofjmux7"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcm.NewAccessLogConfig(ctx, "accessLogConfig", &Tcm.AccessLogConfigArgs{
+//				Address: pulumi.String("10.0.0.1"),
+//				Cls: &tcm.AccessLogConfigClsArgs{
+//					Enable: pulumi.Bool(false),
+//				},
+//				Enable:       pulumi.Bool(true),
+//				EnableServer: pulumi.Bool(true),
+//				EnableStdout: pulumi.Bool(true),
+//				Encoding:     pulumi.String("JSON"),
+//				Format:       pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "	\"authority\": \"", "%", "REQ(:AUTHORITY)", "%", "\",\n", "	\"bytes_received\": \"", "%", "BYTES_RECEIVED", "%", "\",\n", "	\"bytes_sent\": \"", "%", "BYTES_SENT", "%", "\",\n", "	\"downstream_local_address\": \"", "%", "DOWNSTREAM_LOCAL_ADDRESS", "%", "\",\n", "	\"downstream_remote_address\": \"", "%", "DOWNSTREAM_REMOTE_ADDRESS", "%", "\",\n", "	\"duration\": \"", "%", "DURATION", "%", "\",\n", "	\"istio_policy_status\": \"", "%", "DYNAMIC_METADATA(istio.mixer:status)", "%", "\",\n", "	\"method\": \"", "%", "REQ(:METHOD)", "%", "\",\n", "	\"path\": \"", "%", "REQ(X-ENVOY-ORIGINAL-PATH?:PATH)", "%", "\",\n", "	\"protocol\": \"", "%", "PROTOCOL", "%", "\",\n", "	\"request_id\": \"", "%", "REQ(X-REQUEST-ID)", "%", "\",\n", "	\"requested_server_name\": \"", "%", "REQUESTED_SERVER_NAME", "%", "\",\n", "	\"response_code\": \"", "%", "RESPONSE_CODE", "%", "\",\n", "	\"response_flags\": \"", "%", "RESPONSE_FLAGS", "%", "\",\n", "	\"route_name\": \"", "%", "ROUTE_NAME", "%", "\",\n", "	\"start_time\": \"", "%", "START_TIME", "%", "\",\n", "	\"upstream_cluster\": \"", "%", "UPSTREAM_CLUSTER", "%", "\",\n", "	\"upstream_host\": \"", "%", "UPSTREAM_HOST", "%", "\",\n", "	\"upstream_local_address\": \"", "%", "UPSTREAM_LOCAL_ADDRESS", "%", "\",\n", "	\"upstream_service_time\": \"", "%", "RESP(X-ENVOY-UPSTREAM-SERVICE-TIME)", "%", "\",\n", "	\"upstream_transport_failure_reason\": \"", "%", "UPSTREAM_TRANSPORT_FAILURE_REASON", "%", "\",\n", "	\"user_agent\": \"", "%", "REQ(USER-AGENT)", "%", "\",\n", "	\"x_forwarded_for\": \"", "%", "REQ(X-FORWARDED-FOR)", "%\"", "\n", "}\n", "\n")),
+//				MeshName:     pulumi.String("mesh-rofjmxxx"),
+//				SelectedRange: &tcm.AccessLogConfigSelectedRangeArgs{
+//					All: pulumi.Bool(true),
+//				},
+//				Template: pulumi.String("istio"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcm.NewAccessLogConfig(ctx, "deleteLogConfig", &Tcm.AccessLogConfigArgs{
+//				Cls: &tcm.AccessLogConfigClsArgs{
+//					Enable: pulumi.Bool(false),
+//				},
+//				EnableServer: pulumi.Bool(false),
+//				EnableStdout: pulumi.Bool(false),
+//				MeshName:     pulumi.String("mesh-rofjmux7"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -68,7 +71,9 @@ import (
 // tcm access_log_config can be imported using the mesh_id(mesh_name), e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcm/accessLogConfig:AccessLogConfig access_log_config mesh-rofjmxxx
+//
+//	$ pulumi import tencentcloud:Tcm/accessLogConfig:AccessLogConfig access_log_config mesh-rofjmxxx
+//
 // ```
 type AccessLogConfig struct {
 	pulumi.CustomResourceState
@@ -250,7 +255,7 @@ func (i *AccessLogConfig) ToAccessLogConfigOutputWithContext(ctx context.Context
 // AccessLogConfigArrayInput is an input type that accepts AccessLogConfigArray and AccessLogConfigArrayOutput values.
 // You can construct a concrete instance of `AccessLogConfigArrayInput` via:
 //
-//          AccessLogConfigArray{ AccessLogConfigArgs{...} }
+//	AccessLogConfigArray{ AccessLogConfigArgs{...} }
 type AccessLogConfigArrayInput interface {
 	pulumi.Input
 
@@ -275,7 +280,7 @@ func (i AccessLogConfigArray) ToAccessLogConfigArrayOutputWithContext(ctx contex
 // AccessLogConfigMapInput is an input type that accepts AccessLogConfigMap and AccessLogConfigMapOutput values.
 // You can construct a concrete instance of `AccessLogConfigMapInput` via:
 //
-//          AccessLogConfigMap{ "key": AccessLogConfigArgs{...} }
+//	AccessLogConfigMap{ "key": AccessLogConfigArgs{...} }
 type AccessLogConfigMapInput interface {
 	pulumi.Input
 

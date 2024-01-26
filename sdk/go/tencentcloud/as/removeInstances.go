@@ -115,7 +115,7 @@ func (i *RemoveInstances) ToRemoveInstancesOutputWithContext(ctx context.Context
 // RemoveInstancesArrayInput is an input type that accepts RemoveInstancesArray and RemoveInstancesArrayOutput values.
 // You can construct a concrete instance of `RemoveInstancesArrayInput` via:
 //
-//          RemoveInstancesArray{ RemoveInstancesArgs{...} }
+//	RemoveInstancesArray{ RemoveInstancesArgs{...} }
 type RemoveInstancesArrayInput interface {
 	pulumi.Input
 
@@ -140,7 +140,7 @@ func (i RemoveInstancesArray) ToRemoveInstancesArrayOutputWithContext(ctx contex
 // RemoveInstancesMapInput is an input type that accepts RemoveInstancesMap and RemoveInstancesMapOutput values.
 // You can construct a concrete instance of `RemoveInstancesMapInput` via:
 //
-//          RemoveInstancesMap{ "key": RemoveInstancesArgs{...} }
+//	RemoveInstancesMap{ "key": RemoveInstancesArgs{...} }
 type RemoveInstancesMapInput interface {
 	pulumi.Input
 

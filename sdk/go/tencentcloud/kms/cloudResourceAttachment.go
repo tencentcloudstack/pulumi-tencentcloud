@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kms.NewCloudResourceAttachment(ctx, "example", &Kms.CloudResourceAttachmentArgs{
-// 			KeyId:      pulumi.String("72688f39-1fe8-11ee-9f1a-525400cf25a4"),
-// 			ProductId:  pulumi.String("mysql"),
-// 			ResourceId: pulumi.String("cdb-fitq5t9h"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kms.NewCloudResourceAttachment(ctx, "example", &Kms.CloudResourceAttachmentArgs{
+//				KeyId:      pulumi.String("72688f39-1fe8-11ee-9f1a-525400cf25a4"),
+//				ProductId:  pulumi.String("mysql"),
+//				ResourceId: pulumi.String("cdb-fitq5t9h"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // kms cloud_resource_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Kms/cloudResourceAttachment:CloudResourceAttachment example 72688f39-1fe8-11ee-9f1a-525400cf25a4#mysql#cdb-fitq5t9h
+//
+//	$ pulumi import tencentcloud:Kms/cloudResourceAttachment:CloudResourceAttachment example 72688f39-1fe8-11ee-9f1a-525400cf25a4#mysql#cdb-fitq5t9h
+//
 // ```
 type CloudResourceAttachment struct {
 	pulumi.CustomResourceState
@@ -191,7 +196,7 @@ func (i *CloudResourceAttachment) ToCloudResourceAttachmentOutputWithContext(ctx
 // CloudResourceAttachmentArrayInput is an input type that accepts CloudResourceAttachmentArray and CloudResourceAttachmentArrayOutput values.
 // You can construct a concrete instance of `CloudResourceAttachmentArrayInput` via:
 //
-//          CloudResourceAttachmentArray{ CloudResourceAttachmentArgs{...} }
+//	CloudResourceAttachmentArray{ CloudResourceAttachmentArgs{...} }
 type CloudResourceAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -216,7 +221,7 @@ func (i CloudResourceAttachmentArray) ToCloudResourceAttachmentArrayOutputWithCo
 // CloudResourceAttachmentMapInput is an input type that accepts CloudResourceAttachmentMap and CloudResourceAttachmentMapOutput values.
 // You can construct a concrete instance of `CloudResourceAttachmentMapInput` via:
 //
-//          CloudResourceAttachmentMap{ "key": CloudResourceAttachmentArgs{...} }
+//	CloudResourceAttachmentMap{ "key": CloudResourceAttachmentArgs{...} }
 type CloudResourceAttachmentMapInput interface {
 	pulumi.Input
 

@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.NewRecordGroup(ctx, "recordGroup", &Dnspod.RecordGroupArgs{
-// 			Domain:    pulumi.String("dnspod.cn"),
-// 			GroupName: pulumi.String("group_demo"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.NewRecordGroup(ctx, "recordGroup", &Dnspod.RecordGroupArgs{
+//				Domain:    pulumi.String("dnspod.cn"),
+//				GroupName: pulumi.String("group_demo"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // dnspod record_group can be imported using the domain#groupId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dnspod/recordGroup:RecordGroup record_group domain#groupId
+//
+//	$ pulumi import tencentcloud:Dnspod/recordGroup:RecordGroup record_group domain#groupId
+//
 // ```
 type RecordGroup struct {
 	pulumi.CustomResourceState
@@ -153,7 +158,7 @@ func (i *RecordGroup) ToRecordGroupOutputWithContext(ctx context.Context) Record
 // RecordGroupArrayInput is an input type that accepts RecordGroupArray and RecordGroupArrayOutput values.
 // You can construct a concrete instance of `RecordGroupArrayInput` via:
 //
-//          RecordGroupArray{ RecordGroupArgs{...} }
+//	RecordGroupArray{ RecordGroupArgs{...} }
 type RecordGroupArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +183,7 @@ func (i RecordGroupArray) ToRecordGroupArrayOutputWithContext(ctx context.Contex
 // RecordGroupMapInput is an input type that accepts RecordGroupMap and RecordGroupMapOutput values.
 // You can construct a concrete instance of `RecordGroupMapInput` via:
 //
-//          RecordGroupMap{ "key": RecordGroupArgs{...} }
+//	RecordGroupMap{ "key": RecordGroupArgs{...} }
 type RecordGroupMapInput interface {
 	pulumi.Input
 

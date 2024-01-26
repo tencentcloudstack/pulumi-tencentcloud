@@ -19,32 +19,35 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Gaap.NewCustomHeader(ctx, "customHeader", &Gaap.CustomHeaderArgs{
-// 			Headers: gaap.CustomHeaderHeaderArray{
-// 				&gaap.CustomHeaderHeaderArgs{
-// 					HeaderName:  pulumi.String("HeaderName1"),
-// 					HeaderValue: pulumi.String("HeaderValue1"),
-// 				},
-// 				&gaap.CustomHeaderHeaderArgs{
-// 					HeaderName:  pulumi.String("HeaderName2"),
-// 					HeaderValue: pulumi.String("HeaderValue2"),
-// 				},
-// 			},
-// 			RuleId: pulumi.String("rule-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Gaap.NewCustomHeader(ctx, "customHeader", &Gaap.CustomHeaderArgs{
+//				Headers: gaap.CustomHeaderHeaderArray{
+//					&gaap.CustomHeaderHeaderArgs{
+//						HeaderName:  pulumi.String("HeaderName1"),
+//						HeaderValue: pulumi.String("HeaderValue1"),
+//					},
+//					&gaap.CustomHeaderHeaderArgs{
+//						HeaderName:  pulumi.String("HeaderName2"),
+//						HeaderValue: pulumi.String("HeaderValue2"),
+//					},
+//				},
+//				RuleId: pulumi.String("rule-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -52,7 +55,9 @@ import (
 // gaap custom_header can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Gaap/customHeader:CustomHeader custom_header ruleId
+//
+//	$ pulumi import tencentcloud:Gaap/customHeader:CustomHeader custom_header ruleId
+//
 // ```
 type CustomHeader struct {
 	pulumi.CustomResourceState
@@ -154,7 +159,7 @@ func (i *CustomHeader) ToCustomHeaderOutputWithContext(ctx context.Context) Cust
 // CustomHeaderArrayInput is an input type that accepts CustomHeaderArray and CustomHeaderArrayOutput values.
 // You can construct a concrete instance of `CustomHeaderArrayInput` via:
 //
-//          CustomHeaderArray{ CustomHeaderArgs{...} }
+//	CustomHeaderArray{ CustomHeaderArgs{...} }
 type CustomHeaderArrayInput interface {
 	pulumi.Input
 
@@ -179,7 +184,7 @@ func (i CustomHeaderArray) ToCustomHeaderArrayOutputWithContext(ctx context.Cont
 // CustomHeaderMapInput is an input type that accepts CustomHeaderMap and CustomHeaderMapOutput values.
 // You can construct a concrete instance of `CustomHeaderMapInput` via:
 //
-//          CustomHeaderMap{ "key": CustomHeaderArgs{...} }
+//	CustomHeaderMap{ "key": CustomHeaderArgs{...} }
 type CustomHeaderMapInput interface {
 	pulumi.Input
 

@@ -18,27 +18,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.GetImages(ctx, &tcr.GetImagesArgs{
-// 			Digest:         pulumi.StringRef("sha256:xxxxx"),
-// 			ExactMatch:     pulumi.BoolRef(false),
-// 			ImageVersion:   pulumi.StringRef("v1"),
-// 			NamespaceName:  "ns",
-// 			RegistryId:     "tcr-xxx",
-// 			RepositoryName: "repo",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcr.GetImages(ctx, &tcr.GetImagesArgs{
+//				Digest:         pulumi.StringRef("sha256:xxxxx"),
+//				ExactMatch:     pulumi.BoolRef(false),
+//				ImageVersion:   pulumi.StringRef("v1"),
+//				NamespaceName:  "ns",
+//				RegistryId:     "tcr-xxx",
+//				RepositoryName: "repo",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetImages(ctx *pulumi.Context, args *GetImagesArgs, opts ...pulumi.InvokeOption) (*GetImagesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -19,161 +19,164 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.NewRuleEngine(ctx, "rule1", &Teo.RuleEngineArgs{
-// 			ZoneId:   pulumi.Any(tencentcloud_teo_zone.Example.Id),
-// 			RuleName: pulumi.String("test-rule"),
-// 			Status:   pulumi.String("disable"),
-// 			Rules: teo.RuleEngineRuleArray{
-// 				&teo.RuleEngineRuleArgs{
-// 					Actions: teo.RuleEngineRuleActionArray{
-// 						&teo.RuleEngineRuleActionArgs{
-// 							NormalAction: &teo.RuleEngineRuleActionNormalActionArgs{
-// 								Action: pulumi.String("UpstreamUrlRedirect"),
-// 								Parameters: teo.RuleEngineRuleActionNormalActionParameterArray{
-// 									&teo.RuleEngineRuleActionNormalActionParameterArgs{
-// 										Name: pulumi.String("Type"),
-// 										Values: pulumi.StringArray{
-// 											pulumi.String("Path"),
-// 										},
-// 									},
-// 									&teo.RuleEngineRuleActionNormalActionParameterArgs{
-// 										Name: pulumi.String("Action"),
-// 										Values: pulumi.StringArray{
-// 											pulumi.String("addPrefix"),
-// 										},
-// 									},
-// 									&teo.RuleEngineRuleActionNormalActionParameterArgs{
-// 										Name: pulumi.String("Value"),
-// 										Values: pulumi.StringArray{
-// 											pulumi.String("/sss"),
-// 										},
-// 									},
-// 								},
-// 							},
-// 						},
-// 					},
-// 					Ors: teo.RuleEngineRuleOrArray{
-// 						&teo.RuleEngineRuleOrArgs{
-// 							Ands: teo.RuleEngineRuleOrAndArray{
-// 								&teo.RuleEngineRuleOrAndArgs{
-// 									Operator:   pulumi.String("equal"),
-// 									Target:     pulumi.String("host"),
-// 									IgnoreCase: pulumi.Bool(false),
-// 									Values: pulumi.StringArray{
-// 										pulumi.String("a.tf-teo-t.xyz"),
-// 									},
-// 								},
-// 								&teo.RuleEngineRuleOrAndArgs{
-// 									Operator:   pulumi.String("equal"),
-// 									Target:     pulumi.String("extension"),
-// 									IgnoreCase: pulumi.Bool(false),
-// 									Values: pulumi.StringArray{
-// 										pulumi.String("jpg"),
-// 									},
-// 								},
-// 							},
-// 						},
-// 						&teo.RuleEngineRuleOrArgs{
-// 							Ands: teo.RuleEngineRuleOrAndArray{
-// 								&teo.RuleEngineRuleOrAndArgs{
-// 									Operator:   pulumi.String("equal"),
-// 									Target:     pulumi.String("filename"),
-// 									IgnoreCase: pulumi.Bool(false),
-// 									Values: pulumi.StringArray{
-// 										pulumi.String("test.txt"),
-// 									},
-// 								},
-// 							},
-// 						},
-// 					},
-// 					SubRules: teo.RuleEngineRuleSubRuleArray{
-// 						&teo.RuleEngineRuleSubRuleArgs{
-// 							Tags: pulumi.StringArray{
-// 								pulumi.String("png"),
-// 							},
-// 							Rules: teo.RuleEngineRuleSubRuleRuleArray{
-// 								&teo.RuleEngineRuleSubRuleRuleArgs{
-// 									Ors: teo.RuleEngineRuleSubRuleRuleOrArray{
-// 										&teo.RuleEngineRuleSubRuleRuleOrArgs{
-// 											Ands: teo.RuleEngineRuleSubRuleRuleOrAndArray{
-// 												&teo.RuleEngineRuleSubRuleRuleOrAndArgs{
-// 													Operator:   pulumi.String("notequal"),
-// 													Target:     pulumi.String("host"),
-// 													IgnoreCase: pulumi.Bool(false),
-// 													Values: pulumi.StringArray{
-// 														pulumi.String("a.tf-teo-t.xyz"),
-// 													},
-// 												},
-// 												&teo.RuleEngineRuleSubRuleRuleOrAndArgs{
-// 													Operator:   pulumi.String("equal"),
-// 													Target:     pulumi.String("extension"),
-// 													IgnoreCase: pulumi.Bool(false),
-// 													Values: pulumi.StringArray{
-// 														pulumi.String("png"),
-// 													},
-// 												},
-// 											},
-// 										},
-// 										&teo.RuleEngineRuleSubRuleRuleOrArgs{
-// 											Ands: teo.RuleEngineRuleSubRuleRuleOrAndArray{
-// 												&teo.RuleEngineRuleSubRuleRuleOrAndArgs{
-// 													Operator:   pulumi.String("notequal"),
-// 													Target:     pulumi.String("filename"),
-// 													IgnoreCase: pulumi.Bool(false),
-// 													Values: pulumi.StringArray{
-// 														pulumi.String("test.txt"),
-// 													},
-// 												},
-// 											},
-// 										},
-// 									},
-// 									Actions: teo.RuleEngineRuleSubRuleRuleActionArray{
-// 										&teo.RuleEngineRuleSubRuleRuleActionArgs{
-// 											NormalAction: &teo.RuleEngineRuleSubRuleRuleActionNormalActionArgs{
-// 												Action: pulumi.String("UpstreamUrlRedirect"),
-// 												Parameters: teo.RuleEngineRuleSubRuleRuleActionNormalActionParameterArray{
-// 													&teo.RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{
-// 														Name: pulumi.String("Type"),
-// 														Values: pulumi.StringArray{
-// 															pulumi.String("Path"),
-// 														},
-// 													},
-// 													&teo.RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{
-// 														Name: pulumi.String("Action"),
-// 														Values: pulumi.StringArray{
-// 															pulumi.String("addPrefix"),
-// 														},
-// 													},
-// 													&teo.RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{
-// 														Name: pulumi.String("Value"),
-// 														Values: pulumi.StringArray{
-// 															pulumi.String("/www"),
-// 														},
-// 													},
-// 												},
-// 											},
-// 										},
-// 									},
-// 								},
-// 							},
-// 						},
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Teo.NewRuleEngine(ctx, "rule1", &Teo.RuleEngineArgs{
+//				ZoneId:   pulumi.Any(tencentcloud_teo_zone.Example.Id),
+//				RuleName: pulumi.String("test-rule"),
+//				Status:   pulumi.String("disable"),
+//				Rules: teo.RuleEngineRuleArray{
+//					&teo.RuleEngineRuleArgs{
+//						Actions: teo.RuleEngineRuleActionArray{
+//							&teo.RuleEngineRuleActionArgs{
+//								NormalAction: &teo.RuleEngineRuleActionNormalActionArgs{
+//									Action: pulumi.String("UpstreamUrlRedirect"),
+//									Parameters: teo.RuleEngineRuleActionNormalActionParameterArray{
+//										&teo.RuleEngineRuleActionNormalActionParameterArgs{
+//											Name: pulumi.String("Type"),
+//											Values: pulumi.StringArray{
+//												pulumi.String("Path"),
+//											},
+//										},
+//										&teo.RuleEngineRuleActionNormalActionParameterArgs{
+//											Name: pulumi.String("Action"),
+//											Values: pulumi.StringArray{
+//												pulumi.String("addPrefix"),
+//											},
+//										},
+//										&teo.RuleEngineRuleActionNormalActionParameterArgs{
+//											Name: pulumi.String("Value"),
+//											Values: pulumi.StringArray{
+//												pulumi.String("/sss"),
+//											},
+//										},
+//									},
+//								},
+//							},
+//						},
+//						Ors: teo.RuleEngineRuleOrArray{
+//							&teo.RuleEngineRuleOrArgs{
+//								Ands: teo.RuleEngineRuleOrAndArray{
+//									&teo.RuleEngineRuleOrAndArgs{
+//										Operator:   pulumi.String("equal"),
+//										Target:     pulumi.String("host"),
+//										IgnoreCase: pulumi.Bool(false),
+//										Values: pulumi.StringArray{
+//											pulumi.String("a.tf-teo-t.xyz"),
+//										},
+//									},
+//									&teo.RuleEngineRuleOrAndArgs{
+//										Operator:   pulumi.String("equal"),
+//										Target:     pulumi.String("extension"),
+//										IgnoreCase: pulumi.Bool(false),
+//										Values: pulumi.StringArray{
+//											pulumi.String("jpg"),
+//										},
+//									},
+//								},
+//							},
+//							&teo.RuleEngineRuleOrArgs{
+//								Ands: teo.RuleEngineRuleOrAndArray{
+//									&teo.RuleEngineRuleOrAndArgs{
+//										Operator:   pulumi.String("equal"),
+//										Target:     pulumi.String("filename"),
+//										IgnoreCase: pulumi.Bool(false),
+//										Values: pulumi.StringArray{
+//											pulumi.String("test.txt"),
+//										},
+//									},
+//								},
+//							},
+//						},
+//						SubRules: teo.RuleEngineRuleSubRuleArray{
+//							&teo.RuleEngineRuleSubRuleArgs{
+//								Tags: pulumi.StringArray{
+//									pulumi.String("png"),
+//								},
+//								Rules: teo.RuleEngineRuleSubRuleRuleArray{
+//									&teo.RuleEngineRuleSubRuleRuleArgs{
+//										Ors: teo.RuleEngineRuleSubRuleRuleOrArray{
+//											&teo.RuleEngineRuleSubRuleRuleOrArgs{
+//												Ands: teo.RuleEngineRuleSubRuleRuleOrAndArray{
+//													&teo.RuleEngineRuleSubRuleRuleOrAndArgs{
+//														Operator:   pulumi.String("notequal"),
+//														Target:     pulumi.String("host"),
+//														IgnoreCase: pulumi.Bool(false),
+//														Values: pulumi.StringArray{
+//															pulumi.String("a.tf-teo-t.xyz"),
+//														},
+//													},
+//													&teo.RuleEngineRuleSubRuleRuleOrAndArgs{
+//														Operator:   pulumi.String("equal"),
+//														Target:     pulumi.String("extension"),
+//														IgnoreCase: pulumi.Bool(false),
+//														Values: pulumi.StringArray{
+//															pulumi.String("png"),
+//														},
+//													},
+//												},
+//											},
+//											&teo.RuleEngineRuleSubRuleRuleOrArgs{
+//												Ands: teo.RuleEngineRuleSubRuleRuleOrAndArray{
+//													&teo.RuleEngineRuleSubRuleRuleOrAndArgs{
+//														Operator:   pulumi.String("notequal"),
+//														Target:     pulumi.String("filename"),
+//														IgnoreCase: pulumi.Bool(false),
+//														Values: pulumi.StringArray{
+//															pulumi.String("test.txt"),
+//														},
+//													},
+//												},
+//											},
+//										},
+//										Actions: teo.RuleEngineRuleSubRuleRuleActionArray{
+//											&teo.RuleEngineRuleSubRuleRuleActionArgs{
+//												NormalAction: &teo.RuleEngineRuleSubRuleRuleActionNormalActionArgs{
+//													Action: pulumi.String("UpstreamUrlRedirect"),
+//													Parameters: teo.RuleEngineRuleSubRuleRuleActionNormalActionParameterArray{
+//														&teo.RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{
+//															Name: pulumi.String("Type"),
+//															Values: pulumi.StringArray{
+//																pulumi.String("Path"),
+//															},
+//														},
+//														&teo.RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{
+//															Name: pulumi.String("Action"),
+//															Values: pulumi.StringArray{
+//																pulumi.String("addPrefix"),
+//															},
+//														},
+//														&teo.RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs{
+//															Name: pulumi.String("Value"),
+//															Values: pulumi.StringArray{
+//																pulumi.String("/www"),
+//															},
+//														},
+//													},
+//												},
+//											},
+//										},
+//									},
+//								},
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -181,7 +184,9 @@ import (
 // teo rule_engine can be imported using the id#rule_id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Teo/ruleEngine:RuleEngine rule_engine zone-297z8rf93cfw#rule-ajol584a
+//
+//	$ pulumi import tencentcloud:Teo/ruleEngine:RuleEngine rule_engine zone-297z8rf93cfw#rule-ajol584a
+//
 // ```
 type RuleEngine struct {
 	pulumi.CustomResourceState
@@ -328,7 +333,7 @@ func (i *RuleEngine) ToRuleEngineOutputWithContext(ctx context.Context) RuleEngi
 // RuleEngineArrayInput is an input type that accepts RuleEngineArray and RuleEngineArrayOutput values.
 // You can construct a concrete instance of `RuleEngineArrayInput` via:
 //
-//          RuleEngineArray{ RuleEngineArgs{...} }
+//	RuleEngineArray{ RuleEngineArgs{...} }
 type RuleEngineArrayInput interface {
 	pulumi.Input
 
@@ -353,7 +358,7 @@ func (i RuleEngineArray) ToRuleEngineArrayOutputWithContext(ctx context.Context)
 // RuleEngineMapInput is an input type that accepts RuleEngineMap and RuleEngineMapOutput values.
 // You can construct a concrete instance of `RuleEngineMapInput` via:
 //
-//          RuleEngineMap{ "key": RuleEngineArgs{...} }
+//	RuleEngineMap{ "key": RuleEngineArgs{...} }
 type RuleEngineMapInput interface {
 	pulumi.Input
 

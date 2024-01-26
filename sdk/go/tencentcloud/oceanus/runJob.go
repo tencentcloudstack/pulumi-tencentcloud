@@ -19,31 +19,34 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.NewRunJob(ctx, "example", &Oceanus.RunJobArgs{
-// 			RunJobDescriptions: oceanus.RunJobRunJobDescriptionArray{
-// 				&oceanus.RunJobRunJobDescriptionArgs{
-// 					JobConfigVersion:      pulumi.Int(10),
-// 					JobId:                 pulumi.String("cql-4xwincyn"),
-// 					RunType:               pulumi.Int(1),
-// 					StartMode:             pulumi.String("LATEST"),
-// 					UseOldSystemConnector: pulumi.Bool(false),
-// 				},
-// 			},
-// 			WorkSpaceId: pulumi.String("space-2idq8wbr"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.NewRunJob(ctx, "example", &Oceanus.RunJobArgs{
+//				RunJobDescriptions: oceanus.RunJobRunJobDescriptionArray{
+//					&oceanus.RunJobRunJobDescriptionArgs{
+//						JobConfigVersion:      pulumi.Int(10),
+//						JobId:                 pulumi.String("cql-4xwincyn"),
+//						RunType:               pulumi.Int(1),
+//						StartMode:             pulumi.String("LATEST"),
+//						UseOldSystemConnector: pulumi.Bool(false),
+//					},
+//				},
+//				WorkSpaceId: pulumi.String("space-2idq8wbr"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type RunJob struct {
 	pulumi.CustomResourceState
@@ -145,7 +148,7 @@ func (i *RunJob) ToRunJobOutputWithContext(ctx context.Context) RunJobOutput {
 // RunJobArrayInput is an input type that accepts RunJobArray and RunJobArrayOutput values.
 // You can construct a concrete instance of `RunJobArrayInput` via:
 //
-//          RunJobArray{ RunJobArgs{...} }
+//	RunJobArray{ RunJobArgs{...} }
 type RunJobArrayInput interface {
 	pulumi.Input
 
@@ -170,7 +173,7 @@ func (i RunJobArray) ToRunJobArrayOutputWithContext(ctx context.Context) RunJobA
 // RunJobMapInput is an input type that accepts RunJobMap and RunJobMapOutput values.
 // You can construct a concrete instance of `RunJobMapInput` via:
 //
-//          RunJobMap{ "key": RunJobArgs{...} }
+//	RunJobMap{ "key": RunJobArgs{...} }
 type RunJobMapInput interface {
 	pulumi.Input
 

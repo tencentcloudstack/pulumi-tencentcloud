@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewSnapshotByTimeoffsetTemplate(ctx, "snapshotByTimeoffsetTemplate", &Mps.SnapshotByTimeoffsetTemplateArgs{
-// 			FillType:           pulumi.String("stretch"),
-// 			Format:             pulumi.String("jpg"),
-// 			Height:             pulumi.Int(128),
-// 			ResolutionAdaptive: pulumi.String("open"),
-// 			Width:              pulumi.Int(140),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewSnapshotByTimeoffsetTemplate(ctx, "snapshotByTimeoffsetTemplate", &Mps.SnapshotByTimeoffsetTemplateArgs{
+//				FillType:           pulumi.String("stretch"),
+//				Format:             pulumi.String("jpg"),
+//				Height:             pulumi.Int(128),
+//				ResolutionAdaptive: pulumi.String("open"),
+//				Width:              pulumi.Int(140),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // mps snapshot_by_timeoffset_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/snapshotByTimeoffsetTemplate:SnapshotByTimeoffsetTemplate snapshot_by_timeoffset_template snapshot_by_timeoffset_template_id
+//
+//	$ pulumi import tencentcloud:Mps/snapshotByTimeoffsetTemplate:SnapshotByTimeoffsetTemplate snapshot_by_timeoffset_template snapshot_by_timeoffset_template_id
+//
 // ```
 type SnapshotByTimeoffsetTemplate struct {
 	pulumi.CustomResourceState
@@ -193,7 +198,7 @@ func (i *SnapshotByTimeoffsetTemplate) ToSnapshotByTimeoffsetTemplateOutputWithC
 // SnapshotByTimeoffsetTemplateArrayInput is an input type that accepts SnapshotByTimeoffsetTemplateArray and SnapshotByTimeoffsetTemplateArrayOutput values.
 // You can construct a concrete instance of `SnapshotByTimeoffsetTemplateArrayInput` via:
 //
-//          SnapshotByTimeoffsetTemplateArray{ SnapshotByTimeoffsetTemplateArgs{...} }
+//	SnapshotByTimeoffsetTemplateArray{ SnapshotByTimeoffsetTemplateArgs{...} }
 type SnapshotByTimeoffsetTemplateArrayInput interface {
 	pulumi.Input
 
@@ -218,7 +223,7 @@ func (i SnapshotByTimeoffsetTemplateArray) ToSnapshotByTimeoffsetTemplateArrayOu
 // SnapshotByTimeoffsetTemplateMapInput is an input type that accepts SnapshotByTimeoffsetTemplateMap and SnapshotByTimeoffsetTemplateMapOutput values.
 // You can construct a concrete instance of `SnapshotByTimeoffsetTemplateMapInput` via:
 //
-//          SnapshotByTimeoffsetTemplateMap{ "key": SnapshotByTimeoffsetTemplateArgs{...} }
+//	SnapshotByTimeoffsetTemplateMap{ "key": SnapshotByTimeoffsetTemplateArgs{...} }
 type SnapshotByTimeoffsetTemplateMapInput interface {
 	pulumi.Input
 

@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.GetUsableUnitNamespaces(ctx, &tsf.GetUsableUnitNamespacesArgs{
-// 			SearchWord: pulumi.StringRef(""),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.GetUsableUnitNamespaces(ctx, &tsf.GetUsableUnitNamespacesArgs{
+//				SearchWord: pulumi.StringRef(""),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupUsableUnitNamespaces(ctx *pulumi.Context, args *LookupUsableUnitNamespacesArgs, opts ...pulumi.InvokeOption) (*LookupUsableUnitNamespacesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

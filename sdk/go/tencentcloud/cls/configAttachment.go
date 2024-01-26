@@ -18,7 +18,9 @@ import (
 // cls config_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/configAttachment:ConfigAttachment attach config_id#group_id
+//
+//	$ pulumi import tencentcloud:Cls/configAttachment:ConfigAttachment attach config_id#group_id
+//
 // ```
 type ConfigAttachment struct {
 	pulumi.CustomResourceState
@@ -123,7 +125,7 @@ func (i *ConfigAttachment) ToConfigAttachmentOutputWithContext(ctx context.Conte
 // ConfigAttachmentArrayInput is an input type that accepts ConfigAttachmentArray and ConfigAttachmentArrayOutput values.
 // You can construct a concrete instance of `ConfigAttachmentArrayInput` via:
 //
-//          ConfigAttachmentArray{ ConfigAttachmentArgs{...} }
+//	ConfigAttachmentArray{ ConfigAttachmentArgs{...} }
 type ConfigAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -148,7 +150,7 @@ func (i ConfigAttachmentArray) ToConfigAttachmentArrayOutputWithContext(ctx cont
 // ConfigAttachmentMapInput is an input type that accepts ConfigAttachmentMap and ConfigAttachmentMapOutput values.
 // You can construct a concrete instance of `ConfigAttachmentMapInput` via:
 //
-//          ConfigAttachmentMap{ "key": ConfigAttachmentArgs{...} }
+//	ConfigAttachmentMap{ "key": ConfigAttachmentArgs{...} }
 type ConfigAttachmentMapInput interface {
 	pulumi.Input
 

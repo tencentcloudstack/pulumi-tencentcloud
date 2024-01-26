@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cls.NewLogset(ctx, "logset", &Cls.LogsetArgs{
-// 			LogsetName: pulumi.String("demo"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cls.NewLogset(ctx, "logset", &Cls.LogsetArgs{
+//				LogsetName: pulumi.String("demo"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // cls logset can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/logset:Logset logset logset_id
+//
+//	$ pulumi import tencentcloud:Cls/logset:Logset logset logset_id
+//
 // ```
 type Logset struct {
 	pulumi.CustomResourceState
@@ -164,7 +169,7 @@ func (i *Logset) ToLogsetOutputWithContext(ctx context.Context) LogsetOutput {
 // LogsetArrayInput is an input type that accepts LogsetArray and LogsetArrayOutput values.
 // You can construct a concrete instance of `LogsetArrayInput` via:
 //
-//          LogsetArray{ LogsetArgs{...} }
+//	LogsetArray{ LogsetArgs{...} }
 type LogsetArrayInput interface {
 	pulumi.Input
 
@@ -189,7 +194,7 @@ func (i LogsetArray) ToLogsetArrayOutputWithContext(ctx context.Context) LogsetA
 // LogsetMapInput is an input type that accepts LogsetMap and LogsetMapOutput values.
 // You can construct a concrete instance of `LogsetMapInput` via:
 //
-//          LogsetMap{ "key": LogsetArgs{...} }
+//	LogsetMap{ "key": LogsetArgs{...} }
 type LogsetMapInput interface {
 	pulumi.Input
 

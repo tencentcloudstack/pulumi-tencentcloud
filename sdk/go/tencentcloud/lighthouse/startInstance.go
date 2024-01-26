@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewStartInstance(ctx, "startInstance", &Lighthouse.StartInstanceArgs{
-// 			InstanceId: pulumi.String("lhins-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewStartInstance(ctx, "startInstance", &Lighthouse.StartInstanceArgs{
+//				InstanceId: pulumi.String("lhins-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type StartInstance struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *StartInstance) ToStartInstanceOutputWithContext(ctx context.Context) St
 // StartInstanceArrayInput is an input type that accepts StartInstanceArray and StartInstanceArrayOutput values.
 // You can construct a concrete instance of `StartInstanceArrayInput` via:
 //
-//          StartInstanceArray{ StartInstanceArgs{...} }
+//	StartInstanceArray{ StartInstanceArgs{...} }
 type StartInstanceArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i StartInstanceArray) ToStartInstanceArrayOutputWithContext(ctx context.Co
 // StartInstanceMapInput is an input type that accepts StartInstanceMap and StartInstanceMapOutput values.
 // You can construct a concrete instance of `StartInstanceMapInput` via:
 //
-//          StartInstanceMap{ "key": StartInstanceArgs{...} }
+//	StartInstanceMap{ "key": StartInstanceArgs{...} }
 type StartInstanceMapInput interface {
 	pulumi.Input
 

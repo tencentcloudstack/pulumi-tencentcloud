@@ -18,29 +18,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.GetDiskConfig(ctx, &lighthouse.GetDiskConfigArgs{
-// 			Filters: []lighthouse.GetDiskConfigFilter{
-// 				lighthouse.GetDiskConfigFilter{
-// 					Name: "zone",
-// 					Values: []string{
-// 						"ap-guangzhou-3",
-// 					},
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.GetDiskConfig(ctx, &lighthouse.GetDiskConfigArgs{
+//				Filters: []lighthouse.GetDiskConfigFilter{
+//					lighthouse.GetDiskConfigFilter{
+//						Name: "zone",
+//						Values: []string{
+//							"ap-guangzhou-3",
+//						},
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDiskConfig(ctx *pulumi.Context, args *GetDiskConfigArgs, opts ...pulumi.InvokeOption) (*GetDiskConfigResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

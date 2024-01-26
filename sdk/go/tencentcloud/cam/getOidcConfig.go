@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		oidcConfig, err := Cam.GetOidcConfig(ctx, &cam.GetOidcConfigArgs{
-// 			Name: "cls-kzilgv5m",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("identityKey", oidcConfig.IdentityKey)
-// 		ctx.Export("identityUrl", oidcConfig.IdentityUrl)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			oidcConfig, err := Cam.GetOidcConfig(ctx, &cam.GetOidcConfigArgs{
+//				Name: "cls-kzilgv5m",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("identityKey", oidcConfig.IdentityKey)
+//			ctx.Export("identityUrl", oidcConfig.IdentityUrl)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetOidcConfig(ctx *pulumi.Context, args *GetOidcConfigArgs, opts ...pulumi.InvokeOption) (*GetOidcConfigResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

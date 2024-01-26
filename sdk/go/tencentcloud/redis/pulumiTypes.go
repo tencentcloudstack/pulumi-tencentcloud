@@ -20,7 +20,7 @@ type BackupDownloadRestrictionLimitVpc struct {
 // BackupDownloadRestrictionLimitVpcInput is an input type that accepts BackupDownloadRestrictionLimitVpcArgs and BackupDownloadRestrictionLimitVpcOutput values.
 // You can construct a concrete instance of `BackupDownloadRestrictionLimitVpcInput` via:
 //
-//          BackupDownloadRestrictionLimitVpcArgs{...}
+//	BackupDownloadRestrictionLimitVpcArgs{...}
 type BackupDownloadRestrictionLimitVpcInput interface {
 	pulumi.Input
 
@@ -50,7 +50,7 @@ func (i BackupDownloadRestrictionLimitVpcArgs) ToBackupDownloadRestrictionLimitV
 // BackupDownloadRestrictionLimitVpcArrayInput is an input type that accepts BackupDownloadRestrictionLimitVpcArray and BackupDownloadRestrictionLimitVpcArrayOutput values.
 // You can construct a concrete instance of `BackupDownloadRestrictionLimitVpcArrayInput` via:
 //
-//          BackupDownloadRestrictionLimitVpcArray{ BackupDownloadRestrictionLimitVpcArgs{...} }
+//	BackupDownloadRestrictionLimitVpcArray{ BackupDownloadRestrictionLimitVpcArgs{...} }
 type BackupDownloadRestrictionLimitVpcArrayInput interface {
 	pulumi.Input
 
@@ -128,7 +128,7 @@ type InstanceNodeInfo struct {
 // InstanceNodeInfoInput is an input type that accepts InstanceNodeInfoArgs and InstanceNodeInfoOutput values.
 // You can construct a concrete instance of `InstanceNodeInfoInput` via:
 //
-//          InstanceNodeInfoArgs{...}
+//	InstanceNodeInfoArgs{...}
 type InstanceNodeInfoInput interface {
 	pulumi.Input
 
@@ -160,7 +160,7 @@ func (i InstanceNodeInfoArgs) ToInstanceNodeInfoOutputWithContext(ctx context.Co
 // InstanceNodeInfoArrayInput is an input type that accepts InstanceNodeInfoArray and InstanceNodeInfoArrayOutput values.
 // You can construct a concrete instance of `InstanceNodeInfoArrayInput` via:
 //
-//          InstanceNodeInfoArray{ InstanceNodeInfoArgs{...} }
+//	InstanceNodeInfoArray{ InstanceNodeInfoArgs{...} }
 type InstanceNodeInfoArrayInput interface {
 	pulumi.Input
 
@@ -255,7 +255,7 @@ type ParamTemplateParamDetail struct {
 // ParamTemplateParamDetailInput is an input type that accepts ParamTemplateParamDetailArgs and ParamTemplateParamDetailOutput values.
 // You can construct a concrete instance of `ParamTemplateParamDetailInput` via:
 //
-//          ParamTemplateParamDetailArgs{...}
+//	ParamTemplateParamDetailArgs{...}
 type ParamTemplateParamDetailInput interface {
 	pulumi.Input
 
@@ -299,7 +299,7 @@ func (i ParamTemplateParamDetailArgs) ToParamTemplateParamDetailOutputWithContex
 // ParamTemplateParamDetailArrayInput is an input type that accepts ParamTemplateParamDetailArray and ParamTemplateParamDetailArrayOutput values.
 // You can construct a concrete instance of `ParamTemplateParamDetailArrayInput` via:
 //
-//          ParamTemplateParamDetailArray{ ParamTemplateParamDetailArgs{...} }
+//	ParamTemplateParamDetailArray{ ParamTemplateParamDetailArgs{...} }
 type ParamTemplateParamDetailArrayInput interface {
 	pulumi.Input
 
@@ -410,7 +410,7 @@ type ParamTemplateParamsOverride struct {
 // ParamTemplateParamsOverrideInput is an input type that accepts ParamTemplateParamsOverrideArgs and ParamTemplateParamsOverrideOutput values.
 // You can construct a concrete instance of `ParamTemplateParamsOverrideInput` via:
 //
-//          ParamTemplateParamsOverrideArgs{...}
+//	ParamTemplateParamsOverrideArgs{...}
 type ParamTemplateParamsOverrideInput interface {
 	pulumi.Input
 
@@ -440,7 +440,7 @@ func (i ParamTemplateParamsOverrideArgs) ToParamTemplateParamsOverrideOutputWith
 // ParamTemplateParamsOverrideArrayInput is an input type that accepts ParamTemplateParamsOverrideArray and ParamTemplateParamsOverrideArrayOutput values.
 // You can construct a concrete instance of `ParamTemplateParamsOverrideArrayInput` via:
 //
-//          ParamTemplateParamsOverrideArray{ ParamTemplateParamsOverrideArgs{...} }
+//	ParamTemplateParamsOverrideArray{ ParamTemplateParamsOverrideArgs{...} }
 type ParamTemplateParamsOverrideArrayInput interface {
 	pulumi.Input
 
@@ -542,7 +542,7 @@ type GetBackupBackupSet struct {
 // GetBackupBackupSetInput is an input type that accepts GetBackupBackupSetArgs and GetBackupBackupSetOutput values.
 // You can construct a concrete instance of `GetBackupBackupSetInput` via:
 //
-//          GetBackupBackupSetArgs{...}
+//	GetBackupBackupSetArgs{...}
 type GetBackupBackupSetInput interface {
 	pulumi.Input
 
@@ -598,7 +598,7 @@ func (i GetBackupBackupSetArgs) ToGetBackupBackupSetOutputWithContext(ctx contex
 // GetBackupBackupSetArrayInput is an input type that accepts GetBackupBackupSetArray and GetBackupBackupSetArrayOutput values.
 // You can construct a concrete instance of `GetBackupBackupSetArrayInput` via:
 //
-//          GetBackupBackupSetArray{ GetBackupBackupSetArgs{...} }
+//	GetBackupBackupSetArray{ GetBackupBackupSetArgs{...} }
 type GetBackupBackupSetArrayInput interface {
 	pulumi.Input
 
@@ -743,7 +743,7 @@ type GetBackupDownloadInfoBackupInfo struct {
 // GetBackupDownloadInfoBackupInfoInput is an input type that accepts GetBackupDownloadInfoBackupInfoArgs and GetBackupDownloadInfoBackupInfoOutput values.
 // You can construct a concrete instance of `GetBackupDownloadInfoBackupInfoInput` via:
 //
-//          GetBackupDownloadInfoBackupInfoArgs{...}
+//	GetBackupDownloadInfoBackupInfoArgs{...}
 type GetBackupDownloadInfoBackupInfoInput interface {
 	pulumi.Input
 
@@ -777,7 +777,7 @@ func (i GetBackupDownloadInfoBackupInfoArgs) ToGetBackupDownloadInfoBackupInfoOu
 // GetBackupDownloadInfoBackupInfoArrayInput is an input type that accepts GetBackupDownloadInfoBackupInfoArray and GetBackupDownloadInfoBackupInfoArrayOutput values.
 // You can construct a concrete instance of `GetBackupDownloadInfoBackupInfoArrayInput` via:
 //
-//          GetBackupDownloadInfoBackupInfoArray{ GetBackupDownloadInfoBackupInfoArgs{...} }
+//	GetBackupDownloadInfoBackupInfoArray{ GetBackupDownloadInfoBackupInfoArgs{...} }
 type GetBackupDownloadInfoBackupInfoArrayInput interface {
 	pulumi.Input
 
@@ -863,7 +863,7 @@ type GetBackupDownloadInfoLimitVpc struct {
 // GetBackupDownloadInfoLimitVpcInput is an input type that accepts GetBackupDownloadInfoLimitVpcArgs and GetBackupDownloadInfoLimitVpcOutput values.
 // You can construct a concrete instance of `GetBackupDownloadInfoLimitVpcInput` via:
 //
-//          GetBackupDownloadInfoLimitVpcArgs{...}
+//	GetBackupDownloadInfoLimitVpcArgs{...}
 type GetBackupDownloadInfoLimitVpcInput interface {
 	pulumi.Input
 
@@ -893,7 +893,7 @@ func (i GetBackupDownloadInfoLimitVpcArgs) ToGetBackupDownloadInfoLimitVpcOutput
 // GetBackupDownloadInfoLimitVpcArrayInput is an input type that accepts GetBackupDownloadInfoLimitVpcArray and GetBackupDownloadInfoLimitVpcArrayOutput values.
 // You can construct a concrete instance of `GetBackupDownloadInfoLimitVpcArrayInput` via:
 //
-//          GetBackupDownloadInfoLimitVpcArray{ GetBackupDownloadInfoLimitVpcArgs{...} }
+//	GetBackupDownloadInfoLimitVpcArray{ GetBackupDownloadInfoLimitVpcArgs{...} }
 type GetBackupDownloadInfoLimitVpcArrayInput interface {
 	pulumi.Input
 
@@ -969,7 +969,7 @@ type GetInstanceNodeInfoProxy struct {
 // GetInstanceNodeInfoProxyInput is an input type that accepts GetInstanceNodeInfoProxyArgs and GetInstanceNodeInfoProxyOutput values.
 // You can construct a concrete instance of `GetInstanceNodeInfoProxyInput` via:
 //
-//          GetInstanceNodeInfoProxyArgs{...}
+//	GetInstanceNodeInfoProxyArgs{...}
 type GetInstanceNodeInfoProxyInput interface {
 	pulumi.Input
 
@@ -999,7 +999,7 @@ func (i GetInstanceNodeInfoProxyArgs) ToGetInstanceNodeInfoProxyOutputWithContex
 // GetInstanceNodeInfoProxyArrayInput is an input type that accepts GetInstanceNodeInfoProxyArray and GetInstanceNodeInfoProxyArrayOutput values.
 // You can construct a concrete instance of `GetInstanceNodeInfoProxyArrayInput` via:
 //
-//          GetInstanceNodeInfoProxyArray{ GetInstanceNodeInfoProxyArgs{...} }
+//	GetInstanceNodeInfoProxyArray{ GetInstanceNodeInfoProxyArgs{...} }
 type GetInstanceNodeInfoProxyArrayInput interface {
 	pulumi.Input
 
@@ -1079,7 +1079,7 @@ type GetInstanceNodeInfoRedi struct {
 // GetInstanceNodeInfoRediInput is an input type that accepts GetInstanceNodeInfoRediArgs and GetInstanceNodeInfoRediOutput values.
 // You can construct a concrete instance of `GetInstanceNodeInfoRediInput` via:
 //
-//          GetInstanceNodeInfoRediArgs{...}
+//	GetInstanceNodeInfoRediArgs{...}
 type GetInstanceNodeInfoRediInput interface {
 	pulumi.Input
 
@@ -1113,7 +1113,7 @@ func (i GetInstanceNodeInfoRediArgs) ToGetInstanceNodeInfoRediOutputWithContext(
 // GetInstanceNodeInfoRediArrayInput is an input type that accepts GetInstanceNodeInfoRediArray and GetInstanceNodeInfoRediArrayOutput values.
 // You can construct a concrete instance of `GetInstanceNodeInfoRediArrayInput` via:
 //
-//          GetInstanceNodeInfoRediArray{ GetInstanceNodeInfoRediArgs{...} }
+//	GetInstanceNodeInfoRediArray{ GetInstanceNodeInfoRediArgs{...} }
 type GetInstanceNodeInfoRediArrayInput interface {
 	pulumi.Input
 
@@ -1213,7 +1213,7 @@ type GetInstanceShardsInstanceShard struct {
 // GetInstanceShardsInstanceShardInput is an input type that accepts GetInstanceShardsInstanceShardArgs and GetInstanceShardsInstanceShardOutput values.
 // You can construct a concrete instance of `GetInstanceShardsInstanceShardInput` via:
 //
-//          GetInstanceShardsInstanceShardArgs{...}
+//	GetInstanceShardsInstanceShardArgs{...}
 type GetInstanceShardsInstanceShardInput interface {
 	pulumi.Input
 
@@ -1257,7 +1257,7 @@ func (i GetInstanceShardsInstanceShardArgs) ToGetInstanceShardsInstanceShardOutp
 // GetInstanceShardsInstanceShardArrayInput is an input type that accepts GetInstanceShardsInstanceShardArray and GetInstanceShardsInstanceShardArrayOutput values.
 // You can construct a concrete instance of `GetInstanceShardsInstanceShardArrayInput` via:
 //
-//          GetInstanceShardsInstanceShardArray{ GetInstanceShardsInstanceShardArgs{...} }
+//	GetInstanceShardsInstanceShardArray{ GetInstanceShardsInstanceShardArgs{...} }
 type GetInstanceShardsInstanceShardArrayInput interface {
 	pulumi.Input
 
@@ -1382,7 +1382,7 @@ type GetInstanceTaskListTask struct {
 // GetInstanceTaskListTaskInput is an input type that accepts GetInstanceTaskListTaskArgs and GetInstanceTaskListTaskOutput values.
 // You can construct a concrete instance of `GetInstanceTaskListTaskInput` via:
 //
-//          GetInstanceTaskListTaskArgs{...}
+//	GetInstanceTaskListTaskArgs{...}
 type GetInstanceTaskListTaskInput interface {
 	pulumi.Input
 
@@ -1426,7 +1426,7 @@ func (i GetInstanceTaskListTaskArgs) ToGetInstanceTaskListTaskOutputWithContext(
 // GetInstanceTaskListTaskArrayInput is an input type that accepts GetInstanceTaskListTaskArray and GetInstanceTaskListTaskArrayOutput values.
 // You can construct a concrete instance of `GetInstanceTaskListTaskArrayInput` via:
 //
-//          GetInstanceTaskListTaskArray{ GetInstanceTaskListTaskArgs{...} }
+//	GetInstanceTaskListTaskArray{ GetInstanceTaskListTaskArgs{...} }
 type GetInstanceTaskListTaskArrayInput interface {
 	pulumi.Input
 
@@ -1543,7 +1543,7 @@ type GetInstanceZoneInfoReplicaGroup struct {
 // GetInstanceZoneInfoReplicaGroupInput is an input type that accepts GetInstanceZoneInfoReplicaGroupArgs and GetInstanceZoneInfoReplicaGroupOutput values.
 // You can construct a concrete instance of `GetInstanceZoneInfoReplicaGroupInput` via:
 //
-//          GetInstanceZoneInfoReplicaGroupArgs{...}
+//	GetInstanceZoneInfoReplicaGroupArgs{...}
 type GetInstanceZoneInfoReplicaGroupInput interface {
 	pulumi.Input
 
@@ -1579,7 +1579,7 @@ func (i GetInstanceZoneInfoReplicaGroupArgs) ToGetInstanceZoneInfoReplicaGroupOu
 // GetInstanceZoneInfoReplicaGroupArrayInput is an input type that accepts GetInstanceZoneInfoReplicaGroupArray and GetInstanceZoneInfoReplicaGroupArrayOutput values.
 // You can construct a concrete instance of `GetInstanceZoneInfoReplicaGroupArrayInput` via:
 //
-//          GetInstanceZoneInfoReplicaGroupArray{ GetInstanceZoneInfoReplicaGroupArgs{...} }
+//	GetInstanceZoneInfoReplicaGroupArray{ GetInstanceZoneInfoReplicaGroupArgs{...} }
 type GetInstanceZoneInfoReplicaGroupArrayInput interface {
 	pulumi.Input
 
@@ -1678,7 +1678,7 @@ type GetInstanceZoneInfoReplicaGroupRedisNode struct {
 // GetInstanceZoneInfoReplicaGroupRedisNodeInput is an input type that accepts GetInstanceZoneInfoReplicaGroupRedisNodeArgs and GetInstanceZoneInfoReplicaGroupRedisNodeOutput values.
 // You can construct a concrete instance of `GetInstanceZoneInfoReplicaGroupRedisNodeInput` via:
 //
-//          GetInstanceZoneInfoReplicaGroupRedisNodeArgs{...}
+//	GetInstanceZoneInfoReplicaGroupRedisNodeArgs{...}
 type GetInstanceZoneInfoReplicaGroupRedisNodeInput interface {
 	pulumi.Input
 
@@ -1714,7 +1714,7 @@ func (i GetInstanceZoneInfoReplicaGroupRedisNodeArgs) ToGetInstanceZoneInfoRepli
 // GetInstanceZoneInfoReplicaGroupRedisNodeArrayInput is an input type that accepts GetInstanceZoneInfoReplicaGroupRedisNodeArray and GetInstanceZoneInfoReplicaGroupRedisNodeArrayOutput values.
 // You can construct a concrete instance of `GetInstanceZoneInfoReplicaGroupRedisNodeArrayInput` via:
 //
-//          GetInstanceZoneInfoReplicaGroupRedisNodeArray{ GetInstanceZoneInfoReplicaGroupRedisNodeArgs{...} }
+//	GetInstanceZoneInfoReplicaGroupRedisNodeArray{ GetInstanceZoneInfoReplicaGroupRedisNodeArgs{...} }
 type GetInstanceZoneInfoReplicaGroupRedisNodeArrayInput interface {
 	pulumi.Input
 
@@ -1839,7 +1839,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -1903,7 +1903,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -2063,7 +2063,7 @@ type GetInstancesInstanceListNodeInfo struct {
 // GetInstancesInstanceListNodeInfoInput is an input type that accepts GetInstancesInstanceListNodeInfoArgs and GetInstancesInstanceListNodeInfoOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListNodeInfoInput` via:
 //
-//          GetInstancesInstanceListNodeInfoArgs{...}
+//	GetInstancesInstanceListNodeInfoArgs{...}
 type GetInstancesInstanceListNodeInfoInput interface {
 	pulumi.Input
 
@@ -2095,7 +2095,7 @@ func (i GetInstancesInstanceListNodeInfoArgs) ToGetInstancesInstanceListNodeInfo
 // GetInstancesInstanceListNodeInfoArrayInput is an input type that accepts GetInstancesInstanceListNodeInfoArray and GetInstancesInstanceListNodeInfoArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListNodeInfoArrayInput` via:
 //
-//          GetInstancesInstanceListNodeInfoArray{ GetInstancesInstanceListNodeInfoArgs{...} }
+//	GetInstancesInstanceListNodeInfoArray{ GetInstancesInstanceListNodeInfoArgs{...} }
 type GetInstancesInstanceListNodeInfoArrayInput interface {
 	pulumi.Input
 
@@ -2182,7 +2182,7 @@ type GetParamRecordsInstanceParamHistory struct {
 // GetParamRecordsInstanceParamHistoryInput is an input type that accepts GetParamRecordsInstanceParamHistoryArgs and GetParamRecordsInstanceParamHistoryOutput values.
 // You can construct a concrete instance of `GetParamRecordsInstanceParamHistoryInput` via:
 //
-//          GetParamRecordsInstanceParamHistoryArgs{...}
+//	GetParamRecordsInstanceParamHistoryArgs{...}
 type GetParamRecordsInstanceParamHistoryInput interface {
 	pulumi.Input
 
@@ -2218,7 +2218,7 @@ func (i GetParamRecordsInstanceParamHistoryArgs) ToGetParamRecordsInstanceParamH
 // GetParamRecordsInstanceParamHistoryArrayInput is an input type that accepts GetParamRecordsInstanceParamHistoryArray and GetParamRecordsInstanceParamHistoryArrayOutput values.
 // You can construct a concrete instance of `GetParamRecordsInstanceParamHistoryArrayInput` via:
 //
-//          GetParamRecordsInstanceParamHistoryArray{ GetParamRecordsInstanceParamHistoryArgs{...} }
+//	GetParamRecordsInstanceParamHistoryArray{ GetParamRecordsInstanceParamHistoryArgs{...} }
 type GetParamRecordsInstanceParamHistoryArrayInput interface {
 	pulumi.Input
 
@@ -2325,7 +2325,7 @@ type GetZoneConfigList struct {
 // GetZoneConfigListInput is an input type that accepts GetZoneConfigListArgs and GetZoneConfigListOutput values.
 // You can construct a concrete instance of `GetZoneConfigListInput` via:
 //
-//          GetZoneConfigListArgs{...}
+//	GetZoneConfigListArgs{...}
 type GetZoneConfigListInput interface {
 	pulumi.Input
 
@@ -2371,7 +2371,7 @@ func (i GetZoneConfigListArgs) ToGetZoneConfigListOutputWithContext(ctx context.
 // GetZoneConfigListArrayInput is an input type that accepts GetZoneConfigListArray and GetZoneConfigListArrayOutput values.
 // You can construct a concrete instance of `GetZoneConfigListArrayInput` via:
 //
-//          GetZoneConfigListArray{ GetZoneConfigListArgs{...} }
+//	GetZoneConfigListArray{ GetZoneConfigListArgs{...} }
 type GetZoneConfigListArrayInput interface {
 	pulumi.Input
 

@@ -19,35 +19,38 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.NewHourDbInstance(ctx, "basic", &Mariadb.HourDbInstanceArgs{
-// 			DbVersionId:  pulumi.String("10.0"),
-// 			InstanceName: pulumi.String("db-test-del"),
-// 			Memory:       pulumi.Int(2),
-// 			NodeCount:    pulumi.Int(2),
-// 			Storage:      pulumi.Int(10),
-// 			SubnetId:     pulumi.String("subnet-jdi5xn22"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 			Vip:   pulumi.String("10.0.0.197"),
-// 			VpcId: pulumi.String("vpc-k1t8ickr"),
-// 			Zones: pulumi.StringArray{
-// 				pulumi.String("ap-guangzhou-6"),
-// 				pulumi.String("ap-guangzhou-7"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.NewHourDbInstance(ctx, "basic", &Mariadb.HourDbInstanceArgs{
+//				DbVersionId:  pulumi.String("10.0"),
+//				InstanceName: pulumi.String("db-test-del"),
+//				Memory:       pulumi.Int(2),
+//				NodeCount:    pulumi.Int(2),
+//				Storage:      pulumi.Int(10),
+//				SubnetId:     pulumi.String("subnet-jdi5xn22"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//				Vip:   pulumi.String("10.0.0.197"),
+//				VpcId: pulumi.String("vpc-k1t8ickr"),
+//				Zones: pulumi.StringArray{
+//					pulumi.String("ap-guangzhou-6"),
+//					pulumi.String("ap-guangzhou-7"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -55,7 +58,9 @@ import (
 // mariadb hour_db_instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mariadb/hourDbInstance:HourDbInstance hour_db_instance tdsql-kjqih9nn
+//
+//	$ pulumi import tencentcloud:Mariadb/hourDbInstance:HourDbInstance hour_db_instance tdsql-kjqih9nn
+//
 // ```
 type HourDbInstance struct {
 	pulumi.CustomResourceState
@@ -256,7 +261,7 @@ func (i *HourDbInstance) ToHourDbInstanceOutputWithContext(ctx context.Context) 
 // HourDbInstanceArrayInput is an input type that accepts HourDbInstanceArray and HourDbInstanceArrayOutput values.
 // You can construct a concrete instance of `HourDbInstanceArrayInput` via:
 //
-//          HourDbInstanceArray{ HourDbInstanceArgs{...} }
+//	HourDbInstanceArray{ HourDbInstanceArgs{...} }
 type HourDbInstanceArrayInput interface {
 	pulumi.Input
 
@@ -281,7 +286,7 @@ func (i HourDbInstanceArray) ToHourDbInstanceArrayOutputWithContext(ctx context.
 // HourDbInstanceMapInput is an input type that accepts HourDbInstanceMap and HourDbInstanceMapOutput values.
 // You can construct a concrete instance of `HourDbInstanceMapInput` via:
 //
-//          HourDbInstanceMap{ "key": HourDbInstanceArgs{...} }
+//	HourDbInstanceMap{ "key": HourDbInstanceArgs{...} }
 type HourDbInstanceMapInput interface {
 	pulumi.Input
 

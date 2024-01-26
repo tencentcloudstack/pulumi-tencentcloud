@@ -18,29 +18,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.GetUserPolicyAttachments(ctx, &cam.GetUserPolicyAttachmentsArgs{
-// 			UserId: pulumi.StringRef(tencentcloud_cam_user.Foo.Id),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cam.GetUserPolicyAttachments(ctx, &cam.GetUserPolicyAttachmentsArgs{
-// 			UserId:   pulumi.StringRef(tencentcloud_cam_user.Foo.Id),
-// 			PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.GetUserPolicyAttachments(ctx, &cam.GetUserPolicyAttachmentsArgs{
+//				UserId: pulumi.StringRef(tencentcloud_cam_user.Foo.Id),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cam.GetUserPolicyAttachments(ctx, &cam.GetUserPolicyAttachmentsArgs{
+//				UserId:   pulumi.StringRef(tencentcloud_cam_user.Foo.Id),
+//				PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetUserPolicyAttachments(ctx *pulumi.Context, args *GetUserPolicyAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetUserPolicyAttachmentsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

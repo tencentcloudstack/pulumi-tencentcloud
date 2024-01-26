@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.GetAdvices(ctx, &as.GetAdvicesArgs{
-// 			AutoScalingGroupIds: []string{
-// 				"asc-lo0b94oy",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := As.GetAdvices(ctx, &as.GetAdvicesArgs{
+//				AutoScalingGroupIds: []string{
+//					"asc-lo0b94oy",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetAdvices(ctx *pulumi.Context, args *GetAdvicesArgs, opts ...pulumi.InvokeOption) (*GetAdvicesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

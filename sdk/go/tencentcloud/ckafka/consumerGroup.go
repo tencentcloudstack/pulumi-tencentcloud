@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.NewConsumerGroup(ctx, "consumerGroup", &Ckafka.ConsumerGroupArgs{
-// 			GroupName:  pulumi.String("GroupName"),
-// 			InstanceId: pulumi.String("InstanceId"),
-// 			TopicNameLists: pulumi.StringArray{
-// 				pulumi.String("xxxxxx"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.NewConsumerGroup(ctx, "consumerGroup", &Ckafka.ConsumerGroupArgs{
+//				GroupName:  pulumi.String("GroupName"),
+//				InstanceId: pulumi.String("InstanceId"),
+//				TopicNameLists: pulumi.StringArray{
+//					pulumi.String("xxxxxx"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +48,9 @@ import (
 // ckafka consumer_group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ckafka/consumerGroup:ConsumerGroup consumer_group consumer_group_id
+//
+//	$ pulumi import tencentcloud:Ckafka/consumerGroup:ConsumerGroup consumer_group consumer_group_id
+//
 // ```
 type ConsumerGroup struct {
 	pulumi.CustomResourceState
@@ -160,7 +165,7 @@ func (i *ConsumerGroup) ToConsumerGroupOutputWithContext(ctx context.Context) Co
 // ConsumerGroupArrayInput is an input type that accepts ConsumerGroupArray and ConsumerGroupArrayOutput values.
 // You can construct a concrete instance of `ConsumerGroupArrayInput` via:
 //
-//          ConsumerGroupArray{ ConsumerGroupArgs{...} }
+//	ConsumerGroupArray{ ConsumerGroupArgs{...} }
 type ConsumerGroupArrayInput interface {
 	pulumi.Input
 
@@ -185,7 +190,7 @@ func (i ConsumerGroupArray) ToConsumerGroupArrayOutputWithContext(ctx context.Co
 // ConsumerGroupMapInput is an input type that accepts ConsumerGroupMap and ConsumerGroupMapOutput values.
 // You can construct a concrete instance of `ConsumerGroupMapInput` via:
 //
-//          ConsumerGroupMap{ "key": ConsumerGroupArgs{...} }
+//	ConsumerGroupMap{ "key": ConsumerGroupArgs{...} }
 type ConsumerGroupMapInput interface {
 	pulumi.Input
 

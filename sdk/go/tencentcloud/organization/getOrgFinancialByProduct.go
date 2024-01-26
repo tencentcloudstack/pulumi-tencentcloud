@@ -18,26 +18,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Organization.GetOrgFinancialByProduct(ctx, &organization.GetOrgFinancialByProductArgs{
-// 			EndMonth: pulumi.StringRef("2023-09"),
-// 			Month:    "2023-05",
-// 			ProductCodes: []string{
-// 				"p_eip",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Organization.GetOrgFinancialByProduct(ctx, &organization.GetOrgFinancialByProductArgs{
+//				EndMonth: pulumi.StringRef("2023-09"),
+//				Month:    "2023-05",
+//				ProductCodes: []string{
+//					"p_eip",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetOrgFinancialByProduct(ctx *pulumi.Context, args *GetOrgFinancialByProductArgs, opts ...pulumi.InvokeOption) (*GetOrgFinancialByProductResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

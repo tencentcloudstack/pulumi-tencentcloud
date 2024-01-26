@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewInstanceSlaConfig(ctx, "instanceSlaConfig", &Clb.InstanceSlaConfigArgs{
-// 			LoadBalancerId: pulumi.String("lb-5dnrkgry"),
-// 			SlaType:        pulumi.String("SLA"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewInstanceSlaConfig(ctx, "instanceSlaConfig", &Clb.InstanceSlaConfigArgs{
+//				LoadBalancerId: pulumi.String("lb-5dnrkgry"),
+//				SlaType:        pulumi.String("SLA"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // clb instance_sla_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clb/instanceSlaConfig:InstanceSlaConfig instance_sla_config instance_id
+//
+//	$ pulumi import tencentcloud:Clb/instanceSlaConfig:InstanceSlaConfig instance_sla_config instance_id
+//
 // ```
 type InstanceSlaConfig struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *InstanceSlaConfig) ToInstanceSlaConfigOutputWithContext(ctx context.Con
 // InstanceSlaConfigArrayInput is an input type that accepts InstanceSlaConfigArray and InstanceSlaConfigArrayOutput values.
 // You can construct a concrete instance of `InstanceSlaConfigArrayInput` via:
 //
-//          InstanceSlaConfigArray{ InstanceSlaConfigArgs{...} }
+//	InstanceSlaConfigArray{ InstanceSlaConfigArgs{...} }
 type InstanceSlaConfigArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i InstanceSlaConfigArray) ToInstanceSlaConfigArrayOutputWithContext(ctx co
 // InstanceSlaConfigMapInput is an input type that accepts InstanceSlaConfigMap and InstanceSlaConfigMapOutput values.
 // You can construct a concrete instance of `InstanceSlaConfigMapInput` via:
 //
-//          InstanceSlaConfigMap{ "key": InstanceSlaConfigArgs{...} }
+//	InstanceSlaConfigMap{ "key": InstanceSlaConfigArgs{...} }
 type InstanceSlaConfigMapInput interface {
 	pulumi.Input
 

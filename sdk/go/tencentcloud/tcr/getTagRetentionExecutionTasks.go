@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.GetTagRetentionExecutionTasks(ctx, &tcr.GetTagRetentionExecutionTasksArgs{
-// 			ExecutionId: 1,
-// 			RegistryId:  "tcr_ins_id",
-// 			RetentionId: 1,
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcr.GetTagRetentionExecutionTasks(ctx, &tcr.GetTagRetentionExecutionTasksArgs{
+//				ExecutionId: 1,
+//				RegistryId:  "tcr_ins_id",
+//				RetentionId: 1,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetTagRetentionExecutionTasks(ctx *pulumi.Context, args *GetTagRetentionExecutionTasksArgs, opts ...pulumi.InvokeOption) (*GetTagRetentionExecutionTasksResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

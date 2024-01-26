@@ -18,26 +18,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.GetCheckSavepoint(ctx, &oceanus.GetCheckSavepointArgs{
-// 			JobId:         "cql-314rw6w0",
-// 			RecordType:    1,
-// 			SavepointPath: "cosn://52xkpymp-12345/12345/10000/cql-12345/2/flink-savepoints/savepoint-000000-12334",
-// 			SerialId:      "svp-52xkpymp",
-// 			WorkSpaceId:   "space-2idq8wbr",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.GetCheckSavepoint(ctx, &oceanus.GetCheckSavepointArgs{
+//				JobId:         "cql-314rw6w0",
+//				RecordType:    1,
+//				SavepointPath: "cosn://52xkpymp-12345/12345/10000/cql-12345/2/flink-savepoints/savepoint-000000-12334",
+//				SerialId:      "svp-52xkpymp",
+//				WorkSpaceId:   "space-2idq8wbr",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetCheckSavepoint(ctx *pulumi.Context, args *GetCheckSavepointArgs, opts ...pulumi.InvokeOption) (*GetCheckSavepointResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

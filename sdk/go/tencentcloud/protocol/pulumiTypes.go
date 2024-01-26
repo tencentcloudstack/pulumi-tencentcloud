@@ -22,7 +22,7 @@ type GetTemplateGroupsGroupList struct {
 // GetTemplateGroupsGroupListInput is an input type that accepts GetTemplateGroupsGroupListArgs and GetTemplateGroupsGroupListOutput values.
 // You can construct a concrete instance of `GetTemplateGroupsGroupListInput` via:
 //
-//          GetTemplateGroupsGroupListArgs{...}
+//	GetTemplateGroupsGroupListArgs{...}
 type GetTemplateGroupsGroupListInput interface {
 	pulumi.Input
 
@@ -54,7 +54,7 @@ func (i GetTemplateGroupsGroupListArgs) ToGetTemplateGroupsGroupListOutputWithCo
 // GetTemplateGroupsGroupListArrayInput is an input type that accepts GetTemplateGroupsGroupListArray and GetTemplateGroupsGroupListArrayOutput values.
 // You can construct a concrete instance of `GetTemplateGroupsGroupListArrayInput` via:
 //
-//          GetTemplateGroupsGroupListArray{ GetTemplateGroupsGroupListArgs{...} }
+//	GetTemplateGroupsGroupListArray{ GetTemplateGroupsGroupListArgs{...} }
 type GetTemplateGroupsGroupListArrayInput interface {
 	pulumi.Input
 
@@ -137,7 +137,7 @@ type GetTemplatesTemplateList struct {
 // GetTemplatesTemplateListInput is an input type that accepts GetTemplatesTemplateListArgs and GetTemplatesTemplateListOutput values.
 // You can construct a concrete instance of `GetTemplatesTemplateListInput` via:
 //
-//          GetTemplatesTemplateListArgs{...}
+//	GetTemplatesTemplateListArgs{...}
 type GetTemplatesTemplateListInput interface {
 	pulumi.Input
 
@@ -169,7 +169,7 @@ func (i GetTemplatesTemplateListArgs) ToGetTemplatesTemplateListOutputWithContex
 // GetTemplatesTemplateListArrayInput is an input type that accepts GetTemplatesTemplateListArray and GetTemplatesTemplateListArrayOutput values.
 // You can construct a concrete instance of `GetTemplatesTemplateListArrayInput` via:
 //
-//          GetTemplatesTemplateListArray{ GetTemplatesTemplateListArgs{...} }
+//	GetTemplatesTemplateListArray{ GetTemplatesTemplateListArgs{...} }
 type GetTemplatesTemplateListArrayInput interface {
 	pulumi.Input
 

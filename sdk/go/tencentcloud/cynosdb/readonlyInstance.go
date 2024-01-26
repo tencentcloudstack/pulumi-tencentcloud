@@ -19,36 +19,39 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewReadonlyInstance(ctx, "foo", &Cynosdb.ReadonlyInstanceArgs{
-// 			ClusterId:                 pulumi.Any(cynosdbmysql_dzj5l8gz),
-// 			InstanceName:              pulumi.String("tf-cynosdb-readonly-instance"),
-// 			ForceDelete:               pulumi.Bool(true),
-// 			InstanceCpuCore:           pulumi.Int(2),
-// 			InstanceMemorySize:        pulumi.Int(4),
-// 			InstanceMaintainDuration:  pulumi.Int(7200),
-// 			InstanceMaintainStartTime: pulumi.Int(21600),
-// 			InstanceMaintainWeekdays: pulumi.StringArray{
-// 				pulumi.String("Fri"),
-// 				pulumi.String("Mon"),
-// 				pulumi.String("Sat"),
-// 				pulumi.String("Sun"),
-// 				pulumi.String("Thu"),
-// 				pulumi.String("Wed"),
-// 				pulumi.String("Tue"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewReadonlyInstance(ctx, "foo", &Cynosdb.ReadonlyInstanceArgs{
+//				ClusterId:                 pulumi.Any(cynosdbmysql_dzj5l8gz),
+//				InstanceName:              pulumi.String("tf-cynosdb-readonly-instance"),
+//				ForceDelete:               pulumi.Bool(true),
+//				InstanceCpuCore:           pulumi.Int(2),
+//				InstanceMemorySize:        pulumi.Int(4),
+//				InstanceMaintainDuration:  pulumi.Int(7200),
+//				InstanceMaintainStartTime: pulumi.Int(21600),
+//				InstanceMaintainWeekdays: pulumi.StringArray{
+//					pulumi.String("Fri"),
+//					pulumi.String("Mon"),
+//					pulumi.String("Sat"),
+//					pulumi.String("Sun"),
+//					pulumi.String("Thu"),
+//					pulumi.String("Wed"),
+//					pulumi.String("Tue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -56,7 +59,9 @@ import (
 // CynosDB readonly instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance foo cynosdbmysql-ins-dhwynib6
+//
+//	$ pulumi import tencentcloud:Cynosdb/readonlyInstance:ReadonlyInstance foo cynosdbmysql-ins-dhwynib6
+//
 // ```
 type ReadonlyInstance struct {
 	pulumi.CustomResourceState
@@ -253,7 +258,7 @@ func (i *ReadonlyInstance) ToReadonlyInstanceOutputWithContext(ctx context.Conte
 // ReadonlyInstanceArrayInput is an input type that accepts ReadonlyInstanceArray and ReadonlyInstanceArrayOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceArrayInput` via:
 //
-//          ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
+//	ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceArrayInput interface {
 	pulumi.Input
 
@@ -278,7 +283,7 @@ func (i ReadonlyInstanceArray) ToReadonlyInstanceArrayOutputWithContext(ctx cont
 // ReadonlyInstanceMapInput is an input type that accepts ReadonlyInstanceMap and ReadonlyInstanceMapOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceMapInput` via:
 //
-//          ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
+//	ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceMapInput interface {
 	pulumi.Input
 

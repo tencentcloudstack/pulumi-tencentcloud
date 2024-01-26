@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.GetSecurityGroupReferences(ctx, &vpc.GetSecurityGroupReferencesArgs{
-// 			SecurityGroupIds: []string{
-// 				"sg-edmur627",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.GetSecurityGroupReferences(ctx, &vpc.GetSecurityGroupReferencesArgs{
+//				SecurityGroupIds: []string{
+//					"sg-edmur627",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetSecurityGroupReferences(ctx *pulumi.Context, args *GetSecurityGroupReferencesArgs, opts ...pulumi.InvokeOption) (*GetSecurityGroupReferencesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

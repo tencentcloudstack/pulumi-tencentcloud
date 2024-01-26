@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.NewRoute(ctx, "route", &Ckafka.RouteArgs{
-// 			AccessType:    pulumi.Int(0),
-// 			InstanceId:    pulumi.String("ckafka-xxxxxx"),
-// 			PublicNetwork: pulumi.Int(3),
-// 			SubnetId:      pulumi.String("subnet-xxxxxx"),
-// 			VipType:       pulumi.Int(3),
-// 			VpcId:         pulumi.String("vpc-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.NewRoute(ctx, "route", &Ckafka.RouteArgs{
+//				AccessType:    pulumi.Int(0),
+//				InstanceId:    pulumi.String("ckafka-xxxxxx"),
+//				PublicNetwork: pulumi.Int(3),
+//				SubnetId:      pulumi.String("subnet-xxxxxx"),
+//				VipType:       pulumi.Int(3),
+//				VpcId:         pulumi.String("vpc-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Route struct {
 	pulumi.CustomResourceState
@@ -245,7 +248,7 @@ func (i *Route) ToRouteOutputWithContext(ctx context.Context) RouteOutput {
 // RouteArrayInput is an input type that accepts RouteArray and RouteArrayOutput values.
 // You can construct a concrete instance of `RouteArrayInput` via:
 //
-//          RouteArray{ RouteArgs{...} }
+//	RouteArray{ RouteArgs{...} }
 type RouteArrayInput interface {
 	pulumi.Input
 
@@ -270,7 +273,7 @@ func (i RouteArray) ToRouteArrayOutputWithContext(ctx context.Context) RouteArra
 // RouteMapInput is an input type that accepts RouteMap and RouteMapOutput values.
 // You can construct a concrete instance of `RouteMapInput` via:
 //
-//          RouteMap{ "key": RouteArgs{...} }
+//	RouteMap{ "key": RouteArgs{...} }
 type RouteMapInput interface {
 	pulumi.Input
 

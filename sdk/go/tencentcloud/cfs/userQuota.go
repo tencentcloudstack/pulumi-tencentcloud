@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfs.NewUserQuota(ctx, "userQuota", &Cfs.UserQuotaArgs{
-// 			CapacityHardLimit: pulumi.Int(10),
-// 			FileHardLimit:     pulumi.Int(10000),
-// 			FileSystemId:      pulumi.String("cfs-4636029bc"),
-// 			UserId:            pulumi.String("2159973417"),
-// 			UserType:          pulumi.String("Uid"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfs.NewUserQuota(ctx, "userQuota", &Cfs.UserQuotaArgs{
+//				CapacityHardLimit: pulumi.Int(10),
+//				FileHardLimit:     pulumi.Int(10000),
+//				FileSystemId:      pulumi.String("cfs-4636029bc"),
+//				UserId:            pulumi.String("2159973417"),
+//				UserType:          pulumi.String("Uid"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +48,9 @@ import (
 // cfs user_quota can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfs/userQuota:UserQuota user_quota user_quota_id
+//
+//	$ pulumi import tencentcloud:Cfs/userQuota:UserQuota user_quota user_quota_id
+//
 // ```
 type UserQuota struct {
 	pulumi.CustomResourceState
@@ -183,7 +188,7 @@ func (i *UserQuota) ToUserQuotaOutputWithContext(ctx context.Context) UserQuotaO
 // UserQuotaArrayInput is an input type that accepts UserQuotaArray and UserQuotaArrayOutput values.
 // You can construct a concrete instance of `UserQuotaArrayInput` via:
 //
-//          UserQuotaArray{ UserQuotaArgs{...} }
+//	UserQuotaArray{ UserQuotaArgs{...} }
 type UserQuotaArrayInput interface {
 	pulumi.Input
 
@@ -208,7 +213,7 @@ func (i UserQuotaArray) ToUserQuotaArrayOutputWithContext(ctx context.Context) U
 // UserQuotaMapInput is an input type that accepts UserQuotaMap and UserQuotaMapOutput values.
 // You can construct a concrete instance of `UserQuotaMapInput` via:
 //
-//          UserQuotaMap{ "key": UserQuotaArgs{...} }
+//	UserQuotaMap{ "key": UserQuotaArgs{...} }
 type UserQuotaMapInput interface {
 	pulumi.Input
 

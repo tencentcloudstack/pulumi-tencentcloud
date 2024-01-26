@@ -19,38 +19,41 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewParameterTemplate(ctx, "parameterTemplate", &Postgresql.ParameterTemplateArgs{
-// 			DbEngine:       pulumi.String("postgresql"),
-// 			DbMajorVersion: pulumi.String("13"),
-// 			DeleteParamSets: pulumi.StringArray{
-// 				pulumi.String("lc_time"),
-// 			},
-// 			ModifyParamEntrySets: postgresql.ParameterTemplateModifyParamEntrySetArray{
-// 				&postgresql.ParameterTemplateModifyParamEntrySetArgs{
-// 					ExpectedValue: pulumi.String("UTC"),
-// 					Name:          pulumi.String("timezone"),
-// 				},
-// 				&postgresql.ParameterTemplateModifyParamEntrySetArgs{
-// 					ExpectedValue: pulumi.String("123"),
-// 					Name:          pulumi.String("lock_timeout"),
-// 				},
-// 			},
-// 			TemplateDescription: pulumi.String("For_tf_test"),
-// 			TemplateName:        pulumi.String("your_temp_name"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewParameterTemplate(ctx, "parameterTemplate", &Postgresql.ParameterTemplateArgs{
+//				DbEngine:       pulumi.String("postgresql"),
+//				DbMajorVersion: pulumi.String("13"),
+//				DeleteParamSets: pulumi.StringArray{
+//					pulumi.String("lc_time"),
+//				},
+//				ModifyParamEntrySets: postgresql.ParameterTemplateModifyParamEntrySetArray{
+//					&postgresql.ParameterTemplateModifyParamEntrySetArgs{
+//						ExpectedValue: pulumi.String("UTC"),
+//						Name:          pulumi.String("timezone"),
+//					},
+//					&postgresql.ParameterTemplateModifyParamEntrySetArgs{
+//						ExpectedValue: pulumi.String("123"),
+//						Name:          pulumi.String("lock_timeout"),
+//					},
+//				},
+//				TemplateDescription: pulumi.String("For_tf_test"),
+//				TemplateName:        pulumi.String("your_temp_name"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -58,7 +61,9 @@ import (
 // postgresql parameter_template can be imported using the id, e.g. Notice`modify_param_entry_set` and `delete_param_set` do not support import.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Postgresql/parameterTemplate:ParameterTemplate parameter_template parameter_template_id
+//
+//	$ pulumi import tencentcloud:Postgresql/parameterTemplate:ParameterTemplate parameter_template parameter_template_id
+//
 // ```
 type ParameterTemplate struct {
 	pulumi.CustomResourceState
@@ -206,7 +211,7 @@ func (i *ParameterTemplate) ToParameterTemplateOutputWithContext(ctx context.Con
 // ParameterTemplateArrayInput is an input type that accepts ParameterTemplateArray and ParameterTemplateArrayOutput values.
 // You can construct a concrete instance of `ParameterTemplateArrayInput` via:
 //
-//          ParameterTemplateArray{ ParameterTemplateArgs{...} }
+//	ParameterTemplateArray{ ParameterTemplateArgs{...} }
 type ParameterTemplateArrayInput interface {
 	pulumi.Input
 
@@ -231,7 +236,7 @@ func (i ParameterTemplateArray) ToParameterTemplateArrayOutputWithContext(ctx co
 // ParameterTemplateMapInput is an input type that accepts ParameterTemplateMap and ParameterTemplateMapOutput values.
 // You can construct a concrete instance of `ParameterTemplateMapInput` via:
 //
-//          ParameterTemplateMap{ "key": ParameterTemplateArgs{...} }
+//	ParameterTemplateMap{ "key": ParameterTemplateArgs{...} }
 type ParameterTemplateMapInput interface {
 	pulumi.Input
 

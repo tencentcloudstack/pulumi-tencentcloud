@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewCcSession(ctx, "example", &Waf.CcSessionArgs{
-// 			Category:      pulumi.String("match"),
-// 			Domain:        pulumi.String("www.demo.com"),
-// 			Edition:       pulumi.String("sparta-waf"),
-// 			EndMat:        pulumi.String("&"),
-// 			EndOffset:     pulumi.String("-1"),
-// 			KeyOrStartMat: pulumi.String("key_a=123"),
-// 			SessionName:   pulumi.String("terraformDemo"),
-// 			Source:        pulumi.String("get"),
-// 			StartOffset:   pulumi.String("-1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewCcSession(ctx, "example", &Waf.CcSessionArgs{
+//				Category:      pulumi.String("match"),
+//				Domain:        pulumi.String("www.demo.com"),
+//				Edition:       pulumi.String("sparta-waf"),
+//				EndMat:        pulumi.String("&"),
+//				EndOffset:     pulumi.String("-1"),
+//				KeyOrStartMat: pulumi.String("key_a=123"),
+//				SessionName:   pulumi.String("terraformDemo"),
+//				Source:        pulumi.String("get"),
+//				StartOffset:   pulumi.String("-1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -49,7 +52,9 @@ import (
 // waf cc_session can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Waf/ccSession:CcSession example www.demo.com#sparta-waf#2000000253
+//
+//	$ pulumi import tencentcloud:Waf/ccSession:CcSession example www.demo.com#sparta-waf#2000000253
+//
 // ```
 type CcSession struct {
 	pulumi.CustomResourceState
@@ -251,7 +256,7 @@ func (i *CcSession) ToCcSessionOutputWithContext(ctx context.Context) CcSessionO
 // CcSessionArrayInput is an input type that accepts CcSessionArray and CcSessionArrayOutput values.
 // You can construct a concrete instance of `CcSessionArrayInput` via:
 //
-//          CcSessionArray{ CcSessionArgs{...} }
+//	CcSessionArray{ CcSessionArgs{...} }
 type CcSessionArrayInput interface {
 	pulumi.Input
 
@@ -276,7 +281,7 @@ func (i CcSessionArray) ToCcSessionArrayOutputWithContext(ctx context.Context) C
 // CcSessionMapInput is an input type that accepts CcSessionMap and CcSessionMapOutput values.
 // You can construct a concrete instance of `CcSessionMapInput` via:
 //
-//          CcSessionMap{ "key": CcSessionArgs{...} }
+//	CcSessionMap{ "key": CcSessionArgs{...} }
 type CcSessionMapInput interface {
 	pulumi.Input
 

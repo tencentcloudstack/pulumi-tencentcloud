@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.GetDescribeDataEngineImageVersions(ctx, &dlc.GetDescribeDataEngineImageVersionsArgs{
-// 			EngineType: "SparkBatch",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.GetDescribeDataEngineImageVersions(ctx, &dlc.GetDescribeDataEngineImageVersionsArgs{
+//				EngineType: "SparkBatch",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDescribeDataEngineImageVersions(ctx *pulumi.Context, args *GetDescribeDataEngineImageVersionsArgs, opts ...pulumi.InvokeOption) (*GetDescribeDataEngineImageVersionsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

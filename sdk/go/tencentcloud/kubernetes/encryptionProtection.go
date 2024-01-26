@@ -20,71 +20,74 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		exampleRegion := "ap-guangzhou"
-// 		if param := cfg.Get("exampleRegion"); param != "" {
-// 			exampleRegion = param
-// 		}
-// 		exampleClusterCidr := "10.32.0.0/16"
-// 		if param := cfg.Get("exampleClusterCidr"); param != "" {
-// 			exampleClusterCidr = param
-// 		}
-// 		availabilityZone := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZone),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleCluster, err := Kubernetes.NewCluster(ctx, "exampleCluster", &Kubernetes.ClusterArgs{
-// 			VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
-// 			ClusterCidr:          pulumi.String(exampleClusterCidr),
-// 			ClusterMaxPodNum:     pulumi.Int(32),
-// 			ClusterName:          pulumi.String("tf_example_cluster"),
-// 			ClusterDesc:          pulumi.String("a tf example cluster for the kms test"),
-// 			ClusterMaxServiceNum: pulumi.Int(32),
-// 			ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleKey, err := Kms.NewKey(ctx, "exampleKey", &Kms.KeyArgs{
-// 			Alias:       pulumi.String("tf-example-kms-key"),
-// 			Description: pulumi.String("example of kms key instance"),
-// 			KeyUsage:    pulumi.String("ENCRYPT_DECRYPT"),
-// 			IsEnabled:   pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Kubernetes.NewEncryptionProtection(ctx, "exampleEncryptionProtection", &Kubernetes.EncryptionProtectionArgs{
-// 			ClusterId: exampleCluster.ID(),
-// 			KmsConfiguration: &kubernetes.EncryptionProtectionKmsConfigurationArgs{
-// 				KeyId:     exampleKey.ID(),
-// 				KmsRegion: pulumi.String(exampleRegion),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			exampleRegion := "ap-guangzhou"
+//			if param := cfg.Get("exampleRegion"); param != "" {
+//				exampleRegion = param
+//			}
+//			exampleClusterCidr := "10.32.0.0/16"
+//			if param := cfg.Get("exampleClusterCidr"); param != "" {
+//				exampleClusterCidr = param
+//			}
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//				IsDefault:        pulumi.BoolRef(true),
+//				AvailabilityZone: pulumi.StringRef(availabilityZone),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			exampleCluster, err := Kubernetes.NewCluster(ctx, "exampleCluster", &Kubernetes.ClusterArgs{
+//				VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
+//				ClusterCidr:          pulumi.String(exampleClusterCidr),
+//				ClusterMaxPodNum:     pulumi.Int(32),
+//				ClusterName:          pulumi.String("tf_example_cluster"),
+//				ClusterDesc:          pulumi.String("a tf example cluster for the kms test"),
+//				ClusterMaxServiceNum: pulumi.Int(32),
+//				ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleKey, err := Kms.NewKey(ctx, "exampleKey", &Kms.KeyArgs{
+//				Alias:       pulumi.String("tf-example-kms-key"),
+//				Description: pulumi.String("example of kms key instance"),
+//				KeyUsage:    pulumi.String("ENCRYPT_DECRYPT"),
+//				IsEnabled:   pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Kubernetes.NewEncryptionProtection(ctx, "exampleEncryptionProtection", &Kubernetes.EncryptionProtectionArgs{
+//				ClusterId: exampleCluster.ID(),
+//				KmsConfiguration: &kubernetes.EncryptionProtectionKmsConfigurationArgs{
+//					KeyId:     exampleKey.ID(),
+//					KmsRegion: pulumi.String(exampleRegion),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type EncryptionProtection struct {
 	pulumi.CustomResourceState
@@ -195,7 +198,7 @@ func (i *EncryptionProtection) ToEncryptionProtectionOutputWithContext(ctx conte
 // EncryptionProtectionArrayInput is an input type that accepts EncryptionProtectionArray and EncryptionProtectionArrayOutput values.
 // You can construct a concrete instance of `EncryptionProtectionArrayInput` via:
 //
-//          EncryptionProtectionArray{ EncryptionProtectionArgs{...} }
+//	EncryptionProtectionArray{ EncryptionProtectionArgs{...} }
 type EncryptionProtectionArrayInput interface {
 	pulumi.Input
 
@@ -220,7 +223,7 @@ func (i EncryptionProtectionArray) ToEncryptionProtectionArrayOutputWithContext(
 // EncryptionProtectionMapInput is an input type that accepts EncryptionProtectionMap and EncryptionProtectionMapOutput values.
 // You can construct a concrete instance of `EncryptionProtectionMapInput` via:
 //
-//          EncryptionProtectionMap{ "key": EncryptionProtectionArgs{...} }
+//	EncryptionProtectionMap{ "key": EncryptionProtectionArgs{...} }
 type EncryptionProtectionMapInput interface {
 	pulumi.Input
 

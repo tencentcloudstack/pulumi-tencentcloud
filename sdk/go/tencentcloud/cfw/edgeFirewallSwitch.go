@@ -20,28 +20,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleEdgeFwSwitches, err := Cfw.GetEdgeFwSwitches(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cfw.NewEdgeFirewallSwitch(ctx, "exampleEdgeFirewallSwitch", &Cfw.EdgeFirewallSwitchArgs{
-// 			PublicIp:   pulumi.String(exampleEdgeFwSwitches.Datas[0].PublicIp),
-// 			SwitchMode: pulumi.Int(1),
-// 			Enable:     pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleEdgeFwSwitches, err := Cfw.GetEdgeFwSwitches(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cfw.NewEdgeFirewallSwitch(ctx, "exampleEdgeFirewallSwitch", &Cfw.EdgeFirewallSwitchArgs{
+//				PublicIp:   pulumi.String(exampleEdgeFwSwitches.Datas[0].PublicIp),
+//				SwitchMode: pulumi.Int(1),
+//				Enable:     pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### If set subnet id
 //
@@ -49,29 +52,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleEdgeFwSwitches, err := Cfw.GetEdgeFwSwitches(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cfw.NewEdgeFirewallSwitch(ctx, "exampleEdgeFirewallSwitch", &Cfw.EdgeFirewallSwitchArgs{
-// 			PublicIp:   pulumi.String(exampleEdgeFwSwitches.Datas[0].PublicIp),
-// 			SubnetId:   pulumi.String("subnet-id"),
-// 			SwitchMode: pulumi.Int(1),
-// 			Enable:     pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleEdgeFwSwitches, err := Cfw.GetEdgeFwSwitches(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cfw.NewEdgeFirewallSwitch(ctx, "exampleEdgeFirewallSwitch", &Cfw.EdgeFirewallSwitchArgs{
+//				PublicIp:   pulumi.String(exampleEdgeFwSwitches.Datas[0].PublicIp),
+//				SubnetId:   pulumi.String("subnet-id"),
+//				SwitchMode: pulumi.Int(1),
+//				Enable:     pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type EdgeFirewallSwitch struct {
 	pulumi.CustomResourceState
@@ -199,7 +205,7 @@ func (i *EdgeFirewallSwitch) ToEdgeFirewallSwitchOutputWithContext(ctx context.C
 // EdgeFirewallSwitchArrayInput is an input type that accepts EdgeFirewallSwitchArray and EdgeFirewallSwitchArrayOutput values.
 // You can construct a concrete instance of `EdgeFirewallSwitchArrayInput` via:
 //
-//          EdgeFirewallSwitchArray{ EdgeFirewallSwitchArgs{...} }
+//	EdgeFirewallSwitchArray{ EdgeFirewallSwitchArgs{...} }
 type EdgeFirewallSwitchArrayInput interface {
 	pulumi.Input
 
@@ -224,7 +230,7 @@ func (i EdgeFirewallSwitchArray) ToEdgeFirewallSwitchArrayOutputWithContext(ctx 
 // EdgeFirewallSwitchMapInput is an input type that accepts EdgeFirewallSwitchMap and EdgeFirewallSwitchMapOutput values.
 // You can construct a concrete instance of `EdgeFirewallSwitchMapInput` via:
 //
-//          EdgeFirewallSwitchMap{ "key": EdgeFirewallSwitchArgs{...} }
+//	EdgeFirewallSwitchMap{ "key": EdgeFirewallSwitchArgs{...} }
 type EdgeFirewallSwitchMapInput interface {
 	pulumi.Input
 

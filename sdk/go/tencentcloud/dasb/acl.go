@@ -19,63 +19,66 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewAcl(ctx, "example", &Dasb.AclArgs{
-// 			AcTemplateIdSets: pulumi.StringArray{},
-// 			AccountSets: pulumi.StringArray{
-// 				pulumi.String("root"),
-// 			},
-// 			AllowAccessCredential: pulumi.Bool(true),
-// 			AllowAnyAccount:       pulumi.Bool(false),
-// 			AllowClipFileDown:     pulumi.Bool(true),
-// 			AllowClipFileUp:       pulumi.Bool(true),
-// 			AllowClipTextDown:     pulumi.Bool(true),
-// 			AllowClipTextUp:       pulumi.Bool(true),
-// 			AllowDiskFileDown:     pulumi.Bool(true),
-// 			AllowDiskFileUp:       pulumi.Bool(true),
-// 			AllowDiskRedirect:     pulumi.Bool(true),
-// 			AllowFileDel:          pulumi.Bool(true),
-// 			AllowFileDown:         pulumi.Bool(true),
-// 			AllowFileUp:           pulumi.Bool(true),
-// 			AllowShellFileDown:    pulumi.Bool(true),
-// 			AllowShellFileUp:      pulumi.Bool(true),
-// 			CmdTemplateIdSets: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(7),
-// 			},
-// 			DepartmentId: pulumi.String("1.2"),
-// 			DeviceGroupIdSets: pulumi.IntArray{
-// 				pulumi.Int(2),
-// 				pulumi.Int(3),
-// 			},
-// 			DeviceIdSets: pulumi.IntArray{
-// 				pulumi.Int(39),
-// 				pulumi.Int(81),
-// 			},
-// 			MaxFileDownSize: pulumi.Int(0),
-// 			MaxFileUpSize:   pulumi.Int(0),
-// 			UserGroupIdSets: pulumi.IntArray{
-// 				pulumi.Int(6),
-// 				pulumi.Int(36),
-// 			},
-// 			UserIdSets: pulumi.IntArray{
-// 				pulumi.Int(6),
-// 				pulumi.Int(2),
-// 			},
-// 			ValidateFrom: pulumi.String("2023-09-22T00:00:00+08:00"),
-// 			ValidateTo:   pulumi.String("2024-09-23T00:00:00+08:00"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewAcl(ctx, "example", &Dasb.AclArgs{
+//				AcTemplateIdSets: pulumi.StringArray{},
+//				AccountSets: pulumi.StringArray{
+//					pulumi.String("root"),
+//				},
+//				AllowAccessCredential: pulumi.Bool(true),
+//				AllowAnyAccount:       pulumi.Bool(false),
+//				AllowClipFileDown:     pulumi.Bool(true),
+//				AllowClipFileUp:       pulumi.Bool(true),
+//				AllowClipTextDown:     pulumi.Bool(true),
+//				AllowClipTextUp:       pulumi.Bool(true),
+//				AllowDiskFileDown:     pulumi.Bool(true),
+//				AllowDiskFileUp:       pulumi.Bool(true),
+//				AllowDiskRedirect:     pulumi.Bool(true),
+//				AllowFileDel:          pulumi.Bool(true),
+//				AllowFileDown:         pulumi.Bool(true),
+//				AllowFileUp:           pulumi.Bool(true),
+//				AllowShellFileDown:    pulumi.Bool(true),
+//				AllowShellFileUp:      pulumi.Bool(true),
+//				CmdTemplateIdSets: pulumi.IntArray{
+//					pulumi.Int(1),
+//					pulumi.Int(7),
+//				},
+//				DepartmentId: pulumi.String("1.2"),
+//				DeviceGroupIdSets: pulumi.IntArray{
+//					pulumi.Int(2),
+//					pulumi.Int(3),
+//				},
+//				DeviceIdSets: pulumi.IntArray{
+//					pulumi.Int(39),
+//					pulumi.Int(81),
+//				},
+//				MaxFileDownSize: pulumi.Int(0),
+//				MaxFileUpSize:   pulumi.Int(0),
+//				UserGroupIdSets: pulumi.IntArray{
+//					pulumi.Int(6),
+//					pulumi.Int(36),
+//				},
+//				UserIdSets: pulumi.IntArray{
+//					pulumi.Int(6),
+//					pulumi.Int(2),
+//				},
+//				ValidateFrom: pulumi.String("2023-09-22T00:00:00+08:00"),
+//				ValidateTo:   pulumi.String("2024-09-23T00:00:00+08:00"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -83,7 +86,9 @@ import (
 // dasb acl can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dasb/acl:Acl example 132
+//
+//	$ pulumi import tencentcloud:Dasb/acl:Acl example 132
+//
 // ```
 type Acl struct {
 	pulumi.CustomResourceState
@@ -438,7 +443,7 @@ func (i *Acl) ToAclOutputWithContext(ctx context.Context) AclOutput {
 // AclArrayInput is an input type that accepts AclArray and AclArrayOutput values.
 // You can construct a concrete instance of `AclArrayInput` via:
 //
-//          AclArray{ AclArgs{...} }
+//	AclArray{ AclArgs{...} }
 type AclArrayInput interface {
 	pulumi.Input
 
@@ -463,7 +468,7 @@ func (i AclArray) ToAclArrayOutputWithContext(ctx context.Context) AclArrayOutpu
 // AclMapInput is an input type that accepts AclMap and AclMapOutput values.
 // You can construct a concrete instance of `AclMapInput` via:
 //
-//          AclMap{ "key": AclArgs{...} }
+//	AclMap{ "key": AclArgs{...} }
 type AclMapInput interface {
 	pulumi.Input
 

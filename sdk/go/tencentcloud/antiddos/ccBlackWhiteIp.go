@@ -19,30 +19,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Antiddos.NewCcBlackWhiteIp(ctx, "ccBlackWhiteIp", &Antiddos.CcBlackWhiteIpArgs{
-// 			BlackWhiteIp: &antiddos.CcBlackWhiteIpBlackWhiteIpArgs{
-// 				Ip:   pulumi.String("1.2.3.5"),
-// 				Mask: pulumi.Int(0),
-// 			},
-// 			Domain:     pulumi.String("t.baidu.com"),
-// 			InstanceId: pulumi.String("bgpip-xxxxxx"),
-// 			Ip:         pulumi.String("xxx.xxx.xxx.xxx"),
-// 			Protocol:   pulumi.String("http"),
-// 			Type:       pulumi.String("black"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Antiddos.NewCcBlackWhiteIp(ctx, "ccBlackWhiteIp", &Antiddos.CcBlackWhiteIpArgs{
+//				BlackWhiteIp: &antiddos.CcBlackWhiteIpBlackWhiteIpArgs{
+//					Ip:   pulumi.String("1.2.3.5"),
+//					Mask: pulumi.Int(0),
+//				},
+//				Domain:     pulumi.String("t.baidu.com"),
+//				InstanceId: pulumi.String("bgpip-xxxxxx"),
+//				Ip:         pulumi.String("xxx.xxx.xxx.xxx"),
+//				Protocol:   pulumi.String("http"),
+//				Type:       pulumi.String("black"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -50,7 +53,9 @@ import (
 // antiddos cc_black_white_ip can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Antiddos/ccBlackWhiteIp:CcBlackWhiteIp cc_black_white_ip ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}
+//
+//	$ pulumi import tencentcloud:Antiddos/ccBlackWhiteIp:CcBlackWhiteIp cc_black_white_ip ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}
+//
 // ```
 type CcBlackWhiteIp struct {
 	pulumi.CustomResourceState
@@ -207,7 +212,7 @@ func (i *CcBlackWhiteIp) ToCcBlackWhiteIpOutputWithContext(ctx context.Context) 
 // CcBlackWhiteIpArrayInput is an input type that accepts CcBlackWhiteIpArray and CcBlackWhiteIpArrayOutput values.
 // You can construct a concrete instance of `CcBlackWhiteIpArrayInput` via:
 //
-//          CcBlackWhiteIpArray{ CcBlackWhiteIpArgs{...} }
+//	CcBlackWhiteIpArray{ CcBlackWhiteIpArgs{...} }
 type CcBlackWhiteIpArrayInput interface {
 	pulumi.Input
 
@@ -232,7 +237,7 @@ func (i CcBlackWhiteIpArray) ToCcBlackWhiteIpArrayOutputWithContext(ctx context.
 // CcBlackWhiteIpMapInput is an input type that accepts CcBlackWhiteIpMap and CcBlackWhiteIpMapOutput values.
 // You can construct a concrete instance of `CcBlackWhiteIpMapInput` via:
 //
-//          CcBlackWhiteIpMap{ "key": CcBlackWhiteIpArgs{...} }
+//	CcBlackWhiteIpMap{ "key": CcBlackWhiteIpArgs{...} }
 type CcBlackWhiteIpMapInput interface {
 	pulumi.Input
 

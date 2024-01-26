@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.GetSavepointList(ctx, &oceanus.GetSavepointListArgs{
-// 			JobId:       "cql-314rw6w0",
-// 			WorkSpaceId: pulumi.StringRef("space-2idq8wbr"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.GetSavepointList(ctx, &oceanus.GetSavepointListArgs{
+//				JobId:       "cql-314rw6w0",
+//				WorkSpaceId: pulumi.StringRef("space-2idq8wbr"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetSavepointList(ctx *pulumi.Context, args *GetSavepointListArgs, opts ...pulumi.InvokeOption) (*GetSavepointListResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

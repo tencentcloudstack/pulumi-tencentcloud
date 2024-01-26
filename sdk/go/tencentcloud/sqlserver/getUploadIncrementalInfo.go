@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.GetUploadIncrementalInfo(ctx, &sqlserver.GetUploadIncrementalInfoArgs{
-// 			BackupMigrationId:      "mssql-backup-migration-83t5u3tv",
-// 			IncrementalMigrationId: "mssql-incremental-migration-h36gkdxn",
-// 			InstanceId:             "mssql-4tgeyeeh",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.GetUploadIncrementalInfo(ctx, &sqlserver.GetUploadIncrementalInfoArgs{
+//				BackupMigrationId:      "mssql-backup-migration-83t5u3tv",
+//				IncrementalMigrationId: "mssql-incremental-migration-h36gkdxn",
+//				InstanceId:             "mssql-4tgeyeeh",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetUploadIncrementalInfo(ctx *pulumi.Context, args *GetUploadIncrementalInfoArgs, opts ...pulumi.InvokeOption) (*GetUploadIncrementalInfoResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

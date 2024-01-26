@@ -19,35 +19,38 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewFunctionAlias(ctx, "functionAlias", &Scf.FunctionAliasArgs{
-// 			Description:     pulumi.String("matchs for test 12312312"),
-// 			FunctionName:    pulumi.String("keep-1676351130"),
-// 			FunctionVersion: pulumi.String("3"),
-// 			Namespace:       pulumi.String("default"),
-// 			RoutingConfig: &scf.FunctionAliasRoutingConfigArgs{
-// 				AdditionalVersionMatches: scf.FunctionAliasRoutingConfigAdditionalVersionMatchArray{
-// 					&scf.FunctionAliasRoutingConfigAdditionalVersionMatchArgs{
-// 						Expression: pulumi.String("testuser"),
-// 						Key:        pulumi.String("invoke.headers.User"),
-// 						Method:     pulumi.String("exact"),
-// 						Version:    pulumi.String("2"),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewFunctionAlias(ctx, "functionAlias", &Scf.FunctionAliasArgs{
+//				Description:     pulumi.String("matchs for test 12312312"),
+//				FunctionName:    pulumi.String("keep-1676351130"),
+//				FunctionVersion: pulumi.String("3"),
+//				Namespace:       pulumi.String("default"),
+//				RoutingConfig: &scf.FunctionAliasRoutingConfigArgs{
+//					AdditionalVersionMatches: scf.FunctionAliasRoutingConfigAdditionalVersionMatchArray{
+//						&scf.FunctionAliasRoutingConfigAdditionalVersionMatchArgs{
+//							Expression: pulumi.String("testuser"),
+//							Key:        pulumi.String("invoke.headers.User"),
+//							Method:     pulumi.String("exact"),
+//							Version:    pulumi.String("2"),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -55,7 +58,9 @@ import (
 // scf function_alias can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Scf/functionAlias:FunctionAlias function_alias namespace#functionName#name
+//
+//	$ pulumi import tencentcloud:Scf/functionAlias:FunctionAlias function_alias namespace#functionName#name
+//
 // ```
 type FunctionAlias struct {
 	pulumi.CustomResourceState
@@ -200,7 +205,7 @@ func (i *FunctionAlias) ToFunctionAliasOutputWithContext(ctx context.Context) Fu
 // FunctionAliasArrayInput is an input type that accepts FunctionAliasArray and FunctionAliasArrayOutput values.
 // You can construct a concrete instance of `FunctionAliasArrayInput` via:
 //
-//          FunctionAliasArray{ FunctionAliasArgs{...} }
+//	FunctionAliasArray{ FunctionAliasArgs{...} }
 type FunctionAliasArrayInput interface {
 	pulumi.Input
 
@@ -225,7 +230,7 @@ func (i FunctionAliasArray) ToFunctionAliasArrayOutputWithContext(ctx context.Co
 // FunctionAliasMapInput is an input type that accepts FunctionAliasMap and FunctionAliasMapOutput values.
 // You can construct a concrete instance of `FunctionAliasMapInput` via:
 //
-//          FunctionAliasMap{ "key": FunctionAliasArgs{...} }
+//	FunctionAliasMap{ "key": FunctionAliasArgs{...} }
 type FunctionAliasMapInput interface {
 	pulumi.Input
 
