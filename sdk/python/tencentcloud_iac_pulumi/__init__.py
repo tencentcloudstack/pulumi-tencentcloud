@@ -4448,6 +4448,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Monitor/tmpAlertGroup",
+  "fqn": "tencentcloud_iac_pulumi.monitor",
+  "classes": {
+   "tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup": "TmpAlertGroup"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Monitor/tmpAlertRule",
   "fqn": "tencentcloud_iac_pulumi.monitor",
   "classes": {

@@ -6167,6 +6167,12 @@ export namespace Cfw {
         zoneSets: string[];
     }
 
+    export interface VpcPolicyBetaList {
+        lastTime?: string;
+        taskId?: number;
+        taskName?: string;
+    }
+
 }
 
 export namespace Chdfs {
@@ -16503,6 +16509,64 @@ export namespace Clickhouse {
          * Zk path.
          */
         zooPath: string;
+    }
+
+    export interface GetInstanceNodesInstanceNodesList {
+        /**
+         * Name of the clickhouse cluster to which it belongs.
+         */
+        cluster: string;
+        /**
+         * CPU cores.
+         */
+        core: number;
+        /**
+         * Disk size.
+         */
+        diskSize: number;
+        /**
+         * Disk type.
+         */
+        diskType: string;
+        /**
+         * IP Address.
+         */
+        ip: string;
+        /**
+         * When true, it indicates that the chproxy process has been deployed on the node.
+         */
+        isChProxy: boolean;
+        /**
+         * Memory size.
+         */
+        memory: number;
+        /**
+         * Group information to which the node belongs.
+         */
+        nodeGroups: outputs.Clickhouse.GetInstanceNodesInstanceNodesListNodeGroup[];
+        /**
+         * VPC IP.
+         */
+        rip: string;
+        /**
+         * Model, such as S1.
+         */
+        spec: string;
+    }
+
+    export interface GetInstanceNodesInstanceNodesListNodeGroup {
+        /**
+         * Group Name.
+         */
+        groupName: string;
+        /**
+         * Copy variable name.
+         */
+        replicaName: string;
+        /**
+         * Fragmented variable name.
+         */
+        shardName: string;
     }
 
     export interface GetSpecAttachCbsSpec {
@@ -41302,6 +41366,67 @@ export namespace Monitor {
         uniqueId: string;
     }
 
+    export interface TmpAlertGroupCustomReceiver {
+        /**
+         * Time ranges which allow alert message send.
+         */
+        allowedTimeRanges?: outputs.Monitor.TmpAlertGroupCustomReceiverAllowedTimeRange[];
+        /**
+         * Only effect when alertmanager in user cluster, this cluster id.
+         */
+        clusterId?: string;
+        /**
+         * Only effect when alertmanager in user cluster, this cluster type (tke|eks|tdcc).
+         */
+        clusterType?: string;
+        /**
+         * Custom receiver type, webhook|alertmanager.
+         */
+        type?: string;
+        /**
+         * Custom receiver address, can be accessed by process in prometheus instance subnet.
+         */
+        url?: string;
+    }
+
+    export interface TmpAlertGroupCustomReceiverAllowedTimeRange {
+        /**
+         * Time range end, seconds since 0 o'clock.
+         */
+        end?: string;
+        /**
+         * Time range start, seconds since 0 o'clock.
+         */
+        start?: string;
+    }
+
+    export interface TmpAlertGroupRule {
+        /**
+         * Annotation of alert rule. `summary`, `description` is special annotation in prometheus, mapping `Alarm Object`, `Alarm Information` in alarm message.
+         */
+        annotations?: {[key: string]: any};
+        /**
+         * Rule alarm duration.
+         */
+        duration?: string;
+        /**
+         * Prometheus alert expression.
+         */
+        expr?: string;
+        /**
+         * Labels of alert rule.
+         */
+        labels?: {[key: string]: any};
+        /**
+         * Alert rule name.
+         */
+        ruleName?: string;
+        /**
+         * Rule state. `2`-enable, `3`-disable, default `2`.
+         */
+        state?: number;
+    }
+
     export interface TmpAlertRuleAnnotation {
         /**
          * key.
@@ -41835,6 +41960,7 @@ export namespace Monitor {
          */
         templateId?: string;
     }
+
 }
 
 export namespace Mps {

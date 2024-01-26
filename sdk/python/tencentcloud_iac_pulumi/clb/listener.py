@@ -65,7 +65,7 @@ class ListenerArgs:
         :param pulumi.Input[str] health_check_send_context: It represents the content of the request sent by the health check. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When `health_check_context_type` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
         :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled.
         :param pulumi.Input[int] health_check_time_out: Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
-        :param pulumi.Input[str] health_check_type: Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+        :param pulumi.Input[str] health_check_type: Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] health_source_ip_type: Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
         :param pulumi.Input[int] keepalive_enable: Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
@@ -378,7 +378,7 @@ class ListenerArgs:
     @pulumi.getter(name="healthCheckType")
     def health_check_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+        Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
         """
         return pulumi.get(self, "health_check_type")
 
@@ -549,7 +549,7 @@ class _ListenerState:
         :param pulumi.Input[str] health_check_send_context: It represents the content of the request sent by the health check. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When `health_check_context_type` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
         :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled.
         :param pulumi.Input[int] health_check_time_out: Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
-        :param pulumi.Input[str] health_check_type: Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+        :param pulumi.Input[str] health_check_type: Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] health_source_ip_type: Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
         :param pulumi.Input[int] keepalive_enable: Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
@@ -846,7 +846,7 @@ class _ListenerState:
     @pulumi.getter(name="healthCheckType")
     def health_check_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+        Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
         """
         return pulumi.get(self, "health_check_type")
 
@@ -1231,7 +1231,7 @@ class Listener(pulumi.CustomResource):
         :param pulumi.Input[str] health_check_send_context: It represents the content of the request sent by the health check. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When `health_check_context_type` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
         :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled.
         :param pulumi.Input[int] health_check_time_out: Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
-        :param pulumi.Input[str] health_check_type: Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+        :param pulumi.Input[str] health_check_type: Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] health_source_ip_type: Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
         :param pulumi.Input[int] keepalive_enable: Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
@@ -1588,7 +1588,7 @@ class Listener(pulumi.CustomResource):
         :param pulumi.Input[str] health_check_send_context: It represents the content of the request sent by the health check. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When `health_check_context_type` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
         :param pulumi.Input[bool] health_check_switch: Indicates whether health check is enabled.
         :param pulumi.Input[int] health_check_time_out: Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
-        :param pulumi.Input[str] health_check_type: Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+        :param pulumi.Input[str] health_check_type: Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] health_source_ip_type: Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
         :param pulumi.Input[int] keepalive_enable: Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
@@ -1681,7 +1681,7 @@ class Listener(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="healthCheckContextType")
-    def health_check_context_type(self) -> pulumi.Output[Optional[str]]:
+    def health_check_context_type(self) -> pulumi.Output[str]:
         """
         Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
         """
@@ -1787,7 +1787,7 @@ class Listener(pulumi.CustomResource):
     @pulumi.getter(name="healthCheckType")
     def health_check_type(self) -> pulumi.Output[str]:
         """
-        Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+        Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
         """
         return pulumi.get(self, "health_check_type")
 

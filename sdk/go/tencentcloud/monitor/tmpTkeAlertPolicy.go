@@ -13,6 +13,8 @@ import (
 
 // Provides a resource to create a tke tmpAlertPolicy
 //
+// > **NOTE:** This resource will be deprecated in a future version, please use `Monitor.TmpAlertGroup`.
+//
 // ## Example Usage
 //
 // ```go

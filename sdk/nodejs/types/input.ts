@@ -2300,6 +2300,12 @@ export namespace Cfw {
          */
         zoneSets: pulumi.Input<pulumi.Input<string>[]>;
     }
+
+    export interface VpcPolicyBetaList {
+        lastTime?: pulumi.Input<string>;
+        taskId?: pulumi.Input<number>;
+        taskName?: pulumi.Input<string>;
+    }
 }
 
 export namespace Chdfs {
@@ -7369,7 +7375,6 @@ export namespace Clickhouse {
          */
         newConfValue: pulumi.Input<string>;
     }
-
 }
 
 export namespace Cls {
@@ -15198,17 +15203,6 @@ export namespace Monitor {
         startTime?: pulumi.Input<number>;
     }
 
-    export interface GetAlarmHistoryNamespace {
-        /**
-         * Monitor type.
-         */
-        monitorType: string;
-        /**
-         * Policy type.
-         */
-        namespace: string;
-    }
-
     export interface GetAlarmHistoryNamespaceArgs {
         /**
          * Monitor type.
@@ -15218,6 +15212,17 @@ export namespace Monitor {
          * Policy type.
          */
         namespace: pulumi.Input<string>;
+    }
+
+    export interface GetAlarmHistoryNamespace {
+        /**
+         * Monitor type.
+         */
+        monitorType: string;
+        /**
+         * Policy type.
+         */
+        namespace: string;
     }
 
     export interface GetAlarmPolicyTriggerTaskArgs {
@@ -15286,16 +15291,16 @@ export namespace Monitor {
         value?: pulumi.Input<string>;
     }
 
-    export interface GetStatisticDataCondition {
-        key: string;
-        operator: string;
-        values: string[];
-    }
-
     export interface GetStatisticDataConditionArgs {
         key: pulumi.Input<string>;
         operator: pulumi.Input<string>;
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetStatisticDataCondition {
+        key: string;
+        operator: string;
+        values: string[];
     }
 
     export interface GrafanaSsoAccountRole {
@@ -15315,6 +15320,67 @@ export namespace Monitor {
          */
         dimensionsJson: pulumi.Input<string>;
         uniqueId?: pulumi.Input<string>;
+    }
+
+    export interface TmpAlertGroupCustomReceiver {
+        /**
+         * Time ranges which allow alert message send.
+         */
+        allowedTimeRanges?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpAlertGroupCustomReceiverAllowedTimeRange>[]>;
+        /**
+         * Only effect when alertmanager in user cluster, this cluster id.
+         */
+        clusterId?: pulumi.Input<string>;
+        /**
+         * Only effect when alertmanager in user cluster, this cluster type (tke|eks|tdcc).
+         */
+        clusterType?: pulumi.Input<string>;
+        /**
+         * Custom receiver type, webhook|alertmanager.
+         */
+        type?: pulumi.Input<string>;
+        /**
+         * Custom receiver address, can be accessed by process in prometheus instance subnet.
+         */
+        url?: pulumi.Input<string>;
+    }
+
+    export interface TmpAlertGroupCustomReceiverAllowedTimeRange {
+        /**
+         * Time range end, seconds since 0 o'clock.
+         */
+        end?: pulumi.Input<string>;
+        /**
+         * Time range start, seconds since 0 o'clock.
+         */
+        start?: pulumi.Input<string>;
+    }
+
+    export interface TmpAlertGroupRule {
+        /**
+         * Annotation of alert rule. `summary`, `description` is special annotation in prometheus, mapping `Alarm Object`, `Alarm Information` in alarm message.
+         */
+        annotations?: pulumi.Input<{[key: string]: any}>;
+        /**
+         * Rule alarm duration.
+         */
+        duration?: pulumi.Input<string>;
+        /**
+         * Prometheus alert expression.
+         */
+        expr?: pulumi.Input<string>;
+        /**
+         * Labels of alert rule.
+         */
+        labels?: pulumi.Input<{[key: string]: any}>;
+        /**
+         * Alert rule name.
+         */
+        ruleName?: pulumi.Input<string>;
+        /**
+         * Rule state. `2`-enable, `3`-disable, default `2`.
+         */
+        state?: pulumi.Input<number>;
     }
 
     export interface TmpAlertRuleAnnotation {

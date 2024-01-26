@@ -198,6 +198,51 @@ import (
 // 	})
 // }
 // ```
+// ### Specified  Vip Instance
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		fooInstance, err := Vpc.NewInstance(ctx, "fooInstance", &Vpc.InstanceArgs{
+// 			CidrBlock: pulumi.String("10.0.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = Clb.NewInstance(ctx, "clbOpen", &Clb.InstanceArgs{
+// 			NetworkType: pulumi.String("OPEN"),
+// 			ClbName:     pulumi.String("clb-instance-open"),
+// 			ProjectId:   pulumi.Int(0),
+// 			VpcId:       fooInstance.ID(),
+// 			SecurityGroups: pulumi.StringArray{
+// 				fooGroup.ID(),
+// 			},
+// 			Vip: pulumi.String("111.230.4.204"),
+// 			Tags: pulumi.AnyMap{
+// 				"test": pulumi.Any("tf"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		ctx.Export("domain", tencentcloud_clb_instance.Vip)
+// 		return nil
+// 	})
+// }
+// ```
 // ### Default enable
 //
 // ```go
@@ -412,6 +457,8 @@ type Instance struct {
 	TargetRegionInfoRegion pulumi.StringOutput `pulumi:"targetRegionInfoRegion"`
 	// Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
 	TargetRegionInfoVpcId pulumi.StringOutput `pulumi:"targetRegionInfoVpcId"`
+	// Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.
+	Vip pulumi.StringOutput `pulumi:"vip"`
 	// Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
 	VipIsp pulumi.StringOutput `pulumi:"vipIsp"`
 	// VPC ID of the CLB.
@@ -504,6 +551,8 @@ type instanceState struct {
 	TargetRegionInfoRegion *string `pulumi:"targetRegionInfoRegion"`
 	// Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
 	TargetRegionInfoVpcId *string `pulumi:"targetRegionInfoVpcId"`
+	// Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.
+	Vip *string `pulumi:"vip"`
 	// Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
 	VipIsp *string `pulumi:"vipIsp"`
 	// VPC ID of the CLB.
@@ -561,6 +610,8 @@ type InstanceState struct {
 	TargetRegionInfoRegion pulumi.StringPtrInput
 	// Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
 	TargetRegionInfoVpcId pulumi.StringPtrInput
+	// Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.
+	Vip pulumi.StringPtrInput
 	// Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
 	VipIsp pulumi.StringPtrInput
 	// VPC ID of the CLB.
@@ -618,6 +669,8 @@ type instanceArgs struct {
 	TargetRegionInfoRegion *string `pulumi:"targetRegionInfoRegion"`
 	// Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
 	TargetRegionInfoVpcId *string `pulumi:"targetRegionInfoVpcId"`
+	// Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.
+	Vip *string `pulumi:"vip"`
 	// Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
 	VipIsp *string `pulumi:"vipIsp"`
 	// VPC ID of the CLB.
@@ -672,6 +725,8 @@ type InstanceArgs struct {
 	TargetRegionInfoRegion pulumi.StringPtrInput
 	// Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
 	TargetRegionInfoVpcId pulumi.StringPtrInput
+	// Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.
+	Vip pulumi.StringPtrInput
 	// Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
 	VipIsp pulumi.StringPtrInput
 	// VPC ID of the CLB.
@@ -885,6 +940,11 @@ func (o InstanceOutput) TargetRegionInfoRegion() pulumi.StringOutput {
 // Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
 func (o InstanceOutput) TargetRegionInfoVpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.TargetRegionInfoVpcId }).(pulumi.StringOutput)
+}
+
+// Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.
+func (o InstanceOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Vip }).(pulumi.StringOutput)
 }
 
 // Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
