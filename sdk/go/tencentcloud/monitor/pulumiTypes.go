@@ -2151,6 +2151,469 @@ func (o PolicyBindingObjectDimensionArrayOutput) Index(i pulumi.IntInput) Policy
 	}).(PolicyBindingObjectDimensionOutput)
 }
 
+type TmpAlertGroupCustomReceiver struct {
+	// Time ranges which allow alert message send.
+	AllowedTimeRanges []TmpAlertGroupCustomReceiverAllowedTimeRange `pulumi:"allowedTimeRanges"`
+	// Only effect when alertmanager in user cluster, this cluster id.
+	ClusterId *string `pulumi:"clusterId"`
+	// Only effect when alertmanager in user cluster, this cluster type (tke|eks|tdcc).
+	ClusterType *string `pulumi:"clusterType"`
+	// Custom receiver type, webhook|alertmanager.
+	Type *string `pulumi:"type"`
+	// Custom receiver address, can be accessed by process in prometheus instance subnet.
+	Url *string `pulumi:"url"`
+}
+
+// TmpAlertGroupCustomReceiverInput is an input type that accepts TmpAlertGroupCustomReceiverArgs and TmpAlertGroupCustomReceiverOutput values.
+// You can construct a concrete instance of `TmpAlertGroupCustomReceiverInput` via:
+//
+//          TmpAlertGroupCustomReceiverArgs{...}
+type TmpAlertGroupCustomReceiverInput interface {
+	pulumi.Input
+
+	ToTmpAlertGroupCustomReceiverOutput() TmpAlertGroupCustomReceiverOutput
+	ToTmpAlertGroupCustomReceiverOutputWithContext(context.Context) TmpAlertGroupCustomReceiverOutput
+}
+
+type TmpAlertGroupCustomReceiverArgs struct {
+	// Time ranges which allow alert message send.
+	AllowedTimeRanges TmpAlertGroupCustomReceiverAllowedTimeRangeArrayInput `pulumi:"allowedTimeRanges"`
+	// Only effect when alertmanager in user cluster, this cluster id.
+	ClusterId pulumi.StringPtrInput `pulumi:"clusterId"`
+	// Only effect when alertmanager in user cluster, this cluster type (tke|eks|tdcc).
+	ClusterType pulumi.StringPtrInput `pulumi:"clusterType"`
+	// Custom receiver type, webhook|alertmanager.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+	// Custom receiver address, can be accessed by process in prometheus instance subnet.
+	Url pulumi.StringPtrInput `pulumi:"url"`
+}
+
+func (TmpAlertGroupCustomReceiverArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpAlertGroupCustomReceiver)(nil)).Elem()
+}
+
+func (i TmpAlertGroupCustomReceiverArgs) ToTmpAlertGroupCustomReceiverOutput() TmpAlertGroupCustomReceiverOutput {
+	return i.ToTmpAlertGroupCustomReceiverOutputWithContext(context.Background())
+}
+
+func (i TmpAlertGroupCustomReceiverArgs) ToTmpAlertGroupCustomReceiverOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertGroupCustomReceiverOutput)
+}
+
+func (i TmpAlertGroupCustomReceiverArgs) ToTmpAlertGroupCustomReceiverPtrOutput() TmpAlertGroupCustomReceiverPtrOutput {
+	return i.ToTmpAlertGroupCustomReceiverPtrOutputWithContext(context.Background())
+}
+
+func (i TmpAlertGroupCustomReceiverArgs) ToTmpAlertGroupCustomReceiverPtrOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertGroupCustomReceiverOutput).ToTmpAlertGroupCustomReceiverPtrOutputWithContext(ctx)
+}
+
+// TmpAlertGroupCustomReceiverPtrInput is an input type that accepts TmpAlertGroupCustomReceiverArgs, TmpAlertGroupCustomReceiverPtr and TmpAlertGroupCustomReceiverPtrOutput values.
+// You can construct a concrete instance of `TmpAlertGroupCustomReceiverPtrInput` via:
+//
+//          TmpAlertGroupCustomReceiverArgs{...}
+//
+//  or:
+//
+//          nil
+type TmpAlertGroupCustomReceiverPtrInput interface {
+	pulumi.Input
+
+	ToTmpAlertGroupCustomReceiverPtrOutput() TmpAlertGroupCustomReceiverPtrOutput
+	ToTmpAlertGroupCustomReceiverPtrOutputWithContext(context.Context) TmpAlertGroupCustomReceiverPtrOutput
+}
+
+type tmpAlertGroupCustomReceiverPtrType TmpAlertGroupCustomReceiverArgs
+
+func TmpAlertGroupCustomReceiverPtr(v *TmpAlertGroupCustomReceiverArgs) TmpAlertGroupCustomReceiverPtrInput {
+	return (*tmpAlertGroupCustomReceiverPtrType)(v)
+}
+
+func (*tmpAlertGroupCustomReceiverPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpAlertGroupCustomReceiver)(nil)).Elem()
+}
+
+func (i *tmpAlertGroupCustomReceiverPtrType) ToTmpAlertGroupCustomReceiverPtrOutput() TmpAlertGroupCustomReceiverPtrOutput {
+	return i.ToTmpAlertGroupCustomReceiverPtrOutputWithContext(context.Background())
+}
+
+func (i *tmpAlertGroupCustomReceiverPtrType) ToTmpAlertGroupCustomReceiverPtrOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertGroupCustomReceiverPtrOutput)
+}
+
+type TmpAlertGroupCustomReceiverOutput struct{ *pulumi.OutputState }
+
+func (TmpAlertGroupCustomReceiverOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpAlertGroupCustomReceiver)(nil)).Elem()
+}
+
+func (o TmpAlertGroupCustomReceiverOutput) ToTmpAlertGroupCustomReceiverOutput() TmpAlertGroupCustomReceiverOutput {
+	return o
+}
+
+func (o TmpAlertGroupCustomReceiverOutput) ToTmpAlertGroupCustomReceiverOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverOutput {
+	return o
+}
+
+func (o TmpAlertGroupCustomReceiverOutput) ToTmpAlertGroupCustomReceiverPtrOutput() TmpAlertGroupCustomReceiverPtrOutput {
+	return o.ToTmpAlertGroupCustomReceiverPtrOutputWithContext(context.Background())
+}
+
+func (o TmpAlertGroupCustomReceiverOutput) ToTmpAlertGroupCustomReceiverPtrOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TmpAlertGroupCustomReceiver) *TmpAlertGroupCustomReceiver {
+		return &v
+	}).(TmpAlertGroupCustomReceiverPtrOutput)
+}
+
+// Time ranges which allow alert message send.
+func (o TmpAlertGroupCustomReceiverOutput) AllowedTimeRanges() TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput {
+	return o.ApplyT(func(v TmpAlertGroupCustomReceiver) []TmpAlertGroupCustomReceiverAllowedTimeRange {
+		return v.AllowedTimeRanges
+	}).(TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput)
+}
+
+// Only effect when alertmanager in user cluster, this cluster id.
+func (o TmpAlertGroupCustomReceiverOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupCustomReceiver) *string { return v.ClusterId }).(pulumi.StringPtrOutput)
+}
+
+// Only effect when alertmanager in user cluster, this cluster type (tke|eks|tdcc).
+func (o TmpAlertGroupCustomReceiverOutput) ClusterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupCustomReceiver) *string { return v.ClusterType }).(pulumi.StringPtrOutput)
+}
+
+// Custom receiver type, webhook|alertmanager.
+func (o TmpAlertGroupCustomReceiverOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupCustomReceiver) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+// Custom receiver address, can be accessed by process in prometheus instance subnet.
+func (o TmpAlertGroupCustomReceiverOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupCustomReceiver) *string { return v.Url }).(pulumi.StringPtrOutput)
+}
+
+type TmpAlertGroupCustomReceiverPtrOutput struct{ *pulumi.OutputState }
+
+func (TmpAlertGroupCustomReceiverPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpAlertGroupCustomReceiver)(nil)).Elem()
+}
+
+func (o TmpAlertGroupCustomReceiverPtrOutput) ToTmpAlertGroupCustomReceiverPtrOutput() TmpAlertGroupCustomReceiverPtrOutput {
+	return o
+}
+
+func (o TmpAlertGroupCustomReceiverPtrOutput) ToTmpAlertGroupCustomReceiverPtrOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverPtrOutput {
+	return o
+}
+
+func (o TmpAlertGroupCustomReceiverPtrOutput) Elem() TmpAlertGroupCustomReceiverOutput {
+	return o.ApplyT(func(v *TmpAlertGroupCustomReceiver) TmpAlertGroupCustomReceiver {
+		if v != nil {
+			return *v
+		}
+		var ret TmpAlertGroupCustomReceiver
+		return ret
+	}).(TmpAlertGroupCustomReceiverOutput)
+}
+
+// Time ranges which allow alert message send.
+func (o TmpAlertGroupCustomReceiverPtrOutput) AllowedTimeRanges() TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput {
+	return o.ApplyT(func(v *TmpAlertGroupCustomReceiver) []TmpAlertGroupCustomReceiverAllowedTimeRange {
+		if v == nil {
+			return nil
+		}
+		return v.AllowedTimeRanges
+	}).(TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput)
+}
+
+// Only effect when alertmanager in user cluster, this cluster id.
+func (o TmpAlertGroupCustomReceiverPtrOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpAlertGroupCustomReceiver) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClusterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Only effect when alertmanager in user cluster, this cluster type (tke|eks|tdcc).
+func (o TmpAlertGroupCustomReceiverPtrOutput) ClusterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpAlertGroupCustomReceiver) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClusterType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Custom receiver type, webhook|alertmanager.
+func (o TmpAlertGroupCustomReceiverPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpAlertGroupCustomReceiver) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+// Custom receiver address, can be accessed by process in prometheus instance subnet.
+func (o TmpAlertGroupCustomReceiverPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpAlertGroupCustomReceiver) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type TmpAlertGroupCustomReceiverAllowedTimeRange struct {
+	// Time range end, seconds since 0 o'clock.
+	End *string `pulumi:"end"`
+	// Time range start, seconds since 0 o'clock.
+	Start *string `pulumi:"start"`
+}
+
+// TmpAlertGroupCustomReceiverAllowedTimeRangeInput is an input type that accepts TmpAlertGroupCustomReceiverAllowedTimeRangeArgs and TmpAlertGroupCustomReceiverAllowedTimeRangeOutput values.
+// You can construct a concrete instance of `TmpAlertGroupCustomReceiverAllowedTimeRangeInput` via:
+//
+//          TmpAlertGroupCustomReceiverAllowedTimeRangeArgs{...}
+type TmpAlertGroupCustomReceiverAllowedTimeRangeInput interface {
+	pulumi.Input
+
+	ToTmpAlertGroupCustomReceiverAllowedTimeRangeOutput() TmpAlertGroupCustomReceiverAllowedTimeRangeOutput
+	ToTmpAlertGroupCustomReceiverAllowedTimeRangeOutputWithContext(context.Context) TmpAlertGroupCustomReceiverAllowedTimeRangeOutput
+}
+
+type TmpAlertGroupCustomReceiverAllowedTimeRangeArgs struct {
+	// Time range end, seconds since 0 o'clock.
+	End pulumi.StringPtrInput `pulumi:"end"`
+	// Time range start, seconds since 0 o'clock.
+	Start pulumi.StringPtrInput `pulumi:"start"`
+}
+
+func (TmpAlertGroupCustomReceiverAllowedTimeRangeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpAlertGroupCustomReceiverAllowedTimeRange)(nil)).Elem()
+}
+
+func (i TmpAlertGroupCustomReceiverAllowedTimeRangeArgs) ToTmpAlertGroupCustomReceiverAllowedTimeRangeOutput() TmpAlertGroupCustomReceiverAllowedTimeRangeOutput {
+	return i.ToTmpAlertGroupCustomReceiverAllowedTimeRangeOutputWithContext(context.Background())
+}
+
+func (i TmpAlertGroupCustomReceiverAllowedTimeRangeArgs) ToTmpAlertGroupCustomReceiverAllowedTimeRangeOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverAllowedTimeRangeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertGroupCustomReceiverAllowedTimeRangeOutput)
+}
+
+// TmpAlertGroupCustomReceiverAllowedTimeRangeArrayInput is an input type that accepts TmpAlertGroupCustomReceiverAllowedTimeRangeArray and TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput values.
+// You can construct a concrete instance of `TmpAlertGroupCustomReceiverAllowedTimeRangeArrayInput` via:
+//
+//          TmpAlertGroupCustomReceiverAllowedTimeRangeArray{ TmpAlertGroupCustomReceiverAllowedTimeRangeArgs{...} }
+type TmpAlertGroupCustomReceiverAllowedTimeRangeArrayInput interface {
+	pulumi.Input
+
+	ToTmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput() TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput
+	ToTmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutputWithContext(context.Context) TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput
+}
+
+type TmpAlertGroupCustomReceiverAllowedTimeRangeArray []TmpAlertGroupCustomReceiverAllowedTimeRangeInput
+
+func (TmpAlertGroupCustomReceiverAllowedTimeRangeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpAlertGroupCustomReceiverAllowedTimeRange)(nil)).Elem()
+}
+
+func (i TmpAlertGroupCustomReceiverAllowedTimeRangeArray) ToTmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput() TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput {
+	return i.ToTmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutputWithContext(context.Background())
+}
+
+func (i TmpAlertGroupCustomReceiverAllowedTimeRangeArray) ToTmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput)
+}
+
+type TmpAlertGroupCustomReceiverAllowedTimeRangeOutput struct{ *pulumi.OutputState }
+
+func (TmpAlertGroupCustomReceiverAllowedTimeRangeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpAlertGroupCustomReceiverAllowedTimeRange)(nil)).Elem()
+}
+
+func (o TmpAlertGroupCustomReceiverAllowedTimeRangeOutput) ToTmpAlertGroupCustomReceiverAllowedTimeRangeOutput() TmpAlertGroupCustomReceiverAllowedTimeRangeOutput {
+	return o
+}
+
+func (o TmpAlertGroupCustomReceiverAllowedTimeRangeOutput) ToTmpAlertGroupCustomReceiverAllowedTimeRangeOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverAllowedTimeRangeOutput {
+	return o
+}
+
+// Time range end, seconds since 0 o'clock.
+func (o TmpAlertGroupCustomReceiverAllowedTimeRangeOutput) End() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupCustomReceiverAllowedTimeRange) *string { return v.End }).(pulumi.StringPtrOutput)
+}
+
+// Time range start, seconds since 0 o'clock.
+func (o TmpAlertGroupCustomReceiverAllowedTimeRangeOutput) Start() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupCustomReceiverAllowedTimeRange) *string { return v.Start }).(pulumi.StringPtrOutput)
+}
+
+type TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpAlertGroupCustomReceiverAllowedTimeRange)(nil)).Elem()
+}
+
+func (o TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput) ToTmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput() TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput {
+	return o
+}
+
+func (o TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput) ToTmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput {
+	return o
+}
+
+func (o TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput) Index(i pulumi.IntInput) TmpAlertGroupCustomReceiverAllowedTimeRangeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpAlertGroupCustomReceiverAllowedTimeRange {
+		return vs[0].([]TmpAlertGroupCustomReceiverAllowedTimeRange)[vs[1].(int)]
+	}).(TmpAlertGroupCustomReceiverAllowedTimeRangeOutput)
+}
+
+type TmpAlertGroupRule struct {
+	// Annotation of alert rule. `summary`, `description` is special annotation in prometheus, mapping `Alarm Object`, `Alarm Information` in alarm message.
+	Annotations map[string]interface{} `pulumi:"annotations"`
+	// Rule alarm duration.
+	Duration *string `pulumi:"duration"`
+	// Prometheus alert expression.
+	Expr *string `pulumi:"expr"`
+	// Labels of alert rule.
+	Labels map[string]interface{} `pulumi:"labels"`
+	// Alert rule name.
+	RuleName *string `pulumi:"ruleName"`
+	// Rule state. `2`-enable, `3`-disable, default `2`.
+	State *int `pulumi:"state"`
+}
+
+// TmpAlertGroupRuleInput is an input type that accepts TmpAlertGroupRuleArgs and TmpAlertGroupRuleOutput values.
+// You can construct a concrete instance of `TmpAlertGroupRuleInput` via:
+//
+//          TmpAlertGroupRuleArgs{...}
+type TmpAlertGroupRuleInput interface {
+	pulumi.Input
+
+	ToTmpAlertGroupRuleOutput() TmpAlertGroupRuleOutput
+	ToTmpAlertGroupRuleOutputWithContext(context.Context) TmpAlertGroupRuleOutput
+}
+
+type TmpAlertGroupRuleArgs struct {
+	// Annotation of alert rule. `summary`, `description` is special annotation in prometheus, mapping `Alarm Object`, `Alarm Information` in alarm message.
+	Annotations pulumi.MapInput `pulumi:"annotations"`
+	// Rule alarm duration.
+	Duration pulumi.StringPtrInput `pulumi:"duration"`
+	// Prometheus alert expression.
+	Expr pulumi.StringPtrInput `pulumi:"expr"`
+	// Labels of alert rule.
+	Labels pulumi.MapInput `pulumi:"labels"`
+	// Alert rule name.
+	RuleName pulumi.StringPtrInput `pulumi:"ruleName"`
+	// Rule state. `2`-enable, `3`-disable, default `2`.
+	State pulumi.IntPtrInput `pulumi:"state"`
+}
+
+func (TmpAlertGroupRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpAlertGroupRule)(nil)).Elem()
+}
+
+func (i TmpAlertGroupRuleArgs) ToTmpAlertGroupRuleOutput() TmpAlertGroupRuleOutput {
+	return i.ToTmpAlertGroupRuleOutputWithContext(context.Background())
+}
+
+func (i TmpAlertGroupRuleArgs) ToTmpAlertGroupRuleOutputWithContext(ctx context.Context) TmpAlertGroupRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertGroupRuleOutput)
+}
+
+// TmpAlertGroupRuleArrayInput is an input type that accepts TmpAlertGroupRuleArray and TmpAlertGroupRuleArrayOutput values.
+// You can construct a concrete instance of `TmpAlertGroupRuleArrayInput` via:
+//
+//          TmpAlertGroupRuleArray{ TmpAlertGroupRuleArgs{...} }
+type TmpAlertGroupRuleArrayInput interface {
+	pulumi.Input
+
+	ToTmpAlertGroupRuleArrayOutput() TmpAlertGroupRuleArrayOutput
+	ToTmpAlertGroupRuleArrayOutputWithContext(context.Context) TmpAlertGroupRuleArrayOutput
+}
+
+type TmpAlertGroupRuleArray []TmpAlertGroupRuleInput
+
+func (TmpAlertGroupRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpAlertGroupRule)(nil)).Elem()
+}
+
+func (i TmpAlertGroupRuleArray) ToTmpAlertGroupRuleArrayOutput() TmpAlertGroupRuleArrayOutput {
+	return i.ToTmpAlertGroupRuleArrayOutputWithContext(context.Background())
+}
+
+func (i TmpAlertGroupRuleArray) ToTmpAlertGroupRuleArrayOutputWithContext(ctx context.Context) TmpAlertGroupRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertGroupRuleArrayOutput)
+}
+
+type TmpAlertGroupRuleOutput struct{ *pulumi.OutputState }
+
+func (TmpAlertGroupRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpAlertGroupRule)(nil)).Elem()
+}
+
+func (o TmpAlertGroupRuleOutput) ToTmpAlertGroupRuleOutput() TmpAlertGroupRuleOutput {
+	return o
+}
+
+func (o TmpAlertGroupRuleOutput) ToTmpAlertGroupRuleOutputWithContext(ctx context.Context) TmpAlertGroupRuleOutput {
+	return o
+}
+
+// Annotation of alert rule. `summary`, `description` is special annotation in prometheus, mapping `Alarm Object`, `Alarm Information` in alarm message.
+func (o TmpAlertGroupRuleOutput) Annotations() pulumi.MapOutput {
+	return o.ApplyT(func(v TmpAlertGroupRule) map[string]interface{} { return v.Annotations }).(pulumi.MapOutput)
+}
+
+// Rule alarm duration.
+func (o TmpAlertGroupRuleOutput) Duration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupRule) *string { return v.Duration }).(pulumi.StringPtrOutput)
+}
+
+// Prometheus alert expression.
+func (o TmpAlertGroupRuleOutput) Expr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupRule) *string { return v.Expr }).(pulumi.StringPtrOutput)
+}
+
+// Labels of alert rule.
+func (o TmpAlertGroupRuleOutput) Labels() pulumi.MapOutput {
+	return o.ApplyT(func(v TmpAlertGroupRule) map[string]interface{} { return v.Labels }).(pulumi.MapOutput)
+}
+
+// Alert rule name.
+func (o TmpAlertGroupRuleOutput) RuleName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupRule) *string { return v.RuleName }).(pulumi.StringPtrOutput)
+}
+
+// Rule state. `2`-enable, `3`-disable, default `2`.
+func (o TmpAlertGroupRuleOutput) State() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupRule) *int { return v.State }).(pulumi.IntPtrOutput)
+}
+
+type TmpAlertGroupRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpAlertGroupRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpAlertGroupRule)(nil)).Elem()
+}
+
+func (o TmpAlertGroupRuleArrayOutput) ToTmpAlertGroupRuleArrayOutput() TmpAlertGroupRuleArrayOutput {
+	return o
+}
+
+func (o TmpAlertGroupRuleArrayOutput) ToTmpAlertGroupRuleArrayOutputWithContext(ctx context.Context) TmpAlertGroupRuleArrayOutput {
+	return o
+}
+
+func (o TmpAlertGroupRuleArrayOutput) Index(i pulumi.IntInput) TmpAlertGroupRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpAlertGroupRule {
+		return vs[0].([]TmpAlertGroupRule)[vs[1].(int)]
+	}).(TmpAlertGroupRuleOutput)
+}
+
 type TmpAlertRuleAnnotation struct {
 	// key.
 	Key string `pulumi:"key"`
@@ -18233,6 +18696,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GrafanaSsoAccountRoleArrayInput)(nil)).Elem(), GrafanaSsoAccountRoleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PolicyBindingObjectDimensionInput)(nil)).Elem(), PolicyBindingObjectDimensionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PolicyBindingObjectDimensionArrayInput)(nil)).Elem(), PolicyBindingObjectDimensionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertGroupCustomReceiverInput)(nil)).Elem(), TmpAlertGroupCustomReceiverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertGroupCustomReceiverPtrInput)(nil)).Elem(), TmpAlertGroupCustomReceiverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertGroupCustomReceiverAllowedTimeRangeInput)(nil)).Elem(), TmpAlertGroupCustomReceiverAllowedTimeRangeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertGroupCustomReceiverAllowedTimeRangeArrayInput)(nil)).Elem(), TmpAlertGroupCustomReceiverAllowedTimeRangeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertGroupRuleInput)(nil)).Elem(), TmpAlertGroupRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertGroupRuleArrayInput)(nil)).Elem(), TmpAlertGroupRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertRuleAnnotationInput)(nil)).Elem(), TmpAlertRuleAnnotationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertRuleAnnotationArrayInput)(nil)).Elem(), TmpAlertRuleAnnotationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertRuleLabelInput)(nil)).Elem(), TmpAlertRuleLabelArgs{})
@@ -18467,6 +18936,12 @@ func init() {
 	pulumi.RegisterOutputType(GrafanaSsoAccountRoleArrayOutput{})
 	pulumi.RegisterOutputType(PolicyBindingObjectDimensionOutput{})
 	pulumi.RegisterOutputType(PolicyBindingObjectDimensionArrayOutput{})
+	pulumi.RegisterOutputType(TmpAlertGroupCustomReceiverOutput{})
+	pulumi.RegisterOutputType(TmpAlertGroupCustomReceiverPtrOutput{})
+	pulumi.RegisterOutputType(TmpAlertGroupCustomReceiverAllowedTimeRangeOutput{})
+	pulumi.RegisterOutputType(TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput{})
+	pulumi.RegisterOutputType(TmpAlertGroupRuleOutput{})
+	pulumi.RegisterOutputType(TmpAlertGroupRuleArrayOutput{})
 	pulumi.RegisterOutputType(TmpAlertRuleAnnotationOutput{})
 	pulumi.RegisterOutputType(TmpAlertRuleAnnotationArrayOutput{})
 	pulumi.RegisterOutputType(TmpAlertRuleLabelOutput{})

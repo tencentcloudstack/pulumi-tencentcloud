@@ -7,6 +7,8 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
+from ._inputs import *
 
 __all__ = ['VpcPolicyArgs', 'VpcPolicy']
 
@@ -173,6 +175,7 @@ class VpcPolicyArgs:
 @pulumi.input_type
 class _VpcPolicyState:
     def __init__(__self__, *,
+                 beta_lists: Optional[pulumi.Input[Sequence[pulumi.Input['VpcPolicyBetaListArgs']]]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  dest_content: Optional[pulumi.Input[str]] = None,
                  dest_type: Optional[pulumi.Input[str]] = None,
@@ -180,6 +183,8 @@ class _VpcPolicyState:
                  fw_group_id: Optional[pulumi.Input[str]] = None,
                  fw_group_name: Optional[pulumi.Input[str]] = None,
                  internal_uuid: Optional[pulumi.Input[int]] = None,
+                 param_template_id: Optional[pulumi.Input[str]] = None,
+                 param_template_name: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  rule_action: Optional[pulumi.Input[str]] = None,
@@ -188,6 +193,7 @@ class _VpcPolicyState:
                  uuid: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering VpcPolicy resources.
+        :param pulumi.Input[Sequence[pulumi.Input['VpcPolicyBetaListArgs']]] beta_lists: Beta mission details. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[str] description: Describe.
         :param pulumi.Input[str] dest_content: Access purpose example: net:IP/CIDR(192.168.0.2) domain:domain rule, for example*.qq.com.
         :param pulumi.Input[str] dest_type: Access purpose type, the type can be: net, template.
@@ -195,6 +201,8 @@ class _VpcPolicyState:
         :param pulumi.Input[str] fw_group_id: Firewall instance ID where the rule takes effect. Default is ALL.
         :param pulumi.Input[str] fw_group_name: Firewall name.
         :param pulumi.Input[int] internal_uuid: Uuid used internally, this field is generally not used.
+        :param pulumi.Input[str] param_template_id: Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[str] param_template_name: Parameter template Name. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[str] port: The port for the access control policy. Value: -1/-1: All ports; 80: port 80.
         :param pulumi.Input[str] protocol: Protocol, optional value:TCP, UDP, ICMP, ANY, HTTP, HTTPS, HTTP/HTTPS, SMTP, SMTPS, SMTP/SMTPS, FTP, DNS, TLS/SSL.
         :param pulumi.Input[str] rule_action: How traffic set in the access control policy passes through the cloud firewall. Value: accept:accept, drop:drop, log:log.
@@ -202,6 +210,8 @@ class _VpcPolicyState:
         :param pulumi.Input[str] source_type: Access source type, the type can be: net, template.
         :param pulumi.Input[int] uuid: The unique id corresponding to the rule.
         """
+        if beta_lists is not None:
+            pulumi.set(__self__, "beta_lists", beta_lists)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if dest_content is not None:
@@ -216,6 +226,10 @@ class _VpcPolicyState:
             pulumi.set(__self__, "fw_group_name", fw_group_name)
         if internal_uuid is not None:
             pulumi.set(__self__, "internal_uuid", internal_uuid)
+        if param_template_id is not None:
+            pulumi.set(__self__, "param_template_id", param_template_id)
+        if param_template_name is not None:
+            pulumi.set(__self__, "param_template_name", param_template_name)
         if port is not None:
             pulumi.set(__self__, "port", port)
         if protocol is not None:
@@ -228,6 +242,18 @@ class _VpcPolicyState:
             pulumi.set(__self__, "source_type", source_type)
         if uuid is not None:
             pulumi.set(__self__, "uuid", uuid)
+
+    @property
+    @pulumi.getter(name="betaLists")
+    def beta_lists(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VpcPolicyBetaListArgs']]]]:
+        """
+        Beta mission details. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "beta_lists")
+
+    @beta_lists.setter
+    def beta_lists(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VpcPolicyBetaListArgs']]]]):
+        pulumi.set(self, "beta_lists", value)
 
     @property
     @pulumi.getter
@@ -312,6 +338,30 @@ class _VpcPolicyState:
     @internal_uuid.setter
     def internal_uuid(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "internal_uuid", value)
+
+    @property
+    @pulumi.getter(name="paramTemplateId")
+    def param_template_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "param_template_id")
+
+    @param_template_id.setter
+    def param_template_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "param_template_id", value)
+
+    @property
+    @pulumi.getter(name="paramTemplateName")
+    def param_template_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Parameter template Name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "param_template_name")
+
+    @param_template_name.setter
+    def param_template_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "param_template_name", value)
 
     @property
     @pulumi.getter
@@ -546,8 +596,11 @@ class VpcPolicy(pulumi.CustomResource):
             if source_type is None and not opts.urn:
                 raise TypeError("Missing required property 'source_type'")
             __props__.__dict__["source_type"] = source_type
+            __props__.__dict__["beta_lists"] = None
             __props__.__dict__["fw_group_name"] = None
             __props__.__dict__["internal_uuid"] = None
+            __props__.__dict__["param_template_id"] = None
+            __props__.__dict__["param_template_name"] = None
             __props__.__dict__["uuid"] = None
         super(VpcPolicy, __self__).__init__(
             'tencentcloud:Cfw/vpcPolicy:VpcPolicy',
@@ -559,6 +612,7 @@ class VpcPolicy(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            beta_lists: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['VpcPolicyBetaListArgs']]]]] = None,
             description: Optional[pulumi.Input[str]] = None,
             dest_content: Optional[pulumi.Input[str]] = None,
             dest_type: Optional[pulumi.Input[str]] = None,
@@ -566,6 +620,8 @@ class VpcPolicy(pulumi.CustomResource):
             fw_group_id: Optional[pulumi.Input[str]] = None,
             fw_group_name: Optional[pulumi.Input[str]] = None,
             internal_uuid: Optional[pulumi.Input[int]] = None,
+            param_template_id: Optional[pulumi.Input[str]] = None,
+            param_template_name: Optional[pulumi.Input[str]] = None,
             port: Optional[pulumi.Input[str]] = None,
             protocol: Optional[pulumi.Input[str]] = None,
             rule_action: Optional[pulumi.Input[str]] = None,
@@ -579,6 +635,7 @@ class VpcPolicy(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['VpcPolicyBetaListArgs']]]] beta_lists: Beta mission details. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[str] description: Describe.
         :param pulumi.Input[str] dest_content: Access purpose example: net:IP/CIDR(192.168.0.2) domain:domain rule, for example*.qq.com.
         :param pulumi.Input[str] dest_type: Access purpose type, the type can be: net, template.
@@ -586,6 +643,8 @@ class VpcPolicy(pulumi.CustomResource):
         :param pulumi.Input[str] fw_group_id: Firewall instance ID where the rule takes effect. Default is ALL.
         :param pulumi.Input[str] fw_group_name: Firewall name.
         :param pulumi.Input[int] internal_uuid: Uuid used internally, this field is generally not used.
+        :param pulumi.Input[str] param_template_id: Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[str] param_template_name: Parameter template Name. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input[str] port: The port for the access control policy. Value: -1/-1: All ports; 80: port 80.
         :param pulumi.Input[str] protocol: Protocol, optional value:TCP, UDP, ICMP, ANY, HTTP, HTTPS, HTTP/HTTPS, SMTP, SMTPS, SMTP/SMTPS, FTP, DNS, TLS/SSL.
         :param pulumi.Input[str] rule_action: How traffic set in the access control policy passes through the cloud firewall. Value: accept:accept, drop:drop, log:log.
@@ -597,6 +656,7 @@ class VpcPolicy(pulumi.CustomResource):
 
         __props__ = _VpcPolicyState.__new__(_VpcPolicyState)
 
+        __props__.__dict__["beta_lists"] = beta_lists
         __props__.__dict__["description"] = description
         __props__.__dict__["dest_content"] = dest_content
         __props__.__dict__["dest_type"] = dest_type
@@ -604,6 +664,8 @@ class VpcPolicy(pulumi.CustomResource):
         __props__.__dict__["fw_group_id"] = fw_group_id
         __props__.__dict__["fw_group_name"] = fw_group_name
         __props__.__dict__["internal_uuid"] = internal_uuid
+        __props__.__dict__["param_template_id"] = param_template_id
+        __props__.__dict__["param_template_name"] = param_template_name
         __props__.__dict__["port"] = port
         __props__.__dict__["protocol"] = protocol
         __props__.__dict__["rule_action"] = rule_action
@@ -611,6 +673,14 @@ class VpcPolicy(pulumi.CustomResource):
         __props__.__dict__["source_type"] = source_type
         __props__.__dict__["uuid"] = uuid
         return VpcPolicy(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="betaLists")
+    def beta_lists(self) -> pulumi.Output[Sequence['outputs.VpcPolicyBetaList']]:
+        """
+        Beta mission details. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "beta_lists")
 
     @property
     @pulumi.getter
@@ -667,6 +737,22 @@ class VpcPolicy(pulumi.CustomResource):
         Uuid used internally, this field is generally not used.
         """
         return pulumi.get(self, "internal_uuid")
+
+    @property
+    @pulumi.getter(name="paramTemplateId")
+    def param_template_id(self) -> pulumi.Output[str]:
+        """
+        Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "param_template_id")
+
+    @property
+    @pulumi.getter(name="paramTemplateName")
+    def param_template_name(self) -> pulumi.Output[str]:
+        """
+        Parameter template Name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "param_template_name")
 
     @property
     @pulumi.getter

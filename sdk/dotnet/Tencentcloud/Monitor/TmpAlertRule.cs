@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// <summary>
     /// Provides a resource to create a monitor tmpAlertRule
     /// 
+    /// &gt; **NOTE:** This resource will be deprecated in a future version, please use `tencentcloud.Monitor.TmpAlertGroup`.
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp

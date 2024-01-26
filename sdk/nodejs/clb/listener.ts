@@ -240,7 +240,7 @@ export class Listener extends pulumi.CustomResource {
     /**
      * Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
      */
-    public readonly healthCheckContextType!: pulumi.Output<string | undefined>;
+    public readonly healthCheckContextType!: pulumi.Output<string>;
     /**
      * Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
      */
@@ -290,7 +290,7 @@ export class Listener extends pulumi.CustomResource {
      */
     public readonly healthCheckTimeOut!: pulumi.Output<number>;
     /**
-     * Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+     * Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
      */
     public readonly healthCheckType!: pulumi.Output<string>;
     /**
@@ -511,7 +511,7 @@ export interface ListenerState {
      */
     healthCheckTimeOut?: pulumi.Input<number>;
     /**
-     * Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+     * Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
      */
     healthCheckType?: pulumi.Input<string>;
     /**
@@ -641,7 +641,7 @@ export interface ListenerArgs {
      */
     healthCheckTimeOut?: pulumi.Input<number>;
     /**
-     * Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+     * Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
      */
     healthCheckType?: pulumi.Input<string>;
     /**

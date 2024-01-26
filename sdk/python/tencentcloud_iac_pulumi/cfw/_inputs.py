@@ -12,6 +12,7 @@ __all__ = [
     'NatInstanceNewModeItemsArgs',
     'VpcInstanceVpcFwInstanceArgs',
     'VpcInstanceVpcFwInstanceFwDeployArgs',
+    'VpcPolicyBetaListArgs',
 ]
 
 @pulumi.input_type
@@ -182,5 +183,46 @@ class VpcInstanceVpcFwInstanceFwDeployArgs:
     @cross_a_zone.setter
     def cross_a_zone(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "cross_a_zone", value)
+
+
+@pulumi.input_type
+class VpcPolicyBetaListArgs:
+    def __init__(__self__, *,
+                 last_time: Optional[pulumi.Input[str]] = None,
+                 task_id: Optional[pulumi.Input[int]] = None,
+                 task_name: Optional[pulumi.Input[str]] = None):
+        if last_time is not None:
+            pulumi.set(__self__, "last_time", last_time)
+        if task_id is not None:
+            pulumi.set(__self__, "task_id", task_id)
+        if task_name is not None:
+            pulumi.set(__self__, "task_name", task_name)
+
+    @property
+    @pulumi.getter(name="lastTime")
+    def last_time(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "last_time")
+
+    @last_time.setter
+    def last_time(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "last_time", value)
+
+    @property
+    @pulumi.getter(name="taskId")
+    def task_id(self) -> Optional[pulumi.Input[int]]:
+        return pulumi.get(self, "task_id")
+
+    @task_id.setter
+    def task_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "task_id", value)
+
+    @property
+    @pulumi.getter(name="taskName")
+    def task_name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "task_name")
+
+    @task_name.setter
+    def task_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "task_name", value)
 
 

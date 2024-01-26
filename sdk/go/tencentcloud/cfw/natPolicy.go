@@ -61,6 +61,8 @@ type NatPolicy struct {
 	Direction pulumi.IntOutput `pulumi:"direction"`
 	// Rule status, true means enabled, false means disabled. Default is true.
 	Enable pulumi.StringPtrOutput `pulumi:"enable"`
+	// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+	ParamTemplateId pulumi.StringOutput `pulumi:"paramTemplateId"`
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
 	Port pulumi.StringOutput `pulumi:"port"`
 	// Protocol. If Direction=1, optional values: TCP, UDP, ANY; If Direction=0, optional values: TCP, UDP, ICMP, ANY, HTTP, HTTPS, HTTP/HTTPS, SMTP, SMTPS, SMTP/SMTPS, FTP, and DNS.
@@ -139,6 +141,8 @@ type natPolicyState struct {
 	Direction *int `pulumi:"direction"`
 	// Rule status, true means enabled, false means disabled. Default is true.
 	Enable *string `pulumi:"enable"`
+	// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+	ParamTemplateId *string `pulumi:"paramTemplateId"`
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
 	Port *string `pulumi:"port"`
 	// Protocol. If Direction=1, optional values: TCP, UDP, ANY; If Direction=0, optional values: TCP, UDP, ICMP, ANY, HTTP, HTTPS, HTTP/HTTPS, SMTP, SMTPS, SMTP/SMTPS, FTP, and DNS.
@@ -164,6 +168,8 @@ type NatPolicyState struct {
 	Direction pulumi.IntPtrInput
 	// Rule status, true means enabled, false means disabled. Default is true.
 	Enable pulumi.StringPtrInput
+	// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+	ParamTemplateId pulumi.StringPtrInput
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
 	Port pulumi.StringPtrInput
 	// Protocol. If Direction=1, optional values: TCP, UDP, ANY; If Direction=0, optional values: TCP, UDP, ICMP, ANY, HTTP, HTTPS, HTTP/HTTPS, SMTP, SMTPS, SMTP/SMTPS, FTP, and DNS.
@@ -333,6 +339,11 @@ func (o NatPolicyOutput) Direction() pulumi.IntOutput {
 // Rule status, true means enabled, false means disabled. Default is true.
 func (o NatPolicyOutput) Enable() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *NatPolicy) pulumi.StringPtrOutput { return v.Enable }).(pulumi.StringPtrOutput)
+}
+
+// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+func (o NatPolicyOutput) ParamTemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v *NatPolicy) pulumi.StringOutput { return v.ParamTemplateId }).(pulumi.StringOutput)
 }
 
 // The port for the access control policy. Value: -1/-1: All ports 80: Port 80.

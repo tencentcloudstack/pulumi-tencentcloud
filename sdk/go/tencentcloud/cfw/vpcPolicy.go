@@ -55,6 +55,8 @@ import (
 type VpcPolicy struct {
 	pulumi.CustomResourceState
 
+	// Beta mission details. Note: This field may return null, indicating that no valid value can be obtained.
+	BetaLists VpcPolicyBetaListArrayOutput `pulumi:"betaLists"`
 	// Describe.
 	Description pulumi.StringOutput `pulumi:"description"`
 	// Access purpose example: net:IP/CIDR(192.168.0.2) domain:domain rule, for example*.qq.com.
@@ -69,6 +71,10 @@ type VpcPolicy struct {
 	FwGroupName pulumi.StringOutput `pulumi:"fwGroupName"`
 	// Uuid used internally, this field is generally not used.
 	InternalUuid pulumi.IntOutput `pulumi:"internalUuid"`
+	// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+	ParamTemplateId pulumi.StringOutput `pulumi:"paramTemplateId"`
+	// Parameter template Name. Note: This field may return null, indicating that no valid value can be obtained.
+	ParamTemplateName pulumi.StringOutput `pulumi:"paramTemplateName"`
 	// The port for the access control policy. Value: -1/-1: All ports; 80: port 80.
 	Port pulumi.StringOutput `pulumi:"port"`
 	// Protocol, optional value:TCP, UDP, ICMP, ANY, HTTP, HTTPS, HTTP/HTTPS, SMTP, SMTPS, SMTP/SMTPS, FTP, DNS, TLS/SSL.
@@ -137,6 +143,8 @@ func GetVpcPolicy(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering VpcPolicy resources.
 type vpcPolicyState struct {
+	// Beta mission details. Note: This field may return null, indicating that no valid value can be obtained.
+	BetaLists []VpcPolicyBetaList `pulumi:"betaLists"`
 	// Describe.
 	Description *string `pulumi:"description"`
 	// Access purpose example: net:IP/CIDR(192.168.0.2) domain:domain rule, for example*.qq.com.
@@ -151,6 +159,10 @@ type vpcPolicyState struct {
 	FwGroupName *string `pulumi:"fwGroupName"`
 	// Uuid used internally, this field is generally not used.
 	InternalUuid *int `pulumi:"internalUuid"`
+	// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+	ParamTemplateId *string `pulumi:"paramTemplateId"`
+	// Parameter template Name. Note: This field may return null, indicating that no valid value can be obtained.
+	ParamTemplateName *string `pulumi:"paramTemplateName"`
 	// The port for the access control policy. Value: -1/-1: All ports; 80: port 80.
 	Port *string `pulumi:"port"`
 	// Protocol, optional value:TCP, UDP, ICMP, ANY, HTTP, HTTPS, HTTP/HTTPS, SMTP, SMTPS, SMTP/SMTPS, FTP, DNS, TLS/SSL.
@@ -166,6 +178,8 @@ type vpcPolicyState struct {
 }
 
 type VpcPolicyState struct {
+	// Beta mission details. Note: This field may return null, indicating that no valid value can be obtained.
+	BetaLists VpcPolicyBetaListArrayInput
 	// Describe.
 	Description pulumi.StringPtrInput
 	// Access purpose example: net:IP/CIDR(192.168.0.2) domain:domain rule, for example*.qq.com.
@@ -180,6 +194,10 @@ type VpcPolicyState struct {
 	FwGroupName pulumi.StringPtrInput
 	// Uuid used internally, this field is generally not used.
 	InternalUuid pulumi.IntPtrInput
+	// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+	ParamTemplateId pulumi.StringPtrInput
+	// Parameter template Name. Note: This field may return null, indicating that no valid value can be obtained.
+	ParamTemplateName pulumi.StringPtrInput
 	// The port for the access control policy. Value: -1/-1: All ports; 80: port 80.
 	Port pulumi.StringPtrInput
 	// Protocol, optional value:TCP, UDP, ICMP, ANY, HTTP, HTTPS, HTTP/HTTPS, SMTP, SMTPS, SMTP/SMTPS, FTP, DNS, TLS/SSL.
@@ -332,6 +350,11 @@ func (o VpcPolicyOutput) ToVpcPolicyOutputWithContext(ctx context.Context) VpcPo
 	return o
 }
 
+// Beta mission details. Note: This field may return null, indicating that no valid value can be obtained.
+func (o VpcPolicyOutput) BetaLists() VpcPolicyBetaListArrayOutput {
+	return o.ApplyT(func(v *VpcPolicy) VpcPolicyBetaListArrayOutput { return v.BetaLists }).(VpcPolicyBetaListArrayOutput)
+}
+
 // Describe.
 func (o VpcPolicyOutput) Description() pulumi.StringOutput {
 	return o.ApplyT(func(v *VpcPolicy) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
@@ -365,6 +388,16 @@ func (o VpcPolicyOutput) FwGroupName() pulumi.StringOutput {
 // Uuid used internally, this field is generally not used.
 func (o VpcPolicyOutput) InternalUuid() pulumi.IntOutput {
 	return o.ApplyT(func(v *VpcPolicy) pulumi.IntOutput { return v.InternalUuid }).(pulumi.IntOutput)
+}
+
+// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+func (o VpcPolicyOutput) ParamTemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v *VpcPolicy) pulumi.StringOutput { return v.ParamTemplateId }).(pulumi.StringOutput)
+}
+
+// Parameter template Name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o VpcPolicyOutput) ParamTemplateName() pulumi.StringOutput {
+	return o.ApplyT(func(v *VpcPolicy) pulumi.StringOutput { return v.ParamTemplateName }).(pulumi.StringOutput)
 }
 
 // The port for the access control policy. Value: -1/-1: All ports; 80: port 80.

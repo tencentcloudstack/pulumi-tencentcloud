@@ -13,6 +13,7 @@ from .delete_backup_data import *
 from .get_backup_job_detail import *
 from .get_backup_jobs import *
 from .get_backup_tables import *
+from .get_instance_nodes import *
 from .get_instance_shards import *
 from .get_spec import *
 from .instance import *

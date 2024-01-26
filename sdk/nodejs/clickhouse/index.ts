@@ -13,6 +13,7 @@ export * from "./deleteBackupData";
 export * from "./getBackupJobDetail";
 export * from "./getBackupJobs";
 export * from "./getBackupTables";
+export * from "./getInstanceNodes";
 export * from "./getInstanceShards";
 export * from "./getSpec";
 export * from "./instance";

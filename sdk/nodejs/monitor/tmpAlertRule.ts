@@ -8,6 +8,8 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a monitor tmpAlertRule
  *
+ * > **NOTE:** This resource will be deprecated in a future version, please use `tencentcloud.Monitor.TmpAlertGroup`.
+ *
  * ## Example Usage
  *
  * ```typescript

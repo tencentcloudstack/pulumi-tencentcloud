@@ -297,7 +297,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
         /// </summary>
         [Output("healthCheckContextType")]
-        public Output<string?> HealthCheckContextType { get; private set; } = null!;
+        public Output<string> HealthCheckContextType { get; private set; } = null!;
 
         /// <summary>
         /// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -372,7 +372,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<int> HealthCheckTimeOut { get; private set; } = null!;
 
         /// <summary>
-        /// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+        /// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
         /// </summary>
         [Output("healthCheckType")]
         public Output<string> HealthCheckType { get; private set; } = null!;
@@ -605,7 +605,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<int>? HealthCheckTimeOut { get; set; }
 
         /// <summary>
-        /// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+        /// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
         /// </summary>
         [Input("healthCheckType")]
         public Input<string>? HealthCheckType { get; set; }
@@ -792,7 +792,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<int>? HealthCheckTimeOut { get; set; }
 
         /// <summary>
-        /// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+        /// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
         /// </summary>
         [Input("healthCheckType")]
         public Input<string>? HealthCheckType { get; set; }

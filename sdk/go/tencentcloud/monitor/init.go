@@ -53,6 +53,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &GrafanaWhitelistConfig{}
 	case "tencentcloud:Monitor/policyBindingObject:PolicyBindingObject":
 		r = &PolicyBindingObject{}
+	case "tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup":
+		r = &TmpAlertGroup{}
 	case "tencentcloud:Monitor/tmpAlertRule:TmpAlertRule":
 		r = &TmpAlertRule{}
 	case "tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent":
@@ -176,6 +178,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Monitor/policyBindingObject",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/tmpAlertGroup",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

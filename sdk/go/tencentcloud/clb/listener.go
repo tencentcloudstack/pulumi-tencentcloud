@@ -307,7 +307,7 @@ type Listener struct {
 	// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	EndPort pulumi.IntOutput `pulumi:"endPort"`
 	// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
-	HealthCheckContextType pulumi.StringPtrOutput `pulumi:"healthCheckContextType"`
+	HealthCheckContextType pulumi.StringOutput `pulumi:"healthCheckContextType"`
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
 	HealthCheckHealthNum pulumi.IntOutput `pulumi:"healthCheckHealthNum"`
 	// HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `healthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
@@ -332,7 +332,7 @@ type Listener struct {
 	HealthCheckSwitch pulumi.BoolOutput `pulumi:"healthCheckSwitch"`
 	// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
 	HealthCheckTimeOut pulumi.IntOutput `pulumi:"healthCheckTimeOut"`
-	// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+	// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
 	HealthCheckType pulumi.StringOutput `pulumi:"healthCheckType"`
 	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum pulumi.IntOutput `pulumi:"healthCheckUnhealthNum"`
@@ -435,7 +435,7 @@ type listenerState struct {
 	HealthCheckSwitch *bool `pulumi:"healthCheckSwitch"`
 	// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
 	HealthCheckTimeOut *int `pulumi:"healthCheckTimeOut"`
-	// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+	// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
 	HealthCheckType *string `pulumi:"healthCheckType"`
 	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum *int `pulumi:"healthCheckUnhealthNum"`
@@ -500,7 +500,7 @@ type ListenerState struct {
 	HealthCheckSwitch pulumi.BoolPtrInput
 	// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
 	HealthCheckTimeOut pulumi.IntPtrInput
-	// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+	// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
 	HealthCheckType pulumi.StringPtrInput
 	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum pulumi.IntPtrInput
@@ -569,7 +569,7 @@ type listenerArgs struct {
 	HealthCheckSwitch *bool `pulumi:"healthCheckSwitch"`
 	// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
 	HealthCheckTimeOut *int `pulumi:"healthCheckTimeOut"`
-	// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+	// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
 	HealthCheckType *string `pulumi:"healthCheckType"`
 	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum *int `pulumi:"healthCheckUnhealthNum"`
@@ -633,7 +633,7 @@ type ListenerArgs struct {
 	HealthCheckSwitch pulumi.BoolPtrInput
 	// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
 	HealthCheckTimeOut pulumi.IntPtrInput
-	// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+	// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
 	HealthCheckType pulumi.StringPtrInput
 	// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	HealthCheckUnhealthNum pulumi.IntPtrInput
@@ -772,8 +772,8 @@ func (o ListenerOutput) EndPort() pulumi.IntOutput {
 }
 
 // Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
-func (o ListenerOutput) HealthCheckContextType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Listener) pulumi.StringPtrOutput { return v.HealthCheckContextType }).(pulumi.StringPtrOutput)
+func (o ListenerOutput) HealthCheckContextType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Listener) pulumi.StringOutput { return v.HealthCheckContextType }).(pulumi.StringOutput)
 }
 
 // Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -836,7 +836,7 @@ func (o ListenerOutput) HealthCheckTimeOut() pulumi.IntOutput {
 	return o.ApplyT(func(v *Listener) pulumi.IntOutput { return v.HealthCheckTimeOut }).(pulumi.IntOutput)
 }
 
-// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`.
+// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
 func (o ListenerOutput) HealthCheckType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Listener) pulumi.StringOutput { return v.HealthCheckType }).(pulumi.StringOutput)
 }

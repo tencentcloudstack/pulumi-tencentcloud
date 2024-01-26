@@ -2,6 +2,7 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import { input as inputs, output as outputs } from "../types";
 import * as utilities from "../utilities";
 
 /**
@@ -64,6 +65,10 @@ export class VpcPolicy extends pulumi.CustomResource {
     }
 
     /**
+     * Beta mission details. Note: This field may return null, indicating that no valid value can be obtained.
+     */
+    public /*out*/ readonly betaLists!: pulumi.Output<outputs.Cfw.VpcPolicyBetaList[]>;
+    /**
      * Describe.
      */
     public readonly description!: pulumi.Output<string>;
@@ -91,6 +96,14 @@ export class VpcPolicy extends pulumi.CustomResource {
      * Uuid used internally, this field is generally not used.
      */
     public /*out*/ readonly internalUuid!: pulumi.Output<number>;
+    /**
+     * Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+     */
+    public /*out*/ readonly paramTemplateId!: pulumi.Output<string>;
+    /**
+     * Parameter template Name. Note: This field may return null, indicating that no valid value can be obtained.
+     */
+    public /*out*/ readonly paramTemplateName!: pulumi.Output<string>;
     /**
      * The port for the access control policy. Value: -1/-1: All ports; 80: port 80.
      */
@@ -129,6 +142,7 @@ export class VpcPolicy extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as VpcPolicyState | undefined;
+            resourceInputs["betaLists"] = state ? state.betaLists : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["destContent"] = state ? state.destContent : undefined;
             resourceInputs["destType"] = state ? state.destType : undefined;
@@ -136,6 +150,8 @@ export class VpcPolicy extends pulumi.CustomResource {
             resourceInputs["fwGroupId"] = state ? state.fwGroupId : undefined;
             resourceInputs["fwGroupName"] = state ? state.fwGroupName : undefined;
             resourceInputs["internalUuid"] = state ? state.internalUuid : undefined;
+            resourceInputs["paramTemplateId"] = state ? state.paramTemplateId : undefined;
+            resourceInputs["paramTemplateName"] = state ? state.paramTemplateName : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
             resourceInputs["protocol"] = state ? state.protocol : undefined;
             resourceInputs["ruleAction"] = state ? state.ruleAction : undefined;
@@ -178,8 +194,11 @@ export class VpcPolicy extends pulumi.CustomResource {
             resourceInputs["ruleAction"] = args ? args.ruleAction : undefined;
             resourceInputs["sourceContent"] = args ? args.sourceContent : undefined;
             resourceInputs["sourceType"] = args ? args.sourceType : undefined;
+            resourceInputs["betaLists"] = undefined /*out*/;
             resourceInputs["fwGroupName"] = undefined /*out*/;
             resourceInputs["internalUuid"] = undefined /*out*/;
+            resourceInputs["paramTemplateId"] = undefined /*out*/;
+            resourceInputs["paramTemplateName"] = undefined /*out*/;
             resourceInputs["uuid"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -191,6 +210,10 @@ export class VpcPolicy extends pulumi.CustomResource {
  * Input properties used for looking up and filtering VpcPolicy resources.
  */
 export interface VpcPolicyState {
+    /**
+     * Beta mission details. Note: This field may return null, indicating that no valid value can be obtained.
+     */
+    betaLists?: pulumi.Input<pulumi.Input<inputs.Cfw.VpcPolicyBetaList>[]>;
     /**
      * Describe.
      */
@@ -219,6 +242,14 @@ export interface VpcPolicyState {
      * Uuid used internally, this field is generally not used.
      */
     internalUuid?: pulumi.Input<number>;
+    /**
+     * Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+     */
+    paramTemplateId?: pulumi.Input<string>;
+    /**
+     * Parameter template Name. Note: This field may return null, indicating that no valid value can be obtained.
+     */
+    paramTemplateName?: pulumi.Input<string>;
     /**
      * The port for the access control policy. Value: -1/-1: All ports; 80: port 80.
      */

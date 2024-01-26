@@ -71,6 +71,10 @@ export class GrafanaInstance extends pulumi.CustomResource {
     }
 
     /**
+     * Whether to automatically use vouchers.
+     */
+    public readonly autoVoucher!: pulumi.Output<boolean | undefined>;
+    /**
      * Control whether grafana could be accessed by internet.
      */
     public readonly enableInternet!: pulumi.Output<boolean>;
@@ -138,6 +142,7 @@ export class GrafanaInstance extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as GrafanaInstanceState | undefined;
+            resourceInputs["autoVoucher"] = state ? state.autoVoucher : undefined;
             resourceInputs["enableInternet"] = state ? state.enableInternet : undefined;
             resourceInputs["grafanaInitPassword"] = state ? state.grafanaInitPassword : undefined;
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
@@ -156,6 +161,7 @@ export class GrafanaInstance extends pulumi.CustomResource {
             if ((!args || args.instanceName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'instanceName'");
             }
+            resourceInputs["autoVoucher"] = args ? args.autoVoucher : undefined;
             resourceInputs["enableInternet"] = args ? args.enableInternet : undefined;
             resourceInputs["grafanaInitPassword"] = args ? args.grafanaInitPassword : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
@@ -179,6 +185,10 @@ export class GrafanaInstance extends pulumi.CustomResource {
  * Input properties used for looking up and filtering GrafanaInstance resources.
  */
 export interface GrafanaInstanceState {
+    /**
+     * Whether to automatically use vouchers.
+     */
+    autoVoucher?: pulumi.Input<boolean>;
     /**
      * Control whether grafana could be accessed by internet.
      */
@@ -239,6 +249,10 @@ export interface GrafanaInstanceState {
  * The set of arguments for constructing a GrafanaInstance resource.
  */
 export interface GrafanaInstanceArgs {
+    /**
+     * Whether to automatically use vouchers.
+     */
+    autoVoucher?: pulumi.Input<boolean>;
     /**
      * Control whether grafana could be accessed by internet.
      */

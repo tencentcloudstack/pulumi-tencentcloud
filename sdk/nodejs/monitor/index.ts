@@ -40,6 +40,7 @@ export * from "./grafanaSsoConfig";
 export * from "./grafanaVersionUpgrade";
 export * from "./grafanaWhitelistConfig";
 export * from "./policyBindingObject";
+export * from "./tmpAlertGroup";
 export * from "./tmpAlertRule";
 export * from "./tmpCvmAgent";
 export * from "./tmpExporterIntegration";
@@ -74,6 +75,7 @@ import { GrafanaSsoConfig } from "./grafanaSsoConfig";
 import { GrafanaVersionUpgrade } from "./grafanaVersionUpgrade";
 import { GrafanaWhitelistConfig } from "./grafanaWhitelistConfig";
 import { PolicyBindingObject } from "./policyBindingObject";
+import { TmpAlertGroup } from "./tmpAlertGroup";
 import { TmpAlertRule } from "./tmpAlertRule";
 import { TmpCvmAgent } from "./tmpCvmAgent";
 import { TmpExporterIntegration } from "./tmpExporterIntegration";
@@ -127,6 +129,8 @@ const _module = {
                 return new GrafanaWhitelistConfig(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/policyBindingObject:PolicyBindingObject":
                 return new PolicyBindingObject(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup":
+                return new TmpAlertGroup(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/tmpAlertRule:TmpAlertRule":
                 return new TmpAlertRule(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent":
@@ -180,6 +184,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaSsoConfig"
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaVersionUpgrade", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaWhitelistConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/policyBindingObject", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpAlertGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpAlertRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpCvmAgent", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpExporterIntegration", _module)

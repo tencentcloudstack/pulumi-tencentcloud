@@ -121,7 +121,7 @@ type Connection struct {
 	IpsecEncryptAlgorithm pulumi.StringPtrOutput `pulumi:"ipsecEncryptAlgorithm"`
 	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm pulumi.StringPtrOutput `pulumi:"ipsecIntegrityAlgorithm"`
-	// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+	// PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
 	IpsecPfsDhGroup pulumi.StringPtrOutput `pulumi:"ipsecPfsDhGroup"`
 	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
 	IpsecSaLifetimeSeconds pulumi.IntPtrOutput `pulumi:"ipsecSaLifetimeSeconds"`
@@ -236,7 +236,7 @@ type connectionState struct {
 	IpsecEncryptAlgorithm *string `pulumi:"ipsecEncryptAlgorithm"`
 	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm *string `pulumi:"ipsecIntegrityAlgorithm"`
-	// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+	// PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
 	IpsecPfsDhGroup *string `pulumi:"ipsecPfsDhGroup"`
 	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
 	IpsecSaLifetimeSeconds *int `pulumi:"ipsecSaLifetimeSeconds"`
@@ -313,7 +313,7 @@ type ConnectionState struct {
 	IpsecEncryptAlgorithm pulumi.StringPtrInput
 	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm pulumi.StringPtrInput
-	// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+	// PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
 	IpsecPfsDhGroup pulumi.StringPtrInput
 	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
 	IpsecSaLifetimeSeconds pulumi.IntPtrInput
@@ -390,7 +390,7 @@ type connectionArgs struct {
 	IpsecEncryptAlgorithm *string `pulumi:"ipsecEncryptAlgorithm"`
 	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm *string `pulumi:"ipsecIntegrityAlgorithm"`
-	// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+	// PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
 	IpsecPfsDhGroup *string `pulumi:"ipsecPfsDhGroup"`
 	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
 	IpsecSaLifetimeSeconds *int `pulumi:"ipsecSaLifetimeSeconds"`
@@ -456,7 +456,7 @@ type ConnectionArgs struct {
 	IpsecEncryptAlgorithm pulumi.StringPtrInput
 	// Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
 	IpsecIntegrityAlgorithm pulumi.StringPtrInput
-	// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+	// PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
 	IpsecPfsDhGroup pulumi.StringPtrInput
 	// SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
 	IpsecSaLifetimeSeconds pulumi.IntPtrInput
@@ -680,7 +680,7 @@ func (o ConnectionOutput) IpsecIntegrityAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IpsecIntegrityAlgorithm }).(pulumi.StringPtrOutput)
 }
 
-// PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+// PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
 func (o ConnectionOutput) IpsecPfsDhGroup() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IpsecPfsDhGroup }).(pulumi.StringPtrOutput)
 }

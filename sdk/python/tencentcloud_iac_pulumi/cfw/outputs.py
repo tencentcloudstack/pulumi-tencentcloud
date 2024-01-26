@@ -13,6 +13,7 @@ __all__ = [
     'NatInstanceNewModeItems',
     'VpcInstanceVpcFwInstance',
     'VpcInstanceVpcFwInstanceFwDeploy',
+    'VpcPolicyBetaList',
     'GetEdgeFwSwitchesDataResult',
     'GetNatFwSwitchesDataResult',
     'GetVpcFwSwitchesSwitchListResult',
@@ -205,6 +206,56 @@ class VpcInstanceVpcFwInstanceFwDeploy(dict):
         Off-site disaster recovery 1: use off-site disaster recovery; 0: do not use off-site disaster recovery; if it is empty, off-site disaster recovery will not be used by default.
         """
         return pulumi.get(self, "cross_a_zone")
+
+
+@pulumi.output_type
+class VpcPolicyBetaList(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "lastTime":
+            suggest = "last_time"
+        elif key == "taskId":
+            suggest = "task_id"
+        elif key == "taskName":
+            suggest = "task_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in VpcPolicyBetaList. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        VpcPolicyBetaList.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        VpcPolicyBetaList.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 last_time: Optional[str] = None,
+                 task_id: Optional[int] = None,
+                 task_name: Optional[str] = None):
+        if last_time is not None:
+            pulumi.set(__self__, "last_time", last_time)
+        if task_id is not None:
+            pulumi.set(__self__, "task_id", task_id)
+        if task_name is not None:
+            pulumi.set(__self__, "task_name", task_name)
+
+    @property
+    @pulumi.getter(name="lastTime")
+    def last_time(self) -> Optional[str]:
+        return pulumi.get(self, "last_time")
+
+    @property
+    @pulumi.getter(name="taskId")
+    def task_id(self) -> Optional[int]:
+        return pulumi.get(self, "task_id")
+
+    @property
+    @pulumi.getter(name="taskName")
+    def task_name(self) -> Optional[str]:
+        return pulumi.get(self, "task_name")
 
 
 @pulumi.output_type

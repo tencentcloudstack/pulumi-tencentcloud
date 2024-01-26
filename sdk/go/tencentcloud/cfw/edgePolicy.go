@@ -104,6 +104,8 @@ type EdgePolicy struct {
 	Direction pulumi.IntOutput `pulumi:"direction"`
 	// Rule status, true means enabled, false means disabled. Default is true.
 	Enable pulumi.StringPtrOutput `pulumi:"enable"`
+	// Parameter template id.
+	ParamTemplateId pulumi.StringOutput `pulumi:"paramTemplateId"`
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
 	Port pulumi.StringOutput `pulumi:"port"`
 	// Protocol. If Direction=1 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=1 && Scope!=serial, optional values: TCP; If Direction=0 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=0 && Scope!=serial, optional values: TCP HTTP/HTTPS TLS/SSL.
@@ -184,6 +186,8 @@ type edgePolicyState struct {
 	Direction *int `pulumi:"direction"`
 	// Rule status, true means enabled, false means disabled. Default is true.
 	Enable *string `pulumi:"enable"`
+	// Parameter template id.
+	ParamTemplateId *string `pulumi:"paramTemplateId"`
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
 	Port *string `pulumi:"port"`
 	// Protocol. If Direction=1 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=1 && Scope!=serial, optional values: TCP; If Direction=0 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=0 && Scope!=serial, optional values: TCP HTTP/HTTPS TLS/SSL.
@@ -211,6 +215,8 @@ type EdgePolicyState struct {
 	Direction pulumi.IntPtrInput
 	// Rule status, true means enabled, false means disabled. Default is true.
 	Enable pulumi.StringPtrInput
+	// Parameter template id.
+	ParamTemplateId pulumi.StringPtrInput
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
 	Port pulumi.StringPtrInput
 	// Protocol. If Direction=1 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=1 && Scope!=serial, optional values: TCP; If Direction=0 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=0 && Scope!=serial, optional values: TCP HTTP/HTTPS TLS/SSL.
@@ -386,6 +392,11 @@ func (o EdgePolicyOutput) Direction() pulumi.IntOutput {
 // Rule status, true means enabled, false means disabled. Default is true.
 func (o EdgePolicyOutput) Enable() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *EdgePolicy) pulumi.StringPtrOutput { return v.Enable }).(pulumi.StringPtrOutput)
+}
+
+// Parameter template id.
+func (o EdgePolicyOutput) ParamTemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v *EdgePolicy) pulumi.StringOutput { return v.ParamTemplateId }).(pulumi.StringOutput)
 }
 
 // The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
