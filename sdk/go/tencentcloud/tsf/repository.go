@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewRepository(ctx, "repository", &Tsf.RepositoryArgs{
-// 			BucketName:     pulumi.String(""),
-// 			BucketRegion:   pulumi.String(""),
-// 			Directory:      pulumi.String(""),
-// 			RepositoryDesc: pulumi.String(""),
-// 			RepositoryName: pulumi.String(""),
-// 			RepositoryType: pulumi.String(""),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewRepository(ctx, "repository", &Tsf.RepositoryArgs{
+//				BucketName:     pulumi.String(""),
+//				BucketRegion:   pulumi.String(""),
+//				Directory:      pulumi.String(""),
+//				RepositoryDesc: pulumi.String(""),
+//				RepositoryName: pulumi.String(""),
+//				RepositoryType: pulumi.String(""),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +49,9 @@ import (
 // tsf repository can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tsf/repository:Repository repository repository_id
+//
+//	$ pulumi import tencentcloud:Tsf/repository:Repository repository repository_id
+//
 // ```
 type Repository struct {
 	pulumi.CustomResourceState
@@ -215,7 +220,7 @@ func (i *Repository) ToRepositoryOutputWithContext(ctx context.Context) Reposito
 // RepositoryArrayInput is an input type that accepts RepositoryArray and RepositoryArrayOutput values.
 // You can construct a concrete instance of `RepositoryArrayInput` via:
 //
-//          RepositoryArray{ RepositoryArgs{...} }
+//	RepositoryArray{ RepositoryArgs{...} }
 type RepositoryArrayInput interface {
 	pulumi.Input
 
@@ -240,7 +245,7 @@ func (i RepositoryArray) ToRepositoryArrayOutputWithContext(ctx context.Context)
 // RepositoryMapInput is an input type that accepts RepositoryMap and RepositoryMapOutput values.
 // You can construct a concrete instance of `RepositoryMapInput` via:
 //
-//          RepositoryMap{ "key": RepositoryArgs{...} }
+//	RepositoryMap{ "key": RepositoryArgs{...} }
 type RepositoryMapInput interface {
 	pulumi.Input
 

@@ -18,26 +18,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kubernetes.GetClusterCommonNames(ctx, &kubernetes.GetClusterCommonNamesArgs{
-// 			ClusterId: pulumi.StringRef("cls-12345678"),
-// 			SubaccountUins: []string{
-// 				"1234567890",
-// 				"0987654321",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kubernetes.GetClusterCommonNames(ctx, &kubernetes.GetClusterCommonNamesArgs{
+//				ClusterId: pulumi.StringRef("cls-12345678"),
+//				SubaccountUins: []string{
+//					"1234567890",
+//					"0987654321",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetClusterCommonNames(ctx *pulumi.Context, args *GetClusterCommonNamesArgs, opts ...pulumi.InvokeOption) (*GetClusterCommonNamesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kms.GetGetParametersForImport(ctx, &kms.GetGetParametersForImportArgs{
-// 			KeyId:             "786aea8c-4aec-11ee-b601-525400281a45",
-// 			WrappingAlgorithm: "RSAES_OAEP_SHA_1",
-// 			WrappingKeySpec:   "RSA_2048",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kms.GetGetParametersForImport(ctx, &kms.GetGetParametersForImportArgs{
+//				KeyId:             "786aea8c-4aec-11ee-b601-525400281a45",
+//				WrappingAlgorithm: "RSAES_OAEP_SHA_1",
+//				WrappingKeySpec:   "RSA_2048",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetGetParametersForImport(ctx *pulumi.Context, args *GetGetParametersForImportArgs, opts ...pulumi.InvokeOption) (*GetGetParametersForImportResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

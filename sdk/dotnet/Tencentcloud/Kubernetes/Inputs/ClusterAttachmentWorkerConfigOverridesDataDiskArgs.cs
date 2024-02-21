@@ -32,7 +32,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<int>? DiskSize { get; set; }
 
         /// <summary>
-        /// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        /// Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
         /// </summary>
         [Input("diskType")]
         public Input<string>? DiskType { get; set; }

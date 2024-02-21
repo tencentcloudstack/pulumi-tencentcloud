@@ -21,23 +21,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.NewSecurityGroups(ctx, "securityGroups", &Mariadb.SecurityGroupsArgs{
-// 			InstanceId:      pulumi.String("tdsql-4pzs5b67"),
-// 			Product:         pulumi.String("mariadb"),
-// 			SecurityGroupId: pulumi.String("sg-7kpsbxdb"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.NewSecurityGroups(ctx, "securityGroups", &Mariadb.SecurityGroupsArgs{
+//				InstanceId:      pulumi.String("tdsql-4pzs5b67"),
+//				Product:         pulumi.String("mariadb"),
+//				SecurityGroupId: pulumi.String("sg-7kpsbxdb"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +48,9 @@ import (
 // mariadb security_groups can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mariadb/securityGroups:SecurityGroups security_groups tdsql-4pzs5b67#sg-7kpsbxdb#mariadb
+//
+//	$ pulumi import tencentcloud:Mariadb/securityGroups:SecurityGroups security_groups tdsql-4pzs5b67#sg-7kpsbxdb#mariadb
+//
 // ```
 type SecurityGroups struct {
 	pulumi.CustomResourceState
@@ -163,7 +168,7 @@ func (i *SecurityGroups) ToSecurityGroupsOutputWithContext(ctx context.Context) 
 // SecurityGroupsArrayInput is an input type that accepts SecurityGroupsArray and SecurityGroupsArrayOutput values.
 // You can construct a concrete instance of `SecurityGroupsArrayInput` via:
 //
-//          SecurityGroupsArray{ SecurityGroupsArgs{...} }
+//	SecurityGroupsArray{ SecurityGroupsArgs{...} }
 type SecurityGroupsArrayInput interface {
 	pulumi.Input
 
@@ -188,7 +193,7 @@ func (i SecurityGroupsArray) ToSecurityGroupsArrayOutputWithContext(ctx context.
 // SecurityGroupsMapInput is an input type that accepts SecurityGroupsMap and SecurityGroupsMapOutput values.
 // You can construct a concrete instance of `SecurityGroupsMapInput` via:
 //
-//          SecurityGroupsMap{ "key": SecurityGroupsArgs{...} }
+//	SecurityGroupsMap{ "key": SecurityGroupsArgs{...} }
 type SecurityGroupsMapInput interface {
 	pulumi.Input
 

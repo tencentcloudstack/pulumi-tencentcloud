@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mongodb.GetZoneConfig(ctx, &mongodb.GetZoneConfigArgs{
-// 			AvailableZone: pulumi.StringRef("ap-guangzhou-2"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mongodb.GetZoneConfig(ctx, &mongodb.GetZoneConfigArgs{
+//				AvailableZone: pulumi.StringRef("ap-guangzhou-2"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetZoneConfig(ctx *pulumi.Context, args *GetZoneConfigArgs, opts ...pulumi.InvokeOption) (*GetZoneConfigResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

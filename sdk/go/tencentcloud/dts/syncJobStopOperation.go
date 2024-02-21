@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewSyncJobStopOperation(ctx, "syncJobStopOperation", &Dts.SyncJobStopOperationArgs{
-// 			JobId: pulumi.String("sync-werwfs23"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewSyncJobStopOperation(ctx, "syncJobStopOperation", &Dts.SyncJobStopOperationArgs{
+//				JobId: pulumi.String("sync-werwfs23"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SyncJobStopOperation struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *SyncJobStopOperation) ToSyncJobStopOperationOutputWithContext(ctx conte
 // SyncJobStopOperationArrayInput is an input type that accepts SyncJobStopOperationArray and SyncJobStopOperationArrayOutput values.
 // You can construct a concrete instance of `SyncJobStopOperationArrayInput` via:
 //
-//          SyncJobStopOperationArray{ SyncJobStopOperationArgs{...} }
+//	SyncJobStopOperationArray{ SyncJobStopOperationArgs{...} }
 type SyncJobStopOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i SyncJobStopOperationArray) ToSyncJobStopOperationArrayOutputWithContext(
 // SyncJobStopOperationMapInput is an input type that accepts SyncJobStopOperationMap and SyncJobStopOperationMapOutput values.
 // You can construct a concrete instance of `SyncJobStopOperationMapInput` via:
 //
-//          SyncJobStopOperationMap{ "key": SyncJobStopOperationArgs{...} }
+//	SyncJobStopOperationMap{ "key": SyncJobStopOperationArgs{...} }
 type SyncJobStopOperationMapInput interface {
 	pulumi.Input
 

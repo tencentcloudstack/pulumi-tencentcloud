@@ -18,27 +18,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Rum.GetGroupLog(ctx, &rum.GetGroupLogArgs{
-// 			EndTime:    "1625454840000",
-// 			GroupField: "level",
-// 			OrderBy:    "desc",
-// 			ProjectId:  1,
-// 			Query:      "id:123 AND type:\"log\"",
-// 			StartTime:  "1625444040000",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Rum.GetGroupLog(ctx, &rum.GetGroupLogArgs{
+//				EndTime:    "1625454840000",
+//				GroupField: "level",
+//				OrderBy:    "desc",
+//				ProjectId:  1,
+//				Query:      "id:123 AND type:\"log\"",
+//				StartTime:  "1625444040000",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetGroupLog(ctx *pulumi.Context, args *GetGroupLogArgs, opts ...pulumi.InvokeOption) (*GetGroupLogResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

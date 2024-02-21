@@ -40,6 +40,7 @@ export * from "./service";
 export * from "./serviceRelease";
 export * from "./strategyAttachment";
 export * from "./updateApiAppKey";
+export * from "./updateService";
 export * from "./upstream";
 export * from "./usagePlan";
 export * from "./usagePlanAttachment";
@@ -60,6 +61,7 @@ import { Service } from "./service";
 import { ServiceRelease } from "./serviceRelease";
 import { StrategyAttachment } from "./strategyAttachment";
 import { UpdateApiAppKey } from "./updateApiAppKey";
+import { UpdateService } from "./updateService";
 import { Upstream } from "./upstream";
 import { UsagePlan } from "./usagePlan";
 import { UsagePlanAttachment } from "./usagePlanAttachment";
@@ -98,6 +100,8 @@ const _module = {
                 return new StrategyAttachment(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/updateApiAppKey:UpdateApiAppKey":
                 return new UpdateApiAppKey(name, <any>undefined, { urn })
+            case "tencentcloud:ApiGateway/updateService:UpdateService":
+                return new UpdateService(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/upstream:Upstream":
                 return new Upstream(name, <any>undefined, { urn })
             case "tencentcloud:ApiGateway/usagePlan:UsagePlan":
@@ -124,6 +128,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/service", _mod
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/serviceRelease", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/strategyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/updateApiAppKey", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/updateService", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/upstream", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/usagePlan", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "ApiGateway/usagePlanAttachment", _module)

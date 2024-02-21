@@ -21,38 +21,41 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewFirewallRule(ctx, "firewallRule", &Lighthouse.FirewallRuleArgs{
-// 			FirewallRules: lighthouse.FirewallRuleFirewallRuleArray{
-// 				&lighthouse.FirewallRuleFirewallRuleArgs{
-// 					Action:                  pulumi.String("ACCEPT"),
-// 					CidrBlock:               pulumi.String("10.0.0.1"),
-// 					FirewallRuleDescription: pulumi.String("description 1"),
-// 					Port:                    pulumi.String("80"),
-// 					Protocol:                pulumi.String("TCP"),
-// 				},
-// 				&lighthouse.FirewallRuleFirewallRuleArgs{
-// 					Action:                  pulumi.String("ACCEPT"),
-// 					CidrBlock:               pulumi.String("10.0.0.2"),
-// 					FirewallRuleDescription: pulumi.String("description 2"),
-// 					Port:                    pulumi.String("80"),
-// 					Protocol:                pulumi.String("TCP"),
-// 				},
-// 			},
-// 			InstanceId: pulumi.String("lhins-xxxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewFirewallRule(ctx, "firewallRule", &Lighthouse.FirewallRuleArgs{
+//				FirewallRules: lighthouse.FirewallRuleFirewallRuleArray{
+//					&lighthouse.FirewallRuleFirewallRuleArgs{
+//						Action:                  pulumi.String("ACCEPT"),
+//						CidrBlock:               pulumi.String("10.0.0.1"),
+//						FirewallRuleDescription: pulumi.String("description 1"),
+//						Port:                    pulumi.String("80"),
+//						Protocol:                pulumi.String("TCP"),
+//					},
+//					&lighthouse.FirewallRuleFirewallRuleArgs{
+//						Action:                  pulumi.String("ACCEPT"),
+//						CidrBlock:               pulumi.String("10.0.0.2"),
+//						FirewallRuleDescription: pulumi.String("description 2"),
+//						Port:                    pulumi.String("80"),
+//						Protocol:                pulumi.String("TCP"),
+//					},
+//				},
+//				InstanceId: pulumi.String("lhins-xxxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -60,7 +63,9 @@ import (
 // lighthouse firewall_rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Lighthouse/firewallRule:FirewallRule firewall_rule lighthouse_instance_id
+//
+//	$ pulumi import tencentcloud:Lighthouse/firewallRule:FirewallRule firewall_rule lighthouse_instance_id
+//
 // ```
 type FirewallRule struct {
 	pulumi.CustomResourceState
@@ -165,7 +170,7 @@ func (i *FirewallRule) ToFirewallRuleOutputWithContext(ctx context.Context) Fire
 // FirewallRuleArrayInput is an input type that accepts FirewallRuleArray and FirewallRuleArrayOutput values.
 // You can construct a concrete instance of `FirewallRuleArrayInput` via:
 //
-//          FirewallRuleArray{ FirewallRuleArgs{...} }
+//	FirewallRuleArray{ FirewallRuleArgs{...} }
 type FirewallRuleArrayInput interface {
 	pulumi.Input
 
@@ -190,7 +195,7 @@ func (i FirewallRuleArray) ToFirewallRuleArrayOutputWithContext(ctx context.Cont
 // FirewallRuleMapInput is an input type that accepts FirewallRuleMap and FirewallRuleMapOutput values.
 // You can construct a concrete instance of `FirewallRuleMapInput` via:
 //
-//          FirewallRuleMap{ "key": FirewallRuleArgs{...} }
+//	FirewallRuleMap{ "key": FirewallRuleArgs{...} }
 type FirewallRuleMapInput interface {
 	pulumi.Input
 

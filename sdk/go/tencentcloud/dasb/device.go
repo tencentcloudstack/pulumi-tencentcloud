@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewDevice(ctx, "example", &Dasb.DeviceArgs{
-// 			DepartmentId: pulumi.String("1.2.3"),
-// 			Ip:           pulumi.String("192.168.0.1"),
-// 			OsName:       pulumi.String("Linux"),
-// 			Port:         pulumi.Int(80),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewDevice(ctx, "example", &Dasb.DeviceArgs{
+//				DepartmentId: pulumi.String("1.2.3"),
+//				Ip:           pulumi.String("192.168.0.1"),
+//				OsName:       pulumi.String("Linux"),
+//				Port:         pulumi.Int(80),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // dasb device can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dasb/device:Device example 17
+//
+//	$ pulumi import tencentcloud:Dasb/device:Device example 17
+//
 // ```
 type Device struct {
 	pulumi.CustomResourceState
@@ -192,7 +197,7 @@ func (i *Device) ToDeviceOutputWithContext(ctx context.Context) DeviceOutput {
 // DeviceArrayInput is an input type that accepts DeviceArray and DeviceArrayOutput values.
 // You can construct a concrete instance of `DeviceArrayInput` via:
 //
-//          DeviceArray{ DeviceArgs{...} }
+//	DeviceArray{ DeviceArgs{...} }
 type DeviceArrayInput interface {
 	pulumi.Input
 
@@ -217,7 +222,7 @@ func (i DeviceArray) ToDeviceArrayOutputWithContext(ctx context.Context) DeviceA
 // DeviceMapInput is an input type that accepts DeviceMap and DeviceMapOutput values.
 // You can construct a concrete instance of `DeviceMapInput` via:
 //
-//          DeviceMap{ "key": DeviceArgs{...} }
+//	DeviceMap{ "key": DeviceArgs{...} }
 type DeviceMapInput interface {
 	pulumi.Input
 

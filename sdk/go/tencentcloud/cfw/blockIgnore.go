@@ -22,26 +22,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewBlockIgnore(ctx, "example", &Cfw.BlockIgnoreArgs{
-// 			Comment:   pulumi.String("remark."),
-// 			Direction: pulumi.String("0"),
-// 			EndTime:   pulumi.String("2023-10-01 00:00:00"),
-// 			Ip:        pulumi.String("1.1.1.1"),
-// 			RuleType:  pulumi.Int(1),
-// 			StartTime: pulumi.String("2023-09-01 00:00:00"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.NewBlockIgnore(ctx, "example", &Cfw.BlockIgnoreArgs{
+//				Comment:   pulumi.String("remark."),
+//				Direction: pulumi.String("0"),
+//				EndTime:   pulumi.String("2023-10-01 00:00:00"),
+//				Ip:        pulumi.String("1.1.1.1"),
+//				RuleType:  pulumi.Int(1),
+//				StartTime: pulumi.String("2023-09-01 00:00:00"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### If create domain rule
 //
@@ -49,26 +52,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewBlockIgnore(ctx, "example", &Cfw.BlockIgnoreArgs{
-// 			Comment:   pulumi.String("remark."),
-// 			Direction: pulumi.String("1"),
-// 			Domain:    pulumi.String("domain.com"),
-// 			EndTime:   pulumi.String("2023-10-01 00:00:00"),
-// 			RuleType:  pulumi.Int(1),
-// 			StartTime: pulumi.String("2023-09-01 00:00:00"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.NewBlockIgnore(ctx, "example", &Cfw.BlockIgnoreArgs{
+//				Comment:   pulumi.String("remark."),
+//				Direction: pulumi.String("1"),
+//				Domain:    pulumi.String("domain.com"),
+//				EndTime:   pulumi.String("2023-10-01 00:00:00"),
+//				RuleType:  pulumi.Int(1),
+//				StartTime: pulumi.String("2023-09-01 00:00:00"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -76,13 +82,17 @@ import (
 // cfw block_ignore_list can be imported using the id, e.g. If import ip rule
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfw/blockIgnore:BlockIgnore example 1.1.1.1##0#1
+//
+//	$ pulumi import tencentcloud:Cfw/blockIgnore:BlockIgnore example 1.1.1.1##0#1
+//
 // ```
 //
-//  If import domain rule
+//	If import domain rule
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfw/blockIgnore:BlockIgnore example domain.com##0#1
+//
+//	$ pulumi import tencentcloud:Cfw/blockIgnore:BlockIgnore example domain.com##0#1
+//
 // ```
 type BlockIgnore struct {
 	pulumi.CustomResourceState
@@ -240,7 +250,7 @@ func (i *BlockIgnore) ToBlockIgnoreOutputWithContext(ctx context.Context) BlockI
 // BlockIgnoreArrayInput is an input type that accepts BlockIgnoreArray and BlockIgnoreArrayOutput values.
 // You can construct a concrete instance of `BlockIgnoreArrayInput` via:
 //
-//          BlockIgnoreArray{ BlockIgnoreArgs{...} }
+//	BlockIgnoreArray{ BlockIgnoreArgs{...} }
 type BlockIgnoreArrayInput interface {
 	pulumi.Input
 
@@ -265,7 +275,7 @@ func (i BlockIgnoreArray) ToBlockIgnoreArrayOutputWithContext(ctx context.Contex
 // BlockIgnoreMapInput is an input type that accepts BlockIgnoreMap and BlockIgnoreMapOutput values.
 // You can construct a concrete instance of `BlockIgnoreMapInput` via:
 //
-//          BlockIgnoreMap{ "key": BlockIgnoreArgs{...} }
+//	BlockIgnoreMap{ "key": BlockIgnoreArgs{...} }
 type BlockIgnoreMapInput interface {
 	pulumi.Input
 

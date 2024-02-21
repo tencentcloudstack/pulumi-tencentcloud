@@ -157,7 +157,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public Output<string> InstanceName { get; private set; } = null!;
 
         /// <summary>
-        /// Instance login settings.
+        /// Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
         /// </summary>
         [Output("loginSettings")]
         public Output<ImmutableDictionary<string, object>?> LoginSettings { get; private set; } = null!;
@@ -325,7 +325,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         private InputMap<object>? _loginSettings;
 
         /// <summary>
-        /// Instance login settings.
+        /// Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
         /// </summary>
         public InputMap<object> LoginSettings
         {
@@ -487,7 +487,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         private InputMap<object>? _loginSettings;
 
         /// <summary>
-        /// Instance login settings.
+        /// Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
         /// </summary>
         public InputMap<object> LoginSettings
         {

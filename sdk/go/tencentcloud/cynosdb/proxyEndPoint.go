@@ -19,62 +19,68 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewProxyEndPoint(ctx, "proxyEndPoint", &Cynosdb.ProxyEndPointArgs{
-// 			ClusterId: pulumi.String("cynosdbmysql-bws8h88b"),
-// 			InstanceWeights: cynosdb.ProxyEndPointInstanceWeightArray{
-// 				&cynosdb.ProxyEndPointInstanceWeightArgs{
-// 					InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
-// 					Weight:     pulumi.Int(1),
-// 				},
-// 			},
-// 			UniqueSubnetId: pulumi.String("subnet-dwj7ipnc"),
-// 			UniqueVpcId:    pulumi.String("vpc-4owdpnwr"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewProxyEndPoint(ctx, "proxyEndPoint", &Cynosdb.ProxyEndPointArgs{
+//				ClusterId: pulumi.String("cynosdbmysql-bws8h88b"),
+//				InstanceWeights: cynosdb.ProxyEndPointInstanceWeightArray{
+//					&cynosdb.ProxyEndPointInstanceWeightArgs{
+//						InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
+//						Weight:     pulumi.Int(1),
+//					},
+//				},
+//				UniqueSubnetId: pulumi.String("subnet-dwj7ipnc"),
+//				UniqueVpcId:    pulumi.String("vpc-4owdpnwr"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewProxyEndPoint(ctx, "proxyEndPoint", &Cynosdb.ProxyEndPointArgs{
-// 			ClusterId: pulumi.String("cynosdbmysql-bws8h88b"),
-// 			InstanceWeights: cynosdb.ProxyEndPointInstanceWeightArray{
-// 				&cynosdb.ProxyEndPointInstanceWeightArgs{
-// 					InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
-// 					Weight:     pulumi.Int(1),
-// 				},
-// 			},
-// 			UniqueSubnetId: pulumi.String("subnet-dwj7ipnc"),
-// 			UniqueVpcId:    pulumi.String("vpc-4owdpnwr"),
-// 			Vip:            pulumi.String("172.16.112.108"),
-// 			Vport:          pulumi.Int(3306),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewProxyEndPoint(ctx, "proxyEndPoint", &Cynosdb.ProxyEndPointArgs{
+//				ClusterId: pulumi.String("cynosdbmysql-bws8h88b"),
+//				InstanceWeights: cynosdb.ProxyEndPointInstanceWeightArray{
+//					&cynosdb.ProxyEndPointInstanceWeightArgs{
+//						InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
+//						Weight:     pulumi.Int(1),
+//					},
+//				},
+//				UniqueSubnetId: pulumi.String("subnet-dwj7ipnc"),
+//				UniqueVpcId:    pulumi.String("vpc-4owdpnwr"),
+//				Vip:            pulumi.String("172.16.112.108"),
+//				Vport:          pulumi.Int(3306),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Open connection pool
 //
@@ -82,35 +88,38 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewProxyEndPoint(ctx, "proxyEndPoint", &Cynosdb.ProxyEndPointArgs{
-// 			ClusterId:             pulumi.String("cynosdbmysql-bws8h88b"),
-// 			ConnectionPoolTimeOut: pulumi.Int(30),
-// 			ConnectionPoolType:    pulumi.String("SessionConnectionPool"),
-// 			InstanceWeights: cynosdb.ProxyEndPointInstanceWeightArray{
-// 				&cynosdb.ProxyEndPointInstanceWeightArgs{
-// 					InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
-// 					Weight:     pulumi.Int(1),
-// 				},
-// 			},
-// 			OpenConnectionPool: pulumi.String("yes"),
-// 			UniqueSubnetId:     pulumi.String("subnet-dwj7ipnc"),
-// 			UniqueVpcId:        pulumi.String("vpc-4owdpnwr"),
-// 			Vip:                pulumi.String("172.16.112.108"),
-// 			Vport:              pulumi.Int(3306),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewProxyEndPoint(ctx, "proxyEndPoint", &Cynosdb.ProxyEndPointArgs{
+//				ClusterId:             pulumi.String("cynosdbmysql-bws8h88b"),
+//				ConnectionPoolTimeOut: pulumi.Int(30),
+//				ConnectionPoolType:    pulumi.String("SessionConnectionPool"),
+//				InstanceWeights: cynosdb.ProxyEndPointInstanceWeightArray{
+//					&cynosdb.ProxyEndPointInstanceWeightArgs{
+//						InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
+//						Weight:     pulumi.Int(1),
+//					},
+//				},
+//				OpenConnectionPool: pulumi.String("yes"),
+//				UniqueSubnetId:     pulumi.String("subnet-dwj7ipnc"),
+//				UniqueVpcId:        pulumi.String("vpc-4owdpnwr"),
+//				Vip:                pulumi.String("172.16.112.108"),
+//				Vport:              pulumi.Int(3306),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Close connection pool
 //
@@ -118,104 +127,113 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewProxyEndPoint(ctx, "proxyEndPoint", &Cynosdb.ProxyEndPointArgs{
-// 			ClusterId: pulumi.String("cynosdbmysql-bws8h88b"),
-// 			InstanceWeights: cynosdb.ProxyEndPointInstanceWeightArray{
-// 				&cynosdb.ProxyEndPointInstanceWeightArgs{
-// 					InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
-// 					Weight:     pulumi.Int(1),
-// 				},
-// 			},
-// 			OpenConnectionPool: pulumi.String("no"),
-// 			UniqueSubnetId:     pulumi.String("subnet-dwj7ipnc"),
-// 			UniqueVpcId:        pulumi.String("vpc-4owdpnwr"),
-// 			Vip:                pulumi.String("172.16.112.108"),
-// 			Vport:              pulumi.Int(3306),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewProxyEndPoint(ctx, "proxyEndPoint", &Cynosdb.ProxyEndPointArgs{
+//				ClusterId: pulumi.String("cynosdbmysql-bws8h88b"),
+//				InstanceWeights: cynosdb.ProxyEndPointInstanceWeightArray{
+//					&cynosdb.ProxyEndPointInstanceWeightArgs{
+//						InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
+//						Weight:     pulumi.Int(1),
+//					},
+//				},
+//				OpenConnectionPool: pulumi.String("no"),
+//				UniqueSubnetId:     pulumi.String("subnet-dwj7ipnc"),
+//				UniqueVpcId:        pulumi.String("vpc-4owdpnwr"),
+//				Vip:                pulumi.String("172.16.112.108"),
+//				Vport:              pulumi.Int(3306),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewProxyEndPoint(ctx, "proxyEndPoint", &Cynosdb.ProxyEndPointArgs{
-// 			ClusterId:          pulumi.String("cynosdbmysql-bws8h88b"),
-// 			ConsistencyTimeOut: pulumi.Int(30),
-// 			ConsistencyType:    pulumi.String("global"),
-// 			FailOver:           pulumi.String("yes"),
-// 			InstanceWeights: cynosdb.ProxyEndPointInstanceWeightArray{
-// 				&cynosdb.ProxyEndPointInstanceWeightArgs{
-// 					InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
-// 					Weight:     pulumi.Int(1),
-// 				},
-// 			},
-// 			OpenConnectionPool: pulumi.String("no"),
-// 			RwType:             pulumi.String("READWRITE"),
-// 			UniqueSubnetId:     pulumi.String("subnet-dwj7ipnc"),
-// 			UniqueVpcId:        pulumi.String("vpc-4owdpnwr"),
-// 			Vip:                pulumi.String("172.16.112.108"),
-// 			Vport:              pulumi.Int(3306),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewProxyEndPoint(ctx, "proxyEndPoint", &Cynosdb.ProxyEndPointArgs{
+//				ClusterId:          pulumi.String("cynosdbmysql-bws8h88b"),
+//				ConsistencyTimeOut: pulumi.Int(30),
+//				ConsistencyType:    pulumi.String("global"),
+//				FailOver:           pulumi.String("yes"),
+//				InstanceWeights: cynosdb.ProxyEndPointInstanceWeightArray{
+//					&cynosdb.ProxyEndPointInstanceWeightArgs{
+//						InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
+//						Weight:     pulumi.Int(1),
+//					},
+//				},
+//				OpenConnectionPool: pulumi.String("no"),
+//				RwType:             pulumi.String("READWRITE"),
+//				UniqueSubnetId:     pulumi.String("subnet-dwj7ipnc"),
+//				UniqueVpcId:        pulumi.String("vpc-4owdpnwr"),
+//				Vip:                pulumi.String("172.16.112.108"),
+//				Vport:              pulumi.Int(3306),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewProxyEndPoint(ctx, "proxyEndPoint", &Cynosdb.ProxyEndPointArgs{
-// 			ClusterId: pulumi.String("cynosdbmysql-bws8h88b"),
-// 			InstanceWeights: cynosdb.ProxyEndPointInstanceWeightArray{
-// 				&cynosdb.ProxyEndPointInstanceWeightArgs{
-// 					InstanceId: pulumi.String("cynosdbmysql-ins-rikr6z4o"),
-// 					Weight:     pulumi.Int(1),
-// 				},
-// 			},
-// 			OpenConnectionPool: pulumi.String("no"),
-// 			RwType:             pulumi.String("READONLY"),
-// 			UniqueSubnetId:     pulumi.String("subnet-dwj7ipnc"),
-// 			UniqueVpcId:        pulumi.String("vpc-4owdpnwr"),
-// 			Vip:                pulumi.String("172.16.112.108"),
-// 			Vport:              pulumi.Int(3306),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewProxyEndPoint(ctx, "proxyEndPoint", &Cynosdb.ProxyEndPointArgs{
+//				ClusterId: pulumi.String("cynosdbmysql-bws8h88b"),
+//				InstanceWeights: cynosdb.ProxyEndPointInstanceWeightArray{
+//					&cynosdb.ProxyEndPointInstanceWeightArgs{
+//						InstanceId: pulumi.String("cynosdbmysql-ins-rikr6z4o"),
+//						Weight:     pulumi.Int(1),
+//					},
+//				},
+//				OpenConnectionPool: pulumi.String("no"),
+//				RwType:             pulumi.String("READONLY"),
+//				UniqueSubnetId:     pulumi.String("subnet-dwj7ipnc"),
+//				UniqueVpcId:        pulumi.String("vpc-4owdpnwr"),
+//				Vip:                pulumi.String("172.16.112.108"),
+//				Vport:              pulumi.Int(3306),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Comprehensive parameter examples
 //
@@ -223,47 +241,50 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewProxyEndPoint(ctx, "proxyEndPoint", &Cynosdb.ProxyEndPointArgs{
-// 			AccessMode:            pulumi.String("nearby"),
-// 			AutoAddRo:             pulumi.String("yes"),
-// 			ClusterId:             pulumi.String("cynosdbmysql-bws8h88b"),
-// 			ConnectionPoolTimeOut: pulumi.Int(30),
-// 			ConnectionPoolType:    pulumi.String("SessionConnectionPool"),
-// 			ConsistencyTimeOut:    pulumi.Int(30),
-// 			ConsistencyType:       pulumi.String("global"),
-// 			Description:           pulumi.String("desc value"),
-// 			FailOver:              pulumi.String("yes"),
-// 			InstanceWeights: cynosdb.ProxyEndPointInstanceWeightArray{
-// 				&cynosdb.ProxyEndPointInstanceWeightArgs{
-// 					InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
-// 					Weight:     pulumi.Int(1),
-// 				},
-// 			},
-// 			OpenConnectionPool: pulumi.String("yes"),
-// 			RwType:             pulumi.String("READWRITE"),
-// 			SecurityGroupIds: pulumi.StringArray{
-// 				pulumi.String("sg-7kpsbxdb"),
-// 			},
-// 			TransSplit:     pulumi.Bool(true),
-// 			UniqueSubnetId: pulumi.String("subnet-dwj7ipnc"),
-// 			UniqueVpcId:    pulumi.String("vpc-4owdpnwr"),
-// 			Vip:            pulumi.String("172.16.112.118"),
-// 			Vport:          pulumi.Int(3306),
-// 			WeightMode:     pulumi.String("system"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewProxyEndPoint(ctx, "proxyEndPoint", &Cynosdb.ProxyEndPointArgs{
+//				AccessMode:            pulumi.String("nearby"),
+//				AutoAddRo:             pulumi.String("yes"),
+//				ClusterId:             pulumi.String("cynosdbmysql-bws8h88b"),
+//				ConnectionPoolTimeOut: pulumi.Int(30),
+//				ConnectionPoolType:    pulumi.String("SessionConnectionPool"),
+//				ConsistencyTimeOut:    pulumi.Int(30),
+//				ConsistencyType:       pulumi.String("global"),
+//				Description:           pulumi.String("desc value"),
+//				FailOver:              pulumi.String("yes"),
+//				InstanceWeights: cynosdb.ProxyEndPointInstanceWeightArray{
+//					&cynosdb.ProxyEndPointInstanceWeightArgs{
+//						InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
+//						Weight:     pulumi.Int(1),
+//					},
+//				},
+//				OpenConnectionPool: pulumi.String("yes"),
+//				RwType:             pulumi.String("READWRITE"),
+//				SecurityGroupIds: pulumi.StringArray{
+//					pulumi.String("sg-7kpsbxdb"),
+//				},
+//				TransSplit:     pulumi.Bool(true),
+//				UniqueSubnetId: pulumi.String("subnet-dwj7ipnc"),
+//				UniqueVpcId:    pulumi.String("vpc-4owdpnwr"),
+//				Vip:            pulumi.String("172.16.112.118"),
+//				Vport:          pulumi.Int(3306),
+//				WeightMode:     pulumi.String("system"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ProxyEndPoint struct {
 	pulumi.CustomResourceState
@@ -553,7 +574,7 @@ func (i *ProxyEndPoint) ToProxyEndPointOutputWithContext(ctx context.Context) Pr
 // ProxyEndPointArrayInput is an input type that accepts ProxyEndPointArray and ProxyEndPointArrayOutput values.
 // You can construct a concrete instance of `ProxyEndPointArrayInput` via:
 //
-//          ProxyEndPointArray{ ProxyEndPointArgs{...} }
+//	ProxyEndPointArray{ ProxyEndPointArgs{...} }
 type ProxyEndPointArrayInput interface {
 	pulumi.Input
 
@@ -578,7 +599,7 @@ func (i ProxyEndPointArray) ToProxyEndPointArrayOutputWithContext(ctx context.Co
 // ProxyEndPointMapInput is an input type that accepts ProxyEndPointMap and ProxyEndPointMapOutput values.
 // You can construct a concrete instance of `ProxyEndPointMapInput` via:
 //
-//          ProxyEndPointMap{ "key": ProxyEndPointArgs{...} }
+//	ProxyEndPointMap{ "key": ProxyEndPointArgs{...} }
 type ProxyEndPointMapInput interface {
 	pulumi.Input
 

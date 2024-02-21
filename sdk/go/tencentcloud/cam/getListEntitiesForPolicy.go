@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.GetListEntitiesForPolicy(ctx, &cam.GetListEntitiesForPolicyArgs{
-// 			EntityFilter: pulumi.StringRef("All"),
-// 			PolicyId:     1,
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.GetListEntitiesForPolicy(ctx, &cam.GetListEntitiesForPolicyArgs{
+//				EntityFilter: pulumi.StringRef("All"),
+//				PolicyId:     1,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetListEntitiesForPolicy(ctx *pulumi.Context, args *GetListEntitiesForPolicyArgs, opts ...pulumi.InvokeOption) (*GetListEntitiesForPolicyResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

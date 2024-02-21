@@ -19,56 +19,59 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		logset, err := Cls.NewLogset(ctx, "logset", &Cls.LogsetArgs{
-// 			LogsetName: pulumi.String("tf-example-logset"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		topic, err := Cls.NewTopic(ctx, "topic", &Cls.TopicArgs{
-// 			TopicName:          pulumi.String("tf-example-topic"),
-// 			LogsetId:           logset.ID(),
-// 			AutoSplit:          pulumi.Bool(false),
-// 			MaxSplitPartitions: pulumi.Int(20),
-// 			PartitionCount:     pulumi.Int(1),
-// 			Period:             pulumi.Int(10),
-// 			StorageType:        pulumi.String("hot"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cls.NewKafkaRecharge(ctx, "kafkaRecharge", &Cls.KafkaRechargeArgs{
-// 			TopicId:          topic.ID(),
-// 			KafkaType:        pulumi.Int(0),
-// 			Offset:           -2,
-// 			IsEncryptionAddr: pulumi.Bool(true),
-// 			UserKafkaTopics:  pulumi.String("recharge"),
-// 			KafkaInstance:    pulumi.String("ckafka-qzoeaqx8"),
-// 			LogRechargeRule: &cls.KafkaRechargeLogRechargeRuleArgs{
-// 				RechargeType:      pulumi.String("json_log"),
-// 				EncodingFormat:    pulumi.Int(0),
-// 				DefaultTimeSwitch: pulumi.Bool(true),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			logset, err := Cls.NewLogset(ctx, "logset", &Cls.LogsetArgs{
+//				LogsetName: pulumi.String("tf-example-logset"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			topic, err := Cls.NewTopic(ctx, "topic", &Cls.TopicArgs{
+//				TopicName:          pulumi.String("tf-example-topic"),
+//				LogsetId:           logset.ID(),
+//				AutoSplit:          pulumi.Bool(false),
+//				MaxSplitPartitions: pulumi.Int(20),
+//				PartitionCount:     pulumi.Int(1),
+//				Period:             pulumi.Int(10),
+//				StorageType:        pulumi.String("hot"),
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cls.NewKafkaRecharge(ctx, "kafkaRecharge", &Cls.KafkaRechargeArgs{
+//				TopicId:          topic.ID(),
+//				KafkaType:        pulumi.Int(0),
+//				Offset:           -2,
+//				IsEncryptionAddr: pulumi.Bool(true),
+//				UserKafkaTopics:  pulumi.String("recharge"),
+//				KafkaInstance:    pulumi.String("ckafka-qzoeaqx8"),
+//				LogRechargeRule: &cls.KafkaRechargeLogRechargeRuleArgs{
+//					RechargeType:      pulumi.String("json_log"),
+//					EncodingFormat:    pulumi.Int(0),
+//					DefaultTimeSwitch: pulumi.Bool(true),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -76,7 +79,9 @@ import (
 // cls kafka_recharge can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/kafkaRecharge:KafkaRecharge kafka_recharge kafka_recharge_id
+//
+//	$ pulumi import tencentcloud:Cls/kafkaRecharge:KafkaRecharge kafka_recharge kafka_recharge_id
+//
 // ```
 type KafkaRecharge struct {
 	pulumi.CustomResourceState
@@ -277,7 +282,7 @@ func (i *KafkaRecharge) ToKafkaRechargeOutputWithContext(ctx context.Context) Ka
 // KafkaRechargeArrayInput is an input type that accepts KafkaRechargeArray and KafkaRechargeArrayOutput values.
 // You can construct a concrete instance of `KafkaRechargeArrayInput` via:
 //
-//          KafkaRechargeArray{ KafkaRechargeArgs{...} }
+//	KafkaRechargeArray{ KafkaRechargeArgs{...} }
 type KafkaRechargeArrayInput interface {
 	pulumi.Input
 
@@ -302,7 +307,7 @@ func (i KafkaRechargeArray) ToKafkaRechargeArrayOutputWithContext(ctx context.Co
 // KafkaRechargeMapInput is an input type that accepts KafkaRechargeMap and KafkaRechargeMapOutput values.
 // You can construct a concrete instance of `KafkaRechargeMapInput` via:
 //
-//          KafkaRechargeMap{ "key": KafkaRechargeArgs{...} }
+//	KafkaRechargeMap{ "key": KafkaRechargeArgs{...} }
 type KafkaRechargeMapInput interface {
 	pulumi.Input
 

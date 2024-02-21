@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cos.NewBucketVersion(ctx, "bucketVersion", &Cos.BucketVersionArgs{
-// 			Bucket: pulumi.String("mycos-1258798060"),
-// 			Status: pulumi.String("Enabled"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cos.NewBucketVersion(ctx, "bucketVersion", &Cos.BucketVersionArgs{
+//				Bucket: pulumi.String("mycos-1258798060"),
+//				Status: pulumi.String("Enabled"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // cos bucket_version can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cos/bucketVersion:BucketVersion bucket_version bucket_id
+//
+//	$ pulumi import tencentcloud:Cos/bucketVersion:BucketVersion bucket_version bucket_id
+//
 // ```
 type BucketVersion struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *BucketVersion) ToBucketVersionOutputWithContext(ctx context.Context) Bu
 // BucketVersionArrayInput is an input type that accepts BucketVersionArray and BucketVersionArrayOutput values.
 // You can construct a concrete instance of `BucketVersionArrayInput` via:
 //
-//          BucketVersionArray{ BucketVersionArgs{...} }
+//	BucketVersionArray{ BucketVersionArgs{...} }
 type BucketVersionArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i BucketVersionArray) ToBucketVersionArrayOutputWithContext(ctx context.Co
 // BucketVersionMapInput is an input type that accepts BucketVersionMap and BucketVersionMapOutput values.
 // You can construct a concrete instance of `BucketVersionMapInput` via:
 //
-//          BucketVersionMap{ "key": BucketVersionArgs{...} }
+//	BucketVersionMap{ "key": BucketVersionArgs{...} }
 type BucketVersionMapInput interface {
 	pulumi.Input
 

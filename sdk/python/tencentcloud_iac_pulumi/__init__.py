@@ -560,6 +560,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "ApiGateway/updateService",
+  "fqn": "tencentcloud_iac_pulumi.apigateway",
+  "classes": {
+   "tencentcloud:ApiGateway/updateService:UpdateService": "UpdateService"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "ApiGateway/upstream",
   "fqn": "tencentcloud_iac_pulumi.apigateway",
   "classes": {
@@ -4448,6 +4456,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Monitor/tmpAlertGroup",
+  "fqn": "tencentcloud_iac_pulumi.monitor",
+  "classes": {
+   "tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup": "TmpAlertGroup"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Monitor/tmpAlertRule",
   "fqn": "tencentcloud_iac_pulumi.monitor",
   "classes": {
@@ -5236,6 +5252,22 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.organization",
   "classes": {
    "tencentcloud:Organization/orgNode:OrgNode": "OrgNode"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Organization/orgShareUnit",
+  "fqn": "tencentcloud_iac_pulumi.organization",
+  "classes": {
+   "tencentcloud:Organization/orgShareUnit:OrgShareUnit": "OrgShareUnit"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Organization/orgShareUnitMember",
+  "fqn": "tencentcloud_iac_pulumi.organization",
+  "classes": {
+   "tencentcloud:Organization/orgShareUnitMember:OrgShareUnitMember": "OrgShareUnitMember"
   }
  },
  {

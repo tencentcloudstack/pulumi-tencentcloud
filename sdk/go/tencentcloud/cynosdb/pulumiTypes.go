@@ -20,7 +20,7 @@ type AccountPrivilegesDatabasePrivilege struct {
 // AccountPrivilegesDatabasePrivilegeInput is an input type that accepts AccountPrivilegesDatabasePrivilegeArgs and AccountPrivilegesDatabasePrivilegeOutput values.
 // You can construct a concrete instance of `AccountPrivilegesDatabasePrivilegeInput` via:
 //
-//          AccountPrivilegesDatabasePrivilegeArgs{...}
+//	AccountPrivilegesDatabasePrivilegeArgs{...}
 type AccountPrivilegesDatabasePrivilegeInput interface {
 	pulumi.Input
 
@@ -50,7 +50,7 @@ func (i AccountPrivilegesDatabasePrivilegeArgs) ToAccountPrivilegesDatabasePrivi
 // AccountPrivilegesDatabasePrivilegeArrayInput is an input type that accepts AccountPrivilegesDatabasePrivilegeArray and AccountPrivilegesDatabasePrivilegeArrayOutput values.
 // You can construct a concrete instance of `AccountPrivilegesDatabasePrivilegeArrayInput` via:
 //
-//          AccountPrivilegesDatabasePrivilegeArray{ AccountPrivilegesDatabasePrivilegeArgs{...} }
+//	AccountPrivilegesDatabasePrivilegeArray{ AccountPrivilegesDatabasePrivilegeArgs{...} }
 type AccountPrivilegesDatabasePrivilegeArrayInput interface {
 	pulumi.Input
 
@@ -128,7 +128,7 @@ type AccountPrivilegesTablePrivilege struct {
 // AccountPrivilegesTablePrivilegeInput is an input type that accepts AccountPrivilegesTablePrivilegeArgs and AccountPrivilegesTablePrivilegeOutput values.
 // You can construct a concrete instance of `AccountPrivilegesTablePrivilegeInput` via:
 //
-//          AccountPrivilegesTablePrivilegeArgs{...}
+//	AccountPrivilegesTablePrivilegeArgs{...}
 type AccountPrivilegesTablePrivilegeInput interface {
 	pulumi.Input
 
@@ -160,7 +160,7 @@ func (i AccountPrivilegesTablePrivilegeArgs) ToAccountPrivilegesTablePrivilegeOu
 // AccountPrivilegesTablePrivilegeArrayInput is an input type that accepts AccountPrivilegesTablePrivilegeArray and AccountPrivilegesTablePrivilegeArrayOutput values.
 // You can construct a concrete instance of `AccountPrivilegesTablePrivilegeArrayInput` via:
 //
-//          AccountPrivilegesTablePrivilegeArray{ AccountPrivilegesTablePrivilegeArgs{...} }
+//	AccountPrivilegesTablePrivilegeArray{ AccountPrivilegesTablePrivilegeArgs{...} }
 type AccountPrivilegesTablePrivilegeArrayInput interface {
 	pulumi.Input
 
@@ -263,7 +263,7 @@ type AuditLogFileFilter struct {
 // AuditLogFileFilterInput is an input type that accepts AuditLogFileFilterArgs and AuditLogFileFilterOutput values.
 // You can construct a concrete instance of `AuditLogFileFilterInput` via:
 //
-//          AuditLogFileFilterArgs{...}
+//	AuditLogFileFilterArgs{...}
 type AuditLogFileFilterInput interface {
 	pulumi.Input
 
@@ -323,11 +323,11 @@ func (i AuditLogFileFilterArgs) ToAuditLogFileFilterPtrOutputWithContext(ctx con
 // AuditLogFileFilterPtrInput is an input type that accepts AuditLogFileFilterArgs, AuditLogFileFilterPtr and AuditLogFileFilterPtrOutput values.
 // You can construct a concrete instance of `AuditLogFileFilterPtrInput` via:
 //
-//          AuditLogFileFilterArgs{...}
+//	        AuditLogFileFilterArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AuditLogFileFilterPtrInput interface {
 	pulumi.Input
 
@@ -608,7 +608,7 @@ type ClusterDatabasesUserHostPrivilege struct {
 // ClusterDatabasesUserHostPrivilegeInput is an input type that accepts ClusterDatabasesUserHostPrivilegeArgs and ClusterDatabasesUserHostPrivilegeOutput values.
 // You can construct a concrete instance of `ClusterDatabasesUserHostPrivilegeInput` via:
 //
-//          ClusterDatabasesUserHostPrivilegeArgs{...}
+//	ClusterDatabasesUserHostPrivilegeArgs{...}
 type ClusterDatabasesUserHostPrivilegeInput interface {
 	pulumi.Input
 
@@ -640,7 +640,7 @@ func (i ClusterDatabasesUserHostPrivilegeArgs) ToClusterDatabasesUserHostPrivile
 // ClusterDatabasesUserHostPrivilegeArrayInput is an input type that accepts ClusterDatabasesUserHostPrivilegeArray and ClusterDatabasesUserHostPrivilegeArrayOutput values.
 // You can construct a concrete instance of `ClusterDatabasesUserHostPrivilegeArrayInput` via:
 //
-//          ClusterDatabasesUserHostPrivilegeArray{ ClusterDatabasesUserHostPrivilegeArgs{...} }
+//	ClusterDatabasesUserHostPrivilegeArray{ ClusterDatabasesUserHostPrivilegeArgs{...} }
 type ClusterDatabasesUserHostPrivilegeArrayInput interface {
 	pulumi.Input
 
@@ -723,7 +723,7 @@ type ClusterParamItem struct {
 // ClusterParamItemInput is an input type that accepts ClusterParamItemArgs and ClusterParamItemOutput values.
 // You can construct a concrete instance of `ClusterParamItemInput` via:
 //
-//          ClusterParamItemArgs{...}
+//	ClusterParamItemArgs{...}
 type ClusterParamItemInput interface {
 	pulumi.Input
 
@@ -755,7 +755,7 @@ func (i ClusterParamItemArgs) ToClusterParamItemOutputWithContext(ctx context.Co
 // ClusterParamItemArrayInput is an input type that accepts ClusterParamItemArray and ClusterParamItemArrayOutput values.
 // You can construct a concrete instance of `ClusterParamItemArrayInput` via:
 //
-//          ClusterParamItemArray{ ClusterParamItemArgs{...} }
+//	ClusterParamItemArray{ ClusterParamItemArgs{...} }
 type ClusterParamItemArrayInput interface {
 	pulumi.Input
 
@@ -836,7 +836,7 @@ type ClusterRoGroupAddr struct {
 // ClusterRoGroupAddrInput is an input type that accepts ClusterRoGroupAddrArgs and ClusterRoGroupAddrOutput values.
 // You can construct a concrete instance of `ClusterRoGroupAddrInput` via:
 //
-//          ClusterRoGroupAddrArgs{...}
+//	ClusterRoGroupAddrArgs{...}
 type ClusterRoGroupAddrInput interface {
 	pulumi.Input
 
@@ -866,7 +866,7 @@ func (i ClusterRoGroupAddrArgs) ToClusterRoGroupAddrOutputWithContext(ctx contex
 // ClusterRoGroupAddrArrayInput is an input type that accepts ClusterRoGroupAddrArray and ClusterRoGroupAddrArrayOutput values.
 // You can construct a concrete instance of `ClusterRoGroupAddrArrayInput` via:
 //
-//          ClusterRoGroupAddrArray{ ClusterRoGroupAddrArgs{...} }
+//	ClusterRoGroupAddrArray{ ClusterRoGroupAddrArgs{...} }
 type ClusterRoGroupAddrArrayInput interface {
 	pulumi.Input
 
@@ -942,7 +942,7 @@ type ClusterRoGroupInstance struct {
 // ClusterRoGroupInstanceInput is an input type that accepts ClusterRoGroupInstanceArgs and ClusterRoGroupInstanceOutput values.
 // You can construct a concrete instance of `ClusterRoGroupInstanceInput` via:
 //
-//          ClusterRoGroupInstanceArgs{...}
+//	ClusterRoGroupInstanceArgs{...}
 type ClusterRoGroupInstanceInput interface {
 	pulumi.Input
 
@@ -972,7 +972,7 @@ func (i ClusterRoGroupInstanceArgs) ToClusterRoGroupInstanceOutputWithContext(ct
 // ClusterRoGroupInstanceArrayInput is an input type that accepts ClusterRoGroupInstanceArray and ClusterRoGroupInstanceArrayOutput values.
 // You can construct a concrete instance of `ClusterRoGroupInstanceArrayInput` via:
 //
-//          ClusterRoGroupInstanceArray{ ClusterRoGroupInstanceArgs{...} }
+//	ClusterRoGroupInstanceArray{ ClusterRoGroupInstanceArgs{...} }
 type ClusterRoGroupInstanceArrayInput interface {
 	pulumi.Input
 
@@ -1048,7 +1048,7 @@ type ClusterRwGroupAddr struct {
 // ClusterRwGroupAddrInput is an input type that accepts ClusterRwGroupAddrArgs and ClusterRwGroupAddrOutput values.
 // You can construct a concrete instance of `ClusterRwGroupAddrInput` via:
 //
-//          ClusterRwGroupAddrArgs{...}
+//	ClusterRwGroupAddrArgs{...}
 type ClusterRwGroupAddrInput interface {
 	pulumi.Input
 
@@ -1078,7 +1078,7 @@ func (i ClusterRwGroupAddrArgs) ToClusterRwGroupAddrOutputWithContext(ctx contex
 // ClusterRwGroupAddrArrayInput is an input type that accepts ClusterRwGroupAddrArray and ClusterRwGroupAddrArrayOutput values.
 // You can construct a concrete instance of `ClusterRwGroupAddrArrayInput` via:
 //
-//          ClusterRwGroupAddrArray{ ClusterRwGroupAddrArgs{...} }
+//	ClusterRwGroupAddrArray{ ClusterRwGroupAddrArgs{...} }
 type ClusterRwGroupAddrArrayInput interface {
 	pulumi.Input
 
@@ -1154,7 +1154,7 @@ type ClusterRwGroupInstance struct {
 // ClusterRwGroupInstanceInput is an input type that accepts ClusterRwGroupInstanceArgs and ClusterRwGroupInstanceOutput values.
 // You can construct a concrete instance of `ClusterRwGroupInstanceInput` via:
 //
-//          ClusterRwGroupInstanceArgs{...}
+//	ClusterRwGroupInstanceArgs{...}
 type ClusterRwGroupInstanceInput interface {
 	pulumi.Input
 
@@ -1184,7 +1184,7 @@ func (i ClusterRwGroupInstanceArgs) ToClusterRwGroupInstanceOutputWithContext(ct
 // ClusterRwGroupInstanceArrayInput is an input type that accepts ClusterRwGroupInstanceArray and ClusterRwGroupInstanceArrayOutput values.
 // You can construct a concrete instance of `ClusterRwGroupInstanceArrayInput` via:
 //
-//          ClusterRwGroupInstanceArray{ ClusterRwGroupInstanceArgs{...} }
+//	ClusterRwGroupInstanceArray{ ClusterRwGroupInstanceArgs{...} }
 type ClusterRwGroupInstanceArrayInput interface {
 	pulumi.Input
 
@@ -1262,7 +1262,7 @@ type ExportInstanceErrorLogsErrorLogItemExport struct {
 // ExportInstanceErrorLogsErrorLogItemExportInput is an input type that accepts ExportInstanceErrorLogsErrorLogItemExportArgs and ExportInstanceErrorLogsErrorLogItemExportOutput values.
 // You can construct a concrete instance of `ExportInstanceErrorLogsErrorLogItemExportInput` via:
 //
-//          ExportInstanceErrorLogsErrorLogItemExportArgs{...}
+//	ExportInstanceErrorLogsErrorLogItemExportArgs{...}
 type ExportInstanceErrorLogsErrorLogItemExportInput interface {
 	pulumi.Input
 
@@ -1294,7 +1294,7 @@ func (i ExportInstanceErrorLogsErrorLogItemExportArgs) ToExportInstanceErrorLogs
 // ExportInstanceErrorLogsErrorLogItemExportArrayInput is an input type that accepts ExportInstanceErrorLogsErrorLogItemExportArray and ExportInstanceErrorLogsErrorLogItemExportArrayOutput values.
 // You can construct a concrete instance of `ExportInstanceErrorLogsErrorLogItemExportArrayInput` via:
 //
-//          ExportInstanceErrorLogsErrorLogItemExportArray{ ExportInstanceErrorLogsErrorLogItemExportArgs{...} }
+//	ExportInstanceErrorLogsErrorLogItemExportArray{ ExportInstanceErrorLogsErrorLogItemExportArgs{...} }
 type ExportInstanceErrorLogsErrorLogItemExportArrayInput interface {
 	pulumi.Input
 
@@ -1375,7 +1375,7 @@ type InstanceParamInstanceParamList struct {
 // InstanceParamInstanceParamListInput is an input type that accepts InstanceParamInstanceParamListArgs and InstanceParamInstanceParamListOutput values.
 // You can construct a concrete instance of `InstanceParamInstanceParamListInput` via:
 //
-//          InstanceParamInstanceParamListArgs{...}
+//	InstanceParamInstanceParamListArgs{...}
 type InstanceParamInstanceParamListInput interface {
 	pulumi.Input
 
@@ -1405,7 +1405,7 @@ func (i InstanceParamInstanceParamListArgs) ToInstanceParamInstanceParamListOutp
 // InstanceParamInstanceParamListArrayInput is an input type that accepts InstanceParamInstanceParamListArray and InstanceParamInstanceParamListArrayOutput values.
 // You can construct a concrete instance of `InstanceParamInstanceParamListArrayInput` via:
 //
-//          InstanceParamInstanceParamListArray{ InstanceParamInstanceParamListArgs{...} }
+//	InstanceParamInstanceParamListArray{ InstanceParamInstanceParamListArgs{...} }
 type InstanceParamInstanceParamListArrayInput interface {
 	pulumi.Input
 
@@ -1481,7 +1481,7 @@ type ParamTemplateParamList struct {
 // ParamTemplateParamListInput is an input type that accepts ParamTemplateParamListArgs and ParamTemplateParamListOutput values.
 // You can construct a concrete instance of `ParamTemplateParamListInput` via:
 //
-//          ParamTemplateParamListArgs{...}
+//	ParamTemplateParamListArgs{...}
 type ParamTemplateParamListInput interface {
 	pulumi.Input
 
@@ -1511,7 +1511,7 @@ func (i ParamTemplateParamListArgs) ToParamTemplateParamListOutputWithContext(ct
 // ParamTemplateParamListArrayInput is an input type that accepts ParamTemplateParamListArray and ParamTemplateParamListArrayOutput values.
 // You can construct a concrete instance of `ParamTemplateParamListArrayInput` via:
 //
-//          ParamTemplateParamListArray{ ParamTemplateParamListArgs{...} }
+//	ParamTemplateParamListArray{ ParamTemplateParamListArgs{...} }
 type ParamTemplateParamListArrayInput interface {
 	pulumi.Input
 
@@ -1587,7 +1587,7 @@ type ProxyEndPointInstanceWeight struct {
 // ProxyEndPointInstanceWeightInput is an input type that accepts ProxyEndPointInstanceWeightArgs and ProxyEndPointInstanceWeightOutput values.
 // You can construct a concrete instance of `ProxyEndPointInstanceWeightInput` via:
 //
-//          ProxyEndPointInstanceWeightArgs{...}
+//	ProxyEndPointInstanceWeightArgs{...}
 type ProxyEndPointInstanceWeightInput interface {
 	pulumi.Input
 
@@ -1617,7 +1617,7 @@ func (i ProxyEndPointInstanceWeightArgs) ToProxyEndPointInstanceWeightOutputWith
 // ProxyEndPointInstanceWeightArrayInput is an input type that accepts ProxyEndPointInstanceWeightArray and ProxyEndPointInstanceWeightArrayOutput values.
 // You can construct a concrete instance of `ProxyEndPointInstanceWeightArrayInput` via:
 //
-//          ProxyEndPointInstanceWeightArray{ ProxyEndPointInstanceWeightArgs{...} }
+//	ProxyEndPointInstanceWeightArray{ ProxyEndPointInstanceWeightArgs{...} }
 type ProxyEndPointInstanceWeightArrayInput interface {
 	pulumi.Input
 
@@ -1693,7 +1693,7 @@ type ProxyProxyZone struct {
 // ProxyProxyZoneInput is an input type that accepts ProxyProxyZoneArgs and ProxyProxyZoneOutput values.
 // You can construct a concrete instance of `ProxyProxyZoneInput` via:
 //
-//          ProxyProxyZoneArgs{...}
+//	ProxyProxyZoneArgs{...}
 type ProxyProxyZoneInput interface {
 	pulumi.Input
 
@@ -1723,7 +1723,7 @@ func (i ProxyProxyZoneArgs) ToProxyProxyZoneOutputWithContext(ctx context.Contex
 // ProxyProxyZoneArrayInput is an input type that accepts ProxyProxyZoneArray and ProxyProxyZoneArrayOutput values.
 // You can construct a concrete instance of `ProxyProxyZoneArrayInput` via:
 //
-//          ProxyProxyZoneArray{ ProxyProxyZoneArgs{...} }
+//	ProxyProxyZoneArray{ ProxyProxyZoneArgs{...} }
 type ProxyProxyZoneArrayInput interface {
 	pulumi.Input
 
@@ -1797,7 +1797,7 @@ type ProxyRoInstance struct {
 // ProxyRoInstanceInput is an input type that accepts ProxyRoInstanceArgs and ProxyRoInstanceOutput values.
 // You can construct a concrete instance of `ProxyRoInstanceInput` via:
 //
-//          ProxyRoInstanceArgs{...}
+//	ProxyRoInstanceArgs{...}
 type ProxyRoInstanceInput interface {
 	pulumi.Input
 
@@ -1825,7 +1825,7 @@ func (i ProxyRoInstanceArgs) ToProxyRoInstanceOutputWithContext(ctx context.Cont
 // ProxyRoInstanceArrayInput is an input type that accepts ProxyRoInstanceArray and ProxyRoInstanceArrayOutput values.
 // You can construct a concrete instance of `ProxyRoInstanceArrayInput` via:
 //
-//          ProxyRoInstanceArray{ ProxyRoInstanceArgs{...} }
+//	ProxyRoInstanceArray{ ProxyRoInstanceArgs{...} }
 type ProxyRoInstanceArrayInput interface {
 	pulumi.Input
 
@@ -1899,7 +1899,7 @@ type RollBackClusterRollbackDatabase struct {
 // RollBackClusterRollbackDatabaseInput is an input type that accepts RollBackClusterRollbackDatabaseArgs and RollBackClusterRollbackDatabaseOutput values.
 // You can construct a concrete instance of `RollBackClusterRollbackDatabaseInput` via:
 //
-//          RollBackClusterRollbackDatabaseArgs{...}
+//	RollBackClusterRollbackDatabaseArgs{...}
 type RollBackClusterRollbackDatabaseInput interface {
 	pulumi.Input
 
@@ -1929,7 +1929,7 @@ func (i RollBackClusterRollbackDatabaseArgs) ToRollBackClusterRollbackDatabaseOu
 // RollBackClusterRollbackDatabaseArrayInput is an input type that accepts RollBackClusterRollbackDatabaseArray and RollBackClusterRollbackDatabaseArrayOutput values.
 // You can construct a concrete instance of `RollBackClusterRollbackDatabaseArrayInput` via:
 //
-//          RollBackClusterRollbackDatabaseArray{ RollBackClusterRollbackDatabaseArgs{...} }
+//	RollBackClusterRollbackDatabaseArray{ RollBackClusterRollbackDatabaseArgs{...} }
 type RollBackClusterRollbackDatabaseArrayInput interface {
 	pulumi.Input
 
@@ -2005,7 +2005,7 @@ type RollBackClusterRollbackTable struct {
 // RollBackClusterRollbackTableInput is an input type that accepts RollBackClusterRollbackTableArgs and RollBackClusterRollbackTableOutput values.
 // You can construct a concrete instance of `RollBackClusterRollbackTableInput` via:
 //
-//          RollBackClusterRollbackTableArgs{...}
+//	RollBackClusterRollbackTableArgs{...}
 type RollBackClusterRollbackTableInput interface {
 	pulumi.Input
 
@@ -2035,7 +2035,7 @@ func (i RollBackClusterRollbackTableArgs) ToRollBackClusterRollbackTableOutputWi
 // RollBackClusterRollbackTableArrayInput is an input type that accepts RollBackClusterRollbackTableArray and RollBackClusterRollbackTableArrayOutput values.
 // You can construct a concrete instance of `RollBackClusterRollbackTableArrayInput` via:
 //
-//          RollBackClusterRollbackTableArray{ RollBackClusterRollbackTableArgs{...} }
+//	RollBackClusterRollbackTableArray{ RollBackClusterRollbackTableArgs{...} }
 type RollBackClusterRollbackTableArrayInput interface {
 	pulumi.Input
 
@@ -2111,7 +2111,7 @@ type RollBackClusterRollbackTableTable struct {
 // RollBackClusterRollbackTableTableInput is an input type that accepts RollBackClusterRollbackTableTableArgs and RollBackClusterRollbackTableTableOutput values.
 // You can construct a concrete instance of `RollBackClusterRollbackTableTableInput` via:
 //
-//          RollBackClusterRollbackTableTableArgs{...}
+//	RollBackClusterRollbackTableTableArgs{...}
 type RollBackClusterRollbackTableTableInput interface {
 	pulumi.Input
 
@@ -2141,7 +2141,7 @@ func (i RollBackClusterRollbackTableTableArgs) ToRollBackClusterRollbackTableTab
 // RollBackClusterRollbackTableTableArrayInput is an input type that accepts RollBackClusterRollbackTableTableArray and RollBackClusterRollbackTableTableArrayOutput values.
 // You can construct a concrete instance of `RollBackClusterRollbackTableTableArrayInput` via:
 //
-//          RollBackClusterRollbackTableTableArray{ RollBackClusterRollbackTableTableArgs{...} }
+//	RollBackClusterRollbackTableTableArray{ RollBackClusterRollbackTableTableArgs{...} }
 type RollBackClusterRollbackTableTableArrayInput interface {
 	pulumi.Input
 
@@ -2217,7 +2217,7 @@ type GetAccountAllGrantPrivilegesAccount struct {
 // GetAccountAllGrantPrivilegesAccountInput is an input type that accepts GetAccountAllGrantPrivilegesAccountArgs and GetAccountAllGrantPrivilegesAccountOutput values.
 // You can construct a concrete instance of `GetAccountAllGrantPrivilegesAccountInput` via:
 //
-//          GetAccountAllGrantPrivilegesAccountArgs{...}
+//	GetAccountAllGrantPrivilegesAccountArgs{...}
 type GetAccountAllGrantPrivilegesAccountInput interface {
 	pulumi.Input
 
@@ -2278,7 +2278,7 @@ type GetAccountAllGrantPrivilegesDatabasePrivilege struct {
 // GetAccountAllGrantPrivilegesDatabasePrivilegeInput is an input type that accepts GetAccountAllGrantPrivilegesDatabasePrivilegeArgs and GetAccountAllGrantPrivilegesDatabasePrivilegeOutput values.
 // You can construct a concrete instance of `GetAccountAllGrantPrivilegesDatabasePrivilegeInput` via:
 //
-//          GetAccountAllGrantPrivilegesDatabasePrivilegeArgs{...}
+//	GetAccountAllGrantPrivilegesDatabasePrivilegeArgs{...}
 type GetAccountAllGrantPrivilegesDatabasePrivilegeInput interface {
 	pulumi.Input
 
@@ -2308,7 +2308,7 @@ func (i GetAccountAllGrantPrivilegesDatabasePrivilegeArgs) ToGetAccountAllGrantP
 // GetAccountAllGrantPrivilegesDatabasePrivilegeArrayInput is an input type that accepts GetAccountAllGrantPrivilegesDatabasePrivilegeArray and GetAccountAllGrantPrivilegesDatabasePrivilegeArrayOutput values.
 // You can construct a concrete instance of `GetAccountAllGrantPrivilegesDatabasePrivilegeArrayInput` via:
 //
-//          GetAccountAllGrantPrivilegesDatabasePrivilegeArray{ GetAccountAllGrantPrivilegesDatabasePrivilegeArgs{...} }
+//	GetAccountAllGrantPrivilegesDatabasePrivilegeArray{ GetAccountAllGrantPrivilegesDatabasePrivilegeArgs{...} }
 type GetAccountAllGrantPrivilegesDatabasePrivilegeArrayInput interface {
 	pulumi.Input
 
@@ -2386,7 +2386,7 @@ type GetAccountAllGrantPrivilegesTablePrivilege struct {
 // GetAccountAllGrantPrivilegesTablePrivilegeInput is an input type that accepts GetAccountAllGrantPrivilegesTablePrivilegeArgs and GetAccountAllGrantPrivilegesTablePrivilegeOutput values.
 // You can construct a concrete instance of `GetAccountAllGrantPrivilegesTablePrivilegeInput` via:
 //
-//          GetAccountAllGrantPrivilegesTablePrivilegeArgs{...}
+//	GetAccountAllGrantPrivilegesTablePrivilegeArgs{...}
 type GetAccountAllGrantPrivilegesTablePrivilegeInput interface {
 	pulumi.Input
 
@@ -2418,7 +2418,7 @@ func (i GetAccountAllGrantPrivilegesTablePrivilegeArgs) ToGetAccountAllGrantPriv
 // GetAccountAllGrantPrivilegesTablePrivilegeArrayInput is an input type that accepts GetAccountAllGrantPrivilegesTablePrivilegeArray and GetAccountAllGrantPrivilegesTablePrivilegeArrayOutput values.
 // You can construct a concrete instance of `GetAccountAllGrantPrivilegesTablePrivilegeArrayInput` via:
 //
-//          GetAccountAllGrantPrivilegesTablePrivilegeArray{ GetAccountAllGrantPrivilegesTablePrivilegeArgs{...} }
+//	GetAccountAllGrantPrivilegesTablePrivilegeArray{ GetAccountAllGrantPrivilegesTablePrivilegeArgs{...} }
 type GetAccountAllGrantPrivilegesTablePrivilegeArrayInput interface {
 	pulumi.Input
 
@@ -2507,7 +2507,7 @@ type GetAccountsAccountSet struct {
 // GetAccountsAccountSetInput is an input type that accepts GetAccountsAccountSetArgs and GetAccountsAccountSetOutput values.
 // You can construct a concrete instance of `GetAccountsAccountSetInput` via:
 //
-//          GetAccountsAccountSetArgs{...}
+//	GetAccountsAccountSetArgs{...}
 type GetAccountsAccountSetInput interface {
 	pulumi.Input
 
@@ -2545,7 +2545,7 @@ func (i GetAccountsAccountSetArgs) ToGetAccountsAccountSetOutputWithContext(ctx 
 // GetAccountsAccountSetArrayInput is an input type that accepts GetAccountsAccountSetArray and GetAccountsAccountSetArrayOutput values.
 // You can construct a concrete instance of `GetAccountsAccountSetArrayInput` via:
 //
-//          GetAccountsAccountSetArray{ GetAccountsAccountSetArgs{...} }
+//	GetAccountsAccountSetArray{ GetAccountsAccountSetArgs{...} }
 type GetAccountsAccountSetArrayInput interface {
 	pulumi.Input
 
@@ -2663,7 +2663,7 @@ type GetAuditLogsFilter struct {
 // GetAuditLogsFilterInput is an input type that accepts GetAuditLogsFilterArgs and GetAuditLogsFilterOutput values.
 // You can construct a concrete instance of `GetAuditLogsFilterInput` via:
 //
-//          GetAuditLogsFilterArgs{...}
+//	GetAuditLogsFilterArgs{...}
 type GetAuditLogsFilterInput interface {
 	pulumi.Input
 
@@ -2723,11 +2723,11 @@ func (i GetAuditLogsFilterArgs) ToGetAuditLogsFilterPtrOutputWithContext(ctx con
 // GetAuditLogsFilterPtrInput is an input type that accepts GetAuditLogsFilterArgs, GetAuditLogsFilterPtr and GetAuditLogsFilterPtrOutput values.
 // You can construct a concrete instance of `GetAuditLogsFilterPtrInput` via:
 //
-//          GetAuditLogsFilterArgs{...}
+//	        GetAuditLogsFilterArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type GetAuditLogsFilterPtrInput interface {
 	pulumi.Input
 
@@ -3030,7 +3030,7 @@ type GetAuditLogsItem struct {
 // GetAuditLogsItemInput is an input type that accepts GetAuditLogsItemArgs and GetAuditLogsItemOutput values.
 // You can construct a concrete instance of `GetAuditLogsItemInput` via:
 //
-//          GetAuditLogsItemArgs{...}
+//	GetAuditLogsItemArgs{...}
 type GetAuditLogsItemInput interface {
 	pulumi.Input
 
@@ -3084,7 +3084,7 @@ func (i GetAuditLogsItemArgs) ToGetAuditLogsItemOutputWithContext(ctx context.Co
 // GetAuditLogsItemArrayInput is an input type that accepts GetAuditLogsItemArray and GetAuditLogsItemArrayOutput values.
 // You can construct a concrete instance of `GetAuditLogsItemArrayInput` via:
 //
-//          GetAuditLogsItemArray{ GetAuditLogsItemArgs{...} }
+//	GetAuditLogsItemArray{ GetAuditLogsItemArgs{...} }
 type GetAuditLogsItemArrayInput interface {
 	pulumi.Input
 
@@ -3240,7 +3240,7 @@ type GetClusterDetailDatabasesDbInfo struct {
 // GetClusterDetailDatabasesDbInfoInput is an input type that accepts GetClusterDetailDatabasesDbInfoArgs and GetClusterDetailDatabasesDbInfoOutput values.
 // You can construct a concrete instance of `GetClusterDetailDatabasesDbInfoInput` via:
 //
-//          GetClusterDetailDatabasesDbInfoArgs{...}
+//	GetClusterDetailDatabasesDbInfoArgs{...}
 type GetClusterDetailDatabasesDbInfoInput interface {
 	pulumi.Input
 
@@ -3290,7 +3290,7 @@ func (i GetClusterDetailDatabasesDbInfoArgs) ToGetClusterDetailDatabasesDbInfoOu
 // GetClusterDetailDatabasesDbInfoArrayInput is an input type that accepts GetClusterDetailDatabasesDbInfoArray and GetClusterDetailDatabasesDbInfoArrayOutput values.
 // You can construct a concrete instance of `GetClusterDetailDatabasesDbInfoArrayInput` via:
 //
-//          GetClusterDetailDatabasesDbInfoArray{ GetClusterDetailDatabasesDbInfoArgs{...} }
+//	GetClusterDetailDatabasesDbInfoArray{ GetClusterDetailDatabasesDbInfoArgs{...} }
 type GetClusterDetailDatabasesDbInfoArrayInput interface {
 	pulumi.Input
 
@@ -3420,7 +3420,7 @@ type GetClusterDetailDatabasesDbInfoUserHostPrivilege struct {
 // GetClusterDetailDatabasesDbInfoUserHostPrivilegeInput is an input type that accepts GetClusterDetailDatabasesDbInfoUserHostPrivilegeArgs and GetClusterDetailDatabasesDbInfoUserHostPrivilegeOutput values.
 // You can construct a concrete instance of `GetClusterDetailDatabasesDbInfoUserHostPrivilegeInput` via:
 //
-//          GetClusterDetailDatabasesDbInfoUserHostPrivilegeArgs{...}
+//	GetClusterDetailDatabasesDbInfoUserHostPrivilegeArgs{...}
 type GetClusterDetailDatabasesDbInfoUserHostPrivilegeInput interface {
 	pulumi.Input
 
@@ -3452,7 +3452,7 @@ func (i GetClusterDetailDatabasesDbInfoUserHostPrivilegeArgs) ToGetClusterDetail
 // GetClusterDetailDatabasesDbInfoUserHostPrivilegeArrayInput is an input type that accepts GetClusterDetailDatabasesDbInfoUserHostPrivilegeArray and GetClusterDetailDatabasesDbInfoUserHostPrivilegeArrayOutput values.
 // You can construct a concrete instance of `GetClusterDetailDatabasesDbInfoUserHostPrivilegeArrayInput` via:
 //
-//          GetClusterDetailDatabasesDbInfoUserHostPrivilegeArray{ GetClusterDetailDatabasesDbInfoUserHostPrivilegeArgs{...} }
+//	GetClusterDetailDatabasesDbInfoUserHostPrivilegeArray{ GetClusterDetailDatabasesDbInfoUserHostPrivilegeArgs{...} }
 type GetClusterDetailDatabasesDbInfoUserHostPrivilegeArrayInput interface {
 	pulumi.Input
 
@@ -3559,7 +3559,7 @@ type GetClusterInstanceGroupsInstanceGrpInfoList struct {
 // GetClusterInstanceGroupsInstanceGrpInfoListInput is an input type that accepts GetClusterInstanceGroupsInstanceGrpInfoListArgs and GetClusterInstanceGroupsInstanceGrpInfoListOutput values.
 // You can construct a concrete instance of `GetClusterInstanceGroupsInstanceGrpInfoListInput` via:
 //
-//          GetClusterInstanceGroupsInstanceGrpInfoListArgs{...}
+//	GetClusterInstanceGroupsInstanceGrpInfoListArgs{...}
 type GetClusterInstanceGroupsInstanceGrpInfoListInput interface {
 	pulumi.Input
 
@@ -3615,7 +3615,7 @@ func (i GetClusterInstanceGroupsInstanceGrpInfoListArgs) ToGetClusterInstanceGro
 // GetClusterInstanceGroupsInstanceGrpInfoListArrayInput is an input type that accepts GetClusterInstanceGroupsInstanceGrpInfoListArray and GetClusterInstanceGroupsInstanceGrpInfoListArrayOutput values.
 // You can construct a concrete instance of `GetClusterInstanceGroupsInstanceGrpInfoListArrayInput` via:
 //
-//          GetClusterInstanceGroupsInstanceGrpInfoListArray{ GetClusterInstanceGroupsInstanceGrpInfoListArgs{...} }
+//	GetClusterInstanceGroupsInstanceGrpInfoListArray{ GetClusterInstanceGroupsInstanceGrpInfoListArgs{...} }
 type GetClusterInstanceGroupsInstanceGrpInfoListArrayInput interface {
 	pulumi.Input
 
@@ -3848,7 +3848,7 @@ type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSet struct {
 // GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetInput is an input type that accepts GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArgs and GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetOutput values.
 // You can construct a concrete instance of `GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetInput` via:
 //
-//          GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArgs{...}
+//	GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArgs{...}
 type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetInput interface {
 	pulumi.Input
 
@@ -3968,7 +3968,7 @@ func (i GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArgs) ToGetCluster
 // GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayInput is an input type that accepts GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArray and GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayOutput values.
 // You can construct a concrete instance of `GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayInput` via:
 //
-//          GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArray{ GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArgs{...} }
+//	GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArray{ GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArgs{...} }
 type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetArrayInput interface {
 	pulumi.Input
 
@@ -4273,7 +4273,7 @@ type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTag struct {
 // GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagInput is an input type that accepts GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArgs and GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagOutput values.
 // You can construct a concrete instance of `GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagInput` via:
 //
-//          GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArgs{...}
+//	GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArgs{...}
 type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagInput interface {
 	pulumi.Input
 
@@ -4303,7 +4303,7 @@ func (i GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArgs) T
 // GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayInput is an input type that accepts GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArray and GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayOutput values.
 // You can construct a concrete instance of `GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayInput` via:
 //
-//          GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArray{ GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArgs{...} }
+//	GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArray{ GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArgs{...} }
 type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetResourceTagArrayInput interface {
 	pulumi.Input
 
@@ -4385,7 +4385,7 @@ type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTask struct {
 // GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskInput is an input type that accepts GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArgs and GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskOutput values.
 // You can construct a concrete instance of `GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskInput` via:
 //
-//          GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArgs{...}
+//	GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArgs{...}
 type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskInput interface {
 	pulumi.Input
 
@@ -4421,7 +4421,7 @@ func (i GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArgs) ToGetClu
 // GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayInput is an input type that accepts GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArray and GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayOutput values.
 // You can construct a concrete instance of `GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayInput` via:
 //
-//          GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArray{ GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArgs{...} }
+//	GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArray{ GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArgs{...} }
 type GetClusterInstanceGroupsInstanceGrpInfoListInstanceSetTaskArrayInput interface {
 	pulumi.Input
 
@@ -4524,7 +4524,7 @@ type GetClusterParamLogsClusterParamLog struct {
 // GetClusterParamLogsClusterParamLogInput is an input type that accepts GetClusterParamLogsClusterParamLogArgs and GetClusterParamLogsClusterParamLogOutput values.
 // You can construct a concrete instance of `GetClusterParamLogsClusterParamLogInput` via:
 //
-//          GetClusterParamLogsClusterParamLogArgs{...}
+//	GetClusterParamLogsClusterParamLogArgs{...}
 type GetClusterParamLogsClusterParamLogInput interface {
 	pulumi.Input
 
@@ -4566,7 +4566,7 @@ func (i GetClusterParamLogsClusterParamLogArgs) ToGetClusterParamLogsClusterPara
 // GetClusterParamLogsClusterParamLogArrayInput is an input type that accepts GetClusterParamLogsClusterParamLogArray and GetClusterParamLogsClusterParamLogArrayOutput values.
 // You can construct a concrete instance of `GetClusterParamLogsClusterParamLogArrayInput` via:
 //
-//          GetClusterParamLogsClusterParamLogArray{ GetClusterParamLogsClusterParamLogArgs{...} }
+//	GetClusterParamLogsClusterParamLogArray{ GetClusterParamLogsClusterParamLogArgs{...} }
 type GetClusterParamLogsClusterParamLogArrayInput interface {
 	pulumi.Input
 
@@ -4696,7 +4696,7 @@ type GetClusterParamsItem struct {
 // GetClusterParamsItemInput is an input type that accepts GetClusterParamsItemArgs and GetClusterParamsItemOutput values.
 // You can construct a concrete instance of `GetClusterParamsItemInput` via:
 //
-//          GetClusterParamsItemArgs{...}
+//	GetClusterParamsItemArgs{...}
 type GetClusterParamsItemInput interface {
 	pulumi.Input
 
@@ -4750,7 +4750,7 @@ func (i GetClusterParamsItemArgs) ToGetClusterParamsItemOutputWithContext(ctx co
 // GetClusterParamsItemArrayInput is an input type that accepts GetClusterParamsItemArray and GetClusterParamsItemArrayOutput values.
 // You can construct a concrete instance of `GetClusterParamsItemArrayInput` via:
 //
-//          GetClusterParamsItemArray{ GetClusterParamsItemArgs{...} }
+//	GetClusterParamsItemArray{ GetClusterParamsItemArgs{...} }
 type GetClusterParamsItemArrayInput interface {
 	pulumi.Input
 
@@ -4886,7 +4886,7 @@ type GetClusterTable struct {
 // GetClusterTableInput is an input type that accepts GetClusterTableArgs and GetClusterTableOutput values.
 // You can construct a concrete instance of `GetClusterTableInput` via:
 //
-//          GetClusterTableArgs{...}
+//	GetClusterTableArgs{...}
 type GetClusterTableInput interface {
 	pulumi.Input
 
@@ -4916,7 +4916,7 @@ func (i GetClusterTableArgs) ToGetClusterTableOutputWithContext(ctx context.Cont
 // GetClusterTableArrayInput is an input type that accepts GetClusterTableArray and GetClusterTableArrayOutput values.
 // You can construct a concrete instance of `GetClusterTableArrayInput` via:
 //
-//          GetClusterTableArray{ GetClusterTableArgs{...} }
+//	GetClusterTableArray{ GetClusterTableArgs{...} }
 type GetClusterTableArrayInput interface {
 	pulumi.Input
 
@@ -5016,7 +5016,7 @@ type GetClustersClusterList struct {
 // GetClustersClusterListInput is an input type that accepts GetClustersClusterListArgs and GetClustersClusterListOutput values.
 // You can construct a concrete instance of `GetClustersClusterListInput` via:
 //
-//          GetClustersClusterListArgs{...}
+//	GetClustersClusterListArgs{...}
 type GetClustersClusterListInput interface {
 	pulumi.Input
 
@@ -5070,7 +5070,7 @@ func (i GetClustersClusterListArgs) ToGetClustersClusterListOutputWithContext(ct
 // GetClustersClusterListArrayInput is an input type that accepts GetClustersClusterListArray and GetClustersClusterListArrayOutput values.
 // You can construct a concrete instance of `GetClustersClusterListArrayInput` via:
 //
-//          GetClustersClusterListArray{ GetClustersClusterListArgs{...} }
+//	GetClustersClusterListArray{ GetClustersClusterListArgs{...} }
 type GetClustersClusterListArrayInput interface {
 	pulumi.Input
 
@@ -5208,7 +5208,7 @@ type GetDescribeInstanceErrorLogsErrorLog struct {
 // GetDescribeInstanceErrorLogsErrorLogInput is an input type that accepts GetDescribeInstanceErrorLogsErrorLogArgs and GetDescribeInstanceErrorLogsErrorLogOutput values.
 // You can construct a concrete instance of `GetDescribeInstanceErrorLogsErrorLogInput` via:
 //
-//          GetDescribeInstanceErrorLogsErrorLogArgs{...}
+//	GetDescribeInstanceErrorLogsErrorLogArgs{...}
 type GetDescribeInstanceErrorLogsErrorLogInput interface {
 	pulumi.Input
 
@@ -5240,7 +5240,7 @@ func (i GetDescribeInstanceErrorLogsErrorLogArgs) ToGetDescribeInstanceErrorLogs
 // GetDescribeInstanceErrorLogsErrorLogArrayInput is an input type that accepts GetDescribeInstanceErrorLogsErrorLogArray and GetDescribeInstanceErrorLogsErrorLogArrayOutput values.
 // You can construct a concrete instance of `GetDescribeInstanceErrorLogsErrorLogArrayInput` via:
 //
-//          GetDescribeInstanceErrorLogsErrorLogArray{ GetDescribeInstanceErrorLogsErrorLogArgs{...} }
+//	GetDescribeInstanceErrorLogsErrorLogArray{ GetDescribeInstanceErrorLogsErrorLogArgs{...} }
 type GetDescribeInstanceErrorLogsErrorLogArrayInput interface {
 	pulumi.Input
 
@@ -5327,7 +5327,7 @@ type GetDescribeInstanceSlowQueriesBinlog struct {
 // GetDescribeInstanceSlowQueriesBinlogInput is an input type that accepts GetDescribeInstanceSlowQueriesBinlogArgs and GetDescribeInstanceSlowQueriesBinlogOutput values.
 // You can construct a concrete instance of `GetDescribeInstanceSlowQueriesBinlogInput` via:
 //
-//          GetDescribeInstanceSlowQueriesBinlogArgs{...}
+//	GetDescribeInstanceSlowQueriesBinlogArgs{...}
 type GetDescribeInstanceSlowQueriesBinlogInput interface {
 	pulumi.Input
 
@@ -5363,7 +5363,7 @@ func (i GetDescribeInstanceSlowQueriesBinlogArgs) ToGetDescribeInstanceSlowQueri
 // GetDescribeInstanceSlowQueriesBinlogArrayInput is an input type that accepts GetDescribeInstanceSlowQueriesBinlogArray and GetDescribeInstanceSlowQueriesBinlogArrayOutput values.
 // You can construct a concrete instance of `GetDescribeInstanceSlowQueriesBinlogArrayInput` via:
 //
-//          GetDescribeInstanceSlowQueriesBinlogArray{ GetDescribeInstanceSlowQueriesBinlogArgs{...} }
+//	GetDescribeInstanceSlowQueriesBinlogArray{ GetDescribeInstanceSlowQueriesBinlogArgs{...} }
 type GetDescribeInstanceSlowQueriesBinlogArrayInput interface {
 	pulumi.Input
 
@@ -5472,7 +5472,7 @@ type GetInstanceSlowQueriesSlowQuery struct {
 // GetInstanceSlowQueriesSlowQueryInput is an input type that accepts GetInstanceSlowQueriesSlowQueryArgs and GetInstanceSlowQueriesSlowQueryOutput values.
 // You can construct a concrete instance of `GetInstanceSlowQueriesSlowQueryInput` via:
 //
-//          GetInstanceSlowQueriesSlowQueryArgs{...}
+//	GetInstanceSlowQueriesSlowQueryArgs{...}
 type GetInstanceSlowQueriesSlowQueryInput interface {
 	pulumi.Input
 
@@ -5520,7 +5520,7 @@ func (i GetInstanceSlowQueriesSlowQueryArgs) ToGetInstanceSlowQueriesSlowQueryOu
 // GetInstanceSlowQueriesSlowQueryArrayInput is an input type that accepts GetInstanceSlowQueriesSlowQueryArray and GetInstanceSlowQueriesSlowQueryArrayOutput values.
 // You can construct a concrete instance of `GetInstanceSlowQueriesSlowQueryArrayInput` via:
 //
-//          GetInstanceSlowQueriesSlowQueryArray{ GetInstanceSlowQueriesSlowQueryArgs{...} }
+//	GetInstanceSlowQueriesSlowQueryArray{ GetInstanceSlowQueriesSlowQueryArgs{...} }
 type GetInstanceSlowQueriesSlowQueryArrayInput interface {
 	pulumi.Input
 
@@ -5653,7 +5653,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -5695,7 +5695,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -5812,7 +5812,7 @@ type GetParamTemplatesItem struct {
 // GetParamTemplatesItemInput is an input type that accepts GetParamTemplatesItemArgs and GetParamTemplatesItemOutput values.
 // You can construct a concrete instance of `GetParamTemplatesItemInput` via:
 //
-//          GetParamTemplatesItemArgs{...}
+//	GetParamTemplatesItemArgs{...}
 type GetParamTemplatesItemInput interface {
 	pulumi.Input
 
@@ -5850,7 +5850,7 @@ func (i GetParamTemplatesItemArgs) ToGetParamTemplatesItemOutputWithContext(ctx 
 // GetParamTemplatesItemArrayInput is an input type that accepts GetParamTemplatesItemArray and GetParamTemplatesItemArrayOutput values.
 // You can construct a concrete instance of `GetParamTemplatesItemArrayInput` via:
 //
-//          GetParamTemplatesItemArray{ GetParamTemplatesItemArgs{...} }
+//	GetParamTemplatesItemArray{ GetParamTemplatesItemArgs{...} }
 type GetParamTemplatesItemArrayInput interface {
 	pulumi.Input
 
@@ -5960,7 +5960,7 @@ type GetParamTemplatesItemParamInfoSet struct {
 // GetParamTemplatesItemParamInfoSetInput is an input type that accepts GetParamTemplatesItemParamInfoSetArgs and GetParamTemplatesItemParamInfoSetOutput values.
 // You can construct a concrete instance of `GetParamTemplatesItemParamInfoSetInput` via:
 //
-//          GetParamTemplatesItemParamInfoSetArgs{...}
+//	GetParamTemplatesItemParamInfoSetArgs{...}
 type GetParamTemplatesItemParamInfoSetInput interface {
 	pulumi.Input
 
@@ -6004,7 +6004,7 @@ func (i GetParamTemplatesItemParamInfoSetArgs) ToGetParamTemplatesItemParamInfoS
 // GetParamTemplatesItemParamInfoSetArrayInput is an input type that accepts GetParamTemplatesItemParamInfoSetArray and GetParamTemplatesItemParamInfoSetArrayOutput values.
 // You can construct a concrete instance of `GetParamTemplatesItemParamInfoSetArrayInput` via:
 //
-//          GetParamTemplatesItemParamInfoSetArray{ GetParamTemplatesItemParamInfoSetArgs{...} }
+//	GetParamTemplatesItemParamInfoSetArray{ GetParamTemplatesItemParamInfoSetArgs{...} }
 type GetParamTemplatesItemParamInfoSetArrayInput interface {
 	pulumi.Input
 
@@ -6125,7 +6125,7 @@ type GetProjectSecurityGroupsGroup struct {
 // GetProjectSecurityGroupsGroupInput is an input type that accepts GetProjectSecurityGroupsGroupArgs and GetProjectSecurityGroupsGroupOutput values.
 // You can construct a concrete instance of `GetProjectSecurityGroupsGroupInput` via:
 //
-//          GetProjectSecurityGroupsGroupArgs{...}
+//	GetProjectSecurityGroupsGroupArgs{...}
 type GetProjectSecurityGroupsGroupInput interface {
 	pulumi.Input
 
@@ -6165,7 +6165,7 @@ func (i GetProjectSecurityGroupsGroupArgs) ToGetProjectSecurityGroupsGroupOutput
 // GetProjectSecurityGroupsGroupArrayInput is an input type that accepts GetProjectSecurityGroupsGroupArray and GetProjectSecurityGroupsGroupArrayOutput values.
 // You can construct a concrete instance of `GetProjectSecurityGroupsGroupArrayInput` via:
 //
-//          GetProjectSecurityGroupsGroupArray{ GetProjectSecurityGroupsGroupArgs{...} }
+//	GetProjectSecurityGroupsGroupArray{ GetProjectSecurityGroupsGroupArgs{...} }
 type GetProjectSecurityGroupsGroupArrayInput interface {
 	pulumi.Input
 
@@ -6278,7 +6278,7 @@ type GetProjectSecurityGroupsGroupInbound struct {
 // GetProjectSecurityGroupsGroupInboundInput is an input type that accepts GetProjectSecurityGroupsGroupInboundArgs and GetProjectSecurityGroupsGroupInboundOutput values.
 // You can construct a concrete instance of `GetProjectSecurityGroupsGroupInboundInput` via:
 //
-//          GetProjectSecurityGroupsGroupInboundArgs{...}
+//	GetProjectSecurityGroupsGroupInboundArgs{...}
 type GetProjectSecurityGroupsGroupInboundInput interface {
 	pulumi.Input
 
@@ -6320,7 +6320,7 @@ func (i GetProjectSecurityGroupsGroupInboundArgs) ToGetProjectSecurityGroupsGrou
 // GetProjectSecurityGroupsGroupInboundArrayInput is an input type that accepts GetProjectSecurityGroupsGroupInboundArray and GetProjectSecurityGroupsGroupInboundArrayOutput values.
 // You can construct a concrete instance of `GetProjectSecurityGroupsGroupInboundArrayInput` via:
 //
-//          GetProjectSecurityGroupsGroupInboundArray{ GetProjectSecurityGroupsGroupInboundArgs{...} }
+//	GetProjectSecurityGroupsGroupInboundArray{ GetProjectSecurityGroupsGroupInboundArgs{...} }
 type GetProjectSecurityGroupsGroupInboundArrayInput interface {
 	pulumi.Input
 
@@ -6438,7 +6438,7 @@ type GetProjectSecurityGroupsGroupOutbound struct {
 // GetProjectSecurityGroupsGroupOutboundInput is an input type that accepts GetProjectSecurityGroupsGroupOutboundArgs and GetProjectSecurityGroupsGroupOutboundOutput values.
 // You can construct a concrete instance of `GetProjectSecurityGroupsGroupOutboundInput` via:
 //
-//          GetProjectSecurityGroupsGroupOutboundArgs{...}
+//	GetProjectSecurityGroupsGroupOutboundArgs{...}
 type GetProjectSecurityGroupsGroupOutboundInput interface {
 	pulumi.Input
 
@@ -6480,7 +6480,7 @@ func (i GetProjectSecurityGroupsGroupOutboundArgs) ToGetProjectSecurityGroupsGro
 // GetProjectSecurityGroupsGroupOutboundArrayInput is an input type that accepts GetProjectSecurityGroupsGroupOutboundArray and GetProjectSecurityGroupsGroupOutboundArrayOutput values.
 // You can construct a concrete instance of `GetProjectSecurityGroupsGroupOutboundArrayInput` via:
 //
-//          GetProjectSecurityGroupsGroupOutboundArray{ GetProjectSecurityGroupsGroupOutboundArgs{...} }
+//	GetProjectSecurityGroupsGroupOutboundArray{ GetProjectSecurityGroupsGroupOutboundArgs{...} }
 type GetProjectSecurityGroupsGroupOutboundArrayInput interface {
 	pulumi.Input
 
@@ -6592,7 +6592,7 @@ type GetProxyNodeFilter struct {
 // GetProxyNodeFilterInput is an input type that accepts GetProxyNodeFilterArgs and GetProxyNodeFilterOutput values.
 // You can construct a concrete instance of `GetProxyNodeFilterInput` via:
 //
-//          GetProxyNodeFilterArgs{...}
+//	GetProxyNodeFilterArgs{...}
 type GetProxyNodeFilterInput interface {
 	pulumi.Input
 
@@ -6628,7 +6628,7 @@ func (i GetProxyNodeFilterArgs) ToGetProxyNodeFilterOutputWithContext(ctx contex
 // GetProxyNodeFilterArrayInput is an input type that accepts GetProxyNodeFilterArray and GetProxyNodeFilterArrayOutput values.
 // You can construct a concrete instance of `GetProxyNodeFilterArrayInput` via:
 //
-//          GetProxyNodeFilterArray{ GetProxyNodeFilterArgs{...} }
+//	GetProxyNodeFilterArray{ GetProxyNodeFilterArgs{...} }
 type GetProxyNodeFilterArrayInput interface {
 	pulumi.Input
 
@@ -6735,7 +6735,7 @@ type GetProxyNodeProxyNodeInfo struct {
 // GetProxyNodeProxyNodeInfoInput is an input type that accepts GetProxyNodeProxyNodeInfoArgs and GetProxyNodeProxyNodeInfoOutput values.
 // You can construct a concrete instance of `GetProxyNodeProxyNodeInfoInput` via:
 //
-//          GetProxyNodeProxyNodeInfoArgs{...}
+//	GetProxyNodeProxyNodeInfoArgs{...}
 type GetProxyNodeProxyNodeInfoInput interface {
 	pulumi.Input
 
@@ -6781,7 +6781,7 @@ func (i GetProxyNodeProxyNodeInfoArgs) ToGetProxyNodeProxyNodeInfoOutputWithCont
 // GetProxyNodeProxyNodeInfoArrayInput is an input type that accepts GetProxyNodeProxyNodeInfoArray and GetProxyNodeProxyNodeInfoArrayOutput values.
 // You can construct a concrete instance of `GetProxyNodeProxyNodeInfoArrayInput` via:
 //
-//          GetProxyNodeProxyNodeInfoArray{ GetProxyNodeProxyNodeInfoArgs{...} }
+//	GetProxyNodeProxyNodeInfoArray{ GetProxyNodeProxyNodeInfoArgs{...} }
 type GetProxyNodeProxyNodeInfoArrayInput interface {
 	pulumi.Input
 
@@ -6917,7 +6917,7 @@ type GetResourcePackageListResourcePackageList struct {
 // GetResourcePackageListResourcePackageListInput is an input type that accepts GetResourcePackageListResourcePackageListArgs and GetResourcePackageListResourcePackageListOutput values.
 // You can construct a concrete instance of `GetResourcePackageListResourcePackageListInput` via:
 //
-//          GetResourcePackageListResourcePackageListArgs{...}
+//	GetResourcePackageListResourcePackageListArgs{...}
 type GetResourcePackageListResourcePackageListInput interface {
 	pulumi.Input
 
@@ -6967,7 +6967,7 @@ func (i GetResourcePackageListResourcePackageListArgs) ToGetResourcePackageListR
 // GetResourcePackageListResourcePackageListArrayInput is an input type that accepts GetResourcePackageListResourcePackageListArray and GetResourcePackageListResourcePackageListArrayOutput values.
 // You can construct a concrete instance of `GetResourcePackageListResourcePackageListArrayInput` via:
 //
-//          GetResourcePackageListResourcePackageListArray{ GetResourcePackageListResourcePackageListArgs{...} }
+//	GetResourcePackageListResourcePackageListArray{ GetResourcePackageListResourcePackageListArgs{...} }
 type GetResourcePackageListResourcePackageListArrayInput interface {
 	pulumi.Input
 
@@ -7097,7 +7097,7 @@ type GetResourcePackageListResourcePackageListBindInstanceInfo struct {
 // GetResourcePackageListResourcePackageListBindInstanceInfoInput is an input type that accepts GetResourcePackageListResourcePackageListBindInstanceInfoArgs and GetResourcePackageListResourcePackageListBindInstanceInfoOutput values.
 // You can construct a concrete instance of `GetResourcePackageListResourcePackageListBindInstanceInfoInput` via:
 //
-//          GetResourcePackageListResourcePackageListBindInstanceInfoArgs{...}
+//	GetResourcePackageListResourcePackageListBindInstanceInfoArgs{...}
 type GetResourcePackageListResourcePackageListBindInstanceInfoInput interface {
 	pulumi.Input
 
@@ -7129,7 +7129,7 @@ func (i GetResourcePackageListResourcePackageListBindInstanceInfoArgs) ToGetReso
 // GetResourcePackageListResourcePackageListBindInstanceInfoArrayInput is an input type that accepts GetResourcePackageListResourcePackageListBindInstanceInfoArray and GetResourcePackageListResourcePackageListBindInstanceInfoArrayOutput values.
 // You can construct a concrete instance of `GetResourcePackageListResourcePackageListBindInstanceInfoArrayInput` via:
 //
-//          GetResourcePackageListResourcePackageListBindInstanceInfoArray{ GetResourcePackageListResourcePackageListBindInstanceInfoArgs{...} }
+//	GetResourcePackageListResourcePackageListBindInstanceInfoArray{ GetResourcePackageListResourcePackageListBindInstanceInfoArgs{...} }
 type GetResourcePackageListResourcePackageListBindInstanceInfoArrayInput interface {
 	pulumi.Input
 
@@ -7218,7 +7218,7 @@ type GetResourcePackageSaleSpecsDetail struct {
 // GetResourcePackageSaleSpecsDetailInput is an input type that accepts GetResourcePackageSaleSpecsDetailArgs and GetResourcePackageSaleSpecsDetailOutput values.
 // You can construct a concrete instance of `GetResourcePackageSaleSpecsDetailInput` via:
 //
-//          GetResourcePackageSaleSpecsDetailArgs{...}
+//	GetResourcePackageSaleSpecsDetailArgs{...}
 type GetResourcePackageSaleSpecsDetailInput interface {
 	pulumi.Input
 
@@ -7256,7 +7256,7 @@ func (i GetResourcePackageSaleSpecsDetailArgs) ToGetResourcePackageSaleSpecsDeta
 // GetResourcePackageSaleSpecsDetailArrayInput is an input type that accepts GetResourcePackageSaleSpecsDetailArray and GetResourcePackageSaleSpecsDetailArrayOutput values.
 // You can construct a concrete instance of `GetResourcePackageSaleSpecsDetailArrayInput` via:
 //
-//          GetResourcePackageSaleSpecsDetailArray{ GetResourcePackageSaleSpecsDetailArgs{...} }
+//	GetResourcePackageSaleSpecsDetailArray{ GetResourcePackageSaleSpecsDetailArgs{...} }
 type GetResourcePackageSaleSpecsDetailArrayInput interface {
 	pulumi.Input
 
@@ -7352,7 +7352,7 @@ type GetRollbackTimeRangeRollbackTimeRange struct {
 // GetRollbackTimeRangeRollbackTimeRangeInput is an input type that accepts GetRollbackTimeRangeRollbackTimeRangeArgs and GetRollbackTimeRangeRollbackTimeRangeOutput values.
 // You can construct a concrete instance of `GetRollbackTimeRangeRollbackTimeRangeInput` via:
 //
-//          GetRollbackTimeRangeRollbackTimeRangeArgs{...}
+//	GetRollbackTimeRangeRollbackTimeRangeArgs{...}
 type GetRollbackTimeRangeRollbackTimeRangeInput interface {
 	pulumi.Input
 
@@ -7382,7 +7382,7 @@ func (i GetRollbackTimeRangeRollbackTimeRangeArgs) ToGetRollbackTimeRangeRollbac
 // GetRollbackTimeRangeRollbackTimeRangeArrayInput is an input type that accepts GetRollbackTimeRangeRollbackTimeRangeArray and GetRollbackTimeRangeRollbackTimeRangeArrayOutput values.
 // You can construct a concrete instance of `GetRollbackTimeRangeRollbackTimeRangeArrayInput` via:
 //
-//          GetRollbackTimeRangeRollbackTimeRangeArray{ GetRollbackTimeRangeRollbackTimeRangeArgs{...} }
+//	GetRollbackTimeRangeRollbackTimeRangeArray{ GetRollbackTimeRangeRollbackTimeRangeArgs{...} }
 type GetRollbackTimeRangeRollbackTimeRangeArrayInput interface {
 	pulumi.Input
 
@@ -7468,7 +7468,7 @@ type GetZoneConfigList struct {
 // GetZoneConfigListInput is an input type that accepts GetZoneConfigListArgs and GetZoneConfigListOutput values.
 // You can construct a concrete instance of `GetZoneConfigListInput` via:
 //
-//          GetZoneConfigListArgs{...}
+//	GetZoneConfigListArgs{...}
 type GetZoneConfigListInput interface {
 	pulumi.Input
 
@@ -7508,7 +7508,7 @@ func (i GetZoneConfigListArgs) ToGetZoneConfigListOutputWithContext(ctx context.
 // GetZoneConfigListArrayInput is an input type that accepts GetZoneConfigListArray and GetZoneConfigListArrayOutput values.
 // You can construct a concrete instance of `GetZoneConfigListArrayInput` via:
 //
-//          GetZoneConfigListArray{ GetZoneConfigListArgs{...} }
+//	GetZoneConfigListArray{ GetZoneConfigListArgs{...} }
 type GetZoneConfigListArrayInput interface {
 	pulumi.Input
 
@@ -7609,7 +7609,7 @@ type GetZoneConfigListZoneStockInfo struct {
 // GetZoneConfigListZoneStockInfoInput is an input type that accepts GetZoneConfigListZoneStockInfoArgs and GetZoneConfigListZoneStockInfoOutput values.
 // You can construct a concrete instance of `GetZoneConfigListZoneStockInfoInput` via:
 //
-//          GetZoneConfigListZoneStockInfoArgs{...}
+//	GetZoneConfigListZoneStockInfoArgs{...}
 type GetZoneConfigListZoneStockInfoInput interface {
 	pulumi.Input
 
@@ -7639,7 +7639,7 @@ func (i GetZoneConfigListZoneStockInfoArgs) ToGetZoneConfigListZoneStockInfoOutp
 // GetZoneConfigListZoneStockInfoArrayInput is an input type that accepts GetZoneConfigListZoneStockInfoArray and GetZoneConfigListZoneStockInfoArrayOutput values.
 // You can construct a concrete instance of `GetZoneConfigListZoneStockInfoArrayInput` via:
 //
-//          GetZoneConfigListZoneStockInfoArray{ GetZoneConfigListZoneStockInfoArgs{...} }
+//	GetZoneConfigListZoneStockInfoArray{ GetZoneConfigListZoneStockInfoArgs{...} }
 type GetZoneConfigListZoneStockInfoArrayInput interface {
 	pulumi.Input
 
@@ -7723,7 +7723,7 @@ type GetZoneRegionSet struct {
 // GetZoneRegionSetInput is an input type that accepts GetZoneRegionSetArgs and GetZoneRegionSetOutput values.
 // You can construct a concrete instance of `GetZoneRegionSetInput` via:
 //
-//          GetZoneRegionSetArgs{...}
+//	GetZoneRegionSetArgs{...}
 type GetZoneRegionSetInput interface {
 	pulumi.Input
 
@@ -7761,7 +7761,7 @@ func (i GetZoneRegionSetArgs) ToGetZoneRegionSetOutputWithContext(ctx context.Co
 // GetZoneRegionSetArrayInput is an input type that accepts GetZoneRegionSetArray and GetZoneRegionSetArrayOutput values.
 // You can construct a concrete instance of `GetZoneRegionSetArrayInput` via:
 //
-//          GetZoneRegionSetArray{ GetZoneRegionSetArgs{...} }
+//	GetZoneRegionSetArray{ GetZoneRegionSetArgs{...} }
 type GetZoneRegionSetArrayInput interface {
 	pulumi.Input
 
@@ -7857,7 +7857,7 @@ type GetZoneRegionSetModule struct {
 // GetZoneRegionSetModuleInput is an input type that accepts GetZoneRegionSetModuleArgs and GetZoneRegionSetModuleOutput values.
 // You can construct a concrete instance of `GetZoneRegionSetModuleInput` via:
 //
-//          GetZoneRegionSetModuleArgs{...}
+//	GetZoneRegionSetModuleArgs{...}
 type GetZoneRegionSetModuleInput interface {
 	pulumi.Input
 
@@ -7887,7 +7887,7 @@ func (i GetZoneRegionSetModuleArgs) ToGetZoneRegionSetModuleOutputWithContext(ct
 // GetZoneRegionSetModuleArrayInput is an input type that accepts GetZoneRegionSetModuleArray and GetZoneRegionSetModuleArrayOutput values.
 // You can construct a concrete instance of `GetZoneRegionSetModuleArrayInput` via:
 //
-//          GetZoneRegionSetModuleArray{ GetZoneRegionSetModuleArgs{...} }
+//	GetZoneRegionSetModuleArray{ GetZoneRegionSetModuleArgs{...} }
 type GetZoneRegionSetModuleArrayInput interface {
 	pulumi.Input
 
@@ -7975,7 +7975,7 @@ type GetZoneRegionSetZoneSet struct {
 // GetZoneRegionSetZoneSetInput is an input type that accepts GetZoneRegionSetZoneSetArgs and GetZoneRegionSetZoneSetOutput values.
 // You can construct a concrete instance of `GetZoneRegionSetZoneSetInput` via:
 //
-//          GetZoneRegionSetZoneSetArgs{...}
+//	GetZoneRegionSetZoneSetArgs{...}
 type GetZoneRegionSetZoneSetInput interface {
 	pulumi.Input
 
@@ -8017,7 +8017,7 @@ func (i GetZoneRegionSetZoneSetArgs) ToGetZoneRegionSetZoneSetOutputWithContext(
 // GetZoneRegionSetZoneSetArrayInput is an input type that accepts GetZoneRegionSetZoneSetArray and GetZoneRegionSetZoneSetArrayOutput values.
 // You can construct a concrete instance of `GetZoneRegionSetZoneSetArrayInput` via:
 //
-//          GetZoneRegionSetZoneSetArray{ GetZoneRegionSetZoneSetArgs{...} }
+//	GetZoneRegionSetZoneSetArray{ GetZoneRegionSetZoneSetArgs{...} }
 type GetZoneRegionSetZoneSetArrayInput interface {
 	pulumi.Input
 

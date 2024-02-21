@@ -19,40 +19,43 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		object, err := Cos.GetBucketObject(ctx, &cos.GetBucketObjectArgs{
-// 			Bucket: fmt.Sprintf("%v%v", "keep-bucket-", local.App_id),
-// 			Key:    "/mps-test/test.mov",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mps.GetMediaMetaData(ctx, &mps.GetMediaMetaDataArgs{
-// 			InputInfo: mps.GetMediaMetaDataInputInfo{
-// 				Type: "COS",
-// 				CosInputInfo: mps.GetMediaMetaDataInputInfoCosInputInfo{
-// 					Bucket: object.Bucket,
-// 					Region: fmt.Sprintf("%v%v", "%", "s"),
-// 					Object: object.Key,
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			object, err := Cos.GetBucketObject(ctx, &cos.GetBucketObjectArgs{
+//				Bucket: fmt.Sprintf("%v%v", "keep-bucket-", local.App_id),
+//				Key:    "/mps-test/test.mov",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mps.GetMediaMetaData(ctx, &mps.GetMediaMetaDataArgs{
+//				InputInfo: mps.GetMediaMetaDataInputInfo{
+//					Type: "COS",
+//					CosInputInfo: mps.GetMediaMetaDataInputInfoCosInputInfo{
+//						Bucket: object.Bucket,
+//						Region: fmt.Sprintf("%v%v", "%", "s"),
+//						Object: object.Key,
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetMediaMetaData(ctx *pulumi.Context, args *GetMediaMetaDataArgs, opts ...pulumi.InvokeOption) (*GetMediaMetaDataResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

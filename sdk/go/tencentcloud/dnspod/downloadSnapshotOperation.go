@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.NewDownloadSnapshotOperation(ctx, "downloadSnapshot", &Dnspod.DownloadSnapshotOperationArgs{
-// 			Domain:     pulumi.String("dnspod.cn"),
-// 			SnapshotId: pulumi.String("456"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.NewDownloadSnapshotOperation(ctx, "downloadSnapshot", &Dnspod.DownloadSnapshotOperationArgs{
+//				Domain:     pulumi.String("dnspod.cn"),
+//				SnapshotId: pulumi.String("456"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type DownloadSnapshotOperation struct {
 	pulumi.CustomResourceState
@@ -145,7 +148,7 @@ func (i *DownloadSnapshotOperation) ToDownloadSnapshotOperationOutputWithContext
 // DownloadSnapshotOperationArrayInput is an input type that accepts DownloadSnapshotOperationArray and DownloadSnapshotOperationArrayOutput values.
 // You can construct a concrete instance of `DownloadSnapshotOperationArrayInput` via:
 //
-//          DownloadSnapshotOperationArray{ DownloadSnapshotOperationArgs{...} }
+//	DownloadSnapshotOperationArray{ DownloadSnapshotOperationArgs{...} }
 type DownloadSnapshotOperationArrayInput interface {
 	pulumi.Input
 
@@ -170,7 +173,7 @@ func (i DownloadSnapshotOperationArray) ToDownloadSnapshotOperationArrayOutputWi
 // DownloadSnapshotOperationMapInput is an input type that accepts DownloadSnapshotOperationMap and DownloadSnapshotOperationMapOutput values.
 // You can construct a concrete instance of `DownloadSnapshotOperationMapInput` via:
 //
-//          DownloadSnapshotOperationMap{ "key": DownloadSnapshotOperationArgs{...} }
+//	DownloadSnapshotOperationMap{ "key": DownloadSnapshotOperationArgs{...} }
 type DownloadSnapshotOperationMapInput interface {
 	pulumi.Input
 

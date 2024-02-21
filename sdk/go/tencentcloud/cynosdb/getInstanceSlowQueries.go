@@ -19,37 +19,40 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		cynosdbClusterId := "default_cynosdb_cluster"
-// 		if param := cfg.Get("cynosdbClusterId"); param != "" {
-// 			cynosdbClusterId = param
-// 		}
-// 		_, err := Cynosdb.GetInstanceSlowQueries(ctx, &cynosdb.GetInstanceSlowQueriesArgs{
-// 			InstanceId:  cynosdbClusterId,
-// 			StartTime:   pulumi.StringRef("2023-06-20 23:19:03"),
-// 			EndTime:     pulumi.StringRef("2023-06-30 23:19:03"),
-// 			Username:    pulumi.StringRef("keep_dts"),
-// 			Host:        pulumi.StringRef(fmt.Sprintf("%v%v", "%", "%")),
-// 			Database:    pulumi.StringRef("tf_ci_test"),
-// 			OrderBy:     pulumi.StringRef("QueryTime"),
-// 			OrderByType: pulumi.StringRef("desc"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			cynosdbClusterId := "default_cynosdb_cluster"
+//			if param := cfg.Get("cynosdbClusterId"); param != "" {
+//				cynosdbClusterId = param
+//			}
+//			_, err := Cynosdb.GetInstanceSlowQueries(ctx, &cynosdb.GetInstanceSlowQueriesArgs{
+//				InstanceId:  cynosdbClusterId,
+//				StartTime:   pulumi.StringRef("2023-06-20 23:19:03"),
+//				EndTime:     pulumi.StringRef("2023-06-30 23:19:03"),
+//				Username:    pulumi.StringRef("keep_dts"),
+//				Host:        pulumi.StringRef(fmt.Sprintf("%v%v", "%", "%")),
+//				Database:    pulumi.StringRef("tf_ci_test"),
+//				OrderBy:     pulumi.StringRef("QueryTime"),
+//				OrderByType: pulumi.StringRef("desc"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Query slow queries by time range
 //
@@ -57,32 +60,35 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		cynosdbClusterId := "default_cynosdb_cluster"
-// 		if param := cfg.Get("cynosdbClusterId"); param != "" {
-// 			cynosdbClusterId = param
-// 		}
-// 		_, err := Cynosdb.GetInstanceSlowQueries(ctx, &cynosdb.GetInstanceSlowQueriesArgs{
-// 			InstanceId:  cynosdbClusterId,
-// 			StartTime:   pulumi.StringRef("2023-06-20 23:19:03"),
-// 			EndTime:     pulumi.StringRef("2023-06-30 23:19:03"),
-// 			OrderBy:     pulumi.StringRef("QueryTime"),
-// 			OrderByType: pulumi.StringRef("desc"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			cynosdbClusterId := "default_cynosdb_cluster"
+//			if param := cfg.Get("cynosdbClusterId"); param != "" {
+//				cynosdbClusterId = param
+//			}
+//			_, err := Cynosdb.GetInstanceSlowQueries(ctx, &cynosdb.GetInstanceSlowQueriesArgs{
+//				InstanceId:  cynosdbClusterId,
+//				StartTime:   pulumi.StringRef("2023-06-20 23:19:03"),
+//				EndTime:     pulumi.StringRef("2023-06-30 23:19:03"),
+//				OrderBy:     pulumi.StringRef("QueryTime"),
+//				OrderByType: pulumi.StringRef("desc"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Query slow queries by user and db name
 //
@@ -90,35 +96,38 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		cynosdbClusterId := "default_cynosdb_cluster"
-// 		if param := cfg.Get("cynosdbClusterId"); param != "" {
-// 			cynosdbClusterId = param
-// 		}
-// 		_, err := Cynosdb.GetInstanceSlowQueries(ctx, &cynosdb.GetInstanceSlowQueriesArgs{
-// 			InstanceId:  cynosdbClusterId,
-// 			Username:    pulumi.StringRef("keep_dts"),
-// 			Host:        pulumi.StringRef(fmt.Sprintf("%v%v", "%", "%")),
-// 			Database:    pulumi.StringRef("tf_ci_test"),
-// 			OrderBy:     pulumi.StringRef("QueryTime"),
-// 			OrderByType: pulumi.StringRef("desc"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			cynosdbClusterId := "default_cynosdb_cluster"
+//			if param := cfg.Get("cynosdbClusterId"); param != "" {
+//				cynosdbClusterId = param
+//			}
+//			_, err := Cynosdb.GetInstanceSlowQueries(ctx, &cynosdb.GetInstanceSlowQueriesArgs{
+//				InstanceId:  cynosdbClusterId,
+//				Username:    pulumi.StringRef("keep_dts"),
+//				Host:        pulumi.StringRef(fmt.Sprintf("%v%v", "%", "%")),
+//				Database:    pulumi.StringRef("tf_ci_test"),
+//				OrderBy:     pulumi.StringRef("QueryTime"),
+//				OrderByType: pulumi.StringRef("desc"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetInstanceSlowQueries(ctx *pulumi.Context, args *GetInstanceSlowQueriesArgs, opts ...pulumi.InvokeOption) (*GetInstanceSlowQueriesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

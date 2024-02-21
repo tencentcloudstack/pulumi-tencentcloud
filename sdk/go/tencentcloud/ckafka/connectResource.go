@@ -19,33 +19,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.NewConnectResource(ctx, "connectResource", &Ckafka.ConnectResourceArgs{
-// 			Description: pulumi.String("for terraform test"),
-// 			MysqlConnectParam: &ckafka.ConnectResourceMysqlConnectParamArgs{
-// 				Password:   pulumi.String("xxxxxxxxx"),
-// 				Port:       pulumi.Int(3306),
-// 				Resource:   pulumi.String("cdb-fitq5t9h"),
-// 				SelfBuilt:  pulumi.Bool(false),
-// 				ServiceVip: pulumi.String("172.16.80.59"),
-// 				UniqVpcId:  pulumi.String("vpc-4owdpnwr"),
-// 				UserName:   pulumi.String("root"),
-// 			},
-// 			ResourceName: pulumi.String("terraform-test"),
-// 			Type:         pulumi.String("MYSQL"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.NewConnectResource(ctx, "connectResource", &Ckafka.ConnectResourceArgs{
+//				Description: pulumi.String("for terraform test"),
+//				MysqlConnectParam: &ckafka.ConnectResourceMysqlConnectParamArgs{
+//					Password:   pulumi.String("xxxxxxxxx"),
+//					Port:       pulumi.Int(3306),
+//					Resource:   pulumi.String("cdb-fitq5t9h"),
+//					SelfBuilt:  pulumi.Bool(false),
+//					ServiceVip: pulumi.String("172.16.80.59"),
+//					UniqVpcId:  pulumi.String("vpc-4owdpnwr"),
+//					UserName:   pulumi.String("root"),
+//				},
+//				ResourceName: pulumi.String("terraform-test"),
+//				Type:         pulumi.String("MYSQL"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -53,7 +56,9 @@ import (
 // ckafka connect_resource can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ckafka/connectResource:ConnectResource connect_resource connect_resource_id
+//
+//	$ pulumi import tencentcloud:Ckafka/connectResource:ConnectResource connect_resource connect_resource_id
+//
 // ```
 type ConnectResource struct {
 	pulumi.CustomResourceState
@@ -268,7 +273,7 @@ func (i *ConnectResource) ToConnectResourceOutputWithContext(ctx context.Context
 // ConnectResourceArrayInput is an input type that accepts ConnectResourceArray and ConnectResourceArrayOutput values.
 // You can construct a concrete instance of `ConnectResourceArrayInput` via:
 //
-//          ConnectResourceArray{ ConnectResourceArgs{...} }
+//	ConnectResourceArray{ ConnectResourceArgs{...} }
 type ConnectResourceArrayInput interface {
 	pulumi.Input
 
@@ -293,7 +298,7 @@ func (i ConnectResourceArray) ToConnectResourceArrayOutputWithContext(ctx contex
 // ConnectResourceMapInput is an input type that accepts ConnectResourceMap and ConnectResourceMapOutput values.
 // You can construct a concrete instance of `ConnectResourceMapInput` via:
 //
-//          ConnectResourceMap{ "key": ConnectResourceArgs{...} }
+//	ConnectResourceMap{ "key": ConnectResourceArgs{...} }
 type ConnectResourceMapInput interface {
 	pulumi.Input
 

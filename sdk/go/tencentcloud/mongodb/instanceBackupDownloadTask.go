@@ -147,7 +147,7 @@ func (i *InstanceBackupDownloadTask) ToInstanceBackupDownloadTaskOutputWithConte
 // InstanceBackupDownloadTaskArrayInput is an input type that accepts InstanceBackupDownloadTaskArray and InstanceBackupDownloadTaskArrayOutput values.
 // You can construct a concrete instance of `InstanceBackupDownloadTaskArrayInput` via:
 //
-//          InstanceBackupDownloadTaskArray{ InstanceBackupDownloadTaskArgs{...} }
+//	InstanceBackupDownloadTaskArray{ InstanceBackupDownloadTaskArgs{...} }
 type InstanceBackupDownloadTaskArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +172,7 @@ func (i InstanceBackupDownloadTaskArray) ToInstanceBackupDownloadTaskArrayOutput
 // InstanceBackupDownloadTaskMapInput is an input type that accepts InstanceBackupDownloadTaskMap and InstanceBackupDownloadTaskMapOutput values.
 // You can construct a concrete instance of `InstanceBackupDownloadTaskMapInput` via:
 //
-//          InstanceBackupDownloadTaskMap{ "key": InstanceBackupDownloadTaskArgs{...} }
+//	InstanceBackupDownloadTaskMap{ "key": InstanceBackupDownloadTaskArgs{...} }
 type InstanceBackupDownloadTaskMapInput interface {
 	pulumi.Input
 

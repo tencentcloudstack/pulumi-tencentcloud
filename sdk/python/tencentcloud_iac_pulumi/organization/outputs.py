@@ -13,6 +13,7 @@ __all__ = [
     'InstanceOrgPermission',
     'OrgIdentityIdentityPolicy',
     'OrgMemberOrgPermission',
+    'OrgShareUnitMemberMember',
     'GetMembersItemResult',
     'GetMembersItemOrgIdentityResult',
     'GetMembersItemOrgPermissionResult',
@@ -21,6 +22,7 @@ __all__ = [
     'GetOrgFinancialByMemberItemResult',
     'GetOrgFinancialByMonthItemResult',
     'GetOrgFinancialByProductItemResult',
+    'GetOrgShareAreaItemResult',
 ]
 
 @pulumi.output_type
@@ -161,6 +163,41 @@ class OrgMemberOrgPermission(dict):
         Member name.
         """
         return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class OrgShareUnitMemberMember(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "shareMemberUin":
+            suggest = "share_member_uin"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in OrgShareUnitMemberMember. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        OrgShareUnitMemberMember.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        OrgShareUnitMemberMember.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 share_member_uin: int):
+        """
+        :param int share_member_uin: Member uin.
+        """
+        pulumi.set(__self__, "share_member_uin", share_member_uin)
+
+    @property
+    @pulumi.getter(name="shareMemberUin")
+    def share_member_uin(self) -> int:
+        """
+        Member uin.
+        """
+        return pulumi.get(self, "share_member_uin")
 
 
 @pulumi.output_type
@@ -635,5 +672,45 @@ class GetOrgFinancialByProductItemResult(dict):
         Total cost of the product.
         """
         return pulumi.get(self, "total_cost")
+
+
+@pulumi.output_type
+class GetOrgShareAreaItemResult(dict):
+    def __init__(__self__, *,
+                 area: str,
+                 area_id: int,
+                 name: str):
+        """
+        :param str area: Region identifier.
+        :param int area_id: Region ID.
+        :param str name: Region name.
+        """
+        pulumi.set(__self__, "area", area)
+        pulumi.set(__self__, "area_id", area_id)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def area(self) -> str:
+        """
+        Region identifier.
+        """
+        return pulumi.get(self, "area")
+
+    @property
+    @pulumi.getter(name="areaId")
+    def area_id(self) -> int:
+        """
+        Region ID.
+        """
+        return pulumi.get(self, "area_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Region name.
+        """
+        return pulumi.get(self, "name")
 
 

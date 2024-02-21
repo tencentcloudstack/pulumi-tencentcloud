@@ -19,30 +19,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		internetAddress, err := Dc.NewInternetAddress(ctx, "internetAddress", &Dc.InternetAddressArgs{
-// 			MaskLen:   pulumi.Int(30),
-// 			AddrType:  pulumi.Int(2),
-// 			AddrProto: pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Dc.NewInternetAddressConfig(ctx, "internetAddressConfig", &Dc.InternetAddressConfigArgs{
-// 			InstanceId: internetAddress.ID(),
-// 			Enable:     pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			internetAddress, err := Dc.NewInternetAddress(ctx, "internetAddress", &Dc.InternetAddressArgs{
+//				MaskLen:   pulumi.Int(30),
+//				AddrType:  pulumi.Int(2),
+//				AddrProto: pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dc.NewInternetAddressConfig(ctx, "internetAddressConfig", &Dc.InternetAddressConfigArgs{
+//				InstanceId: internetAddress.ID(),
+//				Enable:     pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -50,7 +53,9 @@ import (
 // dc internet_address_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dc/internetAddressConfig:InternetAddressConfig internet_address_config internet_address_id
+//
+//	$ pulumi import tencentcloud:Dc/internetAddressConfig:InternetAddressConfig internet_address_config internet_address_id
+//
 // ```
 type InternetAddressConfig struct {
 	pulumi.CustomResourceState
@@ -155,7 +160,7 @@ func (i *InternetAddressConfig) ToInternetAddressConfigOutputWithContext(ctx con
 // InternetAddressConfigArrayInput is an input type that accepts InternetAddressConfigArray and InternetAddressConfigArrayOutput values.
 // You can construct a concrete instance of `InternetAddressConfigArrayInput` via:
 //
-//          InternetAddressConfigArray{ InternetAddressConfigArgs{...} }
+//	InternetAddressConfigArray{ InternetAddressConfigArgs{...} }
 type InternetAddressConfigArrayInput interface {
 	pulumi.Input
 
@@ -180,7 +185,7 @@ func (i InternetAddressConfigArray) ToInternetAddressConfigArrayOutputWithContex
 // InternetAddressConfigMapInput is an input type that accepts InternetAddressConfigMap and InternetAddressConfigMapOutput values.
 // You can construct a concrete instance of `InternetAddressConfigMapInput` via:
 //
-//          InternetAddressConfigMap{ "key": InternetAddressConfigArgs{...} }
+//	InternetAddressConfigMap{ "key": InternetAddressConfigArgs{...} }
 type InternetAddressConfigMapInput interface {
 	pulumi.Input
 

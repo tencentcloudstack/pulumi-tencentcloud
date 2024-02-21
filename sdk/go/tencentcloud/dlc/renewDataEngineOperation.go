@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.NewRenewDataEngineOperation(ctx, "renewDataEngine", &Dlc.RenewDataEngineOperationArgs{
-// 			DataEngineName: pulumi.String("testEngine"),
-// 			PayMode:        pulumi.Int(1),
-// 			RenewFlag:      pulumi.Int(1),
-// 			TimeSpan:       pulumi.Int(3600),
-// 			TimeUnit:       pulumi.String("m"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.NewRenewDataEngineOperation(ctx, "renewDataEngine", &Dlc.RenewDataEngineOperationArgs{
+//				DataEngineName: pulumi.String("testEngine"),
+//				PayMode:        pulumi.Int(1),
+//				RenewFlag:      pulumi.Int(1),
+//				TimeSpan:       pulumi.Int(3600),
+//				TimeUnit:       pulumi.String("m"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +48,9 @@ import (
 // dlc renew_data_engine can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dlc/renewDataEngineOperation:RenewDataEngineOperation renew_data_engine renew_data_engine_id
+//
+//	$ pulumi import tencentcloud:Dlc/renewDataEngineOperation:RenewDataEngineOperation renew_data_engine renew_data_engine_id
+//
 // ```
 type RenewDataEngineOperation struct {
 	pulumi.CustomResourceState
@@ -180,7 +185,7 @@ func (i *RenewDataEngineOperation) ToRenewDataEngineOperationOutputWithContext(c
 // RenewDataEngineOperationArrayInput is an input type that accepts RenewDataEngineOperationArray and RenewDataEngineOperationArrayOutput values.
 // You can construct a concrete instance of `RenewDataEngineOperationArrayInput` via:
 //
-//          RenewDataEngineOperationArray{ RenewDataEngineOperationArgs{...} }
+//	RenewDataEngineOperationArray{ RenewDataEngineOperationArgs{...} }
 type RenewDataEngineOperationArrayInput interface {
 	pulumi.Input
 
@@ -205,7 +210,7 @@ func (i RenewDataEngineOperationArray) ToRenewDataEngineOperationArrayOutputWith
 // RenewDataEngineOperationMapInput is an input type that accepts RenewDataEngineOperationMap and RenewDataEngineOperationMapOutput values.
 // You can construct a concrete instance of `RenewDataEngineOperationMapInput` via:
 //
-//          RenewDataEngineOperationMap{ "key": RenewDataEngineOperationArgs{...} }
+//	RenewDataEngineOperationMap{ "key": RenewDataEngineOperationArgs{...} }
 type RenewDataEngineOperationMapInput interface {
 	pulumi.Input
 

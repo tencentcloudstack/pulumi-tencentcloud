@@ -18,26 +18,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.GetApplication(ctx, &tsf.GetApplicationArgs{
-// 			ApplicationIdLists: []string{
-// 				"application-a24x29xv",
-// 			},
-// 			ApplicationType:  pulumi.StringRef("V"),
-// 			MicroserviceType: pulumi.StringRef("N"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.GetApplication(ctx, &tsf.GetApplicationArgs{
+//				ApplicationIdLists: []string{
+//					"application-a24x29xv",
+//				},
+//				ApplicationType:  pulumi.StringRef("V"),
+//				MicroserviceType: pulumi.StringRef("N"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupApplication(ctx *pulumi.Context, args *LookupApplicationArgs, opts ...pulumi.InvokeOption) (*LookupApplicationResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -19,34 +19,37 @@ import (
 // package main
 //
 // import (
-// 	"encoding/json"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"type":   "white_list",
-// 			"blocks": "1.1.1.1",
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		_, err := ApiGateway.NewPlugin(ctx, "example", &ApiGateway.PluginArgs{
-// 			PluginName:  pulumi.String("tf-example"),
-// 			PluginType:  pulumi.String("IPControl"),
-// 			PluginData:  pulumi.String(json0),
-// 			Description: pulumi.String("desc."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"type":   "white_list",
+//				"blocks": "1.1.1.1",
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err := ApiGateway.NewPlugin(ctx, "example", &ApiGateway.PluginArgs{
+//				PluginName:  pulumi.String("tf-example"),
+//				PluginType:  pulumi.String("IPControl"),
+//				PluginData:  pulumi.String(json0),
+//				Description: pulumi.String("desc."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -54,7 +57,9 @@ import (
 // apiGateway plugin can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:ApiGateway/plugin:Plugin plugin plugin_id
+//
+//	$ pulumi import tencentcloud:ApiGateway/plugin:Plugin plugin plugin_id
+//
 // ```
 type Plugin struct {
 	pulumi.CustomResourceState
@@ -182,7 +187,7 @@ func (i *Plugin) ToPluginOutputWithContext(ctx context.Context) PluginOutput {
 // PluginArrayInput is an input type that accepts PluginArray and PluginArrayOutput values.
 // You can construct a concrete instance of `PluginArrayInput` via:
 //
-//          PluginArray{ PluginArgs{...} }
+//	PluginArray{ PluginArgs{...} }
 type PluginArrayInput interface {
 	pulumi.Input
 
@@ -207,7 +212,7 @@ func (i PluginArray) ToPluginArrayOutputWithContext(ctx context.Context) PluginA
 // PluginMapInput is an input type that accepts PluginMap and PluginMapOutput values.
 // You can construct a concrete instance of `PluginMapInput` via:
 //
-//          PluginMap{ "key": PluginArgs{...} }
+//	PluginMap{ "key": PluginArgs{...} }
 type PluginMapInput interface {
 	pulumi.Input
 

@@ -19,44 +19,47 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cls.NewCkafkaConsumer(ctx, "ckafkaConsumer", &Cls.CkafkaConsumerArgs{
-// 			Ckafka: &cls.CkafkaConsumerCkafkaArgs{
-// 				InstanceId:   pulumi.String("ckafka-qzoeaqx8"),
-// 				InstanceName: pulumi.String("ckafka-instance"),
-// 				TopicId:      pulumi.String("topic-c6tm4kpm"),
-// 				TopicName:    pulumi.String("name"),
-// 				Vip:          pulumi.String("172.16.112.23"),
-// 				Vport:        pulumi.String("9092"),
-// 			},
-// 			Compression: pulumi.Int(1),
-// 			Content: &cls.CkafkaConsumerContentArgs{
-// 				EnableTag: pulumi.Bool(true),
-// 				MetaFields: pulumi.StringArray{
-// 					pulumi.String("__FILENAME__"),
-// 					pulumi.String("__HOSTNAME__"),
-// 					pulumi.String("__PKGID__"),
-// 					pulumi.String("__SOURCE__"),
-// 					pulumi.String("__TIMESTAMP__"),
-// 				},
-// 				TagJsonNotTiled:   pulumi.Bool(true),
-// 				TimestampAccuracy: pulumi.Int(2),
-// 			},
-// 			NeedContent: pulumi.Bool(true),
-// 			TopicId:     pulumi.String("7e34a3a7-635e-4da8-9005-88106c1fde69"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cls.NewCkafkaConsumer(ctx, "ckafkaConsumer", &Cls.CkafkaConsumerArgs{
+//				Ckafka: &cls.CkafkaConsumerCkafkaArgs{
+//					InstanceId:   pulumi.String("ckafka-qzoeaqx8"),
+//					InstanceName: pulumi.String("ckafka-instance"),
+//					TopicId:      pulumi.String("topic-c6tm4kpm"),
+//					TopicName:    pulumi.String("name"),
+//					Vip:          pulumi.String("172.16.112.23"),
+//					Vport:        pulumi.String("9092"),
+//				},
+//				Compression: pulumi.Int(1),
+//				Content: &cls.CkafkaConsumerContentArgs{
+//					EnableTag: pulumi.Bool(true),
+//					MetaFields: pulumi.StringArray{
+//						pulumi.String("__FILENAME__"),
+//						pulumi.String("__HOSTNAME__"),
+//						pulumi.String("__PKGID__"),
+//						pulumi.String("__SOURCE__"),
+//						pulumi.String("__TIMESTAMP__"),
+//					},
+//					TagJsonNotTiled:   pulumi.Bool(true),
+//					TimestampAccuracy: pulumi.Int(2),
+//				},
+//				NeedContent: pulumi.Bool(true),
+//				TopicId:     pulumi.String("7e34a3a7-635e-4da8-9005-88106c1fde69"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -64,7 +67,9 @@ import (
 // cls ckafka_consumer can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/ckafkaConsumer:CkafkaConsumer ckafka_consumer topic_id
+//
+//	$ pulumi import tencentcloud:Cls/ckafkaConsumer:CkafkaConsumer ckafka_consumer topic_id
+//
 // ```
 type CkafkaConsumer struct {
 	pulumi.CustomResourceState
@@ -196,7 +201,7 @@ func (i *CkafkaConsumer) ToCkafkaConsumerOutputWithContext(ctx context.Context) 
 // CkafkaConsumerArrayInput is an input type that accepts CkafkaConsumerArray and CkafkaConsumerArrayOutput values.
 // You can construct a concrete instance of `CkafkaConsumerArrayInput` via:
 //
-//          CkafkaConsumerArray{ CkafkaConsumerArgs{...} }
+//	CkafkaConsumerArray{ CkafkaConsumerArgs{...} }
 type CkafkaConsumerArrayInput interface {
 	pulumi.Input
 
@@ -221,7 +226,7 @@ func (i CkafkaConsumerArray) ToCkafkaConsumerArrayOutputWithContext(ctx context.
 // CkafkaConsumerMapInput is an input type that accepts CkafkaConsumerMap and CkafkaConsumerMapOutput values.
 // You can construct a concrete instance of `CkafkaConsumerMapInput` via:
 //
-//          CkafkaConsumerMap{ "key": CkafkaConsumerArgs{...} }
+//	CkafkaConsumerMap{ "key": CkafkaConsumerArgs{...} }
 type CkafkaConsumerMapInput interface {
 	pulumi.Input
 

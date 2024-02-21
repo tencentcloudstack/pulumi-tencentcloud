@@ -19,32 +19,35 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewCluster(ctx, "cluster", &Tsf.ClusterArgs{
-// 			ClusterCidr:          pulumi.String("9.165.120.0/24"),
-// 			ClusterDesc:          pulumi.String("test"),
-// 			ClusterName:          pulumi.String("terraform-test"),
-// 			ClusterType:          pulumi.String("C"),
-// 			ClusterVersion:       pulumi.String("1.18.4"),
-// 			MaxClusterServiceNum: pulumi.Int(128),
-// 			MaxNodePodNum:        pulumi.Int(32),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 			TsfRegionId: pulumi.String("ap-guangzhou"),
-// 			VpcId:       pulumi.String("vpc-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewCluster(ctx, "cluster", &Tsf.ClusterArgs{
+//				ClusterCidr:          pulumi.String("9.165.120.0/24"),
+//				ClusterDesc:          pulumi.String("test"),
+//				ClusterName:          pulumi.String("terraform-test"),
+//				ClusterType:          pulumi.String("C"),
+//				ClusterVersion:       pulumi.String("1.18.4"),
+//				MaxClusterServiceNum: pulumi.Int(128),
+//				MaxNodePodNum:        pulumi.Int(32),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//				TsfRegionId: pulumi.String("ap-guangzhou"),
+//				VpcId:       pulumi.String("vpc-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Cluster struct {
 	pulumi.CustomResourceState
@@ -450,7 +453,7 @@ func (i *Cluster) ToClusterOutputWithContext(ctx context.Context) ClusterOutput 
 // ClusterArrayInput is an input type that accepts ClusterArray and ClusterArrayOutput values.
 // You can construct a concrete instance of `ClusterArrayInput` via:
 //
-//          ClusterArray{ ClusterArgs{...} }
+//	ClusterArray{ ClusterArgs{...} }
 type ClusterArrayInput interface {
 	pulumi.Input
 
@@ -475,7 +478,7 @@ func (i ClusterArray) ToClusterArrayOutputWithContext(ctx context.Context) Clust
 // ClusterMapInput is an input type that accepts ClusterMap and ClusterMapOutput values.
 // You can construct a concrete instance of `ClusterMapInput` via:
 //
-//          ClusterMap{ "key": ClusterArgs{...} }
+//	ClusterMap{ "key": ClusterArgs{...} }
 type ClusterMapInput interface {
 	pulumi.Input
 

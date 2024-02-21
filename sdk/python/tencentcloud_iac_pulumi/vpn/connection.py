@@ -71,7 +71,7 @@ class ConnectionArgs:
         :param pulumi.Input[str] ike_version: Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
         :param pulumi.Input[str] ipsec_encrypt_algorithm: Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         :param pulumi.Input[str] ipsec_integrity_algorithm: Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
-        :param pulumi.Input[str] ipsec_pfs_dh_group: PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+        :param pulumi.Input[str] ipsec_pfs_dh_group: PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
         :param pulumi.Input[int] ipsec_sa_lifetime_seconds: SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
         :param pulumi.Input[int] ipsec_sa_lifetime_traffic: SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
         :param pulumi.Input[str] name: Name of the VPN connection. The length of character is limited to 1-60.
@@ -420,7 +420,7 @@ class ConnectionArgs:
     @pulumi.getter(name="ipsecPfsDhGroup")
     def ipsec_pfs_dh_group(self) -> Optional[pulumi.Input[str]]:
         """
-        PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+        PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
         """
         return pulumi.get(self, "ipsec_pfs_dh_group")
 
@@ -578,7 +578,7 @@ class _ConnectionState:
         :param pulumi.Input[str] ike_version: Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
         :param pulumi.Input[str] ipsec_encrypt_algorithm: Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         :param pulumi.Input[str] ipsec_integrity_algorithm: Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
-        :param pulumi.Input[str] ipsec_pfs_dh_group: PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+        :param pulumi.Input[str] ipsec_pfs_dh_group: PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
         :param pulumi.Input[int] ipsec_sa_lifetime_seconds: SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
         :param pulumi.Input[int] ipsec_sa_lifetime_traffic: SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
         :param pulumi.Input[bool] is_ccn_type: Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpc_id`. If `is_ccn_type` is true, modification of `vpc_id` will be ignored.
@@ -948,7 +948,7 @@ class _ConnectionState:
     @pulumi.getter(name="ipsecPfsDhGroup")
     def ipsec_pfs_dh_group(self) -> Optional[pulumi.Input[str]]:
         """
-        PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+        PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
         """
         return pulumi.get(self, "ipsec_pfs_dh_group")
 
@@ -1218,7 +1218,7 @@ class Connection(pulumi.CustomResource):
         :param pulumi.Input[str] ike_version: Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
         :param pulumi.Input[str] ipsec_encrypt_algorithm: Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         :param pulumi.Input[str] ipsec_integrity_algorithm: Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
-        :param pulumi.Input[str] ipsec_pfs_dh_group: PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+        :param pulumi.Input[str] ipsec_pfs_dh_group: PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
         :param pulumi.Input[int] ipsec_sa_lifetime_seconds: SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
         :param pulumi.Input[int] ipsec_sa_lifetime_traffic: SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
         :param pulumi.Input[str] name: Name of the VPN connection. The length of character is limited to 1-60.
@@ -1460,7 +1460,7 @@ class Connection(pulumi.CustomResource):
         :param pulumi.Input[str] ike_version: Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
         :param pulumi.Input[str] ipsec_encrypt_algorithm: Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
         :param pulumi.Input[str] ipsec_integrity_algorithm: Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
-        :param pulumi.Input[str] ipsec_pfs_dh_group: PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+        :param pulumi.Input[str] ipsec_pfs_dh_group: PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
         :param pulumi.Input[int] ipsec_sa_lifetime_seconds: SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
         :param pulumi.Input[int] ipsec_sa_lifetime_traffic: SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
         :param pulumi.Input[bool] is_ccn_type: Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpc_id`. If `is_ccn_type` is true, modification of `vpc_id` will be ignored.
@@ -1706,7 +1706,7 @@ class Connection(pulumi.CustomResource):
     @pulumi.getter(name="ipsecPfsDhGroup")
     def ipsec_pfs_dh_group(self) -> pulumi.Output[Optional[str]]:
         """
-        PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+        PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
         """
         return pulumi.get(self, "ipsec_pfs_dh_group")
 

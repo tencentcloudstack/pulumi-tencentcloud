@@ -19,46 +19,49 @@ import (
 // package main
 //
 // import (
-// 	"encoding/json"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"connectType":   "public",
-// 			"authorityType": "true",
-// 			"deployType":    "CONNSTR_PUBLICDB",
-// 			"url":           "jdbc:mysql://1.1.1.1:8080/database",
-// 			"username":      "root",
-// 			"password":      "password",
-// 			"type":          "MYSQL",
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		_, err := Wedata.NewDatasource(ctx, "example", &Wedata.DatasourceArgs{
-// 			Category:          pulumi.String("DB"),
-// 			Type:              pulumi.String("MYSQL"),
-// 			OwnerProjectId:    pulumi.String("1612982498218618880"),
-// 			OwnerProjectName:  pulumi.String("project_demo"),
-// 			OwnerProjectIdent: pulumi.String("体验项目"),
-// 			Description:       pulumi.String("description."),
-// 			Display:           pulumi.String("tf_example_demo"),
-// 			Status:            pulumi.Int(1),
-// 			CosBucket:         pulumi.String("wedata-agent-sh-1257305158"),
-// 			CosRegion:         pulumi.String("ap-shanghai"),
-// 			Params:            pulumi.String(json0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"connectType":   "public",
+//				"authorityType": "true",
+//				"deployType":    "CONNSTR_PUBLICDB",
+//				"url":           "jdbc:mysql://1.1.1.1:8080/database",
+//				"username":      "root",
+//				"password":      "password",
+//				"type":          "MYSQL",
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err := Wedata.NewDatasource(ctx, "example", &Wedata.DatasourceArgs{
+//				Category:          pulumi.String("DB"),
+//				Type:              pulumi.String("MYSQL"),
+//				OwnerProjectId:    pulumi.String("1612982498218618880"),
+//				OwnerProjectName:  pulumi.String("project_demo"),
+//				OwnerProjectIdent: pulumi.String("体验项目"),
+//				Description:       pulumi.String("description."),
+//				Display:           pulumi.String("tf_example_demo"),
+//				Status:            pulumi.Int(1),
+//				CosBucket:         pulumi.String("wedata-agent-sh-1257305158"),
+//				CosRegion:         pulumi.String("ap-shanghai"),
+//				Params:            pulumi.String(json0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Datasource struct {
 	pulumi.CustomResourceState
@@ -331,7 +334,7 @@ func (i *Datasource) ToDatasourceOutputWithContext(ctx context.Context) Datasour
 // DatasourceArrayInput is an input type that accepts DatasourceArray and DatasourceArrayOutput values.
 // You can construct a concrete instance of `DatasourceArrayInput` via:
 //
-//          DatasourceArray{ DatasourceArgs{...} }
+//	DatasourceArray{ DatasourceArgs{...} }
 type DatasourceArrayInput interface {
 	pulumi.Input
 
@@ -356,7 +359,7 @@ func (i DatasourceArray) ToDatasourceArrayOutputWithContext(ctx context.Context)
 // DatasourceMapInput is an input type that accepts DatasourceMap and DatasourceMapOutput values.
 // You can construct a concrete instance of `DatasourceMapInput` via:
 //
-//          DatasourceMap{ "key": DatasourceArgs{...} }
+//	DatasourceMap{ "key": DatasourceArgs{...} }
 type DatasourceMapInput interface {
 	pulumi.Input
 

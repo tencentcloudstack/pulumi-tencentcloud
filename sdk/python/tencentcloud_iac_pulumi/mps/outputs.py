@@ -25887,6 +25887,7 @@ class GetSchedulesScheduleInfoSetResult(dict):
                  create_time: str,
                  output_dir: str,
                  output_storages: Sequence['outputs.GetSchedulesScheduleInfoSetOutputStorageResult'],
+                 resource_id: str,
                  schedule_id: int,
                  schedule_name: str,
                  status: str,
@@ -25898,6 +25899,7 @@ class GetSchedulesScheduleInfoSetResult(dict):
         :param str create_time: The creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).Note: This field may return null, indicating that no valid values can be obtained.
         :param str output_dir: The directory to save the output file.Note: This field may return null, indicating that no valid values can be obtained.
         :param Sequence['GetSchedulesScheduleInfoSetOutputStorageArgs'] output_storages: The bucket to save the output file.Note: This field may return null, indicating that no valid values can be obtained.
+        :param str resource_id: The resource ID. If there is no associated resource ID, fill it with the account's main resource ID.
         :param int schedule_id: The scheme ID.
         :param str schedule_name: The scheme name.Note: This field may return null, indicating that no valid values can be obtained.
         :param str status: The scheme status. Valid values:`Enabled`, `Disabled`. If you do not specify this parameter, all schemes will be returned regardless of the status.
@@ -25909,6 +25911,7 @@ class GetSchedulesScheduleInfoSetResult(dict):
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "output_dir", output_dir)
         pulumi.set(__self__, "output_storages", output_storages)
+        pulumi.set(__self__, "resource_id", resource_id)
         pulumi.set(__self__, "schedule_id", schedule_id)
         pulumi.set(__self__, "schedule_name", schedule_name)
         pulumi.set(__self__, "status", status)
@@ -25947,6 +25950,14 @@ class GetSchedulesScheduleInfoSetResult(dict):
         The bucket to save the output file.Note: This field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "output_storages")
+
+    @property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> str:
+        """
+        The resource ID. If there is no associated resource ID, fill it with the account's main resource ID.
+        """
+        return pulumi.get(self, "resource_id")
 
     @property
     @pulumi.getter(name="scheduleId")

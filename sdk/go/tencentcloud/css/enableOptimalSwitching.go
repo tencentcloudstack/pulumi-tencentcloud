@@ -21,23 +21,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewEnableOptimalSwitching(ctx, "enableOptimalSwitching", &Css.EnableOptimalSwitchingArgs{
-// 			EnableSwitch:  pulumi.Int(1),
-// 			HostGroupName: pulumi.String("test-group"),
-// 			StreamName:    pulumi.String("1308919341_test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewEnableOptimalSwitching(ctx, "enableOptimalSwitching", &Css.EnableOptimalSwitchingArgs{
+//				EnableSwitch:  pulumi.Int(1),
+//				HostGroupName: pulumi.String("test-group"),
+//				StreamName:    pulumi.String("1308919341_test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +48,9 @@ import (
 // css domain can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/enableOptimalSwitching:EnableOptimalSwitching enable_optimal_switching streamName
+//
+//	$ pulumi import tencentcloud:Css/enableOptimalSwitching:EnableOptimalSwitching enable_optimal_switching streamName
+//
 // ```
 type EnableOptimalSwitching struct {
 	pulumi.CustomResourceState
@@ -157,7 +162,7 @@ func (i *EnableOptimalSwitching) ToEnableOptimalSwitchingOutputWithContext(ctx c
 // EnableOptimalSwitchingArrayInput is an input type that accepts EnableOptimalSwitchingArray and EnableOptimalSwitchingArrayOutput values.
 // You can construct a concrete instance of `EnableOptimalSwitchingArrayInput` via:
 //
-//          EnableOptimalSwitchingArray{ EnableOptimalSwitchingArgs{...} }
+//	EnableOptimalSwitchingArray{ EnableOptimalSwitchingArgs{...} }
 type EnableOptimalSwitchingArrayInput interface {
 	pulumi.Input
 
@@ -182,7 +187,7 @@ func (i EnableOptimalSwitchingArray) ToEnableOptimalSwitchingArrayOutputWithCont
 // EnableOptimalSwitchingMapInput is an input type that accepts EnableOptimalSwitchingMap and EnableOptimalSwitchingMapOutput values.
 // You can construct a concrete instance of `EnableOptimalSwitchingMapInput` via:
 //
-//          EnableOptimalSwitchingMap{ "key": EnableOptimalSwitchingArgs{...} }
+//	EnableOptimalSwitchingMap{ "key": EnableOptimalSwitchingArgs{...} }
 type EnableOptimalSwitchingMapInput interface {
 	pulumi.Input
 

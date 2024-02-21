@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Address"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Address"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Address.NewTemplate(ctx, "foo", &Address.TemplateArgs{
-// 			Addresses: pulumi.StringArray{
-// 				pulumi.String("10.0.0.1"),
-// 				pulumi.String("10.0.1.0/24"),
-// 				pulumi.String("10.0.0.1-10.0.0.100"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Address.NewTemplate(ctx, "foo", &Address.TemplateArgs{
+//				Addresses: pulumi.StringArray{
+//					pulumi.String("10.0.0.1"),
+//					pulumi.String("10.0.1.0/24"),
+//					pulumi.String("10.0.0.1-10.0.0.100"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -45,7 +48,9 @@ import (
 // Address template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Address/template:Template foo ipm-makf7k9e"
+//
+//	$ pulumi import tencentcloud:Address/template:Template foo ipm-makf7k9e"
+//
 // ```
 type Template struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *Template) ToTemplateOutputWithContext(ctx context.Context) TemplateOutp
 // TemplateArrayInput is an input type that accepts TemplateArray and TemplateArrayOutput values.
 // You can construct a concrete instance of `TemplateArrayInput` via:
 //
-//          TemplateArray{ TemplateArgs{...} }
+//	TemplateArray{ TemplateArgs{...} }
 type TemplateArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i TemplateArray) ToTemplateArrayOutputWithContext(ctx context.Context) Tem
 // TemplateMapInput is an input type that accepts TemplateMap and TemplateMapOutput values.
 // You can construct a concrete instance of `TemplateMapInput` via:
 //
-//          TemplateMap{ "key": TemplateArgs{...} }
+//	TemplateMap{ "key": TemplateArgs{...} }
 type TemplateMapInput interface {
 	pulumi.Input
 

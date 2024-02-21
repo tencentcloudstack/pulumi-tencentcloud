@@ -19,48 +19,51 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "cdb",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// 			VpcId:            vpc.ID(),
-// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mysql.NewRoInstanceIp(ctx, "example", &Mysql.RoInstanceIpArgs{
-// 			InstanceId:   pulumi.String("cdbro-bdlvcfpj"),
-// 			UniqSubnetId: subnet.ID(),
-// 			UniqVpcId:    vpc.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "cdb",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mysql.NewRoInstanceIp(ctx, "example", &Mysql.RoInstanceIpArgs{
+//				InstanceId:   pulumi.String("cdbro-bdlvcfpj"),
+//				UniqSubnetId: subnet.ID(),
+//				UniqVpcId:    vpc.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type RoInstanceIp struct {
 	pulumi.CustomResourceState
@@ -184,7 +187,7 @@ func (i *RoInstanceIp) ToRoInstanceIpOutputWithContext(ctx context.Context) RoIn
 // RoInstanceIpArrayInput is an input type that accepts RoInstanceIpArray and RoInstanceIpArrayOutput values.
 // You can construct a concrete instance of `RoInstanceIpArrayInput` via:
 //
-//          RoInstanceIpArray{ RoInstanceIpArgs{...} }
+//	RoInstanceIpArray{ RoInstanceIpArgs{...} }
 type RoInstanceIpArrayInput interface {
 	pulumi.Input
 
@@ -209,7 +212,7 @@ func (i RoInstanceIpArray) ToRoInstanceIpArrayOutputWithContext(ctx context.Cont
 // RoInstanceIpMapInput is an input type that accepts RoInstanceIpMap and RoInstanceIpMapOutput values.
 // You can construct a concrete instance of `RoInstanceIpMapInput` via:
 //
-//          RoInstanceIpMap{ "key": RoInstanceIpArgs{...} }
+//	RoInstanceIpMap{ "key": RoInstanceIpArgs{...} }
 type RoInstanceIpMapInput interface {
 	pulumi.Input
 

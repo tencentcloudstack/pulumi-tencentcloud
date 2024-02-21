@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpn.NewGatewayCcnRoutes(ctx, "vpnGatewayCcnRoutes", &Vpn.GatewayCcnRoutesArgs{
-// 			DestinationCidrBlock: pulumi.String("192.168.1.0/24"),
-// 			RouteId:              pulumi.String("vpnr-akdy0757"),
-// 			Status:               pulumi.String("DISABLE"),
-// 			VpnGatewayId:         pulumi.String("vpngw-lie1a4u7"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpn.NewGatewayCcnRoutes(ctx, "vpnGatewayCcnRoutes", &Vpn.GatewayCcnRoutesArgs{
+//				DestinationCidrBlock: pulumi.String("192.168.1.0/24"),
+//				RouteId:              pulumi.String("vpnr-akdy0757"),
+//				Status:               pulumi.String("DISABLE"),
+//				VpnGatewayId:         pulumi.String("vpngw-lie1a4u7"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // vpc vpn_gateway_ccn_routes can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpn/gatewayCcnRoutes:GatewayCcnRoutes vpn_gateway_ccn_routes vpn_gateway_id#ccn_routes_id
+//
+//	$ pulumi import tencentcloud:Vpn/gatewayCcnRoutes:GatewayCcnRoutes vpn_gateway_ccn_routes vpn_gateway_id#ccn_routes_id
+//
 // ```
 type GatewayCcnRoutes struct {
 	pulumi.CustomResourceState
@@ -175,7 +180,7 @@ func (i *GatewayCcnRoutes) ToGatewayCcnRoutesOutputWithContext(ctx context.Conte
 // GatewayCcnRoutesArrayInput is an input type that accepts GatewayCcnRoutesArray and GatewayCcnRoutesArrayOutput values.
 // You can construct a concrete instance of `GatewayCcnRoutesArrayInput` via:
 //
-//          GatewayCcnRoutesArray{ GatewayCcnRoutesArgs{...} }
+//	GatewayCcnRoutesArray{ GatewayCcnRoutesArgs{...} }
 type GatewayCcnRoutesArrayInput interface {
 	pulumi.Input
 
@@ -200,7 +205,7 @@ func (i GatewayCcnRoutesArray) ToGatewayCcnRoutesArrayOutputWithContext(ctx cont
 // GatewayCcnRoutesMapInput is an input type that accepts GatewayCcnRoutesMap and GatewayCcnRoutesMapOutput values.
 // You can construct a concrete instance of `GatewayCcnRoutesMapInput` via:
 //
-//          GatewayCcnRoutesMap{ "key": GatewayCcnRoutesArgs{...} }
+//	GatewayCcnRoutesMap{ "key": GatewayCcnRoutesArgs{...} }
 type GatewayCcnRoutesMapInput interface {
 	pulumi.Input
 

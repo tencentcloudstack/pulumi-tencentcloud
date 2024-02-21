@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.NewRestartNodesOperation(ctx, "restartNodesOperation", &Elasticsearch.RestartNodesOperationArgs{
-// 			InstanceId: pulumi.String("es-xxxxxx"),
-// 			NodeNames: pulumi.StringArray{
-// 				pulumi.String("1648026612002990732"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.NewRestartNodesOperation(ctx, "restartNodesOperation", &Elasticsearch.RestartNodesOperationArgs{
+//				InstanceId: pulumi.String("es-xxxxxx"),
+//				NodeNames: pulumi.StringArray{
+//					pulumi.String("1648026612002990732"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type RestartNodesOperation struct {
 	pulumi.CustomResourceState
@@ -171,7 +174,7 @@ func (i *RestartNodesOperation) ToRestartNodesOperationOutputWithContext(ctx con
 // RestartNodesOperationArrayInput is an input type that accepts RestartNodesOperationArray and RestartNodesOperationArrayOutput values.
 // You can construct a concrete instance of `RestartNodesOperationArrayInput` via:
 //
-//          RestartNodesOperationArray{ RestartNodesOperationArgs{...} }
+//	RestartNodesOperationArray{ RestartNodesOperationArgs{...} }
 type RestartNodesOperationArrayInput interface {
 	pulumi.Input
 
@@ -196,7 +199,7 @@ func (i RestartNodesOperationArray) ToRestartNodesOperationArrayOutputWithContex
 // RestartNodesOperationMapInput is an input type that accepts RestartNodesOperationMap and RestartNodesOperationMapOutput values.
 // You can construct a concrete instance of `RestartNodesOperationMapInput` via:
 //
-//          RestartNodesOperationMap{ "key": RestartNodesOperationArgs{...} }
+//	RestartNodesOperationMap{ "key": RestartNodesOperationArgs{...} }
 type RestartNodesOperationMapInput interface {
 	pulumi.Input
 

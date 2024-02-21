@@ -19,99 +19,102 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
-// 			TypeId: pulumi.IntRef(7),
-// 			Region: pulumi.StringRef("ap-guangzhou"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		cfg := config.New(ctx, "")
-// 		replicaZoneIds := []float64{
-// 			100004,
-// 			100006,
-// 		}
-// 		if param := cfg.GetBool("replicaZoneIds"); param != nil {
-// 			replicaZoneIds = param
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Security.NewGroupLiteRule(ctx, "fooGroupLiteRule", &Security.GroupLiteRuleArgs{
-// 			SecurityGroupId: fooGroup.ID(),
-// 			Ingresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.1.0/24#80#TCP"),
-// 				pulumi.String("DROP#8.8.8.8#80,90#UDP"),
-// 				pulumi.String("DROP#0.0.0.0/0#80-90#TCP"),
-// 			},
-// 			Egresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#192.168.0.0/16#ALL#TCP"),
-// 				pulumi.String("ACCEPT#10.0.0.0/8#ALL#ICMP"),
-// 				pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooInstance, err := Redis.NewInstance(ctx, "fooInstance", &Redis.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
-// 			TypeId:           pulumi.Int(zone.Lists[2].TypeId),
-// 			Password:         pulumi.String("test12345789"),
-// 			MemSize:          pulumi.Int(8192),
-// 			RedisShardNum:    pulumi.Int(zone.Lists[2].RedisShardNums[0]),
-// 			RedisReplicasNum: pulumi.Int(2),
-// 			ReplicaZoneIds:   pulumi.Any(replicaZoneIds),
-// 			Port:             pulumi.Int(6379),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			SecurityGroups: pulumi.StringArray{
-// 				fooGroup.ID(),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooInstanceZoneInfo := Redis.GetInstanceZoneInfoOutput(ctx, redis.GetInstanceZoneInfoOutputArgs{
-// 			InstanceId: fooInstance.ID(),
-// 		}, nil)
-// 		_, err = Redis.NewSwitchMaster(ctx, "switchMaster", &Redis.SwitchMasterArgs{
-// 			InstanceId: fooInstance.ID(),
-// 			GroupId: fooInstanceZoneInfo.ApplyT(func(fooInstanceZoneInfo redis.GetInstanceZoneInfoResult) (int, error) {
-// 				return fooInstanceZoneInfo.ReplicaGroups[1].GroupId, nil
-// 			}).(pulumi.IntOutput),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+//				TypeId: pulumi.IntRef(7),
+//				Region: pulumi.StringRef("ap-guangzhou"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			cfg := config.New(ctx, "")
+//			replicaZoneIds := []float64{
+//				100004,
+//				100006,
+//			}
+//			if param := cfg.GetBool("replicaZoneIds"); param != nil {
+//				replicaZoneIds = param
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooGroup, err := Security.NewGroup(ctx, "fooGroup", nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Security.NewGroupLiteRule(ctx, "fooGroupLiteRule", &Security.GroupLiteRuleArgs{
+//				SecurityGroupId: fooGroup.ID(),
+//				Ingresses: pulumi.StringArray{
+//					pulumi.String("ACCEPT#192.168.1.0/24#80#TCP"),
+//					pulumi.String("DROP#8.8.8.8#80,90#UDP"),
+//					pulumi.String("DROP#0.0.0.0/0#80-90#TCP"),
+//				},
+//				Egresses: pulumi.StringArray{
+//					pulumi.String("ACCEPT#192.168.0.0/16#ALL#TCP"),
+//					pulumi.String("ACCEPT#10.0.0.0/8#ALL#ICMP"),
+//					pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooInstance, err := Redis.NewInstance(ctx, "fooInstance", &Redis.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
+//				TypeId:           pulumi.Int(zone.Lists[2].TypeId),
+//				Password:         pulumi.String("test12345789"),
+//				MemSize:          pulumi.Int(8192),
+//				RedisShardNum:    pulumi.Int(zone.Lists[2].RedisShardNums[0]),
+//				RedisReplicasNum: pulumi.Int(2),
+//				ReplicaZoneIds:   pulumi.Any(replicaZoneIds),
+//				Port:             pulumi.Int(6379),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				SecurityGroups: pulumi.StringArray{
+//					fooGroup.ID(),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooInstanceZoneInfo := Redis.GetInstanceZoneInfoOutput(ctx, redis.GetInstanceZoneInfoOutputArgs{
+//				InstanceId: fooInstance.ID(),
+//			}, nil)
+//			_, err = Redis.NewSwitchMaster(ctx, "switchMaster", &Redis.SwitchMasterArgs{
+//				InstanceId: fooInstance.ID(),
+//				GroupId: fooInstanceZoneInfo.ApplyT(func(fooInstanceZoneInfo redis.GetInstanceZoneInfoResult) (int, error) {
+//					return fooInstanceZoneInfo.ReplicaGroups[1].GroupId, nil
+//				}).(pulumi.IntOutput),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SwitchMaster struct {
 	pulumi.CustomResourceState
@@ -213,7 +216,7 @@ func (i *SwitchMaster) ToSwitchMasterOutputWithContext(ctx context.Context) Swit
 // SwitchMasterArrayInput is an input type that accepts SwitchMasterArray and SwitchMasterArrayOutput values.
 // You can construct a concrete instance of `SwitchMasterArrayInput` via:
 //
-//          SwitchMasterArray{ SwitchMasterArgs{...} }
+//	SwitchMasterArray{ SwitchMasterArgs{...} }
 type SwitchMasterArrayInput interface {
 	pulumi.Input
 
@@ -238,7 +241,7 @@ func (i SwitchMasterArray) ToSwitchMasterArrayOutputWithContext(ctx context.Cont
 // SwitchMasterMapInput is an input type that accepts SwitchMasterMap and SwitchMasterMapOutput values.
 // You can construct a concrete instance of `SwitchMasterMapInput` via:
 //
-//          SwitchMasterMap{ "key": SwitchMasterArgs{...} }
+//	SwitchMasterMap{ "key": SwitchMasterArgs{...} }
 type SwitchMasterMapInput interface {
 	pulumi.Input
 

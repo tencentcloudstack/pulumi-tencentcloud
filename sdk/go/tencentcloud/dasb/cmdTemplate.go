@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewCmdTemplate(ctx, "example", &Dasb.CmdTemplateArgs{
-// 			CmdList: pulumi.String("rm -rf*"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewCmdTemplate(ctx, "example", &Dasb.CmdTemplateArgs{
+//				CmdList: pulumi.String("rm -rf*"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -41,7 +44,9 @@ import (
 // dasb cmd_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dasb/cmdTemplate:CmdTemplate example 15
+//
+//	$ pulumi import tencentcloud:Dasb/cmdTemplate:CmdTemplate example 15
+//
 // ```
 type CmdTemplate struct {
 	pulumi.CustomResourceState
@@ -143,7 +148,7 @@ func (i *CmdTemplate) ToCmdTemplateOutputWithContext(ctx context.Context) CmdTem
 // CmdTemplateArrayInput is an input type that accepts CmdTemplateArray and CmdTemplateArrayOutput values.
 // You can construct a concrete instance of `CmdTemplateArrayInput` via:
 //
-//          CmdTemplateArray{ CmdTemplateArgs{...} }
+//	CmdTemplateArray{ CmdTemplateArgs{...} }
 type CmdTemplateArrayInput interface {
 	pulumi.Input
 
@@ -168,7 +173,7 @@ func (i CmdTemplateArray) ToCmdTemplateArrayOutputWithContext(ctx context.Contex
 // CmdTemplateMapInput is an input type that accepts CmdTemplateMap and CmdTemplateMapOutput values.
 // You can construct a concrete instance of `CmdTemplateMapInput` via:
 //
-//          CmdTemplateMap{ "key": CmdTemplateArgs{...} }
+//	CmdTemplateMap{ "key": CmdTemplateArgs{...} }
 type CmdTemplateMapInput interface {
 	pulumi.Input
 

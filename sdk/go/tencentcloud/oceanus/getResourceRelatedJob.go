@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.GetResourceRelatedJob(ctx, &oceanus.GetResourceRelatedJobArgs{
-// 			DescByJobConfigCreateTime: pulumi.IntRef(0),
-// 			ResourceConfigVersion:     pulumi.IntRef(1),
-// 			ResourceId:                "resource-8y9lzcuz",
-// 			WorkSpaceId:               pulumi.StringRef("space-2idq8wbr"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.GetResourceRelatedJob(ctx, &oceanus.GetResourceRelatedJobArgs{
+//				DescByJobConfigCreateTime: pulumi.IntRef(0),
+//				ResourceConfigVersion:     pulumi.IntRef(1),
+//				ResourceId:                "resource-8y9lzcuz",
+//				WorkSpaceId:               pulumi.StringRef("space-2idq8wbr"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetResourceRelatedJob(ctx *pulumi.Context, args *GetResourceRelatedJobArgs, opts ...pulumi.InvokeOption) (*GetResourceRelatedJobResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

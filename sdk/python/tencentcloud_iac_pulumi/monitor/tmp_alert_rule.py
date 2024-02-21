@@ -330,6 +330,8 @@ class TmpAlertRule(pulumi.CustomResource):
         """
         Provides a resource to create a monitor tmpAlertRule
 
+        > **NOTE:** This resource will be deprecated in a future version, please use `Monitor.TmpAlertGroup`.
+
         ## Example Usage
 
         ```python
@@ -407,6 +409,8 @@ class TmpAlertRule(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a monitor tmpAlertRule
+
+        > **NOTE:** This resource will be deprecated in a future version, please use `Monitor.TmpAlertGroup`.
 
         ## Example Usage
 

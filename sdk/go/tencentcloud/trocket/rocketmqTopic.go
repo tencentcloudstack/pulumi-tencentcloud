@@ -19,39 +19,42 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Trocket"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Trocket"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		rocketmqInstance, err := Trocket.NewRocketmqInstance(ctx, "rocketmqInstance", &Trocket.RocketmqInstanceArgs{
-// 			InstanceType: pulumi.String("EXPERIMENT"),
-// 			SkuCode:      pulumi.String("experiment_500"),
-// 			Remark:       pulumi.String("test"),
-// 			VpcId:        pulumi.String("vpc-xxxxx"),
-// 			SubnetId:     pulumi.String("subnet-xxxxx"),
-// 			Tags: pulumi.AnyMap{
-// 				"tag_key":   pulumi.Any("rocketmq"),
-// 				"tag_value": pulumi.Any("5.x"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Trocket.NewRocketmqTopic(ctx, "rocketmqTopic", &Trocket.RocketmqTopicArgs{
-// 			InstanceId: rocketmqInstance.ID(),
-// 			Topic:      pulumi.String("test_topic"),
-// 			TopicType:  pulumi.String("NORMAL"),
-// 			QueueNum:   pulumi.Int(4),
-// 			Remark:     pulumi.String("test for terraform"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			rocketmqInstance, err := Trocket.NewRocketmqInstance(ctx, "rocketmqInstance", &Trocket.RocketmqInstanceArgs{
+//				InstanceType: pulumi.String("EXPERIMENT"),
+//				SkuCode:      pulumi.String("experiment_500"),
+//				Remark:       pulumi.String("test"),
+//				VpcId:        pulumi.String("vpc-xxxxx"),
+//				SubnetId:     pulumi.String("subnet-xxxxx"),
+//				Tags: pulumi.AnyMap{
+//					"tag_key":   pulumi.Any("rocketmq"),
+//					"tag_value": pulumi.Any("5.x"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Trocket.NewRocketmqTopic(ctx, "rocketmqTopic", &Trocket.RocketmqTopicArgs{
+//				InstanceId: rocketmqInstance.ID(),
+//				Topic:      pulumi.String("test_topic"),
+//				TopicType:  pulumi.String("NORMAL"),
+//				QueueNum:   pulumi.Int(4),
+//				Remark:     pulumi.String("test for terraform"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -59,7 +62,9 @@ import (
 // trocket rocketmq_topic can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Trocket/rocketmqTopic:RocketmqTopic rocketmq_topic instanceId#topic
+//
+//	$ pulumi import tencentcloud:Trocket/rocketmqTopic:RocketmqTopic rocketmq_topic instanceId#topic
+//
 // ```
 type RocketmqTopic struct {
 	pulumi.CustomResourceState
@@ -200,7 +205,7 @@ func (i *RocketmqTopic) ToRocketmqTopicOutputWithContext(ctx context.Context) Ro
 // RocketmqTopicArrayInput is an input type that accepts RocketmqTopicArray and RocketmqTopicArrayOutput values.
 // You can construct a concrete instance of `RocketmqTopicArrayInput` via:
 //
-//          RocketmqTopicArray{ RocketmqTopicArgs{...} }
+//	RocketmqTopicArray{ RocketmqTopicArgs{...} }
 type RocketmqTopicArrayInput interface {
 	pulumi.Input
 
@@ -225,7 +230,7 @@ func (i RocketmqTopicArray) ToRocketmqTopicArrayOutputWithContext(ctx context.Co
 // RocketmqTopicMapInput is an input type that accepts RocketmqTopicMap and RocketmqTopicMapOutput values.
 // You can construct a concrete instance of `RocketmqTopicMapInput` via:
 //
-//          RocketmqTopicMap{ "key": RocketmqTopicArgs{...} }
+//	RocketmqTopicMap{ "key": RocketmqTopicArgs{...} }
 type RocketmqTopicMapInput interface {
 	pulumi.Input
 

@@ -18,66 +18,69 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-// 			Bandwidth:        pulumi.Int(10),
-// 			Concurrent:       pulumi.Int(2),
-// 			AccessRegion:     pulumi.String("SouthChina"),
-// 			RealserverRegion: pulumi.String("NorthChina"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
-// 			Protocol: pulumi.String("HTTP"),
-// 			Port:     pulumi.Int(80),
-// 			ProxyId:  pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooHttpDomain, err := Gaap.NewHttpDomain(ctx, "fooHttpDomain", &Gaap.HttpDomainArgs{
-// 			ListenerId: fooLayer7Listener.ID(),
-// 			Domain:     pulumi.String("www.qq.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooDomainErrorPage, err := Gaap.NewDomainErrorPage(ctx, "fooDomainErrorPage", &Gaap.DomainErrorPageArgs{
-// 			ListenerId: fooLayer7Listener.ID(),
-// 			Domain:     fooHttpDomain.Domain,
-// 			ErrorCodes: pulumi.IntArray{
-// 				pulumi.Int(406),
-// 				pulumi.Int(504),
-// 			},
-// 			NewErrorCode: pulumi.Int(502),
-// 			Body:         pulumi.String("bad request"),
-// 			ClearHeaders: pulumi.StringArray{
-// 				pulumi.String("Content-Length"),
-// 				pulumi.String("X-TEST"),
-// 			},
-// 			SetHeaders: pulumi.AnyMap{
-// 				"X-TEST": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Gaap.GetDomainErrorPagesOutput(ctx, gaap.GetDomainErrorPagesOutputArgs{
-// 			ListenerId: fooDomainErrorPage.ListenerId,
-// 			Domain:     fooDomainErrorPage.Domain,
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+//				Bandwidth:        pulumi.Int(10),
+//				Concurrent:       pulumi.Int(2),
+//				AccessRegion:     pulumi.String("SouthChina"),
+//				RealserverRegion: pulumi.String("NorthChina"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
+//				Protocol: pulumi.String("HTTP"),
+//				Port:     pulumi.Int(80),
+//				ProxyId:  pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooHttpDomain, err := Gaap.NewHttpDomain(ctx, "fooHttpDomain", &Gaap.HttpDomainArgs{
+//				ListenerId: fooLayer7Listener.ID(),
+//				Domain:     pulumi.String("www.qq.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooDomainErrorPage, err := Gaap.NewDomainErrorPage(ctx, "fooDomainErrorPage", &Gaap.DomainErrorPageArgs{
+//				ListenerId: fooLayer7Listener.ID(),
+//				Domain:     fooHttpDomain.Domain,
+//				ErrorCodes: pulumi.IntArray{
+//					pulumi.Int(406),
+//					pulumi.Int(504),
+//				},
+//				NewErrorCode: pulumi.Int(502),
+//				Body:         pulumi.String("bad request"),
+//				ClearHeaders: pulumi.StringArray{
+//					pulumi.String("Content-Length"),
+//					pulumi.String("X-TEST"),
+//				},
+//				SetHeaders: pulumi.AnyMap{
+//					"X-TEST": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Gaap.GetDomainErrorPagesOutput(ctx, gaap.GetDomainErrorPagesOutputArgs{
+//				ListenerId: fooDomainErrorPage.ListenerId,
+//				Domain:     fooDomainErrorPage.Domain,
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDomainErrorPages(ctx *pulumi.Context, args *GetDomainErrorPagesArgs, opts ...pulumi.InvokeOption) (*GetDomainErrorPagesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

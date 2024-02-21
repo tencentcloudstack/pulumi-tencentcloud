@@ -20,7 +20,9 @@ import (
 // Security group lite rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Security/groupLiteRule:GroupLiteRule tencentcloud_security_group_lite_rule.foo sg-ey3wmiz1
+//
+//	$ pulumi import tencentcloud:Security/groupLiteRule:GroupLiteRule tencentcloud_security_group_lite_rule.foo sg-ey3wmiz1
+//
 // ```
 type GroupLiteRule struct {
 	pulumi.CustomResourceState
@@ -132,7 +134,7 @@ func (i *GroupLiteRule) ToGroupLiteRuleOutputWithContext(ctx context.Context) Gr
 // GroupLiteRuleArrayInput is an input type that accepts GroupLiteRuleArray and GroupLiteRuleArrayOutput values.
 // You can construct a concrete instance of `GroupLiteRuleArrayInput` via:
 //
-//          GroupLiteRuleArray{ GroupLiteRuleArgs{...} }
+//	GroupLiteRuleArray{ GroupLiteRuleArgs{...} }
 type GroupLiteRuleArrayInput interface {
 	pulumi.Input
 
@@ -157,7 +159,7 @@ func (i GroupLiteRuleArray) ToGroupLiteRuleArrayOutputWithContext(ctx context.Co
 // GroupLiteRuleMapInput is an input type that accepts GroupLiteRuleMap and GroupLiteRuleMapOutput values.
 // You can construct a concrete instance of `GroupLiteRuleMapInput` via:
 //
-//          GroupLiteRuleMap{ "key": GroupLiteRuleArgs{...} }
+//	GroupLiteRuleMap{ "key": GroupLiteRuleArgs{...} }
 type GroupLiteRuleMapInput interface {
 	pulumi.Input
 

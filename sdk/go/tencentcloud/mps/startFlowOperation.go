@@ -20,22 +20,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewStartFlowOperation(ctx, "operation", &Mps.StartFlowOperationArgs{
-// 			FlowId: pulumi.Any(tencentcloud_mps_flow.Flow_rtp.Id),
-// 			Start:  pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewStartFlowOperation(ctx, "operation", &Mps.StartFlowOperationArgs{
+//				FlowId: pulumi.Any(tencentcloud_mps_flow.Flow_rtp.Id),
+//				Start:  pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Stop flow
 //
@@ -43,22 +46,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewStartFlowOperation(ctx, "operation", &Mps.StartFlowOperationArgs{
-// 			FlowId: pulumi.Any(tencentcloud_mps_flow.Flow_rtp.Id),
-// 			Start:  pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewStartFlowOperation(ctx, "operation", &Mps.StartFlowOperationArgs{
+//				FlowId: pulumi.Any(tencentcloud_mps_flow.Flow_rtp.Id),
+//				Start:  pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type StartFlowOperation struct {
 	pulumi.CustomResourceState
@@ -163,7 +169,7 @@ func (i *StartFlowOperation) ToStartFlowOperationOutputWithContext(ctx context.C
 // StartFlowOperationArrayInput is an input type that accepts StartFlowOperationArray and StartFlowOperationArrayOutput values.
 // You can construct a concrete instance of `StartFlowOperationArrayInput` via:
 //
-//          StartFlowOperationArray{ StartFlowOperationArgs{...} }
+//	StartFlowOperationArray{ StartFlowOperationArgs{...} }
 type StartFlowOperationArrayInput interface {
 	pulumi.Input
 
@@ -188,7 +194,7 @@ func (i StartFlowOperationArray) ToStartFlowOperationArrayOutputWithContext(ctx 
 // StartFlowOperationMapInput is an input type that accepts StartFlowOperationMap and StartFlowOperationMapOutput values.
 // You can construct a concrete instance of `StartFlowOperationMapInput` via:
 //
-//          StartFlowOperationMap{ "key": StartFlowOperationArgs{...} }
+//	StartFlowOperationMap{ "key": StartFlowOperationArgs{...} }
 type StartFlowOperationMapInput interface {
 	pulumi.Input
 

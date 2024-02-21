@@ -39,7 +39,7 @@ type GroupRuleSetEgress struct {
 // GroupRuleSetEgressInput is an input type that accepts GroupRuleSetEgressArgs and GroupRuleSetEgressOutput values.
 // You can construct a concrete instance of `GroupRuleSetEgressInput` via:
 //
-//          GroupRuleSetEgressArgs{...}
+//	GroupRuleSetEgressArgs{...}
 type GroupRuleSetEgressInput interface {
 	pulumi.Input
 
@@ -88,7 +88,7 @@ func (i GroupRuleSetEgressArgs) ToGroupRuleSetEgressOutputWithContext(ctx contex
 // GroupRuleSetEgressArrayInput is an input type that accepts GroupRuleSetEgressArray and GroupRuleSetEgressArrayOutput values.
 // You can construct a concrete instance of `GroupRuleSetEgressArrayInput` via:
 //
-//          GroupRuleSetEgressArray{ GroupRuleSetEgressArgs{...} }
+//	GroupRuleSetEgressArray{ GroupRuleSetEgressArgs{...} }
 type GroupRuleSetEgressArrayInput interface {
 	pulumi.Input
 
@@ -232,7 +232,7 @@ type GroupRuleSetIngress struct {
 // GroupRuleSetIngressInput is an input type that accepts GroupRuleSetIngressArgs and GroupRuleSetIngressOutput values.
 // You can construct a concrete instance of `GroupRuleSetIngressInput` via:
 //
-//          GroupRuleSetIngressArgs{...}
+//	GroupRuleSetIngressArgs{...}
 type GroupRuleSetIngressInput interface {
 	pulumi.Input
 
@@ -281,7 +281,7 @@ func (i GroupRuleSetIngressArgs) ToGroupRuleSetIngressOutputWithContext(ctx cont
 // GroupRuleSetIngressArrayInput is an input type that accepts GroupRuleSetIngressArray and GroupRuleSetIngressArrayOutput values.
 // You can construct a concrete instance of `GroupRuleSetIngressArrayInput` via:
 //
-//          GroupRuleSetIngressArray{ GroupRuleSetIngressArgs{...} }
+//	GroupRuleSetIngressArray{ GroupRuleSetIngressArgs{...} }
 type GroupRuleSetIngressArrayInput interface {
 	pulumi.Input
 
@@ -420,7 +420,7 @@ type GetGroupsSecurityGroup struct {
 // GetGroupsSecurityGroupInput is an input type that accepts GetGroupsSecurityGroupArgs and GetGroupsSecurityGroupOutput values.
 // You can construct a concrete instance of `GetGroupsSecurityGroupInput` via:
 //
-//          GetGroupsSecurityGroupArgs{...}
+//	GetGroupsSecurityGroupArgs{...}
 type GetGroupsSecurityGroupInput interface {
 	pulumi.Input
 
@@ -464,7 +464,7 @@ func (i GetGroupsSecurityGroupArgs) ToGetGroupsSecurityGroupOutputWithContext(ct
 // GetGroupsSecurityGroupArrayInput is an input type that accepts GetGroupsSecurityGroupArray and GetGroupsSecurityGroupArrayOutput values.
 // You can construct a concrete instance of `GetGroupsSecurityGroupArrayInput` via:
 //
-//          GetGroupsSecurityGroupArray{ GetGroupsSecurityGroupArgs{...} }
+//	GetGroupsSecurityGroupArray{ GetGroupsSecurityGroupArgs{...} }
 type GetGroupsSecurityGroupArrayInput interface {
 	pulumi.Input
 

@@ -18,34 +18,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.GetBindApiAppsStatus(ctx, &apigateway.GetBindApiAppsStatusArgs{
-// 			ApiIds: []string{
-// 				"api-0cvmf4x4",
-// 				"api-jvqlzolk",
-// 			},
-// 			Filters: []apigateway.GetBindApiAppsStatusFilter{
-// 				apigateway.GetBindApiAppsStatusFilter{
-// 					Name: "ApiAppId",
-// 					Values: []string{
-// 						"app-krljp4wn",
-// 					},
-// 				},
-// 			},
-// 			ServiceId: "service-nxz6yync",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.GetBindApiAppsStatus(ctx, &apigateway.GetBindApiAppsStatusArgs{
+//				ApiIds: []string{
+//					"api-0cvmf4x4",
+//					"api-jvqlzolk",
+//				},
+//				Filters: []apigateway.GetBindApiAppsStatusFilter{
+//					apigateway.GetBindApiAppsStatusFilter{
+//						Name: "ApiAppId",
+//						Values: []string{
+//							"app-krljp4wn",
+//						},
+//					},
+//				},
+//				ServiceId: "service-nxz6yync",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupBindApiAppsStatus(ctx *pulumi.Context, args *LookupBindApiAppsStatusArgs, opts ...pulumi.InvokeOption) (*LookupBindApiAppsStatusResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

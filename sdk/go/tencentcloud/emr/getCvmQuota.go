@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Emr.GetCvmQuota(ctx, &emr.GetCvmQuotaArgs{
-// 			ClusterId: "emr-0ze36vnp",
-// 			ZoneId:    pulumi.IntRef(100003),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Emr.GetCvmQuota(ctx, &emr.GetCvmQuotaArgs{
+//				ClusterId: "emr-0ze36vnp",
+//				ZoneId:    pulumi.IntRef(100003),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetCvmQuota(ctx *pulumi.Context, args *GetCvmQuotaArgs, opts ...pulumi.InvokeOption) (*GetCvmQuotaResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

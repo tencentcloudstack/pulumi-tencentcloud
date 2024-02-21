@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.GetDescribeUserInfo(ctx, &dlc.GetDescribeUserInfoArgs{
-// 			SortBy:  pulumi.StringRef("create-time"),
-// 			Sorting: pulumi.StringRef("desc"),
-// 			Type:    pulumi.StringRef("Group"),
-// 			UserId:  pulumi.StringRef("100032772113"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.GetDescribeUserInfo(ctx, &dlc.GetDescribeUserInfoArgs{
+//				SortBy:  pulumi.StringRef("create-time"),
+//				Sorting: pulumi.StringRef("desc"),
+//				Type:    pulumi.StringRef("Group"),
+//				UserId:  pulumi.StringRef("100032772113"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDescribeUserInfo(ctx *pulumi.Context, args *GetDescribeUserInfoArgs, opts ...pulumi.InvokeOption) (*GetDescribeUserInfoResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

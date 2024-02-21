@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.GetOrders(ctx, &mariadb.GetOrdersArgs{
-// 			DealName: "20230607164033835942781",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.GetOrders(ctx, &mariadb.GetOrdersArgs{
+//				DealName: "20230607164033835942781",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetOrders(ctx *pulumi.Context, args *GetOrdersArgs, opts ...pulumi.InvokeOption) (*GetOrdersResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

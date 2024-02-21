@@ -19,27 +19,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.NewAccelerationDomain(ctx, "accelerationDomain", &Teo.AccelerationDomainArgs{
-// 			DomainName: pulumi.String("aaa.makn.cn"),
-// 			OriginInfo: &teo.AccelerationDomainOriginInfoArgs{
-// 				Origin:     pulumi.String("150.109.8.1"),
-// 				OriginType: pulumi.String("IP_DOMAIN"),
-// 			},
-// 			ZoneId: pulumi.String("zone-2o0i41pv2h8c"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Teo.NewAccelerationDomain(ctx, "accelerationDomain", &Teo.AccelerationDomainArgs{
+//				DomainName: pulumi.String("aaa.makn.cn"),
+//				OriginInfo: &teo.AccelerationDomainOriginInfoArgs{
+//					Origin:     pulumi.String("150.109.8.1"),
+//					OriginType: pulumi.String("IP_DOMAIN"),
+//				},
+//				ZoneId: pulumi.String("zone-2o0i41pv2h8c"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -47,7 +50,9 @@ import (
 // teo acceleration_domain can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Teo/accelerationDomain:AccelerationDomain acceleration_domain acceleration_domain_id
+//
+//	$ pulumi import tencentcloud:Teo/accelerationDomain:AccelerationDomain acceleration_domain acceleration_domain_id
+//
 // ```
 type AccelerationDomain struct {
 	pulumi.CustomResourceState
@@ -181,7 +186,7 @@ func (i *AccelerationDomain) ToAccelerationDomainOutputWithContext(ctx context.C
 // AccelerationDomainArrayInput is an input type that accepts AccelerationDomainArray and AccelerationDomainArrayOutput values.
 // You can construct a concrete instance of `AccelerationDomainArrayInput` via:
 //
-//          AccelerationDomainArray{ AccelerationDomainArgs{...} }
+//	AccelerationDomainArray{ AccelerationDomainArgs{...} }
 type AccelerationDomainArrayInput interface {
 	pulumi.Input
 
@@ -206,7 +211,7 @@ func (i AccelerationDomainArray) ToAccelerationDomainArrayOutputWithContext(ctx 
 // AccelerationDomainMapInput is an input type that accepts AccelerationDomainMap and AccelerationDomainMapOutput values.
 // You can construct a concrete instance of `AccelerationDomainMapInput` via:
 //
-//          AccelerationDomainMap{ "key": AccelerationDomainArgs{...} }
+//	AccelerationDomainMap{ "key": AccelerationDomainArgs{...} }
 type AccelerationDomainMapInput interface {
 	pulumi.Input
 

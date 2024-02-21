@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.GetNatFwSwitches(ctx, &cfw.GetNatFwSwitchesArgs{
-// 			NatInsId: pulumi.StringRef("cfwnat-18d2ba18"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.GetNatFwSwitches(ctx, &cfw.GetNatFwSwitchesArgs{
+//				NatInsId: pulumi.StringRef("cfwnat-18d2ba18"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Or filter by switch status
 //
@@ -42,23 +45,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.GetNatFwSwitches(ctx, &cfw.GetNatFwSwitchesArgs{
-// 			NatInsId: pulumi.StringRef("cfwnat-18d2ba18"),
-// 			Status:   pulumi.IntRef(1),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.GetNatFwSwitches(ctx, &cfw.GetNatFwSwitchesArgs{
+//				NatInsId: pulumi.StringRef("cfwnat-18d2ba18"),
+//				Status:   pulumi.IntRef(1),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetNatFwSwitches(ctx *pulumi.Context, args *GetNatFwSwitchesArgs, opts ...pulumi.InvokeOption) (*GetNatFwSwitchesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

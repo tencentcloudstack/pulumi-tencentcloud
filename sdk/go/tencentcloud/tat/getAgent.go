@@ -18,29 +18,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tat.GetAgent(ctx, &tat.GetAgentArgs{
-// 			Filters: []tat.GetAgentFilter{
-// 				tat.GetAgentFilter{
-// 					Name: "environment",
-// 					Values: []string{
-// 						"Linux",
-// 					},
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tat.GetAgent(ctx, &tat.GetAgentArgs{
+//				Filters: []tat.GetAgentFilter{
+//					tat.GetAgentFilter{
+//						Name: "environment",
+//						Values: []string{
+//							"Linux",
+//						},
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetAgent(ctx *pulumi.Context, args *GetAgentArgs, opts ...pulumi.InvokeOption) (*GetAgentResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

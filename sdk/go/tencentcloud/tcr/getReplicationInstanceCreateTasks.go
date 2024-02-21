@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.GetReplicationInstanceCreateTasks(ctx, &tcr.GetReplicationInstanceCreateTasksArgs{
-// 			ReplicationRegistryId: local.Dst_registry_id,
-// 			ReplicationRegionId:   local.Dst_region_id,
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcr.GetReplicationInstanceCreateTasks(ctx, &tcr.GetReplicationInstanceCreateTasksArgs{
+//				ReplicationRegistryId: local.Dst_registry_id,
+//				ReplicationRegionId:   local.Dst_region_id,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetReplicationInstanceCreateTasks(ctx *pulumi.Context, args *GetReplicationInstanceCreateTasksArgs, opts ...pulumi.InvokeOption) (*GetReplicationInstanceCreateTasksResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

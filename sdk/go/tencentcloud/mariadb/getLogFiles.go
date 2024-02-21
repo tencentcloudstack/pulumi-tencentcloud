@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.GetLogFiles(ctx, &mariadb.GetLogFilesArgs{
-// 			InstanceId: "tdsql-9vqvls95",
-// 			Type:       1,
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.GetLogFiles(ctx, &mariadb.GetLogFilesArgs{
+//				InstanceId: "tdsql-9vqvls95",
+//				Type:       1,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetLogFiles(ctx *pulumi.Context, args *GetLogFilesArgs, opts ...pulumi.InvokeOption) (*GetLogFilesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

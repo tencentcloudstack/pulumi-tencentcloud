@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Antiddos.GetOverviewDdosEventList(ctx, &antiddos.GetOverviewDdosEventListArgs{
-// 			AttackStatus: pulumi.StringRef("end"),
-// 			EndTime:      "2023-11-21 00:00:00",
-// 			StartTime:    "2023-11-20 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Antiddos.GetOverviewDdosEventList(ctx, &antiddos.GetOverviewDdosEventListArgs{
+//				AttackStatus: pulumi.StringRef("end"),
+//				EndTime:      "2023-11-21 00:00:00",
+//				StartTime:    "2023-11-20 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetOverviewDdosEventList(ctx *pulumi.Context, args *GetOverviewDdosEventListArgs, opts ...pulumi.InvokeOption) (*GetOverviewDdosEventListResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcaplus.GetIdls(ctx, &tcaplus.GetIdlsArgs{
-// 			ClusterId: "19162256624",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcaplus.GetIdls(ctx, &tcaplus.GetIdlsArgs{
+//				ClusterId: "19162256624",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetIdls(ctx *pulumi.Context, args *GetIdlsArgs, opts ...pulumi.InvokeOption) (*GetIdlsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

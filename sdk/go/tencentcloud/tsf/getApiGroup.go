@@ -18,28 +18,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.GetApiGroup(ctx, &tsf.GetApiGroupArgs{
-// 			AuthType:          pulumi.StringRef("none"),
-// 			GatewayInstanceId: pulumi.StringRef("gw-ins-lvdypq5k"),
-// 			GroupType:         pulumi.StringRef("ms"),
-// 			OrderBy:           pulumi.StringRef("created_time"),
-// 			OrderType:         pulumi.IntRef(0),
-// 			SearchWord:        pulumi.StringRef("xxx01"),
-// 			Status:            pulumi.StringRef("released"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.GetApiGroup(ctx, &tsf.GetApiGroupArgs{
+//				AuthType:          pulumi.StringRef("none"),
+//				GatewayInstanceId: pulumi.StringRef("gw-ins-lvdypq5k"),
+//				GroupType:         pulumi.StringRef("ms"),
+//				OrderBy:           pulumi.StringRef("created_time"),
+//				OrderType:         pulumi.IntRef(0),
+//				SearchWord:        pulumi.StringRef("xxx01"),
+//				Status:            pulumi.StringRef("released"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupApiGroup(ctx *pulumi.Context, args *LookupApiGroupArgs, opts ...pulumi.InvokeOption) (*LookupApiGroupResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

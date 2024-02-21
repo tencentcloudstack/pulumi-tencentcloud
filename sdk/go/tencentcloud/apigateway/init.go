@@ -51,6 +51,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &StrategyAttachment{}
 	case "tencentcloud:ApiGateway/updateApiAppKey:UpdateApiAppKey":
 		r = &UpdateApiAppKey{}
+	case "tencentcloud:ApiGateway/updateService:UpdateService":
+		r = &UpdateService{}
 	case "tencentcloud:ApiGateway/upstream:Upstream":
 		r = &Upstream{}
 	case "tencentcloud:ApiGateway/usagePlan:UsagePlan":
@@ -143,6 +145,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"ApiGateway/updateApiAppKey",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"ApiGateway/updateService",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

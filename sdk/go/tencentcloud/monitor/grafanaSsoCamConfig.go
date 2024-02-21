@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewGrafanaSsoCamConfig(ctx, "grafanaSsoCamConfig", &Monitor.GrafanaSsoCamConfigArgs{
-// 			EnableSsoCamCheck: pulumi.Bool(false),
-// 			InstanceId:        pulumi.String("grafana-dp2hnnfa"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.NewGrafanaSsoCamConfig(ctx, "grafanaSsoCamConfig", &Monitor.GrafanaSsoCamConfigArgs{
+//				EnableSsoCamCheck: pulumi.Bool(false),
+//				InstanceId:        pulumi.String("grafana-dp2hnnfa"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // monitor grafana_sso_cam_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/grafanaSsoCamConfig:GrafanaSsoCamConfig grafana_sso_cam_config instance_id
+//
+//	$ pulumi import tencentcloud:Monitor/grafanaSsoCamConfig:GrafanaSsoCamConfig grafana_sso_cam_config instance_id
+//
 // ```
 type GrafanaSsoCamConfig struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *GrafanaSsoCamConfig) ToGrafanaSsoCamConfigOutputWithContext(ctx context
 // GrafanaSsoCamConfigArrayInput is an input type that accepts GrafanaSsoCamConfigArray and GrafanaSsoCamConfigArrayOutput values.
 // You can construct a concrete instance of `GrafanaSsoCamConfigArrayInput` via:
 //
-//          GrafanaSsoCamConfigArray{ GrafanaSsoCamConfigArgs{...} }
+//	GrafanaSsoCamConfigArray{ GrafanaSsoCamConfigArgs{...} }
 type GrafanaSsoCamConfigArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i GrafanaSsoCamConfigArray) ToGrafanaSsoCamConfigArrayOutputWithContext(ct
 // GrafanaSsoCamConfigMapInput is an input type that accepts GrafanaSsoCamConfigMap and GrafanaSsoCamConfigMapOutput values.
 // You can construct a concrete instance of `GrafanaSsoCamConfigMapInput` via:
 //
-//          GrafanaSsoCamConfigMap{ "key": GrafanaSsoCamConfigArgs{...} }
+//	GrafanaSsoCamConfigMap{ "key": GrafanaSsoCamConfigArgs{...} }
 type GrafanaSsoCamConfigMapInput interface {
 	pulumi.Input
 

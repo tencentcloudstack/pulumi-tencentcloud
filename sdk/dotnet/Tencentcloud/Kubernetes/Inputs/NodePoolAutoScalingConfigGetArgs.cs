@@ -183,7 +183,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<int>? SystemDiskSize { get; set; }
 
         /// <summary>
-        /// Type of a CVM disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`.
+        /// Type of a CVM disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`. Default is `CLOUD_PREMIUM`.
         /// </summary>
         [Input("systemDiskType")]
         public Input<string>? SystemDiskType { get; set; }

@@ -19,40 +19,43 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Antiddos.NewCcPrecisionPolicy(ctx, "ccPrecisionPolicy", &Antiddos.CcPrecisionPolicyArgs{
-// 			Domain:       pulumi.String("t.baidu.com"),
-// 			InstanceId:   pulumi.String("bgpip-0000078h"),
-// 			Ip:           pulumi.String("212.64.62.191"),
-// 			PolicyAction: pulumi.String("drop"),
-// 			PolicyLists: antiddos.CcPrecisionPolicyPolicyListArray{
-// 				&antiddos.CcPrecisionPolicyPolicyListArgs{
-// 					FieldName:     pulumi.String("cgi"),
-// 					FieldType:     pulumi.String("value"),
-// 					Value:         pulumi.String("a.com"),
-// 					ValueOperator: pulumi.String("equal"),
-// 				},
-// 				&antiddos.CcPrecisionPolicyPolicyListArgs{
-// 					FieldName:     pulumi.String("ua"),
-// 					FieldType:     pulumi.String("value"),
-// 					Value:         pulumi.String("test"),
-// 					ValueOperator: pulumi.String("equal"),
-// 				},
-// 			},
-// 			Protocol: pulumi.String("http"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Antiddos.NewCcPrecisionPolicy(ctx, "ccPrecisionPolicy", &Antiddos.CcPrecisionPolicyArgs{
+//				Domain:       pulumi.String("t.baidu.com"),
+//				InstanceId:   pulumi.String("bgpip-0000078h"),
+//				Ip:           pulumi.String("212.64.62.191"),
+//				PolicyAction: pulumi.String("drop"),
+//				PolicyLists: antiddos.CcPrecisionPolicyPolicyListArray{
+//					&antiddos.CcPrecisionPolicyPolicyListArgs{
+//						FieldName:     pulumi.String("cgi"),
+//						FieldType:     pulumi.String("value"),
+//						Value:         pulumi.String("a.com"),
+//						ValueOperator: pulumi.String("equal"),
+//					},
+//					&antiddos.CcPrecisionPolicyPolicyListArgs{
+//						FieldName:     pulumi.String("ua"),
+//						FieldType:     pulumi.String("value"),
+//						Value:         pulumi.String("test"),
+//						ValueOperator: pulumi.String("equal"),
+//					},
+//				},
+//				Protocol: pulumi.String("http"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -60,7 +63,9 @@ import (
 // antiddos cc_precision_policy can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Antiddos/ccPrecisionPolicy:CcPrecisionPolicy cc_precision_policy ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}
+//
+//	$ pulumi import tencentcloud:Antiddos/ccPrecisionPolicy:CcPrecisionPolicy cc_precision_policy ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}
+//
 // ```
 type CcPrecisionPolicy struct {
 	pulumi.CustomResourceState
@@ -217,7 +222,7 @@ func (i *CcPrecisionPolicy) ToCcPrecisionPolicyOutputWithContext(ctx context.Con
 // CcPrecisionPolicyArrayInput is an input type that accepts CcPrecisionPolicyArray and CcPrecisionPolicyArrayOutput values.
 // You can construct a concrete instance of `CcPrecisionPolicyArrayInput` via:
 //
-//          CcPrecisionPolicyArray{ CcPrecisionPolicyArgs{...} }
+//	CcPrecisionPolicyArray{ CcPrecisionPolicyArgs{...} }
 type CcPrecisionPolicyArrayInput interface {
 	pulumi.Input
 
@@ -242,7 +247,7 @@ func (i CcPrecisionPolicyArray) ToCcPrecisionPolicyArrayOutputWithContext(ctx co
 // CcPrecisionPolicyMapInput is an input type that accepts CcPrecisionPolicyMap and CcPrecisionPolicyMapOutput values.
 // You can construct a concrete instance of `CcPrecisionPolicyMapInput` via:
 //
-//          CcPrecisionPolicyMap{ "key": CcPrecisionPolicyArgs{...} }
+//	CcPrecisionPolicyMap{ "key": CcPrecisionPolicyArgs{...} }
 type CcPrecisionPolicyMapInput interface {
 	pulumi.Input
 

@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewAutoDenyRules(ctx, "example", &Waf.AutoDenyRulesArgs{
-// 			AttackThreshold:   pulumi.Int(20),
-// 			DenyTimeThreshold: pulumi.Int(5),
-// 			Domain:            pulumi.String("demo.waf.com"),
-// 			TimeThreshold:     pulumi.Int(12),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewAutoDenyRules(ctx, "example", &Waf.AutoDenyRulesArgs{
+//				AttackThreshold:   pulumi.Int(20),
+//				DenyTimeThreshold: pulumi.Int(5),
+//				Domain:            pulumi.String("demo.waf.com"),
+//				TimeThreshold:     pulumi.Int(12),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // waf auto_deny_rules can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Waf/autoDenyRules:AutoDenyRules example demo.waf.com
+//
+//	$ pulumi import tencentcloud:Waf/autoDenyRules:AutoDenyRules example demo.waf.com
+//
 // ```
 type AutoDenyRules struct {
 	pulumi.CustomResourceState
@@ -175,7 +180,7 @@ func (i *AutoDenyRules) ToAutoDenyRulesOutputWithContext(ctx context.Context) Au
 // AutoDenyRulesArrayInput is an input type that accepts AutoDenyRulesArray and AutoDenyRulesArrayOutput values.
 // You can construct a concrete instance of `AutoDenyRulesArrayInput` via:
 //
-//          AutoDenyRulesArray{ AutoDenyRulesArgs{...} }
+//	AutoDenyRulesArray{ AutoDenyRulesArgs{...} }
 type AutoDenyRulesArrayInput interface {
 	pulumi.Input
 
@@ -200,7 +205,7 @@ func (i AutoDenyRulesArray) ToAutoDenyRulesArrayOutputWithContext(ctx context.Co
 // AutoDenyRulesMapInput is an input type that accepts AutoDenyRulesMap and AutoDenyRulesMapOutput values.
 // You can construct a concrete instance of `AutoDenyRulesMapInput` via:
 //
-//          AutoDenyRulesMap{ "key": AutoDenyRulesArgs{...} }
+//	AutoDenyRulesMap{ "key": AutoDenyRulesArgs{...} }
 type AutoDenyRulesMapInput interface {
 	pulumi.Input
 

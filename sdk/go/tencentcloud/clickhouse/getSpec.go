@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clickhouse.GetSpec(ctx, &clickhouse.GetSpecArgs{
-// 			IsElastic: pulumi.BoolRef(false),
-// 			PayMode:   pulumi.StringRef("PREPAID"),
-// 			Zone:      "ap-guangzhou-7",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clickhouse.GetSpec(ctx, &clickhouse.GetSpecArgs{
+//				IsElastic: pulumi.BoolRef(false),
+//				PayMode:   pulumi.StringRef("PREPAID"),
+//				Zone:      "ap-guangzhou-7",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetSpec(ctx *pulumi.Context, args *GetSpecArgs, opts ...pulumi.InvokeOption) (*GetSpecResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

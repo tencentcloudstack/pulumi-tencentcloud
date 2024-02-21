@@ -631,7 +631,7 @@ export class Cluster extends pulumi.CustomResource {
     /**
      * Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
-    public readonly clusterInternet!: pulumi.Output<boolean | undefined>;
+    public readonly clusterInternet!: pulumi.Output<boolean>;
     /**
      * Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
      */
@@ -643,7 +643,7 @@ export class Cluster extends pulumi.CustomResource {
     /**
      * Open intranet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
-    public readonly clusterIntranet!: pulumi.Output<boolean | undefined>;
+    public readonly clusterIntranet!: pulumi.Output<boolean>;
     /**
      * Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
      */

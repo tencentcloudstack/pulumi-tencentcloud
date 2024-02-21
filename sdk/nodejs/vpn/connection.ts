@@ -172,7 +172,7 @@ export class Connection extends pulumi.CustomResource {
      */
     public readonly ipsecIntegrityAlgorithm!: pulumi.Output<string | undefined>;
     /**
-     * PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+     * PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
      */
     public readonly ipsecPfsDhGroup!: pulumi.Output<string | undefined>;
     /**
@@ -429,7 +429,7 @@ export interface ConnectionState {
      */
     ipsecIntegrityAlgorithm?: pulumi.Input<string>;
     /**
-     * PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+     * PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
      */
     ipsecPfsDhGroup?: pulumi.Input<string>;
     /**
@@ -575,7 +575,7 @@ export interface ConnectionArgs {
      */
     ipsecIntegrityAlgorithm?: pulumi.Input<string>;
     /**
-     * PFS DH group. Valid value: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`, `NULL`. Default value is `NULL`.
+     * PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
      */
     ipsecPfsDhGroup?: pulumi.Input<string>;
     /**

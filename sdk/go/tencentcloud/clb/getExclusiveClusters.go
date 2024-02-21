@@ -18,29 +18,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.GetExclusiveClusters(ctx, &clb.GetExclusiveClustersArgs{
-// 			Filters: []clb.GetExclusiveClustersFilter{
-// 				clb.GetExclusiveClustersFilter{
-// 					Name: "zone",
-// 					Values: []string{
-// 						"ap-guangzhou-1",
-// 					},
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.GetExclusiveClusters(ctx, &clb.GetExclusiveClustersArgs{
+//				Filters: []clb.GetExclusiveClustersFilter{
+//					clb.GetExclusiveClustersFilter{
+//						Name: "zone",
+//						Values: []string{
+//							"ap-guangzhou-1",
+//						},
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetExclusiveClusters(ctx *pulumi.Context, args *GetExclusiveClustersArgs, opts ...pulumi.InvokeOption) (*GetExclusiveClustersResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

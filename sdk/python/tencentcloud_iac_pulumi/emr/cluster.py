@@ -54,7 +54,7 @@ class ClusterArgs:
         :param pulumi.Input[Mapping[str, Any]] vpc_settings: The private net config of EMR instance.
         :param pulumi.Input[str] display_strategy: It will be deprecated in later versions. Display strategy of EMR instance.
         :param pulumi.Input[str] extend_fs_field: Access the external file system.
-        :param pulumi.Input[Mapping[str, Any]] login_settings: Instance login settings.
+        :param pulumi.Input[Mapping[str, Any]] login_settings: Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
         :param pulumi.Input[str] need_master_wan: Whether to enable the cluster Master node public network. Value range:
                - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
                - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
@@ -215,7 +215,7 @@ class ClusterArgs:
     @pulumi.getter(name="loginSettings")
     def login_settings(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
-        Instance login settings.
+        Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
         """
         return pulumi.get(self, "login_settings")
 
@@ -351,7 +351,7 @@ class _ClusterState:
         :param pulumi.Input[str] extend_fs_field: Access the external file system.
         :param pulumi.Input[str] instance_id: Created EMR instance id.
         :param pulumi.Input[str] instance_name: Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
-        :param pulumi.Input[Mapping[str, Any]] login_settings: Instance login settings.
+        :param pulumi.Input[Mapping[str, Any]] login_settings: Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
         :param pulumi.Input[str] need_master_wan: Whether to enable the cluster Master node public network. Value range:
                - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
                - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
@@ -477,7 +477,7 @@ class _ClusterState:
     @pulumi.getter(name="loginSettings")
     def login_settings(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
         """
-        Instance login settings.
+        Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
         """
         return pulumi.get(self, "login_settings")
 
@@ -772,7 +772,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] display_strategy: It will be deprecated in later versions. Display strategy of EMR instance.
         :param pulumi.Input[str] extend_fs_field: Access the external file system.
         :param pulumi.Input[str] instance_name: Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
-        :param pulumi.Input[Mapping[str, Any]] login_settings: Instance login settings.
+        :param pulumi.Input[Mapping[str, Any]] login_settings: Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
         :param pulumi.Input[str] need_master_wan: Whether to enable the cluster Master node public network. Value range:
                - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
                - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
@@ -1016,7 +1016,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] extend_fs_field: Access the external file system.
         :param pulumi.Input[str] instance_id: Created EMR instance id.
         :param pulumi.Input[str] instance_name: Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
-        :param pulumi.Input[Mapping[str, Any]] login_settings: Instance login settings.
+        :param pulumi.Input[Mapping[str, Any]] login_settings: Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
         :param pulumi.Input[str] need_master_wan: Whether to enable the cluster Master node public network. Value range:
                - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
                - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
@@ -1107,7 +1107,7 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="loginSettings")
     def login_settings(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
         """
-        Instance login settings.
+        Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
         """
         return pulumi.get(self, "login_settings")
 

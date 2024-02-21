@@ -19,28 +19,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.NewDedicatedclusterDbInstance(ctx, "dedicatedclusterDbInstance", &Mariadb.DedicatedclusterDbInstanceArgs{
-// 			ClusterId:    pulumi.String("dbdc-24odnuhr"),
-// 			DbVersionId:  pulumi.String("8.0"),
-// 			GoodsNum:     pulumi.Int(1),
-// 			InstanceName: pulumi.String("cluster-mariadb-test-1"),
-// 			Memory:       pulumi.Int(2),
-// 			Storage:      pulumi.Int(10),
-// 			SubnetId:     pulumi.String("subnet-3ku415by"),
-// 			VpcId:        pulumi.String("vpc-ii1jfbhl"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.NewDedicatedclusterDbInstance(ctx, "dedicatedclusterDbInstance", &Mariadb.DedicatedclusterDbInstanceArgs{
+//				ClusterId:    pulumi.String("dbdc-24odnuhr"),
+//				DbVersionId:  pulumi.String("8.0"),
+//				GoodsNum:     pulumi.Int(1),
+//				InstanceName: pulumi.String("cluster-mariadb-test-1"),
+//				Memory:       pulumi.Int(2),
+//				Storage:      pulumi.Int(10),
+//				SubnetId:     pulumi.String("subnet-3ku415by"),
+//				VpcId:        pulumi.String("vpc-ii1jfbhl"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -48,7 +51,9 @@ import (
 // mariadb dedicatedcluster_db_instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mariadb/dedicatedclusterDbInstance:DedicatedclusterDbInstance dedicatedcluster_db_instance tdsql-050g3fmv
+//
+//	$ pulumi import tencentcloud:Mariadb/dedicatedclusterDbInstance:DedicatedclusterDbInstance dedicatedcluster_db_instance tdsql-050g3fmv
+//
 // ```
 type DedicatedclusterDbInstance struct {
 	pulumi.CustomResourceState
@@ -249,7 +254,7 @@ func (i *DedicatedclusterDbInstance) ToDedicatedclusterDbInstanceOutputWithConte
 // DedicatedclusterDbInstanceArrayInput is an input type that accepts DedicatedclusterDbInstanceArray and DedicatedclusterDbInstanceArrayOutput values.
 // You can construct a concrete instance of `DedicatedclusterDbInstanceArrayInput` via:
 //
-//          DedicatedclusterDbInstanceArray{ DedicatedclusterDbInstanceArgs{...} }
+//	DedicatedclusterDbInstanceArray{ DedicatedclusterDbInstanceArgs{...} }
 type DedicatedclusterDbInstanceArrayInput interface {
 	pulumi.Input
 
@@ -274,7 +279,7 @@ func (i DedicatedclusterDbInstanceArray) ToDedicatedclusterDbInstanceArrayOutput
 // DedicatedclusterDbInstanceMapInput is an input type that accepts DedicatedclusterDbInstanceMap and DedicatedclusterDbInstanceMapOutput values.
 // You can construct a concrete instance of `DedicatedclusterDbInstanceMapInput` via:
 //
-//          DedicatedclusterDbInstanceMap{ "key": DedicatedclusterDbInstanceArgs{...} }
+//	DedicatedclusterDbInstanceMap{ "key": DedicatedclusterDbInstanceArgs{...} }
 type DedicatedclusterDbInstanceMapInput interface {
 	pulumi.Input
 

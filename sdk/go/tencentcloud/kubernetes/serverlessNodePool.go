@@ -20,82 +20,85 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		exampleClusterCidr := "10.31.0.0/16"
-// 		if param := cfg.Get("exampleClusterCidr"); param != "" {
-// 			exampleClusterCidr = param
-// 		}
-// 		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZone),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpcId := vpc.InstanceLists[0].VpcId
-// 		subnetId := vpc.InstanceLists[0].SubnetId
-// 		sg, err := Security.GetGroups(ctx, &security.GetGroupsArgs{
-// 			Name: pulumi.StringRef("default"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		sgId := sg.SecurityGroups[0].SecurityGroupId
-// 		exampleCluster, err := Kubernetes.NewCluster(ctx, "exampleCluster", &Kubernetes.ClusterArgs{
-// 			VpcId:                pulumi.String(vpcId),
-// 			ClusterCidr:          pulumi.String(exampleClusterCidr),
-// 			ClusterMaxPodNum:     pulumi.Int(32),
-// 			ClusterName:          pulumi.String("tf_example_cluster"),
-// 			ClusterDesc:          pulumi.String("tf example cluster"),
-// 			ClusterMaxServiceNum: pulumi.Int(32),
-// 			ClusterVersion:       pulumi.String("1.18.4"),
-// 			ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Kubernetes.NewServerlessNodePool(ctx, "exampleServerlessNodePool", &Kubernetes.ServerlessNodePoolArgs{
-// 			ClusterId: exampleCluster.ID(),
-// 			ServerlessNodes: kubernetes.ServerlessNodePoolServerlessNodeArray{
-// 				&kubernetes.ServerlessNodePoolServerlessNodeArgs{
-// 					DisplayName: pulumi.String("tf_example_serverless_node1"),
-// 					SubnetId:    pulumi.String(subnetId),
-// 				},
-// 				&kubernetes.ServerlessNodePoolServerlessNodeArgs{
-// 					DisplayName: pulumi.String("tf_example_serverless_node2"),
-// 					SubnetId:    pulumi.String(subnetId),
-// 				},
-// 			},
-// 			SecurityGroupIds: pulumi.StringArray{
-// 				pulumi.String(sgId),
-// 			},
-// 			Labels: pulumi.AnyMap{
-// 				"label1": pulumi.Any("value1"),
-// 				"label2": pulumi.Any("value2"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			exampleClusterCidr := "10.31.0.0/16"
+//			if param := cfg.Get("exampleClusterCidr"); param != "" {
+//				exampleClusterCidr = param
+//			}
+//			vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//				IsDefault:        pulumi.BoolRef(true),
+//				AvailabilityZone: pulumi.StringRef(availabilityZone),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpcId := vpc.InstanceLists[0].VpcId
+//			subnetId := vpc.InstanceLists[0].SubnetId
+//			sg, err := Security.GetGroups(ctx, &security.GetGroupsArgs{
+//				Name: pulumi.StringRef("default"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			sgId := sg.SecurityGroups[0].SecurityGroupId
+//			exampleCluster, err := Kubernetes.NewCluster(ctx, "exampleCluster", &Kubernetes.ClusterArgs{
+//				VpcId:                pulumi.String(vpcId),
+//				ClusterCidr:          pulumi.String(exampleClusterCidr),
+//				ClusterMaxPodNum:     pulumi.Int(32),
+//				ClusterName:          pulumi.String("tf_example_cluster"),
+//				ClusterDesc:          pulumi.String("tf example cluster"),
+//				ClusterMaxServiceNum: pulumi.Int(32),
+//				ClusterVersion:       pulumi.String("1.18.4"),
+//				ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Kubernetes.NewServerlessNodePool(ctx, "exampleServerlessNodePool", &Kubernetes.ServerlessNodePoolArgs{
+//				ClusterId: exampleCluster.ID(),
+//				ServerlessNodes: kubernetes.ServerlessNodePoolServerlessNodeArray{
+//					&kubernetes.ServerlessNodePoolServerlessNodeArgs{
+//						DisplayName: pulumi.String("tf_example_serverless_node1"),
+//						SubnetId:    pulumi.String(subnetId),
+//					},
+//					&kubernetes.ServerlessNodePoolServerlessNodeArgs{
+//						DisplayName: pulumi.String("tf_example_serverless_node2"),
+//						SubnetId:    pulumi.String(subnetId),
+//					},
+//				},
+//				SecurityGroupIds: pulumi.StringArray{
+//					pulumi.String(sgId),
+//				},
+//				Labels: pulumi.AnyMap{
+//					"label1": pulumi.Any("value1"),
+//					"label2": pulumi.Any("value2"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Adding taints to the virtual nodes under this node pool
 //
@@ -105,51 +108,54 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kubernetes.NewServerlessNodePool(ctx, "example", &Kubernetes.ServerlessNodePoolArgs{
-// 			ClusterId: pulumi.Any(tencentcloud_kubernetes_cluster.Example.Id),
-// 			ServerlessNodes: kubernetes.ServerlessNodePoolServerlessNodeArray{
-// 				&kubernetes.ServerlessNodePoolServerlessNodeArgs{
-// 					DisplayName: pulumi.String("tf_example_serverless_node1"),
-// 					SubnetId:    pulumi.Any(local.Subnet_id),
-// 				},
-// 				&kubernetes.ServerlessNodePoolServerlessNodeArgs{
-// 					DisplayName: pulumi.String("tf_example_serverless_node2"),
-// 					SubnetId:    pulumi.Any(local.Subnet_id),
-// 				},
-// 			},
-// 			SecurityGroupIds: pulumi.StringArray{
-// 				pulumi.Any(local.Sg_id),
-// 			},
-// 			Labels: pulumi.AnyMap{
-// 				"label1": pulumi.Any("value1"),
-// 				"label2": pulumi.Any("value2"),
-// 			},
-// 			Taints: kubernetes.ServerlessNodePoolTaintArray{
-// 				&kubernetes.ServerlessNodePoolTaintArgs{
-// 					Key:    pulumi.String("key1"),
-// 					Value:  pulumi.String("value1"),
-// 					Effect: pulumi.String("NoSchedule"),
-// 				},
-// 				&kubernetes.ServerlessNodePoolTaintArgs{
-// 					Key:    pulumi.String("key1"),
-// 					Value:  pulumi.String("value1"),
-// 					Effect: pulumi.String("NoExecute"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kubernetes.NewServerlessNodePool(ctx, "example", &Kubernetes.ServerlessNodePoolArgs{
+//				ClusterId: pulumi.Any(tencentcloud_kubernetes_cluster.Example.Id),
+//				ServerlessNodes: kubernetes.ServerlessNodePoolServerlessNodeArray{
+//					&kubernetes.ServerlessNodePoolServerlessNodeArgs{
+//						DisplayName: pulumi.String("tf_example_serverless_node1"),
+//						SubnetId:    pulumi.Any(local.Subnet_id),
+//					},
+//					&kubernetes.ServerlessNodePoolServerlessNodeArgs{
+//						DisplayName: pulumi.String("tf_example_serverless_node2"),
+//						SubnetId:    pulumi.Any(local.Subnet_id),
+//					},
+//				},
+//				SecurityGroupIds: pulumi.StringArray{
+//					pulumi.Any(local.Sg_id),
+//				},
+//				Labels: pulumi.AnyMap{
+//					"label1": pulumi.Any("value1"),
+//					"label2": pulumi.Any("value2"),
+//				},
+//				Taints: kubernetes.ServerlessNodePoolTaintArray{
+//					&kubernetes.ServerlessNodePoolTaintArgs{
+//						Key:    pulumi.String("key1"),
+//						Value:  pulumi.String("value1"),
+//						Effect: pulumi.String("NoSchedule"),
+//					},
+//					&kubernetes.ServerlessNodePoolTaintArgs{
+//						Key:    pulumi.String("key1"),
+//						Value:  pulumi.String("value1"),
+//						Effect: pulumi.String("NoExecute"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -157,7 +163,9 @@ import (
 // serverless node pool can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool test cls-xxx#np-xxx
+//
+//	$ pulumi import tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool test cls-xxx#np-xxx
+//
 // ```
 type ServerlessNodePool struct {
 	pulumi.CustomResourceState
@@ -308,7 +316,7 @@ func (i *ServerlessNodePool) ToServerlessNodePoolOutputWithContext(ctx context.C
 // ServerlessNodePoolArrayInput is an input type that accepts ServerlessNodePoolArray and ServerlessNodePoolArrayOutput values.
 // You can construct a concrete instance of `ServerlessNodePoolArrayInput` via:
 //
-//          ServerlessNodePoolArray{ ServerlessNodePoolArgs{...} }
+//	ServerlessNodePoolArray{ ServerlessNodePoolArgs{...} }
 type ServerlessNodePoolArrayInput interface {
 	pulumi.Input
 
@@ -333,7 +341,7 @@ func (i ServerlessNodePoolArray) ToServerlessNodePoolArrayOutputWithContext(ctx 
 // ServerlessNodePoolMapInput is an input type that accepts ServerlessNodePoolMap and ServerlessNodePoolMapOutput values.
 // You can construct a concrete instance of `ServerlessNodePoolMapInput` via:
 //
-//          ServerlessNodePoolMap{ "key": ServerlessNodePoolArgs{...} }
+//	ServerlessNodePoolMap{ "key": ServerlessNodePoolArgs{...} }
 type ServerlessNodePoolMapInput interface {
 	pulumi.Input
 

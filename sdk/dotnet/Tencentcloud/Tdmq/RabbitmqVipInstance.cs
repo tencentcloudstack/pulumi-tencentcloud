@@ -12,6 +12,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
 {
     /// <summary>
     /// Provides a resource to create a tdmq rabbitmq_vip_instance
+    /// 
+    /// ## Import
+    /// 
+    /// tdmq rabbitmq_vip_instance can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    ///  $ pulumi import tencentcloud:Tdmq/rabbitmqVipInstance:RabbitmqVipInstance example amqp-mok52gmn
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/rabbitmqVipInstance:RabbitmqVipInstance")]
     public partial class RabbitmqVipInstance : Pulumi.CustomResource

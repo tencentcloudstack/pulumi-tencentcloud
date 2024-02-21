@@ -19,27 +19,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewTimeshiftTemplate(ctx, "timeshiftTemplate", &Css.TimeshiftTemplateArgs{
-// 			Area:                 pulumi.String("Mainland"),
-// 			Description:          pulumi.String("timeshift template"),
-// 			Duration:             pulumi.Int(604800),
-// 			ItemDuration:         pulumi.Int(5),
-// 			RemoveWatermark:      pulumi.Bool(true),
-// 			TemplateName:         pulumi.String("tf-test"),
-// 			TranscodeTemplateIds: pulumi.IntArray{},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewTimeshiftTemplate(ctx, "timeshiftTemplate", &Css.TimeshiftTemplateArgs{
+//				Area:                 pulumi.String("Mainland"),
+//				Description:          pulumi.String("timeshift template"),
+//				Duration:             pulumi.Int(604800),
+//				ItemDuration:         pulumi.Int(5),
+//				RemoveWatermark:      pulumi.Bool(true),
+//				TemplateName:         pulumi.String("tf-test"),
+//				TranscodeTemplateIds: pulumi.IntArray{},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -47,7 +50,9 @@ import (
 // css timeshift_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/timeshiftTemplate:TimeshiftTemplate timeshift_template templateId
+//
+//	$ pulumi import tencentcloud:Css/timeshiftTemplate:TimeshiftTemplate timeshift_template templateId
+//
 // ```
 type TimeshiftTemplate struct {
 	pulumi.CustomResourceState
@@ -202,7 +207,7 @@ func (i *TimeshiftTemplate) ToTimeshiftTemplateOutputWithContext(ctx context.Con
 // TimeshiftTemplateArrayInput is an input type that accepts TimeshiftTemplateArray and TimeshiftTemplateArrayOutput values.
 // You can construct a concrete instance of `TimeshiftTemplateArrayInput` via:
 //
-//          TimeshiftTemplateArray{ TimeshiftTemplateArgs{...} }
+//	TimeshiftTemplateArray{ TimeshiftTemplateArgs{...} }
 type TimeshiftTemplateArrayInput interface {
 	pulumi.Input
 
@@ -227,7 +232,7 @@ func (i TimeshiftTemplateArray) ToTimeshiftTemplateArrayOutputWithContext(ctx co
 // TimeshiftTemplateMapInput is an input type that accepts TimeshiftTemplateMap and TimeshiftTemplateMapOutput values.
 // You can construct a concrete instance of `TimeshiftTemplateMapInput` via:
 //
-//          TimeshiftTemplateMap{ "key": TimeshiftTemplateArgs{...} }
+//	TimeshiftTemplateMap{ "key": TimeshiftTemplateArgs{...} }
 type TimeshiftTemplateMapInput interface {
 	pulumi.Input
 

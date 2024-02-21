@@ -19,38 +19,41 @@ import (
 // package main
 //
 // import (
-// 	"encoding/base64"
-// 	"io/ioutil"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"encoding/base64"
+//	"io/ioutil"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func filebase64OrPanic(path string) pulumi.StringPtrInput {
-// 	if fileData, err := ioutil.ReadFile(path); err == nil {
-// 		return pulumi.String(base64.StdEncoding.EncodeToString(fileData[:]))
-// 	} else {
-// 		panic(err.Error())
-// 	}
-// }
+//	func filebase64OrPanic(path string) pulumi.StringPtrInput {
+//		if fileData, err := ioutil.ReadFile(path); err == nil {
+//			return pulumi.String(base64.StdEncoding.EncodeToString(fileData[:]))
+//		} else {
+//			panic(err.Error())
+//		}
+//	}
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewPersonSample(ctx, "personSample", &Mps.PersonSampleArgs{
-// 			Usages: pulumi.StringArray{
-// 				pulumi.String("Review.Face"),
-// 			},
-// 			Description: pulumi.String("test"),
-// 			FaceContents: pulumi.StringArray{
-// 				filebase64OrPanic("./person.png"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewPersonSample(ctx, "personSample", &Mps.PersonSampleArgs{
+//				Usages: pulumi.StringArray{
+//					pulumi.String("Review.Face"),
+//				},
+//				Description: pulumi.String("test"),
+//				FaceContents: pulumi.StringArray{
+//					filebase64OrPanic("./person.png"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -58,7 +61,9 @@ import (
 // mps person_sample can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/personSample:PersonSample person_sample person_sample_id
+//
+//	$ pulumi import tencentcloud:Mps/personSample:PersonSample person_sample person_sample_id
+//
 // ```
 type PersonSample struct {
 	pulumi.CustomResourceState
@@ -180,7 +185,7 @@ func (i *PersonSample) ToPersonSampleOutputWithContext(ctx context.Context) Pers
 // PersonSampleArrayInput is an input type that accepts PersonSampleArray and PersonSampleArrayOutput values.
 // You can construct a concrete instance of `PersonSampleArrayInput` via:
 //
-//          PersonSampleArray{ PersonSampleArgs{...} }
+//	PersonSampleArray{ PersonSampleArgs{...} }
 type PersonSampleArrayInput interface {
 	pulumi.Input
 
@@ -205,7 +210,7 @@ func (i PersonSampleArray) ToPersonSampleArrayOutputWithContext(ctx context.Cont
 // PersonSampleMapInput is an input type that accepts PersonSampleMap and PersonSampleMapOutput values.
 // You can construct a concrete instance of `PersonSampleMapInput` via:
 //
-//          PersonSampleMap{ "key": PersonSampleArgs{...} }
+//	PersonSampleMap{ "key": PersonSampleArgs{...} }
 type PersonSampleMapInput interface {
 	pulumi.Input
 

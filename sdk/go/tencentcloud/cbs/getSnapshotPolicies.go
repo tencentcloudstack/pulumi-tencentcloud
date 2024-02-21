@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cbs.GetSnapshotPolicies(ctx, &cbs.GetSnapshotPoliciesArgs{
-// 			SnapshotPolicyId:   pulumi.StringRef("snap-f3io7adt"),
-// 			SnapshotPolicyName: pulumi.StringRef("test"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cbs.GetSnapshotPolicies(ctx, &cbs.GetSnapshotPoliciesArgs{
+//				SnapshotPolicyId:   pulumi.StringRef("snap-f3io7adt"),
+//				SnapshotPolicyName: pulumi.StringRef("test"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetSnapshotPolicies(ctx *pulumi.Context, args *GetSnapshotPoliciesArgs, opts ...pulumi.InvokeOption) (*GetSnapshotPoliciesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

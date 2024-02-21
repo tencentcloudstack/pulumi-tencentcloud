@@ -19,30 +19,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mongodb.NewInstance(ctx, "mongodb", &Mongodb.InstanceArgs{
-// 			AvailableZone: pulumi.String("ap-guangzhou-2"),
-// 			EngineVersion: pulumi.String("MONGO_36_WT"),
-// 			InstanceName:  pulumi.String("mongodb"),
-// 			MachineType:   pulumi.String("HIO10G"),
-// 			Memory:        pulumi.Int(4),
-// 			Password:      pulumi.String("password1234"),
-// 			ProjectId:     pulumi.Int(0),
-// 			SubnetId:      pulumi.String("subnet-xxxxxx"),
-// 			Volume:        pulumi.Int(100),
-// 			VpcId:         pulumi.String("vpc-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mongodb.NewInstance(ctx, "mongodb", &Mongodb.InstanceArgs{
+//				AvailableZone: pulumi.String("ap-guangzhou-2"),
+//				EngineVersion: pulumi.String("MONGO_36_WT"),
+//				InstanceName:  pulumi.String("mongodb"),
+//				MachineType:   pulumi.String("HIO10G"),
+//				Memory:        pulumi.Int(4),
+//				Password:      pulumi.String("password1234"),
+//				ProjectId:     pulumi.Int(0),
+//				SubnetId:      pulumi.String("subnet-xxxxxx"),
+//				Volume:        pulumi.Int(100),
+//				VpcId:         pulumi.String("vpc-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -50,7 +53,9 @@ import (
 // Mongodb instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mongodb/instance:Instance mongodb cmgo-41s6jwy4
+//
+//	$ pulumi import tencentcloud:Mongodb/instance:Instance mongodb cmgo-41s6jwy4
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -377,7 +382,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -402,7 +407,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

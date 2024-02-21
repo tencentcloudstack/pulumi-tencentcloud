@@ -114,7 +114,7 @@ func (i *ClassicLinkAttachment) ToClassicLinkAttachmentOutputWithContext(ctx con
 // ClassicLinkAttachmentArrayInput is an input type that accepts ClassicLinkAttachmentArray and ClassicLinkAttachmentArrayOutput values.
 // You can construct a concrete instance of `ClassicLinkAttachmentArrayInput` via:
 //
-//          ClassicLinkAttachmentArray{ ClassicLinkAttachmentArgs{...} }
+//	ClassicLinkAttachmentArray{ ClassicLinkAttachmentArgs{...} }
 type ClassicLinkAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -139,7 +139,7 @@ func (i ClassicLinkAttachmentArray) ToClassicLinkAttachmentArrayOutputWithContex
 // ClassicLinkAttachmentMapInput is an input type that accepts ClassicLinkAttachmentMap and ClassicLinkAttachmentMapOutput values.
 // You can construct a concrete instance of `ClassicLinkAttachmentMapInput` via:
 //
-//          ClassicLinkAttachmentMap{ "key": ClassicLinkAttachmentArgs{...} }
+//	ClassicLinkAttachmentMap{ "key": ClassicLinkAttachmentArgs{...} }
 type ClassicLinkAttachmentMapInput interface {
 	pulumi.Input
 

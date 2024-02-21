@@ -120,7 +120,7 @@ func (i *NotifyRoutes) ToNotifyRoutesOutputWithContext(ctx context.Context) Noti
 // NotifyRoutesArrayInput is an input type that accepts NotifyRoutesArray and NotifyRoutesArrayOutput values.
 // You can construct a concrete instance of `NotifyRoutesArrayInput` via:
 //
-//          NotifyRoutesArray{ NotifyRoutesArgs{...} }
+//	NotifyRoutesArray{ NotifyRoutesArgs{...} }
 type NotifyRoutesArrayInput interface {
 	pulumi.Input
 
@@ -145,7 +145,7 @@ func (i NotifyRoutesArray) ToNotifyRoutesArrayOutputWithContext(ctx context.Cont
 // NotifyRoutesMapInput is an input type that accepts NotifyRoutesMap and NotifyRoutesMapOutput values.
 // You can construct a concrete instance of `NotifyRoutesMapInput` via:
 //
-//          NotifyRoutesMap{ "key": NotifyRoutesArgs{...} }
+//	NotifyRoutesMap{ "key": NotifyRoutesArgs{...} }
 type NotifyRoutesMapInput interface {
 	pulumi.Input
 

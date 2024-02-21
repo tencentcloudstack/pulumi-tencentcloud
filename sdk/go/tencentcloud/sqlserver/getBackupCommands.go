@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.GetBackupCommands(ctx, &sqlserver.GetBackupCommandsArgs{
-// 			BackupFileType: "FULL",
-// 			DataBaseName:   "keep-publish-instance",
-// 			IsRecovery:     "NO",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.GetBackupCommands(ctx, &sqlserver.GetBackupCommandsArgs{
+//				BackupFileType: "FULL",
+//				DataBaseName:   "keep-publish-instance",
+//				IsRecovery:     "NO",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetBackupCommands(ctx *pulumi.Context, args *GetBackupCommandsArgs, opts ...pulumi.InvokeOption) (*GetBackupCommandsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

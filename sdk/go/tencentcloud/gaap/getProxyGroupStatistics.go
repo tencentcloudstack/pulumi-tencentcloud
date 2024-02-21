@@ -18,31 +18,34 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Gaap.GetProxyGroupStatistics(ctx, &gaap.GetProxyGroupStatisticsArgs{
-// 			EndTime:     "2023-10-09 23:59:59",
-// 			Granularity: 300,
-// 			GroupId:     "link-8lpyo88p",
-// 			MetricNames: []string{
-// 				"InBandwidth",
-// 				"OutBandwidth",
-// 				"InFlow",
-// 				"OutFlow",
-// 			},
-// 			StartTime: "2023-10-09 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Gaap.GetProxyGroupStatistics(ctx, &gaap.GetProxyGroupStatisticsArgs{
+//				EndTime:     "2023-10-09 23:59:59",
+//				Granularity: 300,
+//				GroupId:     "link-8lpyo88p",
+//				MetricNames: []string{
+//					"InBandwidth",
+//					"OutBandwidth",
+//					"InFlow",
+//					"OutFlow",
+//				},
+//				StartTime: "2023-10-09 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetProxyGroupStatistics(ctx *pulumi.Context, args *GetProxyGroupStatisticsArgs, opts ...pulumi.InvokeOption) (*GetProxyGroupStatisticsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

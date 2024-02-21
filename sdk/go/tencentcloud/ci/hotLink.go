@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewHotLink(ctx, "hotLink", &Ci.HotLinkArgs{
-// 			Bucket: pulumi.String("terraform-ci-xxxxxx"),
-// 			Type:   pulumi.String("white"),
-// 			Urls: pulumi.StringArray{
-// 				pulumi.String("10.0.0.1"),
-// 				pulumi.String("10.0.0.2"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewHotLink(ctx, "hotLink", &Ci.HotLinkArgs{
+//				Bucket: pulumi.String("terraform-ci-xxxxxx"),
+//				Type:   pulumi.String("white"),
+//				Urls: pulumi.StringArray{
+//					pulumi.String("10.0.0.1"),
+//					pulumi.String("10.0.0.2"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +49,9 @@ import (
 // ci hot_link can be imported using the bucket, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/hotLink:HotLink hot_link terraform-ci-xxxxxx
+//
+//	$ pulumi import tencentcloud:Ci/hotLink:HotLink hot_link terraform-ci-xxxxxx
+//
 // ```
 type HotLink struct {
 	pulumi.CustomResourceState
@@ -164,7 +169,7 @@ func (i *HotLink) ToHotLinkOutputWithContext(ctx context.Context) HotLinkOutput 
 // HotLinkArrayInput is an input type that accepts HotLinkArray and HotLinkArrayOutput values.
 // You can construct a concrete instance of `HotLinkArrayInput` via:
 //
-//          HotLinkArray{ HotLinkArgs{...} }
+//	HotLinkArray{ HotLinkArgs{...} }
 type HotLinkArrayInput interface {
 	pulumi.Input
 
@@ -189,7 +194,7 @@ func (i HotLinkArray) ToHotLinkArrayOutputWithContext(ctx context.Context) HotLi
 // HotLinkMapInput is an input type that accepts HotLinkMap and HotLinkMapOutput values.
 // You can construct a concrete instance of `HotLinkMapInput` via:
 //
-//          HotLinkMap{ "key": HotLinkArgs{...} }
+//	HotLinkMap{ "key": HotLinkArgs{...} }
 type HotLinkMapInput interface {
 	pulumi.Input
 

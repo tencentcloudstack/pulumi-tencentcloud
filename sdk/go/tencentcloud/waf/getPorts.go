@@ -18,20 +18,23 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.GetPorts(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.GetPorts(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Or
 //
@@ -39,23 +42,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.GetPorts(ctx, &waf.GetPortsArgs{
-// 			Edition:    pulumi.StringRef("clb-waf"),
-// 			InstanceId: pulumi.StringRef("waf_2kxtlbky00b2v1fn"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.GetPorts(ctx, &waf.GetPortsArgs{
+//				Edition:    pulumi.StringRef("clb-waf"),
+//				InstanceId: pulumi.StringRef("waf_2kxtlbky00b2v1fn"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetPorts(ctx *pulumi.Context, args *GetPortsArgs, opts ...pulumi.InvokeOption) (*GetPortsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

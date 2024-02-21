@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewSyncJobResizeOperation(ctx, "syncJobResizeOperation", &Dts.SyncJobResizeOperationArgs{
-// 			JobId:            pulumi.String("sync-werwfs23"),
-// 			NewInstanceClass: pulumi.String("large"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewSyncJobResizeOperation(ctx, "syncJobResizeOperation", &Dts.SyncJobResizeOperationArgs{
+//				JobId:            pulumi.String("sync-werwfs23"),
+//				NewInstanceClass: pulumi.String("large"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SyncJobResizeOperation struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *SyncJobResizeOperation) ToSyncJobResizeOperationOutputWithContext(ctx c
 // SyncJobResizeOperationArrayInput is an input type that accepts SyncJobResizeOperationArray and SyncJobResizeOperationArrayOutput values.
 // You can construct a concrete instance of `SyncJobResizeOperationArrayInput` via:
 //
-//          SyncJobResizeOperationArray{ SyncJobResizeOperationArgs{...} }
+//	SyncJobResizeOperationArray{ SyncJobResizeOperationArgs{...} }
 type SyncJobResizeOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i SyncJobResizeOperationArray) ToSyncJobResizeOperationArrayOutputWithCont
 // SyncJobResizeOperationMapInput is an input type that accepts SyncJobResizeOperationMap and SyncJobResizeOperationMapOutput values.
 // You can construct a concrete instance of `SyncJobResizeOperationMapInput` via:
 //
-//          SyncJobResizeOperationMap{ "key": SyncJobResizeOperationArgs{...} }
+//	SyncJobResizeOperationMap{ "key": SyncJobResizeOperationArgs{...} }
 type SyncJobResizeOperationMapInput interface {
 	pulumi.Input
 

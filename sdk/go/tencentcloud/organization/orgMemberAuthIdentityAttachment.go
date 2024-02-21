@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Organization.NewOrgMemberAuthIdentityAttachment(ctx, "orgMemberAuthIdentity", &Organization.OrgMemberAuthIdentityAttachmentArgs{
-// 			IdentityIds: pulumi.IntArray{
-// 				pulumi.Int(1657),
-// 			},
-// 			MemberUin: pulumi.Int(100033704327),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Organization.NewOrgMemberAuthIdentityAttachment(ctx, "orgMemberAuthIdentity", &Organization.OrgMemberAuthIdentityAttachmentArgs{
+//				IdentityIds: pulumi.IntArray{
+//					pulumi.Int(1657),
+//				},
+//				MemberUin: pulumi.Int(100033704327),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // organization org_member_auth_identity can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Organization/orgMemberAuthIdentityAttachment:OrgMemberAuthIdentityAttachment org_member_auth_identity org_member_auth_identity_id
+//
+//	$ pulumi import tencentcloud:Organization/orgMemberAuthIdentityAttachment:OrgMemberAuthIdentityAttachment org_member_auth_identity org_member_auth_identity_id
+//
 // ```
 type OrgMemberAuthIdentityAttachment struct {
 	pulumi.CustomResourceState
@@ -149,7 +154,7 @@ func (i *OrgMemberAuthIdentityAttachment) ToOrgMemberAuthIdentityAttachmentOutpu
 // OrgMemberAuthIdentityAttachmentArrayInput is an input type that accepts OrgMemberAuthIdentityAttachmentArray and OrgMemberAuthIdentityAttachmentArrayOutput values.
 // You can construct a concrete instance of `OrgMemberAuthIdentityAttachmentArrayInput` via:
 //
-//          OrgMemberAuthIdentityAttachmentArray{ OrgMemberAuthIdentityAttachmentArgs{...} }
+//	OrgMemberAuthIdentityAttachmentArray{ OrgMemberAuthIdentityAttachmentArgs{...} }
 type OrgMemberAuthIdentityAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -174,7 +179,7 @@ func (i OrgMemberAuthIdentityAttachmentArray) ToOrgMemberAuthIdentityAttachmentA
 // OrgMemberAuthIdentityAttachmentMapInput is an input type that accepts OrgMemberAuthIdentityAttachmentMap and OrgMemberAuthIdentityAttachmentMapOutput values.
 // You can construct a concrete instance of `OrgMemberAuthIdentityAttachmentMapInput` via:
 //
-//          OrgMemberAuthIdentityAttachmentMap{ "key": OrgMemberAuthIdentityAttachmentArgs{...} }
+//	OrgMemberAuthIdentityAttachmentMap{ "key": OrgMemberAuthIdentityAttachmentArgs{...} }
 type OrgMemberAuthIdentityAttachmentMapInput interface {
 	pulumi.Input
 

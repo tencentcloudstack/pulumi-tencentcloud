@@ -165,7 +165,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
      */
-    public readonly period!: pulumi.Output<number>;
+    public readonly period!: pulumi.Output<number | undefined>;
     /**
      * It has been deprecated from version v1.81.8. Use `tencentcloud.Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
      *
@@ -173,13 +173,21 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly permitDefaultKeyPairLogin!: pulumi.Output<string>;
     /**
+     * Private addresses.
+     */
+    public /*out*/ readonly privateAddresses!: pulumi.Output<string[]>;
+    /**
+     * Public addresses.
+     */
+    public /*out*/ readonly publicAddresses!: pulumi.Output<string[]>;
+    /**
      * Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
      */
     public readonly renewFlag!: pulumi.Output<string>;
     /**
      * List of availability zones. A random AZ is selected by default.
      */
-    public readonly zone!: pulumi.Output<string | undefined>;
+    public readonly zone!: pulumi.Output<string>;
 
     /**
      * Create a Instance resource with the given unique name, arguments, and options.
@@ -206,6 +214,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["loginConfiguration"] = state ? state.loginConfiguration : undefined;
             resourceInputs["period"] = state ? state.period : undefined;
             resourceInputs["permitDefaultKeyPairLogin"] = state ? state.permitDefaultKeyPairLogin : undefined;
+            resourceInputs["privateAddresses"] = state ? state.privateAddresses : undefined;
+            resourceInputs["publicAddresses"] = state ? state.publicAddresses : undefined;
             resourceInputs["renewFlag"] = state ? state.renewFlag : undefined;
             resourceInputs["zone"] = state ? state.zone : undefined;
         } else {
@@ -218,9 +228,6 @@ export class Instance extends pulumi.CustomResource {
             }
             if ((!args || args.instanceName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'instanceName'");
-            }
-            if ((!args || args.period === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'period'");
             }
             if ((!args || args.renewFlag === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'renewFlag'");
@@ -239,6 +246,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["permitDefaultKeyPairLogin"] = args ? args.permitDefaultKeyPairLogin : undefined;
             resourceInputs["renewFlag"] = args ? args.renewFlag : undefined;
             resourceInputs["zone"] = args ? args.zone : undefined;
+            resourceInputs["privateAddresses"] = undefined /*out*/;
+            resourceInputs["publicAddresses"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Instance.__pulumiType, name, resourceInputs, opts);
@@ -300,6 +309,14 @@ export interface InstanceState {
      */
     permitDefaultKeyPairLogin?: pulumi.Input<string>;
     /**
+     * Private addresses.
+     */
+    privateAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Public addresses.
+     */
+    publicAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
      */
     renewFlag?: pulumi.Input<string>;
@@ -356,7 +373,7 @@ export interface InstanceArgs {
     /**
      * Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
      */
-    period: pulumi.Input<number>;
+    period?: pulumi.Input<number>;
     /**
      * It has been deprecated from version v1.81.8. Use `tencentcloud.Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
      *

@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Rum.GetLogExportList(ctx, &rum.GetLogExportListArgs{
-// 			ProjectId: 1,
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Rum.GetLogExportList(ctx, &rum.GetLogExportListArgs{
+//				ProjectId: 1,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetLogExportList(ctx *pulumi.Context, args *GetLogExportListArgs, opts ...pulumi.InvokeOption) (*GetLogExportListResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

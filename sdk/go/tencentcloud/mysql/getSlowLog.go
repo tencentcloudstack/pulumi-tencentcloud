@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.GetSlowLog(ctx, &mysql.GetSlowLogArgs{
-// 			InstanceId: "cdb-fitq5t9h",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mysql.GetSlowLog(ctx, &mysql.GetSlowLogArgs{
+//				InstanceId: "cdb-fitq5t9h",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetSlowLog(ctx *pulumi.Context, args *GetSlowLogArgs, opts ...pulumi.InvokeOption) (*GetSlowLogResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

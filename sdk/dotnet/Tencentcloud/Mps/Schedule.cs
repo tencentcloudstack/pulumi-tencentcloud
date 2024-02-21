@@ -253,6 +253,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public Output<Outputs.ScheduleOutputStorage?> OutputStorage { get; private set; } = null!;
 
         /// <summary>
+        /// Resource ID, you need to ensure that the corresponding resource is open. The default is the account main resource ID.
+        /// </summary>
+        [Output("resourceId")]
+        public Output<string?> ResourceId { get; private set; } = null!;
+
+        /// <summary>
         /// The scheme name (max 128 characters). This name should be unique across your account.
         /// </summary>
         [Output("scheduleName")]
@@ -342,6 +348,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public Input<Inputs.ScheduleOutputStorageArgs>? OutputStorage { get; set; }
 
         /// <summary>
+        /// Resource ID, you need to ensure that the corresponding resource is open. The default is the account main resource ID.
+        /// </summary>
+        [Input("resourceId")]
+        public Input<string>? ResourceId { get; set; }
+
+        /// <summary>
         /// The scheme name (max 128 characters). This name should be unique across your account.
         /// </summary>
         [Input("scheduleName", required: true)]
@@ -389,6 +401,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// </summary>
         [Input("outputStorage")]
         public Input<Inputs.ScheduleOutputStorageGetArgs>? OutputStorage { get; set; }
+
+        /// <summary>
+        /// Resource ID, you need to ensure that the corresponding resource is open. The default is the account main resource ID.
+        /// </summary>
+        [Input("resourceId")]
+        public Input<string>? ResourceId { get; set; }
 
         /// <summary>
         /// The scheme name (max 128 characters). This name should be unique across your account.

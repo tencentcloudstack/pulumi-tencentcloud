@@ -24,7 +24,7 @@ type ZoneAccountVpcSet struct {
 // ZoneAccountVpcSetInput is an input type that accepts ZoneAccountVpcSetArgs and ZoneAccountVpcSetOutput values.
 // You can construct a concrete instance of `ZoneAccountVpcSetInput` via:
 //
-//          ZoneAccountVpcSetArgs{...}
+//	ZoneAccountVpcSetArgs{...}
 type ZoneAccountVpcSetInput interface {
 	pulumi.Input
 
@@ -58,7 +58,7 @@ func (i ZoneAccountVpcSetArgs) ToZoneAccountVpcSetOutputWithContext(ctx context.
 // ZoneAccountVpcSetArrayInput is an input type that accepts ZoneAccountVpcSetArray and ZoneAccountVpcSetArrayOutput values.
 // You can construct a concrete instance of `ZoneAccountVpcSetArrayInput` via:
 //
-//          ZoneAccountVpcSetArray{ ZoneAccountVpcSetArgs{...} }
+//	ZoneAccountVpcSetArray{ ZoneAccountVpcSetArgs{...} }
 type ZoneAccountVpcSetArrayInput interface {
 	pulumi.Input
 
@@ -144,7 +144,7 @@ type ZoneTagSet struct {
 // ZoneTagSetInput is an input type that accepts ZoneTagSetArgs and ZoneTagSetOutput values.
 // You can construct a concrete instance of `ZoneTagSetInput` via:
 //
-//          ZoneTagSetArgs{...}
+//	ZoneTagSetArgs{...}
 type ZoneTagSetInput interface {
 	pulumi.Input
 
@@ -174,7 +174,7 @@ func (i ZoneTagSetArgs) ToZoneTagSetOutputWithContext(ctx context.Context) ZoneT
 // ZoneTagSetArrayInput is an input type that accepts ZoneTagSetArray and ZoneTagSetArrayOutput values.
 // You can construct a concrete instance of `ZoneTagSetArrayInput` via:
 //
-//          ZoneTagSetArray{ ZoneTagSetArgs{...} }
+//	ZoneTagSetArray{ ZoneTagSetArgs{...} }
 type ZoneTagSetArrayInput interface {
 	pulumi.Input
 
@@ -252,7 +252,7 @@ type ZoneVpcAttachmentAccountVpcSet struct {
 // ZoneVpcAttachmentAccountVpcSetInput is an input type that accepts ZoneVpcAttachmentAccountVpcSetArgs and ZoneVpcAttachmentAccountVpcSetOutput values.
 // You can construct a concrete instance of `ZoneVpcAttachmentAccountVpcSetInput` via:
 //
-//          ZoneVpcAttachmentAccountVpcSetArgs{...}
+//	ZoneVpcAttachmentAccountVpcSetArgs{...}
 type ZoneVpcAttachmentAccountVpcSetInput interface {
 	pulumi.Input
 
@@ -292,11 +292,11 @@ func (i ZoneVpcAttachmentAccountVpcSetArgs) ToZoneVpcAttachmentAccountVpcSetPtrO
 // ZoneVpcAttachmentAccountVpcSetPtrInput is an input type that accepts ZoneVpcAttachmentAccountVpcSetArgs, ZoneVpcAttachmentAccountVpcSetPtr and ZoneVpcAttachmentAccountVpcSetPtrOutput values.
 // You can construct a concrete instance of `ZoneVpcAttachmentAccountVpcSetPtrInput` via:
 //
-//          ZoneVpcAttachmentAccountVpcSetArgs{...}
+//	        ZoneVpcAttachmentAccountVpcSetArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneVpcAttachmentAccountVpcSetPtrInput interface {
 	pulumi.Input
 
@@ -425,7 +425,7 @@ type ZoneVpcAttachmentVpcSet struct {
 // ZoneVpcAttachmentVpcSetInput is an input type that accepts ZoneVpcAttachmentVpcSetArgs and ZoneVpcAttachmentVpcSetOutput values.
 // You can construct a concrete instance of `ZoneVpcAttachmentVpcSetInput` via:
 //
-//          ZoneVpcAttachmentVpcSetArgs{...}
+//	ZoneVpcAttachmentVpcSetArgs{...}
 type ZoneVpcAttachmentVpcSetInput interface {
 	pulumi.Input
 
@@ -463,11 +463,11 @@ func (i ZoneVpcAttachmentVpcSetArgs) ToZoneVpcAttachmentVpcSetPtrOutputWithConte
 // ZoneVpcAttachmentVpcSetPtrInput is an input type that accepts ZoneVpcAttachmentVpcSetArgs, ZoneVpcAttachmentVpcSetPtr and ZoneVpcAttachmentVpcSetPtrOutput values.
 // You can construct a concrete instance of `ZoneVpcAttachmentVpcSetPtrInput` via:
 //
-//          ZoneVpcAttachmentVpcSetArgs{...}
+//	        ZoneVpcAttachmentVpcSetArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ZoneVpcAttachmentVpcSetPtrInput interface {
 	pulumi.Input
 
@@ -581,7 +581,7 @@ type ZoneVpcSet struct {
 // ZoneVpcSetInput is an input type that accepts ZoneVpcSetArgs and ZoneVpcSetOutput values.
 // You can construct a concrete instance of `ZoneVpcSetInput` via:
 //
-//          ZoneVpcSetArgs{...}
+//	ZoneVpcSetArgs{...}
 type ZoneVpcSetInput interface {
 	pulumi.Input
 
@@ -611,7 +611,7 @@ func (i ZoneVpcSetArgs) ToZoneVpcSetOutputWithContext(ctx context.Context) ZoneV
 // ZoneVpcSetArrayInput is an input type that accepts ZoneVpcSetArray and ZoneVpcSetArrayOutput values.
 // You can construct a concrete instance of `ZoneVpcSetArrayInput` via:
 //
-//          ZoneVpcSetArray{ ZoneVpcSetArgs{...} }
+//	ZoneVpcSetArray{ ZoneVpcSetArgs{...} }
 type ZoneVpcSetArrayInput interface {
 	pulumi.Input
 
@@ -687,7 +687,7 @@ type GetRecordsFilter struct {
 // GetRecordsFilterInput is an input type that accepts GetRecordsFilterArgs and GetRecordsFilterOutput values.
 // You can construct a concrete instance of `GetRecordsFilterInput` via:
 //
-//          GetRecordsFilterArgs{...}
+//	GetRecordsFilterArgs{...}
 type GetRecordsFilterInput interface {
 	pulumi.Input
 
@@ -717,7 +717,7 @@ func (i GetRecordsFilterArgs) ToGetRecordsFilterOutputWithContext(ctx context.Co
 // GetRecordsFilterArrayInput is an input type that accepts GetRecordsFilterArray and GetRecordsFilterArrayOutput values.
 // You can construct a concrete instance of `GetRecordsFilterArrayInput` via:
 //
-//          GetRecordsFilterArray{ GetRecordsFilterArgs{...} }
+//	GetRecordsFilterArray{ GetRecordsFilterArgs{...} }
 type GetRecordsFilterArrayInput interface {
 	pulumi.Input
 
@@ -815,7 +815,7 @@ type GetRecordsRecordSet struct {
 // GetRecordsRecordSetInput is an input type that accepts GetRecordsRecordSetArgs and GetRecordsRecordSetOutput values.
 // You can construct a concrete instance of `GetRecordsRecordSetInput` via:
 //
-//          GetRecordsRecordSetArgs{...}
+//	GetRecordsRecordSetArgs{...}
 type GetRecordsRecordSetInput interface {
 	pulumi.Input
 
@@ -867,7 +867,7 @@ func (i GetRecordsRecordSetArgs) ToGetRecordsRecordSetOutputWithContext(ctx cont
 // GetRecordsRecordSetArrayInput is an input type that accepts GetRecordsRecordSetArray and GetRecordsRecordSetArrayOutput values.
 // You can construct a concrete instance of `GetRecordsRecordSetArrayInput` via:
 //
-//          GetRecordsRecordSetArray{ GetRecordsRecordSetArgs{...} }
+//	GetRecordsRecordSetArray{ GetRecordsRecordSetArgs{...} }
 type GetRecordsRecordSetArrayInput interface {
 	pulumi.Input
 

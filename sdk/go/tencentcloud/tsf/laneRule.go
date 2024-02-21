@@ -19,33 +19,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewLaneRule(ctx, "laneRule", &Tsf.LaneRuleArgs{
-// 			Enable:   pulumi.Bool(false),
-// 			LaneId:   pulumi.String("lane-abw5oo5a"),
-// 			Remark:   pulumi.String("terraform-test"),
-// 			RuleName: pulumi.String("terraform-rule-name"),
-// 			RuleTagLists: tsf.LaneRuleRuleTagListArray{
-// 				&tsf.LaneRuleRuleTagListArgs{
-// 					TagName:     pulumi.String("xxx"),
-// 					TagOperator: pulumi.String("EQUAL"),
-// 					TagValue:    pulumi.String("222"),
-// 				},
-// 			},
-// 			RuleTagRelationship: pulumi.String("RELEATION_AND"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewLaneRule(ctx, "laneRule", &Tsf.LaneRuleArgs{
+//				Enable:   pulumi.Bool(false),
+//				LaneId:   pulumi.String("lane-abw5oo5a"),
+//				Remark:   pulumi.String("terraform-test"),
+//				RuleName: pulumi.String("terraform-rule-name"),
+//				RuleTagLists: tsf.LaneRuleRuleTagListArray{
+//					&tsf.LaneRuleRuleTagListArgs{
+//						TagName:     pulumi.String("xxx"),
+//						TagOperator: pulumi.String("EQUAL"),
+//						TagValue:    pulumi.String("222"),
+//					},
+//				},
+//				RuleTagRelationship: pulumi.String("RELEATION_AND"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type LaneRule struct {
 	pulumi.CustomResourceState
@@ -236,7 +239,7 @@ func (i *LaneRule) ToLaneRuleOutputWithContext(ctx context.Context) LaneRuleOutp
 // LaneRuleArrayInput is an input type that accepts LaneRuleArray and LaneRuleArrayOutput values.
 // You can construct a concrete instance of `LaneRuleArrayInput` via:
 //
-//          LaneRuleArray{ LaneRuleArgs{...} }
+//	LaneRuleArray{ LaneRuleArgs{...} }
 type LaneRuleArrayInput interface {
 	pulumi.Input
 
@@ -261,7 +264,7 @@ func (i LaneRuleArray) ToLaneRuleArrayOutputWithContext(ctx context.Context) Lan
 // LaneRuleMapInput is an input type that accepts LaneRuleMap and LaneRuleMapOutput values.
 // You can construct a concrete instance of `LaneRuleMapInput` via:
 //
-//          LaneRuleMap{ "key": LaneRuleArgs{...} }
+//	LaneRuleMap{ "key": LaneRuleArgs{...} }
 type LaneRuleMapInput interface {
 	pulumi.Input
 

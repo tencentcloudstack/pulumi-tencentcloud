@@ -145,7 +145,7 @@ func (i *BandwidthPackageAttachment) ToBandwidthPackageAttachmentOutputWithConte
 // BandwidthPackageAttachmentArrayInput is an input type that accepts BandwidthPackageAttachmentArray and BandwidthPackageAttachmentArrayOutput values.
 // You can construct a concrete instance of `BandwidthPackageAttachmentArrayInput` via:
 //
-//          BandwidthPackageAttachmentArray{ BandwidthPackageAttachmentArgs{...} }
+//	BandwidthPackageAttachmentArray{ BandwidthPackageAttachmentArgs{...} }
 type BandwidthPackageAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -170,7 +170,7 @@ func (i BandwidthPackageAttachmentArray) ToBandwidthPackageAttachmentArrayOutput
 // BandwidthPackageAttachmentMapInput is an input type that accepts BandwidthPackageAttachmentMap and BandwidthPackageAttachmentMapOutput values.
 // You can construct a concrete instance of `BandwidthPackageAttachmentMapInput` via:
 //
-//          BandwidthPackageAttachmentMap{ "key": BandwidthPackageAttachmentArgs{...} }
+//	BandwidthPackageAttachmentMap{ "key": BandwidthPackageAttachmentArgs{...} }
 type BandwidthPackageAttachmentMapInput interface {
 	pulumi.Input
 

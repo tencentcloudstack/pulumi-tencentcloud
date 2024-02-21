@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Rum.NewOfflineLogConfigAttachment(ctx, "offlineLogConfigAttachment", &Rum.OfflineLogConfigAttachmentArgs{
-// 			ProjectKey: pulumi.String("ZEYrYfvaYQ30jRdmPx"),
-// 			UniqueId:   pulumi.String("100027012454"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Rum.NewOfflineLogConfigAttachment(ctx, "offlineLogConfigAttachment", &Rum.OfflineLogConfigAttachmentArgs{
+//				ProjectKey: pulumi.String("ZEYrYfvaYQ30jRdmPx"),
+//				UniqueId:   pulumi.String("100027012454"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // rum offline_log_config_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Rum/offlineLogConfigAttachment:OfflineLogConfigAttachment offline_log_config_attachment ZEYrYfvaYQ30jRdmPx#100027012454
+//
+//	$ pulumi import tencentcloud:Rum/offlineLogConfigAttachment:OfflineLogConfigAttachment offline_log_config_attachment ZEYrYfvaYQ30jRdmPx#100027012454
+//
 // ```
 type OfflineLogConfigAttachment struct {
 	pulumi.CustomResourceState
@@ -153,7 +158,7 @@ func (i *OfflineLogConfigAttachment) ToOfflineLogConfigAttachmentOutputWithConte
 // OfflineLogConfigAttachmentArrayInput is an input type that accepts OfflineLogConfigAttachmentArray and OfflineLogConfigAttachmentArrayOutput values.
 // You can construct a concrete instance of `OfflineLogConfigAttachmentArrayInput` via:
 //
-//          OfflineLogConfigAttachmentArray{ OfflineLogConfigAttachmentArgs{...} }
+//	OfflineLogConfigAttachmentArray{ OfflineLogConfigAttachmentArgs{...} }
 type OfflineLogConfigAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +183,7 @@ func (i OfflineLogConfigAttachmentArray) ToOfflineLogConfigAttachmentArrayOutput
 // OfflineLogConfigAttachmentMapInput is an input type that accepts OfflineLogConfigAttachmentMap and OfflineLogConfigAttachmentMapOutput values.
 // You can construct a concrete instance of `OfflineLogConfigAttachmentMapInput` via:
 //
-//          OfflineLogConfigAttachmentMap{ "key": OfflineLogConfigAttachmentArgs{...} }
+//	OfflineLogConfigAttachmentMap{ "key": OfflineLogConfigAttachmentArgs{...} }
 type OfflineLogConfigAttachmentMapInput interface {
 	pulumi.Input
 

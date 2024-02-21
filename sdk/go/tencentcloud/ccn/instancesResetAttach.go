@@ -19,30 +19,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ccn.NewInstancesResetAttach(ctx, "ccnInstancesResetAttach", &Ccn.InstancesResetAttachArgs{
-// 			CcnId:  pulumi.String("ccn-39lqkygf"),
-// 			CcnUin: pulumi.String("100022975249"),
-// 			Instances: ccn.InstancesResetAttachInstanceArray{
-// 				&ccn.InstancesResetAttachInstanceArgs{
-// 					InstanceId:     pulumi.String("vpc-j9yhbzpn"),
-// 					InstanceRegion: pulumi.String("ap-guangzhou"),
-// 					InstanceType:   pulumi.String("VPC"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ccn.NewInstancesResetAttach(ctx, "ccnInstancesResetAttach", &Ccn.InstancesResetAttachArgs{
+//				CcnId:  pulumi.String("ccn-39lqkygf"),
+//				CcnUin: pulumi.String("100022975249"),
+//				Instances: ccn.InstancesResetAttachInstanceArray{
+//					&ccn.InstancesResetAttachInstanceArgs{
+//						InstanceId:     pulumi.String("vpc-j9yhbzpn"),
+//						InstanceRegion: pulumi.String("ap-guangzhou"),
+//						InstanceType:   pulumi.String("VPC"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type InstancesResetAttach struct {
 	pulumi.CustomResourceState
@@ -160,7 +163,7 @@ func (i *InstancesResetAttach) ToInstancesResetAttachOutputWithContext(ctx conte
 // InstancesResetAttachArrayInput is an input type that accepts InstancesResetAttachArray and InstancesResetAttachArrayOutput values.
 // You can construct a concrete instance of `InstancesResetAttachArrayInput` via:
 //
-//          InstancesResetAttachArray{ InstancesResetAttachArgs{...} }
+//	InstancesResetAttachArray{ InstancesResetAttachArgs{...} }
 type InstancesResetAttachArrayInput interface {
 	pulumi.Input
 
@@ -185,7 +188,7 @@ func (i InstancesResetAttachArray) ToInstancesResetAttachArrayOutputWithContext(
 // InstancesResetAttachMapInput is an input type that accepts InstancesResetAttachMap and InstancesResetAttachMapOutput values.
 // You can construct a concrete instance of `InstancesResetAttachMapInput` via:
 //
-//          InstancesResetAttachMap{ "key": InstancesResetAttachArgs{...} }
+//	InstancesResetAttachMap{ "key": InstancesResetAttachArgs{...} }
 type InstancesResetAttachMapInput interface {
 	pulumi.Input
 

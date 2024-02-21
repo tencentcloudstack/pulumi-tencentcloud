@@ -19,53 +19,56 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/providers"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/providers"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := providers.Newtencentcloud(ctx, "shanghai", &providers.tencentcloudArgs{
-// 			Region: "ap-shanghai",
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		mongodbInstance, err := Mongodb.NewInstance(ctx, "mongodbInstance", &Mongodb.InstanceArgs{
-// 			InstanceName:  pulumi.String("tf-mongodb-test"),
-// 			Memory:        pulumi.Int(4),
-// 			Volume:        pulumi.Int(100),
-// 			EngineVersion: pulumi.String("MONGO_40_WT"),
-// 			MachineType:   pulumi.String("HIO10G"),
-// 			AvailableZone: pulumi.Any(_var.Availability_zone),
-// 			ProjectId:     pulumi.Int(0),
-// 			Password:      pulumi.String("test1234"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mongodb.NewStandbyInstance(ctx, "mongodbStandbyInstance", &Mongodb.StandbyInstanceArgs{
-// 			InstanceName:         pulumi.String("tf-mongodb-standby-test"),
-// 			Memory:               pulumi.Int(4),
-// 			Volume:               pulumi.Int(100),
-// 			AvailableZone:        pulumi.String("ap-shanghai-2"),
-// 			ProjectId:            pulumi.Int(0),
-// 			FatherInstanceId:     mongodbInstance.ID(),
-// 			FatherInstanceRegion: pulumi.String("ap-guangzhou"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		}, pulumi.Provider(tencentcloud.Shanghai))
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := providers.Newtencentcloud(ctx, "shanghai", &providers.tencentcloudArgs{
+//				Region: "ap-shanghai",
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			mongodbInstance, err := Mongodb.NewInstance(ctx, "mongodbInstance", &Mongodb.InstanceArgs{
+//				InstanceName:  pulumi.String("tf-mongodb-test"),
+//				Memory:        pulumi.Int(4),
+//				Volume:        pulumi.Int(100),
+//				EngineVersion: pulumi.String("MONGO_40_WT"),
+//				MachineType:   pulumi.String("HIO10G"),
+//				AvailableZone: pulumi.Any(_var.Availability_zone),
+//				ProjectId:     pulumi.Int(0),
+//				Password:      pulumi.String("test1234"),
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mongodb.NewStandbyInstance(ctx, "mongodbStandbyInstance", &Mongodb.StandbyInstanceArgs{
+//				InstanceName:         pulumi.String("tf-mongodb-standby-test"),
+//				Memory:               pulumi.Int(4),
+//				Volume:               pulumi.Int(100),
+//				AvailableZone:        pulumi.String("ap-shanghai-2"),
+//				ProjectId:            pulumi.Int(0),
+//				FatherInstanceId:     mongodbInstance.ID(),
+//				FatherInstanceRegion: pulumi.String("ap-guangzhou"),
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("test"),
+//				},
+//			}, pulumi.Provider(tencentcloud.Shanghai))
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -73,7 +76,9 @@ import (
 // Mongodb instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mongodb/standbyInstance:StandbyInstance mongodb cmgo-41s6jwy4
+//
+//	$ pulumi import tencentcloud:Mongodb/standbyInstance:StandbyInstance mongodb cmgo-41s6jwy4
+//
 // ```
 type StandbyInstance struct {
 	pulumi.CustomResourceState
@@ -346,7 +351,7 @@ func (i *StandbyInstance) ToStandbyInstanceOutputWithContext(ctx context.Context
 // StandbyInstanceArrayInput is an input type that accepts StandbyInstanceArray and StandbyInstanceArrayOutput values.
 // You can construct a concrete instance of `StandbyInstanceArrayInput` via:
 //
-//          StandbyInstanceArray{ StandbyInstanceArgs{...} }
+//	StandbyInstanceArray{ StandbyInstanceArgs{...} }
 type StandbyInstanceArrayInput interface {
 	pulumi.Input
 
@@ -371,7 +376,7 @@ func (i StandbyInstanceArray) ToStandbyInstanceArrayOutputWithContext(ctx contex
 // StandbyInstanceMapInput is an input type that accepts StandbyInstanceMap and StandbyInstanceMapOutput values.
 // You can construct a concrete instance of `StandbyInstanceMapInput` via:
 //
-//          StandbyInstanceMap{ "key": StandbyInstanceArgs{...} }
+//	StandbyInstanceMap{ "key": StandbyInstanceArgs{...} }
 type StandbyInstanceMapInput interface {
 	pulumi.Input
 

@@ -179,7 +179,7 @@ func (i *RocketmqVipInstance) ToRocketmqVipInstanceOutputWithContext(ctx context
 // RocketmqVipInstanceArrayInput is an input type that accepts RocketmqVipInstanceArray and RocketmqVipInstanceArrayOutput values.
 // You can construct a concrete instance of `RocketmqVipInstanceArrayInput` via:
 //
-//          RocketmqVipInstanceArray{ RocketmqVipInstanceArgs{...} }
+//	RocketmqVipInstanceArray{ RocketmqVipInstanceArgs{...} }
 type RocketmqVipInstanceArrayInput interface {
 	pulumi.Input
 
@@ -204,7 +204,7 @@ func (i RocketmqVipInstanceArray) ToRocketmqVipInstanceArrayOutputWithContext(ct
 // RocketmqVipInstanceMapInput is an input type that accepts RocketmqVipInstanceMap and RocketmqVipInstanceMapOutput values.
 // You can construct a concrete instance of `RocketmqVipInstanceMapInput` via:
 //
-//          RocketmqVipInstanceMap{ "key": RocketmqVipInstanceArgs{...} }
+//	RocketmqVipInstanceMap{ "key": RocketmqVipInstanceArgs{...} }
 type RocketmqVipInstanceMapInput interface {
 	pulumi.Input
 

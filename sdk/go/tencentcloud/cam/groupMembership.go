@@ -19,51 +19,54 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		camGroupBasic := "keep-cam-group"
-// 		if param := cfg.Get("camGroupBasic"); param != "" {
-// 			camGroupBasic = param
-// 		}
-// 		groups, err := Cam.GetGroups(ctx, &cam.GetGroupsArgs{
-// 			Name: pulumi.StringRef(camGroupBasic),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		foo, err := Cam.NewUser(ctx, "foo", &Cam.UserArgs{
-// 			Remark:            pulumi.String("tf_user_remark"),
-// 			ConsoleLogin:      pulumi.Bool(true),
-// 			UseApi:            pulumi.Bool(true),
-// 			NeedResetPassword: pulumi.Bool(true),
-// 			Password:          pulumi.String("Gail@1234"),
-// 			PhoneNum:          pulumi.String("12345678910"),
-// 			CountryCode:       pulumi.String("86"),
-// 			Email:             pulumi.String("1234@qq.com"),
-// 			ForceDelete:       pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cam.NewGroupMembership(ctx, "groupMembershipBasic", &Cam.GroupMembershipArgs{
-// 			GroupId: pulumi.String(groups.GroupLists[0].GroupId),
-// 			UserNames: pulumi.StringArray{
-// 				foo.ID(),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			camGroupBasic := "keep-cam-group"
+//			if param := cfg.Get("camGroupBasic"); param != "" {
+//				camGroupBasic = param
+//			}
+//			groups, err := Cam.GetGroups(ctx, &cam.GetGroupsArgs{
+//				Name: pulumi.StringRef(camGroupBasic),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			foo, err := Cam.NewUser(ctx, "foo", &Cam.UserArgs{
+//				Remark:            pulumi.String("tf_user_remark"),
+//				ConsoleLogin:      pulumi.Bool(true),
+//				UseApi:            pulumi.Bool(true),
+//				NeedResetPassword: pulumi.Bool(true),
+//				Password:          pulumi.String("Gail@1234"),
+//				PhoneNum:          pulumi.String("12345678910"),
+//				CountryCode:       pulumi.String("86"),
+//				Email:             pulumi.String("1234@qq.com"),
+//				ForceDelete:       pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cam.NewGroupMembership(ctx, "groupMembershipBasic", &Cam.GroupMembershipArgs{
+//				GroupId: pulumi.String(groups.GroupLists[0].GroupId),
+//				UserNames: pulumi.StringArray{
+//					foo.ID(),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -71,7 +74,9 @@ import (
 // CAM group membership can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/groupMembership:GroupMembership foo 12515263
+//
+//	$ pulumi import tencentcloud:Cam/groupMembership:GroupMembership foo 12515263
+//
 // ```
 type GroupMembership struct {
 	pulumi.CustomResourceState
@@ -193,7 +198,7 @@ func (i *GroupMembership) ToGroupMembershipOutputWithContext(ctx context.Context
 // GroupMembershipArrayInput is an input type that accepts GroupMembershipArray and GroupMembershipArrayOutput values.
 // You can construct a concrete instance of `GroupMembershipArrayInput` via:
 //
-//          GroupMembershipArray{ GroupMembershipArgs{...} }
+//	GroupMembershipArray{ GroupMembershipArgs{...} }
 type GroupMembershipArrayInput interface {
 	pulumi.Input
 
@@ -218,7 +223,7 @@ func (i GroupMembershipArray) ToGroupMembershipArrayOutputWithContext(ctx contex
 // GroupMembershipMapInput is an input type that accepts GroupMembershipMap and GroupMembershipMapOutput values.
 // You can construct a concrete instance of `GroupMembershipMapInput` via:
 //
-//          GroupMembershipMap{ "key": GroupMembershipArgs{...} }
+//	GroupMembershipMap{ "key": GroupMembershipArgs{...} }
 type GroupMembershipMapInput interface {
 	pulumi.Input
 

@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Antiddos.NewDdosGeoIpBlockConfig(ctx, "ddosGeoIpBlockConfig", &Antiddos.DdosGeoIpBlockConfigArgs{
-// 			DdosGeoIpBlockConfig: &antiddos.DdosGeoIpBlockConfigDdosGeoIpBlockConfigArgs{
-// 				Action: pulumi.String("drop"),
-// 				AreaLists: pulumi.IntArray{
-// 					pulumi.Int(100002),
-// 				},
-// 				RegionType: pulumi.String("customized"),
-// 			},
-// 			InstanceId: pulumi.String("bgp-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Antiddos.NewDdosGeoIpBlockConfig(ctx, "ddosGeoIpBlockConfig", &Antiddos.DdosGeoIpBlockConfigArgs{
+//				DdosGeoIpBlockConfig: &antiddos.DdosGeoIpBlockConfigDdosGeoIpBlockConfigArgs{
+//					Action: pulumi.String("drop"),
+//					AreaLists: pulumi.IntArray{
+//						pulumi.Int(100002),
+//					},
+//					RegionType: pulumi.String("customized"),
+//				},
+//				InstanceId: pulumi.String("bgp-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -49,7 +52,9 @@ import (
 // antiddos ddos_geo_ip_block_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Antiddos/ddosGeoIpBlockConfig:DdosGeoIpBlockConfig ddos_geo_ip_block_config ${instanceId}#${configId}
+//
+//	$ pulumi import tencentcloud:Antiddos/ddosGeoIpBlockConfig:DdosGeoIpBlockConfig ddos_geo_ip_block_config ${instanceId}#${configId}
+//
 // ```
 type DdosGeoIpBlockConfig struct {
 	pulumi.CustomResourceState
@@ -154,7 +159,7 @@ func (i *DdosGeoIpBlockConfig) ToDdosGeoIpBlockConfigOutputWithContext(ctx conte
 // DdosGeoIpBlockConfigArrayInput is an input type that accepts DdosGeoIpBlockConfigArray and DdosGeoIpBlockConfigArrayOutput values.
 // You can construct a concrete instance of `DdosGeoIpBlockConfigArrayInput` via:
 //
-//          DdosGeoIpBlockConfigArray{ DdosGeoIpBlockConfigArgs{...} }
+//	DdosGeoIpBlockConfigArray{ DdosGeoIpBlockConfigArgs{...} }
 type DdosGeoIpBlockConfigArrayInput interface {
 	pulumi.Input
 
@@ -179,7 +184,7 @@ func (i DdosGeoIpBlockConfigArray) ToDdosGeoIpBlockConfigArrayOutputWithContext(
 // DdosGeoIpBlockConfigMapInput is an input type that accepts DdosGeoIpBlockConfigMap and DdosGeoIpBlockConfigMapOutput values.
 // You can construct a concrete instance of `DdosGeoIpBlockConfigMapInput` via:
 //
-//          DdosGeoIpBlockConfigMap{ "key": DdosGeoIpBlockConfigArgs{...} }
+//	DdosGeoIpBlockConfigMap{ "key": DdosGeoIpBlockConfigArgs{...} }
 type DdosGeoIpBlockConfigMapInput interface {
 	pulumi.Input
 

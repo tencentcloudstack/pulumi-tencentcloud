@@ -18,27 +18,30 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.GetImageManifests(ctx, &tcr.GetImageManifestsArgs{
-// 			ImageVersion:   "v1",
-// 			NamespaceName:  fmt.Sprintf("%v%v", "%", "s"),
-// 			RegistryId:     fmt.Sprintf("%v%v", "%", "s"),
-// 			RepositoryName: fmt.Sprintf("%v%v", "%", "s"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcr.GetImageManifests(ctx, &tcr.GetImageManifestsArgs{
+//				ImageVersion:   "v1",
+//				NamespaceName:  fmt.Sprintf("%v%v", "%", "s"),
+//				RegistryId:     fmt.Sprintf("%v%v", "%", "s"),
+//				RepositoryName: fmt.Sprintf("%v%v", "%", "s"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetImageManifests(ctx *pulumi.Context, args *GetImageManifestsArgs, opts ...pulumi.InvokeOption) (*GetImageManifestsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

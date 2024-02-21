@@ -18,27 +18,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ccn.GetTenantInstances(ctx, &ccn.GetTenantInstancesArgs{
-// 			CcnIds: []string{
-// 				"ccn-39lqkygf",
-// 			},
-// 			IsSecurityLocks: []string{
-// 				"true",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ccn.GetTenantInstances(ctx, &ccn.GetTenantInstancesArgs{
+//				CcnIds: []string{
+//					"ccn-39lqkygf",
+//				},
+//				IsSecurityLocks: []string{
+//					"true",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetTenantInstances(ctx *pulumi.Context, args *GetTenantInstancesArgs, opts ...pulumi.InvokeOption) (*GetTenantInstancesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

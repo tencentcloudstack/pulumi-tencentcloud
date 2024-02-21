@@ -18,26 +18,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.GetSlowLogs(ctx, &mariadb.GetSlowLogsArgs{
-// 			InstanceId:  "tdsql-9vqvls95",
-// 			OrderBy:     pulumi.StringRef("query_time_sum"),
-// 			OrderByType: pulumi.StringRef("desc"),
-// 			Slave:       pulumi.IntRef(0),
-// 			StartTime:   "2023-06-01 14:55:20",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.GetSlowLogs(ctx, &mariadb.GetSlowLogsArgs{
+//				InstanceId:  "tdsql-9vqvls95",
+//				OrderBy:     pulumi.StringRef("query_time_sum"),
+//				OrderByType: pulumi.StringRef("desc"),
+//				Slave:       pulumi.IntRef(0),
+//				StartTime:   "2023-06-01 14:55:20",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetSlowLogs(ctx *pulumi.Context, args *GetSlowLogsArgs, opts ...pulumi.InvokeOption) (*GetSlowLogsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

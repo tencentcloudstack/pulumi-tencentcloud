@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcmq.NewQueue(ctx, "queue", &Tcmq.QueueArgs{
-// 			QueueName: pulumi.String("queue_name"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcmq.NewQueue(ctx, "queue", &Tcmq.QueueArgs{
+//				QueueName: pulumi.String("queue_name"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -41,7 +44,9 @@ import (
 // tcmq queue can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcmq/queue:Queue queue queue_id
+//
+//	$ pulumi import tencentcloud:Tcmq/queue:Queue queue queue_id
+//
 // ```
 type Queue struct {
 	pulumi.CustomResourceState
@@ -283,7 +288,7 @@ func (i *Queue) ToQueueOutputWithContext(ctx context.Context) QueueOutput {
 // QueueArrayInput is an input type that accepts QueueArray and QueueArrayOutput values.
 // You can construct a concrete instance of `QueueArrayInput` via:
 //
-//          QueueArray{ QueueArgs{...} }
+//	QueueArray{ QueueArgs{...} }
 type QueueArrayInput interface {
 	pulumi.Input
 
@@ -308,7 +313,7 @@ func (i QueueArray) ToQueueArrayOutputWithContext(ctx context.Context) QueueArra
 // QueueMapInput is an input type that accepts QueueMap and QueueMapOutput values.
 // You can construct a concrete instance of `QueueMapInput` via:
 //
-//          QueueMap{ "key": QueueArgs{...} }
+//	QueueMap{ "key": QueueArgs{...} }
 type QueueMapInput interface {
 	pulumi.Input
 

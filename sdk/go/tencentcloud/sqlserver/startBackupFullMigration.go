@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.NewStartBackupFullMigration(ctx, "startBackupFullMigration", &Sqlserver.StartBackupFullMigrationArgs{
-// 			BackupMigrationId: pulumi.String("mssql-backup-migration-kpl74n9l"),
-// 			InstanceId:        pulumi.String("mssql-i1z41iwd"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.NewStartBackupFullMigration(ctx, "startBackupFullMigration", &Sqlserver.StartBackupFullMigrationArgs{
+//				BackupMigrationId: pulumi.String("mssql-backup-migration-kpl74n9l"),
+//				InstanceId:        pulumi.String("mssql-i1z41iwd"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type StartBackupFullMigration struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *StartBackupFullMigration) ToStartBackupFullMigrationOutputWithContext(c
 // StartBackupFullMigrationArrayInput is an input type that accepts StartBackupFullMigrationArray and StartBackupFullMigrationArrayOutput values.
 // You can construct a concrete instance of `StartBackupFullMigrationArrayInput` via:
 //
-//          StartBackupFullMigrationArray{ StartBackupFullMigrationArgs{...} }
+//	StartBackupFullMigrationArray{ StartBackupFullMigrationArgs{...} }
 type StartBackupFullMigrationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i StartBackupFullMigrationArray) ToStartBackupFullMigrationArrayOutputWith
 // StartBackupFullMigrationMapInput is an input type that accepts StartBackupFullMigrationMap and StartBackupFullMigrationMapOutput values.
 // You can construct a concrete instance of `StartBackupFullMigrationMapInput` via:
 //
-//          StartBackupFullMigrationMap{ "key": StartBackupFullMigrationArgs{...} }
+//	StartBackupFullMigrationMap{ "key": StartBackupFullMigrationArgs{...} }
 type StartBackupFullMigrationMapInput interface {
 	pulumi.Input
 

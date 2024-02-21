@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.NewStopLogstashPipelineOperation(ctx, "stopLogstashPipelineOperation", &Elasticsearch.StopLogstashPipelineOperationArgs{
-// 			InstanceId: pulumi.String("ls-xxxxxx"),
-// 			PipelineId: pulumi.String("xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.NewStopLogstashPipelineOperation(ctx, "stopLogstashPipelineOperation", &Elasticsearch.StopLogstashPipelineOperationArgs{
+//				InstanceId: pulumi.String("ls-xxxxxx"),
+//				PipelineId: pulumi.String("xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type StopLogstashPipelineOperation struct {
 	pulumi.CustomResourceState
@@ -139,7 +142,7 @@ func (i *StopLogstashPipelineOperation) ToStopLogstashPipelineOperationOutputWit
 // StopLogstashPipelineOperationArrayInput is an input type that accepts StopLogstashPipelineOperationArray and StopLogstashPipelineOperationArrayOutput values.
 // You can construct a concrete instance of `StopLogstashPipelineOperationArrayInput` via:
 //
-//          StopLogstashPipelineOperationArray{ StopLogstashPipelineOperationArgs{...} }
+//	StopLogstashPipelineOperationArray{ StopLogstashPipelineOperationArgs{...} }
 type StopLogstashPipelineOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +167,7 @@ func (i StopLogstashPipelineOperationArray) ToStopLogstashPipelineOperationArray
 // StopLogstashPipelineOperationMapInput is an input type that accepts StopLogstashPipelineOperationMap and StopLogstashPipelineOperationMapOutput values.
 // You can construct a concrete instance of `StopLogstashPipelineOperationMapInput` via:
 //
-//          StopLogstashPipelineOperationMap{ "key": StopLogstashPipelineOperationArgs{...} }
+//	StopLogstashPipelineOperationMap{ "key": StopLogstashPipelineOperationArgs{...} }
 type StopLogstashPipelineOperationMapInput interface {
 	pulumi.Input
 

@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.GetFunctionAliases(ctx, &scf.GetFunctionAliasesArgs{
-// 			FunctionName: "keep-1676351130",
-// 			Namespace:    pulumi.StringRef("default"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.GetFunctionAliases(ctx, &scf.GetFunctionAliasesArgs{
+//				FunctionName: "keep-1676351130",
+//				Namespace:    pulumi.StringRef("default"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetFunctionAliases(ctx *pulumi.Context, args *GetFunctionAliasesArgs, opts ...pulumi.InvokeOption) (*GetFunctionAliasesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

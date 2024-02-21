@@ -20,38 +20,41 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewInput(ctx, "input", &Mps.InputArgs{
-// 			FlowId: pulumi.Any(tencentcloud_mps_flow.Flow.Id),
-// 			InputGroup: &mps.InputInputGroupArgs{
-// 				InputName:   pulumi.String("your_input_name"),
-// 				Protocol:    pulumi.String("SRT"),
-// 				Description: pulumi.String("input name Description"),
-// 				AllowIpLists: pulumi.StringArray{
-// 					pulumi.String("0.0.0.0/0"),
-// 				},
-// 				SrtSettings: &mps.InputInputGroupSrtSettingsArgs{
-// 					Mode:            pulumi.String("LISTENER"),
-// 					StreamId:        pulumi.String("#!::u=johnny,r=resource,h=xxx.com,t=stream,m=play"),
-// 					Latency:         pulumi.Int(1000),
-// 					RecvLatency:     pulumi.Int(1000),
-// 					PeerLatency:     pulumi.Int(1000),
-// 					PeerIdleTimeout: pulumi.Int(1000),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewInput(ctx, "input", &Mps.InputArgs{
+//				FlowId: pulumi.Any(tencentcloud_mps_flow.Flow.Id),
+//				InputGroup: &mps.InputInputGroupArgs{
+//					InputName:   pulumi.String("your_input_name"),
+//					Protocol:    pulumi.String("SRT"),
+//					Description: pulumi.String("input name Description"),
+//					AllowIpLists: pulumi.StringArray{
+//						pulumi.String("0.0.0.0/0"),
+//					},
+//					SrtSettings: &mps.InputInputGroupSrtSettingsArgs{
+//						Mode:            pulumi.String("LISTENER"),
+//						StreamId:        pulumi.String("#!::u=johnny,r=resource,h=xxx.com,t=stream,m=play"),
+//						Latency:         pulumi.Int(1000),
+//						RecvLatency:     pulumi.Int(1000),
+//						PeerLatency:     pulumi.Int(1000),
+//						PeerIdleTimeout: pulumi.Int(1000),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -59,7 +62,9 @@ import (
 // mps input can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/input:Input input input_id
+//
+//	$ pulumi import tencentcloud:Mps/input:Input input input_id
+//
 // ```
 type Input struct {
 	pulumi.CustomResourceState
@@ -161,7 +166,7 @@ func (i *Input) ToInputOutputWithContext(ctx context.Context) InputOutput {
 // InputArrayInput is an input type that accepts InputArray and InputArrayOutput values.
 // You can construct a concrete instance of `InputArrayInput` via:
 //
-//          InputArray{ InputArgs{...} }
+//	InputArray{ InputArgs{...} }
 type InputArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +191,7 @@ func (i InputArray) ToInputArrayOutputWithContext(ctx context.Context) InputArra
 // InputMapInput is an input type that accepts InputMap and InputMapOutput values.
 // You can construct a concrete instance of `InputMapInput` via:
 //
-//          InputMap{ "key": InputArgs{...} }
+//	InputMap{ "key": InputArgs{...} }
 type InputMapInput interface {
 	pulumi.Input
 

@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewGrafanaWhitelistConfig(ctx, "grafanaWhitelistConfig", &Monitor.GrafanaWhitelistConfigArgs{
-// 			InstanceId: pulumi.String("grafana-dp2hnnfa"),
-// 			Whitelists: pulumi.StringArray{
-// 				pulumi.String("10.1.1.1"),
-// 				pulumi.String("10.1.1.2"),
-// 				pulumi.String("10.1.1.3"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.NewGrafanaWhitelistConfig(ctx, "grafanaWhitelistConfig", &Monitor.GrafanaWhitelistConfigArgs{
+//				InstanceId: pulumi.String("grafana-dp2hnnfa"),
+//				Whitelists: pulumi.StringArray{
+//					pulumi.String("10.1.1.1"),
+//					pulumi.String("10.1.1.2"),
+//					pulumi.String("10.1.1.3"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +49,9 @@ import (
 // monitor grafana_whitelist_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/grafanaWhitelistConfig:GrafanaWhitelistConfig grafana_whitelist_config instance_id
+//
+//	$ pulumi import tencentcloud:Monitor/grafanaWhitelistConfig:GrafanaWhitelistConfig grafana_whitelist_config instance_id
+//
 // ```
 type GrafanaWhitelistConfig struct {
 	pulumi.CustomResourceState
@@ -148,7 +153,7 @@ func (i *GrafanaWhitelistConfig) ToGrafanaWhitelistConfigOutputWithContext(ctx c
 // GrafanaWhitelistConfigArrayInput is an input type that accepts GrafanaWhitelistConfigArray and GrafanaWhitelistConfigArrayOutput values.
 // You can construct a concrete instance of `GrafanaWhitelistConfigArrayInput` via:
 //
-//          GrafanaWhitelistConfigArray{ GrafanaWhitelistConfigArgs{...} }
+//	GrafanaWhitelistConfigArray{ GrafanaWhitelistConfigArgs{...} }
 type GrafanaWhitelistConfigArrayInput interface {
 	pulumi.Input
 
@@ -173,7 +178,7 @@ func (i GrafanaWhitelistConfigArray) ToGrafanaWhitelistConfigArrayOutputWithCont
 // GrafanaWhitelistConfigMapInput is an input type that accepts GrafanaWhitelistConfigMap and GrafanaWhitelistConfigMapOutput values.
 // You can construct a concrete instance of `GrafanaWhitelistConfigMapInput` via:
 //
-//          GrafanaWhitelistConfigMap{ "key": GrafanaWhitelistConfigArgs{...} }
+//	GrafanaWhitelistConfigMap{ "key": GrafanaWhitelistConfigArgs{...} }
 type GrafanaWhitelistConfigMapInput interface {
 	pulumi.Input
 

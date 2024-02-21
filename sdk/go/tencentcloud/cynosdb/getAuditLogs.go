@@ -18,39 +18,42 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.GetAuditLogs(ctx, &cynosdb.GetAuditLogsArgs{
-// 			EndTime: "2023-06-18 10:00:02",
-// 			Filter: cynosdb.GetAuditLogsFilter{
-// 				Hosts: []string{
-// 					"30.50.207.176",
-// 				},
-// 				PolicyNames: []string{
-// 					"default_audit",
-// 				},
-// 				Sql:     pulumi.StringRef("SELECT @@max_allowed_packet"),
-// 				SqlType: pulumi.StringRef("SELECT"),
-// 				Users: []string{
-// 					"keep_dts",
-// 				},
-// 			},
-// 			InstanceId: "cynosdbmysql-ins-afqx1hy0",
-// 			Order:      pulumi.StringRef("DESC"),
-// 			OrderBy:    pulumi.StringRef("timestamp"),
-// 			StartTime:  "2023-06-18 10:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.GetAuditLogs(ctx, &cynosdb.GetAuditLogsArgs{
+//				EndTime: "2023-06-18 10:00:02",
+//				Filter: cynosdb.GetAuditLogsFilter{
+//					Hosts: []string{
+//						"30.50.207.176",
+//					},
+//					PolicyNames: []string{
+//						"default_audit",
+//					},
+//					Sql:     pulumi.StringRef("SELECT @@max_allowed_packet"),
+//					SqlType: pulumi.StringRef("SELECT"),
+//					Users: []string{
+//						"keep_dts",
+//					},
+//				},
+//				InstanceId: "cynosdbmysql-ins-afqx1hy0",
+//				Order:      pulumi.StringRef("DESC"),
+//				OrderBy:    pulumi.StringRef("timestamp"),
+//				StartTime:  "2023-06-18 10:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetAuditLogs(ctx *pulumi.Context, args *GetAuditLogsArgs, opts ...pulumi.InvokeOption) (*GetAuditLogsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

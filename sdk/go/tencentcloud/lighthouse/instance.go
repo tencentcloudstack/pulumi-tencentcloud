@@ -19,100 +19,103 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		firewallTemplate, err := Lighthouse.NewFirewallTemplate(ctx, "firewallTemplate", &Lighthouse.FirewallTemplateArgs{
-// 			TemplateName: pulumi.String("empty-template"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Lighthouse.NewInstance(ctx, "lighthouse", &Lighthouse.InstanceArgs{
-// 			BundleId:     pulumi.String("bundle2022_gen_01"),
-// 			BlueprintId:  pulumi.String("lhbp-f1lkcd41"),
-// 			Period:       pulumi.Int(1),
-// 			RenewFlag:    pulumi.String("NOTIFY_AND_AUTO_RENEW"),
-// 			InstanceName: pulumi.String("hello world"),
-// 			Zone:         pulumi.String("ap-guangzhou-3"),
-// 			Containers: lighthouse.InstanceContainerArray{
-// 				&lighthouse.InstanceContainerArgs{
-// 					ContainerImage: pulumi.String("ccr.ccs.tencentyun.com/qcloud/nginx"),
-// 					ContainerName:  pulumi.String("nginx"),
-// 					Envs: lighthouse.InstanceContainerEnvArray{
-// 						&lighthouse.InstanceContainerEnvArgs{
-// 							Key:   pulumi.String("key"),
-// 							Value: pulumi.String("value"),
-// 						},
-// 						&lighthouse.InstanceContainerEnvArgs{
-// 							Key:   pulumi.String("key2"),
-// 							Value: pulumi.String("value2"),
-// 						},
-// 					},
-// 					PublishPorts: lighthouse.InstanceContainerPublishPortArray{
-// 						&lighthouse.InstanceContainerPublishPortArgs{
-// 							HostPort:      pulumi.Int(80),
-// 							ContainerPort: pulumi.Int(80),
-// 							Ip:            pulumi.String("127.0.0.1"),
-// 							Protocol:      pulumi.String("tcp"),
-// 						},
-// 						&lighthouse.InstanceContainerPublishPortArgs{
-// 							HostPort:      pulumi.Int(36000),
-// 							ContainerPort: pulumi.Int(36000),
-// 							Ip:            pulumi.String("127.0.0.1"),
-// 							Protocol:      pulumi.String("tcp"),
-// 						},
-// 					},
-// 					Volumes: lighthouse.InstanceContainerVolumeArray{
-// 						&lighthouse.InstanceContainerVolumeArgs{
-// 							ContainerPath: pulumi.String("/data"),
-// 							HostPath:      pulumi.String("/tmp"),
-// 						},
-// 						&lighthouse.InstanceContainerVolumeArgs{
-// 							ContainerPath: pulumi.String("/var"),
-// 							HostPath:      pulumi.String("/tmp"),
-// 						},
-// 					},
-// 					Command: pulumi.String("ls -l"),
-// 				},
-// 				&lighthouse.InstanceContainerArgs{
-// 					ContainerImage: pulumi.String("ccr.ccs.tencentyun.com/qcloud/resty"),
-// 					ContainerName:  pulumi.String("resty"),
-// 					Envs: lighthouse.InstanceContainerEnvArray{
-// 						&lighthouse.InstanceContainerEnvArgs{
-// 							Key:   pulumi.String("key2"),
-// 							Value: pulumi.String("value2"),
-// 						},
-// 					},
-// 					PublishPorts: lighthouse.InstanceContainerPublishPortArray{
-// 						&lighthouse.InstanceContainerPublishPortArgs{
-// 							HostPort:      pulumi.Int(80),
-// 							ContainerPort: pulumi.Int(80),
-// 							Ip:            pulumi.String("127.0.0.1"),
-// 							Protocol:      pulumi.String("udp"),
-// 						},
-// 					},
-// 					Volumes: lighthouse.InstanceContainerVolumeArray{
-// 						&lighthouse.InstanceContainerVolumeArgs{
-// 							ContainerPath: pulumi.String("/var"),
-// 							HostPath:      pulumi.String("/tmp"),
-// 						},
-// 					},
-// 					Command: pulumi.String("echo \"hello\""),
-// 				},
-// 			},
-// 			FirewallTemplateId: firewallTemplate.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			firewallTemplate, err := Lighthouse.NewFirewallTemplate(ctx, "firewallTemplate", &Lighthouse.FirewallTemplateArgs{
+//				TemplateName: pulumi.String("empty-template"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Lighthouse.NewInstance(ctx, "lighthouse", &Lighthouse.InstanceArgs{
+//				BundleId:     pulumi.String("bundle2022_gen_01"),
+//				BlueprintId:  pulumi.String("lhbp-f1lkcd41"),
+//				Period:       pulumi.Int(1),
+//				RenewFlag:    pulumi.String("NOTIFY_AND_AUTO_RENEW"),
+//				InstanceName: pulumi.String("hello world"),
+//				Zone:         pulumi.String("ap-guangzhou-3"),
+//				Containers: lighthouse.InstanceContainerArray{
+//					&lighthouse.InstanceContainerArgs{
+//						ContainerImage: pulumi.String("ccr.ccs.tencentyun.com/qcloud/nginx"),
+//						ContainerName:  pulumi.String("nginx"),
+//						Envs: lighthouse.InstanceContainerEnvArray{
+//							&lighthouse.InstanceContainerEnvArgs{
+//								Key:   pulumi.String("key"),
+//								Value: pulumi.String("value"),
+//							},
+//							&lighthouse.InstanceContainerEnvArgs{
+//								Key:   pulumi.String("key2"),
+//								Value: pulumi.String("value2"),
+//							},
+//						},
+//						PublishPorts: lighthouse.InstanceContainerPublishPortArray{
+//							&lighthouse.InstanceContainerPublishPortArgs{
+//								HostPort:      pulumi.Int(80),
+//								ContainerPort: pulumi.Int(80),
+//								Ip:            pulumi.String("127.0.0.1"),
+//								Protocol:      pulumi.String("tcp"),
+//							},
+//							&lighthouse.InstanceContainerPublishPortArgs{
+//								HostPort:      pulumi.Int(36000),
+//								ContainerPort: pulumi.Int(36000),
+//								Ip:            pulumi.String("127.0.0.1"),
+//								Protocol:      pulumi.String("tcp"),
+//							},
+//						},
+//						Volumes: lighthouse.InstanceContainerVolumeArray{
+//							&lighthouse.InstanceContainerVolumeArgs{
+//								ContainerPath: pulumi.String("/data"),
+//								HostPath:      pulumi.String("/tmp"),
+//							},
+//							&lighthouse.InstanceContainerVolumeArgs{
+//								ContainerPath: pulumi.String("/var"),
+//								HostPath:      pulumi.String("/tmp"),
+//							},
+//						},
+//						Command: pulumi.String("ls -l"),
+//					},
+//					&lighthouse.InstanceContainerArgs{
+//						ContainerImage: pulumi.String("ccr.ccs.tencentyun.com/qcloud/resty"),
+//						ContainerName:  pulumi.String("resty"),
+//						Envs: lighthouse.InstanceContainerEnvArray{
+//							&lighthouse.InstanceContainerEnvArgs{
+//								Key:   pulumi.String("key2"),
+//								Value: pulumi.String("value2"),
+//							},
+//						},
+//						PublishPorts: lighthouse.InstanceContainerPublishPortArray{
+//							&lighthouse.InstanceContainerPublishPortArgs{
+//								HostPort:      pulumi.Int(80),
+//								ContainerPort: pulumi.Int(80),
+//								Ip:            pulumi.String("127.0.0.1"),
+//								Protocol:      pulumi.String("udp"),
+//							},
+//						},
+//						Volumes: lighthouse.InstanceContainerVolumeArray{
+//							&lighthouse.InstanceContainerVolumeArgs{
+//								ContainerPath: pulumi.String("/var"),
+//								HostPath:      pulumi.String("/tmp"),
+//							},
+//						},
+//						Command: pulumi.String("echo \"hello\""),
+//					},
+//				},
+//				FirewallTemplateId: firewallTemplate.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -120,7 +123,9 @@ import (
 // lighthouse instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Lighthouse/instance:Instance lighthouse lhins-xxxxxx
+//
+//	$ pulumi import tencentcloud:Lighthouse/instance:Instance lighthouse lhins-xxxxxx
+//
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -146,15 +151,19 @@ type Instance struct {
 	// Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.
 	LoginConfiguration InstanceLoginConfigurationPtrOutput `pulumi:"loginConfiguration"`
 	// Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
-	Period pulumi.IntOutput `pulumi:"period"`
+	Period pulumi.IntPtrOutput `pulumi:"period"`
 	// It has been deprecated from version v1.81.8. Use `Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
 	//
 	// Deprecated: It has been deprecated from version v1.81.8. Use `tencentcloud_lighthouse_key_pair_attachment` manage key pair.
 	PermitDefaultKeyPairLogin pulumi.StringOutput `pulumi:"permitDefaultKeyPairLogin"`
+	// Private addresses.
+	PrivateAddresses pulumi.StringArrayOutput `pulumi:"privateAddresses"`
+	// Public addresses.
+	PublicAddresses pulumi.StringArrayOutput `pulumi:"publicAddresses"`
 	// Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
 	RenewFlag pulumi.StringOutput `pulumi:"renewFlag"`
 	// List of availability zones. A random AZ is selected by default.
-	Zone pulumi.StringPtrOutput `pulumi:"zone"`
+	Zone pulumi.StringOutput `pulumi:"zone"`
 }
 
 // NewInstance registers a new resource with the given unique name, arguments, and options.
@@ -172,9 +181,6 @@ func NewInstance(ctx *pulumi.Context,
 	}
 	if args.InstanceName == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceName'")
-	}
-	if args.Period == nil {
-		return nil, errors.New("invalid value for required argument 'Period'")
 	}
 	if args.RenewFlag == nil {
 		return nil, errors.New("invalid value for required argument 'RenewFlag'")
@@ -228,6 +234,10 @@ type instanceState struct {
 	//
 	// Deprecated: It has been deprecated from version v1.81.8. Use `tencentcloud_lighthouse_key_pair_attachment` manage key pair.
 	PermitDefaultKeyPairLogin *string `pulumi:"permitDefaultKeyPairLogin"`
+	// Private addresses.
+	PrivateAddresses []string `pulumi:"privateAddresses"`
+	// Public addresses.
+	PublicAddresses []string `pulumi:"publicAddresses"`
 	// Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
 	RenewFlag *string `pulumi:"renewFlag"`
 	// List of availability zones. A random AZ is selected by default.
@@ -261,6 +271,10 @@ type InstanceState struct {
 	//
 	// Deprecated: It has been deprecated from version v1.81.8. Use `tencentcloud_lighthouse_key_pair_attachment` manage key pair.
 	PermitDefaultKeyPairLogin pulumi.StringPtrInput
+	// Private addresses.
+	PrivateAddresses pulumi.StringArrayInput
+	// Public addresses.
+	PublicAddresses pulumi.StringArrayInput
 	// Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
 	RenewFlag pulumi.StringPtrInput
 	// List of availability zones. A random AZ is selected by default.
@@ -293,7 +307,7 @@ type instanceArgs struct {
 	// Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.
 	LoginConfiguration *InstanceLoginConfiguration `pulumi:"loginConfiguration"`
 	// Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
-	Period int `pulumi:"period"`
+	Period *int `pulumi:"period"`
 	// It has been deprecated from version v1.81.8. Use `Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
 	//
 	// Deprecated: It has been deprecated from version v1.81.8. Use `tencentcloud_lighthouse_key_pair_attachment` manage key pair.
@@ -327,7 +341,7 @@ type InstanceArgs struct {
 	// Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.
 	LoginConfiguration InstanceLoginConfigurationPtrInput
 	// Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
-	Period pulumi.IntInput
+	Period pulumi.IntPtrInput
 	// It has been deprecated from version v1.81.8. Use `Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
 	//
 	// Deprecated: It has been deprecated from version v1.81.8. Use `tencentcloud_lighthouse_key_pair_attachment` manage key pair.
@@ -364,7 +378,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -389,7 +403,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -476,8 +490,8 @@ func (o InstanceOutput) LoginConfiguration() InstanceLoginConfigurationPtrOutput
 }
 
 // Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
-func (o InstanceOutput) Period() pulumi.IntOutput {
-	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.Period }).(pulumi.IntOutput)
+func (o InstanceOutput) Period() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.Period }).(pulumi.IntPtrOutput)
 }
 
 // It has been deprecated from version v1.81.8. Use `Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
@@ -487,14 +501,24 @@ func (o InstanceOutput) PermitDefaultKeyPairLogin() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.PermitDefaultKeyPairLogin }).(pulumi.StringOutput)
 }
 
+// Private addresses.
+func (o InstanceOutput) PrivateAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.PrivateAddresses }).(pulumi.StringArrayOutput)
+}
+
+// Public addresses.
+func (o InstanceOutput) PublicAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.PublicAddresses }).(pulumi.StringArrayOutput)
+}
+
 // Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
 func (o InstanceOutput) RenewFlag() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.RenewFlag }).(pulumi.StringOutput)
 }
 
 // List of availability zones. A random AZ is selected by default.
-func (o InstanceOutput) Zone() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.Zone }).(pulumi.StringPtrOutput)
+func (o InstanceOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Zone }).(pulumi.StringOutput)
 }
 
 type InstanceArrayOutput struct{ *pulumi.OutputState }

@@ -20,40 +20,43 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewClbDomain(ctx, "example", &Waf.ClbDomainArgs{
-// 			AlbType:    pulumi.String("clb"),
-// 			Domain:     pulumi.String("test.com"),
-// 			InstanceId: pulumi.String("waf_2kxtlbky00b2v1fn"),
-// 			LoadBalancerSets: waf.ClbDomainLoadBalancerSetArray{
-// 				&waf.ClbDomainLoadBalancerSetArgs{
-// 					ListenerId:       pulumi.String("lbl-nonkgvc2"),
-// 					ListenerName:     pulumi.String("dsadasd"),
-// 					LoadBalancerId:   pulumi.String("lb-5dnrkgry"),
-// 					LoadBalancerName: pulumi.String("keep-listener-clb"),
-// 					LoadBalancerType: pulumi.String("OPEN"),
-// 					NumericalVpcId:   pulumi.Int(5232945),
-// 					Protocol:         pulumi.String("HTTP"),
-// 					Region:           pulumi.String("gz"),
-// 					Vip:              pulumi.String("106.55.220.8"),
-// 					Vport:            pulumi.Int(80),
-// 					Zone:             pulumi.String("ap-guangzhou-6"),
-// 				},
-// 			},
-// 			Region: pulumi.String("gz"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewClbDomain(ctx, "example", &Waf.ClbDomainArgs{
+//				AlbType:    pulumi.String("clb"),
+//				Domain:     pulumi.String("test.com"),
+//				InstanceId: pulumi.String("waf_2kxtlbky00b2v1fn"),
+//				LoadBalancerSets: waf.ClbDomainLoadBalancerSetArray{
+//					&waf.ClbDomainLoadBalancerSetArgs{
+//						ListenerId:       pulumi.String("lbl-nonkgvc2"),
+//						ListenerName:     pulumi.String("dsadasd"),
+//						LoadBalancerId:   pulumi.String("lb-5dnrkgry"),
+//						LoadBalancerName: pulumi.String("keep-listener-clb"),
+//						LoadBalancerType: pulumi.String("OPEN"),
+//						NumericalVpcId:   pulumi.Int(5232945),
+//						Protocol:         pulumi.String("HTTP"),
+//						Region:           pulumi.String("gz"),
+//						Vip:              pulumi.String("106.55.220.8"),
+//						Vport:            pulumi.Int(80),
+//						Zone:             pulumi.String("ap-guangzhou-6"),
+//					},
+//				},
+//				Region: pulumi.String("gz"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Create a complete waf clb domain
 //
@@ -61,51 +64,54 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewClbDomain(ctx, "example", &Waf.ClbDomainArgs{
-// 			AlbType:       pulumi.String("clb"),
-// 			ApiSafeStatus: pulumi.Int(1),
-// 			BotStatus:     pulumi.Int(1),
-// 			Domain:        pulumi.String("test.com"),
-// 			Engine:        pulumi.Int(21),
-// 			FlowMode:      pulumi.Int(1),
-// 			InstanceId:    pulumi.String("waf_2kxtlbky00b2v1fn"),
-// 			IpHeaders: pulumi.StringArray{
-// 				pulumi.String("headers_1"),
-// 				pulumi.String("headers_2"),
-// 				pulumi.String("headers_3"),
-// 			},
-// 			IsCdn: pulumi.Int(3),
-// 			LoadBalancerSets: waf.ClbDomainLoadBalancerSetArray{
-// 				&waf.ClbDomainLoadBalancerSetArgs{
-// 					ListenerId:       pulumi.String("lbl-nonkgvc2"),
-// 					ListenerName:     pulumi.String("dsadasd"),
-// 					LoadBalancerId:   pulumi.String("lb-5dnrkgry"),
-// 					LoadBalancerName: pulumi.String("keep-listener-clb"),
-// 					LoadBalancerType: pulumi.String("OPEN"),
-// 					NumericalVpcId:   pulumi.Int(5232945),
-// 					Protocol:         pulumi.String("HTTP"),
-// 					Region:           pulumi.String("gz"),
-// 					Vip:              pulumi.String("106.55.220.8"),
-// 					Vport:            pulumi.Int(80),
-// 					Zone:             pulumi.String("ap-guangzhou-6"),
-// 				},
-// 			},
-// 			Region: pulumi.String("gz"),
-// 			Status: pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewClbDomain(ctx, "example", &Waf.ClbDomainArgs{
+//				AlbType:       pulumi.String("clb"),
+//				ApiSafeStatus: pulumi.Int(1),
+//				BotStatus:     pulumi.Int(1),
+//				Domain:        pulumi.String("test.com"),
+//				Engine:        pulumi.Int(21),
+//				FlowMode:      pulumi.Int(1),
+//				InstanceId:    pulumi.String("waf_2kxtlbky00b2v1fn"),
+//				IpHeaders: pulumi.StringArray{
+//					pulumi.String("headers_1"),
+//					pulumi.String("headers_2"),
+//					pulumi.String("headers_3"),
+//				},
+//				IsCdn: pulumi.Int(3),
+//				LoadBalancerSets: waf.ClbDomainLoadBalancerSetArray{
+//					&waf.ClbDomainLoadBalancerSetArgs{
+//						ListenerId:       pulumi.String("lbl-nonkgvc2"),
+//						ListenerName:     pulumi.String("dsadasd"),
+//						LoadBalancerId:   pulumi.String("lb-5dnrkgry"),
+//						LoadBalancerName: pulumi.String("keep-listener-clb"),
+//						LoadBalancerType: pulumi.String("OPEN"),
+//						NumericalVpcId:   pulumi.Int(5232945),
+//						Protocol:         pulumi.String("HTTP"),
+//						Region:           pulumi.String("gz"),
+//						Vip:              pulumi.String("106.55.220.8"),
+//						Vport:            pulumi.Int(80),
+//						Zone:             pulumi.String("ap-guangzhou-6"),
+//					},
+//				},
+//				Region: pulumi.String("gz"),
+//				Status: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Create a complete waf tsegw domain
 //
@@ -113,30 +119,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewClbDomain(ctx, "example", &Waf.ClbDomainArgs{
-// 			AlbType:       pulumi.String("tsegw"),
-// 			ApiSafeStatus: pulumi.Int(0),
-// 			BotStatus:     pulumi.Int(0),
-// 			Domain:        pulumi.String("xxx.com"),
-// 			Engine:        pulumi.Int(12),
-// 			FlowMode:      pulumi.Int(0),
-// 			InstanceId:    pulumi.String("waf_2kxtlbky00b2v1fn"),
-// 			IsCdn:         pulumi.Int(0),
-// 			Region:        pulumi.String("gz"),
-// 			Status:        pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewClbDomain(ctx, "example", &Waf.ClbDomainArgs{
+//				AlbType:       pulumi.String("tsegw"),
+//				ApiSafeStatus: pulumi.Int(0),
+//				BotStatus:     pulumi.Int(0),
+//				Domain:        pulumi.String("xxx.com"),
+//				Engine:        pulumi.Int(12),
+//				FlowMode:      pulumi.Int(0),
+//				InstanceId:    pulumi.String("waf_2kxtlbky00b2v1fn"),
+//				IsCdn:         pulumi.Int(0),
+//				Region:        pulumi.String("gz"),
+//				Status:        pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Create a complete waf apisix domain
 //
@@ -144,30 +153,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewClbDomain(ctx, "example", &Waf.ClbDomainArgs{
-// 			AlbType:       pulumi.String("apisix"),
-// 			ApiSafeStatus: pulumi.Int(0),
-// 			BotStatus:     pulumi.Int(0),
-// 			Domain:        pulumi.String("xxx.com"),
-// 			Engine:        pulumi.Int(12),
-// 			FlowMode:      pulumi.Int(0),
-// 			InstanceId:    pulumi.String("waf_2kxtlbky00b2v1fn"),
-// 			IsCdn:         pulumi.Int(0),
-// 			Region:        pulumi.String("gz"),
-// 			Status:        pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewClbDomain(ctx, "example", &Waf.ClbDomainArgs{
+//				AlbType:       pulumi.String("apisix"),
+//				ApiSafeStatus: pulumi.Int(0),
+//				BotStatus:     pulumi.Int(0),
+//				Domain:        pulumi.String("xxx.com"),
+//				Engine:        pulumi.Int(12),
+//				FlowMode:      pulumi.Int(0),
+//				InstanceId:    pulumi.String("waf_2kxtlbky00b2v1fn"),
+//				IsCdn:         pulumi.Int(0),
+//				Region:        pulumi.String("gz"),
+//				Status:        pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -175,7 +187,9 @@ import (
 // waf clb_domain can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Waf/clbDomain:ClbDomain example waf_2kxtlbky00b2v1fn#test.com#waf-0FSehoRU
+//
+//	$ pulumi import tencentcloud:Waf/clbDomain:ClbDomain example waf_2kxtlbky00b2v1fn#test.com#waf-0FSehoRU
+//
 // ```
 type ClbDomain struct {
 	pulumi.CustomResourceState
@@ -399,7 +413,7 @@ func (i *ClbDomain) ToClbDomainOutputWithContext(ctx context.Context) ClbDomainO
 // ClbDomainArrayInput is an input type that accepts ClbDomainArray and ClbDomainArrayOutput values.
 // You can construct a concrete instance of `ClbDomainArrayInput` via:
 //
-//          ClbDomainArray{ ClbDomainArgs{...} }
+//	ClbDomainArray{ ClbDomainArgs{...} }
 type ClbDomainArrayInput interface {
 	pulumi.Input
 
@@ -424,7 +438,7 @@ func (i ClbDomainArray) ToClbDomainArrayOutputWithContext(ctx context.Context) C
 // ClbDomainMapInput is an input type that accepts ClbDomainMap and ClbDomainMapOutput values.
 // You can construct a concrete instance of `ClbDomainMapInput` via:
 //
-//          ClbDomainMap{ "key": ClbDomainArgs{...} }
+//	ClbDomainMap{ "key": ClbDomainArgs{...} }
 type ClbDomainMapInput interface {
 	pulumi.Input
 

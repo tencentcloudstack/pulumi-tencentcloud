@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.GetBinlogDownloadUrl(ctx, &cynosdb.GetBinlogDownloadUrlArgs{
-// 			BinlogId:  6202249,
-// 			ClusterId: "cynosdbmysql-bws8h88b",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.GetBinlogDownloadUrl(ctx, &cynosdb.GetBinlogDownloadUrlArgs{
+//				BinlogId:  6202249,
+//				ClusterId: "cynosdbmysql-bws8h88b",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetBinlogDownloadUrl(ctx *pulumi.Context, args *GetBinlogDownloadUrlArgs, opts ...pulumi.InvokeOption) (*GetBinlogDownloadUrlResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

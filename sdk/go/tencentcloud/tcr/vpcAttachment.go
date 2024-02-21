@@ -20,53 +20,56 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(_var.Availability_zone),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpcId := vpc.InstanceLists[0].VpcId
-// 		subnetId := vpc.InstanceLists[0].SubnetId
-// 		example, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
-// 			InstanceType: pulumi.String("basic"),
-// 			DeleteBucket: pulumi.Bool(true),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		tcrId := example.ID()
-// 		_, err = Security.GetGroups(ctx, &security.GetGroupsArgs{
-// 			Name: pulumi.StringRef("default"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tcr.NewVpcAttachment(ctx, "foo", &Tcr.VpcAttachmentArgs{
-// 			InstanceId: pulumi.String(tcrId),
-// 			VpcId:      pulumi.String(vpcId),
-// 			SubnetId:   pulumi.String(subnetId),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//				IsDefault:        pulumi.BoolRef(true),
+//				AvailabilityZone: pulumi.StringRef(_var.Availability_zone),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpcId := vpc.InstanceLists[0].VpcId
+//			subnetId := vpc.InstanceLists[0].SubnetId
+//			example, err := Tcr.NewInstance(ctx, "example", &Tcr.InstanceArgs{
+//				InstanceType: pulumi.String("basic"),
+//				DeleteBucket: pulumi.Bool(true),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			tcrId := example.ID()
+//			_, err = Security.GetGroups(ctx, &security.GetGroupsArgs{
+//				Name: pulumi.StringRef("default"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcr.NewVpcAttachment(ctx, "foo", &Tcr.VpcAttachmentArgs{
+//				InstanceId: pulumi.String(tcrId),
+//				VpcId:      pulumi.String(vpcId),
+//				SubnetId:   pulumi.String(subnetId),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -74,7 +77,9 @@ import (
 // tcr vpc attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo instance_id#vpc_id#subnet_id
+//
+//	$ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo instance_id#vpc_id#subnet_id
+//
 // ```
 type VpcAttachment struct {
 	pulumi.CustomResourceState
@@ -254,7 +259,7 @@ func (i *VpcAttachment) ToVpcAttachmentOutputWithContext(ctx context.Context) Vp
 // VpcAttachmentArrayInput is an input type that accepts VpcAttachmentArray and VpcAttachmentArrayOutput values.
 // You can construct a concrete instance of `VpcAttachmentArrayInput` via:
 //
-//          VpcAttachmentArray{ VpcAttachmentArgs{...} }
+//	VpcAttachmentArray{ VpcAttachmentArgs{...} }
 type VpcAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -279,7 +284,7 @@ func (i VpcAttachmentArray) ToVpcAttachmentArrayOutputWithContext(ctx context.Co
 // VpcAttachmentMapInput is an input type that accepts VpcAttachmentMap and VpcAttachmentMapOutput values.
 // You can construct a concrete instance of `VpcAttachmentMapInput` via:
 //
-//          VpcAttachmentMap{ "key": VpcAttachmentArgs{...} }
+//	VpcAttachmentMap{ "key": VpcAttachmentArgs{...} }
 type VpcAttachmentMapInput interface {
 	pulumi.Input
 

@@ -18,29 +18,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.GetTargetGroupList(ctx, &clb.GetTargetGroupListArgs{
-// 			Filters: []clb.GetTargetGroupListFilter{
-// 				clb.GetTargetGroupListFilter{
-// 					Name: "TargetGroupName",
-// 					Values: []string{
-// 						"keep-tgg",
-// 					},
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.GetTargetGroupList(ctx, &clb.GetTargetGroupListArgs{
+//				Filters: []clb.GetTargetGroupListFilter{
+//					clb.GetTargetGroupListFilter{
+//						Name: "TargetGroupName",
+//						Values: []string{
+//							"keep-tgg",
+//						},
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetTargetGroupList(ctx *pulumi.Context, args *GetTargetGroupListArgs, opts ...pulumi.InvokeOption) (*GetTargetGroupListResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

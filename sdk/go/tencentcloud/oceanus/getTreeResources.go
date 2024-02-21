@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.GetTreeResources(ctx, &oceanus.GetTreeResourcesArgs{
-// 			WorkSpaceId: "space-2idq8wbr",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.GetTreeResources(ctx, &oceanus.GetTreeResourcesArgs{
+//				WorkSpaceId: "space-2idq8wbr",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetTreeResources(ctx *pulumi.Context, args *GetTreeResourcesArgs, opts ...pulumi.InvokeOption) (*GetTreeResourcesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

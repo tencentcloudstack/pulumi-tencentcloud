@@ -102,7 +102,7 @@ func (i *IsolateHourInstanceOperation) ToIsolateHourInstanceOperationOutputWithC
 // IsolateHourInstanceOperationArrayInput is an input type that accepts IsolateHourInstanceOperationArray and IsolateHourInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `IsolateHourInstanceOperationArrayInput` via:
 //
-//          IsolateHourInstanceOperationArray{ IsolateHourInstanceOperationArgs{...} }
+//	IsolateHourInstanceOperationArray{ IsolateHourInstanceOperationArgs{...} }
 type IsolateHourInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -127,7 +127,7 @@ func (i IsolateHourInstanceOperationArray) ToIsolateHourInstanceOperationArrayOu
 // IsolateHourInstanceOperationMapInput is an input type that accepts IsolateHourInstanceOperationMap and IsolateHourInstanceOperationMapOutput values.
 // You can construct a concrete instance of `IsolateHourInstanceOperationMapInput` via:
 //
-//          IsolateHourInstanceOperationMap{ "key": IsolateHourInstanceOperationArgs{...} }
+//	IsolateHourInstanceOperationMap{ "key": IsolateHourInstanceOperationArgs{...} }
 type IsolateHourInstanceOperationMapInput interface {
 	pulumi.Input
 

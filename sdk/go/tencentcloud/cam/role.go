@@ -20,56 +20,102 @@ import (
 // package main
 //
 // import (
-// 	"encoding/json"
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"encoding/json"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		info, err := User.GetInfo(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		myUin := info.OwnerUin
-// 		ctx.Export("uin", myUin)
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"statement": []map[string]interface{}{
-// 				map[string]interface{}{
-// 					"action": "name/sts:AssumeRole",
-// 					"effect": "allow",
-// 					"principal": map[string]interface{}{
-// 						"qcs": []string{
-// 							fmt.Sprintf("%v%v%v", "qcs::cam::uin/", myUin, ":root"),
-// 						},
-// 					},
-// 				},
-// 			},
-// 			"version": "2.0",
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		_, err = Cam.NewRole(ctx, "foo", &Cam.RoleArgs{
-// 			Document:        pulumi.String(json0),
-// 			ConsoleLogin:    pulumi.Bool(true),
-// 			Description:     pulumi.String("test"),
-// 			SessionDuration: pulumi.Int(7200),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("tf-cam-role"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			myUin := info.OwnerUin
+//			ctx.Export("uin", myUin)
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"statement": []map[string]interface{}{
+//					map[string]interface{}{
+//						"action": "name/sts:AssumeRole",
+//						"effect": "allow",
+//						"principal": map[string]interface{}{
+//							"qcs": []string{
+//								fmt.Sprintf("%v%v%v", "qcs::cam::uin/", myUin, ":root"),
+//							},
+//						},
+//					},
+//				},
+//				"version": "2.0",
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err = Cam.NewRole(ctx, "foo", &Cam.RoleArgs{
+//				Document:        pulumi.String(json0),
+//				ConsoleLogin:    pulumi.Bool(true),
+//				Description:     pulumi.String("test"),
+//				SessionDuration: pulumi.Int(7200),
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("tf-cam-role"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// ### Create with SAML provider
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			saml - provider := "example"
+//			if param := cfg.Get("saml-provider"); param != "" {
+//				saml - provider = param
+//			}
+//			info, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			uin := info.Uin
+//			samlProvider := saml_provider
+//			_, err = Cam.NewRole(ctx, "boo", &Cam.RoleArgs{
+//				Document:     pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\n", "        \"name/sts:AssumeRole\"\n", "      ],\n", "      \"effect\": \"allow\",\n", "      \"principal\": {\n", "        \"qcs\": [\n", "          \"qcs::cam::uin/", uin, ":saml-provider/", samlProvider, "\"\n", "        ]\n", "      }\n", "    }\n", "  ]\n", "}\n")),
+//				Description:  pulumi.String("tf_test"),
+//				ConsoleLogin: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -77,7 +123,9 @@ import (
 // CAM role can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/role:Role foo 4611686018427733635
+//
+//	$ pulumi import tencentcloud:Cam/role:Role foo 4611686018427733635
+//
 // ```
 type Role struct {
 	pulumi.CustomResourceState
@@ -246,7 +294,7 @@ func (i *Role) ToRoleOutputWithContext(ctx context.Context) RoleOutput {
 // RoleArrayInput is an input type that accepts RoleArray and RoleArrayOutput values.
 // You can construct a concrete instance of `RoleArrayInput` via:
 //
-//          RoleArray{ RoleArgs{...} }
+//	RoleArray{ RoleArgs{...} }
 type RoleArrayInput interface {
 	pulumi.Input
 
@@ -271,7 +319,7 @@ func (i RoleArray) ToRoleArrayOutputWithContext(ctx context.Context) RoleArrayOu
 // RoleMapInput is an input type that accepts RoleMap and RoleMapOutput values.
 // You can construct a concrete instance of `RoleMapInput` via:
 //
-//          RoleMap{ "key": RoleArgs{...} }
+//	RoleMap{ "key": RoleArgs{...} }
 type RoleMapInput interface {
 	pulumi.Input
 

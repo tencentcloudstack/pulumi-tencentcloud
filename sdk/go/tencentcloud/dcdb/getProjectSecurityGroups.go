@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.GetProjectSecurityGroups(ctx, &dcdb.GetProjectSecurityGroupsArgs{
-// 			Product:   "dcdb",
-// 			ProjectId: pulumi.IntRef(0),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcdb.GetProjectSecurityGroups(ctx, &dcdb.GetProjectSecurityGroupsArgs{
+//				Product:   "dcdb",
+//				ProjectId: pulumi.IntRef(0),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetProjectSecurityGroups(ctx *pulumi.Context, args *GetProjectSecurityGroupsArgs, opts ...pulumi.InvokeOption) (*GetProjectSecurityGroupsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

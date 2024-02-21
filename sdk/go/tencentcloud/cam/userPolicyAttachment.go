@@ -18,7 +18,9 @@ import (
 // CAM user policy attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment foo cam-test#26800353
+//
+//	$ pulumi import tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment foo cam-test#26800353
+//
 // ```
 type UserPolicyAttachment struct {
 	pulumi.CustomResourceState
@@ -164,7 +166,7 @@ func (i *UserPolicyAttachment) ToUserPolicyAttachmentOutputWithContext(ctx conte
 // UserPolicyAttachmentArrayInput is an input type that accepts UserPolicyAttachmentArray and UserPolicyAttachmentArrayOutput values.
 // You can construct a concrete instance of `UserPolicyAttachmentArrayInput` via:
 //
-//          UserPolicyAttachmentArray{ UserPolicyAttachmentArgs{...} }
+//	UserPolicyAttachmentArray{ UserPolicyAttachmentArgs{...} }
 type UserPolicyAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -189,7 +191,7 @@ func (i UserPolicyAttachmentArray) ToUserPolicyAttachmentArrayOutputWithContext(
 // UserPolicyAttachmentMapInput is an input type that accepts UserPolicyAttachmentMap and UserPolicyAttachmentMapOutput values.
 // You can construct a concrete instance of `UserPolicyAttachmentMapInput` via:
 //
-//          UserPolicyAttachmentMap{ "key": UserPolicyAttachmentArgs{...} }
+//	UserPolicyAttachmentMap{ "key": UserPolicyAttachmentArgs{...} }
 type UserPolicyAttachmentMapInput interface {
 	pulumi.Input
 

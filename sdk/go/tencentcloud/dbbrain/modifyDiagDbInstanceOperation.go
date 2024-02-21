@@ -19,62 +19,68 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.NewModifyDiagDbInstanceOperation(ctx, "on", &Dbbrain.ModifyDiagDbInstanceOperationArgs{
-// 			InstanceConfs: &dbbrain.ModifyDiagDbInstanceOperationInstanceConfsArgs{
-// 				DailyInspection: pulumi.String("Yes"),
-// 				OverviewDisplay: pulumi.String("Yes"),
-// 			},
-// 			InstanceIds: pulumi.StringArray{
-// 				pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			},
-// 			Product: pulumi.String("mysql"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.NewModifyDiagDbInstanceOperation(ctx, "on", &Dbbrain.ModifyDiagDbInstanceOperationArgs{
+//				InstanceConfs: &dbbrain.ModifyDiagDbInstanceOperationInstanceConfsArgs{
+//					DailyInspection: pulumi.String("Yes"),
+//					OverviewDisplay: pulumi.String("Yes"),
+//				},
+//				InstanceIds: pulumi.StringArray{
+//					pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//				},
+//				Product: pulumi.String("mysql"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.NewModifyDiagDbInstanceOperation(ctx, "off", &Dbbrain.ModifyDiagDbInstanceOperationArgs{
-// 			InstanceConfs: &dbbrain.ModifyDiagDbInstanceOperationInstanceConfsArgs{
-// 				DailyInspection: pulumi.String("No"),
-// 				OverviewDisplay: pulumi.String("No"),
-// 			},
-// 			InstanceIds: pulumi.StringArray{
-// 				pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			},
-// 			Product: pulumi.String("mysql"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.NewModifyDiagDbInstanceOperation(ctx, "off", &Dbbrain.ModifyDiagDbInstanceOperationArgs{
+//				InstanceConfs: &dbbrain.ModifyDiagDbInstanceOperationInstanceConfsArgs{
+//					DailyInspection: pulumi.String("No"),
+//					OverviewDisplay: pulumi.String("No"),
+//				},
+//				InstanceIds: pulumi.StringArray{
+//					pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//				},
+//				Product: pulumi.String("mysql"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ModifyDiagDbInstanceOperation struct {
 	pulumi.CustomResourceState
@@ -199,7 +205,7 @@ func (i *ModifyDiagDbInstanceOperation) ToModifyDiagDbInstanceOperationOutputWit
 // ModifyDiagDbInstanceOperationArrayInput is an input type that accepts ModifyDiagDbInstanceOperationArray and ModifyDiagDbInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `ModifyDiagDbInstanceOperationArrayInput` via:
 //
-//          ModifyDiagDbInstanceOperationArray{ ModifyDiagDbInstanceOperationArgs{...} }
+//	ModifyDiagDbInstanceOperationArray{ ModifyDiagDbInstanceOperationArgs{...} }
 type ModifyDiagDbInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -224,7 +230,7 @@ func (i ModifyDiagDbInstanceOperationArray) ToModifyDiagDbInstanceOperationArray
 // ModifyDiagDbInstanceOperationMapInput is an input type that accepts ModifyDiagDbInstanceOperationMap and ModifyDiagDbInstanceOperationMapOutput values.
 // You can construct a concrete instance of `ModifyDiagDbInstanceOperationMapInput` via:
 //
-//          ModifyDiagDbInstanceOperationMap{ "key": ModifyDiagDbInstanceOperationArgs{...} }
+//	ModifyDiagDbInstanceOperationMap{ "key": ModifyDiagDbInstanceOperationArgs{...} }
 type ModifyDiagDbInstanceOperationMapInput interface {
 	pulumi.Input
 

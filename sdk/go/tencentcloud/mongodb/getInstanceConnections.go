@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mongodb.GetInstanceConnections(ctx, &mongodb.GetInstanceConnectionsArgs{
-// 			InstanceId: "cmgo-9d0p6umb",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mongodb.GetInstanceConnections(ctx, &mongodb.GetInstanceConnectionsArgs{
+//				InstanceId: "cmgo-9d0p6umb",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetInstanceConnections(ctx *pulumi.Context, args *GetInstanceConnectionsArgs, opts ...pulumi.InvokeOption) (*GetInstanceConnectionsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

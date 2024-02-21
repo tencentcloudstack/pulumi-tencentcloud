@@ -18,28 +18,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.GetTimeShiftRecordDetail(ctx, &css.GetTimeShiftRecordDetailArgs{
-// 			AppName:     "qqq",
-// 			Domain:      "177154.push.tlivecloud.com",
-// 			DomainGroup: pulumi.StringRef("tf-test"),
-// 			EndTime:     1698820641,
-// 			StartTime:   1698768000,
-// 			StreamName:  "live",
-// 			TransCodeId: pulumi.IntRef(0),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.GetTimeShiftRecordDetail(ctx, &css.GetTimeShiftRecordDetailArgs{
+//				AppName:     "qqq",
+//				Domain:      "177154.push.tlivecloud.com",
+//				DomainGroup: pulumi.StringRef("tf-test"),
+//				EndTime:     1698820641,
+//				StartTime:   1698768000,
+//				StreamName:  "live",
+//				TransCodeId: pulumi.IntRef(0),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetTimeShiftRecordDetail(ctx *pulumi.Context, args *GetTimeShiftRecordDetailArgs, opts ...pulumi.InvokeOption) (*GetTimeShiftRecordDetailResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

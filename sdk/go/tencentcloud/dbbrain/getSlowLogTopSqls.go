@@ -18,29 +18,32 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.GetSlowLogTopSqls(ctx, &dbbrain.GetSlowLogTopSqlsArgs{
-// 			EndTime:    fmt.Sprintf("%v%v", "%", "s"),
-// 			InstanceId: fmt.Sprintf("%v%v", "%", "s"),
-// 			OrderBy:    pulumi.StringRef("ASC"),
-// 			Product:    pulumi.StringRef("mysql"),
-// 			SortBy:     pulumi.StringRef("QueryTimeMax"),
-// 			StartTime:  fmt.Sprintf("%v%v", "%", "s"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.GetSlowLogTopSqls(ctx, &dbbrain.GetSlowLogTopSqlsArgs{
+//				EndTime:    fmt.Sprintf("%v%v", "%", "s"),
+//				InstanceId: fmt.Sprintf("%v%v", "%", "s"),
+//				OrderBy:    pulumi.StringRef("ASC"),
+//				Product:    pulumi.StringRef("mysql"),
+//				SortBy:     pulumi.StringRef("QueryTimeMax"),
+//				StartTime:  fmt.Sprintf("%v%v", "%", "s"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetSlowLogTopSqls(ctx *pulumi.Context, args *GetSlowLogTopSqlsArgs, opts ...pulumi.InvokeOption) (*GetSlowLogTopSqlsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

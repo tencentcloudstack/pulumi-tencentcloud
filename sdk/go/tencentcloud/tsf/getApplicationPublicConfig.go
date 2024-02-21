@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.GetApplicationPublicConfig(ctx, &tsf.GetApplicationPublicConfigArgs{
-// 			ConfigId:      pulumi.StringRef("dcfg-p-evjrbgly"),
-// 			ConfigName:    pulumi.StringRef("dsadsa"),
-// 			ConfigVersion: pulumi.StringRef("123"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.GetApplicationPublicConfig(ctx, &tsf.GetApplicationPublicConfigArgs{
+//				ConfigId:      pulumi.StringRef("dcfg-p-evjrbgly"),
+//				ConfigName:    pulumi.StringRef("dsadsa"),
+//				ConfigVersion: pulumi.StringRef("123"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupApplicationPublicConfig(ctx *pulumi.Context, args *LookupApplicationPublicConfigArgs, opts ...pulumi.InvokeOption) (*LookupApplicationPublicConfigResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

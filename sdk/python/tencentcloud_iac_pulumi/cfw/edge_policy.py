@@ -192,6 +192,7 @@ class _EdgePolicyState:
                  description: Optional[pulumi.Input[str]] = None,
                  direction: Optional[pulumi.Input[int]] = None,
                  enable: Optional[pulumi.Input[str]] = None,
+                 param_template_id: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  rule_action: Optional[pulumi.Input[str]] = None,
@@ -206,6 +207,7 @@ class _EdgePolicyState:
         :param pulumi.Input[str] description: Description.
         :param pulumi.Input[int] direction: Rule direction: 1, inbound; 0, outbound.
         :param pulumi.Input[str] enable: Rule status, true means enabled, false means disabled. Default is true.
+        :param pulumi.Input[str] param_template_id: Parameter template id.
         :param pulumi.Input[str] port: The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
         :param pulumi.Input[str] protocol: Protocol. If Direction=1 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=1 && Scope!=serial, optional values: TCP; If Direction=0 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=0 && Scope!=serial, optional values: TCP HTTP/HTTPS TLS/SSL.
         :param pulumi.Input[str] rule_action: How the traffic set in the access control policy passes through the cloud firewall. Values: accept: allow; drop: reject; log: observe.
@@ -222,6 +224,8 @@ class _EdgePolicyState:
             pulumi.set(__self__, "direction", direction)
         if enable is not None:
             pulumi.set(__self__, "enable", enable)
+        if param_template_id is not None:
+            pulumi.set(__self__, "param_template_id", param_template_id)
         if port is not None:
             pulumi.set(__self__, "port", port)
         if protocol is not None:
@@ -276,6 +280,18 @@ class _EdgePolicyState:
     @enable.setter
     def enable(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "enable", value)
+
+    @property
+    @pulumi.getter(name="paramTemplateId")
+    def param_template_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Parameter template id.
+        """
+        return pulumi.get(self, "param_template_id")
+
+    @param_template_id.setter
+    def param_template_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "param_template_id", value)
 
     @property
     @pulumi.getter
@@ -598,6 +614,7 @@ class EdgePolicy(pulumi.CustomResource):
             if target_type is None and not opts.urn:
                 raise TypeError("Missing required property 'target_type'")
             __props__.__dict__["target_type"] = target_type
+            __props__.__dict__["param_template_id"] = None
             __props__.__dict__["uuid"] = None
         super(EdgePolicy, __self__).__init__(
             'tencentcloud:Cfw/edgePolicy:EdgePolicy',
@@ -612,6 +629,7 @@ class EdgePolicy(pulumi.CustomResource):
             description: Optional[pulumi.Input[str]] = None,
             direction: Optional[pulumi.Input[int]] = None,
             enable: Optional[pulumi.Input[str]] = None,
+            param_template_id: Optional[pulumi.Input[str]] = None,
             port: Optional[pulumi.Input[str]] = None,
             protocol: Optional[pulumi.Input[str]] = None,
             rule_action: Optional[pulumi.Input[str]] = None,
@@ -631,6 +649,7 @@ class EdgePolicy(pulumi.CustomResource):
         :param pulumi.Input[str] description: Description.
         :param pulumi.Input[int] direction: Rule direction: 1, inbound; 0, outbound.
         :param pulumi.Input[str] enable: Rule status, true means enabled, false means disabled. Default is true.
+        :param pulumi.Input[str] param_template_id: Parameter template id.
         :param pulumi.Input[str] port: The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
         :param pulumi.Input[str] protocol: Protocol. If Direction=1 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=1 && Scope!=serial, optional values: TCP; If Direction=0 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=0 && Scope!=serial, optional values: TCP HTTP/HTTPS TLS/SSL.
         :param pulumi.Input[str] rule_action: How the traffic set in the access control policy passes through the cloud firewall. Values: accept: allow; drop: reject; log: observe.
@@ -648,6 +667,7 @@ class EdgePolicy(pulumi.CustomResource):
         __props__.__dict__["description"] = description
         __props__.__dict__["direction"] = direction
         __props__.__dict__["enable"] = enable
+        __props__.__dict__["param_template_id"] = param_template_id
         __props__.__dict__["port"] = port
         __props__.__dict__["protocol"] = protocol
         __props__.__dict__["rule_action"] = rule_action
@@ -682,6 +702,14 @@ class EdgePolicy(pulumi.CustomResource):
         Rule status, true means enabled, false means disabled. Default is true.
         """
         return pulumi.get(self, "enable")
+
+    @property
+    @pulumi.getter(name="paramTemplateId")
+    def param_template_id(self) -> pulumi.Output[str]:
+        """
+        Parameter template id.
+        """
+        return pulumi.get(self, "param_template_id")
 
     @property
     @pulumi.getter

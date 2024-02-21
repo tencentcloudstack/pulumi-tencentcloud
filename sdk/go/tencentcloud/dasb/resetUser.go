@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewResetUser(ctx, "example", &Dasb.ResetUserArgs{
-// 			UserId: pulumi.Int(16),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewResetUser(ctx, "example", &Dasb.ResetUserArgs{
+//				UserId: pulumi.Int(16),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ResetUser struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *ResetUser) ToResetUserOutputWithContext(ctx context.Context) ResetUserO
 // ResetUserArrayInput is an input type that accepts ResetUserArray and ResetUserArrayOutput values.
 // You can construct a concrete instance of `ResetUserArrayInput` via:
 //
-//          ResetUserArray{ ResetUserArgs{...} }
+//	ResetUserArray{ ResetUserArgs{...} }
 type ResetUserArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i ResetUserArray) ToResetUserArrayOutputWithContext(ctx context.Context) R
 // ResetUserMapInput is an input type that accepts ResetUserMap and ResetUserMapOutput values.
 // You can construct a concrete instance of `ResetUserMapInput` via:
 //
-//          ResetUserMap{ "key": ResetUserArgs{...} }
+//	ResetUserMap{ "key": ResetUserArgs{...} }
 type ResetUserMapInput interface {
 	pulumi.Input
 

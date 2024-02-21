@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Rum.GetFetchUrl(ctx, &rum.GetFetchUrlArgs{
-// 			EndTime:   1625454840,
-// 			ProjectId: 1,
-// 			StartTime: 1625444040,
-// 			Type:      "allcount",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Rum.GetFetchUrl(ctx, &rum.GetFetchUrlArgs{
+//				EndTime:   1625454840,
+//				ProjectId: 1,
+//				StartTime: 1625444040,
+//				Type:      "allcount",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetFetchUrl(ctx *pulumi.Context, args *GetFetchUrlArgs, opts ...pulumi.InvokeOption) (*GetFetchUrlResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

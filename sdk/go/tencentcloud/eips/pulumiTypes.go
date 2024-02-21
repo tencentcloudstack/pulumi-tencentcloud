@@ -34,7 +34,7 @@ type GetInstanceEipList struct {
 // GetInstanceEipListInput is an input type that accepts GetInstanceEipListArgs and GetInstanceEipListOutput values.
 // You can construct a concrete instance of `GetInstanceEipListInput` via:
 //
-//          GetInstanceEipListArgs{...}
+//	GetInstanceEipListArgs{...}
 type GetInstanceEipListInput interface {
 	pulumi.Input
 
@@ -78,7 +78,7 @@ func (i GetInstanceEipListArgs) ToGetInstanceEipListOutputWithContext(ctx contex
 // GetInstanceEipListArrayInput is an input type that accepts GetInstanceEipListArray and GetInstanceEipListArrayOutput values.
 // You can construct a concrete instance of `GetInstanceEipListArrayInput` via:
 //
-//          GetInstanceEipListArray{ GetInstanceEipListArgs{...} }
+//	GetInstanceEipListArray{ GetInstanceEipListArgs{...} }
 type GetInstanceEipListArrayInput interface {
 	pulumi.Input
 

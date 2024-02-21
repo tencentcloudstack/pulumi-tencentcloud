@@ -19,25 +19,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewDisisolateDbInstanceOperation(ctx, "disisolateDbInstanceOperation", &Postgresql.DisisolateDbInstanceOperationArgs{
-// 			DbInstanceIdSets: pulumi.StringArray{
-// 				pulumi.Any(local.Pgsql_id),
-// 			},
-// 			Period:      pulumi.Int(1),
-// 			AutoVoucher: pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewDisisolateDbInstanceOperation(ctx, "disisolateDbInstanceOperation", &Postgresql.DisisolateDbInstanceOperationArgs{
+//				DbInstanceIdSets: pulumi.StringArray{
+//					pulumi.Any(local.Pgsql_id),
+//				},
+//				Period:      pulumi.Int(1),
+//				AutoVoucher: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type DisisolateDbInstanceOperation struct {
 	pulumi.CustomResourceState
@@ -159,7 +162,7 @@ func (i *DisisolateDbInstanceOperation) ToDisisolateDbInstanceOperationOutputWit
 // DisisolateDbInstanceOperationArrayInput is an input type that accepts DisisolateDbInstanceOperationArray and DisisolateDbInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `DisisolateDbInstanceOperationArrayInput` via:
 //
-//          DisisolateDbInstanceOperationArray{ DisisolateDbInstanceOperationArgs{...} }
+//	DisisolateDbInstanceOperationArray{ DisisolateDbInstanceOperationArgs{...} }
 type DisisolateDbInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -184,7 +187,7 @@ func (i DisisolateDbInstanceOperationArray) ToDisisolateDbInstanceOperationArray
 // DisisolateDbInstanceOperationMapInput is an input type that accepts DisisolateDbInstanceOperationMap and DisisolateDbInstanceOperationMapOutput values.
 // You can construct a concrete instance of `DisisolateDbInstanceOperationMapInput` via:
 //
-//          DisisolateDbInstanceOperationMap{ "key": DisisolateDbInstanceOperationArgs{...} }
+//	DisisolateDbInstanceOperationMap{ "key": DisisolateDbInstanceOperationArgs{...} }
 type DisisolateDbInstanceOperationMapInput interface {
 	pulumi.Input
 

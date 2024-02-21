@@ -22,25 +22,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewTmpExporterIntegration(ctx, "tmpExporterIntegration", &Monitor.TmpExporterIntegrationArgs{
-// 			ClusterId:  pulumi.String("cls-bmuaukfu"),
-// 			Content:    pulumi.String("{\"name\":\"test\",\"kind\":\"blackbox-exporter\",\"spec\":{\"instanceSpec\":{\"module\":\"http_get\",\"urls\":[\"xx\"]}}}"),
-// 			InstanceId: pulumi.String("prom-dko9d0nu"),
-// 			Kind:       pulumi.String("blackbox-exporter"),
-// 			KubeType:   pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.NewTmpExporterIntegration(ctx, "tmpExporterIntegration", &Monitor.TmpExporterIntegrationArgs{
+//				ClusterId:  pulumi.String("cls-bmuaukfu"),
+//				Content:    pulumi.String("{\"name\":\"test\",\"kind\":\"blackbox-exporter\",\"spec\":{\"instanceSpec\":{\"module\":\"http_get\",\"urls\":[\"xx\"]}}}"),
+//				InstanceId: pulumi.String("prom-dko9d0nu"),
+//				Kind:       pulumi.String("blackbox-exporter"),
+//				KubeType:   pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Use es-exporter
 //
@@ -48,53 +51,56 @@ import (
 // package main
 //
 // import (
-// 	"encoding/json"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"name": "ex-exporter-example",
-// 			"kind": "es-exporter",
-// 			"spec": map[string]interface{}{
-// 				"instanceSpec": map[string]interface{}{
-// 					"url": "http://127.0.0.1:9123",
-// 					"labels": map[string]interface{}{
-// 						"instance": "es-abcd",
-// 					},
-// 					"version":  "1.70.1",
-// 					"user":     "fugiat Duis minim",
-// 					"password": "exercitation cillum velit",
-// 				},
-// 				"exporterSpec": map[string]interface{}{
-// 					"all":             true,
-// 					"indicesSettings": false,
-// 					"snapshots":       false,
-// 					"indices":         true,
-// 					"shards":          false,
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		_, err := Monitor.NewTmpExporterIntegration(ctx, "tmpExporterIntegrationEs", &Monitor.TmpExporterIntegrationArgs{
-// 			InstanceId: pulumi.Any(tencentcloud_monitor_tmp_instance.TmpInstance.Id),
-// 			Kind:       pulumi.String("es-exporter"),
-// 			Content:    pulumi.String(json0),
-// 			ClusterId:  pulumi.String(""),
-// 			KubeType:   pulumi.Int(3),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"name": "ex-exporter-example",
+//				"kind": "es-exporter",
+//				"spec": map[string]interface{}{
+//					"instanceSpec": map[string]interface{}{
+//						"url": "http://127.0.0.1:9123",
+//						"labels": map[string]interface{}{
+//							"instance": "es-abcd",
+//						},
+//						"version":  "1.70.1",
+//						"user":     "fugiat Duis minim",
+//						"password": "exercitation cillum velit",
+//					},
+//					"exporterSpec": map[string]interface{}{
+//						"all":             true,
+//						"indicesSettings": false,
+//						"snapshots":       false,
+//						"indices":         true,
+//						"shards":          false,
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err := Monitor.NewTmpExporterIntegration(ctx, "tmpExporterIntegrationEs", &Monitor.TmpExporterIntegrationArgs{
+//				InstanceId: pulumi.Any(tencentcloud_monitor_tmp_instance.TmpInstance.Id),
+//				Kind:       pulumi.String("es-exporter"),
+//				Content:    pulumi.String(json0),
+//				ClusterId:  pulumi.String(""),
+//				KubeType:   pulumi.Int(3),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type TmpExporterIntegration struct {
 	pulumi.CustomResourceState
@@ -238,7 +244,7 @@ func (i *TmpExporterIntegration) ToTmpExporterIntegrationOutputWithContext(ctx c
 // TmpExporterIntegrationArrayInput is an input type that accepts TmpExporterIntegrationArray and TmpExporterIntegrationArrayOutput values.
 // You can construct a concrete instance of `TmpExporterIntegrationArrayInput` via:
 //
-//          TmpExporterIntegrationArray{ TmpExporterIntegrationArgs{...} }
+//	TmpExporterIntegrationArray{ TmpExporterIntegrationArgs{...} }
 type TmpExporterIntegrationArrayInput interface {
 	pulumi.Input
 
@@ -263,7 +269,7 @@ func (i TmpExporterIntegrationArray) ToTmpExporterIntegrationArrayOutputWithCont
 // TmpExporterIntegrationMapInput is an input type that accepts TmpExporterIntegrationMap and TmpExporterIntegrationMapOutput values.
 // You can construct a concrete instance of `TmpExporterIntegrationMapInput` via:
 //
-//          TmpExporterIntegrationMap{ "key": TmpExporterIntegrationArgs{...} }
+//	TmpExporterIntegrationMap{ "key": TmpExporterIntegrationArgs{...} }
 type TmpExporterIntegrationMapInput interface {
 	pulumi.Input
 

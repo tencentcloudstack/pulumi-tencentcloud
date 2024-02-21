@@ -24,7 +24,7 @@ type AlarmNoticeClsNotice struct {
 // AlarmNoticeClsNoticeInput is an input type that accepts AlarmNoticeClsNoticeArgs and AlarmNoticeClsNoticeOutput values.
 // You can construct a concrete instance of `AlarmNoticeClsNoticeInput` via:
 //
-//          AlarmNoticeClsNoticeArgs{...}
+//	AlarmNoticeClsNoticeArgs{...}
 type AlarmNoticeClsNoticeInput interface {
 	pulumi.Input
 
@@ -58,7 +58,7 @@ func (i AlarmNoticeClsNoticeArgs) ToAlarmNoticeClsNoticeOutputWithContext(ctx co
 // AlarmNoticeClsNoticeArrayInput is an input type that accepts AlarmNoticeClsNoticeArray and AlarmNoticeClsNoticeArrayOutput values.
 // You can construct a concrete instance of `AlarmNoticeClsNoticeArrayInput` via:
 //
-//          AlarmNoticeClsNoticeArray{ AlarmNoticeClsNoticeArgs{...} }
+//	AlarmNoticeClsNoticeArray{ AlarmNoticeClsNoticeArgs{...} }
 type AlarmNoticeClsNoticeArrayInput interface {
 	pulumi.Input
 
@@ -152,7 +152,7 @@ type AlarmNoticeUrlNotice struct {
 // AlarmNoticeUrlNoticeInput is an input type that accepts AlarmNoticeUrlNoticeArgs and AlarmNoticeUrlNoticeOutput values.
 // You can construct a concrete instance of `AlarmNoticeUrlNoticeInput` via:
 //
-//          AlarmNoticeUrlNoticeArgs{...}
+//	AlarmNoticeUrlNoticeArgs{...}
 type AlarmNoticeUrlNoticeInput interface {
 	pulumi.Input
 
@@ -190,7 +190,7 @@ func (i AlarmNoticeUrlNoticeArgs) ToAlarmNoticeUrlNoticeOutputWithContext(ctx co
 // AlarmNoticeUrlNoticeArrayInput is an input type that accepts AlarmNoticeUrlNoticeArray and AlarmNoticeUrlNoticeArrayOutput values.
 // You can construct a concrete instance of `AlarmNoticeUrlNoticeArrayInput` via:
 //
-//          AlarmNoticeUrlNoticeArray{ AlarmNoticeUrlNoticeArgs{...} }
+//	AlarmNoticeUrlNoticeArray{ AlarmNoticeUrlNoticeArgs{...} }
 type AlarmNoticeUrlNoticeArrayInput interface {
 	pulumi.Input
 
@@ -308,7 +308,7 @@ type AlarmNoticeUserNotice struct {
 // AlarmNoticeUserNoticeInput is an input type that accepts AlarmNoticeUserNoticeArgs and AlarmNoticeUserNoticeOutput values.
 // You can construct a concrete instance of `AlarmNoticeUserNoticeInput` via:
 //
-//          AlarmNoticeUserNoticeArgs{...}
+//	AlarmNoticeUserNoticeArgs{...}
 type AlarmNoticeUserNoticeInput interface {
 	pulumi.Input
 
@@ -360,7 +360,7 @@ func (i AlarmNoticeUserNoticeArgs) ToAlarmNoticeUserNoticeOutputWithContext(ctx 
 // AlarmNoticeUserNoticeArrayInput is an input type that accepts AlarmNoticeUserNoticeArray and AlarmNoticeUserNoticeArrayOutput values.
 // You can construct a concrete instance of `AlarmNoticeUserNoticeArrayInput` via:
 //
-//          AlarmNoticeUserNoticeArray{ AlarmNoticeUserNoticeArgs{...} }
+//	AlarmNoticeUserNoticeArray{ AlarmNoticeUserNoticeArgs{...} }
 type AlarmNoticeUserNoticeArrayInput interface {
 	pulumi.Input
 
@@ -491,7 +491,7 @@ type AlarmPolicyConditions struct {
 // AlarmPolicyConditionsInput is an input type that accepts AlarmPolicyConditionsArgs and AlarmPolicyConditionsOutput values.
 // You can construct a concrete instance of `AlarmPolicyConditionsInput` via:
 //
-//          AlarmPolicyConditionsArgs{...}
+//	AlarmPolicyConditionsArgs{...}
 type AlarmPolicyConditionsInput interface {
 	pulumi.Input
 
@@ -529,11 +529,11 @@ func (i AlarmPolicyConditionsArgs) ToAlarmPolicyConditionsPtrOutputWithContext(c
 // AlarmPolicyConditionsPtrInput is an input type that accepts AlarmPolicyConditionsArgs, AlarmPolicyConditionsPtr and AlarmPolicyConditionsPtrOutput values.
 // You can construct a concrete instance of `AlarmPolicyConditionsPtrInput` via:
 //
-//          AlarmPolicyConditionsArgs{...}
+//	        AlarmPolicyConditionsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AlarmPolicyConditionsPtrInput interface {
 	pulumi.Input
 
@@ -665,7 +665,7 @@ type AlarmPolicyConditionsRule struct {
 // AlarmPolicyConditionsRuleInput is an input type that accepts AlarmPolicyConditionsRuleArgs and AlarmPolicyConditionsRuleOutput values.
 // You can construct a concrete instance of `AlarmPolicyConditionsRuleInput` via:
 //
-//          AlarmPolicyConditionsRuleArgs{...}
+//	AlarmPolicyConditionsRuleArgs{...}
 type AlarmPolicyConditionsRuleInput interface {
 	pulumi.Input
 
@@ -713,7 +713,7 @@ func (i AlarmPolicyConditionsRuleArgs) ToAlarmPolicyConditionsRuleOutputWithCont
 // AlarmPolicyConditionsRuleArrayInput is an input type that accepts AlarmPolicyConditionsRuleArray and AlarmPolicyConditionsRuleArrayOutput values.
 // You can construct a concrete instance of `AlarmPolicyConditionsRuleArrayInput` via:
 //
-//          AlarmPolicyConditionsRuleArray{ AlarmPolicyConditionsRuleArgs{...} }
+//	AlarmPolicyConditionsRuleArray{ AlarmPolicyConditionsRuleArgs{...} }
 type AlarmPolicyConditionsRuleArrayInput interface {
 	pulumi.Input
 
@@ -834,7 +834,7 @@ type AlarmPolicyConditionsRuleFilter struct {
 // AlarmPolicyConditionsRuleFilterInput is an input type that accepts AlarmPolicyConditionsRuleFilterArgs and AlarmPolicyConditionsRuleFilterOutput values.
 // You can construct a concrete instance of `AlarmPolicyConditionsRuleFilterInput` via:
 //
-//          AlarmPolicyConditionsRuleFilterArgs{...}
+//	AlarmPolicyConditionsRuleFilterArgs{...}
 type AlarmPolicyConditionsRuleFilterInput interface {
 	pulumi.Input
 
@@ -872,11 +872,11 @@ func (i AlarmPolicyConditionsRuleFilterArgs) ToAlarmPolicyConditionsRuleFilterPt
 // AlarmPolicyConditionsRuleFilterPtrInput is an input type that accepts AlarmPolicyConditionsRuleFilterArgs, AlarmPolicyConditionsRuleFilterPtr and AlarmPolicyConditionsRuleFilterPtrOutput values.
 // You can construct a concrete instance of `AlarmPolicyConditionsRuleFilterPtrInput` via:
 //
-//          AlarmPolicyConditionsRuleFilterArgs{...}
+//	        AlarmPolicyConditionsRuleFilterArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AlarmPolicyConditionsRuleFilterPtrInput interface {
 	pulumi.Input
 
@@ -1008,7 +1008,7 @@ type AlarmPolicyEventCondition struct {
 // AlarmPolicyEventConditionInput is an input type that accepts AlarmPolicyEventConditionArgs and AlarmPolicyEventConditionOutput values.
 // You can construct a concrete instance of `AlarmPolicyEventConditionInput` via:
 //
-//          AlarmPolicyEventConditionArgs{...}
+//	AlarmPolicyEventConditionArgs{...}
 type AlarmPolicyEventConditionInput interface {
 	pulumi.Input
 
@@ -1056,7 +1056,7 @@ func (i AlarmPolicyEventConditionArgs) ToAlarmPolicyEventConditionOutputWithCont
 // AlarmPolicyEventConditionArrayInput is an input type that accepts AlarmPolicyEventConditionArray and AlarmPolicyEventConditionArrayOutput values.
 // You can construct a concrete instance of `AlarmPolicyEventConditionArrayInput` via:
 //
-//          AlarmPolicyEventConditionArray{ AlarmPolicyEventConditionArgs{...} }
+//	AlarmPolicyEventConditionArray{ AlarmPolicyEventConditionArgs{...} }
 type AlarmPolicyEventConditionArrayInput interface {
 	pulumi.Input
 
@@ -1177,7 +1177,7 @@ type AlarmPolicyEventConditionFilter struct {
 // AlarmPolicyEventConditionFilterInput is an input type that accepts AlarmPolicyEventConditionFilterArgs and AlarmPolicyEventConditionFilterOutput values.
 // You can construct a concrete instance of `AlarmPolicyEventConditionFilterInput` via:
 //
-//          AlarmPolicyEventConditionFilterArgs{...}
+//	AlarmPolicyEventConditionFilterArgs{...}
 type AlarmPolicyEventConditionFilterInput interface {
 	pulumi.Input
 
@@ -1215,11 +1215,11 @@ func (i AlarmPolicyEventConditionFilterArgs) ToAlarmPolicyEventConditionFilterPt
 // AlarmPolicyEventConditionFilterPtrInput is an input type that accepts AlarmPolicyEventConditionFilterArgs, AlarmPolicyEventConditionFilterPtr and AlarmPolicyEventConditionFilterPtrOutput values.
 // You can construct a concrete instance of `AlarmPolicyEventConditionFilterPtrInput` via:
 //
-//          AlarmPolicyEventConditionFilterArgs{...}
+//	        AlarmPolicyEventConditionFilterArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AlarmPolicyEventConditionFilterPtrInput interface {
 	pulumi.Input
 
@@ -1333,7 +1333,7 @@ type AlarmPolicyFilter struct {
 // AlarmPolicyFilterInput is an input type that accepts AlarmPolicyFilterArgs and AlarmPolicyFilterOutput values.
 // You can construct a concrete instance of `AlarmPolicyFilterInput` via:
 //
-//          AlarmPolicyFilterArgs{...}
+//	AlarmPolicyFilterArgs{...}
 type AlarmPolicyFilterInput interface {
 	pulumi.Input
 
@@ -1371,11 +1371,11 @@ func (i AlarmPolicyFilterArgs) ToAlarmPolicyFilterPtrOutputWithContext(ctx conte
 // AlarmPolicyFilterPtrInput is an input type that accepts AlarmPolicyFilterArgs, AlarmPolicyFilterPtr and AlarmPolicyFilterPtrOutput values.
 // You can construct a concrete instance of `AlarmPolicyFilterPtrInput` via:
 //
-//          AlarmPolicyFilterArgs{...}
+//	        AlarmPolicyFilterArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AlarmPolicyFilterPtrInput interface {
 	pulumi.Input
 
@@ -1489,7 +1489,7 @@ type AlarmPolicyPolicyTag struct {
 // AlarmPolicyPolicyTagInput is an input type that accepts AlarmPolicyPolicyTagArgs and AlarmPolicyPolicyTagOutput values.
 // You can construct a concrete instance of `AlarmPolicyPolicyTagInput` via:
 //
-//          AlarmPolicyPolicyTagArgs{...}
+//	AlarmPolicyPolicyTagArgs{...}
 type AlarmPolicyPolicyTagInput interface {
 	pulumi.Input
 
@@ -1519,7 +1519,7 @@ func (i AlarmPolicyPolicyTagArgs) ToAlarmPolicyPolicyTagOutputWithContext(ctx co
 // AlarmPolicyPolicyTagArrayInput is an input type that accepts AlarmPolicyPolicyTagArray and AlarmPolicyPolicyTagArrayOutput values.
 // You can construct a concrete instance of `AlarmPolicyPolicyTagArrayInput` via:
 //
-//          AlarmPolicyPolicyTagArray{ AlarmPolicyPolicyTagArgs{...} }
+//	AlarmPolicyPolicyTagArray{ AlarmPolicyPolicyTagArgs{...} }
 type AlarmPolicyPolicyTagArrayInput interface {
 	pulumi.Input
 
@@ -1595,7 +1595,7 @@ type AlarmPolicyTriggerTask struct {
 // AlarmPolicyTriggerTaskInput is an input type that accepts AlarmPolicyTriggerTaskArgs and AlarmPolicyTriggerTaskOutput values.
 // You can construct a concrete instance of `AlarmPolicyTriggerTaskInput` via:
 //
-//          AlarmPolicyTriggerTaskArgs{...}
+//	AlarmPolicyTriggerTaskArgs{...}
 type AlarmPolicyTriggerTaskInput interface {
 	pulumi.Input
 
@@ -1625,7 +1625,7 @@ func (i AlarmPolicyTriggerTaskArgs) ToAlarmPolicyTriggerTaskOutputWithContext(ct
 // AlarmPolicyTriggerTaskArrayInput is an input type that accepts AlarmPolicyTriggerTaskArray and AlarmPolicyTriggerTaskArrayOutput values.
 // You can construct a concrete instance of `AlarmPolicyTriggerTaskArrayInput` via:
 //
-//          AlarmPolicyTriggerTaskArray{ AlarmPolicyTriggerTaskArgs{...} }
+//	AlarmPolicyTriggerTaskArray{ AlarmPolicyTriggerTaskArgs{...} }
 type AlarmPolicyTriggerTaskArrayInput interface {
 	pulumi.Input
 
@@ -1711,7 +1711,7 @@ type BindingReceiverReceivers struct {
 // BindingReceiverReceiversInput is an input type that accepts BindingReceiverReceiversArgs and BindingReceiverReceiversOutput values.
 // You can construct a concrete instance of `BindingReceiverReceiversInput` via:
 //
-//          BindingReceiverReceiversArgs{...}
+//	BindingReceiverReceiversArgs{...}
 type BindingReceiverReceiversInput interface {
 	pulumi.Input
 
@@ -1759,11 +1759,11 @@ func (i BindingReceiverReceiversArgs) ToBindingReceiverReceiversPtrOutputWithCon
 // BindingReceiverReceiversPtrInput is an input type that accepts BindingReceiverReceiversArgs, BindingReceiverReceiversPtr and BindingReceiverReceiversPtrOutput values.
 // You can construct a concrete instance of `BindingReceiverReceiversPtrInput` via:
 //
-//          BindingReceiverReceiversArgs{...}
+//	        BindingReceiverReceiversArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type BindingReceiverReceiversPtrInput interface {
 	pulumi.Input
 
@@ -1952,7 +1952,7 @@ type GrafanaSsoAccountRole struct {
 // GrafanaSsoAccountRoleInput is an input type that accepts GrafanaSsoAccountRoleArgs and GrafanaSsoAccountRoleOutput values.
 // You can construct a concrete instance of `GrafanaSsoAccountRoleInput` via:
 //
-//          GrafanaSsoAccountRoleArgs{...}
+//	GrafanaSsoAccountRoleArgs{...}
 type GrafanaSsoAccountRoleInput interface {
 	pulumi.Input
 
@@ -1982,7 +1982,7 @@ func (i GrafanaSsoAccountRoleArgs) ToGrafanaSsoAccountRoleOutputWithContext(ctx 
 // GrafanaSsoAccountRoleArrayInput is an input type that accepts GrafanaSsoAccountRoleArray and GrafanaSsoAccountRoleArrayOutput values.
 // You can construct a concrete instance of `GrafanaSsoAccountRoleArrayInput` via:
 //
-//          GrafanaSsoAccountRoleArray{ GrafanaSsoAccountRoleArgs{...} }
+//	GrafanaSsoAccountRoleArray{ GrafanaSsoAccountRoleArgs{...} }
 type GrafanaSsoAccountRoleArrayInput interface {
 	pulumi.Input
 
@@ -2057,7 +2057,7 @@ type PolicyBindingObjectDimension struct {
 // PolicyBindingObjectDimensionInput is an input type that accepts PolicyBindingObjectDimensionArgs and PolicyBindingObjectDimensionOutput values.
 // You can construct a concrete instance of `PolicyBindingObjectDimensionInput` via:
 //
-//          PolicyBindingObjectDimensionArgs{...}
+//	PolicyBindingObjectDimensionArgs{...}
 type PolicyBindingObjectDimensionInput interface {
 	pulumi.Input
 
@@ -2086,7 +2086,7 @@ func (i PolicyBindingObjectDimensionArgs) ToPolicyBindingObjectDimensionOutputWi
 // PolicyBindingObjectDimensionArrayInput is an input type that accepts PolicyBindingObjectDimensionArray and PolicyBindingObjectDimensionArrayOutput values.
 // You can construct a concrete instance of `PolicyBindingObjectDimensionArrayInput` via:
 //
-//          PolicyBindingObjectDimensionArray{ PolicyBindingObjectDimensionArgs{...} }
+//	PolicyBindingObjectDimensionArray{ PolicyBindingObjectDimensionArgs{...} }
 type PolicyBindingObjectDimensionArrayInput interface {
 	pulumi.Input
 
@@ -2151,6 +2151,469 @@ func (o PolicyBindingObjectDimensionArrayOutput) Index(i pulumi.IntInput) Policy
 	}).(PolicyBindingObjectDimensionOutput)
 }
 
+type TmpAlertGroupCustomReceiver struct {
+	// Time ranges which allow alert message send.
+	AllowedTimeRanges []TmpAlertGroupCustomReceiverAllowedTimeRange `pulumi:"allowedTimeRanges"`
+	// Only effect when alertmanager in user cluster, this cluster id.
+	ClusterId *string `pulumi:"clusterId"`
+	// Only effect when alertmanager in user cluster, this cluster type (tke|eks|tdcc).
+	ClusterType *string `pulumi:"clusterType"`
+	// Custom receiver type, webhook|alertmanager.
+	Type *string `pulumi:"type"`
+	// Custom receiver address, can be accessed by process in prometheus instance subnet.
+	Url *string `pulumi:"url"`
+}
+
+// TmpAlertGroupCustomReceiverInput is an input type that accepts TmpAlertGroupCustomReceiverArgs and TmpAlertGroupCustomReceiverOutput values.
+// You can construct a concrete instance of `TmpAlertGroupCustomReceiverInput` via:
+//
+//	TmpAlertGroupCustomReceiverArgs{...}
+type TmpAlertGroupCustomReceiverInput interface {
+	pulumi.Input
+
+	ToTmpAlertGroupCustomReceiverOutput() TmpAlertGroupCustomReceiverOutput
+	ToTmpAlertGroupCustomReceiverOutputWithContext(context.Context) TmpAlertGroupCustomReceiverOutput
+}
+
+type TmpAlertGroupCustomReceiverArgs struct {
+	// Time ranges which allow alert message send.
+	AllowedTimeRanges TmpAlertGroupCustomReceiverAllowedTimeRangeArrayInput `pulumi:"allowedTimeRanges"`
+	// Only effect when alertmanager in user cluster, this cluster id.
+	ClusterId pulumi.StringPtrInput `pulumi:"clusterId"`
+	// Only effect when alertmanager in user cluster, this cluster type (tke|eks|tdcc).
+	ClusterType pulumi.StringPtrInput `pulumi:"clusterType"`
+	// Custom receiver type, webhook|alertmanager.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+	// Custom receiver address, can be accessed by process in prometheus instance subnet.
+	Url pulumi.StringPtrInput `pulumi:"url"`
+}
+
+func (TmpAlertGroupCustomReceiverArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpAlertGroupCustomReceiver)(nil)).Elem()
+}
+
+func (i TmpAlertGroupCustomReceiverArgs) ToTmpAlertGroupCustomReceiverOutput() TmpAlertGroupCustomReceiverOutput {
+	return i.ToTmpAlertGroupCustomReceiverOutputWithContext(context.Background())
+}
+
+func (i TmpAlertGroupCustomReceiverArgs) ToTmpAlertGroupCustomReceiverOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertGroupCustomReceiverOutput)
+}
+
+func (i TmpAlertGroupCustomReceiverArgs) ToTmpAlertGroupCustomReceiverPtrOutput() TmpAlertGroupCustomReceiverPtrOutput {
+	return i.ToTmpAlertGroupCustomReceiverPtrOutputWithContext(context.Background())
+}
+
+func (i TmpAlertGroupCustomReceiverArgs) ToTmpAlertGroupCustomReceiverPtrOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertGroupCustomReceiverOutput).ToTmpAlertGroupCustomReceiverPtrOutputWithContext(ctx)
+}
+
+// TmpAlertGroupCustomReceiverPtrInput is an input type that accepts TmpAlertGroupCustomReceiverArgs, TmpAlertGroupCustomReceiverPtr and TmpAlertGroupCustomReceiverPtrOutput values.
+// You can construct a concrete instance of `TmpAlertGroupCustomReceiverPtrInput` via:
+//
+//	        TmpAlertGroupCustomReceiverArgs{...}
+//
+//	or:
+//
+//	        nil
+type TmpAlertGroupCustomReceiverPtrInput interface {
+	pulumi.Input
+
+	ToTmpAlertGroupCustomReceiverPtrOutput() TmpAlertGroupCustomReceiverPtrOutput
+	ToTmpAlertGroupCustomReceiverPtrOutputWithContext(context.Context) TmpAlertGroupCustomReceiverPtrOutput
+}
+
+type tmpAlertGroupCustomReceiverPtrType TmpAlertGroupCustomReceiverArgs
+
+func TmpAlertGroupCustomReceiverPtr(v *TmpAlertGroupCustomReceiverArgs) TmpAlertGroupCustomReceiverPtrInput {
+	return (*tmpAlertGroupCustomReceiverPtrType)(v)
+}
+
+func (*tmpAlertGroupCustomReceiverPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpAlertGroupCustomReceiver)(nil)).Elem()
+}
+
+func (i *tmpAlertGroupCustomReceiverPtrType) ToTmpAlertGroupCustomReceiverPtrOutput() TmpAlertGroupCustomReceiverPtrOutput {
+	return i.ToTmpAlertGroupCustomReceiverPtrOutputWithContext(context.Background())
+}
+
+func (i *tmpAlertGroupCustomReceiverPtrType) ToTmpAlertGroupCustomReceiverPtrOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertGroupCustomReceiverPtrOutput)
+}
+
+type TmpAlertGroupCustomReceiverOutput struct{ *pulumi.OutputState }
+
+func (TmpAlertGroupCustomReceiverOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpAlertGroupCustomReceiver)(nil)).Elem()
+}
+
+func (o TmpAlertGroupCustomReceiverOutput) ToTmpAlertGroupCustomReceiverOutput() TmpAlertGroupCustomReceiverOutput {
+	return o
+}
+
+func (o TmpAlertGroupCustomReceiverOutput) ToTmpAlertGroupCustomReceiverOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverOutput {
+	return o
+}
+
+func (o TmpAlertGroupCustomReceiverOutput) ToTmpAlertGroupCustomReceiverPtrOutput() TmpAlertGroupCustomReceiverPtrOutput {
+	return o.ToTmpAlertGroupCustomReceiverPtrOutputWithContext(context.Background())
+}
+
+func (o TmpAlertGroupCustomReceiverOutput) ToTmpAlertGroupCustomReceiverPtrOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TmpAlertGroupCustomReceiver) *TmpAlertGroupCustomReceiver {
+		return &v
+	}).(TmpAlertGroupCustomReceiverPtrOutput)
+}
+
+// Time ranges which allow alert message send.
+func (o TmpAlertGroupCustomReceiverOutput) AllowedTimeRanges() TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput {
+	return o.ApplyT(func(v TmpAlertGroupCustomReceiver) []TmpAlertGroupCustomReceiverAllowedTimeRange {
+		return v.AllowedTimeRanges
+	}).(TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput)
+}
+
+// Only effect when alertmanager in user cluster, this cluster id.
+func (o TmpAlertGroupCustomReceiverOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupCustomReceiver) *string { return v.ClusterId }).(pulumi.StringPtrOutput)
+}
+
+// Only effect when alertmanager in user cluster, this cluster type (tke|eks|tdcc).
+func (o TmpAlertGroupCustomReceiverOutput) ClusterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupCustomReceiver) *string { return v.ClusterType }).(pulumi.StringPtrOutput)
+}
+
+// Custom receiver type, webhook|alertmanager.
+func (o TmpAlertGroupCustomReceiverOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupCustomReceiver) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+// Custom receiver address, can be accessed by process in prometheus instance subnet.
+func (o TmpAlertGroupCustomReceiverOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupCustomReceiver) *string { return v.Url }).(pulumi.StringPtrOutput)
+}
+
+type TmpAlertGroupCustomReceiverPtrOutput struct{ *pulumi.OutputState }
+
+func (TmpAlertGroupCustomReceiverPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TmpAlertGroupCustomReceiver)(nil)).Elem()
+}
+
+func (o TmpAlertGroupCustomReceiverPtrOutput) ToTmpAlertGroupCustomReceiverPtrOutput() TmpAlertGroupCustomReceiverPtrOutput {
+	return o
+}
+
+func (o TmpAlertGroupCustomReceiverPtrOutput) ToTmpAlertGroupCustomReceiverPtrOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverPtrOutput {
+	return o
+}
+
+func (o TmpAlertGroupCustomReceiverPtrOutput) Elem() TmpAlertGroupCustomReceiverOutput {
+	return o.ApplyT(func(v *TmpAlertGroupCustomReceiver) TmpAlertGroupCustomReceiver {
+		if v != nil {
+			return *v
+		}
+		var ret TmpAlertGroupCustomReceiver
+		return ret
+	}).(TmpAlertGroupCustomReceiverOutput)
+}
+
+// Time ranges which allow alert message send.
+func (o TmpAlertGroupCustomReceiverPtrOutput) AllowedTimeRanges() TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput {
+	return o.ApplyT(func(v *TmpAlertGroupCustomReceiver) []TmpAlertGroupCustomReceiverAllowedTimeRange {
+		if v == nil {
+			return nil
+		}
+		return v.AllowedTimeRanges
+	}).(TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput)
+}
+
+// Only effect when alertmanager in user cluster, this cluster id.
+func (o TmpAlertGroupCustomReceiverPtrOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpAlertGroupCustomReceiver) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClusterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Only effect when alertmanager in user cluster, this cluster type (tke|eks|tdcc).
+func (o TmpAlertGroupCustomReceiverPtrOutput) ClusterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpAlertGroupCustomReceiver) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClusterType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Custom receiver type, webhook|alertmanager.
+func (o TmpAlertGroupCustomReceiverPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpAlertGroupCustomReceiver) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+// Custom receiver address, can be accessed by process in prometheus instance subnet.
+func (o TmpAlertGroupCustomReceiverPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TmpAlertGroupCustomReceiver) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type TmpAlertGroupCustomReceiverAllowedTimeRange struct {
+	// Time range end, seconds since 0 o'clock.
+	End *string `pulumi:"end"`
+	// Time range start, seconds since 0 o'clock.
+	Start *string `pulumi:"start"`
+}
+
+// TmpAlertGroupCustomReceiverAllowedTimeRangeInput is an input type that accepts TmpAlertGroupCustomReceiverAllowedTimeRangeArgs and TmpAlertGroupCustomReceiverAllowedTimeRangeOutput values.
+// You can construct a concrete instance of `TmpAlertGroupCustomReceiverAllowedTimeRangeInput` via:
+//
+//	TmpAlertGroupCustomReceiverAllowedTimeRangeArgs{...}
+type TmpAlertGroupCustomReceiverAllowedTimeRangeInput interface {
+	pulumi.Input
+
+	ToTmpAlertGroupCustomReceiverAllowedTimeRangeOutput() TmpAlertGroupCustomReceiverAllowedTimeRangeOutput
+	ToTmpAlertGroupCustomReceiverAllowedTimeRangeOutputWithContext(context.Context) TmpAlertGroupCustomReceiverAllowedTimeRangeOutput
+}
+
+type TmpAlertGroupCustomReceiverAllowedTimeRangeArgs struct {
+	// Time range end, seconds since 0 o'clock.
+	End pulumi.StringPtrInput `pulumi:"end"`
+	// Time range start, seconds since 0 o'clock.
+	Start pulumi.StringPtrInput `pulumi:"start"`
+}
+
+func (TmpAlertGroupCustomReceiverAllowedTimeRangeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpAlertGroupCustomReceiverAllowedTimeRange)(nil)).Elem()
+}
+
+func (i TmpAlertGroupCustomReceiverAllowedTimeRangeArgs) ToTmpAlertGroupCustomReceiverAllowedTimeRangeOutput() TmpAlertGroupCustomReceiverAllowedTimeRangeOutput {
+	return i.ToTmpAlertGroupCustomReceiverAllowedTimeRangeOutputWithContext(context.Background())
+}
+
+func (i TmpAlertGroupCustomReceiverAllowedTimeRangeArgs) ToTmpAlertGroupCustomReceiverAllowedTimeRangeOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverAllowedTimeRangeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertGroupCustomReceiverAllowedTimeRangeOutput)
+}
+
+// TmpAlertGroupCustomReceiverAllowedTimeRangeArrayInput is an input type that accepts TmpAlertGroupCustomReceiverAllowedTimeRangeArray and TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput values.
+// You can construct a concrete instance of `TmpAlertGroupCustomReceiverAllowedTimeRangeArrayInput` via:
+//
+//	TmpAlertGroupCustomReceiverAllowedTimeRangeArray{ TmpAlertGroupCustomReceiverAllowedTimeRangeArgs{...} }
+type TmpAlertGroupCustomReceiverAllowedTimeRangeArrayInput interface {
+	pulumi.Input
+
+	ToTmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput() TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput
+	ToTmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutputWithContext(context.Context) TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput
+}
+
+type TmpAlertGroupCustomReceiverAllowedTimeRangeArray []TmpAlertGroupCustomReceiverAllowedTimeRangeInput
+
+func (TmpAlertGroupCustomReceiverAllowedTimeRangeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpAlertGroupCustomReceiverAllowedTimeRange)(nil)).Elem()
+}
+
+func (i TmpAlertGroupCustomReceiverAllowedTimeRangeArray) ToTmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput() TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput {
+	return i.ToTmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutputWithContext(context.Background())
+}
+
+func (i TmpAlertGroupCustomReceiverAllowedTimeRangeArray) ToTmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput)
+}
+
+type TmpAlertGroupCustomReceiverAllowedTimeRangeOutput struct{ *pulumi.OutputState }
+
+func (TmpAlertGroupCustomReceiverAllowedTimeRangeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpAlertGroupCustomReceiverAllowedTimeRange)(nil)).Elem()
+}
+
+func (o TmpAlertGroupCustomReceiverAllowedTimeRangeOutput) ToTmpAlertGroupCustomReceiverAllowedTimeRangeOutput() TmpAlertGroupCustomReceiverAllowedTimeRangeOutput {
+	return o
+}
+
+func (o TmpAlertGroupCustomReceiverAllowedTimeRangeOutput) ToTmpAlertGroupCustomReceiverAllowedTimeRangeOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverAllowedTimeRangeOutput {
+	return o
+}
+
+// Time range end, seconds since 0 o'clock.
+func (o TmpAlertGroupCustomReceiverAllowedTimeRangeOutput) End() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupCustomReceiverAllowedTimeRange) *string { return v.End }).(pulumi.StringPtrOutput)
+}
+
+// Time range start, seconds since 0 o'clock.
+func (o TmpAlertGroupCustomReceiverAllowedTimeRangeOutput) Start() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupCustomReceiverAllowedTimeRange) *string { return v.Start }).(pulumi.StringPtrOutput)
+}
+
+type TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpAlertGroupCustomReceiverAllowedTimeRange)(nil)).Elem()
+}
+
+func (o TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput) ToTmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput() TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput {
+	return o
+}
+
+func (o TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput) ToTmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutputWithContext(ctx context.Context) TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput {
+	return o
+}
+
+func (o TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput) Index(i pulumi.IntInput) TmpAlertGroupCustomReceiverAllowedTimeRangeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpAlertGroupCustomReceiverAllowedTimeRange {
+		return vs[0].([]TmpAlertGroupCustomReceiverAllowedTimeRange)[vs[1].(int)]
+	}).(TmpAlertGroupCustomReceiverAllowedTimeRangeOutput)
+}
+
+type TmpAlertGroupRule struct {
+	// Annotation of alert rule. `summary`, `description` is special annotation in prometheus, mapping `Alarm Object`, `Alarm Information` in alarm message.
+	Annotations map[string]interface{} `pulumi:"annotations"`
+	// Rule alarm duration.
+	Duration *string `pulumi:"duration"`
+	// Prometheus alert expression.
+	Expr *string `pulumi:"expr"`
+	// Labels of alert rule.
+	Labels map[string]interface{} `pulumi:"labels"`
+	// Alert rule name.
+	RuleName *string `pulumi:"ruleName"`
+	// Rule state. `2`-enable, `3`-disable, default `2`.
+	State *int `pulumi:"state"`
+}
+
+// TmpAlertGroupRuleInput is an input type that accepts TmpAlertGroupRuleArgs and TmpAlertGroupRuleOutput values.
+// You can construct a concrete instance of `TmpAlertGroupRuleInput` via:
+//
+//	TmpAlertGroupRuleArgs{...}
+type TmpAlertGroupRuleInput interface {
+	pulumi.Input
+
+	ToTmpAlertGroupRuleOutput() TmpAlertGroupRuleOutput
+	ToTmpAlertGroupRuleOutputWithContext(context.Context) TmpAlertGroupRuleOutput
+}
+
+type TmpAlertGroupRuleArgs struct {
+	// Annotation of alert rule. `summary`, `description` is special annotation in prometheus, mapping `Alarm Object`, `Alarm Information` in alarm message.
+	Annotations pulumi.MapInput `pulumi:"annotations"`
+	// Rule alarm duration.
+	Duration pulumi.StringPtrInput `pulumi:"duration"`
+	// Prometheus alert expression.
+	Expr pulumi.StringPtrInput `pulumi:"expr"`
+	// Labels of alert rule.
+	Labels pulumi.MapInput `pulumi:"labels"`
+	// Alert rule name.
+	RuleName pulumi.StringPtrInput `pulumi:"ruleName"`
+	// Rule state. `2`-enable, `3`-disable, default `2`.
+	State pulumi.IntPtrInput `pulumi:"state"`
+}
+
+func (TmpAlertGroupRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpAlertGroupRule)(nil)).Elem()
+}
+
+func (i TmpAlertGroupRuleArgs) ToTmpAlertGroupRuleOutput() TmpAlertGroupRuleOutput {
+	return i.ToTmpAlertGroupRuleOutputWithContext(context.Background())
+}
+
+func (i TmpAlertGroupRuleArgs) ToTmpAlertGroupRuleOutputWithContext(ctx context.Context) TmpAlertGroupRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertGroupRuleOutput)
+}
+
+// TmpAlertGroupRuleArrayInput is an input type that accepts TmpAlertGroupRuleArray and TmpAlertGroupRuleArrayOutput values.
+// You can construct a concrete instance of `TmpAlertGroupRuleArrayInput` via:
+//
+//	TmpAlertGroupRuleArray{ TmpAlertGroupRuleArgs{...} }
+type TmpAlertGroupRuleArrayInput interface {
+	pulumi.Input
+
+	ToTmpAlertGroupRuleArrayOutput() TmpAlertGroupRuleArrayOutput
+	ToTmpAlertGroupRuleArrayOutputWithContext(context.Context) TmpAlertGroupRuleArrayOutput
+}
+
+type TmpAlertGroupRuleArray []TmpAlertGroupRuleInput
+
+func (TmpAlertGroupRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpAlertGroupRule)(nil)).Elem()
+}
+
+func (i TmpAlertGroupRuleArray) ToTmpAlertGroupRuleArrayOutput() TmpAlertGroupRuleArrayOutput {
+	return i.ToTmpAlertGroupRuleArrayOutputWithContext(context.Background())
+}
+
+func (i TmpAlertGroupRuleArray) ToTmpAlertGroupRuleArrayOutputWithContext(ctx context.Context) TmpAlertGroupRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TmpAlertGroupRuleArrayOutput)
+}
+
+type TmpAlertGroupRuleOutput struct{ *pulumi.OutputState }
+
+func (TmpAlertGroupRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TmpAlertGroupRule)(nil)).Elem()
+}
+
+func (o TmpAlertGroupRuleOutput) ToTmpAlertGroupRuleOutput() TmpAlertGroupRuleOutput {
+	return o
+}
+
+func (o TmpAlertGroupRuleOutput) ToTmpAlertGroupRuleOutputWithContext(ctx context.Context) TmpAlertGroupRuleOutput {
+	return o
+}
+
+// Annotation of alert rule. `summary`, `description` is special annotation in prometheus, mapping `Alarm Object`, `Alarm Information` in alarm message.
+func (o TmpAlertGroupRuleOutput) Annotations() pulumi.MapOutput {
+	return o.ApplyT(func(v TmpAlertGroupRule) map[string]interface{} { return v.Annotations }).(pulumi.MapOutput)
+}
+
+// Rule alarm duration.
+func (o TmpAlertGroupRuleOutput) Duration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupRule) *string { return v.Duration }).(pulumi.StringPtrOutput)
+}
+
+// Prometheus alert expression.
+func (o TmpAlertGroupRuleOutput) Expr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupRule) *string { return v.Expr }).(pulumi.StringPtrOutput)
+}
+
+// Labels of alert rule.
+func (o TmpAlertGroupRuleOutput) Labels() pulumi.MapOutput {
+	return o.ApplyT(func(v TmpAlertGroupRule) map[string]interface{} { return v.Labels }).(pulumi.MapOutput)
+}
+
+// Alert rule name.
+func (o TmpAlertGroupRuleOutput) RuleName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupRule) *string { return v.RuleName }).(pulumi.StringPtrOutput)
+}
+
+// Rule state. `2`-enable, `3`-disable, default `2`.
+func (o TmpAlertGroupRuleOutput) State() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TmpAlertGroupRule) *int { return v.State }).(pulumi.IntPtrOutput)
+}
+
+type TmpAlertGroupRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (TmpAlertGroupRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TmpAlertGroupRule)(nil)).Elem()
+}
+
+func (o TmpAlertGroupRuleArrayOutput) ToTmpAlertGroupRuleArrayOutput() TmpAlertGroupRuleArrayOutput {
+	return o
+}
+
+func (o TmpAlertGroupRuleArrayOutput) ToTmpAlertGroupRuleArrayOutputWithContext(ctx context.Context) TmpAlertGroupRuleArrayOutput {
+	return o
+}
+
+func (o TmpAlertGroupRuleArrayOutput) Index(i pulumi.IntInput) TmpAlertGroupRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TmpAlertGroupRule {
+		return vs[0].([]TmpAlertGroupRule)[vs[1].(int)]
+	}).(TmpAlertGroupRuleOutput)
+}
+
 type TmpAlertRuleAnnotation struct {
 	// key.
 	Key string `pulumi:"key"`
@@ -2161,7 +2624,7 @@ type TmpAlertRuleAnnotation struct {
 // TmpAlertRuleAnnotationInput is an input type that accepts TmpAlertRuleAnnotationArgs and TmpAlertRuleAnnotationOutput values.
 // You can construct a concrete instance of `TmpAlertRuleAnnotationInput` via:
 //
-//          TmpAlertRuleAnnotationArgs{...}
+//	TmpAlertRuleAnnotationArgs{...}
 type TmpAlertRuleAnnotationInput interface {
 	pulumi.Input
 
@@ -2191,7 +2654,7 @@ func (i TmpAlertRuleAnnotationArgs) ToTmpAlertRuleAnnotationOutputWithContext(ct
 // TmpAlertRuleAnnotationArrayInput is an input type that accepts TmpAlertRuleAnnotationArray and TmpAlertRuleAnnotationArrayOutput values.
 // You can construct a concrete instance of `TmpAlertRuleAnnotationArrayInput` via:
 //
-//          TmpAlertRuleAnnotationArray{ TmpAlertRuleAnnotationArgs{...} }
+//	TmpAlertRuleAnnotationArray{ TmpAlertRuleAnnotationArgs{...} }
 type TmpAlertRuleAnnotationArrayInput interface {
 	pulumi.Input
 
@@ -2267,7 +2730,7 @@ type TmpAlertRuleLabel struct {
 // TmpAlertRuleLabelInput is an input type that accepts TmpAlertRuleLabelArgs and TmpAlertRuleLabelOutput values.
 // You can construct a concrete instance of `TmpAlertRuleLabelInput` via:
 //
-//          TmpAlertRuleLabelArgs{...}
+//	TmpAlertRuleLabelArgs{...}
 type TmpAlertRuleLabelInput interface {
 	pulumi.Input
 
@@ -2297,7 +2760,7 @@ func (i TmpAlertRuleLabelArgs) ToTmpAlertRuleLabelOutputWithContext(ctx context.
 // TmpAlertRuleLabelArrayInput is an input type that accepts TmpAlertRuleLabelArray and TmpAlertRuleLabelArrayOutput values.
 // You can construct a concrete instance of `TmpAlertRuleLabelArrayInput` via:
 //
-//          TmpAlertRuleLabelArray{ TmpAlertRuleLabelArgs{...} }
+//	TmpAlertRuleLabelArray{ TmpAlertRuleLabelArgs{...} }
 type TmpAlertRuleLabelArrayInput interface {
 	pulumi.Input
 
@@ -2383,7 +2846,7 @@ type TmpTkeAlertPolicyAlertRule struct {
 // TmpTkeAlertPolicyAlertRuleInput is an input type that accepts TmpTkeAlertPolicyAlertRuleArgs and TmpTkeAlertPolicyAlertRuleOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleInput` via:
 //
-//          TmpTkeAlertPolicyAlertRuleArgs{...}
+//	TmpTkeAlertPolicyAlertRuleArgs{...}
 type TmpTkeAlertPolicyAlertRuleInput interface {
 	pulumi.Input
 
@@ -2431,11 +2894,11 @@ func (i TmpTkeAlertPolicyAlertRuleArgs) ToTmpTkeAlertPolicyAlertRulePtrOutputWit
 // TmpTkeAlertPolicyAlertRulePtrInput is an input type that accepts TmpTkeAlertPolicyAlertRuleArgs, TmpTkeAlertPolicyAlertRulePtr and TmpTkeAlertPolicyAlertRulePtrOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRulePtrInput` via:
 //
-//          TmpTkeAlertPolicyAlertRuleArgs{...}
+//	        TmpTkeAlertPolicyAlertRuleArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type TmpTkeAlertPolicyAlertRulePtrInput interface {
 	pulumi.Input
 
@@ -2648,7 +3111,7 @@ type TmpTkeAlertPolicyAlertRuleNotification struct {
 // TmpTkeAlertPolicyAlertRuleNotificationInput is an input type that accepts TmpTkeAlertPolicyAlertRuleNotificationArgs and TmpTkeAlertPolicyAlertRuleNotificationOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleNotificationInput` via:
 //
-//          TmpTkeAlertPolicyAlertRuleNotificationArgs{...}
+//	TmpTkeAlertPolicyAlertRuleNotificationArgs{...}
 type TmpTkeAlertPolicyAlertRuleNotificationInput interface {
 	pulumi.Input
 
@@ -2710,11 +3173,11 @@ func (i TmpTkeAlertPolicyAlertRuleNotificationArgs) ToTmpTkeAlertPolicyAlertRule
 // TmpTkeAlertPolicyAlertRuleNotificationPtrInput is an input type that accepts TmpTkeAlertPolicyAlertRuleNotificationArgs, TmpTkeAlertPolicyAlertRuleNotificationPtr and TmpTkeAlertPolicyAlertRuleNotificationPtrOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleNotificationPtrInput` via:
 //
-//          TmpTkeAlertPolicyAlertRuleNotificationArgs{...}
+//	        TmpTkeAlertPolicyAlertRuleNotificationArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type TmpTkeAlertPolicyAlertRuleNotificationPtrInput interface {
 	pulumi.Input
 
@@ -3012,7 +3475,7 @@ type TmpTkeAlertPolicyAlertRuleNotificationAlertManager struct {
 // TmpTkeAlertPolicyAlertRuleNotificationAlertManagerInput is an input type that accepts TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs and TmpTkeAlertPolicyAlertRuleNotificationAlertManagerOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleNotificationAlertManagerInput` via:
 //
-//          TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs{...}
+//	TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs{...}
 type TmpTkeAlertPolicyAlertRuleNotificationAlertManagerInput interface {
 	pulumi.Input
 
@@ -3052,11 +3515,11 @@ func (i TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs) ToTmpTkeAlertPol
 // TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrInput is an input type that accepts TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs, TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtr and TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrInput` via:
 //
-//          TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs{...}
+//	        TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type TmpTkeAlertPolicyAlertRuleNotificationAlertManagerPtrInput interface {
 	pulumi.Input
 
@@ -3197,7 +3660,7 @@ type TmpTkeAlertPolicyAlertRuleRule struct {
 // TmpTkeAlertPolicyAlertRuleRuleInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleArgs and TmpTkeAlertPolicyAlertRuleRuleOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleInput` via:
 //
-//          TmpTkeAlertPolicyAlertRuleRuleArgs{...}
+//	TmpTkeAlertPolicyAlertRuleRuleArgs{...}
 type TmpTkeAlertPolicyAlertRuleRuleInput interface {
 	pulumi.Input
 
@@ -3239,7 +3702,7 @@ func (i TmpTkeAlertPolicyAlertRuleRuleArgs) ToTmpTkeAlertPolicyAlertRuleRuleOutp
 // TmpTkeAlertPolicyAlertRuleRuleArrayInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleArray and TmpTkeAlertPolicyAlertRuleRuleArrayOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleArrayInput` via:
 //
-//          TmpTkeAlertPolicyAlertRuleRuleArray{ TmpTkeAlertPolicyAlertRuleRuleArgs{...} }
+//	TmpTkeAlertPolicyAlertRuleRuleArray{ TmpTkeAlertPolicyAlertRuleRuleArgs{...} }
 type TmpTkeAlertPolicyAlertRuleRuleArrayInput interface {
 	pulumi.Input
 
@@ -3347,7 +3810,7 @@ type TmpTkeAlertPolicyAlertRuleRuleAnnotation struct {
 // TmpTkeAlertPolicyAlertRuleRuleAnnotationInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs and TmpTkeAlertPolicyAlertRuleRuleAnnotationOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleAnnotationInput` via:
 //
-//          TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs{...}
+//	TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs{...}
 type TmpTkeAlertPolicyAlertRuleRuleAnnotationInput interface {
 	pulumi.Input
 
@@ -3377,7 +3840,7 @@ func (i TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs) ToTmpTkeAlertPolicyAlertRu
 // TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleAnnotationArray and TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayInput` via:
 //
-//          TmpTkeAlertPolicyAlertRuleRuleAnnotationArray{ TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs{...} }
+//	TmpTkeAlertPolicyAlertRuleRuleAnnotationArray{ TmpTkeAlertPolicyAlertRuleRuleAnnotationArgs{...} }
 type TmpTkeAlertPolicyAlertRuleRuleAnnotationArrayInput interface {
 	pulumi.Input
 
@@ -3453,7 +3916,7 @@ type TmpTkeAlertPolicyAlertRuleRuleLabel struct {
 // TmpTkeAlertPolicyAlertRuleRuleLabelInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleLabelArgs and TmpTkeAlertPolicyAlertRuleRuleLabelOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleLabelInput` via:
 //
-//          TmpTkeAlertPolicyAlertRuleRuleLabelArgs{...}
+//	TmpTkeAlertPolicyAlertRuleRuleLabelArgs{...}
 type TmpTkeAlertPolicyAlertRuleRuleLabelInput interface {
 	pulumi.Input
 
@@ -3483,7 +3946,7 @@ func (i TmpTkeAlertPolicyAlertRuleRuleLabelArgs) ToTmpTkeAlertPolicyAlertRuleRul
 // TmpTkeAlertPolicyAlertRuleRuleLabelArrayInput is an input type that accepts TmpTkeAlertPolicyAlertRuleRuleLabelArray and TmpTkeAlertPolicyAlertRuleRuleLabelArrayOutput values.
 // You can construct a concrete instance of `TmpTkeAlertPolicyAlertRuleRuleLabelArrayInput` via:
 //
-//          TmpTkeAlertPolicyAlertRuleRuleLabelArray{ TmpTkeAlertPolicyAlertRuleRuleLabelArgs{...} }
+//	TmpTkeAlertPolicyAlertRuleRuleLabelArray{ TmpTkeAlertPolicyAlertRuleRuleLabelArgs{...} }
 type TmpTkeAlertPolicyAlertRuleRuleLabelArrayInput interface {
 	pulumi.Input
 
@@ -3573,7 +4036,7 @@ type TmpTkeClusterAgentAgents struct {
 // TmpTkeClusterAgentAgentsInput is an input type that accepts TmpTkeClusterAgentAgentsArgs and TmpTkeClusterAgentAgentsOutput values.
 // You can construct a concrete instance of `TmpTkeClusterAgentAgentsInput` via:
 //
-//          TmpTkeClusterAgentAgentsArgs{...}
+//	TmpTkeClusterAgentAgentsArgs{...}
 type TmpTkeClusterAgentAgentsInput interface {
 	pulumi.Input
 
@@ -3625,11 +4088,11 @@ func (i TmpTkeClusterAgentAgentsArgs) ToTmpTkeClusterAgentAgentsPtrOutputWithCon
 // TmpTkeClusterAgentAgentsPtrInput is an input type that accepts TmpTkeClusterAgentAgentsArgs, TmpTkeClusterAgentAgentsPtr and TmpTkeClusterAgentAgentsPtrOutput values.
 // You can construct a concrete instance of `TmpTkeClusterAgentAgentsPtrInput` via:
 //
-//          TmpTkeClusterAgentAgentsArgs{...}
+//	        TmpTkeClusterAgentAgentsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type TmpTkeClusterAgentAgentsPtrInput interface {
 	pulumi.Input
 
@@ -3861,7 +4324,7 @@ type TmpTkeClusterAgentAgentsExternalLabel struct {
 // TmpTkeClusterAgentAgentsExternalLabelInput is an input type that accepts TmpTkeClusterAgentAgentsExternalLabelArgs and TmpTkeClusterAgentAgentsExternalLabelOutput values.
 // You can construct a concrete instance of `TmpTkeClusterAgentAgentsExternalLabelInput` via:
 //
-//          TmpTkeClusterAgentAgentsExternalLabelArgs{...}
+//	TmpTkeClusterAgentAgentsExternalLabelArgs{...}
 type TmpTkeClusterAgentAgentsExternalLabelInput interface {
 	pulumi.Input
 
@@ -3891,7 +4354,7 @@ func (i TmpTkeClusterAgentAgentsExternalLabelArgs) ToTmpTkeClusterAgentAgentsExt
 // TmpTkeClusterAgentAgentsExternalLabelArrayInput is an input type that accepts TmpTkeClusterAgentAgentsExternalLabelArray and TmpTkeClusterAgentAgentsExternalLabelArrayOutput values.
 // You can construct a concrete instance of `TmpTkeClusterAgentAgentsExternalLabelArrayInput` via:
 //
-//          TmpTkeClusterAgentAgentsExternalLabelArray{ TmpTkeClusterAgentAgentsExternalLabelArgs{...} }
+//	TmpTkeClusterAgentAgentsExternalLabelArray{ TmpTkeClusterAgentAgentsExternalLabelArgs{...} }
 type TmpTkeClusterAgentAgentsExternalLabelArrayInput interface {
 	pulumi.Input
 
@@ -3969,7 +4432,7 @@ type TmpTkeClusterAgentAgentsInClusterPodConfig struct {
 // TmpTkeClusterAgentAgentsInClusterPodConfigInput is an input type that accepts TmpTkeClusterAgentAgentsInClusterPodConfigArgs and TmpTkeClusterAgentAgentsInClusterPodConfigOutput values.
 // You can construct a concrete instance of `TmpTkeClusterAgentAgentsInClusterPodConfigInput` via:
 //
-//          TmpTkeClusterAgentAgentsInClusterPodConfigArgs{...}
+//	TmpTkeClusterAgentAgentsInClusterPodConfigArgs{...}
 type TmpTkeClusterAgentAgentsInClusterPodConfigInput interface {
 	pulumi.Input
 
@@ -4009,11 +4472,11 @@ func (i TmpTkeClusterAgentAgentsInClusterPodConfigArgs) ToTmpTkeClusterAgentAgen
 // TmpTkeClusterAgentAgentsInClusterPodConfigPtrInput is an input type that accepts TmpTkeClusterAgentAgentsInClusterPodConfigArgs, TmpTkeClusterAgentAgentsInClusterPodConfigPtr and TmpTkeClusterAgentAgentsInClusterPodConfigPtrOutput values.
 // You can construct a concrete instance of `TmpTkeClusterAgentAgentsInClusterPodConfigPtrInput` via:
 //
-//          TmpTkeClusterAgentAgentsInClusterPodConfigArgs{...}
+//	        TmpTkeClusterAgentAgentsInClusterPodConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type TmpTkeClusterAgentAgentsInClusterPodConfigPtrInput interface {
 	pulumi.Input
 
@@ -4146,7 +4609,7 @@ type TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelector struct {
 // TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorInput is an input type that accepts TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs and TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorOutput values.
 // You can construct a concrete instance of `TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorInput` via:
 //
-//          TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs{...}
+//	TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs{...}
 type TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorInput interface {
 	pulumi.Input
 
@@ -4176,7 +4639,7 @@ func (i TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs) ToTmpTkeClus
 // TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayInput is an input type that accepts TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArray and TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayOutput values.
 // You can construct a concrete instance of `TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayInput` via:
 //
-//          TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArray{ TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs{...} }
+//	TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArray{ TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArgs{...} }
 type TmpTkeClusterAgentAgentsInClusterPodConfigNodeSelectorArrayInput interface {
 	pulumi.Input
 
@@ -4254,7 +4717,7 @@ type TmpTkeClusterAgentAgentsInClusterPodConfigToleration struct {
 // TmpTkeClusterAgentAgentsInClusterPodConfigTolerationInput is an input type that accepts TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs and TmpTkeClusterAgentAgentsInClusterPodConfigTolerationOutput values.
 // You can construct a concrete instance of `TmpTkeClusterAgentAgentsInClusterPodConfigTolerationInput` via:
 //
-//          TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs{...}
+//	TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs{...}
 type TmpTkeClusterAgentAgentsInClusterPodConfigTolerationInput interface {
 	pulumi.Input
 
@@ -4286,7 +4749,7 @@ func (i TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs) ToTmpTkeCluste
 // TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayInput is an input type that accepts TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArray and TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayOutput values.
 // You can construct a concrete instance of `TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayInput` via:
 //
-//          TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArray{ TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs{...} }
+//	TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArray{ TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs{...} }
 type TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArrayInput interface {
 	pulumi.Input
 
@@ -4369,7 +4832,7 @@ type TmpTkeConfigPodMonitor struct {
 // TmpTkeConfigPodMonitorInput is an input type that accepts TmpTkeConfigPodMonitorArgs and TmpTkeConfigPodMonitorOutput values.
 // You can construct a concrete instance of `TmpTkeConfigPodMonitorInput` via:
 //
-//          TmpTkeConfigPodMonitorArgs{...}
+//	TmpTkeConfigPodMonitorArgs{...}
 type TmpTkeConfigPodMonitorInput interface {
 	pulumi.Input
 
@@ -4401,7 +4864,7 @@ func (i TmpTkeConfigPodMonitorArgs) ToTmpTkeConfigPodMonitorOutputWithContext(ct
 // TmpTkeConfigPodMonitorArrayInput is an input type that accepts TmpTkeConfigPodMonitorArray and TmpTkeConfigPodMonitorArrayOutput values.
 // You can construct a concrete instance of `TmpTkeConfigPodMonitorArrayInput` via:
 //
-//          TmpTkeConfigPodMonitorArray{ TmpTkeConfigPodMonitorArgs{...} }
+//	TmpTkeConfigPodMonitorArray{ TmpTkeConfigPodMonitorArgs{...} }
 type TmpTkeConfigPodMonitorArrayInput interface {
 	pulumi.Input
 
@@ -4484,7 +4947,7 @@ type TmpTkeConfigRawJob struct {
 // TmpTkeConfigRawJobInput is an input type that accepts TmpTkeConfigRawJobArgs and TmpTkeConfigRawJobOutput values.
 // You can construct a concrete instance of `TmpTkeConfigRawJobInput` via:
 //
-//          TmpTkeConfigRawJobArgs{...}
+//	TmpTkeConfigRawJobArgs{...}
 type TmpTkeConfigRawJobInput interface {
 	pulumi.Input
 
@@ -4516,7 +4979,7 @@ func (i TmpTkeConfigRawJobArgs) ToTmpTkeConfigRawJobOutputWithContext(ctx contex
 // TmpTkeConfigRawJobArrayInput is an input type that accepts TmpTkeConfigRawJobArray and TmpTkeConfigRawJobArrayOutput values.
 // You can construct a concrete instance of `TmpTkeConfigRawJobArrayInput` via:
 //
-//          TmpTkeConfigRawJobArray{ TmpTkeConfigRawJobArgs{...} }
+//	TmpTkeConfigRawJobArray{ TmpTkeConfigRawJobArgs{...} }
 type TmpTkeConfigRawJobArrayInput interface {
 	pulumi.Input
 
@@ -4599,7 +5062,7 @@ type TmpTkeConfigServiceMonitor struct {
 // TmpTkeConfigServiceMonitorInput is an input type that accepts TmpTkeConfigServiceMonitorArgs and TmpTkeConfigServiceMonitorOutput values.
 // You can construct a concrete instance of `TmpTkeConfigServiceMonitorInput` via:
 //
-//          TmpTkeConfigServiceMonitorArgs{...}
+//	TmpTkeConfigServiceMonitorArgs{...}
 type TmpTkeConfigServiceMonitorInput interface {
 	pulumi.Input
 
@@ -4631,7 +5094,7 @@ func (i TmpTkeConfigServiceMonitorArgs) ToTmpTkeConfigServiceMonitorOutputWithCo
 // TmpTkeConfigServiceMonitorArrayInput is an input type that accepts TmpTkeConfigServiceMonitorArray and TmpTkeConfigServiceMonitorArrayOutput values.
 // You can construct a concrete instance of `TmpTkeConfigServiceMonitorArrayInput` via:
 //
-//          TmpTkeConfigServiceMonitorArray{ TmpTkeConfigServiceMonitorArgs{...} }
+//	TmpTkeConfigServiceMonitorArray{ TmpTkeConfigServiceMonitorArgs{...} }
 type TmpTkeConfigServiceMonitorArrayInput interface {
 	pulumi.Input
 
@@ -4736,7 +5199,7 @@ type TmpTkeGlobalNotificationNotification struct {
 // TmpTkeGlobalNotificationNotificationInput is an input type that accepts TmpTkeGlobalNotificationNotificationArgs and TmpTkeGlobalNotificationNotificationOutput values.
 // You can construct a concrete instance of `TmpTkeGlobalNotificationNotificationInput` via:
 //
-//          TmpTkeGlobalNotificationNotificationArgs{...}
+//	TmpTkeGlobalNotificationNotificationArgs{...}
 type TmpTkeGlobalNotificationNotificationInput interface {
 	pulumi.Input
 
@@ -4798,11 +5261,11 @@ func (i TmpTkeGlobalNotificationNotificationArgs) ToTmpTkeGlobalNotificationNoti
 // TmpTkeGlobalNotificationNotificationPtrInput is an input type that accepts TmpTkeGlobalNotificationNotificationArgs, TmpTkeGlobalNotificationNotificationPtr and TmpTkeGlobalNotificationNotificationPtrOutput values.
 // You can construct a concrete instance of `TmpTkeGlobalNotificationNotificationPtrInput` via:
 //
-//          TmpTkeGlobalNotificationNotificationArgs{...}
+//	        TmpTkeGlobalNotificationNotificationArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type TmpTkeGlobalNotificationNotificationPtrInput interface {
 	pulumi.Input
 
@@ -5100,7 +5563,7 @@ type TmpTkeGlobalNotificationNotificationAlertManager struct {
 // TmpTkeGlobalNotificationNotificationAlertManagerInput is an input type that accepts TmpTkeGlobalNotificationNotificationAlertManagerArgs and TmpTkeGlobalNotificationNotificationAlertManagerOutput values.
 // You can construct a concrete instance of `TmpTkeGlobalNotificationNotificationAlertManagerInput` via:
 //
-//          TmpTkeGlobalNotificationNotificationAlertManagerArgs{...}
+//	TmpTkeGlobalNotificationNotificationAlertManagerArgs{...}
 type TmpTkeGlobalNotificationNotificationAlertManagerInput interface {
 	pulumi.Input
 
@@ -5132,7 +5595,7 @@ func (i TmpTkeGlobalNotificationNotificationAlertManagerArgs) ToTmpTkeGlobalNoti
 // TmpTkeGlobalNotificationNotificationAlertManagerArrayInput is an input type that accepts TmpTkeGlobalNotificationNotificationAlertManagerArray and TmpTkeGlobalNotificationNotificationAlertManagerArrayOutput values.
 // You can construct a concrete instance of `TmpTkeGlobalNotificationNotificationAlertManagerArrayInput` via:
 //
-//          TmpTkeGlobalNotificationNotificationAlertManagerArray{ TmpTkeGlobalNotificationNotificationAlertManagerArgs{...} }
+//	TmpTkeGlobalNotificationNotificationAlertManagerArray{ TmpTkeGlobalNotificationNotificationAlertManagerArgs{...} }
 type TmpTkeGlobalNotificationNotificationAlertManagerArrayInput interface {
 	pulumi.Input
 
@@ -5225,7 +5688,7 @@ type TmpTkeTemplateAttachmentTargets struct {
 // TmpTkeTemplateAttachmentTargetsInput is an input type that accepts TmpTkeTemplateAttachmentTargetsArgs and TmpTkeTemplateAttachmentTargetsOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateAttachmentTargetsInput` via:
 //
-//          TmpTkeTemplateAttachmentTargetsArgs{...}
+//	TmpTkeTemplateAttachmentTargetsArgs{...}
 type TmpTkeTemplateAttachmentTargetsInput interface {
 	pulumi.Input
 
@@ -5275,11 +5738,11 @@ func (i TmpTkeTemplateAttachmentTargetsArgs) ToTmpTkeTemplateAttachmentTargetsPt
 // TmpTkeTemplateAttachmentTargetsPtrInput is an input type that accepts TmpTkeTemplateAttachmentTargetsArgs, TmpTkeTemplateAttachmentTargetsPtr and TmpTkeTemplateAttachmentTargetsPtrOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateAttachmentTargetsPtrInput` via:
 //
-//          TmpTkeTemplateAttachmentTargetsArgs{...}
+//	        TmpTkeTemplateAttachmentTargetsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type TmpTkeTemplateAttachmentTargetsPtrInput interface {
 	pulumi.Input
 
@@ -5501,7 +5964,7 @@ type TmpTkeTemplateTemplate struct {
 // TmpTkeTemplateTemplateInput is an input type that accepts TmpTkeTemplateTemplateArgs and TmpTkeTemplateTemplateOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplateInput` via:
 //
-//          TmpTkeTemplateTemplateArgs{...}
+//	TmpTkeTemplateTemplateArgs{...}
 type TmpTkeTemplateTemplateInput interface {
 	pulumi.Input
 
@@ -5557,11 +6020,11 @@ func (i TmpTkeTemplateTemplateArgs) ToTmpTkeTemplateTemplatePtrOutputWithContext
 // TmpTkeTemplateTemplatePtrInput is an input type that accepts TmpTkeTemplateTemplateArgs, TmpTkeTemplateTemplatePtr and TmpTkeTemplateTemplatePtrOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplatePtrInput` via:
 //
-//          TmpTkeTemplateTemplateArgs{...}
+//	        TmpTkeTemplateTemplateArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type TmpTkeTemplateTemplatePtrInput interface {
 	pulumi.Input
 
@@ -5812,7 +6275,7 @@ type TmpTkeTemplateTemplatePodMonitor struct {
 // TmpTkeTemplateTemplatePodMonitorInput is an input type that accepts TmpTkeTemplateTemplatePodMonitorArgs and TmpTkeTemplateTemplatePodMonitorOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplatePodMonitorInput` via:
 //
-//          TmpTkeTemplateTemplatePodMonitorArgs{...}
+//	TmpTkeTemplateTemplatePodMonitorArgs{...}
 type TmpTkeTemplateTemplatePodMonitorInput interface {
 	pulumi.Input
 
@@ -5844,7 +6307,7 @@ func (i TmpTkeTemplateTemplatePodMonitorArgs) ToTmpTkeTemplateTemplatePodMonitor
 // TmpTkeTemplateTemplatePodMonitorArrayInput is an input type that accepts TmpTkeTemplateTemplatePodMonitorArray and TmpTkeTemplateTemplatePodMonitorArrayOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplatePodMonitorArrayInput` via:
 //
-//          TmpTkeTemplateTemplatePodMonitorArray{ TmpTkeTemplateTemplatePodMonitorArgs{...} }
+//	TmpTkeTemplateTemplatePodMonitorArray{ TmpTkeTemplateTemplatePodMonitorArgs{...} }
 type TmpTkeTemplateTemplatePodMonitorArrayInput interface {
 	pulumi.Input
 
@@ -5927,7 +6390,7 @@ type TmpTkeTemplateTemplateRawJob struct {
 // TmpTkeTemplateTemplateRawJobInput is an input type that accepts TmpTkeTemplateTemplateRawJobArgs and TmpTkeTemplateTemplateRawJobOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplateRawJobInput` via:
 //
-//          TmpTkeTemplateTemplateRawJobArgs{...}
+//	TmpTkeTemplateTemplateRawJobArgs{...}
 type TmpTkeTemplateTemplateRawJobInput interface {
 	pulumi.Input
 
@@ -5959,7 +6422,7 @@ func (i TmpTkeTemplateTemplateRawJobArgs) ToTmpTkeTemplateTemplateRawJobOutputWi
 // TmpTkeTemplateTemplateRawJobArrayInput is an input type that accepts TmpTkeTemplateTemplateRawJobArray and TmpTkeTemplateTemplateRawJobArrayOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplateRawJobArrayInput` via:
 //
-//          TmpTkeTemplateTemplateRawJobArray{ TmpTkeTemplateTemplateRawJobArgs{...} }
+//	TmpTkeTemplateTemplateRawJobArray{ TmpTkeTemplateTemplateRawJobArgs{...} }
 type TmpTkeTemplateTemplateRawJobArrayInput interface {
 	pulumi.Input
 
@@ -6042,7 +6505,7 @@ type TmpTkeTemplateTemplateRecordRule struct {
 // TmpTkeTemplateTemplateRecordRuleInput is an input type that accepts TmpTkeTemplateTemplateRecordRuleArgs and TmpTkeTemplateTemplateRecordRuleOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplateRecordRuleInput` via:
 //
-//          TmpTkeTemplateTemplateRecordRuleArgs{...}
+//	TmpTkeTemplateTemplateRecordRuleArgs{...}
 type TmpTkeTemplateTemplateRecordRuleInput interface {
 	pulumi.Input
 
@@ -6074,7 +6537,7 @@ func (i TmpTkeTemplateTemplateRecordRuleArgs) ToTmpTkeTemplateTemplateRecordRule
 // TmpTkeTemplateTemplateRecordRuleArrayInput is an input type that accepts TmpTkeTemplateTemplateRecordRuleArray and TmpTkeTemplateTemplateRecordRuleArrayOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplateRecordRuleArrayInput` via:
 //
-//          TmpTkeTemplateTemplateRecordRuleArray{ TmpTkeTemplateTemplateRecordRuleArgs{...} }
+//	TmpTkeTemplateTemplateRecordRuleArray{ TmpTkeTemplateTemplateRecordRuleArgs{...} }
 type TmpTkeTemplateTemplateRecordRuleArrayInput interface {
 	pulumi.Input
 
@@ -6157,7 +6620,7 @@ type TmpTkeTemplateTemplateServiceMonitor struct {
 // TmpTkeTemplateTemplateServiceMonitorInput is an input type that accepts TmpTkeTemplateTemplateServiceMonitorArgs and TmpTkeTemplateTemplateServiceMonitorOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplateServiceMonitorInput` via:
 //
-//          TmpTkeTemplateTemplateServiceMonitorArgs{...}
+//	TmpTkeTemplateTemplateServiceMonitorArgs{...}
 type TmpTkeTemplateTemplateServiceMonitorInput interface {
 	pulumi.Input
 
@@ -6189,7 +6652,7 @@ func (i TmpTkeTemplateTemplateServiceMonitorArgs) ToTmpTkeTemplateTemplateServic
 // TmpTkeTemplateTemplateServiceMonitorArrayInput is an input type that accepts TmpTkeTemplateTemplateServiceMonitorArray and TmpTkeTemplateTemplateServiceMonitorArrayOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateTemplateServiceMonitorArrayInput` via:
 //
-//          TmpTkeTemplateTemplateServiceMonitorArray{ TmpTkeTemplateTemplateServiceMonitorArgs{...} }
+//	TmpTkeTemplateTemplateServiceMonitorArray{ TmpTkeTemplateTemplateServiceMonitorArgs{...} }
 type TmpTkeTemplateTemplateServiceMonitorArrayInput interface {
 	pulumi.Input
 
@@ -6274,7 +6737,7 @@ type GetAlarmAllNamespacesCommonNamespace struct {
 // GetAlarmAllNamespacesCommonNamespaceInput is an input type that accepts GetAlarmAllNamespacesCommonNamespaceArgs and GetAlarmAllNamespacesCommonNamespaceOutput values.
 // You can construct a concrete instance of `GetAlarmAllNamespacesCommonNamespaceInput` via:
 //
-//          GetAlarmAllNamespacesCommonNamespaceArgs{...}
+//	GetAlarmAllNamespacesCommonNamespaceArgs{...}
 type GetAlarmAllNamespacesCommonNamespaceInput interface {
 	pulumi.Input
 
@@ -6308,7 +6771,7 @@ func (i GetAlarmAllNamespacesCommonNamespaceArgs) ToGetAlarmAllNamespacesCommonN
 // GetAlarmAllNamespacesCommonNamespaceArrayInput is an input type that accepts GetAlarmAllNamespacesCommonNamespaceArray and GetAlarmAllNamespacesCommonNamespaceArrayOutput values.
 // You can construct a concrete instance of `GetAlarmAllNamespacesCommonNamespaceArrayInput` via:
 //
-//          GetAlarmAllNamespacesCommonNamespaceArray{ GetAlarmAllNamespacesCommonNamespaceArgs{...} }
+//	GetAlarmAllNamespacesCommonNamespaceArray{ GetAlarmAllNamespacesCommonNamespaceArgs{...} }
 type GetAlarmAllNamespacesCommonNamespaceArrayInput interface {
 	pulumi.Input
 
@@ -6416,7 +6879,7 @@ type GetAlarmAllNamespacesCommonNamespaceDimension struct {
 // GetAlarmAllNamespacesCommonNamespaceDimensionInput is an input type that accepts GetAlarmAllNamespacesCommonNamespaceDimensionArgs and GetAlarmAllNamespacesCommonNamespaceDimensionOutput values.
 // You can construct a concrete instance of `GetAlarmAllNamespacesCommonNamespaceDimensionInput` via:
 //
-//          GetAlarmAllNamespacesCommonNamespaceDimensionArgs{...}
+//	GetAlarmAllNamespacesCommonNamespaceDimensionArgs{...}
 type GetAlarmAllNamespacesCommonNamespaceDimensionInput interface {
 	pulumi.Input
 
@@ -6466,7 +6929,7 @@ func (i GetAlarmAllNamespacesCommonNamespaceDimensionArgs) ToGetAlarmAllNamespac
 // GetAlarmAllNamespacesCommonNamespaceDimensionArrayInput is an input type that accepts GetAlarmAllNamespacesCommonNamespaceDimensionArray and GetAlarmAllNamespacesCommonNamespaceDimensionArrayOutput values.
 // You can construct a concrete instance of `GetAlarmAllNamespacesCommonNamespaceDimensionArrayInput` via:
 //
-//          GetAlarmAllNamespacesCommonNamespaceDimensionArray{ GetAlarmAllNamespacesCommonNamespaceDimensionArgs{...} }
+//	GetAlarmAllNamespacesCommonNamespaceDimensionArray{ GetAlarmAllNamespacesCommonNamespaceDimensionArgs{...} }
 type GetAlarmAllNamespacesCommonNamespaceDimensionArrayInput interface {
 	pulumi.Input
 
@@ -6594,7 +7057,7 @@ type GetAlarmAllNamespacesCommonNamespaceDimensionOperator struct {
 // GetAlarmAllNamespacesCommonNamespaceDimensionOperatorInput is an input type that accepts GetAlarmAllNamespacesCommonNamespaceDimensionOperatorArgs and GetAlarmAllNamespacesCommonNamespaceDimensionOperatorOutput values.
 // You can construct a concrete instance of `GetAlarmAllNamespacesCommonNamespaceDimensionOperatorInput` via:
 //
-//          GetAlarmAllNamespacesCommonNamespaceDimensionOperatorArgs{...}
+//	GetAlarmAllNamespacesCommonNamespaceDimensionOperatorArgs{...}
 type GetAlarmAllNamespacesCommonNamespaceDimensionOperatorInput interface {
 	pulumi.Input
 
@@ -6624,7 +7087,7 @@ func (i GetAlarmAllNamespacesCommonNamespaceDimensionOperatorArgs) ToGetAlarmAll
 // GetAlarmAllNamespacesCommonNamespaceDimensionOperatorArrayInput is an input type that accepts GetAlarmAllNamespacesCommonNamespaceDimensionOperatorArray and GetAlarmAllNamespacesCommonNamespaceDimensionOperatorArrayOutput values.
 // You can construct a concrete instance of `GetAlarmAllNamespacesCommonNamespaceDimensionOperatorArrayInput` via:
 //
-//          GetAlarmAllNamespacesCommonNamespaceDimensionOperatorArray{ GetAlarmAllNamespacesCommonNamespaceDimensionOperatorArgs{...} }
+//	GetAlarmAllNamespacesCommonNamespaceDimensionOperatorArray{ GetAlarmAllNamespacesCommonNamespaceDimensionOperatorArgs{...} }
 type GetAlarmAllNamespacesCommonNamespaceDimensionOperatorArrayInput interface {
 	pulumi.Input
 
@@ -6712,7 +7175,7 @@ type GetAlarmAllNamespacesCustomNamespacesNews struct {
 // GetAlarmAllNamespacesCustomNamespacesNewsInput is an input type that accepts GetAlarmAllNamespacesCustomNamespacesNewsArgs and GetAlarmAllNamespacesCustomNamespacesNewsOutput values.
 // You can construct a concrete instance of `GetAlarmAllNamespacesCustomNamespacesNewsInput` via:
 //
-//          GetAlarmAllNamespacesCustomNamespacesNewsArgs{...}
+//	GetAlarmAllNamespacesCustomNamespacesNewsArgs{...}
 type GetAlarmAllNamespacesCustomNamespacesNewsInput interface {
 	pulumi.Input
 
@@ -6754,7 +7217,7 @@ func (i GetAlarmAllNamespacesCustomNamespacesNewsArgs) ToGetAlarmAllNamespacesCu
 // GetAlarmAllNamespacesCustomNamespacesNewsArrayInput is an input type that accepts GetAlarmAllNamespacesCustomNamespacesNewsArray and GetAlarmAllNamespacesCustomNamespacesNewsArrayOutput values.
 // You can construct a concrete instance of `GetAlarmAllNamespacesCustomNamespacesNewsArrayInput` via:
 //
-//          GetAlarmAllNamespacesCustomNamespacesNewsArray{ GetAlarmAllNamespacesCustomNamespacesNewsArgs{...} }
+//	GetAlarmAllNamespacesCustomNamespacesNewsArray{ GetAlarmAllNamespacesCustomNamespacesNewsArgs{...} }
 type GetAlarmAllNamespacesCustomNamespacesNewsArrayInput interface {
 	pulumi.Input
 
@@ -6872,7 +7335,7 @@ type GetAlarmAllNamespacesQceNamespacesNews struct {
 // GetAlarmAllNamespacesQceNamespacesNewsInput is an input type that accepts GetAlarmAllNamespacesQceNamespacesNewsArgs and GetAlarmAllNamespacesQceNamespacesNewsOutput values.
 // You can construct a concrete instance of `GetAlarmAllNamespacesQceNamespacesNewsInput` via:
 //
-//          GetAlarmAllNamespacesQceNamespacesNewsArgs{...}
+//	GetAlarmAllNamespacesQceNamespacesNewsArgs{...}
 type GetAlarmAllNamespacesQceNamespacesNewsInput interface {
 	pulumi.Input
 
@@ -6914,7 +7377,7 @@ func (i GetAlarmAllNamespacesQceNamespacesNewsArgs) ToGetAlarmAllNamespacesQceNa
 // GetAlarmAllNamespacesQceNamespacesNewsArrayInput is an input type that accepts GetAlarmAllNamespacesQceNamespacesNewsArray and GetAlarmAllNamespacesQceNamespacesNewsArrayOutput values.
 // You can construct a concrete instance of `GetAlarmAllNamespacesQceNamespacesNewsArrayInput` via:
 //
-//          GetAlarmAllNamespacesQceNamespacesNewsArray{ GetAlarmAllNamespacesQceNamespacesNewsArgs{...} }
+//	GetAlarmAllNamespacesQceNamespacesNewsArray{ GetAlarmAllNamespacesQceNamespacesNewsArgs{...} }
 type GetAlarmAllNamespacesQceNamespacesNewsArrayInput interface {
 	pulumi.Input
 
@@ -7060,7 +7523,7 @@ type GetAlarmBasicAlarmsAlarm struct {
 // GetAlarmBasicAlarmsAlarmInput is an input type that accepts GetAlarmBasicAlarmsAlarmArgs and GetAlarmBasicAlarmsAlarmOutput values.
 // You can construct a concrete instance of `GetAlarmBasicAlarmsAlarmInput` via:
 //
-//          GetAlarmBasicAlarmsAlarmArgs{...}
+//	GetAlarmBasicAlarmsAlarmArgs{...}
 type GetAlarmBasicAlarmsAlarmInput interface {
 	pulumi.Input
 
@@ -7130,7 +7593,7 @@ func (i GetAlarmBasicAlarmsAlarmArgs) ToGetAlarmBasicAlarmsAlarmOutputWithContex
 // GetAlarmBasicAlarmsAlarmArrayInput is an input type that accepts GetAlarmBasicAlarmsAlarmArray and GetAlarmBasicAlarmsAlarmArrayOutput values.
 // You can construct a concrete instance of `GetAlarmBasicAlarmsAlarmArrayInput` via:
 //
-//          GetAlarmBasicAlarmsAlarmArray{ GetAlarmBasicAlarmsAlarmArgs{...} }
+//	GetAlarmBasicAlarmsAlarmArray{ GetAlarmBasicAlarmsAlarmArgs{...} }
 type GetAlarmBasicAlarmsAlarmArrayInput interface {
 	pulumi.Input
 
@@ -7306,7 +7769,7 @@ type GetAlarmBasicAlarmsAlarmInstanceGroup struct {
 // GetAlarmBasicAlarmsAlarmInstanceGroupInput is an input type that accepts GetAlarmBasicAlarmsAlarmInstanceGroupArgs and GetAlarmBasicAlarmsAlarmInstanceGroupOutput values.
 // You can construct a concrete instance of `GetAlarmBasicAlarmsAlarmInstanceGroupInput` via:
 //
-//          GetAlarmBasicAlarmsAlarmInstanceGroupArgs{...}
+//	GetAlarmBasicAlarmsAlarmInstanceGroupArgs{...}
 type GetAlarmBasicAlarmsAlarmInstanceGroupInput interface {
 	pulumi.Input
 
@@ -7336,7 +7799,7 @@ func (i GetAlarmBasicAlarmsAlarmInstanceGroupArgs) ToGetAlarmBasicAlarmsAlarmIns
 // GetAlarmBasicAlarmsAlarmInstanceGroupArrayInput is an input type that accepts GetAlarmBasicAlarmsAlarmInstanceGroupArray and GetAlarmBasicAlarmsAlarmInstanceGroupArrayOutput values.
 // You can construct a concrete instance of `GetAlarmBasicAlarmsAlarmInstanceGroupArrayInput` via:
 //
-//          GetAlarmBasicAlarmsAlarmInstanceGroupArray{ GetAlarmBasicAlarmsAlarmInstanceGroupArgs{...} }
+//	GetAlarmBasicAlarmsAlarmInstanceGroupArray{ GetAlarmBasicAlarmsAlarmInstanceGroupArgs{...} }
 type GetAlarmBasicAlarmsAlarmInstanceGroupArrayInput interface {
 	pulumi.Input
 
@@ -7426,7 +7889,7 @@ type GetAlarmBasicMetricMetricSet struct {
 // GetAlarmBasicMetricMetricSetInput is an input type that accepts GetAlarmBasicMetricMetricSetArgs and GetAlarmBasicMetricMetricSetOutput values.
 // You can construct a concrete instance of `GetAlarmBasicMetricMetricSetInput` via:
 //
-//          GetAlarmBasicMetricMetricSetArgs{...}
+//	GetAlarmBasicMetricMetricSetArgs{...}
 type GetAlarmBasicMetricMetricSetInput interface {
 	pulumi.Input
 
@@ -7470,7 +7933,7 @@ func (i GetAlarmBasicMetricMetricSetArgs) ToGetAlarmBasicMetricMetricSetOutputWi
 // GetAlarmBasicMetricMetricSetArrayInput is an input type that accepts GetAlarmBasicMetricMetricSetArray and GetAlarmBasicMetricMetricSetArrayOutput values.
 // You can construct a concrete instance of `GetAlarmBasicMetricMetricSetArrayInput` via:
 //
-//          GetAlarmBasicMetricMetricSetArray{ GetAlarmBasicMetricMetricSetArgs{...} }
+//	GetAlarmBasicMetricMetricSetArray{ GetAlarmBasicMetricMetricSetArgs{...} }
 type GetAlarmBasicMetricMetricSetArrayInput interface {
 	pulumi.Input
 
@@ -7579,7 +8042,7 @@ type GetAlarmBasicMetricMetricSetDimension struct {
 // GetAlarmBasicMetricMetricSetDimensionInput is an input type that accepts GetAlarmBasicMetricMetricSetDimensionArgs and GetAlarmBasicMetricMetricSetDimensionOutput values.
 // You can construct a concrete instance of `GetAlarmBasicMetricMetricSetDimensionInput` via:
 //
-//          GetAlarmBasicMetricMetricSetDimensionArgs{...}
+//	GetAlarmBasicMetricMetricSetDimensionArgs{...}
 type GetAlarmBasicMetricMetricSetDimensionInput interface {
 	pulumi.Input
 
@@ -7607,7 +8070,7 @@ func (i GetAlarmBasicMetricMetricSetDimensionArgs) ToGetAlarmBasicMetricMetricSe
 // GetAlarmBasicMetricMetricSetDimensionArrayInput is an input type that accepts GetAlarmBasicMetricMetricSetDimensionArray and GetAlarmBasicMetricMetricSetDimensionArrayOutput values.
 // You can construct a concrete instance of `GetAlarmBasicMetricMetricSetDimensionArrayInput` via:
 //
-//          GetAlarmBasicMetricMetricSetDimensionArray{ GetAlarmBasicMetricMetricSetDimensionArgs{...} }
+//	GetAlarmBasicMetricMetricSetDimensionArray{ GetAlarmBasicMetricMetricSetDimensionArgs{...} }
 type GetAlarmBasicMetricMetricSetDimensionArrayInput interface {
 	pulumi.Input
 
@@ -7678,7 +8141,7 @@ type GetAlarmBasicMetricMetricSetMeaning struct {
 // GetAlarmBasicMetricMetricSetMeaningInput is an input type that accepts GetAlarmBasicMetricMetricSetMeaningArgs and GetAlarmBasicMetricMetricSetMeaningOutput values.
 // You can construct a concrete instance of `GetAlarmBasicMetricMetricSetMeaningInput` via:
 //
-//          GetAlarmBasicMetricMetricSetMeaningArgs{...}
+//	GetAlarmBasicMetricMetricSetMeaningArgs{...}
 type GetAlarmBasicMetricMetricSetMeaningInput interface {
 	pulumi.Input
 
@@ -7708,7 +8171,7 @@ func (i GetAlarmBasicMetricMetricSetMeaningArgs) ToGetAlarmBasicMetricMetricSetM
 // GetAlarmBasicMetricMetricSetMeaningArrayInput is an input type that accepts GetAlarmBasicMetricMetricSetMeaningArray and GetAlarmBasicMetricMetricSetMeaningArrayOutput values.
 // You can construct a concrete instance of `GetAlarmBasicMetricMetricSetMeaningArrayInput` via:
 //
-//          GetAlarmBasicMetricMetricSetMeaningArray{ GetAlarmBasicMetricMetricSetMeaningArgs{...} }
+//	GetAlarmBasicMetricMetricSetMeaningArray{ GetAlarmBasicMetricMetricSetMeaningArgs{...} }
 type GetAlarmBasicMetricMetricSetMeaningArrayInput interface {
 	pulumi.Input
 
@@ -7784,7 +8247,7 @@ type GetAlarmBasicMetricMetricSetPeriod struct {
 // GetAlarmBasicMetricMetricSetPeriodInput is an input type that accepts GetAlarmBasicMetricMetricSetPeriodArgs and GetAlarmBasicMetricMetricSetPeriodOutput values.
 // You can construct a concrete instance of `GetAlarmBasicMetricMetricSetPeriodInput` via:
 //
-//          GetAlarmBasicMetricMetricSetPeriodArgs{...}
+//	GetAlarmBasicMetricMetricSetPeriodArgs{...}
 type GetAlarmBasicMetricMetricSetPeriodInput interface {
 	pulumi.Input
 
@@ -7814,7 +8277,7 @@ func (i GetAlarmBasicMetricMetricSetPeriodArgs) ToGetAlarmBasicMetricMetricSetPe
 // GetAlarmBasicMetricMetricSetPeriodArrayInput is an input type that accepts GetAlarmBasicMetricMetricSetPeriodArray and GetAlarmBasicMetricMetricSetPeriodArrayOutput values.
 // You can construct a concrete instance of `GetAlarmBasicMetricMetricSetPeriodArrayInput` via:
 //
-//          GetAlarmBasicMetricMetricSetPeriodArray{ GetAlarmBasicMetricMetricSetPeriodArgs{...} }
+//	GetAlarmBasicMetricMetricSetPeriodArray{ GetAlarmBasicMetricMetricSetPeriodArgs{...} }
 type GetAlarmBasicMetricMetricSetPeriodArrayInput interface {
 	pulumi.Input
 
@@ -7908,7 +8371,7 @@ type GetAlarmConditionsTemplateTemplateGroupList struct {
 // GetAlarmConditionsTemplateTemplateGroupListInput is an input type that accepts GetAlarmConditionsTemplateTemplateGroupListArgs and GetAlarmConditionsTemplateTemplateGroupListOutput values.
 // You can construct a concrete instance of `GetAlarmConditionsTemplateTemplateGroupListInput` via:
 //
-//          GetAlarmConditionsTemplateTemplateGroupListArgs{...}
+//	GetAlarmConditionsTemplateTemplateGroupListArgs{...}
 type GetAlarmConditionsTemplateTemplateGroupListInput interface {
 	pulumi.Input
 
@@ -7956,7 +8419,7 @@ func (i GetAlarmConditionsTemplateTemplateGroupListArgs) ToGetAlarmConditionsTem
 // GetAlarmConditionsTemplateTemplateGroupListArrayInput is an input type that accepts GetAlarmConditionsTemplateTemplateGroupListArray and GetAlarmConditionsTemplateTemplateGroupListArrayOutput values.
 // You can construct a concrete instance of `GetAlarmConditionsTemplateTemplateGroupListArrayInput` via:
 //
-//          GetAlarmConditionsTemplateTemplateGroupListArray{ GetAlarmConditionsTemplateTemplateGroupListArgs{...} }
+//	GetAlarmConditionsTemplateTemplateGroupListArray{ GetAlarmConditionsTemplateTemplateGroupListArgs{...} }
 type GetAlarmConditionsTemplateTemplateGroupListArrayInput interface {
 	pulumi.Input
 
@@ -8105,7 +8568,7 @@ type GetAlarmConditionsTemplateTemplateGroupListCondition struct {
 // GetAlarmConditionsTemplateTemplateGroupListConditionInput is an input type that accepts GetAlarmConditionsTemplateTemplateGroupListConditionArgs and GetAlarmConditionsTemplateTemplateGroupListConditionOutput values.
 // You can construct a concrete instance of `GetAlarmConditionsTemplateTemplateGroupListConditionInput` via:
 //
-//          GetAlarmConditionsTemplateTemplateGroupListConditionArgs{...}
+//	GetAlarmConditionsTemplateTemplateGroupListConditionArgs{...}
 type GetAlarmConditionsTemplateTemplateGroupListConditionInput interface {
 	pulumi.Input
 
@@ -8157,7 +8620,7 @@ func (i GetAlarmConditionsTemplateTemplateGroupListConditionArgs) ToGetAlarmCond
 // GetAlarmConditionsTemplateTemplateGroupListConditionArrayInput is an input type that accepts GetAlarmConditionsTemplateTemplateGroupListConditionArray and GetAlarmConditionsTemplateTemplateGroupListConditionArrayOutput values.
 // You can construct a concrete instance of `GetAlarmConditionsTemplateTemplateGroupListConditionArrayInput` via:
 //
-//          GetAlarmConditionsTemplateTemplateGroupListConditionArray{ GetAlarmConditionsTemplateTemplateGroupListConditionArgs{...} }
+//	GetAlarmConditionsTemplateTemplateGroupListConditionArray{ GetAlarmConditionsTemplateTemplateGroupListConditionArgs{...} }
 type GetAlarmConditionsTemplateTemplateGroupListConditionArrayInput interface {
 	pulumi.Input
 
@@ -8294,7 +8757,7 @@ type GetAlarmConditionsTemplateTemplateGroupListEventCondition struct {
 // GetAlarmConditionsTemplateTemplateGroupListEventConditionInput is an input type that accepts GetAlarmConditionsTemplateTemplateGroupListEventConditionArgs and GetAlarmConditionsTemplateTemplateGroupListEventConditionOutput values.
 // You can construct a concrete instance of `GetAlarmConditionsTemplateTemplateGroupListEventConditionInput` via:
 //
-//          GetAlarmConditionsTemplateTemplateGroupListEventConditionArgs{...}
+//	GetAlarmConditionsTemplateTemplateGroupListEventConditionArgs{...}
 type GetAlarmConditionsTemplateTemplateGroupListEventConditionInput interface {
 	pulumi.Input
 
@@ -8330,7 +8793,7 @@ func (i GetAlarmConditionsTemplateTemplateGroupListEventConditionArgs) ToGetAlar
 // GetAlarmConditionsTemplateTemplateGroupListEventConditionArrayInput is an input type that accepts GetAlarmConditionsTemplateTemplateGroupListEventConditionArray and GetAlarmConditionsTemplateTemplateGroupListEventConditionArrayOutput values.
 // You can construct a concrete instance of `GetAlarmConditionsTemplateTemplateGroupListEventConditionArrayInput` via:
 //
-//          GetAlarmConditionsTemplateTemplateGroupListEventConditionArray{ GetAlarmConditionsTemplateTemplateGroupListEventConditionArgs{...} }
+//	GetAlarmConditionsTemplateTemplateGroupListEventConditionArray{ GetAlarmConditionsTemplateTemplateGroupListEventConditionArgs{...} }
 type GetAlarmConditionsTemplateTemplateGroupListEventConditionArrayInput interface {
 	pulumi.Input
 
@@ -8449,7 +8912,7 @@ type GetAlarmConditionsTemplateTemplateGroupListPolicyGroup struct {
 // GetAlarmConditionsTemplateTemplateGroupListPolicyGroupInput is an input type that accepts GetAlarmConditionsTemplateTemplateGroupListPolicyGroupArgs and GetAlarmConditionsTemplateTemplateGroupListPolicyGroupOutput values.
 // You can construct a concrete instance of `GetAlarmConditionsTemplateTemplateGroupListPolicyGroupInput` via:
 //
-//          GetAlarmConditionsTemplateTemplateGroupListPolicyGroupArgs{...}
+//	GetAlarmConditionsTemplateTemplateGroupListPolicyGroupArgs{...}
 type GetAlarmConditionsTemplateTemplateGroupListPolicyGroupInput interface {
 	pulumi.Input
 
@@ -8507,7 +8970,7 @@ func (i GetAlarmConditionsTemplateTemplateGroupListPolicyGroupArgs) ToGetAlarmCo
 // GetAlarmConditionsTemplateTemplateGroupListPolicyGroupArrayInput is an input type that accepts GetAlarmConditionsTemplateTemplateGroupListPolicyGroupArray and GetAlarmConditionsTemplateTemplateGroupListPolicyGroupArrayOutput values.
 // You can construct a concrete instance of `GetAlarmConditionsTemplateTemplateGroupListPolicyGroupArrayInput` via:
 //
-//          GetAlarmConditionsTemplateTemplateGroupListPolicyGroupArray{ GetAlarmConditionsTemplateTemplateGroupListPolicyGroupArgs{...} }
+//	GetAlarmConditionsTemplateTemplateGroupListPolicyGroupArray{ GetAlarmConditionsTemplateTemplateGroupListPolicyGroupArgs{...} }
 type GetAlarmConditionsTemplateTemplateGroupListPolicyGroupArrayInput interface {
 	pulumi.Input
 
@@ -8677,7 +9140,7 @@ type GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfo struct {
 // GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoInput is an input type that accepts GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoArgs and GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoOutput values.
 // You can construct a concrete instance of `GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoInput` via:
 //
-//          GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoArgs{...}
+//	GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoArgs{...}
 type GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoInput interface {
 	pulumi.Input
 
@@ -8729,7 +9192,7 @@ func (i GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoArgs) 
 // GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoArrayInput is an input type that accepts GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoArray and GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoArrayOutput values.
 // You can construct a concrete instance of `GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoArrayInput` via:
 //
-//          GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoArray{ GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoArgs{...} }
+//	GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoArray{ GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoArgs{...} }
 type GetAlarmConditionsTemplateTemplateGroupListPolicyGroupReceiverInfoArrayInput interface {
 	pulumi.Input
 
@@ -8920,7 +9383,7 @@ type GetAlarmHistoryHistory struct {
 // GetAlarmHistoryHistoryInput is an input type that accepts GetAlarmHistoryHistoryArgs and GetAlarmHistoryHistoryOutput values.
 // You can construct a concrete instance of `GetAlarmHistoryHistoryInput` via:
 //
-//          GetAlarmHistoryHistoryArgs{...}
+//	GetAlarmHistoryHistoryArgs{...}
 type GetAlarmHistoryHistoryInput interface {
 	pulumi.Input
 
@@ -8996,7 +9459,7 @@ func (i GetAlarmHistoryHistoryArgs) ToGetAlarmHistoryHistoryOutputWithContext(ct
 // GetAlarmHistoryHistoryArrayInput is an input type that accepts GetAlarmHistoryHistoryArray and GetAlarmHistoryHistoryArrayOutput values.
 // You can construct a concrete instance of `GetAlarmHistoryHistoryArrayInput` via:
 //
-//          GetAlarmHistoryHistoryArray{ GetAlarmHistoryHistoryArgs{...} }
+//	GetAlarmHistoryHistoryArray{ GetAlarmHistoryHistoryArgs{...} }
 type GetAlarmHistoryHistoryArrayInput interface {
 	pulumi.Input
 
@@ -9187,7 +9650,7 @@ type GetAlarmHistoryHistoryInstanceGroup struct {
 // GetAlarmHistoryHistoryInstanceGroupInput is an input type that accepts GetAlarmHistoryHistoryInstanceGroupArgs and GetAlarmHistoryHistoryInstanceGroupOutput values.
 // You can construct a concrete instance of `GetAlarmHistoryHistoryInstanceGroupInput` via:
 //
-//          GetAlarmHistoryHistoryInstanceGroupArgs{...}
+//	GetAlarmHistoryHistoryInstanceGroupArgs{...}
 type GetAlarmHistoryHistoryInstanceGroupInput interface {
 	pulumi.Input
 
@@ -9217,7 +9680,7 @@ func (i GetAlarmHistoryHistoryInstanceGroupArgs) ToGetAlarmHistoryHistoryInstanc
 // GetAlarmHistoryHistoryInstanceGroupArrayInput is an input type that accepts GetAlarmHistoryHistoryInstanceGroupArray and GetAlarmHistoryHistoryInstanceGroupArrayOutput values.
 // You can construct a concrete instance of `GetAlarmHistoryHistoryInstanceGroupArrayInput` via:
 //
-//          GetAlarmHistoryHistoryInstanceGroupArray{ GetAlarmHistoryHistoryInstanceGroupArgs{...} }
+//	GetAlarmHistoryHistoryInstanceGroupArray{ GetAlarmHistoryHistoryInstanceGroupArgs{...} }
 type GetAlarmHistoryHistoryInstanceGroupArrayInput interface {
 	pulumi.Input
 
@@ -9299,7 +9762,7 @@ type GetAlarmHistoryHistoryMetricsInfo struct {
 // GetAlarmHistoryHistoryMetricsInfoInput is an input type that accepts GetAlarmHistoryHistoryMetricsInfoArgs and GetAlarmHistoryHistoryMetricsInfoOutput values.
 // You can construct a concrete instance of `GetAlarmHistoryHistoryMetricsInfoInput` via:
 //
-//          GetAlarmHistoryHistoryMetricsInfoArgs{...}
+//	GetAlarmHistoryHistoryMetricsInfoArgs{...}
 type GetAlarmHistoryHistoryMetricsInfoInput interface {
 	pulumi.Input
 
@@ -9335,7 +9798,7 @@ func (i GetAlarmHistoryHistoryMetricsInfoArgs) ToGetAlarmHistoryHistoryMetricsIn
 // GetAlarmHistoryHistoryMetricsInfoArrayInput is an input type that accepts GetAlarmHistoryHistoryMetricsInfoArray and GetAlarmHistoryHistoryMetricsInfoArrayOutput values.
 // You can construct a concrete instance of `GetAlarmHistoryHistoryMetricsInfoArrayInput` via:
 //
-//          GetAlarmHistoryHistoryMetricsInfoArray{ GetAlarmHistoryHistoryMetricsInfoArgs{...} }
+//	GetAlarmHistoryHistoryMetricsInfoArray{ GetAlarmHistoryHistoryMetricsInfoArgs{...} }
 type GetAlarmHistoryHistoryMetricsInfoArrayInput interface {
 	pulumi.Input
 
@@ -9426,7 +9889,7 @@ type GetAlarmHistoryNamespace struct {
 // GetAlarmHistoryNamespaceInput is an input type that accepts GetAlarmHistoryNamespaceArgs and GetAlarmHistoryNamespaceOutput values.
 // You can construct a concrete instance of `GetAlarmHistoryNamespaceInput` via:
 //
-//          GetAlarmHistoryNamespaceArgs{...}
+//	GetAlarmHistoryNamespaceArgs{...}
 type GetAlarmHistoryNamespaceInput interface {
 	pulumi.Input
 
@@ -9456,7 +9919,7 @@ func (i GetAlarmHistoryNamespaceArgs) ToGetAlarmHistoryNamespaceOutputWithContex
 // GetAlarmHistoryNamespaceArrayInput is an input type that accepts GetAlarmHistoryNamespaceArray and GetAlarmHistoryNamespaceArrayOutput values.
 // You can construct a concrete instance of `GetAlarmHistoryNamespaceArrayInput` via:
 //
-//          GetAlarmHistoryNamespaceArray{ GetAlarmHistoryNamespaceArgs{...} }
+//	GetAlarmHistoryNamespaceArray{ GetAlarmHistoryNamespaceArgs{...} }
 type GetAlarmHistoryNamespaceArrayInput interface {
 	pulumi.Input
 
@@ -9554,7 +10017,7 @@ type GetAlarmMetricMetric struct {
 // GetAlarmMetricMetricInput is an input type that accepts GetAlarmMetricMetricArgs and GetAlarmMetricMetricOutput values.
 // You can construct a concrete instance of `GetAlarmMetricMetricInput` via:
 //
-//          GetAlarmMetricMetricArgs{...}
+//	GetAlarmMetricMetricArgs{...}
 type GetAlarmMetricMetricInput interface {
 	pulumi.Input
 
@@ -9606,7 +10069,7 @@ func (i GetAlarmMetricMetricArgs) ToGetAlarmMetricMetricOutputWithContext(ctx co
 // GetAlarmMetricMetricArrayInput is an input type that accepts GetAlarmMetricMetricArray and GetAlarmMetricMetricArrayOutput values.
 // You can construct a concrete instance of `GetAlarmMetricMetricArrayInput` via:
 //
-//          GetAlarmMetricMetricArray{ GetAlarmMetricMetricArgs{...} }
+//	GetAlarmMetricMetricArray{ GetAlarmMetricMetricArgs{...} }
 type GetAlarmMetricMetricArrayInput interface {
 	pulumi.Input
 
@@ -9739,7 +10202,7 @@ type GetAlarmMetricMetricMetricConfig struct {
 // GetAlarmMetricMetricMetricConfigInput is an input type that accepts GetAlarmMetricMetricMetricConfigArgs and GetAlarmMetricMetricMetricConfigOutput values.
 // You can construct a concrete instance of `GetAlarmMetricMetricMetricConfigInput` via:
 //
-//          GetAlarmMetricMetricMetricConfigArgs{...}
+//	GetAlarmMetricMetricMetricConfigArgs{...}
 type GetAlarmMetricMetricMetricConfigInput interface {
 	pulumi.Input
 
@@ -9771,7 +10234,7 @@ func (i GetAlarmMetricMetricMetricConfigArgs) ToGetAlarmMetricMetricMetricConfig
 // GetAlarmMetricMetricMetricConfigArrayInput is an input type that accepts GetAlarmMetricMetricMetricConfigArray and GetAlarmMetricMetricMetricConfigArrayOutput values.
 // You can construct a concrete instance of `GetAlarmMetricMetricMetricConfigArrayInput` via:
 //
-//          GetAlarmMetricMetricMetricConfigArray{ GetAlarmMetricMetricMetricConfigArgs{...} }
+//	GetAlarmMetricMetricMetricConfigArray{ GetAlarmMetricMetricMetricConfigArgs{...} }
 type GetAlarmMetricMetricMetricConfigArrayInput interface {
 	pulumi.Input
 
@@ -9852,7 +10315,7 @@ type GetAlarmMetricMetricOperator struct {
 // GetAlarmMetricMetricOperatorInput is an input type that accepts GetAlarmMetricMetricOperatorArgs and GetAlarmMetricMetricOperatorOutput values.
 // You can construct a concrete instance of `GetAlarmMetricMetricOperatorInput` via:
 //
-//          GetAlarmMetricMetricOperatorArgs{...}
+//	GetAlarmMetricMetricOperatorArgs{...}
 type GetAlarmMetricMetricOperatorInput interface {
 	pulumi.Input
 
@@ -9882,7 +10345,7 @@ func (i GetAlarmMetricMetricOperatorArgs) ToGetAlarmMetricMetricOperatorOutputWi
 // GetAlarmMetricMetricOperatorArrayInput is an input type that accepts GetAlarmMetricMetricOperatorArray and GetAlarmMetricMetricOperatorArrayOutput values.
 // You can construct a concrete instance of `GetAlarmMetricMetricOperatorArrayInput` via:
 //
-//          GetAlarmMetricMetricOperatorArray{ GetAlarmMetricMetricOperatorArgs{...} }
+//	GetAlarmMetricMetricOperatorArray{ GetAlarmMetricMetricOperatorArgs{...} }
 type GetAlarmMetricMetricOperatorArrayInput interface {
 	pulumi.Input
 
@@ -9960,7 +10423,7 @@ type GetAlarmMonitorTypeMonitorTypeInfo struct {
 // GetAlarmMonitorTypeMonitorTypeInfoInput is an input type that accepts GetAlarmMonitorTypeMonitorTypeInfoArgs and GetAlarmMonitorTypeMonitorTypeInfoOutput values.
 // You can construct a concrete instance of `GetAlarmMonitorTypeMonitorTypeInfoInput` via:
 //
-//          GetAlarmMonitorTypeMonitorTypeInfoArgs{...}
+//	GetAlarmMonitorTypeMonitorTypeInfoArgs{...}
 type GetAlarmMonitorTypeMonitorTypeInfoInput interface {
 	pulumi.Input
 
@@ -9992,7 +10455,7 @@ func (i GetAlarmMonitorTypeMonitorTypeInfoArgs) ToGetAlarmMonitorTypeMonitorType
 // GetAlarmMonitorTypeMonitorTypeInfoArrayInput is an input type that accepts GetAlarmMonitorTypeMonitorTypeInfoArray and GetAlarmMonitorTypeMonitorTypeInfoArrayOutput values.
 // You can construct a concrete instance of `GetAlarmMonitorTypeMonitorTypeInfoArrayInput` via:
 //
-//          GetAlarmMonitorTypeMonitorTypeInfoArray{ GetAlarmMonitorTypeMonitorTypeInfoArgs{...} }
+//	GetAlarmMonitorTypeMonitorTypeInfoArray{ GetAlarmMonitorTypeMonitorTypeInfoArgs{...} }
 type GetAlarmMonitorTypeMonitorTypeInfoArrayInput interface {
 	pulumi.Input
 
@@ -10081,7 +10544,7 @@ type GetAlarmNoticeCallbacksUrlNotice struct {
 // GetAlarmNoticeCallbacksUrlNoticeInput is an input type that accepts GetAlarmNoticeCallbacksUrlNoticeArgs and GetAlarmNoticeCallbacksUrlNoticeOutput values.
 // You can construct a concrete instance of `GetAlarmNoticeCallbacksUrlNoticeInput` via:
 //
-//          GetAlarmNoticeCallbacksUrlNoticeArgs{...}
+//	GetAlarmNoticeCallbacksUrlNoticeArgs{...}
 type GetAlarmNoticeCallbacksUrlNoticeInput interface {
 	pulumi.Input
 
@@ -10119,7 +10582,7 @@ func (i GetAlarmNoticeCallbacksUrlNoticeArgs) ToGetAlarmNoticeCallbacksUrlNotice
 // GetAlarmNoticeCallbacksUrlNoticeArrayInput is an input type that accepts GetAlarmNoticeCallbacksUrlNoticeArray and GetAlarmNoticeCallbacksUrlNoticeArrayOutput values.
 // You can construct a concrete instance of `GetAlarmNoticeCallbacksUrlNoticeArrayInput` via:
 //
-//          GetAlarmNoticeCallbacksUrlNoticeArray{ GetAlarmNoticeCallbacksUrlNoticeArgs{...} }
+//	GetAlarmNoticeCallbacksUrlNoticeArray{ GetAlarmNoticeCallbacksUrlNoticeArgs{...} }
 type GetAlarmNoticeCallbacksUrlNoticeArrayInput interface {
 	pulumi.Input
 
@@ -10235,7 +10698,7 @@ type GetAlarmNoticesAlarmNotice struct {
 // GetAlarmNoticesAlarmNoticeInput is an input type that accepts GetAlarmNoticesAlarmNoticeArgs and GetAlarmNoticesAlarmNoticeOutput values.
 // You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeInput` via:
 //
-//          GetAlarmNoticesAlarmNoticeArgs{...}
+//	GetAlarmNoticesAlarmNoticeArgs{...}
 type GetAlarmNoticesAlarmNoticeInput interface {
 	pulumi.Input
 
@@ -10285,7 +10748,7 @@ func (i GetAlarmNoticesAlarmNoticeArgs) ToGetAlarmNoticesAlarmNoticeOutputWithCo
 // GetAlarmNoticesAlarmNoticeArrayInput is an input type that accepts GetAlarmNoticesAlarmNoticeArray and GetAlarmNoticesAlarmNoticeArrayOutput values.
 // You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeArrayInput` via:
 //
-//          GetAlarmNoticesAlarmNoticeArray{ GetAlarmNoticesAlarmNoticeArgs{...} }
+//	GetAlarmNoticesAlarmNoticeArray{ GetAlarmNoticesAlarmNoticeArgs{...} }
 type GetAlarmNoticesAlarmNoticeArrayInput interface {
 	pulumi.Input
 
@@ -10415,7 +10878,7 @@ type GetAlarmNoticesAlarmNoticeClsNotice struct {
 // GetAlarmNoticesAlarmNoticeClsNoticeInput is an input type that accepts GetAlarmNoticesAlarmNoticeClsNoticeArgs and GetAlarmNoticesAlarmNoticeClsNoticeOutput values.
 // You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeClsNoticeInput` via:
 //
-//          GetAlarmNoticesAlarmNoticeClsNoticeArgs{...}
+//	GetAlarmNoticesAlarmNoticeClsNoticeArgs{...}
 type GetAlarmNoticesAlarmNoticeClsNoticeInput interface {
 	pulumi.Input
 
@@ -10449,7 +10912,7 @@ func (i GetAlarmNoticesAlarmNoticeClsNoticeArgs) ToGetAlarmNoticesAlarmNoticeCls
 // GetAlarmNoticesAlarmNoticeClsNoticeArrayInput is an input type that accepts GetAlarmNoticesAlarmNoticeClsNoticeArray and GetAlarmNoticesAlarmNoticeClsNoticeArrayOutput values.
 // You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeClsNoticeArrayInput` via:
 //
-//          GetAlarmNoticesAlarmNoticeClsNoticeArray{ GetAlarmNoticesAlarmNoticeClsNoticeArgs{...} }
+//	GetAlarmNoticesAlarmNoticeClsNoticeArray{ GetAlarmNoticesAlarmNoticeClsNoticeArgs{...} }
 type GetAlarmNoticesAlarmNoticeClsNoticeArrayInput interface {
 	pulumi.Input
 
@@ -10539,7 +11002,7 @@ type GetAlarmNoticesAlarmNoticeUrlNotice struct {
 // GetAlarmNoticesAlarmNoticeUrlNoticeInput is an input type that accepts GetAlarmNoticesAlarmNoticeUrlNoticeArgs and GetAlarmNoticesAlarmNoticeUrlNoticeOutput values.
 // You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeUrlNoticeInput` via:
 //
-//          GetAlarmNoticesAlarmNoticeUrlNoticeArgs{...}
+//	GetAlarmNoticesAlarmNoticeUrlNoticeArgs{...}
 type GetAlarmNoticesAlarmNoticeUrlNoticeInput interface {
 	pulumi.Input
 
@@ -10573,7 +11036,7 @@ func (i GetAlarmNoticesAlarmNoticeUrlNoticeArgs) ToGetAlarmNoticesAlarmNoticeUrl
 // GetAlarmNoticesAlarmNoticeUrlNoticeArrayInput is an input type that accepts GetAlarmNoticesAlarmNoticeUrlNoticeArray and GetAlarmNoticesAlarmNoticeUrlNoticeArrayOutput values.
 // You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeUrlNoticeArrayInput` via:
 //
-//          GetAlarmNoticesAlarmNoticeUrlNoticeArray{ GetAlarmNoticesAlarmNoticeUrlNoticeArgs{...} }
+//	GetAlarmNoticesAlarmNoticeUrlNoticeArray{ GetAlarmNoticesAlarmNoticeUrlNoticeArgs{...} }
 type GetAlarmNoticesAlarmNoticeUrlNoticeArrayInput interface {
 	pulumi.Input
 
@@ -10681,7 +11144,7 @@ type GetAlarmNoticesAlarmNoticeUserNotice struct {
 // GetAlarmNoticesAlarmNoticeUserNoticeInput is an input type that accepts GetAlarmNoticesAlarmNoticeUserNoticeArgs and GetAlarmNoticesAlarmNoticeUserNoticeOutput values.
 // You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeUserNoticeInput` via:
 //
-//          GetAlarmNoticesAlarmNoticeUserNoticeArgs{...}
+//	GetAlarmNoticesAlarmNoticeUserNoticeArgs{...}
 type GetAlarmNoticesAlarmNoticeUserNoticeInput interface {
 	pulumi.Input
 
@@ -10733,7 +11196,7 @@ func (i GetAlarmNoticesAlarmNoticeUserNoticeArgs) ToGetAlarmNoticesAlarmNoticeUs
 // GetAlarmNoticesAlarmNoticeUserNoticeArrayInput is an input type that accepts GetAlarmNoticesAlarmNoticeUserNoticeArray and GetAlarmNoticesAlarmNoticeUserNoticeArrayOutput values.
 // You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeUserNoticeArrayInput` via:
 //
-//          GetAlarmNoticesAlarmNoticeUserNoticeArray{ GetAlarmNoticesAlarmNoticeUserNoticeArgs{...} }
+//	GetAlarmNoticesAlarmNoticeUserNoticeArray{ GetAlarmNoticesAlarmNoticeUserNoticeArgs{...} }
 type GetAlarmNoticesAlarmNoticeUserNoticeArrayInput interface {
 	pulumi.Input
 
@@ -10930,7 +11393,7 @@ type GetAlarmPolicyPolicy struct {
 // GetAlarmPolicyPolicyInput is an input type that accepts GetAlarmPolicyPolicyArgs and GetAlarmPolicyPolicyOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyInput` via:
 //
-//          GetAlarmPolicyPolicyArgs{...}
+//	GetAlarmPolicyPolicyArgs{...}
 type GetAlarmPolicyPolicyInput interface {
 	pulumi.Input
 
@@ -11026,7 +11489,7 @@ func (i GetAlarmPolicyPolicyArgs) ToGetAlarmPolicyPolicyOutputWithContext(ctx co
 // GetAlarmPolicyPolicyArrayInput is an input type that accepts GetAlarmPolicyPolicyArray and GetAlarmPolicyPolicyArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyArrayInput` via:
 //
-//          GetAlarmPolicyPolicyArray{ GetAlarmPolicyPolicyArgs{...} }
+//	GetAlarmPolicyPolicyArray{ GetAlarmPolicyPolicyArgs{...} }
 type GetAlarmPolicyPolicyArrayInput interface {
 	pulumi.Input
 
@@ -11269,7 +11732,7 @@ type GetAlarmPolicyPolicyCondition struct {
 // GetAlarmPolicyPolicyConditionInput is an input type that accepts GetAlarmPolicyPolicyConditionArgs and GetAlarmPolicyPolicyConditionOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionInput` via:
 //
-//          GetAlarmPolicyPolicyConditionArgs{...}
+//	GetAlarmPolicyPolicyConditionArgs{...}
 type GetAlarmPolicyPolicyConditionInput interface {
 	pulumi.Input
 
@@ -11301,7 +11764,7 @@ func (i GetAlarmPolicyPolicyConditionArgs) ToGetAlarmPolicyPolicyConditionOutput
 // GetAlarmPolicyPolicyConditionArrayInput is an input type that accepts GetAlarmPolicyPolicyConditionArray and GetAlarmPolicyPolicyConditionArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionArrayInput` via:
 //
-//          GetAlarmPolicyPolicyConditionArray{ GetAlarmPolicyPolicyConditionArgs{...} }
+//	GetAlarmPolicyPolicyConditionArray{ GetAlarmPolicyPolicyConditionArgs{...} }
 type GetAlarmPolicyPolicyConditionArrayInput interface {
 	pulumi.Input
 
@@ -11412,7 +11875,7 @@ type GetAlarmPolicyPolicyConditionRule struct {
 // GetAlarmPolicyPolicyConditionRuleInput is an input type that accepts GetAlarmPolicyPolicyConditionRuleArgs and GetAlarmPolicyPolicyConditionRuleOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionRuleInput` via:
 //
-//          GetAlarmPolicyPolicyConditionRuleArgs{...}
+//	GetAlarmPolicyPolicyConditionRuleArgs{...}
 type GetAlarmPolicyPolicyConditionRuleInput interface {
 	pulumi.Input
 
@@ -11472,7 +11935,7 @@ func (i GetAlarmPolicyPolicyConditionRuleArgs) ToGetAlarmPolicyPolicyConditionRu
 // GetAlarmPolicyPolicyConditionRuleArrayInput is an input type that accepts GetAlarmPolicyPolicyConditionRuleArray and GetAlarmPolicyPolicyConditionRuleArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionRuleArrayInput` via:
 //
-//          GetAlarmPolicyPolicyConditionRuleArray{ GetAlarmPolicyPolicyConditionRuleArgs{...} }
+//	GetAlarmPolicyPolicyConditionRuleArray{ GetAlarmPolicyPolicyConditionRuleArgs{...} }
 type GetAlarmPolicyPolicyConditionRuleArrayInput interface {
 	pulumi.Input
 
@@ -11625,7 +12088,7 @@ type GetAlarmPolicyPolicyConditionRuleFilter struct {
 // GetAlarmPolicyPolicyConditionRuleFilterInput is an input type that accepts GetAlarmPolicyPolicyConditionRuleFilterArgs and GetAlarmPolicyPolicyConditionRuleFilterOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionRuleFilterInput` via:
 //
-//          GetAlarmPolicyPolicyConditionRuleFilterArgs{...}
+//	GetAlarmPolicyPolicyConditionRuleFilterArgs{...}
 type GetAlarmPolicyPolicyConditionRuleFilterInput interface {
 	pulumi.Input
 
@@ -11655,7 +12118,7 @@ func (i GetAlarmPolicyPolicyConditionRuleFilterArgs) ToGetAlarmPolicyPolicyCondi
 // GetAlarmPolicyPolicyConditionRuleFilterArrayInput is an input type that accepts GetAlarmPolicyPolicyConditionRuleFilterArray and GetAlarmPolicyPolicyConditionRuleFilterArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionRuleFilterArrayInput` via:
 //
-//          GetAlarmPolicyPolicyConditionRuleFilterArray{ GetAlarmPolicyPolicyConditionRuleFilterArgs{...} }
+//	GetAlarmPolicyPolicyConditionRuleFilterArray{ GetAlarmPolicyPolicyConditionRuleFilterArgs{...} }
 type GetAlarmPolicyPolicyConditionRuleFilterArrayInput interface {
 	pulumi.Input
 
@@ -11733,7 +12196,7 @@ type GetAlarmPolicyPolicyConditionRuleHierarchicalValue struct {
 // GetAlarmPolicyPolicyConditionRuleHierarchicalValueInput is an input type that accepts GetAlarmPolicyPolicyConditionRuleHierarchicalValueArgs and GetAlarmPolicyPolicyConditionRuleHierarchicalValueOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionRuleHierarchicalValueInput` via:
 //
-//          GetAlarmPolicyPolicyConditionRuleHierarchicalValueArgs{...}
+//	GetAlarmPolicyPolicyConditionRuleHierarchicalValueArgs{...}
 type GetAlarmPolicyPolicyConditionRuleHierarchicalValueInput interface {
 	pulumi.Input
 
@@ -11765,7 +12228,7 @@ func (i GetAlarmPolicyPolicyConditionRuleHierarchicalValueArgs) ToGetAlarmPolicy
 // GetAlarmPolicyPolicyConditionRuleHierarchicalValueArrayInput is an input type that accepts GetAlarmPolicyPolicyConditionRuleHierarchicalValueArray and GetAlarmPolicyPolicyConditionRuleHierarchicalValueArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionRuleHierarchicalValueArrayInput` via:
 //
-//          GetAlarmPolicyPolicyConditionRuleHierarchicalValueArray{ GetAlarmPolicyPolicyConditionRuleHierarchicalValueArgs{...} }
+//	GetAlarmPolicyPolicyConditionRuleHierarchicalValueArray{ GetAlarmPolicyPolicyConditionRuleHierarchicalValueArgs{...} }
 type GetAlarmPolicyPolicyConditionRuleHierarchicalValueArrayInput interface {
 	pulumi.Input
 
@@ -11848,7 +12311,7 @@ type GetAlarmPolicyPolicyConditionsTemp struct {
 // GetAlarmPolicyPolicyConditionsTempInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempArgs and GetAlarmPolicyPolicyConditionsTempOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempArgs{...}
+//	GetAlarmPolicyPolicyConditionsTempArgs{...}
 type GetAlarmPolicyPolicyConditionsTempInput interface {
 	pulumi.Input
 
@@ -11880,7 +12343,7 @@ func (i GetAlarmPolicyPolicyConditionsTempArgs) ToGetAlarmPolicyPolicyConditions
 // GetAlarmPolicyPolicyConditionsTempArrayInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempArray and GetAlarmPolicyPolicyConditionsTempArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempArrayInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempArray{ GetAlarmPolicyPolicyConditionsTempArgs{...} }
+//	GetAlarmPolicyPolicyConditionsTempArray{ GetAlarmPolicyPolicyConditionsTempArgs{...} }
 type GetAlarmPolicyPolicyConditionsTempArrayInput interface {
 	pulumi.Input
 
@@ -11967,7 +12430,7 @@ type GetAlarmPolicyPolicyConditionsTempCondition struct {
 // GetAlarmPolicyPolicyConditionsTempConditionInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempConditionArgs and GetAlarmPolicyPolicyConditionsTempConditionOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempConditionInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempConditionArgs{...}
+//	GetAlarmPolicyPolicyConditionsTempConditionArgs{...}
 type GetAlarmPolicyPolicyConditionsTempConditionInput interface {
 	pulumi.Input
 
@@ -11999,7 +12462,7 @@ func (i GetAlarmPolicyPolicyConditionsTempConditionArgs) ToGetAlarmPolicyPolicyC
 // GetAlarmPolicyPolicyConditionsTempConditionArrayInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempConditionArray and GetAlarmPolicyPolicyConditionsTempConditionArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempConditionArrayInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempConditionArray{ GetAlarmPolicyPolicyConditionsTempConditionArgs{...} }
+//	GetAlarmPolicyPolicyConditionsTempConditionArray{ GetAlarmPolicyPolicyConditionsTempConditionArgs{...} }
 type GetAlarmPolicyPolicyConditionsTempConditionArrayInput interface {
 	pulumi.Input
 
@@ -12112,7 +12575,7 @@ type GetAlarmPolicyPolicyConditionsTempConditionRule struct {
 // GetAlarmPolicyPolicyConditionsTempConditionRuleInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempConditionRuleArgs and GetAlarmPolicyPolicyConditionsTempConditionRuleOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempConditionRuleInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempConditionRuleArgs{...}
+//	GetAlarmPolicyPolicyConditionsTempConditionRuleArgs{...}
 type GetAlarmPolicyPolicyConditionsTempConditionRuleInput interface {
 	pulumi.Input
 
@@ -12172,7 +12635,7 @@ func (i GetAlarmPolicyPolicyConditionsTempConditionRuleArgs) ToGetAlarmPolicyPol
 // GetAlarmPolicyPolicyConditionsTempConditionRuleArrayInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempConditionRuleArray and GetAlarmPolicyPolicyConditionsTempConditionRuleArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempConditionRuleArrayInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempConditionRuleArray{ GetAlarmPolicyPolicyConditionsTempConditionRuleArgs{...} }
+//	GetAlarmPolicyPolicyConditionsTempConditionRuleArray{ GetAlarmPolicyPolicyConditionsTempConditionRuleArgs{...} }
 type GetAlarmPolicyPolicyConditionsTempConditionRuleArrayInput interface {
 	pulumi.Input
 
@@ -12327,7 +12790,7 @@ type GetAlarmPolicyPolicyConditionsTempConditionRuleFilter struct {
 // GetAlarmPolicyPolicyConditionsTempConditionRuleFilterInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempConditionRuleFilterArgs and GetAlarmPolicyPolicyConditionsTempConditionRuleFilterOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempConditionRuleFilterInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempConditionRuleFilterArgs{...}
+//	GetAlarmPolicyPolicyConditionsTempConditionRuleFilterArgs{...}
 type GetAlarmPolicyPolicyConditionsTempConditionRuleFilterInput interface {
 	pulumi.Input
 
@@ -12357,7 +12820,7 @@ func (i GetAlarmPolicyPolicyConditionsTempConditionRuleFilterArgs) ToGetAlarmPol
 // GetAlarmPolicyPolicyConditionsTempConditionRuleFilterArrayInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempConditionRuleFilterArray and GetAlarmPolicyPolicyConditionsTempConditionRuleFilterArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempConditionRuleFilterArrayInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempConditionRuleFilterArray{ GetAlarmPolicyPolicyConditionsTempConditionRuleFilterArgs{...} }
+//	GetAlarmPolicyPolicyConditionsTempConditionRuleFilterArray{ GetAlarmPolicyPolicyConditionsTempConditionRuleFilterArgs{...} }
 type GetAlarmPolicyPolicyConditionsTempConditionRuleFilterArrayInput interface {
 	pulumi.Input
 
@@ -12435,7 +12898,7 @@ type GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValue struct {
 // GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueArgs and GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueArgs{...}
+//	GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueArgs{...}
 type GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueInput interface {
 	pulumi.Input
 
@@ -12467,7 +12930,7 @@ func (i GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueArgs) To
 // GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueArrayInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueArray and GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueArrayInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueArray{ GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueArgs{...} }
+//	GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueArray{ GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueArgs{...} }
 type GetAlarmPolicyPolicyConditionsTempConditionRuleHierarchicalValueArrayInput interface {
 	pulumi.Input
 
@@ -12546,7 +13009,7 @@ type GetAlarmPolicyPolicyConditionsTempEventCondition struct {
 // GetAlarmPolicyPolicyConditionsTempEventConditionInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempEventConditionArgs and GetAlarmPolicyPolicyConditionsTempEventConditionOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempEventConditionInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempEventConditionArgs{...}
+//	GetAlarmPolicyPolicyConditionsTempEventConditionArgs{...}
 type GetAlarmPolicyPolicyConditionsTempEventConditionInput interface {
 	pulumi.Input
 
@@ -12574,7 +13037,7 @@ func (i GetAlarmPolicyPolicyConditionsTempEventConditionArgs) ToGetAlarmPolicyPo
 // GetAlarmPolicyPolicyConditionsTempEventConditionArrayInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempEventConditionArray and GetAlarmPolicyPolicyConditionsTempEventConditionArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempEventConditionArrayInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempEventConditionArray{ GetAlarmPolicyPolicyConditionsTempEventConditionArgs{...} }
+//	GetAlarmPolicyPolicyConditionsTempEventConditionArray{ GetAlarmPolicyPolicyConditionsTempEventConditionArgs{...} }
 type GetAlarmPolicyPolicyConditionsTempEventConditionArrayInput interface {
 	pulumi.Input
 
@@ -12677,7 +13140,7 @@ type GetAlarmPolicyPolicyConditionsTempEventConditionRule struct {
 // GetAlarmPolicyPolicyConditionsTempEventConditionRuleInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempEventConditionRuleArgs and GetAlarmPolicyPolicyConditionsTempEventConditionRuleOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempEventConditionRuleInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempEventConditionRuleArgs{...}
+//	GetAlarmPolicyPolicyConditionsTempEventConditionRuleArgs{...}
 type GetAlarmPolicyPolicyConditionsTempEventConditionRuleInput interface {
 	pulumi.Input
 
@@ -12737,7 +13200,7 @@ func (i GetAlarmPolicyPolicyConditionsTempEventConditionRuleArgs) ToGetAlarmPoli
 // GetAlarmPolicyPolicyConditionsTempEventConditionRuleArrayInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempEventConditionRuleArray and GetAlarmPolicyPolicyConditionsTempEventConditionRuleArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempEventConditionRuleArrayInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempEventConditionRuleArray{ GetAlarmPolicyPolicyConditionsTempEventConditionRuleArgs{...} }
+//	GetAlarmPolicyPolicyConditionsTempEventConditionRuleArray{ GetAlarmPolicyPolicyConditionsTempEventConditionRuleArgs{...} }
 type GetAlarmPolicyPolicyConditionsTempEventConditionRuleArrayInput interface {
 	pulumi.Input
 
@@ -12892,7 +13355,7 @@ type GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilter struct {
 // GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterArgs and GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterArgs{...}
+//	GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterArgs{...}
 type GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterInput interface {
 	pulumi.Input
 
@@ -12922,7 +13385,7 @@ func (i GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterArgs) ToGetAla
 // GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterArrayInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterArray and GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterArrayInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterArray{ GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterArgs{...} }
+//	GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterArray{ GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterArgs{...} }
 type GetAlarmPolicyPolicyConditionsTempEventConditionRuleFilterArrayInput interface {
 	pulumi.Input
 
@@ -13000,7 +13463,7 @@ type GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValue struc
 // GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueArgs and GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueArgs{...}
+//	GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueArgs{...}
 type GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueInput interface {
 	pulumi.Input
 
@@ -13032,7 +13495,7 @@ func (i GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueArg
 // GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueArrayInput is an input type that accepts GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueArray and GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueArrayInput` via:
 //
-//          GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueArray{ GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueArgs{...} }
+//	GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueArray{ GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueArgs{...} }
 type GetAlarmPolicyPolicyConditionsTempEventConditionRuleHierarchicalValueArrayInput interface {
 	pulumi.Input
 
@@ -13111,7 +13574,7 @@ type GetAlarmPolicyPolicyEventCondition struct {
 // GetAlarmPolicyPolicyEventConditionInput is an input type that accepts GetAlarmPolicyPolicyEventConditionArgs and GetAlarmPolicyPolicyEventConditionOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyEventConditionInput` via:
 //
-//          GetAlarmPolicyPolicyEventConditionArgs{...}
+//	GetAlarmPolicyPolicyEventConditionArgs{...}
 type GetAlarmPolicyPolicyEventConditionInput interface {
 	pulumi.Input
 
@@ -13139,7 +13602,7 @@ func (i GetAlarmPolicyPolicyEventConditionArgs) ToGetAlarmPolicyPolicyEventCondi
 // GetAlarmPolicyPolicyEventConditionArrayInput is an input type that accepts GetAlarmPolicyPolicyEventConditionArray and GetAlarmPolicyPolicyEventConditionArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyEventConditionArrayInput` via:
 //
-//          GetAlarmPolicyPolicyEventConditionArray{ GetAlarmPolicyPolicyEventConditionArgs{...} }
+//	GetAlarmPolicyPolicyEventConditionArray{ GetAlarmPolicyPolicyEventConditionArgs{...} }
 type GetAlarmPolicyPolicyEventConditionArrayInput interface {
 	pulumi.Input
 
@@ -13240,7 +13703,7 @@ type GetAlarmPolicyPolicyEventConditionRule struct {
 // GetAlarmPolicyPolicyEventConditionRuleInput is an input type that accepts GetAlarmPolicyPolicyEventConditionRuleArgs and GetAlarmPolicyPolicyEventConditionRuleOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyEventConditionRuleInput` via:
 //
-//          GetAlarmPolicyPolicyEventConditionRuleArgs{...}
+//	GetAlarmPolicyPolicyEventConditionRuleArgs{...}
 type GetAlarmPolicyPolicyEventConditionRuleInput interface {
 	pulumi.Input
 
@@ -13300,7 +13763,7 @@ func (i GetAlarmPolicyPolicyEventConditionRuleArgs) ToGetAlarmPolicyPolicyEventC
 // GetAlarmPolicyPolicyEventConditionRuleArrayInput is an input type that accepts GetAlarmPolicyPolicyEventConditionRuleArray and GetAlarmPolicyPolicyEventConditionRuleArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyEventConditionRuleArrayInput` via:
 //
-//          GetAlarmPolicyPolicyEventConditionRuleArray{ GetAlarmPolicyPolicyEventConditionRuleArgs{...} }
+//	GetAlarmPolicyPolicyEventConditionRuleArray{ GetAlarmPolicyPolicyEventConditionRuleArgs{...} }
 type GetAlarmPolicyPolicyEventConditionRuleArrayInput interface {
 	pulumi.Input
 
@@ -13455,7 +13918,7 @@ type GetAlarmPolicyPolicyEventConditionRuleFilter struct {
 // GetAlarmPolicyPolicyEventConditionRuleFilterInput is an input type that accepts GetAlarmPolicyPolicyEventConditionRuleFilterArgs and GetAlarmPolicyPolicyEventConditionRuleFilterOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyEventConditionRuleFilterInput` via:
 //
-//          GetAlarmPolicyPolicyEventConditionRuleFilterArgs{...}
+//	GetAlarmPolicyPolicyEventConditionRuleFilterArgs{...}
 type GetAlarmPolicyPolicyEventConditionRuleFilterInput interface {
 	pulumi.Input
 
@@ -13485,7 +13948,7 @@ func (i GetAlarmPolicyPolicyEventConditionRuleFilterArgs) ToGetAlarmPolicyPolicy
 // GetAlarmPolicyPolicyEventConditionRuleFilterArrayInput is an input type that accepts GetAlarmPolicyPolicyEventConditionRuleFilterArray and GetAlarmPolicyPolicyEventConditionRuleFilterArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyEventConditionRuleFilterArrayInput` via:
 //
-//          GetAlarmPolicyPolicyEventConditionRuleFilterArray{ GetAlarmPolicyPolicyEventConditionRuleFilterArgs{...} }
+//	GetAlarmPolicyPolicyEventConditionRuleFilterArray{ GetAlarmPolicyPolicyEventConditionRuleFilterArgs{...} }
 type GetAlarmPolicyPolicyEventConditionRuleFilterArrayInput interface {
 	pulumi.Input
 
@@ -13563,7 +14026,7 @@ type GetAlarmPolicyPolicyEventConditionRuleHierarchicalValue struct {
 // GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueInput is an input type that accepts GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueArgs and GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueInput` via:
 //
-//          GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueArgs{...}
+//	GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueArgs{...}
 type GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueInput interface {
 	pulumi.Input
 
@@ -13595,7 +14058,7 @@ func (i GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueArgs) ToGetAlarmP
 // GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueArrayInput is an input type that accepts GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueArray and GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueArrayInput` via:
 //
-//          GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueArray{ GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueArgs{...} }
+//	GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueArray{ GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueArgs{...} }
 type GetAlarmPolicyPolicyEventConditionRuleHierarchicalValueArrayInput interface {
 	pulumi.Input
 
@@ -13698,7 +14161,7 @@ type GetAlarmPolicyPolicyNotice struct {
 // GetAlarmPolicyPolicyNoticeInput is an input type that accepts GetAlarmPolicyPolicyNoticeArgs and GetAlarmPolicyPolicyNoticeOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyNoticeInput` via:
 //
-//          GetAlarmPolicyPolicyNoticeArgs{...}
+//	GetAlarmPolicyPolicyNoticeArgs{...}
 type GetAlarmPolicyPolicyNoticeInput interface {
 	pulumi.Input
 
@@ -13750,7 +14213,7 @@ func (i GetAlarmPolicyPolicyNoticeArgs) ToGetAlarmPolicyPolicyNoticeOutputWithCo
 // GetAlarmPolicyPolicyNoticeArrayInput is an input type that accepts GetAlarmPolicyPolicyNoticeArray and GetAlarmPolicyPolicyNoticeArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyNoticeArrayInput` via:
 //
-//          GetAlarmPolicyPolicyNoticeArray{ GetAlarmPolicyPolicyNoticeArgs{...} }
+//	GetAlarmPolicyPolicyNoticeArray{ GetAlarmPolicyPolicyNoticeArgs{...} }
 type GetAlarmPolicyPolicyNoticeArrayInput interface {
 	pulumi.Input
 
@@ -13885,7 +14348,7 @@ type GetAlarmPolicyPolicyNoticeClsNotice struct {
 // GetAlarmPolicyPolicyNoticeClsNoticeInput is an input type that accepts GetAlarmPolicyPolicyNoticeClsNoticeArgs and GetAlarmPolicyPolicyNoticeClsNoticeOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyNoticeClsNoticeInput` via:
 //
-//          GetAlarmPolicyPolicyNoticeClsNoticeArgs{...}
+//	GetAlarmPolicyPolicyNoticeClsNoticeArgs{...}
 type GetAlarmPolicyPolicyNoticeClsNoticeInput interface {
 	pulumi.Input
 
@@ -13919,7 +14382,7 @@ func (i GetAlarmPolicyPolicyNoticeClsNoticeArgs) ToGetAlarmPolicyPolicyNoticeCls
 // GetAlarmPolicyPolicyNoticeClsNoticeArrayInput is an input type that accepts GetAlarmPolicyPolicyNoticeClsNoticeArray and GetAlarmPolicyPolicyNoticeClsNoticeArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyNoticeClsNoticeArrayInput` via:
 //
-//          GetAlarmPolicyPolicyNoticeClsNoticeArray{ GetAlarmPolicyPolicyNoticeClsNoticeArgs{...} }
+//	GetAlarmPolicyPolicyNoticeClsNoticeArray{ GetAlarmPolicyPolicyNoticeClsNoticeArgs{...} }
 type GetAlarmPolicyPolicyNoticeClsNoticeArrayInput interface {
 	pulumi.Input
 
@@ -14005,7 +14468,7 @@ type GetAlarmPolicyPolicyNoticeTag struct {
 // GetAlarmPolicyPolicyNoticeTagInput is an input type that accepts GetAlarmPolicyPolicyNoticeTagArgs and GetAlarmPolicyPolicyNoticeTagOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyNoticeTagInput` via:
 //
-//          GetAlarmPolicyPolicyNoticeTagArgs{...}
+//	GetAlarmPolicyPolicyNoticeTagArgs{...}
 type GetAlarmPolicyPolicyNoticeTagInput interface {
 	pulumi.Input
 
@@ -14035,7 +14498,7 @@ func (i GetAlarmPolicyPolicyNoticeTagArgs) ToGetAlarmPolicyPolicyNoticeTagOutput
 // GetAlarmPolicyPolicyNoticeTagArrayInput is an input type that accepts GetAlarmPolicyPolicyNoticeTagArray and GetAlarmPolicyPolicyNoticeTagArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyNoticeTagArrayInput` via:
 //
-//          GetAlarmPolicyPolicyNoticeTagArray{ GetAlarmPolicyPolicyNoticeTagArgs{...} }
+//	GetAlarmPolicyPolicyNoticeTagArray{ GetAlarmPolicyPolicyNoticeTagArgs{...} }
 type GetAlarmPolicyPolicyNoticeTagArrayInput interface {
 	pulumi.Input
 
@@ -14119,7 +14582,7 @@ type GetAlarmPolicyPolicyNoticeUrlNotice struct {
 // GetAlarmPolicyPolicyNoticeUrlNoticeInput is an input type that accepts GetAlarmPolicyPolicyNoticeUrlNoticeArgs and GetAlarmPolicyPolicyNoticeUrlNoticeOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyNoticeUrlNoticeInput` via:
 //
-//          GetAlarmPolicyPolicyNoticeUrlNoticeArgs{...}
+//	GetAlarmPolicyPolicyNoticeUrlNoticeArgs{...}
 type GetAlarmPolicyPolicyNoticeUrlNoticeInput interface {
 	pulumi.Input
 
@@ -14157,7 +14620,7 @@ func (i GetAlarmPolicyPolicyNoticeUrlNoticeArgs) ToGetAlarmPolicyPolicyNoticeUrl
 // GetAlarmPolicyPolicyNoticeUrlNoticeArrayInput is an input type that accepts GetAlarmPolicyPolicyNoticeUrlNoticeArray and GetAlarmPolicyPolicyNoticeUrlNoticeArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyNoticeUrlNoticeArrayInput` via:
 //
-//          GetAlarmPolicyPolicyNoticeUrlNoticeArray{ GetAlarmPolicyPolicyNoticeUrlNoticeArgs{...} }
+//	GetAlarmPolicyPolicyNoticeUrlNoticeArray{ GetAlarmPolicyPolicyNoticeUrlNoticeArgs{...} }
 type GetAlarmPolicyPolicyNoticeUrlNoticeArrayInput interface {
 	pulumi.Input
 
@@ -14277,7 +14740,7 @@ type GetAlarmPolicyPolicyNoticeUserNotice struct {
 // GetAlarmPolicyPolicyNoticeUserNoticeInput is an input type that accepts GetAlarmPolicyPolicyNoticeUserNoticeArgs and GetAlarmPolicyPolicyNoticeUserNoticeOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyNoticeUserNoticeInput` via:
 //
-//          GetAlarmPolicyPolicyNoticeUserNoticeArgs{...}
+//	GetAlarmPolicyPolicyNoticeUserNoticeArgs{...}
 type GetAlarmPolicyPolicyNoticeUserNoticeInput interface {
 	pulumi.Input
 
@@ -14331,7 +14794,7 @@ func (i GetAlarmPolicyPolicyNoticeUserNoticeArgs) ToGetAlarmPolicyPolicyNoticeUs
 // GetAlarmPolicyPolicyNoticeUserNoticeArrayInput is an input type that accepts GetAlarmPolicyPolicyNoticeUserNoticeArray and GetAlarmPolicyPolicyNoticeUserNoticeArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyNoticeUserNoticeArrayInput` via:
 //
-//          GetAlarmPolicyPolicyNoticeUserNoticeArray{ GetAlarmPolicyPolicyNoticeUserNoticeArgs{...} }
+//	GetAlarmPolicyPolicyNoticeUserNoticeArray{ GetAlarmPolicyPolicyNoticeUserNoticeArgs{...} }
 type GetAlarmPolicyPolicyNoticeUserNoticeArrayInput interface {
 	pulumi.Input
 
@@ -14467,7 +14930,7 @@ type GetAlarmPolicyPolicyTag struct {
 // GetAlarmPolicyPolicyTagInput is an input type that accepts GetAlarmPolicyPolicyTagArgs and GetAlarmPolicyPolicyTagOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyTagInput` via:
 //
-//          GetAlarmPolicyPolicyTagArgs{...}
+//	GetAlarmPolicyPolicyTagArgs{...}
 type GetAlarmPolicyPolicyTagInput interface {
 	pulumi.Input
 
@@ -14497,7 +14960,7 @@ func (i GetAlarmPolicyPolicyTagArgs) ToGetAlarmPolicyPolicyTagOutputWithContext(
 // GetAlarmPolicyPolicyTagArrayInput is an input type that accepts GetAlarmPolicyPolicyTagArray and GetAlarmPolicyPolicyTagArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyTagArrayInput` via:
 //
-//          GetAlarmPolicyPolicyTagArray{ GetAlarmPolicyPolicyTagArgs{...} }
+//	GetAlarmPolicyPolicyTagArray{ GetAlarmPolicyPolicyTagArgs{...} }
 type GetAlarmPolicyPolicyTagArrayInput interface {
 	pulumi.Input
 
@@ -14583,7 +15046,7 @@ type GetAlarmPolicyPolicyTagInstance struct {
 // GetAlarmPolicyPolicyTagInstanceInput is an input type that accepts GetAlarmPolicyPolicyTagInstanceArgs and GetAlarmPolicyPolicyTagInstanceOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyTagInstanceInput` via:
 //
-//          GetAlarmPolicyPolicyTagInstanceArgs{...}
+//	GetAlarmPolicyPolicyTagInstanceArgs{...}
 type GetAlarmPolicyPolicyTagInstanceInput interface {
 	pulumi.Input
 
@@ -14623,7 +15086,7 @@ func (i GetAlarmPolicyPolicyTagInstanceArgs) ToGetAlarmPolicyPolicyTagInstanceOu
 // GetAlarmPolicyPolicyTagInstanceArrayInput is an input type that accepts GetAlarmPolicyPolicyTagInstanceArray and GetAlarmPolicyPolicyTagInstanceArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyTagInstanceArrayInput` via:
 //
-//          GetAlarmPolicyPolicyTagInstanceArray{ GetAlarmPolicyPolicyTagInstanceArgs{...} }
+//	GetAlarmPolicyPolicyTagInstanceArray{ GetAlarmPolicyPolicyTagInstanceArgs{...} }
 type GetAlarmPolicyPolicyTagInstanceArrayInput interface {
 	pulumi.Input
 
@@ -14724,7 +15187,7 @@ type GetAlarmPolicyPolicyTriggerTask struct {
 // GetAlarmPolicyPolicyTriggerTaskInput is an input type that accepts GetAlarmPolicyPolicyTriggerTaskArgs and GetAlarmPolicyPolicyTriggerTaskOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyTriggerTaskInput` via:
 //
-//          GetAlarmPolicyPolicyTriggerTaskArgs{...}
+//	GetAlarmPolicyPolicyTriggerTaskArgs{...}
 type GetAlarmPolicyPolicyTriggerTaskInput interface {
 	pulumi.Input
 
@@ -14754,7 +15217,7 @@ func (i GetAlarmPolicyPolicyTriggerTaskArgs) ToGetAlarmPolicyPolicyTriggerTaskOu
 // GetAlarmPolicyPolicyTriggerTaskArrayInput is an input type that accepts GetAlarmPolicyPolicyTriggerTaskArray and GetAlarmPolicyPolicyTriggerTaskArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyPolicyTriggerTaskArrayInput` via:
 //
-//          GetAlarmPolicyPolicyTriggerTaskArray{ GetAlarmPolicyPolicyTriggerTaskArgs{...} }
+//	GetAlarmPolicyPolicyTriggerTaskArray{ GetAlarmPolicyPolicyTriggerTaskArgs{...} }
 type GetAlarmPolicyPolicyTriggerTaskArrayInput interface {
 	pulumi.Input
 
@@ -14830,7 +15293,7 @@ type GetAlarmPolicyTriggerTask struct {
 // GetAlarmPolicyTriggerTaskInput is an input type that accepts GetAlarmPolicyTriggerTaskArgs and GetAlarmPolicyTriggerTaskOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyTriggerTaskInput` via:
 //
-//          GetAlarmPolicyTriggerTaskArgs{...}
+//	GetAlarmPolicyTriggerTaskArgs{...}
 type GetAlarmPolicyTriggerTaskInput interface {
 	pulumi.Input
 
@@ -14860,7 +15323,7 @@ func (i GetAlarmPolicyTriggerTaskArgs) ToGetAlarmPolicyTriggerTaskOutputWithCont
 // GetAlarmPolicyTriggerTaskArrayInput is an input type that accepts GetAlarmPolicyTriggerTaskArray and GetAlarmPolicyTriggerTaskArrayOutput values.
 // You can construct a concrete instance of `GetAlarmPolicyTriggerTaskArrayInput` via:
 //
-//          GetAlarmPolicyTriggerTaskArray{ GetAlarmPolicyTriggerTaskArgs{...} }
+//	GetAlarmPolicyTriggerTaskArray{ GetAlarmPolicyTriggerTaskArgs{...} }
 type GetAlarmPolicyTriggerTaskArrayInput interface {
 	pulumi.Input
 
@@ -14940,7 +15403,7 @@ type GetBindingObjectsList struct {
 // GetBindingObjectsListInput is an input type that accepts GetBindingObjectsListArgs and GetBindingObjectsListOutput values.
 // You can construct a concrete instance of `GetBindingObjectsListInput` via:
 //
-//          GetBindingObjectsListArgs{...}
+//	GetBindingObjectsListArgs{...}
 type GetBindingObjectsListInput interface {
 	pulumi.Input
 
@@ -14974,7 +15437,7 @@ func (i GetBindingObjectsListArgs) ToGetBindingObjectsListOutputWithContext(ctx 
 // GetBindingObjectsListArrayInput is an input type that accepts GetBindingObjectsListArray and GetBindingObjectsListArrayOutput values.
 // You can construct a concrete instance of `GetBindingObjectsListArrayInput` via:
 //
-//          GetBindingObjectsListArray{ GetBindingObjectsListArgs{...} }
+//	GetBindingObjectsListArray{ GetBindingObjectsListArgs{...} }
 type GetBindingObjectsListArrayInput interface {
 	pulumi.Input
 
@@ -15060,7 +15523,7 @@ type GetDataDimension struct {
 // GetDataDimensionInput is an input type that accepts GetDataDimensionArgs and GetDataDimensionOutput values.
 // You can construct a concrete instance of `GetDataDimensionInput` via:
 //
-//          GetDataDimensionArgs{...}
+//	GetDataDimensionArgs{...}
 type GetDataDimensionInput interface {
 	pulumi.Input
 
@@ -15090,7 +15553,7 @@ func (i GetDataDimensionArgs) ToGetDataDimensionOutputWithContext(ctx context.Co
 // GetDataDimensionArrayInput is an input type that accepts GetDataDimensionArray and GetDataDimensionArrayOutput values.
 // You can construct a concrete instance of `GetDataDimensionArrayInput` via:
 //
-//          GetDataDimensionArray{ GetDataDimensionArgs{...} }
+//	GetDataDimensionArray{ GetDataDimensionArgs{...} }
 type GetDataDimensionArrayInput interface {
 	pulumi.Input
 
@@ -15166,7 +15629,7 @@ type GetDataList struct {
 // GetDataListInput is an input type that accepts GetDataListArgs and GetDataListOutput values.
 // You can construct a concrete instance of `GetDataListInput` via:
 //
-//          GetDataListArgs{...}
+//	GetDataListArgs{...}
 type GetDataListInput interface {
 	pulumi.Input
 
@@ -15196,7 +15659,7 @@ func (i GetDataListArgs) ToGetDataListOutputWithContext(ctx context.Context) Get
 // GetDataListArrayInput is an input type that accepts GetDataListArray and GetDataListArrayOutput values.
 // You can construct a concrete instance of `GetDataListArrayInput` via:
 //
-//          GetDataListArray{ GetDataListArgs{...} }
+//	GetDataListArray{ GetDataListArgs{...} }
 type GetDataListArrayInput interface {
 	pulumi.Input
 
@@ -15272,7 +15735,7 @@ type GetGrafanaPluginOverviewsPluginSet struct {
 // GetGrafanaPluginOverviewsPluginSetInput is an input type that accepts GetGrafanaPluginOverviewsPluginSetArgs and GetGrafanaPluginOverviewsPluginSetOutput values.
 // You can construct a concrete instance of `GetGrafanaPluginOverviewsPluginSetInput` via:
 //
-//          GetGrafanaPluginOverviewsPluginSetArgs{...}
+//	GetGrafanaPluginOverviewsPluginSetArgs{...}
 type GetGrafanaPluginOverviewsPluginSetInput interface {
 	pulumi.Input
 
@@ -15302,7 +15765,7 @@ func (i GetGrafanaPluginOverviewsPluginSetArgs) ToGetGrafanaPluginOverviewsPlugi
 // GetGrafanaPluginOverviewsPluginSetArrayInput is an input type that accepts GetGrafanaPluginOverviewsPluginSetArray and GetGrafanaPluginOverviewsPluginSetArrayOutput values.
 // You can construct a concrete instance of `GetGrafanaPluginOverviewsPluginSetArrayInput` via:
 //
-//          GetGrafanaPluginOverviewsPluginSetArray{ GetGrafanaPluginOverviewsPluginSetArgs{...} }
+//	GetGrafanaPluginOverviewsPluginSetArray{ GetGrafanaPluginOverviewsPluginSetArgs{...} }
 type GetGrafanaPluginOverviewsPluginSetArrayInput interface {
 	pulumi.Input
 
@@ -15386,7 +15849,7 @@ type GetPolicyConditionsList struct {
 // GetPolicyConditionsListInput is an input type that accepts GetPolicyConditionsListArgs and GetPolicyConditionsListOutput values.
 // You can construct a concrete instance of `GetPolicyConditionsListInput` via:
 //
-//          GetPolicyConditionsListArgs{...}
+//	GetPolicyConditionsListArgs{...}
 type GetPolicyConditionsListInput interface {
 	pulumi.Input
 
@@ -15424,7 +15887,7 @@ func (i GetPolicyConditionsListArgs) ToGetPolicyConditionsListOutputWithContext(
 // GetPolicyConditionsListArrayInput is an input type that accepts GetPolicyConditionsListArray and GetPolicyConditionsListArrayOutput values.
 // You can construct a concrete instance of `GetPolicyConditionsListArrayInput` via:
 //
-//          GetPolicyConditionsListArray{ GetPolicyConditionsListArgs{...} }
+//	GetPolicyConditionsListArray{ GetPolicyConditionsListArgs{...} }
 type GetPolicyConditionsListArrayInput interface {
 	pulumi.Input
 
@@ -15522,7 +15985,7 @@ type GetPolicyConditionsListEventMetric struct {
 // GetPolicyConditionsListEventMetricInput is an input type that accepts GetPolicyConditionsListEventMetricArgs and GetPolicyConditionsListEventMetricOutput values.
 // You can construct a concrete instance of `GetPolicyConditionsListEventMetricInput` via:
 //
-//          GetPolicyConditionsListEventMetricArgs{...}
+//	GetPolicyConditionsListEventMetricArgs{...}
 type GetPolicyConditionsListEventMetricInput interface {
 	pulumi.Input
 
@@ -15554,7 +16017,7 @@ func (i GetPolicyConditionsListEventMetricArgs) ToGetPolicyConditionsListEventMe
 // GetPolicyConditionsListEventMetricArrayInput is an input type that accepts GetPolicyConditionsListEventMetricArray and GetPolicyConditionsListEventMetricArrayOutput values.
 // You can construct a concrete instance of `GetPolicyConditionsListEventMetricArrayInput` via:
 //
-//          GetPolicyConditionsListEventMetricArray{ GetPolicyConditionsListEventMetricArgs{...} }
+//	GetPolicyConditionsListEventMetricArray{ GetPolicyConditionsListEventMetricArgs{...} }
 type GetPolicyConditionsListEventMetricArrayInput interface {
 	pulumi.Input
 
@@ -15685,7 +16148,7 @@ type GetPolicyConditionsListMetric struct {
 // GetPolicyConditionsListMetricInput is an input type that accepts GetPolicyConditionsListMetricArgs and GetPolicyConditionsListMetricOutput values.
 // You can construct a concrete instance of `GetPolicyConditionsListMetricInput` via:
 //
-//          GetPolicyConditionsListMetricArgs{...}
+//	GetPolicyConditionsListMetricArgs{...}
 type GetPolicyConditionsListMetricInput interface {
 	pulumi.Input
 
@@ -15765,7 +16228,7 @@ func (i GetPolicyConditionsListMetricArgs) ToGetPolicyConditionsListMetricOutput
 // GetPolicyConditionsListMetricArrayInput is an input type that accepts GetPolicyConditionsListMetricArray and GetPolicyConditionsListMetricArrayOutput values.
 // You can construct a concrete instance of `GetPolicyConditionsListMetricArrayInput` via:
 //
-//          GetPolicyConditionsListMetricArray{ GetPolicyConditionsListMetricArgs{...} }
+//	GetPolicyConditionsListMetricArray{ GetPolicyConditionsListMetricArgs{...} }
 type GetPolicyConditionsListMetricArrayInput interface {
 	pulumi.Input
 
@@ -15996,7 +16459,7 @@ type GetPolicyGroupsList struct {
 // GetPolicyGroupsListInput is an input type that accepts GetPolicyGroupsListArgs and GetPolicyGroupsListOutput values.
 // You can construct a concrete instance of `GetPolicyGroupsListInput` via:
 //
-//          GetPolicyGroupsListArgs{...}
+//	GetPolicyGroupsListArgs{...}
 type GetPolicyGroupsListInput interface {
 	pulumi.Input
 
@@ -16056,7 +16519,7 @@ func (i GetPolicyGroupsListArgs) ToGetPolicyGroupsListOutputWithContext(ctx cont
 // GetPolicyGroupsListArrayInput is an input type that accepts GetPolicyGroupsListArray and GetPolicyGroupsListArrayOutput values.
 // You can construct a concrete instance of `GetPolicyGroupsListArrayInput` via:
 //
-//          GetPolicyGroupsListArray{ GetPolicyGroupsListArgs{...} }
+//	GetPolicyGroupsListArray{ GetPolicyGroupsListArgs{...} }
 type GetPolicyGroupsListArrayInput interface {
 	pulumi.Input
 
@@ -16223,7 +16686,7 @@ type GetPolicyGroupsListCondition struct {
 // GetPolicyGroupsListConditionInput is an input type that accepts GetPolicyGroupsListConditionArgs and GetPolicyGroupsListConditionOutput values.
 // You can construct a concrete instance of `GetPolicyGroupsListConditionInput` via:
 //
-//          GetPolicyGroupsListConditionArgs{...}
+//	GetPolicyGroupsListConditionArgs{...}
 type GetPolicyGroupsListConditionInput interface {
 	pulumi.Input
 
@@ -16269,7 +16732,7 @@ func (i GetPolicyGroupsListConditionArgs) ToGetPolicyGroupsListConditionOutputWi
 // GetPolicyGroupsListConditionArrayInput is an input type that accepts GetPolicyGroupsListConditionArray and GetPolicyGroupsListConditionArrayOutput values.
 // You can construct a concrete instance of `GetPolicyGroupsListConditionArrayInput` via:
 //
-//          GetPolicyGroupsListConditionArray{ GetPolicyGroupsListConditionArgs{...} }
+//	GetPolicyGroupsListConditionArray{ GetPolicyGroupsListConditionArgs{...} }
 type GetPolicyGroupsListConditionArrayInput interface {
 	pulumi.Input
 
@@ -16391,7 +16854,7 @@ type GetPolicyGroupsListEventCondition struct {
 // GetPolicyGroupsListEventConditionInput is an input type that accepts GetPolicyGroupsListEventConditionArgs and GetPolicyGroupsListEventConditionOutput values.
 // You can construct a concrete instance of `GetPolicyGroupsListEventConditionInput` via:
 //
-//          GetPolicyGroupsListEventConditionArgs{...}
+//	GetPolicyGroupsListEventConditionArgs{...}
 type GetPolicyGroupsListEventConditionInput interface {
 	pulumi.Input
 
@@ -16427,7 +16890,7 @@ func (i GetPolicyGroupsListEventConditionArgs) ToGetPolicyGroupsListEventConditi
 // GetPolicyGroupsListEventConditionArrayInput is an input type that accepts GetPolicyGroupsListEventConditionArray and GetPolicyGroupsListEventConditionArrayOutput values.
 // You can construct a concrete instance of `GetPolicyGroupsListEventConditionArrayInput` via:
 //
-//          GetPolicyGroupsListEventConditionArray{ GetPolicyGroupsListEventConditionArgs{...} }
+//	GetPolicyGroupsListEventConditionArray{ GetPolicyGroupsListEventConditionArgs{...} }
 type GetPolicyGroupsListEventConditionArrayInput interface {
 	pulumi.Input
 
@@ -16542,7 +17005,7 @@ type GetPolicyGroupsListReceiver struct {
 // GetPolicyGroupsListReceiverInput is an input type that accepts GetPolicyGroupsListReceiverArgs and GetPolicyGroupsListReceiverOutput values.
 // You can construct a concrete instance of `GetPolicyGroupsListReceiverInput` via:
 //
-//          GetPolicyGroupsListReceiverArgs{...}
+//	GetPolicyGroupsListReceiverArgs{...}
 type GetPolicyGroupsListReceiverInput interface {
 	pulumi.Input
 
@@ -16596,7 +17059,7 @@ func (i GetPolicyGroupsListReceiverArgs) ToGetPolicyGroupsListReceiverOutputWith
 // GetPolicyGroupsListReceiverArrayInput is an input type that accepts GetPolicyGroupsListReceiverArray and GetPolicyGroupsListReceiverArrayOutput values.
 // You can construct a concrete instance of `GetPolicyGroupsListReceiverArrayInput` via:
 //
-//          GetPolicyGroupsListReceiverArray{ GetPolicyGroupsListReceiverArgs{...} }
+//	GetPolicyGroupsListReceiverArray{ GetPolicyGroupsListReceiverArgs{...} }
 type GetPolicyGroupsListReceiverArrayInput interface {
 	pulumi.Input
 
@@ -16732,7 +17195,7 @@ type GetProductEventDimension struct {
 // GetProductEventDimensionInput is an input type that accepts GetProductEventDimensionArgs and GetProductEventDimensionOutput values.
 // You can construct a concrete instance of `GetProductEventDimensionInput` via:
 //
-//          GetProductEventDimensionArgs{...}
+//	GetProductEventDimensionArgs{...}
 type GetProductEventDimensionInput interface {
 	pulumi.Input
 
@@ -16762,7 +17225,7 @@ func (i GetProductEventDimensionArgs) ToGetProductEventDimensionOutputWithContex
 // GetProductEventDimensionArrayInput is an input type that accepts GetProductEventDimensionArray and GetProductEventDimensionArrayOutput values.
 // You can construct a concrete instance of `GetProductEventDimensionArrayInput` via:
 //
-//          GetProductEventDimensionArray{ GetProductEventDimensionArgs{...} }
+//	GetProductEventDimensionArray{ GetProductEventDimensionArgs{...} }
 type GetProductEventDimensionArrayInput interface {
 	pulumi.Input
 
@@ -16874,7 +17337,7 @@ type GetProductEventList struct {
 // GetProductEventListInput is an input type that accepts GetProductEventListArgs and GetProductEventListOutput values.
 // You can construct a concrete instance of `GetProductEventListInput` via:
 //
-//          GetProductEventListArgs{...}
+//	GetProductEventListArgs{...}
 type GetProductEventListInput interface {
 	pulumi.Input
 
@@ -16940,7 +17403,7 @@ func (i GetProductEventListArgs) ToGetProductEventListOutputWithContext(ctx cont
 // GetProductEventListArrayInput is an input type that accepts GetProductEventListArray and GetProductEventListArrayOutput values.
 // You can construct a concrete instance of `GetProductEventListArrayInput` via:
 //
-//          GetProductEventListArray{ GetProductEventListArgs{...} }
+//	GetProductEventListArray{ GetProductEventListArgs{...} }
 type GetProductEventListArrayInput interface {
 	pulumi.Input
 
@@ -17108,7 +17571,7 @@ type GetProductEventListAdditionMsg struct {
 // GetProductEventListAdditionMsgInput is an input type that accepts GetProductEventListAdditionMsgArgs and GetProductEventListAdditionMsgOutput values.
 // You can construct a concrete instance of `GetProductEventListAdditionMsgInput` via:
 //
-//          GetProductEventListAdditionMsgArgs{...}
+//	GetProductEventListAdditionMsgArgs{...}
 type GetProductEventListAdditionMsgInput interface {
 	pulumi.Input
 
@@ -17140,7 +17603,7 @@ func (i GetProductEventListAdditionMsgArgs) ToGetProductEventListAdditionMsgOutp
 // GetProductEventListAdditionMsgArrayInput is an input type that accepts GetProductEventListAdditionMsgArray and GetProductEventListAdditionMsgArrayOutput values.
 // You can construct a concrete instance of `GetProductEventListAdditionMsgArrayInput` via:
 //
-//          GetProductEventListAdditionMsgArray{ GetProductEventListAdditionMsgArgs{...} }
+//	GetProductEventListAdditionMsgArray{ GetProductEventListAdditionMsgArgs{...} }
 type GetProductEventListAdditionMsgArrayInput interface {
 	pulumi.Input
 
@@ -17223,7 +17686,7 @@ type GetProductEventListDimension struct {
 // GetProductEventListDimensionInput is an input type that accepts GetProductEventListDimensionArgs and GetProductEventListDimensionOutput values.
 // You can construct a concrete instance of `GetProductEventListDimensionInput` via:
 //
-//          GetProductEventListDimensionArgs{...}
+//	GetProductEventListDimensionArgs{...}
 type GetProductEventListDimensionInput interface {
 	pulumi.Input
 
@@ -17255,7 +17718,7 @@ func (i GetProductEventListDimensionArgs) ToGetProductEventListDimensionOutputWi
 // GetProductEventListDimensionArrayInput is an input type that accepts GetProductEventListDimensionArray and GetProductEventListDimensionArrayOutput values.
 // You can construct a concrete instance of `GetProductEventListDimensionArrayInput` via:
 //
-//          GetProductEventListDimensionArray{ GetProductEventListDimensionArgs{...} }
+//	GetProductEventListDimensionArray{ GetProductEventListDimensionArgs{...} }
 type GetProductEventListDimensionArrayInput interface {
 	pulumi.Input
 
@@ -17336,7 +17799,7 @@ type GetProductEventListGroupInfo struct {
 // GetProductEventListGroupInfoInput is an input type that accepts GetProductEventListGroupInfoArgs and GetProductEventListGroupInfoOutput values.
 // You can construct a concrete instance of `GetProductEventListGroupInfoInput` via:
 //
-//          GetProductEventListGroupInfoArgs{...}
+//	GetProductEventListGroupInfoArgs{...}
 type GetProductEventListGroupInfoInput interface {
 	pulumi.Input
 
@@ -17366,7 +17829,7 @@ func (i GetProductEventListGroupInfoArgs) ToGetProductEventListGroupInfoOutputWi
 // GetProductEventListGroupInfoArrayInput is an input type that accepts GetProductEventListGroupInfoArray and GetProductEventListGroupInfoArrayOutput values.
 // You can construct a concrete instance of `GetProductEventListGroupInfoArrayInput` via:
 //
-//          GetProductEventListGroupInfoArray{ GetProductEventListGroupInfoArgs{...} }
+//	GetProductEventListGroupInfoArray{ GetProductEventListGroupInfoArgs{...} }
 type GetProductEventListGroupInfoArrayInput interface {
 	pulumi.Input
 
@@ -17444,7 +17907,7 @@ type GetProductNamespaceList struct {
 // GetProductNamespaceListInput is an input type that accepts GetProductNamespaceListArgs and GetProductNamespaceListOutput values.
 // You can construct a concrete instance of `GetProductNamespaceListInput` via:
 //
-//          GetProductNamespaceListArgs{...}
+//	GetProductNamespaceListArgs{...}
 type GetProductNamespaceListInput interface {
 	pulumi.Input
 
@@ -17476,7 +17939,7 @@ func (i GetProductNamespaceListArgs) ToGetProductNamespaceListOutputWithContext(
 // GetProductNamespaceListArrayInput is an input type that accepts GetProductNamespaceListArray and GetProductNamespaceListArrayOutput values.
 // You can construct a concrete instance of `GetProductNamespaceListArrayInput` via:
 //
-//          GetProductNamespaceListArray{ GetProductNamespaceListArgs{...} }
+//	GetProductNamespaceListArray{ GetProductNamespaceListArgs{...} }
 type GetProductNamespaceListArrayInput interface {
 	pulumi.Input
 
@@ -17556,7 +18019,7 @@ type GetStatisticDataCondition struct {
 // GetStatisticDataConditionInput is an input type that accepts GetStatisticDataConditionArgs and GetStatisticDataConditionOutput values.
 // You can construct a concrete instance of `GetStatisticDataConditionInput` via:
 //
-//          GetStatisticDataConditionArgs{...}
+//	GetStatisticDataConditionArgs{...}
 type GetStatisticDataConditionInput interface {
 	pulumi.Input
 
@@ -17585,7 +18048,7 @@ func (i GetStatisticDataConditionArgs) ToGetStatisticDataConditionOutputWithCont
 // GetStatisticDataConditionArrayInput is an input type that accepts GetStatisticDataConditionArray and GetStatisticDataConditionArrayOutput values.
 // You can construct a concrete instance of `GetStatisticDataConditionArrayInput` via:
 //
-//          GetStatisticDataConditionArray{ GetStatisticDataConditionArgs{...} }
+//	GetStatisticDataConditionArray{ GetStatisticDataConditionArgs{...} }
 type GetStatisticDataConditionArrayInput interface {
 	pulumi.Input
 
@@ -17661,7 +18124,7 @@ type GetStatisticDataData struct {
 // GetStatisticDataDataInput is an input type that accepts GetStatisticDataDataArgs and GetStatisticDataDataOutput values.
 // You can construct a concrete instance of `GetStatisticDataDataInput` via:
 //
-//          GetStatisticDataDataArgs{...}
+//	GetStatisticDataDataArgs{...}
 type GetStatisticDataDataInput interface {
 	pulumi.Input
 
@@ -17689,7 +18152,7 @@ func (i GetStatisticDataDataArgs) ToGetStatisticDataDataOutputWithContext(ctx co
 // GetStatisticDataDataArrayInput is an input type that accepts GetStatisticDataDataArray and GetStatisticDataDataArrayOutput values.
 // You can construct a concrete instance of `GetStatisticDataDataArrayInput` via:
 //
-//          GetStatisticDataDataArray{ GetStatisticDataDataArgs{...} }
+//	GetStatisticDataDataArray{ GetStatisticDataDataArgs{...} }
 type GetStatisticDataDataArrayInput interface {
 	pulumi.Input
 
@@ -17761,7 +18224,7 @@ type GetStatisticDataDataPoint struct {
 // GetStatisticDataDataPointInput is an input type that accepts GetStatisticDataDataPointArgs and GetStatisticDataDataPointOutput values.
 // You can construct a concrete instance of `GetStatisticDataDataPointInput` via:
 //
-//          GetStatisticDataDataPointArgs{...}
+//	GetStatisticDataDataPointArgs{...}
 type GetStatisticDataDataPointInput interface {
 	pulumi.Input
 
@@ -17789,7 +18252,7 @@ func (i GetStatisticDataDataPointArgs) ToGetStatisticDataDataPointOutputWithCont
 // GetStatisticDataDataPointArrayInput is an input type that accepts GetStatisticDataDataPointArray and GetStatisticDataDataPointArrayOutput values.
 // You can construct a concrete instance of `GetStatisticDataDataPointArrayInput` via:
 //
-//          GetStatisticDataDataPointArray{ GetStatisticDataDataPointArgs{...} }
+//	GetStatisticDataDataPointArray{ GetStatisticDataDataPointArgs{...} }
 type GetStatisticDataDataPointArrayInput interface {
 	pulumi.Input
 
@@ -17861,7 +18324,7 @@ type GetStatisticDataDataPointDimension struct {
 // GetStatisticDataDataPointDimensionInput is an input type that accepts GetStatisticDataDataPointDimensionArgs and GetStatisticDataDataPointDimensionOutput values.
 // You can construct a concrete instance of `GetStatisticDataDataPointDimensionInput` via:
 //
-//          GetStatisticDataDataPointDimensionArgs{...}
+//	GetStatisticDataDataPointDimensionArgs{...}
 type GetStatisticDataDataPointDimensionInput interface {
 	pulumi.Input
 
@@ -17889,7 +18352,7 @@ func (i GetStatisticDataDataPointDimensionArgs) ToGetStatisticDataDataPointDimen
 // GetStatisticDataDataPointDimensionArrayInput is an input type that accepts GetStatisticDataDataPointDimensionArray and GetStatisticDataDataPointDimensionArrayOutput values.
 // You can construct a concrete instance of `GetStatisticDataDataPointDimensionArrayInput` via:
 //
-//          GetStatisticDataDataPointDimensionArray{ GetStatisticDataDataPointDimensionArgs{...} }
+//	GetStatisticDataDataPointDimensionArray{ GetStatisticDataDataPointDimensionArgs{...} }
 type GetStatisticDataDataPointDimensionArrayInput interface {
 	pulumi.Input
 
@@ -17961,7 +18424,7 @@ type GetStatisticDataDataPointValue struct {
 // GetStatisticDataDataPointValueInput is an input type that accepts GetStatisticDataDataPointValueArgs and GetStatisticDataDataPointValueOutput values.
 // You can construct a concrete instance of `GetStatisticDataDataPointValueInput` via:
 //
-//          GetStatisticDataDataPointValueArgs{...}
+//	GetStatisticDataDataPointValueArgs{...}
 type GetStatisticDataDataPointValueInput interface {
 	pulumi.Input
 
@@ -17989,7 +18452,7 @@ func (i GetStatisticDataDataPointValueArgs) ToGetStatisticDataDataPointValueOutp
 // GetStatisticDataDataPointValueArrayInput is an input type that accepts GetStatisticDataDataPointValueArray and GetStatisticDataDataPointValueArrayOutput values.
 // You can construct a concrete instance of `GetStatisticDataDataPointValueArrayInput` via:
 //
-//          GetStatisticDataDataPointValueArray{ GetStatisticDataDataPointValueArgs{...} }
+//	GetStatisticDataDataPointValueArray{ GetStatisticDataDataPointValueArgs{...} }
 type GetStatisticDataDataPointValueArrayInput interface {
 	pulumi.Input
 
@@ -18073,7 +18536,7 @@ type GetTmpRegionsRegionSet struct {
 // GetTmpRegionsRegionSetInput is an input type that accepts GetTmpRegionsRegionSetArgs and GetTmpRegionsRegionSetOutput values.
 // You can construct a concrete instance of `GetTmpRegionsRegionSetInput` via:
 //
-//          GetTmpRegionsRegionSetArgs{...}
+//	GetTmpRegionsRegionSetArgs{...}
 type GetTmpRegionsRegionSetInput interface {
 	pulumi.Input
 
@@ -18113,7 +18576,7 @@ func (i GetTmpRegionsRegionSetArgs) ToGetTmpRegionsRegionSetOutputWithContext(ct
 // GetTmpRegionsRegionSetArrayInput is an input type that accepts GetTmpRegionsRegionSetArray and GetTmpRegionsRegionSetArrayOutput values.
 // You can construct a concrete instance of `GetTmpRegionsRegionSetArrayInput` via:
 //
-//          GetTmpRegionsRegionSetArray{ GetTmpRegionsRegionSetArgs{...} }
+//	GetTmpRegionsRegionSetArray{ GetTmpRegionsRegionSetArgs{...} }
 type GetTmpRegionsRegionSetArrayInput interface {
 	pulumi.Input
 
@@ -18233,6 +18696,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GrafanaSsoAccountRoleArrayInput)(nil)).Elem(), GrafanaSsoAccountRoleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PolicyBindingObjectDimensionInput)(nil)).Elem(), PolicyBindingObjectDimensionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PolicyBindingObjectDimensionArrayInput)(nil)).Elem(), PolicyBindingObjectDimensionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertGroupCustomReceiverInput)(nil)).Elem(), TmpAlertGroupCustomReceiverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertGroupCustomReceiverPtrInput)(nil)).Elem(), TmpAlertGroupCustomReceiverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertGroupCustomReceiverAllowedTimeRangeInput)(nil)).Elem(), TmpAlertGroupCustomReceiverAllowedTimeRangeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertGroupCustomReceiverAllowedTimeRangeArrayInput)(nil)).Elem(), TmpAlertGroupCustomReceiverAllowedTimeRangeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertGroupRuleInput)(nil)).Elem(), TmpAlertGroupRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertGroupRuleArrayInput)(nil)).Elem(), TmpAlertGroupRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertRuleAnnotationInput)(nil)).Elem(), TmpAlertRuleAnnotationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertRuleAnnotationArrayInput)(nil)).Elem(), TmpAlertRuleAnnotationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertRuleLabelInput)(nil)).Elem(), TmpAlertRuleLabelArgs{})
@@ -18467,6 +18936,12 @@ func init() {
 	pulumi.RegisterOutputType(GrafanaSsoAccountRoleArrayOutput{})
 	pulumi.RegisterOutputType(PolicyBindingObjectDimensionOutput{})
 	pulumi.RegisterOutputType(PolicyBindingObjectDimensionArrayOutput{})
+	pulumi.RegisterOutputType(TmpAlertGroupCustomReceiverOutput{})
+	pulumi.RegisterOutputType(TmpAlertGroupCustomReceiverPtrOutput{})
+	pulumi.RegisterOutputType(TmpAlertGroupCustomReceiverAllowedTimeRangeOutput{})
+	pulumi.RegisterOutputType(TmpAlertGroupCustomReceiverAllowedTimeRangeArrayOutput{})
+	pulumi.RegisterOutputType(TmpAlertGroupRuleOutput{})
+	pulumi.RegisterOutputType(TmpAlertGroupRuleArrayOutput{})
 	pulumi.RegisterOutputType(TmpAlertRuleAnnotationOutput{})
 	pulumi.RegisterOutputType(TmpAlertRuleAnnotationArrayOutput{})
 	pulumi.RegisterOutputType(TmpAlertRuleLabelOutput{})

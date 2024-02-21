@@ -19,28 +19,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.NewStopJob(ctx, "example", &Oceanus.StopJobArgs{
-// 			StopJobDescriptions: oceanus.StopJobStopJobDescriptionArray{
-// 				&oceanus.StopJobStopJobDescriptionArgs{
-// 					JobId:    pulumi.String("cql-4xwincyn"),
-// 					StopType: pulumi.Int(1),
-// 				},
-// 			},
-// 			WorkSpaceId: pulumi.String("space-2idq8wbr"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.NewStopJob(ctx, "example", &Oceanus.StopJobArgs{
+//				StopJobDescriptions: oceanus.StopJobStopJobDescriptionArray{
+//					&oceanus.StopJobStopJobDescriptionArgs{
+//						JobId:    pulumi.String("cql-4xwincyn"),
+//						StopType: pulumi.Int(1),
+//					},
+//				},
+//				WorkSpaceId: pulumi.String("space-2idq8wbr"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type StopJob struct {
 	pulumi.CustomResourceState
@@ -142,7 +145,7 @@ func (i *StopJob) ToStopJobOutputWithContext(ctx context.Context) StopJobOutput 
 // StopJobArrayInput is an input type that accepts StopJobArray and StopJobArrayOutput values.
 // You can construct a concrete instance of `StopJobArrayInput` via:
 //
-//          StopJobArray{ StopJobArgs{...} }
+//	StopJobArray{ StopJobArgs{...} }
 type StopJobArrayInput interface {
 	pulumi.Input
 
@@ -167,7 +170,7 @@ func (i StopJobArray) ToStopJobArrayOutputWithContext(ctx context.Context) StopJ
 // StopJobMapInput is an input type that accepts StopJobMap and StopJobMapOutput values.
 // You can construct a concrete instance of `StopJobMapInput` via:
 //
-//          StopJobMap{ "key": StopJobArgs{...} }
+//	StopJobMap{ "key": StopJobArgs{...} }
 type StopJobMapInput interface {
 	pulumi.Input
 

@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.GetDescribeHostUpdateRecord(ctx, &ssl.GetDescribeHostUpdateRecordArgs{
-// 			OldCertificateId: pulumi.StringRef("8u8DII0l"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.GetDescribeHostUpdateRecord(ctx, &ssl.GetDescribeHostUpdateRecordArgs{
+//				OldCertificateId: pulumi.StringRef("8u8DII0l"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDescribeHostUpdateRecord(ctx *pulumi.Context, args *GetDescribeHostUpdateRecordArgs, opts ...pulumi.InvokeOption) (*GetDescribeHostUpdateRecordResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

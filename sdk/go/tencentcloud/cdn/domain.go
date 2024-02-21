@@ -21,47 +21,50 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cdn.NewDomain(ctx, "foo", &Cdn.DomainArgs{
-// 			Area:         pulumi.String("mainland"),
-// 			Domain:       pulumi.String("xxxx.com"),
-// 			FullUrlCache: pulumi.Bool(false),
-// 			HttpsConfig: &cdn.DomainHttpsConfigArgs{
-// 				ForceRedirect: &cdn.DomainHttpsConfigForceRedirectArgs{
-// 					RedirectStatusCode: pulumi.Int(302),
-// 					RedirectType:       pulumi.String("http"),
-// 					Switch:             pulumi.String("on"),
-// 				},
-// 				Http2Switch:        pulumi.String("off"),
-// 				HttpsSwitch:        pulumi.String("off"),
-// 				OcspStaplingSwitch: pulumi.String("off"),
-// 				SpdySwitch:         pulumi.String("off"),
-// 				VerifyClient:       pulumi.String("off"),
-// 			},
-// 			Origin: &cdn.DomainOriginArgs{
-// 				OriginLists: pulumi.StringArray{
-// 					pulumi.String("127.0.0.1"),
-// 				},
-// 				OriginPullProtocol: pulumi.String("follow"),
-// 				OriginType:         pulumi.String("ip"),
-// 			},
-// 			ServiceType: pulumi.String("web"),
-// 			Tags: pulumi.AnyMap{
-// 				"hello": pulumi.Any("world"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cdn.NewDomain(ctx, "foo", &Cdn.DomainArgs{
+//				Area:         pulumi.String("mainland"),
+//				Domain:       pulumi.String("xxxx.com"),
+//				FullUrlCache: pulumi.Bool(false),
+//				HttpsConfig: &cdn.DomainHttpsConfigArgs{
+//					ForceRedirect: &cdn.DomainHttpsConfigForceRedirectArgs{
+//						RedirectStatusCode: pulumi.Int(302),
+//						RedirectType:       pulumi.String("http"),
+//						Switch:             pulumi.String("on"),
+//					},
+//					Http2Switch:        pulumi.String("off"),
+//					HttpsSwitch:        pulumi.String("off"),
+//					OcspStaplingSwitch: pulumi.String("off"),
+//					SpdySwitch:         pulumi.String("off"),
+//					VerifyClient:       pulumi.String("off"),
+//				},
+//				Origin: &cdn.DomainOriginArgs{
+//					OriginLists: pulumi.StringArray{
+//						pulumi.String("127.0.0.1"),
+//					},
+//					OriginPullProtocol: pulumi.String("follow"),
+//					OriginType:         pulumi.String("ip"),
+//				},
+//				ServiceType: pulumi.String("web"),
+//				Tags: pulumi.AnyMap{
+//					"hello": pulumi.Any("world"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Example Usage of cdn uses cache and request headers
 //
@@ -69,71 +72,74 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cdn.NewDomain(ctx, "foo", &Cdn.DomainArgs{
-// 			Area: pulumi.String("mainland"),
-// 			CacheKey: &cdn.DomainCacheKeyArgs{
-// 				FullUrlCache: pulumi.String("on"),
-// 			},
-// 			Domain: pulumi.String("xxxx.com"),
-// 			HttpsConfig: &cdn.DomainHttpsConfigArgs{
-// 				ForceRedirect: &cdn.DomainHttpsConfigForceRedirectArgs{
-// 					RedirectStatusCode: pulumi.Int(302),
-// 					RedirectType:       pulumi.String("http"),
-// 					Switch:             pulumi.String("on"),
-// 				},
-// 				Http2Switch:        pulumi.String("off"),
-// 				HttpsSwitch:        pulumi.String("off"),
-// 				OcspStaplingSwitch: pulumi.String("off"),
-// 				SpdySwitch:         pulumi.String("off"),
-// 				VerifyClient:       pulumi.String("off"),
-// 			},
-// 			Origin: &cdn.DomainOriginArgs{
-// 				OriginLists: pulumi.StringArray{
-// 					pulumi.String("127.0.0.1"),
-// 				},
-// 				OriginPullProtocol: pulumi.String("follow"),
-// 				OriginType:         pulumi.String("ip"),
-// 			},
-// 			RangeOriginSwitch: pulumi.String("off"),
-// 			RequestHeader: &cdn.DomainRequestHeaderArgs{
-// 				HeaderRules: cdn.DomainRequestHeaderHeaderRuleArray{
-// 					&cdn.DomainRequestHeaderHeaderRuleArgs{
-// 						HeaderMode:  pulumi.String("add"),
-// 						HeaderName:  pulumi.String("tf-header-name"),
-// 						HeaderValue: pulumi.String("tf-header-value"),
-// 						RulePaths: pulumi.StringArray{
-// 							pulumi.String("*"),
-// 						},
-// 						RuleType: pulumi.String("all"),
-// 					},
-// 				},
-// 				Switch: pulumi.String("on"),
-// 			},
-// 			RuleCaches: cdn.DomainRuleCachArray{
-// 				&cdn.DomainRuleCachArgs{
-// 					CacheTime:     pulumi.Int(10000),
-// 					NoCacheSwitch: pulumi.String("on"),
-// 					ReValidate:    pulumi.String("on"),
-// 				},
-// 			},
-// 			ServiceType: pulumi.String("web"),
-// 			Tags: pulumi.AnyMap{
-// 				"hello": pulumi.Any("world"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cdn.NewDomain(ctx, "foo", &Cdn.DomainArgs{
+//				Area: pulumi.String("mainland"),
+//				CacheKey: &cdn.DomainCacheKeyArgs{
+//					FullUrlCache: pulumi.String("on"),
+//				},
+//				Domain: pulumi.String("xxxx.com"),
+//				HttpsConfig: &cdn.DomainHttpsConfigArgs{
+//					ForceRedirect: &cdn.DomainHttpsConfigForceRedirectArgs{
+//						RedirectStatusCode: pulumi.Int(302),
+//						RedirectType:       pulumi.String("http"),
+//						Switch:             pulumi.String("on"),
+//					},
+//					Http2Switch:        pulumi.String("off"),
+//					HttpsSwitch:        pulumi.String("off"),
+//					OcspStaplingSwitch: pulumi.String("off"),
+//					SpdySwitch:         pulumi.String("off"),
+//					VerifyClient:       pulumi.String("off"),
+//				},
+//				Origin: &cdn.DomainOriginArgs{
+//					OriginLists: pulumi.StringArray{
+//						pulumi.String("127.0.0.1"),
+//					},
+//					OriginPullProtocol: pulumi.String("follow"),
+//					OriginType:         pulumi.String("ip"),
+//				},
+//				RangeOriginSwitch: pulumi.String("off"),
+//				RequestHeader: &cdn.DomainRequestHeaderArgs{
+//					HeaderRules: cdn.DomainRequestHeaderHeaderRuleArray{
+//						&cdn.DomainRequestHeaderHeaderRuleArgs{
+//							HeaderMode:  pulumi.String("add"),
+//							HeaderName:  pulumi.String("tf-header-name"),
+//							HeaderValue: pulumi.String("tf-header-value"),
+//							RulePaths: pulumi.StringArray{
+//								pulumi.String("*"),
+//							},
+//							RuleType: pulumi.String("all"),
+//						},
+//					},
+//					Switch: pulumi.String("on"),
+//				},
+//				RuleCaches: cdn.DomainRuleCachArray{
+//					&cdn.DomainRuleCachArgs{
+//						CacheTime:     pulumi.Int(10000),
+//						NoCacheSwitch: pulumi.String("on"),
+//						ReValidate:    pulumi.String("on"),
+//					},
+//				},
+//				ServiceType: pulumi.String("web"),
+//				Tags: pulumi.AnyMap{
+//					"hello": pulumi.Any("world"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Example Usage of COS bucket url as origin
 //
@@ -141,51 +147,54 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		bucket, err := Cos.NewBucket(ctx, "bucket", &Cos.BucketArgs{
-// 			Bucket: pulumi.String("demo-bucket-1251234567"),
-// 			Acl:    pulumi.String("private"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cdn.NewDomain(ctx, "cdn", &Cdn.DomainArgs{
-// 			Domain:      pulumi.String("abc.com"),
-// 			ServiceType: pulumi.String("web"),
-// 			Area:        pulumi.String("mainland"),
-// 			CacheKey: &cdn.DomainCacheKeyArgs{
-// 				FullUrlCache: pulumi.String("off"),
-// 			},
-// 			Origin: &cdn.DomainOriginArgs{
-// 				OriginType: pulumi.String("cos"),
-// 				OriginLists: pulumi.StringArray{
-// 					bucket.CosBucketUrl,
-// 				},
-// 				ServerName:         bucket.CosBucketUrl,
-// 				OriginPullProtocol: pulumi.String("follow"),
-// 				CosPrivateAccess:   pulumi.String("on"),
-// 			},
-// 			HttpsConfig: &cdn.DomainHttpsConfigArgs{
-// 				HttpsSwitch:        pulumi.String("off"),
-// 				Http2Switch:        pulumi.String("off"),
-// 				OcspStaplingSwitch: pulumi.String("off"),
-// 				SpdySwitch:         pulumi.String("off"),
-// 				VerifyClient:       pulumi.String("off"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			bucket, err := Cos.NewBucket(ctx, "bucket", &Cos.BucketArgs{
+//				Bucket: pulumi.String("demo-bucket-1251234567"),
+//				Acl:    pulumi.String("private"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cdn.NewDomain(ctx, "cdn", &Cdn.DomainArgs{
+//				Domain:      pulumi.String("abc.com"),
+//				ServiceType: pulumi.String("web"),
+//				Area:        pulumi.String("mainland"),
+//				CacheKey: &cdn.DomainCacheKeyArgs{
+//					FullUrlCache: pulumi.String("off"),
+//				},
+//				Origin: &cdn.DomainOriginArgs{
+//					OriginType: pulumi.String("cos"),
+//					OriginLists: pulumi.StringArray{
+//						bucket.CosBucketUrl,
+//					},
+//					ServerName:         bucket.CosBucketUrl,
+//					OriginPullProtocol: pulumi.String("follow"),
+//					CosPrivateAccess:   pulumi.String("on"),
+//				},
+//				HttpsConfig: &cdn.DomainHttpsConfigArgs{
+//					HttpsSwitch:        pulumi.String("off"),
+//					Http2Switch:        pulumi.String("off"),
+//					OcspStaplingSwitch: pulumi.String("off"),
+//					SpdySwitch:         pulumi.String("off"),
+//					VerifyClient:       pulumi.String("off"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -193,7 +202,9 @@ import (
 // CDN domain can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cdn/domain:Domain foo xxxx.com
+//
+//	$ pulumi import tencentcloud:Cdn/domain:Domain foo xxxx.com
+//
 // ```
 type Domain struct {
 	pulumi.CustomResourceState
@@ -721,7 +732,7 @@ func (i *Domain) ToDomainOutputWithContext(ctx context.Context) DomainOutput {
 // DomainArrayInput is an input type that accepts DomainArray and DomainArrayOutput values.
 // You can construct a concrete instance of `DomainArrayInput` via:
 //
-//          DomainArray{ DomainArgs{...} }
+//	DomainArray{ DomainArgs{...} }
 type DomainArrayInput interface {
 	pulumi.Input
 
@@ -746,7 +757,7 @@ func (i DomainArray) ToDomainArrayOutputWithContext(ctx context.Context) DomainA
 // DomainMapInput is an input type that accepts DomainMap and DomainMapOutput values.
 // You can construct a concrete instance of `DomainMapInput` via:
 //
-//          DomainMap{ "key": DomainArgs{...} }
+//	DomainMap{ "key": DomainArgs{...} }
 type DomainMapInput interface {
 	pulumi.Input
 

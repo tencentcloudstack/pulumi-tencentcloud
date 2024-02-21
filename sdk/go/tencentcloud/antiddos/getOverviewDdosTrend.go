@@ -18,26 +18,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Antiddos.GetOverviewDdosTrend(ctx, &antiddos.GetOverviewDdosTrendArgs{
-// 			Business:   pulumi.StringRef("bgpip"),
-// 			EndTime:    "2023-11-21 14:16:23",
-// 			MetricName: "bps",
-// 			Period:     300,
-// 			StartTime:  "2023-11-20 14:16:23",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Antiddos.GetOverviewDdosTrend(ctx, &antiddos.GetOverviewDdosTrendArgs{
+//				Business:   pulumi.StringRef("bgpip"),
+//				EndTime:    "2023-11-21 14:16:23",
+//				MetricName: "bps",
+//				Period:     300,
+//				StartTime:  "2023-11-20 14:16:23",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetOverviewDdosTrend(ctx *pulumi.Context, args *GetOverviewDdosTrendArgs, opts ...pulumi.InvokeOption) (*GetOverviewDdosTrendResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

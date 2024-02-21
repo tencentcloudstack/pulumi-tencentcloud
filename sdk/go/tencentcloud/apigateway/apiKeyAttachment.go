@@ -19,38 +19,41 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		key, err := ApiGateway.NewApiKey(ctx, "key", &ApiGateway.ApiKeyArgs{
-// 			SecretName: pulumi.String("my_api_key"),
-// 			Status:     pulumi.String("on"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		plan, err := ApiGateway.NewUsagePlan(ctx, "plan", &ApiGateway.UsagePlanArgs{
-// 			UsagePlanName:       pulumi.String("my_plan"),
-// 			UsagePlanDesc:       pulumi.String("nice plan"),
-// 			MaxRequestNum:       pulumi.Int(100),
-// 			MaxRequestNumPreSec: pulumi.Int(10),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = ApiGateway.NewApiKeyAttachment(ctx, "attach", &ApiGateway.ApiKeyAttachmentArgs{
-// 			ApiKeyId:    key.ID(),
-// 			UsagePlanId: plan.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			key, err := ApiGateway.NewApiKey(ctx, "key", &ApiGateway.ApiKeyArgs{
+//				SecretName: pulumi.String("my_api_key"),
+//				Status:     pulumi.String("on"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			plan, err := ApiGateway.NewUsagePlan(ctx, "plan", &ApiGateway.UsagePlanArgs{
+//				UsagePlanName:       pulumi.String("my_plan"),
+//				UsagePlanDesc:       pulumi.String("nice plan"),
+//				MaxRequestNum:       pulumi.Int(100),
+//				MaxRequestNumPreSec: pulumi.Int(10),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = ApiGateway.NewApiKeyAttachment(ctx, "attach", &ApiGateway.ApiKeyAttachmentArgs{
+//				ApiKeyId:    key.ID(),
+//				UsagePlanId: plan.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -58,7 +61,9 @@ import (
 // API gateway attach access key can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment attach AKID110b8Rmuw7t0fP1N8bi809n327023Is7xN8f#usagePlan-gyeafpab
+//
+//	$ pulumi import tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment attach AKID110b8Rmuw7t0fP1N8bi809n327023Is7xN8f#usagePlan-gyeafpab
+//
 // ```
 type ApiKeyAttachment struct {
 	pulumi.CustomResourceState
@@ -163,7 +168,7 @@ func (i *ApiKeyAttachment) ToApiKeyAttachmentOutputWithContext(ctx context.Conte
 // ApiKeyAttachmentArrayInput is an input type that accepts ApiKeyAttachmentArray and ApiKeyAttachmentArrayOutput values.
 // You can construct a concrete instance of `ApiKeyAttachmentArrayInput` via:
 //
-//          ApiKeyAttachmentArray{ ApiKeyAttachmentArgs{...} }
+//	ApiKeyAttachmentArray{ ApiKeyAttachmentArgs{...} }
 type ApiKeyAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -188,7 +193,7 @@ func (i ApiKeyAttachmentArray) ToApiKeyAttachmentArrayOutputWithContext(ctx cont
 // ApiKeyAttachmentMapInput is an input type that accepts ApiKeyAttachmentMap and ApiKeyAttachmentMapOutput values.
 // You can construct a concrete instance of `ApiKeyAttachmentMapInput` via:
 //
-//          ApiKeyAttachmentMap{ "key": ApiKeyAttachmentArgs{...} }
+//	ApiKeyAttachmentMap{ "key": ApiKeyAttachmentArgs{...} }
 type ApiKeyAttachmentMapInput interface {
 	pulumi.Input
 

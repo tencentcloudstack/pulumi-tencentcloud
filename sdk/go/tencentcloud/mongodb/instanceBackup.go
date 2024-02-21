@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mongodb.NewInstanceBackup(ctx, "instanceBackup", &Mongodb.InstanceBackupArgs{
-// 			BackupMethod: pulumi.Int(0),
-// 			BackupRemark: pulumi.String("my backup"),
-// 			InstanceId:   pulumi.String("cmgo-9d0p6umb"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mongodb.NewInstanceBackup(ctx, "instanceBackup", &Mongodb.InstanceBackupArgs{
+//				BackupMethod: pulumi.Int(0),
+//				BackupRemark: pulumi.String("my backup"),
+//				InstanceId:   pulumi.String("cmgo-9d0p6umb"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type InstanceBackup struct {
 	pulumi.CustomResourceState
@@ -150,7 +153,7 @@ func (i *InstanceBackup) ToInstanceBackupOutputWithContext(ctx context.Context) 
 // InstanceBackupArrayInput is an input type that accepts InstanceBackupArray and InstanceBackupArrayOutput values.
 // You can construct a concrete instance of `InstanceBackupArrayInput` via:
 //
-//          InstanceBackupArray{ InstanceBackupArgs{...} }
+//	InstanceBackupArray{ InstanceBackupArgs{...} }
 type InstanceBackupArrayInput interface {
 	pulumi.Input
 
@@ -175,7 +178,7 @@ func (i InstanceBackupArray) ToInstanceBackupArrayOutputWithContext(ctx context.
 // InstanceBackupMapInput is an input type that accepts InstanceBackupMap and InstanceBackupMapOutput values.
 // You can construct a concrete instance of `InstanceBackupMapInput` via:
 //
-//          InstanceBackupMap{ "key": InstanceBackupArgs{...} }
+//	InstanceBackupMap{ "key": InstanceBackupArgs{...} }
 type InstanceBackupMapInput interface {
 	pulumi.Input
 

@@ -18,27 +18,30 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.GetContainerGroup(ctx, &tsf.GetContainerGroupArgs{
-// 			ApplicationId: pulumi.StringRef("application-a24x29xv"),
-// 			ClusterId:     pulumi.StringRef("cluster-vwgj5e6y"),
-// 			NamespaceId:   pulumi.StringRef("namespace-aemrg36v"),
-// 			OrderBy:       pulumi.StringRef("createTime"),
-// 			OrderType:     pulumi.IntRef(0),
-// 			SearchWord:    pulumi.StringRef("keep"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.GetContainerGroup(ctx, &tsf.GetContainerGroupArgs{
+//				ApplicationId: pulumi.StringRef("application-a24x29xv"),
+//				ClusterId:     pulumi.StringRef("cluster-vwgj5e6y"),
+//				NamespaceId:   pulumi.StringRef("namespace-aemrg36v"),
+//				OrderBy:       pulumi.StringRef("createTime"),
+//				OrderType:     pulumi.IntRef(0),
+//				SearchWord:    pulumi.StringRef("keep"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupContainerGroup(ctx *pulumi.Context, args *LookupContainerGroupArgs, opts ...pulumi.InvokeOption) (*LookupContainerGroupResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

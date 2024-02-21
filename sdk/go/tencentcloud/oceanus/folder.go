@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Oceanus.NewFolder(ctx, "example", &Oceanus.FolderArgs{
-// 			FolderName:  pulumi.String("tf_example"),
-// 			FolderType:  pulumi.Int(0),
-// 			ParentId:    pulumi.String("folder-lfqkt11s"),
-// 			WorkSpaceId: pulumi.String("space-125703345ap-shenzhen-fsi"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Oceanus.NewFolder(ctx, "example", &Oceanus.FolderArgs{
+//				FolderName:  pulumi.String("tf_example"),
+//				FolderType:  pulumi.Int(0),
+//				ParentId:    pulumi.String("folder-lfqkt11s"),
+//				WorkSpaceId: pulumi.String("space-125703345ap-shenzhen-fsi"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // oceanus folder can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Oceanus/folder:Folder example space-125703345ap-shenzhen-fsi#folder-f40fq79g#0
+//
+//	$ pulumi import tencentcloud:Oceanus/folder:Folder example space-125703345ap-shenzhen-fsi#folder-f40fq79g#0
+//
 // ```
 type Folder struct {
 	pulumi.CustomResourceState
@@ -172,7 +177,7 @@ func (i *Folder) ToFolderOutputWithContext(ctx context.Context) FolderOutput {
 // FolderArrayInput is an input type that accepts FolderArray and FolderArrayOutput values.
 // You can construct a concrete instance of `FolderArrayInput` via:
 //
-//          FolderArray{ FolderArgs{...} }
+//	FolderArray{ FolderArgs{...} }
 type FolderArrayInput interface {
 	pulumi.Input
 
@@ -197,7 +202,7 @@ func (i FolderArray) ToFolderArrayOutputWithContext(ctx context.Context) FolderA
 // FolderMapInput is an input type that accepts FolderMap and FolderMapOutput values.
 // You can construct a concrete instance of `FolderMapInput` via:
 //
-//          FolderMap{ "key": FolderArgs{...} }
+//	FolderMap{ "key": FolderArgs{...} }
 type FolderMapInput interface {
 	pulumi.Input
 

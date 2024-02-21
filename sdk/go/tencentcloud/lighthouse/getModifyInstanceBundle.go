@@ -18,30 +18,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.GetModifyInstanceBundle(ctx, &lighthouse.GetModifyInstanceBundleArgs{
-// 			Filters: []lighthouse.GetModifyInstanceBundleFilter{
-// 				lighthouse.GetModifyInstanceBundleFilter{
-// 					Name: "bundle-id",
-// 					Values: []string{
-// 						"bundle_gen_mc_med2_02",
-// 					},
-// 				},
-// 			},
-// 			InstanceId: "lhins-xxxxxx",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.GetModifyInstanceBundle(ctx, &lighthouse.GetModifyInstanceBundleArgs{
+//				Filters: []lighthouse.GetModifyInstanceBundleFilter{
+//					lighthouse.GetModifyInstanceBundleFilter{
+//						Name: "bundle-id",
+//						Values: []string{
+//							"bundle_gen_mc_med2_02",
+//						},
+//					},
+//				},
+//				InstanceId: "lhins-xxxxxx",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetModifyInstanceBundle(ctx *pulumi.Context, args *GetModifyInstanceBundleArgs, opts ...pulumi.InvokeOption) (*GetModifyInstanceBundleResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

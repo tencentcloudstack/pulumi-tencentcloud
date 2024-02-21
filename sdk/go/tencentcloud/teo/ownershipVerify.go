@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.NewOwnershipVerify(ctx, "ownershipVerify", &Teo.OwnershipVerifyArgs{
-// 			Domain: pulumi.String("qq.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Teo.NewOwnershipVerify(ctx, "ownershipVerify", &Teo.OwnershipVerifyArgs{
+//				Domain: pulumi.String("qq.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type OwnershipVerify struct {
 	pulumi.CustomResourceState
@@ -137,7 +140,7 @@ func (i *OwnershipVerify) ToOwnershipVerifyOutputWithContext(ctx context.Context
 // OwnershipVerifyArrayInput is an input type that accepts OwnershipVerifyArray and OwnershipVerifyArrayOutput values.
 // You can construct a concrete instance of `OwnershipVerifyArrayInput` via:
 //
-//          OwnershipVerifyArray{ OwnershipVerifyArgs{...} }
+//	OwnershipVerifyArray{ OwnershipVerifyArgs{...} }
 type OwnershipVerifyArrayInput interface {
 	pulumi.Input
 
@@ -162,7 +165,7 @@ func (i OwnershipVerifyArray) ToOwnershipVerifyArrayOutputWithContext(ctx contex
 // OwnershipVerifyMapInput is an input type that accepts OwnershipVerifyMap and OwnershipVerifyMapOutput values.
 // You can construct a concrete instance of `OwnershipVerifyMapInput` via:
 //
-//          OwnershipVerifyMap{ "key": OwnershipVerifyArgs{...} }
+//	OwnershipVerifyMap{ "key": OwnershipVerifyArgs{...} }
 type OwnershipVerifyMapInput interface {
 	pulumi.Input
 

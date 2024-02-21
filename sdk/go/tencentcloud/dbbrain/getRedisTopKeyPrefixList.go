@@ -18,26 +18,29 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.GetRedisTopKeyPrefixList(ctx, &dbbrain.GetRedisTopKeyPrefixListArgs{
-// 			InstanceId: local.Redis_id,
-// 			Date:       fmt.Sprintf("%v%v", "%", "s"),
-// 			Product:    "redis",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.GetRedisTopKeyPrefixList(ctx, &dbbrain.GetRedisTopKeyPrefixListArgs{
+//				InstanceId: local.Redis_id,
+//				Date:       fmt.Sprintf("%v%v", "%", "s"),
+//				Product:    "redis",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetRedisTopKeyPrefixList(ctx *pulumi.Context, args *GetRedisTopKeyPrefixListArgs, opts ...pulumi.InvokeOption) (*GetRedisTopKeyPrefixListResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

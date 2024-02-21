@@ -18,7 +18,6 @@ class InstanceArgs:
                  blueprint_id: pulumi.Input[str],
                  bundle_id: pulumi.Input[str],
                  instance_name: pulumi.Input[str],
-                 period: pulumi.Input[int],
                  renew_flag: pulumi.Input[str],
                  client_token: Optional[pulumi.Input[str]] = None,
                  containers: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceContainerArgs']]]] = None,
@@ -27,6 +26,7 @@ class InstanceArgs:
                  is_update_bundle_id_auto_voucher: Optional[pulumi.Input[bool]] = None,
                  isolate_data_disk: Optional[pulumi.Input[bool]] = None,
                  login_configuration: Optional[pulumi.Input['InstanceLoginConfigurationArgs']] = None,
+                 period: Optional[pulumi.Input[int]] = None,
                  permit_default_key_pair_login: Optional[pulumi.Input[str]] = None,
                  zone: Optional[pulumi.Input[str]] = None):
         """
@@ -34,7 +34,6 @@ class InstanceArgs:
         :param pulumi.Input[str] blueprint_id: ID of the Lighthouse image.
         :param pulumi.Input[str] bundle_id: ID of the Lighthouse package.
         :param pulumi.Input[str] instance_name: The display name of the Lighthouse instance.
-        :param pulumi.Input[int] period: Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
         :param pulumi.Input[str] renew_flag: Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
         :param pulumi.Input[str] client_token: A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceContainerArgs']]] containers: Configuration of the containers to create.
@@ -43,13 +42,13 @@ class InstanceArgs:
         :param pulumi.Input[bool] is_update_bundle_id_auto_voucher: Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
         :param pulumi.Input[bool] isolate_data_disk: Whether to return the mounted data disk. `true`: returns both the instance and the mounted data disk; `false`: returns the instance and no longer returns its mounted data disk. Default: `true`.
         :param pulumi.Input['InstanceLoginConfigurationArgs'] login_configuration: Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.
+        :param pulumi.Input[int] period: Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
         :param pulumi.Input[str] permit_default_key_pair_login: It has been deprecated from version v1.81.8. Use `Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
         :param pulumi.Input[str] zone: List of availability zones. A random AZ is selected by default.
         """
         pulumi.set(__self__, "blueprint_id", blueprint_id)
         pulumi.set(__self__, "bundle_id", bundle_id)
         pulumi.set(__self__, "instance_name", instance_name)
-        pulumi.set(__self__, "period", period)
         pulumi.set(__self__, "renew_flag", renew_flag)
         if client_token is not None:
             pulumi.set(__self__, "client_token", client_token)
@@ -65,6 +64,8 @@ class InstanceArgs:
             pulumi.set(__self__, "isolate_data_disk", isolate_data_disk)
         if login_configuration is not None:
             pulumi.set(__self__, "login_configuration", login_configuration)
+        if period is not None:
+            pulumi.set(__self__, "period", period)
         if permit_default_key_pair_login is not None:
             warnings.warn("""It has been deprecated from version v1.81.8. Use `tencentcloud_lighthouse_key_pair_attachment` manage key pair.""", DeprecationWarning)
             pulumi.log.warn("""permit_default_key_pair_login is deprecated: It has been deprecated from version v1.81.8. Use `tencentcloud_lighthouse_key_pair_attachment` manage key pair.""")
@@ -108,18 +109,6 @@ class InstanceArgs:
     @instance_name.setter
     def instance_name(self, value: pulumi.Input[str]):
         pulumi.set(self, "instance_name", value)
-
-    @property
-    @pulumi.getter
-    def period(self) -> pulumi.Input[int]:
-        """
-        Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
-        """
-        return pulumi.get(self, "period")
-
-    @period.setter
-    def period(self, value: pulumi.Input[int]):
-        pulumi.set(self, "period", value)
 
     @property
     @pulumi.getter(name="renewFlag")
@@ -218,6 +207,18 @@ class InstanceArgs:
         pulumi.set(self, "login_configuration", value)
 
     @property
+    @pulumi.getter
+    def period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+        """
+        return pulumi.get(self, "period")
+
+    @period.setter
+    def period(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "period", value)
+
+    @property
     @pulumi.getter(name="permitDefaultKeyPairLogin")
     def permit_default_key_pair_login(self) -> Optional[pulumi.Input[str]]:
         """
@@ -257,6 +258,8 @@ class _InstanceState:
                  login_configuration: Optional[pulumi.Input['InstanceLoginConfigurationArgs']] = None,
                  period: Optional[pulumi.Input[int]] = None,
                  permit_default_key_pair_login: Optional[pulumi.Input[str]] = None,
+                 private_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 public_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  renew_flag: Optional[pulumi.Input[str]] = None,
                  zone: Optional[pulumi.Input[str]] = None):
         """
@@ -273,6 +276,8 @@ class _InstanceState:
         :param pulumi.Input['InstanceLoginConfigurationArgs'] login_configuration: Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.
         :param pulumi.Input[int] period: Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
         :param pulumi.Input[str] permit_default_key_pair_login: It has been deprecated from version v1.81.8. Use `Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] private_addresses: Private addresses.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] public_addresses: Public addresses.
         :param pulumi.Input[str] renew_flag: Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
         :param pulumi.Input[str] zone: List of availability zones. A random AZ is selected by default.
         """
@@ -303,6 +308,10 @@ class _InstanceState:
             pulumi.log.warn("""permit_default_key_pair_login is deprecated: It has been deprecated from version v1.81.8. Use `tencentcloud_lighthouse_key_pair_attachment` manage key pair.""")
         if permit_default_key_pair_login is not None:
             pulumi.set(__self__, "permit_default_key_pair_login", permit_default_key_pair_login)
+        if private_addresses is not None:
+            pulumi.set(__self__, "private_addresses", private_addresses)
+        if public_addresses is not None:
+            pulumi.set(__self__, "public_addresses", public_addresses)
         if renew_flag is not None:
             pulumi.set(__self__, "renew_flag", renew_flag)
         if zone is not None:
@@ -451,6 +460,30 @@ class _InstanceState:
     @permit_default_key_pair_login.setter
     def permit_default_key_pair_login(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "permit_default_key_pair_login", value)
+
+    @property
+    @pulumi.getter(name="privateAddresses")
+    def private_addresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Private addresses.
+        """
+        return pulumi.get(self, "private_addresses")
+
+    @private_addresses.setter
+    def private_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "private_addresses", value)
+
+    @property
+    @pulumi.getter(name="publicAddresses")
+    def public_addresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Public addresses.
+        """
+        return pulumi.get(self, "public_addresses")
+
+    @public_addresses.setter
+    def public_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "public_addresses", value)
 
     @property
     @pulumi.getter(name="renewFlag")
@@ -755,8 +788,6 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["is_update_bundle_id_auto_voucher"] = is_update_bundle_id_auto_voucher
             __props__.__dict__["isolate_data_disk"] = isolate_data_disk
             __props__.__dict__["login_configuration"] = login_configuration
-            if period is None and not opts.urn:
-                raise TypeError("Missing required property 'period'")
             __props__.__dict__["period"] = period
             if permit_default_key_pair_login is not None and not opts.urn:
                 warnings.warn("""It has been deprecated from version v1.81.8. Use `tencentcloud_lighthouse_key_pair_attachment` manage key pair.""", DeprecationWarning)
@@ -766,6 +797,8 @@ class Instance(pulumi.CustomResource):
                 raise TypeError("Missing required property 'renew_flag'")
             __props__.__dict__["renew_flag"] = renew_flag
             __props__.__dict__["zone"] = zone
+            __props__.__dict__["private_addresses"] = None
+            __props__.__dict__["public_addresses"] = None
         super(Instance, __self__).__init__(
             'tencentcloud:Lighthouse/instance:Instance',
             resource_name,
@@ -788,6 +821,8 @@ class Instance(pulumi.CustomResource):
             login_configuration: Optional[pulumi.Input[pulumi.InputType['InstanceLoginConfigurationArgs']]] = None,
             period: Optional[pulumi.Input[int]] = None,
             permit_default_key_pair_login: Optional[pulumi.Input[str]] = None,
+            private_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            public_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             renew_flag: Optional[pulumi.Input[str]] = None,
             zone: Optional[pulumi.Input[str]] = None) -> 'Instance':
         """
@@ -809,6 +844,8 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['InstanceLoginConfigurationArgs']] login_configuration: Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.
         :param pulumi.Input[int] period: Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
         :param pulumi.Input[str] permit_default_key_pair_login: It has been deprecated from version v1.81.8. Use `Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] private_addresses: Private addresses.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] public_addresses: Public addresses.
         :param pulumi.Input[str] renew_flag: Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
         :param pulumi.Input[str] zone: List of availability zones. A random AZ is selected by default.
         """
@@ -828,6 +865,8 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["login_configuration"] = login_configuration
         __props__.__dict__["period"] = period
         __props__.__dict__["permit_default_key_pair_login"] = permit_default_key_pair_login
+        __props__.__dict__["private_addresses"] = private_addresses
+        __props__.__dict__["public_addresses"] = public_addresses
         __props__.__dict__["renew_flag"] = renew_flag
         __props__.__dict__["zone"] = zone
         return Instance(resource_name, opts=opts, __props__=__props__)
@@ -914,7 +953,7 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def period(self) -> pulumi.Output[int]:
+    def period(self) -> pulumi.Output[Optional[int]]:
         """
         Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
         """
@@ -929,6 +968,22 @@ class Instance(pulumi.CustomResource):
         return pulumi.get(self, "permit_default_key_pair_login")
 
     @property
+    @pulumi.getter(name="privateAddresses")
+    def private_addresses(self) -> pulumi.Output[Sequence[str]]:
+        """
+        Private addresses.
+        """
+        return pulumi.get(self, "private_addresses")
+
+    @property
+    @pulumi.getter(name="publicAddresses")
+    def public_addresses(self) -> pulumi.Output[Sequence[str]]:
+        """
+        Public addresses.
+        """
+        return pulumi.get(self, "public_addresses")
+
+    @property
     @pulumi.getter(name="renewFlag")
     def renew_flag(self) -> pulumi.Output[str]:
         """
@@ -938,7 +993,7 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def zone(self) -> pulumi.Output[Optional[str]]:
+    def zone(self) -> pulumi.Output[str]:
         """
         List of availability zones. A random AZ is selected by default.
         """

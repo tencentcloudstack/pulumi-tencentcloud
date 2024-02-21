@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.GetInstanceByCertId(ctx, &clb.GetInstanceByCertIdArgs{
-// 			CertIds: []string{
-// 				"3a6B5y8v",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.GetInstanceByCertId(ctx, &clb.GetInstanceByCertIdArgs{
+//				CertIds: []string{
+//					"3a6B5y8v",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetInstanceByCertId(ctx *pulumi.Context, args *GetInstanceByCertIdArgs, opts ...pulumi.InvokeOption) (*GetInstanceByCertIdResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

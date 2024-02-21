@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.GetApiPlugins(ctx, &apigateway.GetApiPluginsArgs{
-// 			ApiId:           "api-0cvmf4x4",
-// 			EnvironmentName: pulumi.StringRef("test"),
-// 			ServiceId:       "service-nxz6yync",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.GetApiPlugins(ctx, &apigateway.GetApiPluginsArgs{
+//				ApiId:           "api-0cvmf4x4",
+//				EnvironmentName: pulumi.StringRef("test"),
+//				ServiceId:       "service-nxz6yync",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupApiPlugins(ctx *pulumi.Context, args *LookupApiPluginsArgs, opts ...pulumi.InvokeOption) (*LookupApiPluginsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

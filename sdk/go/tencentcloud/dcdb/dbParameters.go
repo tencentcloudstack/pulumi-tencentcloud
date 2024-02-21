@@ -19,28 +19,31 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.NewDbParameters(ctx, "dbParameters", &Dcdb.DbParametersArgs{
-// 			InstanceId: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			Params: &dcdb.DbParametersParamsArgs{
-// 				Param: pulumi.String("max_connections"),
-// 				Value: pulumi.String("9999"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcdb.NewDbParameters(ctx, "dbParameters", &Dcdb.DbParametersArgs{
+//				InstanceId: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
+//				Params: &dcdb.DbParametersParamsArgs{
+//					Param: pulumi.String("max_connections"),
+//					Value: pulumi.String("9999"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -48,7 +51,9 @@ import (
 // dcdb db_parameters can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dcdb/dbParameters:DbParameters db_parameters instanceId#paramName
+//
+//	$ pulumi import tencentcloud:Dcdb/dbParameters:DbParameters db_parameters instanceId#paramName
+//
 // ```
 type DbParameters struct {
 	pulumi.CustomResourceState
@@ -153,7 +158,7 @@ func (i *DbParameters) ToDbParametersOutputWithContext(ctx context.Context) DbPa
 // DbParametersArrayInput is an input type that accepts DbParametersArray and DbParametersArrayOutput values.
 // You can construct a concrete instance of `DbParametersArrayInput` via:
 //
-//          DbParametersArray{ DbParametersArgs{...} }
+//	DbParametersArray{ DbParametersArgs{...} }
 type DbParametersArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +183,7 @@ func (i DbParametersArray) ToDbParametersArrayOutputWithContext(ctx context.Cont
 // DbParametersMapInput is an input type that accepts DbParametersMap and DbParametersMapOutput values.
 // You can construct a concrete instance of `DbParametersMapInput` via:
 //
-//          DbParametersMap{ "key": DbParametersArgs{...} }
+//	DbParametersMap{ "key": DbParametersArgs{...} }
 type DbParametersMapInput interface {
 	pulumi.Input
 

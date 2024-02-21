@@ -19,45 +19,48 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Wedata.NewDqRule(ctx, "example", &Wedata.DqRuleArgs{
-// 			AlarmLevel: pulumi.Int(1),
-// 			CompareRule: &wedata.DqRuleCompareRuleArgs{
-// 				Items: wedata.DqRuleCompareRuleItemArray{
-// 					&wedata.DqRuleCompareRuleItemArgs{
-// 						CompareType: pulumi.Int(1),
-// 						Operator:    pulumi.String("=="),
-// 						ValueList: []map[string]interface{}{
-// 							map[string]interface{}{
-// 								"value":     "100",
-// 								"valueType": 3,
-// 							},
-// 						},
-// 					},
-// 				},
-// 			},
-// 			ConditionType:            pulumi.Int(1),
-// 			Description:              pulumi.String("description."),
-// 			ProjectId:                pulumi.String("1948767646355341312"),
-// 			RuleGroupId:              pulumi.Int(312),
-// 			RuleTemplateId:           pulumi.Int(1),
-// 			SourceObjectDataTypeName: pulumi.String("table"),
-// 			SourceObjectValue:        pulumi.String("表"),
-// 			TableId:                  pulumi.String("N85hbsh5QQ2VLHL2iOUVeQ"),
-// 			Type:                     pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Wedata.NewDqRule(ctx, "example", &Wedata.DqRuleArgs{
+//				AlarmLevel: pulumi.Int(1),
+//				CompareRule: &wedata.DqRuleCompareRuleArgs{
+//					Items: wedata.DqRuleCompareRuleItemArray{
+//						&wedata.DqRuleCompareRuleItemArgs{
+//							CompareType: pulumi.Int(1),
+//							Operator:    pulumi.String("=="),
+//							ValueList: []map[string]interface{}{
+//								map[string]interface{}{
+//									"value":     "100",
+//									"valueType": 3,
+//								},
+//							},
+//						},
+//					},
+//				},
+//				ConditionType:            pulumi.Int(1),
+//				Description:              pulumi.String("description."),
+//				ProjectId:                pulumi.String("1948767646355341312"),
+//				RuleGroupId:              pulumi.Int(312),
+//				RuleTemplateId:           pulumi.Int(1),
+//				SourceObjectDataTypeName: pulumi.String("table"),
+//				SourceObjectValue:        pulumi.String("表"),
+//				TableId:                  pulumi.String("N85hbsh5QQ2VLHL2iOUVeQ"),
+//				Type:                     pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -65,7 +68,9 @@ import (
 // wedata dq_rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Wedata/dqRule:DqRule example 1948767646355341312#894
+//
+//	$ pulumi import tencentcloud:Wedata/dqRule:DqRule example 1948767646355341312#894
+//
 // ```
 type DqRule struct {
 	pulumi.CustomResourceState
@@ -394,7 +399,7 @@ func (i *DqRule) ToDqRuleOutputWithContext(ctx context.Context) DqRuleOutput {
 // DqRuleArrayInput is an input type that accepts DqRuleArray and DqRuleArrayOutput values.
 // You can construct a concrete instance of `DqRuleArrayInput` via:
 //
-//          DqRuleArray{ DqRuleArgs{...} }
+//	DqRuleArray{ DqRuleArgs{...} }
 type DqRuleArrayInput interface {
 	pulumi.Input
 
@@ -419,7 +424,7 @@ func (i DqRuleArray) ToDqRuleArrayOutputWithContext(ctx context.Context) DqRuleA
 // DqRuleMapInput is an input type that accepts DqRuleMap and DqRuleMapOutput values.
 // You can construct a concrete instance of `DqRuleMapInput` via:
 //
-//          DqRuleMap{ "key": DqRuleArgs{...} }
+//	DqRuleMap{ "key": DqRuleArgs{...} }
 type DqRuleMapInput interface {
 	pulumi.Input
 

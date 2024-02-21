@@ -201,13 +201,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
         /// </summary>
         [Output("period")]
-        public Output<int> Period { get; private set; } = null!;
+        public Output<int?> Period { get; private set; } = null!;
 
         /// <summary>
         /// It has been deprecated from version v1.81.8. Use `tencentcloud.Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
         /// </summary>
         [Output("permitDefaultKeyPairLogin")]
         public Output<string> PermitDefaultKeyPairLogin { get; private set; } = null!;
+
+        /// <summary>
+        /// Private addresses.
+        /// </summary>
+        [Output("privateAddresses")]
+        public Output<ImmutableArray<string>> PrivateAddresses { get; private set; } = null!;
+
+        /// <summary>
+        /// Public addresses.
+        /// </summary>
+        [Output("publicAddresses")]
+        public Output<ImmutableArray<string>> PublicAddresses { get; private set; } = null!;
 
         /// <summary>
         /// Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
@@ -219,7 +231,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// List of availability zones. A random AZ is selected by default.
         /// </summary>
         [Output("zone")]
-        public Output<string?> Zone { get; private set; } = null!;
+        public Output<string> Zone { get; private set; } = null!;
 
 
         /// <summary>
@@ -337,8 +349,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// <summary>
         /// Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
         /// </summary>
-        [Input("period", required: true)]
-        public Input<int> Period { get; set; } = null!;
+        [Input("period")]
+        public Input<int>? Period { get; set; }
 
         /// <summary>
         /// It has been deprecated from version v1.81.8. Use `tencentcloud.Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
@@ -442,6 +454,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// </summary>
         [Input("permitDefaultKeyPairLogin")]
         public Input<string>? PermitDefaultKeyPairLogin { get; set; }
+
+        [Input("privateAddresses")]
+        private InputList<string>? _privateAddresses;
+
+        /// <summary>
+        /// Private addresses.
+        /// </summary>
+        public InputList<string> PrivateAddresses
+        {
+            get => _privateAddresses ?? (_privateAddresses = new InputList<string>());
+            set => _privateAddresses = value;
+        }
+
+        [Input("publicAddresses")]
+        private InputList<string>? _publicAddresses;
+
+        /// <summary>
+        /// Public addresses.
+        /// </summary>
+        public InputList<string> PublicAddresses
+        {
+            get => _publicAddresses ?? (_publicAddresses = new InputList<string>());
+            set => _publicAddresses = value;
+        }
 
         /// <summary>
         /// Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.

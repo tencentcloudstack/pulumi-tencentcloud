@@ -20,7 +20,7 @@ type FunctionAliasRoutingConfig struct {
 // FunctionAliasRoutingConfigInput is an input type that accepts FunctionAliasRoutingConfigArgs and FunctionAliasRoutingConfigOutput values.
 // You can construct a concrete instance of `FunctionAliasRoutingConfigInput` via:
 //
-//          FunctionAliasRoutingConfigArgs{...}
+//	FunctionAliasRoutingConfigArgs{...}
 type FunctionAliasRoutingConfigInput interface {
 	pulumi.Input
 
@@ -58,11 +58,11 @@ func (i FunctionAliasRoutingConfigArgs) ToFunctionAliasRoutingConfigPtrOutputWit
 // FunctionAliasRoutingConfigPtrInput is an input type that accepts FunctionAliasRoutingConfigArgs, FunctionAliasRoutingConfigPtr and FunctionAliasRoutingConfigPtrOutput values.
 // You can construct a concrete instance of `FunctionAliasRoutingConfigPtrInput` via:
 //
-//          FunctionAliasRoutingConfigArgs{...}
+//	        FunctionAliasRoutingConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type FunctionAliasRoutingConfigPtrInput interface {
 	pulumi.Input
 
@@ -184,7 +184,7 @@ type FunctionAliasRoutingConfigAdditionalVersionMatch struct {
 // FunctionAliasRoutingConfigAdditionalVersionMatchInput is an input type that accepts FunctionAliasRoutingConfigAdditionalVersionMatchArgs and FunctionAliasRoutingConfigAdditionalVersionMatchOutput values.
 // You can construct a concrete instance of `FunctionAliasRoutingConfigAdditionalVersionMatchInput` via:
 //
-//          FunctionAliasRoutingConfigAdditionalVersionMatchArgs{...}
+//	FunctionAliasRoutingConfigAdditionalVersionMatchArgs{...}
 type FunctionAliasRoutingConfigAdditionalVersionMatchInput interface {
 	pulumi.Input
 
@@ -218,7 +218,7 @@ func (i FunctionAliasRoutingConfigAdditionalVersionMatchArgs) ToFunctionAliasRou
 // FunctionAliasRoutingConfigAdditionalVersionMatchArrayInput is an input type that accepts FunctionAliasRoutingConfigAdditionalVersionMatchArray and FunctionAliasRoutingConfigAdditionalVersionMatchArrayOutput values.
 // You can construct a concrete instance of `FunctionAliasRoutingConfigAdditionalVersionMatchArrayInput` via:
 //
-//          FunctionAliasRoutingConfigAdditionalVersionMatchArray{ FunctionAliasRoutingConfigAdditionalVersionMatchArgs{...} }
+//	FunctionAliasRoutingConfigAdditionalVersionMatchArray{ FunctionAliasRoutingConfigAdditionalVersionMatchArgs{...} }
 type FunctionAliasRoutingConfigAdditionalVersionMatchArrayInput interface {
 	pulumi.Input
 
@@ -304,7 +304,7 @@ type FunctionAliasRoutingConfigAdditionalVersionWeight struct {
 // FunctionAliasRoutingConfigAdditionalVersionWeightInput is an input type that accepts FunctionAliasRoutingConfigAdditionalVersionWeightArgs and FunctionAliasRoutingConfigAdditionalVersionWeightOutput values.
 // You can construct a concrete instance of `FunctionAliasRoutingConfigAdditionalVersionWeightInput` via:
 //
-//          FunctionAliasRoutingConfigAdditionalVersionWeightArgs{...}
+//	FunctionAliasRoutingConfigAdditionalVersionWeightArgs{...}
 type FunctionAliasRoutingConfigAdditionalVersionWeightInput interface {
 	pulumi.Input
 
@@ -334,7 +334,7 @@ func (i FunctionAliasRoutingConfigAdditionalVersionWeightArgs) ToFunctionAliasRo
 // FunctionAliasRoutingConfigAdditionalVersionWeightArrayInput is an input type that accepts FunctionAliasRoutingConfigAdditionalVersionWeightArray and FunctionAliasRoutingConfigAdditionalVersionWeightArrayOutput values.
 // You can construct a concrete instance of `FunctionAliasRoutingConfigAdditionalVersionWeightArrayInput` via:
 //
-//          FunctionAliasRoutingConfigAdditionalVersionWeightArray{ FunctionAliasRoutingConfigAdditionalVersionWeightArgs{...} }
+//	FunctionAliasRoutingConfigAdditionalVersionWeightArray{ FunctionAliasRoutingConfigAdditionalVersionWeightArgs{...} }
 type FunctionAliasRoutingConfigAdditionalVersionWeightArrayInput interface {
 	pulumi.Input
 
@@ -421,7 +421,7 @@ type FunctionCfsConfig struct {
 // FunctionCfsConfigInput is an input type that accepts FunctionCfsConfigArgs and FunctionCfsConfigOutput values.
 // You can construct a concrete instance of `FunctionCfsConfigInput` via:
 //
-//          FunctionCfsConfigArgs{...}
+//	FunctionCfsConfigArgs{...}
 type FunctionCfsConfigInput interface {
 	pulumi.Input
 
@@ -462,7 +462,7 @@ func (i FunctionCfsConfigArgs) ToFunctionCfsConfigOutputWithContext(ctx context.
 // FunctionCfsConfigArrayInput is an input type that accepts FunctionCfsConfigArray and FunctionCfsConfigArrayOutput values.
 // You can construct a concrete instance of `FunctionCfsConfigArrayInput` via:
 //
-//          FunctionCfsConfigArray{ FunctionCfsConfigArgs{...} }
+//	FunctionCfsConfigArray{ FunctionCfsConfigArgs{...} }
 type FunctionCfsConfigArrayInput interface {
 	pulumi.Input
 
@@ -570,7 +570,7 @@ type FunctionEventInvokeConfigAsyncTriggerConfig struct {
 // FunctionEventInvokeConfigAsyncTriggerConfigInput is an input type that accepts FunctionEventInvokeConfigAsyncTriggerConfigArgs and FunctionEventInvokeConfigAsyncTriggerConfigOutput values.
 // You can construct a concrete instance of `FunctionEventInvokeConfigAsyncTriggerConfigInput` via:
 //
-//          FunctionEventInvokeConfigAsyncTriggerConfigArgs{...}
+//	FunctionEventInvokeConfigAsyncTriggerConfigArgs{...}
 type FunctionEventInvokeConfigAsyncTriggerConfigInput interface {
 	pulumi.Input
 
@@ -608,11 +608,11 @@ func (i FunctionEventInvokeConfigAsyncTriggerConfigArgs) ToFunctionEventInvokeCo
 // FunctionEventInvokeConfigAsyncTriggerConfigPtrInput is an input type that accepts FunctionEventInvokeConfigAsyncTriggerConfigArgs, FunctionEventInvokeConfigAsyncTriggerConfigPtr and FunctionEventInvokeConfigAsyncTriggerConfigPtrOutput values.
 // You can construct a concrete instance of `FunctionEventInvokeConfigAsyncTriggerConfigPtrInput` via:
 //
-//          FunctionEventInvokeConfigAsyncTriggerConfigArgs{...}
+//	        FunctionEventInvokeConfigAsyncTriggerConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type FunctionEventInvokeConfigAsyncTriggerConfigPtrInput interface {
 	pulumi.Input
 
@@ -726,7 +726,7 @@ type FunctionEventInvokeConfigAsyncTriggerConfigRetryConfig struct {
 // FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigInput is an input type that accepts FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs and FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigOutput values.
 // You can construct a concrete instance of `FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigInput` via:
 //
-//          FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs{...}
+//	FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs{...}
 type FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigInput interface {
 	pulumi.Input
 
@@ -754,7 +754,7 @@ func (i FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs) ToFunctionEv
 // FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayInput is an input type that accepts FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArray and FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput values.
 // You can construct a concrete instance of `FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayInput` via:
 //
-//          FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArray{ FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs{...} }
+//	FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArray{ FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs{...} }
 type FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayInput interface {
 	pulumi.Input
 
@@ -837,7 +837,7 @@ type FunctionImageConfig struct {
 // FunctionImageConfigInput is an input type that accepts FunctionImageConfigArgs and FunctionImageConfigOutput values.
 // You can construct a concrete instance of `FunctionImageConfigInput` via:
 //
-//          FunctionImageConfigArgs{...}
+//	FunctionImageConfigArgs{...}
 type FunctionImageConfigInput interface {
 	pulumi.Input
 
@@ -879,7 +879,7 @@ func (i FunctionImageConfigArgs) ToFunctionImageConfigOutputWithContext(ctx cont
 // FunctionImageConfigArrayInput is an input type that accepts FunctionImageConfigArray and FunctionImageConfigArrayOutput values.
 // You can construct a concrete instance of `FunctionImageConfigArrayInput` via:
 //
-//          FunctionImageConfigArray{ FunctionImageConfigArgs{...} }
+//	FunctionImageConfigArray{ FunctionImageConfigArgs{...} }
 type FunctionImageConfigArrayInput interface {
 	pulumi.Input
 
@@ -984,7 +984,7 @@ type FunctionIntranetConfig struct {
 // FunctionIntranetConfigInput is an input type that accepts FunctionIntranetConfigArgs and FunctionIntranetConfigOutput values.
 // You can construct a concrete instance of `FunctionIntranetConfigInput` via:
 //
-//          FunctionIntranetConfigArgs{...}
+//	FunctionIntranetConfigArgs{...}
 type FunctionIntranetConfigInput interface {
 	pulumi.Input
 
@@ -1021,11 +1021,11 @@ func (i FunctionIntranetConfigArgs) ToFunctionIntranetConfigPtrOutputWithContext
 // FunctionIntranetConfigPtrInput is an input type that accepts FunctionIntranetConfigArgs, FunctionIntranetConfigPtr and FunctionIntranetConfigPtrOutput values.
 // You can construct a concrete instance of `FunctionIntranetConfigPtrInput` via:
 //
-//          FunctionIntranetConfigArgs{...}
+//	        FunctionIntranetConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type FunctionIntranetConfigPtrInput interface {
 	pulumi.Input
 
@@ -1137,7 +1137,7 @@ type FunctionLayer struct {
 // FunctionLayerInput is an input type that accepts FunctionLayerArgs and FunctionLayerOutput values.
 // You can construct a concrete instance of `FunctionLayerInput` via:
 //
-//          FunctionLayerArgs{...}
+//	FunctionLayerArgs{...}
 type FunctionLayerInput interface {
 	pulumi.Input
 
@@ -1167,7 +1167,7 @@ func (i FunctionLayerArgs) ToFunctionLayerOutputWithContext(ctx context.Context)
 // FunctionLayerArrayInput is an input type that accepts FunctionLayerArray and FunctionLayerArrayOutput values.
 // You can construct a concrete instance of `FunctionLayerArrayInput` via:
 //
-//          FunctionLayerArray{ FunctionLayerArgs{...} }
+//	FunctionLayerArray{ FunctionLayerArgs{...} }
 type FunctionLayerArrayInput interface {
 	pulumi.Input
 
@@ -1247,7 +1247,7 @@ type FunctionTrigger struct {
 // FunctionTriggerInput is an input type that accepts FunctionTriggerArgs and FunctionTriggerOutput values.
 // You can construct a concrete instance of `FunctionTriggerInput` via:
 //
-//          FunctionTriggerArgs{...}
+//	FunctionTriggerArgs{...}
 type FunctionTriggerInput interface {
 	pulumi.Input
 
@@ -1281,7 +1281,7 @@ func (i FunctionTriggerArgs) ToFunctionTriggerOutputWithContext(ctx context.Cont
 // FunctionTriggerArrayInput is an input type that accepts FunctionTriggerArray and FunctionTriggerArrayOutput values.
 // You can construct a concrete instance of `FunctionTriggerArrayInput` via:
 //
-//          FunctionTriggerArray{ FunctionTriggerArgs{...} }
+//	FunctionTriggerArray{ FunctionTriggerArgs{...} }
 type FunctionTriggerArrayInput interface {
 	pulumi.Input
 
@@ -1377,7 +1377,7 @@ type FunctionTriggerInfo struct {
 // FunctionTriggerInfoInput is an input type that accepts FunctionTriggerInfoArgs and FunctionTriggerInfoOutput values.
 // You can construct a concrete instance of `FunctionTriggerInfoInput` via:
 //
-//          FunctionTriggerInfoArgs{...}
+//	FunctionTriggerInfoArgs{...}
 type FunctionTriggerInfoInput interface {
 	pulumi.Input
 
@@ -1417,7 +1417,7 @@ func (i FunctionTriggerInfoArgs) ToFunctionTriggerInfoOutputWithContext(ctx cont
 // FunctionTriggerInfoArrayInput is an input type that accepts FunctionTriggerInfoArray and FunctionTriggerInfoArrayOutput values.
 // You can construct a concrete instance of `FunctionTriggerInfoArrayInput` via:
 //
-//          FunctionTriggerInfoArray{ FunctionTriggerInfoArgs{...} }
+//	FunctionTriggerInfoArray{ FunctionTriggerInfoArgs{...} }
 type FunctionTriggerInfoArrayInput interface {
 	pulumi.Input
 
@@ -1522,7 +1522,7 @@ type LayerContent struct {
 // LayerContentInput is an input type that accepts LayerContentArgs and LayerContentOutput values.
 // You can construct a concrete instance of `LayerContentInput` via:
 //
-//          LayerContentArgs{...}
+//	LayerContentArgs{...}
 type LayerContentInput interface {
 	pulumi.Input
 
@@ -1564,11 +1564,11 @@ func (i LayerContentArgs) ToLayerContentPtrOutputWithContext(ctx context.Context
 // LayerContentPtrInput is an input type that accepts LayerContentArgs, LayerContentPtr and LayerContentPtrOutput values.
 // You can construct a concrete instance of `LayerContentPtrInput` via:
 //
-//          LayerContentArgs{...}
+//	        LayerContentArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type LayerContentPtrInput interface {
 	pulumi.Input
 
@@ -1716,7 +1716,7 @@ type ProvisionedConcurrencyConfigTriggerAction struct {
 // ProvisionedConcurrencyConfigTriggerActionInput is an input type that accepts ProvisionedConcurrencyConfigTriggerActionArgs and ProvisionedConcurrencyConfigTriggerActionOutput values.
 // You can construct a concrete instance of `ProvisionedConcurrencyConfigTriggerActionInput` via:
 //
-//          ProvisionedConcurrencyConfigTriggerActionArgs{...}
+//	ProvisionedConcurrencyConfigTriggerActionArgs{...}
 type ProvisionedConcurrencyConfigTriggerActionInput interface {
 	pulumi.Input
 
@@ -1750,7 +1750,7 @@ func (i ProvisionedConcurrencyConfigTriggerActionArgs) ToProvisionedConcurrencyC
 // ProvisionedConcurrencyConfigTriggerActionArrayInput is an input type that accepts ProvisionedConcurrencyConfigTriggerActionArray and ProvisionedConcurrencyConfigTriggerActionArrayOutput values.
 // You can construct a concrete instance of `ProvisionedConcurrencyConfigTriggerActionArrayInput` via:
 //
-//          ProvisionedConcurrencyConfigTriggerActionArray{ ProvisionedConcurrencyConfigTriggerActionArgs{...} }
+//	ProvisionedConcurrencyConfigTriggerActionArray{ ProvisionedConcurrencyConfigTriggerActionArgs{...} }
 type ProvisionedConcurrencyConfigTriggerActionArrayInput interface {
 	pulumi.Input
 
@@ -1836,7 +1836,7 @@ type GetAccountInfoAccountLimit struct {
 // GetAccountInfoAccountLimitInput is an input type that accepts GetAccountInfoAccountLimitArgs and GetAccountInfoAccountLimitOutput values.
 // You can construct a concrete instance of `GetAccountInfoAccountLimitInput` via:
 //
-//          GetAccountInfoAccountLimitArgs{...}
+//	GetAccountInfoAccountLimitArgs{...}
 type GetAccountInfoAccountLimitInput interface {
 	pulumi.Input
 
@@ -1866,7 +1866,7 @@ func (i GetAccountInfoAccountLimitArgs) ToGetAccountInfoAccountLimitOutputWithCo
 // GetAccountInfoAccountLimitArrayInput is an input type that accepts GetAccountInfoAccountLimitArray and GetAccountInfoAccountLimitArrayOutput values.
 // You can construct a concrete instance of `GetAccountInfoAccountLimitArrayInput` via:
 //
-//          GetAccountInfoAccountLimitArray{ GetAccountInfoAccountLimitArgs{...} }
+//	GetAccountInfoAccountLimitArray{ GetAccountInfoAccountLimitArgs{...} }
 type GetAccountInfoAccountLimitArrayInput interface {
 	pulumi.Input
 
@@ -1958,7 +1958,7 @@ type GetAccountInfoAccountLimitNamespace struct {
 // GetAccountInfoAccountLimitNamespaceInput is an input type that accepts GetAccountInfoAccountLimitNamespaceArgs and GetAccountInfoAccountLimitNamespaceOutput values.
 // You can construct a concrete instance of `GetAccountInfoAccountLimitNamespaceInput` via:
 //
-//          GetAccountInfoAccountLimitNamespaceArgs{...}
+//	GetAccountInfoAccountLimitNamespaceArgs{...}
 type GetAccountInfoAccountLimitNamespaceInput interface {
 	pulumi.Input
 
@@ -2004,7 +2004,7 @@ func (i GetAccountInfoAccountLimitNamespaceArgs) ToGetAccountInfoAccountLimitNam
 // GetAccountInfoAccountLimitNamespaceArrayInput is an input type that accepts GetAccountInfoAccountLimitNamespaceArray and GetAccountInfoAccountLimitNamespaceArrayOutput values.
 // You can construct a concrete instance of `GetAccountInfoAccountLimitNamespaceArrayInput` via:
 //
-//          GetAccountInfoAccountLimitNamespaceArray{ GetAccountInfoAccountLimitNamespaceArgs{...} }
+//	GetAccountInfoAccountLimitNamespaceArray{ GetAccountInfoAccountLimitNamespaceArgs{...} }
 type GetAccountInfoAccountLimitNamespaceArrayInput interface {
 	pulumi.Input
 
@@ -2142,7 +2142,7 @@ type GetAccountInfoAccountLimitNamespaceTrigger struct {
 // GetAccountInfoAccountLimitNamespaceTriggerInput is an input type that accepts GetAccountInfoAccountLimitNamespaceTriggerArgs and GetAccountInfoAccountLimitNamespaceTriggerOutput values.
 // You can construct a concrete instance of `GetAccountInfoAccountLimitNamespaceTriggerInput` via:
 //
-//          GetAccountInfoAccountLimitNamespaceTriggerArgs{...}
+//	GetAccountInfoAccountLimitNamespaceTriggerArgs{...}
 type GetAccountInfoAccountLimitNamespaceTriggerInput interface {
 	pulumi.Input
 
@@ -2192,7 +2192,7 @@ func (i GetAccountInfoAccountLimitNamespaceTriggerArgs) ToGetAccountInfoAccountL
 // GetAccountInfoAccountLimitNamespaceTriggerArrayInput is an input type that accepts GetAccountInfoAccountLimitNamespaceTriggerArray and GetAccountInfoAccountLimitNamespaceTriggerArrayOutput values.
 // You can construct a concrete instance of `GetAccountInfoAccountLimitNamespaceTriggerArrayInput` via:
 //
-//          GetAccountInfoAccountLimitNamespaceTriggerArray{ GetAccountInfoAccountLimitNamespaceTriggerArgs{...} }
+//	GetAccountInfoAccountLimitNamespaceTriggerArray{ GetAccountInfoAccountLimitNamespaceTriggerArgs{...} }
 type GetAccountInfoAccountLimitNamespaceTriggerArrayInput interface {
 	pulumi.Input
 
@@ -2324,7 +2324,7 @@ type GetAccountInfoAccountUsage struct {
 // GetAccountInfoAccountUsageInput is an input type that accepts GetAccountInfoAccountUsageArgs and GetAccountInfoAccountUsageOutput values.
 // You can construct a concrete instance of `GetAccountInfoAccountUsageInput` via:
 //
-//          GetAccountInfoAccountUsageArgs{...}
+//	GetAccountInfoAccountUsageArgs{...}
 type GetAccountInfoAccountUsageInput interface {
 	pulumi.Input
 
@@ -2360,7 +2360,7 @@ func (i GetAccountInfoAccountUsageArgs) ToGetAccountInfoAccountUsageOutputWithCo
 // GetAccountInfoAccountUsageArrayInput is an input type that accepts GetAccountInfoAccountUsageArray and GetAccountInfoAccountUsageArrayOutput values.
 // You can construct a concrete instance of `GetAccountInfoAccountUsageArrayInput` via:
 //
-//          GetAccountInfoAccountUsageArray{ GetAccountInfoAccountUsageArgs{...} }
+//	GetAccountInfoAccountUsageArray{ GetAccountInfoAccountUsageArgs{...} }
 type GetAccountInfoAccountUsageArrayInput interface {
 	pulumi.Input
 
@@ -2459,7 +2459,7 @@ type GetAccountInfoAccountUsageNamespace struct {
 // GetAccountInfoAccountUsageNamespaceInput is an input type that accepts GetAccountInfoAccountUsageNamespaceArgs and GetAccountInfoAccountUsageNamespaceOutput values.
 // You can construct a concrete instance of `GetAccountInfoAccountUsageNamespaceInput` via:
 //
-//          GetAccountInfoAccountUsageNamespaceArgs{...}
+//	GetAccountInfoAccountUsageNamespaceArgs{...}
 type GetAccountInfoAccountUsageNamespaceInput interface {
 	pulumi.Input
 
@@ -2497,7 +2497,7 @@ func (i GetAccountInfoAccountUsageNamespaceArgs) ToGetAccountInfoAccountUsageNam
 // GetAccountInfoAccountUsageNamespaceArrayInput is an input type that accepts GetAccountInfoAccountUsageNamespaceArray and GetAccountInfoAccountUsageNamespaceArrayOutput values.
 // You can construct a concrete instance of `GetAccountInfoAccountUsageNamespaceArrayInput` via:
 //
-//          GetAccountInfoAccountUsageNamespaceArray{ GetAccountInfoAccountUsageNamespaceArgs{...} }
+//	GetAccountInfoAccountUsageNamespaceArray{ GetAccountInfoAccountUsageNamespaceArgs{...} }
 type GetAccountInfoAccountUsageNamespaceArrayInput interface {
 	pulumi.Input
 
@@ -2601,7 +2601,7 @@ type GetAsyncEventManagementEventList struct {
 // GetAsyncEventManagementEventListInput is an input type that accepts GetAsyncEventManagementEventListArgs and GetAsyncEventManagementEventListOutput values.
 // You can construct a concrete instance of `GetAsyncEventManagementEventListInput` via:
 //
-//          GetAsyncEventManagementEventListArgs{...}
+//	GetAsyncEventManagementEventListArgs{...}
 type GetAsyncEventManagementEventListInput interface {
 	pulumi.Input
 
@@ -2639,7 +2639,7 @@ func (i GetAsyncEventManagementEventListArgs) ToGetAsyncEventManagementEventList
 // GetAsyncEventManagementEventListArrayInput is an input type that accepts GetAsyncEventManagementEventListArray and GetAsyncEventManagementEventListArrayOutput values.
 // You can construct a concrete instance of `GetAsyncEventManagementEventListArrayInput` via:
 //
-//          GetAsyncEventManagementEventListArray{ GetAsyncEventManagementEventListArgs{...} }
+//	GetAsyncEventManagementEventListArray{ GetAsyncEventManagementEventListArgs{...} }
 type GetAsyncEventManagementEventListArrayInput interface {
 	pulumi.Input
 
@@ -2737,7 +2737,7 @@ type GetAsyncEventStatusResult struct {
 // GetAsyncEventStatusResultInput is an input type that accepts GetAsyncEventStatusResultArgs and GetAsyncEventStatusResultOutput values.
 // You can construct a concrete instance of `GetAsyncEventStatusResultInput` via:
 //
-//          GetAsyncEventStatusResultArgs{...}
+//	GetAsyncEventStatusResultArgs{...}
 type GetAsyncEventStatusResultInput interface {
 	pulumi.Input
 
@@ -2769,7 +2769,7 @@ func (i GetAsyncEventStatusResultArgs) ToGetAsyncEventStatusResultOutputWithCont
 // GetAsyncEventStatusResultArrayInput is an input type that accepts GetAsyncEventStatusResultArray and GetAsyncEventStatusResultArrayOutput values.
 // You can construct a concrete instance of `GetAsyncEventStatusResultArrayInput` via:
 //
-//          GetAsyncEventStatusResultArray{ GetAsyncEventStatusResultArgs{...} }
+//	GetAsyncEventStatusResultArray{ GetAsyncEventStatusResultArgs{...} }
 type GetAsyncEventStatusResultArrayInput interface {
 	pulumi.Input
 
@@ -2858,7 +2858,7 @@ type GetFunctionAliasesAlias struct {
 // GetFunctionAliasesAliasInput is an input type that accepts GetFunctionAliasesAliasArgs and GetFunctionAliasesAliasOutput values.
 // You can construct a concrete instance of `GetFunctionAliasesAliasInput` via:
 //
-//          GetFunctionAliasesAliasArgs{...}
+//	GetFunctionAliasesAliasArgs{...}
 type GetFunctionAliasesAliasInput interface {
 	pulumi.Input
 
@@ -2896,7 +2896,7 @@ func (i GetFunctionAliasesAliasArgs) ToGetFunctionAliasesAliasOutputWithContext(
 // GetFunctionAliasesAliasArrayInput is an input type that accepts GetFunctionAliasesAliasArray and GetFunctionAliasesAliasArrayOutput values.
 // You can construct a concrete instance of `GetFunctionAliasesAliasArrayInput` via:
 //
-//          GetFunctionAliasesAliasArray{ GetFunctionAliasesAliasArgs{...} }
+//	GetFunctionAliasesAliasArray{ GetFunctionAliasesAliasArgs{...} }
 type GetFunctionAliasesAliasArrayInput interface {
 	pulumi.Input
 
@@ -2992,7 +2992,7 @@ type GetFunctionAliasesAliasRoutingConfig struct {
 // GetFunctionAliasesAliasRoutingConfigInput is an input type that accepts GetFunctionAliasesAliasRoutingConfigArgs and GetFunctionAliasesAliasRoutingConfigOutput values.
 // You can construct a concrete instance of `GetFunctionAliasesAliasRoutingConfigInput` via:
 //
-//          GetFunctionAliasesAliasRoutingConfigArgs{...}
+//	GetFunctionAliasesAliasRoutingConfigArgs{...}
 type GetFunctionAliasesAliasRoutingConfigInput interface {
 	pulumi.Input
 
@@ -3022,7 +3022,7 @@ func (i GetFunctionAliasesAliasRoutingConfigArgs) ToGetFunctionAliasesAliasRouti
 // GetFunctionAliasesAliasRoutingConfigArrayInput is an input type that accepts GetFunctionAliasesAliasRoutingConfigArray and GetFunctionAliasesAliasRoutingConfigArrayOutput values.
 // You can construct a concrete instance of `GetFunctionAliasesAliasRoutingConfigArrayInput` via:
 //
-//          GetFunctionAliasesAliasRoutingConfigArray{ GetFunctionAliasesAliasRoutingConfigArgs{...} }
+//	GetFunctionAliasesAliasRoutingConfigArray{ GetFunctionAliasesAliasRoutingConfigArgs{...} }
 type GetFunctionAliasesAliasRoutingConfigArrayInput interface {
 	pulumi.Input
 
@@ -3106,7 +3106,7 @@ type GetFunctionAliasesAliasRoutingConfigAdditionVersionMatch struct {
 // GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchInput is an input type that accepts GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArgs and GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchOutput values.
 // You can construct a concrete instance of `GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchInput` via:
 //
-//          GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArgs{...}
+//	GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArgs{...}
 type GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchInput interface {
 	pulumi.Input
 
@@ -3140,7 +3140,7 @@ func (i GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArgs) ToGetFunct
 // GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayInput is an input type that accepts GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArray and GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayOutput values.
 // You can construct a concrete instance of `GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayInput` via:
 //
-//          GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArray{ GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArgs{...} }
+//	GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArray{ GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArgs{...} }
 type GetFunctionAliasesAliasRoutingConfigAdditionVersionMatchArrayInput interface {
 	pulumi.Input
 
@@ -3226,7 +3226,7 @@ type GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeight struct {
 // GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightInput is an input type that accepts GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArgs and GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightOutput values.
 // You can construct a concrete instance of `GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightInput` via:
 //
-//          GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArgs{...}
+//	GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArgs{...}
 type GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightInput interface {
 	pulumi.Input
 
@@ -3256,7 +3256,7 @@ func (i GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArgs) ToGetFu
 // GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayInput is an input type that accepts GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArray and GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayOutput values.
 // You can construct a concrete instance of `GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayInput` via:
 //
-//          GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArray{ GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArgs{...} }
+//	GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArray{ GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArgs{...} }
 type GetFunctionAliasesAliasRoutingConfigAdditionalVersionWeightArrayInput interface {
 	pulumi.Input
 
@@ -3338,7 +3338,7 @@ type GetFunctionVersionsVersion struct {
 // GetFunctionVersionsVersionInput is an input type that accepts GetFunctionVersionsVersionArgs and GetFunctionVersionsVersionOutput values.
 // You can construct a concrete instance of `GetFunctionVersionsVersionInput` via:
 //
-//          GetFunctionVersionsVersionArgs{...}
+//	GetFunctionVersionsVersionArgs{...}
 type GetFunctionVersionsVersionInput interface {
 	pulumi.Input
 
@@ -3374,7 +3374,7 @@ func (i GetFunctionVersionsVersionArgs) ToGetFunctionVersionsVersionOutputWithCo
 // GetFunctionVersionsVersionArrayInput is an input type that accepts GetFunctionVersionsVersionArray and GetFunctionVersionsVersionArrayOutput values.
 // You can construct a concrete instance of `GetFunctionVersionsVersionArrayInput` via:
 //
-//          GetFunctionVersionsVersionArray{ GetFunctionVersionsVersionArgs{...} }
+//	GetFunctionVersionsVersionArray{ GetFunctionVersionsVersionArgs{...} }
 type GetFunctionVersionsVersionArrayInput interface {
 	pulumi.Input
 
@@ -3531,7 +3531,7 @@ type GetFunctionsFunction struct {
 // GetFunctionsFunctionInput is an input type that accepts GetFunctionsFunctionArgs and GetFunctionsFunctionOutput values.
 // You can construct a concrete instance of `GetFunctionsFunctionInput` via:
 //
-//          GetFunctionsFunctionArgs{...}
+//	GetFunctionsFunctionArgs{...}
 type GetFunctionsFunctionInput interface {
 	pulumi.Input
 
@@ -3627,7 +3627,7 @@ func (i GetFunctionsFunctionArgs) ToGetFunctionsFunctionOutputWithContext(ctx co
 // GetFunctionsFunctionArrayInput is an input type that accepts GetFunctionsFunctionArray and GetFunctionsFunctionArrayOutput values.
 // You can construct a concrete instance of `GetFunctionsFunctionArrayInput` via:
 //
-//          GetFunctionsFunctionArray{ GetFunctionsFunctionArgs{...} }
+//	GetFunctionsFunctionArray{ GetFunctionsFunctionArgs{...} }
 type GetFunctionsFunctionArrayInput interface {
 	pulumi.Input
 
@@ -3880,7 +3880,7 @@ type GetFunctionsFunctionImageConfig struct {
 // GetFunctionsFunctionImageConfigInput is an input type that accepts GetFunctionsFunctionImageConfigArgs and GetFunctionsFunctionImageConfigOutput values.
 // You can construct a concrete instance of `GetFunctionsFunctionImageConfigInput` via:
 //
-//          GetFunctionsFunctionImageConfigArgs{...}
+//	GetFunctionsFunctionImageConfigArgs{...}
 type GetFunctionsFunctionImageConfigInput interface {
 	pulumi.Input
 
@@ -3922,7 +3922,7 @@ func (i GetFunctionsFunctionImageConfigArgs) ToGetFunctionsFunctionImageConfigOu
 // GetFunctionsFunctionImageConfigArrayInput is an input type that accepts GetFunctionsFunctionImageConfigArray and GetFunctionsFunctionImageConfigArrayOutput values.
 // You can construct a concrete instance of `GetFunctionsFunctionImageConfigArrayInput` via:
 //
-//          GetFunctionsFunctionImageConfigArray{ GetFunctionsFunctionImageConfigArgs{...} }
+//	GetFunctionsFunctionImageConfigArray{ GetFunctionsFunctionImageConfigArgs{...} }
 type GetFunctionsFunctionImageConfigArrayInput interface {
 	pulumi.Input
 
@@ -4028,7 +4028,7 @@ type GetFunctionsFunctionIntranetConfig struct {
 // GetFunctionsFunctionIntranetConfigInput is an input type that accepts GetFunctionsFunctionIntranetConfigArgs and GetFunctionsFunctionIntranetConfigOutput values.
 // You can construct a concrete instance of `GetFunctionsFunctionIntranetConfigInput` via:
 //
-//          GetFunctionsFunctionIntranetConfigArgs{...}
+//	GetFunctionsFunctionIntranetConfigArgs{...}
 type GetFunctionsFunctionIntranetConfigInput interface {
 	pulumi.Input
 
@@ -4058,7 +4058,7 @@ func (i GetFunctionsFunctionIntranetConfigArgs) ToGetFunctionsFunctionIntranetCo
 // GetFunctionsFunctionIntranetConfigArrayInput is an input type that accepts GetFunctionsFunctionIntranetConfigArray and GetFunctionsFunctionIntranetConfigArrayOutput values.
 // You can construct a concrete instance of `GetFunctionsFunctionIntranetConfigArrayInput` via:
 //
-//          GetFunctionsFunctionIntranetConfigArray{ GetFunctionsFunctionIntranetConfigArgs{...} }
+//	GetFunctionsFunctionIntranetConfigArray{ GetFunctionsFunctionIntranetConfigArgs{...} }
 type GetFunctionsFunctionIntranetConfigArrayInput interface {
 	pulumi.Input
 
@@ -4144,7 +4144,7 @@ type GetFunctionsFunctionTriggerInfo struct {
 // GetFunctionsFunctionTriggerInfoInput is an input type that accepts GetFunctionsFunctionTriggerInfoArgs and GetFunctionsFunctionTriggerInfoOutput values.
 // You can construct a concrete instance of `GetFunctionsFunctionTriggerInfoInput` via:
 //
-//          GetFunctionsFunctionTriggerInfoArgs{...}
+//	GetFunctionsFunctionTriggerInfoArgs{...}
 type GetFunctionsFunctionTriggerInfoInput interface {
 	pulumi.Input
 
@@ -4184,7 +4184,7 @@ func (i GetFunctionsFunctionTriggerInfoArgs) ToGetFunctionsFunctionTriggerInfoOu
 // GetFunctionsFunctionTriggerInfoArrayInput is an input type that accepts GetFunctionsFunctionTriggerInfoArray and GetFunctionsFunctionTriggerInfoArrayOutput values.
 // You can construct a concrete instance of `GetFunctionsFunctionTriggerInfoArrayInput` via:
 //
-//          GetFunctionsFunctionTriggerInfoArray{ GetFunctionsFunctionTriggerInfoArgs{...} }
+//	GetFunctionsFunctionTriggerInfoArray{ GetFunctionsFunctionTriggerInfoArgs{...} }
 type GetFunctionsFunctionTriggerInfoArrayInput interface {
 	pulumi.Input
 
@@ -4297,7 +4297,7 @@ type GetLayerVersionsLayerVersion struct {
 // GetLayerVersionsLayerVersionInput is an input type that accepts GetLayerVersionsLayerVersionArgs and GetLayerVersionsLayerVersionOutput values.
 // You can construct a concrete instance of `GetLayerVersionsLayerVersionInput` via:
 //
-//          GetLayerVersionsLayerVersionArgs{...}
+//	GetLayerVersionsLayerVersionArgs{...}
 type GetLayerVersionsLayerVersionInput interface {
 	pulumi.Input
 
@@ -4339,7 +4339,7 @@ func (i GetLayerVersionsLayerVersionArgs) ToGetLayerVersionsLayerVersionOutputWi
 // GetLayerVersionsLayerVersionArrayInput is an input type that accepts GetLayerVersionsLayerVersionArray and GetLayerVersionsLayerVersionArrayOutput values.
 // You can construct a concrete instance of `GetLayerVersionsLayerVersionArrayInput` via:
 //
-//          GetLayerVersionsLayerVersionArray{ GetLayerVersionsLayerVersionArgs{...} }
+//	GetLayerVersionsLayerVersionArray{ GetLayerVersionsLayerVersionArgs{...} }
 type GetLayerVersionsLayerVersionArrayInput interface {
 	pulumi.Input
 
@@ -4457,7 +4457,7 @@ type GetLayersLayer struct {
 // GetLayersLayerInput is an input type that accepts GetLayersLayerArgs and GetLayersLayerOutput values.
 // You can construct a concrete instance of `GetLayersLayerInput` via:
 //
-//          GetLayersLayerArgs{...}
+//	GetLayersLayerArgs{...}
 type GetLayersLayerInput interface {
 	pulumi.Input
 
@@ -4499,7 +4499,7 @@ func (i GetLayersLayerArgs) ToGetLayersLayerOutputWithContext(ctx context.Contex
 // GetLayersLayerArrayInput is an input type that accepts GetLayersLayerArray and GetLayersLayerArrayOutput values.
 // You can construct a concrete instance of `GetLayersLayerArrayInput` via:
 //
-//          GetLayersLayerArray{ GetLayersLayerArgs{...} }
+//	GetLayersLayerArray{ GetLayersLayerArgs{...} }
 type GetLayersLayerArrayInput interface {
 	pulumi.Input
 
@@ -4625,7 +4625,7 @@ type GetLogsLog struct {
 // GetLogsLogInput is an input type that accepts GetLogsLogArgs and GetLogsLogOutput values.
 // You can construct a concrete instance of `GetLogsLogInput` via:
 //
-//          GetLogsLogArgs{...}
+//	GetLogsLogArgs{...}
 type GetLogsLogInput interface {
 	pulumi.Input
 
@@ -4675,7 +4675,7 @@ func (i GetLogsLogArgs) ToGetLogsLogOutputWithContext(ctx context.Context) GetLo
 // GetLogsLogArrayInput is an input type that accepts GetLogsLogArray and GetLogsLogArrayOutput values.
 // You can construct a concrete instance of `GetLogsLogArrayInput` via:
 //
-//          GetLogsLogArray{ GetLogsLogArgs{...} }
+//	GetLogsLogArray{ GetLogsLogArgs{...} }
 type GetLogsLogArrayInput interface {
 	pulumi.Input
 
@@ -4807,7 +4807,7 @@ type GetNamespacesNamespace struct {
 // GetNamespacesNamespaceInput is an input type that accepts GetNamespacesNamespaceArgs and GetNamespacesNamespaceOutput values.
 // You can construct a concrete instance of `GetNamespacesNamespaceInput` via:
 //
-//          GetNamespacesNamespaceArgs{...}
+//	GetNamespacesNamespaceArgs{...}
 type GetNamespacesNamespaceInput interface {
 	pulumi.Input
 
@@ -4843,7 +4843,7 @@ func (i GetNamespacesNamespaceArgs) ToGetNamespacesNamespaceOutputWithContext(ct
 // GetNamespacesNamespaceArrayInput is an input type that accepts GetNamespacesNamespaceArray and GetNamespacesNamespaceArrayOutput values.
 // You can construct a concrete instance of `GetNamespacesNamespaceArrayInput` via:
 //
-//          GetNamespacesNamespaceArray{ GetNamespacesNamespaceArgs{...} }
+//	GetNamespacesNamespaceArray{ GetNamespacesNamespaceArgs{...} }
 type GetNamespacesNamespaceArrayInput interface {
 	pulumi.Input
 
@@ -4946,7 +4946,7 @@ type GetRequestStatusData struct {
 // GetRequestStatusDataInput is an input type that accepts GetRequestStatusDataArgs and GetRequestStatusDataOutput values.
 // You can construct a concrete instance of `GetRequestStatusDataInput` via:
 //
-//          GetRequestStatusDataArgs{...}
+//	GetRequestStatusDataArgs{...}
 type GetRequestStatusDataInput interface {
 	pulumi.Input
 
@@ -4988,7 +4988,7 @@ func (i GetRequestStatusDataArgs) ToGetRequestStatusDataOutputWithContext(ctx co
 // GetRequestStatusDataArrayInput is an input type that accepts GetRequestStatusDataArray and GetRequestStatusDataArrayOutput values.
 // You can construct a concrete instance of `GetRequestStatusDataArrayInput` via:
 //
-//          GetRequestStatusDataArray{ GetRequestStatusDataArgs{...} }
+//	GetRequestStatusDataArray{ GetRequestStatusDataArgs{...} }
 type GetRequestStatusDataArrayInput interface {
 	pulumi.Input
 
@@ -5094,7 +5094,7 @@ type GetTriggersFilter struct {
 // GetTriggersFilterInput is an input type that accepts GetTriggersFilterArgs and GetTriggersFilterOutput values.
 // You can construct a concrete instance of `GetTriggersFilterInput` via:
 //
-//          GetTriggersFilterArgs{...}
+//	GetTriggersFilterArgs{...}
 type GetTriggersFilterInput interface {
 	pulumi.Input
 
@@ -5124,7 +5124,7 @@ func (i GetTriggersFilterArgs) ToGetTriggersFilterOutputWithContext(ctx context.
 // GetTriggersFilterArrayInput is an input type that accepts GetTriggersFilterArray and GetTriggersFilterArrayOutput values.
 // You can construct a concrete instance of `GetTriggersFilterArrayInput` via:
 //
-//          GetTriggersFilterArray{ GetTriggersFilterArgs{...} }
+//	GetTriggersFilterArray{ GetTriggersFilterArgs{...} }
 type GetTriggersFilterArrayInput interface {
 	pulumi.Input
 
@@ -5220,7 +5220,7 @@ type GetTriggersTrigger struct {
 // GetTriggersTriggerInput is an input type that accepts GetTriggersTriggerArgs and GetTriggersTriggerOutput values.
 // You can construct a concrete instance of `GetTriggersTriggerInput` via:
 //
-//          GetTriggersTriggerArgs{...}
+//	GetTriggersTriggerArgs{...}
 type GetTriggersTriggerInput interface {
 	pulumi.Input
 
@@ -5270,7 +5270,7 @@ func (i GetTriggersTriggerArgs) ToGetTriggersTriggerOutputWithContext(ctx contex
 // GetTriggersTriggerArrayInput is an input type that accepts GetTriggersTriggerArray and GetTriggersTriggerArrayOutput values.
 // You can construct a concrete instance of `GetTriggersTriggerArrayInput` via:
 //
-//          GetTriggersTriggerArray{ GetTriggersTriggerArgs{...} }
+//	GetTriggersTriggerArray{ GetTriggersTriggerArgs{...} }
 type GetTriggersTriggerArrayInput interface {
 	pulumi.Input
 

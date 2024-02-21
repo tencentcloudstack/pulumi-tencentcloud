@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.GetSqlTemplates(ctx, &dbbrain.GetSqlTemplatesArgs{
-// 			InstanceId: "",
-// 			Product:    pulumi.StringRef(""),
-// 			Schema:     "",
-// 			SqlText:    "",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.GetSqlTemplates(ctx, &dbbrain.GetSqlTemplatesArgs{
+//				InstanceId: "",
+//				Product:    pulumi.StringRef(""),
+//				Schema:     "",
+//				SqlText:    "",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetSqlTemplates(ctx *pulumi.Context, args *GetSqlTemplatesArgs, opts ...pulumi.InvokeOption) (*GetSqlTemplatesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

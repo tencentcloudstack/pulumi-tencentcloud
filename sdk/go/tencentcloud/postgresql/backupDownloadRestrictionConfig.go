@@ -20,21 +20,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewBackupDownloadRestrictionConfig(ctx, "backupDownloadRestrictionConfig", &Postgresql.BackupDownloadRestrictionConfigArgs{
-// 			RestrictionType: pulumi.String("NONE"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewBackupDownloadRestrictionConfig(ctx, "backupDownloadRestrictionConfig", &Postgresql.BackupDownloadRestrictionConfigArgs{
+//				RestrictionType: pulumi.String("NONE"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Set the download only to allow the intranet downloads.
 //
@@ -42,21 +45,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewBackupDownloadRestrictionConfig(ctx, "backupDownloadRestrictionConfig", &Postgresql.BackupDownloadRestrictionConfigArgs{
-// 			RestrictionType: pulumi.String("INTRANET"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewBackupDownloadRestrictionConfig(ctx, "backupDownloadRestrictionConfig", &Postgresql.BackupDownloadRestrictionConfigArgs{
+//				RestrictionType: pulumi.String("INTRANET"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Restrict the backup file download by customizing.
 //
@@ -64,36 +70,39 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewInstance(ctx, "pgVpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.Any(_var.Vpc_cidr),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Postgresql.NewBackupDownloadRestrictionConfig(ctx, "backupDownloadRestrictionConfig", &Postgresql.BackupDownloadRestrictionConfigArgs{
-// 			RestrictionType:      pulumi.String("CUSTOMIZE"),
-// 			VpcRestrictionEffect: pulumi.String("DENY"),
-// 			VpcIdSets: pulumi.StringArray{
-// 				pulumi.Any(tencentcloud_vpc.Pg_vpc2.Id),
-// 			},
-// 			IpRestrictionEffect: pulumi.String("DENY"),
-// 			IpSets: pulumi.StringArray{
-// 				pulumi.String("192.168.0.0"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.NewInstance(ctx, "pgVpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.Any(_var.Vpc_cidr),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Postgresql.NewBackupDownloadRestrictionConfig(ctx, "backupDownloadRestrictionConfig", &Postgresql.BackupDownloadRestrictionConfigArgs{
+//				RestrictionType:      pulumi.String("CUSTOMIZE"),
+//				VpcRestrictionEffect: pulumi.String("DENY"),
+//				VpcIdSets: pulumi.StringArray{
+//					pulumi.Any(tencentcloud_vpc.Pg_vpc2.Id),
+//				},
+//				IpRestrictionEffect: pulumi.String("DENY"),
+//				IpSets: pulumi.StringArray{
+//					pulumi.String("192.168.0.0"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -101,7 +110,9 @@ import (
 // postgresql backup_download_restriction_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Postgresql/backupDownloadRestrictionConfig:BackupDownloadRestrictionConfig backup_download_restriction_config backup_download_restriction_config_id
+//
+//	$ pulumi import tencentcloud:Postgresql/backupDownloadRestrictionConfig:BackupDownloadRestrictionConfig backup_download_restriction_config backup_download_restriction_config_id
+//
 // ```
 type BackupDownloadRestrictionConfig struct {
 	pulumi.CustomResourceState
@@ -233,7 +244,7 @@ func (i *BackupDownloadRestrictionConfig) ToBackupDownloadRestrictionConfigOutpu
 // BackupDownloadRestrictionConfigArrayInput is an input type that accepts BackupDownloadRestrictionConfigArray and BackupDownloadRestrictionConfigArrayOutput values.
 // You can construct a concrete instance of `BackupDownloadRestrictionConfigArrayInput` via:
 //
-//          BackupDownloadRestrictionConfigArray{ BackupDownloadRestrictionConfigArgs{...} }
+//	BackupDownloadRestrictionConfigArray{ BackupDownloadRestrictionConfigArgs{...} }
 type BackupDownloadRestrictionConfigArrayInput interface {
 	pulumi.Input
 
@@ -258,7 +269,7 @@ func (i BackupDownloadRestrictionConfigArray) ToBackupDownloadRestrictionConfigA
 // BackupDownloadRestrictionConfigMapInput is an input type that accepts BackupDownloadRestrictionConfigMap and BackupDownloadRestrictionConfigMapOutput values.
 // You can construct a concrete instance of `BackupDownloadRestrictionConfigMapInput` via:
 //
-//          BackupDownloadRestrictionConfigMap{ "key": BackupDownloadRestrictionConfigArgs{...} }
+//	BackupDownloadRestrictionConfigMap{ "key": BackupDownloadRestrictionConfigArgs{...} }
 type BackupDownloadRestrictionConfigMapInput interface {
 	pulumi.Input
 

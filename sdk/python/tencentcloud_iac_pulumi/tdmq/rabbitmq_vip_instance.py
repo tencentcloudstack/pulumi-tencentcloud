@@ -361,6 +361,14 @@ class RabbitmqVipInstance(pulumi.CustomResource):
         """
         Provides a resource to create a tdmq rabbitmq_vip_instance
 
+        ## Import
+
+        tdmq rabbitmq_vip_instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tdmq/rabbitmqVipInstance:RabbitmqVipInstance example amqp-mok52gmn
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] auto_renew_flag: Automatic renewal, the default is true.
@@ -382,6 +390,14 @@ class RabbitmqVipInstance(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a tdmq rabbitmq_vip_instance
+
+        ## Import
+
+        tdmq rabbitmq_vip_instance can be imported using the id, e.g.
+
+        ```sh
+         $ pulumi import tencentcloud:Tdmq/rabbitmqVipInstance:RabbitmqVipInstance example amqp-mok52gmn
+        ```
 
         :param str resource_name: The name of the resource.
         :param RabbitmqVipInstanceArgs args: The arguments to use to populate this resource's properties.

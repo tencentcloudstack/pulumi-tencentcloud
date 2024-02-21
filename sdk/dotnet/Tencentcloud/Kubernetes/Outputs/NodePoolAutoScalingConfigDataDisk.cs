@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly int? DiskSize;
         /// <summary>
-        /// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        /// Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
         /// </summary>
         public readonly string? DiskType;
         /// <summary>

@@ -19,60 +19,63 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-6"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(availabilityZone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		foo, err := Monitor.NewGrafanaInstance(ctx, "foo", &Monitor.GrafanaInstanceArgs{
-// 			InstanceName: pulumi.String("test-grafana"),
-// 			VpcId:        vpc.ID(),
-// 			SubnetIds: pulumi.StringArray{
-// 				subnet.ID(),
-// 			},
-// 			GrafanaInitPassword: pulumi.String("1234567890"),
-// 			EnableInternet:      pulumi.Bool(false),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Monitor.NewGrafanaPlugin(ctx, "grafanaPlugin", &Monitor.GrafanaPluginArgs{
-// 			InstanceId: foo.ID(),
-// 			PluginId:   pulumi.String("grafana-piechart-panel"),
-// 			Version:    pulumi.String("1.6.2"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-6"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			foo, err := Monitor.NewGrafanaInstance(ctx, "foo", &Monitor.GrafanaInstanceArgs{
+//				InstanceName: pulumi.String("test-grafana"),
+//				VpcId:        vpc.ID(),
+//				SubnetIds: pulumi.StringArray{
+//					subnet.ID(),
+//				},
+//				GrafanaInitPassword: pulumi.String("1234567890"),
+//				EnableInternet:      pulumi.Bool(false),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Monitor.NewGrafanaPlugin(ctx, "grafanaPlugin", &Monitor.GrafanaPluginArgs{
+//				InstanceId: foo.ID(),
+//				PluginId:   pulumi.String("grafana-piechart-panel"),
+//				Version:    pulumi.String("1.6.2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -80,7 +83,9 @@ import (
 // monitor grafanaPlugin can be imported using the instance_id#plugin_id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/grafanaPlugin:GrafanaPlugin grafanaPlugin grafana-50nj6v00#grafana-piechart-panel
+//
+//	$ pulumi import tencentcloud:Monitor/grafanaPlugin:GrafanaPlugin grafanaPlugin grafana-50nj6v00#grafana-piechart-panel
+//
 // ```
 type GrafanaPlugin struct {
 	pulumi.CustomResourceState
@@ -195,7 +200,7 @@ func (i *GrafanaPlugin) ToGrafanaPluginOutputWithContext(ctx context.Context) Gr
 // GrafanaPluginArrayInput is an input type that accepts GrafanaPluginArray and GrafanaPluginArrayOutput values.
 // You can construct a concrete instance of `GrafanaPluginArrayInput` via:
 //
-//          GrafanaPluginArray{ GrafanaPluginArgs{...} }
+//	GrafanaPluginArray{ GrafanaPluginArgs{...} }
 type GrafanaPluginArrayInput interface {
 	pulumi.Input
 
@@ -220,7 +225,7 @@ func (i GrafanaPluginArray) ToGrafanaPluginArrayOutputWithContext(ctx context.Co
 // GrafanaPluginMapInput is an input type that accepts GrafanaPluginMap and GrafanaPluginMapOutput values.
 // You can construct a concrete instance of `GrafanaPluginMapInput` via:
 //
-//          GrafanaPluginMap{ "key": GrafanaPluginArgs{...} }
+//	GrafanaPluginMap{ "key": GrafanaPluginArgs{...} }
 type GrafanaPluginMapInput interface {
 	pulumi.Input
 

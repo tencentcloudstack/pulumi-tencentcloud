@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cbs.NewDiskBackupRollbackOperation(ctx, "operation", &Cbs.DiskBackupRollbackOperationArgs{
-// 			DiskBackupId: pulumi.String("dbp-xxx"),
-// 			DiskId:       pulumi.String("disk-xxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cbs.NewDiskBackupRollbackOperation(ctx, "operation", &Cbs.DiskBackupRollbackOperationArgs{
+//				DiskBackupId: pulumi.String("dbp-xxx"),
+//				DiskId:       pulumi.String("disk-xxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type DiskBackupRollbackOperation struct {
 	pulumi.CustomResourceState
@@ -145,7 +148,7 @@ func (i *DiskBackupRollbackOperation) ToDiskBackupRollbackOperationOutputWithCon
 // DiskBackupRollbackOperationArrayInput is an input type that accepts DiskBackupRollbackOperationArray and DiskBackupRollbackOperationArrayOutput values.
 // You can construct a concrete instance of `DiskBackupRollbackOperationArrayInput` via:
 //
-//          DiskBackupRollbackOperationArray{ DiskBackupRollbackOperationArgs{...} }
+//	DiskBackupRollbackOperationArray{ DiskBackupRollbackOperationArgs{...} }
 type DiskBackupRollbackOperationArrayInput interface {
 	pulumi.Input
 
@@ -170,7 +173,7 @@ func (i DiskBackupRollbackOperationArray) ToDiskBackupRollbackOperationArrayOutp
 // DiskBackupRollbackOperationMapInput is an input type that accepts DiskBackupRollbackOperationMap and DiskBackupRollbackOperationMapOutput values.
 // You can construct a concrete instance of `DiskBackupRollbackOperationMapInput` via:
 //
-//          DiskBackupRollbackOperationMap{ "key": DiskBackupRollbackOperationArgs{...} }
+//	DiskBackupRollbackOperationMap{ "key": DiskBackupRollbackOperationArgs{...} }
 type DiskBackupRollbackOperationMapInput interface {
 	pulumi.Input
 

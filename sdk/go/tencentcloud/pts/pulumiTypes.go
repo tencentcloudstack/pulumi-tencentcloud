@@ -26,7 +26,7 @@ type FileFileInfo struct {
 // FileFileInfoInput is an input type that accepts FileFileInfoArgs and FileFileInfoOutput values.
 // You can construct a concrete instance of `FileFileInfoInput` via:
 //
-//          FileFileInfoArgs{...}
+//	FileFileInfoArgs{...}
 type FileFileInfoInput interface {
 	pulumi.Input
 
@@ -62,7 +62,7 @@ func (i FileFileInfoArgs) ToFileFileInfoOutputWithContext(ctx context.Context) F
 // FileFileInfoArrayInput is an input type that accepts FileFileInfoArray and FileFileInfoArrayOutput values.
 // You can construct a concrete instance of `FileFileInfoArrayInput` via:
 //
-//          FileFileInfoArray{ FileFileInfoArgs{...} }
+//	FileFileInfoArray{ FileFileInfoArgs{...} }
 type FileFileInfoArrayInput interface {
 	pulumi.Input
 
@@ -161,7 +161,7 @@ type JobDataset struct {
 // JobDatasetInput is an input type that accepts JobDatasetArgs and JobDatasetOutput values.
 // You can construct a concrete instance of `JobDatasetInput` via:
 //
-//          JobDatasetArgs{...}
+//	JobDatasetArgs{...}
 type JobDatasetInput interface {
 	pulumi.Input
 
@@ -199,7 +199,7 @@ func (i JobDatasetArgs) ToJobDatasetOutputWithContext(ctx context.Context) JobDa
 // JobDatasetArrayInput is an input type that accepts JobDatasetArray and JobDatasetArrayOutput values.
 // You can construct a concrete instance of `JobDatasetArrayInput` via:
 //
-//          JobDatasetArray{ JobDatasetArgs{...} }
+//	JobDatasetArray{ JobDatasetArgs{...} }
 type JobDatasetArrayInput interface {
 	pulumi.Input
 
@@ -308,7 +308,7 @@ type JobDomainNameConfig struct {
 // JobDomainNameConfigInput is an input type that accepts JobDomainNameConfigArgs and JobDomainNameConfigOutput values.
 // You can construct a concrete instance of `JobDomainNameConfigInput` via:
 //
-//          JobDomainNameConfigArgs{...}
+//	JobDomainNameConfigArgs{...}
 type JobDomainNameConfigInput interface {
 	pulumi.Input
 
@@ -336,7 +336,7 @@ func (i JobDomainNameConfigArgs) ToJobDomainNameConfigOutputWithContext(ctx cont
 // JobDomainNameConfigArrayInput is an input type that accepts JobDomainNameConfigArray and JobDomainNameConfigArrayOutput values.
 // You can construct a concrete instance of `JobDomainNameConfigArrayInput` via:
 //
-//          JobDomainNameConfigArray{ JobDomainNameConfigArgs{...} }
+//	JobDomainNameConfigArray{ JobDomainNameConfigArgs{...} }
 type JobDomainNameConfigArrayInput interface {
 	pulumi.Input
 
@@ -407,7 +407,7 @@ type JobDomainNameConfigDnsConfig struct {
 // JobDomainNameConfigDnsConfigInput is an input type that accepts JobDomainNameConfigDnsConfigArgs and JobDomainNameConfigDnsConfigOutput values.
 // You can construct a concrete instance of `JobDomainNameConfigDnsConfigInput` via:
 //
-//          JobDomainNameConfigDnsConfigArgs{...}
+//	JobDomainNameConfigDnsConfigArgs{...}
 type JobDomainNameConfigDnsConfigInput interface {
 	pulumi.Input
 
@@ -442,11 +442,11 @@ func (i JobDomainNameConfigDnsConfigArgs) ToJobDomainNameConfigDnsConfigPtrOutpu
 // JobDomainNameConfigDnsConfigPtrInput is an input type that accepts JobDomainNameConfigDnsConfigArgs, JobDomainNameConfigDnsConfigPtr and JobDomainNameConfigDnsConfigPtrOutput values.
 // You can construct a concrete instance of `JobDomainNameConfigDnsConfigPtrInput` via:
 //
-//          JobDomainNameConfigDnsConfigArgs{...}
+//	        JobDomainNameConfigDnsConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type JobDomainNameConfigDnsConfigPtrInput interface {
 	pulumi.Input
 
@@ -541,7 +541,7 @@ type JobDomainNameConfigHostAlias struct {
 // JobDomainNameConfigHostAliasInput is an input type that accepts JobDomainNameConfigHostAliasArgs and JobDomainNameConfigHostAliasOutput values.
 // You can construct a concrete instance of `JobDomainNameConfigHostAliasInput` via:
 //
-//          JobDomainNameConfigHostAliasArgs{...}
+//	JobDomainNameConfigHostAliasArgs{...}
 type JobDomainNameConfigHostAliasInput interface {
 	pulumi.Input
 
@@ -569,7 +569,7 @@ func (i JobDomainNameConfigHostAliasArgs) ToJobDomainNameConfigHostAliasOutputWi
 // JobDomainNameConfigHostAliasArrayInput is an input type that accepts JobDomainNameConfigHostAliasArray and JobDomainNameConfigHostAliasArrayOutput values.
 // You can construct a concrete instance of `JobDomainNameConfigHostAliasArrayInput` via:
 //
-//          JobDomainNameConfigHostAliasArray{ JobDomainNameConfigHostAliasArgs{...} }
+//	JobDomainNameConfigHostAliasArray{ JobDomainNameConfigHostAliasArgs{...} }
 type JobDomainNameConfigHostAliasArrayInput interface {
 	pulumi.Input
 
@@ -642,7 +642,7 @@ type JobLoad struct {
 // JobLoadInput is an input type that accepts JobLoadArgs and JobLoadOutput values.
 // You can construct a concrete instance of `JobLoadInput` via:
 //
-//          JobLoadArgs{...}
+//	JobLoadArgs{...}
 type JobLoadInput interface {
 	pulumi.Input
 
@@ -671,7 +671,7 @@ func (i JobLoadArgs) ToJobLoadOutputWithContext(ctx context.Context) JobLoadOutp
 // JobLoadArrayInput is an input type that accepts JobLoadArray and JobLoadArrayOutput values.
 // You can construct a concrete instance of `JobLoadArrayInput` via:
 //
-//          JobLoadArray{ JobLoadArgs{...} }
+//	JobLoadArray{ JobLoadArgs{...} }
 type JobLoadArrayInput interface {
 	pulumi.Input
 
@@ -748,7 +748,7 @@ type JobLoadGeoRegionsLoadDistribution struct {
 // JobLoadGeoRegionsLoadDistributionInput is an input type that accepts JobLoadGeoRegionsLoadDistributionArgs and JobLoadGeoRegionsLoadDistributionOutput values.
 // You can construct a concrete instance of `JobLoadGeoRegionsLoadDistributionInput` via:
 //
-//          JobLoadGeoRegionsLoadDistributionArgs{...}
+//	JobLoadGeoRegionsLoadDistributionArgs{...}
 type JobLoadGeoRegionsLoadDistributionInput interface {
 	pulumi.Input
 
@@ -777,7 +777,7 @@ func (i JobLoadGeoRegionsLoadDistributionArgs) ToJobLoadGeoRegionsLoadDistributi
 // JobLoadGeoRegionsLoadDistributionArrayInput is an input type that accepts JobLoadGeoRegionsLoadDistributionArray and JobLoadGeoRegionsLoadDistributionArrayOutput values.
 // You can construct a concrete instance of `JobLoadGeoRegionsLoadDistributionArrayInput` via:
 //
-//          JobLoadGeoRegionsLoadDistributionArray{ JobLoadGeoRegionsLoadDistributionArgs{...} }
+//	JobLoadGeoRegionsLoadDistributionArray{ JobLoadGeoRegionsLoadDistributionArgs{...} }
 type JobLoadGeoRegionsLoadDistributionArrayInput interface {
 	pulumi.Input
 
@@ -855,7 +855,7 @@ type JobLoadLoadSpec struct {
 // JobLoadLoadSpecInput is an input type that accepts JobLoadLoadSpecArgs and JobLoadLoadSpecOutput values.
 // You can construct a concrete instance of `JobLoadLoadSpecInput` via:
 //
-//          JobLoadLoadSpecArgs{...}
+//	JobLoadLoadSpecArgs{...}
 type JobLoadLoadSpecInput interface {
 	pulumi.Input
 
@@ -893,11 +893,11 @@ func (i JobLoadLoadSpecArgs) ToJobLoadLoadSpecPtrOutputWithContext(ctx context.C
 // JobLoadLoadSpecPtrInput is an input type that accepts JobLoadLoadSpecArgs, JobLoadLoadSpecPtr and JobLoadLoadSpecPtrOutput values.
 // You can construct a concrete instance of `JobLoadLoadSpecPtrInput` via:
 //
-//          JobLoadLoadSpecArgs{...}
+//	        JobLoadLoadSpecArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type JobLoadLoadSpecPtrInput interface {
 	pulumi.Input
 
@@ -1023,7 +1023,7 @@ type JobLoadLoadSpecConcurrency struct {
 // JobLoadLoadSpecConcurrencyInput is an input type that accepts JobLoadLoadSpecConcurrencyArgs and JobLoadLoadSpecConcurrencyOutput values.
 // You can construct a concrete instance of `JobLoadLoadSpecConcurrencyInput` via:
 //
-//          JobLoadLoadSpecConcurrencyArgs{...}
+//	JobLoadLoadSpecConcurrencyArgs{...}
 type JobLoadLoadSpecConcurrencyInput interface {
 	pulumi.Input
 
@@ -1062,11 +1062,11 @@ func (i JobLoadLoadSpecConcurrencyArgs) ToJobLoadLoadSpecConcurrencyPtrOutputWit
 // JobLoadLoadSpecConcurrencyPtrInput is an input type that accepts JobLoadLoadSpecConcurrencyArgs, JobLoadLoadSpecConcurrencyPtr and JobLoadLoadSpecConcurrencyPtrOutput values.
 // You can construct a concrete instance of `JobLoadLoadSpecConcurrencyPtrInput` via:
 //
-//          JobLoadLoadSpecConcurrencyArgs{...}
+//	        JobLoadLoadSpecConcurrencyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type JobLoadLoadSpecConcurrencyPtrInput interface {
 	pulumi.Input
 
@@ -1202,7 +1202,7 @@ type JobLoadLoadSpecConcurrencyStage struct {
 // JobLoadLoadSpecConcurrencyStageInput is an input type that accepts JobLoadLoadSpecConcurrencyStageArgs and JobLoadLoadSpecConcurrencyStageOutput values.
 // You can construct a concrete instance of `JobLoadLoadSpecConcurrencyStageInput` via:
 //
-//          JobLoadLoadSpecConcurrencyStageArgs{...}
+//	JobLoadLoadSpecConcurrencyStageArgs{...}
 type JobLoadLoadSpecConcurrencyStageInput interface {
 	pulumi.Input
 
@@ -1230,7 +1230,7 @@ func (i JobLoadLoadSpecConcurrencyStageArgs) ToJobLoadLoadSpecConcurrencyStageOu
 // JobLoadLoadSpecConcurrencyStageArrayInput is an input type that accepts JobLoadLoadSpecConcurrencyStageArray and JobLoadLoadSpecConcurrencyStageArrayOutput values.
 // You can construct a concrete instance of `JobLoadLoadSpecConcurrencyStageArrayInput` via:
 //
-//          JobLoadLoadSpecConcurrencyStageArray{ JobLoadLoadSpecConcurrencyStageArgs{...} }
+//	JobLoadLoadSpecConcurrencyStageArray{ JobLoadLoadSpecConcurrencyStageArgs{...} }
 type JobLoadLoadSpecConcurrencyStageArrayInput interface {
 	pulumi.Input
 
@@ -1307,7 +1307,7 @@ type JobLoadLoadSpecRequestsPerSecond struct {
 // JobLoadLoadSpecRequestsPerSecondInput is an input type that accepts JobLoadLoadSpecRequestsPerSecondArgs and JobLoadLoadSpecRequestsPerSecondOutput values.
 // You can construct a concrete instance of `JobLoadLoadSpecRequestsPerSecondInput` via:
 //
-//          JobLoadLoadSpecRequestsPerSecondArgs{...}
+//	JobLoadLoadSpecRequestsPerSecondArgs{...}
 type JobLoadLoadSpecRequestsPerSecondInput interface {
 	pulumi.Input
 
@@ -1348,11 +1348,11 @@ func (i JobLoadLoadSpecRequestsPerSecondArgs) ToJobLoadLoadSpecRequestsPerSecond
 // JobLoadLoadSpecRequestsPerSecondPtrInput is an input type that accepts JobLoadLoadSpecRequestsPerSecondArgs, JobLoadLoadSpecRequestsPerSecondPtr and JobLoadLoadSpecRequestsPerSecondPtrOutput values.
 // You can construct a concrete instance of `JobLoadLoadSpecRequestsPerSecondPtrInput` via:
 //
-//          JobLoadLoadSpecRequestsPerSecondArgs{...}
+//	        JobLoadLoadSpecRequestsPerSecondArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type JobLoadLoadSpecRequestsPerSecondPtrInput interface {
 	pulumi.Input
 
@@ -1515,7 +1515,7 @@ type JobLoadLoadSpecScriptOrigin struct {
 // JobLoadLoadSpecScriptOriginInput is an input type that accepts JobLoadLoadSpecScriptOriginArgs and JobLoadLoadSpecScriptOriginOutput values.
 // You can construct a concrete instance of `JobLoadLoadSpecScriptOriginInput` via:
 //
-//          JobLoadLoadSpecScriptOriginArgs{...}
+//	JobLoadLoadSpecScriptOriginArgs{...}
 type JobLoadLoadSpecScriptOriginInput interface {
 	pulumi.Input
 
@@ -1552,11 +1552,11 @@ func (i JobLoadLoadSpecScriptOriginArgs) ToJobLoadLoadSpecScriptOriginPtrOutputW
 // JobLoadLoadSpecScriptOriginPtrInput is an input type that accepts JobLoadLoadSpecScriptOriginArgs, JobLoadLoadSpecScriptOriginPtr and JobLoadLoadSpecScriptOriginPtrOutput values.
 // You can construct a concrete instance of `JobLoadLoadSpecScriptOriginPtrInput` via:
 //
-//          JobLoadLoadSpecScriptOriginArgs{...}
+//	        JobLoadLoadSpecScriptOriginArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type JobLoadLoadSpecScriptOriginPtrInput interface {
 	pulumi.Input
 
@@ -1679,7 +1679,7 @@ type JobLoadVpcLoadDistribution struct {
 // JobLoadVpcLoadDistributionInput is an input type that accepts JobLoadVpcLoadDistributionArgs and JobLoadVpcLoadDistributionOutput values.
 // You can construct a concrete instance of `JobLoadVpcLoadDistributionInput` via:
 //
-//          JobLoadVpcLoadDistributionArgs{...}
+//	JobLoadVpcLoadDistributionArgs{...}
 type JobLoadVpcLoadDistributionInput interface {
 	pulumi.Input
 
@@ -1717,11 +1717,11 @@ func (i JobLoadVpcLoadDistributionArgs) ToJobLoadVpcLoadDistributionPtrOutputWit
 // JobLoadVpcLoadDistributionPtrInput is an input type that accepts JobLoadVpcLoadDistributionArgs, JobLoadVpcLoadDistributionPtr and JobLoadVpcLoadDistributionPtrOutput values.
 // You can construct a concrete instance of `JobLoadVpcLoadDistributionPtrInput` via:
 //
-//          JobLoadVpcLoadDistributionArgs{...}
+//	        JobLoadVpcLoadDistributionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type JobLoadVpcLoadDistributionPtrInput interface {
 	pulumi.Input
 
@@ -1859,7 +1859,7 @@ type JobPlugin struct {
 // JobPluginInput is an input type that accepts JobPluginArgs and JobPluginOutput values.
 // You can construct a concrete instance of `JobPluginInput` via:
 //
-//          JobPluginArgs{...}
+//	JobPluginArgs{...}
 type JobPluginInput interface {
 	pulumi.Input
 
@@ -1891,7 +1891,7 @@ func (i JobPluginArgs) ToJobPluginOutputWithContext(ctx context.Context) JobPlug
 // JobPluginArrayInput is an input type that accepts JobPluginArray and JobPluginArrayOutput values.
 // You can construct a concrete instance of `JobPluginArrayInput` via:
 //
-//          JobPluginArray{ JobPluginArgs{...} }
+//	JobPluginArray{ JobPluginArgs{...} }
 type JobPluginArrayInput interface {
 	pulumi.Input
 
@@ -1980,7 +1980,7 @@ type JobProtocol struct {
 // JobProtocolInput is an input type that accepts JobProtocolArgs and JobProtocolOutput values.
 // You can construct a concrete instance of `JobProtocolInput` via:
 //
-//          JobProtocolArgs{...}
+//	JobProtocolArgs{...}
 type JobProtocolInput interface {
 	pulumi.Input
 
@@ -2012,7 +2012,7 @@ func (i JobProtocolArgs) ToJobProtocolOutputWithContext(ctx context.Context) Job
 // JobProtocolArrayInput is an input type that accepts JobProtocolArray and JobProtocolArrayOutput values.
 // You can construct a concrete instance of `JobProtocolArrayInput` via:
 //
-//          JobProtocolArray{ JobProtocolArgs{...} }
+//	JobProtocolArray{ JobProtocolArgs{...} }
 type JobProtocolArrayInput interface {
 	pulumi.Input
 
@@ -2101,7 +2101,7 @@ type JobRequestFile struct {
 // JobRequestFileInput is an input type that accepts JobRequestFileArgs and JobRequestFileOutput values.
 // You can construct a concrete instance of `JobRequestFileInput` via:
 //
-//          JobRequestFileArgs{...}
+//	JobRequestFileArgs{...}
 type JobRequestFileInput interface {
 	pulumi.Input
 
@@ -2133,7 +2133,7 @@ func (i JobRequestFileArgs) ToJobRequestFileOutputWithContext(ctx context.Contex
 // JobRequestFileArrayInput is an input type that accepts JobRequestFileArray and JobRequestFileArrayOutput values.
 // You can construct a concrete instance of `JobRequestFileArrayInput` via:
 //
-//          JobRequestFileArray{ JobRequestFileArgs{...} }
+//	JobRequestFileArray{ JobRequestFileArgs{...} }
 type JobRequestFileArrayInput interface {
 	pulumi.Input
 
@@ -2224,7 +2224,7 @@ type JobTestScript struct {
 // JobTestScriptInput is an input type that accepts JobTestScriptArgs and JobTestScriptOutput values.
 // You can construct a concrete instance of `JobTestScriptInput` via:
 //
-//          JobTestScriptArgs{...}
+//	JobTestScriptArgs{...}
 type JobTestScriptInput interface {
 	pulumi.Input
 
@@ -2258,7 +2258,7 @@ func (i JobTestScriptArgs) ToJobTestScriptOutputWithContext(ctx context.Context)
 // JobTestScriptArrayInput is an input type that accepts JobTestScriptArray and JobTestScriptArrayOutput values.
 // You can construct a concrete instance of `JobTestScriptArrayInput` via:
 //
-//          JobTestScriptArray{ JobTestScriptArgs{...} }
+//	JobTestScriptArray{ JobTestScriptArgs{...} }
 type JobTestScriptArrayInput interface {
 	pulumi.Input
 
@@ -2353,7 +2353,7 @@ type ProjectTag struct {
 // ProjectTagInput is an input type that accepts ProjectTagArgs and ProjectTagOutput values.
 // You can construct a concrete instance of `ProjectTagInput` via:
 //
-//          ProjectTagArgs{...}
+//	ProjectTagArgs{...}
 type ProjectTagInput interface {
 	pulumi.Input
 
@@ -2383,7 +2383,7 @@ func (i ProjectTagArgs) ToProjectTagOutputWithContext(ctx context.Context) Proje
 // ProjectTagArrayInput is an input type that accepts ProjectTagArray and ProjectTagArrayOutput values.
 // You can construct a concrete instance of `ProjectTagArrayInput` via:
 //
-//          ProjectTagArray{ ProjectTagArgs{...} }
+//	ProjectTagArray{ ProjectTagArgs{...} }
 type ProjectTagArrayInput interface {
 	pulumi.Input
 
@@ -2477,7 +2477,7 @@ type ScenarioDataset struct {
 // ScenarioDatasetInput is an input type that accepts ScenarioDatasetArgs and ScenarioDatasetOutput values.
 // You can construct a concrete instance of `ScenarioDatasetInput` via:
 //
-//          ScenarioDatasetArgs{...}
+//	ScenarioDatasetArgs{...}
 type ScenarioDatasetInput interface {
 	pulumi.Input
 
@@ -2525,7 +2525,7 @@ func (i ScenarioDatasetArgs) ToScenarioDatasetOutputWithContext(ctx context.Cont
 // ScenarioDatasetArrayInput is an input type that accepts ScenarioDatasetArray and ScenarioDatasetArrayOutput values.
 // You can construct a concrete instance of `ScenarioDatasetArrayInput` via:
 //
-//          ScenarioDatasetArray{ ScenarioDatasetArgs{...} }
+//	ScenarioDatasetArray{ ScenarioDatasetArgs{...} }
 type ScenarioDatasetArrayInput interface {
 	pulumi.Input
 
@@ -2646,7 +2646,7 @@ type ScenarioDomainNameConfig struct {
 // ScenarioDomainNameConfigInput is an input type that accepts ScenarioDomainNameConfigArgs and ScenarioDomainNameConfigOutput values.
 // You can construct a concrete instance of `ScenarioDomainNameConfigInput` via:
 //
-//          ScenarioDomainNameConfigArgs{...}
+//	ScenarioDomainNameConfigArgs{...}
 type ScenarioDomainNameConfigInput interface {
 	pulumi.Input
 
@@ -2684,11 +2684,11 @@ func (i ScenarioDomainNameConfigArgs) ToScenarioDomainNameConfigPtrOutputWithCon
 // ScenarioDomainNameConfigPtrInput is an input type that accepts ScenarioDomainNameConfigArgs, ScenarioDomainNameConfigPtr and ScenarioDomainNameConfigPtrOutput values.
 // You can construct a concrete instance of `ScenarioDomainNameConfigPtrInput` via:
 //
-//          ScenarioDomainNameConfigArgs{...}
+//	        ScenarioDomainNameConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ScenarioDomainNameConfigPtrInput interface {
 	pulumi.Input
 
@@ -2800,7 +2800,7 @@ type ScenarioDomainNameConfigDnsConfig struct {
 // ScenarioDomainNameConfigDnsConfigInput is an input type that accepts ScenarioDomainNameConfigDnsConfigArgs and ScenarioDomainNameConfigDnsConfigOutput values.
 // You can construct a concrete instance of `ScenarioDomainNameConfigDnsConfigInput` via:
 //
-//          ScenarioDomainNameConfigDnsConfigArgs{...}
+//	ScenarioDomainNameConfigDnsConfigArgs{...}
 type ScenarioDomainNameConfigDnsConfigInput interface {
 	pulumi.Input
 
@@ -2836,11 +2836,11 @@ func (i ScenarioDomainNameConfigDnsConfigArgs) ToScenarioDomainNameConfigDnsConf
 // ScenarioDomainNameConfigDnsConfigPtrInput is an input type that accepts ScenarioDomainNameConfigDnsConfigArgs, ScenarioDomainNameConfigDnsConfigPtr and ScenarioDomainNameConfigDnsConfigPtrOutput values.
 // You can construct a concrete instance of `ScenarioDomainNameConfigDnsConfigPtrInput` via:
 //
-//          ScenarioDomainNameConfigDnsConfigArgs{...}
+//	        ScenarioDomainNameConfigDnsConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ScenarioDomainNameConfigDnsConfigPtrInput interface {
 	pulumi.Input
 
@@ -2939,7 +2939,7 @@ type ScenarioDomainNameConfigHostAlias struct {
 // ScenarioDomainNameConfigHostAliasInput is an input type that accepts ScenarioDomainNameConfigHostAliasArgs and ScenarioDomainNameConfigHostAliasOutput values.
 // You can construct a concrete instance of `ScenarioDomainNameConfigHostAliasInput` via:
 //
-//          ScenarioDomainNameConfigHostAliasArgs{...}
+//	ScenarioDomainNameConfigHostAliasArgs{...}
 type ScenarioDomainNameConfigHostAliasInput interface {
 	pulumi.Input
 
@@ -2969,7 +2969,7 @@ func (i ScenarioDomainNameConfigHostAliasArgs) ToScenarioDomainNameConfigHostAli
 // ScenarioDomainNameConfigHostAliasArrayInput is an input type that accepts ScenarioDomainNameConfigHostAliasArray and ScenarioDomainNameConfigHostAliasArrayOutput values.
 // You can construct a concrete instance of `ScenarioDomainNameConfigHostAliasArrayInput` via:
 //
-//          ScenarioDomainNameConfigHostAliasArray{ ScenarioDomainNameConfigHostAliasArgs{...} }
+//	ScenarioDomainNameConfigHostAliasArray{ ScenarioDomainNameConfigHostAliasArgs{...} }
 type ScenarioDomainNameConfigHostAliasArrayInput interface {
 	pulumi.Input
 
@@ -3047,7 +3047,7 @@ type ScenarioLoad struct {
 // ScenarioLoadInput is an input type that accepts ScenarioLoadArgs and ScenarioLoadOutput values.
 // You can construct a concrete instance of `ScenarioLoadInput` via:
 //
-//          ScenarioLoadArgs{...}
+//	ScenarioLoadArgs{...}
 type ScenarioLoadInput interface {
 	pulumi.Input
 
@@ -3087,11 +3087,11 @@ func (i ScenarioLoadArgs) ToScenarioLoadPtrOutputWithContext(ctx context.Context
 // ScenarioLoadPtrInput is an input type that accepts ScenarioLoadArgs, ScenarioLoadPtr and ScenarioLoadPtrOutput values.
 // You can construct a concrete instance of `ScenarioLoadPtrInput` via:
 //
-//          ScenarioLoadArgs{...}
+//	        ScenarioLoadArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ScenarioLoadPtrInput interface {
 	pulumi.Input
 
@@ -3222,7 +3222,7 @@ type ScenarioLoadGeoRegionsLoadDistribution struct {
 // ScenarioLoadGeoRegionsLoadDistributionInput is an input type that accepts ScenarioLoadGeoRegionsLoadDistributionArgs and ScenarioLoadGeoRegionsLoadDistributionOutput values.
 // You can construct a concrete instance of `ScenarioLoadGeoRegionsLoadDistributionInput` via:
 //
-//          ScenarioLoadGeoRegionsLoadDistributionArgs{...}
+//	ScenarioLoadGeoRegionsLoadDistributionArgs{...}
 type ScenarioLoadGeoRegionsLoadDistributionInput interface {
 	pulumi.Input
 
@@ -3254,7 +3254,7 @@ func (i ScenarioLoadGeoRegionsLoadDistributionArgs) ToScenarioLoadGeoRegionsLoad
 // ScenarioLoadGeoRegionsLoadDistributionArrayInput is an input type that accepts ScenarioLoadGeoRegionsLoadDistributionArray and ScenarioLoadGeoRegionsLoadDistributionArrayOutput values.
 // You can construct a concrete instance of `ScenarioLoadGeoRegionsLoadDistributionArrayInput` via:
 //
-//          ScenarioLoadGeoRegionsLoadDistributionArray{ ScenarioLoadGeoRegionsLoadDistributionArgs{...} }
+//	ScenarioLoadGeoRegionsLoadDistributionArray{ ScenarioLoadGeoRegionsLoadDistributionArgs{...} }
 type ScenarioLoadGeoRegionsLoadDistributionArrayInput interface {
 	pulumi.Input
 
@@ -3337,7 +3337,7 @@ type ScenarioLoadLoadSpec struct {
 // ScenarioLoadLoadSpecInput is an input type that accepts ScenarioLoadLoadSpecArgs and ScenarioLoadLoadSpecOutput values.
 // You can construct a concrete instance of `ScenarioLoadLoadSpecInput` via:
 //
-//          ScenarioLoadLoadSpecArgs{...}
+//	ScenarioLoadLoadSpecArgs{...}
 type ScenarioLoadLoadSpecInput interface {
 	pulumi.Input
 
@@ -3377,11 +3377,11 @@ func (i ScenarioLoadLoadSpecArgs) ToScenarioLoadLoadSpecPtrOutputWithContext(ctx
 // ScenarioLoadLoadSpecPtrInput is an input type that accepts ScenarioLoadLoadSpecArgs, ScenarioLoadLoadSpecPtr and ScenarioLoadLoadSpecPtrOutput values.
 // You can construct a concrete instance of `ScenarioLoadLoadSpecPtrInput` via:
 //
-//          ScenarioLoadLoadSpecArgs{...}
+//	        ScenarioLoadLoadSpecArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ScenarioLoadLoadSpecPtrInput interface {
 	pulumi.Input
 
@@ -3514,7 +3514,7 @@ type ScenarioLoadLoadSpecConcurrency struct {
 // ScenarioLoadLoadSpecConcurrencyInput is an input type that accepts ScenarioLoadLoadSpecConcurrencyArgs and ScenarioLoadLoadSpecConcurrencyOutput values.
 // You can construct a concrete instance of `ScenarioLoadLoadSpecConcurrencyInput` via:
 //
-//          ScenarioLoadLoadSpecConcurrencyArgs{...}
+//	ScenarioLoadLoadSpecConcurrencyArgs{...}
 type ScenarioLoadLoadSpecConcurrencyInput interface {
 	pulumi.Input
 
@@ -3556,11 +3556,11 @@ func (i ScenarioLoadLoadSpecConcurrencyArgs) ToScenarioLoadLoadSpecConcurrencyPt
 // ScenarioLoadLoadSpecConcurrencyPtrInput is an input type that accepts ScenarioLoadLoadSpecConcurrencyArgs, ScenarioLoadLoadSpecConcurrencyPtr and ScenarioLoadLoadSpecConcurrencyPtrOutput values.
 // You can construct a concrete instance of `ScenarioLoadLoadSpecConcurrencyPtrInput` via:
 //
-//          ScenarioLoadLoadSpecConcurrencyArgs{...}
+//	        ScenarioLoadLoadSpecConcurrencyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ScenarioLoadLoadSpecConcurrencyPtrInput interface {
 	pulumi.Input
 
@@ -3704,7 +3704,7 @@ type ScenarioLoadLoadSpecConcurrencyStage struct {
 // ScenarioLoadLoadSpecConcurrencyStageInput is an input type that accepts ScenarioLoadLoadSpecConcurrencyStageArgs and ScenarioLoadLoadSpecConcurrencyStageOutput values.
 // You can construct a concrete instance of `ScenarioLoadLoadSpecConcurrencyStageInput` via:
 //
-//          ScenarioLoadLoadSpecConcurrencyStageArgs{...}
+//	ScenarioLoadLoadSpecConcurrencyStageArgs{...}
 type ScenarioLoadLoadSpecConcurrencyStageInput interface {
 	pulumi.Input
 
@@ -3734,7 +3734,7 @@ func (i ScenarioLoadLoadSpecConcurrencyStageArgs) ToScenarioLoadLoadSpecConcurre
 // ScenarioLoadLoadSpecConcurrencyStageArrayInput is an input type that accepts ScenarioLoadLoadSpecConcurrencyStageArray and ScenarioLoadLoadSpecConcurrencyStageArrayOutput values.
 // You can construct a concrete instance of `ScenarioLoadLoadSpecConcurrencyStageArrayInput` via:
 //
-//          ScenarioLoadLoadSpecConcurrencyStageArray{ ScenarioLoadLoadSpecConcurrencyStageArgs{...} }
+//	ScenarioLoadLoadSpecConcurrencyStageArray{ ScenarioLoadLoadSpecConcurrencyStageArgs{...} }
 type ScenarioLoadLoadSpecConcurrencyStageArrayInput interface {
 	pulumi.Input
 
@@ -3818,7 +3818,7 @@ type ScenarioLoadLoadSpecRequestsPerSecond struct {
 // ScenarioLoadLoadSpecRequestsPerSecondInput is an input type that accepts ScenarioLoadLoadSpecRequestsPerSecondArgs and ScenarioLoadLoadSpecRequestsPerSecondOutput values.
 // You can construct a concrete instance of `ScenarioLoadLoadSpecRequestsPerSecondInput` via:
 //
-//          ScenarioLoadLoadSpecRequestsPerSecondArgs{...}
+//	ScenarioLoadLoadSpecRequestsPerSecondArgs{...}
 type ScenarioLoadLoadSpecRequestsPerSecondInput interface {
 	pulumi.Input
 
@@ -3864,11 +3864,11 @@ func (i ScenarioLoadLoadSpecRequestsPerSecondArgs) ToScenarioLoadLoadSpecRequest
 // ScenarioLoadLoadSpecRequestsPerSecondPtrInput is an input type that accepts ScenarioLoadLoadSpecRequestsPerSecondArgs, ScenarioLoadLoadSpecRequestsPerSecondPtr and ScenarioLoadLoadSpecRequestsPerSecondPtrOutput values.
 // You can construct a concrete instance of `ScenarioLoadLoadSpecRequestsPerSecondPtrInput` via:
 //
-//          ScenarioLoadLoadSpecRequestsPerSecondArgs{...}
+//	        ScenarioLoadLoadSpecRequestsPerSecondArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ScenarioLoadLoadSpecRequestsPerSecondPtrInput interface {
 	pulumi.Input
 
@@ -4044,7 +4044,7 @@ type ScenarioLoadLoadSpecScriptOrigin struct {
 // ScenarioLoadLoadSpecScriptOriginInput is an input type that accepts ScenarioLoadLoadSpecScriptOriginArgs and ScenarioLoadLoadSpecScriptOriginOutput values.
 // You can construct a concrete instance of `ScenarioLoadLoadSpecScriptOriginInput` via:
 //
-//          ScenarioLoadLoadSpecScriptOriginArgs{...}
+//	ScenarioLoadLoadSpecScriptOriginArgs{...}
 type ScenarioLoadLoadSpecScriptOriginInput interface {
 	pulumi.Input
 
@@ -4084,11 +4084,11 @@ func (i ScenarioLoadLoadSpecScriptOriginArgs) ToScenarioLoadLoadSpecScriptOrigin
 // ScenarioLoadLoadSpecScriptOriginPtrInput is an input type that accepts ScenarioLoadLoadSpecScriptOriginArgs, ScenarioLoadLoadSpecScriptOriginPtr and ScenarioLoadLoadSpecScriptOriginPtrOutput values.
 // You can construct a concrete instance of `ScenarioLoadLoadSpecScriptOriginPtrInput` via:
 //
-//          ScenarioLoadLoadSpecScriptOriginArgs{...}
+//	        ScenarioLoadLoadSpecScriptOriginArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ScenarioLoadLoadSpecScriptOriginPtrInput interface {
 	pulumi.Input
 
@@ -4221,7 +4221,7 @@ type ScenarioLoadVpcLoadDistribution struct {
 // ScenarioLoadVpcLoadDistributionInput is an input type that accepts ScenarioLoadVpcLoadDistributionArgs and ScenarioLoadVpcLoadDistributionOutput values.
 // You can construct a concrete instance of `ScenarioLoadVpcLoadDistributionInput` via:
 //
-//          ScenarioLoadVpcLoadDistributionArgs{...}
+//	ScenarioLoadVpcLoadDistributionArgs{...}
 type ScenarioLoadVpcLoadDistributionInput interface {
 	pulumi.Input
 
@@ -4263,11 +4263,11 @@ func (i ScenarioLoadVpcLoadDistributionArgs) ToScenarioLoadVpcLoadDistributionPt
 // ScenarioLoadVpcLoadDistributionPtrInput is an input type that accepts ScenarioLoadVpcLoadDistributionArgs, ScenarioLoadVpcLoadDistributionPtr and ScenarioLoadVpcLoadDistributionPtrOutput values.
 // You can construct a concrete instance of `ScenarioLoadVpcLoadDistributionPtrInput` via:
 //
-//          ScenarioLoadVpcLoadDistributionArgs{...}
+//	        ScenarioLoadVpcLoadDistributionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ScenarioLoadVpcLoadDistributionPtrInput interface {
 	pulumi.Input
 
@@ -4417,7 +4417,7 @@ type ScenarioPlugin struct {
 // ScenarioPluginInput is an input type that accepts ScenarioPluginArgs and ScenarioPluginOutput values.
 // You can construct a concrete instance of `ScenarioPluginInput` via:
 //
-//          ScenarioPluginArgs{...}
+//	ScenarioPluginArgs{...}
 type ScenarioPluginInput interface {
 	pulumi.Input
 
@@ -4453,7 +4453,7 @@ func (i ScenarioPluginArgs) ToScenarioPluginOutputWithContext(ctx context.Contex
 // ScenarioPluginArrayInput is an input type that accepts ScenarioPluginArray and ScenarioPluginArrayOutput values.
 // You can construct a concrete instance of `ScenarioPluginArrayInput` via:
 //
-//          ScenarioPluginArray{ ScenarioPluginArgs{...} }
+//	ScenarioPluginArray{ ScenarioPluginArgs{...} }
 type ScenarioPluginArrayInput interface {
 	pulumi.Input
 
@@ -4550,7 +4550,7 @@ type ScenarioProtocol struct {
 // ScenarioProtocolInput is an input type that accepts ScenarioProtocolArgs and ScenarioProtocolOutput values.
 // You can construct a concrete instance of `ScenarioProtocolInput` via:
 //
-//          ScenarioProtocolArgs{...}
+//	ScenarioProtocolArgs{...}
 type ScenarioProtocolInput interface {
 	pulumi.Input
 
@@ -4586,7 +4586,7 @@ func (i ScenarioProtocolArgs) ToScenarioProtocolOutputWithContext(ctx context.Co
 // ScenarioProtocolArrayInput is an input type that accepts ScenarioProtocolArray and ScenarioProtocolArrayOutput values.
 // You can construct a concrete instance of `ScenarioProtocolArrayInput` via:
 //
-//          ScenarioProtocolArray{ ScenarioProtocolArgs{...} }
+//	ScenarioProtocolArray{ ScenarioProtocolArgs{...} }
 type ScenarioProtocolArrayInput interface {
 	pulumi.Input
 
@@ -4683,7 +4683,7 @@ type ScenarioRequestFile struct {
 // ScenarioRequestFileInput is an input type that accepts ScenarioRequestFileArgs and ScenarioRequestFileOutput values.
 // You can construct a concrete instance of `ScenarioRequestFileInput` via:
 //
-//          ScenarioRequestFileArgs{...}
+//	ScenarioRequestFileArgs{...}
 type ScenarioRequestFileInput interface {
 	pulumi.Input
 
@@ -4719,7 +4719,7 @@ func (i ScenarioRequestFileArgs) ToScenarioRequestFileOutputWithContext(ctx cont
 // ScenarioRequestFileArrayInput is an input type that accepts ScenarioRequestFileArray and ScenarioRequestFileArrayOutput values.
 // You can construct a concrete instance of `ScenarioRequestFileArrayInput` via:
 //
-//          ScenarioRequestFileArray{ ScenarioRequestFileArgs{...} }
+//	ScenarioRequestFileArray{ ScenarioRequestFileArgs{...} }
 type ScenarioRequestFileArrayInput interface {
 	pulumi.Input
 
@@ -4810,7 +4810,7 @@ type ScenarioSlaPolicy struct {
 // ScenarioSlaPolicyInput is an input type that accepts ScenarioSlaPolicyArgs and ScenarioSlaPolicyOutput values.
 // You can construct a concrete instance of `ScenarioSlaPolicyInput` via:
 //
-//          ScenarioSlaPolicyArgs{...}
+//	ScenarioSlaPolicyArgs{...}
 type ScenarioSlaPolicyInput interface {
 	pulumi.Input
 
@@ -4848,11 +4848,11 @@ func (i ScenarioSlaPolicyArgs) ToScenarioSlaPolicyPtrOutputWithContext(ctx conte
 // ScenarioSlaPolicyPtrInput is an input type that accepts ScenarioSlaPolicyArgs, ScenarioSlaPolicyPtr and ScenarioSlaPolicyPtrOutput values.
 // You can construct a concrete instance of `ScenarioSlaPolicyPtrInput` via:
 //
-//          ScenarioSlaPolicyArgs{...}
+//	        ScenarioSlaPolicyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ScenarioSlaPolicyPtrInput interface {
 	pulumi.Input
 
@@ -4966,7 +4966,7 @@ type ScenarioSlaPolicyAlertChannel struct {
 // ScenarioSlaPolicyAlertChannelInput is an input type that accepts ScenarioSlaPolicyAlertChannelArgs and ScenarioSlaPolicyAlertChannelOutput values.
 // You can construct a concrete instance of `ScenarioSlaPolicyAlertChannelInput` via:
 //
-//          ScenarioSlaPolicyAlertChannelArgs{...}
+//	ScenarioSlaPolicyAlertChannelArgs{...}
 type ScenarioSlaPolicyAlertChannelInput interface {
 	pulumi.Input
 
@@ -5004,11 +5004,11 @@ func (i ScenarioSlaPolicyAlertChannelArgs) ToScenarioSlaPolicyAlertChannelPtrOut
 // ScenarioSlaPolicyAlertChannelPtrInput is an input type that accepts ScenarioSlaPolicyAlertChannelArgs, ScenarioSlaPolicyAlertChannelPtr and ScenarioSlaPolicyAlertChannelPtrOutput values.
 // You can construct a concrete instance of `ScenarioSlaPolicyAlertChannelPtrInput` via:
 //
-//          ScenarioSlaPolicyAlertChannelArgs{...}
+//	        ScenarioSlaPolicyAlertChannelArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ScenarioSlaPolicyAlertChannelPtrInput interface {
 	pulumi.Input
 
@@ -5132,7 +5132,7 @@ type ScenarioSlaPolicySlaRule struct {
 // ScenarioSlaPolicySlaRuleInput is an input type that accepts ScenarioSlaPolicySlaRuleArgs and ScenarioSlaPolicySlaRuleOutput values.
 // You can construct a concrete instance of `ScenarioSlaPolicySlaRuleInput` via:
 //
-//          ScenarioSlaPolicySlaRuleArgs{...}
+//	ScenarioSlaPolicySlaRuleArgs{...}
 type ScenarioSlaPolicySlaRuleInput interface {
 	pulumi.Input
 
@@ -5172,7 +5172,7 @@ func (i ScenarioSlaPolicySlaRuleArgs) ToScenarioSlaPolicySlaRuleOutputWithContex
 // ScenarioSlaPolicySlaRuleArrayInput is an input type that accepts ScenarioSlaPolicySlaRuleArray and ScenarioSlaPolicySlaRuleArrayOutput values.
 // You can construct a concrete instance of `ScenarioSlaPolicySlaRuleArrayInput` via:
 //
-//          ScenarioSlaPolicySlaRuleArray{ ScenarioSlaPolicySlaRuleArgs{...} }
+//	ScenarioSlaPolicySlaRuleArray{ ScenarioSlaPolicySlaRuleArgs{...} }
 type ScenarioSlaPolicySlaRuleArrayInput interface {
 	pulumi.Input
 
@@ -5273,7 +5273,7 @@ type ScenarioSlaPolicySlaRuleLabelFilter struct {
 // ScenarioSlaPolicySlaRuleLabelFilterInput is an input type that accepts ScenarioSlaPolicySlaRuleLabelFilterArgs and ScenarioSlaPolicySlaRuleLabelFilterOutput values.
 // You can construct a concrete instance of `ScenarioSlaPolicySlaRuleLabelFilterInput` via:
 //
-//          ScenarioSlaPolicySlaRuleLabelFilterArgs{...}
+//	ScenarioSlaPolicySlaRuleLabelFilterArgs{...}
 type ScenarioSlaPolicySlaRuleLabelFilterInput interface {
 	pulumi.Input
 
@@ -5303,7 +5303,7 @@ func (i ScenarioSlaPolicySlaRuleLabelFilterArgs) ToScenarioSlaPolicySlaRuleLabel
 // ScenarioSlaPolicySlaRuleLabelFilterArrayInput is an input type that accepts ScenarioSlaPolicySlaRuleLabelFilterArray and ScenarioSlaPolicySlaRuleLabelFilterArrayOutput values.
 // You can construct a concrete instance of `ScenarioSlaPolicySlaRuleLabelFilterArrayInput` via:
 //
-//          ScenarioSlaPolicySlaRuleLabelFilterArray{ ScenarioSlaPolicySlaRuleLabelFilterArgs{...} }
+//	ScenarioSlaPolicySlaRuleLabelFilterArray{ ScenarioSlaPolicySlaRuleLabelFilterArgs{...} }
 type ScenarioSlaPolicySlaRuleLabelFilterArrayInput interface {
 	pulumi.Input
 
@@ -5389,7 +5389,7 @@ type ScenarioTestScript struct {
 // ScenarioTestScriptInput is an input type that accepts ScenarioTestScriptArgs and ScenarioTestScriptOutput values.
 // You can construct a concrete instance of `ScenarioTestScriptInput` via:
 //
-//          ScenarioTestScriptArgs{...}
+//	ScenarioTestScriptArgs{...}
 type ScenarioTestScriptInput interface {
 	pulumi.Input
 
@@ -5429,7 +5429,7 @@ func (i ScenarioTestScriptArgs) ToScenarioTestScriptOutputWithContext(ctx contex
 // ScenarioTestScriptArrayInput is an input type that accepts ScenarioTestScriptArray and ScenarioTestScriptArrayOutput values.
 // You can construct a concrete instance of `ScenarioTestScriptArrayInput` via:
 //
-//          ScenarioTestScriptArray{ ScenarioTestScriptArgs{...} }
+//	ScenarioTestScriptArray{ ScenarioTestScriptArgs{...} }
 type ScenarioTestScriptArrayInput interface {
 	pulumi.Input
 
@@ -5532,7 +5532,7 @@ type TmpKeyGenerateCredential struct {
 // TmpKeyGenerateCredentialInput is an input type that accepts TmpKeyGenerateCredentialArgs and TmpKeyGenerateCredentialOutput values.
 // You can construct a concrete instance of `TmpKeyGenerateCredentialInput` via:
 //
-//          TmpKeyGenerateCredentialArgs{...}
+//	TmpKeyGenerateCredentialArgs{...}
 type TmpKeyGenerateCredentialInput interface {
 	pulumi.Input
 
@@ -5564,7 +5564,7 @@ func (i TmpKeyGenerateCredentialArgs) ToTmpKeyGenerateCredentialOutputWithContex
 // TmpKeyGenerateCredentialArrayInput is an input type that accepts TmpKeyGenerateCredentialArray and TmpKeyGenerateCredentialArrayOutput values.
 // You can construct a concrete instance of `TmpKeyGenerateCredentialArrayInput` via:
 //
-//          TmpKeyGenerateCredentialArray{ TmpKeyGenerateCredentialArgs{...} }
+//	TmpKeyGenerateCredentialArray{ TmpKeyGenerateCredentialArgs{...} }
 type TmpKeyGenerateCredentialArrayInput interface {
 	pulumi.Input
 
@@ -5645,7 +5645,7 @@ type GetScenarioWithJobsScenarioWithJobsSet struct {
 // GetScenarioWithJobsScenarioWithJobsSetInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetArgs and GetScenarioWithJobsScenarioWithJobsSetOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetInput interface {
 	pulumi.Input
 
@@ -5675,7 +5675,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetArgs) ToGetScenarioWithJobsScenari
 // GetScenarioWithJobsScenarioWithJobsSetArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetArray and GetScenarioWithJobsScenarioWithJobsSetArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetArray{ GetScenarioWithJobsScenarioWithJobsSetArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetArray{ GetScenarioWithJobsScenarioWithJobsSetArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetArrayInput interface {
 	pulumi.Input
 
@@ -5837,7 +5837,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJob struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobArgs and GetScenarioWithJobsScenarioWithJobsSetJobOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobInput interface {
 	pulumi.Input
 
@@ -5949,7 +5949,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobArgs) ToGetScenarioWithJobsScen
 // GetScenarioWithJobsScenarioWithJobsSetJobArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobArray and GetScenarioWithJobsScenarioWithJobsSetJobArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobArray{ GetScenarioWithJobsScenarioWithJobsSetJobArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobArray{ GetScenarioWithJobsScenarioWithJobsSetJobArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobArrayInput interface {
 	pulumi.Input
 
@@ -6268,7 +6268,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobDataset struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobDatasetInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobDatasetArgs and GetScenarioWithJobsScenarioWithJobsSetJobDatasetOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobDatasetInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobDatasetArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobDatasetArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobDatasetInput interface {
 	pulumi.Input
 
@@ -6316,7 +6316,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobDatasetArgs) ToGetScenarioWithJ
 // GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobDatasetArray and GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobDatasetArray{ GetScenarioWithJobsScenarioWithJobsSetJobDatasetArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobDatasetArray{ GetScenarioWithJobsScenarioWithJobsSetJobDatasetArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobDatasetArrayInput interface {
 	pulumi.Input
 
@@ -6437,7 +6437,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfig struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArgs and GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigInput interface {
 	pulumi.Input
 
@@ -6467,7 +6467,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArgs) ToGetScen
 // GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArray and GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArray{ GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArray{ GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigArrayInput interface {
 	pulumi.Input
 
@@ -6545,7 +6545,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfig struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArgs and GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigInput interface {
 	pulumi.Input
 
@@ -6573,7 +6573,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArgs) 
 // GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArray and GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArray{ GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArray{ GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigDnsConfigArrayInput interface {
 	pulumi.Input
 
@@ -6646,7 +6646,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAlias struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArgs and GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasInput interface {
 	pulumi.Input
 
@@ -6676,7 +6676,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArgs) 
 // GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArray and GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArray{ GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArray{ GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobDomainNameConfigHostAliasArrayInput interface {
 	pulumi.Input
 
@@ -6756,7 +6756,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobLoad struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadInput interface {
 	pulumi.Input
 
@@ -6788,7 +6788,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadArgs) ToGetScenarioWithJobs
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadArrayInput interface {
 	pulumi.Input
 
@@ -6877,7 +6877,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistribution str
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionInput interface {
 	pulumi.Input
 
@@ -6909,7 +6909,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionA
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadGeoRegionsLoadDistributionArrayInput interface {
 	pulumi.Input
 
@@ -6996,7 +6996,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpec struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecInput interface {
 	pulumi.Input
 
@@ -7028,7 +7028,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArgs) ToGetScenario
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecArrayInput interface {
 	pulumi.Input
 
@@ -7121,7 +7121,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrency struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyInput interface {
 	pulumi.Input
 
@@ -7157,7 +7157,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArgs) To
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyArrayInput interface {
 	pulumi.Input
 
@@ -7254,7 +7254,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStage struc
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageInput interface {
 	pulumi.Input
 
@@ -7284,7 +7284,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArg
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecConcurrencyStageArrayInput interface {
 	pulumi.Input
 
@@ -7374,7 +7374,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecond stru
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondInput interface {
 	pulumi.Input
 
@@ -7414,7 +7414,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondAr
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecRequestsPerSecondArrayInput interface {
 	pulumi.Input
 
@@ -7529,7 +7529,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOrigin struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginInput interface {
 	pulumi.Input
 
@@ -7561,7 +7561,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArgs) T
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadLoadSpecScriptOriginArrayInput interface {
 	pulumi.Input
 
@@ -7648,7 +7648,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobLoadSource struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInput interface {
 	pulumi.Input
 
@@ -7680,7 +7680,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArgs) ToGetScenarioWi
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceArrayInput interface {
 	pulumi.Input
 
@@ -7763,7 +7763,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfo struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoInput interface {
 	pulumi.Input
 
@@ -7795,7 +7795,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArgs) ToGetScenar
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadSourceInfoArrayInput interface {
 	pulumi.Input
 
@@ -7880,7 +7880,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistribution struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArgs and GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionInput interface {
 	pulumi.Input
 
@@ -7914,7 +7914,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArgs) To
 // GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArray and GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArray{ GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobLoadVpcLoadDistributionArrayInput interface {
 	pulumi.Input
 
@@ -8000,7 +8000,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobNotificationHook struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArgs and GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookInput interface {
 	pulumi.Input
 
@@ -8030,7 +8030,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArgs) ToGetScen
 // GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArray and GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArray{ GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArray{ GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobNotificationHookArrayInput interface {
 	pulumi.Input
 
@@ -8112,7 +8112,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobPlugin struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobPluginInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobPluginArgs and GetScenarioWithJobsScenarioWithJobsSetJobPluginOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobPluginInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobPluginArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobPluginArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobPluginInput interface {
 	pulumi.Input
 
@@ -8148,7 +8148,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobPluginArgs) ToGetScenarioWithJo
 // GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobPluginArray and GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobPluginArray{ GetScenarioWithJobsScenarioWithJobsSetJobPluginArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobPluginArray{ GetScenarioWithJobsScenarioWithJobsSetJobPluginArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobPluginArrayInput interface {
 	pulumi.Input
 
@@ -8245,7 +8245,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobProtocol struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobProtocolInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobProtocolArgs and GetScenarioWithJobsScenarioWithJobsSetJobProtocolOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobProtocolInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobProtocolArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobProtocolArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobProtocolInput interface {
 	pulumi.Input
 
@@ -8281,7 +8281,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobProtocolArgs) ToGetScenarioWith
 // GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobProtocolArray and GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobProtocolArray{ GetScenarioWithJobsScenarioWithJobsSetJobProtocolArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobProtocolArray{ GetScenarioWithJobsScenarioWithJobsSetJobProtocolArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobProtocolArrayInput interface {
 	pulumi.Input
 
@@ -8378,7 +8378,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobRequestFile struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobRequestFileInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArgs and GetScenarioWithJobsScenarioWithJobsSetJobRequestFileOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobRequestFileInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobRequestFileInput interface {
 	pulumi.Input
 
@@ -8414,7 +8414,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArgs) ToGetScenarioW
 // GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArray and GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArray{ GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArray{ GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobRequestFileArrayInput interface {
 	pulumi.Input
 
@@ -8517,7 +8517,7 @@ type GetScenarioWithJobsScenarioWithJobsSetJobTestScript struct {
 // GetScenarioWithJobsScenarioWithJobsSetJobTestScriptInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArgs and GetScenarioWithJobsScenarioWithJobsSetJobTestScriptOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobTestScriptInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetJobTestScriptInput interface {
 	pulumi.Input
 
@@ -8559,7 +8559,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArgs) ToGetScenarioWi
 // GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArray and GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArray{ GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArray{ GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetJobTestScriptArrayInput interface {
 	pulumi.Input
 
@@ -8715,7 +8715,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenario struct {
 // GetScenarioWithJobsScenarioWithJobsSetScenarioInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioInput interface {
 	pulumi.Input
 
@@ -8795,7 +8795,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioArgs) ToGetScenarioWithJob
 // GetScenarioWithJobsScenarioWithJobsSetScenarioArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioArray and GetScenarioWithJobsScenarioWithJobsSetScenarioArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioArrayInput interface {
 	pulumi.Input
 
@@ -9032,7 +9032,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioDataset struct {
 // GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetInput interface {
 	pulumi.Input
 
@@ -9080,7 +9080,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArgs) ToGetScenario
 // GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArray and GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioDatasetArrayInput interface {
 	pulumi.Input
 
@@ -9201,7 +9201,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfig struct {
 // GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigInput interface {
 	pulumi.Input
 
@@ -9231,7 +9231,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArgs) ToGe
 // GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArray and GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigArrayInput interface {
 	pulumi.Input
 
@@ -9309,7 +9309,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfig str
 // GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigInput interface {
 	pulumi.Input
 
@@ -9337,7 +9337,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigA
 // GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArray and GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigDnsConfigArrayInput interface {
 	pulumi.Input
 
@@ -9410,7 +9410,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAlias str
 // GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasInput interface {
 	pulumi.Input
 
@@ -9440,7 +9440,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasA
 // GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArray and GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioDomainNameConfigHostAliasArrayInput interface {
 	pulumi.Input
 
@@ -9520,7 +9520,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioLoad struct {
 // GetScenarioWithJobsScenarioWithJobsSetScenarioLoadInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadInput interface {
 	pulumi.Input
 
@@ -9552,7 +9552,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArgs) ToGetScenarioWit
 // GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArray and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadArrayInput interface {
 	pulumi.Input
 
@@ -9641,7 +9641,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributio
 // GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionInput interface {
 	pulumi.Input
 
@@ -9673,7 +9673,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistribu
 // GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArray and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadGeoRegionsLoadDistributionArrayInput interface {
 	pulumi.Input
 
@@ -9762,7 +9762,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpec struct {
 // GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecInput interface {
 	pulumi.Input
 
@@ -9794,7 +9794,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArgs) ToGetSce
 // GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArray and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecArrayInput interface {
 	pulumi.Input
 
@@ -9887,7 +9887,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrency struc
 // GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyInput interface {
 	pulumi.Input
 
@@ -9923,7 +9923,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArg
 // GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArray and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyArrayInput interface {
 	pulumi.Input
 
@@ -10022,7 +10022,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStage 
 // GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageInput interface {
 	pulumi.Input
 
@@ -10052,7 +10052,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencySta
 // GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArray and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecConcurrencyStageArrayInput interface {
 	pulumi.Input
 
@@ -10142,7 +10142,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecond
 // GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondInput interface {
 	pulumi.Input
 
@@ -10182,7 +10182,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSec
 // GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArray and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecRequestsPerSecondArrayInput interface {
 	pulumi.Input
 
@@ -10299,7 +10299,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOrigin stru
 // GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginInput interface {
 	pulumi.Input
 
@@ -10331,7 +10331,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginAr
 // GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArray and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadLoadSpecScriptOriginArrayInput interface {
 	pulumi.Input
 
@@ -10422,7 +10422,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistribution struc
 // GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionInput interface {
 	pulumi.Input
 
@@ -10456,7 +10456,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArg
 // GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArray and GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioLoadVpcLoadDistributionArrayInput interface {
 	pulumi.Input
 
@@ -10544,7 +10544,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHook struct {
 // GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookInput interface {
 	pulumi.Input
 
@@ -10574,7 +10574,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArgs) ToGe
 // GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArray and GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioNotificationHookArrayInput interface {
 	pulumi.Input
 
@@ -10656,7 +10656,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioPlugin struct {
 // GetScenarioWithJobsScenarioWithJobsSetScenarioPluginInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioPluginOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioPluginInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioPluginInput interface {
 	pulumi.Input
 
@@ -10692,7 +10692,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArgs) ToGetScenarioW
 // GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArray and GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioPluginArrayInput interface {
 	pulumi.Input
 
@@ -10789,7 +10789,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioProtocol struct {
 // GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolInput interface {
 	pulumi.Input
 
@@ -10825,7 +10825,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArgs) ToGetScenari
 // GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArray and GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioProtocolArrayInput interface {
 	pulumi.Input
 
@@ -10922,7 +10922,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFile struct {
 // GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileInput interface {
 	pulumi.Input
 
@@ -10958,7 +10958,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArgs) ToGetScen
 // GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArray and GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioRequestFileArrayInput interface {
 	pulumi.Input
 
@@ -11049,7 +11049,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicy struct {
 // GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyInput interface {
 	pulumi.Input
 
@@ -11079,7 +11079,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArgs) ToGetScenar
 // GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArray and GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyArrayInput interface {
 	pulumi.Input
 
@@ -11159,7 +11159,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannel struct 
 // GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelInput interface {
 	pulumi.Input
 
@@ -11189,7 +11189,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArgs)
 // GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArray and GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicyAlertChannelArrayInput interface {
 	pulumi.Input
 
@@ -11277,7 +11277,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRule struct {
 // GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleInput interface {
 	pulumi.Input
 
@@ -11317,7 +11317,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArgs) ToGe
 // GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArray and GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleArrayInput interface {
 	pulumi.Input
 
@@ -11420,7 +11420,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilter s
 // GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterInput interface {
 	pulumi.Input
 
@@ -11450,7 +11450,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilte
 // GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArray and GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioSlaPolicySlaRuleLabelFilterArrayInput interface {
 	pulumi.Input
 
@@ -11542,7 +11542,7 @@ type GetScenarioWithJobsScenarioWithJobsSetScenarioTestScript struct {
 // GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArgs and GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArgs{...}
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArgs{...}
 type GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptInput interface {
 	pulumi.Input
 
@@ -11584,7 +11584,7 @@ func (i GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArgs) ToGetScena
 // GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayInput is an input type that accepts GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArray and GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayOutput values.
 // You can construct a concrete instance of `GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayInput` via:
 //
-//          GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArgs{...} }
+//	GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArray{ GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArgs{...} }
 type GetScenarioWithJobsScenarioWithJobsSetScenarioTestScriptArrayInput interface {
 	pulumi.Input
 

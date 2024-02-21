@@ -20,7 +20,7 @@ type CcBlackWhiteIpBlackWhiteIp struct {
 // CcBlackWhiteIpBlackWhiteIpInput is an input type that accepts CcBlackWhiteIpBlackWhiteIpArgs and CcBlackWhiteIpBlackWhiteIpOutput values.
 // You can construct a concrete instance of `CcBlackWhiteIpBlackWhiteIpInput` via:
 //
-//          CcBlackWhiteIpBlackWhiteIpArgs{...}
+//	CcBlackWhiteIpBlackWhiteIpArgs{...}
 type CcBlackWhiteIpBlackWhiteIpInput interface {
 	pulumi.Input
 
@@ -58,11 +58,11 @@ func (i CcBlackWhiteIpBlackWhiteIpArgs) ToCcBlackWhiteIpBlackWhiteIpPtrOutputWit
 // CcBlackWhiteIpBlackWhiteIpPtrInput is an input type that accepts CcBlackWhiteIpBlackWhiteIpArgs, CcBlackWhiteIpBlackWhiteIpPtr and CcBlackWhiteIpBlackWhiteIpPtrOutput values.
 // You can construct a concrete instance of `CcBlackWhiteIpBlackWhiteIpPtrInput` via:
 //
-//          CcBlackWhiteIpBlackWhiteIpArgs{...}
+//	        CcBlackWhiteIpBlackWhiteIpArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type CcBlackWhiteIpBlackWhiteIpPtrInput interface {
 	pulumi.Input
 
@@ -180,7 +180,7 @@ type CcPrecisionPolicyPolicyList struct {
 // CcPrecisionPolicyPolicyListInput is an input type that accepts CcPrecisionPolicyPolicyListArgs and CcPrecisionPolicyPolicyListOutput values.
 // You can construct a concrete instance of `CcPrecisionPolicyPolicyListInput` via:
 //
-//          CcPrecisionPolicyPolicyListArgs{...}
+//	CcPrecisionPolicyPolicyListArgs{...}
 type CcPrecisionPolicyPolicyListInput interface {
 	pulumi.Input
 
@@ -214,7 +214,7 @@ func (i CcPrecisionPolicyPolicyListArgs) ToCcPrecisionPolicyPolicyListOutputWith
 // CcPrecisionPolicyPolicyListArrayInput is an input type that accepts CcPrecisionPolicyPolicyListArray and CcPrecisionPolicyPolicyListArrayOutput values.
 // You can construct a concrete instance of `CcPrecisionPolicyPolicyListArrayInput` via:
 //
-//          CcPrecisionPolicyPolicyListArray{ CcPrecisionPolicyPolicyListArgs{...} }
+//	CcPrecisionPolicyPolicyListArray{ CcPrecisionPolicyPolicyListArgs{...} }
 type CcPrecisionPolicyPolicyListArrayInput interface {
 	pulumi.Input
 
@@ -302,7 +302,7 @@ type DdosGeoIpBlockConfigDdosGeoIpBlockConfig struct {
 // DdosGeoIpBlockConfigDdosGeoIpBlockConfigInput is an input type that accepts DdosGeoIpBlockConfigDdosGeoIpBlockConfigArgs and DdosGeoIpBlockConfigDdosGeoIpBlockConfigOutput values.
 // You can construct a concrete instance of `DdosGeoIpBlockConfigDdosGeoIpBlockConfigInput` via:
 //
-//          DdosGeoIpBlockConfigDdosGeoIpBlockConfigArgs{...}
+//	DdosGeoIpBlockConfigDdosGeoIpBlockConfigArgs{...}
 type DdosGeoIpBlockConfigDdosGeoIpBlockConfigInput interface {
 	pulumi.Input
 
@@ -342,11 +342,11 @@ func (i DdosGeoIpBlockConfigDdosGeoIpBlockConfigArgs) ToDdosGeoIpBlockConfigDdos
 // DdosGeoIpBlockConfigDdosGeoIpBlockConfigPtrInput is an input type that accepts DdosGeoIpBlockConfigDdosGeoIpBlockConfigArgs, DdosGeoIpBlockConfigDdosGeoIpBlockConfigPtr and DdosGeoIpBlockConfigDdosGeoIpBlockConfigPtrOutput values.
 // You can construct a concrete instance of `DdosGeoIpBlockConfigDdosGeoIpBlockConfigPtrInput` via:
 //
-//          DdosGeoIpBlockConfigDdosGeoIpBlockConfigArgs{...}
+//	        DdosGeoIpBlockConfigDdosGeoIpBlockConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DdosGeoIpBlockConfigDdosGeoIpBlockConfigPtrInput interface {
 	pulumi.Input
 
@@ -481,7 +481,7 @@ type DdosSpeedLimitConfigDdosSpeedLimitConfig struct {
 // DdosSpeedLimitConfigDdosSpeedLimitConfigInput is an input type that accepts DdosSpeedLimitConfigDdosSpeedLimitConfigArgs and DdosSpeedLimitConfigDdosSpeedLimitConfigOutput values.
 // You can construct a concrete instance of `DdosSpeedLimitConfigDdosSpeedLimitConfigInput` via:
 //
-//          DdosSpeedLimitConfigDdosSpeedLimitConfigArgs{...}
+//	DdosSpeedLimitConfigDdosSpeedLimitConfigArgs{...}
 type DdosSpeedLimitConfigDdosSpeedLimitConfigInput interface {
 	pulumi.Input
 
@@ -525,11 +525,11 @@ func (i DdosSpeedLimitConfigDdosSpeedLimitConfigArgs) ToDdosSpeedLimitConfigDdos
 // DdosSpeedLimitConfigDdosSpeedLimitConfigPtrInput is an input type that accepts DdosSpeedLimitConfigDdosSpeedLimitConfigArgs, DdosSpeedLimitConfigDdosSpeedLimitConfigPtr and DdosSpeedLimitConfigDdosSpeedLimitConfigPtrOutput values.
 // You can construct a concrete instance of `DdosSpeedLimitConfigDdosSpeedLimitConfigPtrInput` via:
 //
-//          DdosSpeedLimitConfigDdosSpeedLimitConfigArgs{...}
+//	        DdosSpeedLimitConfigDdosSpeedLimitConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DdosSpeedLimitConfigDdosSpeedLimitConfigPtrInput interface {
 	pulumi.Input
 
@@ -692,7 +692,7 @@ type DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScope struct {
 // DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeInput is an input type that accepts DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArgs and DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeOutput values.
 // You can construct a concrete instance of `DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeInput` via:
 //
-//          DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArgs{...}
+//	DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArgs{...}
 type DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeInput interface {
 	pulumi.Input
 
@@ -722,7 +722,7 @@ func (i DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArgs) ToDdosSpeedLim
 // DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArrayInput is an input type that accepts DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArray and DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArrayOutput values.
 // You can construct a concrete instance of `DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArrayInput` via:
 //
-//          DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArray{ DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArgs{...} }
+//	DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArray{ DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArgs{...} }
 type DdosSpeedLimitConfigDdosSpeedLimitConfigDstPortScopeArrayInput interface {
 	pulumi.Input
 
@@ -798,7 +798,7 @@ type DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValue struct {
 // DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueInput is an input type that accepts DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs and DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueOutput values.
 // You can construct a concrete instance of `DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueInput` via:
 //
-//          DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs{...}
+//	DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs{...}
 type DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueInput interface {
 	pulumi.Input
 
@@ -828,7 +828,7 @@ func (i DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs) ToDdosSpeedLimit
 // DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArrayInput is an input type that accepts DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArray and DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArrayOutput values.
 // You can construct a concrete instance of `DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArrayInput` via:
 //
-//          DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArray{ DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs{...} }
+//	DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArray{ DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs{...} }
 type DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArrayInput interface {
 	pulumi.Input
 
@@ -904,7 +904,7 @@ type DefaultAlarmThresholdDefaultAlarmConfig struct {
 // DefaultAlarmThresholdDefaultAlarmConfigInput is an input type that accepts DefaultAlarmThresholdDefaultAlarmConfigArgs and DefaultAlarmThresholdDefaultAlarmConfigOutput values.
 // You can construct a concrete instance of `DefaultAlarmThresholdDefaultAlarmConfigInput` via:
 //
-//          DefaultAlarmThresholdDefaultAlarmConfigArgs{...}
+//	DefaultAlarmThresholdDefaultAlarmConfigArgs{...}
 type DefaultAlarmThresholdDefaultAlarmConfigInput interface {
 	pulumi.Input
 
@@ -942,11 +942,11 @@ func (i DefaultAlarmThresholdDefaultAlarmConfigArgs) ToDefaultAlarmThresholdDefa
 // DefaultAlarmThresholdDefaultAlarmConfigPtrInput is an input type that accepts DefaultAlarmThresholdDefaultAlarmConfigArgs, DefaultAlarmThresholdDefaultAlarmConfigPtr and DefaultAlarmThresholdDefaultAlarmConfigPtrOutput values.
 // You can construct a concrete instance of `DefaultAlarmThresholdDefaultAlarmConfigPtrInput` via:
 //
-//          DefaultAlarmThresholdDefaultAlarmConfigArgs{...}
+//	        DefaultAlarmThresholdDefaultAlarmConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DefaultAlarmThresholdDefaultAlarmConfigPtrInput interface {
 	pulumi.Input
 
@@ -1100,7 +1100,7 @@ type PacketFilterConfigPacketFilterConfig struct {
 // PacketFilterConfigPacketFilterConfigInput is an input type that accepts PacketFilterConfigPacketFilterConfigArgs and PacketFilterConfigPacketFilterConfigOutput values.
 // You can construct a concrete instance of `PacketFilterConfigPacketFilterConfigInput` via:
 //
-//          PacketFilterConfigPacketFilterConfigArgs{...}
+//	PacketFilterConfigPacketFilterConfigArgs{...}
 type PacketFilterConfigPacketFilterConfigInput interface {
 	pulumi.Input
 
@@ -1178,11 +1178,11 @@ func (i PacketFilterConfigPacketFilterConfigArgs) ToPacketFilterConfigPacketFilt
 // PacketFilterConfigPacketFilterConfigPtrInput is an input type that accepts PacketFilterConfigPacketFilterConfigArgs, PacketFilterConfigPacketFilterConfigPtr and PacketFilterConfigPacketFilterConfigPtrOutput values.
 // You can construct a concrete instance of `PacketFilterConfigPacketFilterConfigPtrInput` via:
 //
-//          PacketFilterConfigPacketFilterConfigArgs{...}
+//	        PacketFilterConfigPacketFilterConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type PacketFilterConfigPacketFilterConfigPtrInput interface {
 	pulumi.Input
 
@@ -1606,7 +1606,7 @@ type PortAclConfigAclConfig struct {
 // PortAclConfigAclConfigInput is an input type that accepts PortAclConfigAclConfigArgs and PortAclConfigAclConfigOutput values.
 // You can construct a concrete instance of `PortAclConfigAclConfigInput` via:
 //
-//          PortAclConfigAclConfigArgs{...}
+//	PortAclConfigAclConfigArgs{...}
 type PortAclConfigAclConfigInput interface {
 	pulumi.Input
 
@@ -1654,11 +1654,11 @@ func (i PortAclConfigAclConfigArgs) ToPortAclConfigAclConfigPtrOutputWithContext
 // PortAclConfigAclConfigPtrInput is an input type that accepts PortAclConfigAclConfigArgs, PortAclConfigAclConfigPtr and PortAclConfigAclConfigPtrOutput values.
 // You can construct a concrete instance of `PortAclConfigAclConfigPtrInput` via:
 //
-//          PortAclConfigAclConfigArgs{...}
+//	        PortAclConfigAclConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type PortAclConfigAclConfigPtrInput interface {
 	pulumi.Input
 
@@ -1847,7 +1847,7 @@ type GetBasicDeviceStatusClbData struct {
 // GetBasicDeviceStatusClbDataInput is an input type that accepts GetBasicDeviceStatusClbDataArgs and GetBasicDeviceStatusClbDataOutput values.
 // You can construct a concrete instance of `GetBasicDeviceStatusClbDataInput` via:
 //
-//          GetBasicDeviceStatusClbDataArgs{...}
+//	GetBasicDeviceStatusClbDataArgs{...}
 type GetBasicDeviceStatusClbDataInput interface {
 	pulumi.Input
 
@@ -1877,7 +1877,7 @@ func (i GetBasicDeviceStatusClbDataArgs) ToGetBasicDeviceStatusClbDataOutputWith
 // GetBasicDeviceStatusClbDataArrayInput is an input type that accepts GetBasicDeviceStatusClbDataArray and GetBasicDeviceStatusClbDataArrayOutput values.
 // You can construct a concrete instance of `GetBasicDeviceStatusClbDataArrayInput` via:
 //
-//          GetBasicDeviceStatusClbDataArray{ GetBasicDeviceStatusClbDataArgs{...} }
+//	GetBasicDeviceStatusClbDataArray{ GetBasicDeviceStatusClbDataArgs{...} }
 type GetBasicDeviceStatusClbDataArrayInput interface {
 	pulumi.Input
 
@@ -1953,7 +1953,7 @@ type GetBasicDeviceStatusData struct {
 // GetBasicDeviceStatusDataInput is an input type that accepts GetBasicDeviceStatusDataArgs and GetBasicDeviceStatusDataOutput values.
 // You can construct a concrete instance of `GetBasicDeviceStatusDataInput` via:
 //
-//          GetBasicDeviceStatusDataArgs{...}
+//	GetBasicDeviceStatusDataArgs{...}
 type GetBasicDeviceStatusDataInput interface {
 	pulumi.Input
 
@@ -1983,7 +1983,7 @@ func (i GetBasicDeviceStatusDataArgs) ToGetBasicDeviceStatusDataOutputWithContex
 // GetBasicDeviceStatusDataArrayInput is an input type that accepts GetBasicDeviceStatusDataArray and GetBasicDeviceStatusDataArrayOutput values.
 // You can construct a concrete instance of `GetBasicDeviceStatusDataArrayInput` via:
 //
-//          GetBasicDeviceStatusDataArray{ GetBasicDeviceStatusDataArgs{...} }
+//	GetBasicDeviceStatusDataArray{ GetBasicDeviceStatusDataArgs{...} }
 type GetBasicDeviceStatusDataArrayInput interface {
 	pulumi.Input
 
@@ -2067,7 +2067,7 @@ type GetListListenerLayer4Listener struct {
 // GetListListenerLayer4ListenerInput is an input type that accepts GetListListenerLayer4ListenerArgs and GetListListenerLayer4ListenerOutput values.
 // You can construct a concrete instance of `GetListListenerLayer4ListenerInput` via:
 //
-//          GetListListenerLayer4ListenerArgs{...}
+//	GetListListenerLayer4ListenerArgs{...}
 type GetListListenerLayer4ListenerInput interface {
 	pulumi.Input
 
@@ -2105,7 +2105,7 @@ func (i GetListListenerLayer4ListenerArgs) ToGetListListenerLayer4ListenerOutput
 // GetListListenerLayer4ListenerArrayInput is an input type that accepts GetListListenerLayer4ListenerArray and GetListListenerLayer4ListenerArrayOutput values.
 // You can construct a concrete instance of `GetListListenerLayer4ListenerArrayInput` via:
 //
-//          GetListListenerLayer4ListenerArray{ GetListListenerLayer4ListenerArgs{...} }
+//	GetListListenerLayer4ListenerArray{ GetListListenerLayer4ListenerArgs{...} }
 type GetListListenerLayer4ListenerArrayInput interface {
 	pulumi.Input
 
@@ -2205,7 +2205,7 @@ type GetListListenerLayer4ListenerInstanceDetail struct {
 // GetListListenerLayer4ListenerInstanceDetailInput is an input type that accepts GetListListenerLayer4ListenerInstanceDetailArgs and GetListListenerLayer4ListenerInstanceDetailOutput values.
 // You can construct a concrete instance of `GetListListenerLayer4ListenerInstanceDetailInput` via:
 //
-//          GetListListenerLayer4ListenerInstanceDetailArgs{...}
+//	GetListListenerLayer4ListenerInstanceDetailArgs{...}
 type GetListListenerLayer4ListenerInstanceDetailInput interface {
 	pulumi.Input
 
@@ -2235,7 +2235,7 @@ func (i GetListListenerLayer4ListenerInstanceDetailArgs) ToGetListListenerLayer4
 // GetListListenerLayer4ListenerInstanceDetailArrayInput is an input type that accepts GetListListenerLayer4ListenerInstanceDetailArray and GetListListenerLayer4ListenerInstanceDetailArrayOutput values.
 // You can construct a concrete instance of `GetListListenerLayer4ListenerInstanceDetailArrayInput` via:
 //
-//          GetListListenerLayer4ListenerInstanceDetailArray{ GetListListenerLayer4ListenerInstanceDetailArgs{...} }
+//	GetListListenerLayer4ListenerInstanceDetailArray{ GetListListenerLayer4ListenerInstanceDetailArgs{...} }
 type GetListListenerLayer4ListenerInstanceDetailArrayInput interface {
 	pulumi.Input
 
@@ -2313,7 +2313,7 @@ type GetListListenerLayer4ListenerInstanceDetailRule struct {
 // GetListListenerLayer4ListenerInstanceDetailRuleInput is an input type that accepts GetListListenerLayer4ListenerInstanceDetailRuleArgs and GetListListenerLayer4ListenerInstanceDetailRuleOutput values.
 // You can construct a concrete instance of `GetListListenerLayer4ListenerInstanceDetailRuleInput` via:
 //
-//          GetListListenerLayer4ListenerInstanceDetailRuleArgs{...}
+//	GetListListenerLayer4ListenerInstanceDetailRuleArgs{...}
 type GetListListenerLayer4ListenerInstanceDetailRuleInput interface {
 	pulumi.Input
 
@@ -2345,7 +2345,7 @@ func (i GetListListenerLayer4ListenerInstanceDetailRuleArgs) ToGetListListenerLa
 // GetListListenerLayer4ListenerInstanceDetailRuleArrayInput is an input type that accepts GetListListenerLayer4ListenerInstanceDetailRuleArray and GetListListenerLayer4ListenerInstanceDetailRuleArrayOutput values.
 // You can construct a concrete instance of `GetListListenerLayer4ListenerInstanceDetailRuleArrayInput` via:
 //
-//          GetListListenerLayer4ListenerInstanceDetailRuleArray{ GetListListenerLayer4ListenerInstanceDetailRuleArgs{...} }
+//	GetListListenerLayer4ListenerInstanceDetailRuleArray{ GetListListenerLayer4ListenerInstanceDetailRuleArgs{...} }
 type GetListListenerLayer4ListenerInstanceDetailRuleArrayInput interface {
 	pulumi.Input
 
@@ -2430,7 +2430,7 @@ type GetListListenerLayer4ListenerRealServer struct {
 // GetListListenerLayer4ListenerRealServerInput is an input type that accepts GetListListenerLayer4ListenerRealServerArgs and GetListListenerLayer4ListenerRealServerOutput values.
 // You can construct a concrete instance of `GetListListenerLayer4ListenerRealServerInput` via:
 //
-//          GetListListenerLayer4ListenerRealServerArgs{...}
+//	GetListListenerLayer4ListenerRealServerArgs{...}
 type GetListListenerLayer4ListenerRealServerInput interface {
 	pulumi.Input
 
@@ -2464,7 +2464,7 @@ func (i GetListListenerLayer4ListenerRealServerArgs) ToGetListListenerLayer4List
 // GetListListenerLayer4ListenerRealServerArrayInput is an input type that accepts GetListListenerLayer4ListenerRealServerArray and GetListListenerLayer4ListenerRealServerArrayOutput values.
 // You can construct a concrete instance of `GetListListenerLayer4ListenerRealServerArrayInput` via:
 //
-//          GetListListenerLayer4ListenerRealServerArray{ GetListListenerLayer4ListenerRealServerArgs{...} }
+//	GetListListenerLayer4ListenerRealServerArray{ GetListListenerLayer4ListenerRealServerArgs{...} }
 type GetListListenerLayer4ListenerRealServerArrayInput interface {
 	pulumi.Input
 
@@ -2560,7 +2560,7 @@ type GetListListenerLayer7Listener struct {
 // GetListListenerLayer7ListenerInput is an input type that accepts GetListListenerLayer7ListenerArgs and GetListListenerLayer7ListenerOutput values.
 // You can construct a concrete instance of `GetListListenerLayer7ListenerInput` via:
 //
-//          GetListListenerLayer7ListenerArgs{...}
+//	GetListListenerLayer7ListenerArgs{...}
 type GetListListenerLayer7ListenerInput interface {
 	pulumi.Input
 
@@ -2600,7 +2600,7 @@ func (i GetListListenerLayer7ListenerArgs) ToGetListListenerLayer7ListenerOutput
 // GetListListenerLayer7ListenerArrayInput is an input type that accepts GetListListenerLayer7ListenerArray and GetListListenerLayer7ListenerArrayOutput values.
 // You can construct a concrete instance of `GetListListenerLayer7ListenerArrayInput` via:
 //
-//          GetListListenerLayer7ListenerArray{ GetListListenerLayer7ListenerArgs{...} }
+//	GetListListenerLayer7ListenerArray{ GetListListenerLayer7ListenerArgs{...} }
 type GetListListenerLayer7ListenerArrayInput interface {
 	pulumi.Input
 
@@ -2707,7 +2707,7 @@ type GetListListenerLayer7ListenerInstanceDetail struct {
 // GetListListenerLayer7ListenerInstanceDetailInput is an input type that accepts GetListListenerLayer7ListenerInstanceDetailArgs and GetListListenerLayer7ListenerInstanceDetailOutput values.
 // You can construct a concrete instance of `GetListListenerLayer7ListenerInstanceDetailInput` via:
 //
-//          GetListListenerLayer7ListenerInstanceDetailArgs{...}
+//	GetListListenerLayer7ListenerInstanceDetailArgs{...}
 type GetListListenerLayer7ListenerInstanceDetailInput interface {
 	pulumi.Input
 
@@ -2737,7 +2737,7 @@ func (i GetListListenerLayer7ListenerInstanceDetailArgs) ToGetListListenerLayer7
 // GetListListenerLayer7ListenerInstanceDetailArrayInput is an input type that accepts GetListListenerLayer7ListenerInstanceDetailArray and GetListListenerLayer7ListenerInstanceDetailArrayOutput values.
 // You can construct a concrete instance of `GetListListenerLayer7ListenerInstanceDetailArrayInput` via:
 //
-//          GetListListenerLayer7ListenerInstanceDetailArray{ GetListListenerLayer7ListenerInstanceDetailArgs{...} }
+//	GetListListenerLayer7ListenerInstanceDetailArray{ GetListListenerLayer7ListenerInstanceDetailArgs{...} }
 type GetListListenerLayer7ListenerInstanceDetailArrayInput interface {
 	pulumi.Input
 
@@ -2815,7 +2815,7 @@ type GetListListenerLayer7ListenerInstanceDetailRule struct {
 // GetListListenerLayer7ListenerInstanceDetailRuleInput is an input type that accepts GetListListenerLayer7ListenerInstanceDetailRuleArgs and GetListListenerLayer7ListenerInstanceDetailRuleOutput values.
 // You can construct a concrete instance of `GetListListenerLayer7ListenerInstanceDetailRuleInput` via:
 //
-//          GetListListenerLayer7ListenerInstanceDetailRuleArgs{...}
+//	GetListListenerLayer7ListenerInstanceDetailRuleArgs{...}
 type GetListListenerLayer7ListenerInstanceDetailRuleInput interface {
 	pulumi.Input
 
@@ -2847,7 +2847,7 @@ func (i GetListListenerLayer7ListenerInstanceDetailRuleArgs) ToGetListListenerLa
 // GetListListenerLayer7ListenerInstanceDetailRuleArrayInput is an input type that accepts GetListListenerLayer7ListenerInstanceDetailRuleArray and GetListListenerLayer7ListenerInstanceDetailRuleArrayOutput values.
 // You can construct a concrete instance of `GetListListenerLayer7ListenerInstanceDetailRuleArrayInput` via:
 //
-//          GetListListenerLayer7ListenerInstanceDetailRuleArray{ GetListListenerLayer7ListenerInstanceDetailRuleArgs{...} }
+//	GetListListenerLayer7ListenerInstanceDetailRuleArray{ GetListListenerLayer7ListenerInstanceDetailRuleArgs{...} }
 type GetListListenerLayer7ListenerInstanceDetailRuleArrayInput interface {
 	pulumi.Input
 
@@ -2928,7 +2928,7 @@ type GetListListenerLayer7ListenerProxyTypeList struct {
 // GetListListenerLayer7ListenerProxyTypeListInput is an input type that accepts GetListListenerLayer7ListenerProxyTypeListArgs and GetListListenerLayer7ListenerProxyTypeListOutput values.
 // You can construct a concrete instance of `GetListListenerLayer7ListenerProxyTypeListInput` via:
 //
-//          GetListListenerLayer7ListenerProxyTypeListArgs{...}
+//	GetListListenerLayer7ListenerProxyTypeListArgs{...}
 type GetListListenerLayer7ListenerProxyTypeListInput interface {
 	pulumi.Input
 
@@ -2958,7 +2958,7 @@ func (i GetListListenerLayer7ListenerProxyTypeListArgs) ToGetListListenerLayer7L
 // GetListListenerLayer7ListenerProxyTypeListArrayInput is an input type that accepts GetListListenerLayer7ListenerProxyTypeListArray and GetListListenerLayer7ListenerProxyTypeListArrayOutput values.
 // You can construct a concrete instance of `GetListListenerLayer7ListenerProxyTypeListArrayInput` via:
 //
-//          GetListListenerLayer7ListenerProxyTypeListArray{ GetListListenerLayer7ListenerProxyTypeListArgs{...} }
+//	GetListListenerLayer7ListenerProxyTypeListArray{ GetListListenerLayer7ListenerProxyTypeListArgs{...} }
 type GetListListenerLayer7ListenerProxyTypeListArrayInput interface {
 	pulumi.Input
 
@@ -3038,7 +3038,7 @@ type GetListListenerLayer7ListenerRealServer struct {
 // GetListListenerLayer7ListenerRealServerInput is an input type that accepts GetListListenerLayer7ListenerRealServerArgs and GetListListenerLayer7ListenerRealServerOutput values.
 // You can construct a concrete instance of `GetListListenerLayer7ListenerRealServerInput` via:
 //
-//          GetListListenerLayer7ListenerRealServerArgs{...}
+//	GetListListenerLayer7ListenerRealServerArgs{...}
 type GetListListenerLayer7ListenerRealServerInput interface {
 	pulumi.Input
 
@@ -3072,7 +3072,7 @@ func (i GetListListenerLayer7ListenerRealServerArgs) ToGetListListenerLayer7List
 // GetListListenerLayer7ListenerRealServerArrayInput is an input type that accepts GetListListenerLayer7ListenerRealServerArray and GetListListenerLayer7ListenerRealServerArrayOutput values.
 // You can construct a concrete instance of `GetListListenerLayer7ListenerRealServerArrayInput` via:
 //
-//          GetListListenerLayer7ListenerRealServerArray{ GetListListenerLayer7ListenerRealServerArgs{...} }
+//	GetListListenerLayer7ListenerRealServerArray{ GetListListenerLayer7ListenerRealServerArgs{...} }
 type GetListListenerLayer7ListenerRealServerArrayInput interface {
 	pulumi.Input
 
@@ -3176,7 +3176,7 @@ type GetOverviewDdosEventListEventList struct {
 // GetOverviewDdosEventListEventListInput is an input type that accepts GetOverviewDdosEventListEventListArgs and GetOverviewDdosEventListEventListOutput values.
 // You can construct a concrete instance of `GetOverviewDdosEventListEventListInput` via:
 //
-//          GetOverviewDdosEventListEventListArgs{...}
+//	GetOverviewDdosEventListEventListArgs{...}
 type GetOverviewDdosEventListEventListInput interface {
 	pulumi.Input
 
@@ -3224,7 +3224,7 @@ func (i GetOverviewDdosEventListEventListArgs) ToGetOverviewDdosEventListEventLi
 // GetOverviewDdosEventListEventListArrayInput is an input type that accepts GetOverviewDdosEventListEventListArray and GetOverviewDdosEventListEventListArrayOutput values.
 // You can construct a concrete instance of `GetOverviewDdosEventListEventListArrayInput` via:
 //
-//          GetOverviewDdosEventListEventListArray{ GetOverviewDdosEventListEventListArgs{...} }
+//	GetOverviewDdosEventListEventListArray{ GetOverviewDdosEventListEventListArgs{...} }
 type GetOverviewDdosEventListEventListArrayInput interface {
 	pulumi.Input
 

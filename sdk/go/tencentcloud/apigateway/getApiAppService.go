@@ -18,73 +18,76 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleService, err := ApiGateway.NewService(ctx, "exampleService", &ApiGateway.ServiceArgs{
-// 			ServiceName: pulumi.String("tf_example"),
-// 			Protocol:    pulumi.String("http&https"),
-// 			ServiceDesc: pulumi.String("desc."),
-// 			NetTypes: pulumi.StringArray{
-// 				pulumi.String("INNER"),
-// 				pulumi.String("OUTER"),
-// 			},
-// 			IpVersion: pulumi.String("IPv4"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleApi, err := ApiGateway.NewApi(ctx, "exampleApi", &ApiGateway.ApiArgs{
-// 			ServiceId:           exampleService.ID(),
-// 			ApiName:             pulumi.String("tf_example"),
-// 			ApiDesc:             pulumi.String("my hello api update"),
-// 			AuthType:            pulumi.String("APP"),
-// 			Protocol:            pulumi.String("HTTP"),
-// 			EnableCors:          pulumi.Bool(true),
-// 			RequestConfigPath:   pulumi.String("/user/info"),
-// 			RequestConfigMethod: pulumi.String("POST"),
-// 			RequestParameters: apigateway.ApiRequestParameterArray{
-// 				&apigateway.ApiRequestParameterArgs{
-// 					Name:         pulumi.String("email"),
-// 					Position:     pulumi.String("QUERY"),
-// 					Type:         pulumi.String("string"),
-// 					Desc:         pulumi.String("desc."),
-// 					DefaultValue: pulumi.String("test@qq.com"),
-// 					Required:     pulumi.Bool(true),
-// 				},
-// 			},
-// 			ServiceConfigType:      pulumi.String("HTTP"),
-// 			ServiceConfigTimeout:   pulumi.Int(10),
-// 			ServiceConfigUrl:       pulumi.String("http://www.tencent.com"),
-// 			ServiceConfigPath:      pulumi.String("/user"),
-// 			ServiceConfigMethod:    pulumi.String("POST"),
-// 			ResponseType:           pulumi.String("XML"),
-// 			ResponseSuccessExample: pulumi.String("<note>success</note>"),
-// 			ResponseFailExample:    pulumi.String("<note>fail</note>"),
-// 			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
-// 				&apigateway.ApiResponseErrorCodeArgs{
-// 					Code:          pulumi.Int(500),
-// 					Msg:           pulumi.String("system error"),
-// 					Desc:          pulumi.String("system error code"),
-// 					ConvertedCode: pulumi.Int(5000),
-// 					NeedConvert:   pulumi.Bool(true),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = ApiGateway.GetApiAppServiceOutput(ctx, apigateway.GetApiAppServiceOutputArgs{
-// 			ServiceId: exampleApi.ServiceId,
-// 			ApiRegion: pulumi.String("ap-guangzhou"),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleService, err := ApiGateway.NewService(ctx, "exampleService", &ApiGateway.ServiceArgs{
+//				ServiceName: pulumi.String("tf_example"),
+//				Protocol:    pulumi.String("http&https"),
+//				ServiceDesc: pulumi.String("desc."),
+//				NetTypes: pulumi.StringArray{
+//					pulumi.String("INNER"),
+//					pulumi.String("OUTER"),
+//				},
+//				IpVersion: pulumi.String("IPv4"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleApi, err := ApiGateway.NewApi(ctx, "exampleApi", &ApiGateway.ApiArgs{
+//				ServiceId:           exampleService.ID(),
+//				ApiName:             pulumi.String("tf_example"),
+//				ApiDesc:             pulumi.String("my hello api update"),
+//				AuthType:            pulumi.String("APP"),
+//				Protocol:            pulumi.String("HTTP"),
+//				EnableCors:          pulumi.Bool(true),
+//				RequestConfigPath:   pulumi.String("/user/info"),
+//				RequestConfigMethod: pulumi.String("POST"),
+//				RequestParameters: apigateway.ApiRequestParameterArray{
+//					&apigateway.ApiRequestParameterArgs{
+//						Name:         pulumi.String("email"),
+//						Position:     pulumi.String("QUERY"),
+//						Type:         pulumi.String("string"),
+//						Desc:         pulumi.String("desc."),
+//						DefaultValue: pulumi.String("test@qq.com"),
+//						Required:     pulumi.Bool(true),
+//					},
+//				},
+//				ServiceConfigType:      pulumi.String("HTTP"),
+//				ServiceConfigTimeout:   pulumi.Int(10),
+//				ServiceConfigUrl:       pulumi.String("http://www.tencent.com"),
+//				ServiceConfigPath:      pulumi.String("/user"),
+//				ServiceConfigMethod:    pulumi.String("POST"),
+//				ResponseType:           pulumi.String("XML"),
+//				ResponseSuccessExample: pulumi.String("<note>success</note>"),
+//				ResponseFailExample:    pulumi.String("<note>fail</note>"),
+//				ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
+//					&apigateway.ApiResponseErrorCodeArgs{
+//						Code:          pulumi.Int(500),
+//						Msg:           pulumi.String("system error"),
+//						Desc:          pulumi.String("system error code"),
+//						ConvertedCode: pulumi.Int(5000),
+//						NeedConvert:   pulumi.Bool(true),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = ApiGateway.GetApiAppServiceOutput(ctx, apigateway.GetApiAppServiceOutputArgs{
+//				ServiceId: exampleApi.ServiceId,
+//				ApiRegion: pulumi.String("ap-guangzhou"),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetApiAppService(ctx *pulumi.Context, args *GetApiAppServiceArgs, opts ...pulumi.InvokeOption) (*GetApiAppServiceResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

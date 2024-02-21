@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewEndPointServiceWhiteList(ctx, "endPointServiceWhiteList", &Vpc.EndPointServiceWhiteListArgs{
-// 			Description:       pulumi.String("terraform for test"),
-// 			EndPointServiceId: pulumi.String("vpcsvc-69y13tdb"),
-// 			UserUin:           pulumi.String("100020512675"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.NewEndPointServiceWhiteList(ctx, "endPointServiceWhiteList", &Vpc.EndPointServiceWhiteListArgs{
+//				Description:       pulumi.String("terraform for test"),
+//				EndPointServiceId: pulumi.String("vpcsvc-69y13tdb"),
+//				UserUin:           pulumi.String("100020512675"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -43,7 +46,9 @@ import (
 // vpc end_point_service_white_list can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/endPointServiceWhiteList:EndPointServiceWhiteList end_point_service_white_list end_point_service_white_list_id
+//
+//	$ pulumi import tencentcloud:Vpc/endPointServiceWhiteList:EndPointServiceWhiteList end_point_service_white_list end_point_service_white_list_id
+//
 // ```
 type EndPointServiceWhiteList struct {
 	pulumi.CustomResourceState
@@ -170,7 +175,7 @@ func (i *EndPointServiceWhiteList) ToEndPointServiceWhiteListOutputWithContext(c
 // EndPointServiceWhiteListArrayInput is an input type that accepts EndPointServiceWhiteListArray and EndPointServiceWhiteListArrayOutput values.
 // You can construct a concrete instance of `EndPointServiceWhiteListArrayInput` via:
 //
-//          EndPointServiceWhiteListArray{ EndPointServiceWhiteListArgs{...} }
+//	EndPointServiceWhiteListArray{ EndPointServiceWhiteListArgs{...} }
 type EndPointServiceWhiteListArrayInput interface {
 	pulumi.Input
 
@@ -195,7 +200,7 @@ func (i EndPointServiceWhiteListArray) ToEndPointServiceWhiteListArrayOutputWith
 // EndPointServiceWhiteListMapInput is an input type that accepts EndPointServiceWhiteListMap and EndPointServiceWhiteListMapOutput values.
 // You can construct a concrete instance of `EndPointServiceWhiteListMapInput` via:
 //
-//          EndPointServiceWhiteListMap{ "key": EndPointServiceWhiteListArgs{...} }
+//	EndPointServiceWhiteListMap{ "key": EndPointServiceWhiteListArgs{...} }
 type EndPointServiceWhiteListMapInput interface {
 	pulumi.Input
 

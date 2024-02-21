@@ -18,24 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdmq.GetPublisherSummary(ctx, &tdmq.GetPublisherSummaryArgs{
-// 			ClusterId: "pulsar-9n95ax58b9vn",
-// 			Namespace: "keep-ns",
-// 			Topic:     "keep-topic",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tdmq.GetPublisherSummary(ctx, &tdmq.GetPublisherSummaryArgs{
+//				ClusterId: "pulsar-9n95ax58b9vn",
+//				Namespace: "keep-ns",
+//				Topic:     "keep-topic",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetPublisherSummary(ctx *pulumi.Context, args *GetPublisherSummaryArgs, opts ...pulumi.InvokeOption) (*GetPublisherSummaryResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

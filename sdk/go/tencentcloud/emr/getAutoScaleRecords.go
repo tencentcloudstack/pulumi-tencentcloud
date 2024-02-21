@@ -18,28 +18,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Emr.GetAutoScaleRecords(ctx, &emr.GetAutoScaleRecordsArgs{
-// 			Filters: []emr.GetAutoScaleRecordsFilter{
-// 				emr.GetAutoScaleRecordsFilter{
-// 					Key:   "StartTime",
-// 					Value: "2006-01-02 15:04:05",
-// 				},
-// 			},
-// 			InstanceId: "emr-bpum4pad",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Emr.GetAutoScaleRecords(ctx, &emr.GetAutoScaleRecordsArgs{
+//				Filters: []emr.GetAutoScaleRecordsFilter{
+//					emr.GetAutoScaleRecordsFilter{
+//						Key:   "StartTime",
+//						Value: "2006-01-02 15:04:05",
+//					},
+//				},
+//				InstanceId: "emr-bpum4pad",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetAutoScaleRecords(ctx *pulumi.Context, args *GetAutoScaleRecordsArgs, opts ...pulumi.InvokeOption) (*GetAutoScaleRecordsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

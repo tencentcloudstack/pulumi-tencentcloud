@@ -18,58 +18,61 @@ import (
 // package main
 //
 // import (
-// 	"encoding/json"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Eb.NewEventBus(ctx, "foo", &Eb.EventBusArgs{
-// 			EventBusName: pulumi.String("tf-event_bus_rule"),
-// 			Description:  pulumi.String("event bus desc"),
-// 			EnableStore:  pulumi.Bool(false),
-// 			SaveDays:     pulumi.Int(1),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"source": "apigw.cloud.tencent",
-// 			"type": []string{
-// 				"connector:apigw",
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		_, err = Eb.NewEventRule(ctx, "eventRule", &Eb.EventRuleArgs{
-// 			EventBusId:   foo.ID(),
-// 			RuleName:     pulumi.String("tf-event_rule"),
-// 			Description:  pulumi.String("event rule desc"),
-// 			Enable:       pulumi.Bool(true),
-// 			EventPattern: pulumi.String(json0),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Eb.GetEventRulesOutput(ctx, eb.GetEventRulesOutputArgs{
-// 			EventBusId: foo.ID(),
-// 			OrderBy:    pulumi.String("AddTime"),
-// 			Order:      pulumi.String("DESC"),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			foo, err := Eb.NewEventBus(ctx, "foo", &Eb.EventBusArgs{
+//				EventBusName: pulumi.String("tf-event_bus_rule"),
+//				Description:  pulumi.String("event bus desc"),
+//				EnableStore:  pulumi.Bool(false),
+//				SaveDays:     pulumi.Int(1),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"source": "apigw.cloud.tencent",
+//				"type": []string{
+//					"connector:apigw",
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err = Eb.NewEventRule(ctx, "eventRule", &Eb.EventRuleArgs{
+//				EventBusId:   foo.ID(),
+//				RuleName:     pulumi.String("tf-event_rule"),
+//				Description:  pulumi.String("event rule desc"),
+//				Enable:       pulumi.Bool(true),
+//				EventPattern: pulumi.String(json0),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Eb.GetEventRulesOutput(ctx, eb.GetEventRulesOutputArgs{
+//				EventBusId: foo.ID(),
+//				OrderBy:    pulumi.String("AddTime"),
+//				Order:      pulumi.String("DESC"),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetEventRules(ctx *pulumi.Context, args *GetEventRulesArgs, opts ...pulumi.InvokeOption) (*GetEventRulesResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

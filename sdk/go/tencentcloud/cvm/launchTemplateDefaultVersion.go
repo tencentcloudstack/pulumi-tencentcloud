@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cvm.NewLaunchTemplateDefaultVersion(ctx, "launchTemplateDefaultVersion", &Cvm.LaunchTemplateDefaultVersionArgs{
-// 			DefaultVersion:   pulumi.Int(2),
-// 			LaunchTemplateId: pulumi.String("lt-34vaef8fe"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cvm.NewLaunchTemplateDefaultVersion(ctx, "launchTemplateDefaultVersion", &Cvm.LaunchTemplateDefaultVersionArgs{
+//				DefaultVersion:   pulumi.Int(2),
+//				LaunchTemplateId: pulumi.String("lt-34vaef8fe"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // cvm launch_template_default_version can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cvm/launchTemplateDefaultVersion:LaunchTemplateDefaultVersion launch_template_default_version launch_template_id
+//
+//	$ pulumi import tencentcloud:Cvm/launchTemplateDefaultVersion:LaunchTemplateDefaultVersion launch_template_default_version launch_template_id
+//
 // ```
 type LaunchTemplateDefaultVersion struct {
 	pulumi.CustomResourceState
@@ -147,7 +152,7 @@ func (i *LaunchTemplateDefaultVersion) ToLaunchTemplateDefaultVersionOutputWithC
 // LaunchTemplateDefaultVersionArrayInput is an input type that accepts LaunchTemplateDefaultVersionArray and LaunchTemplateDefaultVersionArrayOutput values.
 // You can construct a concrete instance of `LaunchTemplateDefaultVersionArrayInput` via:
 //
-//          LaunchTemplateDefaultVersionArray{ LaunchTemplateDefaultVersionArgs{...} }
+//	LaunchTemplateDefaultVersionArray{ LaunchTemplateDefaultVersionArgs{...} }
 type LaunchTemplateDefaultVersionArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +177,7 @@ func (i LaunchTemplateDefaultVersionArray) ToLaunchTemplateDefaultVersionArrayOu
 // LaunchTemplateDefaultVersionMapInput is an input type that accepts LaunchTemplateDefaultVersionMap and LaunchTemplateDefaultVersionMapOutput values.
 // You can construct a concrete instance of `LaunchTemplateDefaultVersionMapInput` via:
 //
-//          LaunchTemplateDefaultVersionMap{ "key": LaunchTemplateDefaultVersionArgs{...} }
+//	LaunchTemplateDefaultVersionMap{ "key": LaunchTemplateDefaultVersionArgs{...} }
 type LaunchTemplateDefaultVersionMapInput interface {
 	pulumi.Input
 

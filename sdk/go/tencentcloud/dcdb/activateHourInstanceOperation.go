@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.NewActivateHourInstanceOperation(ctx, "activateHourInstanceOperation", &Dcdb.ActivateHourInstanceOperationArgs{
-// 			InstanceId: pulumi.Any(local.Dcdb_id),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcdb.NewActivateHourInstanceOperation(ctx, "activateHourInstanceOperation", &Dcdb.ActivateHourInstanceOperationArgs{
+//				InstanceId: pulumi.Any(local.Dcdb_id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ActivateHourInstanceOperation struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *ActivateHourInstanceOperation) ToActivateHourInstanceOperationOutputWit
 // ActivateHourInstanceOperationArrayInput is an input type that accepts ActivateHourInstanceOperationArray and ActivateHourInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `ActivateHourInstanceOperationArrayInput` via:
 //
-//          ActivateHourInstanceOperationArray{ ActivateHourInstanceOperationArgs{...} }
+//	ActivateHourInstanceOperationArray{ ActivateHourInstanceOperationArgs{...} }
 type ActivateHourInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i ActivateHourInstanceOperationArray) ToActivateHourInstanceOperationArray
 // ActivateHourInstanceOperationMapInput is an input type that accepts ActivateHourInstanceOperationMap and ActivateHourInstanceOperationMapOutput values.
 // You can construct a concrete instance of `ActivateHourInstanceOperationMapInput` via:
 //
-//          ActivateHourInstanceOperationMap{ "key": ActivateHourInstanceOperationArgs{...} }
+//	ActivateHourInstanceOperationMap{ "key": ActivateHourInstanceOperationArgs{...} }
 type ActivateHourInstanceOperationMapInput interface {
 	pulumi.Input
 

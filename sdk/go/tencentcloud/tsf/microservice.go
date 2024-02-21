@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewMicroservice(ctx, "microservice", &Tsf.MicroserviceArgs{
-// 			MicroserviceDesc: pulumi.String("desc-microservice"),
-// 			MicroserviceName: pulumi.String("test-microservice"),
-// 			NamespaceId:      pulumi.String("namespace-vjlkzkgy"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewMicroservice(ctx, "microservice", &Tsf.MicroserviceArgs{
+//				MicroserviceDesc: pulumi.String("desc-microservice"),
+//				MicroserviceName: pulumi.String("test-microservice"),
+//				NamespaceId:      pulumi.String("namespace-vjlkzkgy"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +49,9 @@ import (
 // tsf microservice can be imported using the namespaceId#microserviceId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tsf/microservice:Microservice microservice namespace-vjlkzkgy#ms-vjeb43lw
+//
+//	$ pulumi import tencentcloud:Tsf/microservice:Microservice microservice namespace-vjlkzkgy#ms-vjeb43lw
+//
 // ```
 type Microservice struct {
 	pulumi.CustomResourceState
@@ -171,7 +176,7 @@ func (i *Microservice) ToMicroserviceOutputWithContext(ctx context.Context) Micr
 // MicroserviceArrayInput is an input type that accepts MicroserviceArray and MicroserviceArrayOutput values.
 // You can construct a concrete instance of `MicroserviceArrayInput` via:
 //
-//          MicroserviceArray{ MicroserviceArgs{...} }
+//	MicroserviceArray{ MicroserviceArgs{...} }
 type MicroserviceArrayInput interface {
 	pulumi.Input
 
@@ -196,7 +201,7 @@ func (i MicroserviceArray) ToMicroserviceArrayOutputWithContext(ctx context.Cont
 // MicroserviceMapInput is an input type that accepts MicroserviceMap and MicroserviceMapOutput values.
 // You can construct a concrete instance of `MicroserviceMapInput` via:
 //
-//          MicroserviceMap{ "key": MicroserviceArgs{...} }
+//	MicroserviceMap{ "key": MicroserviceArgs{...} }
 type MicroserviceMapInput interface {
 	pulumi.Input
 

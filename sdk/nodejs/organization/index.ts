@@ -10,6 +10,7 @@ export * from "./getOrgAuthNode";
 export * from "./getOrgFinancialByMember";
 export * from "./getOrgFinancialByMonth";
 export * from "./getOrgFinancialByProduct";
+export * from "./getOrgShareArea";
 export * from "./instance";
 export * from "./orgIdentity";
 export * from "./orgMember";
@@ -17,6 +18,8 @@ export * from "./orgMemberAuthIdentityAttachment";
 export * from "./orgMemberEmail";
 export * from "./orgMemberPolicyAttachment";
 export * from "./orgNode";
+export * from "./orgShareUnit";
+export * from "./orgShareUnitMember";
 export * from "./policySubAccountAttachment";
 export * from "./quitOrganizationOperation";
 
@@ -28,6 +31,8 @@ import { OrgMemberAuthIdentityAttachment } from "./orgMemberAuthIdentityAttachme
 import { OrgMemberEmail } from "./orgMemberEmail";
 import { OrgMemberPolicyAttachment } from "./orgMemberPolicyAttachment";
 import { OrgNode } from "./orgNode";
+import { OrgShareUnit } from "./orgShareUnit";
+import { OrgShareUnitMember } from "./orgShareUnitMember";
 import { PolicySubAccountAttachment } from "./policySubAccountAttachment";
 import { QuitOrganizationOperation } from "./quitOrganizationOperation";
 
@@ -49,6 +54,10 @@ const _module = {
                 return new OrgMemberPolicyAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Organization/orgNode:OrgNode":
                 return new OrgNode(name, <any>undefined, { urn })
+            case "tencentcloud:Organization/orgShareUnit:OrgShareUnit":
+                return new OrgShareUnit(name, <any>undefined, { urn })
+            case "tencentcloud:Organization/orgShareUnitMember:OrgShareUnitMember":
+                return new OrgShareUnitMember(name, <any>undefined, { urn })
             case "tencentcloud:Organization/policySubAccountAttachment:PolicySubAccountAttachment":
                 return new PolicySubAccountAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Organization/quitOrganizationOperation:QuitOrganizationOperation":
@@ -65,5 +74,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgMemberAut
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgMemberEmail", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgMemberPolicyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgNode", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgShareUnit", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgShareUnitMember", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/policySubAccountAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/quitOrganizationOperation", _module)

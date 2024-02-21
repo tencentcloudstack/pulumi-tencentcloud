@@ -31,6 +31,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.GetSchedulesScheduleInfoSetOutputStorageResult> OutputStorages;
         /// <summary>
+        /// The resource ID. If there is no associated resource ID, fill it with the account's main resource ID.
+        /// </summary>
+        public readonly string ResourceId;
+        /// <summary>
         /// The scheme ID.
         /// </summary>
         public readonly int ScheduleId;
@@ -65,6 +69,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Outputs
 
             ImmutableArray<Outputs.GetSchedulesScheduleInfoSetOutputStorageResult> outputStorages,
 
+            string resourceId,
+
             int scheduleId,
 
             string scheduleName,
@@ -81,6 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Outputs
             CreateTime = createTime;
             OutputDir = outputDir;
             OutputStorages = outputStorages;
+            ResourceId = resourceId;
             ScheduleId = scheduleId;
             ScheduleName = scheduleName;
             Status = status;

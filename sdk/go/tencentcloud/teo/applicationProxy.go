@@ -239,7 +239,7 @@ func (i *ApplicationProxy) ToApplicationProxyOutputWithContext(ctx context.Conte
 // ApplicationProxyArrayInput is an input type that accepts ApplicationProxyArray and ApplicationProxyArrayOutput values.
 // You can construct a concrete instance of `ApplicationProxyArrayInput` via:
 //
-//          ApplicationProxyArray{ ApplicationProxyArgs{...} }
+//	ApplicationProxyArray{ ApplicationProxyArgs{...} }
 type ApplicationProxyArrayInput interface {
 	pulumi.Input
 
@@ -264,7 +264,7 @@ func (i ApplicationProxyArray) ToApplicationProxyArrayOutputWithContext(ctx cont
 // ApplicationProxyMapInput is an input type that accepts ApplicationProxyMap and ApplicationProxyMapOutput values.
 // You can construct a concrete instance of `ApplicationProxyMapInput` via:
 //
-//          ApplicationProxyMap{ "key": ApplicationProxyArgs{...} }
+//	ApplicationProxyMap{ "key": ApplicationProxyArgs{...} }
 type ApplicationProxyMapInput interface {
 	pulumi.Input
 

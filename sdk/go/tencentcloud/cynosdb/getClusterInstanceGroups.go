@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.GetClusterInstanceGroups(ctx, &cynosdb.GetClusterInstanceGroupsArgs{
-// 			ClusterId: "",
-// 			Xxxxxx: []map[string]interface{}{
-// 				nil,
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.GetClusterInstanceGroups(ctx, &cynosdb.GetClusterInstanceGroupsArgs{
+//				ClusterId: "",
+//				Xxxxxx: []map[string]interface{}{
+//					nil,
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetClusterInstanceGroups(ctx *pulumi.Context, args *GetClusterInstanceGroupsArgs, opts ...pulumi.InvokeOption) (*GetClusterInstanceGroupsResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

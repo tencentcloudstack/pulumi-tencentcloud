@@ -20,7 +20,7 @@ type TaskSetBatchTasks struct {
 // TaskSetBatchTasksInput is an input type that accepts TaskSetBatchTasksArgs and TaskSetBatchTasksOutput values.
 // You can construct a concrete instance of `TaskSetBatchTasksInput` via:
 //
-//          TaskSetBatchTasksArgs{...}
+//	TaskSetBatchTasksArgs{...}
 type TaskSetBatchTasksInput interface {
 	pulumi.Input
 
@@ -58,11 +58,11 @@ func (i TaskSetBatchTasksArgs) ToTaskSetBatchTasksPtrOutputWithContext(ctx conte
 // TaskSetBatchTasksPtrInput is an input type that accepts TaskSetBatchTasksArgs, TaskSetBatchTasksPtr and TaskSetBatchTasksPtrOutput values.
 // You can construct a concrete instance of `TaskSetBatchTasksPtrInput` via:
 //
-//          TaskSetBatchTasksArgs{...}
+//	        TaskSetBatchTasksArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type TaskSetBatchTasksPtrInput interface {
 	pulumi.Input
 
@@ -194,7 +194,7 @@ type GetNodeNodeDefine struct {
 // GetNodeNodeDefineInput is an input type that accepts GetNodeNodeDefineArgs and GetNodeNodeDefineOutput values.
 // You can construct a concrete instance of `GetNodeNodeDefineInput` via:
 //
-//          GetNodeNodeDefineArgs{...}
+//	GetNodeNodeDefineArgs{...}
 type GetNodeNodeDefineInput interface {
 	pulumi.Input
 
@@ -242,7 +242,7 @@ func (i GetNodeNodeDefineArgs) ToGetNodeNodeDefineOutputWithContext(ctx context.
 // GetNodeNodeDefineArrayInput is an input type that accepts GetNodeNodeDefineArray and GetNodeNodeDefineArrayOutput values.
 // You can construct a concrete instance of `GetNodeNodeDefineArrayInput` via:
 //
-//          GetNodeNodeDefineArray{ GetNodeNodeDefineArgs{...} }
+//	GetNodeNodeDefineArray{ GetNodeNodeDefineArgs{...} }
 type GetNodeNodeDefineArrayInput interface {
 	pulumi.Input
 
@@ -365,7 +365,7 @@ type GetProbeDataDetailedSingleDataDefine struct {
 // GetProbeDataDetailedSingleDataDefineInput is an input type that accepts GetProbeDataDetailedSingleDataDefineArgs and GetProbeDataDetailedSingleDataDefineOutput values.
 // You can construct a concrete instance of `GetProbeDataDetailedSingleDataDefineInput` via:
 //
-//          GetProbeDataDetailedSingleDataDefineArgs{...}
+//	GetProbeDataDetailedSingleDataDefineArgs{...}
 type GetProbeDataDetailedSingleDataDefineInput interface {
 	pulumi.Input
 
@@ -397,7 +397,7 @@ func (i GetProbeDataDetailedSingleDataDefineArgs) ToGetProbeDataDetailedSingleDa
 // GetProbeDataDetailedSingleDataDefineArrayInput is an input type that accepts GetProbeDataDetailedSingleDataDefineArray and GetProbeDataDetailedSingleDataDefineArrayOutput values.
 // You can construct a concrete instance of `GetProbeDataDetailedSingleDataDefineArrayInput` via:
 //
-//          GetProbeDataDetailedSingleDataDefineArray{ GetProbeDataDetailedSingleDataDefineArgs{...} }
+//	GetProbeDataDetailedSingleDataDefineArray{ GetProbeDataDetailedSingleDataDefineArgs{...} }
 type GetProbeDataDetailedSingleDataDefineArrayInput interface {
 	pulumi.Input
 
@@ -484,7 +484,7 @@ type GetProbeDataDetailedSingleDataDefineField struct {
 // GetProbeDataDetailedSingleDataDefineFieldInput is an input type that accepts GetProbeDataDetailedSingleDataDefineFieldArgs and GetProbeDataDetailedSingleDataDefineFieldOutput values.
 // You can construct a concrete instance of `GetProbeDataDetailedSingleDataDefineFieldInput` via:
 //
-//          GetProbeDataDetailedSingleDataDefineFieldArgs{...}
+//	GetProbeDataDetailedSingleDataDefineFieldArgs{...}
 type GetProbeDataDetailedSingleDataDefineFieldInput interface {
 	pulumi.Input
 
@@ -516,7 +516,7 @@ func (i GetProbeDataDetailedSingleDataDefineFieldArgs) ToGetProbeDataDetailedSin
 // GetProbeDataDetailedSingleDataDefineFieldArrayInput is an input type that accepts GetProbeDataDetailedSingleDataDefineFieldArray and GetProbeDataDetailedSingleDataDefineFieldArrayOutput values.
 // You can construct a concrete instance of `GetProbeDataDetailedSingleDataDefineFieldArrayInput` via:
 //
-//          GetProbeDataDetailedSingleDataDefineFieldArray{ GetProbeDataDetailedSingleDataDefineFieldArgs{...} }
+//	GetProbeDataDetailedSingleDataDefineFieldArray{ GetProbeDataDetailedSingleDataDefineFieldArgs{...} }
 type GetProbeDataDetailedSingleDataDefineFieldArrayInput interface {
 	pulumi.Input
 
@@ -599,7 +599,7 @@ type GetProbeDataDetailedSingleDataDefineLabel struct {
 // GetProbeDataDetailedSingleDataDefineLabelInput is an input type that accepts GetProbeDataDetailedSingleDataDefineLabelArgs and GetProbeDataDetailedSingleDataDefineLabelOutput values.
 // You can construct a concrete instance of `GetProbeDataDetailedSingleDataDefineLabelInput` via:
 //
-//          GetProbeDataDetailedSingleDataDefineLabelArgs{...}
+//	GetProbeDataDetailedSingleDataDefineLabelArgs{...}
 type GetProbeDataDetailedSingleDataDefineLabelInput interface {
 	pulumi.Input
 
@@ -631,7 +631,7 @@ func (i GetProbeDataDetailedSingleDataDefineLabelArgs) ToGetProbeDataDetailedSin
 // GetProbeDataDetailedSingleDataDefineLabelArrayInput is an input type that accepts GetProbeDataDetailedSingleDataDefineLabelArray and GetProbeDataDetailedSingleDataDefineLabelArrayOutput values.
 // You can construct a concrete instance of `GetProbeDataDetailedSingleDataDefineLabelArrayInput` via:
 //
-//          GetProbeDataDetailedSingleDataDefineLabelArray{ GetProbeDataDetailedSingleDataDefineLabelArgs{...} }
+//	GetProbeDataDetailedSingleDataDefineLabelArray{ GetProbeDataDetailedSingleDataDefineLabelArgs{...} }
 type GetProbeDataDetailedSingleDataDefineLabelArrayInput interface {
 	pulumi.Input
 

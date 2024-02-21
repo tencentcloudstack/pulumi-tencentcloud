@@ -19,26 +19,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clickhouse.NewKeyvalConfig(ctx, "keyvalConfig", &Clickhouse.KeyvalConfigArgs{
-// 			InstanceId: pulumi.String("cdwch-datuhk3z"),
-// 			Items: &clickhouse.KeyvalConfigItemsArgs{
-// 				ConfKey:   pulumi.String("max_open_files"),
-// 				ConfValue: pulumi.String("50000"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clickhouse.NewKeyvalConfig(ctx, "keyvalConfig", &Clickhouse.KeyvalConfigArgs{
+//				InstanceId: pulumi.String("cdwch-datuhk3z"),
+//				Items: &clickhouse.KeyvalConfigItemsArgs{
+//					ConfKey:   pulumi.String("max_open_files"),
+//					ConfValue: pulumi.String("50000"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -46,7 +49,9 @@ import (
 // clickhouse config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clickhouse/keyvalConfig:KeyvalConfig config cdwch-datuhk3z#max_open_files#50000
+//
+//	$ pulumi import tencentcloud:Clickhouse/keyvalConfig:KeyvalConfig config cdwch-datuhk3z#max_open_files#50000
+//
 // ```
 type KeyvalConfig struct {
 	pulumi.CustomResourceState
@@ -151,7 +156,7 @@ func (i *KeyvalConfig) ToKeyvalConfigOutputWithContext(ctx context.Context) Keyv
 // KeyvalConfigArrayInput is an input type that accepts KeyvalConfigArray and KeyvalConfigArrayOutput values.
 // You can construct a concrete instance of `KeyvalConfigArrayInput` via:
 //
-//          KeyvalConfigArray{ KeyvalConfigArgs{...} }
+//	KeyvalConfigArray{ KeyvalConfigArgs{...} }
 type KeyvalConfigArrayInput interface {
 	pulumi.Input
 
@@ -176,7 +181,7 @@ func (i KeyvalConfigArray) ToKeyvalConfigArrayOutputWithContext(ctx context.Cont
 // KeyvalConfigMapInput is an input type that accepts KeyvalConfigMap and KeyvalConfigMapOutput values.
 // You can construct a concrete instance of `KeyvalConfigMapInput` via:
 //
-//          KeyvalConfigMap{ "key": KeyvalConfigArgs{...} }
+//	KeyvalConfigMap{ "key": KeyvalConfigArgs{...} }
 type KeyvalConfigMapInput interface {
 	pulumi.Input
 

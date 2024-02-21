@@ -19,30 +19,33 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewNatPolicy(ctx, "example", &Cfw.NatPolicyArgs{
-// 			Description:   pulumi.String("policy description."),
-// 			Direction:     pulumi.Int(1),
-// 			Enable:        pulumi.String("true"),
-// 			Port:          pulumi.String("-1/-1"),
-// 			Protocol:      pulumi.String("TCP"),
-// 			RuleAction:    pulumi.String("drop"),
-// 			SourceContent: pulumi.String("1.1.1.1/0"),
-// 			SourceType:    pulumi.String("net"),
-// 			TargetContent: pulumi.String("0.0.0.0/0"),
-// 			TargetType:    pulumi.String("net"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.NewNatPolicy(ctx, "example", &Cfw.NatPolicyArgs{
+//				Description:   pulumi.String("policy description."),
+//				Direction:     pulumi.Int(1),
+//				Enable:        pulumi.String("true"),
+//				Port:          pulumi.String("-1/-1"),
+//				Protocol:      pulumi.String("TCP"),
+//				RuleAction:    pulumi.String("drop"),
+//				SourceContent: pulumi.String("1.1.1.1/0"),
+//				SourceType:    pulumi.String("net"),
+//				TargetContent: pulumi.String("0.0.0.0/0"),
+//				TargetType:    pulumi.String("net"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -50,7 +53,9 @@ import (
 // cfw nat_policy can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfw/natPolicy:NatPolicy example nat_policy_id
+//
+//	$ pulumi import tencentcloud:Cfw/natPolicy:NatPolicy example nat_policy_id
+//
 // ```
 type NatPolicy struct {
 	pulumi.CustomResourceState
@@ -61,6 +66,8 @@ type NatPolicy struct {
 	Direction pulumi.IntOutput `pulumi:"direction"`
 	// Rule status, true means enabled, false means disabled. Default is true.
 	Enable pulumi.StringPtrOutput `pulumi:"enable"`
+	// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+	ParamTemplateId pulumi.StringOutput `pulumi:"paramTemplateId"`
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
 	Port pulumi.StringOutput `pulumi:"port"`
 	// Protocol. If Direction=1, optional values: TCP, UDP, ANY; If Direction=0, optional values: TCP, UDP, ICMP, ANY, HTTP, HTTPS, HTTP/HTTPS, SMTP, SMTPS, SMTP/SMTPS, FTP, and DNS.
@@ -139,6 +146,8 @@ type natPolicyState struct {
 	Direction *int `pulumi:"direction"`
 	// Rule status, true means enabled, false means disabled. Default is true.
 	Enable *string `pulumi:"enable"`
+	// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+	ParamTemplateId *string `pulumi:"paramTemplateId"`
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
 	Port *string `pulumi:"port"`
 	// Protocol. If Direction=1, optional values: TCP, UDP, ANY; If Direction=0, optional values: TCP, UDP, ICMP, ANY, HTTP, HTTPS, HTTP/HTTPS, SMTP, SMTPS, SMTP/SMTPS, FTP, and DNS.
@@ -164,6 +173,8 @@ type NatPolicyState struct {
 	Direction pulumi.IntPtrInput
 	// Rule status, true means enabled, false means disabled. Default is true.
 	Enable pulumi.StringPtrInput
+	// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+	ParamTemplateId pulumi.StringPtrInput
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
 	Port pulumi.StringPtrInput
 	// Protocol. If Direction=1, optional values: TCP, UDP, ANY; If Direction=0, optional values: TCP, UDP, ICMP, ANY, HTTP, HTTPS, HTTP/HTTPS, SMTP, SMTPS, SMTP/SMTPS, FTP, and DNS.
@@ -259,7 +270,7 @@ func (i *NatPolicy) ToNatPolicyOutputWithContext(ctx context.Context) NatPolicyO
 // NatPolicyArrayInput is an input type that accepts NatPolicyArray and NatPolicyArrayOutput values.
 // You can construct a concrete instance of `NatPolicyArrayInput` via:
 //
-//          NatPolicyArray{ NatPolicyArgs{...} }
+//	NatPolicyArray{ NatPolicyArgs{...} }
 type NatPolicyArrayInput interface {
 	pulumi.Input
 
@@ -284,7 +295,7 @@ func (i NatPolicyArray) ToNatPolicyArrayOutputWithContext(ctx context.Context) N
 // NatPolicyMapInput is an input type that accepts NatPolicyMap and NatPolicyMapOutput values.
 // You can construct a concrete instance of `NatPolicyMapInput` via:
 //
-//          NatPolicyMap{ "key": NatPolicyArgs{...} }
+//	NatPolicyMap{ "key": NatPolicyArgs{...} }
 type NatPolicyMapInput interface {
 	pulumi.Input
 
@@ -333,6 +344,11 @@ func (o NatPolicyOutput) Direction() pulumi.IntOutput {
 // Rule status, true means enabled, false means disabled. Default is true.
 func (o NatPolicyOutput) Enable() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *NatPolicy) pulumi.StringPtrOutput { return v.Enable }).(pulumi.StringPtrOutput)
+}
+
+// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+func (o NatPolicyOutput) ParamTemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v *NatPolicy) pulumi.StringOutput { return v.ParamTemplateId }).(pulumi.StringOutput)
 }
 
 // The port for the access control policy. Value: -1/-1: All ports 80: Port 80.

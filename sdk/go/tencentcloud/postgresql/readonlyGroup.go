@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewReadonlyGroup(ctx, "group", &Postgresql.ReadonlyGroupArgs{
-// 			MasterDbInstanceId:       pulumi.String("postgres-gzg9jb2n"),
-// 			MaxReplayLag:             pulumi.Int(100),
-// 			MaxReplayLatency:         pulumi.Int(512),
-// 			MinDelayEliminateReserve: pulumi.Int(1),
-// 			ProjectId:                pulumi.Int(0),
-// 			ReplayLagEliminate:       pulumi.Int(1),
-// 			ReplayLatencyEliminate:   pulumi.Int(1),
-// 			SubnetId:                 pulumi.String("subnet-enm92y0m"),
-// 			VpcId:                    pulumi.String("vpc-86v957zb"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewReadonlyGroup(ctx, "group", &Postgresql.ReadonlyGroupArgs{
+//				MasterDbInstanceId:       pulumi.String("postgres-gzg9jb2n"),
+//				MaxReplayLag:             pulumi.Int(100),
+//				MaxReplayLatency:         pulumi.Int(512),
+//				MinDelayEliminateReserve: pulumi.Int(1),
+//				ProjectId:                pulumi.Int(0),
+//				ReplayLagEliminate:       pulumi.Int(1),
+//				ReplayLatencyEliminate:   pulumi.Int(1),
+//				SubnetId:                 pulumi.String("subnet-enm92y0m"),
+//				VpcId:                    pulumi.String("vpc-86v957zb"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ReadonlyGroup struct {
 	pulumi.CustomResourceState
@@ -263,7 +266,7 @@ func (i *ReadonlyGroup) ToReadonlyGroupOutputWithContext(ctx context.Context) Re
 // ReadonlyGroupArrayInput is an input type that accepts ReadonlyGroupArray and ReadonlyGroupArrayOutput values.
 // You can construct a concrete instance of `ReadonlyGroupArrayInput` via:
 //
-//          ReadonlyGroupArray{ ReadonlyGroupArgs{...} }
+//	ReadonlyGroupArray{ ReadonlyGroupArgs{...} }
 type ReadonlyGroupArrayInput interface {
 	pulumi.Input
 
@@ -288,7 +291,7 @@ func (i ReadonlyGroupArray) ToReadonlyGroupArrayOutputWithContext(ctx context.Co
 // ReadonlyGroupMapInput is an input type that accepts ReadonlyGroupMap and ReadonlyGroupMapOutput values.
 // You can construct a concrete instance of `ReadonlyGroupMapInput` via:
 //
-//          ReadonlyGroupMap{ "key": ReadonlyGroupArgs{...} }
+//	ReadonlyGroupMap{ "key": ReadonlyGroupArgs{...} }
 type ReadonlyGroupMapInput interface {
 	pulumi.Input
 

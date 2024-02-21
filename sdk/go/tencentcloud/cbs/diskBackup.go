@@ -21,22 +21,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cbs.NewDiskBackup(ctx, "diskBackup", &Cbs.DiskBackupArgs{
-// 			DiskBackupName: pulumi.String("xxx"),
-// 			DiskId:         pulumi.String("disk-xxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cbs.NewDiskBackup(ctx, "diskBackup", &Cbs.DiskBackupArgs{
+//				DiskBackupName: pulumi.String("xxx"),
+//				DiskId:         pulumi.String("disk-xxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // cbs disk_backup can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cbs/diskBackup:DiskBackup disk_backup disk_backup_id
+//
+//	$ pulumi import tencentcloud:Cbs/diskBackup:DiskBackup disk_backup disk_backup_id
+//
 // ```
 type DiskBackup struct {
 	pulumi.CustomResourceState
@@ -146,7 +151,7 @@ func (i *DiskBackup) ToDiskBackupOutputWithContext(ctx context.Context) DiskBack
 // DiskBackupArrayInput is an input type that accepts DiskBackupArray and DiskBackupArrayOutput values.
 // You can construct a concrete instance of `DiskBackupArrayInput` via:
 //
-//          DiskBackupArray{ DiskBackupArgs{...} }
+//	DiskBackupArray{ DiskBackupArgs{...} }
 type DiskBackupArrayInput interface {
 	pulumi.Input
 
@@ -171,7 +176,7 @@ func (i DiskBackupArray) ToDiskBackupArrayOutputWithContext(ctx context.Context)
 // DiskBackupMapInput is an input type that accepts DiskBackupMap and DiskBackupMapOutput values.
 // You can construct a concrete instance of `DiskBackupMapInput` via:
 //
-//          DiskBackupMap{ "key": DiskBackupArgs{...} }
+//	DiskBackupMap{ "key": DiskBackupArgs{...} }
 type DiskBackupMapInput interface {
 	pulumi.Input
 

@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.NewFlushBinlog(ctx, "flushBinlog", &Mariadb.FlushBinlogArgs{
-// 			InstanceId: pulumi.String("tdsql-9vqvls95"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.NewFlushBinlog(ctx, "flushBinlog", &Mariadb.FlushBinlogArgs{
+//				InstanceId: pulumi.String("tdsql-9vqvls95"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type FlushBinlog struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *FlushBinlog) ToFlushBinlogOutputWithContext(ctx context.Context) FlushB
 // FlushBinlogArrayInput is an input type that accepts FlushBinlogArray and FlushBinlogArrayOutput values.
 // You can construct a concrete instance of `FlushBinlogArrayInput` via:
 //
-//          FlushBinlogArray{ FlushBinlogArgs{...} }
+//	FlushBinlogArray{ FlushBinlogArgs{...} }
 type FlushBinlogArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i FlushBinlogArray) ToFlushBinlogArrayOutputWithContext(ctx context.Contex
 // FlushBinlogMapInput is an input type that accepts FlushBinlogMap and FlushBinlogMapOutput values.
 // You can construct a concrete instance of `FlushBinlogMapInput` via:
 //
-//          FlushBinlogMap{ "key": FlushBinlogArgs{...} }
+//	FlushBinlogMap{ "key": FlushBinlogArgs{...} }
 type FlushBinlogMapInput interface {
 	pulumi.Input
 

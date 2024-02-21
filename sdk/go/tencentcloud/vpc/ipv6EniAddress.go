@@ -125,7 +125,7 @@ func (i *Ipv6EniAddress) ToIpv6EniAddressOutputWithContext(ctx context.Context) 
 // Ipv6EniAddressArrayInput is an input type that accepts Ipv6EniAddressArray and Ipv6EniAddressArrayOutput values.
 // You can construct a concrete instance of `Ipv6EniAddressArrayInput` via:
 //
-//          Ipv6EniAddressArray{ Ipv6EniAddressArgs{...} }
+//	Ipv6EniAddressArray{ Ipv6EniAddressArgs{...} }
 type Ipv6EniAddressArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +150,7 @@ func (i Ipv6EniAddressArray) ToIpv6EniAddressArrayOutputWithContext(ctx context.
 // Ipv6EniAddressMapInput is an input type that accepts Ipv6EniAddressMap and Ipv6EniAddressMapOutput values.
 // You can construct a concrete instance of `Ipv6EniAddressMapInput` via:
 //
-//          Ipv6EniAddressMap{ "key": Ipv6EniAddressArgs{...} }
+//	Ipv6EniAddressMap{ "key": Ipv6EniAddressArgs{...} }
 type Ipv6EniAddressMapInput interface {
 	pulumi.Input
 

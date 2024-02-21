@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cdn.NewUrlPurge(ctx, "foo", &Cdn.UrlPurgeArgs{
-// 			Urls: pulumi.StringArray{
-// 				pulumi.String("https://www.example.com/a"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cdn.NewUrlPurge(ctx, "foo", &Cdn.UrlPurgeArgs{
+//				Urls: pulumi.StringArray{
+//					pulumi.String("https://www.example.com/a"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### argument to request new purge task with same urls
 //
@@ -43,24 +46,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cdn.NewUrlPurge(ctx, "foo", &Cdn.UrlPurgeArgs{
-// 			Redo: pulumi.Int(1),
-// 			Urls: pulumi.StringArray{
-// 				pulumi.String("https://www.example.com/a"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cdn.NewUrlPurge(ctx, "foo", &Cdn.UrlPurgeArgs{
+//				Redo: pulumi.Int(1),
+//				Urls: pulumi.StringArray{
+//					pulumi.String("https://www.example.com/a"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type UrlPurge struct {
 	pulumi.CustomResourceState
@@ -194,7 +200,7 @@ func (i *UrlPurge) ToUrlPurgeOutputWithContext(ctx context.Context) UrlPurgeOutp
 // UrlPurgeArrayInput is an input type that accepts UrlPurgeArray and UrlPurgeArrayOutput values.
 // You can construct a concrete instance of `UrlPurgeArrayInput` via:
 //
-//          UrlPurgeArray{ UrlPurgeArgs{...} }
+//	UrlPurgeArray{ UrlPurgeArgs{...} }
 type UrlPurgeArrayInput interface {
 	pulumi.Input
 
@@ -219,7 +225,7 @@ func (i UrlPurgeArray) ToUrlPurgeArrayOutputWithContext(ctx context.Context) Url
 // UrlPurgeMapInput is an input type that accepts UrlPurgeMap and UrlPurgeMapOutput values.
 // You can construct a concrete instance of `UrlPurgeMapInput` via:
 //
-//          UrlPurgeMap{ "key": UrlPurgeArgs{...} }
+//	UrlPurgeMap{ "key": UrlPurgeArgs{...} }
 type UrlPurgeMapInput interface {
 	pulumi.Input
 

@@ -20,46 +20,49 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		eipExample, err := Eip.NewInstance(ctx, "eipExample", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		nat, err := Nat.NewGateway(ctx, "nat", &Nat.GatewayArgs{
-// 			VpcId:         vpc.ID(),
-// 			MaxConcurrent: pulumi.Int(3000000),
-// 			Bandwidth:     pulumi.Int(500),
-// 			AssignedEipSets: pulumi.StringArray{
-// 				eipExample.PublicIp,
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Nat.NewRefreshNatDcRoute(ctx, "refreshNatDcRoute", &Nat.RefreshNatDcRouteArgs{
-// 			NatGatewayId: nat.ID(),
-// 			VpcId:        vpc.ID(),
-// 			DryRun:       pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			eipExample, err := Eip.NewInstance(ctx, "eipExample", nil)
+//			if err != nil {
+//				return err
+//			}
+//			nat, err := Nat.NewGateway(ctx, "nat", &Nat.GatewayArgs{
+//				VpcId:         vpc.ID(),
+//				MaxConcurrent: pulumi.Int(3000000),
+//				Bandwidth:     pulumi.Int(500),
+//				AssignedEipSets: pulumi.StringArray{
+//					eipExample.PublicIp,
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Nat.NewRefreshNatDcRoute(ctx, "refreshNatDcRoute", &Nat.RefreshNatDcRouteArgs{
+//				NatGatewayId: nat.ID(),
+//				VpcId:        vpc.ID(),
+//				DryRun:       pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### is False
 //
@@ -67,23 +70,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Nat.NewRefreshNatDcRoute(ctx, "refreshNatDcRoute", &Nat.RefreshNatDcRouteArgs{
-// 			NatGatewayId: pulumi.Any(tencentcloud_nat_gateway.Nat.Id),
-// 			VpcId:        pulumi.Any(tencentcloud_vpc.Vpc.Id),
-// 			DryRun:       pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Nat.NewRefreshNatDcRoute(ctx, "refreshNatDcRoute", &Nat.RefreshNatDcRouteArgs{
+//				NatGatewayId: pulumi.Any(tencentcloud_nat_gateway.Nat.Id),
+//				VpcId:        pulumi.Any(tencentcloud_vpc.Vpc.Id),
+//				DryRun:       pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -91,7 +97,9 @@ import (
 // vpc refresh_nat_dc_route can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Nat/refreshNatDcRoute:RefreshNatDcRoute refresh_nat_dc_route vpc_id#nat_gateway_id
+//
+//	$ pulumi import tencentcloud:Nat/refreshNatDcRoute:RefreshNatDcRoute refresh_nat_dc_route vpc_id#nat_gateway_id
+//
 // ```
 type RefreshNatDcRoute struct {
 	pulumi.CustomResourceState
@@ -209,7 +217,7 @@ func (i *RefreshNatDcRoute) ToRefreshNatDcRouteOutputWithContext(ctx context.Con
 // RefreshNatDcRouteArrayInput is an input type that accepts RefreshNatDcRouteArray and RefreshNatDcRouteArrayOutput values.
 // You can construct a concrete instance of `RefreshNatDcRouteArrayInput` via:
 //
-//          RefreshNatDcRouteArray{ RefreshNatDcRouteArgs{...} }
+//	RefreshNatDcRouteArray{ RefreshNatDcRouteArgs{...} }
 type RefreshNatDcRouteArrayInput interface {
 	pulumi.Input
 
@@ -234,7 +242,7 @@ func (i RefreshNatDcRouteArray) ToRefreshNatDcRouteArrayOutputWithContext(ctx co
 // RefreshNatDcRouteMapInput is an input type that accepts RefreshNatDcRouteMap and RefreshNatDcRouteMapOutput values.
 // You can construct a concrete instance of `RefreshNatDcRouteMapInput` via:
 //
-//          RefreshNatDcRouteMap{ "key": RefreshNatDcRouteArgs{...} }
+//	RefreshNatDcRouteMap{ "key": RefreshNatDcRouteArgs{...} }
 type RefreshNatDcRouteMapInput interface {
 	pulumi.Input
 

@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cvm.NewHpcCluster(ctx, "hpcCluster", &Cvm.HpcClusterArgs{
-// 			Remark: pulumi.String("create for test"),
-// 			Zone:   pulumi.String("ap-beijing-6"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cvm.NewHpcCluster(ctx, "hpcCluster", &Cvm.HpcClusterArgs{
+//				Remark: pulumi.String("create for test"),
+//				Zone:   pulumi.String("ap-beijing-6"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -42,7 +45,9 @@ import (
 // cvm hpc_cluster can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cvm/hpcCluster:HpcCluster hpc_cluster hpc_cluster_id
+//
+//	$ pulumi import tencentcloud:Cvm/hpcCluster:HpcCluster hpc_cluster hpc_cluster_id
+//
 // ```
 type HpcCluster struct {
 	pulumi.CustomResourceState
@@ -154,7 +159,7 @@ func (i *HpcCluster) ToHpcClusterOutputWithContext(ctx context.Context) HpcClust
 // HpcClusterArrayInput is an input type that accepts HpcClusterArray and HpcClusterArrayOutput values.
 // You can construct a concrete instance of `HpcClusterArrayInput` via:
 //
-//          HpcClusterArray{ HpcClusterArgs{...} }
+//	HpcClusterArray{ HpcClusterArgs{...} }
 type HpcClusterArrayInput interface {
 	pulumi.Input
 
@@ -179,7 +184,7 @@ func (i HpcClusterArray) ToHpcClusterArrayOutputWithContext(ctx context.Context)
 // HpcClusterMapInput is an input type that accepts HpcClusterMap and HpcClusterMapOutput values.
 // You can construct a concrete instance of `HpcClusterMapInput` via:
 //
-//          HpcClusterMap{ "key": HpcClusterArgs{...} }
+//	HpcClusterMap{ "key": HpcClusterArgs{...} }
 type HpcClusterMapInput interface {
 	pulumi.Input
 

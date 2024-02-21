@@ -19,34 +19,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.NewUserDataEngineConfig(ctx, "userDataEngineConfig", &Dlc.UserDataEngineConfigArgs{
-// 			DataEngineConfigPairs: dlc.UserDataEngineConfigDataEngineConfigPairArray{
-// 				&dlc.UserDataEngineConfigDataEngineConfigPairArgs{
-// 					ConfigItem:  pulumi.String("qq"),
-// 					ConfigValue: pulumi.String("ff"),
-// 				},
-// 			},
-// 			DataEngineId: pulumi.String("DataEngine-cgkvbas6"),
-// 			SessionResourceTemplate: &dlc.UserDataEngineConfigSessionResourceTemplateArgs{
-// 				DriverSize:         pulumi.String("small"),
-// 				ExecutorMaxNumbers: pulumi.Int(1),
-// 				ExecutorNums:       pulumi.Int(1),
-// 				ExecutorSize:       pulumi.String("small"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.NewUserDataEngineConfig(ctx, "userDataEngineConfig", &Dlc.UserDataEngineConfigArgs{
+//				DataEngineConfigPairs: dlc.UserDataEngineConfigDataEngineConfigPairArray{
+//					&dlc.UserDataEngineConfigDataEngineConfigPairArgs{
+//						ConfigItem:  pulumi.String("qq"),
+//						ConfigValue: pulumi.String("ff"),
+//					},
+//				},
+//				DataEngineId: pulumi.String("DataEngine-cgkvbas6"),
+//				SessionResourceTemplate: &dlc.UserDataEngineConfigSessionResourceTemplateArgs{
+//					DriverSize:         pulumi.String("small"),
+//					ExecutorMaxNumbers: pulumi.Int(1),
+//					ExecutorNums:       pulumi.Int(1),
+//					ExecutorSize:       pulumi.String("small"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -54,7 +57,9 @@ import (
 // dlc user_data_engine_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dlc/userDataEngineConfig:UserDataEngineConfig user_data_engine_config user_data_engine_config_id
+//
+//	$ pulumi import tencentcloud:Dlc/userDataEngineConfig:UserDataEngineConfig user_data_engine_config user_data_engine_config_id
+//
 // ```
 type UserDataEngineConfig struct {
 	pulumi.CustomResourceState
@@ -166,7 +171,7 @@ func (i *UserDataEngineConfig) ToUserDataEngineConfigOutputWithContext(ctx conte
 // UserDataEngineConfigArrayInput is an input type that accepts UserDataEngineConfigArray and UserDataEngineConfigArrayOutput values.
 // You can construct a concrete instance of `UserDataEngineConfigArrayInput` via:
 //
-//          UserDataEngineConfigArray{ UserDataEngineConfigArgs{...} }
+//	UserDataEngineConfigArray{ UserDataEngineConfigArgs{...} }
 type UserDataEngineConfigArrayInput interface {
 	pulumi.Input
 
@@ -191,7 +196,7 @@ func (i UserDataEngineConfigArray) ToUserDataEngineConfigArrayOutputWithContext(
 // UserDataEngineConfigMapInput is an input type that accepts UserDataEngineConfigMap and UserDataEngineConfigMapOutput values.
 // You can construct a concrete instance of `UserDataEngineConfigMapInput` via:
 //
-//          UserDataEngineConfigMap{ "key": UserDataEngineConfigArgs{...} }
+//	UserDataEngineConfigMap{ "key": UserDataEngineConfigArgs{...} }
 type UserDataEngineConfigMapInput interface {
 	pulumi.Input
 

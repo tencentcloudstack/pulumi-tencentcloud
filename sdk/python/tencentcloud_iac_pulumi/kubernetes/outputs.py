@@ -256,7 +256,7 @@ class ClusterAttachmentWorkerConfigDataDisk(dict):
         :param bool auto_format_and_mount: Indicate whether to auto format and mount or not. Default is `false`.
         :param str disk_partition: The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.
         :param int disk_size: Volume of disk in GB. Default is `0`.
-        :param str disk_type: Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        :param str disk_type: Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
         :param str file_system: File system, e.g. `ext3/ext4/xfs`.
         :param str mount_target: Mount target.
         """
@@ -301,7 +301,7 @@ class ClusterAttachmentWorkerConfigDataDisk(dict):
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[str]:
         """
-        Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
         """
         return pulumi.get(self, "disk_type")
 
@@ -582,7 +582,7 @@ class ClusterAttachmentWorkerConfigOverridesDataDisk(dict):
         :param bool auto_format_and_mount: Indicate whether to auto format and mount or not. Default is `false`.
         :param str disk_partition: The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.
         :param int disk_size: Volume of disk in GB. Default is `0`.
-        :param str disk_type: Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        :param str disk_type: Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
         :param str file_system: File system, e.g. `ext3/ext4/xfs`.
         :param str mount_target: Mount target.
         """
@@ -627,7 +627,7 @@ class ClusterAttachmentWorkerConfigOverridesDataDisk(dict):
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[str]:
         """
-        Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
         """
         return pulumi.get(self, "disk_type")
 
@@ -2675,7 +2675,7 @@ class NodePoolAutoScalingConfig(dict):
         :param str spot_instance_type: Type of spot instance, only support `one-time` now. Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param str spot_max_price: Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instance_charge_type is set to `SPOTPAID`.
         :param int system_disk_size: Volume of system disk in GB. Default is `50`.
-        :param str system_disk_type: Type of a CVM disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`.
+        :param str system_disk_type: Type of a CVM disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`. Default is `CLOUD_PREMIUM`.
         """
         pulumi.set(__self__, "instance_type", instance_type)
         if backup_instance_types is not None:
@@ -2913,7 +2913,7 @@ class NodePoolAutoScalingConfig(dict):
     @pulumi.getter(name="systemDiskType")
     def system_disk_type(self) -> Optional[str]:
         """
-        Type of a CVM disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`.
+        Type of a CVM disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`. Default is `CLOUD_PREMIUM`.
         """
         return pulumi.get(self, "system_disk_type")
 
@@ -2955,7 +2955,7 @@ class NodePoolAutoScalingConfigDataDisk(dict):
         """
         :param bool delete_with_instance: Indicates whether the disk remove after instance terminated. Default is `false`.
         :param int disk_size: Volume of disk in GB. Default is `0`.
-        :param str disk_type: Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        :param str disk_type: Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
         :param bool encrypt: Specify whether to encrypt data disk, default: false. NOTE: Make sure the instance type is offering and the cam role `QcloudKMSAccessForCVMRole` was provided.
         :param str snapshot_id: Data disk snapshot ID.
         :param int throughput_performance: Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD` and `data_size` > 460GB.
@@ -2993,7 +2993,7 @@ class NodePoolAutoScalingConfigDataDisk(dict):
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[str]:
         """
-        Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
         """
         return pulumi.get(self, "disk_type")
 
@@ -3196,7 +3196,7 @@ class NodePoolNodeConfigDataDisk(dict):
         :param bool auto_format_and_mount: Indicate whether to auto format and mount or not. Default is `false`.
         :param str disk_partition: The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.
         :param int disk_size: Volume of disk in GB. Default is `0`.
-        :param str disk_type: Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        :param str disk_type: Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
         :param str file_system: File system, e.g. `ext3/ext4/xfs`.
         :param str mount_target: Mount target.
         """
@@ -3241,7 +3241,7 @@ class NodePoolNodeConfigDataDisk(dict):
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[str]:
         """
-        Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+        Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
         """
         return pulumi.get(self, "disk_type")
 

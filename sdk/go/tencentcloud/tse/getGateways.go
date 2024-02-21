@@ -18,29 +18,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.GetGateways(ctx, &tse.GetGatewaysArgs{
-// 			Filters: []tse.GetGatewaysFilter{
-// 				tse.GetGatewaysFilter{
-// 					Name: "GatewayId",
-// 					Values: []string{
-// 						"gateway-ddbb709b",
-// 					},
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.GetGateways(ctx, &tse.GetGatewaysArgs{
+//				Filters: []tse.GetGatewaysFilter{
+//					tse.GetGatewaysFilter{
+//						Name: "GatewayId",
+//						Values: []string{
+//							"gateway-ddbb709b",
+//						},
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupGateways(ctx *pulumi.Context, args *LookupGatewaysArgs, opts ...pulumi.InvokeOption) (*LookupGatewaysResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

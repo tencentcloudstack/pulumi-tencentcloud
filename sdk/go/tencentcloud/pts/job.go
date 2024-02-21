@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Pts.NewJob(ctx, "job", &Pts.JobArgs{
-// 			JobOwner:   pulumi.String("username"),
-// 			Note:       pulumi.String("desc"),
-// 			ProjectId:  pulumi.String("project-45vw7v82"),
-// 			ScenarioId: pulumi.String("scenario-22q19f3k"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Pts.NewJob(ctx, "job", &Pts.JobArgs{
+//				JobOwner:   pulumi.String("username"),
+//				Note:       pulumi.String("desc"),
+//				ProjectId:  pulumi.String("project-45vw7v82"),
+//				ScenarioId: pulumi.String("scenario-22q19f3k"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // pts job can be imported using the projectId#scenarioId#jobId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Pts/job:Job job project-45vw7v82#scenario-22q19f3k#job-dtm93vx0
+//
+//	$ pulumi import tencentcloud:Pts/job:Job job project-45vw7v82#scenario-22q19f3k#job-dtm93vx0
+//
 // ```
 type Job struct {
 	pulumi.CustomResourceState
@@ -344,7 +349,7 @@ func (i *Job) ToJobOutputWithContext(ctx context.Context) JobOutput {
 // JobArrayInput is an input type that accepts JobArray and JobArrayOutput values.
 // You can construct a concrete instance of `JobArrayInput` via:
 //
-//          JobArray{ JobArgs{...} }
+//	JobArray{ JobArgs{...} }
 type JobArrayInput interface {
 	pulumi.Input
 
@@ -369,7 +374,7 @@ func (i JobArray) ToJobArrayOutputWithContext(ctx context.Context) JobArrayOutpu
 // JobMapInput is an input type that accepts JobMap and JobMapOutput values.
 // You can construct a concrete instance of `JobMapInput` via:
 //
-//          JobMap{ "key": JobArgs{...} }
+//	JobMap{ "key": JobArgs{...} }
 type JobMapInput interface {
 	pulumi.Input
 

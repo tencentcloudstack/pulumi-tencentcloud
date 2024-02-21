@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kms.NewOverwriteWhiteBoxDeviceFingerprints(ctx, "example", &Kms.OverwriteWhiteBoxDeviceFingerprintsArgs{
-// 			KeyId: pulumi.String("23e80852-1e38-11e9-b129-5cb9019b4b01"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kms.NewOverwriteWhiteBoxDeviceFingerprints(ctx, "example", &Kms.OverwriteWhiteBoxDeviceFingerprintsArgs{
+//				KeyId: pulumi.String("23e80852-1e38-11e9-b129-5cb9019b4b01"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type OverwriteWhiteBoxDeviceFingerprints struct {
 	pulumi.CustomResourceState
@@ -135,7 +138,7 @@ func (i *OverwriteWhiteBoxDeviceFingerprints) ToOverwriteWhiteBoxDeviceFingerpri
 // OverwriteWhiteBoxDeviceFingerprintsArrayInput is an input type that accepts OverwriteWhiteBoxDeviceFingerprintsArray and OverwriteWhiteBoxDeviceFingerprintsArrayOutput values.
 // You can construct a concrete instance of `OverwriteWhiteBoxDeviceFingerprintsArrayInput` via:
 //
-//          OverwriteWhiteBoxDeviceFingerprintsArray{ OverwriteWhiteBoxDeviceFingerprintsArgs{...} }
+//	OverwriteWhiteBoxDeviceFingerprintsArray{ OverwriteWhiteBoxDeviceFingerprintsArgs{...} }
 type OverwriteWhiteBoxDeviceFingerprintsArrayInput interface {
 	pulumi.Input
 
@@ -160,7 +163,7 @@ func (i OverwriteWhiteBoxDeviceFingerprintsArray) ToOverwriteWhiteBoxDeviceFinge
 // OverwriteWhiteBoxDeviceFingerprintsMapInput is an input type that accepts OverwriteWhiteBoxDeviceFingerprintsMap and OverwriteWhiteBoxDeviceFingerprintsMapOutput values.
 // You can construct a concrete instance of `OverwriteWhiteBoxDeviceFingerprintsMapInput` via:
 //
-//          OverwriteWhiteBoxDeviceFingerprintsMap{ "key": OverwriteWhiteBoxDeviceFingerprintsArgs{...} }
+//	OverwriteWhiteBoxDeviceFingerprintsMap{ "key": OverwriteWhiteBoxDeviceFingerprintsArgs{...} }
 type OverwriteWhiteBoxDeviceFingerprintsMapInput interface {
 	pulumi.Input
 

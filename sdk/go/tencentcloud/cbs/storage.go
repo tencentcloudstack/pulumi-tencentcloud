@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cbs.NewStorage(ctx, "storage", &Cbs.StorageArgs{
-// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
-// 			Encrypt:          pulumi.Bool(false),
-// 			ProjectId:        pulumi.Int(0),
-// 			StorageName:      pulumi.String("mystorage"),
-// 			StorageSize:      pulumi.Int(100),
-// 			StorageType:      pulumi.String("CLOUD_SSD"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("tf"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cbs.NewStorage(ctx, "storage", &Cbs.StorageArgs{
+//				AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+//				Encrypt:          pulumi.Bool(false),
+//				ProjectId:        pulumi.Int(0),
+//				StorageName:      pulumi.String("mystorage"),
+//				StorageSize:      pulumi.Int(100),
+//				StorageType:      pulumi.String("CLOUD_SSD"),
+//				Tags: pulumi.AnyMap{
+//					"test": pulumi.Any("tf"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -49,7 +52,9 @@ import (
 // CBS storage can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cbs/storage:Storage storage disk-41s6jwy4
+//
+//	$ pulumi import tencentcloud:Cbs/storage:Storage storage disk-41s6jwy4
+//
 // ```
 type Storage struct {
 	pulumi.CustomResourceState
@@ -312,7 +317,7 @@ func (i *Storage) ToStorageOutputWithContext(ctx context.Context) StorageOutput 
 // StorageArrayInput is an input type that accepts StorageArray and StorageArrayOutput values.
 // You can construct a concrete instance of `StorageArrayInput` via:
 //
-//          StorageArray{ StorageArgs{...} }
+//	StorageArray{ StorageArgs{...} }
 type StorageArrayInput interface {
 	pulumi.Input
 
@@ -337,7 +342,7 @@ func (i StorageArray) ToStorageArrayOutputWithContext(ctx context.Context) Stora
 // StorageMapInput is an input type that accepts StorageMap and StorageMapOutput values.
 // You can construct a concrete instance of `StorageMapInput` via:
 //
-//          StorageMap{ "key": StorageArgs{...} }
+//	StorageMap{ "key": StorageArgs{...} }
 type StorageMapInput interface {
 	pulumi.Input
 

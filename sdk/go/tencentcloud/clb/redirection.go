@@ -20,25 +20,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewRedirection(ctx, "foo", &Clb.RedirectionArgs{
-// 			ClbId:            pulumi.String("lb-p7olt9e5"),
-// 			SourceListenerId: pulumi.String("lbl-jc1dx6ju"),
-// 			SourceRuleId:     pulumi.String("loc-ft8fmngv"),
-// 			TargetListenerId: pulumi.String("lbl-asj1hzuo"),
-// 			TargetRuleId:     pulumi.String("loc-4xxr2cy7"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewRedirection(ctx, "foo", &Clb.RedirectionArgs{
+//				ClbId:            pulumi.String("lb-p7olt9e5"),
+//				SourceListenerId: pulumi.String("lbl-jc1dx6ju"),
+//				SourceRuleId:     pulumi.String("loc-ft8fmngv"),
+//				TargetListenerId: pulumi.String("lbl-asj1hzuo"),
+//				TargetRuleId:     pulumi.String("loc-4xxr2cy7"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Auto Rewrite
 //
@@ -46,24 +49,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewRedirection(ctx, "foo", &Clb.RedirectionArgs{
-// 			ClbId:            pulumi.String("lb-p7olt9e5"),
-// 			IsAutoRewrite:    pulumi.Bool(true),
-// 			TargetListenerId: pulumi.String("lbl-asj1hzuo"),
-// 			TargetRuleId:     pulumi.String("loc-4xxr2cy7"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewRedirection(ctx, "foo", &Clb.RedirectionArgs{
+//				ClbId:            pulumi.String("lb-p7olt9e5"),
+//				IsAutoRewrite:    pulumi.Bool(true),
+//				TargetListenerId: pulumi.String("lbl-asj1hzuo"),
+//				TargetRuleId:     pulumi.String("loc-4xxr2cy7"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -71,7 +77,9 @@ import (
 // CLB redirection can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clb/redirection:Redirection foo loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
+//
+//	$ pulumi import tencentcloud:Clb/redirection:Redirection foo loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
+//
 // ```
 type Redirection struct {
 	pulumi.CustomResourceState
@@ -229,7 +237,7 @@ func (i *Redirection) ToRedirectionOutputWithContext(ctx context.Context) Redire
 // RedirectionArrayInput is an input type that accepts RedirectionArray and RedirectionArrayOutput values.
 // You can construct a concrete instance of `RedirectionArrayInput` via:
 //
-//          RedirectionArray{ RedirectionArgs{...} }
+//	RedirectionArray{ RedirectionArgs{...} }
 type RedirectionArrayInput interface {
 	pulumi.Input
 
@@ -254,7 +262,7 @@ func (i RedirectionArray) ToRedirectionArrayOutputWithContext(ctx context.Contex
 // RedirectionMapInput is an input type that accepts RedirectionMap and RedirectionMapOutput values.
 // You can construct a concrete instance of `RedirectionMapInput` via:
 //
-//          RedirectionMap{ "key": RedirectionArgs{...} }
+//	RedirectionMap{ "key": RedirectionArgs{...} }
 type RedirectionMapInput interface {
 	pulumi.Input
 

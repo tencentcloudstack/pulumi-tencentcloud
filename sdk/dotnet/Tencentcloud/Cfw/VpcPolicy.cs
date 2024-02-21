@@ -53,6 +53,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     public partial class VpcPolicy : Pulumi.CustomResource
     {
         /// <summary>
+        /// Beta mission details. Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
+        [Output("betaLists")]
+        public Output<ImmutableArray<Outputs.VpcPolicyBetaList>> BetaLists { get; private set; } = null!;
+
+        /// <summary>
         /// Describe.
         /// </summary>
         [Output("description")]
@@ -93,6 +99,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// </summary>
         [Output("internalUuid")]
         public Output<int> InternalUuid { get; private set; } = null!;
+
+        /// <summary>
+        /// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
+        [Output("paramTemplateId")]
+        public Output<string> ParamTemplateId { get; private set; } = null!;
+
+        /// <summary>
+        /// Parameter template Name. Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
+        [Output("paramTemplateName")]
+        public Output<string> ParamTemplateName { get; private set; } = null!;
 
         /// <summary>
         /// The port for the access control policy. Value: -1/-1: All ports; 80: port 80.
@@ -244,6 +262,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
 
     public sealed class VpcPolicyState : Pulumi.ResourceArgs
     {
+        [Input("betaLists")]
+        private InputList<Inputs.VpcPolicyBetaListGetArgs>? _betaLists;
+
+        /// <summary>
+        /// Beta mission details. Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
+        public InputList<Inputs.VpcPolicyBetaListGetArgs> BetaLists
+        {
+            get => _betaLists ?? (_betaLists = new InputList<Inputs.VpcPolicyBetaListGetArgs>());
+            set => _betaLists = value;
+        }
+
         /// <summary>
         /// Describe.
         /// </summary>
@@ -285,6 +315,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// </summary>
         [Input("internalUuid")]
         public Input<int>? InternalUuid { get; set; }
+
+        /// <summary>
+        /// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
+        [Input("paramTemplateId")]
+        public Input<string>? ParamTemplateId { get; set; }
+
+        /// <summary>
+        /// Parameter template Name. Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
+        [Input("paramTemplateName")]
+        public Input<string>? ParamTemplateName { get; set; }
 
         /// <summary>
         /// The port for the access control policy. Value: -1/-1: All ports; 80: port 80.

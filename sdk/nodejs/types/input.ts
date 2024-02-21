@@ -236,6 +236,7 @@ export namespace Antiddos {
          */
         sPortStart: pulumi.Input<number>;
     }
+
 }
 
 export namespace ApiGateway {
@@ -908,20 +909,10 @@ export namespace ApiGateway {
          */
         serviceName?: pulumi.Input<string>;
     }
+
 }
 
 export namespace As {
-    export interface GetInstancesFilter {
-        /**
-         * Fields to be filtered. Valid names: `instance-id`: Filters by instance ID, `auto-scaling-group-id`: Filter by scaling group ID.
-         */
-        name: string;
-        /**
-         * Value of the field.
-         */
-        values: string[];
-    }
-
     export interface GetInstancesFilterArgs {
         /**
          * Fields to be filtered. Valid names: `instance-id`: Filters by instance ID, `auto-scaling-group-id`: Filter by scaling group ID.
@@ -931,6 +922,17 @@ export namespace As {
          * Value of the field.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetInstancesFilter {
+        /**
+         * Fields to be filtered. Valid names: `instance-id`: Filters by instance ID, `auto-scaling-group-id`: Filter by scaling group ID.
+         */
+        name: string;
+        /**
+         * Value of the field.
+         */
+        values: string[];
     }
 
     export interface LoadBalancerForwardLoadBalancer {
@@ -1016,6 +1018,7 @@ export namespace As {
          */
         weight: pulumi.Input<number>;
     }
+
 }
 
 export namespace Audit {
@@ -1131,17 +1134,6 @@ export namespace Cbs {
 }
 
 export namespace Ccn {
-    export interface GetCrossBorderRegionBandwidthLimitsFilter {
-        /**
-         * attribute name.
-         */
-        name: string;
-        /**
-         * Value of the field.
-         */
-        values: string[];
-    }
-
     export interface GetCrossBorderRegionBandwidthLimitsFilterArgs {
         /**
          * attribute name.
@@ -1151,6 +1143,17 @@ export namespace Ccn {
          * Value of the field.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetCrossBorderRegionBandwidthLimitsFilter {
+        /**
+         * attribute name.
+         */
+        name: string;
+        /**
+         * Value of the field.
+         */
+        values: string[];
     }
 
     export interface InstancesAcceptAttachInstance {
@@ -2300,6 +2303,13 @@ export namespace Cfw {
          */
         zoneSets: pulumi.Input<pulumi.Input<string>[]>;
     }
+
+    export interface VpcPolicyBetaList {
+        lastTime?: pulumi.Input<string>;
+        taskId?: pulumi.Input<number>;
+        taskName?: pulumi.Input<string>;
+    }
+
 }
 
 export namespace Chdfs {
@@ -3296,7 +3306,6 @@ export namespace Ci {
          */
         transparency: pulumi.Input<string>;
     }
-
 }
 
 export namespace Ckafka {
@@ -6832,17 +6841,6 @@ export namespace Ckafka {
         rowContent: pulumi.Input<string>;
     }
 
-    export interface GetInstancesFilter {
-        /**
-         * The field that needs to be filtered.
-         */
-        name: string;
-        /**
-         * The filtered value of the field.
-         */
-        values: string[];
-    }
-
     export interface GetInstancesFilterArgs {
         /**
          * The field that needs to be filtered.
@@ -6852,6 +6850,17 @@ export namespace Ckafka {
          * The filtered value of the field.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetInstancesFilter {
+        /**
+         * The field that needs to be filtered.
+         */
+        name: string;
+        /**
+         * The filtered value of the field.
+         */
+        values: string[];
     }
 
     export interface InstanceConfig {
@@ -6972,17 +6981,6 @@ export namespace Clb {
         functionQualifierType?: pulumi.Input<string>;
     }
 
-    export interface GetClusterResourcesFilterArgs {
-        /**
-         * Filter name.
-         */
-        name: pulumi.Input<string>;
-        /**
-         * Filter values.
-         */
-        values: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetClusterResourcesFilter {
         /**
          * Filter name.
@@ -6992,6 +6990,17 @@ export namespace Clb {
          * Filter values.
          */
         values: string[];
+    }
+
+    export interface GetClusterResourcesFilterArgs {
+        /**
+         * Filter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter values.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetCrossTargetsFilterArgs {
@@ -7016,17 +7025,6 @@ export namespace Clb {
         values: string[];
     }
 
-    export interface GetExclusiveClustersFilter {
-        /**
-         * Filter name.
-         */
-        name: string;
-        /**
-         * Filter value array.
-         */
-        values: string[];
-    }
-
     export interface GetExclusiveClustersFilterArgs {
         /**
          * Filter name.
@@ -7038,7 +7036,7 @@ export namespace Clb {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetInstanceDetailFilter {
+    export interface GetExclusiveClustersFilter {
         /**
          * Filter name.
          */
@@ -7058,6 +7056,17 @@ export namespace Clb {
          * Filter value array.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetInstanceDetailFilter {
+        /**
+         * Filter name.
+         */
+        name: string;
+        /**
+         * Filter value array.
+         */
+        values: string[];
     }
 
     export interface GetListenersByTargetsBackendArgs {
@@ -8915,6 +8924,7 @@ export namespace Css {
          */
         outputStreamWidth: pulumi.Input<number>;
     }
+
 }
 
 export namespace Cvm {
@@ -9596,7 +9606,6 @@ export namespace Cvm {
          */
         renewFlag?: pulumi.Input<string>;
     }
-
 }
 
 export namespace Cwp {
@@ -9803,17 +9812,6 @@ export namespace Cynosdb {
         timestamp?: pulumi.Input<string>;
     }
 
-    export interface GetAccountAllGrantPrivilegesAccountArgs {
-        /**
-         * Account.
-         */
-        accountName: pulumi.Input<string>;
-        /**
-         * Host, default `%`.
-         */
-        host?: pulumi.Input<string>;
-    }
-
     export interface GetAccountAllGrantPrivilegesAccount {
         /**
          * Account.
@@ -9825,59 +9823,15 @@ export namespace Cynosdb {
         host?: string;
     }
 
-    export interface GetAuditLogsFilterArgs {
+    export interface GetAccountAllGrantPrivilegesAccountArgs {
         /**
-         * Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
+         * Account.
          */
-        affectRows?: pulumi.Input<number>;
+        accountName: pulumi.Input<string>;
         /**
-         * Database name.
+         * Host, default `%`.
          */
-        dbNames?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * Execution time. Unit: ms. Indicates audit logs with a filter execution time greater than this value.
-         */
-        execTime?: pulumi.Input<number>;
-        /**
-         * Client address.
-         */
-        hosts?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * Audit policy name.
-         */
-        policyNames?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * Returns the number of rows.
-         */
-        sentRows?: pulumi.Input<number>;
-        /**
-         * SQL statement. Supports fuzzy matching.
-         */
-        sql?: pulumi.Input<string>;
-        /**
-         * SQL type. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
-         */
-        sqlType?: pulumi.Input<string>;
-        /**
-         * SQL type. Supports simultaneous querying of multiple types. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
-         */
-        sqlTypes?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * SQL statement. Supports passing multiple SQL statements.
-         */
-        sqls?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * Table name.
-         */
-        tableNames?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * Thread ID.
-         */
-        threadIds?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * User name.
-         */
-        users?: pulumi.Input<pulumi.Input<string>[]>;
+        host?: pulumi.Input<string>;
     }
 
     export interface GetAuditLogsFilter {
@@ -9935,27 +9889,59 @@ export namespace Cynosdb {
         users?: string[];
     }
 
-    export interface GetProxyNodeFilter {
+    export interface GetAuditLogsFilterArgs {
         /**
-         * Exact match or not.
+         * Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
          */
-        exactMatch?: boolean;
+        affectRows?: pulumi.Input<number>;
         /**
-         * Search Fields. Supported: Status, ProxyNodeId, ClusterId.
+         * Database name.
          */
-        name?: string;
+        dbNames?: pulumi.Input<pulumi.Input<string>[]>;
         /**
-         * Search String.
+         * Execution time. Unit: ms. Indicates audit logs with a filter execution time greater than this value.
          */
-        names: string[];
+        execTime?: pulumi.Input<number>;
         /**
-         * Operator.
+         * Client address.
          */
-        operator?: string;
+        hosts?: pulumi.Input<pulumi.Input<string>[]>;
         /**
-         * Search String.
+         * Audit policy name.
          */
-        values: string[];
+        policyNames?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Returns the number of rows.
+         */
+        sentRows?: pulumi.Input<number>;
+        /**
+         * SQL statement. Supports fuzzy matching.
+         */
+        sql?: pulumi.Input<string>;
+        /**
+         * SQL type. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+         */
+        sqlType?: pulumi.Input<string>;
+        /**
+         * SQL type. Supports simultaneous querying of multiple types. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+         */
+        sqlTypes?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * SQL statement. Supports passing multiple SQL statements.
+         */
+        sqls?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Table name.
+         */
+        tableNames?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Thread ID.
+         */
+        threadIds?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * User name.
+         */
+        users?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetProxyNodeFilterArgs {
@@ -9979,6 +9965,29 @@ export namespace Cynosdb {
          * Search String.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetProxyNodeFilter {
+        /**
+         * Exact match or not.
+         */
+        exactMatch?: boolean;
+        /**
+         * Search Fields. Supported: Status, ProxyNodeId, ClusterId.
+         */
+        name?: string;
+        /**
+         * Search String.
+         */
+        names: string[];
+        /**
+         * Operator.
+         */
+        operator?: string;
+        /**
+         * Search String.
+         */
+        values: string[];
     }
 
     export interface InstanceParamInstanceParamList {
@@ -10062,6 +10071,7 @@ export namespace Cynosdb {
          */
         oldTable: pulumi.Input<string>;
     }
+
 }
 
 export namespace Dayu {
@@ -10825,21 +10835,22 @@ export namespace Dayu {
         source: pulumi.Input<string>;
         weight: pulumi.Input<number>;
     }
+
 }
 
 export namespace Dbbrain {
-    export interface GetSlowLogTopSqlsSchemaList {
-        /**
-         * DB name.
-         */
-        schema: string;
-    }
-
     export interface GetSlowLogTopSqlsSchemaListArgs {
         /**
          * DB name.
          */
         schema: pulumi.Input<string>;
+    }
+
+    export interface GetSlowLogTopSqlsSchemaList {
+        /**
+         * DB name.
+         */
+        schema: string;
     }
 
     export interface ModifyDiagDbInstanceOperationInstanceConfs {
@@ -11022,21 +11033,6 @@ export namespace Dcdb {
         value: pulumi.Input<string>;
     }
 
-    export interface GetUpgradePriceAddShardConfigArgs {
-        /**
-         * The number of new shards.
-         */
-        shardCount: pulumi.Input<number>;
-        /**
-         * Shard memory size in GB.
-         */
-        shardMemory: pulumi.Input<number>;
-        /**
-         * Shard storage capacity in GB.
-         */
-        shardStorage: pulumi.Input<number>;
-    }
-
     export interface GetUpgradePriceAddShardConfig {
         /**
          * The number of new shards.
@@ -11050,6 +11046,21 @@ export namespace Dcdb {
          * Shard storage capacity in GB.
          */
         shardStorage: number;
+    }
+
+    export interface GetUpgradePriceAddShardConfigArgs {
+        /**
+         * The number of new shards.
+         */
+        shardCount: pulumi.Input<number>;
+        /**
+         * Shard memory size in GB.
+         */
+        shardMemory: pulumi.Input<number>;
+        /**
+         * Shard storage capacity in GB.
+         */
+        shardStorage: pulumi.Input<number>;
     }
 
     export interface GetUpgradePriceExpandShardConfig {
@@ -11335,17 +11346,6 @@ export namespace Dlc {
         view?: pulumi.Input<string>;
     }
 
-    export interface GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArgs {
-        /**
-         * Configuration item.
-         */
-        configItem: pulumi.Input<string>;
-        /**
-         * Configuration value.
-         */
-        configValue: pulumi.Input<string>;
-    }
-
     export interface GetCheckDataEngineConfigPairsValidityDataEngineConfigPair {
         /**
          * Configuration item.
@@ -11357,15 +11357,15 @@ export namespace Dlc {
         configValue: string;
     }
 
-    export interface GetDescribeUserInfoFilterArgs {
+    export interface GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArgs {
         /**
-         * Attribute name. If there are multiple Filters, the relationship between Filters is a logical OR (OR) relationship.
+         * Configuration item.
          */
-        name: pulumi.Input<string>;
+        configItem: pulumi.Input<string>;
         /**
-         * Attribute value, if there are multiple Values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+         * Configuration value.
          */
-        values: pulumi.Input<pulumi.Input<string>[]>;
+        configValue: pulumi.Input<string>;
     }
 
     export interface GetDescribeUserInfoFilter {
@@ -11379,15 +11379,15 @@ export namespace Dlc {
         values: string[];
     }
 
-    export interface GetDescribeWorkGroupInfoFilter {
+    export interface GetDescribeUserInfoFilterArgs {
         /**
-         * Attribute name. If there are multiple Filters, the relationship between filters is a logical or (OR) relationship.
+         * Attribute name. If there are multiple Filters, the relationship between Filters is a logical OR (OR) relationship.
          */
-        name: string;
+        name: pulumi.Input<string>;
         /**
-         * Attribute value, if there are multiple values in the same filter, the relationship between values under the same filter is a logical or relationship.
+         * Attribute value, if there are multiple Values in the same filter, the relationship between values under the same filter is a logical OR relationship.
          */
-        values: string[];
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetDescribeWorkGroupInfoFilterArgs {
@@ -11399,6 +11399,17 @@ export namespace Dlc {
          * Attribute value, if there are multiple values in the same filter, the relationship between values under the same filter is a logical or relationship.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetDescribeWorkGroupInfoFilter {
+        /**
+         * Attribute name. If there are multiple Filters, the relationship between filters is a logical or (OR) relationship.
+         */
+        name: string;
+        /**
+         * Attribute value, if there are multiple values in the same filter, the relationship between values under the same filter is a logical or relationship.
+         */
+        values: string[];
     }
 
     export interface UpdateRowFilterOperationPolicy {
@@ -11501,6 +11512,7 @@ export namespace Dlc {
          */
         executorSize?: pulumi.Input<string>;
     }
+
 }
 
 export namespace Dnats {
@@ -12488,6 +12500,7 @@ export namespace Dts {
          */
         tagValue?: pulumi.Input<string>;
     }
+
 }
 
 export namespace Eb {
@@ -12681,17 +12694,6 @@ export namespace Eb {
         valueType: pulumi.Input<string>;
     }
 
-    export interface GetBusFilterArgs {
-        /**
-         * The name of the filter key.
-         */
-        name: pulumi.Input<string>;
-        /**
-         * One or more filter values.
-         */
-        values: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetBusFilter {
         /**
          * The name of the filter key.
@@ -12701,6 +12703,17 @@ export namespace Eb {
          * One or more filter values.
          */
         values: string[];
+    }
+
+    export interface GetBusFilterArgs {
+        /**
+         * The name of the filter key.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * One or more filter values.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetSearchFilter {
@@ -12894,7 +12907,6 @@ export namespace Elasticsearch {
          */
         workers: pulumi.Input<number>;
     }
-
 }
 
 export namespace Emr {
@@ -13281,7 +13293,7 @@ export namespace Kubernetes {
          */
         diskSize?: pulumi.Input<number>;
         /**
-         * Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+         * Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
          */
         diskType?: pulumi.Input<string>;
         /**
@@ -13366,7 +13378,7 @@ export namespace Kubernetes {
          */
         diskSize?: pulumi.Input<number>;
         /**
-         * Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+         * Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
          */
         diskType?: pulumi.Input<string>;
         /**
@@ -14031,7 +14043,7 @@ export namespace Kubernetes {
          */
         systemDiskSize?: pulumi.Input<number>;
         /**
-         * Type of a CVM disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`.
+         * Type of a CVM disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`. Default is `CLOUD_PREMIUM`.
          */
         systemDiskType?: pulumi.Input<string>;
     }
@@ -14046,7 +14058,7 @@ export namespace Kubernetes {
          */
         diskSize?: pulumi.Input<number>;
         /**
-         * Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+         * Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
          */
         diskType?: pulumi.Input<string>;
         /**
@@ -14112,7 +14124,7 @@ export namespace Kubernetes {
          */
         diskSize?: pulumi.Input<number>;
         /**
-         * Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+         * Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
          */
         diskType?: pulumi.Input<string>;
         /**
@@ -14508,17 +14520,6 @@ export namespace Lighthouse {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetDiskConfigFilter {
-        /**
-         * Field to be filtered.
-         */
-        name: string;
-        /**
-         * Filter value of field.
-         */
-        values: string[];
-    }
-
     export interface GetDiskConfigFilterArgs {
         /**
          * Field to be filtered.
@@ -14530,13 +14531,13 @@ export namespace Lighthouse {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetDisksFilter {
+    export interface GetDiskConfigFilter {
         /**
-         * Fields to be filtered. Valid names: `disk-id`: Filters by disk id; `instance-id`: Filter by instance id; `disk-name`: Filter by disk name; `zone`: Filter by zone; `disk-usage`: Filter by disk usage(Values: `SYSTEM_DISK` or `DATA_DISK`); `disk-state`: Filter by disk state.
+         * Field to be filtered.
          */
         name: string;
         /**
-         * Value of the field.
+         * Filter value of field.
          */
         values: string[];
     }
@@ -14550,6 +14551,17 @@ export namespace Lighthouse {
          * Value of the field.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetDisksFilter {
+        /**
+         * Fields to be filtered. Valid names: `disk-id`: Filters by disk id; `instance-id`: Filter by instance id; `disk-name`: Filter by disk name; `zone`: Filter by zone; `disk-usage`: Filter by disk usage(Values: `SYSTEM_DISK` or `DATA_DISK`); `disk-state`: Filter by disk state.
+         */
+        name: string;
+        /**
+         * Value of the field.
+         */
+        values: string[];
     }
 
     export interface GetModifyInstanceBundleFilterArgs {
@@ -14574,17 +14586,6 @@ export namespace Lighthouse {
         values: string[];
     }
 
-    export interface GetResetInstanceBlueprintFilter {
-        /**
-         * Field to be filtered.
-         */
-        name: string;
-        /**
-         * Filter value of field.
-         */
-        values: string[];
-    }
-
     export interface GetResetInstanceBlueprintFilterArgs {
         /**
          * Field to be filtered.
@@ -14594,6 +14595,17 @@ export namespace Lighthouse {
          * Filter value of field.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetResetInstanceBlueprintFilter {
+        /**
+         * Field to be filtered.
+         */
+        name: string;
+        /**
+         * Filter value of field.
+         */
+        values: string[];
     }
 
     export interface InstanceContainer {
@@ -14708,6 +14720,7 @@ export namespace Lighthouse {
          */
         renewFlag?: pulumi.Input<string>;
     }
+
 }
 
 export namespace Mariadb {
@@ -14902,7 +14915,6 @@ export namespace Mongodb {
          */
         standbyInstanceRegion?: pulumi.Input<string>;
     }
-
 }
 
 export namespace Monitor {
@@ -15198,17 +15210,6 @@ export namespace Monitor {
         startTime?: pulumi.Input<number>;
     }
 
-    export interface GetAlarmHistoryNamespace {
-        /**
-         * Monitor type.
-         */
-        monitorType: string;
-        /**
-         * Policy type.
-         */
-        namespace: string;
-    }
-
     export interface GetAlarmHistoryNamespaceArgs {
         /**
          * Monitor type.
@@ -15220,15 +15221,15 @@ export namespace Monitor {
         namespace: pulumi.Input<string>;
     }
 
-    export interface GetAlarmPolicyTriggerTaskArgs {
+    export interface GetAlarmHistoryNamespace {
         /**
-         * Configuration information in JSON format, such as {Key1:Value1,Key2:Value2}Note: this field may return null, indicating that no valid values can be obtained.
+         * Monitor type.
          */
-        taskConfig: pulumi.Input<string>;
+        monitorType: string;
         /**
-         * Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
+         * Policy type.
          */
-        type: pulumi.Input<string>;
+        namespace: string;
     }
 
     export interface GetAlarmPolicyTriggerTask {
@@ -15242,15 +15243,15 @@ export namespace Monitor {
         type: string;
     }
 
-    export interface GetDataDimensionArgs {
+    export interface GetAlarmPolicyTriggerTaskArgs {
         /**
-         * Instance dimension name, eg: `InstanceId` for cvm.
+         * Configuration information in JSON format, such as {Key1:Value1,Key2:Value2}Note: this field may return null, indicating that no valid values can be obtained.
          */
-        name: pulumi.Input<string>;
+        taskConfig: pulumi.Input<string>;
         /**
-         * Instance dimension value, eg: `ins-j0hk02zo` for cvm.
+         * Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
          */
-        value: pulumi.Input<string>;
+        type: pulumi.Input<string>;
     }
 
     export interface GetDataDimension {
@@ -15264,15 +15265,15 @@ export namespace Monitor {
         value: string;
     }
 
-    export interface GetProductEventDimension {
+    export interface GetDataDimensionArgs {
         /**
-         * Instance dimension name, eg: `deviceWanIp` for internet ip.
+         * Instance dimension name, eg: `InstanceId` for cvm.
          */
-        name?: string;
+        name: pulumi.Input<string>;
         /**
-         * Instance dimension value, eg: `119.119.119.119` for internet ip.
+         * Instance dimension value, eg: `ins-j0hk02zo` for cvm.
          */
-        value?: string;
+        value: pulumi.Input<string>;
     }
 
     export interface GetProductEventDimensionArgs {
@@ -15284,6 +15285,17 @@ export namespace Monitor {
          * Instance dimension value, eg: `119.119.119.119` for internet ip.
          */
         value?: pulumi.Input<string>;
+    }
+
+    export interface GetProductEventDimension {
+        /**
+         * Instance dimension name, eg: `deviceWanIp` for internet ip.
+         */
+        name?: string;
+        /**
+         * Instance dimension value, eg: `119.119.119.119` for internet ip.
+         */
+        value?: string;
     }
 
     export interface GetStatisticDataCondition {
@@ -15315,6 +15327,67 @@ export namespace Monitor {
          */
         dimensionsJson: pulumi.Input<string>;
         uniqueId?: pulumi.Input<string>;
+    }
+
+    export interface TmpAlertGroupCustomReceiver {
+        /**
+         * Time ranges which allow alert message send.
+         */
+        allowedTimeRanges?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpAlertGroupCustomReceiverAllowedTimeRange>[]>;
+        /**
+         * Only effect when alertmanager in user cluster, this cluster id.
+         */
+        clusterId?: pulumi.Input<string>;
+        /**
+         * Only effect when alertmanager in user cluster, this cluster type (tke|eks|tdcc).
+         */
+        clusterType?: pulumi.Input<string>;
+        /**
+         * Custom receiver type, webhook|alertmanager.
+         */
+        type?: pulumi.Input<string>;
+        /**
+         * Custom receiver address, can be accessed by process in prometheus instance subnet.
+         */
+        url?: pulumi.Input<string>;
+    }
+
+    export interface TmpAlertGroupCustomReceiverAllowedTimeRange {
+        /**
+         * Time range end, seconds since 0 o'clock.
+         */
+        end?: pulumi.Input<string>;
+        /**
+         * Time range start, seconds since 0 o'clock.
+         */
+        start?: pulumi.Input<string>;
+    }
+
+    export interface TmpAlertGroupRule {
+        /**
+         * Annotation of alert rule. `summary`, `description` is special annotation in prometheus, mapping `Alarm Object`, `Alarm Information` in alarm message.
+         */
+        annotations?: pulumi.Input<{[key: string]: any}>;
+        /**
+         * Rule alarm duration.
+         */
+        duration?: pulumi.Input<string>;
+        /**
+         * Prometheus alert expression.
+         */
+        expr?: pulumi.Input<string>;
+        /**
+         * Labels of alert rule.
+         */
+        labels?: pulumi.Input<{[key: string]: any}>;
+        /**
+         * Alert rule name.
+         */
+        ruleName?: pulumi.Input<string>;
+        /**
+         * Rule state. `2`-enable, `3`-disable, default `2`.
+         */
+        state?: pulumi.Input<number>;
     }
 
     export interface TmpAlertRuleAnnotation {
@@ -15850,7 +15923,6 @@ export namespace Monitor {
          */
         templateId?: pulumi.Input<string>;
     }
-
 }
 
 export namespace Mps {
@@ -16700,21 +16772,6 @@ export namespace Mps {
         urlInputInfo?: inputs.Mps.GetMediaMetaDataInputInfoUrlInputInfo;
     }
 
-    export interface GetMediaMetaDataInputInfoCosInputInfoArgs {
-        /**
-         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
-         */
-        bucket: pulumi.Input<string>;
-        /**
-         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
-         */
-        object: pulumi.Input<string>;
-        /**
-         * The region of the COS bucket, such as `ap-chongqing`.
-         */
-        region: pulumi.Input<string>;
-    }
-
     export interface GetMediaMetaDataInputInfoCosInputInfo {
         /**
          * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
@@ -16728,6 +16785,21 @@ export namespace Mps {
          * The region of the COS bucket, such as `ap-chongqing`.
          */
         region: string;
+    }
+
+    export interface GetMediaMetaDataInputInfoCosInputInfoArgs {
+        /**
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         */
+        bucket: pulumi.Input<string>;
+        /**
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         */
+        object: pulumi.Input<string>;
+        /**
+         * The region of the COS bucket, such as `ap-chongqing`.
+         */
+        region: pulumi.Input<string>;
     }
 
     export interface GetMediaMetaDataInputInfoS3InputInfoArgs {
@@ -22985,6 +23057,7 @@ export namespace Mysql {
          */
         tableName: pulumi.Input<string>;
     }
+
 }
 
 export namespace Nat {
@@ -23013,17 +23086,6 @@ export namespace Oceanus {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetSystemResourceFilterArgs {
-        /**
-         * Field to be filtered.
-         */
-        name: pulumi.Input<string>;
-        /**
-         * Filter values for the field.
-         */
-        values: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetSystemResourceFilter {
         /**
          * Field to be filtered.
@@ -23035,9 +23097,9 @@ export namespace Oceanus {
         values: string[];
     }
 
-    export interface GetTreeJobsFilterArgs {
+    export interface GetSystemResourceFilterArgs {
         /**
-         * Field to be filtered. Can only be set `Zone` or `JobType` or `JobStatus`.
+         * Field to be filtered.
          */
         name: pulumi.Input<string>;
         /**
@@ -23055,6 +23117,17 @@ export namespace Oceanus {
          * Filter values for the field.
          */
         values: string[];
+    }
+
+    export interface GetTreeJobsFilterArgs {
+        /**
+         * Field to be filtered. Can only be set `Zone` or `JobType` or `JobStatus`.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter values for the field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetWorkSpacesFilterArgs {
@@ -23382,35 +23455,19 @@ export namespace Organization {
         name?: pulumi.Input<string>;
     }
 
+    export interface OrgShareUnitMemberMember {
+        /**
+         * Member uin.
+         */
+        shareMemberUin: pulumi.Input<number>;
+    }
+
 }
 
 export namespace Placement {
 }
 
 export namespace Postgresql {
-    export interface GetBackupDownloadUrlsBackupDownloadRestriction {
-        /**
-         * Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
-         */
-        ipRestrictionEffect?: string;
-        /**
-         * Whether it is allowed to download IP list of the backup files.
-         */
-        ipSets?: string[];
-        /**
-         * Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
-         */
-        restrictionType?: string;
-        /**
-         * Whether it is allowed to download the VPC ID list of the backup files.
-         */
-        vpcIdSets?: string[];
-        /**
-         * Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
-         */
-        vpcRestrictionEffect?: string;
-    }
-
     export interface GetBackupDownloadUrlsBackupDownloadRestrictionArgs {
         /**
          * Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
@@ -23434,15 +23491,27 @@ export namespace Postgresql {
         vpcRestrictionEffect?: pulumi.Input<string>;
     }
 
-    export interface GetBaseBackupsFilterArgs {
+    export interface GetBackupDownloadUrlsBackupDownloadRestriction {
         /**
-         * Filter name.
+         * Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
          */
-        name?: pulumi.Input<string>;
+        ipRestrictionEffect?: string;
         /**
-         * One or more filter values.
+         * Whether it is allowed to download IP list of the backup files.
          */
-        values?: pulumi.Input<pulumi.Input<string>[]>;
+        ipSets?: string[];
+        /**
+         * Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+         */
+        restrictionType?: string;
+        /**
+         * Whether it is allowed to download the VPC ID list of the backup files.
+         */
+        vpcIdSets?: string[];
+        /**
+         * Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+         */
+        vpcRestrictionEffect?: string;
     }
 
     export interface GetBaseBackupsFilter {
@@ -23454,6 +23523,17 @@ export namespace Postgresql {
          * One or more filter values.
          */
         values?: string[];
+    }
+
+    export interface GetBaseBackupsFilterArgs {
+        /**
+         * Filter name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * One or more filter values.
+         */
+        values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetLogBackupsFilter {
@@ -23565,17 +23645,6 @@ export namespace Postgresql {
 }
 
 export namespace PrivateDns {
-    export interface GetRecordsFilterArgs {
-        /**
-         * Parameter name.
-         */
-        name: pulumi.Input<string>;
-        /**
-         * Parameter values.
-         */
-        values: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetRecordsFilter {
         /**
          * Parameter name.
@@ -23585,6 +23654,17 @@ export namespace PrivateDns {
          * Parameter values.
          */
         values: string[];
+    }
+
+    export interface GetRecordsFilterArgs {
+        /**
+         * Parameter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Parameter values.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface ZoneAccountVpcSet {
@@ -23653,6 +23733,7 @@ export namespace PrivateDns {
          */
         uniqVpcId: pulumi.Input<string>;
     }
+
 }
 
 export namespace Projects {
@@ -24224,7 +24305,6 @@ export namespace Pts {
          */
         token?: pulumi.Input<string>;
     }
-
 }
 
 export namespace Redis {
@@ -24789,7 +24869,6 @@ export namespace Ses {
          */
         text?: pulumi.Input<string>;
     }
-
 }
 
 export namespace Sqlserver {
@@ -24978,6 +25057,7 @@ export namespace Sqlserver {
          */
         threshold: pulumi.Input<number>;
     }
+
 }
 
 export namespace Ssl {
@@ -24996,17 +25076,6 @@ export namespace Ssl {
         dvAuthVerifyType?: pulumi.Input<string>;
     }
 
-    export interface GetDescribeHostApiGatewayInstanceListFilter {
-        /**
-         * Filter parameter key.
-         */
-        filterKey: string;
-        /**
-         * Filter parameter value.
-         */
-        filterValue: string;
-    }
-
     export interface GetDescribeHostApiGatewayInstanceListFilterArgs {
         /**
          * Filter parameter key.
@@ -25018,15 +25087,15 @@ export namespace Ssl {
         filterValue: pulumi.Input<string>;
     }
 
-    export interface GetDescribeHostCdnInstanceListFilterArgs {
+    export interface GetDescribeHostApiGatewayInstanceListFilter {
         /**
          * Filter parameter key.
          */
-        filterKey: pulumi.Input<string>;
+        filterKey: string;
         /**
          * Filter parameter value.
          */
-        filterValue: pulumi.Input<string>;
+        filterValue: string;
     }
 
     export interface GetDescribeHostCdnInstanceListFilter {
@@ -25038,6 +25107,17 @@ export namespace Ssl {
          * Filter parameter value.
          */
         filterValue: string;
+    }
+
+    export interface GetDescribeHostCdnInstanceListFilterArgs {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: pulumi.Input<string>;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: pulumi.Input<string>;
     }
 
     export interface GetDescribeHostClbInstanceListFilter {
@@ -25106,17 +25186,6 @@ export namespace Ssl {
         filterValue: string;
     }
 
-    export interface GetDescribeHostLighthouseInstanceListFilterArgs {
-        /**
-         * Filter parameter key.
-         */
-        filterKey: pulumi.Input<string>;
-        /**
-         * Filter parameter value.
-         */
-        filterValue: pulumi.Input<string>;
-    }
-
     export interface GetDescribeHostLighthouseInstanceListFilter {
         /**
          * Filter parameter key.
@@ -25126,6 +25195,17 @@ export namespace Ssl {
          * Filter parameter value.
          */
         filterValue: string;
+    }
+
+    export interface GetDescribeHostLighthouseInstanceListFilterArgs {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: pulumi.Input<string>;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: pulumi.Input<string>;
     }
 
     export interface GetDescribeHostLiveInstanceListFilter {
@@ -25150,17 +25230,6 @@ export namespace Ssl {
         filterValue: pulumi.Input<string>;
     }
 
-    export interface GetDescribeHostTeoInstanceListFilter {
-        /**
-         * Filter parameter key.
-         */
-        filterKey: string;
-        /**
-         * Filter parameter value.
-         */
-        filterValue: string;
-    }
-
     export interface GetDescribeHostTeoInstanceListFilterArgs {
         /**
          * Filter parameter key.
@@ -25170,6 +25239,17 @@ export namespace Ssl {
          * Filter parameter value.
          */
         filterValue: pulumi.Input<string>;
+    }
+
+    export interface GetDescribeHostTeoInstanceListFilter {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: string;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: string;
     }
 
     export interface GetDescribeHostTkeInstanceListFilter {
@@ -25194,17 +25274,6 @@ export namespace Ssl {
         filterValue: pulumi.Input<string>;
     }
 
-    export interface GetDescribeHostVodInstanceListFilter {
-        /**
-         * Filter parameter key.
-         */
-        filterKey: string;
-        /**
-         * Filter parameter value.
-         */
-        filterValue: string;
-    }
-
     export interface GetDescribeHostVodInstanceListFilterArgs {
         /**
          * Filter parameter key.
@@ -25214,6 +25283,17 @@ export namespace Ssl {
          * Filter parameter value.
          */
         filterValue: pulumi.Input<string>;
+    }
+
+    export interface GetDescribeHostVodInstanceListFilter {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: string;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: string;
     }
 
     export interface GetDescribeHostWafInstanceListFilter {
@@ -25881,21 +25961,9 @@ export namespace Tcm {
          */
         address: pulumi.Input<string>;
     }
-
 }
 
 export namespace Tcmq {
-    export interface GetQueueFilterArgs {
-        /**
-         * Filter parameter name.
-         */
-        name?: pulumi.Input<string>;
-        /**
-         * Value.
-         */
-        values?: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetQueueFilter {
         /**
          * Filter parameter name.
@@ -25905,6 +25973,17 @@ export namespace Tcmq {
          * Value.
          */
         values?: string[];
+    }
+
+    export interface GetQueueFilterArgs {
+        /**
+         * Filter parameter name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Value.
+         */
+        values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetTopicFilter {
@@ -26118,6 +26197,7 @@ export namespace Tcr {
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
+
 }
 
 export namespace Tdcpg {
@@ -26146,17 +26226,6 @@ export namespace Tdmq {
         values?: string[];
     }
 
-    export interface GetPublishersFilter {
-        /**
-         * The name of the filter parameter.
-         */
-        name?: string;
-        /**
-         * value.
-         */
-        values?: string[];
-    }
-
     export interface GetPublishersFilterArgs {
         /**
          * The name of the filter parameter.
@@ -26166,6 +26235,17 @@ export namespace Tdmq {
          * value.
          */
         values?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetPublishersFilter {
+        /**
+         * The name of the filter parameter.
+         */
+        name?: string;
+        /**
+         * value.
+         */
+        values?: string[];
     }
 
     export interface GetPublishersSort {
@@ -26253,7 +26333,6 @@ export namespace Tdmq {
          */
         vpcId: pulumi.Input<string>;
     }
-
 }
 
 export namespace Tem {
@@ -27321,7 +27400,6 @@ export namespace Teo {
          */
         timeout?: pulumi.Input<number>;
     }
-
 }
 
 export namespace Trocket {
@@ -27871,17 +27949,6 @@ export namespace Tse {
         weight: pulumi.Input<number>;
     }
 
-    export interface GetGatewayCertificatesFilterArgs {
-        /**
-         * Filter name.
-         */
-        key?: pulumi.Input<string>;
-        /**
-         * Filter value.
-         */
-        value?: pulumi.Input<string>;
-    }
-
     export interface GetGatewayCertificatesFilter {
         /**
          * Filter name.
@@ -27891,6 +27958,17 @@ export namespace Tse {
          * Filter value.
          */
         value?: string;
+    }
+
+    export interface GetGatewayCertificatesFilterArgs {
+        /**
+         * Filter name.
+         */
+        key?: pulumi.Input<string>;
+        /**
+         * Filter value.
+         */
+        value?: pulumi.Input<string>;
     }
 
     export interface GetGatewayServicesFilter {
@@ -27937,17 +28015,6 @@ export namespace Tse {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetGroupsFilterArgs {
-        /**
-         * filter name.
-         */
-        name: pulumi.Input<string>;
-        /**
-         * filter values.
-         */
-        values: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetGroupsFilter {
         /**
          * filter name.
@@ -27957,6 +28024,17 @@ export namespace Tse {
          * filter values.
          */
         values: string[];
+    }
+
+    export interface GetGroupsFilterArgs {
+        /**
+         * filter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * filter values.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface InstanceEngineRegionInfo {
@@ -27988,7 +28066,6 @@ export namespace Tse {
          */
         vpcId: pulumi.Input<string>;
     }
-
 }
 
 export namespace Tsf {
@@ -29252,7 +29329,6 @@ export namespace Vpc {
          */
         backupTime: pulumi.Input<string>;
     }
-
 }
 
 export namespace Vpn {
@@ -29381,16 +29457,16 @@ export namespace Waf {
         field: pulumi.Input<string>;
     }
 
-    export interface GetWafInfosParamArgs {
-        domainId?: pulumi.Input<string>;
-        listenerId?: pulumi.Input<string>;
-        loadBalancerId: pulumi.Input<string>;
-    }
-
     export interface GetWafInfosParam {
         domainId?: string;
         listenerId?: string;
         loadBalancerId: string;
+    }
+
+    export interface GetWafInfosParamArgs {
+        domainId?: pulumi.Input<string>;
+        listenerId?: pulumi.Input<string>;
+        loadBalancerId: pulumi.Input<string>;
     }
 
     export interface IpAccessControlItem {
@@ -29695,17 +29771,6 @@ export namespace Wedata {
         values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetDataSourceListOrderFieldArgs {
-        /**
-         * OrderFields rule.
-         */
-        direction: pulumi.Input<string>;
-        /**
-         * OrderFields name.
-         */
-        name: pulumi.Input<string>;
-    }
-
     export interface GetDataSourceListOrderField {
         /**
          * OrderFields rule.
@@ -29717,15 +29782,15 @@ export namespace Wedata {
         name: string;
     }
 
-    export interface GetDataSourceWithoutInfoFilterArgs {
+    export interface GetDataSourceListOrderFieldArgs {
         /**
-         * Filter name.
+         * OrderFields rule.
          */
-        name?: pulumi.Input<string>;
+        direction: pulumi.Input<string>;
         /**
-         * Filter value.
+         * OrderFields name.
          */
-        values?: pulumi.Input<pulumi.Input<string>[]>;
+        name: pulumi.Input<string>;
     }
 
     export interface GetDataSourceWithoutInfoFilter {
@@ -29739,15 +29804,15 @@ export namespace Wedata {
         values?: string[];
     }
 
-    export interface GetDataSourceWithoutInfoOrderFieldArgs {
+    export interface GetDataSourceWithoutInfoFilterArgs {
         /**
-         * OrderFields rule.
+         * Filter name.
          */
-        direction: pulumi.Input<string>;
+        name?: pulumi.Input<string>;
         /**
-         * OrderFields name.
+         * Filter value.
          */
-        name: pulumi.Input<string>;
+        values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetDataSourceWithoutInfoOrderField {
@@ -29759,6 +29824,17 @@ export namespace Wedata {
          * OrderFields name.
          */
         name: string;
+    }
+
+    export interface GetDataSourceWithoutInfoOrderFieldArgs {
+        /**
+         * OrderFields rule.
+         */
+        direction: pulumi.Input<string>;
+        /**
+         * OrderFields name.
+         */
+        name: pulumi.Input<string>;
     }
 
     export interface IntegrationOfflineTaskTaskInfo {

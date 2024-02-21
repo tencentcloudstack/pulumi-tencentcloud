@@ -19,128 +19,131 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		clusterCidr := "172.16.0.0/16"
-// 		if param := cfg.Get("clusterCidr"); param != "" {
-// 			clusterCidr = param
-// 		}
-// 		defaultInstanceType := "S1.SMALL1"
-// 		if param := cfg.Get("defaultInstanceType"); param != "" {
-// 			defaultInstanceType = param
-// 		}
-// 		defaultInstance, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-// 			ImageTypes: []string{
-// 				"PUBLIC_IMAGE",
-// 			},
-// 			OsName: pulumi.StringRef("centos"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZone),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Instance.GetTypes(ctx, &instance.GetTypesArgs{
-// 			Filters: []instance.GetTypesFilter{
-// 				instance.GetTypesFilter{
-// 					Name: "instance-family",
-// 					Values: []string{
-// 						"SA2",
-// 					},
-// 				},
-// 			},
-// 			CpuCoreCount: pulumi.IntRef(8),
-// 			MemorySize:   pulumi.IntRef(16),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		foo, err := Instance.NewInstance(ctx, "foo", &Instance.InstanceArgs{
-// 			InstanceName:     pulumi.String("tf-auto-test-1-1"),
-// 			AvailabilityZone: pulumi.String(availabilityZone),
-// 			ImageId:          pulumi.String(defaultInstance.Images[0].ImageId),
-// 			InstanceType:     pulumi.String(defaultInstanceType),
-// 			SystemDiskType:   pulumi.String("CLOUD_PREMIUM"),
-// 			SystemDiskSize:   pulumi.Int(50),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		managedCluster, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
-// 			VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
-// 			ClusterCidr:          pulumi.String("10.1.0.0/16"),
-// 			ClusterMaxPodNum:     pulumi.Int(32),
-// 			ClusterName:          pulumi.String("keep"),
-// 			ClusterDesc:          pulumi.String("test cluster desc"),
-// 			ClusterMaxServiceNum: pulumi.Int(32),
-// 			WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
-// 				&kubernetes.ClusterWorkerConfigArgs{
-// 					Count:                   pulumi.Int(1),
-// 					AvailabilityZone:        pulumi.String(availabilityZone),
-// 					InstanceType:            pulumi.String(defaultInstanceType),
-// 					SystemDiskType:          pulumi.String("CLOUD_SSD"),
-// 					SystemDiskSize:          pulumi.Int(60),
-// 					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 					InternetMaxBandwidthOut: pulumi.Int(100),
-// 					PublicIpAssigned:        pulumi.Bool(true),
-// 					SubnetId:                pulumi.String(vpc.InstanceLists[0].SubnetId),
-// 					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
-// 						&kubernetes.ClusterWorkerConfigDataDiskArgs{
-// 							DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 							DiskSize: pulumi.Int(50),
-// 						},
-// 					},
-// 					EnhancedSecurityService: pulumi.Bool(false),
-// 					EnhancedMonitorService:  pulumi.Bool(false),
-// 					UserData:                pulumi.String("dGVzdA=="),
-// 					Password:                pulumi.String("ZZXXccvv1212"),
-// 				},
-// 			},
-// 			ClusterDeployType: pulumi.String("MANAGED_CLUSTER"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Kubernetes.NewClusterAttachment(ctx, "testAttach", &Kubernetes.ClusterAttachmentArgs{
-// 			ClusterId:  managedCluster.ID(),
-// 			InstanceId: foo.ID(),
-// 			Password:   pulumi.String("Lo4wbdit"),
-// 			Labels: pulumi.AnyMap{
-// 				"test1": pulumi.Any("test1"),
-// 				"test2": pulumi.Any("test2"),
-// 			},
-// 			WorkerConfigOverrides: &kubernetes.ClusterAttachmentWorkerConfigOverridesArgs{
-// 				DesiredPodNum: pulumi.Int(8),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			clusterCidr := "172.16.0.0/16"
+//			if param := cfg.Get("clusterCidr"); param != "" {
+//				clusterCidr = param
+//			}
+//			defaultInstanceType := "S1.SMALL1"
+//			if param := cfg.Get("defaultInstanceType"); param != "" {
+//				defaultInstanceType = param
+//			}
+//			defaultInstance, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+//				ImageTypes: []string{
+//					"PUBLIC_IMAGE",
+//				},
+//				OsName: pulumi.StringRef("centos"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//				IsDefault:        pulumi.BoolRef(true),
+//				AvailabilityZone: pulumi.StringRef(availabilityZone),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Instance.GetTypes(ctx, &instance.GetTypesArgs{
+//				Filters: []instance.GetTypesFilter{
+//					instance.GetTypesFilter{
+//						Name: "instance-family",
+//						Values: []string{
+//							"SA2",
+//						},
+//					},
+//				},
+//				CpuCoreCount: pulumi.IntRef(8),
+//				MemorySize:   pulumi.IntRef(16),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			foo, err := Instance.NewInstance(ctx, "foo", &Instance.InstanceArgs{
+//				InstanceName:     pulumi.String("tf-auto-test-1-1"),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				ImageId:          pulumi.String(defaultInstance.Images[0].ImageId),
+//				InstanceType:     pulumi.String(defaultInstanceType),
+//				SystemDiskType:   pulumi.String("CLOUD_PREMIUM"),
+//				SystemDiskSize:   pulumi.Int(50),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			managedCluster, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
+//				VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
+//				ClusterCidr:          pulumi.String("10.1.0.0/16"),
+//				ClusterMaxPodNum:     pulumi.Int(32),
+//				ClusterName:          pulumi.String("keep"),
+//				ClusterDesc:          pulumi.String("test cluster desc"),
+//				ClusterMaxServiceNum: pulumi.Int(32),
+//				WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
+//					&kubernetes.ClusterWorkerConfigArgs{
+//						Count:                   pulumi.Int(1),
+//						AvailabilityZone:        pulumi.String(availabilityZone),
+//						InstanceType:            pulumi.String(defaultInstanceType),
+//						SystemDiskType:          pulumi.String("CLOUD_SSD"),
+//						SystemDiskSize:          pulumi.Int(60),
+//						InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+//						InternetMaxBandwidthOut: pulumi.Int(100),
+//						PublicIpAssigned:        pulumi.Bool(true),
+//						SubnetId:                pulumi.String(vpc.InstanceLists[0].SubnetId),
+//						DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
+//							&kubernetes.ClusterWorkerConfigDataDiskArgs{
+//								DiskType: pulumi.String("CLOUD_PREMIUM"),
+//								DiskSize: pulumi.Int(50),
+//							},
+//						},
+//						EnhancedSecurityService: pulumi.Bool(false),
+//						EnhancedMonitorService:  pulumi.Bool(false),
+//						UserData:                pulumi.String("dGVzdA=="),
+//						Password:                pulumi.String("ZZXXccvv1212"),
+//					},
+//				},
+//				ClusterDeployType: pulumi.String("MANAGED_CLUSTER"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Kubernetes.NewClusterAttachment(ctx, "testAttach", &Kubernetes.ClusterAttachmentArgs{
+//				ClusterId:  managedCluster.ID(),
+//				InstanceId: foo.ID(),
+//				Password:   pulumi.String("Lo4wbdit"),
+//				Labels: pulumi.AnyMap{
+//					"test1": pulumi.Any("test1"),
+//					"test2": pulumi.Any("test2"),
+//				},
+//				WorkerConfigOverrides: &kubernetes.ClusterAttachmentWorkerConfigOverridesArgs{
+//					DesiredPodNum: pulumi.Int(8),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type ClusterAttachment struct {
 	pulumi.CustomResourceState
@@ -327,7 +330,7 @@ func (i *ClusterAttachment) ToClusterAttachmentOutputWithContext(ctx context.Con
 // ClusterAttachmentArrayInput is an input type that accepts ClusterAttachmentArray and ClusterAttachmentArrayOutput values.
 // You can construct a concrete instance of `ClusterAttachmentArrayInput` via:
 //
-//          ClusterAttachmentArray{ ClusterAttachmentArgs{...} }
+//	ClusterAttachmentArray{ ClusterAttachmentArgs{...} }
 type ClusterAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -352,7 +355,7 @@ func (i ClusterAttachmentArray) ToClusterAttachmentArrayOutputWithContext(ctx co
 // ClusterAttachmentMapInput is an input type that accepts ClusterAttachmentMap and ClusterAttachmentMapOutput values.
 // You can construct a concrete instance of `ClusterAttachmentMapInput` via:
 //
-//          ClusterAttachmentMap{ "key": ClusterAttachmentArgs{...} }
+//	ClusterAttachmentMap{ "key": ClusterAttachmentArgs{...} }
 type ClusterAttachmentMapInput interface {
 	pulumi.Input
 

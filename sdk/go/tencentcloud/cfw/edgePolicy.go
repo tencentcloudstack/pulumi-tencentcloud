@@ -19,31 +19,34 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewEdgePolicy(ctx, "example", &Cfw.EdgePolicyArgs{
-// 			Description:   pulumi.String("policy description."),
-// 			Direction:     pulumi.Int(1),
-// 			Enable:        pulumi.String("true"),
-// 			Port:          pulumi.String("-1/-1"),
-// 			Protocol:      pulumi.String("TCP"),
-// 			RuleAction:    pulumi.String("drop"),
-// 			Scope:         pulumi.String("all"),
-// 			SourceContent: pulumi.String("1.1.1.1/0"),
-// 			SourceType:    pulumi.String("net"),
-// 			TargetContent: pulumi.String("0.0.0.0/0"),
-// 			TargetType:    pulumi.String("net"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.NewEdgePolicy(ctx, "example", &Cfw.EdgePolicyArgs{
+//				Description:   pulumi.String("policy description."),
+//				Direction:     pulumi.Int(1),
+//				Enable:        pulumi.String("true"),
+//				Port:          pulumi.String("-1/-1"),
+//				Protocol:      pulumi.String("TCP"),
+//				RuleAction:    pulumi.String("drop"),
+//				Scope:         pulumi.String("all"),
+//				SourceContent: pulumi.String("1.1.1.1/0"),
+//				SourceType:    pulumi.String("net"),
+//				TargetContent: pulumi.String("0.0.0.0/0"),
+//				TargetType:    pulumi.String("net"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### If targetType is tag
 //
@@ -51,41 +54,44 @@ import (
 // package main
 //
 // import (
-// 	"encoding/json"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"Key":   "test",
-// 			"Value": "dddd",
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		_, err := Cfw.NewEdgePolicy(ctx, "example", &Cfw.EdgePolicyArgs{
-// 			SourceContent: pulumi.String("0.0.0.0/0"),
-// 			SourceType:    pulumi.String("net"),
-// 			TargetContent: pulumi.String(json0),
-// 			TargetType:    pulumi.String("tag"),
-// 			Protocol:      pulumi.String("TCP"),
-// 			RuleAction:    pulumi.String("drop"),
-// 			Port:          pulumi.String("-1/-1"),
-// 			Direction:     pulumi.Int(1),
-// 			Enable:        pulumi.String("true"),
-// 			Description:   pulumi.String("policy description."),
-// 			Scope:         pulumi.String("all"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"Key":   "test",
+//				"Value": "dddd",
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err := Cfw.NewEdgePolicy(ctx, "example", &Cfw.EdgePolicyArgs{
+//				SourceContent: pulumi.String("0.0.0.0/0"),
+//				SourceType:    pulumi.String("net"),
+//				TargetContent: pulumi.String(json0),
+//				TargetType:    pulumi.String("tag"),
+//				Protocol:      pulumi.String("TCP"),
+//				RuleAction:    pulumi.String("drop"),
+//				Port:          pulumi.String("-1/-1"),
+//				Direction:     pulumi.Int(1),
+//				Enable:        pulumi.String("true"),
+//				Description:   pulumi.String("policy description."),
+//				Scope:         pulumi.String("all"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -93,7 +99,9 @@ import (
 // cfw edge_policy can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfw/edgePolicy:EdgePolicy example edge_policy_id
+//
+//	$ pulumi import tencentcloud:Cfw/edgePolicy:EdgePolicy example edge_policy_id
+//
 // ```
 type EdgePolicy struct {
 	pulumi.CustomResourceState
@@ -104,6 +112,8 @@ type EdgePolicy struct {
 	Direction pulumi.IntOutput `pulumi:"direction"`
 	// Rule status, true means enabled, false means disabled. Default is true.
 	Enable pulumi.StringPtrOutput `pulumi:"enable"`
+	// Parameter template id.
+	ParamTemplateId pulumi.StringOutput `pulumi:"paramTemplateId"`
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
 	Port pulumi.StringOutput `pulumi:"port"`
 	// Protocol. If Direction=1 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=1 && Scope!=serial, optional values: TCP; If Direction=0 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=0 && Scope!=serial, optional values: TCP HTTP/HTTPS TLS/SSL.
@@ -184,6 +194,8 @@ type edgePolicyState struct {
 	Direction *int `pulumi:"direction"`
 	// Rule status, true means enabled, false means disabled. Default is true.
 	Enable *string `pulumi:"enable"`
+	// Parameter template id.
+	ParamTemplateId *string `pulumi:"paramTemplateId"`
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
 	Port *string `pulumi:"port"`
 	// Protocol. If Direction=1 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=1 && Scope!=serial, optional values: TCP; If Direction=0 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=0 && Scope!=serial, optional values: TCP HTTP/HTTPS TLS/SSL.
@@ -211,6 +223,8 @@ type EdgePolicyState struct {
 	Direction pulumi.IntPtrInput
 	// Rule status, true means enabled, false means disabled. Default is true.
 	Enable pulumi.StringPtrInput
+	// Parameter template id.
+	ParamTemplateId pulumi.StringPtrInput
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
 	Port pulumi.StringPtrInput
 	// Protocol. If Direction=1 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=1 && Scope!=serial, optional values: TCP; If Direction=0 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=0 && Scope!=serial, optional values: TCP HTTP/HTTPS TLS/SSL.
@@ -312,7 +326,7 @@ func (i *EdgePolicy) ToEdgePolicyOutputWithContext(ctx context.Context) EdgePoli
 // EdgePolicyArrayInput is an input type that accepts EdgePolicyArray and EdgePolicyArrayOutput values.
 // You can construct a concrete instance of `EdgePolicyArrayInput` via:
 //
-//          EdgePolicyArray{ EdgePolicyArgs{...} }
+//	EdgePolicyArray{ EdgePolicyArgs{...} }
 type EdgePolicyArrayInput interface {
 	pulumi.Input
 
@@ -337,7 +351,7 @@ func (i EdgePolicyArray) ToEdgePolicyArrayOutputWithContext(ctx context.Context)
 // EdgePolicyMapInput is an input type that accepts EdgePolicyMap and EdgePolicyMapOutput values.
 // You can construct a concrete instance of `EdgePolicyMapInput` via:
 //
-//          EdgePolicyMap{ "key": EdgePolicyArgs{...} }
+//	EdgePolicyMap{ "key": EdgePolicyArgs{...} }
 type EdgePolicyMapInput interface {
 	pulumi.Input
 
@@ -386,6 +400,11 @@ func (o EdgePolicyOutput) Direction() pulumi.IntOutput {
 // Rule status, true means enabled, false means disabled. Default is true.
 func (o EdgePolicyOutput) Enable() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *EdgePolicy) pulumi.StringPtrOutput { return v.Enable }).(pulumi.StringPtrOutput)
+}
+
+// Parameter template id.
+func (o EdgePolicyOutput) ParamTemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v *EdgePolicy) pulumi.StringOutput { return v.ParamTemplateId }).(pulumi.StringOutput)
 }
 
 // The port for the access control policy. Value: -1/-1: All ports 80: Port 80.

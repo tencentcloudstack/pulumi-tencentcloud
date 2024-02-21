@@ -19,24 +19,27 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewPolicy(ctx, "foo", &Cam.PolicyArgs{
-// 			Description: pulumi.String("tf_test"),
-// 			Document:    pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\n", "        \"name/sts:AssumeRole\"\n", "      ],\n", "      \"effect\": \"allow\",\n", "      \"resource\": [\n", "        \"*\"\n", "      ]\n", "    }\n", "  ]\n", "}\n", "\n")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewPolicy(ctx, "foo", &Cam.PolicyArgs{
+//				Description: pulumi.String("tf_test"),
+//				Document:    pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "{\n", "  \"version\": \"2.0\",\n", "  \"statement\": [\n", "    {\n", "      \"action\": [\n", "        \"name/sts:AssumeRole\"\n", "      ],\n", "      \"effect\": \"allow\",\n", "      \"resource\": [\n", "        \"*\"\n", "      ]\n", "    }\n", "  ]\n", "}\n", "\n")),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -44,7 +47,9 @@ import (
 // CAM policy can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/policy:Policy foo 26655801
+//
+//	$ pulumi import tencentcloud:Cam/policy:Policy foo 26655801
+//
 // ```
 type Policy struct {
 	pulumi.CustomResourceState
@@ -189,7 +194,7 @@ func (i *Policy) ToPolicyOutputWithContext(ctx context.Context) PolicyOutput {
 // PolicyArrayInput is an input type that accepts PolicyArray and PolicyArrayOutput values.
 // You can construct a concrete instance of `PolicyArrayInput` via:
 //
-//          PolicyArray{ PolicyArgs{...} }
+//	PolicyArray{ PolicyArgs{...} }
 type PolicyArrayInput interface {
 	pulumi.Input
 
@@ -214,7 +219,7 @@ func (i PolicyArray) ToPolicyArrayOutputWithContext(ctx context.Context) PolicyA
 // PolicyMapInput is an input type that accepts PolicyMap and PolicyMapOutput values.
 // You can construct a concrete instance of `PolicyMapInput` via:
 //
-//          PolicyMap{ "key": PolicyArgs{...} }
+//	PolicyMap{ "key": PolicyArgs{...} }
 type PolicyMapInput interface {
 	pulumi.Input
 

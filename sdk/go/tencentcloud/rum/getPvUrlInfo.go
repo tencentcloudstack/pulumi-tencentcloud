@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Rum.GetPvUrlInfo(ctx, &rum.GetPvUrlInfoArgs{
-// 			EndTime:   1625454840,
-// 			ProjectId: 1,
-// 			StartTime: 1625444040,
-// 			Type:      "pagepv",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Rum.GetPvUrlInfo(ctx, &rum.GetPvUrlInfoArgs{
+//				EndTime:   1625454840,
+//				ProjectId: 1,
+//				StartTime: 1625444040,
+//				Type:      "pagepv",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetPvUrlInfo(ctx *pulumi.Context, args *GetPvUrlInfoArgs, opts ...pulumi.InvokeOption) (*GetPvUrlInfoResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

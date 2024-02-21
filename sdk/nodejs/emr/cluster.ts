@@ -141,7 +141,7 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly instanceName!: pulumi.Output<string>;
     /**
-     * Instance login settings.
+     * Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
      */
     public readonly loginSettings!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
@@ -313,7 +313,7 @@ export interface ClusterState {
      */
     instanceName?: pulumi.Input<string>;
     /**
-     * Instance login settings.
+     * Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
      */
     loginSettings?: pulumi.Input<{[key: string]: any}>;
     /**
@@ -407,7 +407,7 @@ export interface ClusterArgs {
      */
     instanceName: pulumi.Input<string>;
     /**
-     * Instance login settings.
+     * Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
      */
     loginSettings?: pulumi.Input<{[key: string]: any}>;
     /**

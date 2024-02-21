@@ -19,28 +19,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewUser(ctx, "example", &Dasb.UserArgs{
-// 			AuthType:     pulumi.Int(0),
-// 			DepartmentId: pulumi.String("1.2"),
-// 			Email:        pulumi.String("demo@tencent.com"),
-// 			Phone:        pulumi.String("+86|18345678782"),
-// 			RealName:     pulumi.String("terraform"),
-// 			UserName:     pulumi.String("tf_example"),
-// 			ValidateFrom: pulumi.String("2023-09-22T02:00:00+08:00"),
-// 			ValidateTo:   pulumi.String("2023-09-23T03:00:00+08:00"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewUser(ctx, "example", &Dasb.UserArgs{
+//				AuthType:     pulumi.Int(0),
+//				DepartmentId: pulumi.String("1.2"),
+//				Email:        pulumi.String("demo@tencent.com"),
+//				Phone:        pulumi.String("+86|18345678782"),
+//				RealName:     pulumi.String("terraform"),
+//				UserName:     pulumi.String("tf_example"),
+//				ValidateFrom: pulumi.String("2023-09-22T02:00:00+08:00"),
+//				ValidateTo:   pulumi.String("2023-09-23T03:00:00+08:00"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -48,7 +51,9 @@ import (
 // dasb user can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dasb/user:User example 134
+//
+//	$ pulumi import tencentcloud:Dasb/user:User example 134
+//
 // ```
 type User struct {
 	pulumi.CustomResourceState
@@ -233,7 +238,7 @@ func (i *User) ToUserOutputWithContext(ctx context.Context) UserOutput {
 // UserArrayInput is an input type that accepts UserArray and UserArrayOutput values.
 // You can construct a concrete instance of `UserArrayInput` via:
 //
-//          UserArray{ UserArgs{...} }
+//	UserArray{ UserArgs{...} }
 type UserArrayInput interface {
 	pulumi.Input
 
@@ -258,7 +263,7 @@ func (i UserArray) ToUserArrayOutputWithContext(ctx context.Context) UserArrayOu
 // UserMapInput is an input type that accepts UserMap and UserMapOutput values.
 // You can construct a concrete instance of `UserMapInput` via:
 //
-//          UserMap{ "key": UserArgs{...} }
+//	UserMap{ "key": UserArgs{...} }
 type UserMapInput interface {
 	pulumi.Input
 

@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.GetBackupStream(ctx, &css.GetBackupStreamArgs{
-// 			StreamName: pulumi.StringRef("live"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.GetBackupStream(ctx, &css.GetBackupStreamArgs{
+//				StreamName: pulumi.StringRef("live"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupBackupStream(ctx *pulumi.Context, args *LookupBackupStreamArgs, opts ...pulumi.InvokeOption) (*LookupBackupStreamResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

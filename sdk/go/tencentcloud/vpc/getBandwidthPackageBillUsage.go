@@ -18,22 +18,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.GetBandwidthPackageBillUsage(ctx, &vpc.GetBandwidthPackageBillUsageArgs{
-// 			BandwidthPackageId: "bwp-234rfgt5",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.GetBandwidthPackageBillUsage(ctx, &vpc.GetBandwidthPackageBillUsageArgs{
+//				BandwidthPackageId: "bwp-234rfgt5",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetBandwidthPackageBillUsage(ctx *pulumi.Context, args *GetBandwidthPackageBillUsageArgs, opts ...pulumi.InvokeOption) (*GetBandwidthPackageBillUsageResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

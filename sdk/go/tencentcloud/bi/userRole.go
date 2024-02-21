@@ -19,28 +19,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Bi.NewUserRole(ctx, "userRole", &Bi.UserRoleArgs{
-// 			AreaCode:    pulumi.String("+83"),
-// 			Email:       pulumi.String("1055000000@qq.com"),
-// 			PhoneNumber: pulumi.String("13470010000"),
-// 			RoleIdLists: pulumi.IntArray{
-// 				pulumi.Int(10629359),
-// 			},
-// 			UserId:   pulumi.String("100032767426"),
-// 			UserName: pulumi.String("keep-iac-test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Bi.NewUserRole(ctx, "userRole", &Bi.UserRoleArgs{
+//				AreaCode:    pulumi.String("+83"),
+//				Email:       pulumi.String("1055000000@qq.com"),
+//				PhoneNumber: pulumi.String("13470010000"),
+//				RoleIdLists: pulumi.IntArray{
+//					pulumi.Int(10629359),
+//				},
+//				UserId:   pulumi.String("100032767426"),
+//				UserName: pulumi.String("keep-iac-test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -48,7 +51,9 @@ import (
 // bi user_role can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Bi/userRole:UserRole user_role user_id
+//
+//	$ pulumi import tencentcloud:Bi/userRole:UserRole user_role user_id
+//
 // ```
 type UserRole struct {
 	pulumi.CustomResourceState
@@ -205,7 +210,7 @@ func (i *UserRole) ToUserRoleOutputWithContext(ctx context.Context) UserRoleOutp
 // UserRoleArrayInput is an input type that accepts UserRoleArray and UserRoleArrayOutput values.
 // You can construct a concrete instance of `UserRoleArrayInput` via:
 //
-//          UserRoleArray{ UserRoleArgs{...} }
+//	UserRoleArray{ UserRoleArgs{...} }
 type UserRoleArrayInput interface {
 	pulumi.Input
 
@@ -230,7 +235,7 @@ func (i UserRoleArray) ToUserRoleArrayOutputWithContext(ctx context.Context) Use
 // UserRoleMapInput is an input type that accepts UserRoleMap and UserRoleMapOutput values.
 // You can construct a concrete instance of `UserRoleMapInput` via:
 //
-//          UserRoleMap{ "key": UserRoleArgs{...} }
+//	UserRoleMap{ "key": UserRoleArgs{...} }
 type UserRoleMapInput interface {
 	pulumi.Input
 

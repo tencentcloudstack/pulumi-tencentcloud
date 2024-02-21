@@ -12,6 +12,7 @@ __all__ = [
     'InstanceOrgPermissionArgs',
     'OrgIdentityIdentityPolicyArgs',
     'OrgMemberOrgPermissionArgs',
+    'OrgShareUnitMemberMemberArgs',
 ]
 
 @pulumi.input_type
@@ -161,5 +162,27 @@ class OrgMemberOrgPermissionArgs:
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+
+@pulumi.input_type
+class OrgShareUnitMemberMemberArgs:
+    def __init__(__self__, *,
+                 share_member_uin: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] share_member_uin: Member uin.
+        """
+        pulumi.set(__self__, "share_member_uin", share_member_uin)
+
+    @property
+    @pulumi.getter(name="shareMemberUin")
+    def share_member_uin(self) -> pulumi.Input[int]:
+        """
+        Member uin.
+        """
+        return pulumi.get(self, "share_member_uin")
+
+    @share_member_uin.setter
+    def share_member_uin(self, value: pulumi.Input[int]):
+        pulumi.set(self, "share_member_uin", value)
 
 

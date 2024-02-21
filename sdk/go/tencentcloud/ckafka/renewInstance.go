@@ -19,22 +19,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.NewRenewInstance(ctx, "renewCkafkaInstance", &Ckafka.RenewInstanceArgs{
-// 			InstanceId: pulumi.String("InstanceId"),
-// 			TimeSpan:   pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.NewRenewInstance(ctx, "renewCkafkaInstance", &Ckafka.RenewInstanceArgs{
+//				InstanceId: pulumi.String("InstanceId"),
+//				TimeSpan:   pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type RenewInstance struct {
 	pulumi.CustomResourceState
@@ -136,7 +139,7 @@ func (i *RenewInstance) ToRenewInstanceOutputWithContext(ctx context.Context) Re
 // RenewInstanceArrayInput is an input type that accepts RenewInstanceArray and RenewInstanceArrayOutput values.
 // You can construct a concrete instance of `RenewInstanceArrayInput` via:
 //
-//          RenewInstanceArray{ RenewInstanceArgs{...} }
+//	RenewInstanceArray{ RenewInstanceArgs{...} }
 type RenewInstanceArrayInput interface {
 	pulumi.Input
 
@@ -161,7 +164,7 @@ func (i RenewInstanceArray) ToRenewInstanceArrayOutputWithContext(ctx context.Co
 // RenewInstanceMapInput is an input type that accepts RenewInstanceMap and RenewInstanceMapOutput values.
 // You can construct a concrete instance of `RenewInstanceMapInput` via:
 //
-//          RenewInstanceMap{ "key": RenewInstanceArgs{...} }
+//	RenewInstanceMap{ "key": RenewInstanceArgs{...} }
 type RenewInstanceMapInput interface {
 	pulumi.Input
 

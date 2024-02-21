@@ -17,22 +17,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.NewCustomLine(ctx, "customLine", &Dnspod.CustomLineArgs{
-// 			Area:   pulumi.String("6.6.6.1-6.6.6.2"),
-// 			Domain: pulumi.String("dnspod.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.NewCustomLine(ctx, "customLine", &Dnspod.CustomLineArgs{
+//				Area:   pulumi.String("6.6.6.1-6.6.6.2"),
+//				Domain: pulumi.String("dnspod.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -40,7 +43,9 @@ import (
 // dnspod custom_line can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dnspod/customLine:CustomLine custom_line domain#name
+//
+//	$ pulumi import tencentcloud:Dnspod/customLine:CustomLine custom_line domain#name
+//
 // ```
 type CustomLine struct {
 	pulumi.CustomResourceState
@@ -155,7 +160,7 @@ func (i *CustomLine) ToCustomLineOutputWithContext(ctx context.Context) CustomLi
 // CustomLineArrayInput is an input type that accepts CustomLineArray and CustomLineArrayOutput values.
 // You can construct a concrete instance of `CustomLineArrayInput` via:
 //
-//          CustomLineArray{ CustomLineArgs{...} }
+//	CustomLineArray{ CustomLineArgs{...} }
 type CustomLineArrayInput interface {
 	pulumi.Input
 
@@ -180,7 +185,7 @@ func (i CustomLineArray) ToCustomLineArrayOutputWithContext(ctx context.Context)
 // CustomLineMapInput is an input type that accepts CustomLineMap and CustomLineMapOutput values.
 // You can construct a concrete instance of `CustomLineMapInput` via:
 //
-//          CustomLineMap{ "key": CustomLineArgs{...} }
+//	CustomLineMap{ "key": CustomLineArgs{...} }
 type CustomLineMapInput interface {
 	pulumi.Input
 

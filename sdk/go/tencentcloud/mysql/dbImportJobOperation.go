@@ -165,7 +165,7 @@ func (i *DbImportJobOperation) ToDbImportJobOperationOutputWithContext(ctx conte
 // DbImportJobOperationArrayInput is an input type that accepts DbImportJobOperationArray and DbImportJobOperationArrayOutput values.
 // You can construct a concrete instance of `DbImportJobOperationArrayInput` via:
 //
-//          DbImportJobOperationArray{ DbImportJobOperationArgs{...} }
+//	DbImportJobOperationArray{ DbImportJobOperationArgs{...} }
 type DbImportJobOperationArrayInput interface {
 	pulumi.Input
 
@@ -190,7 +190,7 @@ func (i DbImportJobOperationArray) ToDbImportJobOperationArrayOutputWithContext(
 // DbImportJobOperationMapInput is an input type that accepts DbImportJobOperationMap and DbImportJobOperationMapOutput values.
 // You can construct a concrete instance of `DbImportJobOperationMapInput` via:
 //
-//          DbImportJobOperationMap{ "key": DbImportJobOperationArgs{...} }
+//	DbImportJobOperationMap{ "key": DbImportJobOperationArgs{...} }
 type DbImportJobOperationMapInput interface {
 	pulumi.Input
 

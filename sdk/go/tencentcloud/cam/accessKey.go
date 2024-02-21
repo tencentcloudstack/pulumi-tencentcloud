@@ -18,21 +18,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewAccessKey(ctx, "accessKey", &Cam.AccessKeyArgs{
-// 			TargetUin: pulumi.Int(100033690181),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewAccessKey(ctx, "accessKey", &Cam.AccessKeyArgs{
+//				TargetUin: pulumi.Int(100033690181),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Update
 //
@@ -40,22 +43,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewAccessKey(ctx, "accessKey", &Cam.AccessKeyArgs{
-// 			Status:    pulumi.String("Inactive"),
-// 			TargetUin: pulumi.Int(100033690181),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewAccessKey(ctx, "accessKey", &Cam.AccessKeyArgs{
+//				Status:    pulumi.String("Inactive"),
+//				TargetUin: pulumi.Int(100033690181),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### Encrypted
 //
@@ -63,22 +69,25 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewAccessKey(ctx, "accessKey", &Cam.AccessKeyArgs{
-// 			PgpKey:    pulumi.String("keybase:some_person_that_exists"),
-// 			TargetUin: pulumi.Int(100033690181),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewAccessKey(ctx, "accessKey", &Cam.AccessKeyArgs{
+//				PgpKey:    pulumi.String("keybase:some_person_that_exists"),
+//				TargetUin: pulumi.Int(100033690181),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -86,7 +95,9 @@ import (
 // cam access_key can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/accessKey:AccessKey access_key access_key_id
+//
+//	$ pulumi import tencentcloud:Cam/accessKey:AccessKey access_key access_key_id
+//
 // ```
 type AccessKey struct {
 	pulumi.CustomResourceState
@@ -229,7 +240,7 @@ func (i *AccessKey) ToAccessKeyOutputWithContext(ctx context.Context) AccessKeyO
 // AccessKeyArrayInput is an input type that accepts AccessKeyArray and AccessKeyArrayOutput values.
 // You can construct a concrete instance of `AccessKeyArrayInput` via:
 //
-//          AccessKeyArray{ AccessKeyArgs{...} }
+//	AccessKeyArray{ AccessKeyArgs{...} }
 type AccessKeyArrayInput interface {
 	pulumi.Input
 
@@ -254,7 +265,7 @@ func (i AccessKeyArray) ToAccessKeyArrayOutputWithContext(ctx context.Context) A
 // AccessKeyMapInput is an input type that accepts AccessKeyMap and AccessKeyMapOutput values.
 // You can construct a concrete instance of `AccessKeyMapInput` via:
 //
-//          AccessKeyMap{ "key": AccessKeyArgs{...} }
+//	AccessKeyMap{ "key": AccessKeyArgs{...} }
 type AccessKeyMapInput interface {
 	pulumi.Input
 

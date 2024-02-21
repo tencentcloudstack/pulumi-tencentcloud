@@ -19,44 +19,47 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.NewDatahubTask(ctx, "datahubTask", &Ckafka.DatahubTaskArgs{
-// 			SourceResource: &ckafka.DatahubTaskSourceResourceArgs{
-// 				PostgreSqlParam: &ckafka.DatahubTaskSourceResourcePostgreSqlParamArgs{
-// 					Database:         pulumi.String("postgres"),
-// 					IsTableRegular:   pulumi.Bool(false),
-// 					KeyColumns:       pulumi.String(""),
-// 					PluginName:       pulumi.String("decoderbufs"),
-// 					RecordWithSchema: pulumi.Bool(false),
-// 					Resource:         pulumi.String("resource-y9nxnw46"),
-// 					SnapshotMode:     pulumi.String("never"),
-// 					Table:            pulumi.String("*"),
-// 				},
-// 				Type: pulumi.String("POSTGRESQL"),
-// 			},
-// 			TargetResource: &ckafka.DatahubTaskTargetResourceArgs{
-// 				TopicParam: &ckafka.DatahubTaskTargetResourceTopicParamArgs{
-// 					CompressionType:    pulumi.String("none"),
-// 					Resource:           pulumi.String("1308726196-keep-topic"),
-// 					UseAutoCreateTopic: pulumi.Bool(false),
-// 				},
-// 				Type: pulumi.String("TOPIC"),
-// 			},
-// 			TaskName: pulumi.String("test-task123321"),
-// 			TaskType: pulumi.String("SOURCE"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.NewDatahubTask(ctx, "datahubTask", &Ckafka.DatahubTaskArgs{
+//				SourceResource: &ckafka.DatahubTaskSourceResourceArgs{
+//					PostgreSqlParam: &ckafka.DatahubTaskSourceResourcePostgreSqlParamArgs{
+//						Database:         pulumi.String("postgres"),
+//						IsTableRegular:   pulumi.Bool(false),
+//						KeyColumns:       pulumi.String(""),
+//						PluginName:       pulumi.String("decoderbufs"),
+//						RecordWithSchema: pulumi.Bool(false),
+//						Resource:         pulumi.String("resource-y9nxnw46"),
+//						SnapshotMode:     pulumi.String("never"),
+//						Table:            pulumi.String("*"),
+//					},
+//					Type: pulumi.String("POSTGRESQL"),
+//				},
+//				TargetResource: &ckafka.DatahubTaskTargetResourceArgs{
+//					TopicParam: &ckafka.DatahubTaskTargetResourceTopicParamArgs{
+//						CompressionType:    pulumi.String("none"),
+//						Resource:           pulumi.String("1308726196-keep-topic"),
+//						UseAutoCreateTopic: pulumi.Bool(false),
+//					},
+//					Type: pulumi.String("TOPIC"),
+//				},
+//				TaskName: pulumi.String("test-task123321"),
+//				TaskType: pulumi.String("SOURCE"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -64,7 +67,9 @@ import (
 // ckafka datahub_task can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ckafka/datahubTask:DatahubTask datahub_task datahub_task_id
+//
+//	$ pulumi import tencentcloud:Ckafka/datahubTask:DatahubTask datahub_task datahub_task_id
+//
 // ```
 type DatahubTask struct {
 	pulumi.CustomResourceState
@@ -219,7 +224,7 @@ func (i *DatahubTask) ToDatahubTaskOutputWithContext(ctx context.Context) Datahu
 // DatahubTaskArrayInput is an input type that accepts DatahubTaskArray and DatahubTaskArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskArrayInput` via:
 //
-//          DatahubTaskArray{ DatahubTaskArgs{...} }
+//	DatahubTaskArray{ DatahubTaskArgs{...} }
 type DatahubTaskArrayInput interface {
 	pulumi.Input
 
@@ -244,7 +249,7 @@ func (i DatahubTaskArray) ToDatahubTaskArrayOutputWithContext(ctx context.Contex
 // DatahubTaskMapInput is an input type that accepts DatahubTaskMap and DatahubTaskMapOutput values.
 // You can construct a concrete instance of `DatahubTaskMapInput` via:
 //
-//          DatahubTaskMap{ "key": DatahubTaskArgs{...} }
+//	DatahubTaskMap{ "key": DatahubTaskArgs{...} }
 type DatahubTaskMapInput interface {
 	pulumi.Input
 

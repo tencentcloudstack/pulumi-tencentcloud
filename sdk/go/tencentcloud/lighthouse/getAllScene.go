@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.GetAllScene(ctx, &lighthouse.GetAllSceneArgs{
-// 			Limit:  pulumi.IntRef(20),
-// 			Offset: pulumi.IntRef(0),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.GetAllScene(ctx, &lighthouse.GetAllSceneArgs{
+//				Limit:  pulumi.IntRef(20),
+//				Offset: pulumi.IntRef(0),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetAllScene(ctx *pulumi.Context, args *GetAllSceneArgs, opts ...pulumi.InvokeOption) (*GetAllSceneResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

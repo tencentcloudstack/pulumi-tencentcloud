@@ -19,39 +19,42 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-// 			Bandwidth:        pulumi.Int(10),
-// 			Concurrent:       pulumi.Int(2),
-// 			AccessRegion:     pulumi.String("SouthChina"),
-// 			RealserverRegion: pulumi.String("NorthChina"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
-// 			Protocol: pulumi.String("HTTP"),
-// 			Port:     pulumi.Int(80),
-// 			ProxyId:  fooProxy.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Gaap.NewHttpDomain(ctx, "fooHttpDomain", &Gaap.HttpDomainArgs{
-// 			ListenerId: fooLayer7Listener.ID(),
-// 			Domain:     pulumi.String("www.qq.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+//				Bandwidth:        pulumi.Int(10),
+//				Concurrent:       pulumi.Int(2),
+//				AccessRegion:     pulumi.String("SouthChina"),
+//				RealserverRegion: pulumi.String("NorthChina"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
+//				Protocol: pulumi.String("HTTP"),
+//				Port:     pulumi.Int(80),
+//				ProxyId:  fooProxy.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Gaap.NewHttpDomain(ctx, "fooHttpDomain", &Gaap.HttpDomainArgs{
+//				ListenerId: fooLayer7Listener.ID(),
+//				Domain:     pulumi.String("www.qq.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -59,7 +62,9 @@ import (
 // GAAP http domain can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Gaap/httpDomain:HttpDomain tencentcloud_gaap_http_domain.foo listener-11112222+HTTP+www.qq.com
+//
+//	$ pulumi import tencentcloud:Gaap/httpDomain:HttpDomain tencentcloud_gaap_http_domain.foo listener-11112222+HTTP+www.qq.com
+//
 // ```
 type HttpDomain struct {
 	pulumi.CustomResourceState
@@ -294,7 +299,7 @@ func (i *HttpDomain) ToHttpDomainOutputWithContext(ctx context.Context) HttpDoma
 // HttpDomainArrayInput is an input type that accepts HttpDomainArray and HttpDomainArrayOutput values.
 // You can construct a concrete instance of `HttpDomainArrayInput` via:
 //
-//          HttpDomainArray{ HttpDomainArgs{...} }
+//	HttpDomainArray{ HttpDomainArgs{...} }
 type HttpDomainArrayInput interface {
 	pulumi.Input
 
@@ -319,7 +324,7 @@ func (i HttpDomainArray) ToHttpDomainArrayOutputWithContext(ctx context.Context)
 // HttpDomainMapInput is an input type that accepts HttpDomainMap and HttpDomainMapOutput values.
 // You can construct a concrete instance of `HttpDomainMapInput` via:
 //
-//          HttpDomainMap{ "key": HttpDomainArgs{...} }
+//	HttpDomainMap{ "key": HttpDomainArgs{...} }
 type HttpDomainMapInput interface {
 	pulumi.Input
 

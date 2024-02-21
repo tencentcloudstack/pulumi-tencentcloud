@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.NewRestartKibanaOperation(ctx, "restartKibanaOperation", &Elasticsearch.RestartKibanaOperationArgs{
-// 			InstanceId: pulumi.String("es-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.NewRestartKibanaOperation(ctx, "restartKibanaOperation", &Elasticsearch.RestartKibanaOperationArgs{
+//				InstanceId: pulumi.String("es-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type RestartKibanaOperation struct {
 	pulumi.CustomResourceState
@@ -125,7 +128,7 @@ func (i *RestartKibanaOperation) ToRestartKibanaOperationOutputWithContext(ctx c
 // RestartKibanaOperationArrayInput is an input type that accepts RestartKibanaOperationArray and RestartKibanaOperationArrayOutput values.
 // You can construct a concrete instance of `RestartKibanaOperationArrayInput` via:
 //
-//          RestartKibanaOperationArray{ RestartKibanaOperationArgs{...} }
+//	RestartKibanaOperationArray{ RestartKibanaOperationArgs{...} }
 type RestartKibanaOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +153,7 @@ func (i RestartKibanaOperationArray) ToRestartKibanaOperationArrayOutputWithCont
 // RestartKibanaOperationMapInput is an input type that accepts RestartKibanaOperationMap and RestartKibanaOperationMapOutput values.
 // You can construct a concrete instance of `RestartKibanaOperationMapInput` via:
 //
-//          RestartKibanaOperationMap{ "key": RestartKibanaOperationArgs{...} }
+//	RestartKibanaOperationMap{ "key": RestartKibanaOperationArgs{...} }
 type RestartKibanaOperationMapInput interface {
 	pulumi.Input
 

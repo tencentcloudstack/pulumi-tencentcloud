@@ -19,21 +19,24 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewRevokeCertificateOperation(ctx, "revokeCertificate", &Ssl.RevokeCertificateOperationArgs{
-// 			CertificateId: pulumi.String("7zUGkVab"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.NewRevokeCertificateOperation(ctx, "revokeCertificate", &Ssl.RevokeCertificateOperationArgs{
+//				CertificateId: pulumi.String("7zUGkVab"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -41,7 +44,9 @@ import (
 // ssl revoke_certificate can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssl/revokeCertificateOperation:RevokeCertificateOperation revoke_certificate revoke_certificate_id
+//
+//	$ pulumi import tencentcloud:Ssl/revokeCertificateOperation:RevokeCertificateOperation revoke_certificate revoke_certificate_id
+//
 // ```
 type RevokeCertificateOperation struct {
 	pulumi.CustomResourceState
@@ -143,7 +148,7 @@ func (i *RevokeCertificateOperation) ToRevokeCertificateOperationOutputWithConte
 // RevokeCertificateOperationArrayInput is an input type that accepts RevokeCertificateOperationArray and RevokeCertificateOperationArrayOutput values.
 // You can construct a concrete instance of `RevokeCertificateOperationArrayInput` via:
 //
-//          RevokeCertificateOperationArray{ RevokeCertificateOperationArgs{...} }
+//	RevokeCertificateOperationArray{ RevokeCertificateOperationArgs{...} }
 type RevokeCertificateOperationArrayInput interface {
 	pulumi.Input
 
@@ -168,7 +173,7 @@ func (i RevokeCertificateOperationArray) ToRevokeCertificateOperationArrayOutput
 // RevokeCertificateOperationMapInput is an input type that accepts RevokeCertificateOperationMap and RevokeCertificateOperationMapOutput values.
 // You can construct a concrete instance of `RevokeCertificateOperationMapInput` via:
 //
-//          RevokeCertificateOperationMap{ "key": RevokeCertificateOperationArgs{...} }
+//	RevokeCertificateOperationMap{ "key": RevokeCertificateOperationArgs{...} }
 type RevokeCertificateOperationMapInput interface {
 	pulumi.Input
 

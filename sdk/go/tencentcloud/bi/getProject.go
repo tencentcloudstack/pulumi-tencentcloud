@@ -18,25 +18,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Bi.GetProject(ctx, &bi.GetProjectArgs{
-// 			AllPage:          pulumi.BoolRef(true),
-// 			Keyword:          pulumi.StringRef("abc"),
-// 			ModuleCollection: pulumi.StringRef("sys_common_user"),
-// 			PageNo:           pulumi.IntRef(1),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Bi.GetProject(ctx, &bi.GetProjectArgs{
+//				AllPage:          pulumi.BoolRef(true),
+//				Keyword:          pulumi.StringRef("abc"),
+//				ModuleCollection: pulumi.StringRef("sys_common_user"),
+//				PageNo:           pulumi.IntRef(1),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupProject(ctx *pulumi.Context, args *LookupProjectArgs, opts ...pulumi.InvokeOption) (*LookupProjectResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

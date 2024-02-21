@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewBindDeviceAccountPrivateKey(ctx, "example", &Dasb.BindDeviceAccountPrivateKeyArgs{
-// 			DeviceAccountId:    pulumi.Int(16),
-// 			PrivateKey:         pulumi.String("MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQABAoGAFijko56+qGyN8M0RVyaRAXz++xTqHBLh"),
-// 			PrivateKeyPassword: pulumi.String("TerraformPassword"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewBindDeviceAccountPrivateKey(ctx, "example", &Dasb.BindDeviceAccountPrivateKeyArgs{
+//				DeviceAccountId:    pulumi.Int(16),
+//				PrivateKey:         pulumi.String("MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQABAoGAFijko56+qGyN8M0RVyaRAXz++xTqHBLh"),
+//				PrivateKeyPassword: pulumi.String("TerraformPassword"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type BindDeviceAccountPrivateKey struct {
 	pulumi.CustomResourceState
@@ -150,7 +153,7 @@ func (i *BindDeviceAccountPrivateKey) ToBindDeviceAccountPrivateKeyOutputWithCon
 // BindDeviceAccountPrivateKeyArrayInput is an input type that accepts BindDeviceAccountPrivateKeyArray and BindDeviceAccountPrivateKeyArrayOutput values.
 // You can construct a concrete instance of `BindDeviceAccountPrivateKeyArrayInput` via:
 //
-//          BindDeviceAccountPrivateKeyArray{ BindDeviceAccountPrivateKeyArgs{...} }
+//	BindDeviceAccountPrivateKeyArray{ BindDeviceAccountPrivateKeyArgs{...} }
 type BindDeviceAccountPrivateKeyArrayInput interface {
 	pulumi.Input
 
@@ -175,7 +178,7 @@ func (i BindDeviceAccountPrivateKeyArray) ToBindDeviceAccountPrivateKeyArrayOutp
 // BindDeviceAccountPrivateKeyMapInput is an input type that accepts BindDeviceAccountPrivateKeyMap and BindDeviceAccountPrivateKeyMapOutput values.
 // You can construct a concrete instance of `BindDeviceAccountPrivateKeyMapInput` via:
 //
-//          BindDeviceAccountPrivateKeyMap{ "key": BindDeviceAccountPrivateKeyArgs{...} }
+//	BindDeviceAccountPrivateKeyMap{ "key": BindDeviceAccountPrivateKeyArgs{...} }
 type BindDeviceAccountPrivateKeyMapInput interface {
 	pulumi.Input
 

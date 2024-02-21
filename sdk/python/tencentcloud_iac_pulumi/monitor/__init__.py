@@ -40,6 +40,7 @@ from .grafana_sso_config import *
 from .grafana_version_upgrade import *
 from .grafana_whitelist_config import *
 from .policy_binding_object import *
+from .tmp_alert_group import *
 from .tmp_alert_rule import *
 from .tmp_cvm_agent import *
 from .tmp_exporter_integration import *

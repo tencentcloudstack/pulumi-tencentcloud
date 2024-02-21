@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.NewZone(ctx, "zone", &Teo.ZoneArgs{
-// 			AliasZoneName: pulumi.String("teo-test"),
-// 			Area:          pulumi.String("overseas"),
-// 			Paused:        pulumi.Bool(false),
-// 			PlanId:        pulumi.String("edgeone-2kfv1h391n6w"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 			Type:     pulumi.String("partial"),
-// 			ZoneName: pulumi.String("tf-teo.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Teo.NewZone(ctx, "zone", &Teo.ZoneArgs{
+//				AliasZoneName: pulumi.String("teo-test"),
+//				Area:          pulumi.String("overseas"),
+//				Paused:        pulumi.Bool(false),
+//				PlanId:        pulumi.String("edgeone-2kfv1h391n6w"),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//				Type:     pulumi.String("partial"),
+//				ZoneName: pulumi.String("tf-teo.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -49,7 +52,9 @@ import (
 // teo zone can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Teo/zone:Zone zone zone_id
+//
+//	$ pulumi import tencentcloud:Teo/zone:Zone zone zone_id
+//
 // ```
 type Zone struct {
 	pulumi.CustomResourceState
@@ -228,7 +233,7 @@ func (i *Zone) ToZoneOutputWithContext(ctx context.Context) ZoneOutput {
 // ZoneArrayInput is an input type that accepts ZoneArray and ZoneArrayOutput values.
 // You can construct a concrete instance of `ZoneArrayInput` via:
 //
-//          ZoneArray{ ZoneArgs{...} }
+//	ZoneArray{ ZoneArgs{...} }
 type ZoneArrayInput interface {
 	pulumi.Input
 
@@ -253,7 +258,7 @@ func (i ZoneArray) ToZoneArrayOutputWithContext(ctx context.Context) ZoneArrayOu
 // ZoneMapInput is an input type that accepts ZoneMap and ZoneMapOutput values.
 // You can construct a concrete instance of `ZoneMapInput` via:
 //
-//          ZoneMap{ "key": ZoneArgs{...} }
+//	ZoneMap{ "key": ZoneArgs{...} }
 type ZoneMapInput interface {
 	pulumi.Input
 

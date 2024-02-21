@@ -19,29 +19,32 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.NewSecurityAuditLogExportTask(ctx, "task", &Dbbrain.SecurityAuditLogExportTaskArgs{
-// 			DangerLevels: pulumi.IntArray{
-// 				pulumi.Int(0),
-// 				pulumi.Int(1),
-// 				pulumi.Int(2),
-// 			},
-// 			EndTime:         pulumi.String("2020-12-28 01:00:00"),
-// 			Product:         pulumi.String("mysql"),
-// 			SecAuditGroupId: pulumi.String("sec_audit_group_id"),
-// 			StartTime:       pulumi.String("2020-12-28 00:00:00"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.NewSecurityAuditLogExportTask(ctx, "task", &Dbbrain.SecurityAuditLogExportTaskArgs{
+//				DangerLevels: pulumi.IntArray{
+//					pulumi.Int(0),
+//					pulumi.Int(1),
+//					pulumi.Int(2),
+//				},
+//				EndTime:         pulumi.String("2020-12-28 01:00:00"),
+//				Product:         pulumi.String("mysql"),
+//				SecAuditGroupId: pulumi.String("sec_audit_group_id"),
+//				StartTime:       pulumi.String("2020-12-28 00:00:00"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type SecurityAuditLogExportTask struct {
 	pulumi.CustomResourceState
@@ -188,7 +191,7 @@ func (i *SecurityAuditLogExportTask) ToSecurityAuditLogExportTaskOutputWithConte
 // SecurityAuditLogExportTaskArrayInput is an input type that accepts SecurityAuditLogExportTaskArray and SecurityAuditLogExportTaskArrayOutput values.
 // You can construct a concrete instance of `SecurityAuditLogExportTaskArrayInput` via:
 //
-//          SecurityAuditLogExportTaskArray{ SecurityAuditLogExportTaskArgs{...} }
+//	SecurityAuditLogExportTaskArray{ SecurityAuditLogExportTaskArgs{...} }
 type SecurityAuditLogExportTaskArrayInput interface {
 	pulumi.Input
 
@@ -213,7 +216,7 @@ func (i SecurityAuditLogExportTaskArray) ToSecurityAuditLogExportTaskArrayOutput
 // SecurityAuditLogExportTaskMapInput is an input type that accepts SecurityAuditLogExportTaskMap and SecurityAuditLogExportTaskMapOutput values.
 // You can construct a concrete instance of `SecurityAuditLogExportTaskMapInput` via:
 //
-//          SecurityAuditLogExportTaskMap{ "key": SecurityAuditLogExportTaskArgs{...} }
+//	SecurityAuditLogExportTaskMap{ "key": SecurityAuditLogExportTaskArgs{...} }
 type SecurityAuditLogExportTaskMapInput interface {
 	pulumi.Input
 

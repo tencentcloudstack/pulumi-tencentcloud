@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.GetDescribeHostLiveInstanceList(ctx, &ssl.GetDescribeHostLiveInstanceListArgs{
-// 			CertificateId: "8u8DII0l",
-// 			ResourceType:  "live",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.GetDescribeHostLiveInstanceList(ctx, &ssl.GetDescribeHostLiveInstanceListArgs{
+//				CertificateId: "8u8DII0l",
+//				ResourceType:  "live",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDescribeHostLiveInstanceList(ctx *pulumi.Context, args *GetDescribeHostLiveInstanceListArgs, opts ...pulumi.InvokeOption) (*GetDescribeHostLiveInstanceListResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

@@ -18,23 +18,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.GetAccessAddress(ctx, &tse.GetAccessAddressArgs{
-// 			EngineRegion: pulumi.StringRef("ap-guangzhou"),
-// 			InstanceId:   "ins-7eb7eea7",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.GetAccessAddress(ctx, &tse.GetAccessAddressArgs{
+//				EngineRegion: pulumi.StringRef("ap-guangzhou"),
+//				InstanceId:   "ins-7eb7eea7",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetAccessAddress(ctx *pulumi.Context, args *GetAccessAddressArgs, opts ...pulumi.InvokeOption) (*GetAccessAddressResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

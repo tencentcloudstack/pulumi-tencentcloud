@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Pts.NewJobAbort(ctx, "jobAbort", &Pts.JobAbortArgs{
-// 			JobId:      pulumi.String("job-my644ozi"),
-// 			ProjectId:  pulumi.String("project-45vw7v82"),
-// 			ScenarioId: pulumi.String("scenario-22q19f3k"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Pts.NewJobAbort(ctx, "jobAbort", &Pts.JobAbortArgs{
+//				JobId:      pulumi.String("job-my644ozi"),
+//				ProjectId:  pulumi.String("project-45vw7v82"),
+//				ScenarioId: pulumi.String("scenario-22q19f3k"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type JobAbort struct {
 	pulumi.CustomResourceState
@@ -163,7 +166,7 @@ func (i *JobAbort) ToJobAbortOutputWithContext(ctx context.Context) JobAbortOutp
 // JobAbortArrayInput is an input type that accepts JobAbortArray and JobAbortArrayOutput values.
 // You can construct a concrete instance of `JobAbortArrayInput` via:
 //
-//          JobAbortArray{ JobAbortArgs{...} }
+//	JobAbortArray{ JobAbortArgs{...} }
 type JobAbortArrayInput interface {
 	pulumi.Input
 
@@ -188,7 +191,7 @@ func (i JobAbortArray) ToJobAbortArrayOutputWithContext(ctx context.Context) Job
 // JobAbortMapInput is an input type that accepts JobAbortMap and JobAbortMapOutput values.
 // You can construct a concrete instance of `JobAbortMapInput` via:
 //
-//          JobAbortMap{ "key": JobAbortArgs{...} }
+//	JobAbortMap{ "key": JobAbortArgs{...} }
 type JobAbortMapInput interface {
 	pulumi.Input
 

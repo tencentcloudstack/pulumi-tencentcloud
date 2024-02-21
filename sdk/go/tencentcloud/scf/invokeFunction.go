@@ -19,23 +19,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewInvokeFunction(ctx, "invokeFunction", &Scf.InvokeFunctionArgs{
-// 			FunctionName: pulumi.String("keep-1676351130"),
-// 			Namespace:    pulumi.String("default"),
-// 			Qualifier:    pulumi.String("2"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewInvokeFunction(ctx, "invokeFunction", &Scf.InvokeFunctionArgs{
+//				FunctionName: pulumi.String("keep-1676351130"),
+//				Namespace:    pulumi.String("default"),
+//				Qualifier:    pulumi.String("2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type InvokeFunction struct {
 	pulumi.CustomResourceState
@@ -187,7 +190,7 @@ func (i *InvokeFunction) ToInvokeFunctionOutputWithContext(ctx context.Context) 
 // InvokeFunctionArrayInput is an input type that accepts InvokeFunctionArray and InvokeFunctionArrayOutput values.
 // You can construct a concrete instance of `InvokeFunctionArrayInput` via:
 //
-//          InvokeFunctionArray{ InvokeFunctionArgs{...} }
+//	InvokeFunctionArray{ InvokeFunctionArgs{...} }
 type InvokeFunctionArrayInput interface {
 	pulumi.Input
 
@@ -212,7 +215,7 @@ func (i InvokeFunctionArray) ToInvokeFunctionArrayOutputWithContext(ctx context.
 // InvokeFunctionMapInput is an input type that accepts InvokeFunctionMap and InvokeFunctionMapOutput values.
 // You can construct a concrete instance of `InvokeFunctionMapInput` via:
 //
-//          InvokeFunctionMap{ "key": InvokeFunctionArgs{...} }
+//	InvokeFunctionMap{ "key": InvokeFunctionArgs{...} }
 type InvokeFunctionMapInput interface {
 	pulumi.Input
 

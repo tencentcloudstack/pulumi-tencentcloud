@@ -18,28 +18,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cwp"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cwp"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cwp.NewLicenseOrder(ctx, "example", &Cwp.LicenseOrderArgs{
-// 			Alias:       pulumi.String("tf_example"),
-// 			LicenseNum:  pulumi.Int(1),
-// 			LicenseType: pulumi.Int(0),
-// 			ProjectId:   pulumi.Int(0),
-// 			RegionId:    pulumi.Int(1),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cwp.NewLicenseOrder(ctx, "example", &Cwp.LicenseOrderArgs{
+//				Alias:       pulumi.String("tf_example"),
+//				LicenseNum:  pulumi.Int(1),
+//				LicenseType: pulumi.Int(0),
+//				ProjectId:   pulumi.Int(0),
+//				RegionId:    pulumi.Int(1),
+//				Tags: pulumi.AnyMap{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -47,7 +50,9 @@ import (
 // cwp license_order can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cwp/licenseOrder:LicenseOrder example cwplic-130715d2#1
+//
+//	$ pulumi import tencentcloud:Cwp/licenseOrder:LicenseOrder example cwplic-130715d2#1
+//
 // ```
 type LicenseOrder struct {
 	pulumi.CustomResourceState
@@ -198,7 +203,7 @@ func (i *LicenseOrder) ToLicenseOrderOutputWithContext(ctx context.Context) Lice
 // LicenseOrderArrayInput is an input type that accepts LicenseOrderArray and LicenseOrderArrayOutput values.
 // You can construct a concrete instance of `LicenseOrderArrayInput` via:
 //
-//          LicenseOrderArray{ LicenseOrderArgs{...} }
+//	LicenseOrderArray{ LicenseOrderArgs{...} }
 type LicenseOrderArrayInput interface {
 	pulumi.Input
 
@@ -223,7 +228,7 @@ func (i LicenseOrderArray) ToLicenseOrderArrayOutputWithContext(ctx context.Cont
 // LicenseOrderMapInput is an input type that accepts LicenseOrderMap and LicenseOrderMapOutput values.
 // You can construct a concrete instance of `LicenseOrderMapInput` via:
 //
-//          LicenseOrderMap{ "key": LicenseOrderArgs{...} }
+//	LicenseOrderMap{ "key": LicenseOrderArgs{...} }
 type LicenseOrderMapInput interface {
 	pulumi.Input
 

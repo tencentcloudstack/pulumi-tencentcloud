@@ -24,6 +24,9 @@ __all__ = [
     'BindingReceiverReceivers',
     'GrafanaSsoAccountRole',
     'PolicyBindingObjectDimension',
+    'TmpAlertGroupCustomReceiver',
+    'TmpAlertGroupCustomReceiverAllowedTimeRange',
+    'TmpAlertGroupRule',
     'TmpAlertRuleAnnotation',
     'TmpAlertRuleLabel',
     'TmpTkeAlertPolicyAlertRule',
@@ -1232,6 +1235,221 @@ class PolicyBindingObjectDimension(dict):
     @pulumi.getter(name="uniqueId")
     def unique_id(self) -> Optional[str]:
         return pulumi.get(self, "unique_id")
+
+
+@pulumi.output_type
+class TmpAlertGroupCustomReceiver(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "allowedTimeRanges":
+            suggest = "allowed_time_ranges"
+        elif key == "clusterId":
+            suggest = "cluster_id"
+        elif key == "clusterType":
+            suggest = "cluster_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TmpAlertGroupCustomReceiver. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TmpAlertGroupCustomReceiver.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TmpAlertGroupCustomReceiver.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 allowed_time_ranges: Optional[Sequence['outputs.TmpAlertGroupCustomReceiverAllowedTimeRange']] = None,
+                 cluster_id: Optional[str] = None,
+                 cluster_type: Optional[str] = None,
+                 type: Optional[str] = None,
+                 url: Optional[str] = None):
+        """
+        :param Sequence['TmpAlertGroupCustomReceiverAllowedTimeRangeArgs'] allowed_time_ranges: Time ranges which allow alert message send.
+        :param str cluster_id: Only effect when alertmanager in user cluster, this cluster id.
+        :param str cluster_type: Only effect when alertmanager in user cluster, this cluster type (tke|eks|tdcc).
+        :param str type: Custom receiver type, webhook|alertmanager.
+        :param str url: Custom receiver address, can be accessed by process in prometheus instance subnet.
+        """
+        if allowed_time_ranges is not None:
+            pulumi.set(__self__, "allowed_time_ranges", allowed_time_ranges)
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
+        if cluster_type is not None:
+            pulumi.set(__self__, "cluster_type", cluster_type)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+        if url is not None:
+            pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter(name="allowedTimeRanges")
+    def allowed_time_ranges(self) -> Optional[Sequence['outputs.TmpAlertGroupCustomReceiverAllowedTimeRange']]:
+        """
+        Time ranges which allow alert message send.
+        """
+        return pulumi.get(self, "allowed_time_ranges")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[str]:
+        """
+        Only effect when alertmanager in user cluster, this cluster id.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="clusterType")
+    def cluster_type(self) -> Optional[str]:
+        """
+        Only effect when alertmanager in user cluster, this cluster type (tke|eks|tdcc).
+        """
+        return pulumi.get(self, "cluster_type")
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[str]:
+        """
+        Custom receiver type, webhook|alertmanager.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def url(self) -> Optional[str]:
+        """
+        Custom receiver address, can be accessed by process in prometheus instance subnet.
+        """
+        return pulumi.get(self, "url")
+
+
+@pulumi.output_type
+class TmpAlertGroupCustomReceiverAllowedTimeRange(dict):
+    def __init__(__self__, *,
+                 end: Optional[str] = None,
+                 start: Optional[str] = None):
+        """
+        :param str end: Time range end, seconds since 0 o'clock.
+        :param str start: Time range start, seconds since 0 o'clock.
+        """
+        if end is not None:
+            pulumi.set(__self__, "end", end)
+        if start is not None:
+            pulumi.set(__self__, "start", start)
+
+    @property
+    @pulumi.getter
+    def end(self) -> Optional[str]:
+        """
+        Time range end, seconds since 0 o'clock.
+        """
+        return pulumi.get(self, "end")
+
+    @property
+    @pulumi.getter
+    def start(self) -> Optional[str]:
+        """
+        Time range start, seconds since 0 o'clock.
+        """
+        return pulumi.get(self, "start")
+
+
+@pulumi.output_type
+class TmpAlertGroupRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ruleName":
+            suggest = "rule_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TmpAlertGroupRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TmpAlertGroupRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TmpAlertGroupRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 annotations: Optional[Mapping[str, Any]] = None,
+                 duration: Optional[str] = None,
+                 expr: Optional[str] = None,
+                 labels: Optional[Mapping[str, Any]] = None,
+                 rule_name: Optional[str] = None,
+                 state: Optional[int] = None):
+        """
+        :param Mapping[str, Any] annotations: Annotation of alert rule. `summary`, `description` is special annotation in prometheus, mapping `Alarm Object`, `Alarm Information` in alarm message.
+        :param str duration: Rule alarm duration.
+        :param str expr: Prometheus alert expression.
+        :param Mapping[str, Any] labels: Labels of alert rule.
+        :param str rule_name: Alert rule name.
+        :param int state: Rule state. `2`-enable, `3`-disable, default `2`.
+        """
+        if annotations is not None:
+            pulumi.set(__self__, "annotations", annotations)
+        if duration is not None:
+            pulumi.set(__self__, "duration", duration)
+        if expr is not None:
+            pulumi.set(__self__, "expr", expr)
+        if labels is not None:
+            pulumi.set(__self__, "labels", labels)
+        if rule_name is not None:
+            pulumi.set(__self__, "rule_name", rule_name)
+        if state is not None:
+            pulumi.set(__self__, "state", state)
+
+    @property
+    @pulumi.getter
+    def annotations(self) -> Optional[Mapping[str, Any]]:
+        """
+        Annotation of alert rule. `summary`, `description` is special annotation in prometheus, mapping `Alarm Object`, `Alarm Information` in alarm message.
+        """
+        return pulumi.get(self, "annotations")
+
+    @property
+    @pulumi.getter
+    def duration(self) -> Optional[str]:
+        """
+        Rule alarm duration.
+        """
+        return pulumi.get(self, "duration")
+
+    @property
+    @pulumi.getter
+    def expr(self) -> Optional[str]:
+        """
+        Prometheus alert expression.
+        """
+        return pulumi.get(self, "expr")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Optional[Mapping[str, Any]]:
+        """
+        Labels of alert rule.
+        """
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter(name="ruleName")
+    def rule_name(self) -> Optional[str]:
+        """
+        Alert rule name.
+        """
+        return pulumi.get(self, "rule_name")
+
+    @property
+    @pulumi.getter
+    def state(self) -> Optional[int]:
+        """
+        Rule state. `2`-enable, `3`-disable, default `2`.
+        """
+        return pulumi.get(self, "state")
 
 
 @pulumi.output_type

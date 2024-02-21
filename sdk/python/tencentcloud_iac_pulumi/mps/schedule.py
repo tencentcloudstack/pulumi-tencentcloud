@@ -20,6 +20,7 @@ class ScheduleArgs:
                  trigger: pulumi.Input['ScheduleTriggerArgs'],
                  output_dir: Optional[pulumi.Input[str]] = None,
                  output_storage: Optional[pulumi.Input['ScheduleOutputStorageArgs']] = None,
+                 resource_id: Optional[pulumi.Input[str]] = None,
                  task_notify_config: Optional[pulumi.Input['ScheduleTaskNotifyConfigArgs']] = None):
         """
         The set of arguments for constructing a Schedule resource.
@@ -28,6 +29,7 @@ class ScheduleArgs:
         :param pulumi.Input['ScheduleTriggerArgs'] trigger: The trigger of the scheme. If a file is uploaded to the specified bucket, the scheme will be triggered.
         :param pulumi.Input[str] output_dir: The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.If you do not specify this, the file will be saved to the trigger directory.
         :param pulumi.Input['ScheduleOutputStorageArgs'] output_storage: The bucket to save the output file. If you do not specify this parameter, the bucket in `Trigger` will be used.
+        :param pulumi.Input[str] resource_id: Resource ID, you need to ensure that the corresponding resource is open. The default is the account main resource ID.
         :param pulumi.Input['ScheduleTaskNotifyConfigArgs'] task_notify_config: The notification configuration. If you do not specify this parameter, notifications will not be sent.
         """
         pulumi.set(__self__, "activities", activities)
@@ -37,6 +39,8 @@ class ScheduleArgs:
             pulumi.set(__self__, "output_dir", output_dir)
         if output_storage is not None:
             pulumi.set(__self__, "output_storage", output_storage)
+        if resource_id is not None:
+            pulumi.set(__self__, "resource_id", resource_id)
         if task_notify_config is not None:
             pulumi.set(__self__, "task_notify_config", task_notify_config)
 
@@ -101,6 +105,18 @@ class ScheduleArgs:
         pulumi.set(self, "output_storage", value)
 
     @property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Resource ID, you need to ensure that the corresponding resource is open. The default is the account main resource ID.
+        """
+        return pulumi.get(self, "resource_id")
+
+    @resource_id.setter
+    def resource_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource_id", value)
+
+    @property
     @pulumi.getter(name="taskNotifyConfig")
     def task_notify_config(self) -> Optional[pulumi.Input['ScheduleTaskNotifyConfigArgs']]:
         """
@@ -119,6 +135,7 @@ class _ScheduleState:
                  activities: Optional[pulumi.Input[Sequence[pulumi.Input['ScheduleActivityArgs']]]] = None,
                  output_dir: Optional[pulumi.Input[str]] = None,
                  output_storage: Optional[pulumi.Input['ScheduleOutputStorageArgs']] = None,
+                 resource_id: Optional[pulumi.Input[str]] = None,
                  schedule_name: Optional[pulumi.Input[str]] = None,
                  task_notify_config: Optional[pulumi.Input['ScheduleTaskNotifyConfigArgs']] = None,
                  trigger: Optional[pulumi.Input['ScheduleTriggerArgs']] = None):
@@ -127,6 +144,7 @@ class _ScheduleState:
         :param pulumi.Input[Sequence[pulumi.Input['ScheduleActivityArgs']]] activities: The subtasks of the scheme.
         :param pulumi.Input[str] output_dir: The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.If you do not specify this, the file will be saved to the trigger directory.
         :param pulumi.Input['ScheduleOutputStorageArgs'] output_storage: The bucket to save the output file. If you do not specify this parameter, the bucket in `Trigger` will be used.
+        :param pulumi.Input[str] resource_id: Resource ID, you need to ensure that the corresponding resource is open. The default is the account main resource ID.
         :param pulumi.Input[str] schedule_name: The scheme name (max 128 characters). This name should be unique across your account.
         :param pulumi.Input['ScheduleTaskNotifyConfigArgs'] task_notify_config: The notification configuration. If you do not specify this parameter, notifications will not be sent.
         :param pulumi.Input['ScheduleTriggerArgs'] trigger: The trigger of the scheme. If a file is uploaded to the specified bucket, the scheme will be triggered.
@@ -137,6 +155,8 @@ class _ScheduleState:
             pulumi.set(__self__, "output_dir", output_dir)
         if output_storage is not None:
             pulumi.set(__self__, "output_storage", output_storage)
+        if resource_id is not None:
+            pulumi.set(__self__, "resource_id", resource_id)
         if schedule_name is not None:
             pulumi.set(__self__, "schedule_name", schedule_name)
         if task_notify_config is not None:
@@ -179,6 +199,18 @@ class _ScheduleState:
     @output_storage.setter
     def output_storage(self, value: Optional[pulumi.Input['ScheduleOutputStorageArgs']]):
         pulumi.set(self, "output_storage", value)
+
+    @property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Resource ID, you need to ensure that the corresponding resource is open. The default is the account main resource ID.
+        """
+        return pulumi.get(self, "resource_id")
+
+    @resource_id.setter
+    def resource_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource_id", value)
 
     @property
     @pulumi.getter(name="scheduleName")
@@ -225,6 +257,7 @@ class Schedule(pulumi.CustomResource):
                  activities: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScheduleActivityArgs']]]]] = None,
                  output_dir: Optional[pulumi.Input[str]] = None,
                  output_storage: Optional[pulumi.Input[pulumi.InputType['ScheduleOutputStorageArgs']]] = None,
+                 resource_id: Optional[pulumi.Input[str]] = None,
                  schedule_name: Optional[pulumi.Input[str]] = None,
                  task_notify_config: Optional[pulumi.Input[pulumi.InputType['ScheduleTaskNotifyConfigArgs']]] = None,
                  trigger: Optional[pulumi.Input[pulumi.InputType['ScheduleTriggerArgs']]] = None,
@@ -382,6 +415,7 @@ class Schedule(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScheduleActivityArgs']]]] activities: The subtasks of the scheme.
         :param pulumi.Input[str] output_dir: The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.If you do not specify this, the file will be saved to the trigger directory.
         :param pulumi.Input[pulumi.InputType['ScheduleOutputStorageArgs']] output_storage: The bucket to save the output file. If you do not specify this parameter, the bucket in `Trigger` will be used.
+        :param pulumi.Input[str] resource_id: Resource ID, you need to ensure that the corresponding resource is open. The default is the account main resource ID.
         :param pulumi.Input[str] schedule_name: The scheme name (max 128 characters). This name should be unique across your account.
         :param pulumi.Input[pulumi.InputType['ScheduleTaskNotifyConfigArgs']] task_notify_config: The notification configuration. If you do not specify this parameter, notifications will not be sent.
         :param pulumi.Input[pulumi.InputType['ScheduleTriggerArgs']] trigger: The trigger of the scheme. If a file is uploaded to the specified bucket, the scheme will be triggered.
@@ -558,6 +592,7 @@ class Schedule(pulumi.CustomResource):
                  activities: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScheduleActivityArgs']]]]] = None,
                  output_dir: Optional[pulumi.Input[str]] = None,
                  output_storage: Optional[pulumi.Input[pulumi.InputType['ScheduleOutputStorageArgs']]] = None,
+                 resource_id: Optional[pulumi.Input[str]] = None,
                  schedule_name: Optional[pulumi.Input[str]] = None,
                  task_notify_config: Optional[pulumi.Input[pulumi.InputType['ScheduleTaskNotifyConfigArgs']]] = None,
                  trigger: Optional[pulumi.Input[pulumi.InputType['ScheduleTriggerArgs']]] = None,
@@ -580,6 +615,7 @@ class Schedule(pulumi.CustomResource):
             __props__.__dict__["activities"] = activities
             __props__.__dict__["output_dir"] = output_dir
             __props__.__dict__["output_storage"] = output_storage
+            __props__.__dict__["resource_id"] = resource_id
             if schedule_name is None and not opts.urn:
                 raise TypeError("Missing required property 'schedule_name'")
             __props__.__dict__["schedule_name"] = schedule_name
@@ -600,6 +636,7 @@ class Schedule(pulumi.CustomResource):
             activities: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScheduleActivityArgs']]]]] = None,
             output_dir: Optional[pulumi.Input[str]] = None,
             output_storage: Optional[pulumi.Input[pulumi.InputType['ScheduleOutputStorageArgs']]] = None,
+            resource_id: Optional[pulumi.Input[str]] = None,
             schedule_name: Optional[pulumi.Input[str]] = None,
             task_notify_config: Optional[pulumi.Input[pulumi.InputType['ScheduleTaskNotifyConfigArgs']]] = None,
             trigger: Optional[pulumi.Input[pulumi.InputType['ScheduleTriggerArgs']]] = None) -> 'Schedule':
@@ -613,6 +650,7 @@ class Schedule(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScheduleActivityArgs']]]] activities: The subtasks of the scheme.
         :param pulumi.Input[str] output_dir: The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.If you do not specify this, the file will be saved to the trigger directory.
         :param pulumi.Input[pulumi.InputType['ScheduleOutputStorageArgs']] output_storage: The bucket to save the output file. If you do not specify this parameter, the bucket in `Trigger` will be used.
+        :param pulumi.Input[str] resource_id: Resource ID, you need to ensure that the corresponding resource is open. The default is the account main resource ID.
         :param pulumi.Input[str] schedule_name: The scheme name (max 128 characters). This name should be unique across your account.
         :param pulumi.Input[pulumi.InputType['ScheduleTaskNotifyConfigArgs']] task_notify_config: The notification configuration. If you do not specify this parameter, notifications will not be sent.
         :param pulumi.Input[pulumi.InputType['ScheduleTriggerArgs']] trigger: The trigger of the scheme. If a file is uploaded to the specified bucket, the scheme will be triggered.
@@ -624,6 +662,7 @@ class Schedule(pulumi.CustomResource):
         __props__.__dict__["activities"] = activities
         __props__.__dict__["output_dir"] = output_dir
         __props__.__dict__["output_storage"] = output_storage
+        __props__.__dict__["resource_id"] = resource_id
         __props__.__dict__["schedule_name"] = schedule_name
         __props__.__dict__["task_notify_config"] = task_notify_config
         __props__.__dict__["trigger"] = trigger
@@ -652,6 +691,14 @@ class Schedule(pulumi.CustomResource):
         The bucket to save the output file. If you do not specify this parameter, the bucket in `Trigger` will be used.
         """
         return pulumi.get(self, "output_storage")
+
+    @property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        Resource ID, you need to ensure that the corresponding resource is open. The default is the account main resource ID.
+        """
+        return pulumi.get(self, "resource_id")
 
     @property
     @pulumi.getter(name="scheduleName")

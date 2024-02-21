@@ -35,6 +35,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &OrgMemberPolicyAttachment{}
 	case "tencentcloud:Organization/orgNode:OrgNode":
 		r = &OrgNode{}
+	case "tencentcloud:Organization/orgShareUnit:OrgShareUnit":
+		r = &OrgShareUnit{}
+	case "tencentcloud:Organization/orgShareUnitMember:OrgShareUnitMember":
+		r = &OrgShareUnitMember{}
 	case "tencentcloud:Organization/policySubAccountAttachment:PolicySubAccountAttachment":
 		r = &PolicySubAccountAttachment{}
 	case "tencentcloud:Organization/quitOrganizationOperation:QuitOrganizationOperation":
@@ -85,6 +89,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Organization/orgNode",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Organization/orgShareUnit",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Organization/orgShareUnitMember",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

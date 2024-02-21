@@ -114,7 +114,7 @@ func (i *SwitchProxy) ToSwitchProxyOutputWithContext(ctx context.Context) Switch
 // SwitchProxyArrayInput is an input type that accepts SwitchProxyArray and SwitchProxyArrayOutput values.
 // You can construct a concrete instance of `SwitchProxyArrayInput` via:
 //
-//          SwitchProxyArray{ SwitchProxyArgs{...} }
+//	SwitchProxyArray{ SwitchProxyArgs{...} }
 type SwitchProxyArrayInput interface {
 	pulumi.Input
 
@@ -139,7 +139,7 @@ func (i SwitchProxyArray) ToSwitchProxyArrayOutputWithContext(ctx context.Contex
 // SwitchProxyMapInput is an input type that accepts SwitchProxyMap and SwitchProxyMapOutput values.
 // You can construct a concrete instance of `SwitchProxyMapInput` via:
 //
-//          SwitchProxyMap{ "key": SwitchProxyArgs{...} }
+//	SwitchProxyMap{ "key": SwitchProxyArgs{...} }
 type SwitchProxyMapInput interface {
 	pulumi.Input
 

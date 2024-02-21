@@ -20,23 +20,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewAddressTemplate(ctx, "example", &Cfw.AddressTemplateArgs{
-// 			Detail:   pulumi.String("test template"),
-// 			IpString: pulumi.String("1.1.1.1,2.2.2.2"),
-// 			Type:     pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.NewAddressTemplate(ctx, "example", &Cfw.AddressTemplateArgs{
+//				Detail:   pulumi.String("test template"),
+//				IpString: pulumi.String("1.1.1.1,2.2.2.2"),
+//				Type:     pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ### If type is 5
 //
@@ -44,23 +47,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewAddressTemplate(ctx, "example", &Cfw.AddressTemplateArgs{
-// 			Detail:   pulumi.String("test template"),
-// 			IpString: pulumi.String("www.qq.com,www.tencent.com"),
-// 			Type:     pulumi.Int(5),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.NewAddressTemplate(ctx, "example", &Cfw.AddressTemplateArgs{
+//				Detail:   pulumi.String("test template"),
+//				IpString: pulumi.String("www.qq.com,www.tencent.com"),
+//				Type:     pulumi.Int(5),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
@@ -68,7 +74,9 @@ import (
 // cfw address_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfw/addressTemplate:AddressTemplate example mb_1300846651_1695611353900
+//
+//	$ pulumi import tencentcloud:Cfw/addressTemplate:AddressTemplate example mb_1300846651_1695611353900
+//
 // ```
 type AddressTemplate struct {
 	pulumi.CustomResourceState
@@ -196,7 +204,7 @@ func (i *AddressTemplate) ToAddressTemplateOutputWithContext(ctx context.Context
 // AddressTemplateArrayInput is an input type that accepts AddressTemplateArray and AddressTemplateArrayOutput values.
 // You can construct a concrete instance of `AddressTemplateArrayInput` via:
 //
-//          AddressTemplateArray{ AddressTemplateArgs{...} }
+//	AddressTemplateArray{ AddressTemplateArgs{...} }
 type AddressTemplateArrayInput interface {
 	pulumi.Input
 
@@ -221,7 +229,7 @@ func (i AddressTemplateArray) ToAddressTemplateArrayOutputWithContext(ctx contex
 // AddressTemplateMapInput is an input type that accepts AddressTemplateMap and AddressTemplateMapOutput values.
 // You can construct a concrete instance of `AddressTemplateMapInput` via:
 //
-//          AddressTemplateMap{ "key": AddressTemplateArgs{...} }
+//	AddressTemplateMap{ "key": AddressTemplateArgs{...} }
 type AddressTemplateMapInput interface {
 	pulumi.Input
 
